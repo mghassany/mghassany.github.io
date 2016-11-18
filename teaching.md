@@ -7,7 +7,7 @@ layout: page
 
 ### Since 2014
 
-* Machine Learning.
+* Machine Learning. ([Course](../ML_course/index.html))
 * Statistical inference.
 * Probabilities 2.
 * Probabilities 1.

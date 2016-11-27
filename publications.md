@@ -1,5 +1,5 @@
 ---
-title: My References
+title: Publications
 layout: page
 ---
 

@@ -1,5 +1,5 @@
 ---
-title: Research topics and projects
+title: Research
 layout: page
 ---
 

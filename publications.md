@@ -3,6 +3,8 @@ title: Publications
 layout: page
 ---
 
+My [Google Scholar](https://scholar.google.com/citations?user=rqfVsosAAAAJ) page.
+
 ## Journal articles
 
 {% bibliography --query @article[status!=editorial && status!=other] %}

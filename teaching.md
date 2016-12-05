@@ -7,11 +7,20 @@ layout: page
 
 ### Since 2014
 
-* Machine Learning. ([Course](../ML_course/index.html))
-* Statistical inference.
-* Probabilities 2.
-* Probabilities 1.
+* Machine Learning. 
+	+ Prepared by me for Spring 16-17: [Course repository](../ML_course/index.html "Introduction to Machine Learning -- Spring 16-17").
 * Probabilities & Statistics.
+	+ Prepared by me for Spring 16-17: Course,  Exercices.
+	+ <ul class="list-inline">
+  		<li> Fall 16-17 <a target="_blank" href="../documents/proba-fall-16-17.pdf"><i class="fa fa-file-pdf-o" aria-hidden="true"></i></a></li>
+  		<li>Spring 15-16 <a target="_blank" href="../documents/proba-spring-15-16.pdf"><i class="fa fa-file-pdf-o" aria-hidden="true"></i></a></li>
+  		<li>Fall 15-16 <a target="_blank" href="../documents/proba-fall-15-16.pdf"><i class="fa fa-file-pdf-o" aria-hidden="true"></i></a></li>
+  		<li>Spring 14-15 <a target="_blank" href="../documents/proba-spring-14-15.pdf"><i class="fa fa-file-pdf-o" aria-hidden="true"></i></a></li>
+		</ul>
+* Statistical inference.
+	+ Fall 15-16 <a target="_blank" href="../documents/stat-inf-fall-15-16.pdf"><i class="fa fa-file-pdf-o" aria-hidden="true"></i></a>
+* Descriptive Statistics.
+	+ Fall 16-17 <a target="_blank" href="../documents/stat-desc-fall-16-17.pdf"><i class="fa fa-file-pdf-o" aria-hidden="true"></i></a>
 
 ## Université Paris 13
 

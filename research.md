@@ -5,10 +5,31 @@ layout: page
 
 ## Projects
 
+### Sodatech
+
+Création d’une plateforme de Big Data pour faire du monitoring et établir des mesures des réseaux
+sociaux en temps réel. Création d’un outil de visualisation dynamique et interactive des réseaux
+sociaux. 
+
+Creation of [Sodata](site chaire): a Big Data Plateform to collect and visualize data from social networks such as Facebook,  Twitter &  Instagram. 
+
+Partners: 1000Mercis, ENS Cachan. 
+
+* *Missions*:
+	+ Constact graphs from crawled social networks data (Facebook,  Twitter and Instagram) 
+	+ Compute network structures for the constracted graphs. 
+	+ Integrate the visualizatio to the Sodata plateform. 
+* *Softwares and Langages*:
+	+ MongoDB,  Pig,  Javascript,  Django (Python),  Shell scripts,  Gephi,  Spark. 
+	
+
 ### Curated Media
 
 Projet FUI 17. Projet de plateforme de qualification de données issues du web à grande échelle.
-Ce projet est en partenariat avec Linkfluence, Intercloud, CEA list, Tigerlily, youmag.
+
+<!-- Project funded by the french minister of.. -->
+
+Partners:  Linkfluence, Intercloud, CEA list, Tigerlily, youmag. 
 
 * *Missions*:
 	+ Test and evaluation of Radarly. 
@@ -18,21 +39,6 @@ Ce projet est en partenariat avec Linkfluence, Intercloud, CEA list, Tigerlily, 
 * *Softwares and Langages*: R
 	+ Using my favorite R IDE: Rstudio. 
 	+ Most used libraries: data.table, dplyr, reshape2, ggplot2,  plotly,  knitr, pander and rmarkdown to build beautiful reports and work summaries (html_notebooks). 
-
-
-### Sodatech
-
-Création d’une plateforme de Big Data pour faire du monitoring et établir des mesures des réseaux
-sociaux en temps réel. Création d’un outil de visualisation dynamique et interactive des réseaux
-sociaux. Ce projet regroupe trois partenaires : IMT, 1000Mercis, ENS Cachan.
-
-* *Missions*:
-	+ Constact graphs from crawled social networks data (Facebook,  Twitter and Instagram) 
-	+ Compute network structures for the constracted graphs. 
-	+ Integrate the visualizatio to the Sodata plateform. 
-* *Softwares and Langages*:
-	+ MongoDB,  Pig,  Javascript,  Django (Python),  Shell scripts,  Gephi,  Spark. 
-
 
 
 ### Open Food System

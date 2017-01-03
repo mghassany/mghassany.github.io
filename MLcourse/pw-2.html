@@ -26,15 +26,15 @@
 <meta name="author" content="Mohamad Ghassany">
 
 
-<meta name="date" content="2016-12-28">
+<meta name="date" content="2016-12-29">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black">
   
   
-<link rel="prev" href="dimensionality-reduction.html">
-<link rel="next" href="clustering-kmeans.html">
+<link rel="prev" href="multiple-linear-regression.html">
+<link rel="next" href="logistic-regression.html">
 
 <script src="book_assets/jquery-2.2.3/jquery.min.js"></script>
 <link href="book_assets/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -152,8 +152,11 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="pw-2.html"><a href="pw-2.html"><i class="fa fa-check"></i>PW 2</a><ul>
-<li class="chapter" data-level="" data-path="pw-2.html"><a href="pw-2.html#rmarkdown"><i class="fa fa-check"></i>RMarkdown</a></li>
-<li class="chapter" data-level="" data-path="pw-2.html"><a href="pw-2.html#multiple-linear-regression-1"><i class="fa fa-check"></i>Multiple Linear Regression</a></li>
+<li class="chapter" data-level="2.4" data-path="pw-2.html"><a href="pw-2.html#reporting"><i class="fa fa-check"></i><b>2.4</b> Reporting</a><ul>
+<li class="chapter" data-level="2.4.1" data-path="pw-2.html"><a href="pw-2.html#markdown"><i class="fa fa-check"></i><b>2.4.1</b> Markdown</a></li>
+<li class="chapter" data-level="2.4.2" data-path="pw-2.html"><a href="pw-2.html#r-markdown"><i class="fa fa-check"></i><b>2.4.2</b> R Markdown</a></li>
+</ul></li>
+<li class="chapter" data-level="2.5" data-path="pw-2.html"><a href="pw-2.html#multiple-linear-regression-1"><i class="fa fa-check"></i><b>2.5</b> Multiple Linear Regression</a></li>
 </ul></li>
 <li class="part"><span><b>Classification</b></span></li>
 <li class="chapter" data-level="3" data-path="logistic-regression.html"><a href="logistic-regression.html"><i class="fa fa-check"></i><b>3</b> Logistic Regression</a><ul>
@@ -238,25 +241,106 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="pw-6" class="section level1 unnumbered">
-<h1>PW 6</h1>
-<div id="subsection-8" class="section level2 unnumbered">
-<h2>Subsection</h2>
-<p>Text</p>
+<div id="pw-2" class="section level1 unnumbered">
+<h1>PW 2</h1>
+<div id="reporting" class="section level2">
+<h2><span class="header-section-number">2.4</span> Reporting</h2>
+<div id="markdown" class="section level3">
+<h3><span class="header-section-number">2.4.1</span> Markdown</h3>
+<p>Markdown is a lightweight markup language with plain text formatting syntax designed so that it can be converted to HTML and many other formats.</p>
+<p>Go to this Markdown online editor <a href="http://dillinger.io/">dillinger.io/</a>. See the Markdown source file and the preview to understand it. Play with the source text to see the result in the preview.</p>
 </div>
-<div id="subsection-9" class="section level2 unnumbered">
-<h2>Subsection</h2>
-<p>Text</p>
+<div id="r-markdown" class="section level3">
+<h3><span class="header-section-number">2.4.2</span> R Markdown</h3>
+<p>R Markdown is a variant of Markdown that has embedded <code>R</code> code chunks, to be used with the <code>knitr</code> package to make it easy to create reproducible web-based reports.</p>
+<p>First, in <code>Rstudio</code> create a new <code>R Notebook</code> file. A default template will be opened. Click on <code>Preview</code> and save your file. Then your html report will be opened in the viewer pane. Every time you click on <code>Preview</code> the html file in the viewer pane will be updated. If your file is named <code>report.Rmd</code>, your report is named <code>report.nb.html</code>. I will as you to send me your <code>.nb.html</code> files after some classes.</p>
+<p>You can find all the informations about R Markdown on this site: <a href="http://rmarkdown.rstudio.com/lesson-1.html">http://rmarkdown.rstudio.com/</a>.</p>
+<p>You may also find the following resources helpful:</p>
+<ul>
+<li><a href="https://www.rstudio.com/wp-content/uploads/2016/03/rmarkdown-cheatsheet-2.0.pdf">The R Markdown Cheatsheet</a></li>
+<li><a href="https://www.rstudio.com/wp-content/uploads/2015/03/rmarkdown-reference.pdf">The R Markdown Reference Guide</a></li>
+</ul>
+</div>
+</div>
+<div id="multiple-linear-regression-1" class="section level2">
+<h2><span class="header-section-number">2.5</span> Multiple Linear Regression</h2>
+<div class="rmdexercise">
+<p>
+We will continue what we started last week with the Boston dataset which is part of the <code>MASS</code> package. Recall that this dataset recordes the median value of houses for 506 neighborhoods around Boston.
+</p>
+<ol style="list-style-type: decimal">
+<li>
+<p>
+Load the Boston dataset from <code>MASS</code> package.
+</p>
+</li>
+<li>
+<p>
+Split the dataset into traning set and testing set.
+</p>
+</li>
+<li>
+<p>
+Check if there is a linear relationship between the variables <code>mdev</code> and <code>age</code>. (use <code>cor()</code> function).
+</p>
+</li>
+<li>
+<p>
+Plot <code>medv</code> in function of <code>age</code>.
+</p>
+</li>
+<li>
+<p>
+Train a regression model using both <code>lstat</code> and <code>age</code> as predictors of median house value. (Remember that we transformed <code>lstat</code>, use the same transformation here). What is the obtained model?
+</p>
+</li>
+<li>
+<p>
+Print the summary of the obtained regression model.
+</p>
+</li>
+<li>
+<p>
+Are the predictors significant?
+</p>
+</li>
+<li>
+<p>
+Is the model as a whole significant ?
+</p>
+</li>
+<li>
+<p>
+Train a new model using all the variables of the dataset. (We can use <code>.</code> as a short cut instead of writing down all the variables names)
+</p>
+</li>
+<li>
+<p>
+Did <span class="math inline"><em>R</em><sup>2</sup></span> increase? How can we explain it?
+</p>
+</li>
+<li>
+<p>
+When using all the variables as predictors, we didn’t transform <code>lstat</code>. Re train the model using <code>log(lstat)</code> instead of <code>lstat</code>.
+</p>
+</li>
+<li>
+</li>
+</ol>
+</div>
 
 </div>
 </div>
+
+
+
             </section>
 
           </div>
         </div>
       </div>
-<a href="dimensionality-reduction.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="clustering-kmeans.html" class="navigation navigation-next " aria-label="Next page""><i class="fa fa-angle-right"></i></a>
+<a href="multiple-linear-regression.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="logistic-regression.html" class="navigation navigation-next " aria-label="Next page""><i class="fa fa-angle-right"></i></a>
 
 <script src="book_assets/gitbook-2.6.7/js/app.min.js"></script>
 <script src="book_assets/gitbook-2.6.7/js/lunr.js"></script>

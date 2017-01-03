@@ -26,15 +26,15 @@
 <meta name="author" content="Mohamad Ghassany">
 
 
-<meta name="date" content="2016-12-28">
+<meta name="date" content="2016-12-29">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black">
   
   
-<link rel="prev" href="pw-2.html">
-<link rel="next" href="pw-3.html">
+<link rel="prev" href="pw-6.html">
+<link rel="next" href="pw-7.html">
 
 <script src="book_assets/jquery-2.2.3/jquery.min.js"></script>
 <link href="book_assets/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -152,8 +152,11 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="pw-2.html"><a href="pw-2.html"><i class="fa fa-check"></i>PW 2</a><ul>
-<li class="chapter" data-level="" data-path="pw-2.html"><a href="pw-2.html#rmarkdown"><i class="fa fa-check"></i>RMarkdown</a></li>
-<li class="chapter" data-level="" data-path="pw-2.html"><a href="pw-2.html#multiple-linear-regression-1"><i class="fa fa-check"></i>Multiple Linear Regression</a></li>
+<li class="chapter" data-level="2.4" data-path="pw-2.html"><a href="pw-2.html#reporting"><i class="fa fa-check"></i><b>2.4</b> Reporting</a><ul>
+<li class="chapter" data-level="2.4.1" data-path="pw-2.html"><a href="pw-2.html#markdown"><i class="fa fa-check"></i><b>2.4.1</b> Markdown</a></li>
+<li class="chapter" data-level="2.4.2" data-path="pw-2.html"><a href="pw-2.html#r-markdown"><i class="fa fa-check"></i><b>2.4.2</b> R Markdown</a></li>
+</ul></li>
+<li class="chapter" data-level="2.5" data-path="pw-2.html"><a href="pw-2.html#multiple-linear-regression-1"><i class="fa fa-check"></i><b>2.5</b> Multiple Linear Regression</a></li>
 </ul></li>
 <li class="part"><span><b>Classification</b></span></li>
 <li class="chapter" data-level="3" data-path="logistic-regression.html"><a href="logistic-regression.html"><i class="fa fa-check"></i><b>3</b> Logistic Regression</a><ul>
@@ -238,152 +241,20 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="logistic-regression" class="section level1">
-<h1><span class="header-section-number">3</span> Logistic Regression</h1>
-<div id="introduction-1" class="section level2">
-<h2><span class="header-section-number">3.1</span> Introduction</h2>
-<p>In the previous chapters we discussed the linear regression model, which assumes that the response variable <span class="math inline">\(Y\)</span> is quantitative. But in many situations, the response variable is instead qualitative (categorical). For example, eye color is qualitative, taking on values blue, brown, or green.</p>
-<p>The process for predicting qualitative responses is known as <strong><em>classification</em></strong>.</p>
-<p>Given a feature vector <span class="math inline">\(X\)</span> and a qualitative response <span class="math inline">\(Y\)</span> taking values in the set <span class="math inline">\(\mathcal{C}\)</span>, the classification task is to build a function <span class="math inline">\(C(X)\)</span> that takes as input the feature vector <span class="math inline">\(X\)</span> and predicts its value for <span class="math inline">\(Y\)</span>; i.e. <span class="math inline">\(C(X) \in \mathcal{C}\)</span>. We are often more interested in estimating the probabilities that <span class="math inline">\(X\)</span> belongs to each category in <span class="math inline">\(\mathcal{C}\)</span>.</p>
-<blockquote>
-<p>If <span class="math inline">\(c\)</span> is a category (<span class="math inline">\(c \in \mathcal{C}\)</span>), by the probability that <span class="math inline">\(X\)</span> belongs to <span class="math inline">\(c\)</span> we mean <span class="math inline">\(p(X \in c) = \mathbb{P}(Y=c|X)\)</span>.</p>
-</blockquote>
-<p>In the binomial or binary logistic regression, the outcome can have only two possible types of values (e.g. “Yes” or “No”, “Success” or “Failure”). Multinomial logistic refers to cases where the outcome can have three or more possible types of values (e.g., “good” vs. “very good” vs. “best”). Generally outcome is coded as “0” and “1” in binary logistic regression.</p>
+<div id="clustering-kmeans" class="section level1">
+<h1><span class="header-section-number">7</span> Clustering: Kmeans</h1>
+<div id="subsection-1-4" class="section level2">
+<h2><span class="header-section-number">7.1</span> Subsection 1</h2>
+<p>Text</p>
 </div>
-<div id="logistic-regression-1" class="section level2">
-<h2><span class="header-section-number">3.2</span> Logistic Regression</h2>
-<p>Consider a data set where the response falls into one of two categories, Yes or No. Rather than modeling the response <span class="math inline">\(Y\)</span> directly, logistic regression models the <em>probability</em> that <span class="math inline">\(Y\)</span> belongs to a particular category.</p>
-<div id="the-logistic-model" class="section level3">
-<h3><span class="header-section-number">3.2.1</span> The Logistic Model</h3>
-<p>Let us suppose the response has two categories and we use the generic 0/1 coding for the response. How should we model the relationship between <span class="math inline">\(p(X) = \mathbb{P}(Y = 1|X)\)</span> and <span class="math inline">\(X\)</span>?</p>
-<p>The simplest situation is when <span class="math inline">\(Y\)</span> is <em>binary</em>: it can only take two values, codified for convenience as <span class="math inline">\(0\)</span> (success) and <span class="math inline">\(1\)</span> (failure).</p>
-<p>More formally, a binary variable is known as a <em>Bernoulli variable</em>, which is the simplest non-trivial random variable. We say that <span class="math inline">\(Y\sim\mathrm{Ber}(p)\)</span>, <span class="math inline">\(0\leq p\leq1\)</span>, if <span class="math display">\[
-Y=\left\{\begin{array}{ll}1,&amp;\text{with probability }p,\\0,&amp;\text{with probability }1-p,\end{array}\right.
-\]</span> or, equivalently, if <span class="math inline">\(\mathbb{P}[Y=1]=p\)</span> and <span class="math inline">\(\mathbb{P}[Y=0]=1-p\)</span>, which can be written compactly as <span class="math display">\[\begin{align}
-\mathbb{P}[Y=y]=p^y(1-p)^{1-y},\quad y=0,1.
-\end{align}\]</span> Recall that a <em>binomial variable with size <span class="math inline">\(n\)</span> and probability <span class="math inline">\(p\)</span></em>, <span class="math inline">\(\mathrm{Bi}(n,p)\)</span>, was obtained by adding <span class="math inline">\(n\)</span> independent <span class="math inline">\(\mathrm{Ber}(p)\)</span> (so <span class="math inline">\(\mathrm{Ber}(p)\)</span> is the same as <span class="math inline">\(\mathrm{Bi}(1,p)\)</span>).</p>
-<div class="rmdinsight">
-<p>
-A Bernoulli variable <span class="math inline"><em>Y</em></span> is completely determined by <span class="math inline"><em>p</em></span>. <strong>So its mean and variance</strong>:
-</p>
-<ul>
-<li>
-<span class="math inline">𝔼[<em>Y</em>]=<em>p</em> × 1 + (1 − <em>p</em>)×0 = <em>p</em></span>
-</li>
-<li>
-<span class="math inline">𝕍<em>a</em><em>r</em>[<em>Y</em>]=<em>p</em>(1 − <em>p</em>)</span>.
-</li>
-</ul>
-<p>
-In particular, recall that <span class="math inline">ℙ[<em>Y</em> = 1]=𝔼[<em>Y</em>]=<em>p</em></span>.
-</p>
-</div>
-<p>Assume then that <span class="math inline">\(Y\)</span> is a binary/Bernoulli variable and that <span class="math inline">\(X\)</span> are predictors associated to them (no particular assumptions on them). The purpose in <em>logistic regression</em> is to estimate <span class="math display">\[
-p(x)=\mathbb{P}[Y=1|X=x]=\mathbb{E}[Y|X=x],
-\]</span> this is, how the probability of <span class="math inline">\(Y=1\)</span> is changing according to particular values, denoted by <span class="math inline">\(x\)</span>, of the random variables <span class="math inline">\(X\)</span>.</p>
-<p><em>Why not linear regression?</em> A tempting possibility is to consider the model <span class="math display">\[
-p(x)=\beta_0+\beta_1 x.
-\]</span> However, such a model will run into problems inevitably: negative probabilities and probabilities larger than one (<span class="math inline">\(p(x) &lt; 0\)</span> for some values of <span class="math inline">\(X\)</span> and <span class="math inline">\(p(X) &gt; 1\)</span> for others). To avoid this problem, the solution is to consider a function to encapsulate the value of <span class="math inline">\(z=\beta_0+\beta_1 x\)</span>, in <span class="math inline">\(\mathbb{R}\)</span>, and map it to <span class="math inline">\([0,1]\)</span>. There are several alternatives to do so, based on distribution functions <span class="math inline">\(F:\mathbb{R}\longrightarrow[0,1]\)</span> that deliver <span class="math inline">\(y=F(z)\in[0,1]\)</span>. Many functions meet this description. In logistic regression, we use the <em>logistic function</em>,</p>
-<p><span class="math display">\[ p(X) = \frac{e^{\beta_0 + \beta_1 X}}{1+e^{\beta_0 + \beta_1 X}} \]</span></p>
-<div class="rmdinsight">
-<ul>
-<li>
-No matter what values <span class="math inline"><em>β</em><sub>0</sub></span>, <span class="math inline"><em>β</em><sub>1</sub></span> or <span class="math inline"><em>X</em></span> take, <span class="math inline"><em>p</em>(<em>X</em>)</span> will have values between 0 and 1.
-</li>
-<li>
-The logistic function will always produce an <em>S-shaped</em> curve.
-</li>
-<li>
-The logistic <em>distribution</em> function is: <br /><span class="math display"><span class="math display">\[F(z)=\mathrm{logistic}(z)=\frac{e^z}{1+e^z}=\frac{1}{1+e^{-z}}.\]</span></span><br />
-</li>
-</ul>
-</div>
-<p>After a bit of manipulation of the previous equation, we find that</p>
-<p><span class="math display">\[ \frac{p(X)}{1-p(X)} = e^{\beta_0 + \beta_1 X} \]</span></p>
-<div class="rmdnoicon">
-<p>
-The quantity <span class="math inline"><em>p</em>(<em>X</em>)/[1 − <em>p</em>(<em>X</em>)]</span> is called the <em>odds</em>, and can take on any value between <span class="math inline">0</span> and <span class="math inline">∞</span>.
-</p>
-</div>
-<p>By taking the logarithm of both sides of the equation, we arrive at</p>
-<p><span class="math display">\[ \log( \frac{p(X)}{1-p(X)} ) = \beta_0 + \beta_1 X \]</span></p>
-<div class="rmdnoicon">
-<p>
-The left-hand side is called the <em>log-odds</em> or <em>logit</em>. We see that the logistic regression model has a logit that is linear in X.
-</p>
-</div>
-</div>
-<div id="estimating-the-regression-coefficients-1" class="section level3">
-<h3><span class="header-section-number">3.2.2</span> Estimating the Regression Coefficients</h3>
-<p>We estimate <span class="math inline">\(\beta_0\)</span> and <span class="math inline">\(\beta_1\)</span> using the <em>Maximum Likelihood Estimation</em> method (MLE). The basic intuition behind using maximum likelihood to fit a logistic regression model is as follows: we seek estimates for <span class="math inline">\(\beta_0\)</span> and <span class="math inline">\(\beta_1\)</span> such that the predicted probability <span class="math inline">\(\hat{p}(x_i)\)</span> of the response for each individual, corresponds as closely as possible to the individual’s observed response status (recall that the response <span class="math inline">\(Y\)</span> is categorical). The <em>likelihood function</em> is</p>
-<p><span class="math display">\[ l(\beta_0,\beta_1) = \prod_{i=1}^n p(x_i)^{Y_i}(1-p(x_i))^{1-Y_i}. \]</span></p>
-<p>This likelihood is <strong>the probability of the data based on the model</strong>. It gives the probability of the observed zeros and ones in the data. The estimates <span class="math inline">\(\hat{\beta_0}\)</span> and <span class="math inline">\(\hat{\beta_1}\)</span> are chosen to <em>maximize</em> this likelihood function. The interpretation of the likelihood function is the following:</p>
-<ul>
-<li><span class="math inline">\(\prod_{i=1}^n\)</span> appears because the sample elements are assumed to be independent and we are computing the probability of observing the whole sample <span class="math inline">\((x_{1},y_1),\ldots,(x_{n},y_n)\)</span>. This probability is equal to the product of the <em>probabilities of observing each <span class="math inline">\((x_{i},y_i)\)</span></em>.</li>
-<li><span class="math inline">\(p(x_i)^{Y_i}(1-p(x_i))^{1-Y_i}\)</span> is the probability of observing <span class="math inline">\((x_{i},Y_i)\)</span>.</li>
-</ul>
-<div class="rmdinsight">
-<p>
-In the linear regression setting, the least squares approach is a special case of maximum likelihood.
-</p>
-</div>
-<p>We will not give mathematical details about the maximum likelihood and how to estimate the parameters. We will use R to fit the logistic regression models (using <code>glm</code> function).</p>
-<div class="rmdinsight">
-<p>
-Click <a href="https://egarpor.shinyapps.io/log-maximum-likelihood/">here</a> to see how the log-likelihood changes with respect to the values for <span class="math inline">(<em>β</em><sub>0</sub>, <em>β</em><sub>1</sub>)</span> in three data patterns. The logistic regression fit and its dependence on <span class="math inline"><em>β</em><sub>0</sub></span> (horizontal displacement) and <span class="math inline"><em>β</em><sub>1</sub></span> (steepness of the curve). Recall the effect of the sign of <span class="math inline"><em>β</em><sub>1</sub></span> in the curve: if positive, the logistic curve has an <span class="math inline"><em>s</em></span> form; if negative, the form is a reflected <span class="math inline"><em>s</em></span>.’
-</p>
-</div>
-</div>
-<div id="prediction-1" class="section level3">
-<h3><span class="header-section-number">3.2.3</span> Prediction</h3>
-<p><strong>Example</strong></p>
-<table>
-<thead>
-<tr class="header">
-<th align="left"></th>
-<th align="left">Coefficient</th>
-<th align="left">Std. error</th>
-<th align="left"><span class="math inline">\(Z\)</span>-statistic</th>
-<th align="left">p-value</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td align="left">Constant</td>
-<td align="left">-10.6513</td>
-<td align="left">0.3612</td>
-<td align="left">-29.5</td>
-<td align="left">&lt;0.0001</td>
-</tr>
-<tr class="even">
-<td align="left"><span class="math inline">\(X\)</span></td>
-<td align="left">0.0055</td>
-<td align="left">0.0002</td>
-<td align="left">24.9</td>
-<td align="left">&lt;0.0001</td>
-</tr>
-</tbody>
-</table>
-<p>In this example, <span class="math inline">\(\hat{\beta_0} = -10.6513\)</span> and <span class="math inline">\(\hat{\beta_1} = 0.0055\)</span>. It produces the blue curve that separates that data in the following figure,</p>
-<div class="figure">
-<img src="img/lr_example.png" />
+<div id="subsection-2-3" class="section level2">
+<h2><span class="header-section-number">7.2</span> Subsection 2</h2>
+<p>Text</p>
+<div id="subsection-3-3" class="section level3">
+<h3><span class="header-section-number">7.2.1</span>  Subsection 3</h3>
+<p>Text</p>
 
 </div>
-<p>As for prediction, we use the model built with the estimated parameters to predict probabilities. For example,</p>
-<p>If <span class="math inline">\(X=1000\)</span>,</p>
-<p><span class="math display">\[ \hat{p}(X) = \frac{e^{\hat{\beta_0} + \hat{\beta_1} X}}{1+e^{\hat{\beta_0} + \hat{\beta_1} X}} = \frac{e^{-10.6513+0.0055 \times 1000}}{1+e^{-10.6513+0.0055 \times 1000}} = 0.006\]</span></p>
-<p>If <span class="math inline">\(X=2000\)</span>,</p>
-<p><span class="math display">\[ \hat{p}(X) = \frac{e^{\hat{\beta_0} + \hat{\beta_1} X}}{1+e^{\hat{\beta_0} + \hat{\beta_1} X}} = \frac{e^{-10.6513+0.0055 \times 2000}}{1+e^{-10.6513+0.0055 \times 2000}} = 0.586\]</span></p>
-</div>
-</div>
-<div id="multiple-logistic-regression" class="section level2">
-<h2><span class="header-section-number">3.3</span> Multiple Logistic Regression</h2>
-<p>We now consider the problem of predicting a binary response using multiple predictors. By analogy with the extension from simple to multiple linear regression in the previous chapters, we can generalize the simple logistic regression equation as follows:</p>
-<p><span class="math display">\[ \log( \frac{p(X)}{1-p(X)} ) = \beta_0 + \beta_1 X_1 +  \ldots + \beta_p X_p\]</span></p>
-<p>where <span class="math inline">\(X=(X_1,\ldots,X_p)\)</span> are <span class="math inline">\(p\)</span> predictors. The equation above can be rewritten as</p>
-<p><span class="math display">\[ p(X) = \frac{e^{\beta_0 + \beta_1 X_1 +  \ldots + \beta_p X_p}}{1+e^{\beta_0 + \beta_1 X_1 +  \ldots + \beta_p X_p}} \]</span></p>
-<p>Just as in the simple logistic regression we use the maximum likelihood method to estimate <span class="math inline">\(\beta_0,\beta_1,\ldots,\beta_p\)</span>.</p>
-
 </div>
 </div>
             </section>
@@ -391,8 +262,8 @@ Click <a href="https://egarpor.shinyapps.io/log-maximum-likelihood/">here</a> to
           </div>
         </div>
       </div>
-<a href="pw-2.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="pw-3.html" class="navigation navigation-next " aria-label="Next page""><i class="fa fa-angle-right"></i></a>
+<a href="pw-6.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="pw-7.html" class="navigation navigation-next " aria-label="Next page""><i class="fa fa-angle-right"></i></a>
 
 <script src="book_assets/gitbook-2.6.7/js/app.min.js"></script>
 <script src="book_assets/gitbook-2.6.7/js/lunr.js"></script>

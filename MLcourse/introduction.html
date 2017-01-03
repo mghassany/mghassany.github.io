@@ -26,15 +26,15 @@
 <meta name="author" content="Mohamad Ghassany">
 
 
-<meta name="date" content="2016-12-28">
+<meta name="date" content="2016-12-29">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black">
   
   
-
-<link rel="next" href="introduction.html">
+<link rel="prev" href="index.html">
+<link rel="next" href="linear-regression.html">
 
 <script src="book_assets/jquery-2.2.3/jquery.min.js"></script>
 <link href="book_assets/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -152,8 +152,11 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="pw-2.html"><a href="pw-2.html"><i class="fa fa-check"></i>PW 2</a><ul>
-<li class="chapter" data-level="" data-path="pw-2.html"><a href="pw-2.html#rmarkdown"><i class="fa fa-check"></i>RMarkdown</a></li>
-<li class="chapter" data-level="" data-path="pw-2.html"><a href="pw-2.html#multiple-linear-regression-1"><i class="fa fa-check"></i>Multiple Linear Regression</a></li>
+<li class="chapter" data-level="2.4" data-path="pw-2.html"><a href="pw-2.html#reporting"><i class="fa fa-check"></i><b>2.4</b> Reporting</a><ul>
+<li class="chapter" data-level="2.4.1" data-path="pw-2.html"><a href="pw-2.html#markdown"><i class="fa fa-check"></i><b>2.4.1</b> Markdown</a></li>
+<li class="chapter" data-level="2.4.2" data-path="pw-2.html"><a href="pw-2.html#r-markdown"><i class="fa fa-check"></i><b>2.4.2</b> R Markdown</a></li>
+</ul></li>
+<li class="chapter" data-level="2.5" data-path="pw-2.html"><a href="pw-2.html#multiple-linear-regression-1"><i class="fa fa-check"></i><b>2.5</b> Multiple Linear Regression</a></li>
 </ul></li>
 <li class="part"><span><b>Classification</b></span></li>
 <li class="chapter" data-level="3" data-path="logistic-regression.html"><a href="logistic-regression.html"><i class="fa fa-check"></i><b>3</b> Logistic Regression</a><ul>
@@ -238,25 +241,128 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="header">
-<h1 class="title">Machine Learning</h1>
-<h4 class="author"><em>Mohamad Ghassany</em></h4>
-<h4 class="date"><em>2016-12-28</em></h4>
-</div>
-<div id="welcome" class="section level1 unnumbered">
-<h1>Welcome</h1>
+<div id="introduction" class="section level1 unnumbered">
+<h1>Introduction</h1>
 <!-- # Introduction -->
-<p>Welcome to this course. It is only a little introduction to Machine Learning.</p>
-<p>The aim of Machine Learning is to build computer systems that can adapt to their environments and learn form experience. Learning techniques and methods from this field are successfully applied to a variety of learning tasks in a broad range of areas, including, for example, spam recognition, text classification, gene discovery, financial forecasting. The course will give an overview of many concepts, techniques, and algorithms in machine learning, beginning with topics such as linear regression and classification and ending up with topics such as kmeans and Expectation Maximization. The course will give the student the basic ideas and intuition behind these methods, as well as a more formal statistical and computational understanding. Students will have an opportunity to experiment with machine learning techniques in R and apply them to a selected problem.</p>
+<div id="what-is-machine-learning" class="section level2 unnumbered">
+<h2>What is Machine Learning ?</h2>
+<p>What is Machine Learning?</p>
+<p>Two definitions of Machine Learning are offered. Arthur Samuel described it as: “the field of study that gives computers the ability to learn without being explicitly programmed.” This is an older, informal definition.</p>
+<p>Tom Mitchell provides a more modern definition: “A computer program is said to learn from experience E with respect to some class of tasks T and performance measure P, if its performance at tasks in T, as measured by P, improves with experience E.”</p>
+<p>Machine Learning is also called Statistical Learning.</p>
+<p>Example: playing checkers.</p>
+<p>E = the experience of playing many games of checkers</p>
+<p>T = the task of playing checkers.</p>
+<p>P = the probability that the program will win the next game.</p>
+<p>In general, any machine learning problem can be assigned to one of two broad classifications:</p>
+<p>Supervised learning and Unsupervised learning.</p>
+</div>
+<div id="supervised-learning" class="section level2 unnumbered">
+<h2>Supervised Learning</h2>
+<p>Supervised Learning is probably the most common type of machine learning problem. Let’s start with an example of what is it. Let’s say we want to predict housing prices. We plot a data set and it looks like this.</p>
+<center>
+<img src="img/sl1.png" />
+</center>
+<p>Here on the horizontal axis, the size of different houses in square feet, and on the vertical axis, the price of different houses in thousands of dollars.</p>
+<p>So. Given this data, let’s say we own a house that is, say 750 square feet and hoping to sell the house and they want to know how much they can get for the house.</p>
+<center>
+<center>
+<img src="img/sl2.png" />
+</center>
+<p>So how can the learning algorithm help?</p>
+<p>One thing a learning algorithm might be able to do is put a straight line through the data or to <strong>“fit”</strong> a straight line to the data and, based on that, it looks like maybe the house can be sold for maybe about $150,000.</p>
+<center>
+<img src="img/sl3.png" />
+</center>
+<p>But maybe this isn’t the only learning algorithm we can use. There might be a better one. For example, instead of sending a straight line to the data, we might decide that it’s better to fit a <em>quadratic function</em> or a <em>second-order polynomial</em> to this data.</p>
+<center>
+<img src="img/sl4.png" />
+</center>
+<p>If we do that, and make a prediction here, then it looks like, well, maybe we can sell the house for closer to $200,000.</p>
+<p>This is an example of a supervised learning algorithm.</p>
+<p>The term supervised learning refers to the fact that we gave the algorithm a data set in which the <strong>“right answers”</strong> were given.</p>
+<p>The example above is also called a regression problem. A regression problem is when we try to predict a <strong>continuous</strong> value output. Namely the price in the example.</p>
+<p>Here’s another supervised learning example. Let’s say we want to look at medical records and try to predict of a breast cancer as malignant or benign. If someone discovers a breast tumor, a lump in their breast, a malignant tumor is a tumor that is harmful and dangerous and a benign tumor is a tumor that is harmless. Let’s see a collected data set and suppose in the data set we have the size of the tumor on the horizontal axis and on the vertical axis we plot one or zero, yes or no, whether or not these are examples of tumors we’ve seen before are malignant (which is one) or zero if not malignant or benign.</p>
+<center>
+<img src="img/sl5.png" />
+</center>
+<p>In this data set we have five examples of benign tumors, and five examples of malignant tumors.</p>
+<p>Let’s say a person who tragically has a breast tumor, and let’s say her breast tumor size is known (rose arrow in the following figure).</p>
+<center>
+<img src="img/sl6.png" />
+</center>
+<p>The machine learning question is, can you estimate what is the probability that a tumor is malignant versus benign? To introduce a bit more terminology this is an example of a classification problem.</p>
+<p>The term classification refers to the fact that here we’re trying to predict a <strong>discrete</strong> value output: zero or one, malignant or benign. And it turns out that in classification problems sometimes you can have more than two values for the two possible values for the output.</p>
+<p>In classification problems there is another way to plot this data. Let’s use a slightly different set of symbols to plot this data. So if tumor size is going to be the attribute that we are going to use to predict malignancy or benignness, we can also draw the data like this.</p>
+<center>
+<img src="img/sl7.png" />
+</center>
+<p>All we did was we took the data set on top and just mapped it down using different symbols. So instead of drawing crosses, we are now going to draw <code>O</code>’s for the benign tumors.</p>
+<center>
+<img src="img/sl8.png" />
+</center>
+<p>Now, in this example we use only one <strong>feature</strong> or one attribute, mainly, the <em>tumor size</em> in order to predict whether the tumor is malignant or benign.</p>
+<p>In other machine learning problems we may have more than one feature.</p>
+<p>Here’s an example. Let’s say that instead of just knowing the tumor size, we know both the age of the patients and the tumor size. In that case maybe the data set will look like this.</p>
+<center>
+<img src="img/sl9.png" />
+</center>
+<p>So, let’s say a person who tragically has a tumor. And maybe, their tumor size and age falls around there (rose point):</p>
+<center>
+<img src="img/sl10.png" />
+</center>
+<p>So given a data set like this, what the learning algorithm might do is throw a straight line through the data to try to separate out the malignant tumors from the benign ones. And with this, hopefully we can decide that the person’s tumor falls on this benign side and is therefore more likely to be benign than malignant.</p>
+<center>
+<img src="img/sl11.png" />
+</center>
+<p>In this example we had <strong>two features</strong>, namely, the age of the patient and the size of the tumor. In other machine learning problems we will often have more features.</p>
+<p>Most interesting learning algorithms is a learning algorithm that can deal with, not just two or three or five features, but an <strong>infinite number of features</strong>. So how do you deal with an infinite number of features. How do you even store an infinite number of things on the computer when your computer is gonna run out of memory.</p>
+</div>
+<div id="unsupervised-learning" class="section level2 unnumbered">
+<h2>Unsupervised Learning</h2>
+<p>The second major type of machine learning problem is called Unsupervised Learning.</p>
+<p>The difference between Unsupervised Learning and Supervised Learning is that in Supervised Learning we are told explicitly what is the so-called right answers (data are labeled).</p>
+<p>In Unsupervised Learning, we’re given data that doesn’t have any labels or that all has the same label or really no labels. Like in this example:</p>
+<center>
+<img src="img/ul1.png" />
+</center>
+<p>So we’re given the data set and we’re not told what to do with it and we’re not told what each data point is. Instead we’re just told, here is a data set. Can you find some structure in the data?</p>
+<p>Given this data set, an Unsupervised Learning algorithm might decide that the data lives in two different clusters.</p>
+<center>
+<img src="img/ul2.png" />
+</center>
+<p>This is called a <strong>clustering</strong> algorithm.</p>
+<p>Here are two examples where Unsupervised Learning or clustering is used.</p>
+<p>Social network analysis:</p>
+<center>
+<img src="img/ul3.png" />
+</center>
+<p>So given knowledge about which friends you email the most or given your Facebook friends or your Google+ circles, can we automatically identify which are cohesive groups of friends, also which are groups of people that all know each other?</p>
+<p>Market segmentation:</p>
+<center>
+<img src="img/ul4.png" />
+</center>
+<p>Many companies have huge databases of customer information. So, can you look at this customer data set and automatically discover market segments and automatically group your customers into different market segments so that you can automatically and more efficiently sell or market your different market segments together?</p>
+<p>This is Unsupervised Learning because we have all this customer data, but we don’t know in advance what are the market segments and for the customers in our data set, we don’t know in advance who is in market segment one, who is in market segment two, and so on. But we have to let the algorithm discover all this just from the data.</p>
+<p align="right">
+◼
+</p>
 
 </div>
+</div>
+
+
+
+
+
+
             </section>
 
           </div>
         </div>
       </div>
-
-<a href="introduction.html" class="navigation navigation-next navigation-unique" aria-label="Next page""><i class="fa fa-angle-right"></i></a>
+<a href="index.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="linear-regression.html" class="navigation navigation-next " aria-label="Next page""><i class="fa fa-angle-right"></i></a>
 
 <script src="book_assets/gitbook-2.6.7/js/app.min.js"></script>
 <script src="book_assets/gitbook-2.6.7/js/lunr.js"></script>

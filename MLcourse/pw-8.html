@@ -26,15 +26,15 @@
 <meta name="author" content="Mohamad Ghassany">
 
 
-<meta name="date" content="2016-12-28">
+<meta name="date" content="2016-12-29">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black">
   
   
-<link rel="prev" href="pw-1.html">
-<link rel="next" href="pw-2.html">
+<link rel="prev" href="expectation-maximisation.html">
+<link rel="next" href="references-resources.html">
 
 <script src="book_assets/jquery-2.2.3/jquery.min.js"></script>
 <link href="book_assets/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -152,8 +152,11 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="pw-2.html"><a href="pw-2.html"><i class="fa fa-check"></i>PW 2</a><ul>
-<li class="chapter" data-level="" data-path="pw-2.html"><a href="pw-2.html#rmarkdown"><i class="fa fa-check"></i>RMarkdown</a></li>
-<li class="chapter" data-level="" data-path="pw-2.html"><a href="pw-2.html#multiple-linear-regression-1"><i class="fa fa-check"></i>Multiple Linear Regression</a></li>
+<li class="chapter" data-level="2.4" data-path="pw-2.html"><a href="pw-2.html#reporting"><i class="fa fa-check"></i><b>2.4</b> Reporting</a><ul>
+<li class="chapter" data-level="2.4.1" data-path="pw-2.html"><a href="pw-2.html#markdown"><i class="fa fa-check"></i><b>2.4.1</b> Markdown</a></li>
+<li class="chapter" data-level="2.4.2" data-path="pw-2.html"><a href="pw-2.html#r-markdown"><i class="fa fa-check"></i><b>2.4.2</b> R Markdown</a></li>
+</ul></li>
+<li class="chapter" data-level="2.5" data-path="pw-2.html"><a href="pw-2.html#multiple-linear-regression-1"><i class="fa fa-check"></i><b>2.5</b> Multiple Linear Regression</a></li>
 </ul></li>
 <li class="part"><span><b>Classification</b></span></li>
 <li class="chapter" data-level="3" data-path="logistic-regression.html"><a href="logistic-regression.html"><i class="fa fa-check"></i><b>3</b> Logistic Regression</a><ul>
@@ -238,249 +241,16 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="multiple-linear-regression" class="section level1">
-<h1><span class="header-section-number">2</span> Multiple Linear Regression</h1>
-<p>Simple linear regressionis a useful approach for predicting a response on the basis of a single predictor variable. However, in practice we often have more than one predictor. In the previous chapter, we took for example the prediction of housing prices considering we had the size of each house. We had a single feature <span class="math inline">\(X\)</span>, the size of the house. But now imagine if we had not only the size of the house as a feature but we also knew the number of bedrooms, the number of flours and the age of the home in years. It seems like this would give us a lot more information with which to predict the price.</p>
-<div id="the-model" class="section level2">
-<h2><span class="header-section-number">2.1</span> The Model</h2>
-<p>In general, suppose that we have p distinct predictors. Then the multiple linear regression model takes the form</p>
-<p><span class="math display">\[ Y = \beta_0 + \beta_1 X_1 + \beta_2 X_2 + \dots + \beta_p X_p + \epsilon \]</span></p>
-<p>where <span class="math inline">\(X_j\)</span> represents the <span class="math inline">\(j\)</span>th predictor and <span class="math inline">\(\beta_j\)</span> quantifies the association between that variable and the response. We interpret <span class="math inline">\(\beta_j\)</span> as the average effect on <span class="math inline">\(Y\)</span> of a one unit increase in <span class="math inline">\(X_j\)</span>, <em>holding all other predictors fixed</em>.</p>
-<p>In matrix terms, supposing we have <span class="math inline">\(n\)</span> observations and <span class="math inline">\(p\)</span> variables, we need to define the following matrices:</p>
-\begin{equation}
- \textbf{Y}_{n \times 1} = \begin{pmatrix}
-    Y_{1} \\
-    Y_{2} \\
-    \vdots \\
-    Y_{n}
-\end{pmatrix}   \,\,\,\,\,\,\,\,\,\,\,\,  \textbf{X}_{n \times (p+1)}  = \begin{pmatrix}
-    1      &amp; X_{11} &amp; X_{12} &amp; \dots  &amp; X_{1p} \\
-    1      &amp; X_{21} &amp; X_{22} &amp; \dots  &amp; X_{2p} \\
-    \vdots &amp; \vdots &amp; \vdots &amp; \ddots &amp; \vdots \\
-    1      &amp; X_{n1} &amp; X_{n2} &amp; \dots  &amp; X_{np}
-\end{pmatrix}
-\end{equation}
-\begin{equation}
- {\mathbb{\beta}}_{(p+1) \times 1} = \begin{pmatrix}
-    \beta_{0} \\
-    \beta_{1} \\
-    \vdots \\
-    \beta_{p}
-    \end{pmatrix}   \,\,\,\,\,\,\,\,\,\,\,\,  {\epsilon}_{n \times 1} = \begin{pmatrix}
-        \epsilon_{1} \\
-        \epsilon_{2} \\
-        \vdots \\
-        \epsilon_{n}
-    \end{pmatrix}
-\end{equation}
-<p>In matrix terms, the general linear regression model is</p>
-<p><span class="math display">\[ \textbf{Y}_{n \times 1} = \textbf{X}_{n \times (p+1)} {\mathbb{\beta}}_{(p+1) \times 1} + {\epsilon}_{n \times 1} \]</span></p>
-<p>where,</p>
-<ul>
-<li><span class="math inline">\(\textbf{Y}\)</span> is a vector of responses.</li>
-<li><span class="math inline">\(\mathbb{\beta}\)</span> is a vector of parameters.</li>
-<li><span class="math inline">\(\textbf{X}\)</span> is a matrix of constants.</li>
-<li><span class="math inline">\(\epsilon\)</span> is a vector of independent normal random variables.</li>
-</ul>
+<div id="pw-8" class="section level1 unnumbered">
+<h1>PW 8</h1>
+<div id="subsection-12" class="section level2 unnumbered">
+<h2>Subsection</h2>
+<p>Text</p>
 </div>
-<div id="estimating-the-regression-coefficients" class="section level2">
-<h2><span class="header-section-number">2.2</span> Estimating the Regression Coefficients</h2>
-<p>As was the case in the simple linear regression setting, the regression coefficients <span class="math inline">\(\beta_{0}, \beta_{1}, \ldots, \beta_{p}\)</span> are unknown, and must be estimated. Given estimates <span class="math inline">\(\hat{\beta_{0}}, \hat{\beta_{1}}, \ldots, \hat{\beta_{p}}\)</span>, we can make predictions using the formula</p>
-<p><span class="math display">\[ \hat{y} = \hat{\beta_{0}} + \hat{\beta_{1}} x_1 + \hat{\beta_{2}} x_2 + \ldots, \hat{\beta_{p}} x_p \]</span></p>
-<p>We choose <span class="math inline">\(\beta_{0}, \beta_{1}, \ldots, \beta_{p}\)</span> to minimize the sum of squared residuals</p>
-<p><span class="math display">\[ \begin{aligned}
-RSS &amp;= \sum_{i=1}^{n} (y_i - \hat{y}_i)^2 \\
-    &amp;= \sum_{i=1}^{n} (y_1 - \hat{\beta_0} - \hat{\beta_1} \hat{x}_{i1}  - \hat{\beta_2} \hat{x}_{i2} - \ldots  -  \hat{\beta_p} \hat{x}_{ip})^2 \\
-\end{aligned}
-\]</span></p>
-<p>The values <span class="math inline">\(\hat{\beta_{0}}, \hat{\beta_{1}}, \ldots, \hat{\beta_{p}}\)</span> that minimize the RSS are the multiple least squares regression coefficient estimates, they are calculated using this formula (in matrix terms):</p>
-<p><span class="math display">\[ \hat{\beta} = (\textbf{X}^T \textbf{X})^{-1}\textbf{X}^T \textbf{Y} \]</span></p>
-<p>Note 1:</p>
-<div class="rmdinsight">
-<p>
-It is a remarkable property of matrix algebra that the results for the general linear regression model in matrix notation appear exactly as those for the simple linear regression model. Only the degrees of freedom and other constants related to the number of <span class="math inline"><em>X</em></span> variables and the dimensions of some matrices are different.
-</p>
-</div>
-<p>Note 2:</p>
-<div class="rmdinsight">
-<p>
-If <span class="math inline"><strong>X</strong><sup><em>T</em></sup><strong>X</strong></span> is noninvertible, the common causes might be having:
-</p>
-<ul>
-<li>
-Redundant features, where two features are very closely related (i.e. they are linearly dependent)
-</li>
-<li>
-Too many features (e.g. <span class="math inline"><em>p</em> ≥ <em>n</em></span>). In this case, we delete some features or we use “regularization” (to be explained in a later lesson, maybe).
-</li>
-</ul>
-</div>
-</div>
-<div id="some-important-questions" class="section level2">
-<h2><span class="header-section-number">2.3</span> Some important questions</h2>
-<p>When we perform multiple linear regression, we usually are interested in answering a few important questions.</p>
-<ol style="list-style-type: decimal">
-<li>Is at least one of the predictors <span class="math inline">\(X_1 ,X_2 ,\ldots,X_p\)</span> useful in predicting the response?</li>
-<li>Do all the predictors help to explain <span class="math inline">\(Y\)</span>, or is only a subset of the predictors useful?</li>
-<li>How well does the model fit the data?</li>
-<li>Given a set of predictor values, what response value should we predict, and how accurate is our prediction?</li>
-</ol>
-<p><strong><em>Relationship Between the Response and Predictors?</em></strong></p>
-<p><strong><span class="math inline">\(F\)</span>-Statistic</strong></p>
-<p>Recall that in the simple linear regression setting, in order to determine whether there is a relationship between the response and the predictor we can simply check whether <span class="math inline">\(\beta_1 = 0\)</span>. In the multiple regression setting with <span class="math inline">\(p\)</span> predictors, we need to ask whether all of the regression coefficients are zero, i.e. whether <span class="math inline">\(\beta_1 = \beta_2 = \ldots = \beta_p = 0\)</span>. As in the simple linear regression setting, we use a hypothesis test to answer this question. We test the null hypothesis,</p>
-<p><span class="math display">\[ H_0 : \beta_1 = \beta_2 = \ldots = \beta_p = 0 \]</span></p>
-<p>versus the alternative hypothesis</p>
-<p><span class="math display">\[ H_1 : \text{at least one} \, \beta_j \, \text{is non-zero} \]</span></p>
-<p>This hypothesis test is performed by computing the <span class="math inline">\(F\)</span>-statistic (<em>Fisher</em>):</p>
-<p><span class="math display">\[ F = \frac{ (\text{TSS} - \text{RSS})/p}{\text{RSS}/(n-p-1)} \sim F_{p,n-p-1} \]</span></p>
-<p>where, as with simple linear regression, <span class="math inline">\(\text{TSS} = \sum (y_i - \bar{y})^2\)</span> and <span class="math inline">\(\text{RSS} = \sum (y_i - \hat{y}_i)^2\)</span>.</p>
-<p>When the <span class="math inline">\(F\)</span>-statistic value is close to 1, then <span class="math inline">\(H_0\)</span> is true, which means there is no relationship between the response and predictors. On the other hand, if <span class="math inline">\(H_1\)</span> is true, so we expect <span class="math inline">\(F\)</span> to be greater than 1.</p>
-<p>So the question we ask here: <em>Is the whole regression explaining anything at all?</em> The answer comes from the <span class="math inline">\(F\)</span>-test in the ANOVA (ANalysis Of VAriance) table. This is what we get in an ANOVA table:</p>
-<table>
-<thead>
-<tr class="header">
-<th align="left">Source</th>
-<th align="left">df</th>
-<th align="left">SS</th>
-<th align="left">MS</th>
-<th align="left"><span class="math inline">\(F\)</span></th>
-<th align="left">p-value</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td align="left">Factor (Explained)</td>
-<td align="left"><span class="math inline">\(p-1\)</span></td>
-<td align="left">SST</td>
-<td align="left">SST/<span class="math inline">\((k-1)\)</span></td>
-<td align="left">MST/MSE</td>
-<td align="left">p-value</td>
-</tr>
-<tr class="even">
-<td align="left">Error (Unexplained)</td>
-<td align="left"><span class="math inline">\(n-p\)</span></td>
-<td align="left">SSE</td>
-<td align="left">SSE/<span class="math inline">\((n-k)\)</span></td>
-<td align="left"></td>
-<td align="left"></td>
-</tr>
-<tr class="odd">
-<td align="left">Total</td>
-<td align="left"><span class="math inline">\(n-1\)</span></td>
-<td align="left">SS</td>
-<td align="left"></td>
-<td align="left"></td>
-<td align="left"></td>
-</tr>
-</tbody>
-</table>
-<p>The ANOVA table has many pieces of information. What we care about is the <span class="math inline">\(F\)</span> Ratio and the corresponding p-value. We compare the <span class="math inline">\(F\)</span> Ratio with <span class="math inline">\(F_{(p-1,n-p)}\)</span> and a corresponding <span class="math inline">\(\alpha\)</span> value (error).</p>
-<p><strong>p-values</strong></p>
-<p>The p-values provide information about whether each individual predictor is related to the response, after adjusting for the other predictors. Let’s look at the following table we obtain in general using a statistical software for example</p>
-<table>
-<thead>
-<tr class="header">
-<th align="left"></th>
-<th align="left">Coefficient</th>
-<th align="left">Std. error</th>
-<th align="left"><span class="math inline">\(t\)</span>-statistic</th>
-<th align="left">p-value</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td align="left">Constant</td>
-<td align="left">2.939</td>
-<td align="left">0.3119</td>
-<td align="left">9.42</td>
-<td align="left">&lt;0.0001</td>
-</tr>
-<tr class="even">
-<td align="left"><span class="math inline">\(X_1\)</span></td>
-<td align="left">0.046</td>
-<td align="left">0.0014</td>
-<td align="left">32.81</td>
-<td align="left">&lt;0.0001</td>
-</tr>
-<tr class="odd">
-<td align="left"><span class="math inline">\(X_2\)</span></td>
-<td align="left">0.189</td>
-<td align="left">0.0086</td>
-<td align="left">21.89</td>
-<td align="left">&lt;0.0001</td>
-</tr>
-<tr class="even">
-<td align="left"><span class="math inline">\(X_3\)</span></td>
-<td align="left">-0.001</td>
-<td align="left">0.0059</td>
-<td align="left">-0.18</td>
-<td align="left">0.8599</td>
-</tr>
-</tbody>
-</table>
-<p>In this tablewe the following model</p>
-<p><span class="math display">\[ Y = 2.939 + 0.046 X_1 + 0.189 X_2 - 0.001 X_3 \]</span></p>
-<p>Note that for each individual predictor a <span class="math inline">\(t\)</span>-statistic and a p-value were reported. These p-values indicate that <span class="math inline">\(X_1\)</span> and <span class="math inline">\(X_2\)</span> are related to <span class="math inline">\(Y\)</span>, but that there is no evidence that <span class="math inline">\(X_3\)</span> is associated with <span class="math inline">\(Y\)</span>, in the presence of these two.</p>
-<p><strong><em>Deciding on Important Variables</em></strong></p>
-<p>The most direct approach is called <em>all subsets</em> or <em>best subsets</em> regression: we compute the least squares fit for all possible subsets and then choose between them based on some criterion that balances training error with model size.</p>
-<p>However we often can’t examine all possible models, since they are <span class="math inline">\(2^p\)</span> of them; for example when <span class="math inline">\(p = 40\)</span> there are over a billion models! Instead we need an automated approach that searches through a subset of them. Here are two commonly use approaches:</p>
-<p><strong>Forward selection</strong>:</p>
-<ul>
-<li>Begin with the <em>null model</em> — a model that contains an intercept (constant) but no predictors.</li>
-<li>Fit p simple linear regressions and add to the null model the variable that results in the lowest RSS.</li>
-<li>Add to that model the variable that results in the lowest RSS amongst all two-variable models.</li>
-<li>Continue until some stopping rule is satisfied, for example when all remaining variables have a p-value above some threshold.</li>
-</ul>
-<p><strong>Backward selection</strong>:</p>
-<ul>
-<li>Start with all variables in the model.</li>
-<li>Remove the variable with the largest p-value — that is, the variable that is the least statistically significant.</li>
-<li>The new <span class="math inline">\((p − 1)\)</span>-variable model is fit, and the variable with the largest p-value is removed.</li>
-<li>Continue until a stopping rule is reached. For instance, we may stop when all remaining variables have a significant p-value defined by some significance threshold.</li>
-</ul>
-<div class="rmdinsight">
-<p>
-There are more systematic criteria for choosing an “optimal” member in the path of models produced by forward or backward stepwise selection. These include <em>Mallow’s <span class="math inline"><em>C</em><sub><em>p</em></sub></span></em> , <em>Akaike information criterion (AIC)</em>, <em>Bayesian information criterion (BIC)</em>, <em>adjusted <span class="math inline"><em>R</em><sup>2</sup></span></em> and <em>Cross-validation (CV)</em>.
-</p>
-</div>
-<p><strong><em>Model Fit</em></strong></p>
-<p>Two of the most common numerical measures of model fit are the RSE and <span class="math inline">\(R^2\)</span>, the fraction of variance explained. These quantities are computed and interpreted in the same fashion as for simple linear regression. Recall that in simple regression, <span class="math inline">\(R^2\)</span> is the square of the correlation of the response and the variable. In multiple linear regression, it turns out that it equals <span class="math inline">\(Cor(Y, \hat{Y})^2\)</span> , the square of the correlation between the response and the fitted linear model; in fact one property of the fitted linear model is that it maximizes this correlation among all possible linear models. An <span class="math inline">\(R^2\)</span> value close to 1 indicates that the model explains a large portion of the variance in the response variable.</p>
-<p>In general RSE is defined as</p>
-<p><span class="math display">\[ \text{RSE} = \sqrt{\frac{1}{n-p-1}\text{RSS}} \]</span></p>
-<div id="other-considerations-in-regression-model" class="section level3">
-<h3><span class="header-section-number">2.3.1</span> Other Considerations in Regression Model</h3>
-<p><strong>Qualitative Predictors</strong></p>
-<ul>
-<li>If we have a categorial (qualitative) variable (feature), how do we fit into a regression equation?</li>
-<li>For example, if <span class="math inline">\(X_1\)</span> is the gender (male or female).</li>
-<li>We can code, for example, male = 0 and female = 1.</li>
-<li>Suppose <span class="math inline">\(X_2\)</span> is a quantitative variable, the regression equation becomes:</li>
-</ul>
-<p><span class="math display">\[ Y_i \approx \beta_0 + \beta_1 X_1 + \beta_2 X_2 = \begin{cases}
-  \beta_0 + \beta_2 X_2 &amp; \text{ if male} \\
-  \beta_0 + \beta_1 X_1 + \beta_2 X_2 &amp; \text{ if female}
-\end{cases} \]</span></p>
-<ul>
-<li>Another possible coding scheme is to let male = -1 and female = 1, the regression equation is then:</li>
-</ul>
-<p><span class="math display">\[ Y_i \approx \beta_0 + \beta_1 X_1 + \beta_2 X_2 = \begin{cases}
-  \beta_0 -\beta_1 X_1 + \beta_2 X_2 &amp; \text{ if male} \\
-  \beta_0 + \beta_1 X_1 + \beta_2 X_2 &amp; \text{ if female}
-\end{cases} \]</span></p>
-<p><strong>Interaction Terms</strong></p>
-<ul>
-<li>When the effect on <span class="math inline">\(Y\)</span> of increasing <span class="math inline">\(X_1\)</span> depends on another <span class="math inline">\(X_2\)</span>.</li>
-<li>We may in this case try the model</li>
-</ul>
-<p><span class="math display">\[ Y_i = \beta_0 + \beta_1 X_1 + \beta_2 X_2 + \beta_3 X_1 X_2 \]</span></p>
-<ul>
-<li><span class="math inline">\(X_1 X_2\)</span> is the Interaction term.</li>
-</ul>
-<p align="right">
-◼
-</p>
+<div id="subsection-13" class="section level2 unnumbered">
+<h2>Subsection</h2>
+<p>Text</p>
 
-</div>
 </div>
 </div>
             </section>
@@ -488,8 +258,8 @@ There are more systematic criteria for choosing an “optimal” member in the p
           </div>
         </div>
       </div>
-<a href="pw-1.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="pw-2.html" class="navigation navigation-next " aria-label="Next page""><i class="fa fa-angle-right"></i></a>
+<a href="expectation-maximisation.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="references-resources.html" class="navigation navigation-next " aria-label="Next page""><i class="fa fa-angle-right"></i></a>
 
 <script src="book_assets/gitbook-2.6.7/js/app.min.js"></script>
 <script src="book_assets/gitbook-2.6.7/js/lunr.js"></script>

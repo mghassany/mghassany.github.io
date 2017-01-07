@@ -124,7 +124,7 @@
   \postauthor{\par}
   \predate{\centering\large\emph}
   \postdate{\par}
-  \date{2017-01-03}
+  \date{2017-01-07}
 
 \usepackage{booktabs}
 \usepackage{longtable}
@@ -1230,7 +1230,7 @@ the \texttt{plot()} function, type \texttt{?plot}.
 \CommentTok{# - unif -> Uniform}
 \CommentTok{# - exp -> Exponential}
 \CommentTok{# - t -> Student's t}
-\CommentTok{# - f -> Snedecor's F}
+\CommentTok{# - f -> Snedecor's F (Fisher)}
 \CommentTok{# - chisq -> Chi squared}
 \CommentTok{# - pois -> Poisson}
 \CommentTok{# - binom -> Binomial}
@@ -1329,7 +1329,12 @@ will look in the working directory for this file, and when you tell R to
 save a data file or figure, it will save it in the working directory.
 
 To set your working directory within RStudio you can go to
-\texttt{Tools\ /\ Set\ working\ directory}.
+\texttt{Tools\ /\ Set\ working\ directory}, or use the command
+\texttt{setwd()}, we put the complete path of the directory between the
+brackets, do not forget to put the path into quotation marks
+\texttt{""}.
+
+To know the actual working directory we use \texttt{getwd()}.
 
 \subsection{Loading Data}\label{loading-data}
 
@@ -1356,23 +1361,28 @@ Next we will show how to load the data set
 \begin{itemize}
 \tightlist
 \item
-  If the file is a csv format, we use \texttt{read.csv}.
+  If the file is of csv format, we use \texttt{read.csv}.
 \item
   Always try to look to the file before importing it to \texttt{R} (Open
   it in a text editor. See for example if the first row containes the
   variables names, if the columns are separated by \texttt{,} or
   \texttt{;} or ..
 \item
-  I suggest \href{https://www.sublimetext.com/}{\texttt{Sublime\ Text}}
-  or \href{https://atom.io/}{\texttt{Atom}} as text editors.
+  For text editors, I suggest
+  \href{https://www.sublimetext.com/}{\texttt{Sublime\ Text}} or
+  \href{https://atom.io/}{\texttt{Atom}}.
 \end{itemize}
 \end{rmdinsight}
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\KeywordTok{dim}\NormalTok{(Auto)}
+\KeywordTok{dim}\NormalTok{(Auto) }\CommentTok{# To see the dimensions of the data set}
 \CommentTok{#ans> [1] 397   9}
-\NormalTok{Auto[}\DecValTok{1}\NormalTok{:}\DecValTok{4}\NormalTok{,]}
+\KeywordTok{nrow}\NormalTok{(Auto) }\CommentTok{# To see the number of rows}
+\CommentTok{#ans> [1] 397}
+\KeywordTok{ncol}\NormalTok{(Auto) }\CommentTok{# To see the number of columns}
+\CommentTok{#ans> [1] 9}
+\NormalTok{Auto[}\DecValTok{1}\NormalTok{:}\DecValTok{4}\NormalTok{,] }\CommentTok{# The first 4 rows of the data set}
 \CommentTok{#ans>   mpg cylinders displacement horsepower weight acceleration year origin}
 \CommentTok{#ans> 1  18         8          307        130   3504         12.0   70      1}
 \CommentTok{#ans> 2  15         8          350        165   3693         11.5   70      1}
@@ -1398,9 +1408,9 @@ Next we will show how to load the data set
 \end{Shaded}
 
 \begin{rmdinsight}
-This
+Take a look at this
 \href{https://cran.r-project.org/doc/contrib/Torfs+Brauer-Short-R-Intro.pdf}{(very)
-short introduction to R} can be useful.
+short introduction to R}. It can be useful.
 \end{rmdinsight}
 
 \section{Regression}\label{regression}
@@ -1416,39 +1426,112 @@ countries population (Population2010,Population2013).
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\CommentTok{# lm has the syntax: lm(formula = response ~ predictor, data = data)}
+\CommentTok{# Load the dataset, when we load an .RData using load()}
+\CommentTok{# function we do not attribute it to a name like we did}
+\CommentTok{# when we used read.table() or when we use read.csv()}
+
+\KeywordTok{load}\NormalTok{(}\StringTok{"EU.RData"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{rmdinsight}
+There is two ways to tell \texttt{R}~where is the file you want to
+load/use/import or where to save a file when you write/export/save :
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  write the complete path of the files.
+\item
+  set a working directory and put the files in it.
+\end{enumerate}
+\end{rmdinsight}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{# lm (for linear model) has the syntax: }
+\CommentTok{# lm(formula = response ~ predictor, data = data)}
 \CommentTok{# The response is the y in the model. The predictor is x.}
 \CommentTok{# For example (after loading the EU dataset)}
 \NormalTok{mod <-}\StringTok{ }\KeywordTok{lm}\NormalTok{(}\DataTypeTok{formula =} \NormalTok{Seats2011 ~}\StringTok{ }\NormalTok{Population2010, }\DataTypeTok{data =} \NormalTok{EU)}
-\CommentTok{#ans> Error in eval(predvars, data, env): invalid 'envir' argument of type 'character'}
 
 \CommentTok{# We have saved the linear model into mod, which now contains all the output of lm}
 \CommentTok{# You can see it by typing}
 \NormalTok{mod}
-\CommentTok{#ans> Error in eval(expr, envir, enclos): object 'mod' not found}
+\CommentTok{#ans> }
+\CommentTok{#ans> Call:}
+\CommentTok{#ans> lm(formula = Seats2011 ~ Population2010, data = EU)}
+\CommentTok{#ans> }
+\CommentTok{#ans> Coefficients:}
+\CommentTok{#ans>    (Intercept)  Population2010  }
+\CommentTok{#ans>       7.91e+00        1.08e-06}
 
 \CommentTok{# mod is indeed a list of objects whose names are}
 \KeywordTok{names}\NormalTok{(mod)}
-\CommentTok{#ans> Error in eval(expr, envir, enclos): object 'mod' not found}
+\CommentTok{#ans>  [1] "coefficients"  "residuals"     "effects"       "rank"         }
+\CommentTok{#ans>  [5] "fitted.values" "assign"        "qr"            "df.residual"  }
+\CommentTok{#ans>  [9] "na.action"     "xlevels"       "call"          "terms"        }
+\CommentTok{#ans> [13] "model"}
 
 \CommentTok{# We can access these elements by $}
 \CommentTok{# For example}
 \NormalTok{mod$coefficients}
-\CommentTok{#ans> Error in eval(expr, envir, enclos): object 'mod' not found}
+\CommentTok{#ans>    (Intercept) Population2010 }
+\CommentTok{#ans>       7.91e+00       1.08e-06}
 
 \CommentTok{# The residuals}
 \NormalTok{mod$residuals}
-\CommentTok{#ans> Error in eval(expr, envir, enclos): object 'mod' not found}
+\CommentTok{#ans>        Germany         France United Kingdom          Italy          Spain }
+\CommentTok{#ans>         2.8675        -3.7031        -1.7847         0.0139        -3.5084 }
+\CommentTok{#ans>         Poland        Romania    Netherlands         Greece        Belgium }
+\CommentTok{#ans>         1.9272         1.9434         0.2142         1.8977         2.3994 }
+\CommentTok{#ans>       Portugal Czech Republic        Hungary         Sweden        Austria }
+\CommentTok{#ans>         2.6175         2.7587         3.2898         2.0163         2.0575 }
+\CommentTok{#ans>       Bulgaria        Denmark       Slovakia        Finland        Ireland }
+\CommentTok{#ans>         1.9328        -0.8790        -0.7606        -0.6813        -0.7284 }
+\CommentTok{#ans>      Lithuania         Latvia       Slovenia        Estonia         Cyprus }
+\CommentTok{#ans>         0.4998        -1.3347        -2.1175        -3.3552        -2.7761 }
+\CommentTok{#ans>     Luxembourg          Malta }
+\CommentTok{#ans>        -2.4514        -2.3553}
 
 \CommentTok{# The fitted values}
 \NormalTok{mod$fitted.values}
-\CommentTok{#ans> Error in eval(expr, envir, enclos): object 'mod' not found}
+\CommentTok{#ans>        Germany         France United Kingdom          Italy          Spain }
+\CommentTok{#ans>          96.13          77.70          74.78          72.99          57.51 }
+\CommentTok{#ans>         Poland        Romania    Netherlands         Greece        Belgium }
+\CommentTok{#ans>          49.07          31.06          25.79          20.10          19.60 }
+\CommentTok{#ans>       Portugal Czech Republic        Hungary         Sweden        Austria }
+\CommentTok{#ans>          19.38          19.24          18.71          17.98          16.94 }
+\CommentTok{#ans>       Bulgaria        Denmark       Slovakia        Finland        Ireland }
+\CommentTok{#ans>          16.07          13.88          13.76          13.68          12.73 }
+\CommentTok{#ans>      Lithuania         Latvia       Slovenia        Estonia         Cyprus }
+\CommentTok{#ans>          11.50          10.33          10.12           9.36           8.78 }
+\CommentTok{#ans>     Luxembourg          Malta }
+\CommentTok{#ans>           8.45           8.36}
 
 \CommentTok{# Summary of the model}
 \NormalTok{sumMod <-}\StringTok{ }\KeywordTok{summary}\NormalTok{(mod)}
-\CommentTok{#ans> Error in summary(mod): object 'mod' not found}
 \NormalTok{sumMod}
-\CommentTok{#ans> Error in eval(expr, envir, enclos): object 'sumMod' not found}
+\CommentTok{#ans> }
+\CommentTok{#ans> Call:}
+\CommentTok{#ans> lm(formula = Seats2011 ~ Population2010, data = EU)}
+\CommentTok{#ans> }
+\CommentTok{#ans> Residuals:}
+\CommentTok{#ans>    Min     1Q Median     3Q    Max }
+\CommentTok{#ans> -3.703 -1.951  0.014  1.980  3.290 }
+\CommentTok{#ans> }
+\CommentTok{#ans> Coefficients:}
+\CommentTok{#ans>                Estimate Std. Error t value Pr(>|t|)    }
+\CommentTok{#ans> (Intercept)    7.91e+00   5.66e-01    14.0  2.6e-13 ***}
+\CommentTok{#ans> Population2010 1.08e-06   1.92e-08    56.3  < 2e-16 ***}
+\CommentTok{#ans> ---}
+\CommentTok{#ans> Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1}
+\CommentTok{#ans> }
+\CommentTok{#ans> Residual standard error: 2.29 on 25 degrees of freedom}
+\CommentTok{#ans>   (1 observation deleted due to missingness)}
+\CommentTok{#ans> Multiple R-squared:  0.992,   Adjusted R-squared:  0.992 }
+\CommentTok{#ans> F-statistic: 3.17e+03 on 1 and 25 DF,  p-value: <2e-16}
 \end{Highlighting}
 \end{Shaded}
 
@@ -1540,7 +1623,7 @@ Do the following:
 \tightlist
 \item
   Download The `EU' dataset from \href{datasets/EU.RData}{here} as an
-  \texttt{.RData} file and load it into use the function \texttt{load}.
+  \texttt{.RData} file and load it using the function \texttt{load}.
 \item
   Compute the regression of \texttt{CamCom2011} into
   \texttt{Population2010}. Save that model as the variable
@@ -1616,7 +1699,7 @@ between x and y is linear.
 \end{Highlighting}
 \end{Shaded}
 
-\begin{center}\includegraphics[width=0.7\linewidth]{Machine-Learning_files/figure-latex/unnamed-chunk-29-1} \end{center}
+\begin{center}\includegraphics[width=0.7\linewidth]{Machine-Learning_files/figure-latex/unnamed-chunk-31-1} \end{center}
 
 According to the plot, we see that the relationship is not linear. Let's
 try a transformation of our explanatory variable \texttt{lstat}.
@@ -1628,7 +1711,7 @@ try a transformation of our explanatory variable \texttt{lstat}.
 \end{Highlighting}
 \end{Shaded}
 
-\begin{center}\includegraphics[width=0.7\linewidth]{Machine-Learning_files/figure-latex/unnamed-chunk-30-1} \end{center}
+\begin{center}\includegraphics[width=0.7\linewidth]{Machine-Learning_files/figure-latex/unnamed-chunk-32-1} \end{center}
 
 Look at the plot, it is more linear, so we can proceed and perform
 \texttt{lm()}:
@@ -1755,7 +1838,7 @@ Now, let's plot our regression line on top of our data.
 \end{Highlighting}
 \end{Shaded}
 
-\begin{center}\includegraphics[width=0.7\linewidth]{Machine-Learning_files/figure-latex/unnamed-chunk-36-1} \end{center}
+\begin{center}\includegraphics[width=0.7\linewidth]{Machine-Learning_files/figure-latex/unnamed-chunk-38-1} \end{center}
 
 Let's play with the look of the plot, and makes it perttier!
 
@@ -1773,7 +1856,7 @@ Let's play with the look of the plot, and makes it perttier!
 \end{Highlighting}
 \end{Shaded}
 
-\begin{center}\includegraphics[width=0.7\linewidth]{Machine-Learning_files/figure-latex/unnamed-chunk-37-1} \end{center}
+\begin{center}\includegraphics[width=0.7\linewidth]{Machine-Learning_files/figure-latex/unnamed-chunk-39-1} \end{center}
 
 \textbf{STEP 5: Assess the model}
 
@@ -1818,6 +1901,8 @@ assess the model we created, then we will be using the test data!
 \CommentTok{#ans> [1] 17.7}
 \end{Highlighting}
 \end{Shaded}
+
+◼
 
 
 \end{document}

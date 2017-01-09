@@ -1918,4 +1918,367 @@ assess the model we created, then we will be using the test data!
 
 ◼
 
+\chapter{Multiple Linear Regression}\label{multiple-linear-regression}
+
+Simple linear regression is a useful approach for predicting a response
+on the basis of a single predictor variable. However, in practice we
+often have more than one predictor. In the previous chapter, we took for
+example the prediction of housing prices considering we had the size of
+each house. We had a single feature \(X\), the size of the house. But
+now imagine if we had not only the size of the house as a feature but we
+also knew the number of bedrooms, the number of flours and the age of
+the house in years. It seems like this would give us a lot more
+information with which to predict the price.
+
+\section{The Model}\label{the-model}
+
+In general, suppose that we have \(p\) distinct predictors. Then the
+multiple linear regression model takes the form
+
+\[ Y = \beta_0 + \beta_1 X_1 + \beta_2 X_2 + \dots + \beta_p X_p + \epsilon \]
+
+where \(X_j\) represents the \(j\)th predictor and \(\beta_j\)
+quantifies the association between that variable and the response. We
+interpret \(\beta_j\) as the average effect on \(Y\) of a one unit
+increase in \(X_j\), \emph{holding all other predictors fixed}.
+
+In matrix terms, supposing we have \(n\) observations and \(p\)
+variables, we need to define the following matrices:
+
+\begin{equation}
+ \textbf{Y}_{n \times 1} = \begin{pmatrix}
+    Y_{1} \\
+    Y_{2} \\
+    \vdots \\
+    Y_{n}
+\end{pmatrix}   \,\,\,\,\,\,\,\,\,\,\,\,  \textbf{X}_{n \times (p+1)}  = \begin{pmatrix}
+    1      & X_{11} & X_{12} & \dots  & X_{1p} \\
+    1      & X_{21} & X_{22} & \dots  & X_{2p} \\
+    \vdots & \vdots & \vdots & \ddots & \vdots \\
+    1      & X_{n1} & X_{n2} & \dots  & X_{np}
+\end{pmatrix}
+\end{equation}
+
+\begin{equation}
+ {\mathbb{\beta}}_{(p+1) \times 1} = \begin{pmatrix}
+    \beta_{0} \\
+    \beta_{1} \\
+    \vdots \\
+    \beta_{p}
+    \end{pmatrix}   \,\,\,\,\,\,\,\,\,\,\,\,  {\epsilon}_{n \times 1} = \begin{pmatrix}
+        \epsilon_{1} \\
+        \epsilon_{2} \\
+        \vdots \\
+        \epsilon_{n}
+    \end{pmatrix}
+\end{equation}
+
+In matrix terms, the general linear regression model is
+
+\[ \textbf{Y}_{n \times 1} = \textbf{X}_{n \times (p+1)} {\mathbb{\beta}}_{(p+1) \times 1} + {\epsilon}_{n \times 1} \]
+
+where,
+
+\begin{itemize}
+\tightlist
+\item
+  \(\textbf{Y}\) is a vector of responses.
+\item
+  \(\mathbb{\beta}\) is a vector of parameters.
+\item
+  \(\textbf{X}\) is a matrix of constants.
+\item
+  \(\epsilon\) is a vector of independent \emph{normal} (Gaussian)
+  random variables.
+\end{itemize}
+
+\section{Estimating the Regression
+Coefficients}\label{estimating-the-regression-coefficients}
+
+As was the case in the simple linear regression setting, the regression
+coefficients \(\beta_{0}, \beta_{1}, \ldots, \beta_{p}\) are unknown,
+and must be estimated. Given estimates
+\(\hat{\beta_{0}}, \hat{\beta_{1}}, \ldots, \hat{\beta_{p}}\), we can
+make predictions using the formula
+
+\[ \hat{y} = \hat{\beta_{0}} + \hat{\beta_{1}} x_1 + \hat{\beta_{2}} x_2 + \ldots, \hat{\beta_{p}} x_p \]
+
+We choose \(\beta_{0}, \beta_{1}, \ldots, \beta_{p}\) to minimize the
+sum of squared residuals
+
+\[ \begin{aligned}
+RSS &= \sum_{i=1}^{n} (y_i - \hat{y}_i)^2 \\
+    &= \sum_{i=1}^{n} (y_1 - \hat{\beta_0} - \hat{\beta_1} \hat{x}_{i1}  - \hat{\beta_2} \hat{x}_{i2} - \ldots  -  \hat{\beta_p} \hat{x}_{ip})^2 \\
+\end{aligned}
+\]
+
+The values \(\hat{\beta_{0}}, \hat{\beta_{1}}, \ldots, \hat{\beta_{p}}\)
+that minimize the RSS are the multiple least squares regression
+coefficient estimates, they are calculated using this formula (in matrix
+terms):
+
+\[ \hat{\beta} = (\textbf{X}^T \textbf{X})^{-1}\textbf{X}^T \textbf{Y} \]
+
+Note 1:
+
+\begin{rmdinsight}
+It is a remarkable property of matrix algebra that the results for the
+general linear regression model in matrix notation appear exactly as
+those for the simple linear regression model. Only the degrees of
+freedom and other constants related to the number of \(X\) variables and
+the dimensions of some matrices are different.
+\end{rmdinsight}
+
+Note 2:
+
+\begin{rmdinsight}
+If \(\textbf{X}^T \textbf{X}\) is noninvertible, the common causes might
+be having:
+
+\begin{itemize}
+\tightlist
+\item
+  Redundant features, where two features are very closely related
+  (i.e.~they are linearly dependent)
+\item
+  Too many features (e.g. \(p \geq n\)). In this case, we delete some
+  features or we use ``regularization'' (to be, maybe, explained in a
+  later lesson).
+\end{itemize}
+\end{rmdinsight}
+
+\section{Some important questions}\label{some-important-questions}
+
+When we perform multiple linear regression, we usually are interested in
+answering a few important questions.
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  Is at least one of the predictors \(X_1 ,X_2 ,\ldots,X_p\) useful in
+  predicting the response?
+\item
+  Do all the predictors help to explain \(Y\), or is only a subset of
+  the predictors useful?
+\item
+  How well does the model fit the data?
+\item
+  Given a set of predictor values, what response value should we
+  predict, and how accurate is our prediction?
+\end{enumerate}
+
+\textbf{\emph{Relationship Between the Response and Predictors?}}
+
+\textbf{\(F\)-Statistic}
+
+Recall that in the simple linear regression setting, in order to
+determine whether there is a relationship between the response and the
+predictor we can simply check whether \(\beta_1 = 0\). In the multiple
+regression setting with \(p\) predictors, we need to ask whether all of
+the regression coefficients are zero, i.e.~whether
+\(\beta_1 = \beta_2 = \ldots = \beta_p = 0\). As in the simple linear
+regression setting, we use a hypothesis test to answer this question. We
+test the null hypothesis,
+
+\[ H_0 : \beta_1 = \beta_2 = \ldots = \beta_p = 0 \]
+
+versus the alternative hypothesis
+
+\[ H_1 : \text{at least one} \, \beta_j \, \text{is non-zero} \]
+
+This hypothesis test is performed by computing the \(F\)-statistic
+(\emph{Fisher}):
+
+\[ F = \frac{ (\text{TSS} - \text{RSS})/p}{\text{RSS}/(n-p-1)} \sim F_{p,n-p-1} \]
+
+where, as with simple linear regression,
+\(\text{TSS} = \sum (y_i - \bar{y})^2\) and
+\(\text{RSS} = \sum (y_i - \hat{y}_i)^2\).
+
+When the \(F\)-statistic value is close to 1, then \(H_0\) is true,
+which means there is no relationship between the response and
+predictors. On the other hand, if \(H_1\) is true, so we expect \(F\) to
+be greater than 1.
+
+So the question we ask here: \emph{Is the whole regression explaining
+anything at all?} The answer comes from the \(F\)-test in the ANOVA
+(ANalysis Of VAriance) table. This is what we get in an ANOVA table:
+
+\begin{longtable}[c]{@{}llllll@{}}
+\toprule
+Source & df & SS & MS & \(F\) & p-value\tabularnewline
+\midrule
+\endhead
+Factor (Explained) & \(p-1\) & SST & SST/\((k-1)\) & MST/MSE &
+p-value\tabularnewline
+Error (Unexplained) & \(n-p\) & SSE & SSE/\((n-k)\) & &\tabularnewline
+Total & \(n-1\) & SS & & &\tabularnewline
+\bottomrule
+\end{longtable}
+
+The ANOVA table has many pieces of information. What we care about is
+the \(F\) Ratio and the corresponding p-value. We compare the \(F\)
+Ratio with \(F_{(p-1,n-p)}\) and a corresponding \(\alpha\) value
+(error).
+
+\textbf{p-values}
+
+The p-values provide information about whether each individual predictor
+is related to the response, after adjusting for the other predictors.
+Let's look at the following table we obtain in general using a
+statistical software for example
+
+\begin{longtable}[c]{@{}lllll@{}}
+\toprule
+& Coefficient & Std. error & \(t\)-statistic & p-value\tabularnewline
+\midrule
+\endhead
+Constant & 2.939 & 0.3119 & 9.42 & \textless{}0.0001\tabularnewline
+\(X_1\) & 0.046 & 0.0014 & 32.81 & \textless{}0.0001\tabularnewline
+\(X_2\) & 0.189 & 0.0086 & 21.89 & \textless{}0.0001\tabularnewline
+\(X_3\) & -0.001 & 0.0059 & -0.18 & 0.8599\tabularnewline
+\bottomrule
+\end{longtable}
+
+In this tablewe the following model
+
+\[ Y = 2.939 + 0.046 X_1 + 0.189 X_2 - 0.001 X_3 \]
+
+Note that for each individual predictor a \(t\)-statistic and a p-value
+were reported. These p-values indicate that \(X_1\) and \(X_2\) are
+related to \(Y\), but that there is no evidence that \(X_3\) is
+associated with \(Y\), in the presence of these two.
+
+\textbf{\emph{Deciding on Important Variables}}
+
+The most direct approach is called \emph{all subsets} or \emph{best
+subsets} regression: we compute the least squares fit for all possible
+subsets and then choose between them based on some criterion that
+balances training error with model size.
+
+However we often can't examine all possible models, since they are
+\(2^p\) of them; for example when \(p = 40\) there are over a billion
+models! Instead we need an automated approach that searches through a
+subset of them. Here are two commonly use approaches:
+
+\textbf{Forward selection}:
+
+\begin{itemize}
+\tightlist
+\item
+  Begin with the \emph{null model} --- a model that contains an
+  intercept (constant) but no predictors.
+\item
+  Fit p simple linear regressions and add to the null model the variable
+  that results in the lowest RSS.
+\item
+  Add to that model the variable that results in the lowest RSS amongst
+  all two-variable models.
+\item
+  Continue until some stopping rule is satisfied, for example when all
+  remaining variables have a p-value above some threshold.
+\end{itemize}
+
+\textbf{Backward selection}:
+
+\begin{itemize}
+\tightlist
+\item
+  Start with all variables in the model.
+\item
+  Remove the variable with the largest p-value --- that is, the variable
+  that is the least statistically significant.
+\item
+  The new \((p − 1)\)-variable model is fit, and the variable with the
+  largest p-value is removed.
+\item
+  Continue until a stopping rule is reached. For instance, we may stop
+  when all remaining variables have a significant p-value defined by
+  some significance threshold.
+\end{itemize}
+
+\begin{rmdinsight}
+There are more systematic criteria for choosing an ``optimal'' member in
+the path of models produced by forward or backward stepwise selection.
+These include \emph{Mallow's \(C_p\)} , \emph{Akaike information
+criterion (AIC)}, \emph{Bayesian information criterion (BIC)},
+\emph{adjusted \(R^2\)} and \emph{Cross-validation (CV)}.
+\end{rmdinsight}
+
+\textbf{\emph{Model Fit}}
+
+Two of the most common numerical measures of model fit are the RSE and
+\(R^2\), the fraction of variance explained. These quantities are
+computed and interpreted in the same fashion as for simple linear
+regression. Recall that in simple regression, \(R^2\) is the square of
+the correlation of the response and the variable. In multiple linear
+regression, it turns out that it equals \(Cor(Y, \hat{Y})^2\) , the
+square of the correlation between the response and the fitted linear
+model; in fact one property of the fitted linear model is that it
+maximizes this correlation among all possible linear models. An \(R^2\)
+value close to 1 indicates that the model explains a large portion of
+the variance in the response variable.
+
+In general RSE is defined as
+
+\[ \text{RSE} = \sqrt{\frac{1}{n-p-1}\text{RSS}} \]
+
+\subsection{Other Considerations in Regression
+Model}\label{other-considerations-in-regression-model}
+
+\textbf{Qualitative Predictors}
+
+\begin{itemize}
+\tightlist
+\item
+  If we have a categorial (qualitative) variable (feature), how do we
+  fit into a regression equation?
+\item
+  For example, if \(X_1\) is the gender (male or female).
+\item
+  We can code, for example, male = 0 and female = 1.
+\item
+  Suppose \(X_2\) is a quantitative variable, the regression equation
+  becomes:
+\end{itemize}
+
+\[ Y_i \approx \beta_0 + \beta_1 X_1 + \beta_2 X_2 = \begin{cases}
+  \beta_0 + \beta_2 X_2 & \text{ if male} \\
+  \beta_0 + \beta_1 X_1 + \beta_2 X_2 & \text{ if female}
+\end{cases} \]
+
+\begin{itemize}
+\tightlist
+\item
+  Another possible coding scheme is to let male = -1 and female = 1, the
+  regression equation is then:
+\end{itemize}
+
+\[ Y_i \approx \beta_0 + \beta_1 X_1 + \beta_2 X_2 = \begin{cases}
+  \beta_0 -\beta_1 X_1 + \beta_2 X_2 & \text{ if male} \\
+  \beta_0 + \beta_1 X_1 + \beta_2 X_2 & \text{ if female}
+\end{cases} \]
+
+\textbf{Interaction Terms}
+
+\begin{itemize}
+\tightlist
+\item
+  When the effect on \(Y\) of increasing \(X_1\) depends on another
+  \(X_2\).
+\item
+  We may in this case try the model
+\end{itemize}
+
+\[ Y_i = \beta_0 + \beta_1 X_1 + \beta_2 X_2 + \beta_3 X_1 X_2 \]
+
+\begin{itemize}
+\tightlist
+\item
+  \(X_1 X_2\) is the Interaction term.
+\end{itemize}
+
+◼
+
 \end{document}

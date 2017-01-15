@@ -26,7 +26,7 @@
 <meta name="author" content="Mohamad Ghassany">
 
 
-<meta name="date" content="2017-01-09">
+<meta name="date" content="2017-01-15">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -34,7 +34,7 @@
   
   
 <link rel="prev" href="pw-1.html">
-
+<link rel="next" href="pw-2.html">
 
 <script src="book_assets/jquery-2.2.3/jquery.min.js"></script>
 <link href="book_assets/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -151,6 +151,16 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="2.3.1" data-path="multiple-linear-regression.html"><a href="multiple-linear-regression.html#other-considerations-in-regression-model"><i class="fa fa-check"></i><b>2.3.1</b> Other Considerations in Regression Model</a></li>
 </ul></li>
 </ul></li>
+<li class="chapter" data-level="" data-path="pw-2.html"><a href="pw-2.html"><i class="fa fa-check"></i>PW 2</a><ul>
+<li class="chapter" data-level="2.4" data-path="pw-2.html"><a href="pw-2.html#reporting"><i class="fa fa-check"></i><b>2.4</b> Reporting</a><ul>
+<li class="chapter" data-level="" data-path="pw-2.html"><a href="pw-2.html#markdown"><i class="fa fa-check"></i>Markdown</a></li>
+<li class="chapter" data-level="" data-path="pw-2.html"><a href="pw-2.html#r-markdown"><i class="fa fa-check"></i>R Markdown</a></li>
+<li class="chapter" data-level="" data-path="pw-2.html"><a href="pw-2.html#the-report-to-be-submitted"><i class="fa fa-check"></i>The report to be submitted</a></li>
+</ul></li>
+<li class="chapter" data-level="2.5" data-path="pw-2.html"><a href="pw-2.html#multiple-linear-regression-1"><i class="fa fa-check"></i><b>2.5</b> Multiple Linear Regression</a><ul>
+<li class="chapter" data-level="" data-path="pw-2.html"><a href="pw-2.html#exercise-1-boston-data-set"><i class="fa fa-check"></i>Exercise 1: Boston data set</a></li>
+</ul></li>
+</ul></li>
 </ul>
 
       </nav>
@@ -177,7 +187,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <p><span class="math display">\[ Y = \beta_0 + \beta_1 X_1 + \beta_2 X_2 + \dots + \beta_p X_p + \epsilon \]</span></p>
 <p>where <span class="math inline">\(X_j\)</span> represents the <span class="math inline">\(j\)</span>th predictor and <span class="math inline">\(\beta_j\)</span> quantifies the association between that variable and the response. We interpret <span class="math inline">\(\beta_j\)</span> as the average effect on <span class="math inline">\(Y\)</span> of a one unit increase in <span class="math inline">\(X_j\)</span>, <em>holding all other predictors fixed</em>.</p>
 <p>In matrix terms, supposing we have <span class="math inline">\(n\)</span> observations and <span class="math inline">\(p\)</span> variables, we need to define the following matrices:</p>
-\begin{equation}
+<span class="math display">\[\begin{equation}
  \textbf{Y}_{n \times 1} = \begin{pmatrix}
     Y_{1} \\
     Y_{2} \\
@@ -189,8 +199,8 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
     \vdots &amp; \vdots &amp; \vdots &amp; \ddots &amp; \vdots \\
     1      &amp; X_{n1} &amp; X_{n2} &amp; \dots  &amp; X_{np}
 \end{pmatrix}
-\end{equation}
-\begin{equation}
+\end{equation}\]</span>
+<span class="math display">\[\begin{equation}
  {\mathbb{\beta}}_{(p+1) \times 1} = \begin{pmatrix}
     \beta_{0} \\
     \beta_{1} \\
@@ -202,7 +212,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
         \vdots \\
         \epsilon_{n}
     \end{pmatrix}
-\end{equation}
+\end{equation}\]</span>
 <p>In matrix terms, the general linear regression model is</p>
 <p><span class="math display">\[ \textbf{Y}_{n \times 1} = \textbf{X}_{n \times (p+1)} {\mathbb{\beta}}_{(p+1) \times 1} + {\epsilon}_{n \times 1} \]</span></p>
 <p>where,</p>
@@ -269,38 +279,38 @@ Too many features (e.g. <span class="math inline"><em>p</em> ≥ <em>n</em><
 <table>
 <thead>
 <tr class="header">
-<th align="left">Source</th>
-<th align="left">df</th>
-<th align="left">SS</th>
-<th align="left">MS</th>
-<th align="left"><span class="math inline">\(F\)</span></th>
-<th align="left">p-value</th>
+<th>Source</th>
+<th>df</th>
+<th>SS</th>
+<th>MS</th>
+<th><span class="math inline">\(F\)</span></th>
+<th>p-value</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<td align="left">Factor (Explained)</td>
-<td align="left"><span class="math inline">\(p-1\)</span></td>
-<td align="left">SST</td>
-<td align="left">SST/<span class="math inline">\((k-1)\)</span></td>
-<td align="left">MST/MSE</td>
-<td align="left">p-value</td>
+<td>Factor (Explained)</td>
+<td><span class="math inline">\(p-1\)</span></td>
+<td>SST</td>
+<td>SST/<span class="math inline">\((k-1)\)</span></td>
+<td>MST/MSE</td>
+<td>p-value</td>
 </tr>
 <tr class="even">
-<td align="left">Error (Unexplained)</td>
-<td align="left"><span class="math inline">\(n-p\)</span></td>
-<td align="left">SSE</td>
-<td align="left">SSE/<span class="math inline">\((n-k)\)</span></td>
-<td align="left"></td>
-<td align="left"></td>
+<td>Error (Unexplained)</td>
+<td><span class="math inline">\(n-p\)</span></td>
+<td>SSE</td>
+<td>SSE/<span class="math inline">\((n-k)\)</span></td>
+<td></td>
+<td></td>
 </tr>
 <tr class="odd">
-<td align="left">Total</td>
-<td align="left"><span class="math inline">\(n-1\)</span></td>
-<td align="left">SS</td>
-<td align="left"></td>
-<td align="left"></td>
-<td align="left"></td>
+<td>Total</td>
+<td><span class="math inline">\(n-1\)</span></td>
+<td>SS</td>
+<td></td>
+<td></td>
+<td></td>
 </tr>
 </tbody>
 </table>
@@ -310,41 +320,41 @@ Too many features (e.g. <span class="math inline"><em>p</em> ≥ <em>n</em><
 <table>
 <thead>
 <tr class="header">
-<th align="left"></th>
-<th align="left">Coefficient</th>
-<th align="left">Std. error</th>
-<th align="left"><span class="math inline">\(t\)</span>-statistic</th>
-<th align="left">p-value</th>
+<th></th>
+<th>Coefficient</th>
+<th>Std. error</th>
+<th><span class="math inline">\(t\)</span>-statistic</th>
+<th>p-value</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<td align="left">Constant</td>
-<td align="left">2.939</td>
-<td align="left">0.3119</td>
-<td align="left">9.42</td>
-<td align="left">&lt;0.0001</td>
+<td>Constant</td>
+<td>2.939</td>
+<td>0.3119</td>
+<td>9.42</td>
+<td>&lt;0.0001</td>
 </tr>
 <tr class="even">
-<td align="left"><span class="math inline">\(X_1\)</span></td>
-<td align="left">0.046</td>
-<td align="left">0.0014</td>
-<td align="left">32.81</td>
-<td align="left">&lt;0.0001</td>
+<td><span class="math inline">\(X_1\)</span></td>
+<td>0.046</td>
+<td>0.0014</td>
+<td>32.81</td>
+<td>&lt;0.0001</td>
 </tr>
 <tr class="odd">
-<td align="left"><span class="math inline">\(X_2\)</span></td>
-<td align="left">0.189</td>
-<td align="left">0.0086</td>
-<td align="left">21.89</td>
-<td align="left">&lt;0.0001</td>
+<td><span class="math inline">\(X_2\)</span></td>
+<td>0.189</td>
+<td>0.0086</td>
+<td>21.89</td>
+<td>&lt;0.0001</td>
 </tr>
 <tr class="even">
-<td align="left"><span class="math inline">\(X_3\)</span></td>
-<td align="left">-0.001</td>
-<td align="left">0.0059</td>
-<td align="left">-0.18</td>
-<td align="left">0.8599</td>
+<td><span class="math inline">\(X_3\)</span></td>
+<td>-0.001</td>
+<td>0.0059</td>
+<td>-0.18</td>
+<td>0.8599</td>
 </tr>
 </tbody>
 </table>
@@ -413,21 +423,13 @@ There are more systematic criteria for choosing an “optimal” member in the p
 </div>
 </div>
 </div>
-
-
-
-
-
-
-
-
             </section>
 
           </div>
         </div>
       </div>
-<a href="pw-1.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-
+<a href="pw-1.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="pw-2.html" class="navigation navigation-next " aria-label="Next page""><i class="fa fa-angle-right"></i></a>
 
 <script src="book_assets/gitbook-2.6.7/js/app.min.js"></script>
 <script src="book_assets/gitbook-2.6.7/js/lunr.js"></script>

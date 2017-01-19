@@ -26,7 +26,7 @@
 <meta name="author" content="Mohamad Ghassany">
 
 
-<meta name="date" content="2017-01-17">
+<meta name="date" content="2017-01-19">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -269,7 +269,7 @@ output: html_document
 title: &quot;Week 2&quot;
 subtitle: &quot;Multiple Linear Regression&quot;
 author: LastName FirstName
-date: &quot;2017-01-17 11:15:24&quot;
+date: &quot;2017-01-19 12:55:52&quot;
 output:
   html_document:
     toc: true
@@ -313,16 +313,29 @@ Submit a report following the instructions above. In the first exercise you must
 <li><p>Visualize the correlations using the <code>corrplot</code> package. To do so, install the <code>corrplot</code> package, load it, then use the function <code>corrplot.mixed()</code>. See this <a href="https://cran.r-project.org/web/packages/corrplot/vignettes/corrplot-intro.html">link</a> for examples and to understand how to use it.</p></li>
 <li><p>What is the correlation between <code>tax</code> and <code>rad</code>?</p></li>
 <li><p>Run the model again without <code>rad</code>. What happens to the <span class="math inline">\(R^2\)</span> ? and for the F-statistic?</p></li>
-<li><p>Calculate the mean squared error (MSE) for the last model.</p></li>
 </ol>
 <div class="rmdinsight">
 <p>
 Of course <span class="math inline"><em>R</em><sup>2</sup></span> should go a little lower because we deleted one of the variables. But check for the model significance (F-statistic) gets higher, which means the p-values gets lower and thus the model is more significant without <code>rad</code>.
 </p>
-<p>
-<strong>Extra</strong>: Re run the model but delete <code>tax</code> instead of <code>rad</code>.
-</p>
+<!-- **Extra**: Re run the model but delete `tax` instead of `rad`. -->
 </div>
+<ol start="16" style="list-style-type: decimal">
+<li>Calculate the mean squared error (MSE) for the last model.</li>
+</ol>
+<p><strong>ANOVA</strong></p>
+<ol start="17" style="list-style-type: decimal">
+<li><p>In the Boston data set there is a categorical variable <code>chas</code> which corresponds to Charles River (= 1 if a suburb bounds the river; 0 otherwise). How many of the suburbs in this data set bound the Charles river?</p></li>
+<li><p>Create Boxplots of the median value of houses with respect to the variable <code>chas</code>. Do we observe some difference between the median value of houses with respect to the neighborhood to Charles River?</p></li>
+<li><p>Next we will apply an analysis of variances (ANOVA) in order to test if there is a significant difference of means between two groups <span class="math inline">\(i\)</span> and <span class="math inline">\(j\)</span> (Consider group <span class="math inline">\(i\)</span> is the suburbs bounding the river and <span class="math inline">\(j\)</span> the suburbs which not). The hypotheses are</p></li>
+</ol>
+<p><span class="math display">\[ H_0 : \mu_i = \mu_j \]</span></p>
+<p><span class="math display">\[ H_1 : \mu_i \neq \mu_j \]</span></p>
+<p>Where <span class="math inline">\(\mu_i\)</span> is the mean of <code>medv</code> in group <span class="math inline">\(i\)</span>.</p>
+<p>Calculate <span class="math inline">\(\mu_i\)</span> and <span class="math inline">\(\mu_j\)</span> (in one line using the function <code>aggregate()</code>).</p>
+<ol start="20" style="list-style-type: decimal">
+<li>Apply an ANOVA test of <code>medv</code> whith respect to <code>chas</code> (use the function <code>aov()</code>). Print the result and the summary of it. what do you conclude ?</li>
+</ol>
 <p class="text-right">
 ◼
 </p>

@@ -124,7 +124,7 @@
   \postauthor{\par}
   \predate{\centering\large\emph}
   \postdate{\par}
-  \date{2017-01-17}
+  \date{2017-01-19}
 
 \usepackage{booktabs}
 \usepackage{longtable}
@@ -2375,7 +2375,7 @@ For your submitted report, use the following YAML header:
 title: "Week 2"
 subtitle: "Multiple Linear Regression"
 author: LastName FirstName
-date: "2017-01-17 11:15:44"
+date: "2017-01-19 12:55:58"
 output:
   html_document:
     toc: true
@@ -2465,8 +2465,6 @@ median value of houses for 506 neighborhoods around Boston.
 \item
   Run the model again without \texttt{rad}. What happens to the \(R^2\)
   ? and for the F-statistic?
-\item
-  Calculate the mean squared error (MSE) for the last model.
 \end{enumerate}
 
 \begin{rmdinsight}
@@ -2474,10 +2472,56 @@ Of course \(R^2\) should go a little lower because we deleted one of the
 variables. But check for the model significance (F-statistic) gets
 higher, which means the p-values gets lower and thus the model is more
 significant without \texttt{rad}.
-
-\textbf{Extra}: Re run the model but delete \texttt{tax} instead of
-\texttt{rad}.
 \end{rmdinsight}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{15}
+\tightlist
+\item
+  Calculate the mean squared error (MSE) for the last model.
+\end{enumerate}
+
+\textbf{ANOVA}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{16}
+\item
+  In the Boston data set there is a categorical variable \texttt{chas}
+  which corresponds to Charles River (= 1 if a suburb bounds the river;
+  0 otherwise). How many of the suburbs in this data set bound the
+  Charles river?
+\item
+  Create Boxplots of the median value of houses with respect to the
+  variable \texttt{chas}. Do we observe some difference between the
+  median value of houses with respect to the neighborhood to Charles
+  River?
+\item
+  Next we will apply an analysis of variances (ANOVA) in order to test
+  if there is a significant difference of means between two groups \(i\)
+  and \(j\) (Consider group \(i\) is the suburbs bounding the river and
+  \(j\) the suburbs which not). The hypotheses are
+\end{enumerate}
+
+\[ H_0 : \mu_i = \mu_j \]
+
+\[ H_1 : \mu_i \neq \mu_j \]
+
+Where \(\mu_i\) is the mean of \texttt{medv} in group \(i\).
+
+Calculate \(\mu_i\) and \(\mu_j\) (in one line using the function
+\texttt{aggregate()}).
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{19}
+\tightlist
+\item
+  Apply an ANOVA test of \texttt{medv} whith respect to \texttt{chas}
+  (use the function \texttt{aov()}). Print the result and the summary of
+  it. what do you conclude ?
+\end{enumerate}
 
 ◼
 

@@ -124,7 +124,7 @@
   \postauthor{\par}
   \predate{\centering\large\emph}
   \postdate{\par}
-  \date{2017-01-22}
+  \date{2017-01-23}
 
 \usepackage{booktabs}
 \usepackage{longtable}
@@ -1251,8 +1251,8 @@ the \texttt{plot()} function, type \texttt{?plot}.
 
 \CommentTok{# Sampling from a Normal - 100 random points from a N(0, 1)}
 \KeywordTok{rnorm}\NormalTok{(}\DataTypeTok{n =} \DecValTok{10}\NormalTok{, }\DataTypeTok{mean =} \DecValTok{0}\NormalTok{, }\DataTypeTok{sd =} \DecValTok{1}\NormalTok{)}
-\CommentTok{#ans>  [1]  1.1582 -0.5217  0.8044 -1.4379 -0.7891  0.0433 -1.4176 -0.1814}
-\CommentTok{#ans>  [9]  0.4807 -0.5889}
+\CommentTok{#ans>  [1]  0.06028 -0.90855  0.72017  0.26706 -0.55897 -0.07243  0.00186}
+\CommentTok{#ans>  [8]  1.26561  1.67282 -0.71334}
 
 \CommentTok{# If you want to have always the same result, set the seed of the random number}
 \CommentTok{# generator}
@@ -2385,7 +2385,7 @@ For your submitted report, use the following YAML header:
 title: "Week 2"
 subtitle: "Multiple Linear Regression"
 author: LastName FirstName
-date: "2017-01-22 19:54:44"
+date: "2017-01-23 11:38:36"
 output:
   html_document:
     toc: true
@@ -2810,29 +2810,26 @@ We will consider the variables \texttt{Age} and \texttt{EstimatedSalary}
 as input variables (features) to see the correlations between them and
 the decision of the user to buy (or not) the product.
 
-\textbf{3.} Is the target variable \texttt{Purchased} is of type factor?
-If not, Encode it as a factor with levels 0 and 1.
-
-\textbf{4.} Now we are going to split the dataset into training set and
+\textbf{3.} Now we are going to split the dataset into training set and
 test set. Last week we did it manually. From now on we will split it
 randomly with this code,
 
 \begin{Shaded}
 \begin{Highlighting}[]
 \KeywordTok{library}\NormalTok{(caTools) }\CommentTok{# install it first in the console}
-\KeywordTok{set.seed}\NormalTok{(}\DecValTok{123}\NormalTok{) }
-\CommentTok{# we use this function with the same number }
+\KeywordTok{set.seed}\NormalTok{(}\DecValTok{123}\NormalTok{)}
+\CommentTok{# we use this function with the same number}
 \CommentTok{# to randomly generate the same values}
-\NormalTok{split =}\StringTok{ }\KeywordTok{sample.split}\NormalTok{(dataset$Purchased, }\DataTypeTok{SplitRatio =} \FloatTok{0.75}\NormalTok{) }
-\CommentTok{# here we chose the SplitRatio to 75% of the dataset, }
+\NormalTok{split =}\StringTok{ }\KeywordTok{sample.split}\NormalTok{(dataset$Purchased, }\DataTypeTok{SplitRatio =} \FloatTok{0.75}\NormalTok{)}
+\CommentTok{# here we chose the SplitRatio to 75% of the dataset,}
 \CommentTok{# and 25% for the test set.}
-\NormalTok{training_set =}\StringTok{ }\KeywordTok{subset}\NormalTok{(dataset, split ==}\StringTok{ }\OtherTok{TRUE}\NormalTok{) }
+\NormalTok{training_set =}\StringTok{ }\KeywordTok{subset}\NormalTok{(dataset, split ==}\StringTok{ }\OtherTok{TRUE}\NormalTok{)}
 \CommentTok{# we use subset to split the dataset}
 \NormalTok{test_set =}\StringTok{ }\KeywordTok{subset}\NormalTok{(dataset, split ==}\StringTok{ }\OtherTok{FALSE}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
 
-\textbf{5.} Scale the input variables in both training set and test set.
+\textbf{4.} Scale the input variables in both training set and test set.
 
 First let us fit a simple logistic regression model of
 \texttt{Purchased} in function of \texttt{Age}. We do it with this line
@@ -2845,13 +2842,13 @@ of code,
 \end{Highlighting}
 \end{Shaded}
 
-\textbf{6.} In the argument \texttt{family} of the function \texttt{glm}
+\textbf{5.} In the argument \texttt{family} of the function \texttt{glm}
 we chose \texttt{binomial}. Why ?
 
-\textbf{7.} What is the equation of the obtained model in the question
-1.5 ?
+\textbf{6.} What is the equation of the obtained model in the question
+\textbf{4} ?
 
-\textbf{8.} Is the feature \texttt{Age} significant?
+\textbf{7.} Is the feature \texttt{Age} significant?
 
 \begin{rmdinsight}
 The \textbf{AIC} is the \textbf{Akaike Information Criterion}. You will
@@ -2881,7 +2878,7 @@ where
 \end{itemize}
 \end{rmdinsight}
 
-\textbf{9.} Plot \texttt{Purchased} in function of \texttt{Age} and add
+\textbf{8.} Plot \texttt{Purchased} in function of \texttt{Age} and add
 the curve of the obtained logistic regression model.
 
 (\textbf{Hints}: First plot the point, then use the \texttt{curve()}
@@ -2922,17 +2919,17 @@ I obtained the last figure with these lines of code,
 \end{Highlighting}
 \end{Shaded}
 
-\textbf{10.} Now let us take another feature into account in the model.
+\textbf{9.} Now let us take another feature into account in the model.
 Fit a logistic regression model of purchasing the product in function of
 the age of the user and its salary.
 
-\textbf{11.} Are the predictors significant? Did the model get better by
+\textbf{10.} Are the predictors significant? Did the model get better by
 adding t he estimated salary?
 
-\textbf{12.} On the test set, predict the probability of purchasing the
+\textbf{11.} On the test set, predict the probability of purchasing the
 product by the users using the obtained model.
 
-\textbf{13.} Take a look on your predicted values for the variable
+\textbf{12.} Take a look on your predicted values for the variable
 \texttt{Purchased}. We predicted the probability that the user will
 purchase the product right? Now in order to compare your results with
 the real answers, transform the predicted values to 0 or 1 (1 if
@@ -3016,18 +3013,18 @@ the actual negatives as possible, and therefore minimize errors
 (incorrect classifications) for both.
 \end{rmdinsight}
 
-\textbf{14.} Now to evaluate the predictions, compute the confusion
+\textbf{13.} Now to evaluate the predictions, compute the confusion
 matrix. What do you obtain ?
 
 (\textbf{Hint}: you can use the \texttt{table()} function).
 
-\textbf{15.} Calculate the accuracy, specificity, sensitivity and the
+\textbf{14.} Calculate the accuracy, specificity, sensitivity and the
 precision of the model.
 
-\textbf{16.} Plot the ROC curve and calculate AUC value.
+\textbf{15.} Plot the ROC curve and calculate AUC value.
 
 \begin{rmdinsight}
-\textbf{Hints}: to plot it, install the \texttt{RCOC} package. Load and
+\textbf{Hints}: to plot it, install the \texttt{ROCR} package. Load and
 use the functions:
 
 \begin{itemize}
@@ -3045,7 +3042,7 @@ use the functions:
 \end{itemize}
 \end{rmdinsight}
 
-\textbf{17.} Compare the AUC of the two models you fitted (one with only
+\textbf{16.} Compare the AUC of the two models you fitted (one with only
 age and one with age and estimated salary) and plot their ROC curves in
 the same figure.
 

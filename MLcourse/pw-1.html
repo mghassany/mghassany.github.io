@@ -26,7 +26,7 @@
 <meta name="author" content="Mohamad Ghassany">
 
 
-<meta name="date" content="2017-01-23">
+<meta name="date" content="2017-01-25">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -175,6 +175,19 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="" data-path="pw-3.html"><a href="pw-3.html#report-template"><i class="fa fa-check"></i>Report template</a></li>
 <li class="chapter" data-level="" data-path="pw-3.html"><a href="pw-3.html#social-networks-ads"><i class="fa fa-check"></i>Social Networks Ads</a></li>
 </ul></li>
+<li class="chapter" data-level="4" data-path="linear-discriminant-analysis.html"><a href="linear-discriminant-analysis.html"><i class="fa fa-check"></i><b>4</b> Linear Discriminant Analysis</a><ul>
+<li class="chapter" data-level="4.1" data-path="linear-discriminant-analysis.html"><a href="linear-discriminant-analysis.html#introduction-2"><i class="fa fa-check"></i><b>4.1</b> Introduction</a></li>
+<li class="chapter" data-level="4.2" data-path="linear-discriminant-analysis.html"><a href="linear-discriminant-analysis.html#bayes-theorem"><i class="fa fa-check"></i><b>4.2</b> Bayes’ Theorem</a></li>
+<li class="chapter" data-level="4.3" data-path="linear-discriminant-analysis.html"><a href="linear-discriminant-analysis.html#lda-for-p1"><i class="fa fa-check"></i><b>4.3</b> LDA for <span class="math inline">\(p=1\)</span></a></li>
+<li class="chapter" data-level="4.4" data-path="linear-discriminant-analysis.html"><a href="linear-discriminant-analysis.html#estimating-the-parameters"><i class="fa fa-check"></i><b>4.4</b> Estimating the parameters</a></li>
+<li class="chapter" data-level="4.5" data-path="linear-discriminant-analysis.html"><a href="linear-discriminant-analysis.html#lda-for-p-1"><i class="fa fa-check"></i><b>4.5</b> LDA for <span class="math inline">\(p &gt; 1\)</span></a></li>
+<li class="chapter" data-level="4.6" data-path="linear-discriminant-analysis.html"><a href="linear-discriminant-analysis.html#making-predictions"><i class="fa fa-check"></i><b>4.6</b> Making predictions</a></li>
+<li class="chapter" data-level="4.7" data-path="linear-discriminant-analysis.html"><a href="linear-discriminant-analysis.html#other-forms-of-discriminant-analysis"><i class="fa fa-check"></i><b>4.7</b> Other forms of Discriminant Analysis</a><ul>
+<li class="chapter" data-level="4.7.1" data-path="linear-discriminant-analysis.html"><a href="linear-discriminant-analysis.html#quadratic-discriminant-analysis-qda"><i class="fa fa-check"></i><b>4.7.1</b> Quadratic Discriminant Analysis (QDA)</a></li>
+<li class="chapter" data-level="4.7.2" data-path="linear-discriminant-analysis.html"><a href="linear-discriminant-analysis.html#naive-bayes"><i class="fa fa-check"></i><b>4.7.2</b> Naive Bayes</a></li>
+</ul></li>
+<li class="chapter" data-level="4.8" data-path="linear-discriminant-analysis.html"><a href="linear-discriminant-analysis.html#lda-vs-logistic-regression"><i class="fa fa-check"></i><b>4.8</b> LDA vs Logistic Regression</a></li>
+</ul></li>
 </ul>
 
       </nav>
@@ -216,18 +229,10 @@ x+y
 <p>Hitting the <em>up arrow</em> multiple times will display the previous commands, which can then be edited. This is useful since one often wishes to repeat a similar command.</p>
 <p>The <code>ls()</code> function allows us to look at a list of all of the objects, such <code>ls()</code> as data and functions, that we have saved so far. The <code>rm()</code> function can be used to delete any object that we don’t want.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ls</span>()
-<span class="co">#ans&gt;  [1] &quot;A&quot;             &quot;Auto&quot;          &quot;B&quot;             &quot;error&quot;        </span>
-<span class="co">#ans&gt;  [5] &quot;error_squared&quot; &quot;mod&quot;           &quot;model&quot;         &quot;MSE&quot;          </span>
-<span class="co">#ans&gt;  [9] &quot;myDf&quot;          &quot;myList&quot;        &quot;sumMod&quot;        &quot;test&quot;         </span>
-<span class="co">#ans&gt; [13] &quot;testing_data&quot;  &quot;train&quot;         &quot;training_data&quot; &quot;variables&quot;    </span>
-<span class="co">#ans&gt; [17] &quot;vec&quot;           &quot;x&quot;             &quot;y&quot;             &quot;y_hat&quot;</span>
+<span class="co">#ans&gt; [1] &quot;A&quot;      &quot;Auto&quot;   &quot;B&quot;      &quot;myDf&quot;   &quot;myList&quot; &quot;vec&quot;    &quot;x&quot;      &quot;y&quot;</span>
 <span class="kw">rm</span>(x)
 <span class="kw">ls</span>()
-<span class="co">#ans&gt;  [1] &quot;A&quot;             &quot;Auto&quot;          &quot;B&quot;             &quot;error&quot;        </span>
-<span class="co">#ans&gt;  [5] &quot;error_squared&quot; &quot;mod&quot;           &quot;model&quot;         &quot;MSE&quot;          </span>
-<span class="co">#ans&gt;  [9] &quot;myDf&quot;          &quot;myList&quot;        &quot;sumMod&quot;        &quot;test&quot;         </span>
-<span class="co">#ans&gt; [13] &quot;testing_data&quot;  &quot;train&quot;         &quot;training_data&quot; &quot;variables&quot;    </span>
-<span class="co">#ans&gt; [17] &quot;vec&quot;           &quot;y&quot;             &quot;y_hat&quot;</span></code></pre></div>
+<span class="co">#ans&gt; [1] &quot;A&quot;      &quot;Auto&quot;   &quot;B&quot;      &quot;myDf&quot;   &quot;myList&quot; &quot;vec&quot;    &quot;y&quot;</span></code></pre></div>
 </div>
 <div id="vectors" class="section level3">
 <h3><span class="header-section-number">1.8.2</span> Vectors</h3>

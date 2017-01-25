@@ -124,7 +124,7 @@
   \postauthor{\par}
   \predate{\centering\large\emph}
   \postdate{\par}
-  \date{2017-01-23}
+  \date{2017-01-25}
 
 \usepackage{booktabs}
 \usepackage{longtable}
@@ -1251,8 +1251,8 @@ the \texttt{plot()} function, type \texttt{?plot}.
 
 \CommentTok{# Sampling from a Normal - 100 random points from a N(0, 1)}
 \KeywordTok{rnorm}\NormalTok{(}\DataTypeTok{n =} \DecValTok{10}\NormalTok{, }\DataTypeTok{mean =} \DecValTok{0}\NormalTok{, }\DataTypeTok{sd =} \DecValTok{1}\NormalTok{)}
-\CommentTok{#ans>  [1]  0.06028 -0.90855  0.72017  0.26706 -0.55897 -0.07243  0.00186}
-\CommentTok{#ans>  [8]  1.26561  1.67282 -0.71334}
+\CommentTok{#ans>  [1]  0.2067  0.0958 -1.2583 -1.0032  1.3780  1.3026 -1.1420  0.4348}
+\CommentTok{#ans>  [9]  1.0992 -0.9037}
 
 \CommentTok{# If you want to have always the same result, set the seed of the random number}
 \CommentTok{# generator}
@@ -2385,7 +2385,7 @@ For your submitted report, use the following YAML header:
 title: "Week 2"
 subtitle: "Multiple Linear Regression"
 author: LastName FirstName
-date: "2017-01-23 12:41:46"
+date: "2017-01-25 17:00:43"
 output:
   html_document:
     toc: true
@@ -2774,6 +2774,8 @@ can be rewritten as
 Just as in the simple logistic regression we use the maximum likelihood
 method to estimate \(\beta_0,\beta_1,\ldots,\beta_p\).
 
+◼
+
 \chapter*{PW 3}\label{pw-3}
 \addcontentsline{toc}{chapter}{PW 3}
 
@@ -3060,6 +3062,458 @@ use the functions:
 \textbf{16.} Compare the AUC of the two models you fitted (one with only
 age and one with age and estimated salary) and plot their ROC curves in
 the same figure.
+
+◼
+
+\chapter{Linear Discriminant
+Analysis}\label{linear-discriminant-analysis}
+
+Discriminant analysis is a popular method for multiple-class
+classiﬁcation. We will start first by the \emph{Linear Discriminant
+Analysis (LDA)}.
+
+\section{Introduction}\label{introduction-2}
+
+As we saw in the previous chapter, Logistic regression involves directly
+modeling \(\mathbb{P} (Y = k|X = x)\) using the \emph{logistic
+function}, for the case of two response classes. In logistic regression,
+we model the conditional distribution of the response \(Y\), given the
+predictor(s) \(X\). We now consider an alternative and less direct
+approach to estimating these probabilities. In this alternative
+approach, \textbf{\emph{we model the distribution}} of the predictors
+\(X\) \textbf{\emph{separately}} in each of the response classes
+(i.e.~given \(Y\)), and then use \textbf{Bayes' theorem} to flip these
+around into estimates for \(\mathbb{P} (Y = k|X = x)\). When these
+distributions are assumed to be \emph{Normal}, it turns out that the
+model is very similar in form to logistic regression.
+
+\textbf{Why not logistic regression?} Why do we need another method,
+when we have logistic regression? There are several reasons:
+
+\begin{itemize}
+\tightlist
+\item
+  When the classes are well-separated, the parameter estimates for the
+  logistic regression model are surprisingly unstable. Linear
+  discriminant analysis does not suﬀer from this problem.
+\item
+  If \(n\) is small and the distribution of the predictors \(X\) is
+  approximately normal in each of the classes, the linear discriminant
+  model is again more stable than the logistic regression model.
+\item
+  Linear discriminant analysis is popular when we have \emph{more than
+  two response classes}.
+\end{itemize}
+
+\section{Bayes' Theorem}\label{bayes-theorem}
+
+Bayes' theorem is stated mathematically as the following equation:
+
+\[ P(A | B) = \frac{P(A \cap B)}{P(B)} =  \frac{P(B|A) P(A)}{P(B)}\]
+
+where \(A\) and \(B\) are events and \(P(B) \neq 0\).
+
+\begin{itemize}
+\tightlist
+\item
+  \(P(A | B)\), a conditional probability, is the probability of
+  observing event \(A\) given that \(B\) is true. It is called the
+  \textbf{\emph{posterior}} probability.
+\item
+  \(P(A)\), is called the \textbf{\emph{prior}}, is the initial degree
+  of belief in A.
+\item
+  \(P(B)\) is the \textbf{\emph{likelihood}}.
+\end{itemize}
+
+\begin{rmdinsight}
+The posterior probability can be written in the memorable form as :
+
+Posterior probability \(\propto\) Likelihood \(\times\) Prior
+probability.
+\end{rmdinsight}
+
+\textbf{Extended form}:
+
+Suppose we have a partition \(\{A_i\}\) of the sample space, the even
+space is given or conceptualized in terms of \(P(A_j)\) and
+\(P(B | A_j)\). It is then useful to compute \(P(B)\) using the law of
+total probability:
+
+\[ P(B) = \sum_j P(B|A_j) P(A_j) \]
+
+\[ \Rightarrow P(A_i|B) = \frac{P(B|A_i) P(A_i)}{\sum_j P(B|A_j) P(A_j)} \]
+
+\textbf{Bayes' Theorem for Classification}:
+
+Suppose that we wish to classify an observation into one of \(K\)
+classes, where \(K \geq 2\). In other words, the qualitative response
+variable \(Y\) can take on \(K\) possible distinct and unordered values.
+
+Let \(\pi_k\) represent the overall or \emph{prior} probability that a
+randomly chosen observation comes from the \(k\)-th class; this is the
+probability that a given observation is associated with the \(k\)-th
+category of the response variable \(Y\).
+
+Let \(f_k(X) \equiv P(X = x|Y = k)\) denote the \emph{density function}
+of \(X\) for an observation that comes from the \(k\)-th class. In other
+words, \(f_k(x)\) is relatively large if there is a high probability
+that an observation in the \(k\)-th class has \(X \approx x\), and
+\(f_k(x)\) is small if it is very unlikely that an observation in the
+\(k\)-th class has \(X \approx x\). Then \emph{Bayes' theorem} states
+that
+
+\begin{equation}
+P(Y=k|X=x) = \frac{ \pi_k f_k(x)}{\sum_{c=1}^K \pi_c f_c(x)}
+\label{eq:bayes}
+\end{equation}
+
+As we did in the last chapter, we will use the abbreviation
+\(p_k(X) =P(Y = k|X)\).
+
+The equation above stated by \emph{Bayes' theorem} suggests that instead
+of directly computing \(p_k(X)\) as we did in the logistic regression,
+we can simply plug in estimates of \(\pi_k\) and \(f_k(X)\) into the
+equation. In general, estimating \(\pi_k\) is easy (the fraction of the
+training observations that belong to the \(k\)-th class). But estimating
+\(f_k(X)\) tends to be more challenging.
+
+\begin{quote}
+Recall that \(p_k(x)\) is the \emph{posterior} probability that an
+observation \(X=x\) belongs to \(k\)-th class.
+\end{quote}
+
+\begin{quote}
+If we can find a way to estimate \(f_k(X)\), we can develop a classifier
+with the lowest possibe error rate out of all classifiers.
+\end{quote}
+
+\section{\texorpdfstring{LDA for
+\(p=1\)}{LDA for p=1}}\label{lda-for-p1}
+
+Assume that \(p=1\), which mean we have only one predictor. We would
+like to obtain an estimate for \(f_k(x)\) that we can plug into the
+Equation \eqref{eq:bayes} in order to estimate \(p_k(x)\). \textbf{We will
+then classify an observation to the class for which \(p_k(x)\) is
+greatest}.
+
+In order to estimate \(f_k(x)\), we will first make some assumptions
+about its form.
+
+Suppose we assume that \(f_k(x)\) is \emph{normal} (\emph{Gaussian}). In
+the one-dimensional setting, the normal density take the form
+
+\begin{equation}
+f_k(x)= \frac{1}{\sigma_k\sqrt{2\pi}} \exp \big( - \frac{1}{2\sigma_k^2 } (x-\mu_k)^2\big)
+\label{eq:normal01}
+\end{equation}
+
+where \(\mu_k\) and \(\sigma_k^2\) are the mean and variance parameters
+for \(k\)-th class. Let us assume that
+\(\sigma_1^2 = \ldots = \sigma_K^2 = \sigma\) (which means there is a
+shared variance term across all \(K\) classes). Plugging Eq.
+\eqref{eq:normal01} into the Bayes formula in Eq. \eqref{eq:bayes} we get,
+
+\begin{equation}
+p_k(x) = \frac{  \pi_k \frac{1}{\sigma \sqrt{2\pi}} e^{-\frac{1}{2} \big(\frac{x-\mu_k}{\sigma}\big)^2 } }{  \sum_{c=1}^K  \pi_c \frac{1}{\sigma \sqrt{2\pi}} e^{-\frac{1}{2} \big(\frac{x-\mu_c}{\sigma}\big)^2 } }
+\label{eq:pkx}
+\end{equation}
+
+\begin{rmdcaution}
+Note that \(\pi_k\) and \(\pi_c\) denote the prior probabilities. And
+\(\pi\) is the mathematical constant \(\pi \approx 3.14159\).
+\end{rmdcaution}
+
+To classify at the value \(X = x\), we need to see which of the
+\(p_k(x)\) is largest. Taking logs, and discarding terms that do not
+depend on \(k\), we see that this is equivalent to assigning \(x\) to
+the class with the largest \textbf{\emph{discriminant score}}:
+
+\begin{equation}
+\delta_k(x) = x.\frac{\mu_k}{\sigma^2} - \frac{\mu_k^2}{2\sigma^2} + \log (\pi_k)
+\label{eq:discscore}
+\end{equation}
+
+Note that \(\delta_k(x)\) is a \emph{linear} function of \(x\).
+
+\begin{rmdinsight}
+\begin{itemize}
+\tightlist
+\item
+  The decision surfaces for a linear discriminant classifiers are
+  defined by the linear equations \(\delta_k(x) = \delta_c(x)\).
+\item
+  Example: If \(K=2\) and \(\pi_1=\pi_2\), then the \textbf{desicion
+  boundary} is at \(x=\frac{\mu_1+\mu2}{2}\) (\textbf{Prove it!}).
+\item
+  An example where \(\mu_1=-1.5\), \(\mu_2=1.5\), \(\mu_1=\mu_2=0.5\)
+  and \(\sigma^2=1\) is shown in this following figure
+\end{itemize}
+
+\includegraphics{img/decbound.png}
+
+\begin{itemize}
+\item
+  See this
+  \href{https://www.coursera.org/learn/machine-learning/lecture/WuL1H/decision-boundary}{video}
+  to understand more about \emph{decision boundary}.
+\item
+  As we classify a new point according to which density is highest, when
+  the priors are diﬀerent we take them into account as well, and compare
+  \(\pi_k f_k(x)\). On the right of the following figure, we favor the
+  pink class (remark that the decision boundary has shifted to the
+  left).
+\end{itemize}
+
+\includegraphics{img/decbound2.png}
+\end{rmdinsight}
+
+\section{Estimating the parameters}\label{estimating-the-parameters}
+
+Typically we don't know these parameters; we just have the training
+data. In that case we simply estimate the parameters and plug them into
+the rule.
+
+Let \(n\) the total number of training observations, and \(n_k\) the
+number of training observations in the \(k\)-th class. The following
+estimates are used:
+
+\begin{align*}
+\hat{\pi}_k &= \frac{n_k}{n} \\
+\hat{\mu}_k &= \frac{1}{n_k} \sum_{i: y_i=k} x_i \\
+\hat{\sigma}^2 &= \frac{1}{n - K} \sum_{k=1}^K \sum_{i: y_i=k} (x_i-\hat{\mu}_k)^2 \\
+ &= \sum_{k=1}^K \frac{n_k-1}{n - K} . \hat{\sigma}_k^2
+\end{align*}
+
+where
+\(\hat{\sigma}_k^2 = \frac{1}{n_k-1}\sum_{i: y_i=k}(x_i-\hat{\mu}_k)^2\)
+is the usual formula for the estimated variance in the -\(k\)-th class.
+
+The linear discriminant analysis (LDA) classifier plugs these estimates
+in Eq. \eqref{eq:discscore} and assigns an observation \(X=x\) to the
+class for which
+
+\begin{equation}
+\hat{\delta}_k(x) = x.\frac{\hat{\mu}_k}{\hat{\sigma}^2} - \frac{\hat{\mu}_k^2}{2\hat{\sigma}^2} + \log (\hat{\pi}_k)
+\label{eq:discscoreest}
+\end{equation}
+
+is largest.
+
+The \emph{discriminant functions} in Eq. \eqref{eq:discscoreest} are
+linear functions of \(x\).
+
+\begin{quote}
+Recall that we assumed that the observations come from a normal
+distribution with a common variance \(\sigma^2\).
+\end{quote}
+
+\section{\texorpdfstring{LDA for
+\(p > 1\)}{LDA for p \textgreater{} 1}}\label{lda-for-p-1}
+
+Let us now suppose that we have multiple predictors. We assume that
+\(X=(X_1,X_2,\ldots,X_p)\) is drawn from \emph{multivariate Gaussian}
+distribution (assuming they have a common covariance matrix, e.g.~same
+variances as in the case of \(p=1\)). The multivariate Gaussian
+distribution assumes that each individual predictor follows a
+one-dimensional normal distribution as in Eq. \eqref{eq:normal01}, with
+some correlation between each pair of predictors.
+
+To indicate that a \(p\)-dimensional random variable \(X\) has a
+multivariate Gaussian distribution, we write
+\(X \sim \mathcal{N}(\mu,\Sigma)\). Where
+
+\[ \mu = E(X) = \begin{pmatrix}
+    \mu_1 \\
+    \mu_2 \\
+    \vdots \\
+    \mu_p
+\end{pmatrix} \]
+
+and, \[ \Sigma = Cov(X) = \begin{pmatrix}
+    \sigma_1^2 & Cov[X_1, X_2]  & \dots  & Cov[X_1, X_p] \\
+    Cov[X_2, X_1] & \sigma_2^2  & \dots  & Cov[X_2, X_p] \\
+    \vdots & \vdots &  \ddots & \vdots \\
+    Cov[X_p, X_1] & Cov[X_p, X_2]  & \dots  & \sigma_p^2
+\end{pmatrix}  \]
+
+\begin{quote}
+\(\Sigma\) is the \(p\times p\) covariance matrix of \(X\).
+\end{quote}
+
+Formally, the multivariate Gaussian density is deﬁned as
+
+\[f(x) = \frac{1}{(2\pi)^{p/2} |\Sigma|^{1/2}} \exp \bigg( - \frac{1}{2} (x-\mu)^T \Sigma^{-1} (x-\mu) \bigg)
+\]
+
+Plugging the density function for the \(k\)-th class, \(f_k(X=x)\), into
+Eq. \eqref{eq:bayes} reveals that the Bayes classifier assigns an
+observation \(X=x\) to the class for which
+
+\begin{equation}
+\delta_k(x) = x^T \Sigma^{-1} \mu_k - \frac{1}{2} \mu_k^T \Sigma^{-1}  \mu_k + \log \pi_k
+\label{eq:discscorematrix}
+\end{equation}
+
+is largest. This is the vector/matrix version of \eqref{eq:discscore}.
+
+An example is shown in the following figure. Three equally-sized
+Gaussian classes are shown with class-specific mean vectors and a common
+covariance matrix (\(\pi_1=\pi_2=\pi_3=1/3\)). The three ellipses
+represent regions that contain \(95\%\) of the probability for each of
+the three classes. The dashed lines are the Bayes decision boundaries.
+
+\includegraphics{img/lda2.png}
+
+Recall that the decision boundaries represent the set of values \(x\)
+for which \(\delta_k(x)=\delta_c(x)\); i.e.~for \(k\neq c\)
+
+\[ x^T \Sigma^{-1} \mu_k - \frac{1}{2} \mu_k^T \Sigma^{-1}  \mu_k = x^T \Sigma^{-1} \mu_c - \frac{1}{2} \mu_c^T \Sigma^{-1}  \mu_c  \]
+
+Note that there are three lines representing the Bayes decision
+boundaries because there are three pairs of classes among the three
+classes. That is, one Bayes decision boundary separates class 1 from
+class 2, one separates class 1 from class 3, and one separates class 2
+from class 3. These three Bayes decision boundaries divide the predictor
+space into three regions. The Bayes classiﬁer will classify an
+observation according to the region in which it is located.
+
+Once again, we need to estimate the unknown parameters
+\(\mu_1,\ldots,\mu_k,\) and \(\pi_1,\ldots,\pi_k,\) and \(\Sigma\); the
+formulas are similar to those used in the one-dimensional case. To
+assign a new observation \(X = x\), LDA plugs these estimates into Eq.
+\eqref{eq:discscorematrix} and classiﬁes to the class for which
+\(\delta_k(x)\) is largest.
+
+Note that in Eq. \eqref{eq:discscorematrix} \(\delta_k(x)\) is a
+\emph{linear} function of \(x\); that is, the LDA decision rule depends
+on x only through a linear combination of its elements. This is the
+reason for the word linear in LDA.
+
+\section{Making predictions}\label{making-predictions}
+
+Once we have estimates \(\hat{\delta}_k(x)\), we can turn these into
+estimates for class probabilities:
+
+\[ \hat{P}(Y=k|X=x)= \frac{e^{\hat{\delta}_k(x)}}{\sum_{c=1}^K e^{\hat{\delta}_c(x)}} \]
+
+So classifying to the largest \(\hat{\delta}_k(x)\) amounts to
+classifying to the class for which \(\hat{P}(Y=k|X=x)\) is largest.
+
+When \(K=2\), we classify to class 2 if \(\hat{P}(Y=2|X=x) \geq 0.5\),
+else to class 1.
+
+\section{Other forms of Discriminant
+Analysis}\label{other-forms-of-discriminant-analysis}
+
+\[P(Y=k|X=x) = \frac{ \pi_k f_k(x)}{\sum_{c=1}^K \pi_c f_c(x)}\]
+
+We saw before that when \(f_k(x)\) are Gaussian densities, whith the
+same covariance matrix \(\Sigma\) in each class, this leads to Linear
+Discriminant Analysis (LDA).
+
+By altering the forms for \(f_k(x)\), we get different classifiers.
+
+\begin{itemize}
+\tightlist
+\item
+  With Gaussians but different \(\Sigma_k\) in each class, we get
+  \emph{Quadratic Discriminant Analysis (QDA)}.
+\item
+  With \(f_k(x) = \prod_{j=1}^p f_{jk}(x_j)\) (conditional independence
+  model) in each class we get \emph{Naive Bayes}. (For Gaussian, this
+  mean the \(\Sigma_k\) are diagonal, e.g.
+  \(Cov(X_i,X_j)=0 \,\, \forall \, \, 1\leq i,j \leq p\)).
+\item
+  Many other forms by proposing specific density models for \(f_k(x)\),
+  including \emph{nonparametric approaches}.
+\end{itemize}
+
+\subsection{Quadratic Discriminant Analysis
+(QDA)}\label{quadratic-discriminant-analysis-qda}
+
+Like LDA, the QDA classiﬁer results from assuming that the observations
+from each class are drawn from a Gaussian distribution, and plugging
+estimates for the parameters into Bayes' theorem in order to perform
+prediction.
+
+However, unlike LDA, QDA assumes that each class has its own covariance
+matrix. Under this assumption, the Bayes classiﬁer assigns an
+observation \(X = x\) to the class for which
+
+\begin{align*}
+\delta_k(x) &= - \frac{1}{2} (x-\mu)^T \Sigma_k^{-1} (x-\mu) - \frac{1}{2} \log |\Sigma_k| + \log \pi_k \\
+            &= - \frac{1}{2} x^T \Sigma_k^{-1} x + \frac{1}{2} x^T \Sigma_k^{-1} \mu_k - \frac{1}{2} \mu_k^T \Sigma_k^{-1} \mu_k - \frac{1}{2} \log |\Sigma_k| + \log \pi_k
+\end{align*}
+
+is largest.
+
+Unlike in LDA, the quantity \(x\) appears as a quadratic function in
+QDA. This is where QDA gets its name.
+
+\begin{rmdcaution}
+The decision boundary in QDA is non-linear. It is quadratic (a curve).
+\end{rmdcaution}
+
+\subsection{Naive Bayes}\label{naive-bayes}
+
+We use Naive Bayes classifier if the features are independant in each
+class. It is useful when \(p\) is large (unklike LDA and QDA).
+
+Naive Bayes assumes that each \(\Sigma_k\) is diagonal, so
+
+\begin{align*}
+\delta_k(x) &\propto \log \bigg[\pi_k \prod_{j=1}^p f_{kj}(x_j) \bigg] \\
+            &= -\frac{1}{2} \sum_{j=1}^p \frac{(x_j-\mu_{kj})^2}{\sigma_{kj}^2} + \log \pi_k
+\end{align*}
+
+It can used for mixed feature vectors (qualitative and quantitative). If
+\(X_j\) is qualitative, we replace \(f_{kj}(x_j)\) by probability mass
+function (histogram) over discrete categories.
+
+\section{LDA vs Logistic Regression}\label{lda-vs-logistic-regression}
+
+the logistic regression and LDA methods are closely connected. Consider
+the two-class setting with \(p =1\) predictor, and let \(p_1(x)\) and
+\(p_2(x)=1−p_1(x)\) be the probabilities that the observation \(X = x\)
+belongs to class 1 and class 2, respectively. In the LDA framework, we
+can see from Eq. \eqref{eq:discscore} (and a bit of simple algebra) that
+the log odds is given by
+
+\[ \log \bigg(\frac{p_1(x)}{1-p_1(x)}\bigg) = \log \bigg(\frac{p_1(x)}{p_2(x)}\bigg) = c_0 + c_1 x\]
+
+where \(c_0\) and \(c_1\) are functions of \(\mu_1, \mu_2,\) and
+\(\sigma^2\).
+
+On the other hand, we know that in logistic regression
+
+\[ \log \bigg(\frac{p_1}{1-p_1}\bigg) = \beta_0 + \beta_1 x\]
+
+Both of the equations above are linear functions of \(x\). Hence both
+logistic regression and LDA produce linear decision boundaries. The only
+diﬀerence between the two approaches lies in the fact that \(\beta_0\)
+and \(\beta_1\) are estimated using \emph{maximum likelihood}, whereas
+\(c_0\) and \(c_1\) are computed using the estimated mean and variance
+from a \emph{normal distribution}. This same connection between LDA and
+logistic regression also holds for multidimensional data with \(p> 1\).
+
+\begin{rmdinsight}
+\begin{itemize}
+\tightlist
+\item
+  Logistic regression uses the conditional likelihood based on
+  \(P(Y|X)\) (known as \emph{discriminative learning}).
+\item
+  LDA uses the full likelihood based on \(P(X,Y )\) (known as
+  \emph{generative learning}).
+\item
+  Despite these differences, in practice the results are often very
+  similar.
+\end{itemize}
+
+\textbf{Remark}: Logistic regression can also fit quadratic boundaries
+like QDA, by explicitly including quadratic terms in the model.
+\end{rmdinsight}
 
 ◼
 

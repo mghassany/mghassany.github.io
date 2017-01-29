@@ -26,7 +26,7 @@
 <meta name="author" content="Mohamad Ghassany">
 
 
-<meta name="date" content="2017-01-25">
+<meta name="date" content="2017-01-29">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -188,6 +188,13 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 </ul></li>
 <li class="chapter" data-level="4.8" data-path="linear-discriminant-analysis.html"><a href="linear-discriminant-analysis.html#lda-vs-logistic-regression"><i class="fa fa-check"></i><b>4.8</b> LDA vs Logistic Regression</a></li>
 </ul></li>
+<li class="chapter" data-level="" data-path="pw-4.html"><a href="pw-4.html"><i class="fa fa-check"></i>PW 4</a><ul>
+<li class="chapter" data-level="" data-path="pw-4.html"><a href="pw-4.html#report-template-1"><i class="fa fa-check"></i>Report template</a></li>
+<li class="chapter" data-level="" data-path="pw-4.html"><a href="pw-4.html#decision-boundary-of-logistic-regression"><i class="fa fa-check"></i>Decision Boundary of Logistic Regression</a></li>
+<li class="chapter" data-level="" data-path="pw-4.html"><a href="pw-4.html#linear-discriminant-analysis-lda"><i class="fa fa-check"></i>Linear Discriminant Analysis (LDA)</a></li>
+<li class="chapter" data-level="" data-path="pw-4.html"><a href="pw-4.html#quadratic-discriminant-analysis-qda-1"><i class="fa fa-check"></i>Quadratic Discriminant Analysis (QDA)</a></li>
+<li class="chapter" data-level="" data-path="pw-4.html"><a href="pw-4.html#comparison"><i class="fa fa-check"></i>Comparison</a></li>
+</ul></li>
 </ul>
 
       </nav>
@@ -229,10 +236,31 @@ x+y
 <p>Hitting the <em>up arrow</em> multiple times will display the previous commands, which can then be edited. This is useful since one often wishes to repeat a similar command.</p>
 <p>The <code>ls()</code> function allows us to look at a list of all of the objects, such <code>ls()</code> as data and functions, that we have saved so far. The <code>rm()</code> function can be used to delete any object that we don’t want.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ls</span>()
-<span class="co">#ans&gt; [1] &quot;A&quot;      &quot;Auto&quot;   &quot;B&quot;      &quot;myDf&quot;   &quot;myList&quot; &quot;vec&quot;    &quot;x&quot;      &quot;y&quot;</span>
+<span class="co">#ans&gt;  [1] &quot;A&quot;                        &quot;Auto&quot;                    </span>
+<span class="co">#ans&gt;  [3] &quot;B&quot;                        &quot;error&quot;                   </span>
+<span class="co">#ans&gt;  [5] &quot;error_squared&quot;            &quot;EU&quot;                      </span>
+<span class="co">#ans&gt;  [7] &quot;mod&quot;                      &quot;model&quot;                   </span>
+<span class="co">#ans&gt;  [9] &quot;MSE&quot;                      &quot;myDf&quot;                    </span>
+<span class="co">#ans&gt; [11] &quot;myList&quot;                   &quot;names.available.packages&quot;</span>
+<span class="co">#ans&gt; [13] &quot;Rcmdr.related.packages&quot;   &quot;sumMod&quot;                  </span>
+<span class="co">#ans&gt; [15] &quot;test&quot;                     &quot;testing_data&quot;            </span>
+<span class="co">#ans&gt; [17] &quot;train&quot;                    &quot;training_data&quot;           </span>
+<span class="co">#ans&gt; [19] &quot;variables&quot;                &quot;vec&quot;                     </span>
+<span class="co">#ans&gt; [21] &quot;x&quot;                        &quot;y&quot;                       </span>
+<span class="co">#ans&gt; [23] &quot;y_hat&quot;</span>
 <span class="kw">rm</span>(x)
 <span class="kw">ls</span>()
-<span class="co">#ans&gt; [1] &quot;A&quot;      &quot;Auto&quot;   &quot;B&quot;      &quot;myDf&quot;   &quot;myList&quot; &quot;vec&quot;    &quot;y&quot;</span></code></pre></div>
+<span class="co">#ans&gt;  [1] &quot;A&quot;                        &quot;Auto&quot;                    </span>
+<span class="co">#ans&gt;  [3] &quot;B&quot;                        &quot;error&quot;                   </span>
+<span class="co">#ans&gt;  [5] &quot;error_squared&quot;            &quot;EU&quot;                      </span>
+<span class="co">#ans&gt;  [7] &quot;mod&quot;                      &quot;model&quot;                   </span>
+<span class="co">#ans&gt;  [9] &quot;MSE&quot;                      &quot;myDf&quot;                    </span>
+<span class="co">#ans&gt; [11] &quot;myList&quot;                   &quot;names.available.packages&quot;</span>
+<span class="co">#ans&gt; [13] &quot;Rcmdr.related.packages&quot;   &quot;sumMod&quot;                  </span>
+<span class="co">#ans&gt; [15] &quot;test&quot;                     &quot;testing_data&quot;            </span>
+<span class="co">#ans&gt; [17] &quot;train&quot;                    &quot;training_data&quot;           </span>
+<span class="co">#ans&gt; [19] &quot;variables&quot;                &quot;vec&quot;                     </span>
+<span class="co">#ans&gt; [21] &quot;y&quot;                        &quot;y_hat&quot;</span></code></pre></div>
 </div>
 <div id="vectors" class="section level3">
 <h3><span class="header-section-number">1.8.2</span> Vectors</h3>
@@ -526,7 +554,7 @@ For text editors, I suggest <a href="https://www.sublimetext.com/"><code>Sublime
 </li>
 </ul>
 </div>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">dim</span>(Auto) <span class="co"># To see the dimensions of the data set</span>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">dim</span>(Auto) <span class="co"># To see the dimensions of the data set</span>
 <span class="co">#ans&gt; [1] 397   9</span>
 <span class="kw">nrow</span>(Auto) <span class="co"># To see the number of rows</span>
 <span class="co">#ans&gt; [1] 397</span>
@@ -563,12 +591,12 @@ Take a look at this <a href="https://cran.r-project.org/doc/contrib/Torfs+Brauer
 <p>We are going to employ the <code>EU</code> dataset. The <code>EU</code> dataset contains 28 rows with the member states of the European Union (Country), the number of seats assigned under different years (Seats2011, Seats2014), the Cambridge Compromise apportionment (CamCom2011), and the countries population (Population2010,Population2013).</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Load the dataset, when we load an .RData using load()</span>
 <span class="co"># function we do not attribute it to a name like we did</span>
-<span class="co"># when we used read.table() or when we use read.csv()</span>
+<span class="co"># when we used read.table() or when we use read.csv()</span>
 
 <span class="kw">load</span>(<span class="st">&quot;EU.RData&quot;</span>)</code></pre></div>
 <div class="rmdinsight">
 <p>
-There is two ways to tell <code>R</code> where is the file you want to load/use/import or where to save a file when you write/export/save :
+There is two ways to tell <code>R</code> where is the file you want to load/use/import or where to save a file when you write/export/save :
 </p>
 <ol style="list-style-type: decimal">
 <li>

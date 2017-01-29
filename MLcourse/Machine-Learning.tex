@@ -124,7 +124,7 @@
   \postauthor{\par}
   \predate{\centering\large\emph}
   \postdate{\par}
-  \date{2017-01-25}
+  \date{2017-01-29}
 
 \usepackage{booktabs}
 \usepackage{longtable}
@@ -1251,8 +1251,7 @@ the \texttt{plot()} function, type \texttt{?plot}.
 
 \CommentTok{# Sampling from a Normal - 100 random points from a N(0, 1)}
 \KeywordTok{rnorm}\NormalTok{(}\DataTypeTok{n =} \DecValTok{10}\NormalTok{, }\DataTypeTok{mean =} \DecValTok{0}\NormalTok{, }\DataTypeTok{sd =} \DecValTok{1}\NormalTok{)}
-\CommentTok{#ans>  [1]  0.2067  0.0958 -1.2583 -1.0032  1.3780  1.3026 -1.1420  0.4348}
-\CommentTok{#ans>  [9]  1.0992 -0.9037}
+\CommentTok{#ans>  [1]  2.086 -0.832 -1.147  0.111  0.981  1.783  0.363 -1.453  1.098  0.822}
 
 \CommentTok{# If you want to have always the same result, set the seed of the random number}
 \CommentTok{# generator}
@@ -1389,7 +1388,7 @@ Next we will show how to load the data set
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\KeywordTok{dim}\NormalTok{(Auto) }\CommentTok{# To see the dimensions of the data set}
+\KeywordTok{dim}\NormalTok{(Auto) }\CommentTok{# To see the dimensions of the data set}
 \CommentTok{#ans> [1] 397   9}
 \KeywordTok{nrow}\NormalTok{(Auto) }\CommentTok{# To see the number of rows}
 \CommentTok{#ans> [1] 397}
@@ -1441,14 +1440,14 @@ countries population (Population2010,Population2013).
 \begin{Highlighting}[]
 \CommentTok{# Load the dataset, when we load an .RData using load()}
 \CommentTok{# function we do not attribute it to a name like we did}
-\CommentTok{# when we used read.table() or when we use read.csv()}
+\CommentTok{# when we used read.table() or when we use read.csv()}
 
 \KeywordTok{load}\NormalTok{(}\StringTok{"EU.RData"}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
 
 \begin{rmdinsight}
-There is two ways to tell \texttt{R}~where is the file you want to
+There is two ways to tell \texttt{R} where is the file you want to
 load/use/import or where to save a file when you write/export/save :
 
 \begin{enumerate}
@@ -2385,7 +2384,7 @@ For your submitted report, use the following YAML header:
 title: "Week 2"
 subtitle: "Multiple Linear Regression"
 author: LastName FirstName
-date: "2017-01-25 17:00:43"
+date: "2017-01-29 21:54:39"
 output:
   html_document:
     toc: true
@@ -3514,6 +3513,308 @@ logistic regression also holds for multidimensional data with \(p> 1\).
 \textbf{Remark}: Logistic regression can also fit quadratic boundaries
 like QDA, by explicitly including quadratic terms in the model.
 \end{rmdinsight}
+
+◼
+
+\chapter*{PW 4}\label{pw-4}
+\addcontentsline{toc}{chapter}{PW 4}
+
+This week we are going to continue the analysis of the
+\texttt{Social\_Network\_Ads} dataset. Recall that this dataset contains
+informations of users of a social network and if they bought a specified
+product. Last week we built a Logistic Regression model for the variable
+\texttt{Purchased} in function of \texttt{Age} and
+\texttt{EstimatedSalary}. We will consider the same variables this week
+but we will fit different models using methods such as LDA, QDA, and
+Naive Bayes.
+
+\section*{Report template}\label{report-template-1}
+\addcontentsline{toc}{section}{Report template}
+
+For this week, use these YAML settings for your RMarkdown file:
+
+\begin{verbatim}
+---
+title: "Week 4"
+subtitle: "Discriminant Analysis"
+author: LastName FirstName
+date: "30/01/2017"
+output:
+  html_document:
+    toc: true
+    toc_depth: 2
+    toc_float: true
+    theme: cerulean
+    highlight: espresso
+---
+\end{verbatim}
+
+\section*{Decision Boundary of Logistic
+Regression}\label{decision-boundary-of-logistic-regression}
+\addcontentsline{toc}{section}{Decision Boundary of Logistic Regression}
+
+\textbf{1.} First, re-do the pre-processing steps you did last week
+(remove the first two columns from the dataset as we are not going to
+use them) and fit a logistic regression model of \texttt{Purchased} in
+function of \texttt{Age} and \texttt{EstimatedSalary}. Name your model
+\texttt{classifier.logreg}. If you need the dataset again, you can
+download it from \href{datasets/Social_Network_Ads.csv}{here}.
+
+Now you are going to visualize the decision boundary for logistic
+regression.
+
+\begin{rmdinsight}
+\begin{itemize}
+\tightlist
+\item
+  Since the decision boundary of logistic regression is a linear
+  (\emph{you know why right?}) and the dimension of the feature space is
+  2 (\texttt{Age} and \texttt{EstimatedSalary}), the decision boundary
+  in this 2-dimensional space is a line that separates the predicted
+  classes ``0'' and ``1'' (values of the response \texttt{Purchased}).
+\item
+  For logistic regression, we predict \(y=1\) if \(\beta^T X \geq 0\)
+  (right side of the line) and \(y=0\) if \(\beta^T X < 0\) (left side
+  of the line). Where
+\end{itemize}
+
+\[ \beta = \begin{pmatrix} \beta_0 \\ \beta_1 \\ \beta2 \end{pmatrix} \,\, \text{and} \,\, X = \begin{pmatrix}
+  1 \\
+  X_1 \\
+  X_2
+  \end{pmatrix}\]
+
+So we predict \(y=1\) if \(\beta_0 + \beta_1 X_1 + \beta_2 X_2 \geq 0\)
+which means that the equation of the decision boundary (a line here) is
+\(X_2 = - \frac{\beta_1}{\beta_2}X_1 - \frac{\beta_0}{\beta_2}\)
+\end{rmdinsight}
+
+\textbf{2.} Plot the decision boundary obtained with logistic
+regression. In order to do so, calculate the intercept and the slope of
+the line presenting the decision boundary, then plot
+\texttt{EstimatedSalary} in function of \texttt{Age} (from the
+\texttt{test\_set}) and add the line using \texttt{abline()}.
+
+\textbf{3.} In order to verify that your line (decision boundary) is
+well plotted, color the points on the last Figure with respect to the
+predicted response.
+
+\textbf{Hints}:
+
+\begin{itemize}
+\tightlist
+\item
+  If your predictions are stored in \texttt{y\_pred}, you can do it
+  using
+  \texttt{bg\ =\ ifelse(y\_pred\ ==\ 1,\ \textquotesingle{}color1\textquotesingle{},\ \textquotesingle{}color2\textquotesingle{})},
+  and precise the argument \texttt{pch} to be 21 (you can choose pch to
+  be a value between 21 and 25, try it).
+\item
+  Then, add the line using \texttt{abline()}, put the line width = 2 to
+  make it more visible. Do not forget to title the Figure).
+\end{itemize}
+
+\textbf{4.} Now make the same plot but color the points with respect to
+their real labels (the variable \texttt{Purchased}). From this figure,
+count the number of the false positive predictions and compare it to the
+value obtained in the confusion matrix.
+
+\section*{Linear Discriminant Analysis
+(LDA)}\label{linear-discriminant-analysis-lda}
+\addcontentsline{toc}{section}{Linear Discriminant Analysis (LDA)}
+
+Let us apply linear discriminant analysis (LDA) now. First we will make
+use of the \texttt{lda()} function in the package \texttt{MASS}. Second,
+you are going to create the model and predict the classes by yourself
+without using the \texttt{lda()} function. And we will visualize the
+decision boundary of LDA.
+
+\textbf{5.} Fit a LDA model of \texttt{Purchased} in function of
+\texttt{Age} and \texttt{EstimatedSalary}. Name the model
+\texttt{classifier.lda}.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{library}\NormalTok{(MASS)}
+\NormalTok{classifier.lda <-}\StringTok{ }\KeywordTok{lda}\NormalTok{(Purchased~Age+EstimatedSalary, }\DataTypeTok{data=}\NormalTok{training_set)}
+\end{Highlighting}
+\end{Shaded}
+
+\textbf{6.} Call \texttt{classifier.lda} and see what does it compute.
+
+\textbf{Plus:} If you enter the following you will be returned with a
+list of summary information concerning the computation:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{classifier.lda$prior}
+\NormalTok{classifier.lda$means}
+\end{Highlighting}
+\end{Shaded}
+
+\textbf{7.} On the test set, predict the probability of purchasing the
+product by the users using the model \texttt{classifier.lda}. Remark
+that when we predict using LDA, we obtain a list instead of a matrix, do
+\texttt{str()} for your predictions to see what do you get.
+
+\textbf{Remark}: we get the predicted class here, without being
+obligated to round the predictions as we did for logistic regression.
+
+\textbf{8.} Compute the confusion matrix and compare the predictions
+results obtained by LDA to the ones obtained by logistic regression.
+What do you remark?
+
+(\textbf{Hint}: compare the accuracy)
+
+\textbf{9.} Now let us plot the decision boundary obtained with LDA. You
+saw in the course that decision boundary for LDA represent the set of
+values \(x\) where \(\delta_k(x) = \delta_c(x)\). Recall that
+\[ \delta_k(X) = x^T \Sigma^{-1} \mu_k - \frac{1}{2} \mu_k^T \Sigma^{-1}  \mu_k + \log \pi_k \]
+
+Here in our case, we have 2 classes (\(K=2\)) and 2 predictors
+(\(p=2\)). So the decision boundary (which is linear in the case of LDA,
+and line in our case since \(p=2\)) will verify the equation
+\(\delta_0(x) = \delta_1(x)\) Since we have two classes ``0'' and ``1''.
+In the case of LDA this leads to linear boundary and is easy to be
+plotted. But in more complicated cases it is difficult to manually
+simplify the equations and plot the decision boundary. Anyway, there is
+a smart method to plot (but a little bit costy) the decision boundary in
+\texttt{R} using the function \texttt{contour()}, the corresponding code
+is the following (you must adapt it and use it to plot your decision
+boundary):
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{# create a grid corresponding to the scales of Age and EstimatedSalary}
+\CommentTok{# and fill this grid with lot of points}
+\NormalTok{X1 =}\StringTok{ }\KeywordTok{seq}\NormalTok{(}\KeywordTok{min}\NormalTok{(training_set[, }\DecValTok{1}\NormalTok{]) -}\StringTok{ }\DecValTok{1}\NormalTok{, }\KeywordTok{max}\NormalTok{(training_set[, }\DecValTok{1}\NormalTok{]) +}\StringTok{ }\DecValTok{1}\NormalTok{, }\DataTypeTok{by =} \FloatTok{0.01}\NormalTok{)}
+\NormalTok{X2 =}\StringTok{ }\KeywordTok{seq}\NormalTok{(}\KeywordTok{min}\NormalTok{(training_set[, }\DecValTok{2}\NormalTok{]) -}\StringTok{ }\DecValTok{1}\NormalTok{, }\KeywordTok{max}\NormalTok{(training_set[, }\DecValTok{2}\NormalTok{]) +}\StringTok{ }\DecValTok{1}\NormalTok{, }\DataTypeTok{by =} \FloatTok{0.01}\NormalTok{)}
+\NormalTok{grid_set =}\StringTok{ }\KeywordTok{expand.grid}\NormalTok{(X1, X2)}
+\CommentTok{# Adapt the variable names}
+\KeywordTok{colnames}\NormalTok{(grid_set) =}\StringTok{ }\KeywordTok{c}\NormalTok{(}\StringTok{'Age'}\NormalTok{, }\StringTok{'EstimatedSalary'}\NormalTok{)}
+
+\CommentTok{# plot 'Estimated Salary' ~ 'Age'}
+\KeywordTok{plot}\NormalTok{(test_set[, -}\DecValTok{3}\NormalTok{],}
+     \DataTypeTok{main =} \StringTok{'Decision Boundary LDA'}\NormalTok{,}
+     \DataTypeTok{xlab =} \StringTok{'Age'}\NormalTok{, }\DataTypeTok{ylab =} \StringTok{'Estimated Salary'}\NormalTok{,}
+     \DataTypeTok{xlim =} \KeywordTok{range}\NormalTok{(X1), }\DataTypeTok{ylim =} \KeywordTok{range}\NormalTok{(X2))}
+
+\CommentTok{# color the plotted points with their real label (class)}
+\KeywordTok{points}\NormalTok{(test_set, }\DataTypeTok{pch =} \DecValTok{21}\NormalTok{, }\DataTypeTok{bg =} \KeywordTok{ifelse}\NormalTok{(test_set[, }\DecValTok{3}\NormalTok{] ==}\StringTok{ }\DecValTok{1}\NormalTok{, }\StringTok{'green4'}\NormalTok{, }\StringTok{'red3'}\NormalTok{))}
+
+\CommentTok{# Make predictions on the points of the grid, this will take some time}
+\NormalTok{pred_grid =}\StringTok{ }\KeywordTok{predict}\NormalTok{(classifier.lda, }\DataTypeTok{newdata =} \NormalTok{grid_set)$class}
+
+\CommentTok{# Separate the predictions by a contour}
+\KeywordTok{contour}\NormalTok{(X1, X2, }\KeywordTok{matrix}\NormalTok{(}\KeywordTok{as.numeric}\NormalTok{(pred_grid), }\KeywordTok{length}\NormalTok{(X1), }\KeywordTok{length}\NormalTok{(X2)), }\DataTypeTok{add =} \OtherTok{TRUE}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\textbf{10.} Now let us build a LDA model for our data set without using
+the \texttt{lda()} function. You are free to do it by creating a
+function or without creating one. Go back to question \textbf{6} and see
+what did you obtain by using \texttt{lda()}. It computes the prior
+probability of group membership and the estimated group means for each
+of the two groups. Additional information that is not provided, but may
+be important, is the single covariance matrix that is being used for the
+various groupings.
+
+\begin{rmdinsight}
+In LDA, we compute for every observation \(x\) its discriminant score
+\(\delta_k(x)\). Then we attribute \(x\) to the class that has the
+highest \(\delta\). Recall that
+
+\[\delta_k(x) = x^T \Sigma^{-1} \mu_k - \frac{1}{2} \mu_k^T \Sigma^{-1}  \mu_k + \log \pi_k\]
+
+So to compute \(\delta_k(x)\) we need to estimate \(\pi_k\), \(\mu_k\)
+and \(\Sigma\).
+
+Note that \[x=\begin{pmatrix}
+            X_1 \\
+            X_2
+            \end{pmatrix}\] and here \(X_1\)=\texttt{Age} and
+\(X_2\)=\texttt{EstimatedSalary}.
+\end{rmdinsight}
+
+So let us do it step by step, first we will do the estimates:
+
+\textbf{10.1} Subset the training set into two sets: \texttt{class0}
+where \texttt{Purchased\ =\ 0} and \texttt{class1} where
+\texttt{Purchased\ =\ 1}).
+
+\textbf{10.2} Compute \(\pi_0\) and \(\pi_1\).
+
+\[\pi_i = N_i / N, \,\, \text{where} \,\, N_i \,\, \text{is the number of data points in group } i\]
+
+\textbf{10.3} Compute \(\mu_0\) and \(\mu_1\). \[\mu_0 = \begin{pmatrix}
+   \mu_0(X_1) \\
+   \mu_0(X_2)
+   \end{pmatrix} \,\, \text{and} \,\, \mu_1 = \begin{pmatrix}
+   \mu_1(X_1) \\
+   \mu_1(X_2)
+   \end{pmatrix}\]
+
+where, for example, \(\mu_0(X_1)\) is the mean of the variable \(X_1\)
+in the group \(0\) (the subset \texttt{class0}).
+
+\textbf{10.4} Compute \(\Sigma\). In the case of two classes like here,
+it is computed by calculating the following:
+
+\[\Sigma = \frac{(N_0-1)\Sigma_0 + (N_1-1)\Sigma_1}{N_0+N_1-2}\]
+
+where \(\Sigma_i\) is the estimated covariance matrix for specific group
+\(i\).
+
+\textbf{Remark:} Recall that in LDA we use the same \(\Sigma\). But in
+QDA we do not.
+
+\textbf{10.5.} Now that we have computed all the needed estimates, we
+can calculate \(\delta_0(x)\) and \(\delta_1(x)\) for any observation
+\(x\). And we will attribute \(x\) to the class with the highest
+\(\delta\). First, try it for \(x\) where \(x^T=(1,1.5)\), what is class
+prediction for this spesific \(x\)?
+
+\textbf{10.6.} Compute the discriminant scores \(\delta\) for the test
+set (a matrix \(100\times 2\)), predict the classes and compare your
+results with the results obtained with the \texttt{lda()} function.
+
+\section*{Quadratic Discriminant Analysis
+(QDA)}\label{quadratic-discriminant-analysis-qda-1}
+\addcontentsline{toc}{section}{Quadratic Discriminant Analysis (QDA)}
+
+Training and assessing a QDA model in \texttt{R} is very similar in
+syntax to training and assessing a LDA model. The only difference is in
+the function name \texttt{qda()}
+
+\textbf{11.} Fit a QDA model of \texttt{Purchased} in function of
+\texttt{Age} and \texttt{EstimatedSalary}. Name the model
+\texttt{classifier.qda}.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{# qda() is a function of library(MASS)}
+\NormalTok{classifier.qda <-}\StringTok{ }\KeywordTok{qda}\NormalTok{(Purchased~., }\DataTypeTok{data =} \NormalTok{training_set)}
+\end{Highlighting}
+\end{Shaded}
+
+\textbf{12.} Make predictions on the \texttt{test\_set} using the QDA
+model \texttt{classifier.qda}. Show the computation matrix and compare
+the results with the predictions obtained using the LDA model
+\texttt{classifier.lda}.
+
+\textbf{13.} Plot the decision boundary obtained with QDA. Color the
+points with the real labels.
+
+\section*{Comparison}\label{comparison}
+\addcontentsline{toc}{section}{Comparison}
+
+\textbf{14.} In order to compare LDA and QDA on your dataset, plot on
+the same Figure the ROC curve for each classifier we fitted and compare
+the correspondant AUC. What was the best model for this dataset?
+
+\textbf{Remark:} If you use the \texttt{ROCR} package, put
+\texttt{pred.lda\$posterior{[},2{]}} and \texttt{test\_set{[},3{]}} in
+the \texttt{prediction()} function.
 
 ◼
 

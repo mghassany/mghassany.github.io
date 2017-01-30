@@ -26,7 +26,7 @@
 <meta name="author" content="Mohamad Ghassany">
 
 
-<meta name="date" content="2017-01-29">
+<meta name="date" content="2017-01-30">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -367,8 +367,12 @@ classifier.qda &lt;-<span class="st"> </span><span class="kw">qda</span>(Purchas
 </div>
 <div id="comparison" class="section level2 unnumbered">
 <h2>Comparison</h2>
-<p><strong>14.</strong> In order to compare LDA and QDA on your dataset, plot on the same Figure the ROC curve for each classifier we fitted and compare the correspondant AUC. What was the best model for this dataset?</p>
-<p><strong>Remark:</strong> If you use the <code>ROCR</code> package, put <code>pred.lda$posterior[,2]</code> and <code>test_set[,3]</code> in the <code>prediction()</code> function.</p>
+<p><strong>14.</strong> In order to compare the methods we used, plot on the same Figure the ROC curve for each classifier we fitted and compare the correspondant AUC. What was the best model for this dataset?</p>
+<p><strong>Remark:</strong> If you use the <code>ROCR</code> package:</p>
+<ul>
+<li>For Logistic regression, use the predicted probabilities in the <code>prediction()</code> (and not the round values “0” or “1”).</li>
+<li>For LDA and QDA, put <code>pred.lda$posterior[,2]</code> in the <code>prediction()</code> function (those are the posterior probabilities that observations belong to class “1”).</li>
+</ul>
 <p class="text-right">
 ◼
 </p>

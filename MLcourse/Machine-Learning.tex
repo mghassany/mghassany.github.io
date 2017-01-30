@@ -124,7 +124,7 @@
   \postauthor{\par}
   \predate{\centering\large\emph}
   \postdate{\par}
-  \date{2017-01-29}
+  \date{2017-01-30}
 
 \usepackage{booktabs}
 \usepackage{longtable}
@@ -2384,7 +2384,7 @@ For your submitted report, use the following YAML header:
 title: "Week 2"
 subtitle: "Multiple Linear Regression"
 author: LastName FirstName
-date: "2017-01-29 21:54:39"
+date: "2017-01-30 10:31:07"
 output:
   html_document:
     toc: true
@@ -3808,13 +3808,22 @@ points with the real labels.
 \section*{Comparison}\label{comparison}
 \addcontentsline{toc}{section}{Comparison}
 
-\textbf{14.} In order to compare LDA and QDA on your dataset, plot on
-the same Figure the ROC curve for each classifier we fitted and compare
-the correspondant AUC. What was the best model for this dataset?
+\textbf{14.} In order to compare the methods we used, plot on the same
+Figure the ROC curve for each classifier we fitted and compare the
+correspondant AUC. What was the best model for this dataset?
 
-\textbf{Remark:} If you use the \texttt{ROCR} package, put
-\texttt{pred.lda\$posterior{[},2{]}} and \texttt{test\_set{[},3{]}} in
-the \texttt{prediction()} function.
+\textbf{Remark:} If you use the \texttt{ROCR} package:
+
+\begin{itemize}
+\tightlist
+\item
+  For Logistic regression, use the predicted probabilities in the
+  \texttt{prediction()} (and not the round values ``0'' or ``1'').
+\item
+  For LDA and QDA, put \texttt{pred.lda\$posterior{[},2{]}} in the
+  \texttt{prediction()} function (those are the posterior probabilities
+  that observations belong to class ``1'').
+\end{itemize}
 
 ◼
 

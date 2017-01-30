@@ -320,24 +320,32 @@ contour(X1, X2, matrix(as.numeric(pred_grid), length(X1), length(X2)), add = TRU
 
 ## Comparison {-}
 
-**14.** In order to compare LDA and QDA on your dataset, plot on the same Figure the ROC curve for each classifier we fitted and compare the correspondant AUC. What was the best model for this dataset? 
+**14.** In order to compare the methods we used, plot on the same Figure the ROC curve for each classifier we fitted and compare the correspondant AUC. What was the best model for this dataset? 
 
-**Remark:** If you use the `ROCR` package, put `pred.lda$posterior[,2]` and `test_set[,3]` in the `prediction()` function.
+**Remark:** 
+If you use the `ROCR` package:
 
-```{r eval=F, echo=T}
+* For Logistic regression, use the predicted probabilities in the `prediction()` (and not the round values "0" or "1"). 
+* For LDA and QDA, put `pred.lda$posterior[,2]` in the `prediction()` function (those are the posterior probabilities that observations belong to class "1").
+
+```{r eval=F, echo=F}
 # ROC
 library(ROCR)
-# score.glm <- prediction(pred.glm,test_set[,3])
+
+# here we need the probs not class for log reg
+pred.glm = predict(classifier, newdata = test_set[,-3], type="response")
+
+score.glm <- prediction(pred.glm,test_set[,3])
 score.lda <- prediction(pred.lda$posterior[,2],test_set[,3])
 score.qda <- prediction(pred.qda$posterior[,2],test_set[,3])
 
 #scores
-# performance(score.glm,"auc")@y.values
+performance(score.glm,"auc")@y.values
 performance(score.lda,"auc")@y.values
 performance(score.qda,"auc")@y.values
 
-# plot(performance(score.glm,"tpr","fpr"),col="green")
-plot(performance(score.lda,"tpr","fpr"),col="red")
+plot(performance(score.glm,"tpr","fpr"),col="green")
+plot(performance(score.lda,"tpr","fpr"),col="red",add=T)
 plot(performance(score.qda,"tpr","fpr"),col="blue",add=T)
 abline(0,1,lty=8)
 ```

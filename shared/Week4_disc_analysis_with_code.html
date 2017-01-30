@@ -385,21 +385,29 @@ pred_grid =<span class="st"> </span><span class="kw">predict</span>(classifier.q
 </div>
 <div id="comparison" class="section level2 unnumbered">
 <h2>Comparison</h2>
-<p><strong>14.</strong> In order to compare LDA and QDA on your dataset, plot on the same Figure the ROC curve for each classifier we fitted and compare the correspondant AUC. What was the best model for this dataset?</p>
-<p><strong>Remark:</strong> If you use the <code>ROCR</code> package, put <code>pred.lda$posterior[,2]</code> and <code>test_set[,3]</code> in the <code>prediction()</code> function.</p>
+<p><strong>14.</strong> In order to compare the methods we used, plot on the same Figure the ROC curve for each classifier we fitted and compare the correspondant AUC. What was the best model for this dataset?</p>
+<p><strong>Remark:</strong> If you use the <code>ROCR</code> package:</p>
+<ul>
+<li>For Logistic regression, use the predicted probabilities in the <code>prediction()</code> (and not the round values “0” or “1”).</li>
+<li>For LDA and QDA, put <code>pred.lda$posterior[,2]</code> in the <code>prediction()</code> function (those are the posterior probabilities that observations belong to class “1”).</li>
+</ul>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># ROC</span>
 <span class="kw">library</span>(ROCR)
-<span class="co"># score.glm &lt;- prediction(pred.glm,test_set[,3])</span>
+
+<span class="co"># here we need the probs not class for log reg</span>
+pred.glm =<span class="st"> </span><span class="kw">predict</span>(classifier, <span class="dt">newdata =</span> test_set[,-<span class="dv">3</span>], <span class="dt">type=</span><span class="st">&quot;response&quot;</span>)
+
+score.glm &lt;-<span class="st"> </span><span class="kw">prediction</span>(pred.glm,test_set[,<span class="dv">3</span>])
 score.lda &lt;-<span class="st"> </span><span class="kw">prediction</span>(pred.lda$posterior[,<span class="dv">2</span>],test_set[,<span class="dv">3</span>])
 score.qda &lt;-<span class="st"> </span><span class="kw">prediction</span>(pred.qda$posterior[,<span class="dv">2</span>],test_set[,<span class="dv">3</span>])
 
 <span class="co">#scores</span>
-<span class="co"># performance(score.glm,&quot;auc&quot;)@y.values</span>
+<span class="kw">performance</span>(score.glm,<span class="st">&quot;auc&quot;</span>)@y.values
 <span class="kw">performance</span>(score.lda,<span class="st">&quot;auc&quot;</span>)@y.values
 <span class="kw">performance</span>(score.qda,<span class="st">&quot;auc&quot;</span>)@y.values
 
-<span class="co"># plot(performance(score.glm,&quot;tpr&quot;,&quot;fpr&quot;),col=&quot;green&quot;)</span>
-<span class="kw">plot</span>(<span class="kw">performance</span>(score.lda,<span class="st">&quot;tpr&quot;</span>,<span class="st">&quot;fpr&quot;</span>),<span class="dt">col=</span><span class="st">&quot;red&quot;</span>)
+<span class="kw">plot</span>(<span class="kw">performance</span>(score.glm,<span class="st">&quot;tpr&quot;</span>,<span class="st">&quot;fpr&quot;</span>),<span class="dt">col=</span><span class="st">&quot;green&quot;</span>)
+<span class="kw">plot</span>(<span class="kw">performance</span>(score.lda,<span class="st">&quot;tpr&quot;</span>,<span class="st">&quot;fpr&quot;</span>),<span class="dt">col=</span><span class="st">&quot;red&quot;</span>,<span class="dt">add=</span>T)
 <span class="kw">plot</span>(<span class="kw">performance</span>(score.qda,<span class="st">&quot;tpr&quot;</span>,<span class="st">&quot;fpr&quot;</span>),<span class="dt">col=</span><span class="st">&quot;blue&quot;</span>,<span class="dt">add=</span>T)
 <span class="kw">abline</span>(<span class="dv">0</span>,<span class="dv">1</span>,<span class="dt">lty=</span><span class="dv">8</span>)</code></pre></div>
 <p class="text-right">

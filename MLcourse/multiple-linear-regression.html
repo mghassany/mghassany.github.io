@@ -26,7 +26,7 @@
 <meta name="author" content="Mohamad Ghassany">
 
 
-<meta name="date" content="2017-02-02">
+<meta name="date" content="2017-02-05">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -203,6 +203,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="5.5" data-path="support-vector-machines.html"><a href="support-vector-machines.html#lab-support-vector-machine-for-classification"><i class="fa fa-check"></i><b>5.5</b> Lab: Support Vector Machine for Classification</a></li>
 <li class="chapter" data-level="5.6" data-path="support-vector-machines.html"><a href="support-vector-machines.html#lab-nonlinear-support-vector-machine"><i class="fa fa-check"></i><b>5.6</b> Lab: Nonlinear Support Vector Machine</a></li>
 </ul></li>
+<li class="chapter" data-level="" data-path="pw-5.html"><a href="pw-5.html"><i class="fa fa-check"></i>PW 5</a></li>
 </ul>
 
       </nav>
@@ -229,7 +230,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <p><span class="math display">\[ Y = \beta_0 + \beta_1 X_1 + \beta_2 X_2 + \dots + \beta_p X_p + \epsilon \]</span></p>
 <p>where <span class="math inline">\(X_j\)</span> represents the <span class="math inline">\(j\)</span>th predictor and <span class="math inline">\(\beta_j\)</span> quantifies the association between that variable and the response. We interpret <span class="math inline">\(\beta_j\)</span> as the average effect on <span class="math inline">\(Y\)</span> of a one unit increase in <span class="math inline">\(X_j\)</span>, <em>holding all other predictors fixed</em>.</p>
 <p>In matrix terms, supposing we have <span class="math inline">\(n\)</span> observations and <span class="math inline">\(p\)</span> variables, we need to define the following matrices:</p>
-<span class="math display">\[\begin{equation}
+\begin{equation}
  \textbf{Y}_{n \times 1} = \begin{pmatrix}
     Y_{1} \\
     Y_{2} \\
@@ -241,8 +242,8 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
     \vdots &amp; \vdots &amp; \vdots &amp; \ddots &amp; \vdots \\
     1      &amp; X_{n1} &amp; X_{n2} &amp; \dots  &amp; X_{np}
 \end{pmatrix}
-\end{equation}\]</span>
-<span class="math display">\[\begin{equation}
+\end{equation}
+\begin{equation}
  {\mathbb{\beta}}_{(p+1) \times 1} = \begin{pmatrix}
     \beta_{0} \\
     \beta_{1} \\
@@ -254,7 +255,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
         \vdots \\
         \epsilon_{n}
     \end{pmatrix}
-\end{equation}\]</span>
+\end{equation}
 <p>In matrix terms, the general linear regression model is</p>
 <p><span class="math display">\[ \textbf{Y}_{n \times 1} = \textbf{X}_{n \times (p+1)} {\mathbb{\beta}}_{(p+1) \times 1} + {\epsilon}_{n \times 1} \]</span></p>
 <p>where,</p>
@@ -321,38 +322,38 @@ Too many features (e.g. <span class="math inline"><em>p</em> ≥ <em>n</em><
 <table>
 <thead>
 <tr class="header">
-<th>Source</th>
-<th>df</th>
-<th>SS</th>
-<th>MS</th>
-<th><span class="math inline">\(F\)</span></th>
-<th>p-value</th>
+<th align="left">Source</th>
+<th align="left">df</th>
+<th align="left">SS</th>
+<th align="left">MS</th>
+<th align="left"><span class="math inline">\(F\)</span></th>
+<th align="left">p-value</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<td>Factor (Explained)</td>
-<td><span class="math inline">\(p-1\)</span></td>
-<td>SST</td>
-<td>SST/<span class="math inline">\((k-1)\)</span></td>
-<td>MST/MSE</td>
-<td>p-value</td>
+<td align="left">Factor (Explained)</td>
+<td align="left"><span class="math inline">\(p-1\)</span></td>
+<td align="left">SST</td>
+<td align="left">SST/<span class="math inline">\((k-1)\)</span></td>
+<td align="left">MST/MSE</td>
+<td align="left">p-value</td>
 </tr>
 <tr class="even">
-<td>Error (Unexplained)</td>
-<td><span class="math inline">\(n-p\)</span></td>
-<td>SSE</td>
-<td>SSE/<span class="math inline">\((n-k)\)</span></td>
-<td></td>
-<td></td>
+<td align="left">Error (Unexplained)</td>
+<td align="left"><span class="math inline">\(n-p\)</span></td>
+<td align="left">SSE</td>
+<td align="left">SSE/<span class="math inline">\((n-k)\)</span></td>
+<td align="left"></td>
+<td align="left"></td>
 </tr>
 <tr class="odd">
-<td>Total</td>
-<td><span class="math inline">\(n-1\)</span></td>
-<td>SS</td>
-<td></td>
-<td></td>
-<td></td>
+<td align="left">Total</td>
+<td align="left"><span class="math inline">\(n-1\)</span></td>
+<td align="left">SS</td>
+<td align="left"></td>
+<td align="left"></td>
+<td align="left"></td>
 </tr>
 </tbody>
 </table>
@@ -362,41 +363,41 @@ Too many features (e.g. <span class="math inline"><em>p</em> ≥ <em>n</em><
 <table>
 <thead>
 <tr class="header">
-<th></th>
-<th>Coefficient</th>
-<th>Std. error</th>
-<th><span class="math inline">\(t\)</span>-statistic</th>
-<th>p-value</th>
+<th align="left"></th>
+<th align="left">Coefficient</th>
+<th align="left">Std. error</th>
+<th align="left"><span class="math inline">\(t\)</span>-statistic</th>
+<th align="left">p-value</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<td>Constant</td>
-<td>2.939</td>
-<td>0.3119</td>
-<td>9.42</td>
-<td>&lt;0.0001</td>
+<td align="left">Constant</td>
+<td align="left">2.939</td>
+<td align="left">0.3119</td>
+<td align="left">9.42</td>
+<td align="left">&lt;0.0001</td>
 </tr>
 <tr class="even">
-<td><span class="math inline">\(X_1\)</span></td>
-<td>0.046</td>
-<td>0.0014</td>
-<td>32.81</td>
-<td>&lt;0.0001</td>
+<td align="left"><span class="math inline">\(X_1\)</span></td>
+<td align="left">0.046</td>
+<td align="left">0.0014</td>
+<td align="left">32.81</td>
+<td align="left">&lt;0.0001</td>
 </tr>
 <tr class="odd">
-<td><span class="math inline">\(X_2\)</span></td>
-<td>0.189</td>
-<td>0.0086</td>
-<td>21.89</td>
-<td>&lt;0.0001</td>
+<td align="left"><span class="math inline">\(X_2\)</span></td>
+<td align="left">0.189</td>
+<td align="left">0.0086</td>
+<td align="left">21.89</td>
+<td align="left">&lt;0.0001</td>
 </tr>
 <tr class="even">
-<td><span class="math inline">\(X_3\)</span></td>
-<td>-0.001</td>
-<td>0.0059</td>
-<td>-0.18</td>
-<td>0.8599</td>
+<td align="left"><span class="math inline">\(X_3\)</span></td>
+<td align="left">-0.001</td>
+<td align="left">0.0059</td>
+<td align="left">-0.18</td>
+<td align="left">0.8599</td>
 </tr>
 </tbody>
 </table>

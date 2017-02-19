@@ -124,7 +124,7 @@
   \postauthor{\par}
   \predate{\centering\large\emph}
   \postdate{\par}
-  \date{2017-02-13}
+  \date{2017-02-19}
 
 \defaultfontfeatures{
     Path = /home/ghassany/texmf/fonts/opentype/public/fontawesome/}
@@ -1255,7 +1255,8 @@ the \texttt{plot()} function, type \texttt{?plot}.
 
 \CommentTok{# Sampling from a Normal - 100 random points from a N(0, 1)}
 \KeywordTok{rnorm}\NormalTok{(}\DataTypeTok{n =} \DecValTok{10}\NormalTok{, }\DataTypeTok{mean =} \DecValTok{0}\NormalTok{, }\DataTypeTok{sd =} \DecValTok{1}\NormalTok{)}
-\CommentTok{#ans>  [1] -0.784 -0.658 -0.488 -0.918 -1.416  0.240  0.405 -1.725 -2.056  0.811}
+\CommentTok{#ans>  [1] -0.53758  1.06981 -0.86083 -0.44062  1.57230 -0.00322  1.66986}
+\CommentTok{#ans>  [8] -0.65939  0.40302 -0.84128}
 
 \CommentTok{# If you want to have always the same result, set the seed of the random number}
 \CommentTok{# generator}
@@ -2388,7 +2389,7 @@ For your submitted report, use the following YAML header:
 title: "Week 2"
 subtitle: "Multiple Linear Regression"
 author: LastName FirstName
-date: "2017-02-13 17:42:47"
+date: "2017-02-19 22:47:11"
 output:
   html_document:
     toc: true
@@ -3849,6 +3850,8 @@ Classification}\label{lab-support-vector-machine-for-classification}
 \section{Lab: Nonlinear Support Vector
 Machine}\label{lab-nonlinear-support-vector-machine}
 
+◼
+
 \chapter*{PW 5}\label{pw-5}
 \addcontentsline{toc}{chapter}{PW 5}
 
@@ -4788,6 +4791,247 @@ plot called \emph{biplot} that summarizes all the analysis for two PCs.
 \end{Shaded}
 
 \begin{center}\includegraphics[width=0.9\linewidth]{Machine-Learning_files/figure-latex/unnamed-chunk-117-1} \end{center}
+
+◼
+
+\chapter*{PW 6}\label{pw-6}
+\addcontentsline{toc}{chapter}{PW 6}
+
+\section*{The Iris Dataset}\label{the-iris-dataset}
+\addcontentsline{toc}{section}{The Iris Dataset}
+
+The iris dataset contains measurements for 150 iris flowers from three
+different species.
+
+The three classes in the Iris dataset are:
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  \emph{Iris-setosa} (\(n_1=50\))
+\item
+  \emph{Iris-versicolor} (\(n_2=50\))
+\item
+  \emph{Iris-virginica} (\(n_3=50\))
+\end{enumerate}
+
+And the four features in Iris dataset are:
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  \emph{sepal length} in cm
+\item
+  \emph{sepal width} in cm
+\item
+  \emph{petal length} in cm
+\item
+  \emph{petal width} in cm
+\end{enumerate}
+
+\begin{figure}[htbp]
+\centering
+\includegraphics{img/iris.png}
+\caption{}
+\end{figure}
+
+\section*{Building the PCA approach}\label{building-the-pca-approach}
+\addcontentsline{toc}{section}{Building the PCA approach}
+
+\begin{rmdtip}
+\textbf{Summary of the PCA Approach}:
+
+\begin{itemize}
+\tightlist
+\item
+  Standardize the data.
+\item
+  Obtain the Eigenvectors and Eigenvalues from the covariance matrix or
+  correlation matrix.
+\item
+  Sort eigenvalues in descending order and choose the \(k\) eigenvectors
+  that correspond to the \(k\) largest eigenvalues, where \(k\) is the
+  number of dimensions of the new feature subspace (\(k \le p\)).
+\item
+  Construct the projection matrix \(\mathbf{A}\) from the selected \(k\)
+  eigenvectors.
+\item
+  Transform the original dataset \(X\) via \(\mathbf{A}\) to obtain a
+  \(k\)-dimensional feature subspace \(\mathbf{Y}\).
+\end{itemize}
+\end{rmdtip}
+
+\subsection*{Data pre-processing}\label{data-pre-processing}
+\addcontentsline{toc}{subsection}{Data pre-processing}
+
+\textbf{1.} Download the iris dataset from \faTable  here and import it
+into \texttt{R}.
+
+\textbf{2.} Show the last 5 rows of the iris dataset.
+
+\textbf{3.} Split the iris dataset into data \(X\) and class labels
+\(y\).
+
+\begin{rmdinsight}
+The iris dataset is now stored in form of a \(150 \times 4\) matrix
+where the columns are the different features, and every row represents a
+separate flower sample. Each sample row \(X^i\) can be pictured as a
+4-dimensional vector
+
+\[ (X^i)^T = \begin{pmatrix} X_1^i \\ X_2^i \\ X_3^i \\ X_4^i \end{pmatrix}
+= \begin{pmatrix} \text{sepal length} \\ \text{sepal width} \\\text{petal length} \\ \text{petal width} \end{pmatrix}\]
+\end{rmdinsight}
+
+\textbf{Exploratory analysis}
+
+\textbf{4.} To explore how the 3 different flower classes are
+distributed along the 4 different features, visualize them via
+histograms.
+
+\textbf{5.} Compare the means and the quartiles of the 3 different
+flower classes for the 4 different features (Plot 4 boxplots into the
+same figure).
+
+\textbf{Standardizing}
+
+\textbf{6.} Scale the 4 different features.
+
+\subsection*{Eigendecomposition - Computing Eigenvectors and
+Eigenvalues}\label{eigendecomposition---computing-eigenvectors-and-eigenvalues}
+\addcontentsline{toc}{subsection}{Eigendecomposition - Computing
+Eigenvectors and Eigenvalues}
+
+\begin{rmdinsight}
+The eigenvectors and eigenvalues of a covariance (or correlation) matrix
+represent the ``core'' of a PCA: The eigenvectors (principal components)
+determine the directions of the new feature space, and the eigenvalues
+determine their magnitude. In other words, the eigenvalues explain the
+variance of the data along the new feature axes.
+\end{rmdinsight}
+
+\textbf{Covariance Matrix}
+
+\textbf{7.} The classic approach to PCA is to perform the
+eigendecomposition on the covariance matrix \(\Sigma\), which is a
+\(p\times p\) matrix where each element represents the covariance
+between two features. Compute the Covariance Matrix of the scaled
+features (Do it manually without using the \texttt{cov()} function)
+(Print the results).
+
+\begin{rmdtip}
+We can summarize the calculation of the covariance matrix via the
+following matrix equation:
+\[ \Sigma = \frac{1}{n-1} \left( (\mathbf{X} - \mathbf{\bar{X}})^T\;(\mathbf{X} - \mathbf{\bar{X}}) \right) \]
+where \(\mathbf{\bar{X}}\) is the mean vector
+\(\mathbf{\bar{X}} = \frac{1}{n} \sum\limits_{k=1}^n x_{k}\).
+
+The mean vector is a \(p\)-dimensional vector where each value in this
+vector represents the sample mean of a feature column in the dataset.
+\end{rmdtip}
+
+\textbf{8.} Perform an eigendecomposition on the covariance matrix.
+Compute the Eigenvectors and the Eigenvalues (you can use the
+\texttt{eigen()} function). What do you obtain?
+
+\textbf{Correlation Matrix}
+
+\begin{rmdinsight}
+Especially, in the field of ``Finance'', the correlation matrix
+typically used instead of the covariance matrix. However, the
+eigendecomposition of the covariance matrix (if the input data was
+standardized) yields the same results as a eigendecomposition on the
+correlation matrix, since the correlation matrix can be understood as
+the normalized covariance matrix.
+\end{rmdinsight}
+
+\textbf{9.} Perform an eigendecomposition of the standardized data based
+on the correlation matrix.
+
+\textbf{10.} Perform an eigendecomposition of the raw data based on the
+correlation matrix. Compare the obtained results with the previous
+question (use conditional statements to make the comparison).
+
+\begin{rmdinsight}
+We should see that all three approaches yield the same eigenvectors and
+eigenvalue pairs:
+
+\begin{itemize}
+\tightlist
+\item
+  Eigendecomposition of the covariance matrix after standardizing the
+  data.
+\item
+  Eigendecomposition of the correlation matrix.
+\item
+  Eigendecomposition of the correlation matrix after standardizing the
+  data.
+\end{itemize}
+\end{rmdinsight}
+
+\subsection*{Selecting Principal
+Components}\label{selecting-principal-components}
+\addcontentsline{toc}{subsection}{Selecting Principal Components}
+
+\textbf{11.} Sort the eigenvalues from highest to lowest in order to
+choose the top \(k\) eigenvectors.
+
+\textbf{Explained Variance}
+
+\textbf{12.} Calculate the individual explained variance and the
+cumulative explained variance of each principal component. Show the
+results.
+
+\textbf{13.} Visualize the individual and cumulative explained variance
+on the same figure.
+
+\subsection*{Projection Matrix}\label{projection-matrix}
+\addcontentsline{toc}{subsection}{Projection Matrix}
+
+\textbf{14.} Construct the projection matrix that will be used to
+transform the Iris data onto the new feature subspace.
+
+\begin{rmdtip}
+The ``projection matrix'' is basically just a matrix of our concatenated
+top \(k\) eigenvectors. Here, the projection matrix \(\mathbf{A}\) is a
+\(4 \times 2\)-dimensional matrix.
+\end{rmdtip}
+
+\textbf{Projection Onto the New Feature Space}
+
+In this last step we will use the \(4 \times 2\)-dimensional projection
+matrix \(\mathbf{A}\) to transform our samples (observations) onto the
+new subspace via the equation \(\mathbf{Y}=X \times \mathbf{A}\) where
+\(\mathbf{Y}\) is a \(150 \times 2\) matrix of our transformed samples.
+
+\textbf{15.} Compute \(\mathbf{Y}\) (Recall the \(\mathbf{Y}\) is the
+matrix of scores, \(\mathbf{A}\) is the matrix of loadings).
+
+\textbf{Visualization}
+
+\textbf{16.} Plot the observations on the new feature space. Name the
+axis PC1 and PC2.
+
+\textbf{17.} On the same plot, color the observations (the flowers) with
+respect to their flower classes and label them with respect of their id
+(row number).
+
+\section*{Verifications with
+princomp()}\label{verifications-with-princomp}
+\addcontentsline{toc}{section}{Verifications with princomp()}
+
+\textbf{18.} Use the \texttt{princomp()} function as explained in
+Chapter 6. Compare the obtained results using \texttt{princomp()} with
+your results above. Use conditional statement in order to compare the
+results.
+
+\textbf{19.} Plot together the scores for PC1 and PC2 and the variables
+expressed in terms of PC1 and PC2 using \texttt{biplot()}.
+
+\textbf{20.} Interpret the results.
+
+◼
 
 
 \end{document}

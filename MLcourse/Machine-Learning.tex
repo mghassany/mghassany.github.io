@@ -124,7 +124,7 @@
   \postauthor{\par}
   \predate{\centering\large\emph}
   \postdate{\par}
-  \date{2017-02-19}
+  \date{2017-02-20}
 
 \defaultfontfeatures{
     Path = /home/ghassany/texmf/fonts/opentype/public/fontawesome/}
@@ -2389,7 +2389,7 @@ For your submitted report, use the following YAML header:
 title: "Week 2"
 subtitle: "Multiple Linear Regression"
 author: LastName FirstName
-date: "2017-02-19 22:47:11"
+date: "2017-02-20 10:57:03"
 output:
   html_document:
     toc: true
@@ -4871,7 +4871,37 @@ into \texttt{R}.
 
 \textbf{2.} Show the last 5 rows of the iris dataset.
 
-\textbf{3.} Split the iris dataset into data \(X\) and class labels
+\textbf{Exploratory analysis}
+
+\textbf{3.} To explore how the 3 different flower classes are
+distributed along the 4 different features, visualize them via
+histograms.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{# load ggplot2, install it if needed}
+\KeywordTok{library}\NormalTok{(ggplot2)}
+
+\CommentTok{# histogram of sepal_length}
+\KeywordTok{ggplot}\NormalTok{(iris, }\KeywordTok{aes}\NormalTok{(}\DataTypeTok{x=}\NormalTok{sepal_length, }\DataTypeTok{fill=}\NormalTok{class)) +}
+\StringTok{  }\KeywordTok{geom_histogram}\NormalTok{(}\DataTypeTok{binwidth=}\NormalTok{.}\DecValTok{2}\NormalTok{, }\DataTypeTok{alpha=}\NormalTok{.}\DecValTok{5}\NormalTok{)}
+\CommentTok{# histogram of sepal_width}
+\KeywordTok{ggplot}\NormalTok{(iris, }\KeywordTok{aes}\NormalTok{(}\DataTypeTok{x=}\NormalTok{sepal_width, }\DataTypeTok{fill=}\NormalTok{class)) +}
+\StringTok{  }\KeywordTok{geom_histogram}\NormalTok{(}\DataTypeTok{binwidth=}\NormalTok{.}\DecValTok{2}\NormalTok{, }\DataTypeTok{alpha=}\NormalTok{.}\DecValTok{5}\NormalTok{)}
+\CommentTok{# histogram of petal_length}
+\KeywordTok{ggplot}\NormalTok{(iris, }\KeywordTok{aes}\NormalTok{(}\DataTypeTok{x=}\NormalTok{petal_length, }\DataTypeTok{fill=}\NormalTok{class)) +}
+\StringTok{  }\KeywordTok{geom_histogram}\NormalTok{(}\DataTypeTok{binwidth=}\NormalTok{.}\DecValTok{2}\NormalTok{, }\DataTypeTok{alpha=}\NormalTok{.}\DecValTok{5}\NormalTok{)}
+\CommentTok{# histogram of petal_width}
+\KeywordTok{ggplot}\NormalTok{(iris, }\KeywordTok{aes}\NormalTok{(}\DataTypeTok{x=}\NormalTok{petal_width, }\DataTypeTok{fill=}\NormalTok{class)) +}
+\StringTok{  }\KeywordTok{geom_histogram}\NormalTok{(}\DataTypeTok{binwidth=}\NormalTok{.}\DecValTok{2}\NormalTok{, }\DataTypeTok{alpha=}\NormalTok{.}\DecValTok{5}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\textbf{4.} Compare the means and the quartiles of the 3 different
+flower classes for the 4 different features (Plot 4 boxplots into the
+same figure).
+
+\textbf{5.} Split the iris dataset into data \(X\) and class labels
 \(y\).
 
 \begin{rmdinsight}
@@ -4883,20 +4913,6 @@ separate flower sample. Each sample row \(X^i\) can be pictured as a
 \[ (X^i)^T = \begin{pmatrix} X_1^i \\ X_2^i \\ X_3^i \\ X_4^i \end{pmatrix}
 = \begin{pmatrix} \text{sepal length} \\ \text{sepal width} \\\text{petal length} \\ \text{petal width} \end{pmatrix}\]
 \end{rmdinsight}
-
-\textbf{Exploratory analysis}
-
-\textbf{4.} To explore how the 3 different flower classes are
-distributed along the 4 different features, visualize them via
-histograms.
-
-\textbf{5.} Compare the means and the quartiles of the 3 different
-flower classes for the 4 different features (Plot 4 boxplots into the
-same figure).
-
-\textbf{Standardizing}
-
-\textbf{6.} Scale the 4 different features.
 
 \subsection*{Eigendecomposition - Computing Eigenvectors and
 Eigenvalues}\label{eigendecomposition---computing-eigenvectors-and-eigenvalues}
@@ -4911,14 +4927,18 @@ determine their magnitude. In other words, the eigenvalues explain the
 variance of the data along the new feature axes.
 \end{rmdinsight}
 
+\textbf{Standardizing}
+
+\textbf{6.} Scale the 4 features. Store the scaled matrix into a new one
+(for example, name it \texttt{x\_scaled}).
+
 \textbf{Covariance Matrix}
 
 \textbf{7.} The classic approach to PCA is to perform the
 eigendecomposition on the covariance matrix \(\Sigma\), which is a
 \(p\times p\) matrix where each element represents the covariance
 between two features. Compute the Covariance Matrix of the scaled
-features (Do it manually without using the \texttt{cov()} function)
-(Print the results).
+features (Print the results).
 
 \begin{rmdtip}
 We can summarize the calculation of the covariance matrix via the
@@ -4951,7 +4971,7 @@ on the correlation matrix.
 
 \textbf{10.} Perform an eigendecomposition of the raw data based on the
 correlation matrix. Compare the obtained results with the previous
-question (use conditional statements to make the comparison).
+question.
 
 \begin{rmdinsight}
 We should see that all three approaches yield the same eigenvectors and
@@ -4974,22 +4994,23 @@ eigenvalue pairs:
 Components}\label{selecting-principal-components}
 \addcontentsline{toc}{subsection}{Selecting Principal Components}
 
-\textbf{11.} Sort the eigenvalues from highest to lowest in order to
-choose the top \(k\) eigenvectors.
+\begin{rmdinsight}
+The \texttt{eigen()} function will, by default, sort the eigenvalues in
+decreasing order.
+\end{rmdinsight}
 
 \textbf{Explained Variance}
 
-\textbf{12.} Calculate the individual explained variance and the
-cumulative explained variance of each principal component. Show the
+\textbf{11.} Calculate the individual explained variation and the
+cumulative explained variation of each principal component. Show the
 results.
 
-\textbf{13.} Visualize the individual and cumulative explained variance
-on the same figure.
+\textbf{12.} Plot the individual explained variation. (scree plot)
 
 \subsection*{Projection Matrix}\label{projection-matrix}
 \addcontentsline{toc}{subsection}{Projection Matrix}
 
-\textbf{14.} Construct the projection matrix that will be used to
+\textbf{13.} Construct the projection matrix that will be used to
 transform the Iris data onto the new feature subspace.
 
 \begin{rmdtip}
@@ -5005,31 +5026,29 @@ matrix \(\mathbf{A}\) to transform our samples (observations) onto the
 new subspace via the equation \(\mathbf{Y}=X \times \mathbf{A}\) where
 \(\mathbf{Y}\) is a \(150 \times 2\) matrix of our transformed samples.
 
-\textbf{15.} Compute \(\mathbf{Y}\) (Recall the \(\mathbf{Y}\) is the
+\textbf{14.} Compute \(\mathbf{Y}\) (Recall the \(\mathbf{Y}\) is the
 matrix of scores, \(\mathbf{A}\) is the matrix of loadings).
 
 \textbf{Visualization}
 
-\textbf{16.} Plot the observations on the new feature space. Name the
+\textbf{15.} Plot the observations on the new feature space. Name the
 axis PC1 and PC2.
 
-\textbf{17.} On the same plot, color the observations (the flowers) with
-respect to their flower classes and label them with respect of their id
-(row number).
+\textbf{16.} On the same plot, color the observations (the flowers) with
+respect to their flower classes.
 
 \section*{Verifications with
 princomp()}\label{verifications-with-princomp}
 \addcontentsline{toc}{section}{Verifications with princomp()}
 
-\textbf{18.} Use the \texttt{princomp()} function as explained in
-Chapter 6. Compare the obtained results using \texttt{princomp()} with
-your results above. Use conditional statement in order to compare the
-results.
+\textbf{17.} Use the \texttt{princomp()} function as explained in
+Chapter 6. Compare the first 5 scores obtained using \texttt{princomp()}
+with your results above.
 
-\textbf{19.} Plot together the scores for PC1 and PC2 and the variables
+\textbf{18.} Plot together the scores for PC1 and PC2 and the variables
 expressed in terms of PC1 and PC2 using \texttt{biplot()}.
 
-\textbf{20.} Interpret the results.
+\textbf{29.} Interpret the results.
 
 ◼
 

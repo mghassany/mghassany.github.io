@@ -362,7 +362,7 @@ Especially, in the field of “Finance”, the correlation matrix typically used
 </p>
 </div>
 <p><strong>9.</strong> Perform an eigendecomposition of the standardized data based on the correlation matrix.</p>
-<p><strong>10.</strong> Perform an eigendecomposition of the raw data based on the correlation matrix. Compare the obtained results with the previous question (use conditional statements to make the comparison).</p>
+<p><strong>10.</strong> Perform an eigendecomposition of the raw data based on the correlation matrix. Compare the obtained results with the previous question.</p>
 <div class="rmdinsight">
 <p>
 We should see that all three approaches yield the same eigenvectors and eigenvalue pairs:
@@ -382,14 +382,18 @@ Eigendecomposition of the correlation matrix after standardizing the data.
 </div>
 <div id="selecting-principal-components" class="section level3 unnumbered">
 <h3>Selecting Principal Components</h3>
-<p><strong>11.</strong> Sort the eigenvalues from highest to lowest in order to choose the top <span class="math inline">\(k\)</span> eigenvectors.</p>
+<div class="rmdinsight">
+<p>
+The <code>eigen()</code> function will, by default, sort the eigenvalues in decreasing order.
+</p>
+</div>
 <p><strong>Explained Variance</strong></p>
-<p><strong>12.</strong> Calculate the individual explained variance and the cumulative explained variance of each principal component. Show the results.</p>
-<p><strong>13.</strong> Visualize the individual and cumulative explained variance on the same figure.</p>
+<p><strong>11.</strong> Calculate the individual explained variance and the cumulative explained variance of each principal component. Show the results.</p>
+<p><strong>12.</strong> Visualize the individual and cumulative explained variance on the same figure.</p>
 </div>
 <div id="projection-matrix" class="section level3 unnumbered">
 <h3>Projection Matrix</h3>
-<p><strong>14.</strong> Construct the projection matrix that will be used to transform the Iris data onto the new feature subspace.</p>
+<p><strong>13.</strong> Construct the projection matrix that will be used to transform the Iris data onto the new feature subspace.</p>
 <div class="rmdtip">
 <p>
 The “projection matrix” is basically just a matrix of our concatenated top <span class="math inline"><em>k</em></span> eigenvectors. Here, the projection matrix <span class="math inline"><strong>A</strong></span> is a <span class="math inline">4 × 2</span>-dimensional matrix.
@@ -397,17 +401,17 @@ The “projection matrix” is basically just a matrix of our concatenated top <
 </div>
 <p><strong>Projection Onto the New Feature Space</strong></p>
 <p>In this last step we will use the <span class="math inline">\(4 \times 2\)</span>-dimensional projection matrix <span class="math inline">\(\mathbf{A}\)</span> to transform our samples (observations) onto the new subspace via the equation <span class="math inline">\(\mathbf{Y}=X \times \mathbf{A}\)</span> where <span class="math inline">\(\mathbf{Y}\)</span> is a <span class="math inline">\(150 \times 2\)</span> matrix of our transformed samples.</p>
-<p><strong>15.</strong> Compute <span class="math inline">\(\mathbf{Y}\)</span> (Recall the <span class="math inline">\(\mathbf{Y}\)</span> is the matrix of scores, <span class="math inline">\(\mathbf{A}\)</span> is the matrix of loadings).</p>
+<p><strong>14.</strong> Compute <span class="math inline">\(\mathbf{Y}\)</span> (Recall the <span class="math inline">\(\mathbf{Y}\)</span> is the matrix of scores, <span class="math inline">\(\mathbf{A}\)</span> is the matrix of loadings).</p>
 <p><strong>Visualization</strong></p>
-<p><strong>16.</strong> Plot the observations on the new feature space. Name the axis PC1 and PC2.</p>
-<p><strong>17.</strong> On the same plot, color the observations (the flowers) with respect to their flower classes and label them with respect of their id (row number).</p>
+<p><strong>15.</strong> Plot the observations on the new feature space. Name the axis PC1 and PC2.</p>
+<p><strong>16.</strong> On the same plot, color the observations (the flowers) with respect to their flower classes and label them with respect of their id (row number).</p>
 </div>
 </div>
 <div id="verifications-with-princomp" class="section level2 unnumbered">
 <h2>Verifications with princomp()</h2>
-<p><strong>18.</strong> Use the <code>princomp()</code> function as explained in Chapter 6. Compare the obtained results using <code>princomp()</code> with your results above. Use conditional statement in order to compare the results.</p>
-<p><strong>19.</strong> Plot together the scores for PC1 and PC2 and the variables expressed in terms of PC1 and PC2 using <code>biplot()</code>.</p>
-<p><strong>20.</strong> Interpret the results.</p>
+<p><strong>17.</strong> Use the <code>princomp()</code> function as explained in Chapter 6. Compare the obtained results using <code>princomp()</code> with your results above. Use conditional statement in order to compare the results.</p>
+<p><strong>18.</strong> Plot together the scores for PC1 and PC2 and the variables expressed in terms of PC1 and PC2 using <code>biplot()</code>.</p>
+<p><strong>29.</strong> Interpret the results.</p>
 <p align="right">
 ◼
 </p>

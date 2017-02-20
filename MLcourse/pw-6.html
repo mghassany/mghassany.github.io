@@ -26,7 +26,7 @@
 <meta name="author" content="Mohamad Ghassany">
 
 
-<meta name="date" content="2017-02-19">
+<meta name="date" content="2017-02-20">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -318,6 +318,22 @@ The iris dataset is now stored in form of a <span class="math inline">150 ×�
 </div>
 <p><strong>Exploratory analysis</strong></p>
 <p><strong>4.</strong> To explore how the 3 different flower classes are distributed along the 4 different features, visualize them via histograms.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">
+<span class="co"># load ggplot2, install it if needed</span>
+<span class="kw">library</span>(ggplot2)
+
+<span class="co"># histogram of sepal_length</span>
+<span class="kw">ggplot</span>(iris, <span class="kw">aes</span>(<span class="dt">x=</span>sepal_length, <span class="dt">fill=</span>class)) +
+<span class="st">  </span><span class="kw">geom_histogram</span>(<span class="dt">binwidth=</span>.<span class="dv">2</span>, <span class="dt">alpha=</span>.<span class="dv">5</span>)
+<span class="co"># histogram of sepal_width</span>
+<span class="kw">ggplot</span>(iris, <span class="kw">aes</span>(<span class="dt">x=</span>sepal_width, <span class="dt">fill=</span>class)) +
+<span class="st">  </span><span class="kw">geom_histogram</span>(<span class="dt">binwidth=</span>.<span class="dv">2</span>, <span class="dt">alpha=</span>.<span class="dv">5</span>)
+<span class="co"># histogram of petal_length</span>
+<span class="kw">ggplot</span>(iris, <span class="kw">aes</span>(<span class="dt">x=</span>petal_length, <span class="dt">fill=</span>class)) +
+<span class="st">  </span><span class="kw">geom_histogram</span>(<span class="dt">binwidth=</span>.<span class="dv">2</span>, <span class="dt">alpha=</span>.<span class="dv">5</span>)
+<span class="co"># histogram of petal_width</span>
+<span class="kw">ggplot</span>(iris, <span class="kw">aes</span>(<span class="dt">x=</span>petal_width, <span class="dt">fill=</span>class)) +
+<span class="st">  </span><span class="kw">geom_histogram</span>(<span class="dt">binwidth=</span>.<span class="dv">2</span>, <span class="dt">alpha=</span>.<span class="dv">5</span>)</code></pre></div>
 <p><strong>5.</strong> Compare the means and the quartiles of the 3 different flower classes for the 4 different features (Plot 4 boxplots into the same figure).</p>
 <p><strong>Standardizing</strong></p>
 <p><strong>6.</strong> Scale the 4 different features.</p>

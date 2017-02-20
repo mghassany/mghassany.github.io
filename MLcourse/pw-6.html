@@ -306,18 +306,8 @@ Transform the original dataset <span class="math inline"><em>X</em></span> via <
 <h3>Data pre-processing</h3>
 <p><strong>1.</strong> Download the iris dataset from <a target="_blank" href="datasets/iris.data"> here <i class="fa fa-table" aria-hidden="true"></i></a> and import it into <code>R</code>.</p>
 <p><strong>2.</strong> Show the last 5 rows of the iris dataset.</p>
-<p><strong>3.</strong> Split the iris dataset into data <span class="math inline">\(X\)</span> and class labels <span class="math inline">\(y\)</span>.</p>
-<div class="rmdinsight">
-<p>
-The iris dataset is now stored in form of a <span class="math inline">150 × 4</span> matrix where the columns are the different features, and every row represents a separate flower sample. Each sample row <span class="math inline"><em>X</em><sup><em>i</em></sup></span> can be pictured as a 4-dimensional vector
-</p>
-<p>
-<br /><span class="math display"><span class="math display">\[ (X^i)^T = \begin{pmatrix} X_1^i \\ X_2^i \\ X_3^i \\ X_4^i \end{pmatrix}
-= \begin{pmatrix} \text{sepal length} \\ \text{sepal width} \\\text{petal length} \\ \text{petal width} \end{pmatrix}\]</span></span><br />
-</p>
-</div>
 <p><strong>Exploratory analysis</strong></p>
-<p><strong>4.</strong> To explore how the 3 different flower classes are distributed along the 4 different features, visualize them via histograms.</p>
+<p><strong>3.</strong> To explore how the 3 different flower classes are distributed along the 4 different features, visualize them via histograms.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># load ggplot2, install it if needed</span>
 <span class="kw">library</span>(ggplot2)
 
@@ -333,9 +323,17 @@ The iris dataset is now stored in form of a <span class="math inline">150 ×�
 <span class="co"># histogram of petal_width</span>
 <span class="kw">ggplot</span>(iris, <span class="kw">aes</span>(<span class="dt">x=</span>petal_width, <span class="dt">fill=</span>class)) +
 <span class="st">  </span><span class="kw">geom_histogram</span>(<span class="dt">binwidth=</span>.<span class="dv">2</span>, <span class="dt">alpha=</span>.<span class="dv">5</span>)</code></pre></div>
-<p><strong>5.</strong> Compare the means and the quartiles of the 3 different flower classes for the 4 different features (Plot 4 boxplots into the same figure).</p>
-<p><strong>Standardizing</strong></p>
-<p><strong>6.</strong> Scale the 4 different features.</p>
+<p><strong>4.</strong> Compare the means and the quartiles of the 3 different flower classes for the 4 different features (Plot 4 boxplots into the same figure).</p>
+<p><strong>5.</strong> Split the iris dataset into data <span class="math inline">\(X\)</span> and class labels <span class="math inline">\(y\)</span>.</p>
+<div class="rmdinsight">
+<p>
+The iris dataset is now stored in form of a <span class="math inline">150 × 4</span> matrix where the columns are the different features, and every row represents a separate flower sample. Each sample row <span class="math inline"><em>X</em><sup><em>i</em></sup></span> can be pictured as a 4-dimensional vector
+</p>
+<p>
+<br /><span class="math display"><span class="math display">\[ (X^i)^T = \begin{pmatrix} X_1^i \\ X_2^i \\ X_3^i \\ X_4^i \end{pmatrix}
+= \begin{pmatrix} \text{sepal length} \\ \text{sepal width} \\\text{petal length} \\ \text{petal width} \end{pmatrix}\]</span></span><br />
+</p>
+</div>
 </div>
 <div id="eigendecomposition---computing-eigenvectors-and-eigenvalues" class="section level3 unnumbered">
 <h3>Eigendecomposition - Computing Eigenvectors and Eigenvalues</h3>
@@ -344,6 +342,8 @@ The iris dataset is now stored in form of a <span class="math inline">150 ×�
 The eigenvectors and eigenvalues of a covariance (or correlation) matrix represent the “core” of a PCA: The eigenvectors (principal components) determine the directions of the new feature space, and the eigenvalues determine their magnitude. In other words, the eigenvalues explain the variance of the data along the new feature axes.
 </p>
 </div>
+<p><strong>Standardizing</strong></p>
+<p><strong>6.</strong> Scale the 4 features. Store the scaled matrix into a new one (for example, name it <code>x_scaled</code>).</p>
 <p><strong>Covariance Matrix</strong></p>
 <p><strong>7.</strong> The classic approach to PCA is to perform the eigendecomposition on the covariance matrix <span class="math inline">\(\Sigma\)</span>, which is a <span class="math inline">\(p\times p\)</span> matrix where each element represents the covariance between two features. Compute the Covariance Matrix of the scaled features (Do it manually without using the <code>cov()</code> function) (Print the results).</p>
 <div class="rmdtip">

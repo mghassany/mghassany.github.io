@@ -26,7 +26,7 @@
 <meta name="author" content="Mohamad Ghassany">
 
 
-<meta name="date" content="2017-02-20">
+<meta name="date" content="2017-03-02">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -237,6 +237,16 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="" data-path="pw-6.html"><a href="pw-6.html#projection-matrix"><i class="fa fa-check"></i>Projection Matrix</a></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="pw-6.html"><a href="pw-6.html#verifications-with-princomp"><i class="fa fa-check"></i>Verifications with princomp()</a></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="clustering-kmeans.html"><a href="clustering-kmeans.html"><i class="fa fa-check"></i><b>7</b> Clustering: kmeans</a><ul>
+<li class="chapter" data-level="7.1" data-path="clustering-kmeans.html"><a href="clustering-kmeans.html#introduction-3"><i class="fa fa-check"></i><b>7.1</b> Introduction</a><ul>
+<li class="chapter" data-level="" data-path="clustering-kmeans.html"><a href="clustering-kmeans.html#hard-clustering"><i class="fa fa-check"></i>Hard clustering</a></li>
+<li class="chapter" data-level="" data-path="clustering-kmeans.html"><a href="clustering-kmeans.html#fuzzy-clustering"><i class="fa fa-check"></i>Fuzzy clustering</a></li>
+</ul></li>
+<li class="chapter" data-level="7.2" data-path="clustering-kmeans.html"><a href="clustering-kmeans.html#k-means"><i class="fa fa-check"></i><b>7.2</b> <span class="math inline">\(k\)</span>-Means</a></li>
+<li class="chapter" data-level="7.3" data-path="clustering-kmeans.html"><a href="clustering-kmeans.html#k-means-in-r"><i class="fa fa-check"></i><b>7.3</b> <span class="math inline">\(k\)</span>-means in <code>R</code></a><ul>
+<li class="chapter" data-level="7.3.1" data-path="clustering-kmeans.html"><a href="clustering-kmeans.html#cluster-validity-choosing-the-number-of-clusters"><i class="fa fa-check"></i><b>7.3.1</b> Cluster Validity, Choosing the Number of Clusters</a></li>
+</ul></li>
 </ul></li>
 </ul>
 
@@ -813,8 +823,8 @@ You can watch these videos for a nice explanation of PCA <a target="_blank"  hre
 </tbody>
 </table>
 <p><strong>Note</strong>: To set the case names as <code>Country</code>, we do</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">row.names</span>(eurojob) &lt;-<span class="st"> </span>eurojob$Country
-eurojob$Country &lt;-<span class="st"> </span><span class="ot">NULL</span></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">row.names</span>(eurojob) &lt;-<span class="st"> </span>eurojob<span class="op">$</span>Country
+eurojob<span class="op">$</span>Country &lt;-<span class="st"> </span><span class="ot">NULL</span></code></pre></div>
 <p>So far, we know how to compute summaries for <em>each variable</em>, and how to quantify and visualize relations between variables with the correlation matrix and the scatterplot matrix. But even for a moderate number of variables like this, their results are hard to process.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Summary of the data - marginal</span>
 <span class="kw">summary</span>(eurojob)
@@ -902,7 +912,7 @@ pca &lt;-<span class="st"> </span><span class="kw">princomp</span>(eurojob, <spa
 <span class="co">#ans&gt;  - attr(*, &quot;class&quot;)= chr &quot;princomp&quot;</span>
 
 <span class="co"># The standard deviation of each PC</span>
-pca$sdev
+pca<span class="op">$</span>sdev
 <span class="co">#ans&gt;  Comp.1  Comp.2  Comp.3  Comp.4  Comp.5  Comp.6  Comp.7  Comp.8  Comp.9 </span>
 <span class="co">#ans&gt; 1.86739 1.45951 1.04831 0.99724 0.73703 0.61922 0.47514 0.36985 0.00675</span>
 
@@ -910,7 +920,7 @@ pca$sdev
 <span class="co"># E.g. Agr = -0.524 * PC1 + 0.213 * PC5 - 0.152 * PC6 + 0.806 * PC9</span>
 <span class="co"># And also: PC1 = -0.524 * Agr + 0.347 * Man + 0256 * Pow + 0.325 * Con + ...</span>
 <span class="co"># (Because the matrix is orthogonal, so the transpose is the inverse)</span>
-pca$loadings
+pca<span class="op">$</span>loadings
 <span class="co">#ans&gt; </span>
 <span class="co">#ans&gt; Loadings:</span>
 <span class="co">#ans&gt;     Comp.1 Comp.2 Comp.3 Comp.4 Comp.5 Comp.6 Comp.7 Comp.8 Comp.9</span>
@@ -934,7 +944,7 @@ pca$loadings
 <span class="co">#ans&gt; Cumulative Var  1.000</span>
 
 <span class="co"># Scores of the data on the PCs: how is the data reexpressed into PCs</span>
-<span class="kw">head</span>(pca$scores, <span class="dv">10</span>)
+<span class="kw">head</span>(pca<span class="op">$</span>scores, <span class="dv">10</span>)
 <span class="co">#ans&gt;         Comp.1  Comp.2  Comp.3  Comp.4  Comp.5  Comp.6  Comp.7 Comp.8</span>
 <span class="co">#ans&gt; Belgium  1.710  1.2218 -0.1148 -0.3395 -0.3245  0.0473  0.3401  0.403</span>
 <span class="co">#ans&gt; Denmark  0.953  2.1278  0.9507 -0.5939  0.1027  0.8273  0.3029 -0.352</span>
@@ -959,20 +969,20 @@ pca$loadings
 <span class="co">#ans&gt; Austria -0.002816</span>
 
 <span class="co"># Scatterplot matrix of the scores - they are uncorrelated!</span>
-<span class="kw">scatterplotMatrix</span>(pca$scores, <span class="dt">reg.line =</span> lm, <span class="dt">smooth =</span> <span class="ot">FALSE</span>, <span class="dt">spread =</span> <span class="ot">FALSE</span>,
+<span class="kw">scatterplotMatrix</span>(pca<span class="op">$</span>scores, <span class="dt">reg.line =</span> lm, <span class="dt">smooth =</span> <span class="ot">FALSE</span>, <span class="dt">spread =</span> <span class="ot">FALSE</span>,
                   <span class="dt">span =</span> <span class="fl">0.5</span>, <span class="dt">ellipse =</span> <span class="ot">FALSE</span>, <span class="dt">levels =</span> <span class="kw">c</span>(.<span class="dv">5</span>, .<span class="dv">9</span>), <span class="dt">id.n =</span> <span class="dv">0</span>,
                   <span class="dt">diagonal =</span> <span class="st">&#39;histogram&#39;</span>)</code></pre></div>
 <p><img src="Machine-Learning_files/figure-html/unnamed-chunk-114-1.png" width="70%" style="display: block; margin: auto;" /></p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">
 <span class="co"># Means of the variables - before PCA the variables are centered</span>
-pca$center
+pca<span class="op">$</span>center
 <span class="co">#ans&gt;    Agr    Min    Man    Pow    Con    Ser    Fin    Soc    Tra </span>
 <span class="co">#ans&gt; 19.131  1.254 27.008  0.908  8.165 12.958  4.000 20.023  6.546</span>
 
 <span class="co"># Rescalation done to each variable</span>
 <span class="co"># - if cor = FALSE (default), a vector of ones</span>
 <span class="co"># - if cor = TRUE, a vector with the standard deviations of the variables</span>
-pca$scale
+pca<span class="op">$</span>scale
 <span class="co">#ans&gt;    Agr    Min    Man    Pow    Con    Ser    Fin    Soc    Tra </span>
 <span class="co">#ans&gt; 15.245  0.951  6.872  0.369  1.614  4.486  2.752  6.697  1.364</span>
 
@@ -997,7 +1007,7 @@ pca$scale
 <p><img src="Machine-Learning_files/figure-html/unnamed-chunk-114-3.png" width="70%" style="display: block; margin: auto;" /></p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">
 <span class="co"># PC1 and PC2</span>
-pca$loadings[, <span class="dv">1</span>:<span class="dv">2</span>]
+pca<span class="op">$</span>loadings[, <span class="dv">1</span><span class="op">:</span><span class="dv">2</span>]
 <span class="co">#ans&gt;       Comp.1  Comp.2</span>
 <span class="co">#ans&gt; Agr -0.52379 -0.0536</span>
 <span class="co">#ans&gt; Min -0.00132 -0.6178</span>

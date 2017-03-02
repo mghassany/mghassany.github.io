@@ -26,7 +26,7 @@
 <meta name="author" content="Mohamad Ghassany">
 
 
-<meta name="date" content="2017-02-20">
+<meta name="date" content="2017-03-02">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -238,6 +238,16 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 </ul></li>
 <li class="chapter" data-level="" data-path="pw-6.html"><a href="pw-6.html#verifications-with-princomp"><i class="fa fa-check"></i>Verifications with princomp()</a></li>
 </ul></li>
+<li class="chapter" data-level="7" data-path="clustering-kmeans.html"><a href="clustering-kmeans.html"><i class="fa fa-check"></i><b>7</b> Clustering: kmeans</a><ul>
+<li class="chapter" data-level="7.1" data-path="clustering-kmeans.html"><a href="clustering-kmeans.html#introduction-3"><i class="fa fa-check"></i><b>7.1</b> Introduction</a><ul>
+<li class="chapter" data-level="" data-path="clustering-kmeans.html"><a href="clustering-kmeans.html#hard-clustering"><i class="fa fa-check"></i>Hard clustering</a></li>
+<li class="chapter" data-level="" data-path="clustering-kmeans.html"><a href="clustering-kmeans.html#fuzzy-clustering"><i class="fa fa-check"></i>Fuzzy clustering</a></li>
+</ul></li>
+<li class="chapter" data-level="7.2" data-path="clustering-kmeans.html"><a href="clustering-kmeans.html#k-means"><i class="fa fa-check"></i><b>7.2</b> <span class="math inline">\(k\)</span>-Means</a></li>
+<li class="chapter" data-level="7.3" data-path="clustering-kmeans.html"><a href="clustering-kmeans.html#k-means-in-r"><i class="fa fa-check"></i><b>7.3</b> <span class="math inline">\(k\)</span>-means in <code>R</code></a><ul>
+<li class="chapter" data-level="7.3.1" data-path="clustering-kmeans.html"><a href="clustering-kmeans.html#cluster-validity-choosing-the-number-of-clusters"><i class="fa fa-check"></i><b>7.3.1</b> Cluster Validity, Choosing the Number of Clusters</a></li>
+</ul></li>
+</ul></li>
 </ul>
 
       </nav>
@@ -313,11 +323,11 @@ So we predict <span class="math inline"><em>y</em> = 1</span> if <span class
 <p>Let us apply linear discriminant analysis (LDA) now. First we will make use of the <code>lda()</code> function in the package <code>MASS</code>. Second, you are going to create the model and predict the classes by yourself without using the <code>lda()</code> function. And we will visualize the decision boundary of LDA.</p>
 <p><strong>5.</strong> Fit a LDA model of <code>Purchased</code> in function of <code>Age</code> and <code>EstimatedSalary</code>. Name the model <code>classifier.lda</code>.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(MASS)
-classifier.lda &lt;-<span class="st"> </span><span class="kw">lda</span>(Purchased~Age+EstimatedSalary, <span class="dt">data=</span>training_set)</code></pre></div>
+classifier.lda &lt;-<span class="st"> </span><span class="kw">lda</span>(Purchased<span class="op">~</span>Age<span class="op">+</span>EstimatedSalary, <span class="dt">data=</span>training_set)</code></pre></div>
 <p><strong>6.</strong> Call <code>classifier.lda</code> and see what does it compute.</p>
 <p><strong>Plus:</strong> If you enter the following you will be returned with a list of summary information concerning the computation:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">classifier.lda$prior
-classifier.lda$means</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">classifier.lda<span class="op">$</span>prior
+classifier.lda<span class="op">$</span>means</code></pre></div>
 <p><strong>7.</strong> On the test set, predict the probability of purchasing the product by the users using the model <code>classifier.lda</code>. Remark that when we predict using LDA, we obtain a list instead of a matrix, do <code>str()</code> for your predictions to see what do you get.</p>
 <p><strong>Remark</strong>: we get the predicted class here, without being obligated to round the predictions as we did for logistic regression.</p>
 <p><strong>8.</strong> Compute the confusion matrix and compare the predictions results obtained by LDA to the ones obtained by logistic regression. What do you remark?</p>
@@ -326,23 +336,23 @@ classifier.lda$means</code></pre></div>
 <p>Here in our case, we have 2 classes (<span class="math inline">\(K=2\)</span>) and 2 predictors (<span class="math inline">\(p=2\)</span>). So the decision boundary (which is linear in the case of LDA, and line in our case since <span class="math inline">\(p=2\)</span>) will verify the equation <span class="math inline">\(\delta_0(x) = \delta_1(x)\)</span> Since we have two classes “0” and “1”. In the case of LDA this leads to linear boundary and is easy to be plotted. But in more complicated cases it is difficult to manually simplify the equations and plot the decision boundary. Anyway, there is a smart method to plot (but a little bit costy) the decision boundary in <code>R</code> using the function <code>contour()</code>, the corresponding code is the following (you must adapt it and use it to plot your decision boundary):</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># create a grid corresponding to the scales of Age and EstimatedSalary</span>
 <span class="co"># and fill this grid with lot of points</span>
-X1 =<span class="st"> </span><span class="kw">seq</span>(<span class="kw">min</span>(training_set[, <span class="dv">1</span>]) -<span class="st"> </span><span class="dv">1</span>, <span class="kw">max</span>(training_set[, <span class="dv">1</span>]) +<span class="st"> </span><span class="dv">1</span>, <span class="dt">by =</span> <span class="fl">0.01</span>)
-X2 =<span class="st"> </span><span class="kw">seq</span>(<span class="kw">min</span>(training_set[, <span class="dv">2</span>]) -<span class="st"> </span><span class="dv">1</span>, <span class="kw">max</span>(training_set[, <span class="dv">2</span>]) +<span class="st"> </span><span class="dv">1</span>, <span class="dt">by =</span> <span class="fl">0.01</span>)
+X1 =<span class="st"> </span><span class="kw">seq</span>(<span class="kw">min</span>(training_set[, <span class="dv">1</span>]) <span class="op">-</span><span class="st"> </span><span class="dv">1</span>, <span class="kw">max</span>(training_set[, <span class="dv">1</span>]) <span class="op">+</span><span class="st"> </span><span class="dv">1</span>, <span class="dt">by =</span> <span class="fl">0.01</span>)
+X2 =<span class="st"> </span><span class="kw">seq</span>(<span class="kw">min</span>(training_set[, <span class="dv">2</span>]) <span class="op">-</span><span class="st"> </span><span class="dv">1</span>, <span class="kw">max</span>(training_set[, <span class="dv">2</span>]) <span class="op">+</span><span class="st"> </span><span class="dv">1</span>, <span class="dt">by =</span> <span class="fl">0.01</span>)
 grid_set =<span class="st"> </span><span class="kw">expand.grid</span>(X1, X2)
 <span class="co"># Adapt the variable names</span>
 <span class="kw">colnames</span>(grid_set) =<span class="st"> </span><span class="kw">c</span>(<span class="st">&#39;Age&#39;</span>, <span class="st">&#39;EstimatedSalary&#39;</span>)
 
 <span class="co"># plot &#39;Estimated Salary&#39; ~ &#39;Age&#39;</span>
-<span class="kw">plot</span>(test_set[, -<span class="dv">3</span>],
+<span class="kw">plot</span>(test_set[, <span class="op">-</span><span class="dv">3</span>],
      <span class="dt">main =</span> <span class="st">&#39;Decision Boundary LDA&#39;</span>,
      <span class="dt">xlab =</span> <span class="st">&#39;Age&#39;</span>, <span class="dt">ylab =</span> <span class="st">&#39;Estimated Salary&#39;</span>,
      <span class="dt">xlim =</span> <span class="kw">range</span>(X1), <span class="dt">ylim =</span> <span class="kw">range</span>(X2))
 
 <span class="co"># color the plotted points with their real label (class)</span>
-<span class="kw">points</span>(test_set, <span class="dt">pch =</span> <span class="dv">21</span>, <span class="dt">bg =</span> <span class="kw">ifelse</span>(test_set[, <span class="dv">3</span>] ==<span class="st"> </span><span class="dv">1</span>, <span class="st">&#39;green4&#39;</span>, <span class="st">&#39;red3&#39;</span>))
+<span class="kw">points</span>(test_set, <span class="dt">pch =</span> <span class="dv">21</span>, <span class="dt">bg =</span> <span class="kw">ifelse</span>(test_set[, <span class="dv">3</span>] <span class="op">==</span><span class="st"> </span><span class="dv">1</span>, <span class="st">&#39;green4&#39;</span>, <span class="st">&#39;red3&#39;</span>))
 
 <span class="co"># Make predictions on the points of the grid, this will take some time</span>
-pred_grid =<span class="st"> </span><span class="kw">predict</span>(classifier.lda, <span class="dt">newdata =</span> grid_set)$class
+pred_grid =<span class="st"> </span><span class="kw">predict</span>(classifier.lda, <span class="dt">newdata =</span> grid_set)<span class="op">$</span>class
 
 <span class="co"># Separate the predictions by a contour</span>
 <span class="kw">contour</span>(X1, X2, <span class="kw">matrix</span>(<span class="kw">as.numeric</span>(pred_grid), <span class="kw">length</span>(X1), <span class="kw">length</span>(X2)), <span class="dt">add =</span> <span class="ot">TRUE</span>)</code></pre></div>
@@ -388,7 +398,7 @@ Note that <br /><span class="math display"><span class="math display">\[x=\begin
 <p>Training and assessing a QDA model in <code>R</code> is very similar in syntax to training and assessing a LDA model. The only difference is in the function name <code>qda()</code></p>
 <p><strong>11.</strong> Fit a QDA model of <code>Purchased</code> in function of <code>Age</code> and <code>EstimatedSalary</code>. Name the model <code>classifier.qda</code>.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># qda() is a function of library(MASS)</span>
-classifier.qda &lt;-<span class="st"> </span><span class="kw">qda</span>(Purchased~., <span class="dt">data =</span> training_set)</code></pre></div>
+classifier.qda &lt;-<span class="st"> </span><span class="kw">qda</span>(Purchased<span class="op">~</span>., <span class="dt">data =</span> training_set)</code></pre></div>
 <p><strong>12.</strong> Make predictions on the <code>test_set</code> using the QDA model <code>classifier.qda</code>. Show the computation matrix and compare the results with the predictions obtained using the LDA model <code>classifier.lda</code>.</p>
 <p><strong>13.</strong> Plot the decision boundary obtained with QDA. Color the points with the real labels.</p>
 <!-- ## Naive Bayes {-} -->

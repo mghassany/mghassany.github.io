@@ -26,7 +26,7 @@
 <meta name="author" content="Mohamad Ghassany">
 
 
-<meta name="date" content="2017-02-20">
+<meta name="date" content="2017-03-02">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -34,7 +34,7 @@
   
   
 <link rel="prev" href="dimensionality-reduction.html">
-
+<link rel="next" href="clustering-kmeans.html">
 
 <script src="book_assets/jquery-2.2.3/jquery.min.js"></script>
 <link href="book_assets/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -238,6 +238,16 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 </ul></li>
 <li class="chapter" data-level="" data-path="pw-6.html"><a href="pw-6.html#verifications-with-princomp"><i class="fa fa-check"></i>Verifications with princomp()</a></li>
 </ul></li>
+<li class="chapter" data-level="7" data-path="clustering-kmeans.html"><a href="clustering-kmeans.html"><i class="fa fa-check"></i><b>7</b> Clustering: kmeans</a><ul>
+<li class="chapter" data-level="7.1" data-path="clustering-kmeans.html"><a href="clustering-kmeans.html#introduction-3"><i class="fa fa-check"></i><b>7.1</b> Introduction</a><ul>
+<li class="chapter" data-level="" data-path="clustering-kmeans.html"><a href="clustering-kmeans.html#hard-clustering"><i class="fa fa-check"></i>Hard clustering</a></li>
+<li class="chapter" data-level="" data-path="clustering-kmeans.html"><a href="clustering-kmeans.html#fuzzy-clustering"><i class="fa fa-check"></i>Fuzzy clustering</a></li>
+</ul></li>
+<li class="chapter" data-level="7.2" data-path="clustering-kmeans.html"><a href="clustering-kmeans.html#k-means"><i class="fa fa-check"></i><b>7.2</b> <span class="math inline">\(k\)</span>-Means</a></li>
+<li class="chapter" data-level="7.3" data-path="clustering-kmeans.html"><a href="clustering-kmeans.html#k-means-in-r"><i class="fa fa-check"></i><b>7.3</b> <span class="math inline">\(k\)</span>-means in <code>R</code></a><ul>
+<li class="chapter" data-level="7.3.1" data-path="clustering-kmeans.html"><a href="clustering-kmeans.html#cluster-validity-choosing-the-number-of-clusters"><i class="fa fa-check"></i><b>7.3.1</b> Cluster Validity, Choosing the Number of Clusters</a></li>
+</ul></li>
+</ul></li>
 </ul>
 
       </nav>
@@ -304,7 +314,7 @@ Transform the original dataset <span class="math inline"><em>X</em></span> via <
 </div>
 <div id="data-pre-processing" class="section level3 unnumbered">
 <h3>Data pre-processing</h3>
-<p><strong>1.</strong> Download the iris dataset from <a target="_blank" href="datasets/iris.data"> here <i class="fa fa-table" aria-hidden="true"></i></a> and import it into <code>R</code>.</p>
+<p><strong>1.</strong> Download the iris dataset from  here <i class="fa fa-table" aria-hidden="true"></i></a> and import it into <code>R</code>.</p>
 <p><strong>2.</strong> Show the last 5 rows of the iris dataset.</p>
 <p><strong>Exploratory analysis</strong></p>
 <p><strong>3.</strong> To explore how the 3 different flower classes are distributed along the 4 different features, visualize them via histograms.</p>
@@ -312,16 +322,16 @@ Transform the original dataset <span class="math inline"><em>X</em></span> via <
 <span class="kw">library</span>(ggplot2)
 
 <span class="co"># histogram of sepal_length</span>
-<span class="kw">ggplot</span>(iris, <span class="kw">aes</span>(<span class="dt">x=</span>sepal_length, <span class="dt">fill=</span>class)) +
+<span class="kw">ggplot</span>(iris, <span class="kw">aes</span>(<span class="dt">x=</span>sepal_length, <span class="dt">fill=</span>class)) <span class="op">+</span>
 <span class="st">  </span><span class="kw">geom_histogram</span>(<span class="dt">binwidth=</span>.<span class="dv">2</span>, <span class="dt">alpha=</span>.<span class="dv">5</span>)
 <span class="co"># histogram of sepal_width</span>
-<span class="kw">ggplot</span>(iris, <span class="kw">aes</span>(<span class="dt">x=</span>sepal_width, <span class="dt">fill=</span>class)) +
+<span class="kw">ggplot</span>(iris, <span class="kw">aes</span>(<span class="dt">x=</span>sepal_width, <span class="dt">fill=</span>class)) <span class="op">+</span>
 <span class="st">  </span><span class="kw">geom_histogram</span>(<span class="dt">binwidth=</span>.<span class="dv">2</span>, <span class="dt">alpha=</span>.<span class="dv">5</span>)
 <span class="co"># histogram of petal_length</span>
-<span class="kw">ggplot</span>(iris, <span class="kw">aes</span>(<span class="dt">x=</span>petal_length, <span class="dt">fill=</span>class)) +
+<span class="kw">ggplot</span>(iris, <span class="kw">aes</span>(<span class="dt">x=</span>petal_length, <span class="dt">fill=</span>class)) <span class="op">+</span>
 <span class="st">  </span><span class="kw">geom_histogram</span>(<span class="dt">binwidth=</span>.<span class="dv">2</span>, <span class="dt">alpha=</span>.<span class="dv">5</span>)
 <span class="co"># histogram of petal_width</span>
-<span class="kw">ggplot</span>(iris, <span class="kw">aes</span>(<span class="dt">x=</span>petal_width, <span class="dt">fill=</span>class)) +
+<span class="kw">ggplot</span>(iris, <span class="kw">aes</span>(<span class="dt">x=</span>petal_width, <span class="dt">fill=</span>class)) <span class="op">+</span>
 <span class="st">  </span><span class="kw">geom_histogram</span>(<span class="dt">binwidth=</span>.<span class="dv">2</span>, <span class="dt">alpha=</span>.<span class="dv">5</span>)</code></pre></div>
 <p><strong>4.</strong> Compare the means and the quartiles of the 3 different flower classes for the 4 different features (Plot 4 boxplots into the same figure).</p>
 <p><strong>5.</strong> Split the iris dataset into data <span class="math inline">\(X\)</span> and class labels <span class="math inline">\(y\)</span>.</p>
@@ -418,21 +428,13 @@ The “projection matrix” is basically just a matrix of our concatenated top <
 
 </div>
 </div>
-
-
-
-
-
-
-
-
             </section>
 
           </div>
         </div>
       </div>
-<a href="dimensionality-reduction.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-
+<a href="dimensionality-reduction.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="clustering-kmeans.html" class="navigation navigation-next " aria-label="Next page""><i class="fa fa-angle-right"></i></a>
 
 <script src="book_assets/gitbook-2.6.7/js/app.min.js"></script>
 <script src="book_assets/gitbook-2.6.7/js/lunr.js"></script>

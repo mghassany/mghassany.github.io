@@ -26,7 +26,7 @@
 <meta name="author" content="Mohamad Ghassany">
 
 
-<meta name="date" content="2017-02-20">
+<meta name="date" content="2017-03-02">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -238,6 +238,16 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 </ul></li>
 <li class="chapter" data-level="" data-path="pw-6.html"><a href="pw-6.html#verifications-with-princomp"><i class="fa fa-check"></i>Verifications with princomp()</a></li>
 </ul></li>
+<li class="chapter" data-level="7" data-path="clustering-kmeans.html"><a href="clustering-kmeans.html"><i class="fa fa-check"></i><b>7</b> Clustering: kmeans</a><ul>
+<li class="chapter" data-level="7.1" data-path="clustering-kmeans.html"><a href="clustering-kmeans.html#introduction-3"><i class="fa fa-check"></i><b>7.1</b> Introduction</a><ul>
+<li class="chapter" data-level="" data-path="clustering-kmeans.html"><a href="clustering-kmeans.html#hard-clustering"><i class="fa fa-check"></i>Hard clustering</a></li>
+<li class="chapter" data-level="" data-path="clustering-kmeans.html"><a href="clustering-kmeans.html#fuzzy-clustering"><i class="fa fa-check"></i>Fuzzy clustering</a></li>
+</ul></li>
+<li class="chapter" data-level="7.2" data-path="clustering-kmeans.html"><a href="clustering-kmeans.html#k-means"><i class="fa fa-check"></i><b>7.2</b> <span class="math inline">\(k\)</span>-Means</a></li>
+<li class="chapter" data-level="7.3" data-path="clustering-kmeans.html"><a href="clustering-kmeans.html#k-means-in-r"><i class="fa fa-check"></i><b>7.3</b> <span class="math inline">\(k\)</span>-means in <code>R</code></a><ul>
+<li class="chapter" data-level="7.3.1" data-path="clustering-kmeans.html"><a href="clustering-kmeans.html#cluster-validity-choosing-the-number-of-clusters"><i class="fa fa-check"></i><b>7.3.1</b> Cluster Validity, Choosing the Number of Clusters</a></li>
+</ul></li>
+</ul></li>
 </ul>
 
       </nav>
@@ -274,7 +284,7 @@ y =<span class="st"> </span><span class="kw">c</span>(<span class="dv">1</span>,
 <span class="co">#ans&gt; [1] 3</span>
 <span class="kw">length</span>(y)
 <span class="co">#ans&gt; [1] 3</span>
-x+y
+x<span class="op">+</span>y
 <span class="co">#ans&gt; [1]  2 10  5</span></code></pre></div>
 <p>Hitting the <em>up arrow</em> multiple times will display the previous commands, which can then be edited. This is useful since one often wishes to repeat a similar command.</p>
 <p>The <code>ls()</code> function allows us to look at a list of all of the objects, such <code>ls()</code> as data and functions, that we have saved so far. The <code>rm()</code> function can be used to delete any object that we don’t want.</p>
@@ -289,18 +299,18 @@ x+y
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">
 <span class="co"># A handy way of creating sequences is the operator :</span>
 <span class="co"># Sequence from 1 to 5</span>
-<span class="dv">1</span>:<span class="dv">5</span>
+<span class="dv">1</span><span class="op">:</span><span class="dv">5</span>
 <span class="co">#ans&gt; [1] 1 2 3 4 5</span>
 
 <span class="co"># Storing some vectors</span>
-vec &lt;-<span class="st"> </span><span class="kw">c</span>(-<span class="fl">4.12</span>, <span class="dv">0</span>, <span class="fl">1.1</span>, <span class="dv">1</span>, <span class="dv">3</span>, <span class="dv">4</span>)
+vec &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="op">-</span><span class="fl">4.12</span>, <span class="dv">0</span>, <span class="fl">1.1</span>, <span class="dv">1</span>, <span class="dv">3</span>, <span class="dv">4</span>)
 vec
 <span class="co">#ans&gt; [1] -4.12  0.00  1.10  1.00  3.00  4.00</span>
 
 <span class="co"># Entry-wise operations</span>
-vec +<span class="st"> </span><span class="dv">1</span>
+vec <span class="op">+</span><span class="st"> </span><span class="dv">1</span>
 <span class="co">#ans&gt; [1] -3.12  1.00  2.10  2.00  4.00  5.00</span>
-vec^<span class="dv">2</span>
+vec<span class="op">^</span><span class="dv">2</span>
 <span class="co">#ans&gt; [1] 16.97  0.00  1.21  1.00  9.00 16.00</span>
 
 <span class="co"># If you want to access a position of a vector, use [position]</span>
@@ -308,20 +318,20 @@ vec[<span class="dv">6</span>]
 <span class="co">#ans&gt; [1] 4</span>
 
 <span class="co"># You also can change elements</span>
-vec[<span class="dv">2</span>] &lt;-<span class="st"> </span>-<span class="dv">1</span>
+vec[<span class="dv">2</span>] &lt;-<span class="st"> </span><span class="op">-</span><span class="dv">1</span>
 vec
 <span class="co">#ans&gt; [1] -4.12 -1.00  1.10  1.00  3.00  4.00</span>
 
 <span class="co"># If you want to access all the elements except a position, use [-position]</span>
-vec[-<span class="dv">2</span>]
+vec[<span class="op">-</span><span class="dv">2</span>]
 <span class="co">#ans&gt; [1] -4.12  1.10  1.00  3.00  4.00</span>
 
 <span class="co"># Also with vectors as indexes</span>
-vec[<span class="dv">1</span>:<span class="dv">2</span>]
+vec[<span class="dv">1</span><span class="op">:</span><span class="dv">2</span>]
 <span class="co">#ans&gt; [1] -4.12 -1.00</span>
 
 <span class="co"># And also</span>
-vec[-<span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">2</span>)]
+vec[<span class="op">-</span><span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">2</span>)]
 <span class="co">#ans&gt; [1] 1.1 1.0 3.0 4.0</span></code></pre></div>
 <div class="rmdexercise">
 <p>
@@ -349,36 +359,36 @@ Index <span class="math inline"><em>y</em></span> by <span class="math inline"><
 <div id="matrices-data-frames-and-lists" class="section level3">
 <h3><span class="header-section-number">1.8.3</span> Matrices, data frames and lists</h3>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># A matrix is an array of vectors</span>
-A &lt;-<span class="st"> </span><span class="kw">matrix</span>(<span class="dv">1</span>:<span class="dv">4</span>, <span class="dt">nrow =</span> <span class="dv">2</span>, <span class="dt">ncol =</span> <span class="dv">2</span>)
+A &lt;-<span class="st"> </span><span class="kw">matrix</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">4</span>, <span class="dt">nrow =</span> <span class="dv">2</span>, <span class="dt">ncol =</span> <span class="dv">2</span>)
 A
 <span class="co">#ans&gt;      [,1] [,2]</span>
 <span class="co">#ans&gt; [1,]    1    3</span>
 <span class="co">#ans&gt; [2,]    2    4</span>
 
 <span class="co"># Another matrix</span>
-B &lt;-<span class="st"> </span><span class="kw">matrix</span>(<span class="dv">1</span>:<span class="dv">4</span>, <span class="dt">nrow =</span> <span class="dv">2</span>, <span class="dt">ncol =</span> <span class="dv">2</span>, <span class="dt">byrow =</span> <span class="ot">TRUE</span>)
+B &lt;-<span class="st"> </span><span class="kw">matrix</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">4</span>, <span class="dt">nrow =</span> <span class="dv">2</span>, <span class="dt">ncol =</span> <span class="dv">2</span>, <span class="dt">byrow =</span> <span class="ot">TRUE</span>)
 B
 <span class="co">#ans&gt;      [,1] [,2]</span>
 <span class="co">#ans&gt; [1,]    1    2</span>
 <span class="co">#ans&gt; [2,]    3    4</span>
 
 <span class="co"># Binding by rows or columns</span>
-<span class="kw">rbind</span>(<span class="dv">1</span>:<span class="dv">3</span>, <span class="dv">4</span>:<span class="dv">6</span>)
+<span class="kw">rbind</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">3</span>, <span class="dv">4</span><span class="op">:</span><span class="dv">6</span>)
 <span class="co">#ans&gt;      [,1] [,2] [,3]</span>
 <span class="co">#ans&gt; [1,]    1    2    3</span>
 <span class="co">#ans&gt; [2,]    4    5    6</span>
-<span class="kw">cbind</span>(<span class="dv">1</span>:<span class="dv">3</span>, <span class="dv">4</span>:<span class="dv">6</span>)
+<span class="kw">cbind</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">3</span>, <span class="dv">4</span><span class="op">:</span><span class="dv">6</span>)
 <span class="co">#ans&gt;      [,1] [,2]</span>
 <span class="co">#ans&gt; [1,]    1    4</span>
 <span class="co">#ans&gt; [2,]    2    5</span>
 <span class="co">#ans&gt; [3,]    3    6</span>
 
 <span class="co"># Entry-wise operations</span>
-A +<span class="st"> </span><span class="dv">1</span>
+A <span class="op">+</span><span class="st"> </span><span class="dv">1</span>
 <span class="co">#ans&gt;      [,1] [,2]</span>
 <span class="co">#ans&gt; [1,]    2    4</span>
 <span class="co">#ans&gt; [2,]    3    5</span>
-A *<span class="st"> </span>B
+A <span class="op">*</span><span class="st"> </span>B
 <span class="co">#ans&gt;      [,1] [,2]</span>
 <span class="co">#ans&gt; [1,]    1    6</span>
 <span class="co">#ans&gt; [2,]    6   16</span>
@@ -393,7 +403,7 @@ A[, <span class="dv">2</span>] <span class="co"># First column</span>
 
 <span class="co"># A data frame is a matrix with column names</span>
 <span class="co"># Useful when you have multiple variables</span>
-myDf &lt;-<span class="st"> </span><span class="kw">data.frame</span>(<span class="dt">var1 =</span> <span class="dv">1</span>:<span class="dv">2</span>, <span class="dt">var2 =</span> <span class="dv">3</span>:<span class="dv">4</span>)
+myDf &lt;-<span class="st"> </span><span class="kw">data.frame</span>(<span class="dt">var1 =</span> <span class="dv">1</span><span class="op">:</span><span class="dv">2</span>, <span class="dt">var2 =</span> <span class="dv">3</span><span class="op">:</span><span class="dv">4</span>)
 myDf
 <span class="co">#ans&gt;   var1 var2</span>
 <span class="co">#ans&gt; 1    1    3</span>
@@ -407,12 +417,12 @@ myDf
 <span class="co">#ans&gt; 2        2        4</span>
 
 <span class="co"># The nice thing is that you can access variables by its name with the $ operator</span>
-myDf$newname1
+myDf<span class="op">$</span>newname1
 <span class="co">#ans&gt; [1] 1 2</span>
 
 <span class="co"># And create new variables also (it has to be of the same</span>
 <span class="co"># length as the rest of variables)</span>
-myDf$myNewVariable &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">1</span>)
+myDf<span class="op">$</span>myNewVariable &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">1</span>)
 myDf
 <span class="co">#ans&gt;   newname1 newname2 myNewVariable</span>
 <span class="co">#ans&gt; 1        1        3             0</span>
@@ -422,13 +432,13 @@ myDf
 myList &lt;-<span class="st"> </span><span class="kw">list</span>(<span class="dt">vec =</span> vec, <span class="dt">A =</span> A, <span class="dt">myDf =</span> myDf)
 
 <span class="co"># Access elements by names</span>
-myList$vec
+myList<span class="op">$</span>vec
 <span class="co">#ans&gt; [1] -4.12 -1.00  1.10  1.00  3.00  4.00</span>
-myList$A
+myList<span class="op">$</span>A
 <span class="co">#ans&gt;      [,1] [,2]</span>
 <span class="co">#ans&gt; [1,]    1    3</span>
 <span class="co">#ans&gt; [2,]    2    4</span>
-myList$myDf
+myList<span class="op">$</span>myDf
 <span class="co">#ans&gt;   newname1 newname2 myNewVariable</span>
 <span class="co">#ans&gt; 1        1        3             0</span>
 <span class="co">#ans&gt; 2        2        4             1</span>
@@ -496,13 +506,13 @@ y=<span class="kw">rnorm</span>(<span class="dv">100</span>)
 <span class="co">#ans&gt;  [1]  1.440 -0.720  0.671 -0.422  0.378 -1.667 -0.508  0.443 -1.799 -0.618</span>
 
 <span class="co"># Plotting the density of a N(0, 1) - the Gauss bell</span>
-x &lt;-<span class="st"> </span><span class="kw">seq</span>(-<span class="dv">4</span>, <span class="dv">4</span>, <span class="dt">l =</span> <span class="dv">100</span>)
+x &lt;-<span class="st"> </span><span class="kw">seq</span>(<span class="op">-</span><span class="dv">4</span>, <span class="dv">4</span>, <span class="dt">l =</span> <span class="dv">100</span>)
 y &lt;-<span class="st"> </span><span class="kw">dnorm</span>(<span class="dt">x =</span> x, <span class="dt">mean =</span> <span class="dv">0</span>, <span class="dt">sd =</span> <span class="dv">1</span>)
 <span class="kw">plot</span>(x, y, <span class="dt">type =</span> <span class="st">&quot;l&quot;</span>)</code></pre></div>
 <p><img src="Machine-Learning_files/figure-html/unnamed-chunk-16-1.png" width="70%" style="display: block; margin: auto;" /></p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">
 <span class="co"># Plotting the distribution function of a N(0, 1)</span>
-x &lt;-<span class="st"> </span><span class="kw">seq</span>(-<span class="dv">4</span>, <span class="dv">4</span>, <span class="dt">l =</span> <span class="dv">100</span>)
+x &lt;-<span class="st"> </span><span class="kw">seq</span>(<span class="op">-</span><span class="dv">4</span>, <span class="dv">4</span>, <span class="dt">l =</span> <span class="dv">100</span>)
 y &lt;-<span class="st"> </span><span class="kw">pnorm</span>(<span class="dt">q =</span> x, <span class="dt">mean =</span> <span class="dv">0</span>, <span class="dt">sd =</span> <span class="dv">1</span>)
 <span class="kw">plot</span>(x, y, <span class="dt">type =</span> <span class="st">&quot;l&quot;</span>, <span class="dt">lwd =</span> <span class="dv">3</span>, <span class="dt">main=</span><span class="st">&quot;The distribution function of a N(0, 1)&quot;</span>)</code></pre></div>
 <p><img src="Machine-Learning_files/figure-html/unnamed-chunk-16-2.png" width="70%" style="display: block; margin: auto;" /></p>
@@ -521,7 +531,7 @@ y &lt;-<span class="st"> </span><span class="kw">pnorm</span>(<span class="dt">q
 <span class="co">#ans&gt;  [1] 0.9251 0.3340 0.2359 0.3366 0.7489 0.9327 0.3365 0.2246 0.6474 0.0808</span>
 
 <span class="co"># Plotting the density of a U(0, 1)</span>
-x &lt;-<span class="st"> </span><span class="kw">seq</span>(-<span class="dv">2</span>, <span class="dv">2</span>, <span class="dt">l =</span> <span class="dv">100</span>)
+x &lt;-<span class="st"> </span><span class="kw">seq</span>(<span class="op">-</span><span class="dv">2</span>, <span class="dv">2</span>, <span class="dt">l =</span> <span class="dv">100</span>)
 y &lt;-<span class="st"> </span><span class="kw">dunif</span>(<span class="dt">x =</span> x, <span class="dt">min =</span> <span class="dv">0</span>, <span class="dt">max =</span> <span class="dv">1</span>)
 <span class="kw">plot</span>(x, y, <span class="dt">type =</span> <span class="st">&quot;l&quot;</span>)</code></pre></div>
 <p><img src="Machine-Learning_files/figure-html/unnamed-chunk-16-3.png" width="70%" style="display: block; margin: auto;" /></p>
@@ -581,7 +591,7 @@ For text editors, I suggest <a href="https://www.sublimetext.com/"><code>Sublime
 <span class="co">#ans&gt; [1] 397</span>
 <span class="kw">ncol</span>(Auto) <span class="co"># To see the number of columns</span>
 <span class="co">#ans&gt; [1] 9</span>
-Auto[<span class="dv">1</span>:<span class="dv">4</span>,] <span class="co"># The first 4 rows of the data set</span>
+Auto[<span class="dv">1</span><span class="op">:</span><span class="dv">4</span>,] <span class="co"># The first 4 rows of the data set</span>
 <span class="co">#ans&gt;   mpg cylinders displacement horsepower weight acceleration year origin</span>
 <span class="co">#ans&gt; 1  18         8          307        130   3504         12.0   70      1</span>
 <span class="co">#ans&gt; 2  15         8          350        165   3693         11.5   70      1</span>
@@ -632,7 +642,7 @@ set a working directory and put the files in it.
 <span class="co"># lm(formula = response ~ predictor, data = data)</span>
 <span class="co"># The response is the y in the model. The predictor is x.</span>
 <span class="co"># For example (after loading the EU dataset)</span>
-mod &lt;-<span class="st"> </span><span class="kw">lm</span>(<span class="dt">formula =</span> Seats2011 ~<span class="st"> </span>Population2010, <span class="dt">data =</span> EU)
+mod &lt;-<span class="st"> </span><span class="kw">lm</span>(<span class="dt">formula =</span> Seats2011 <span class="op">~</span><span class="st"> </span>Population2010, <span class="dt">data =</span> EU)
 
 <span class="co"># We have saved the linear model into mod, which now contains all the output of lm</span>
 <span class="co"># You can see it by typing</span>
@@ -654,12 +664,12 @@ mod
 
 <span class="co"># We can access these elements by $</span>
 <span class="co"># For example</span>
-mod$coefficients
+mod<span class="op">$</span>coefficients
 <span class="co">#ans&gt;    (Intercept) Population2010 </span>
 <span class="co">#ans&gt;       7.91e+00       1.08e-06</span>
 
 <span class="co"># The residuals</span>
-mod$residuals
+mod<span class="op">$</span>residuals
 <span class="co">#ans&gt;        Germany         France United Kingdom          Italy          Spain </span>
 <span class="co">#ans&gt;         2.8675        -3.7031        -1.7847         0.0139        -3.5084 </span>
 <span class="co">#ans&gt;         Poland        Romania    Netherlands         Greece        Belgium </span>
@@ -674,7 +684,7 @@ mod$residuals
 <span class="co">#ans&gt;        -2.4514        -2.3553</span>
 
 <span class="co"># The fitted values</span>
-mod$fitted.values
+mod<span class="op">$</span>fitted.values
 <span class="co">#ans&gt;        Germany         France United Kingdom          Italy          Spain </span>
 <span class="co">#ans&gt;          96.13          77.70          74.78          72.99          57.51 </span>
 <span class="co">#ans&gt;         Poland        Romania    Netherlands         Greece        Belgium </span>
@@ -814,11 +824,11 @@ Access the object <code>sigma</code> of <code>myModel</code>.
 <p><strong>STEP 1: Split the dataset</strong></p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Split the data by using the first 400 observations as the training</span>
 <span class="co"># data and the remaining as the testing data</span>
-train =<span class="st"> </span><span class="dv">1</span>:<span class="dv">400</span>
-test =<span class="st"> </span>-train
+train =<span class="st"> </span><span class="dv">1</span><span class="op">:</span><span class="dv">400</span>
+test =<span class="st"> </span><span class="op">-</span>train
 
 <span class="co"># Speficy that we are going to use only two variables (lstat and medv)</span>
-variables =<span class="st"> </span><span class="kw">which</span>(<span class="kw">names</span>(Boston) ==<span class="kw">c</span>(<span class="st">&quot;lstat&quot;</span>, <span class="st">&quot;medv&quot;</span>))
+variables =<span class="st"> </span><span class="kw">which</span>(<span class="kw">names</span>(Boston) <span class="op">==</span><span class="kw">c</span>(<span class="st">&quot;lstat&quot;</span>, <span class="st">&quot;medv&quot;</span>))
 training_data =<span class="st"> </span>Boston[train, variables]
 testing_data =<span class="st"> </span>Boston[test, variables]
 
@@ -829,15 +839,15 @@ testing_data =<span class="st"> </span>Boston[test, variables]
 <p>In order to perfom linear regression in <code>R</code>, we will use the function <code>lm()</code>to fit a simple linear regression with <code>medv</code> as the response (dependent variable) and <code>lstat</code> as the predictor or independent variable, and then save it in <code>model</code>.</p>
 <p>But before we run our model, let’s visually check if the relationship between x and y is linear.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Scatterplot of lstat vs. medv</span>
-<span class="kw">plot</span>(training_data$lstat, training_data$medv)</code></pre></div>
+<span class="kw">plot</span>(training_data<span class="op">$</span>lstat, training_data<span class="op">$</span>medv)</code></pre></div>
 <p><img src="Machine-Learning_files/figure-html/unnamed-chunk-31-1.png" width="70%" style="display: block; margin: auto;" /></p>
 <p>According to the plot, we see that the relationship is not linear. Let’s try a transformation of our explanatory variable <code>lstat</code>.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Scatterplot of log(lstat) vs. medv</span>
-<span class="kw">plot</span>(<span class="kw">log</span>(training_data$lstat), training_data$medv)</code></pre></div>
+<span class="kw">plot</span>(<span class="kw">log</span>(training_data<span class="op">$</span>lstat), training_data<span class="op">$</span>medv)</code></pre></div>
 <p><img src="Machine-Learning_files/figure-html/unnamed-chunk-32-1.png" width="70%" style="display: block; margin: auto;" /></p>
 <p>Look at the plot, it is more linear, so we can proceed and perform <code>lm()</code>:</p>
 <p><strong>STEP 3: Run the linear regression model</strong></p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">model =<span class="st"> </span><span class="kw">lm</span>(medv ~<span class="st"> </span><span class="kw">log</span>(lstat), <span class="dt">data =</span> training_data)
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">model =<span class="st"> </span><span class="kw">lm</span>(medv <span class="op">~</span><span class="st"> </span><span class="kw">log</span>(lstat), <span class="dt">data =</span> training_data)
 model
 <span class="co">#ans&gt; </span>
 <span class="co">#ans&gt; Call:</span>
@@ -876,7 +886,7 @@ model
 <span class="co">#ans&gt;  [1] &quot;coefficients&quot;  &quot;residuals&quot;     &quot;effects&quot;       &quot;rank&quot;         </span>
 <span class="co">#ans&gt;  [5] &quot;fitted.values&quot; &quot;assign&quot;        &quot;qr&quot;            &quot;df.residual&quot;  </span>
 <span class="co">#ans&gt;  [9] &quot;xlevels&quot;       &quot;call&quot;          &quot;terms&quot;         &quot;model&quot;</span></code></pre></div>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">model$coefficients
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">model<span class="op">$</span>coefficients
 <span class="co">#ans&gt; (Intercept)  log(lstat) </span>
 <span class="co">#ans&gt;        51.8       -12.2</span></code></pre></div>
 <p>To obtain the confidence intervel for the linear model (<code>model</code>), we can use the <code>confint()</code> function:</p>
@@ -888,14 +898,14 @@ model
 <p><strong>STEP 4: Plot the regression model</strong></p>
 <p>Now, let’s plot our regression line on top of our data.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Scatterplot of lstat vs. medv</span>
-<span class="kw">plot</span>(<span class="kw">log</span>(training_data$lstat), training_data$medv)
+<span class="kw">plot</span>(<span class="kw">log</span>(training_data<span class="op">$</span>lstat), training_data<span class="op">$</span>medv)
 
 <span class="co"># Add the regression line to the existing scatterplot</span>
 <span class="kw">abline</span>(model)</code></pre></div>
 <p><img src="Machine-Learning_files/figure-html/unnamed-chunk-38-1.png" width="70%" style="display: block; margin: auto;" /></p>
 <p>Let’s play with the look of the plot, and makes it perttier!</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Scatterplot of lstat vs. medv</span>
-<span class="kw">plot</span>(<span class="kw">log</span>(training_data$lstat), training_data$medv,
+<span class="kw">plot</span>(<span class="kw">log</span>(training_data<span class="op">$</span>lstat), training_data<span class="op">$</span>medv,
 <span class="dt">xlab =</span> <span class="st">&quot;Log Transform of % of Houshold with Low Socioeconomic Income&quot;</span>,
 <span class="dt">ylab =</span> <span class="st">&quot;Median House Value&quot;</span>,
 <span class="dt">col =</span> <span class="st">&quot;red&quot;</span>,
@@ -916,15 +926,15 @@ model
 <span class="co">#ans&gt; 32.1 23.7 18.7</span></code></pre></div>
 <p>Now let’s assess our model, by computing th mean squared error (MSE). To assess the model we created, then we will be using the test data!</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Save the testing median values for houses (testing y) in y</span>
-y =<span class="st"> </span>testing_data$medv
+y =<span class="st"> </span>testing_data<span class="op">$</span>medv
 
 <span class="co"># Compute the predicted value for this y (y hat)</span>
-y_hat =<span class="st"> </span><span class="kw">predict</span>(model, <span class="kw">data.frame</span>(<span class="dt">lstat =</span> testing_data$lstat))
+y_hat =<span class="st"> </span><span class="kw">predict</span>(model, <span class="kw">data.frame</span>(<span class="dt">lstat =</span> testing_data<span class="op">$</span>lstat))
 
 <span class="co"># Now we have both y and y_hat for our testing data. </span>
 <span class="co"># let&#39;s find the mean square error</span>
-error =<span class="st"> </span>y-y_hat
-error_squared =<span class="st"> </span>error^<span class="dv">2</span>
+error =<span class="st"> </span>y<span class="op">-</span>y_hat
+error_squared =<span class="st"> </span>error<span class="op">^</span><span class="dv">2</span>
 MSE =<span class="st"> </span><span class="kw">mean</span>(error_squared)
 MSE
 <span class="co">#ans&gt; [1] 17.7</span></code></pre></div>

@@ -33,8 +33,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black">
   
   
+<link rel="prev" href="pw-6.html">
 
-<link rel="next" href="introduction.html">
 
 <script src="book_assets/jquery-2.2.3/jquery.min.js"></script>
 <link href="book_assets/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -265,25 +265,196 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="header">
-<h1 class="title">Machine Learning</h1>
-<h4 class="author"><em>Mohamad Ghassany</em></h4>
-<h4 class="date"><em>2017-03-02</em></h4>
+<div id="clustering-kmeans" class="section level1">
+<h1><span class="header-section-number">7</span> Clustering: kmeans</h1>
+<p><strong>Clustering</strong> (or Cluster analysis) is the collection of techniques designed to find subgroups or <em>clusters</em> in a dataset of variables <span class="math inline">\(X_1,\ldots,X_p\)</span>. Depending on the similarities between the observations, these are partitioned in homogeneous groups as separated as possible between them. Clustering methods can be classified into two main categories:</p>
+<ul>
+<li><strong>Partition methods</strong>. Given a fixed number of cluster <span class="math inline">\(k\)</span>, these methods aim to assign each observation of <span class="math inline">\(X_1,\ldots,X_p\)</span> to a unique cluster, in such a way that the <em>within-cluster variation</em> is as small as possible (the clusters are as homogeneous as possible) while the <em>between cluster variation</em> is as large as possible (the clusters are as separated as possible).</li>
+<li><strong>Hierarchical methods</strong>. These methods construct a hierarchy for the observations in terms of their similitudes. This results in a tree-based representation of the data in terms of a <em>dendogram</em>, which depicts how the observations are clustered at different levels – from the smallest groups of one element to the largest representing the whole dataset.</li>
+</ul>
+<p>In this chapter we will see the basics of the most well-known <strong>partition method</strong>, namely <em><span class="math inline">\(k\)</span>-means clustering</em>.</p>
+<div id="introduction-3" class="section level2">
+<h2><span class="header-section-number">7.1</span> Introduction</h2>
+<p><strong>Clustering</strong> (or Cluster analysis) is the process of partitioning a set of data objects (observations) into subsets. Each subset is a <strong>cluster</strong>, such that objects in a cluster are similar to one another, yet dissimilar to objects in other clusters.</p>
+<p>The set of clusters resulting from a cluster analysis can be referred to as a clustering. In this context, different clustering methods may generate different clusterings on the same data set. The partitioning is not performed by humans, but by the clustering algorithm. Hence, clustering is useful in that it can lead to the discovery of previously unknown groups within the data.</p>
+<p>Example: Imagine a Director of Customer Relationships at an Electronics magazine, and he has five managers working for him. He would like to organize all the company’s customers into five groups so that each group can be assigned to a different manager. Strategically, he would like that the customers in each group are as similar as possible. Moreover, two given customers having very different business patterns should not be placed in the same group. His intention behind this business strategy is to develop customer relationship campaigns that specifically target each group, based on common features shared by the customers per group. Unlike in classification, the class <strong>label</strong> of each customer is unknown. He needs to discover these groupings. Given a large number of customers and many attributes describing customer profiles, it can be very costly or even infeasible to have a human study the data and manually come up with a way to partition the customers into strategic groups. He needs a <em>clustering</em> tool to help.</p>
+<p>Clustering has been widely used in many applications such as business intelligence, image pattern recognition, Web search, biology, and security. In business intelligence, clustering can be used to organize a large number of customers into groups, where customers within a group share strong similar characteristics. In image recognition, clustering can be used to discover clusters or “subclasses” in handwritten character recognition systems. Suppose we have a data set of handwritten digits, where each digit is labeled as either 1, 2, 3, and so on. Clustering has also found many applications in Web search. For example, a keyword search may often return a very large number of hits (i.e., pages relevant to the search) due to the extremely large number of web pages. Clustering can be used to organize the search results into groups and present the results in a concise and easily accessible way. Moreover, clustering techniques have been developed to cluster documents into topics, which are commonly used in information retrieval practice.</p>
+<p>Clustering is also called <strong>data segmentation</strong> in some applications because clustering partitions large data sets into groups according to their <em>similarity</em>.</p>
+<p>As a branch of statistics, clustering has been extensively studied, with the main focus on <em>distance-based cluster analysis</em>. Clustering tools were proposed like <strong><span class="math inline">\(k\)</span>-means</strong>, <strong>fuzzy <span class="math inline">\(c\)</span>-means</strong>, and several other methods.</p>
+<p>Many clustering algorithms have been introduced in the literature. Since clusters can formally be seen as subsets of the data set, one possible classification of clustering methods can be according to whether the subsets are <strong>fuzzy</strong> or <strong>crisp</strong> (<strong>hard</strong>).</p>
+<div id="hard-clustering" class="section level3 unnumbered">
+<h3>Hard clustering</h3>
+<p>Hard clustering methods are based on classical set theory, and require that an object either does or does not belong to a cluster. Hard clustering means partitioning the data into a specified number of mutually exclusive subsets. The most common hard clustering method is <span class="math inline">\(k\)</span>-means.</p>
 </div>
-<div id="welcome" class="section level1 unnumbered">
-<h1>Welcome</h1>
-<!-- # Introduction -->
-<p>Welcome to this course. It is only a little introduction to Machine Learning.</p>
-<p>The aim of Machine Learning is to build computer systems that can adapt to their environments and learn form experience. Learning techniques and methods from this field are successfully applied to a variety of learning tasks in a broad range of areas, including, for example, spam recognition, text classification, gene discovery, financial forecasting. The course will give an overview of many concepts, techniques, and algorithms in machine learning, beginning with topics such as linear regression and classification and ending up with topics such as kmeans and Expectation Maximization. The course will give the student the basic ideas and intuition behind these methods, as well as a more formal statistical and computational understanding. Students will have an opportunity to experiment with machine learning techniques in R and apply them to a selected problem.</p>
+<div id="fuzzy-clustering" class="section level3 unnumbered">
+<h3>Fuzzy clustering</h3>
+<p>Fuzzy clustering methods, however, allow the objects to belong to several clusters simultaneously, with different degrees of membership. In many situations, fuzzy clustering is more natural than hard clustering. The most know technique of fuzzy clustering is the fuzzy <span class="math inline">\(c\)</span>-means.</p>
+</div>
+</div>
+<div id="k-means" class="section level2">
+<h2><span class="header-section-number">7.2</span> <span class="math inline">\(k\)</span>-Means</h2>
+<p>If you have ever watched a group of tourists with a couple of tour guides who hold umbrellas up so that everybody can see them and follow them, then you have seen a dynamic version of the <span class="math inline">\(k\)</span>-means algorithm. <span class="math inline">\(k\)</span>-means is even simpler, because the data (playing the part of the tourists) does not move, only the tour guides move.</p>
+<p>Suppose that we want to divide our input data into <span class="math inline">\(K\)</span> categories, where we know the value of <span class="math inline">\(K\)</span>. We allocate <span class="math inline">\(K\)</span> <em>cluster centres</em> (also called <em>prototypes</em> or <em>centroids</em>) to our input space, and we would like to position these centres so that there is one cluster centre in the middle of each cluster. However, we don’t know where the clusters are, let alone where their ‘middle’ is, so we need an algorithm that will find them. Learning algorithms generally try to minimize some sort of error, so we need to think of an error criterion that describes this aim. There are two things that we need to define:</p>
+<p><strong>A distance measure</strong>: In order to talk about distances between points, we need some way to measure distances. It is often the normal <strong>Euclidean</strong> distance, but there are other alternatives like Manhattan distance, Correlation distance, Chessboard distance and other.</p>
+<p>The Euclidean distance: Let <span class="math inline">\(x=(x_1,x_2)\)</span> and <span class="math inline">\(y=(y_1,y_2)\)</span> two observations in a two-dimensional space. The Euclidean distance <span class="math inline">\(d_{x,y}\)</span> between <span class="math inline">\(x\)</span> and <span class="math inline">\(y\)</span> is</p>
+<span class="math display">\[\begin{align*}  
+d_{x,y}^2 &amp;= (x_1-y_1)^2+(x_2 - y_2)^2  \\
+d_{x,y} &amp;= \sqrt{(x_1-y_1)^2+(x_2 - y_2)^2}
+\end{align*}\]</span>
+<p><strong>The mean average</strong>: Once we have a distance measure, we can compute the central point of a set of data points, which is the mean average. Actually, this is only true in Euclidean space, which is the one we are used to, where everything is nice and flat.</p>
+<p>We can now think about a suitable way of positioning the cluster centres: we compute the mean point of each cluster, <span class="math inline">\(\textbf{v}_k\)</span>, <span class="math inline">\(i=1,\ldots,K\)</span>, and put the cluster centre there. This is equivalent to minimizing the Euclidean distance (which is the sum-of-squares error) from each data point to its cluster centre. Then we decide which points belong to which clusters by associating each point with the cluster centre that it is closest to. This changes as the algorithm iterates. We start by positioning the cluster centres <strong>randomly</strong> though the input space, since we don’t know where to put them, and we update their positions according to the data. We decide which cluster each data point belongs to by computing the distance between each data point and all of the cluster centres, and assigning it to the cluster that is the closest. For all the point that are assigned to a cluster, we then compute the mean of them, and move the cluster centre to that place. We iterate the algorithm until the cluster centres stop moving.</p>
+<p>It is convenient at this point to define some notation to describe the assignment of data points to clusters. For each data point <span class="math inline">\(x_i\)</span>, we introduce a corresponding set of binary indicator variables <span class="math inline">\(u_{ki} \in {0,1}\)</span>, where <span class="math inline">\(k=1,\ldots,K\)</span> describing which of the <span class="math inline">\(K\)</span> clusters the data point <span class="math inline">\(x_i\)</span> is assigned to, so that if data point <span class="math inline">\(x_i\)</span> is assigned to cluster <span class="math inline">\(k\)</span> then <span class="math inline">\(u_{ki}= 1\)</span>, and <span class="math inline">\(u_{kj}= 0\)</span> for <span class="math inline">\(j \neq i\)</span>. This is known as the <span class="math inline">\(1\)</span>-of-<span class="math inline">\(K\)</span> coding scheme. We can then define an objective function (and sometimes called a <em>distortion measure</em>), given by</p>
+<p><span class="math display">\[J= \sum_{i=1}^{N} \sum_{i=k=1}^{K} u_{ki} \| x_{i}- \mathbf{v}_{k} \|^2\]</span></p>
+<p>which represents the sum of the squares of the distances of each data point to its assigned vector <span class="math inline">\(\mathbf{v}_{k}\)</span>. The goal is to find values for the <span class="math inline">\(\{u_{ki}\}\)</span> and the <span class="math inline">\(\{\mathbf{v}_{k}\}\)</span> so as to minimize <span class="math inline">\(J\)</span>. We can do this through an iterative procedure in which each iteration involves two successive steps corresponding to successive optimizations with respect to the <span class="math inline">\(u_{ki}\)</span> and the <span class="math inline">\(\mathbf{v}_{k}\)</span>. The algorithm of <span class="math inline">\(k\)</span>-means is described in the following algorithm:</p>
+<table>
+<colgroup>
+<col width="37%" />
+<col width="62%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>The <span class="math inline">\(k\)</span>-means algorithm</th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><p><strong>Data</strong>:</p></td>
+<td><p><span class="math inline">\(\textbf{X}=\{x_{ij}, i=1,\ldots,n, j=1,\ldots,p\}\)</span></p></td>
+</tr>
+<tr class="even">
+<td><p><strong>Result</strong>:</p></td>
+<td><p>Cluster centres (Prototypes)</p></td>
+</tr>
+<tr class="odd">
+<td><p><strong>Initialization</strong>:</p></td>
+<td><ul>
+<li>Choose a value for <span class="math inline">\(K\)</span>.</li>
+<li>Choose <span class="math inline">\(K\)</span> random positions in the input space.</li>
+<li>Assign the prototypes <span class="math inline">\(\mathbf{v}_{k}\)</span> to those positions</li>
+</ul></td>
+</tr>
+<tr class="even">
+<td><p><strong>Learning</strong>: <strong>repeat</strong></p></td>
+<td><p><strong>for</strong> <em>each data point <span class="math inline">\(x_i\)</span></em> <strong>do</strong></p>
+<ul>
+<li>compute the distance to each prototype: <span class="math display">\[d_{ki}= \text{min}_k d(x_i,\mathbf{v}_k)\]</span></li>
+<li>assign the data point to the nearest prototype with distance <span class="math display">\[u_{ki}= \left\lbrace \begin{array}{ll}  1   &amp; \mbox{if} \quad k = argmin_j \| x_i -\mathbf{v}_k \|^2 \\  0 &amp; \mbox{otherwise} \end{array} \right.\]</span></li>
+</ul>
+<p><strong>for</strong> <em>each prototype</em> <strong>do</strong></p>
+<ul>
+<li>move the position of the prototype to the mean of the points in that cluster: <span class="math display">\[\mathbf{v}_k = \frac{\sum_i u_{ki} x_i}{\sum_i u_{ki}}\]</span></li>
+</ul>
+<p>Until the prototypes stop moving.</p></td>
+</tr>
+</tbody>
+</table>
+<div class="rmdinsight">
+<p>
+The <span class="math inline"><em>k</em></span>-means algorithm produces
+</p>
+<ul>
+<li>
+A final estimate of cluster centroids (i.e. their coordinates).
+</li>
+<li>
+An assignment of each point to their respective cluster.
+</li>
+</ul>
+</div>
+<p>The denominator in the expression <span class="math inline">\(\mathbf{v}_k = \frac{\sum_i u_{ki} x_i}{\sum_i u_{ki}}\)</span> is equal to the number of points assigned to cluster <span class="math inline">\(k\)</span>, and so this result has a simple interpretation, namely set <span class="math inline">\(\mathbf{v}_k\)</span> equal to the mean of all of the data points <span class="math inline">\(x_i\)</span> assigned to cluster <span class="math inline">\(k\)</span>. For this reason, the procedure is known as the <span class="math inline">\(k\)</span>-means algorithm.</p>
+<p>The two phases of re-assigning data points to clusters and re-computing the cluster means are repeated in turn until there is no further change in the assignments (or until some maximum number of iterations is exceeded). Because each phase reduces the value of the objective function <span class="math inline">\(J\)</span>, convergence of the algorithm is assured. However, it may converge to a local rather than global minimum of <span class="math inline">\(J\)</span>.</p>
+<p>The <span class="math inline">\(k\)</span>-means algorithm is illustrated using the Old Faithful data set <a href="#fn4" class="footnoteRef" id="fnref4"><sup>4</sup></a> in following figure.</p>
+<div class="figure" style="text-align: center"><span id="fig:oldfaithful"></span>
+<img src="img/kmeans.png" alt="Illustration of the $k$-means algorithm using the re-scaled Old Faithful data set, where $k=2$. We can see how the $k$-means algorithm works. (a) The first thing $k$-means has to do is assign an initial set of centroids. (b) The next stage in the algorithm assigns every point in the dataset to the closest centroid. (c) The next stage is the re-calculate the centroids based on the new cluster assignments of the data points. (d) Now we have completed one full cycle of the algorithm we can continue and re-assign points to their (new) closest cluster centroid. (e) And we can update the centroid positions one more time based on the re-assigned points. (g)(h)(f) The algorithm stops when we obtain the same results in consecutive iterations." width="90%" />
+<p class="caption">
+Figure 7.1: Illustration of the <span class="math inline">\(k\)</span>-means algorithm using the re-scaled Old Faithful data set, where <span class="math inline">\(k=2\)</span>. We can see how the <span class="math inline">\(k\)</span>-means algorithm works. (a) The first thing <span class="math inline">\(k\)</span>-means has to do is assign an initial set of centroids. (b) The next stage in the algorithm assigns every point in the dataset to the closest centroid. (c) The next stage is the re-calculate the centroids based on the new cluster assignments of the data points. (d) Now we have completed one full cycle of the algorithm we can continue and re-assign points to their (new) closest cluster centroid. (e) And we can update the centroid positions one more time based on the re-assigned points. (g)(h)(f) The algorithm stops when we obtain the same results in consecutive iterations.
+</p>
+</div>
+<p>The <span class="math inline">\(k\)</span>-means algorithm is illustrated using the Iris data set in following interactive figure<a href="#fn5" class="footnoteRef" id="fnref5"><sup>5</sup></a>. (Try to modify the X and Y variables and the numbers of chosen clusters and see the result)</p>
+<center>
+<iframe src="https://jjallaire.shinyapps.io/shiny-kmeans/?showcase=0" width="90%" height="900px">
+</iframe>
+</center>
+</div>
+<div id="k-means-in-r" class="section level2">
+<h2><span class="header-section-number">7.3</span> <span class="math inline">\(k\)</span>-means in <code>R</code></h2>
+<p>We will use an example with simulated data to demonstrate how the <span class="math inline">\(k\)</span>-means algorithm works. Here we simulate some data from three clusters and plot the dataset below.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">set.seed</span>(<span class="dv">1234</span>)
+x &lt;-<span class="st"> </span><span class="kw">rnorm</span>(<span class="dv">12</span>,<span class="dt">mean=</span><span class="kw">rep</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">3</span>,<span class="dt">each=</span><span class="dv">4</span>),<span class="dt">sd=</span><span class="fl">0.2</span>)
+y &lt;-<span class="st"> </span><span class="kw">rnorm</span>(<span class="dv">12</span>,<span class="dt">mean=</span><span class="kw">rep</span>(<span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">1</span>),<span class="dt">each=</span><span class="dv">4</span>),<span class="dt">sd=</span><span class="fl">0.2</span>)
+<span class="kw">plot</span>(x,y,<span class="dt">col=</span><span class="st">&quot;blue&quot;</span>,<span class="dt">pch=</span><span class="dv">19</span>,<span class="dt">cex=</span><span class="dv">2</span>)
+<span class="kw">text</span>(x<span class="op">+</span><span class="fl">0.05</span>,y<span class="op">+</span><span class="fl">0.05</span>,<span class="dt">labels=</span><span class="kw">as.character</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">12</span>))</code></pre></div>
+<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-149"></span>
+<img src="Machine-Learning_files/figure-html/unnamed-chunk-149-1.png" alt="Simulated dataset" width="70%" />
+<p class="caption">
+Figure 7.2: Simulated dataset
+</p>
+</div>
+<p>The <code>kmeans()</code> function in R implements the <span class="math inline">\(k\)</span>-means algorithm and can be found in the <code>stats</code> package, which comes with R and is usually already loaded when you start R. Two key parameters that you have to specify are <code>x</code>, which is a matrix or data frame of data, and <code>centers</code> which is either an integer indicating the number of clusters or a matrix indicating the locations of the initial cluster centroids. The data should be organized so that each row is an observation and each column is a variable or feature of that observation.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">dataFrame &lt;-<span class="st"> </span><span class="kw">data.frame</span>(x,y)
+kmeansObj &lt;-<span class="st"> </span><span class="kw">kmeans</span>(dataFrame,<span class="dt">centers=</span><span class="dv">3</span>)
+<span class="kw">names</span>(kmeansObj)
+<span class="co">#ans&gt; [1] &quot;cluster&quot;      &quot;centers&quot;      &quot;totss&quot;        &quot;withinss&quot;    </span>
+<span class="co">#ans&gt; [5] &quot;tot.withinss&quot; &quot;betweenss&quot;    &quot;size&quot;         &quot;iter&quot;        </span>
+<span class="co">#ans&gt; [9] &quot;ifault&quot;</span></code></pre></div>
+<p>You can see which cluster each data point got assigned to by looking at the <code>cluster</code> element of the list returned by the <code>kmeans()</code> function.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">kmeansObj<span class="op">$</span>cluster
+<span class="co">#ans&gt;  [1] 3 3 3 3 1 1 1 1 2 2 2 2</span></code></pre></div>
+<p>Here is a plot of the <span class="math inline">\(k\)</span>-means clustering solution.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">plot</span>(x,y,<span class="dt">col=</span>kmeansObj<span class="op">$</span>cluster,<span class="dt">pch=</span><span class="dv">19</span>,<span class="dt">cex=</span><span class="dv">2</span>)
+<span class="kw">points</span>(kmeansObj<span class="op">$</span>centers,<span class="dt">col=</span><span class="dv">1</span><span class="op">:</span><span class="dv">3</span>,<span class="dt">pch=</span><span class="dv">3</span>,<span class="dt">cex=</span><span class="dv">3</span>,<span class="dt">lwd=</span><span class="dv">3</span>)</code></pre></div>
+<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-152"></span>
+<img src="Machine-Learning_files/figure-html/unnamed-chunk-152-1.png" alt="$k$-means clustering solution" width="70%" />
+<p class="caption">
+Figure 7.3: <span class="math inline">\(k\)</span>-means clustering solution
+</p>
+</div>
+<div id="cluster-validity-choosing-the-number-of-clusters" class="section level3">
+<h3><span class="header-section-number">7.3.1</span> Cluster Validity, Choosing the Number of Clusters</h3>
+<p>The result of a clustering algorithm can be very different from each other on the same data set as the other input parameters of an algorithm can extremely modify the behavior and execution of the algorithm. The aim of the cluster validity is to find the partitioning that best fits the underlying data. Usually 2D data sets are used for evaluating clustering algorithms as the reader easily can verify the result. But in case of high dimensional data the visualization and visual validation is not a trivial tasks therefore some formal methods are needed.</p>
+<p>The process of evaluating the results of a clustering algorithm is called cluster validity assessment. Two measurement criteria have been proposed for evaluating and selecting an optimal clustering scheme:</p>
+<ul>
+<li><p><em>Compactness</em>: The member of each cluster should be as close to each other as possible. A common measure of compactness is the variance.</p></li>
+<li><p><em>Separation</em>: The clusters themselves should be widely separated. There are three common approaches measuring the distance between two different clusters: distance between the closest member of the clusters, distance between the most distant members and distance between the centres of the clusters.</p></li>
+</ul>
+<p>There are three different techniques for evaluating the result of the clustering algorithms, and several <em>Validity measures</em> are proposed: Validity measures are scalar indices that assess the goodness of the obtained partition. Clustering algorithms generally aim at locating well separated and compact clusters. When the number of clusters is chosen equal to the number of groups that actually exist in the data, it can be expected that the clustering algorithm will identify them correctly. When this is not the case, misclassifications appear, and the clusters are not likely to be well separated and compact. Hence, most cluster validity measures are designed to quantify the separation and the compactness of the clusters.</p>
+<div class="rmdinsight">
+<p>
+Check this answer on <code>stackoverflow</code> containing <code>R</code> code for several methods of computing an optimal value of <span class="math inline"><em>k</em></span> for <span class="math inline"><em>k</em></span>-means cluster analysis: <a target="_blank"  href="http://stackoverflow.com/a/15376462"><i class="fa fa-stack-overflow" aria-hidden="true"></i> here</a>.
+</p>
+</div>
+<p align="right">
+◼
+</p>
 
+</div>
+</div>
+</div>
+
+
+
+
+
+
+
+
+
+
+<div class="footnotes">
+<hr />
+<ol start="4">
+<li id="fn4"><p>Old Faithful, is a hydrothermal geyser in Yellowstone National Park in the state of Wyoming, U.S.A., and is a popular tourist attraction. Its name stems from the supposed regularity of its eruptions. The data set comprises 272 observations, each of which represents a single eruption and contains two variables corresponding to the duration in minutes of the eruption, and the time until the next eruption, also in minutes.<a href="clustering-kmeans.html#fnref4">↩</a></p></li>
+<li id="fn5"><p>Made by Joseph J. Allaire <a href="https://github.com/jjallaire" class="uri">https://github.com/jjallaire</a><a href="clustering-kmeans.html#fnref5">↩</a></p></li>
+</ol>
 </div>
             </section>
 
           </div>
         </div>
       </div>
+<a href="pw-6.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
 
-<a href="introduction.html" class="navigation navigation-next navigation-unique" aria-label="Next page""><i class="fa fa-angle-right"></i></a>
 
 <script src="book_assets/gitbook-2.6.7/js/app.min.js"></script>
 <script src="book_assets/gitbook-2.6.7/js/lunr.js"></script>

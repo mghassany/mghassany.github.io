@@ -26,7 +26,7 @@
 <meta name="author" content="Mohamad Ghassany">
 
 
-<meta name="date" content="2017-02-20">
+<meta name="date" content="2017-03-02">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -238,6 +238,16 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 </ul></li>
 <li class="chapter" data-level="" data-path="pw-6.html"><a href="pw-6.html#verifications-with-princomp"><i class="fa fa-check"></i>Verifications with princomp()</a></li>
 </ul></li>
+<li class="chapter" data-level="7" data-path="clustering-kmeans.html"><a href="clustering-kmeans.html"><i class="fa fa-check"></i><b>7</b> Clustering: kmeans</a><ul>
+<li class="chapter" data-level="7.1" data-path="clustering-kmeans.html"><a href="clustering-kmeans.html#introduction-3"><i class="fa fa-check"></i><b>7.1</b> Introduction</a><ul>
+<li class="chapter" data-level="" data-path="clustering-kmeans.html"><a href="clustering-kmeans.html#hard-clustering"><i class="fa fa-check"></i>Hard clustering</a></li>
+<li class="chapter" data-level="" data-path="clustering-kmeans.html"><a href="clustering-kmeans.html#fuzzy-clustering"><i class="fa fa-check"></i>Fuzzy clustering</a></li>
+</ul></li>
+<li class="chapter" data-level="7.2" data-path="clustering-kmeans.html"><a href="clustering-kmeans.html#k-means"><i class="fa fa-check"></i><b>7.2</b> <span class="math inline">\(k\)</span>-Means</a></li>
+<li class="chapter" data-level="7.3" data-path="clustering-kmeans.html"><a href="clustering-kmeans.html#k-means-in-r"><i class="fa fa-check"></i><b>7.3</b> <span class="math inline">\(k\)</span>-means in <code>R</code></a><ul>
+<li class="chapter" data-level="7.3.1" data-path="clustering-kmeans.html"><a href="clustering-kmeans.html#cluster-validity-choosing-the-number-of-clusters"><i class="fa fa-check"></i><b>7.3.1</b> Cluster Validity, Choosing the Number of Clusters</a></li>
+</ul></li>
+</ul></li>
 </ul>
 
       </nav>
@@ -291,15 +301,15 @@ output:
 <span class="kw">set.seed</span>(<span class="dv">123</span>)
 <span class="co"># we use this function with the same number</span>
 <span class="co"># to randomly generate the same values</span>
-split =<span class="st"> </span><span class="kw">sample.split</span>(dataset$Purchased, <span class="dt">SplitRatio =</span> <span class="fl">0.75</span>)
+split =<span class="st"> </span><span class="kw">sample.split</span>(dataset<span class="op">$</span>Purchased, <span class="dt">SplitRatio =</span> <span class="fl">0.75</span>)
 <span class="co"># here we chose the SplitRatio to 75% of the dataset,</span>
 <span class="co"># and 25% for the test set.</span>
-training_set =<span class="st"> </span><span class="kw">subset</span>(dataset, split ==<span class="st"> </span><span class="ot">TRUE</span>)
+training_set =<span class="st"> </span><span class="kw">subset</span>(dataset, split <span class="op">==</span><span class="st"> </span><span class="ot">TRUE</span>)
 <span class="co"># we use subset to split the dataset</span>
-test_set =<span class="st"> </span><span class="kw">subset</span>(dataset, split ==<span class="st"> </span><span class="ot">FALSE</span>)</code></pre></div>
+test_set =<span class="st"> </span><span class="kw">subset</span>(dataset, split <span class="op">==</span><span class="st"> </span><span class="ot">FALSE</span>)</code></pre></div>
 <p><strong>4.</strong> Scale the input variables in both training set and test set.</p>
 <p>First let us fit a simple logistic regression model of <code>Purchased</code> in function of <code>Age</code>. We do it with this line of code,</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">classifier &lt;-<span class="st"> </span><span class="kw">glm</span>(Purchased ~<span class="st"> </span>Age , <span class="dt">family =</span> binomial, <span class="dt">data=</span>training_set)
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">classifier &lt;-<span class="st"> </span><span class="kw">glm</span>(Purchased <span class="op">~</span><span class="st"> </span>Age , <span class="dt">family =</span> binomial, <span class="dt">data=</span>training_set)
 <span class="co"># glm goes for generalized linear model</span></code></pre></div>
 <p><strong>5.</strong> In the argument <code>family</code> of the function <code>glm</code> we chose <code>binomial</code>. Why ?</p>
 <p><strong>6.</strong> What is the equation of the obtained model in the question <strong>4</strong> ?</p>
@@ -343,8 +353,8 @@ where
 </div>
 <p>I obtained the last figure with these lines of code,</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(ggplot2)
-<span class="kw">ggplot</span>(training_set, <span class="kw">aes</span>(<span class="dt">x=</span>Age, <span class="dt">y=</span>Purchased)) +
-<span class="st">  </span><span class="kw">geom_point</span>() +
+<span class="kw">ggplot</span>(training_set, <span class="kw">aes</span>(<span class="dt">x=</span>Age, <span class="dt">y=</span>Purchased)) <span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_point</span>() <span class="op">+</span>
 <span class="st">  </span><span class="kw">stat_smooth</span>(<span class="dt">method=</span><span class="st">&quot;glm&quot;</span>, <span class="dt">method.args=</span><span class="kw">list</span>(<span class="dt">family=</span><span class="st">&quot;binomial&quot;</span>), <span class="dt">se=</span><span class="ot">FALSE</span>)</code></pre></div>
 <p><strong>9.</strong> Now let us take another feature into account in the model. Fit a logistic regression model of purchasing the product in function of the age of the user and its salary.</p>
 <p><strong>10.</strong> Are the predictors significant? Did the model get better by adding t he estimated salary?</p>

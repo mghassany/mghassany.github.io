@@ -124,7 +124,7 @@
   \postauthor{\par}
   \predate{\centering\large\emph}
   \postdate{\par}
-  \date{2017-03-02}
+  \date{2017-03-05}
 
 % \defaultfontfeatures{
 %     Path = /home/ghassany/texmf/fonts/opentype/public/fontawesome/}
@@ -2387,7 +2387,7 @@ For your submitted report, use the following YAML header:
 title: "Week 2"
 subtitle: "Multiple Linear Regression"
 author: LastName FirstName
-date: "2017-03-02 15:35:18"
+date: "2017-03-05 21:46:50"
 output:
   html_document:
     toc: true
@@ -5469,6 +5469,153 @@ Check this answer on \texttt{stackoverflow} containing \texttt{R} code
 for several methods of computing an optimal value of \(k\) for
 \(k\)-means cluster analysis:
 \textcolor{white}{[}\faStackOverflow\textcolor{white}{]} here.
+\end{rmdinsight}
+
+◼
+
+\chapter*{PW 7}\label{pw-7}
+\addcontentsline{toc}{chapter}{PW 7}
+
+In this practical work we will apply the \(k\)-means clustering
+algorithm using the standard function \texttt{kmeans()} in \texttt{R},
+we will use the dataset \texttt{La\ Liga\ 2015/2016}.
+
+Use the following YAML header for the report that you must submit at the
+end of the session:
+
+\begin{verbatim}
+---
+title: "Week 7"
+subtitle: "$k$-means clustering"
+author: LastName FirstName
+date: "05/03/2017"
+output:
+  html_document:
+    toc: true
+    toc_depth: 2
+    toc_float: true
+    theme: readable
+    highlight: pygments
+---
+\end{verbatim}
+
+\section*{\texorpdfstring{\(k\)-means
+clustering}{k-means clustering}}\label{k-means-clustering}
+\addcontentsline{toc}{section}{\(k\)-means clustering}
+
+\textbf{1.} Download the dataset:
+\textcolor{white}{[}\faTable\textcolor{white}{]} LaLiga 2015-2016 and
+import it into \texttt{R}. Put the argument \texttt{row.names} to 1.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{# You can import directly from my website (instead of downloading it..)}
+\NormalTok{laliga <-}\StringTok{ }\KeywordTok{read.csv}\NormalTok{(}\StringTok{"http://mghassany.com/MLcourse/datasets/la-liga-15-16.csv"}\NormalTok{, }\DataTypeTok{row.names=}\DecValTok{1}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\textbf{2.} Print the first two rows of the dataset and the total number
+of features in this dataset.
+
+\subsection*{\texorpdfstring{\texttt{pointsCards}}{pointsCards}}\label{pointscards}
+\addcontentsline{toc}{subsection}{\texttt{pointsCards}}
+
+\textbf{3.} We will first consider a smaller dataset to easily
+understand the results of \(k\)-means. Create a new dataset in which you
+consider only \texttt{Points} and \texttt{Yellow.cards} from the
+original dataset. Name it \texttt{pointsCards}
+
+\textbf{4.} Apply \(k\)-means on \texttt{pointsCards}. Chose \(k=2\)
+clusters and put the number of iterations to 20. Store your results into
+\texttt{km}. (\textbf{Remark}: \texttt{kmeans()} uses a random
+initialization of the clusters, so the results may vary from one call to
+another. Use \texttt{set.seed()} to have reproducible outputs).
+
+\textbf{5.} Print and describe what is inside \texttt{km}.
+
+\textbf{6.} What are the coordinates of the centers of the clusters
+(called also prototypes or centroids) ?
+
+\textbf{7.} Plot the data (\texttt{Yellow.cards} vs \texttt{Points}).
+Color the points corresponding to their cluster.
+
+\textbf{8.} Add to the previous plot the clusters centroids and add the
+names of the observations.
+
+\textbf{9.} Re-run \(k\)-means on \texttt{pointsCards} using 3 and 4
+clusters and store the results into \texttt{km3} and \texttt{km4}
+respectively. Visualize the results like in question \textbf{7} and
+\textbf{8}.
+
+\begin{rmdcaution}
+How many clusters \(k\) do we need in practice? There is not a single
+answer: the advice is to try several and compare. Inspecting the
+`between\_SS / total\_SS' for a good trade-off between the number of
+clusters and the percentage of total variation explained usually gives a
+good starting point for deciding on \(k\) (criterion to select \(k\)
+similar to PCA).
+
+There is several methods of computing an optimal value of \(k\) with
+\texttt{R} code on following \texttt{stackoverflow} answer:
+\textcolor{white}{[}\faStackOverflow\textcolor{white}{]} here.
+\end{rmdcaution}
+
+\textbf{10.} Visualize the ``within groups sum of squares'' of the
+\(k\)-means clustering results (use the code in the link above).
+
+\textbf{11.} Modify the code of the previous question in order to
+visualize the `between\_SS / total\_SS'. Interpret the results.
+
+\subsection*{\texorpdfstring{\texttt{laliga}}{laliga}}\label{laliga}
+\addcontentsline{toc}{subsection}{\texttt{laliga}}
+
+So far, you have only taken the information of two variables for
+performing clustering. Now you will apply \texttt{kmeans()} on the
+original dataset \texttt{laliga}. Using PCA, we can visualize the
+clustering performed with all the available variables in the dataset.
+
+By default, \texttt{kmeans()} does not standardize the variables, which
+will affect the clustering result. As a consequence, the clustering of a
+dataset will be different if one variable is expressed in millions or in
+tenths. If you want to avoid this distortion, use scale to automatically
+center and standardize the dataset (the result will be a matrix, so you
+need to transform it to a data frame again).
+
+\textbf{12.} Scale the dataset and transform it to a data frame again.
+Store the scaled dataset into \texttt{laliga\_scaled}.
+
+\textbf{13.} Apply \texttt{kmeans()} on \texttt{laliga} and on
+\texttt{laliga\_scaled} using 3 clusters and 20 iterations. Store the
+results into \texttt{km.laliga} and \texttt{km.laliga.scaled}
+respectively (do not forget to set a seed)
+
+\textbf{14.} How muny observations there are in each cluster of
+\texttt{km.laliga} and \texttt{km.laliga.scaled} ? (you can use
+\texttt{table()}). Do you obtain the same results when you perform
+\texttt{kmeans()} on the scaled and unscaled data?
+
+\subsection*{\texorpdfstring{\texttt{PCA}}{PCA}}\label{pca}
+\addcontentsline{toc}{subsection}{\texttt{PCA}}
+
+\textbf{15.} Apply PCA on \texttt{laliga} dataset and store you results
+in \texttt{pcalaliga}. Do we need to apply PCA on the scaled dataset?
+Justify your answer.
+
+\textbf{16.} Plot the observations and the variables on the first two
+principal components using \texttt{biplot()} function.
+
+\textbf{17.} Redo the biplot (but with the \texttt{plot()} function)
+with colors indicating the cluster assignments.
+
+\textbf{18.} Recall that the figure of question \textbf{17} is a
+visualization with PC1 and PC2 of the clustering done with all the
+variables, not just PC1 and PC2. Now apply the \texttt{kmeans()}
+clustering with only the first two PCs. Visualize the results and
+compare with the question \textbf{17}.
+
+\begin{rmdinsight}
+By applying \(k\)-means only on the PCs we obtain different and less
+accurate result, but it is still an insightful way.
 \end{rmdinsight}
 
 ◼

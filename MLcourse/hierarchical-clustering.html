@@ -33,8 +33,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black">
   
   
-<link rel="prev" href="pw-2.html">
-<link rel="next" href="pw-3.html">
+<link rel="prev" href="pw-7.html">
+<link rel="next" href="final-group-project.html">
 
 <script src="book_assets/jquery-2.2.3/jquery.min.js"></script>
 <link href="book_assets/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -284,164 +284,157 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="logistic-regression" class="section level1">
-<h1><span class="header-section-number">3</span> Logistic Regression</h1>
-<div id="introduction-1" class="section level2">
-<h2><span class="header-section-number">3.1</span> Introduction</h2>
-<p>In the previous chapters we discussed the linear regression model, which assumes that the response variable <span class="math inline">\(Y\)</span> is quantitative. But in many situations, the response variable is instead qualitative (categorical). For example, eye color is qualitative, taking on values blue, brown, or green.</p>
-<p>The process for predicting qualitative responses is known as <strong><em>classification</em></strong>.</p>
-<p>Given a feature vector <span class="math inline">\(X\)</span> and a qualitative response <span class="math inline">\(Y\)</span> taking values in the set <span class="math inline">\(\mathcal{C}\)</span>, the classification task is to build a function <span class="math inline">\(C(X)\)</span> that takes as input the feature vector <span class="math inline">\(X\)</span> and predicts its value for <span class="math inline">\(Y\)</span>; i.e. <span class="math inline">\(C(X) \in \mathcal{C}\)</span>. We are often more interested in estimating the probabilities that <span class="math inline">\(X\)</span> belongs to each category in <span class="math inline">\(\mathcal{C}\)</span>.</p>
-<blockquote>
-<p>If <span class="math inline">\(c\)</span> is a category (<span class="math inline">\(c \in \mathcal{C}\)</span>), by the probability that <span class="math inline">\(X\)</span> belongs to <span class="math inline">\(c\)</span> we mean <span class="math inline">\(p(X \in c) = \mathbb{P}(Y=c|X)\)</span>.</p>
-</blockquote>
-<p>In the binomial or binary logistic regression, the outcome can have only two possible types of values (e.g. “Yes” or “No”, “Success” or “Failure”). Multinomial logistic refers to cases where the outcome can have three or more possible types of values (e.g., “good” vs. “very good” vs. “best”). Generally outcome is coded as “0” and “1” in binary logistic regression.</p>
-</div>
-<div id="logistic-regression-1" class="section level2">
-<h2><span class="header-section-number">3.2</span> Logistic Regression</h2>
-<p>Consider a data set where the response falls into one of two categories, Yes or No. Rather than modeling the response <span class="math inline">\(Y\)</span> directly, logistic regression models the <em>probability</em> that <span class="math inline">\(Y\)</span> belongs to a particular category.</p>
-<div id="the-logistic-model" class="section level3">
-<h3><span class="header-section-number">3.2.1</span> The Logistic Model</h3>
-<p>Let us suppose the response has two categories and we use the generic 0/1 coding for the response. How should we model the relationship between <span class="math inline">\(p(X) = \mathbb{P}(Y = 1|X)\)</span> and <span class="math inline">\(X\)</span>?</p>
-<p>The simplest situation is when <span class="math inline">\(Y\)</span> is <em>binary</em>: it can only take two values, codified for convenience as <span class="math inline">\(0\)</span> (success) and <span class="math inline">\(1\)</span> (failure).</p>
-<p>More formally, a binary variable is known as a <em>Bernoulli variable</em>, which is the simplest non-trivial random variable. We say that <span class="math inline">\(Y\sim\mathrm{Ber}(p)\)</span>, <span class="math inline">\(0\leq p\leq1\)</span>, if <span class="math display">\[
-Y=\left\{\begin{array}{ll}1,&amp;\text{with probability }p,\\0,&amp;\text{with probability }1-p,\end{array}\right.
-\]</span> or, equivalently, if <span class="math inline">\(\mathbb{P}[Y=1]=p\)</span> and <span class="math inline">\(\mathbb{P}[Y=0]=1-p\)</span>, which can be written compactly as <span class="math display">\[\begin{aligned}
-\mathbb{P}[Y=y]=p^y(1-p)^{1-y},\quad y=0,1.
-\end{aligned}\]</span> Recall that a <em>binomial variable with size <span class="math inline">\(n\)</span> and probability <span class="math inline">\(p\)</span></em>, <span class="math inline">\(\mathrm{Bi}(n,p)\)</span>, was obtained by adding <span class="math inline">\(n\)</span> independent <span class="math inline">\(\mathrm{Ber}(p)\)</span> (so <span class="math inline">\(\mathrm{Ber}(p)\)</span> is the same as <span class="math inline">\(\mathrm{Bi}(1,p)\)</span>).</p>
-<div class="rmdinsight">
-<p>
-A Bernoulli variable <span class="math inline"><em>Y</em></span> is completely determined by <span class="math inline"><em>p</em></span>. <strong>So its mean and variance</strong>:
-</p>
-<ul>
-<li>
-<span class="math inline">𝔼[<em>Y</em>]=<em>p</em> × 1 + (1 − <em>p</em>)×0 = <em>p</em></span>
-</li>
-<li>
-<span class="math inline">𝕍<em>a</em><em>r</em>[<em>Y</em>]=<em>p</em>(1 − <em>p</em>)</span>.
-</li>
-</ul>
-<p>
-In particular, recall that <span class="math inline">ℙ[<em>Y</em> = 1]=𝔼[<em>Y</em>]=<em>p</em></span>.
+<div id="hierarchical-clustering" class="section level1">
+<h1><span class="header-section-number">8</span> Hierarchical Clustering</h1>
+<p>In the last chapter we introduced the <span class="math inline">\(k\)</span>-means algorithm. One potential disadvantage of <span class="math inline">\(k\)</span>-means clustering is that it requires us to prespecify the number of clusters <span class="math inline">\(k\)</span>. Hierarchical clustering is an alternative approach which does not require that we commit to a particular choice of <span class="math inline">\(k\)</span>. Hierarchical clustering has an added advantage over <span class="math inline">\(k\)</span>-means clustering in that it results in an attractive tree-based representation of the observations, called a <strong><em>dendrogram</em></strong>.</p>
+<p>The most common type of hierarchical clustering is the <em>agglomerative</em> clustering (or <em>bottom-up</em> clustering). It refers to the fact that a dendrogram (generally depicted as an upside-down tree) is built starting from the leaves and combining clusters up to the trunk.</p>
+<div id="dendrogram" class="section level2">
+<h2><span class="header-section-number">8.1</span> Dendrogram</h2>
+<p>Suppose that we have the simulated data in the following figure:</p>
+<div class="figure" style="text-align: center"><span id="fig:dendro"></span>
+<img src="img/dendro.png" alt="Simulated data of 45 observations generated from a three-class model." width="60%" />
+<p class="caption">
+Figure 8.1: Simulated data of 45 observations generated from a three-class model.
 </p>
 </div>
-<p>Assume then that <span class="math inline">\(Y\)</span> is a binary/Bernoulli variable and that <span class="math inline">\(X\)</span> are predictors associated to them (no particular assumptions on them). The purpose in <em>logistic regression</em> is to estimate <span class="math display">\[
-p(x)=\mathbb{P}[Y=1|X=x]=\mathbb{E}[Y|X=x],
-\]</span> this is, how the probability of <span class="math inline">\(Y=1\)</span> is changing according to particular values, denoted by <span class="math inline">\(x\)</span>, of the random variables <span class="math inline">\(X\)</span>.</p>
-<p><em>Why not linear regression?</em> A tempting possibility is to consider the model <span class="math display">\[
-p(x)=\beta_0+\beta_1 x.
-\]</span> However, such a model will run into problems inevitably: negative probabilities and probabilities larger than one (<span class="math inline">\(p(x) &lt; 0\)</span> for some values of <span class="math inline">\(X\)</span> and <span class="math inline">\(p(X) &gt; 1\)</span> for others). To avoid this problem, the solution is to consider a function to encapsulate the value of <span class="math inline">\(z=\beta_0+\beta_1 x\)</span>, in <span class="math inline">\(\mathbb{R}\)</span>, and map it to <span class="math inline">\([0,1]\)</span>. There are several alternatives to do so, based on distribution functions <span class="math inline">\(F:\mathbb{R}\longrightarrow[0,1]\)</span> that deliver <span class="math inline">\(y=F(z)\in[0,1]\)</span>. Many functions meet this description. In logistic regression, we use the <em>logistic function</em>,</p>
-<p><span class="math display">\[ p(X) = \frac{e^{\beta_0 + \beta_1 X}}{1+e^{\beta_0 + \beta_1 X}} \]</span></p>
-<div class="rmdinsight">
-<ul>
-<li>
-No matter what values <span class="math inline"><em>β</em><sub>0</sub></span>, <span class="math inline"><em>β</em><sub>1</sub></span> or <span class="math inline"><em>X</em></span> take, <span class="math inline"><em>p</em>(<em>X</em>)</span> will have values between 0 and 1.
-</li>
-<li>
-The logistic function will always produce an <em>S-shaped</em> curve.
-</li>
-<li>
-The logistic <em>distribution</em> function is: <br /><span class="math display"><span class="math display">\[F(z)=\mathrm{logistic}(z)=\frac{e^z}{1+e^z}=\frac{1}{1+e^{-z}}.\]</span></span><br />
-</li>
-</ul>
-</div>
-<p>After a bit of manipulation of the previous equation, we find that</p>
-<p><span class="math display">\[ \frac{p(X)}{1-p(X)} = e^{\beta_0 + \beta_1 X} \]</span></p>
-<div class="rmdinsight">
-<p>
-The quantity <span class="math inline"><em>p</em>(<em>X</em>)/[1 − <em>p</em>(<em>X</em>)]</span> is called the <em>odds</em>, and can take on any value between <span class="math inline">0</span> and <span class="math inline">∞</span>.
+<p>The data in the figure above consists of 45 observations in two-dimensional space. The data were generated from a three-class model; the true class labels for each observation are shown in distinct colors. However, suppose that the data were observed without the class labels, and that we wanted to perform hierarchical clustering of the data. Hierarchical clustering (with complete linkage, to be discussed later) yields the result shown in Figure <a href="hierarchical-clustering.html#fig:dendro2">8.2</a>. How can we interpret this dendrogram?</p>
+<div class="figure" style="text-align: center"><span id="fig:dendro2"></span>
+<img src="img/dendro2.png" alt="Dendrogram" width="50%" />
+<p class="caption">
+Figure 8.2: Dendrogram
 </p>
 </div>
-<p>By taking the logarithm of both sides of the equation, we arrive at</p>
-<p><span class="math display">\[ \log( \frac{p(X)}{1-p(X)} ) = \beta_0 + \beta_1 X \]</span></p>
-<div class="rmdinsight">
-<p>
-The left-hand side is called the <em>log-odds</em> or <em>logit</em>. We see that the logistic regression model has a logit that is linear in X.
+<p>In the dendrogram of Figure <a href="hierarchical-clustering.html#fig:dendro2">8.2</a>, each leaf of the dendrogram represents one of the 45 observations. However, as we move up the tree, some leaves begin to fuse into branches. These correspond to observations that are similar to each other. As we move higher up the tree, branches themselves fuse, either with leaves or other branches. The earlier (lower in the tree) fusions occur, the more similar the groups of observations are to each other. On the other hand, observations that fuse later (near the top of the tree) can be quite different. In fact, this statement can be made precise: for any two observations, we can look for the point in the tree where branches containing those two observations are first fused. The height of this fusion, as measured on the vertical axis, indicates how different the two observations are. Thus, observations that fuse at the very bottom of the tree are quite similar to each other, whereas observations that fuse close to the top of the tree will tend to be quite different.</p>
+<p>An example of interpreting a dendrogram is presented in Figure <a href="hierarchical-clustering.html#fig:dendro3">8.3</a></p>
+<div class="figure" style="text-align: center"><span id="fig:dendro3"></span>
+<img src="img/dendro3.png" alt="An illustration of how to properly interpret a dendrogram with nine observations in two-dimensional space. Left: a dendrogram generated using Euclidean distance and complete linkage. Observations 5 and 7 are quite similar to each other, as are observations 1 and 6. However, observation 9 is no more similar to observation 2 than it is to observations 8, 5, and 7, even though observations 9 and 2 are close together in terms of horizontal distance. This is because observations 2, 8, 5, and 7 all fuse with observation 9 at the same height, approximately 1.8. Right: the raw data used to generate the dendrogram can be used to confirm that indeed, observation 9 is no more similar to observation 2 than it is to observations 8, 5, and 7." width="100%" />
+<p class="caption">
+Figure 8.3: An illustration of how to properly interpret a dendrogram with nine observations in two-dimensional space. Left: a dendrogram generated using Euclidean distance and complete linkage. Observations 5 and 7 are quite similar to each other, as are observations 1 and 6. However, observation 9 is no more similar to observation 2 than it is to observations 8, 5, and 7, even though observations 9 and 2 are close together in terms of horizontal distance. This is because observations 2, 8, 5, and 7 all fuse with observation 9 at the same height, approximately 1.8. Right: the raw data used to generate the dendrogram can be used to confirm that indeed, observation 9 is no more similar to observation 2 than it is to observations 8, 5, and 7.
 </p>
 </div>
-</div>
-<div id="estimating-the-regression-coefficients-1" class="section level3">
-<h3><span class="header-section-number">3.2.2</span> Estimating the Regression Coefficients</h3>
-<p>We estimate <span class="math inline">\(\beta_0\)</span> and <span class="math inline">\(\beta_1\)</span> using the <em>Maximum Likelihood Estimation</em> method (MLE). The basic intuition behind using maximum likelihood to fit a logistic regression model is as follows: we seek estimates for <span class="math inline">\(\beta_0\)</span> and <span class="math inline">\(\beta_1\)</span> such that the predicted probability <span class="math inline">\(\hat{p}(x_i)\)</span> of the response for each individual, corresponds as closely as possible to the individual’s observed response status (recall that the response <span class="math inline">\(Y\)</span> is categorical). The <em>likelihood function</em> is</p>
-<p><span class="math display">\[ l(\beta_0,\beta_1) = \prod_{i=1}^n p(x_i)^{Y_i}(1-p(x_i))^{1-Y_i}. \]</span></p>
-<p>This likelihood is <strong>the probability of the data based on the model</strong>. It gives the probability of the observed zeros and ones in the data. The estimates <span class="math inline">\(\hat{\beta_0}\)</span> and <span class="math inline">\(\hat{\beta_1}\)</span> are chosen to <em>maximize</em> this likelihood function. The interpretation of the likelihood function is the following:</p>
-<ul>
-<li><span class="math inline">\(\prod_{i=1}^n\)</span> appears because the sample elements are assumed to be independent and we are computing the probability of observing the whole sample <span class="math inline">\((x_{1},y_1),\ldots,(x_{n},y_n)\)</span>. This probability is equal to the product of the <em>probabilities of observing each <span class="math inline">\((x_{i},y_i)\)</span></em>.</li>
-<li><span class="math inline">\(p(x_i)^{Y_i}(1-p(x_i))^{1-Y_i}\)</span> is the probability of observing <span class="math inline">\((x_{i},Y_i)\)</span>.</li>
-</ul>
-<div class="rmdinsight">
-<p>
-In the linear regression setting, the least squares approach is a special case of maximum likelihood.
+<p>Now that we understand how to interpret the dendrogram of Figure <a href="hierarchical-clustering.html#fig:dendro2">8.2</a>, we can move on to the issue of identifying clusters on the basis of a dendrogram. In order to do this, we make a horizontal cut across the dendrogram, as shown in the following Figure <a href="hierarchical-clustering.html#fig:dendro4">8.4</a> where we cut the dendro4 at a height of nine results in two clusters.</p>
+<div class="figure" style="text-align: center"><span id="fig:dendro4"></span>
+<img src="img/dendro4.png" alt="The dendrogram from the simulated dataset, cut at a height of nine (indicated by the dashed line). This cut results in two distinct clusters, shown in different colors." width="50%" />
+<p class="caption">
+Figure 8.4: The dendrogram from the simulated dataset, cut at a height of nine (indicated by the dashed line). This cut results in two distinct clusters, shown in different colors.
 </p>
 </div>
-<p>We will not give mathematical details about the maximum likelihood and how to estimate the parameters. We will use R to fit the logistic regression models (using <code>glm</code> function).</p>
-<div class="rmdinsight">
-<p>
-Click <a href="https://egarpor.shinyapps.io/log-maximum-likelihood/" target="_blank">here</a> to see how the log-likelihood changes with respect to the values for <span class="math inline">(<em>β</em><sub>0</sub>, <em>β</em><sub>1</sub>)</span> in three data patterns. The logistic regression fit and its dependence on <span class="math inline"><em>β</em><sub>0</sub></span> (horizontal displacement) and <span class="math inline"><em>β</em><sub>1</sub></span> (steepness of the curve). Recall the effect of the sign of <span class="math inline"><em>β</em><sub>1</sub></span> in the curve: if positive, the logistic curve has an <span class="math inline"><em>s</em></span> form; if negative, the form is a reflected <span class="math inline"><em>s</em></span>.’
+<p>The distinct sets of observations beneath the cut can be interpreted as clusters. In Figure <a href="hierarchical-clustering.html#fig:dendro5">8.5</a>, cutting the dendrogram at a height of five results in three clusters.</p>
+<div class="figure" style="text-align: center"><span id="fig:dendro5"></span>
+<img src="img/dendro5.png" alt="The dendrogram from the simulated dataset, cut at a height of five (indicated by the dashed line). This cut results in three distinct clusters, shown in different colors." width="50%" />
+<p class="caption">
+Figure 8.5: The dendrogram from the simulated dataset, cut at a height of five (indicated by the dashed line). This cut results in three distinct clusters, shown in different colors.
 </p>
 </div>
+<p>The term <em>hierarchical</em> refers to the fact that clusters obtained by cutting the dendrogram at a given height are necessarily nested within the clusters obtained by cutting the dendrogram at any greater height.</p>
 </div>
-<div id="prediction-1" class="section level3">
-<h3><span class="header-section-number">3.2.3</span> Prediction</h3>
-<p><strong>Example</strong></p>
+<div id="the-hierarchical-clustering-algorithm" class="section level2">
+<h2><span class="header-section-number">8.2</span> The Hierarchical Clustering Algorithm</h2>
+<p>The hierarchical clustering dendrogram is obtained via an extremely simple algorithm. We begin by defining some sort of <em>dissimilarity</em> measure between each pair of observations. Most often, Euclidean distance is used. The algorithm proceeds iteratively. Starting out at the bottom of the dendrogram, each of the n observations is treated as its own cluster. The two clusters that are most similar to each other are then fused so that there now are <span class="math inline">\(n−1\)</span> clusters. Next the two clusters that are most similar to each other are fused again, so that there now are <span class="math inline">\(n − 2\)</span> clusters. The algorithm proceeds in this fashion until all of the observations belong to one single cluster, and the dendrogram is complete.</p>
+<p>Figure <a href="hierarchical-clustering.html#fig:cah">8.6</a> depicts the first few steps of the algorithm.</p>
+<div class="figure" style="text-align: center"><span id="fig:cah"></span>
+<img src="img/cah.png" alt="An illustration of the first few steps of the hierarchical clustering algorithm, with complete linkage and Euclidean distance. Top Left: initially, there are nine distinct clusters {1}, {2}, ..., {9}. Top Right: the two clusters that are closest together, {5} and {7}, are fused into a single cluster. Bottom Left: the two clusters that are closest together, {6} and {1},are fused into a single cluster. Bottom Right: the two clusters that are closest together using complete linkage, {8} and the cluster {5, 7}, are fused into a single cluster." width="70%" />
+<p class="caption">
+Figure 8.6: An illustration of the first few steps of the hierarchical clustering algorithm, with complete linkage and Euclidean distance. Top Left: initially, there are nine distinct clusters {1}, {2}, …, {9}. Top Right: the two clusters that are closest together, {5} and {7}, are fused into a single cluster. Bottom Left: the two clusters that are closest together, {6} and {1},are fused into a single cluster. Bottom Right: the two clusters that are closest together using complete linkage, {8} and the cluster {5, 7}, are fused into a single cluster.
+</p>
+</div>
+<p>To summarize, the hierarchical clustering algorithm is given in the following Algorithm:</p>
 <table>
-<thead>
-<tr class="header">
-<th></th>
-<th>Coefficient</th>
-<th>Std. error</th>
-<th><span class="math inline">\(Z\)</span>-statistic</th>
-<th>p-value</th>
-</tr>
-</thead>
+<colgroup>
+<col width="100%" />
+</colgroup>
 <tbody>
 <tr class="odd">
-<td>Constant</td>
-<td>-10.6513</td>
-<td>0.3612</td>
-<td>-29.5</td>
-<td>&lt;0.0001</td>
+<td align="left"><strong>Hierarchical Clustering</strong>:</td>
 </tr>
 <tr class="even">
-<td><span class="math inline">\(X\)</span></td>
-<td>0.0055</td>
-<td>0.0002</td>
-<td>24.9</td>
-<td>&lt;0.0001</td>
+<td align="left"><strong>1- Initialisation</strong>: Begin with <span class="math inline">\(n\)</span> observations and a measure (such as Euclidean distance) of all the <span class="math inline">\(C^2_n = n(n−1)/2\)</span> pairwise dissimilarities. Treat each observation as its own cluster.</td>
+</tr>
+<tr class="odd">
+<td align="left"><strong>2- For</strong> <span class="math inline">\(i=n,n-1,\ldots,2\)</span>:</td>
+</tr>
+<tr class="even">
+<td align="left">(a) Examine all pairwise inter-cluster dissimilarities among the <span class="math inline">\(i\)</span> clusters and identify the pair of clusters that are least dissimilar (that is, most similar). Fuse these two clusters. The dissimilarity between these two clusters indicates the height in the dendrogram at which the fusion should be placed.</td>
+</tr>
+<tr class="odd">
+<td align="left">(b) Compute the new pairwise inter-cluster dissimilarities among the <span class="math inline">\(i − 1\)</span> remaining clusters.</td>
 </tr>
 </tbody>
 </table>
-<p>In this example, <span class="math inline">\(\hat{\beta_0} = -10.6513\)</span> and <span class="math inline">\(\hat{\beta_1} = 0.0055\)</span>. It produces the blue curve that separates that data in the following figure,</p>
-<div class="figure">
-<img src="img/lr_example.png" />
+<p>This algorithm seems simple enough, but one issue has not been addressed. Consider the bottom right panel in Figure <a href="hierarchical-clustering.html#fig:cah">8.6</a>. How did we determine that the cluster {5, 7} should be fused with the cluster {8}? We have a concept of the dissimilarity between pairs of observations, but how do we define the dissimilarity between two clusters if one or both of the clusters contains multiple observations? The concept of dissimilarity between a pair of observations needs to be extended to a pair of groups of observations. This extension is achieved by developing the notion of <strong><em>linkage</em></strong>, which defines the dissimilarity between two groups of observations. The four most common types of linkage: complete, average, single, and centroid are briefly are described like follows:</p>
+<ul>
+<li><p><strong>Complete</strong>: Maximal intercluster dissimilarity. Compute all pairwise dissimilarities between the observations in cluster A and the observations in cluster B, and record the largest of these dissimilarities.</p></li>
+<li><p><strong>Single</strong>: Minimal intercluster dissimilarity. Compute all pairwise dissimilarities between the observations in cluster A and the observations in cluster B, and record the smallest of these dissimilarities. Single linkage can result in extended, trailing clusters in which single observations are fused one-at-a-time</p></li>
+<li><p><strong>Average</strong>: Mean intercluster dissimilarity. Compute all pairwise dissimilarities between the observations in cluster A and the observations in cluster B, and record the average of these dissimilarities.</p></li>
+<li><p><strong>Centroid</strong>: Dissimilarity between the centroid for cluster A (a mean vector of length p) and the centroid for cluster B. Centroid linkage can result in undesirable inversions.</p></li>
+</ul>
+<p>Average and complete linkage are generally preferred over single linkage, as they tend to yield more balanced dendrograms. Centroid linkage is often used in genomics.</p>
+<p>The dissimilarities computed in Step 2(b) of the hierarchical clustering algorithm will depend on the type of linkage used, as well as on the choice of dissimilarity measure. Hence, the resulting dendrogram typically depends quite strongly on the type of linkage used, as is shown in Figure <a href="hierarchical-clustering.html#fig:linkage">8.7</a>.</p>
+<div class="figure" style="text-align: center"><span id="fig:linkage"></span>
+<img src="img/linkage.png" alt="Average, complete, and single linkage applied to an example data set. Average and complete linkage tend to yield more balanced clusters." width="70%" />
+<p class="caption">
+Figure 8.7: Average, complete, and single linkage applied to an example data set. Average and complete linkage tend to yield more balanced clusters.
+</p>
+</div>
+</div>
+<div id="hierarchical-clustering-in-r" class="section level2">
+<h2><span class="header-section-number">8.3</span> Hierarchical clustering in <code>R</code></h2>
+<p>Let’s illustrate how to perform hierarchical clustering on dataset <code>laliga</code>.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Load the dataset</span>
+laliga &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&quot;http://mghassany.com/MLcourse/datasets/la-liga-15-16.csv&quot;</span>, <span class="dt">row.names=</span><span class="dv">1</span>)
 
-</div>
-<p>As for prediction, we use the model built with the estimated parameters to predict probabilities. For example,</p>
-<p>If <span class="math inline">\(X=1000\)</span>,</p>
-<p><span class="math display">\[ \hat{p}(X) = \frac{e^{\hat{\beta_0} + \hat{\beta_1} X}}{1+e^{\hat{\beta_0} + \hat{\beta_1} X}} = \frac{e^{-10.6513+0.0055 \times 1000}}{1+e^{-10.6513+0.0055 \times 1000}} = 0.006\]</span></p>
-<p>If <span class="math inline">\(X=2000\)</span>,</p>
-<p><span class="math display">\[ \hat{p}(X) = \frac{e^{\hat{\beta_0} + \hat{\beta_1} X}}{1+e^{\hat{\beta_0} + \hat{\beta_1} X}} = \frac{e^{-10.6513+0.0055 \times 2000}}{1+e^{-10.6513+0.0055 \times 2000}} = 0.586\]</span></p>
-</div>
-</div>
-<div id="multiple-logistic-regression" class="section level2">
-<h2><span class="header-section-number">3.3</span> Multiple Logistic Regression</h2>
-<p>We now consider the problem of predicting a binary response using multiple predictors. By analogy with the extension from simple to multiple linear regression in the previous chapters, we can generalize the simple logistic regression equation as follows:</p>
-<p><span class="math display">\[ \log( \frac{p(X)}{1-p(X)} ) = \beta_0 + \beta_1 X_1 +  \ldots + \beta_p X_p\]</span></p>
-<p>where <span class="math inline">\(X=(X_1,\ldots,X_p)\)</span> are <span class="math inline">\(p\)</span> predictors. The equation above can be rewritten as</p>
-<p><span class="math display">\[ p(X) = \frac{e^{\beta_0 + \beta_1 X_1 +  \ldots + \beta_p X_p}}{1+e^{\beta_0 + \beta_1 X_1 +  \ldots + \beta_p X_p}} \]</span></p>
-<p>Just as in the simple logistic regression we use the maximum likelihood method to estimate <span class="math inline">\(\beta_0,\beta_1,\ldots,\beta_p\)</span>.</p>
+<span class="co"># Work with standardized data</span>
+laliga_scaled &lt;-<span class="st"> </span><span class="kw">data.frame</span>(<span class="kw">scale</span>(laliga))
+<span class="co">#ans&gt; Error in data.frame(scale(laliga)): invalid multibyte string, element 3</span>
+
+<span class="co"># Compute dissimilary matrix - in this case Euclidean distance</span>
+d &lt;-<span class="st"> </span><span class="kw">dist</span>(laliga_scaled)
+<span class="co">#ans&gt; Error in as.matrix(x): object &#39;laliga_scaled&#39; not found</span>
+
+<span class="co"># Hierarchical clustering with complete linkage</span>
+treeComp &lt;-<span class="st"> </span><span class="kw">hclust</span>(d, <span class="dt">method =</span> <span class="st">&quot;complete&quot;</span>)
+<span class="co">#ans&gt; Error in hclust(d, method = &quot;complete&quot;): object &#39;d&#39; not found</span>
+<span class="kw">plot</span>(treeComp)
+<span class="co">#ans&gt; Error in plot(treeComp): object &#39;treeComp&#39; not found</span>
+
+<span class="co"># With average linkage</span>
+treeAve &lt;-<span class="st"> </span><span class="kw">hclust</span>(d, <span class="dt">method =</span> <span class="st">&quot;average&quot;</span>)
+<span class="co">#ans&gt; Error in hclust(d, method = &quot;average&quot;): object &#39;d&#39; not found</span>
+<span class="kw">plot</span>(treeAve)
+<span class="co">#ans&gt; Error in plot(treeAve): object &#39;treeAve&#39; not found</span>
+
+<span class="co"># With single linkage</span>
+treeSingle &lt;-<span class="st"> </span><span class="kw">hclust</span>(d, <span class="dt">method =</span> <span class="st">&quot;single&quot;</span>)
+<span class="co">#ans&gt; Error in hclust(d, method = &quot;single&quot;): object &#39;d&#39; not found</span>
+<span class="kw">plot</span>(treeSingle) <span class="co"># Chaining</span>
+<span class="co">#ans&gt; Error in plot(treeSingle): object &#39;treeSingle&#39; not found</span>
+
+<span class="co"># Set the number of clusters after inspecting visually</span>
+<span class="co"># the dendogram for &quot;long&quot; groups of hanging leaves</span>
+<span class="co"># These are the cluster assignments</span>
+<span class="kw">cutree</span>(treeComp, <span class="dt">k =</span> <span class="dv">2</span>) <span class="co"># (Barcelona, Real Madrid) and (rest)</span>
+<span class="co">#ans&gt; Error in nrow(tree$merge): object &#39;treeComp&#39; not found</span>
+<span class="kw">cutree</span>(treeComp, <span class="dt">k =</span> <span class="dv">3</span>) <span class="co"># (Barcelona, Real Madrid), (Atlético Madrid) and (rest)</span>
+<span class="co">#ans&gt; Error in nrow(tree$merge): object &#39;treeComp&#39; not found</span>
+<span class="co"># Compare differences - treeComp makes more sense than treeAve</span>
+<span class="kw">cutree</span>(treeComp, <span class="dt">k =</span> <span class="dv">4</span>) 
+<span class="co">#ans&gt; Error in nrow(tree$merge): object &#39;treeComp&#39; not found</span></code></pre></div>
 <p align="right">
 ◼
 </p>
 
 </div>
 </div>
+
+
+
             </section>
 
           </div>
         </div>
       </div>
-<a href="pw-2.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="pw-3.html" class="navigation navigation-next " aria-label="Next page""><i class="fa fa-angle-right"></i></a>
+<a href="pw-7.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="final-group-project.html" class="navigation navigation-next " aria-label="Next page""><i class="fa fa-angle-right"></i></a>
 
 <script src="book_assets/gitbook-2.6.7/js/app.min.js"></script>
 <script src="book_assets/gitbook-2.6.7/js/lunr.js"></script>

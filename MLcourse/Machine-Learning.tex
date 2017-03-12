@@ -124,7 +124,7 @@
   \postauthor{\par}
   \predate{\centering\large\emph}
   \postdate{\par}
-  \date{2017-03-10}
+  \date{2017-03-12}
 
 % \defaultfontfeatures{
 %     Path = /home/ghassany/texmf/fonts/opentype/public/fontawesome/}
@@ -2387,7 +2387,7 @@ For your submitted report, use the following YAML header:
 title: "Week 2"
 subtitle: "Multiple Linear Regression"
 author: LastName FirstName
-date: "2017-03-10 00:45:07"
+date: "2017-03-12 13:59:39"
 output:
   html_document:
     toc: true
@@ -5660,6 +5660,319 @@ obtained stop changing.
 
 \textbf{25.} In your plot from \textbf{19}, color the observations
 according to the cluster labels obtained.
+
+◼
+
+\chapter{Hierarchical Clustering}\label{hierarchical-clustering}
+
+In the last chapter we introduced the \(k\)-means algorithm. One
+potential disadvantage of \(k\)-means clustering is that it requires us
+to prespecify the number of clusters \(k\). Hierarchical clustering is
+an alternative approach which does not require that we commit to a
+particular choice of \(k\). Hierarchical clustering has an added
+advantage over \(k\)-means clustering in that it results in an
+attractive tree-based representation of the observations, called a
+\textbf{\emph{dendrogram}}.
+
+The most common type of hierarchical clustering is the
+\emph{agglomerative} clustering (or \emph{bottom-up} clustering). It
+refers to the fact that a dendrogram (generally depicted as an
+upside-down tree) is built starting from the leaves and combining
+clusters up to the trunk.
+
+\section{Dendrogram}\label{dendrogram}
+
+Suppose that we have the simulated data in the following figure:
+
+\begin{figure}
+
+{\centering \includegraphics[width=0.6\linewidth]{img/dendro} 
+
+}
+
+\caption{Simulated data of 45 observations generated from a three-class model.}\label{fig:dendro}
+\end{figure}
+
+The data in the figure above consists of 45 observations in
+two-dimensional space. The data were generated from a three-class model;
+the true class labels for each observation are shown in distinct colors.
+However, suppose that the data were observed without the class labels,
+and that we wanted to perform hierarchical clustering of the data.
+Hierarchical clustering (with complete linkage, to be discussed later)
+yields the result shown in Figure \ref{fig:dendro2}. How can we
+interpret this dendrogram?
+
+\begin{figure}
+
+{\centering \includegraphics[width=0.5\linewidth]{img/dendro2} 
+
+}
+
+\caption{Dendrogram}\label{fig:dendro2}
+\end{figure}
+
+In the dendrogram of Figure \ref{fig:dendro2}, each leaf of the
+dendrogram represents one of the 45 observations. However, as we move up
+the tree, some leaves begin to fuse into branches. These correspond to
+observations that are similar to each other. As we move higher up the
+tree, branches themselves fuse, either with leaves or other branches.
+The earlier (lower in the tree) fusions occur, the more similar the
+groups of observations are to each other. On the other hand,
+observations that fuse later (near the top of the tree) can be quite
+different. In fact, this statement can be made precise: for any two
+observations, we can look for the point in the tree where branches
+containing those two observations are first fused. The height of this
+fusion, as measured on the vertical axis, indicates how different the
+two observations are. Thus, observations that fuse at the very bottom of
+the tree are quite similar to each other, whereas observations that fuse
+close to the top of the tree will tend to be quite different.
+
+An example of interpreting a dendrogram is presented in Figure
+\ref{fig:dendro3}
+
+\begin{figure}
+
+{\centering \includegraphics[width=1\linewidth]{img/dendro3} 
+
+}
+
+\caption{An illustration of how to properly interpret a dendrogram with nine observations in two-dimensional space. Left: a dendrogram generated using Euclidean distance and complete linkage. Observations 5 and 7 are quite similar to each other, as are observations 1 and 6. However, observation 9 is no more similar to observation 2 than it is to observations 8, 5, and 7, even though observations 9 and 2 are close together in terms of horizontal distance. This is because observations 2, 8, 5, and 7 all fuse with observation 9 at the same height, approximately 1.8. Right: the raw data used to generate the dendrogram can be used to confirm that indeed, observation 9 is no more similar to observation 2 than it is to observations 8, 5, and 7.}\label{fig:dendro3}
+\end{figure}
+
+Now that we understand how to interpret the dendrogram of Figure
+\ref{fig:dendro2}, we can move on to the issue of identifying clusters
+on the basis of a dendrogram. In order to do this, we make a horizontal
+cut across the dendrogram, as shown in the following Figure
+\ref{fig:dendro4} where we cut the dendro4 at a height of nine results
+in two clusters.
+
+\begin{figure}
+
+{\centering \includegraphics[width=0.5\linewidth]{img/dendro4} 
+
+}
+
+\caption{The dendrogram from the simulated dataset, cut at a height of nine (indicated by the dashed line). This cut results in two distinct clusters, shown in different colors.}\label{fig:dendro4}
+\end{figure}
+
+The distinct sets of observations beneath the cut can be interpreted as
+clusters. In Figure \ref{fig:dendro5}, cutting the dendrogram at a
+height of five results in three clusters.
+
+\begin{figure}
+
+{\centering \includegraphics[width=0.5\linewidth]{img/dendro5} 
+
+}
+
+\caption{The dendrogram from the simulated dataset, cut at a height of five (indicated by the dashed line). This cut results in three distinct clusters, shown in different colors.}\label{fig:dendro5}
+\end{figure}
+
+The term \emph{hierarchical} refers to the fact that clusters obtained
+by cutting the dendrogram at a given height are necessarily nested
+within the clusters obtained by cutting the dendrogram at any greater
+height.
+
+\section{The Hierarchical Clustering
+Algorithm}\label{the-hierarchical-clustering-algorithm}
+
+The hierarchical clustering dendrogram is obtained via an extremely
+simple algorithm. We begin by defining some sort of \emph{dissimilarity}
+measure between each pair of observations. Most often, Euclidean
+distance is used. The algorithm proceeds iteratively. Starting out at
+the bottom of the dendrogram, each of the n observations is treated as
+its own cluster. The two clusters that are most similar to each other
+are then fused so that there now are \(n−1\) clusters. Next the two
+clusters that are most similar to each other are fused again, so that
+there now are \(n − 2\) clusters. The algorithm proceeds in this fashion
+until all of the observations belong to one single cluster, and the
+dendrogram is complete.
+
+Figure \ref{fig:cah} depicts the first few steps of the algorithm.
+
+\begin{figure}
+
+{\centering \includegraphics[width=0.7\linewidth]{img/cah} 
+
+}
+
+\caption{An illustration of the first few steps of the hierarchical clustering algorithm, with complete linkage and Euclidean distance. Top Left: initially, there are nine distinct clusters {1}, {2}, ..., {9}. Top Right: the two clusters that are closest together, {5} and {7}, are fused into a single cluster. Bottom Left: the two clusters that are closest together, {6} and {1},are fused into a single cluster. Bottom Right: the two clusters that are closest together using complete linkage, {8} and the cluster {5, 7}, are fused into a single cluster.}\label{fig:cah}
+\end{figure}
+
+To summarize, the hierarchical clustering algorithm is given in the
+following Algorithm:
+
+\begin{longtable}[]{@{}l@{}}
+\toprule
+\begin{minipage}[t]{0.97\columnwidth}\raggedright\strut
+\textbf{Hierarchical Clustering}:\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.97\columnwidth}\raggedright\strut
+\textbf{1- Initialisation}: Begin with \(n\) observations and a measure
+(such as Euclidean distance) of all the \(C^2_n = n(n−1)/2\) pairwise
+dissimilarities. Treat each observation as its own cluster.\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.97\columnwidth}\raggedright\strut
+\textbf{2- For} \(i=n,n-1,\ldots,2\):\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.97\columnwidth}\raggedright\strut
+(a) Examine all pairwise inter-cluster dissimilarities among the \(i\)
+clusters and identify the pair of clusters that are least dissimilar
+(that is, most similar). Fuse these two clusters. The dissimilarity
+between these two clusters indicates the height in the dendrogram at
+which the fusion should be placed.\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.97\columnwidth}\raggedright\strut
+(b) Compute the new pairwise inter-cluster dissimilarities among the
+\(i − 1\) remaining clusters.\strut
+\end{minipage}\tabularnewline
+\bottomrule
+\end{longtable}
+
+This algorithm seems simple enough, but one issue has not been
+addressed. Consider the bottom right panel in Figure \ref{fig:cah}. How
+did we determine that the cluster \{5, 7\} should be fused with the
+cluster \{8\}? We have a concept of the dissimilarity between pairs of
+observations, but how do we define the dissimilarity between two
+clusters if one or both of the clusters contains multiple observations?
+The concept of dissimilarity between a pair of observations needs to be
+extended to a pair of groups of observations. This extension is achieved
+by developing the notion of \textbf{\emph{linkage}}, which defines the
+dissimilarity between two groups of observations. The four most common
+types of linkage: complete, average, single, and centroid are briefly
+are described like follows:
+
+\begin{itemize}
+\item
+  \textbf{Complete}: Maximal intercluster dissimilarity. Compute all
+  pairwise dissimilarities between the observations in cluster A and the
+  observations in cluster B, and record the largest of these
+  dissimilarities.
+\item
+  \textbf{Single}: Minimal intercluster dissimilarity. Compute all
+  pairwise dissimilarities between the observations in cluster A and the
+  observations in cluster B, and record the smallest of these
+  dissimilarities. Single linkage can result in extended, trailing
+  clusters in which single observations are fused one-at-a-time
+\item
+  \textbf{Average}: Mean intercluster dissimilarity. Compute all
+  pairwise dissimilarities between the observations in cluster A and the
+  observations in cluster B, and record the average of these
+  dissimilarities.
+\item
+  \textbf{Centroid}: Dissimilarity between the centroid for cluster A (a
+  mean vector of length p) and the centroid for cluster B. Centroid
+  linkage can result in undesirable inversions.
+\end{itemize}
+
+Average and complete linkage are generally preferred over single
+linkage, as they tend to yield more balanced dendrograms. Centroid
+linkage is often used in genomics.
+
+The dissimilarities computed in Step 2(b) of the hierarchical clustering
+algorithm will depend on the type of linkage used, as well as on the
+choice of dissimilarity measure. Hence, the resulting dendrogram
+typically depends quite strongly on the type of linkage used, as is
+shown in Figure \ref{fig:linkage}.
+
+\begin{figure}
+
+{\centering \includegraphics[width=0.7\linewidth]{img/linkage} 
+
+}
+
+\caption{Average, complete, and single linkage applied to an example data set. Average and complete linkage tend to yield more balanced clusters.}\label{fig:linkage}
+\end{figure}
+
+\section{\texorpdfstring{Hierarchical clustering in
+\texttt{R}}{Hierarchical clustering in R}}\label{hierarchical-clustering-in-r}
+
+Let's illustrate how to perform hierarchical clustering on dataset
+\texttt{laliga}.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{# Load the dataset}
+\NormalTok{laliga <-}\StringTok{ }\KeywordTok{read.csv}\NormalTok{(}\StringTok{"http://mghassany.com/MLcourse/datasets/la-liga-15-16.csv"}\NormalTok{, }\DataTypeTok{row.names=}\DecValTok{1}\NormalTok{)}
+
+\CommentTok{# Work with standardized data}
+\NormalTok{laliga_scaled <-}\StringTok{ }\KeywordTok{data.frame}\NormalTok{(}\KeywordTok{scale}\NormalTok{(laliga))}
+
+\CommentTok{# Compute dissimilary matrix - in this case Euclidean distance}
+\NormalTok{d <-}\StringTok{ }\KeywordTok{dist}\NormalTok{(laliga_scaled)}
+
+\CommentTok{# Hierarchical clustering with complete linkage}
+\NormalTok{treeComp <-}\StringTok{ }\KeywordTok{hclust}\NormalTok{(d, }\DataTypeTok{method =} \StringTok{"complete"}\NormalTok{)}
+\KeywordTok{plot}\NormalTok{(treeComp)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{center}\includegraphics[width=0.7\linewidth]{Machine-Learning_files/figure-latex/unnamed-chunk-176-1} \end{center}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+
+\CommentTok{# With average linkage}
+\NormalTok{treeAve <-}\StringTok{ }\KeywordTok{hclust}\NormalTok{(d, }\DataTypeTok{method =} \StringTok{"average"}\NormalTok{)}
+\KeywordTok{plot}\NormalTok{(treeAve)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{center}\includegraphics[width=0.7\linewidth]{Machine-Learning_files/figure-latex/unnamed-chunk-176-2} \end{center}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+
+\CommentTok{# With single linkage}
+\NormalTok{treeSingle <-}\StringTok{ }\KeywordTok{hclust}\NormalTok{(d, }\DataTypeTok{method =} \StringTok{"single"}\NormalTok{)}
+\KeywordTok{plot}\NormalTok{(treeSingle) }\CommentTok{# Chaining}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{center}\includegraphics[width=0.7\linewidth]{Machine-Learning_files/figure-latex/unnamed-chunk-176-3} \end{center}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+
+\CommentTok{# Set the number of clusters after inspecting visually}
+\CommentTok{# the dendogram for "long" groups of hanging leaves}
+\CommentTok{# These are the cluster assignments}
+\KeywordTok{cutree}\NormalTok{(treeComp, }\DataTypeTok{k =} \DecValTok{2}\NormalTok{) }\CommentTok{# (Barcelona, Real Madrid) and (rest)}
+\CommentTok{#ans>       Barcelona     Real Madrid Atlético Madrid      Villarreal }
+\CommentTok{#ans>               1               1               1               2 }
+\CommentTok{#ans>        Athletic           Celta         Sevilla          Málaga }
+\CommentTok{#ans>               2               2               2               2 }
+\CommentTok{#ans>   Real Sociedad           Betis      Las Palmas        Valencia }
+\CommentTok{#ans>               2               2               2               2 }
+\CommentTok{#ans>           Eibar        Espanyol       Deportivo         Granada }
+\CommentTok{#ans>               2               2               2               2 }
+\CommentTok{#ans>  Sporting Gijón  Rayo Vallecano          Getafe         Levante }
+\CommentTok{#ans>               2               2               2               2}
+\KeywordTok{cutree}\NormalTok{(treeComp, }\DataTypeTok{k =} \DecValTok{3}\NormalTok{) }\CommentTok{# (Barcelona, Real Madrid), (Atlético Madrid) and (rest)}
+\CommentTok{#ans>       Barcelona     Real Madrid Atlético Madrid      Villarreal }
+\CommentTok{#ans>               1               1               2               3 }
+\CommentTok{#ans>        Athletic           Celta         Sevilla          Málaga }
+\CommentTok{#ans>               3               3               3               3 }
+\CommentTok{#ans>   Real Sociedad           Betis      Las Palmas        Valencia }
+\CommentTok{#ans>               3               3               3               3 }
+\CommentTok{#ans>           Eibar        Espanyol       Deportivo         Granada }
+\CommentTok{#ans>               3               3               3               3 }
+\CommentTok{#ans>  Sporting Gijón  Rayo Vallecano          Getafe         Levante }
+\CommentTok{#ans>               3               3               3               3}
+\CommentTok{# Compare differences - treeComp makes more sense than treeAve}
+\KeywordTok{cutree}\NormalTok{(treeComp, }\DataTypeTok{k =} \DecValTok{4}\NormalTok{) }
+\CommentTok{#ans>       Barcelona     Real Madrid Atlético Madrid      Villarreal }
+\CommentTok{#ans>               1               1               2               3 }
+\CommentTok{#ans>        Athletic           Celta         Sevilla          Málaga }
+\CommentTok{#ans>               3               3               3               3 }
+\CommentTok{#ans>   Real Sociedad           Betis      Las Palmas        Valencia }
+\CommentTok{#ans>               3               3               3               4 }
+\CommentTok{#ans>           Eibar        Espanyol       Deportivo         Granada }
+\CommentTok{#ans>               4               4               3               4 }
+\CommentTok{#ans>  Sporting Gijón  Rayo Vallecano          Getafe         Levante }
+\CommentTok{#ans>               4               4               4               4}
+\end{Highlighting}
+\end{Shaded}
 
 ◼
 

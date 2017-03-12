@@ -385,40 +385,62 @@ laliga &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span clas
 
 <span class="co"># Work with standardized data</span>
 laliga_scaled &lt;-<span class="st"> </span><span class="kw">data.frame</span>(<span class="kw">scale</span>(laliga))
-<span class="co">#ans&gt; Error in data.frame(scale(laliga)): invalid multibyte string, element 3</span>
 
 <span class="co"># Compute dissimilary matrix - in this case Euclidean distance</span>
 d &lt;-<span class="st"> </span><span class="kw">dist</span>(laliga_scaled)
-<span class="co">#ans&gt; Error in as.matrix(x): object &#39;laliga_scaled&#39; not found</span>
 
 <span class="co"># Hierarchical clustering with complete linkage</span>
 treeComp &lt;-<span class="st"> </span><span class="kw">hclust</span>(d, <span class="dt">method =</span> <span class="st">&quot;complete&quot;</span>)
-<span class="co">#ans&gt; Error in hclust(d, method = &quot;complete&quot;): object &#39;d&#39; not found</span>
-<span class="kw">plot</span>(treeComp)
-<span class="co">#ans&gt; Error in plot(treeComp): object &#39;treeComp&#39; not found</span>
-
+<span class="kw">plot</span>(treeComp)</code></pre></div>
+<p><img src="Machine-Learning_files/figure-html/unnamed-chunk-176-1.png" width="70%" style="display: block; margin: auto;" /></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">
 <span class="co"># With average linkage</span>
 treeAve &lt;-<span class="st"> </span><span class="kw">hclust</span>(d, <span class="dt">method =</span> <span class="st">&quot;average&quot;</span>)
-<span class="co">#ans&gt; Error in hclust(d, method = &quot;average&quot;): object &#39;d&#39; not found</span>
-<span class="kw">plot</span>(treeAve)
-<span class="co">#ans&gt; Error in plot(treeAve): object &#39;treeAve&#39; not found</span>
-
+<span class="kw">plot</span>(treeAve)</code></pre></div>
+<p><img src="Machine-Learning_files/figure-html/unnamed-chunk-176-2.png" width="70%" style="display: block; margin: auto;" /></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">
 <span class="co"># With single linkage</span>
 treeSingle &lt;-<span class="st"> </span><span class="kw">hclust</span>(d, <span class="dt">method =</span> <span class="st">&quot;single&quot;</span>)
-<span class="co">#ans&gt; Error in hclust(d, method = &quot;single&quot;): object &#39;d&#39; not found</span>
-<span class="kw">plot</span>(treeSingle) <span class="co"># Chaining</span>
-<span class="co">#ans&gt; Error in plot(treeSingle): object &#39;treeSingle&#39; not found</span>
-
+<span class="kw">plot</span>(treeSingle) <span class="co"># Chaining</span></code></pre></div>
+<p><img src="Machine-Learning_files/figure-html/unnamed-chunk-176-3.png" width="70%" style="display: block; margin: auto;" /></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">
 <span class="co"># Set the number of clusters after inspecting visually</span>
 <span class="co"># the dendogram for &quot;long&quot; groups of hanging leaves</span>
 <span class="co"># These are the cluster assignments</span>
 <span class="kw">cutree</span>(treeComp, <span class="dt">k =</span> <span class="dv">2</span>) <span class="co"># (Barcelona, Real Madrid) and (rest)</span>
-<span class="co">#ans&gt; Error in nrow(tree$merge): object &#39;treeComp&#39; not found</span>
+<span class="co">#ans&gt;       Barcelona     Real Madrid Atletico Madrid      Villarreal </span>
+<span class="co">#ans&gt;               1               1               1               2 </span>
+<span class="co">#ans&gt;        Athletic           Celta         Sevilla          Malaga </span>
+<span class="co">#ans&gt;               2               2               2               2 </span>
+<span class="co">#ans&gt;   Real Sociedad           Betis      Las Palmas        Valencia </span>
+<span class="co">#ans&gt;               2               2               2               2 </span>
+<span class="co">#ans&gt;           Eibar        Espanyol       Deportivo         Granada </span>
+<span class="co">#ans&gt;               2               2               2               2 </span>
+<span class="co">#ans&gt;  Sporting Gijon  Rayo Vallecano          Getafe         Levante </span>
+<span class="co">#ans&gt;               2               2               2               2</span>
 <span class="kw">cutree</span>(treeComp, <span class="dt">k =</span> <span class="dv">3</span>) <span class="co"># (Barcelona, Real Madrid), (Atlético Madrid) and (rest)</span>
-<span class="co">#ans&gt; Error in nrow(tree$merge): object &#39;treeComp&#39; not found</span>
+<span class="co">#ans&gt;       Barcelona     Real Madrid Atletico Madrid      Villarreal </span>
+<span class="co">#ans&gt;               1               1               2               3 </span>
+<span class="co">#ans&gt;        Athletic           Celta         Sevilla          Malaga </span>
+<span class="co">#ans&gt;               3               3               3               3 </span>
+<span class="co">#ans&gt;   Real Sociedad           Betis      Las Palmas        Valencia </span>
+<span class="co">#ans&gt;               3               3               3               3 </span>
+<span class="co">#ans&gt;           Eibar        Espanyol       Deportivo         Granada </span>
+<span class="co">#ans&gt;               3               3               3               3 </span>
+<span class="co">#ans&gt;  Sporting Gijon  Rayo Vallecano          Getafe         Levante </span>
+<span class="co">#ans&gt;               3               3               3               3</span>
 <span class="co"># Compare differences - treeComp makes more sense than treeAve</span>
 <span class="kw">cutree</span>(treeComp, <span class="dt">k =</span> <span class="dv">4</span>) 
-<span class="co">#ans&gt; Error in nrow(tree$merge): object &#39;treeComp&#39; not found</span></code></pre></div>
+<span class="co">#ans&gt;       Barcelona     Real Madrid Atletico Madrid      Villarreal </span>
+<span class="co">#ans&gt;               1               1               2               3 </span>
+<span class="co">#ans&gt;        Athletic           Celta         Sevilla          Malaga </span>
+<span class="co">#ans&gt;               3               3               3               3 </span>
+<span class="co">#ans&gt;   Real Sociedad           Betis      Las Palmas        Valencia </span>
+<span class="co">#ans&gt;               3               3               3               4 </span>
+<span class="co">#ans&gt;           Eibar        Espanyol       Deportivo         Granada </span>
+<span class="co">#ans&gt;               4               4               3               4 </span>
+<span class="co">#ans&gt;  Sporting Gijon  Rayo Vallecano          Getafe         Levante </span>
+<span class="co">#ans&gt;               4               4               4               4</span></code></pre></div>
 <p align="right">
 ◼
 </p>

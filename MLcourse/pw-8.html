@@ -33,8 +33,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black">
   
   
-
-<link rel="next" href="introduction.html">
+<link rel="prev" href="hierarchical-clustering.html">
+<link rel="next" href="final-group-project.html">
 
 <script src="book_assets/jquery-2.2.3/jquery.min.js"></script>
 <link href="book_assets/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -289,25 +289,78 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="header">
-<h1 class="title">Machine Learning</h1>
-<h4 class="author"><em>Mohamad Ghassany</em></h4>
-<h4 class="date"><em>2017-03-14</em></h4>
+<div id="pw-8" class="section level1 unnumbered">
+<h1>PW 8</h1>
+<div id="distances-dist" class="section level2 unnumbered">
+<h2>Distances <code>dist()</code></h2>
+<p>To calculate the distance in <code>R</code> we use the <code>dist()</code> function. Here is a tutorial of how use it.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Generate a matrix M of values from 1 to 15 with 5 rows and 3 columns</span>
+M &lt;-<span class="st"> </span><span class="kw">matrix</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">15</span>,<span class="dv">5</span>,<span class="dv">3</span>)
+M
+<span class="co">#ans&gt;      [,1] [,2] [,3]</span>
+<span class="co">#ans&gt; [1,]    1    6   11</span>
+<span class="co">#ans&gt; [2,]    2    7   12</span>
+<span class="co">#ans&gt; [3,]    3    8   13</span>
+<span class="co">#ans&gt; [4,]    4    9   14</span>
+<span class="co">#ans&gt; [5,]    5   10   15</span></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># - Compute the distance between rows of M.</span>
+<span class="co"># - The default distance is the euclidian distance.</span>
+<span class="co"># - Since there are 3 columns, it is the euclidian</span>
+<span class="co">#        distance between tri-dimensional points.</span>
+<span class="kw">dist</span>(M)
+<span class="co">#ans&gt;      1    2    3    4</span>
+<span class="co">#ans&gt; 2 1.73               </span>
+<span class="co">#ans&gt; 3 3.46 1.73          </span>
+<span class="co">#ans&gt; 4 5.20 3.46 1.73     </span>
+<span class="co">#ans&gt; 5 6.93 5.20 3.46 1.73</span></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># To compute the Manhattan distance </span>
+<span class="kw">dist</span>(M, <span class="dt">method=</span> <span class="st">&quot;manhattan&quot;</span>)
+<span class="co">#ans&gt;    1  2  3  4</span>
+<span class="co">#ans&gt; 2  3         </span>
+<span class="co">#ans&gt; 3  6  3      </span>
+<span class="co">#ans&gt; 4  9  6  3   </span>
+<span class="co">#ans&gt; 5 12  9  6  3</span></code></pre></div>
 </div>
-<div id="welcome" class="section level1 unnumbered">
-<h1>Welcome</h1>
-<!-- # Introduction -->
-<p>Welcome to this course. It is only a little introduction to Machine Learning.</p>
-<p>The aim of Machine Learning is to build computer systems that can adapt to their environments and learn form experience. Learning techniques and methods from this field are successfully applied to a variety of learning tasks in a broad range of areas, including, for example, spam recognition, text classification, gene discovery, financial forecasting. The course will give an overview of many concepts, techniques, and algorithms in machine learning, beginning with topics such as linear regression and classification and ending up with topics such as kmeans and Expectation Maximization. The course will give the student the basic ideas and intuition behind these methods, as well as a more formal statistical and computational understanding. Students will have an opportunity to experiment with machine learning techniques in R and apply them to a selected problem.</p>
+<div id="dendrogram-hclust" class="section level2 unnumbered">
+<h2>Dendrogram <code>hclust()</code></h2>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># First we construct the dendrogram </span>
+dendro &lt;-<span class="st"> </span><span class="kw">hclust</span>(<span class="kw">dist</span>(M))
+
+<span class="co"># Then we plot it</span>
+<span class="kw">plot</span>(dendro)</code></pre></div>
+<p><img src="Machine-Learning_files/figure-html/unnamed-chunk-181-1.png" width="70%" style="display: block; margin: auto;" /></p>
+</div>
+<div id="hierarchical-clustering-on-iris-dataset" class="section level2 unnumbered">
+<h2>Hierarchical clustering on Iris dataset</h2>
+<p><img src="img/iris.png" width="85%" style="display: block; margin: auto;" /></p>
+<p><strong>1.</strong> Download the iris dataset from  <a target="_blank" href="datasets/iris.data"> here <i class="fa fa-table" aria-hidden="true"></i></a> and import it into <code>R</code>.</p>
+<p><strong>2.</strong> Choose randomly 40 observations of the iris dataset and store the sample dataset into <code>sampleiris</code>.</p>
+<p><strong>3.</strong> Calculate the euclidean distances between the flowers. Store the results in a matrix called <code>D</code>. (<strong>Remark</strong>: the last column of the dataset is the class labels of the flowers)</p>
+<p><strong>4.</strong> Construct a dendrogram on the iris dataset using the method <em>average</em>. Store the result in <code>dendro.avg</code>.</p>
+<p><strong>5.</strong> Plot the dendrogram.</p>
+<p><strong>6.</strong> Plot again the dendrogram using the following command:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">plot</span>(dendro.avg, <span class="dt">hang=</span><span class="op">-</span><span class="dv">1</span>, <span class="dt">label=</span>sampleiris<span class="op">$</span>class)</code></pre></div>
+<p><strong>7.</strong> To cut the dendrogram and obtain a clustering use the <code>cutree</code>. You can choose the number of clusters you wish to obtain, or you can cut by choosing the height from the dendrogram figure. Cut the dendrogram in order to obtain 3 clusters. Store the results into vector <code>groups.avg</code>.</p>
+<p><strong>8.</strong> Visualize the cut tree using the function <code>rect.hclust()</code>. You can choose the colors of the rectangles too!</p>
+<p><strong>9.</strong> Compare the obtained results obtained with Hierarchical clustering and the real class labels of the flowers (function <code>table()</code>). Interpret the results.</p>
+<p><strong>Bonus</strong>: You can cut the tree manually (on demand!). To do so, plot a dendrogram first then use the function <code>identify()</code>. On the figure, click on the clusters you wish to obtain. Then hit <code>Escape</code> to finish.</p>
+<p><strong>10.</strong> Now apply the Hierarchical clustering on the iris dataset (the 150 observations). Choose 3 clusters and compare the results with the real class labels. Compare different methods of Hierarchical clustering (<em>average</em>, <em>complete</em> and <em>single</em> linkages).</p>
+<p align="right">
+◼
+</p>
 
 </div>
+</div>
+
+
+
             </section>
 
           </div>
         </div>
       </div>
-
-<a href="introduction.html" class="navigation navigation-next navigation-unique" aria-label="Next page""><i class="fa fa-angle-right"></i></a>
+<a href="hierarchical-clustering.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="final-group-project.html" class="navigation navigation-next " aria-label="Next page""><i class="fa fa-angle-right"></i></a>
 
 <script src="book_assets/gitbook-2.6.7/js/app.min.js"></script>
 <script src="book_assets/gitbook-2.6.7/js/lunr.js"></script>

@@ -124,7 +124,7 @@
   \postauthor{\par}
   \predate{\centering\large\emph}
   \postdate{\par}
-  \date{2017-03-12}
+  \date{2017-03-14}
 
 % \defaultfontfeatures{
 %     Path = /home/ghassany/texmf/fonts/opentype/public/fontawesome/}
@@ -1253,7 +1253,8 @@ the \texttt{plot()} function, type \texttt{?plot}.
 
 \CommentTok{# Sampling from a Normal - 100 random points from a N(0, 1)}
 \KeywordTok{rnorm}\NormalTok{(}\DataTypeTok{n =} \DecValTok{10}\NormalTok{, }\DataTypeTok{mean =} \DecValTok{0}\NormalTok{, }\DataTypeTok{sd =} \DecValTok{1}\NormalTok{)}
-\CommentTok{#ans>  [1] -2.453  0.501  2.742  2.063 -1.036 -0.380 -0.196 -0.437  0.782  0.203}
+\CommentTok{#ans>  [1]  0.7474  1.0810 -1.0250 -0.1529 -0.0324  0.1698 -0.8135 -0.2311}
+\CommentTok{#ans>  [9] -0.7398 -0.2366}
 
 \CommentTok{# If you want to have always the same result, set the seed of the random number}
 \CommentTok{# generator}
@@ -2386,7 +2387,7 @@ For your submitted report, use the following YAML header:
 title: "Week 2"
 subtitle: "Multiple Linear Regression"
 author: LastName FirstName
-date: "2017-03-12 14:18:31"
+date: "2017-03-14 22:16:38"
 output:
   html_document:
     toc: true
@@ -4828,11 +4829,7 @@ And the four features in Iris dataset are:
   \emph{petal width} in cm
 \end{enumerate}
 
-\begin{figure}
-\centering
-\includegraphics{img/iris.png}
-\caption{}
-\end{figure}
+\begin{center}\includegraphics[width=0.85\linewidth]{img/iris} \end{center}
 
 \section*{Building the PCA approach}\label{building-the-pca-approach}
 \addcontentsline{toc}{section}{Building the PCA approach}
@@ -5972,6 +5969,128 @@ Let's illustrate how to perform hierarchical clustering on dataset
 \CommentTok{#ans>               4               4               4               4}
 \end{Highlighting}
 \end{Shaded}
+
+◼
+
+\chapter*{PW 8}\label{pw-8}
+\addcontentsline{toc}{chapter}{PW 8}
+
+\section*{\texorpdfstring{Distances
+\texttt{dist()}}{Distances dist()}}\label{distances-dist}
+\addcontentsline{toc}{section}{Distances \texttt{dist()}}
+
+To calculate the distance in \texttt{R} we use the \texttt{dist()}
+function. Here is a tutorial of how use it.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{# Generate a matrix M of values from 1 to 15 with 5 rows and 3 columns}
+\NormalTok{M <-}\StringTok{ }\KeywordTok{matrix}\NormalTok{(}\DecValTok{1}\OperatorTok{:}\DecValTok{15}\NormalTok{,}\DecValTok{5}\NormalTok{,}\DecValTok{3}\NormalTok{)}
+\NormalTok{M}
+\CommentTok{#ans>      [,1] [,2] [,3]}
+\CommentTok{#ans> [1,]    1    6   11}
+\CommentTok{#ans> [2,]    2    7   12}
+\CommentTok{#ans> [3,]    3    8   13}
+\CommentTok{#ans> [4,]    4    9   14}
+\CommentTok{#ans> [5,]    5   10   15}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{# - Compute the distance between rows of M.}
+\CommentTok{# - The default distance is the euclidian distance.}
+\CommentTok{# - Since there are 3 columns, it is the euclidian}
+\CommentTok{#        distance between tri-dimensional points.}
+\KeywordTok{dist}\NormalTok{(M)}
+\CommentTok{#ans>      1    2    3    4}
+\CommentTok{#ans> 2 1.73               }
+\CommentTok{#ans> 3 3.46 1.73          }
+\CommentTok{#ans> 4 5.20 3.46 1.73     }
+\CommentTok{#ans> 5 6.93 5.20 3.46 1.73}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{# To compute the Manhattan distance }
+\KeywordTok{dist}\NormalTok{(M, }\DataTypeTok{method=} \StringTok{"manhattan"}\NormalTok{)}
+\CommentTok{#ans>    1  2  3  4}
+\CommentTok{#ans> 2  3         }
+\CommentTok{#ans> 3  6  3      }
+\CommentTok{#ans> 4  9  6  3   }
+\CommentTok{#ans> 5 12  9  6  3}
+\end{Highlighting}
+\end{Shaded}
+
+\section*{\texorpdfstring{Dendrogram
+\texttt{hclust()}}{Dendrogram hclust()}}\label{dendrogram-hclust}
+\addcontentsline{toc}{section}{Dendrogram \texttt{hclust()}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{# First we construct the dendrogram }
+\NormalTok{dendro <-}\StringTok{ }\KeywordTok{hclust}\NormalTok{(}\KeywordTok{dist}\NormalTok{(M))}
+
+\CommentTok{# Then we plot it}
+\KeywordTok{plot}\NormalTok{(dendro)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{center}\includegraphics[width=0.7\linewidth]{Machine-Learning_files/figure-latex/unnamed-chunk-181-1} \end{center}
+
+\section*{Hierarchical clustering on Iris
+dataset}\label{hierarchical-clustering-on-iris-dataset}
+\addcontentsline{toc}{section}{Hierarchical clustering on Iris dataset}
+
+\begin{center}\includegraphics[width=0.85\linewidth]{img/iris} \end{center}
+
+\textbf{1.} Download the iris dataset from
+\textcolor{white}{[}\faTable\textcolor{white}{]} here and import it into
+\texttt{R}.
+
+\textbf{2.} Choose randomly 40 observations of the iris dataset and
+store the sample dataset into \texttt{sampleiris}.
+
+\textbf{3.} Calculate the euclidean distances between the flowers. Store
+the results in a matrix called \texttt{D}. (\textbf{Remark}: the last
+column of the dataset is the class labels of the flowers)
+
+\textbf{4.} Construct a dendrogram on the iris dataset using the method
+\emph{average}. Store the result in \texttt{dendro.avg}.
+
+\textbf{5.} Plot the dendrogram.
+
+\textbf{6.} Plot again the dendrogram using the following command:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{plot}\NormalTok{(dendro.avg, }\DataTypeTok{hang=}\OperatorTok{-}\DecValTok{1}\NormalTok{, }\DataTypeTok{label=}\NormalTok{sampleiris}\OperatorTok{$}\NormalTok{class)}
+\end{Highlighting}
+\end{Shaded}
+
+\textbf{7.} To cut the dendrogram and obtain a clustering use the
+\texttt{cutree}. You can choose the number of clusters you wish to
+obtain, or you can cut by choosing the height from the dendrogram
+figure. Cut the dendrogram in order to obtain 3 clusters. Store the
+results into vector \texttt{groups.avg}.
+
+\textbf{8.} Visualize the cut tree using the function
+\texttt{rect.hclust()}. You can choose the colors of the rectangles too!
+
+\textbf{9.} Compare the obtained results obtained with Hierarchical
+clustering and the real class labels of the flowers (function
+\texttt{table()}). Interpret the results.
+
+\textbf{Bonus}: You can cut the tree manually (on demand!). To do so,
+plot a dendrogram first then use the function \texttt{identify()}. On
+the figure, click on the clusters you wish to obtain. Then hit
+\texttt{Escape} to finish.
+
+\textbf{10.} Now apply the Hierarchical clustering on the iris dataset
+(the 150 observations). Choose 3 clusters and compare the results with
+the real class labels. Compare different methods of Hierarchical
+clustering (\emph{average}, \emph{complete} and \emph{single} linkages).
 
 ◼
 

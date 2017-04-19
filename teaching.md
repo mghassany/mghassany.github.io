@@ -15,7 +15,7 @@ layout: page
 	+ <i class="fa fa-hand-peace-o" aria-hidden="true"></i> Prepared by me for Spring 16-17: 
 		- Discrete Random Variables: <a target="_blank" href="../documents/proba-spring-16-17-1.pdf">1 <i class="fa fa-file-pdf-o" aria-hidden="true"></i></a>, <a target="_blank" href="../documents/proba-spring-16-17-2.pdf">2 <i class="fa fa-file-pdf-o" aria-hidden="true"></i></a>.
 		- Continuous Random Variables: <a target="_blank" href="../documents/proba-spring-16-17-3.pdf"><i class="fa fa-file-pdf-o" aria-hidden="true"></i></a>.
-		- Slides on Coninuous Random Variables: <a target="_blank" href="../documents/slides-lois-continues-.pdf"><i class="fa fa-file-pdf-o" aria-hidden="true"></i></a->.
+		- Slides on Coninuous Random Variables: <a target="_blank" href="../documents/slides-lois-continues-16-17.pdf"><i class="fa fa-file-pdf-o" aria-hidden="true"></i></a>.
 		- Exercices: <a target="_blank" href="../documents/proba-spring-16-17-td1.pdf">1 <i class="fa fa-file-pdf-o" aria-hidden="true"></i></a>, <a target="_blank" href="../documents/proba-spring-16-17-td2.pdf">2 <i class="fa fa-file-pdf-o" aria-hidden="true"></i></a>.
 	+ <ul class="list-inline">
   		<li> Fall 16-17 <a target="_blank" href="../documents/proba-fall-16-17.pdf"><i class="fa fa-file-pdf-o" aria-hidden="true"></i></a></li>,

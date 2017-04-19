@@ -1,0 +1,353 @@
+---
+title: "Week 4 Disc Analysis"
+output: 
+  html_document:
+    highlight: zenburn
+---
+
+
+**1.** First, re-do the pre-processing steps you did last week (remove the first two columns from the dataset as we are not going to use them) and fit a logistic regression model of `Purchased` in function of `Age` and `EstimatedSalary`. Name your model `classifier.logreg`. If you need the dataset again, you can download it from [here](datasets/Social_Network_Ads.csv).
+
+```{r eval=F, echo=T}
+dataset <- read.csv('datasets/Social_Network_Ads.csv')
+
+#removing first 2 columns
+dataset = dataset[3:5]
+
+# splitting
+library(caTools)
+set.seed(123)
+split = sample.split(dataset$Purchased, SplitRatio = 0.75)
+training_set = subset(dataset, split == TRUE)
+test_set = subset(dataset, split == FALSE)
+
+# scaling
+training_set[-3] = scale(training_set[-3])
+test_set[-3] = scale(test_set[-3])
+
+# logistic regression
+classifier <- glm(Purchased ~ Age + EstimatedSalary , family = binomial, data=training_set)
+
+# prediction
+pred.glm = predict(classifier, newdata = test_set[,-3], type="response")
+pred.glm = ifelse(pred.glm >= 0.5, 1,0)
+
+# confusion matrix
+cm = table(test_set[,3], pred.glm)
+
+# ROC
+library(ROCR)
+score <- prediction(pred.glm,test_set[,3])
+performance(score,"auc")
+plot(performance(score,"tpr","fpr"),col="green")
+abline(0,1,lty=8)
+```
+
+
+**2.** Plot the decision boundary obtained with logistic regression. In order to do so, calculate the intercept and the slope of the line presenting the decision boundary, then plot `EstimatedSalary` in function of `Age` (from the `test_set`) and add the line using `abline()`.
+
+```{r eval=F, echo=T}
+slope <- -coef(classifier)[2]/(coef(classifier)[3])
+intercept <- -coef(classifier)[1]/(coef(classifier)[3])
+plot(test_set$Age,test_set$EstimatedSalary)
+abline(intercept,slope)
+```
+
+**3.** In order to verify that your line (decision boundary) is well plotted, color the points on the last Figure with respect to the predicted response.
+
+**Hints**: 
+
+* If your predictions are stored in `y_pred`, you can do it using `bg = ifelse(y_pred == 1, 'color1', 'color2')`, and precise the argument `pch` to be 21 (you can choose pch to be a value between 21 and 25, try it). 
+* Then, add the line using `abline()`, put the line width = 2 to make it more visible. Do not forget to title the Figure).
+
+
+```{r eval=F, echo=T}
+plot(test_set$Age,test_set$EstimatedSalary, xlab = 'Age', ylab = 'EstimatedSalary')
+title("Decision Boundary Logistic Regression")
+points(test_set, pch = 21, bg = ifelse(pred.glm == 1, 'green4', 'red3'))
+abline(intercept,slope, lwd=2)
+```
+
+**4.** Now make the same plot but color the points with respect to their real labels (the variable `Purchased`). From this figure, count the number of the false positive predictions and compare it to the value obtained in the confusion matrix.
+
+```{r eval=F, echo=T}
+plot(test_set$Age,test_set$EstimatedSalary, xlab = 'Age', ylab = 'EstimatedSalary', main="Decision Boundary Logistic Regression")
+points(test_set, pch = 21, bg = ifelse(test_set[3] == 1, 'green4', 'red3'))
+abline(intercept,slope, lwd=2)
+```
+
+
+## Linear Discriminant Analysis (LDA) {-}
+
+**5.** Fit a LDA model of `Purchased` in function of `Age` and `EstimatedSalary`. Name the model `classifier.lda`.
+
+```{r eval=F, echo=T}
+library(MASS)
+classifier.lda <- lda(Purchased~Age+EstimatedSalary, data=training_set)
+```
+
+**6.** Call `classifier.lda` and see what does it compute. 
+
+```{r eval=F, echo=T}
+classifier.lda
+```
+
+**Plus:** If you enter the following you will be returned with a list of summary information concerning the computation:
+  
+```{r eval=F, echo=T}
+classifier.lda$prior
+classifier.lda$means
+```
+
+**7.** On the test set, predict the probability of purchasing the product by the users using the model `classifier.lda`. Remark that when we predict using LDA, we obtain a list instead of a matrix, do `str()` for your predictions to see what do you get. 
+
+**Remark**: we get the predicted class here, without being obligated to round the predictions as we did for logistic regression.
+
+```{r eval=F, echo=T}
+pred.lda <- predict(classifier.lda, test_set[-3])
+```
+
+**8.** Compute the confusion matrix and compare the predictions results obtained by LDA to the ones obtained by logistic regression. What do you remark?
+
+(**Hint**: compare the accuracy)
+
+```{r eval=F, echo=T}
+cm.lda = table(test_set[,3], pred.lda$class)
+```
+
+
+**9.** Now let us plot the decision boundary obtained with LDA. You saw in the course that decision boundary for LDA represent the set of values $x$ where $\delta_k(x) = \delta_c(x)$. Recall that 
+\[ \delta_k(X) = x^T \Sigma^{-1} \mu_k - \frac{1}{2} \mu_k^T \Sigma^{-1}  \mu_k + \log \pi_k \]
+
+Here in our case, we have 2 classes ($K=2$) and 2 predictors ($p=2$). So the decision boundary (which is linear in the case of LDA, and line in our case since $p=2$) will verify the equation $\delta_0(x) = \delta_1(x)$ Since we have two classes "0" and "1". In the case of LDA this leads to linear boundary and is easy to be plotted. But in more complicated cases it is difficult to manually simplify the equations and plot the decision boundary. Anyway, there is a smart method to plot (but a little bit costy) the decision boundary in `R` using the function `contour()`, the corresponding code is the following (you must adapt it and use it to plot your decision boundary):
+
+```{r eval=F, echo=T}
+# create a grid corresponding to the scales of Age and EstimatedSalary
+# and fill this grid with lot of points
+X1 = seq(min(training_set[, 1]) - 1, max(training_set[, 1]) + 1, by = 0.01)
+X2 = seq(min(training_set[, 2]) - 1, max(training_set[, 2]) + 1, by = 0.01)
+grid_set = expand.grid(X1, X2)
+# Adapt the variable names
+colnames(grid_set) = c('Age', 'EstimatedSalary')
+
+# plot 'Estimated Salary' ~ 'Age'
+plot(test_set[, -3],
+     main = 'Decision Boundary LDA',
+     xlab = 'Age', ylab = 'Estimated Salary',
+     xlim = range(X1), ylim = range(X2))
+
+# color the plotted points with their real label (class)
+points(test_set, pch = 21, bg = ifelse(test_set[, 3] == 1, 'green4', 'red3'))
+
+# Make predictions on the points of the grid, this will take some time
+pred_grid = predict(classifier.lda, newdata = grid_set)$class
+
+# Separate the predictions by a contour
+contour(X1, X2, matrix(as.numeric(pred_grid), length(X1), length(X2)), add = TRUE)
+```
+
+```{r eval=F, echo=T}
+# Je l'ai fait manuellement
+set = training_set
+classifier2 <- lda(Purchased ~ ., data = set)
+mu_0 = classifier2$means[1,]
+mu_1 = classifier2$means[2,]
+class0 = set[which(set$Purchased==0),]
+class1 = set[which(set$Purchased==1),]
+sigma=(1/(nrow(set)-1))*( nrow(class0)*cov(class0[-3]) + nrow(class1)*cov(class1[-3]) )
+sigma.inv = solve(sigma)
+pi_0 = classifier2$prior[1]
+pi_1 = classifier2$prior[2]
+left = sigma.inv%*%mu_1
+right = sigma.inv%*%mu_0
+a = left[1]
+b = left[2]
+c = -0.5 * t(mu_1)%*%sigma.inv%*%mu_1 + log(pi_1) # or log ?
+m = right[1]
+n = right[2]
+t = -0.5 * t(mu_0)%*%sigma.inv%*%mu_0 + log(pi_0)
+
+intercept.lda = (t-c)/(b-n)
+slope.lda = (m-a)/(b-n)
+
+plot(set[, -3],
+     main = 'Classifier',
+     xlab = 'Age', ylab = 'Estimated Salary',
+     xlim = range(set$Age), ylim = range(set$EstimatedSalary))
+points(set, pch = 21, bg = ifelse(predict(classifier2,set[,-3])$class == 1, 'green4', 'red3'))
+abline(intercept.lda,slope.lda, col='blue')
+```
+
+
+**10.** Now let us build a LDA model for our data set without using the `lda()` function. You are free to do it by creating a function or without creating one. Go back to question **6** and see what did you obtain by using `lda()`. It computes the prior probability of group membership and the estimated group means for each of the two groups. Additional information that is not provided, but may be important, is the single covariance matrix that is being used for the various groupings. 
+
+```{block, type = 'rmdinsight'}
+In LDA, we compute for every observation $x$ its discriminant score $\delta_k(x)$. Then we attribute $x$ to the class that has the highest $\delta$. Recall that
+
+\[\delta_k(x) = x^T \Sigma^{-1} \mu_k - \frac{1}{2} \mu_k^T \Sigma^{-1}  \mu_k + \log \pi_k\]
+
+So to compute $\delta_k(x)$ we need to estimate $\pi_k$, $\mu_k$ and $\Sigma$.
+
+Note that \[x=\begin{pmatrix}
+            X_1 \\
+            X_2
+            \end{pmatrix}\] and here $X_1$=`Age` and $X_2$=`EstimatedSalary`.
+```
+
+So let us do it step by step, first we will do the estimates:
+
+**10.1** Subset the training set into two sets: `class0` where `Purchased = 0` and `class1` where `Purchased = 1`).
+
+**10.2** Compute $\pi_0$ and $\pi_1$.
+
+\[\pi_i = N_i / N, \,\, \text{where} \,\, N_i \,\, \text{is the number of data points in group } i\]
+
+**10.3** Compute $\mu_0$ and $\mu_1$. 
+\[\mu_0 = \begin{pmatrix}
+   \mu_0(X_1) \\
+   \mu_0(X_2)
+   \end{pmatrix} \,\, \text{and} \,\, \mu_1 = \begin{pmatrix}
+   \mu_1(X_1) \\
+   \mu_1(X_2)
+   \end{pmatrix}\]
+
+where, for example, $\mu_0(X_1)$ is the mean of the variable $X_1$ in the group $0$ (the subset `class0`).
+
+**10.4** Compute $\Sigma$. In the case of two classes like here, it is computed by calculating the following:
+  
+  \[\Sigma = \frac{(N_0-1)\Sigma_0 + (N_1-1)\Sigma_1}{N_0+N_1-2}\]
+  
+where $\Sigma_i$ is the estimated covariance matrix for specific group $i$.
+
+**Remark:** Recall that in LDA we use the same $\Sigma$. But in QDA we do not.
+ 
+**10.5.** Now that we have computed all the needed estimates, we can calculate $\delta_0(x)$ and $\delta_1(x)$ for any observation $x$. And we will attribute $x$ to the class with the highest $\delta$. First, try it for $x$ where $x^T=(1,1.5)$, what is class prediction for this spesific $x$? 
+
+**10.6.** Compute the discriminant scores $\delta$ for the test set (a matrix $100\times 2$), predict the classes and compare your results with the results obtained with the `lda()` function.
+
+```{r eval=F, echo=T}
+set <- training_set
+names(set) <- c("X1","X2","Y")
+# pi
+prior <- numeric(2)
+names(prior) <- c("0","1")
+prior[1]<- sum(set$Y==0)/nrow(set)
+prior[2]<- sum(set$Y==1)/nrow(set)
+# mu
+mu <- matrix(,2,2)
+rownames(mu) <- c("0","1")
+colnames(mu) <- c("X1","X2")
+mu[1,1] <- mean(set[which(set$Y==0),]$X1)
+mu[2,1] <- mean(set[which(set$Y==1),]$X1)
+mu[1,2] <- mean(set[which(set$Y==0),]$X2)
+mu[2,2] <- mean(set[which(set$Y==1),]$X2)
+# sigma
+class0 = set[which(set$Y==0),]
+class1 = set[which(set$Y==1),]
+sigma=(1/(nrow(set)-1))*( nrow(class0)*cov(class0[-3]) + nrow(class1)*cov(class1[-3]) )
+sigma.inv = solve(sigma)
+
+delta0 <- numeric()
+delta1 <- numeric()
+
+for(i in 1:nrow(test_set)){
+delta0[i] <- as.matrix(test_set[i,1:2])%*%sigma.inv%*%mu[1,] - 0.5 * t(mu[1,])%*%sigma.inv%*%mu[1,] + log(prior[1])
+
+delta1[i] <- as.matrix(test_set[i,1:2])%*%sigma.inv%*%mu[2,] - 0.5 * t(mu[2,])%*%sigma.inv%*%mu[2,] + log(prior[2])
+}
+
+deltas <- cbind(delta0,delta1)
+
+class= numeric()
+for(i in 1:nrow(deltas)){
+  class[i] <- ifelse(deltas[i,1]>=deltas[i,2],0,1)
+}
+
+y_pred = predict(classifier.lda, newdata = test_set[-3])
+
+sum(class == as.vector(y_pred$class)) # if 100 then perfect!
+```
+
+  
+## Quadratic Discriminant Analysis (QDA) {-}
+
+Training and assessing a QDA model in `R` is very similar in syntax to training and assessing a LDA model. The only difference is in the function name `qda()`
+
+**11.** Fit a QDA model of `Purchased` in function of `Age` and `EstimatedSalary`. Name the model `classifier.qda`.
+
+```{r eval=F, echo=T}
+# qda() is a function of library(MASS)
+classifier.qda <- qda(Purchased~., data = training_set)
+```
+
+**12.** Make predictions on the `test_set` using the QDA model `classifier.qda`. Show the computation matrix and compare the results with the predictions obtained using the LDA model `classifier.lda`.
+
+```{r eval=F, echo=T}
+pred.qda = predict(classifier.qda, test_set[-3])
+cm.qda = table(pred.qda$class,test_set[,3])
+```
+
+**13.** Plot the decision boundary obtained with QDA. Color the points with the real labels.
+
+```{r eval=F, echo=T}
+# create a grid corresponding to the scales of Age and EstimatedSalary
+# and fill this grid with lot of points
+X1 = seq(min(training_set[, 1]) - 1, max(training_set[, 1]) + 1, by = 0.01)
+X2 = seq(min(training_set[, 2]) - 1, max(training_set[, 2]) + 1, by = 0.01)
+grid_set = expand.grid(X1, X2)
+# Adapt the variable names
+colnames(grid_set) = c('Age', 'EstimatedSalary')
+
+# plot 'Estimated Salary' ~ 'Age'
+plot(test_set[, -3],
+     main = 'Decision Boundary LDA',
+     xlab = 'Age', ylab = 'Estimated Salary',
+     xlim = range(X1), ylim = range(X2))
+
+# color the plotted points with their real label (class)
+points(test_set, pch = 21, bg = ifelse(test_set[, 3] == 1, 'green4', 'red3'))
+
+# Make predictions on the points of the grid, this will take some time
+pred_grid = predict(classifier.qda, newdata = grid_set)$class
+
+# color the plotted points with their predicted label (class)
+# points(test_set, pch = 21, bg = ifelse(pred_grid == 1, 'green4', 'red3'))
+
+# Separate the predictions by a contour
+contour(X1, X2, matrix(as.numeric(pred_grid), length(X1), length(X2)), add = TRUE, lwd=2)
+```
+
+
+## Comparison {-}
+
+**14.** In order to compare the methods we used, plot on the same Figure the ROC curve for each classifier we fitted and compare the correspondant AUC. What was the best model for this dataset? 
+
+**Remark:** 
+If you use the `ROCR` package:
+
+* For Logistic regression, use the predicted probabilities in the `prediction()` (and not the round values "0" or "1"). 
+* For LDA and QDA, put `pred.lda$posterior[,2]` in the `prediction()` function (those are the posterior probabilities that observations belong to class "1").
+
+```{r eval=F, echo=T}
+# ROC
+library(ROCR)
+
+# here we need the probs not class for log reg
+pred.glm = predict(classifier, newdata = test_set[,-3], type="response")
+
+score.glm <- prediction(pred.glm,test_set[,3])
+score.lda <- prediction(pred.lda$posterior[,2],test_set[,3])
+score.qda <- prediction(pred.qda$posterior[,2],test_set[,3])
+
+#scores
+performance(score.glm,"auc")@y.values
+performance(score.lda,"auc")@y.values
+performance(score.qda,"auc")@y.values
+
+plot(performance(score.glm,"tpr","fpr"),col="green")
+plot(performance(score.lda,"tpr","fpr"),col="red",add=T)
+plot(performance(score.qda,"tpr","fpr"),col="blue",add=T)
+abline(0,1,lty=8)
+```
+
+<p class="text-right">&#9724;</p>

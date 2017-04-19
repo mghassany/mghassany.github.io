@@ -8,19 +8,25 @@ layout: page
 ### Since 2014
 
 * Machine Learning. 
-	+ Prepared by me for Spring 16-17: [Course repository](../ML_course/index.html "Introduction to Machine Learning -- Spring 16-17").
+	+ <i class="fa fa-hand-peace-o" aria-hidden="true"></i> Prepared by me for Spring 16-17: <a target="_blank" href="../MLcourse/index.html">Course repository <i class="fa fa-book" aria-hidden="true"></i></a>.
+
+<!-- 	[Course repository](../MLcourse/index.html "Introduction to Machine Learning -- Spring 16-17"). -->
 * Probabilities & Statistics.
-	+ Prepared by me for Spring 16-17: Course,  Exercices.
+	+ <i class="fa fa-hand-peace-o" aria-hidden="true"></i> Prepared by me for Spring 16-17: 
+		- Discrete Random Variables: <a target="_blank" href="../documents/proba-spring-16-17-1.pdf">1 <i class="fa fa-file-pdf-o" aria-hidden="true"></i></a>, <a target="_blank" href="../documents/proba-spring-16-17-2.pdf">2 <i class="fa fa-file-pdf-o" aria-hidden="true"></i></a>.
+		- Continuous Random Variables: <a target="_blank" href="../documents/proba-spring-16-17-3.pdf"><i class="fa fa-file-pdf-o" aria-hidden="true"></i></a>.
+		- Slides on Coninuous Random Variables: <a target="_blank" href="../documents/slides-lois-continues-.pdf"><i class="fa fa-file-pdf-o" aria-hidden="true"></i></a->.
+		- Exercices: <a target="_blank" href="../documents/proba-spring-16-17-td1.pdf">1 <i class="fa fa-file-pdf-o" aria-hidden="true"></i></a>, <a target="_blank" href="../documents/proba-spring-16-17-td2.pdf">2 <i class="fa fa-file-pdf-o" aria-hidden="true"></i></a>.
 	+ <ul class="list-inline">
-  		<li> Fall 16-17 <a target="_blank" href="../documents/proba-fall-16-17.pdf"><i class="fa fa-file-pdf-o" aria-hidden="true"></i></a></li>
-  		<li>Spring 15-16 <a target="_blank" href="../documents/proba-spring-15-16.pdf"><i class="fa fa-file-pdf-o" aria-hidden="true"></i></a></li>
-  		<li>Fall 15-16 <a target="_blank" href="../documents/proba-fall-15-16.pdf"><i class="fa fa-file-pdf-o" aria-hidden="true"></i></a></li>
-  		<li>Spring 14-15 <a target="_blank" href="../documents/proba-spring-14-15.pdf"><i class="fa fa-file-pdf-o" aria-hidden="true"></i></a></li>
+  		<li> Fall 16-17 <a target="_blank" href="../documents/proba-fall-16-17.pdf"><i class="fa fa-file-pdf-o" aria-hidden="true"></i></a></li>,
+  		<li>Spring 15-16 <a target="_blank" href="../documents/proba-spring-15-16.pdf"><i class="fa fa-file-pdf-o" aria-hidden="true"></i></a></li>,
+  		<li>Fall 15-16 <a target="_blank" href="../documents/proba-fall-15-16.pdf"><i class="fa fa-file-pdf-o" aria-hidden="true"></i></a></li>,
+  		<li>Spring 14-15 <a target="_blank" href="../documents/proba-spring-14-15.pdf"><i class="fa fa-file-pdf-o" aria-hidden="true"></i></a></li>.
 		</ul>
 * Statistical inference.
-	+ Fall 15-16 <a target="_blank" href="../documents/stat-inf-fall-15-16.pdf"><i class="fa fa-file-pdf-o" aria-hidden="true"></i></a>
+	+ Fall 15-16 <a target="_blank" href="../documents/stat-inf-fall-15-16.pdf"><i class="fa fa-file-pdf-o" aria-hidden="true"></i></a>.
 * Descriptive Statistics.
-	+ Fall 16-17 <a target="_blank" href="../documents/stat-desc-fall-16-17.pdf"><i class="fa fa-file-pdf-o" aria-hidden="true"></i></a>
+	+ Fall 16-17 <a target="_blank" href="../documents/stat-desc-fall-16-17.pdf"><i class="fa fa-file-pdf-o" aria-hidden="true"></i></a>.
 
 ## Université Paris 13
 

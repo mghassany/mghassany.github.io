@@ -1,0 +1,513 @@
+<!DOCTYPE html>
+<html >
+
+<head>
+
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>Machine Learning</title>
+  <meta content="text/html; charset=UTF-8" http-equiv="Content-Type">
+  <meta name="description" content="Machine Learning course">
+  <meta name="generator" content="bookdown 0.2 and GitBook 2.6.7">
+
+  <meta property="og:title" content="Machine Learning" />
+  <meta property="og:type" content="book" />
+  
+  
+  <meta property="og:description" content="Machine Learning course" />
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Machine Learning" />
+  
+  <meta name="twitter:description" content="Machine Learning course" />
+  
+
+<meta name="author" content="Mohamad Ghassany">
+
+
+<meta name="date" content="2017-03-15">
+
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  
+  
+<link rel="prev" href="linear-discriminant-analysis.html">
+<link rel="next" href="support-vector-machines.html">
+
+<script src="book_assets/jquery-2.2.3/jquery.min.js"></script>
+<link href="book_assets/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="book_assets/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="book_assets/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="book_assets/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="book_assets/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+<style type="text/css">
+div.sourceCode { overflow-x: auto; }
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+  margin: 0; padding: 0; vertical-align: baseline; border: none; }
+table.sourceCode { width: 100%; line-height: 100%; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
+td.sourceCode { padding-left: 5px; }
+code > span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code > span.dt { color: #902000; } /* DataType */
+code > span.dv { color: #40a070; } /* DecVal */
+code > span.bn { color: #40a070; } /* BaseN */
+code > span.fl { color: #40a070; } /* Float */
+code > span.ch { color: #4070a0; } /* Char */
+code > span.st { color: #4070a0; } /* String */
+code > span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code > span.ot { color: #007020; } /* Other */
+code > span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code > span.fu { color: #06287e; } /* Function */
+code > span.er { color: #ff0000; font-weight: bold; } /* Error */
+code > span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+code > span.cn { color: #880000; } /* Constant */
+code > span.sc { color: #4070a0; } /* SpecialChar */
+code > span.vs { color: #4070a0; } /* VerbatimString */
+code > span.ss { color: #bb6688; } /* SpecialString */
+code > span.im { } /* Import */
+code > span.va { color: #19177c; } /* Variable */
+code > span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code > span.op { color: #666666; } /* Operator */
+code > span.bu { } /* BuiltIn */
+code > span.ex { } /* Extension */
+code > span.pp { color: #bc7a00; } /* Preprocessor */
+code > span.at { color: #7d9029; } /* Attribute */
+code > span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code > span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+</style>
+
+<link rel="stylesheet" href="css/style.css" type="text/css" />
+</head>
+
+<body>
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">ESILV Intoduction to Machine Learning</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Welcome</a></li>
+<li class="chapter" data-level="" data-path="introduction.html"><a href="introduction.html"><i class="fa fa-check"></i>Introduction</a><ul>
+<li class="chapter" data-level="" data-path="introduction.html"><a href="introduction.html#what-is-machine-learning"><i class="fa fa-check"></i>What is Machine Learning ?</a></li>
+<li class="chapter" data-level="" data-path="introduction.html"><a href="introduction.html#supervised-learning"><i class="fa fa-check"></i>Supervised Learning</a></li>
+<li class="chapter" data-level="" data-path="introduction.html"><a href="introduction.html#unsupervised-learning"><i class="fa fa-check"></i>Unsupervised Learning</a></li>
+</ul></li>
+<li class="part"><span><b>Supervised Learning</b></span></li>
+<li class="part"><span><b>Regression</b></span></li>
+<li class="chapter" data-level="1" data-path="linear-regression.html"><a href="linear-regression.html"><i class="fa fa-check"></i><b>1</b> Linear Regression</a><ul>
+<li class="chapter" data-level="1.1" data-path="linear-regression.html"><a href="linear-regression.html#notation"><i class="fa fa-check"></i><b>1.1</b> Notation</a></li>
+<li class="chapter" data-level="1.2" data-path="linear-regression.html"><a href="linear-regression.html#model-representation"><i class="fa fa-check"></i><b>1.2</b> Model Representation</a></li>
+<li class="chapter" data-level="1.3" data-path="linear-regression.html"><a href="linear-regression.html#why-estimate-f"><i class="fa fa-check"></i><b>1.3</b> Why Estimate <span class="math inline">\(f\)</span> ?</a><ul>
+<li class="chapter" data-level="" data-path="linear-regression.html"><a href="linear-regression.html#prediction"><i class="fa fa-check"></i>Prediction</a></li>
+<li class="chapter" data-level="" data-path="linear-regression.html"><a href="linear-regression.html#inference"><i class="fa fa-check"></i>Inference</a></li>
+</ul></li>
+<li class="chapter" data-level="1.4" data-path="linear-regression.html"><a href="linear-regression.html#simple-linear-regression-model"><i class="fa fa-check"></i><b>1.4</b> Simple Linear Regression Model</a></li>
+<li class="chapter" data-level="1.5" data-path="linear-regression.html"><a href="linear-regression.html#estimating-the-coefficients"><i class="fa fa-check"></i><b>1.5</b> Estimating the Coefficients</a></li>
+<li class="chapter" data-level="1.6" data-path="linear-regression.html"><a href="linear-regression.html#assessing-the-accuracy-of-the-coefficient-estimates"><i class="fa fa-check"></i><b>1.6</b> Assessing the Accuracy of the Coefficient Estimates</a><ul>
+<li class="chapter" data-level="" data-path="linear-regression.html"><a href="linear-regression.html#hypothesis-testing"><i class="fa fa-check"></i>Hypothesis testing</a></li>
+</ul></li>
+<li class="chapter" data-level="1.7" data-path="linear-regression.html"><a href="linear-regression.html#anova-and-model-fit"><i class="fa fa-check"></i><b>1.7</b> ANOVA and model fit</a><ul>
+<li class="chapter" data-level="1.7.1" data-path="linear-regression.html"><a href="linear-regression.html#anova"><i class="fa fa-check"></i><b>1.7.1</b> ANOVA</a></li>
+<li class="chapter" data-level="1.7.2" data-path="linear-regression.html"><a href="linear-regression.html#the-r2-statistic"><i class="fa fa-check"></i><b>1.7.2</b> The <span class="math inline">\(R^2\)</span> Statistic</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="pw-1.html"><a href="pw-1.html"><i class="fa fa-check"></i>PW 1</a><ul>
+<li class="chapter" data-level="1.8" data-path="pw-1.html"><a href="pw-1.html#some-r-basics"><i class="fa fa-check"></i><b>1.8</b> Some <code>R</code> basics</a><ul>
+<li class="chapter" data-level="1.8.1" data-path="pw-1.html"><a href="pw-1.html#basic-commands"><i class="fa fa-check"></i><b>1.8.1</b> Basic Commands</a></li>
+<li class="chapter" data-level="1.8.2" data-path="pw-1.html"><a href="pw-1.html#vectors"><i class="fa fa-check"></i><b>1.8.2</b> Vectors</a></li>
+<li class="chapter" data-level="1.8.3" data-path="pw-1.html"><a href="pw-1.html#matrices-data-frames-and-lists"><i class="fa fa-check"></i><b>1.8.3</b> Matrices, data frames and lists</a></li>
+<li class="chapter" data-level="1.8.4" data-path="pw-1.html"><a href="pw-1.html#graphics"><i class="fa fa-check"></i><b>1.8.4</b> Graphics</a></li>
+<li class="chapter" data-level="1.8.5" data-path="pw-1.html"><a href="pw-1.html#distributions"><i class="fa fa-check"></i><b>1.8.5</b> Distributions</a></li>
+<li class="chapter" data-level="1.8.6" data-path="pw-1.html"><a href="pw-1.html#working-directory"><i class="fa fa-check"></i><b>1.8.6</b> Working directory</a></li>
+<li class="chapter" data-level="1.8.7" data-path="pw-1.html"><a href="pw-1.html#loading-data"><i class="fa fa-check"></i><b>1.8.7</b> Loading Data</a></li>
+</ul></li>
+<li class="chapter" data-level="1.9" data-path="pw-1.html"><a href="pw-1.html#regression"><i class="fa fa-check"></i><b>1.9</b> Regression</a><ul>
+<li class="chapter" data-level="1.9.1" data-path="pw-1.html"><a href="pw-1.html#the-lm-function"><i class="fa fa-check"></i><b>1.9.1</b> The <code>lm</code> function</a></li>
+<li class="chapter" data-level="1.9.2" data-path="pw-1.html"><a href="pw-1.html#predicting-house-value-boston-dataset"><i class="fa fa-check"></i><b>1.9.2</b> Predicting House Value: Boston dataset</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="multiple-linear-regression.html"><a href="multiple-linear-regression.html"><i class="fa fa-check"></i><b>2</b> Multiple Linear Regression</a><ul>
+<li class="chapter" data-level="2.1" data-path="multiple-linear-regression.html"><a href="multiple-linear-regression.html#the-model"><i class="fa fa-check"></i><b>2.1</b> The Model</a></li>
+<li class="chapter" data-level="2.2" data-path="multiple-linear-regression.html"><a href="multiple-linear-regression.html#estimating-the-regression-coefficients"><i class="fa fa-check"></i><b>2.2</b> Estimating the Regression Coefficients</a></li>
+<li class="chapter" data-level="2.3" data-path="multiple-linear-regression.html"><a href="multiple-linear-regression.html#some-important-questions"><i class="fa fa-check"></i><b>2.3</b> Some important questions</a><ul>
+<li class="chapter" data-level="2.3.1" data-path="multiple-linear-regression.html"><a href="multiple-linear-regression.html#other-considerations-in-regression-model"><i class="fa fa-check"></i><b>2.3.1</b> Other Considerations in Regression Model</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="pw-2.html"><a href="pw-2.html"><i class="fa fa-check"></i>PW 2</a><ul>
+<li class="chapter" data-level="2.4" data-path="pw-2.html"><a href="pw-2.html#reporting"><i class="fa fa-check"></i><b>2.4</b> Reporting</a><ul>
+<li class="chapter" data-level="" data-path="pw-2.html"><a href="pw-2.html#markdown"><i class="fa fa-check"></i>Markdown</a></li>
+<li class="chapter" data-level="" data-path="pw-2.html"><a href="pw-2.html#r-markdown"><i class="fa fa-check"></i>R Markdown</a></li>
+<li class="chapter" data-level="" data-path="pw-2.html"><a href="pw-2.html#the-report-to-be-submitted"><i class="fa fa-check"></i>The report to be submitted</a></li>
+</ul></li>
+<li class="chapter" data-level="2.5" data-path="pw-2.html"><a href="pw-2.html#multiple-linear-regression-1"><i class="fa fa-check"></i><b>2.5</b> Multiple Linear Regression</a><ul>
+<li class="chapter" data-level="" data-path="pw-2.html"><a href="pw-2.html#the-exercises"><i class="fa fa-check"></i>The exercises</a></li>
+</ul></li>
+</ul></li>
+<li class="part"><span><b>Classification</b></span></li>
+<li class="chapter" data-level="3" data-path="logistic-regression.html"><a href="logistic-regression.html"><i class="fa fa-check"></i><b>3</b> Logistic Regression</a><ul>
+<li class="chapter" data-level="3.1" data-path="logistic-regression.html"><a href="logistic-regression.html#introduction-1"><i class="fa fa-check"></i><b>3.1</b> Introduction</a></li>
+<li class="chapter" data-level="3.2" data-path="logistic-regression.html"><a href="logistic-regression.html#logistic-regression-1"><i class="fa fa-check"></i><b>3.2</b> Logistic Regression</a><ul>
+<li class="chapter" data-level="3.2.1" data-path="logistic-regression.html"><a href="logistic-regression.html#the-logistic-model"><i class="fa fa-check"></i><b>3.2.1</b> The Logistic Model</a></li>
+<li class="chapter" data-level="3.2.2" data-path="logistic-regression.html"><a href="logistic-regression.html#estimating-the-regression-coefficients-1"><i class="fa fa-check"></i><b>3.2.2</b> Estimating the Regression Coefficients</a></li>
+<li class="chapter" data-level="3.2.3" data-path="logistic-regression.html"><a href="logistic-regression.html#prediction-1"><i class="fa fa-check"></i><b>3.2.3</b> Prediction</a></li>
+</ul></li>
+<li class="chapter" data-level="3.3" data-path="logistic-regression.html"><a href="logistic-regression.html#multiple-logistic-regression"><i class="fa fa-check"></i><b>3.3</b> Multiple Logistic Regression</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="pw-3.html"><a href="pw-3.html"><i class="fa fa-check"></i>PW 3</a><ul>
+<li class="chapter" data-level="" data-path="pw-3.html"><a href="pw-3.html#report-template"><i class="fa fa-check"></i>Report template</a></li>
+<li class="chapter" data-level="" data-path="pw-3.html"><a href="pw-3.html#social-networks-ads"><i class="fa fa-check"></i>Social Networks Ads</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="linear-discriminant-analysis.html"><a href="linear-discriminant-analysis.html"><i class="fa fa-check"></i><b>4</b> Linear Discriminant Analysis</a><ul>
+<li class="chapter" data-level="4.1" data-path="linear-discriminant-analysis.html"><a href="linear-discriminant-analysis.html#introduction-2"><i class="fa fa-check"></i><b>4.1</b> Introduction</a></li>
+<li class="chapter" data-level="4.2" data-path="linear-discriminant-analysis.html"><a href="linear-discriminant-analysis.html#bayes-theorem"><i class="fa fa-check"></i><b>4.2</b> Bayes’ Theorem</a></li>
+<li class="chapter" data-level="4.3" data-path="linear-discriminant-analysis.html"><a href="linear-discriminant-analysis.html#lda-for-p1"><i class="fa fa-check"></i><b>4.3</b> LDA for <span class="math inline">\(p=1\)</span></a></li>
+<li class="chapter" data-level="4.4" data-path="linear-discriminant-analysis.html"><a href="linear-discriminant-analysis.html#estimating-the-parameters"><i class="fa fa-check"></i><b>4.4</b> Estimating the parameters</a></li>
+<li class="chapter" data-level="4.5" data-path="linear-discriminant-analysis.html"><a href="linear-discriminant-analysis.html#lda-for-p-1"><i class="fa fa-check"></i><b>4.5</b> LDA for <span class="math inline">\(p &gt; 1\)</span></a></li>
+<li class="chapter" data-level="4.6" data-path="linear-discriminant-analysis.html"><a href="linear-discriminant-analysis.html#making-predictions"><i class="fa fa-check"></i><b>4.6</b> Making predictions</a></li>
+<li class="chapter" data-level="4.7" data-path="linear-discriminant-analysis.html"><a href="linear-discriminant-analysis.html#other-forms-of-discriminant-analysis"><i class="fa fa-check"></i><b>4.7</b> Other forms of Discriminant Analysis</a><ul>
+<li class="chapter" data-level="4.7.1" data-path="linear-discriminant-analysis.html"><a href="linear-discriminant-analysis.html#quadratic-discriminant-analysis-qda"><i class="fa fa-check"></i><b>4.7.1</b> Quadratic Discriminant Analysis (QDA)</a></li>
+<li class="chapter" data-level="4.7.2" data-path="linear-discriminant-analysis.html"><a href="linear-discriminant-analysis.html#naive-bayes"><i class="fa fa-check"></i><b>4.7.2</b> Naive Bayes</a></li>
+</ul></li>
+<li class="chapter" data-level="4.8" data-path="linear-discriminant-analysis.html"><a href="linear-discriminant-analysis.html#lda-vs-logistic-regression"><i class="fa fa-check"></i><b>4.8</b> LDA vs Logistic Regression</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="pw-4.html"><a href="pw-4.html"><i class="fa fa-check"></i>PW 4</a><ul>
+<li class="chapter" data-level="" data-path="pw-4.html"><a href="pw-4.html#report-template-1"><i class="fa fa-check"></i>Report template</a></li>
+<li class="chapter" data-level="" data-path="pw-4.html"><a href="pw-4.html#decision-boundary-of-logistic-regression"><i class="fa fa-check"></i>Decision Boundary of Logistic Regression</a></li>
+<li class="chapter" data-level="" data-path="pw-4.html"><a href="pw-4.html#linear-discriminant-analysis-lda"><i class="fa fa-check"></i>Linear Discriminant Analysis (LDA)</a></li>
+<li class="chapter" data-level="" data-path="pw-4.html"><a href="pw-4.html#quadratic-discriminant-analysis-qda-1"><i class="fa fa-check"></i>Quadratic Discriminant Analysis (QDA)</a></li>
+<li class="chapter" data-level="" data-path="pw-4.html"><a href="pw-4.html#comparison"><i class="fa fa-check"></i>Comparison</a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="support-vector-machines.html"><a href="support-vector-machines.html"><i class="fa fa-check"></i><b>5</b> Support Vector Machines</a><ul>
+<li class="chapter" data-level="5.1" data-path="support-vector-machines.html"><a href="support-vector-machines.html#maximal-margin-classifier"><i class="fa fa-check"></i><b>5.1</b> Maximal Margin Classifier</a></li>
+<li class="chapter" data-level="5.2" data-path="support-vector-machines.html"><a href="support-vector-machines.html#support-vector-classifier"><i class="fa fa-check"></i><b>5.2</b> Support Vector Classifier</a></li>
+<li class="chapter" data-level="5.3" data-path="support-vector-machines.html"><a href="support-vector-machines.html#kernels-and-support-vector-machines"><i class="fa fa-check"></i><b>5.3</b>  Kernels and Support Vector Machines</a></li>
+<li class="chapter" data-level="5.4" data-path="support-vector-machines.html"><a href="support-vector-machines.html#example-and-comparison-with-logistic-regression"><i class="fa fa-check"></i><b>5.4</b> Example and Comparison with Logistic Regression</a></li>
+<li class="chapter" data-level="5.5" data-path="support-vector-machines.html"><a href="support-vector-machines.html#lab-support-vector-machine-for-classification"><i class="fa fa-check"></i><b>5.5</b> Lab: Support Vector Machine for Classification</a></li>
+<li class="chapter" data-level="5.6" data-path="support-vector-machines.html"><a href="support-vector-machines.html#lab-nonlinear-support-vector-machine"><i class="fa fa-check"></i><b>5.6</b> Lab: Nonlinear Support Vector Machine</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="pw-5.html"><a href="pw-5.html"><i class="fa fa-check"></i>PW 5</a></li>
+<li class="part"><span><b>Unsupervised Learning</b></span></li>
+<li class="chapter" data-level="6" data-path="dimensionality-reduction.html"><a href="dimensionality-reduction.html"><i class="fa fa-check"></i><b>6</b> Dimensionality Reduction</a><ul>
+<li class="chapter" data-level="6.1" data-path="dimensionality-reduction.html"><a href="dimensionality-reduction.html#unsupervised-learning-1"><i class="fa fa-check"></i><b>6.1</b> Unsupervised Learning</a></li>
+<li class="chapter" data-level="6.2" data-path="dimensionality-reduction.html"><a href="dimensionality-reduction.html#principal-components-analysis"><i class="fa fa-check"></i><b>6.2</b> Principal Components Analysis</a></li>
+<li class="chapter" data-level="6.3" data-path="dimensionality-reduction.html"><a href="dimensionality-reduction.html#principal-components"><i class="fa fa-check"></i><b>6.3</b> Principal Components</a><ul>
+<li class="chapter" data-level="" data-path="dimensionality-reduction.html"><a href="dimensionality-reduction.html#notations-and-procedure"><i class="fa fa-check"></i>Notations and Procedure</a></li>
+<li><a href="dimensionality-reduction.html#first-principal-component-textpc_1-y_1">First Principal Component (<span class="math inline">\(\text{PC}_1\)</span>): <span class="math inline">\(Y_1\)</span></a></li>
+<li><a href="dimensionality-reduction.html#second-principal-component-textpc_2-y_2">Second Principal Component (<span class="math inline">\(\text{PC}_2\)</span>): <span class="math inline">\(Y_2\)</span></a></li>
+<li><a href="dimensionality-reduction.html#ith-principal-component-textpc_i-y_i"><span class="math inline">\(i^{th}\)</span> Principal Component (<span class="math inline">\(\text{PC}_i\)</span>): <span class="math inline">\(Y_i\)</span></a></li>
+</ul></li>
+<li class="chapter" data-level="6.4" data-path="dimensionality-reduction.html"><a href="dimensionality-reduction.html#how-do-we-find-the-coefficients"><i class="fa fa-check"></i><b>6.4</b> How do we find the coefficients?</a><ul>
+<li class="chapter" data-level="" data-path="dimensionality-reduction.html"><a href="dimensionality-reduction.html#why-it-may-be-possible-to-reduce-dimensions"><i class="fa fa-check"></i>Why It May Be Possible to Reduce Dimensions</a></li>
+<li class="chapter" data-level="" data-path="dimensionality-reduction.html"><a href="dimensionality-reduction.html#procedure"><i class="fa fa-check"></i>Procedure</a></li>
+</ul></li>
+<li class="chapter" data-level="6.5" data-path="dimensionality-reduction.html"><a href="dimensionality-reduction.html#standardization-of-the-features"><i class="fa fa-check"></i><b>6.5</b> Standardization of the features</a></li>
+<li class="chapter" data-level="6.6" data-path="dimensionality-reduction.html"><a href="dimensionality-reduction.html#projection-of-the-data"><i class="fa fa-check"></i><b>6.6</b> Projection of the data</a><ul>
+<li class="chapter" data-level="" data-path="dimensionality-reduction.html"><a href="dimensionality-reduction.html#scores"><i class="fa fa-check"></i>Scores</a></li>
+<li class="chapter" data-level="" data-path="dimensionality-reduction.html"><a href="dimensionality-reduction.html#visualization"><i class="fa fa-check"></i>Visualization</a></li>
+<li class="chapter" data-level="" data-path="dimensionality-reduction.html"><a href="dimensionality-reduction.html#extra"><i class="fa fa-check"></i>Extra</a></li>
+</ul></li>
+<li class="chapter" data-level="6.7" data-path="dimensionality-reduction.html"><a href="dimensionality-reduction.html#case-study"><i class="fa fa-check"></i><b>6.7</b> Case study</a><ul>
+<li class="chapter" data-level="" data-path="dimensionality-reduction.html"><a href="dimensionality-reduction.html#employement-in-european-countries-in-the-late-70s"><i class="fa fa-check"></i>Employement in European countries in the late 70s</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="pw-6.html"><a href="pw-6.html"><i class="fa fa-check"></i>PW 6</a><ul>
+<li class="chapter" data-level="" data-path="pw-6.html"><a href="pw-6.html#the-iris-dataset"><i class="fa fa-check"></i>The Iris Dataset</a></li>
+<li class="chapter" data-level="" data-path="pw-6.html"><a href="pw-6.html#building-the-pca-approach"><i class="fa fa-check"></i>Building the PCA approach</a><ul>
+<li class="chapter" data-level="" data-path="pw-6.html"><a href="pw-6.html#data-pre-processing"><i class="fa fa-check"></i>Data pre-processing</a></li>
+<li class="chapter" data-level="" data-path="pw-6.html"><a href="pw-6.html#eigendecomposition---computing-eigenvectors-and-eigenvalues"><i class="fa fa-check"></i>Eigendecomposition - Computing Eigenvectors and Eigenvalues</a></li>
+<li class="chapter" data-level="" data-path="pw-6.html"><a href="pw-6.html#selecting-principal-components"><i class="fa fa-check"></i>Selecting Principal Components</a></li>
+<li class="chapter" data-level="" data-path="pw-6.html"><a href="pw-6.html#projection-matrix"><i class="fa fa-check"></i>Projection Matrix</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="pw-6.html"><a href="pw-6.html#verifications-with-princomp"><i class="fa fa-check"></i>Verifications with princomp()</a></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="clustering-kmeans.html"><a href="clustering-kmeans.html"><i class="fa fa-check"></i><b>7</b> Clustering: kmeans</a><ul>
+<li class="chapter" data-level="7.1" data-path="clustering-kmeans.html"><a href="clustering-kmeans.html#introduction-3"><i class="fa fa-check"></i><b>7.1</b> Introduction</a><ul>
+<li class="chapter" data-level="" data-path="clustering-kmeans.html"><a href="clustering-kmeans.html#hard-clustering"><i class="fa fa-check"></i>Hard clustering</a></li>
+<li class="chapter" data-level="" data-path="clustering-kmeans.html"><a href="clustering-kmeans.html#fuzzy-clustering"><i class="fa fa-check"></i>Fuzzy clustering</a></li>
+</ul></li>
+<li class="chapter" data-level="7.2" data-path="clustering-kmeans.html"><a href="clustering-kmeans.html#k-means"><i class="fa fa-check"></i><b>7.2</b> <span class="math inline">\(k\)</span>-Means</a></li>
+<li class="chapter" data-level="7.3" data-path="clustering-kmeans.html"><a href="clustering-kmeans.html#k-means-in-r"><i class="fa fa-check"></i><b>7.3</b> <span class="math inline">\(k\)</span>-means in <code>R</code></a><ul>
+<li class="chapter" data-level="7.3.1" data-path="clustering-kmeans.html"><a href="clustering-kmeans.html#cluster-validity-choosing-the-number-of-clusters"><i class="fa fa-check"></i><b>7.3.1</b> Cluster Validity, Choosing the Number of Clusters</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="pw-7.html"><a href="pw-7.html"><i class="fa fa-check"></i>PW 7</a><ul>
+<li><a href="pw-7.html#k-means-clustering"><span class="math inline">\(k\)</span>-means clustering</a><ul>
+<li><a href="pw-7.html#pointscards"><code>pointsCards</code></a></li>
+<li><a href="pw-7.html#laliga"><code>laliga</code></a></li>
+<li><a href="pw-7.html#pca"><code>PCA</code></a></li>
+<li><a href="pw-7.html#implementing-k-means"><code>Implementing k-means</code></a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="8" data-path="hierarchical-clustering.html"><a href="hierarchical-clustering.html"><i class="fa fa-check"></i><b>8</b> Hierarchical Clustering</a><ul>
+<li class="chapter" data-level="8.1" data-path="hierarchical-clustering.html"><a href="hierarchical-clustering.html#dendrogram"><i class="fa fa-check"></i><b>8.1</b> Dendrogram</a></li>
+<li class="chapter" data-level="8.2" data-path="hierarchical-clustering.html"><a href="hierarchical-clustering.html#the-hierarchical-clustering-algorithm"><i class="fa fa-check"></i><b>8.2</b> The Hierarchical Clustering Algorithm</a></li>
+<li class="chapter" data-level="8.3" data-path="hierarchical-clustering.html"><a href="hierarchical-clustering.html#hierarchical-clustering-in-r"><i class="fa fa-check"></i><b>8.3</b> Hierarchical clustering in <code>R</code></a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="pw-8.html"><a href="pw-8.html"><i class="fa fa-check"></i>PW 8</a><ul>
+<li><a href="pw-8.html#distances-dist">Distances <code>dist()</code></a></li>
+<li><a href="pw-8.html#dendrogram-hclust">Dendrogram <code>hclust()</code></a></li>
+<li class="chapter" data-level="" data-path="pw-8.html"><a href="pw-8.html#hierarchical-clustering-on-iris-dataset"><i class="fa fa-check"></i>Hierarchical clustering on Iris dataset</a></li>
+</ul></li>
+<li class="part"><span><b>Project</b></span></li>
+<li class="chapter" data-level="" data-path="final-group-project.html"><a href="final-group-project.html"><i class="fa fa-check"></i>Final Group Project</a><ul>
+<li class="chapter" data-level="" data-path="final-group-project.html"><a href="final-group-project.html#deliverables"><i class="fa fa-check"></i>Deliverables</a></li>
+<li class="chapter" data-level="" data-path="final-group-project.html"><a href="final-group-project.html#presentation"><i class="fa fa-check"></i>Presentation</a></li>
+<li class="chapter" data-level="" data-path="final-group-project.html"><a href="final-group-project.html#datasets"><i class="fa fa-check"></i>Datasets</a></li>
+</ul></li>
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Machine Learning</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="pw-4" class="section level1 unnumbered">
+<h1>PW 4</h1>
+<p>This week we are going to continue the analysis of the <code>Social_Network_Ads</code> dataset. Recall that this dataset contains informations of users of a social network and if they bought a specified product. Last week we built a Logistic Regression model for the variable <code>Purchased</code> in function of <code>Age</code> and <code>EstimatedSalary</code>. We will consider the same variables this week but we will fit different models using methods such as LDA, QDA, and Naive Bayes.</p>
+<div id="report-template-1" class="section level2 unnumbered">
+<h2>Report template</h2>
+<p>For this week, use these YAML settings for your RMarkdown file:</p>
+<pre><code>---
+title: &quot;Week 4&quot;
+subtitle: &quot;Discriminant Analysis&quot;
+author: LastName FirstName
+date: &quot;30/01/2017&quot;
+output:
+  html_document:
+    toc: true
+    toc_depth: 2
+    toc_float: true
+    theme: cerulean
+    highlight: espresso
+---</code></pre>
+</div>
+<div id="decision-boundary-of-logistic-regression" class="section level2 unnumbered">
+<h2>Decision Boundary of Logistic Regression</h2>
+<p><strong>1.</strong> First, re-do the pre-processing steps you did last week (remove the first two columns from the dataset as we are not going to use them) and fit a logistic regression model of <code>Purchased</code> in function of <code>Age</code> and <code>EstimatedSalary</code>. Name your model <code>classifier.logreg</code>. If you need the dataset again, you can download it from <a href="datasets/Social_Network_Ads.csv">here</a>.</p>
+<p>Now you are going to visualize the decision boundary for logistic regression.</p>
+<div class="rmdinsight">
+<ul>
+<li>
+Since the decision boundary of logistic regression is a linear (<em>you know why right?</em>) and the dimension of the feature space is 2 (<code>Age</code> and <code>EstimatedSalary</code>), the decision boundary in this 2-dimensional space is a line that separates the predicted classes “0” and “1” (values of the response <code>Purchased</code>).
+</li>
+<li>
+For logistic regression, we predict <span class="math inline"><em>y</em> = 1</span> if <span class="math inline"><em>β</em><sup><em>T</em></sup><em>X</em> ≥ 0</span> (right side of the line) and <span class="math inline"><em>y</em> = 0</span> if <span class="math inline"><em>β</em><sup><em>T</em></sup><em>X</em> &lt; 0</span> (left side of the line). Where
+</li>
+</ul>
+<p>
+<br /><span class="math display"><span class="math display">\[ \beta = \begin{pmatrix} \beta_0 \\ \beta_1 \\ \beta2 \end{pmatrix} \,\, \text{and} \,\, X = \begin{pmatrix}
+  1 \\
+  X_1 \\
+  X_2
+  \end{pmatrix}\]</span></span><br />
+</p>
+<p>
+So we predict <span class="math inline"><em>y</em> = 1</span> if <span class="math inline"><em>β</em><sub>0</sub> + <em>β</em><sub>1</sub><em>X</em><sub>1</sub> + <em>β</em><sub>2</sub><em>X</em><sub>2</sub> ≥ 0</span> which means that the equation of the decision boundary (a line here) is <span class="math inline"><span class="math inline">\(X_2 = - \frac{\beta_1}{\beta_2}X_1 - \frac{\beta_0}{\beta_2}\)</span></span>
+</p>
+</div>
+<p><strong>2.</strong> Plot the decision boundary obtained with logistic regression. In order to do so, calculate the intercept and the slope of the line presenting the decision boundary, then plot <code>EstimatedSalary</code> in function of <code>Age</code> (from the <code>test_set</code>) and add the line using <code>abline()</code>.</p>
+<p><strong>3.</strong> In order to verify that your line (decision boundary) is well plotted, color the points on the last Figure with respect to the predicted response.</p>
+<p><strong>Hints</strong>:</p>
+<ul>
+<li>If your predictions are stored in <code>y_pred</code>, you can do it using <code>bg = ifelse(y_pred == 1, 'color1', 'color2')</code>, and precise the argument <code>pch</code> to be 21 (you can choose pch to be a value between 21 and 25, try it).</li>
+<li>Then, add the line using <code>abline()</code>, put the line width = 2 to make it more visible. Do not forget to title the Figure).</li>
+</ul>
+<p><strong>4.</strong> Now make the same plot but color the points with respect to their real labels (the variable <code>Purchased</code>). From this figure, count the number of the false positive predictions and compare it to the value obtained in the confusion matrix.</p>
+</div>
+<div id="linear-discriminant-analysis-lda" class="section level2 unnumbered">
+<h2>Linear Discriminant Analysis (LDA)</h2>
+<p>Let us apply linear discriminant analysis (LDA) now. First we will make use of the <code>lda()</code> function in the package <code>MASS</code>. Second, you are going to create the model and predict the classes by yourself without using the <code>lda()</code> function. And we will visualize the decision boundary of LDA.</p>
+<p><strong>5.</strong> Fit a LDA model of <code>Purchased</code> in function of <code>Age</code> and <code>EstimatedSalary</code>. Name the model <code>classifier.lda</code>.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(MASS)
+classifier.lda &lt;-<span class="st"> </span><span class="kw">lda</span>(Purchased<span class="op">~</span>Age<span class="op">+</span>EstimatedSalary, <span class="dt">data=</span>training_set)</code></pre></div>
+<p><strong>6.</strong> Call <code>classifier.lda</code> and see what does it compute.</p>
+<p><strong>Plus:</strong> If you enter the following you will be returned with a list of summary information concerning the computation:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">classifier.lda<span class="op">$</span>prior
+classifier.lda<span class="op">$</span>means</code></pre></div>
+<p><strong>7.</strong> On the test set, predict the probability of purchasing the product by the users using the model <code>classifier.lda</code>. Remark that when we predict using LDA, we obtain a list instead of a matrix, do <code>str()</code> for your predictions to see what do you get.</p>
+<p><strong>Remark</strong>: we get the predicted class here, without being obligated to round the predictions as we did for logistic regression.</p>
+<p><strong>8.</strong> Compute the confusion matrix and compare the predictions results obtained by LDA to the ones obtained by logistic regression. What do you remark?</p>
+<p>(<strong>Hint</strong>: compare the accuracy)</p>
+<p><strong>9.</strong> Now let us plot the decision boundary obtained with LDA. You saw in the course that decision boundary for LDA represent the set of values <span class="math inline">\(x\)</span> where <span class="math inline">\(\delta_k(x) = \delta_c(x)\)</span>. Recall that <span class="math display">\[ \delta_k(X) = x^T \Sigma^{-1} \mu_k - \frac{1}{2} \mu_k^T \Sigma^{-1}  \mu_k + \log \pi_k \]</span></p>
+<p>Here in our case, we have 2 classes (<span class="math inline">\(K=2\)</span>) and 2 predictors (<span class="math inline">\(p=2\)</span>). So the decision boundary (which is linear in the case of LDA, and line in our case since <span class="math inline">\(p=2\)</span>) will verify the equation <span class="math inline">\(\delta_0(x) = \delta_1(x)\)</span> Since we have two classes “0” and “1”. In the case of LDA this leads to linear boundary and is easy to be plotted. But in more complicated cases it is difficult to manually simplify the equations and plot the decision boundary. Anyway, there is a smart method to plot (but a little bit costy) the decision boundary in <code>R</code> using the function <code>contour()</code>, the corresponding code is the following (you must adapt it and use it to plot your decision boundary):</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># create a grid corresponding to the scales of Age and EstimatedSalary</span>
+<span class="co"># and fill this grid with lot of points</span>
+X1 =<span class="st"> </span><span class="kw">seq</span>(<span class="kw">min</span>(training_set[, <span class="dv">1</span>]) <span class="op">-</span><span class="st"> </span><span class="dv">1</span>, <span class="kw">max</span>(training_set[, <span class="dv">1</span>]) <span class="op">+</span><span class="st"> </span><span class="dv">1</span>, <span class="dt">by =</span> <span class="fl">0.01</span>)
+X2 =<span class="st"> </span><span class="kw">seq</span>(<span class="kw">min</span>(training_set[, <span class="dv">2</span>]) <span class="op">-</span><span class="st"> </span><span class="dv">1</span>, <span class="kw">max</span>(training_set[, <span class="dv">2</span>]) <span class="op">+</span><span class="st"> </span><span class="dv">1</span>, <span class="dt">by =</span> <span class="fl">0.01</span>)
+grid_set =<span class="st"> </span><span class="kw">expand.grid</span>(X1, X2)
+<span class="co"># Adapt the variable names</span>
+<span class="kw">colnames</span>(grid_set) =<span class="st"> </span><span class="kw">c</span>(<span class="st">&#39;Age&#39;</span>, <span class="st">&#39;EstimatedSalary&#39;</span>)
+
+<span class="co"># plot &#39;Estimated Salary&#39; ~ &#39;Age&#39;</span>
+<span class="kw">plot</span>(test_set[, <span class="op">-</span><span class="dv">3</span>],
+     <span class="dt">main =</span> <span class="st">&#39;Decision Boundary LDA&#39;</span>,
+     <span class="dt">xlab =</span> <span class="st">&#39;Age&#39;</span>, <span class="dt">ylab =</span> <span class="st">&#39;Estimated Salary&#39;</span>,
+     <span class="dt">xlim =</span> <span class="kw">range</span>(X1), <span class="dt">ylim =</span> <span class="kw">range</span>(X2))
+
+<span class="co"># color the plotted points with their real label (class)</span>
+<span class="kw">points</span>(test_set, <span class="dt">pch =</span> <span class="dv">21</span>, <span class="dt">bg =</span> <span class="kw">ifelse</span>(test_set[, <span class="dv">3</span>] <span class="op">==</span><span class="st"> </span><span class="dv">1</span>, <span class="st">&#39;green4&#39;</span>, <span class="st">&#39;red3&#39;</span>))
+
+<span class="co"># Make predictions on the points of the grid, this will take some time</span>
+pred_grid =<span class="st"> </span><span class="kw">predict</span>(classifier.lda, <span class="dt">newdata =</span> grid_set)<span class="op">$</span>class
+
+<span class="co"># Separate the predictions by a contour</span>
+<span class="kw">contour</span>(X1, X2, <span class="kw">matrix</span>(<span class="kw">as.numeric</span>(pred_grid), <span class="kw">length</span>(X1), <span class="kw">length</span>(X2)), <span class="dt">add =</span> <span class="ot">TRUE</span>)</code></pre></div>
+<p><strong>10.</strong> Now let us build a LDA model for our data set without using the <code>lda()</code> function. You are free to do it by creating a function or without creating one. Go back to question <strong>6</strong> and see what did you obtain by using <code>lda()</code>. It computes the prior probability of group membership and the estimated group means for each of the two groups. Additional information that is not provided, but may be important, is the single covariance matrix that is being used for the various groupings.</p>
+<div class="rmdinsight">
+<p>
+In LDA, we compute for every observation <span class="math inline"><em>x</em></span> its discriminant score <span class="math inline"><em>δ</em><sub><em>k</em></sub>(<em>x</em>)</span>. Then we attribute <span class="math inline"><em>x</em></span> to the class that has the highest <span class="math inline"><em>δ</em></span>. Recall that
+</p>
+<p>
+<br /><span class="math display"><span class="math display">\[\delta_k(x) = x^T \Sigma^{-1} \mu_k - \frac{1}{2} \mu_k^T \Sigma^{-1}  \mu_k + \log \pi_k\]</span></span><br />
+</p>
+<p>
+So to compute <span class="math inline"><em>δ</em><sub><em>k</em></sub>(<em>x</em>)</span> we need to estimate <span class="math inline"><em>π</em><sub><em>k</em></sub></span>, <span class="math inline"><em>μ</em><sub><em>k</em></sub></span> and <span class="math inline"><em>Σ</em></span>.
+</p>
+<p>
+Note that <br /><span class="math display"><span class="math display">\[x=\begin{pmatrix}
+            X_1 \\
+            X_2
+            \end{pmatrix}\]</span></span><br /> and here <span class="math inline"><em>X</em><sub>1</sub></span>=<code>Age</code> and <span class="math inline"><em>X</em><sub>2</sub></span>=<code>EstimatedSalary</code>.
+</p>
+</div>
+<p>So let us do it step by step, first we will do the estimates:</p>
+<p><strong>10.1</strong> Subset the training set into two sets: <code>class0</code> where <code>Purchased = 0</code> and <code>class1</code> where <code>Purchased = 1</code>).</p>
+<p><strong>10.2</strong> Compute <span class="math inline">\(\pi_0\)</span> and <span class="math inline">\(\pi_1\)</span>.</p>
+<p><span class="math display">\[\pi_i = N_i / N, \,\, \text{where} \,\, N_i \,\, \text{is the number of data points in group } i\]</span></p>
+<p><strong>10.3</strong> Compute <span class="math inline">\(\mu_0\)</span> and <span class="math inline">\(\mu_1\)</span>. <span class="math display">\[\mu_0 = \begin{pmatrix}
+   \mu_0(X_1) \\
+   \mu_0(X_2)
+   \end{pmatrix} \,\, \text{and} \,\, \mu_1 = \begin{pmatrix}
+   \mu_1(X_1) \\
+   \mu_1(X_2)
+   \end{pmatrix}\]</span></p>
+<p>where, for example, <span class="math inline">\(\mu_0(X_1)\)</span> is the mean of the variable <span class="math inline">\(X_1\)</span> in the group <span class="math inline">\(0\)</span> (the subset <code>class0</code>).</p>
+<p><strong>10.4</strong> Compute <span class="math inline">\(\Sigma\)</span>. In the case of two classes like here, it is computed by calculating the following:</p>
+<p><span class="math display">\[\Sigma = \frac{(N_0-1)\Sigma_0 + (N_1-1)\Sigma_1}{N_0+N_1-2}\]</span></p>
+<p>where <span class="math inline">\(\Sigma_i\)</span> is the estimated covariance matrix for specific group <span class="math inline">\(i\)</span>.</p>
+<p><strong>Remark:</strong> Recall that in LDA we use the same <span class="math inline">\(\Sigma\)</span>. But in QDA we do not.</p>
+<p><strong>10.5.</strong> Now that we have computed all the needed estimates, we can calculate <span class="math inline">\(\delta_0(x)\)</span> and <span class="math inline">\(\delta_1(x)\)</span> for any observation <span class="math inline">\(x\)</span>. And we will attribute <span class="math inline">\(x\)</span> to the class with the highest <span class="math inline">\(\delta\)</span>. First, try it for <span class="math inline">\(x\)</span> where <span class="math inline">\(x^T=(1,1.5)\)</span>, what is class prediction for this spesific <span class="math inline">\(x\)</span>?</p>
+<p><strong>10.6.</strong> Compute the discriminant scores <span class="math inline">\(\delta\)</span> for the test set (a matrix <span class="math inline">\(100\times 2\)</span>), predict the classes and compare your results with the results obtained with the <code>lda()</code> function.</p>
+</div>
+<div id="quadratic-discriminant-analysis-qda-1" class="section level2 unnumbered">
+<h2>Quadratic Discriminant Analysis (QDA)</h2>
+<p>Training and assessing a QDA model in <code>R</code> is very similar in syntax to training and assessing a LDA model. The only difference is in the function name <code>qda()</code></p>
+<p><strong>11.</strong> Fit a QDA model of <code>Purchased</code> in function of <code>Age</code> and <code>EstimatedSalary</code>. Name the model <code>classifier.qda</code>.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># qda() is a function of library(MASS)</span>
+classifier.qda &lt;-<span class="st"> </span><span class="kw">qda</span>(Purchased<span class="op">~</span>., <span class="dt">data =</span> training_set)</code></pre></div>
+<p><strong>12.</strong> Make predictions on the <code>test_set</code> using the QDA model <code>classifier.qda</code>. Show the computation matrix and compare the results with the predictions obtained using the LDA model <code>classifier.lda</code>.</p>
+<p><strong>13.</strong> Plot the decision boundary obtained with QDA. Color the points with the real labels.</p>
+<!-- ## Naive Bayes {-} -->
+<!-- If we assume that the features are independant in each class, we use a Naive Bayes classifier. Let us test it. -->
+<!-- **14.** Fit a Naive Bayes model of `Purchased` in function of `Age` and `EstimatedSalary`. Name the model `classifier.naive`. Note that you can use the function `naiveBayes()` from package `e1071`. -->
+<!-- ```{r eval=F, echo=T} -->
+<!-- library(e1071) # install it if necessary -->
+<!-- # (install it directly from the console) -->
+<!-- classifier.naive <- naiveBayes(Purchased~., data=training_set) -->
+<!-- # By the way, in these functions you can manually -->
+<!-- # insert the features and the response, like this: -->
+<!-- classifier.naive <- naiveBayes(x=training_set[-3],y=training_set$Purchased) -->
+<!-- ``` -->
+<!-- **15.** Make predictions on the `test_set` using `classifier.naive`. Show the computation matrix. Do you obtain better results than in LDA and QDA ? -->
+<!-- ```{r eval=F, echo=F} -->
+<!-- pred.naive = predict(classifier.naive, test_set[-3]) -->
+<!-- cm.naive = table(pred.naive$class,test_set[,3]) -->
+<!-- ``` -->
+</div>
+<div id="comparison" class="section level2 unnumbered">
+<h2>Comparison</h2>
+<p><strong>14.</strong> In order to compare the methods we used, plot on the same Figure the ROC curve for each classifier we fitted and compare the correspondant AUC. What was the best model for this dataset?</p>
+<p><strong>Remark:</strong> If you use the <code>ROCR</code> package:</p>
+<ul>
+<li>For Logistic regression, use the predicted probabilities in the <code>prediction()</code> (and not the round values “0” or “1”).</li>
+<li>For LDA and QDA, put <code>pred.lda$posterior[,2]</code> in the <code>prediction()</code> function (those are the posterior probabilities that observations belong to class “1”).</li>
+</ul>
+<p class="text-right">
+◼
+</p>
+
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="linear-discriminant-analysis.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="support-vector-machines.html" class="navigation navigation-next " aria-label="Next page""><i class="fa fa-angle-right"></i></a>
+
+<script src="book_assets/gitbook-2.6.7/js/app.min.js"></script>
+<script src="book_assets/gitbook-2.6.7/js/lunr.js"></script>
+<script src="book_assets/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="book_assets/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="book_assets/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="book_assets/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="book_assets/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script>
+require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": false,
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"download": ["Machine-Learning.pdf"],
+"toc": {
+"collapse": "section",
+"scroll_highlight": true
+},
+"toolbar": {
+"position": "fixed"
+},
+"search": true
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    if (location.protocol !== "file:" && /^https?:/.test(script.src))
+      script.src  = script.src.replace(/^https?:/, '');
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>

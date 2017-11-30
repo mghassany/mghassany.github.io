@@ -1,0 +1,616 @@
+<!DOCTYPE html>
+<html lang="en">
+  <!-- Beautiful Jekyll | MIT license | Copyright Dean Attali 2016 -->
+  <head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+
+  <title>Generating statistical tables</title>
+
+  <meta name="author" content="Mohamad Ghassany" />
+
+  
+
+  <link rel="alternate" type="application/rss+xml" title="Mohamad Ghassany - Data scientist" href="/feed.xml" />
+
+  
+    
+      <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.6.0/css/font-awesome.min.css" />
+    
+  
+
+  
+    
+      <link rel="stylesheet" href="/css/bootstrap.min.css" />
+    
+      <link rel="stylesheet" href="/css/bootstrap-social.css" />
+    
+      <link rel="stylesheet" href="/css/main.css" />
+    
+  
+
+  
+    
+      <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic" />
+    
+      <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800" />
+    
+  
+
+  
+
+  
+
+  
+
+    <!-- Facebook OpenGraph tags -->
+  
+
+  
+  <meta property="og:title" content="Generating statistical tables" />
+  
+
+   
+  <meta property="og:description" content="Inspired from Arthur Charpentier’s blog post here are some codes to create beautiful statistical tables using R and export them to use in latex. Normal distribution table First tables show the values of , which are the values of the cumulative distribution function of the normal distribution. u=seq(0,3.09,by=0.01) p=pnorm(u) m=matrix(p,ncol=10,byrow=TRUE)...">
+  
+
+
+  <meta property="og:type" content="website" />
+
+  
+  <meta property="og:url" content="http://mghassany.com/blog/generating-statistical-tables/" />
+  <link rel="canonical" href="http://mghassany.com/blog/generating-statistical-tables/" />
+  
+
+  
+  <meta property="og:image" content="http://mghassany.com/img/Ghassany Mohamad _2017_web.jpg" />
+  
+  
+
+  <!-- Twitter summary cards -->
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:site" content="@m_ghass" />
+  <meta name="twitter:creator" content="@m_ghass" />
+
+  
+  <meta name="twitter:title" content="Generating statistical tables" />
+  
+
+  
+  <meta name="twitter:description" content="Inspired from Arthur Charpentier’s blog post here are some codes to create beautiful statistical tables using R and export them to use in latex. Normal distribution table First tables show the values of , which are the values of the cumulative distribution function of the normal distribution. u=seq(0,3.09,by=0.01) p=pnorm(u) m=matrix(p,ncol=10,byrow=TRUE)...">
+  
+
+  
+  <meta name="twitter:image" content="http://mghassany.com/img/Ghassany Mohamad _2017_web.jpg" />
+  
+
+</head>
+
+
+  <body>
+  
+    <nav class="navbar navbar-default navbar-fixed-top navbar-custom">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#main-navbar">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+<!--       remove navbar-brand to remove name in order to put photo on left
+ --><!--       <a class="navbar-brand" href="http://mghassany.com">Mohamad Ghassany</a>
+ -->    </div>
+
+    <div class="collapse navbar-collapse" id="main-navbar">
+      <ul class="nav navbar-nav navbar-right">
+      
+        
+          <li>
+            
+            
+
+
+
+
+
+<a href="/">About me</a>
+
+          </li>
+        
+        
+        
+          <li>
+            
+            
+
+
+
+
+
+<a href="/research">Research</a>
+
+          </li>
+        
+        
+        
+          <li>
+            
+            
+
+
+
+
+
+<a href="/publications">Publications</a>
+
+          </li>
+        
+        
+        
+          <li>
+            
+            
+
+
+
+
+
+<a href="/teaching">Teaching</a>
+
+          </li>
+        
+        
+        
+          <li>
+            
+            
+
+
+
+
+
+<a href="/blog">Blog</a>
+
+          </li>
+        
+        
+      </ul>
+    </div>
+
+	
+	<div class="avatar-container">
+	  <div class="avatar-img-border">
+	    <a href="http://mghassany.com ">
+	      <img class="avatar-img" src="/img/Ghassany Mohamad _2017_web.jpg" />
+		</a>
+	  </div>
+	</div>
+	
+
+  </div>
+</nav>
+
+
+    <!-- TODO this file has become a mess, refactor it -->
+
+
+
+
+
+<header class="header-section ">
+
+<div class="intro-header no-img">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <div class="post-heading">
+          <h1>Generating statistical tables</h1>
+		  
+		  
+		  
+		  <span class="post-meta">Posted on November 30, 2017</span>
+		  
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</header>
+
+
+
+
+<script type="text/javascript"
+    src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+<div class="container">
+  <div class="row">
+    <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+
+      <article role="main" class="blog-post">
+        <p>Inspired from Arthur Charpentier’s <a href="http://freakonometrics.hypotheses.org/9404">blog post</a> here are some codes to create beautiful statistical tables using R and export them to use in latex.</p>
+
+<h3 id="normal-distribution-table">Normal distribution table</h3>
+
+<p>First tables show the values of <script type="math/tex">\Phi</script>, which are the values of the cumulative distribution function of the normal distribution.</p>
+
+<div class="language-r highlighter-rouge"><pre class="highlight"><code><span class="n">u</span><span class="o">=</span><span class="n">seq</span><span class="p">(</span><span class="m">0</span><span class="p">,</span><span class="m">3.09</span><span class="p">,</span><span class="n">by</span><span class="o">=</span><span class="m">0.01</span><span class="p">)</span>
+<span class="n">p</span><span class="o">=</span><span class="n">pnorm</span><span class="p">(</span><span class="n">u</span><span class="p">)</span>
+<span class="n">m</span><span class="o">=</span><span class="n">matrix</span><span class="p">(</span><span class="n">p</span><span class="p">,</span><span class="n">ncol</span><span class="o">=</span><span class="m">10</span><span class="p">,</span><span class="n">byrow</span><span class="o">=</span><span class="n">TRUE</span><span class="p">)</span>
+<span class="n">options</span><span class="p">(</span><span class="n">digits</span><span class="o">=</span><span class="m">4</span><span class="p">)</span>
+<span class="n">rownames</span><span class="p">(</span><span class="n">m</span><span class="p">)</span><span class="o">=</span><span class="n">seq</span><span class="p">(</span><span class="m">0</span><span class="p">,</span><span class="m">3</span><span class="p">,</span><span class="n">b</span><span class="o">=</span><span class="m">.1</span><span class="p">)</span>
+<span class="n">colnames</span><span class="p">(</span><span class="n">m</span><span class="p">)</span><span class="o">=</span><span class="n">seq</span><span class="p">(</span><span class="m">0</span><span class="p">,</span><span class="m">.09</span><span class="p">,</span><span class="n">by</span><span class="o">=</span><span class="m">.01</span><span class="p">)</span>
+</code></pre>
+</div>
+
+<p>Then to export it into latex format:</p>
+
+<div class="language-r highlighter-rouge"><pre class="highlight"><code><span class="n">library</span><span class="p">(</span><span class="n">xtable</span><span class="p">)</span>
+<span class="n">newm</span><span class="o">=</span><span class="n">xtable</span><span class="p">(</span><span class="n">m</span><span class="p">,</span><span class="n">digits</span><span class="o">=</span><span class="m">4</span><span class="p">)</span>
+<span class="n">print.xtable</span><span class="p">(</span><span class="n">newm</span><span class="p">,</span> <span class="n">type</span><span class="o">=</span><span class="s2">"latex"</span><span class="p">,</span> <span class="n">file</span><span class="o">=</span><span class="s2">"nor1.tex"</span><span class="p">)</span>
+</code></pre>
+</div>
+
+<p>The result of the tex file is the following:</p>
+
+<div class="language-latex highlighter-rouge"><pre class="highlight"><code><span class="c">% latex table generated in R 3.4.1 by xtable 1.8-2 package</span>
+<span class="c">% Thu Nov 30 15:10:28 2017</span>
+<span class="nt">\begin{table}</span>[ht]
+<span class="k">\centering</span>
+<span class="nt">\begin{tabular}</span><span class="p">{</span>rrrrrrrrrrr<span class="p">}</span>
+  <span class="k">\hline</span>
+ <span class="p">&amp;</span> 0 <span class="p">&amp;</span> 0.01 <span class="p">&amp;</span> 0.02 <span class="p">&amp;</span> 0.03 <span class="p">&amp;</span> 0.04 <span class="p">&amp;</span> 0.05 <span class="p">&amp;</span> 0.06 <span class="p">&amp;</span> 0.07 <span class="p">&amp;</span> 0.08 <span class="p">&amp;</span> 0.09 <span class="k">\\</span> 
+  <span class="k">\hline</span>
+0 <span class="p">&amp;</span> 0.5000 <span class="p">&amp;</span> 0.5040 <span class="p">&amp;</span> 0.5080 <span class="p">&amp;</span> 0.5120 <span class="p">&amp;</span> 0.5160 <span class="p">&amp;</span> 0.5199 <span class="p">&amp;</span> 0.5239 <span class="p">&amp;</span> 0.5279 <span class="p">&amp;</span> 0.5319 <span class="p">&amp;</span> 0.5359 <span class="k">\\</span> 
+  0.1 <span class="p">&amp;</span> 0.5398 <span class="p">&amp;</span> 0.5438 <span class="p">&amp;</span> 0.5478 <span class="p">&amp;</span> 0.5517 <span class="p">&amp;</span> 0.5557 <span class="p">&amp;</span> 0.5596 <span class="p">&amp;</span> 0.5636 <span class="p">&amp;</span> 0.5675 <span class="p">&amp;</span> 0.5714 <span class="p">&amp;</span> 0.5753 <span class="k">\\</span> 
+  0.2 <span class="p">&amp;</span> 0.5793 <span class="p">&amp;</span> 0.5832 <span class="p">&amp;</span> 0.5871 <span class="p">&amp;</span> 0.5910 <span class="p">&amp;</span> 0.5948 <span class="p">&amp;</span> 0.5987 <span class="p">&amp;</span> 0.6026 <span class="p">&amp;</span> 0.6064 <span class="p">&amp;</span> 0.6103 <span class="p">&amp;</span> 0.6141 <span class="k">\\</span> 
+  0.3 <span class="p">&amp;</span> 0.6179 <span class="p">&amp;</span> 0.6217 <span class="p">&amp;</span> 0.6255 <span class="p">&amp;</span> 0.6293 <span class="p">&amp;</span> 0.6331 <span class="p">&amp;</span> 0.6368 <span class="p">&amp;</span> 0.6406 <span class="p">&amp;</span> 0.6443 <span class="p">&amp;</span> 0.6480 <span class="p">&amp;</span> 0.6517 <span class="k">\\</span> 
+  0.4 <span class="p">&amp;</span> 0.6554 <span class="p">&amp;</span> 0.6591 <span class="p">&amp;</span> 0.6628 <span class="p">&amp;</span> 0.6664 <span class="p">&amp;</span> 0.6700 <span class="p">&amp;</span> 0.6736 <span class="p">&amp;</span> 0.6772 <span class="p">&amp;</span> 0.6808 <span class="p">&amp;</span> 0.6844 <span class="p">&amp;</span> 0.6879 <span class="k">\\</span> 
+  0.5 <span class="p">&amp;</span> 0.6915 <span class="p">&amp;</span> 0.6950 <span class="p">&amp;</span> 0.6985 <span class="p">&amp;</span> 0.7019 <span class="p">&amp;</span> 0.7054 <span class="p">&amp;</span> 0.7088 <span class="p">&amp;</span> 0.7123 <span class="p">&amp;</span> 0.7157 <span class="p">&amp;</span> 0.7190 <span class="p">&amp;</span> 0.7224 <span class="k">\\</span> 
+  0.6 <span class="p">&amp;</span> 0.7257 <span class="p">&amp;</span> 0.7291 <span class="p">&amp;</span> 0.7324 <span class="p">&amp;</span> 0.7357 <span class="p">&amp;</span> 0.7389 <span class="p">&amp;</span> 0.7422 <span class="p">&amp;</span> 0.7454 <span class="p">&amp;</span> 0.7486 <span class="p">&amp;</span> 0.7517 <span class="p">&amp;</span> 0.7549 <span class="k">\\</span> 
+  0.7 <span class="p">&amp;</span> 0.7580 <span class="p">&amp;</span> 0.7611 <span class="p">&amp;</span> 0.7642 <span class="p">&amp;</span> 0.7673 <span class="p">&amp;</span> 0.7704 <span class="p">&amp;</span> 0.7734 <span class="p">&amp;</span> 0.7764 <span class="p">&amp;</span> 0.7794 <span class="p">&amp;</span> 0.7823 <span class="p">&amp;</span> 0.7852 <span class="k">\\</span> 
+  0.8 <span class="p">&amp;</span> 0.7881 <span class="p">&amp;</span> 0.7910 <span class="p">&amp;</span> 0.7939 <span class="p">&amp;</span> 0.7967 <span class="p">&amp;</span> 0.7995 <span class="p">&amp;</span> 0.8023 <span class="p">&amp;</span> 0.8051 <span class="p">&amp;</span> 0.8078 <span class="p">&amp;</span> 0.8106 <span class="p">&amp;</span> 0.8133 <span class="k">\\</span> 
+  0.9 <span class="p">&amp;</span> 0.8159 <span class="p">&amp;</span> 0.8186 <span class="p">&amp;</span> 0.8212 <span class="p">&amp;</span> 0.8238 <span class="p">&amp;</span> 0.8264 <span class="p">&amp;</span> 0.8289 <span class="p">&amp;</span> 0.8315 <span class="p">&amp;</span> 0.8340 <span class="p">&amp;</span> 0.8365 <span class="p">&amp;</span> 0.8389 <span class="k">\\</span> 
+  1 <span class="p">&amp;</span> 0.8413 <span class="p">&amp;</span> 0.8438 <span class="p">&amp;</span> 0.8461 <span class="p">&amp;</span> 0.8485 <span class="p">&amp;</span> 0.8508 <span class="p">&amp;</span> 0.8531 <span class="p">&amp;</span> 0.8554 <span class="p">&amp;</span> 0.8577 <span class="p">&amp;</span> 0.8599 <span class="p">&amp;</span> 0.8621 <span class="k">\\</span> 
+  1.1 <span class="p">&amp;</span> 0.8643 <span class="p">&amp;</span> 0.8665 <span class="p">&amp;</span> 0.8686 <span class="p">&amp;</span> 0.8708 <span class="p">&amp;</span> 0.8729 <span class="p">&amp;</span> 0.8749 <span class="p">&amp;</span> 0.8770 <span class="p">&amp;</span> 0.8790 <span class="p">&amp;</span> 0.8810 <span class="p">&amp;</span> 0.8830 <span class="k">\\</span> 
+  1.2 <span class="p">&amp;</span> 0.8849 <span class="p">&amp;</span> 0.8869 <span class="p">&amp;</span> 0.8888 <span class="p">&amp;</span> 0.8907 <span class="p">&amp;</span> 0.8925 <span class="p">&amp;</span> 0.8944 <span class="p">&amp;</span> 0.8962 <span class="p">&amp;</span> 0.8980 <span class="p">&amp;</span> 0.8997 <span class="p">&amp;</span> 0.9015 <span class="k">\\</span> 
+  1.3 <span class="p">&amp;</span> 0.9032 <span class="p">&amp;</span> 0.9049 <span class="p">&amp;</span> 0.9066 <span class="p">&amp;</span> 0.9082 <span class="p">&amp;</span> 0.9099 <span class="p">&amp;</span> 0.9115 <span class="p">&amp;</span> 0.9131 <span class="p">&amp;</span> 0.9147 <span class="p">&amp;</span> 0.9162 <span class="p">&amp;</span> 0.9177 <span class="k">\\</span> 
+  1.4 <span class="p">&amp;</span> 0.9192 <span class="p">&amp;</span> 0.9207 <span class="p">&amp;</span> 0.9222 <span class="p">&amp;</span> 0.9236 <span class="p">&amp;</span> 0.9251 <span class="p">&amp;</span> 0.9265 <span class="p">&amp;</span> 0.9279 <span class="p">&amp;</span> 0.9292 <span class="p">&amp;</span> 0.9306 <span class="p">&amp;</span> 0.9319 <span class="k">\\</span> 
+  1.5 <span class="p">&amp;</span> 0.9332 <span class="p">&amp;</span> 0.9345 <span class="p">&amp;</span> 0.9357 <span class="p">&amp;</span> 0.9370 <span class="p">&amp;</span> 0.9382 <span class="p">&amp;</span> 0.9394 <span class="p">&amp;</span> 0.9406 <span class="p">&amp;</span> 0.9418 <span class="p">&amp;</span> 0.9429 <span class="p">&amp;</span> 0.9441 <span class="k">\\</span> 
+  1.6 <span class="p">&amp;</span> 0.9452 <span class="p">&amp;</span> 0.9463 <span class="p">&amp;</span> 0.9474 <span class="p">&amp;</span> 0.9484 <span class="p">&amp;</span> 0.9495 <span class="p">&amp;</span> 0.9505 <span class="p">&amp;</span> 0.9515 <span class="p">&amp;</span> 0.9525 <span class="p">&amp;</span> 0.9535 <span class="p">&amp;</span> 0.9545 <span class="k">\\</span> 
+  1.7 <span class="p">&amp;</span> 0.9554 <span class="p">&amp;</span> 0.9564 <span class="p">&amp;</span> 0.9573 <span class="p">&amp;</span> 0.9582 <span class="p">&amp;</span> 0.9591 <span class="p">&amp;</span> 0.9599 <span class="p">&amp;</span> 0.9608 <span class="p">&amp;</span> 0.9616 <span class="p">&amp;</span> 0.9625 <span class="p">&amp;</span> 0.9633 <span class="k">\\</span> 
+  1.8 <span class="p">&amp;</span> 0.9641 <span class="p">&amp;</span> 0.9649 <span class="p">&amp;</span> 0.9656 <span class="p">&amp;</span> 0.9664 <span class="p">&amp;</span> 0.9671 <span class="p">&amp;</span> 0.9678 <span class="p">&amp;</span> 0.9686 <span class="p">&amp;</span> 0.9693 <span class="p">&amp;</span> 0.9699 <span class="p">&amp;</span> 0.9706 <span class="k">\\</span> 
+  1.9 <span class="p">&amp;</span> 0.9713 <span class="p">&amp;</span> 0.9719 <span class="p">&amp;</span> 0.9726 <span class="p">&amp;</span> 0.9732 <span class="p">&amp;</span> 0.9738 <span class="p">&amp;</span> 0.9744 <span class="p">&amp;</span> 0.9750 <span class="p">&amp;</span> 0.9756 <span class="p">&amp;</span> 0.9761 <span class="p">&amp;</span> 0.9767 <span class="k">\\</span> 
+  2 <span class="p">&amp;</span> 0.9772 <span class="p">&amp;</span> 0.9778 <span class="p">&amp;</span> 0.9783 <span class="p">&amp;</span> 0.9788 <span class="p">&amp;</span> 0.9793 <span class="p">&amp;</span> 0.9798 <span class="p">&amp;</span> 0.9803 <span class="p">&amp;</span> 0.9808 <span class="p">&amp;</span> 0.9812 <span class="p">&amp;</span> 0.9817 <span class="k">\\</span> 
+  2.1 <span class="p">&amp;</span> 0.9821 <span class="p">&amp;</span> 0.9826 <span class="p">&amp;</span> 0.9830 <span class="p">&amp;</span> 0.9834 <span class="p">&amp;</span> 0.9838 <span class="p">&amp;</span> 0.9842 <span class="p">&amp;</span> 0.9846 <span class="p">&amp;</span> 0.9850 <span class="p">&amp;</span> 0.9854 <span class="p">&amp;</span> 0.9857 <span class="k">\\</span> 
+  2.2 <span class="p">&amp;</span> 0.9861 <span class="p">&amp;</span> 0.9864 <span class="p">&amp;</span> 0.9868 <span class="p">&amp;</span> 0.9871 <span class="p">&amp;</span> 0.9875 <span class="p">&amp;</span> 0.9878 <span class="p">&amp;</span> 0.9881 <span class="p">&amp;</span> 0.9884 <span class="p">&amp;</span> 0.9887 <span class="p">&amp;</span> 0.9890 <span class="k">\\</span> 
+  2.3 <span class="p">&amp;</span> 0.9893 <span class="p">&amp;</span> 0.9896 <span class="p">&amp;</span> 0.9898 <span class="p">&amp;</span> 0.9901 <span class="p">&amp;</span> 0.9904 <span class="p">&amp;</span> 0.9906 <span class="p">&amp;</span> 0.9909 <span class="p">&amp;</span> 0.9911 <span class="p">&amp;</span> 0.9913 <span class="p">&amp;</span> 0.9916 <span class="k">\\</span> 
+  2.4 <span class="p">&amp;</span> 0.9918 <span class="p">&amp;</span> 0.9920 <span class="p">&amp;</span> 0.9922 <span class="p">&amp;</span> 0.9925 <span class="p">&amp;</span> 0.9927 <span class="p">&amp;</span> 0.9929 <span class="p">&amp;</span> 0.9931 <span class="p">&amp;</span> 0.9932 <span class="p">&amp;</span> 0.9934 <span class="p">&amp;</span> 0.9936 <span class="k">\\</span> 
+  2.5 <span class="p">&amp;</span> 0.9938 <span class="p">&amp;</span> 0.9940 <span class="p">&amp;</span> 0.9941 <span class="p">&amp;</span> 0.9943 <span class="p">&amp;</span> 0.9945 <span class="p">&amp;</span> 0.9946 <span class="p">&amp;</span> 0.9948 <span class="p">&amp;</span> 0.9949 <span class="p">&amp;</span> 0.9951 <span class="p">&amp;</span> 0.9952 <span class="k">\\</span> 
+  2.6 <span class="p">&amp;</span> 0.9953 <span class="p">&amp;</span> 0.9955 <span class="p">&amp;</span> 0.9956 <span class="p">&amp;</span> 0.9957 <span class="p">&amp;</span> 0.9959 <span class="p">&amp;</span> 0.9960 <span class="p">&amp;</span> 0.9961 <span class="p">&amp;</span> 0.9962 <span class="p">&amp;</span> 0.9963 <span class="p">&amp;</span> 0.9964 <span class="k">\\</span> 
+  2.7 <span class="p">&amp;</span> 0.9965 <span class="p">&amp;</span> 0.9966 <span class="p">&amp;</span> 0.9967 <span class="p">&amp;</span> 0.9968 <span class="p">&amp;</span> 0.9969 <span class="p">&amp;</span> 0.9970 <span class="p">&amp;</span> 0.9971 <span class="p">&amp;</span> 0.9972 <span class="p">&amp;</span> 0.9973 <span class="p">&amp;</span> 0.9974 <span class="k">\\</span> 
+  2.8 <span class="p">&amp;</span> 0.9974 <span class="p">&amp;</span> 0.9975 <span class="p">&amp;</span> 0.9976 <span class="p">&amp;</span> 0.9977 <span class="p">&amp;</span> 0.9977 <span class="p">&amp;</span> 0.9978 <span class="p">&amp;</span> 0.9979 <span class="p">&amp;</span> 0.9979 <span class="p">&amp;</span> 0.9980 <span class="p">&amp;</span> 0.9981 <span class="k">\\</span> 
+  2.9 <span class="p">&amp;</span> 0.9981 <span class="p">&amp;</span> 0.9982 <span class="p">&amp;</span> 0.9982 <span class="p">&amp;</span> 0.9983 <span class="p">&amp;</span> 0.9984 <span class="p">&amp;</span> 0.9984 <span class="p">&amp;</span> 0.9985 <span class="p">&amp;</span> 0.9985 <span class="p">&amp;</span> 0.9986 <span class="p">&amp;</span> 0.9986 <span class="k">\\</span> 
+  3 <span class="p">&amp;</span> 0.9987 <span class="p">&amp;</span> 0.9987 <span class="p">&amp;</span> 0.9987 <span class="p">&amp;</span> 0.9988 <span class="p">&amp;</span> 0.9988 <span class="p">&amp;</span> 0.9989 <span class="p">&amp;</span> 0.9989 <span class="p">&amp;</span> 0.9989 <span class="p">&amp;</span> 0.9990 <span class="p">&amp;</span> 0.9990 <span class="k">\\</span> 
+   <span class="k">\hline</span>
+<span class="nt">\end{tabular}</span>
+<span class="nt">\end{table}</span>
+</code></pre>
+</div>
+
+<p>I did some modifications to get a better table, and I created using tikz a figure to explain what the table is showing. The code of the figure is the following:</p>
+
+<div class="language-latex highlighter-rouge"><pre class="highlight"><code><span class="nt">\begin{figure}</span>[!h]
+<span class="k">\centering</span>
+<span class="nt">\begin{tikzpicture}</span>[scale=0.6]
+
+<span class="k">\def</span> <span class="k">\xMoy</span><span class="p">{</span>0<span class="p">}</span>;<span class="c">%moyenne</span>
+<span class="k">\def</span> <span class="k">\ecartType</span> <span class="p">{</span>1<span class="p">}</span>;<span class="c">%ecart-type</span>
+
+
+
+<span class="nt">\begin{axis}</span>
+[
+axis x line=bottom,
+axis y line=none,
+xmin=-3,
+xmax=3,
+ymin=0,
+ymax=0.5,
+xtick=<span class="p">{</span>0,1.3<span class="p">}</span>,
+xticklabels=<span class="p">{</span>0,<span class="p">$</span><span class="nb">a</span><span class="p">$}</span>,
+enlarge x limits=-1, <span class="c">%hack to plot on the full x-axis scale</span>
+width=13cm, <span class="c">%set bigger width</span>
+height=6cm,
+]
+
+<span class="k">\addplot</span>+[mark=none,domain=-3:3,samples=200,color=red,smooth,line width=1mm]<span class="p">{</span>(exp(-(x-<span class="k">\xMoy</span>)<span class="p">^</span>2/(2*<span class="k">\ecartType</span><span class="p">^</span>2)))/(<span class="k">\ecartType*</span>sqrt(6.28))<span class="p">}</span>; 
+
+
+<span class="k">\addplot</span>+[mark=none,fill=NavyBlue,draw=NavyBlue,opacity=0.6,domain=-25:1.3,samples=150]<span class="p">{</span>(exp(-(x-<span class="k">\xMoy</span>)<span class="p">^</span>2/(2*<span class="k">\ecartType</span><span class="p">^</span>2)))/(<span class="k">\ecartType*</span>sqrt(6.28))<span class="p">}</span><span class="k">\closedcycle</span>;
+
+<span class="nt">\end{axis}</span>
+
+<span class="k">\draw</span> (8,2.8) node[right] <span class="p">{</span> <span class="p">{</span><span class="k">\color</span><span class="p">{</span>NavyBlue<span class="p">}</span> <span class="p">$</span><span class="nv">\Phi</span><span class="o">(</span><span class="nb">a</span><span class="o">)=</span><span class="nb">P</span><span class="o">(</span><span class="nb">X</span><span class="nv">\le</span><span class="nb"> a</span><span class="o">)</span><span class="p">$}}</span>;
+<span class="k">\draw</span> (2.5,2.4) node[left] <span class="p">{</span> <span class="p">{</span><span class="k">\color</span><span class="p">{</span>red<span class="p">}</span> <span class="p">$</span><span class="nb">X  </span><span class="nv">\thicksim</span><span class="nb"> </span><span class="nv">\mathcal</span><span class="p">{</span><span class="nb">N</span><span class="p">}</span><span class="o">(</span><span class="m">0</span><span class="nb">,</span><span class="m">1</span><span class="o">)</span><span class="p">$}}</span>;
+
+<span class="nt">\end{tikzpicture}</span>
+<span class="nt">\end{figure}</span>
+</code></pre>
+</div>
+
+<p>Here is a screen capture of the generated table</p>
+
+<p><img src="../../figures/nor1.png" alt="nor1.png" /></p>
+
+<h3 id="another-normal-distribution-table">Another Normal distribution table</h3>
+
+<p>This table gives <script type="math/tex">u_{\alpha}</script> with respect to the value of <script type="math/tex">\alpha</script>.</p>
+
+<div class="language-r highlighter-rouge"><pre class="highlight"><code><span class="n">u</span><span class="o">=</span><span class="n">seq</span><span class="p">(</span><span class="m">0</span><span class="p">,</span><span class="m">0.99</span><span class="p">,</span><span class="n">by</span><span class="o">=</span><span class="m">0.01</span><span class="p">)</span>
+<span class="n">p</span><span class="o">=</span><span class="n">qnorm</span><span class="p">(</span><span class="m">1</span><span class="o">-</span><span class="n">u</span><span class="o">/</span><span class="m">2</span><span class="p">)</span>
+<span class="n">m</span><span class="o">=</span><span class="n">matrix</span><span class="p">(</span><span class="n">p</span><span class="p">,</span><span class="n">ncol</span><span class="o">=</span><span class="m">10</span><span class="p">,</span><span class="n">byrow</span><span class="o">=</span><span class="n">TRUE</span><span class="p">)</span>
+<span class="n">options</span><span class="p">(</span><span class="n">digits</span><span class="o">=</span><span class="m">4</span><span class="p">)</span>
+<span class="n">rownames</span><span class="p">(</span><span class="n">m</span><span class="p">)</span><span class="o">=</span><span class="n">seq</span><span class="p">(</span><span class="m">0</span><span class="p">,</span><span class="m">0.9</span><span class="p">,</span><span class="n">b</span><span class="o">=</span><span class="m">.1</span><span class="p">)</span>
+<span class="n">colnames</span><span class="p">(</span><span class="n">m</span><span class="p">)</span><span class="o">=</span><span class="n">seq</span><span class="p">(</span><span class="m">0</span><span class="p">,</span><span class="m">.09</span><span class="p">,</span><span class="n">by</span><span class="o">=</span><span class="m">.01</span><span class="p">)</span>
+<span class="c1"># library(xtable)
+</span><span class="n">newm</span><span class="o">=</span><span class="n">xtable</span><span class="p">(</span><span class="n">m</span><span class="p">,</span><span class="n">digits</span><span class="o">=</span><span class="m">4</span><span class="p">)</span>
+<span class="n">print.xtable</span><span class="p">(</span><span class="n">newm</span><span class="p">,</span> <span class="n">type</span><span class="o">=</span><span class="s2">"latex"</span><span class="p">,</span> <span class="n">file</span><span class="o">=</span><span class="s2">"nor2.tex"</span><span class="p">)</span>
+</code></pre>
+</div>
+
+<p>Here is the result from the generated pdf, including the figure explaining what the table shows</p>
+
+<p><img src="../../figures/nor2.png" alt="nor2.png" /></p>
+
+<p>The latex code to create the figure is</p>
+
+<div class="language-latex highlighter-rouge"><pre class="highlight"><code><span class="nt">\begin{figure}</span>[!h]
+<span class="k">\centering</span>
+<span class="nt">\begin{tikzpicture}</span>[scale=0.6]
+
+<span class="k">\def</span> <span class="k">\xMoy</span><span class="p">{</span>0<span class="p">}</span>;<span class="c">%moyenne</span>
+<span class="k">\def</span> <span class="k">\ecartType</span> <span class="p">{</span>1<span class="p">}</span>;<span class="c">%ecart-type</span>
+
+
+<span class="nt">\begin{axis}</span>
+[
+axis x line=bottom,
+axis y line=none,
+xmin=-3,
+xmax=3,
+ymin=0,
+ymax=0.5,
+xtick=<span class="p">{</span>-1.3,0,1.3<span class="p">}</span>,
+xticklabels=<span class="p">{$</span><span class="o">-</span><span class="nb">u</span><span class="p">_{</span><span class="nv">\alpha</span><span class="p">}$</span>,0,<span class="p">$</span><span class="nb">u</span><span class="p">_{</span><span class="nv">\alpha</span><span class="p">}$}</span>,
+enlarge x limits=-1, <span class="c">%hack to plot on the full x-axis scale</span>
+width=13cm, <span class="c">%set bigger width</span>
+height=6cm,
+]
+
+<span class="k">\addplot</span>+[mark=none,domain=-3:3,samples=200,color=red,smooth,line width=1mm]<span class="p">{</span>(exp(-(x-<span class="k">\xMoy</span>)<span class="p">^</span>2/(2*<span class="k">\ecartType</span><span class="p">^</span>2)))/(<span class="k">\ecartType*</span>sqrt(6.28))<span class="p">}</span>; 
+
+
+<span class="k">\addplot</span>+[mark=none,fill=NavyBlue,draw=NavyBlue,opacity=0.6,domain=-25:-1.3,samples=150]<span class="p">{</span>(exp(-(x-<span class="k">\xMoy</span>)<span class="p">^</span>2/(2*<span class="k">\ecartType</span><span class="p">^</span>2)))/(<span class="k">\ecartType*</span>sqrt(6.28))<span class="p">}</span><span class="k">\closedcycle</span>;
+
+<span class="k">\addplot</span>+[mark=none,fill=NavyBlue,draw=NavyBlue,opacity=0.6,domain=1.3:25,samples=150]<span class="p">{</span>(exp(-(x-<span class="k">\xMoy</span>)<span class="p">^</span>2/(2*<span class="k">\ecartType</span><span class="p">^</span>2)))/(<span class="k">\ecartType*</span>sqrt(6.28))<span class="p">}</span><span class="k">\closedcycle</span>;
+
+<span class="nt">\end{axis}</span>
+
+<span class="k">\draw</span> (9,2) node[right] <span class="p">{</span> <span class="p">{</span><span class="k">\color</span><span class="p">{</span>NavyBlue<span class="p">}</span> <span class="p">$</span><span class="nv">\alpha</span><span class="o">/</span><span class="m">2</span><span class="p">$}}</span>;
+<span class="k">\draw</span> (1,2) node[right] <span class="p">{</span> <span class="p">{</span><span class="k">\color</span><span class="p">{</span>NavyBlue<span class="p">}</span> <span class="p">$</span><span class="nv">\alpha</span><span class="o">/</span><span class="m">2</span><span class="p">$}}</span>;
+<span class="c">% \draw (2.5,2.4) node[left] { {\color{red} $X  \thicksim \mathcal{N}(0,1)$}};</span>
+<span class="k">\draw</span> (4.7,2.3) node[right] <span class="p">{</span> <span class="p">{</span><span class="k">\color</span><span class="p">{</span>black<span class="p">}</span> <span class="p">$</span><span class="m">1</span><span class="o">-</span><span class="nv">\alpha</span><span class="p">$}}</span>;
+
+<span class="k">\draw</span> [-&gt;, draw=NavyBlue] (9.6,1.3) -&gt; (9,0.3);
+<span class="k">\draw</span> [-&gt;, draw=NavyBlue] (1.7,1.3) -&gt; (2.4,0.3);
+
+<span class="nt">\end{tikzpicture}</span>
+<span class="nt">\end{figure}</span>
+</code></pre>
+</div>
+
+<h3 id="student-table">Student table</h3>
+
+<p>The R code:</p>
+
+<div class="language-r highlighter-rouge"><pre class="highlight"><code><span class="n">n</span><span class="o">=</span><span class="n">seq</span><span class="p">(</span><span class="m">1</span><span class="p">,</span><span class="m">10</span><span class="p">,</span><span class="n">by</span><span class="o">=</span><span class="m">1</span><span class="p">)</span>
+<span class="n">alpha</span> <span class="o">=</span> <span class="n">c</span><span class="p">(</span><span class="m">0.5</span><span class="p">,</span><span class="m">0.4</span><span class="p">,</span><span class="m">0.3</span><span class="p">,</span><span class="m">0.2</span><span class="p">,</span><span class="m">0.1</span><span class="p">,</span><span class="m">0.05</span><span class="p">,</span><span class="m">0.02</span><span class="p">,</span><span class="m">0.01</span><span class="p">,</span><span class="m">0.001</span><span class="p">)</span>
+<span class="n">mt</span><span class="o">=</span><span class="n">matrix</span><span class="p">(</span><span class="m">0</span><span class="p">,</span><span class="n">nrow</span><span class="o">=</span><span class="m">10</span><span class="p">,</span><span class="n">ncol</span><span class="o">=</span><span class="m">9</span><span class="p">,</span><span class="n">byrow</span><span class="o">=</span><span class="n">TRUE</span><span class="p">)</span>
+
+<span class="k">for</span><span class="p">(</span><span class="n">i</span> <span class="k">in</span> <span class="m">1</span><span class="o">:</span><span class="n">length</span><span class="p">(</span><span class="n">n</span><span class="p">))</span>
+<span class="p">{</span> <span class="k">for</span><span class="p">(</span><span class="n">j</span> <span class="k">in</span> <span class="m">1</span><span class="o">:</span><span class="n">length</span><span class="p">(</span><span class="n">alpha</span><span class="p">)){</span>
+  <span class="n">mt</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="n">c</span><span class="p">(</span><span class="n">qt</span><span class="p">(</span><span class="m">1</span><span class="o">-</span><span class="n">alpha</span><span class="p">[</span><span class="n">j</span><span class="p">]</span><span class="o">/</span><span class="m">2</span><span class="p">,</span><span class="n">n</span><span class="p">[</span><span class="n">i</span><span class="p">]))</span>
+<span class="p">}}</span>
+
+
+<span class="n">options</span><span class="p">(</span><span class="n">digits</span><span class="o">=</span><span class="m">4</span><span class="p">)</span>
+<span class="n">rownames</span><span class="p">(</span><span class="n">mt</span><span class="p">)</span><span class="o">=</span><span class="n">seq</span><span class="p">(</span><span class="m">1</span><span class="p">,</span><span class="m">10</span><span class="p">,</span><span class="n">by</span><span class="o">=</span><span class="m">1</span><span class="p">)</span>
+<span class="n">colnames</span><span class="p">(</span><span class="n">mt</span><span class="p">)</span><span class="o">=</span><span class="n">alpha</span>
+<span class="n">library</span><span class="p">(</span><span class="n">xtable</span><span class="p">)</span>
+<span class="n">mt2</span><span class="o">=</span><span class="n">xtable</span><span class="p">(</span><span class="n">m</span><span class="p">,</span><span class="n">digits</span><span class="o">=</span><span class="m">4</span><span class="p">)</span>
+<span class="n">print.xtable</span><span class="p">(</span><span class="n">mt2</span><span class="p">,</span> <span class="n">type</span><span class="o">=</span><span class="s2">"latex"</span><span class="p">,</span> <span class="n">file</span><span class="o">=</span><span class="s2">"student.tex"</span><span class="p">)</span>
+</code></pre>
+</div>
+
+<p>The screen capture of the generated table from the pdf file</p>
+
+<p><img src="../../figures/student.png" alt="student.png" /></p>
+
+<p>And here is the latex code for the figure of the student distribution</p>
+
+<div class="language-latex highlighter-rouge"><pre class="highlight"><code><span class="nt">\begin{figure}</span>[!h]
+<span class="k">\centering</span>
+<span class="nt">\begin{tikzpicture}</span>[scale=0.5]
+
+<span class="k">\def</span> <span class="k">\xMoy</span><span class="p">{</span>0<span class="p">}</span>;<span class="c">%moyenne</span>
+<span class="k">\def</span> <span class="k">\ecartType</span> <span class="p">{</span>1<span class="p">}</span>;<span class="c">%ecart-type</span>
+
+<span class="nt">\begin{axis}</span>
+[
+axis x line=bottom,
+axis y line=none,
+xmin=-3,
+xmax=3,
+ymin=0,
+ymax=0.5,
+xtick=<span class="p">{</span>0,1.3<span class="p">}</span>,
+xticklabels=<span class="p">{</span>0,<span class="p">$</span><span class="nb">a</span><span class="p">$}</span>,
+enlarge x limits=-1, <span class="c">%hack to plot on the full x-axis scale</span>
+width=13cm, <span class="c">%set bigger width</span>
+height=6cm,
+]
+
+<span class="k">\addplot</span>+[mark=none,domain=-3:3,samples=200,color=red,smooth,line width=1mm]<span class="p">{</span>(exp(-(x-<span class="k">\xMoy</span>)<span class="p">^</span>2/(2*<span class="k">\ecartType</span><span class="p">^</span>2)))/(<span class="k">\ecartType*</span>sqrt(6.28))<span class="p">}</span>; 
+
+
+<span class="k">\addplot</span>+[mark=none,fill=NavyBlue,draw=NavyBlue,opacity=0.6,domain=-25:1.3,samples=150]<span class="p">{</span>(exp(-(x-<span class="k">\xMoy</span>)<span class="p">^</span>2/(2*<span class="k">\ecartType</span><span class="p">^</span>2)))/(<span class="k">\ecartType*</span>sqrt(6.28))<span class="p">}</span><span class="k">\closedcycle</span>;
+
+<span class="nt">\end{axis}</span>
+
+<span class="k">\draw</span> (8,2.8) node[right] <span class="p">{</span> <span class="p">{</span><span class="k">\color</span><span class="p">{</span>NavyBlue<span class="p">}</span> <span class="p">$</span><span class="nv">\Phi</span><span class="o">(</span><span class="nb">a</span><span class="o">)=</span><span class="nb">P</span><span class="o">(</span><span class="nb">X</span><span class="nv">\le</span><span class="nb"> a</span><span class="o">)</span><span class="p">$}}</span>;
+<span class="k">\draw</span> (2.5,2.4) node[left] <span class="p">{</span> <span class="p">{</span><span class="k">\color</span><span class="p">{</span>red<span class="p">}</span> <span class="p">$</span><span class="nb">X  </span><span class="nv">\thicksim</span><span class="nb"> </span><span class="nv">\mathcal</span><span class="p">{</span><span class="nb">N</span><span class="p">}</span><span class="o">(</span><span class="m">0</span><span class="nb">,</span><span class="m">1</span><span class="o">)</span><span class="p">$}}</span>;
+
+<span class="nt">\end{tikzpicture}</span>
+<span class="nt">\end{figure}</span>
+</code></pre>
+</div>
+
+
+      </article>
+
+      
+
+      
+
+      <ul class="pager blog-pager">
+        
+        <li class="previous">
+          <a href="/blog/this-website/" data-toggle="tooltip" data-placement="top" title="Credits">&larr; Previous Post</a>
+        </li>
+        
+        
+      </ul>
+
+      
+        <div class="disqus-comments">
+          
+
+        </div>
+      
+    </div>
+  </div>
+</div>
+
+    <footer>
+  <div class="container beautiful-jekyll-footer">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <ul class="list-inline text-center footer-links">
+          
+          
+		  
+          <li>
+            <a href="https://twitter.com/m_ghass" title="Twitter">
+              <span class="fa-stack fa-lg">
+                <i class="fa fa-circle fa-stack-2x"></i>
+                <i class="fa fa-twitter fa-stack-1x fa-inverse"></i>
+              </span>
+            </a>
+          </li>
+          
+      
+		  
+          <li>
+            <a href="mailto:m.ghassany@gmail.com" title="Email me">
+              <span class="fa-stack fa-lg">
+                <i class="fa fa-circle fa-stack-2x"></i>
+                <i class="fa fa-envelope fa-stack-1x fa-inverse"></i>
+              </span>
+            </a>
+          </li>
+          
+		  
+          <li>
+            <a href="https://linkedin.com/in/mghassany" title="LinkedIn">
+              <span class="fa-stack fa-lg">
+                <i class="fa fa-circle fa-stack-2x"></i>
+                <i class="fa fa-linkedin fa-stack-1x fa-inverse"></i>
+              </span>
+            </a>
+          </li>
+          
+		  
+		  
+      
+      
+      
+      
+		  
+        </ul>
+        <p class="copyright text-muted">
+		  Mohamad Ghassany
+		  &nbsp;&bull;&nbsp;
+		  2017
+
+		  
+	    </p>
+	        <!-- Please don't remove this, keep my open source work credited :) -->
+		<p class="theme-by text-muted">
+		  Theme by
+		  <a href="http://deanattali.com/beautiful-jekyll/">beautiful-jekyll</a>
+		</p>
+      </div>
+    </div>
+  </div>
+</footer>
+
+  
+    
+
+
+
+
+
+
+  
+    <!-- doing something a bit funky here because I want to be careful not to include JQuery twice! -->
+    
+      <script>
+      	if (typeof jQuery == 'undefined') {
+      	  document.write('<script src="/js/jquery-1.11.2.min.js"></scr' + 'ipt>');
+      	}
+      </script>
+    
+  
+    <!-- doing something a bit funky here because I want to be careful not to include JQuery twice! -->
+    
+	<script src="/js/bootstrap.min.js"></script>
+    
+  
+    <!-- doing something a bit funky here because I want to be careful not to include JQuery twice! -->
+    
+	<script src="/js/main.js"></script>
+    
+  
+
+
+
+	<!-- Google Analytics -->
+	<script>
+		(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+		(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+		m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+		})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+		ga('create', 'UA-88489172-1', 'auto');
+		ga('send', 'pageview');
+	</script>
+	<!-- End Google Analytics -->
+
+
+  
+  </body>
+</html>

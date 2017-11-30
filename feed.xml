@@ -1,27 +1,3 @@
-<<<<<<< HEAD
----
-layout: null
----
-<?xml version="1.0" encoding="UTF-8"?>
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
-  <channel>
-    <title>{{ site.title | xml_escape }}</title>
-    <description>{{ site.description | xml_escape }}</description>
-    <link>{{ site.url }}</link>
-    <atom:link href="{{ site.url }}/feed.xml" rel="self" type="application/rss+xml" />
-    {% for post in site.posts limit:20 %}
-      <item>
-        <title>{{ post.title | xml_escape }}</title>
-        <description>
-          {% if post.subtitle %}{{ post.subtitle | xml_escape }} - {% endif %}
-          {{ post.content | strip_html | xml_escape | truncatewords: 50 }}
-        </description>
-        <pubDate>{{ post.date | date: "%a, %d %b %Y %H:%M:%S %z" }}</pubDate>
-        <link>{{ site.url }}{{ post.url }}</link>
-        <guid isPermaLink="true">{{ site.url }}{{ post.url }}</guid>
-      </item>
-    {% endfor %}
-=======
 <?xml version="1.0" encoding="UTF-8"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
@@ -29,6 +5,17 @@ layout: null
     <description>Data scientist</description>
     <link>http://mghassany.com</link>
     <atom:link href="http://mghassany.com/feed.xml" rel="self" type="application/rss+xml" />
+    
+      <item>
+        <title>Generating statistical tables</title>
+        <description>
+          
+          Inspired from Arthur Charpentier’s blog post here are some codes to create beautiful statistical tables using R and export them to use in latex. Normal distribution table First tables show the values of , which are the values of the cumulative distribution function of the normal distribution. u=seq(0,3.09,by=0.01) p=pnorm(u) m=matrix(p,ncol=10,byrow=TRUE)...
+        </description>
+        <pubDate>Thu, 30 Nov 2017 00:00:00 +0100</pubDate>
+        <link>http://mghassany.com/blog/generating-statistical-tables/</link>
+        <guid isPermaLink="true">http://mghassany.com/blog/generating-statistical-tables/</guid>
+      </item>
     
       <item>
         <title>Credits</title>
@@ -63,6 +50,5 @@ layout: null
         <guid isPermaLink="true">http://mghassany.com/blog/test-markdown/</guid>
       </item>
     
->>>>>>> 8cbc3a204cf4418a2b176662c3726acac4c2725b
   </channel>
 </rss>

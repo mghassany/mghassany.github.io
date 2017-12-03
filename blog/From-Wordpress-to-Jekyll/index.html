@@ -222,6 +222,8 @@
 
 
 
+<link href="/css/syntax.css" rel="stylesheet" >
+
 <script type="text/javascript"
     src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
 </script>
@@ -247,16 +249,20 @@ Consequently, I maintain my publications with a <a href="http://en.wikipedia.org
 <p>I already mentioned that I use <a href="https://mademistakes.com/work/minimal-mistakes-jekyll-theme/">Minimal Mistakes</a> as a base for this blog.
 In its gem configuration file (<code class="highlighter-rouge">Gemfile</code>) I attached  the following for <em>Jekyll-Scholar</em>:</p>
 
-<figure class="highlight"><pre><code class="language-bash" data-lang="bash">gem <span class="s1">'jekyll-scholar'</span></code></pre></figure>
+<div class="language-bash highlighter-rouge"><pre class="highlight"><code>gem <span class="s1">'jekyll-scholar'</span>
+</code></pre>
+</div>
 
 <p>If you use <a href="http://bundler.io">Bundler</a>, you are now able to update your system to the latest versions of Jekyll-Scholar.
 To enable it, I created the file <code class="highlighter-rouge">ext.rb</code> in the plugin directory (<code class="highlighter-rouge">_plugins</code>) with the following statement:</p>
 
-<figure class="highlight"><pre><code class="language-ruby" data-lang="ruby"><span class="nb">require</span> <span class="s1">'jekyll/scholar'</span></code></pre></figure>
+<div class="language-ruby highlighter-rouge"><pre class="highlight"><code><span class="nb">require</span> <span class="s1">'jekyll/scholar'</span>
+</code></pre>
+</div>
 
 <p>In the configuration file (<code class="highlighter-rouge">_config.yml</code>) of my web site, I attached the following Jekyll-Scholar settings:</p>
 
-<figure class="highlight"><pre><code class="language-yaml" data-lang="yaml"><span class="s">scholar</span><span class="pi">:</span>
+<div class="language-yaml highlighter-rouge"><pre class="highlight"><code><span class="s">scholar</span><span class="pi">:</span>
   <span class="s">style</span><span class="pi">:</span> <span class="s">assets/bibliography/ieee-with-url.csl</span>
   <span class="s">locale</span><span class="pi">:</span> <span class="s">en</span>
 
@@ -275,7 +281,9 @@ To enable it, I created the file <code class="highlighter-rouge">ext.rb</code> i
   <span class="s">details_layout</span><span class="pi">:</span> <span class="s">bibtex.html</span>
   <span class="s">details_link</span><span class="pi">:</span>   <span class="s">Details</span>
 
-  <span class="s">query</span><span class="pi">:</span> <span class="s2">"</span><span class="s">@*"</span></code></pre></figure>
+  <span class="s">query</span><span class="pi">:</span> <span class="s2">"</span><span class="s">@*"</span>
+</code></pre>
+</div>
 
 <p>In this settings, the value of <code class="highlighter-rouge">source</code> describes the location and the value of <code class="highlighter-rouge">references</code> the name of my BibTeX file.
 According to my settings, I put my BibTeX file with the name <em>references.bib</em> in the directory <em>_bibliography</em>.
@@ -283,7 +291,7 @@ As citation style I used a modified version of <em>ieee-with-url</em> from the <
 I removed the citation number from this style, which is nonrelevant for my web site.
 The differences to the original are minimal and are shown as follows <em>diff</em>:</p>
 
-<figure class="highlight"><pre><code class="language-diff" data-lang="diff"><span class="gh">diff --git a/assets/bibliography/ieee-with-url.csl b/assets/bibliography/ieee-with-url.csl
+<div class="language-diff highlighter-rouge"><pre class="highlight"><code><span class="gh">diff --git a/assets/bibliography/ieee-with-url.csl b/assets/bibliography/ieee-with-url.csl
 index 08dbeb1..da17fb0 100755
 </span><span class="gd">--- a/assets/bibliography/ieee-with-url.csl
 </span><span class="gi">+++ b/assets/bibliography/ieee-with-url.csl
@@ -305,12 +313,14 @@ index 08dbeb1..da17fb0 100755
 <span class="gi">+--&gt;
 </span>       &lt;!-- Author(s) --&gt;
        &lt;text macro="author" suffix=", "/&gt;
-<span class="err">       &lt;!-- Rest of Citation --&gt;</span></code></pre></figure>
+       &lt;!-- Rest of Citation --&gt;
+</code></pre>
+</div>
 
 <p>Furthermore, with the file <code class="highlighter-rouge">bibtex.html</code> I defined the layout of my publication list in the directory <code class="highlighter-rouge">_layout</code>.
 The current version of <code class="highlighter-rouge">bibtex.html</code> is shown below:</p>
 
-<figure class="highlight"><pre><code class="language-html" data-lang="html">---Natascha McElhone
+<div class="language-html highlighter-rouge"><pre class="highlight"><code>---Natascha McElhone
 ---
 {{reference}}
 
@@ -337,14 +347,16 @@ The current version of <code class="highlighter-rouge">bibtex.html</code> is sho
   <span class="nt">&lt;p</span> <span class="na">id=</span><span class="s">"{{key}}-abstract"</span> <span class="na">class=</span><span class="s">"collapse"</span><span class="nt">&gt;</span>{{entry.abstract}}<span class="nt">&lt;/p&gt;</span>
   {% endif %}
 
-<span class="nt">&lt;/div&gt;</span></code></pre></figure>
+<span class="nt">&lt;/div&gt;</span>
+</code></pre>
+</div>
 
 <p>The final step was to write a markdown file with the description of the web site, which contains the publication list.
 In my case, I sorted the list by the year of publication.
 Consequently, I had to query the bibliography for every year.
 The first half of the file looks as follows:</p>
 
-<figure class="highlight"><pre><code class="language-html" data-lang="html">---
+<div class="language-html highlighter-rouge"><pre class="highlight"><code>---
 layout: page
 title: "Publications"
 date: 2013-04-08
@@ -358,7 +370,9 @@ share: false
 
 ### 2012
 
-{% bibliography --query @*[year=2012] %}</code></pre></figure>
+{% bibliography --query @*[year=2012] %}
+</code></pre>
+</div>
 
 <p>The rest of the file is an iteration over the years.
 The final result is a publication list as follows:</p>

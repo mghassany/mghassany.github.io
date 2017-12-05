@@ -345,7 +345,7 @@
 
 <p>I did some modifications to get a better table, and I created using tikz a figure to explain what the table is showing. The code of the figure is the following:</p>
 
-<figure class="highlight"><pre><code class="language-javascript" data-lang="javascript"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
+<figure class="highlight"><pre><code class="language-latex" data-lang="latex"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
 2
 3
 4
@@ -381,42 +381,46 @@
 34
 35
 36
-</pre></td><td class="code"><pre><span class="err">\</span><span class="nx">begin</span><span class="p">{</span><span class="nx">figure</span><span class="p">}[</span><span class="o">!</span><span class="nx">h</span><span class="p">]</span>
-<span class="err">\</span><span class="nx">centering</span>
-<span class="err">\</span><span class="nx">begin</span><span class="p">{</span><span class="nx">tikzpicture</span><span class="p">}[</span><span class="nx">scale</span><span class="o">=</span><span class="mf">0.6</span><span class="p">]</span>
+</pre></td><td class="code"><pre><span class="nt">\begin{figure}</span>[!h]
+<span class="k">\centering</span>
+<span class="nt">\begin{tikzpicture}</span>[scale=0.6]
 
-<span class="err">\</span><span class="nx">def</span> <span class="err">\</span><span class="nx">xMoy</span><span class="p">{</span><span class="mi">0</span><span class="p">};</span><span class="o">%</span><span class="nx">moyenne</span>
-<span class="err">\</span><span class="nx">def</span> <span class="err">\</span><span class="nx">ecartType</span> <span class="p">{</span><span class="mi">1</span><span class="p">};</span><span class="o">%</span><span class="nx">ecart</span><span class="o">-</span><span class="nx">type</span>
-
-
-
-<span class="err">\</span><span class="nx">begin</span><span class="p">{</span><span class="nx">axis</span><span class="p">}</span>
-<span class="p">[</span>
-<span class="nx">axis</span> <span class="nx">x</span> <span class="nx">line</span><span class="o">=</span><span class="nx">bottom</span><span class="p">,</span>
-<span class="nx">axis</span> <span class="nx">y</span> <span class="nx">line</span><span class="o">=</span><span class="nx">none</span><span class="p">,</span>
-<span class="nx">xmin</span><span class="o">=-</span><span class="mi">3</span><span class="p">,</span>
-<span class="nx">xmax</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span>
-<span class="nx">ymin</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
-<span class="nx">ymax</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span>
-<span class="nx">xtick</span><span class="o">=</span><span class="p">{</span><span class="mi">0</span><span class="p">,</span><span class="mf">1.3</span><span class="p">},</span>
-<span class="nx">xticklabels</span><span class="o">=</span><span class="p">{</span><span class="mi">0</span><span class="p">,</span><span class="nx">$a$</span><span class="p">},</span>
-<span class="nx">enlarge</span> <span class="nx">x</span> <span class="nx">limits</span><span class="o">=-</span><span class="mi">1</span><span class="p">,</span> <span class="o">%</span><span class="nx">hack</span> <span class="nx">to</span> <span class="nx">plot</span> <span class="nx">on</span> <span class="nx">the</span> <span class="nx">full</span> <span class="nx">x</span><span class="o">-</span><span class="nx">axis</span> <span class="nx">scale</span>
-<span class="nx">width</span><span class="o">=</span><span class="mi">13</span><span class="nx">cm</span><span class="p">,</span> <span class="o">%</span><span class="kd">set</span> <span class="nx">bigger</span> <span class="nx">width</span>
-<span class="nx">height</span><span class="o">=</span><span class="mi">6</span><span class="nx">cm</span><span class="p">,</span>
-<span class="p">]</span>
-
-<span class="err">\</span><span class="nx">addplot</span><span class="o">+</span><span class="p">[</span><span class="nx">mark</span><span class="o">=</span><span class="nx">none</span><span class="p">,</span><span class="nx">domain</span><span class="o">=-</span><span class="mi">3</span><span class="p">:</span><span class="mi">3</span><span class="p">,</span><span class="nx">samples</span><span class="o">=</span><span class="mi">200</span><span class="p">,</span><span class="nx">color</span><span class="o">=</span><span class="nx">red</span><span class="p">,</span><span class="nx">smooth</span><span class="p">,</span><span class="nx">line</span> <span class="nx">width</span><span class="o">=</span><span class="mi">1</span><span class="nx">mm</span><span class="p">]{(</span><span class="nx">exp</span><span class="p">(</span><span class="o">-</span><span class="p">(</span><span class="nx">x</span><span class="o">-</span><span class="err">\</span><span class="nx">xMoy</span><span class="p">)</span><span class="o">^</span><span class="mi">2</span><span class="o">/</span><span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="err">\</span><span class="nx">ecartType</span><span class="o">^</span><span class="mi">2</span><span class="p">)))</span><span class="o">/</span><span class="p">(</span><span class="err">\</span><span class="nx">ecartType</span><span class="o">*</span><span class="nx">sqrt</span><span class="p">(</span><span class="mf">6.28</span><span class="p">))};</span> 
+<span class="k">\def</span> <span class="k">\xMoy</span><span class="p">{</span>0<span class="p">}</span>;<span class="c">%moyenne
+</span>
+<span class="k">\def</span> <span class="k">\ecartType</span> <span class="p">{</span>1<span class="p">}</span>;<span class="c">%ecart-type
+</span>
 
 
-<span class="err">\</span><span class="nx">addplot</span><span class="o">+</span><span class="p">[</span><span class="nx">mark</span><span class="o">=</span><span class="nx">none</span><span class="p">,</span><span class="nx">fill</span><span class="o">=</span><span class="nx">NavyBlue</span><span class="p">,</span><span class="nx">draw</span><span class="o">=</span><span class="nx">NavyBlue</span><span class="p">,</span><span class="nx">opacity</span><span class="o">=</span><span class="mf">0.6</span><span class="p">,</span><span class="nx">domain</span><span class="o">=-</span><span class="mi">25</span><span class="p">:</span><span class="mf">1.3</span><span class="p">,</span><span class="nx">samples</span><span class="o">=</span><span class="mi">150</span><span class="p">]{(</span><span class="nx">exp</span><span class="p">(</span><span class="o">-</span><span class="p">(</span><span class="nx">x</span><span class="o">-</span><span class="err">\</span><span class="nx">xMoy</span><span class="p">)</span><span class="o">^</span><span class="mi">2</span><span class="o">/</span><span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="err">\</span><span class="nx">ecartType</span><span class="o">^</span><span class="mi">2</span><span class="p">)))</span><span class="o">/</span><span class="p">(</span><span class="err">\</span><span class="nx">ecartType</span><span class="o">*</span><span class="nx">sqrt</span><span class="p">(</span><span class="mf">6.28</span><span class="p">))}</span><span class="err">\</span><span class="nx">closedcycle</span><span class="p">;</span>
 
-<span class="err">\</span><span class="nx">end</span><span class="p">{</span><span class="nx">axis</span><span class="p">}</span>
+<span class="nt">\begin{axis}</span>
+[
+axis x line=bottom,
+axis y line=none,
+xmin=-3,
+xmax=3,
+ymin=0,
+ymax=0.5,
+xtick=<span class="p">{</span>0,1.3<span class="p">}</span>,
+xticklabels=<span class="p">{</span>0,<span class="p">$</span><span class="nb">a</span><span class="p">$}</span>,
+enlarge x limits=-1, <span class="c">%hack to plot on the full x-axis scale
+</span>
+width=13cm, <span class="c">%set bigger width
+</span>
+height=6cm,
+]
 
-<span class="err">\</span><span class="nx">draw</span> <span class="p">(</span><span class="mi">8</span><span class="p">,</span><span class="mf">2.8</span><span class="p">)</span> <span class="nx">node</span><span class="p">[</span><span class="nx">right</span><span class="p">]</span> <span class="p">{</span> <span class="p">{</span><span class="err">\</span><span class="nx">color</span><span class="p">{</span><span class="nx">NavyBlue</span><span class="p">}</span> <span class="nx">$</span><span class="err">\</span><span class="nx">Phi</span><span class="p">(</span><span class="nx">a</span><span class="p">)</span><span class="o">=</span><span class="nx">P</span><span class="p">(</span><span class="nx">X</span><span class="err">\</span><span class="nx">le</span> <span class="nx">a</span><span class="p">)</span><span class="nx">$</span><span class="p">}};</span>
-<span class="err">\</span><span class="nx">draw</span> <span class="p">(</span><span class="mf">2.5</span><span class="p">,</span><span class="mf">2.4</span><span class="p">)</span> <span class="nx">node</span><span class="p">[</span><span class="nx">left</span><span class="p">]</span> <span class="p">{</span> <span class="p">{</span><span class="err">\</span><span class="nx">color</span><span class="p">{</span><span class="nx">red</span><span class="p">}</span> <span class="nx">$X</span>  <span class="err">\</span><span class="nx">thicksim</span> <span class="err">\</span><span class="nx">mathcal</span><span class="p">{</span><span class="nx">N</span><span class="p">}(</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span><span class="nx">$</span><span class="p">}};</span>
+<span class="k">\addplot</span>+[mark=none,domain=-3:3,samples=200,color=red,smooth,line width=1mm]<span class="p">{</span>(exp(-(x-<span class="k">\xMoy</span>)<span class="p">^</span>2/(2*<span class="k">\ecartType</span><span class="p">^</span>2)))/(<span class="k">\ecartType*</span>sqrt(6.28))<span class="p">}</span>; 
 
-<span class="err">\</span><span class="nx">end</span><span class="p">{</span><span class="nx">tikzpicture</span><span class="p">}</span>
-<span class="err">\</span><span class="nx">end</span><span class="p">{</span><span class="nx">figure</span><span class="p">}</span></pre></td></tr></tbody></table></code></pre></figure>
+
+<span class="k">\addplot</span>+[mark=none,fill=NavyBlue,draw=NavyBlue,opacity=0.6,domain=-25:1.3,samples=150]<span class="p">{</span>(exp(-(x-<span class="k">\xMoy</span>)<span class="p">^</span>2/(2*<span class="k">\ecartType</span><span class="p">^</span>2)))/(<span class="k">\ecartType*</span>sqrt(6.28))<span class="p">}</span><span class="k">\closedcycle</span>;
+
+<span class="nt">\end{axis}</span>
+
+<span class="k">\draw</span> (8,2.8) node[right] <span class="p">{</span> <span class="p">{</span><span class="k">\color</span><span class="p">{</span>NavyBlue<span class="p">}</span> <span class="p">$</span><span class="nv">\Phi</span><span class="o">(</span><span class="nb">a</span><span class="o">)=</span><span class="nb">P</span><span class="o">(</span><span class="nb">X</span><span class="nv">\le</span><span class="nb"> a</span><span class="o">)</span><span class="p">$}}</span>;
+<span class="k">\draw</span> (2.5,2.4) node[left] <span class="p">{</span> <span class="p">{</span><span class="k">\color</span><span class="p">{</span>red<span class="p">}</span> <span class="p">$</span><span class="nb">X  </span><span class="nv">\thicksim</span><span class="nb"> </span><span class="nv">\mathcal</span><span class="p">{</span><span class="nb">N</span><span class="p">}</span><span class="o">(</span><span class="m">0</span><span class="nb">,</span><span class="m">1</span><span class="o">)</span><span class="p">$}}</span>;
+
+<span class="nt">\end{tikzpicture}</span>
+<span class="nt">\end{figure}</span></pre></td></tr></tbody></table></code></pre></figure>
 
 <p>Here is a screen capture of the generated table</p>
 

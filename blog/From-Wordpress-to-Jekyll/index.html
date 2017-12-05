@@ -249,41 +249,38 @@ Consequently, I maintain my publications with a <a href="http://en.wikipedia.org
 <p>I already mentioned that I use <a href="https://mademistakes.com/work/minimal-mistakes-jekyll-theme/">Minimal Mistakes</a> as a base for this blog.
 In its gem configuration file (<code class="highlighter-rouge">Gemfile</code>) I attached  the following for <em>Jekyll-Scholar</em>:</p>
 
-<div class="language-bash highlighter-rouge"><pre class="highlight"><code>gem <span class="s1">'jekyll-scholar'</span>
-</code></pre>
-</div>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>gem <span class="s1">'jekyll-scholar'</span>
+</code></pre></div></div>
 
 <p>If you use <a href="http://bundler.io">Bundler</a>, you are now able to update your system to the latest versions of Jekyll-Scholar.
 To enable it, I created the file <code class="highlighter-rouge">ext.rb</code> in the plugin directory (<code class="highlighter-rouge">_plugins</code>) with the following statement:</p>
 
-<div class="language-ruby highlighter-rouge"><pre class="highlight"><code><span class="nb">require</span> <span class="s1">'jekyll/scholar'</span>
-</code></pre>
-</div>
+<div class="language-ruby highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">require</span> <span class="s1">'jekyll/scholar'</span>
+</code></pre></div></div>
 
 <p>In the configuration file (<code class="highlighter-rouge">_config.yml</code>) of my web site, I attached the following Jekyll-Scholar settings:</p>
 
-<div class="language-yaml highlighter-rouge"><pre class="highlight"><code><span class="s">scholar</span><span class="pi">:</span>
-  <span class="s">style</span><span class="pi">:</span> <span class="s">assets/bibliography/ieee-with-url.csl</span>
-  <span class="s">locale</span><span class="pi">:</span> <span class="s">en</span>
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">scholar</span><span class="pi">:</span>
+  <span class="na">style</span><span class="pi">:</span> <span class="s">assets/bibliography/ieee-with-url.csl</span>
+  <span class="na">locale</span><span class="pi">:</span> <span class="s">en</span>
 
-  <span class="s">sort_by</span><span class="pi">:</span> <span class="s">year</span>
-  <span class="s">order</span><span class="pi">:</span> <span class="s">descending</span>
-  <span class="s">bibliography_list_tag</span><span class="pi">:</span> <span class="s">ul</span>
+  <span class="na">sort_by</span><span class="pi">:</span> <span class="s">year</span>
+  <span class="na">order</span><span class="pi">:</span> <span class="s">descending</span>
+  <span class="na">bibliography_list_tag</span><span class="pi">:</span> <span class="s">ul</span>
 
-  <span class="s">source</span><span class="pi">:</span> <span class="s">_bibliography</span>
-  <span class="s">repository</span><span class="pi">:</span> <span class="s">pdf</span>
-  <span class="s">bibliography</span><span class="pi">:</span> <span class="s">references</span>
-  <span class="s">bibliography_template</span><span class="pi">:</span> <span class="s">bibliography</span>
+  <span class="na">source</span><span class="pi">:</span> <span class="s">_bibliography</span>
+  <span class="na">repository</span><span class="pi">:</span> <span class="s">pdf</span>
+  <span class="na">bibliography</span><span class="pi">:</span> <span class="s">references</span>
+  <span class="na">bibliography_template</span><span class="pi">:</span> <span class="s">bibliography</span>
 
-  <span class="s">replace_strings</span><span class="pi">:</span> <span class="s">true</span>
+  <span class="na">replace_strings</span><span class="pi">:</span> <span class="no">true</span>
 
-  <span class="s">details_dir</span><span class="pi">:</span>    <span class="s">bibliography</span>
-  <span class="s">details_layout</span><span class="pi">:</span> <span class="s">bibtex.html</span>
-  <span class="s">details_link</span><span class="pi">:</span>   <span class="s">Details</span>
+  <span class="na">details_dir</span><span class="pi">:</span>    <span class="s">bibliography</span>
+  <span class="na">details_layout</span><span class="pi">:</span> <span class="s">bibtex.html</span>
+  <span class="na">details_link</span><span class="pi">:</span>   <span class="s">Details</span>
 
-  <span class="s">query</span><span class="pi">:</span> <span class="s2">"</span><span class="s">@*"</span>
-</code></pre>
-</div>
+  <span class="na">query</span><span class="pi">:</span> <span class="s2">"</span><span class="s">@*"</span>
+</code></pre></div></div>
 
 <p>In this settings, the value of <code class="highlighter-rouge">source</code> describes the location and the value of <code class="highlighter-rouge">references</code> the name of my BibTeX file.
 According to my settings, I put my BibTeX file with the name <em>references.bib</em> in the directory <em>_bibliography</em>.
@@ -291,7 +288,7 @@ As citation style I used a modified version of <em>ieee-with-url</em> from the <
 I removed the citation number from this style, which is nonrelevant for my web site.
 The differences to the original are minimal and are shown as follows <em>diff</em>:</p>
 
-<div class="language-diff highlighter-rouge"><pre class="highlight"><code><span class="gh">diff --git a/assets/bibliography/ieee-with-url.csl b/assets/bibliography/ieee-with-url.csl
+<div class="language-diff highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gh">diff --git a/assets/bibliography/ieee-with-url.csl b/assets/bibliography/ieee-with-url.csl
 index 08dbeb1..da17fb0 100755
 </span><span class="gd">--- a/assets/bibliography/ieee-with-url.csl
 </span><span class="gi">+++ b/assets/bibliography/ieee-with-url.csl
@@ -314,13 +311,12 @@ index 08dbeb1..da17fb0 100755
 </span>       &lt;!-- Author(s) --&gt;
        &lt;text macro="author" suffix=", "/&gt;
        &lt;!-- Rest of Citation --&gt;
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <p>Furthermore, with the file <code class="highlighter-rouge">bibtex.html</code> I defined the layout of my publication list in the directory <code class="highlighter-rouge">_layout</code>.
 The current version of <code class="highlighter-rouge">bibtex.html</code> is shown below:</p>
 
-<div class="language-html highlighter-rouge"><pre class="highlight"><code>---Natascha McElhone
+<div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code>---Natascha McElhone
 ---
 {{reference}}
 
@@ -348,15 +344,14 @@ The current version of <code class="highlighter-rouge">bibtex.html</code> is sho
   {% endif %}
 
 <span class="nt">&lt;/div&gt;</span>
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <p>The final step was to write a markdown file with the description of the web site, which contains the publication list.
 In my case, I sorted the list by the year of publication.
 Consequently, I had to query the bibliography for every year.
 The first half of the file looks as follows:</p>
 
-<div class="language-html highlighter-rouge"><pre class="highlight"><code>---
+<div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code>---
 layout: page
 title: "Publications"
 date: 2013-04-08
@@ -371,13 +366,12 @@ share: false
 ### 2012
 
 {% bibliography --query @*[year=2012] %}
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <p>The rest of the file is an iteration over the years.
 The final result is a publication list as follows:</p>
 
-<h3 id="section">2013</h3>
+<h3 id="2013">2013</h3>
 
 <ol class="bibliography"><li><span id="Ghassany-ijcnn13"><span style="font-variant: small-caps">Ghassany, M., Grozavu, N., and Bennani, Y.</span> 2013. Collaborative Multi-View Clustering. <i>The 2013 International Joint Conference on Neural Networks, IJCNN13, Dallas, USA</i>.</span>
 
@@ -448,7 +442,7 @@ The final result is a publication list as follows:</p>
 
 </li></ol>
 
-<h3 id="section-1">2012</h3>
+<h3 id="2012">2012</h3>
 
 <ol class="bibliography"><li><span id="Ghassany12-iconip"><span style="font-variant: small-caps">Ghassany, M., Grozavu, N., and Bennani, Y.</span> 2012. Collaborative Generative Topographic Mapping. <i>Neural Information Processing: 19th International Conference, ICONIP 2012, Doha, Qatar</i>.</span>
 

@@ -1,0 +1,744 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+
+<meta charset="utf-8">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="generator" content="pandoc" />
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta property="og:title" content="" />
+<meta property="og:type" content="book" />
+
+
+
+
+
+
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  TeX: { equationNumbers: { autoNumber: "AMS" } }
+});
+</script>
+  <script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS_CHTML-full" type="text/javascript"></script>
+
+<meta name="description" content="">
+
+<title></title>
+
+<script src="libs/jquery-1.11.3/jquery.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="libs/bootstrap-3.3.5/css/bootstrap.min.css" rel="stylesheet" />
+<script src="libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<script src="libs/navigation-1.1/tabsets.js"></script>
+
+
+<style type="text/css">code{white-space: pre;}</style>
+<style type="text/css">
+div.sourceCode { overflow-x: auto; }
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+  margin: 0; padding: 0; vertical-align: baseline; border: none; }
+table.sourceCode { width: 100%; line-height: 100%; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
+td.sourceCode { padding-left: 5px; }
+code > span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code > span.dt { color: #902000; } /* DataType */
+code > span.dv { color: #40a070; } /* DecVal */
+code > span.bn { color: #40a070; } /* BaseN */
+code > span.fl { color: #40a070; } /* Float */
+code > span.ch { color: #4070a0; } /* Char */
+code > span.st { color: #4070a0; } /* String */
+code > span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code > span.ot { color: #007020; } /* Other */
+code > span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code > span.fu { color: #06287e; } /* Function */
+code > span.er { color: #ff0000; font-weight: bold; } /* Error */
+code > span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+code > span.cn { color: #880000; } /* Constant */
+code > span.sc { color: #4070a0; } /* SpecialChar */
+code > span.vs { color: #4070a0; } /* VerbatimString */
+code > span.ss { color: #bb6688; } /* SpecialString */
+code > span.im { } /* Import */
+code > span.va { color: #19177c; } /* Variable */
+code > span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code > span.op { color: #666666; } /* Operator */
+code > span.bu { } /* BuiltIn */
+code > span.ex { } /* Extension */
+code > span.pp { color: #bc7a00; } /* Preprocessor */
+code > span.at { color: #7d9029; } /* Attribute */
+code > span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code > span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+</style>
+<style type="text/css">
+  pre:not([class]) {
+    background-color: white;
+  }
+</style>
+
+
+<link rel="stylesheet" href="css\style.css" type="text/css" />
+<link rel="stylesheet" href="css\toc.css" type="text/css" />
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+code {
+  color: inherit;
+  background-color: rgba(0, 0, 0, 0.04);
+}
+img {
+  max-width:100%;
+  height: auto;
+}
+</style>
+</head>
+
+<body>
+
+<div class="container-fluid main-container">
+
+
+<div class="row">
+<div class="col-sm-12">
+<div id="TOC">
+<ul>
+<li class="part"><span><b>I Unsupervised Learning</b></span></li>
+<li class="has-sub"><a href="1-dimensionality-reduction.html#dimensionality-reduction"><span class="toc-section-number">1</span> Dimensionality Reduction</a><ul>
+<li><a href="1-1-unsupervised-learning.html#unsupervised-learning"><span class="toc-section-number">1.1</span> Unsupervised Learning</a></li>
+<li><a href="1-2-principal-components-analysis.html#principal-components-analysis"><span class="toc-section-number">1.2</span> Principal Components Analysis</a></li>
+<li class="has-sub"><a href="1-3-principal-components.html#principal-components"><span class="toc-section-number">1.3</span> Principal Components</a><ul>
+<li><a href="1-3-principal-components.html#notations-and-procedure">Notations and Procedure</a></li>
+<li><a href="1-3-principal-components.html#first-principal-component-textpc_1-y_1">First Principal Component (<span class="math inline">\(\text{PC}_1\)</span>): <span class="math inline">\(Y_1\)</span></a></li>
+<li><a href="1-3-principal-components.html#second-principal-component-textpc_2-y_2">Second Principal Component (<span class="math inline">\(\text{PC}_2\)</span>): <span class="math inline">\(Y_2\)</span></a></li>
+<li><a href="1-3-principal-components.html#ith-principal-component-textpc_i-y_i"><span class="math inline">\(i^{th}\)</span> Principal Component (<span class="math inline">\(\text{PC}_i\)</span>): <span class="math inline">\(Y_i\)</span></a></li>
+</ul></li>
+<li class="has-sub"><a href="1-4-how-do-we-find-the-coefficients.html#how-do-we-find-the-coefficients"><span class="toc-section-number">1.4</span> How do we find the coefficients?</a><ul>
+<li><a href="1-4-how-do-we-find-the-coefficients.html#why-it-may-be-possible-to-reduce-dimensions">Why It May Be Possible to Reduce Dimensions</a></li>
+<li><a href="1-4-how-do-we-find-the-coefficients.html#procedure">Procedure</a></li>
+</ul></li>
+<li><a href="1-5-standardization-of-the-features.html#standardization-of-the-features"><span class="toc-section-number">1.5</span> Standardization of the features</a></li>
+<li class="has-sub"><a href="1-6-projection-of-the-data.html#projection-of-the-data"><span class="toc-section-number">1.6</span> Projection of the data</a><ul>
+<li><a href="1-6-projection-of-the-data.html#scores">Scores</a></li>
+<li><a href="1-6-projection-of-the-data.html#visualization">Visualization</a></li>
+<li><a href="1-6-projection-of-the-data.html#extra">Extra</a></li>
+</ul></li>
+<li class="has-sub"><a href="1-7-case-study.html#case-study"><span class="toc-section-number">1.7</span> Case study</a><ul>
+<li><a href="1-7-case-study.html#employement-in-european-countries-in-the-late-70s">Employement in European countries in the late 70s</a></li>
+</ul></li>
+</ul></li>
+</ul>
+</div>
+</div>
+</div>
+<div class="row">
+<div class="col-sm-12">
+<div id="case-study" class="section level2">
+<h2><span class="header-section-number">1.7</span> Case study</h2>
+<div id="employement-in-european-countries-in-the-late-70s" class="section level3 unnumbered">
+<h3>Employement in European countries in the late 70s</h3>
+<p>The purpose of this case study is to reveal the structure of the job market and economy in different developed countries. The final aim is to have a meaningful and rigorous plot that is able to show the most important features of the countries in a concise form.</p>
+<p>The dataset <code>eurojob</code> (<a href="datasets/eurojob.txt">download</a>) contains the data employed in this case study. It contains the percentage of workforce employed in 1979 in 9 industries for 26 European countries. The industries measured are:</p>
+<ul>
+<li>Agriculture (<code>Agr</code>)</li>
+<li>Mining (<code>Min</code>)</li>
+<li>Manufacturing (<code>Man</code>)</li>
+<li>Power supply industries <code>(Pow</code>)</li>
+<li>Construction (<code>Con</code>)</li>
+<li>Service industries (<code>Ser</code>)</li>
+<li>Finance (<code>Fin</code>)</li>
+<li>Social and personal services (<code>Soc</code>)</li>
+<li>Transport and communications (<code>Tra</code>)</li>
+</ul>
+<p>If the dataset is imported into <code>R</code> and the case names are set as <code>Country</code> (important in order to have only numerical variables), then the data should look like this:</p>
+<table>
+<caption><span id="tab:eurotable">Table 1: </span>The <code>eurojob</code> dataset.</caption>
+<thead>
+<tr class="header">
+<th align="left">Country</th>
+<th align="right">Agr</th>
+<th align="right">Min</th>
+<th align="right">Man</th>
+<th align="right">Pow</th>
+<th align="right">Con</th>
+<th align="right">Ser</th>
+<th align="right">Fin</th>
+<th align="right">Soc</th>
+<th align="right">Tra</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">Belgium</td>
+<td align="right">3.3</td>
+<td align="right">0.9</td>
+<td align="right">27.6</td>
+<td align="right">0.9</td>
+<td align="right">8.2</td>
+<td align="right">19.1</td>
+<td align="right">6.2</td>
+<td align="right">26.6</td>
+<td align="right">7.2</td>
+</tr>
+<tr class="even">
+<td align="left">Denmark</td>
+<td align="right">9.2</td>
+<td align="right">0.1</td>
+<td align="right">21.8</td>
+<td align="right">0.6</td>
+<td align="right">8.3</td>
+<td align="right">14.6</td>
+<td align="right">6.5</td>
+<td align="right">32.2</td>
+<td align="right">7.1</td>
+</tr>
+<tr class="odd">
+<td align="left">France</td>
+<td align="right">10.8</td>
+<td align="right">0.8</td>
+<td align="right">27.5</td>
+<td align="right">0.9</td>
+<td align="right">8.9</td>
+<td align="right">16.8</td>
+<td align="right">6.0</td>
+<td align="right">22.6</td>
+<td align="right">5.7</td>
+</tr>
+<tr class="even">
+<td align="left">WGerm</td>
+<td align="right">6.7</td>
+<td align="right">1.3</td>
+<td align="right">35.8</td>
+<td align="right">0.9</td>
+<td align="right">7.3</td>
+<td align="right">14.4</td>
+<td align="right">5.0</td>
+<td align="right">22.3</td>
+<td align="right">6.1</td>
+</tr>
+<tr class="odd">
+<td align="left">Ireland</td>
+<td align="right">23.2</td>
+<td align="right">1.0</td>
+<td align="right">20.7</td>
+<td align="right">1.3</td>
+<td align="right">7.5</td>
+<td align="right">16.8</td>
+<td align="right">2.8</td>
+<td align="right">20.8</td>
+<td align="right">6.1</td>
+</tr>
+<tr class="even">
+<td align="left">Italy</td>
+<td align="right">15.9</td>
+<td align="right">0.6</td>
+<td align="right">27.6</td>
+<td align="right">0.5</td>
+<td align="right">10.0</td>
+<td align="right">18.1</td>
+<td align="right">1.6</td>
+<td align="right">20.1</td>
+<td align="right">5.7</td>
+</tr>
+<tr class="odd">
+<td align="left">Luxem</td>
+<td align="right">7.7</td>
+<td align="right">3.1</td>
+<td align="right">30.8</td>
+<td align="right">0.8</td>
+<td align="right">9.2</td>
+<td align="right">18.5</td>
+<td align="right">4.6</td>
+<td align="right">19.2</td>
+<td align="right">6.2</td>
+</tr>
+<tr class="even">
+<td align="left">Nether</td>
+<td align="right">6.3</td>
+<td align="right">0.1</td>
+<td align="right">22.5</td>
+<td align="right">1.0</td>
+<td align="right">9.9</td>
+<td align="right">18.0</td>
+<td align="right">6.8</td>
+<td align="right">28.5</td>
+<td align="right">6.8</td>
+</tr>
+<tr class="odd">
+<td align="left">UK</td>
+<td align="right">2.7</td>
+<td align="right">1.4</td>
+<td align="right">30.2</td>
+<td align="right">1.4</td>
+<td align="right">6.9</td>
+<td align="right">16.9</td>
+<td align="right">5.7</td>
+<td align="right">28.3</td>
+<td align="right">6.4</td>
+</tr>
+<tr class="even">
+<td align="left">Austria</td>
+<td align="right">12.7</td>
+<td align="right">1.1</td>
+<td align="right">30.2</td>
+<td align="right">1.4</td>
+<td align="right">9.0</td>
+<td align="right">16.8</td>
+<td align="right">4.9</td>
+<td align="right">16.8</td>
+<td align="right">7.0</td>
+</tr>
+<tr class="odd">
+<td align="left">Finland</td>
+<td align="right">13.0</td>
+<td align="right">0.4</td>
+<td align="right">25.9</td>
+<td align="right">1.3</td>
+<td align="right">7.4</td>
+<td align="right">14.7</td>
+<td align="right">5.5</td>
+<td align="right">24.3</td>
+<td align="right">7.6</td>
+</tr>
+<tr class="even">
+<td align="left">Greece</td>
+<td align="right">41.4</td>
+<td align="right">0.6</td>
+<td align="right">17.6</td>
+<td align="right">0.6</td>
+<td align="right">8.1</td>
+<td align="right">11.5</td>
+<td align="right">2.4</td>
+<td align="right">11.0</td>
+<td align="right">6.7</td>
+</tr>
+<tr class="odd">
+<td align="left">Norway</td>
+<td align="right">9.0</td>
+<td align="right">0.5</td>
+<td align="right">22.4</td>
+<td align="right">0.8</td>
+<td align="right">8.6</td>
+<td align="right">16.9</td>
+<td align="right">4.7</td>
+<td align="right">27.6</td>
+<td align="right">9.4</td>
+</tr>
+<tr class="even">
+<td align="left">Portugal</td>
+<td align="right">27.8</td>
+<td align="right">0.3</td>
+<td align="right">24.5</td>
+<td align="right">0.6</td>
+<td align="right">8.4</td>
+<td align="right">13.3</td>
+<td align="right">2.7</td>
+<td align="right">16.7</td>
+<td align="right">5.7</td>
+</tr>
+<tr class="odd">
+<td align="left">Spain</td>
+<td align="right">22.9</td>
+<td align="right">0.8</td>
+<td align="right">28.5</td>
+<td align="right">0.7</td>
+<td align="right">11.5</td>
+<td align="right">9.7</td>
+<td align="right">8.5</td>
+<td align="right">11.8</td>
+<td align="right">5.5</td>
+</tr>
+<tr class="even">
+<td align="left">Sweden</td>
+<td align="right">6.1</td>
+<td align="right">0.4</td>
+<td align="right">25.9</td>
+<td align="right">0.8</td>
+<td align="right">7.2</td>
+<td align="right">14.4</td>
+<td align="right">6.0</td>
+<td align="right">32.4</td>
+<td align="right">6.8</td>
+</tr>
+<tr class="odd">
+<td align="left">Switz</td>
+<td align="right">7.7</td>
+<td align="right">0.2</td>
+<td align="right">37.8</td>
+<td align="right">0.8</td>
+<td align="right">9.5</td>
+<td align="right">17.5</td>
+<td align="right">5.3</td>
+<td align="right">15.4</td>
+<td align="right">5.7</td>
+</tr>
+<tr class="even">
+<td align="left">Turkey</td>
+<td align="right">66.8</td>
+<td align="right">0.7</td>
+<td align="right">7.9</td>
+<td align="right">0.1</td>
+<td align="right">2.8</td>
+<td align="right">5.2</td>
+<td align="right">1.1</td>
+<td align="right">11.9</td>
+<td align="right">3.2</td>
+</tr>
+<tr class="odd">
+<td align="left">Bulgaria</td>
+<td align="right">23.6</td>
+<td align="right">1.9</td>
+<td align="right">32.3</td>
+<td align="right">0.6</td>
+<td align="right">7.9</td>
+<td align="right">8.0</td>
+<td align="right">0.7</td>
+<td align="right">18.2</td>
+<td align="right">6.7</td>
+</tr>
+<tr class="even">
+<td align="left">Czech</td>
+<td align="right">16.5</td>
+<td align="right">2.9</td>
+<td align="right">35.5</td>
+<td align="right">1.2</td>
+<td align="right">8.7</td>
+<td align="right">9.2</td>
+<td align="right">0.9</td>
+<td align="right">17.9</td>
+<td align="right">7.0</td>
+</tr>
+<tr class="odd">
+<td align="left">EGerm</td>
+<td align="right">4.2</td>
+<td align="right">2.9</td>
+<td align="right">41.2</td>
+<td align="right">1.3</td>
+<td align="right">7.6</td>
+<td align="right">11.2</td>
+<td align="right">1.2</td>
+<td align="right">22.1</td>
+<td align="right">8.4</td>
+</tr>
+<tr class="even">
+<td align="left">Hungary</td>
+<td align="right">21.7</td>
+<td align="right">3.1</td>
+<td align="right">29.6</td>
+<td align="right">1.9</td>
+<td align="right">8.2</td>
+<td align="right">9.4</td>
+<td align="right">0.9</td>
+<td align="right">17.2</td>
+<td align="right">8.0</td>
+</tr>
+<tr class="odd">
+<td align="left">Poland</td>
+<td align="right">31.1</td>
+<td align="right">2.5</td>
+<td align="right">25.7</td>
+<td align="right">0.9</td>
+<td align="right">8.4</td>
+<td align="right">7.5</td>
+<td align="right">0.9</td>
+<td align="right">16.1</td>
+<td align="right">6.9</td>
+</tr>
+<tr class="even">
+<td align="left">Romania</td>
+<td align="right">34.7</td>
+<td align="right">2.1</td>
+<td align="right">30.1</td>
+<td align="right">0.6</td>
+<td align="right">8.7</td>
+<td align="right">5.9</td>
+<td align="right">1.3</td>
+<td align="right">11.7</td>
+<td align="right">5.0</td>
+</tr>
+<tr class="odd">
+<td align="left">USSR</td>
+<td align="right">23.7</td>
+<td align="right">1.4</td>
+<td align="right">25.8</td>
+<td align="right">0.6</td>
+<td align="right">9.2</td>
+<td align="right">6.1</td>
+<td align="right">0.5</td>
+<td align="right">23.6</td>
+<td align="right">9.3</td>
+</tr>
+<tr class="even">
+<td align="left">Yugoslavia</td>
+<td align="right">48.7</td>
+<td align="right">1.5</td>
+<td align="right">16.8</td>
+<td align="right">1.1</td>
+<td align="right">4.9</td>
+<td align="right">6.4</td>
+<td align="right">11.3</td>
+<td align="right">5.3</td>
+<td align="right">4.0</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Note</strong>: To set the case names as <code>Country</code>, we do</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">row.names</span>(eurojob) &lt;-<span class="st"> </span>eurojob<span class="op">$</span>Country
+eurojob<span class="op">$</span>Country &lt;-<span class="st"> </span><span class="ot">NULL</span></code></pre></div>
+<p>So far, we know how to compute summaries for <em>each variable</em>, and how to quantify and visualize relations between variables with the correlation matrix and the scatterplot matrix. But even for a moderate number of variables like this, their results are hard to process.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Summary of the data - marginal</span>
+<span class="kw">summary</span>(eurojob)
+<span class="co">#ans&gt;       Agr            Min             Man            Pow       </span>
+<span class="co">#ans&gt;  Min.   : 2.7   Min.   :0.100   Min.   : 7.9   Min.   :0.100  </span>
+<span class="co">#ans&gt;  1st Qu.: 7.7   1st Qu.:0.525   1st Qu.:23.0   1st Qu.:0.600  </span>
+<span class="co">#ans&gt;  Median :14.4   Median :0.950   Median :27.6   Median :0.850  </span>
+<span class="co">#ans&gt;  Mean   :19.1   Mean   :1.254   Mean   :27.0   Mean   :0.908  </span>
+<span class="co">#ans&gt;  3rd Qu.:23.7   3rd Qu.:1.800   3rd Qu.:30.2   3rd Qu.:1.175  </span>
+<span class="co">#ans&gt;  Max.   :66.8   Max.   :3.100   Max.   :41.2   Max.   :1.900  </span>
+<span class="co">#ans&gt;       Con             Ser             Fin             Soc      </span>
+<span class="co">#ans&gt;  Min.   : 2.80   Min.   : 5.20   Min.   : 0.50   Min.   : 5.3  </span>
+<span class="co">#ans&gt;  1st Qu.: 7.53   1st Qu.: 9.25   1st Qu.: 1.23   1st Qu.:16.2  </span>
+<span class="co">#ans&gt;  Median : 8.35   Median :14.40   Median : 4.65   Median :19.6  </span>
+<span class="co">#ans&gt;  Mean   : 8.17   Mean   :12.96   Mean   : 4.00   Mean   :20.0  </span>
+<span class="co">#ans&gt;  3rd Qu.: 8.97   3rd Qu.:16.88   3rd Qu.: 5.92   3rd Qu.:24.1  </span>
+<span class="co">#ans&gt;  Max.   :11.50   Max.   :19.10   Max.   :11.30   Max.   :32.4  </span>
+<span class="co">#ans&gt;       Tra      </span>
+<span class="co">#ans&gt;  Min.   :3.20  </span>
+<span class="co">#ans&gt;  1st Qu.:5.70  </span>
+<span class="co">#ans&gt;  Median :6.70  </span>
+<span class="co">#ans&gt;  Mean   :6.55  </span>
+<span class="co">#ans&gt;  3rd Qu.:7.08  </span>
+<span class="co">#ans&gt;  Max.   :9.40</span>
+
+<span class="co"># Correlation matrix</span>
+<span class="kw">cor</span>(eurojob)
+<span class="co">#ans&gt;         Agr     Min    Man     Pow     Con    Ser     Fin    Soc    Tra</span>
+<span class="co">#ans&gt; Agr  1.0000  0.0358 -0.671 -0.4001 -0.5383 -0.737 -0.2198 -0.747 -0.565</span>
+<span class="co">#ans&gt; Min  0.0358  1.0000  0.445  0.4055 -0.0256 -0.397 -0.4427 -0.281  0.157</span>
+<span class="co">#ans&gt; Man -0.6711  0.4452  1.000  0.3853  0.4945  0.204 -0.1558  0.154  0.351</span>
+<span class="co">#ans&gt; Pow -0.4001  0.4055  0.385  1.0000  0.0599  0.202  0.1099  0.132  0.375</span>
+<span class="co">#ans&gt; Con -0.5383 -0.0256  0.494  0.0599  1.0000  0.356  0.0163  0.158  0.388</span>
+<span class="co">#ans&gt; Ser -0.7370 -0.3966  0.204  0.2019  0.3560  1.000  0.3656  0.572  0.188</span>
+<span class="co">#ans&gt; Fin -0.2198 -0.4427 -0.156  0.1099  0.0163  0.366  1.0000  0.108 -0.246</span>
+<span class="co">#ans&gt; Soc -0.7468 -0.2810  0.154  0.1324  0.1582  0.572  0.1076  1.000  0.568</span>
+<span class="co">#ans&gt; Tra -0.5649  0.1566  0.351  0.3752  0.3877  0.188 -0.2459  0.568  1.000</span>
+
+<span class="co"># Scatterplot matrix</span>
+<span class="kw">library</span>(car)
+<span class="co">#ans&gt; Warning: package &#39;car&#39; was built under R version 3.4.3</span>
+<span class="kw">scatterplotMatrix</span>(eurojob, <span class="dt">reg.line =</span> lm, <span class="dt">smooth =</span> <span class="ot">FALSE</span>, <span class="dt">spread =</span> <span class="ot">FALSE</span>,
+                  <span class="dt">span =</span> <span class="fl">0.5</span>, <span class="dt">ellipse =</span> <span class="ot">FALSE</span>, <span class="dt">levels =</span> <span class="kw">c</span>(.<span class="dv">5</span>, .<span class="dv">9</span>), <span class="dt">id.n =</span> <span class="dv">0</span>,
+                  <span class="dt">diagonal =</span> <span class="st">&#39;histogram&#39;</span>)</code></pre></div>
+<p><img src="Machine-Learning_files/figure-html/unnamed-chunk-9-1.png" width="70%" style="display: block; margin: auto;" /> We definitely need a way of visualizing and quantifying the relations between variables for a moderate to large amount of variables. PCA will be a handy way. Recall what PCA does:</p>
+<ol style="list-style-type: decimal">
+<li>Takes the data for the variables <span class="math inline">\(X_1,\ldots,X_p\)</span>.</li>
+<li>Using this data, looks for new variables <span class="math inline">\(\text{PC}_1,\ldots \text{PC}_p\)</span> such that:
+<ul>
+<li><span class="math inline">\(\text{PC}_j\)</span> is a <strong>linear combination</strong> of <span class="math inline">\(X_1,\ldots,X_k\)</span>, <span class="math inline">\(1\leq j\leq p\)</span>. This is, <span class="math inline">\(\text{PC}_j=a_{1j}X_1+a_{2j}X_2+\ldots+a_{pj}X_p\)</span>.</li>
+<li><span class="math inline">\(\text{PC}_1,\ldots \text{PC}_p\)</span> are <strong>sorted decreasingly in terms of variance</strong>. Hence <span class="math inline">\(\text{PC}_j\)</span> has more variance than <span class="math inline">\(\text{PC}_{j+1}\)</span>, <span class="math inline">\(1\leq j\leq p-1\)</span>,</li>
+<li><span class="math inline">\(\text{PC}_{j_1}\)</span> and <span class="math inline">\(\text{PC}_{j_2}\)</span> are <strong>uncorrelated</strong>, for <span class="math inline">\(j_1\neq j_2\)</span>.</li>
+<li><span class="math inline">\(\text{PC}_1,\ldots \text{PC}_p\)</span> have the <strong>same information</strong>, measured in terms of <strong>total variance</strong>, as <span class="math inline">\(X_1,\ldots,X_p\)</span>.</li>
+</ul></li>
+<li>Produces three key objects:
+<ul>
+<li><strong>Variances of the PCs</strong>. They are sorted decreasingly and give an idea of which PCs are contain most of the information of the data (the ones with more variance).</li>
+<li><strong>Weights of the variables in the PCs</strong>. They give the interpretation of the PCs in terms of the original variables, as they are the coefficients of the linear combination. The weights of the variables <span class="math inline">\(X_1,\ldots,X_p\)</span> on the PC<span class="math inline">\(_j\)</span>, <span class="math inline">\(a_{1j},\ldots,a_{pj}\)</span>, are normalized: <span class="math inline">\(a_{1j}^2+\ldots+a_{pj}^2=1\)</span>, <span class="math inline">\(j=1,\ldots,p\)</span>. In <code>R</code>, they are called <code>loadings</code>.</li>
+<li><strong>Scores of the data in the PCs</strong>: this is the data with <span class="math inline">\(\text{PC}_1,\ldots \text{PC}_p\)</span> variables instead of <span class="math inline">\(X_1,\ldots,X_p\)</span>. The <strong>scores are uncorrelated</strong>. Useful for knowing which PCs have more effect on a certain observation.</li>
+</ul></li>
+</ol>
+<p>Hence, PCA rearranges our variables in an information-equivalent, but more convenient, layout where the variables are <strong>sorted according to the ammount of information they are able to explain</strong>. From this position, the next step is clear: <strong>stick only with a limited number of PCs such that they explain most of the information</strong> (e.g., 70% of the total variance) and do <em>dimension reduction</em>. The effectiveness of PCA in practice varies from the structure present in the dataset. For example, in the case of highly dependent data, it could explain more than the 90% of variability of a dataset with tens of variables with just two PCs.</p>
+<p>Let’s see how to compute a full PCA in <code>R</code>.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># The main function - use cor = TRUE to avoid scale distortions</span>
+pca &lt;-<span class="st"> </span><span class="kw">princomp</span>(eurojob, <span class="dt">cor =</span> <span class="ot">TRUE</span>)
+
+<span class="co"># What is inside?</span>
+<span class="kw">str</span>(pca)
+<span class="co">#ans&gt; List of 7</span>
+<span class="co">#ans&gt;  $ sdev    : Named num [1:9] 1.867 1.46 1.048 0.997 0.737 ...</span>
+<span class="co">#ans&gt;   ..- attr(*, &quot;names&quot;)= chr [1:9] &quot;Comp.1&quot; &quot;Comp.2&quot; &quot;Comp.3&quot; &quot;Comp.4&quot; ...</span>
+<span class="co">#ans&gt;  $ loadings: loadings [1:9, 1:9] -0.52379 -0.00132 0.3475 0.25572 0.32518 ...</span>
+<span class="co">#ans&gt;   ..- attr(*, &quot;dimnames&quot;)=List of 2</span>
+<span class="co">#ans&gt;   .. ..$ : chr [1:9] &quot;Agr&quot; &quot;Min&quot; &quot;Man&quot; &quot;Pow&quot; ...</span>
+<span class="co">#ans&gt;   .. ..$ : chr [1:9] &quot;Comp.1&quot; &quot;Comp.2&quot; &quot;Comp.3&quot; &quot;Comp.4&quot; ...</span>
+<span class="co">#ans&gt;  $ center  : Named num [1:9] 19.131 1.254 27.008 0.908 8.165 ...</span>
+<span class="co">#ans&gt;   ..- attr(*, &quot;names&quot;)= chr [1:9] &quot;Agr&quot; &quot;Min&quot; &quot;Man&quot; &quot;Pow&quot; ...</span>
+<span class="co">#ans&gt;  $ scale   : Named num [1:9] 15.245 0.951 6.872 0.369 1.614 ...</span>
+<span class="co">#ans&gt;   ..- attr(*, &quot;names&quot;)= chr [1:9] &quot;Agr&quot; &quot;Min&quot; &quot;Man&quot; &quot;Pow&quot; ...</span>
+<span class="co">#ans&gt;  $ n.obs   : int 26</span>
+<span class="co">#ans&gt;  $ scores  : num [1:26, 1:9] 1.71 0.953 0.755 0.853 -0.104 ...</span>
+<span class="co">#ans&gt;   ..- attr(*, &quot;dimnames&quot;)=List of 2</span>
+<span class="co">#ans&gt;   .. ..$ : chr [1:26] &quot;Belgium&quot; &quot;Denmark&quot; &quot;France&quot; &quot;WGerm&quot; ...</span>
+<span class="co">#ans&gt;   .. ..$ : chr [1:9] &quot;Comp.1&quot; &quot;Comp.2&quot; &quot;Comp.3&quot; &quot;Comp.4&quot; ...</span>
+<span class="co">#ans&gt;  $ call    : language princomp(x = eurojob, cor = TRUE)</span>
+<span class="co">#ans&gt;  - attr(*, &quot;class&quot;)= chr &quot;princomp&quot;</span>
+
+<span class="co"># The standard deviation of each PC</span>
+pca<span class="op">$</span>sdev
+<span class="co">#ans&gt;  Comp.1  Comp.2  Comp.3  Comp.4  Comp.5  Comp.6  Comp.7  Comp.8  Comp.9 </span>
+<span class="co">#ans&gt; 1.86739 1.45951 1.04831 0.99724 0.73703 0.61922 0.47514 0.36985 0.00675</span>
+
+<span class="co"># Weights: the expression of the original variables in the PCs</span>
+<span class="co"># E.g. Agr = -0.524 * PC1 + 0.213 * PC5 - 0.152 * PC6 + 0.806 * PC9</span>
+<span class="co"># And also: PC1 = -0.524 * Agr + 0.347 * Man + 0256 * Pow + 0.325 * Con + ...</span>
+<span class="co"># (Because the matrix is orthogonal, so the transpose is the inverse)</span>
+pca<span class="op">$</span>loadings
+<span class="co">#ans&gt; </span>
+<span class="co">#ans&gt; Loadings:</span>
+<span class="co">#ans&gt;     Comp.1 Comp.2 Comp.3 Comp.4 Comp.5 Comp.6 Comp.7 Comp.8 Comp.9</span>
+<span class="co">#ans&gt; Agr -0.524                       0.213 -0.153                0.806</span>
+<span class="co">#ans&gt; Min        -0.618 -0.201        -0.164  0.101  0.726              </span>
+<span class="co">#ans&gt; Man  0.347 -0.355 -0.150  0.346 -0.385  0.288 -0.479  0.126  0.366</span>
+<span class="co">#ans&gt; Pow  0.256 -0.261 -0.561 -0.393  0.295 -0.357 -0.256 -0.341       </span>
+<span class="co">#ans&gt; Con  0.325         0.153  0.668  0.472 -0.130  0.221 -0.356       </span>
+<span class="co">#ans&gt; Ser  0.379  0.350 -0.115        -0.284 -0.615  0.229  0.388  0.238</span>
+<span class="co">#ans&gt; Fin         0.454 -0.587         0.280  0.526  0.187  0.174  0.145</span>
+<span class="co">#ans&gt; Soc  0.387  0.222  0.312 -0.412 -0.220  0.263  0.191 -0.506  0.351</span>
+<span class="co">#ans&gt; Tra  0.367 -0.203  0.375 -0.314  0.513  0.124         0.545       </span>
+<span class="co">#ans&gt; </span>
+<span class="co">#ans&gt;                Comp.1 Comp.2 Comp.3 Comp.4 Comp.5 Comp.6 Comp.7 Comp.8</span>
+<span class="co">#ans&gt; SS loadings     1.000  1.000  1.000  1.000  1.000  1.000  1.000  1.000</span>
+<span class="co">#ans&gt; Proportion Var  0.111  0.111  0.111  0.111  0.111  0.111  0.111  0.111</span>
+<span class="co">#ans&gt; Cumulative Var  0.111  0.222  0.333  0.444  0.556  0.667  0.778  0.889</span>
+<span class="co">#ans&gt;                Comp.9</span>
+<span class="co">#ans&gt; SS loadings     1.000</span>
+<span class="co">#ans&gt; Proportion Var  0.111</span>
+<span class="co">#ans&gt; Cumulative Var  1.000</span>
+
+<span class="co"># Scores of the data on the PCs: how is the data reexpressed into PCs</span>
+<span class="kw">head</span>(pca<span class="op">$</span>scores, <span class="dv">10</span>)
+<span class="co">#ans&gt;         Comp.1  Comp.2  Comp.3  Comp.4  Comp.5  Comp.6  Comp.7 Comp.8</span>
+<span class="co">#ans&gt; Belgium  1.710  1.2218 -0.1148 -0.3395 -0.3245  0.0473  0.3401  0.403</span>
+<span class="co">#ans&gt; Denmark  0.953  2.1278  0.9507 -0.5939  0.1027  0.8273  0.3029 -0.352</span>
+<span class="co">#ans&gt; France   0.755  1.1212 -0.4980  0.5003 -0.2997 -0.1158  0.1855 -0.266</span>
+<span class="co">#ans&gt; WGerm    0.853  0.0114 -0.5795  0.1105 -1.1652  0.6181 -0.4446  0.194</span>
+<span class="co">#ans&gt; Ireland -0.104  0.4140 -0.3840 -0.9267  0.0152 -1.4242  0.0370 -0.334</span>
+<span class="co">#ans&gt; Italy    0.375  0.7695  1.0606  1.4772 -0.6452 -1.0021  0.1418 -0.130</span>
+<span class="co">#ans&gt; Luxem    1.059 -0.7558 -0.6515  0.8352 -0.8659 -0.2188  1.6942  0.547</span>
+<span class="co">#ans&gt; Nether   1.688  2.0048  0.0637  0.0235  0.6352 -0.2120  0.3034 -0.591</span>
+<span class="co">#ans&gt; UK       1.630  0.3731 -1.1409 -1.2669 -0.8129  0.0361 -0.0413 -0.349</span>
+<span class="co">#ans&gt; Austria  1.176 -0.1431 -1.0434  0.1577  0.5210 -0.8019 -0.4150  0.215</span>
+<span class="co">#ans&gt;            Comp.9</span>
+<span class="co">#ans&gt; Belgium -0.001090</span>
+<span class="co">#ans&gt; Denmark  0.015619</span>
+<span class="co">#ans&gt; France  -0.000507</span>
+<span class="co">#ans&gt; WGerm   -0.006539</span>
+<span class="co">#ans&gt; Ireland  0.010879</span>
+<span class="co">#ans&gt; Italy    0.005602</span>
+<span class="co">#ans&gt; Luxem    0.003453</span>
+<span class="co">#ans&gt; Nether  -0.010931</span>
+<span class="co">#ans&gt; UK      -0.005478</span>
+<span class="co">#ans&gt; Austria -0.002816</span>
+
+<span class="co"># Scatterplot matrix of the scores - they are uncorrelated!</span>
+<span class="kw">scatterplotMatrix</span>(pca<span class="op">$</span>scores, <span class="dt">reg.line =</span> lm, <span class="dt">smooth =</span> <span class="ot">FALSE</span>, <span class="dt">spread =</span> <span class="ot">FALSE</span>,
+                  <span class="dt">span =</span> <span class="fl">0.5</span>, <span class="dt">ellipse =</span> <span class="ot">FALSE</span>, <span class="dt">levels =</span> <span class="kw">c</span>(.<span class="dv">5</span>, .<span class="dv">9</span>), <span class="dt">id.n =</span> <span class="dv">0</span>,
+                  <span class="dt">diagonal =</span> <span class="st">&#39;histogram&#39;</span>)</code></pre></div>
+<p><img src="Machine-Learning_files/figure-html/unnamed-chunk-10-1.png" width="70%" style="display: block; margin: auto;" /></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">
+<span class="co"># Means of the variables - before PCA the variables are centered</span>
+pca<span class="op">$</span>center
+<span class="co">#ans&gt;    Agr    Min    Man    Pow    Con    Ser    Fin    Soc    Tra </span>
+<span class="co">#ans&gt; 19.131  1.254 27.008  0.908  8.165 12.958  4.000 20.023  6.546</span>
+
+<span class="co"># Rescalation done to each variable</span>
+<span class="co"># - if cor = FALSE (default), a vector of ones</span>
+<span class="co"># - if cor = TRUE, a vector with the standard deviations of the variables</span>
+pca<span class="op">$</span>scale
+<span class="co">#ans&gt;    Agr    Min    Man    Pow    Con    Ser    Fin    Soc    Tra </span>
+<span class="co">#ans&gt; 15.245  0.951  6.872  0.369  1.614  4.486  2.752  6.697  1.364</span>
+
+<span class="co"># Summary of the importance of components - the third row is key</span>
+<span class="kw">summary</span>(pca)
+<span class="co">#ans&gt; Importance of components:</span>
+<span class="co">#ans&gt;                        Comp.1 Comp.2 Comp.3 Comp.4 Comp.5 Comp.6 Comp.7</span>
+<span class="co">#ans&gt; Standard deviation      1.867  1.460  1.048  0.997 0.7370 0.6192 0.4751</span>
+<span class="co">#ans&gt; Proportion of Variance  0.387  0.237  0.122  0.110 0.0604 0.0426 0.0251</span>
+<span class="co">#ans&gt; Cumulative Proportion   0.387  0.624  0.746  0.857 0.9171 0.9597 0.9848</span>
+<span class="co">#ans&gt;                        Comp.8   Comp.9</span>
+<span class="co">#ans&gt; Standard deviation     0.3699 6.75e-03</span>
+<span class="co">#ans&gt; Proportion of Variance 0.0152 5.07e-06</span>
+<span class="co">#ans&gt; Cumulative Proportion  1.0000 1.00e+00</span>
+
+<span class="co"># Scree plot - the variance of each component</span>
+<span class="kw">plot</span>(pca)</code></pre></div>
+<p><img src="Machine-Learning_files/figure-html/unnamed-chunk-10-2.png" width="70%" style="display: block; margin: auto;" /></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">
+<span class="co"># With connected lines - useful for looking for the &quot;elbow&quot;</span>
+<span class="kw">plot</span>(pca, <span class="dt">type =</span> <span class="st">&quot;l&quot;</span>)</code></pre></div>
+<p><img src="Machine-Learning_files/figure-html/unnamed-chunk-10-3.png" width="70%" style="display: block; margin: auto;" /></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">
+<span class="co"># PC1 and PC2</span>
+pca<span class="op">$</span>loadings[, <span class="dv">1</span><span class="op">:</span><span class="dv">2</span>]
+<span class="co">#ans&gt;       Comp.1  Comp.2</span>
+<span class="co">#ans&gt; Agr -0.52379 -0.0536</span>
+<span class="co">#ans&gt; Min -0.00132 -0.6178</span>
+<span class="co">#ans&gt; Man  0.34750 -0.3551</span>
+<span class="co">#ans&gt; Pow  0.25572 -0.2611</span>
+<span class="co">#ans&gt; Con  0.32518 -0.0513</span>
+<span class="co">#ans&gt; Ser  0.37892  0.3502</span>
+<span class="co">#ans&gt; Fin  0.07437  0.4537</span>
+<span class="co">#ans&gt; Soc  0.38741  0.2215</span>
+<span class="co">#ans&gt; Tra  0.36682 -0.2026</span></code></pre></div>
+<div class="rmdinsight">
+<p>
+PCA produces <strong>uncorrelated</strong> variables from the original set <span class="math inline"><em>X</em><sub>1</sub>, …, <em>X</em><sub><em>p</em></sub></span>. This implies that:
+</p>
+<ul>
+<li>
+The PCs are uncorrelated, <strong>but not independent</strong> (uncorrelated does not imply independent).
+</li>
+<li>
+An uncorrelated or independent variable in <span class="math inline"><em>X</em><sub>1</sub>, …, <em>X</em><sub><em>p</em></sub></span> will get a PC only associated to it. In the extreme case where all the <span class="math inline"><em>X</em><sub>1</sub>, …, <em>X</em><sub><em>p</em></sub></span> are uncorrelated, these coincide with the PCs (up to sign flips).
+</li>
+</ul>
+</div>
+<p>Based on the weights of the variables on the PCs, we can extract the following interpretation:</p>
+<ul>
+<li>PC1 is roughly a linear combination of <code>Agr</code>, with <em>negative</em> weight, and (<code>Man</code>, <code>Pow</code>, <code>Con</code>, <code>Ser</code>, <code>Soc</code>, <code>Tra</code>), with <em>positive</em> weights. So it can be interpreted as an <em>indicator</em> of the kind of economy of the country: agricultural (negative values) or industrial (positive values).</li>
+<li>PC2 has <em>negative</em> weights on (<code>Min</code>, <code>Man</code>, <code>Pow</code>, <code>Tra</code>) and <em>positive</em> weights in (<code>Ser</code>, <code>Fin</code>, <code>Soc</code>). It can be interpreted as the contrast between relatively large or small service sectors. So it tends to be negative in communist countries and positive in capitalist countries.</li>
+</ul>
+<div class="rmdtip">
+<p>
+The interpretation of the PCs involves inspecting the weights and interpreting the linear combination of the original variables, which might be separating between two clear characteristics of the data
+</p>
+</div>
+<p>To conclude, let’s see how we can represent our original data into a plot called <em>biplot</em> that summarizes all the analysis for two PCs.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Biplot - plot together the scores for PC1 and PC2 and the</span>
+<span class="co"># variables expressed in terms of PC1 and PC2</span>
+<span class="kw">biplot</span>(pca)</code></pre></div>
+<p><img src="Machine-Learning_files/figure-html/unnamed-chunk-13-1.png" width="90%" style="display: block; margin: auto;" /></p>
+<p align="right">
+◼
+</p>
+
+</div>
+</div>
+</div>
+<p style="text-align: center;">
+<a href="1-6-projection-of-the-data.html"><button class="btn btn-default">Previous</button></a>
+</p>
+</div>
+</div>
+
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+$(document).ready(function () {
+  $('tr.header').parent('thead').parent('table').addClass('table table-condensed');
+});
+
+</script>
+
+</body>
+<!-- </html> -->

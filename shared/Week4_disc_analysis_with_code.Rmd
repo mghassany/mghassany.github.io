@@ -1,12 +1,229 @@
----
-title: "Week 4 Disc Analysis"
-output: 
-  html_document:
-    highlight: zenburn
----
+<!DOCTYPE html>
+<html lang="en">
+  <!-- Beautiful Jekyll | MIT license | Copyright Dean Attali 2016 -->
+  <head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+
+  <title>Week 4 Disc Analysis</title>
+
+  <meta name="author" content="Mohamad Ghassany" />
+
+  
+
+  <link rel="alternate" type="application/rss+xml" title="Mohamad Ghassany - Data scientist" href="/feed.xml" />
+
+  
+    
+      <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.6.0/css/font-awesome.min.css" />
+    
+  
+
+  
+    
+      <link rel="stylesheet" href="/css/bootstrap.min.css" />
+    
+      <link rel="stylesheet" href="/css/bootstrap-social.css" />
+    
+      <link rel="stylesheet" href="/css/main.css" />
+    
+  
+
+  
+    
+      <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic" />
+    
+      <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800" />
+    
+  
+
+  
+
+  
+
+  
+
+    <!-- Facebook OpenGraph tags -->
+  
+
+  
+  <meta property="og:title" content="Week 4 Disc Analysis" />
+  
+
+   
+  <meta property="og:description" content="**1.** First, re-do the pre-processing steps you did last week (remove the first two columns from the dataset as we are not going to use them) and fit a logistic regression model of `Purchased` in function of `Age` and `EstimatedSalary`. Name your model `classifier.logreg`. If you need the dataset again,...">
+  
 
 
-**1.** First, re-do the pre-processing steps you did last week (remove the first two columns from the dataset as we are not going to use them) and fit a logistic regression model of `Purchased` in function of `Age` and `EstimatedSalary`. Name your model `classifier.logreg`. If you need the dataset again, you can download it from [here](datasets/Social_Network_Ads.csv).
+  <meta property="og:type" content="website" />
+
+  
+  <meta property="og:url" content="http://mghassany.com/shared/Week4_disc_analysis_with_code.Rmd" />
+  <link rel="canonical" href="http://mghassany.com/shared/Week4_disc_analysis_with_code.Rmd" />
+  
+
+  
+  <meta property="og:image" content="http://mghassany.com/img/Ghassany Mohamad _2017_web.jpg" />
+  
+  
+
+  <!-- Twitter summary cards -->
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:site" content="@m_ghass" />
+  <meta name="twitter:creator" content="@m_ghass" />
+
+  
+  <meta name="twitter:title" content="Week 4 Disc Analysis" />
+  
+
+  
+  <meta name="twitter:description" content="**1.** First, re-do the pre-processing steps you did last week (remove the first two columns from the dataset as we are not going to use them) and fit a logistic regression model of `Purchased` in function of `Age` and `EstimatedSalary`. Name your model `classifier.logreg`. If you need the dataset again,...">
+  
+
+  
+  <meta name="twitter:image" content="http://mghassany.com/img/Ghassany Mohamad _2017_web.jpg" />
+  
+
+</head>
+
+
+  <body>
+  
+    <nav class="navbar navbar-default navbar-fixed-top navbar-custom">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#main-navbar">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+<!--       remove navbar-brand to remove name in order to put photo on left
+ --><!--       <a class="navbar-brand" href="http://mghassany.com">Mohamad Ghassany</a>
+ -->    </div>
+
+    <div class="collapse navbar-collapse" id="main-navbar">
+      <ul class="nav navbar-nav navbar-right">
+      
+        
+          <li>
+            
+            
+
+
+
+
+
+<a href="/">About me</a>
+
+          </li>
+        
+        
+        
+          <li>
+            
+            
+
+
+
+
+
+<a href="/research">Research</a>
+
+          </li>
+        
+        
+        
+          <li>
+            
+            
+
+
+
+
+
+<a href="/publications">Publications</a>
+
+          </li>
+        
+        
+        
+          <li>
+            
+            
+
+
+
+
+
+<a href="/teaching">Teaching</a>
+
+          </li>
+        
+        
+        
+          <li>
+            
+            
+
+
+
+
+
+<a href="/blog">Blog</a>
+
+          </li>
+        
+        
+      </ul>
+    </div>
+
+	
+	<div class="avatar-container">
+	  <div class="avatar-img-border">
+	    <a href="http://mghassany.com ">
+	      <img class="avatar-img" src="/img/Ghassany Mohamad _2017_web.jpg" />
+		</a>
+	  </div>
+	</div>
+	
+
+  </div>
+</nav>
+
+
+    <!-- TODO this file has become a mess, refactor it -->
+
+
+
+
+
+<header class="header-section ">
+
+<div class="intro-header no-img">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <div class="page-heading">
+          <h1>Week 4 Disc Analysis</h1>
+		  
+		  
+		  
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</header>
+
+
+
+
+<div class="container" role="main">
+  <div class="row">
+    <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+      **1.** First, re-do the pre-processing steps you did last week (remove the first two columns from the dataset as we are not going to use them) and fit a logistic regression model of `Purchased` in function of `Age` and `EstimatedSalary`. Name your model `classifier.logreg`. If you need the dataset again, you can download it from [here](datasets/Social_Network_Ads.csv).
 
 ```{r eval=F, echo=T}
 dataset <- read.csv('datasets/Social_Network_Ads.csv')
@@ -351,3 +568,119 @@ abline(0,1,lty=8)
 ```
 
 <p class="text-right">&#9724;</p>
+
+	    
+    </div>
+  </div>
+</div>
+
+
+    <footer>
+  <div class="container beautiful-jekyll-footer">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <ul class="list-inline text-center footer-links">
+          
+          
+		  
+          <li>
+            <a href="https://twitter.com/m_ghass" title="Twitter">
+              <span class="fa-stack fa-lg">
+                <i class="fa fa-circle fa-stack-2x"></i>
+                <i class="fa fa-twitter fa-stack-1x fa-inverse"></i>
+              </span>
+            </a>
+          </li>
+          
+      
+		  
+          <li>
+            <a href="mailto:m.ghassany@gmail.com" title="Email me">
+              <span class="fa-stack fa-lg">
+                <i class="fa fa-circle fa-stack-2x"></i>
+                <i class="fa fa-envelope fa-stack-1x fa-inverse"></i>
+              </span>
+            </a>
+          </li>
+          
+		  
+          <li>
+            <a href="https://linkedin.com/in/mghassany" title="LinkedIn">
+              <span class="fa-stack fa-lg">
+                <i class="fa fa-circle fa-stack-2x"></i>
+                <i class="fa fa-linkedin fa-stack-1x fa-inverse"></i>
+              </span>
+            </a>
+          </li>
+          
+		  
+		  
+      
+      
+      
+      
+		  
+        </ul>
+        <p class="copyright text-muted">
+		  Mohamad Ghassany
+		  &nbsp;&bull;&nbsp;
+		  2017
+
+		  
+	    </p>
+	        <!-- Please don't remove this, keep my open source work credited :) -->
+		<p class="theme-by text-muted">
+		  Theme by
+		  <a href="http://deanattali.com/beautiful-jekyll/">beautiful-jekyll</a>
+		</p>
+      </div>
+    </div>
+  </div>
+</footer>
+
+  
+    
+
+
+
+
+
+
+  
+    <!-- doing something a bit funky here because I want to be careful not to include JQuery twice! -->
+    
+      <script>
+      	if (typeof jQuery == 'undefined') {
+      	  document.write('<script src="/js/jquery-1.11.2.min.js"></scr' + 'ipt>');
+      	}
+      </script>
+    
+  
+    <!-- doing something a bit funky here because I want to be careful not to include JQuery twice! -->
+    
+	<script src="/js/bootstrap.min.js"></script>
+    
+  
+    <!-- doing something a bit funky here because I want to be careful not to include JQuery twice! -->
+    
+	<script src="/js/main.js"></script>
+    
+  
+
+
+
+	<!-- Google Analytics -->
+	<script>
+		(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+		(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+		m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+		})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+		ga('create', 'UA-88489172-1', 'auto');
+		ga('send', 'pageview');
+	</script>
+	<!-- End Google Analytics -->
+
+
+  
+  </body>
+</html>

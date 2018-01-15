@@ -31,6 +31,46 @@
 \urlstyle{same}  % don't use monospace font for urls
 \usepackage{natbib}
 \bibliographystyle{apalike}
+\usepackage{color}
+\usepackage{fancyvrb}
+\newcommand{\VerbBar}{|}
+\newcommand{\VERB}{\Verb[commandchars=\\\{\}]}
+\DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+% Add ',fontsize=\small' for more characters per line
+\usepackage{framed}
+\definecolor{shadecolor}{RGB}{248,248,248}
+\newenvironment{Shaded}{\begin{snugshade}}{\end{snugshade}}
+\newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{#1}}
+\newcommand{\DecValTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\FloatTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\CharTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\StringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\ImportTok}[1]{#1}
+\newcommand{\CommentTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+\newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\OtherTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{#1}}
+\newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\VariableTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.81,0.36,0.00}{\textbf{#1}}}
+\newcommand{\BuiltInTok}[1]{#1}
+\newcommand{\ExtensionTok}[1]{#1}
+\newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+\newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.77,0.63,0.00}{#1}}
+\newcommand{\RegionMarkerTok}[1]{#1}
+\newcommand{\InformationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\WarningTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\AlertTok}[1]{\textcolor[rgb]{0.94,0.16,0.16}{#1}}
+\newcommand{\ErrorTok}[1]{\textcolor[rgb]{0.64,0.00,0.00}{\textbf{#1}}}
+\newcommand{\NormalTok}[1]{#1}
 \usepackage{longtable,booktabs}
 \usepackage{graphicx,grffile}
 \makeatletter
@@ -84,7 +124,7 @@
   \postauthor{\par}
   \predate{\centering\large\emph}
   \postdate{\par}
-  \date{2018-01-11}
+  \date{2018-01-15}
 
 % \defaultfontfeatures{
 %     Path = /home/ghassany/texmf/fonts/opentype/public/fontawesome/}
@@ -532,8 +572,8 @@ Let's define some notation from this data set:
   \(X\),
 \item
   The inputs go by different names, such as \emph{predictors},
-  \emph{independent variables}, \emph{features}, \emph{predictor} or
-  sometimes just \emph{variables}.
+  \emph{independent variables}, \emph{features}, or sometimes just
+  \emph{variables}.
 \item
   The output variable is often called the \emph{response},
   \emph{dependent variable} or \emph{target}, and is typically denoted
@@ -835,8 +875,8 @@ figures.
 \end{figure}
 
 \begin{rmdinsight}
-Click here to see the ANOVA decomposition and its dependence on
-\(\sigma^2\) and \(\hat\sigma^2\).'
+Below the ANOVA decomposition and its dependence on \(\sigma^2\) and
+\(\hat\sigma^2\). Application is also available here.
 \end{rmdinsight}
 
 The ANOVA table summarizes the decomposition of the variance. Here is
@@ -930,6 +970,986 @@ model do not hold}. \(R^2\) is the proportion of variance of \(Y\)
 explained by \(X\), but, of course, \emph{only when the linear model is
 correct}.
 \end{rmdinsight}
+
+◼
+
+\chapter*{PW 1}\label{pw-1}
+\addcontentsline{toc}{chapter}{PW 1}
+
+\section{\texorpdfstring{Some \texttt{R}
+basics}{Some R basics}}\label{some-r-basics}
+
+\subsection{Basic Commands}\label{basic-commands}
+
+\texttt{R} uses functions to perform operations. To run a function
+called \texttt{funcname},we type \texttt{funcname(input1,\ input2)} ,
+where the inputs (or arguments) \texttt{input1} and \texttt{input2} tell
+\texttt{R} how to run the function. A function can have any number of
+inputs. For example, to create a vector of numbers, we use the function
+\texttt{c()} (for \emph{concatenate}).
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{x <-}\StringTok{ }\KeywordTok{c}\NormalTok{(}\DecValTok{1}\NormalTok{,}\DecValTok{3}\NormalTok{,}\DecValTok{2}\NormalTok{,}\DecValTok{5}\NormalTok{)}
+\NormalTok{x}
+\CommentTok{#ans> [1] 1 3 2 5}
+\end{Highlighting}
+\end{Shaded}
+
+Note that the \texttt{\textgreater{}} is not part of the command;
+rather, it is printed by \texttt{R} to indicate that it is ready for
+another command to be entered. We can also save things using \texttt{=}
+rather than \texttt{\textless{}-}. Note that the answer in the code
+above is followed by \texttt{\#ans\textgreater{}} while in the
+\texttt{R} console it is not.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{x =}\StringTok{ }\KeywordTok{c}\NormalTok{(}\DecValTok{1}\NormalTok{,}\DecValTok{6}\NormalTok{,}\DecValTok{2}\NormalTok{)}
+\NormalTok{x}
+\CommentTok{#ans> [1] 1 6 2}
+\NormalTok{y =}\StringTok{ }\KeywordTok{c}\NormalTok{(}\DecValTok{1}\NormalTok{,}\DecValTok{4}\NormalTok{,}\DecValTok{3}\NormalTok{)}
+\KeywordTok{length}\NormalTok{(x)}
+\CommentTok{#ans> [1] 3}
+\KeywordTok{length}\NormalTok{(y)}
+\CommentTok{#ans> [1] 3}
+\NormalTok{x}\OperatorTok{+}\NormalTok{y}
+\CommentTok{#ans> [1]  2 10  5}
+\end{Highlighting}
+\end{Shaded}
+
+Hitting the \emph{up arrow} multiple times will display the previous
+commands, which can then be edited. This is useful since one often
+wishes to repeat a similar command.
+
+The \texttt{ls()} function allows us to look at a list of all of the
+objects, such \texttt{ls()} as data and functions, that we have saved so
+far. The \texttt{rm()} function can be used to delete any object that we
+don't want.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{ls}\NormalTok{()}
+\CommentTok{#ans> [1] "x" "y"}
+\KeywordTok{rm}\NormalTok{(x)}
+\KeywordTok{ls}\NormalTok{()}
+\CommentTok{#ans> [1] "y"}
+\end{Highlighting}
+\end{Shaded}
+
+\subsection{Vectors}\label{vectors}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+
+\CommentTok{# A handy way of creating sequences is the operator :}
+\CommentTok{# Sequence from 1 to 5}
+\DecValTok{1}\OperatorTok{:}\DecValTok{5}
+\CommentTok{#ans> [1] 1 2 3 4 5}
+
+\CommentTok{# Storing some vectors}
+\NormalTok{vec <-}\StringTok{ }\KeywordTok{c}\NormalTok{(}\OperatorTok{-}\FloatTok{4.12}\NormalTok{, }\DecValTok{0}\NormalTok{, }\FloatTok{1.1}\NormalTok{, }\DecValTok{1}\NormalTok{, }\DecValTok{3}\NormalTok{, }\DecValTok{4}\NormalTok{)}
+\NormalTok{vec}
+\CommentTok{#ans> [1] -4.12  0.00  1.10  1.00  3.00  4.00}
+
+\CommentTok{# Entry-wise operations}
+\NormalTok{vec }\OperatorTok{+}\StringTok{ }\DecValTok{1}
+\CommentTok{#ans> [1] -3.12  1.00  2.10  2.00  4.00  5.00}
+\NormalTok{vec}\OperatorTok{^}\DecValTok{2}
+\CommentTok{#ans> [1] 16.97  0.00  1.21  1.00  9.00 16.00}
+
+\CommentTok{# If you want to access a position of a vector, use [position]}
+\NormalTok{vec[}\DecValTok{6}\NormalTok{]}
+\CommentTok{#ans> [1] 4}
+
+\CommentTok{# You also can change elements}
+\NormalTok{vec[}\DecValTok{2}\NormalTok{] <-}\StringTok{ }\OperatorTok{-}\DecValTok{1}
+\NormalTok{vec}
+\CommentTok{#ans> [1] -4.12 -1.00  1.10  1.00  3.00  4.00}
+
+\CommentTok{# If you want to access all the elements except a position, use [-position]}
+\NormalTok{vec[}\OperatorTok{-}\DecValTok{2}\NormalTok{]}
+\CommentTok{#ans> [1] -4.12  1.10  1.00  3.00  4.00}
+
+\CommentTok{# Also with vectors as indexes}
+\NormalTok{vec[}\DecValTok{1}\OperatorTok{:}\DecValTok{2}\NormalTok{]}
+\CommentTok{#ans> [1] -4.12 -1.00}
+
+\CommentTok{# And also}
+\NormalTok{vec[}\OperatorTok{-}\KeywordTok{c}\NormalTok{(}\DecValTok{1}\NormalTok{, }\DecValTok{2}\NormalTok{)]}
+\CommentTok{#ans> [1] 1.1 1.0 3.0 4.0}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{rmdexercise}
+Do the following:
+
+\begin{itemize}
+\tightlist
+\item
+  Create the vector \(x=(1, 7, 3, 4)\).
+\item
+  Create the vector \(y=(100, 99, 98, ..., 2, 1)\).
+\item
+  Compute \(x_3+y_4\) and \(\cos(x_3) + \sin(x_2) e^{-y_2}\). (Answers:
+  \texttt{100}, \texttt{-0.9899925})
+\item
+  Set \(x_{3}=0\) and \(y_{2}=-1\). Recompute the previous expressions.
+  (Answers: \texttt{97}, \texttt{2.785875})
+\item
+  Index \(y\) by \(x+1\) and store it as \texttt{z}. What is the output?
+  (Answer: \texttt{z} is \texttt{c(-1,\ 93,\ 100,\ 96)})
+\end{itemize}
+\end{rmdexercise}
+
+\subsection{Matrices, data frames and
+lists}\label{matrices-data-frames-and-lists}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{# A matrix is an array of vectors}
+\NormalTok{A <-}\StringTok{ }\KeywordTok{matrix}\NormalTok{(}\DecValTok{1}\OperatorTok{:}\DecValTok{4}\NormalTok{, }\DataTypeTok{nrow =} \DecValTok{2}\NormalTok{, }\DataTypeTok{ncol =} \DecValTok{2}\NormalTok{)}
+\NormalTok{A}
+\CommentTok{#ans>      [,1] [,2]}
+\CommentTok{#ans> [1,]    1    3}
+\CommentTok{#ans> [2,]    2    4}
+
+\CommentTok{# Another matrix}
+\NormalTok{B <-}\StringTok{ }\KeywordTok{matrix}\NormalTok{(}\DecValTok{1}\OperatorTok{:}\DecValTok{4}\NormalTok{, }\DataTypeTok{nrow =} \DecValTok{2}\NormalTok{, }\DataTypeTok{ncol =} \DecValTok{2}\NormalTok{, }\DataTypeTok{byrow =} \OtherTok{TRUE}\NormalTok{)}
+\NormalTok{B}
+\CommentTok{#ans>      [,1] [,2]}
+\CommentTok{#ans> [1,]    1    2}
+\CommentTok{#ans> [2,]    3    4}
+
+\CommentTok{# Binding by rows or columns}
+\KeywordTok{rbind}\NormalTok{(}\DecValTok{1}\OperatorTok{:}\DecValTok{3}\NormalTok{, }\DecValTok{4}\OperatorTok{:}\DecValTok{6}\NormalTok{)}
+\CommentTok{#ans>      [,1] [,2] [,3]}
+\CommentTok{#ans> [1,]    1    2    3}
+\CommentTok{#ans> [2,]    4    5    6}
+\KeywordTok{cbind}\NormalTok{(}\DecValTok{1}\OperatorTok{:}\DecValTok{3}\NormalTok{, }\DecValTok{4}\OperatorTok{:}\DecValTok{6}\NormalTok{)}
+\CommentTok{#ans>      [,1] [,2]}
+\CommentTok{#ans> [1,]    1    4}
+\CommentTok{#ans> [2,]    2    5}
+\CommentTok{#ans> [3,]    3    6}
+
+\CommentTok{# Entry-wise operations}
+\NormalTok{A }\OperatorTok{+}\StringTok{ }\DecValTok{1}
+\CommentTok{#ans>      [,1] [,2]}
+\CommentTok{#ans> [1,]    2    4}
+\CommentTok{#ans> [2,]    3    5}
+\NormalTok{A }\OperatorTok{*}\StringTok{ }\NormalTok{B}
+\CommentTok{#ans>      [,1] [,2]}
+\CommentTok{#ans> [1,]    1    6}
+\CommentTok{#ans> [2,]    6   16}
+
+\CommentTok{# Accessing elements}
+\NormalTok{A[}\DecValTok{2}\NormalTok{, }\DecValTok{1}\NormalTok{] }\CommentTok{# Element (2, 1)}
+\CommentTok{#ans> [1] 2}
+\NormalTok{A[}\DecValTok{1}\NormalTok{, ] }\CommentTok{# First row}
+\CommentTok{#ans> [1] 1 3}
+\NormalTok{A[, }\DecValTok{2}\NormalTok{] }\CommentTok{# Seconds column}
+\CommentTok{#ans> [1] 3 4}
+
+\CommentTok{# A data frame is a matrix with column names}
+\CommentTok{# Useful when you have multiple variables}
+\NormalTok{myDf <-}\StringTok{ }\KeywordTok{data.frame}\NormalTok{(}\DataTypeTok{var1 =} \DecValTok{1}\OperatorTok{:}\DecValTok{2}\NormalTok{, }\DataTypeTok{var2 =} \DecValTok{3}\OperatorTok{:}\DecValTok{4}\NormalTok{)}
+\NormalTok{myDf}
+\CommentTok{#ans>   var1 var2}
+\CommentTok{#ans> 1    1    3}
+\CommentTok{#ans> 2    2    4}
+
+\CommentTok{# You can change names}
+\KeywordTok{names}\NormalTok{(myDf) <-}\StringTok{ }\KeywordTok{c}\NormalTok{(}\StringTok{"newname1"}\NormalTok{, }\StringTok{"newname2"}\NormalTok{)}
+\NormalTok{myDf}
+\CommentTok{#ans>   newname1 newname2}
+\CommentTok{#ans> 1        1        3}
+\CommentTok{#ans> 2        2        4}
+
+\CommentTok{# The nice thing is that you can access variables by its name with the $ operator}
+\NormalTok{myDf}\OperatorTok{$}\NormalTok{newname1}
+\CommentTok{#ans> [1] 1 2}
+
+\CommentTok{# And create new variables also (it has to be of the same}
+\CommentTok{# length as the rest of variables)}
+\NormalTok{myDf}\OperatorTok{$}\NormalTok{myNewVariable <-}\StringTok{ }\KeywordTok{c}\NormalTok{(}\DecValTok{0}\NormalTok{, }\DecValTok{1}\NormalTok{)}
+\NormalTok{myDf}
+\CommentTok{#ans>   newname1 newname2 myNewVariable}
+\CommentTok{#ans> 1        1        3             0}
+\CommentTok{#ans> 2        2        4             1}
+
+\CommentTok{# A list is a collection of arbitrary variables}
+\NormalTok{myList <-}\StringTok{ }\KeywordTok{list}\NormalTok{(}\DataTypeTok{vec =}\NormalTok{ vec, }\DataTypeTok{A =}\NormalTok{ A, }\DataTypeTok{myDf =}\NormalTok{ myDf)}
+
+\CommentTok{# Access elements by names}
+\NormalTok{myList}\OperatorTok{$}\NormalTok{vec}
+\CommentTok{#ans> [1] -4.12 -1.00  1.10  1.00  3.00  4.00}
+\NormalTok{myList}\OperatorTok{$}\NormalTok{A}
+\CommentTok{#ans>      [,1] [,2]}
+\CommentTok{#ans> [1,]    1    3}
+\CommentTok{#ans> [2,]    2    4}
+\NormalTok{myList}\OperatorTok{$}\NormalTok{myDf}
+\CommentTok{#ans>   newname1 newname2 myNewVariable}
+\CommentTok{#ans> 1        1        3             0}
+\CommentTok{#ans> 2        2        4             1}
+
+\CommentTok{# Reveal the structure of an object}
+\KeywordTok{str}\NormalTok{(myList)}
+\CommentTok{#ans> List of 3}
+\CommentTok{#ans>  $ vec : num [1:6] -4.12 -1 1.1 1 3 4}
+\CommentTok{#ans>  $ A   : int [1:2, 1:2] 1 2 3 4}
+\CommentTok{#ans>  $ myDf:'data.frame': 2 obs. of  3 variables:}
+\CommentTok{#ans>   ..$ newname1     : int [1:2] 1 2}
+\CommentTok{#ans>   ..$ newname2     : int [1:2] 3 4}
+\CommentTok{#ans>   ..$ myNewVariable: num [1:2] 0 1}
+\KeywordTok{str}\NormalTok{(myDf)}
+\CommentTok{#ans> 'data.frame': 2 obs. of  3 variables:}
+\CommentTok{#ans>  $ newname1     : int  1 2}
+\CommentTok{#ans>  $ newname2     : int  3 4}
+\CommentTok{#ans>  $ myNewVariable: num  0 1}
+
+\CommentTok{# A less lengthy output}
+\KeywordTok{names}\NormalTok{(myList)}
+\CommentTok{#ans> [1] "vec"  "A"    "myDf"}
+\end{Highlighting}
+\end{Shaded}
+
+\subsection{Graphics}\label{graphics}
+
+The \texttt{plot()} function is the primary way to plot data in
+\texttt{R} . For instance, \texttt{plot(x,y)} produces a scatterplot of
+the numbers in \texttt{x} versus the numbers in \texttt{y}. There are
+many additional options that can be passed in to the \texttt{plot()}
+function. For example, passing in the argument \texttt{xlab} will result
+in a label on the \texttt{x-axis}. To find out more information about
+the \texttt{plot()} function, type \texttt{?plot}.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{x=}\KeywordTok{rnorm}\NormalTok{(}\DecValTok{100}\NormalTok{)}
+\CommentTok{# The rnorm() function generates a vector of random normal variables,}
+\CommentTok{# rnorm() with first argument n the sample size. Each time we call this}
+\CommentTok{# function, we will get a different answer.}
+\NormalTok{y=}\KeywordTok{rnorm}\NormalTok{(}\DecValTok{100}\NormalTok{)}
+\KeywordTok{plot}\NormalTok{(x,y)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{center}\includegraphics[width=0.7\linewidth]{Machine-Learning_files/figure-latex/unnamed-chunk-15-1} \end{center}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+
+\CommentTok{# with titles}
+\KeywordTok{plot}\NormalTok{(x,y,}\DataTypeTok{xlab=}\StringTok{"this is the x-axis"}\NormalTok{,}\DataTypeTok{ylab=}\StringTok{"this is the y-axis"}\NormalTok{,}
+\DataTypeTok{main=}\StringTok{"Plot of X vs Y"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{center}\includegraphics[width=0.7\linewidth]{Machine-Learning_files/figure-latex/unnamed-chunk-15-2} \end{center}
+
+\subsection{Distributions}\label{distributions}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{# R allows to sample [r], compute density/probability mass [d],}
+\CommentTok{# compute distribution function [p] and compute quantiles [q] for several}
+\CommentTok{# continuous and discrete distributions. The format employed is [rdpq]name,}
+\CommentTok{# where name stands for:}
+\CommentTok{# - norm -> Normal}
+\CommentTok{# - unif -> Uniform}
+\CommentTok{# - exp -> Exponential}
+\CommentTok{# - t -> Student's t}
+\CommentTok{# - f -> Snedecor's F (Fisher)}
+\CommentTok{# - chisq -> Chi squared}
+\CommentTok{# - pois -> Poisson}
+\CommentTok{# - binom -> Binomial}
+\CommentTok{# More distributions: ?Distributions}
+
+
+\CommentTok{# Sampling from a Normal - 100 random points from a N(0, 1)}
+\KeywordTok{rnorm}\NormalTok{(}\DataTypeTok{n =} \DecValTok{10}\NormalTok{, }\DataTypeTok{mean =} \DecValTok{0}\NormalTok{, }\DataTypeTok{sd =} \DecValTok{1}\NormalTok{)}
+\CommentTok{#ans>  [1] -0.6563 -1.0385 -0.0699  0.9699  1.7918 -1.5374  0.0420 -0.8714}
+\CommentTok{#ans>  [9]  0.3257  0.4683}
+
+\CommentTok{# If you want to have always the same result, set the seed of the random number}
+\CommentTok{# generator}
+\KeywordTok{set.seed}\NormalTok{(}\DecValTok{45678}\NormalTok{)}
+\KeywordTok{rnorm}\NormalTok{(}\DataTypeTok{n =} \DecValTok{10}\NormalTok{, }\DataTypeTok{mean =} \DecValTok{0}\NormalTok{, }\DataTypeTok{sd =} \DecValTok{1}\NormalTok{)}
+\CommentTok{#ans>  [1]  1.440 -0.720  0.671 -0.422  0.378 -1.667 -0.508  0.443 -1.799 -0.618}
+
+\CommentTok{# Plotting the density of a N(0, 1) - the Gauss bell}
+\NormalTok{x <-}\StringTok{ }\KeywordTok{seq}\NormalTok{(}\OperatorTok{-}\DecValTok{4}\NormalTok{, }\DecValTok{4}\NormalTok{, }\DataTypeTok{l =} \DecValTok{100}\NormalTok{)}
+\NormalTok{y <-}\StringTok{ }\KeywordTok{dnorm}\NormalTok{(}\DataTypeTok{x =}\NormalTok{ x, }\DataTypeTok{mean =} \DecValTok{0}\NormalTok{, }\DataTypeTok{sd =} \DecValTok{1}\NormalTok{)}
+\KeywordTok{plot}\NormalTok{(x, y, }\DataTypeTok{type =} \StringTok{"l"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{center}\includegraphics[width=0.7\linewidth]{Machine-Learning_files/figure-latex/unnamed-chunk-16-1} \end{center}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+
+\CommentTok{# Plotting the distribution function of a N(0, 1)}
+\NormalTok{x <-}\StringTok{ }\KeywordTok{seq}\NormalTok{(}\OperatorTok{-}\DecValTok{4}\NormalTok{, }\DecValTok{4}\NormalTok{, }\DataTypeTok{l =} \DecValTok{100}\NormalTok{)}
+\NormalTok{y <-}\StringTok{ }\KeywordTok{pnorm}\NormalTok{(}\DataTypeTok{q =}\NormalTok{ x, }\DataTypeTok{mean =} \DecValTok{0}\NormalTok{, }\DataTypeTok{sd =} \DecValTok{1}\NormalTok{)}
+\KeywordTok{plot}\NormalTok{(x, y, }\DataTypeTok{type =} \StringTok{"l"}\NormalTok{, }\DataTypeTok{lwd =} \DecValTok{3}\NormalTok{, }\DataTypeTok{main=}\StringTok{"The distribution function of a N(0, 1)"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{center}\includegraphics[width=0.7\linewidth]{Machine-Learning_files/figure-latex/unnamed-chunk-16-2} \end{center}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+
+\CommentTok{# Computing the 95% quantile for a N(0, 1)}
+\KeywordTok{qnorm}\NormalTok{(}\DataTypeTok{p =} \FloatTok{0.95}\NormalTok{, }\DataTypeTok{mean =} \DecValTok{0}\NormalTok{, }\DataTypeTok{sd =} \DecValTok{1}\NormalTok{)}
+\CommentTok{#ans> [1] 1.64}
+
+\CommentTok{# All distributions have the same syntax: rname(n,...), dname(x,...), dname(p,...)  }
+\CommentTok{# and qname(p,...), but the parameters in ... change. Look them in ?Distributions}
+\CommentTok{# For example, here is que same for the uniform distribution}
+
+\CommentTok{# Sampling from a U(0, 1)}
+\KeywordTok{set.seed}\NormalTok{(}\DecValTok{45678}\NormalTok{)}
+\KeywordTok{runif}\NormalTok{(}\DataTypeTok{n =} \DecValTok{10}\NormalTok{, }\DataTypeTok{min =} \DecValTok{0}\NormalTok{, }\DataTypeTok{max =} \DecValTok{1}\NormalTok{)}
+\CommentTok{#ans>  [1] 0.9251 0.3340 0.2359 0.3366 0.7489 0.9327 0.3365 0.2246 0.6474 0.0808}
+
+\CommentTok{# Plotting the density of a U(0, 1)}
+\NormalTok{x <-}\StringTok{ }\KeywordTok{seq}\NormalTok{(}\OperatorTok{-}\DecValTok{2}\NormalTok{, }\DecValTok{2}\NormalTok{, }\DataTypeTok{l =} \DecValTok{100}\NormalTok{)}
+\NormalTok{y <-}\StringTok{ }\KeywordTok{dunif}\NormalTok{(}\DataTypeTok{x =}\NormalTok{ x, }\DataTypeTok{min =} \DecValTok{0}\NormalTok{, }\DataTypeTok{max =} \DecValTok{1}\NormalTok{)}
+\KeywordTok{plot}\NormalTok{(x, y, }\DataTypeTok{type =} \StringTok{"l"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{center}\includegraphics[width=0.7\linewidth]{Machine-Learning_files/figure-latex/unnamed-chunk-16-3} \end{center}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+
+\CommentTok{# Computing the 95% quantile for a U(0, 1)}
+\KeywordTok{qunif}\NormalTok{(}\DataTypeTok{p =} \FloatTok{0.95}\NormalTok{, }\DataTypeTok{min =} \DecValTok{0}\NormalTok{, }\DataTypeTok{max =} \DecValTok{1}\NormalTok{)}
+\CommentTok{#ans> [1] 0.95}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{rmdexercise}
+Do the following:
+
+\begin{itemize}
+\tightlist
+\item
+  Compute the 90\%, 95\% and 99\% quantiles of a \(F\) distribution with
+  \texttt{df1\ =\ 1} and \texttt{df2\ =\ 5}. (Answer:
+  \texttt{c(4.060420,\ 6.607891,\ 16.258177)})
+\item
+  Sample 100 points from a Poisson with \texttt{lambda\ =\ 5}.
+\item
+  Plot the density of a \(t\) distribution with \texttt{df\ =\ 1} (use a
+  sequence spanning from \texttt{-4} to \texttt{4}). Add lines of
+  different colors with the densities for \texttt{df\ =\ 5},
+  \texttt{df\ =\ 10}, \texttt{df\ =\ 50} and \texttt{df\ =\ 100}.
+\end{itemize}
+\end{rmdexercise}
+
+\subsection{Working directory}\label{working-directory}
+
+Your \emph{working directory} is the folder on your computer in which
+you are currently working. When you ask R to open a certain file, it
+will look in the working directory for this file, and when you tell R to
+save a data file or figure, it will save it in the working directory.
+
+To set your working directory within RStudio you can go to
+\texttt{Tools\ /\ Set\ working\ directory}, or use the command
+\texttt{setwd()}, we put the complete path of the directory between the
+brackets, do not forget to put the path into quotation marks
+\texttt{""}.
+
+To know the actual working directory we use \texttt{getwd()}.
+
+\subsection{Loading Data}\label{loading-data}
+
+The \texttt{read.table()} function is one of the primary ways to import
+a data set into \texttt{R}. The help file \texttt{?read.table()}
+contains details about how to use this function. We can use the function
+\texttt{write.table()} to export data.
+
+Next we will show how to load the data set \texttt{Auto.data} (Download
+it from \textcolor{white}{[}\faTable\textcolor{white}{]} here ).
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{Auto=}\KeywordTok{read.table}\NormalTok{(}\StringTok{"Auto.data"}\NormalTok{,}\DataTypeTok{header=}\NormalTok{T,}\DataTypeTok{na.strings =}\StringTok{"?"}\NormalTok{)}
+\CommentTok{# For this file we needed to tell R that the first row is the}
+\CommentTok{# names of the variables.}
+\CommentTok{# na.strings tells R that any time it sees a particular character}
+\CommentTok{# or set of characters (such as a question mark), it should be}
+\CommentTok{# treated as a missing element of the data matrix. }
+\end{Highlighting}
+\end{Shaded}
+
+\begin{rmdinsight}
+\begin{itemize}
+\tightlist
+\item
+  If the file is of csv format, we use \texttt{read.csv}.
+\item
+  Always try to look to the file before importing it to \texttt{R} (Open
+  it in a text editor. See for example if the first row containes the
+  variables names, if the columns are separated by \texttt{,} or
+  \texttt{;} or ..
+\item
+  For text editors, I suggest
+  \href{https://www.sublimetext.com/}{\texttt{Sublime\ Text}} or
+  \href{https://atom.io/}{\texttt{Atom}}.
+\end{itemize}
+\end{rmdinsight}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{dim}\NormalTok{(Auto) }\CommentTok{# To see the dimensions of the data set}
+\CommentTok{#ans> [1] 397   9}
+\KeywordTok{nrow}\NormalTok{(Auto) }\CommentTok{# To see the number of rows}
+\CommentTok{#ans> [1] 397}
+\KeywordTok{ncol}\NormalTok{(Auto) }\CommentTok{# To see the number of columns}
+\CommentTok{#ans> [1] 9}
+\NormalTok{Auto[}\DecValTok{1}\OperatorTok{:}\DecValTok{4}\NormalTok{,] }\CommentTok{# The first 4 rows of the data set}
+\CommentTok{#ans>   mpg cylinders displacement horsepower weight acceleration year origin}
+\CommentTok{#ans> 1  18         8          307        130   3504         12.0   70      1}
+\CommentTok{#ans> 2  15         8          350        165   3693         11.5   70      1}
+\CommentTok{#ans> 3  18         8          318        150   3436         11.0   70      1}
+\CommentTok{#ans> 4  16         8          304        150   3433         12.0   70      1}
+\CommentTok{#ans>                        name}
+\CommentTok{#ans> 1 chevrolet chevelle malibu}
+\CommentTok{#ans> 2         buick skylark 320}
+\CommentTok{#ans> 3        plymouth satellite}
+\CommentTok{#ans> 4             amc rebel sst}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{# Once the data are loaded correctly, we can use names()}
+\CommentTok{# to check the variable names.}
+\KeywordTok{names}\NormalTok{(Auto)}
+\CommentTok{#ans> [1] "mpg"          "cylinders"    "displacement" "horsepower"  }
+\CommentTok{#ans> [5] "weight"       "acceleration" "year"         "origin"      }
+\CommentTok{#ans> [9] "name"}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{rmdinsight}
+Take a look at this
+\href{https://cran.r-project.org/doc/contrib/Torfs+Brauer-Short-R-Intro.pdf}{(very)
+short introduction to R}. It can be useful.
+\end{rmdinsight}
+
+\section{Regression}\label{regression}
+
+\subsection{\texorpdfstring{The \texttt{lm}
+function}{The lm function}}\label{the-lm-function}
+
+We are going to employ the \texttt{EU} dataset. The \texttt{EU} dataset
+contains 28 rows with the member states of the European Union (Country),
+the number of seats assigned under different years (Seats2011,
+Seats2014), the Cambridge Compromise apportionment (CamCom2011), and the
+countries population (Population2010,Population2013). Click
+\textcolor{white}{[}\faTable\textcolor{white}{]} here to download the
+\texttt{EU} dataset.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{# Load the dataset, when we load an .RData using load()}
+\CommentTok{# function we do not attribute it to a name like we did}
+\CommentTok{# when we used read.table() or when we use read.csv()}
+
+\KeywordTok{load}\NormalTok{(}\StringTok{"EU.RData"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{rmdinsight}
+There is two ways to tell \texttt{R} where is the file you want to
+load/use/import or where to save a file when you write/export/save :
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  write the complete path of the files.
+\item
+  set a working directory and put the files in it.
+\end{enumerate}
+\end{rmdinsight}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{# lm (for linear model) has the syntax: }
+\CommentTok{# lm(formula = response ~ predictor, data = data)}
+\CommentTok{# The response is the y in the model. The predictor is x.}
+\CommentTok{# For example (after loading the EU dataset)}
+\NormalTok{mod <-}\StringTok{ }\KeywordTok{lm}\NormalTok{(}\DataTypeTok{formula =}\NormalTok{ Seats2011 }\OperatorTok{~}\StringTok{ }\NormalTok{Population2010, }\DataTypeTok{data =}\NormalTok{ EU)}
+
+\CommentTok{# We have saved the linear model into mod, which now contains all the output of lm}
+\CommentTok{# You can see it by typing}
+\NormalTok{mod}
+\CommentTok{#ans> }
+\CommentTok{#ans> Call:}
+\CommentTok{#ans> lm(formula = Seats2011 ~ Population2010, data = EU)}
+\CommentTok{#ans> }
+\CommentTok{#ans> Coefficients:}
+\CommentTok{#ans>    (Intercept)  Population2010  }
+\CommentTok{#ans>       7.91e+00        1.08e-06}
+
+\CommentTok{# mod is indeed a list of objects whose names are}
+\KeywordTok{names}\NormalTok{(mod)}
+\CommentTok{#ans>  [1] "coefficients"  "residuals"     "effects"       "rank"         }
+\CommentTok{#ans>  [5] "fitted.values" "assign"        "qr"            "df.residual"  }
+\CommentTok{#ans>  [9] "na.action"     "xlevels"       "call"          "terms"        }
+\CommentTok{#ans> [13] "model"}
+
+\CommentTok{# We can access these elements by $}
+\CommentTok{# For example}
+\NormalTok{mod}\OperatorTok{$}\NormalTok{coefficients}
+\CommentTok{#ans>    (Intercept) Population2010 }
+\CommentTok{#ans>       7.91e+00       1.08e-06}
+
+\CommentTok{# The residuals}
+\NormalTok{mod}\OperatorTok{$}\NormalTok{residuals}
+\CommentTok{#ans>        Germany         France United Kingdom          Italy          Spain }
+\CommentTok{#ans>         2.8675        -3.7031        -1.7847         0.0139        -3.5084 }
+\CommentTok{#ans>         Poland        Romania    Netherlands         Greece        Belgium }
+\CommentTok{#ans>         1.9272         1.9434         0.2142         1.8977         2.3994 }
+\CommentTok{#ans>       Portugal Czech Republic        Hungary         Sweden        Austria }
+\CommentTok{#ans>         2.6175         2.7587         3.2898         2.0163         2.0575 }
+\CommentTok{#ans>       Bulgaria        Denmark       Slovakia        Finland        Ireland }
+\CommentTok{#ans>         1.9328        -0.8790        -0.7606        -0.6813        -0.7284 }
+\CommentTok{#ans>      Lithuania         Latvia       Slovenia        Estonia         Cyprus }
+\CommentTok{#ans>         0.4998        -1.3347        -2.1175        -3.3552        -2.7761 }
+\CommentTok{#ans>     Luxembourg          Malta }
+\CommentTok{#ans>        -2.4514        -2.3553}
+
+\CommentTok{# The fitted values}
+\NormalTok{mod}\OperatorTok{$}\NormalTok{fitted.values}
+\CommentTok{#ans>        Germany         France United Kingdom          Italy          Spain }
+\CommentTok{#ans>          96.13          77.70          74.78          72.99          57.51 }
+\CommentTok{#ans>         Poland        Romania    Netherlands         Greece        Belgium }
+\CommentTok{#ans>          49.07          31.06          25.79          20.10          19.60 }
+\CommentTok{#ans>       Portugal Czech Republic        Hungary         Sweden        Austria }
+\CommentTok{#ans>          19.38          19.24          18.71          17.98          16.94 }
+\CommentTok{#ans>       Bulgaria        Denmark       Slovakia        Finland        Ireland }
+\CommentTok{#ans>          16.07          13.88          13.76          13.68          12.73 }
+\CommentTok{#ans>      Lithuania         Latvia       Slovenia        Estonia         Cyprus }
+\CommentTok{#ans>          11.50          10.33          10.12           9.36           8.78 }
+\CommentTok{#ans>     Luxembourg          Malta }
+\CommentTok{#ans>           8.45           8.36}
+
+\CommentTok{# Summary of the model}
+\NormalTok{sumMod <-}\StringTok{ }\KeywordTok{summary}\NormalTok{(mod)}
+\NormalTok{sumMod}
+\CommentTok{#ans> }
+\CommentTok{#ans> Call:}
+\CommentTok{#ans> lm(formula = Seats2011 ~ Population2010, data = EU)}
+\CommentTok{#ans> }
+\CommentTok{#ans> Residuals:}
+\CommentTok{#ans>    Min     1Q Median     3Q    Max }
+\CommentTok{#ans> -3.703 -1.951  0.014  1.980  3.290 }
+\CommentTok{#ans> }
+\CommentTok{#ans> Coefficients:}
+\CommentTok{#ans>                Estimate Std. Error t value Pr(>|t|)    }
+\CommentTok{#ans> (Intercept)    7.91e+00   5.66e-01    14.0  2.6e-13 ***}
+\CommentTok{#ans> Population2010 1.08e-06   1.92e-08    56.3  < 2e-16 ***}
+\CommentTok{#ans> ---}
+\CommentTok{#ans> Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1}
+\CommentTok{#ans> }
+\CommentTok{#ans> Residual standard error: 2.29 on 25 degrees of freedom}
+\CommentTok{#ans>   (1 observation deleted due to missingness)}
+\CommentTok{#ans> Multiple R-squared:  0.992,   Adjusted R-squared:  0.992 }
+\CommentTok{#ans> F-statistic: 3.17e+03 on 1 and 25 DF,  p-value: <2e-16}
+\end{Highlighting}
+\end{Shaded}
+
+The following table contains a handy cheat sheet of equivalences between
+\texttt{R} code and some of the statistical concepts associated to
+linear regression.
+
+\begin{longtable}[]{@{}ll@{}}
+\toprule
+\begin{minipage}[b]{0.49\columnwidth}\raggedright\strut
+\texttt{R}\strut
+\end{minipage} & \begin{minipage}[b]{0.45\columnwidth}\raggedright\strut
+Statistical concept\strut
+\end{minipage}\tabularnewline
+\midrule
+\endhead
+\begin{minipage}[t]{0.49\columnwidth}\raggedright\strut
+\texttt{x}\strut
+\end{minipage} & \begin{minipage}[t]{0.45\columnwidth}\raggedright\strut
+Predictor \(X_1,\ldots,X_n\)\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.49\columnwidth}\raggedright\strut
+\texttt{y}\strut
+\end{minipage} & \begin{minipage}[t]{0.45\columnwidth}\raggedright\strut
+Response \(Y_1,\ldots,Y_n\)\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.49\columnwidth}\raggedright\strut
+\texttt{data\ \textless{}-\ data.frame(x\ =\ x,\ y\ =\ y)}\strut
+\end{minipage} & \begin{minipage}[t]{0.45\columnwidth}\raggedright\strut
+Sample \((X_1,Y_1),\ldots,(X_n,Y_n)\)\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.49\columnwidth}\raggedright\strut
+\texttt{model\ \textless{}-\ lm(y\ \textasciitilde{}\ x,\ data\ =\ data)}\strut
+\end{minipage} & \begin{minipage}[t]{0.45\columnwidth}\raggedright\strut
+Fitted linear model\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.49\columnwidth}\raggedright\strut
+\texttt{model\$coefficients}\strut
+\end{minipage} & \begin{minipage}[t]{0.45\columnwidth}\raggedright\strut
+Fitted coefficients \(\hat\beta_0,\hat\beta_1\)\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.49\columnwidth}\raggedright\strut
+\texttt{model\$residuals}\strut
+\end{minipage} & \begin{minipage}[t]{0.45\columnwidth}\raggedright\strut
+Fitted residuals \(\hat\varepsilon_1,\ldots,\hat\varepsilon_n\)\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.49\columnwidth}\raggedright\strut
+\texttt{model\$fitted.values}\strut
+\end{minipage} & \begin{minipage}[t]{0.45\columnwidth}\raggedright\strut
+Fitted values \(\hat Y_1,\ldots,\hat Y_n\)\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.49\columnwidth}\raggedright\strut
+\texttt{model\$df.residual}\strut
+\end{minipage} & \begin{minipage}[t]{0.45\columnwidth}\raggedright\strut
+Degrees of freedom \(n-2\)\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.49\columnwidth}\raggedright\strut
+\texttt{summaryModel\ \textless{}-\ summary(model)}\strut
+\end{minipage} & \begin{minipage}[t]{0.45\columnwidth}\raggedright\strut
+Summary of the fitted linear model\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.49\columnwidth}\raggedright\strut
+\texttt{summaryModel\$sigma}\strut
+\end{minipage} & \begin{minipage}[t]{0.45\columnwidth}\raggedright\strut
+Fitted residual standard deviation \(\hat\sigma\)\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.49\columnwidth}\raggedright\strut
+\texttt{summaryModel\$r.squared}\strut
+\end{minipage} & \begin{minipage}[t]{0.45\columnwidth}\raggedright\strut
+Coefficient of determination \(R^2\)\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.49\columnwidth}\raggedright\strut
+\texttt{summaryModel\$fstatistic}\strut
+\end{minipage} & \begin{minipage}[t]{0.45\columnwidth}\raggedright\strut
+\(F\)-test\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.49\columnwidth}\raggedright\strut
+\texttt{anova(model)}\strut
+\end{minipage} & \begin{minipage}[t]{0.45\columnwidth}\raggedright\strut
+ANOVA table\strut
+\end{minipage}\tabularnewline
+\bottomrule
+\end{longtable}
+
+\begin{rmdexercise}
+Do the following:
+
+\begin{itemize}
+\tightlist
+\item
+  Download The `EU' dataset from
+  \textcolor{white}{[}\faTable\textcolor{white}{]} here as an
+  \texttt{.RData} file and load it using the function \texttt{load}.
+\item
+  Compute the regression of \texttt{CamCom2011} into
+  \texttt{Population2010}. Save that model as the variable
+  \texttt{myModel}.
+\item
+  Access the objects \texttt{residuals} and \texttt{coefficients} of
+  \texttt{myModel}.
+\item
+  Compute the summary of \texttt{myModel} and store it as the variable
+  \texttt{summaryMyModel}.
+\item
+  Access the object \texttt{sigma} of \texttt{myModel}.
+\end{itemize}
+\end{rmdexercise}
+
+\subsection{Predicting House Value: Boston
+dataset}\label{predicting-house-value-boston-dataset}
+
+We are going to use a dataset called Boston which is part of the
+\texttt{MASS} package. It recordes the median value of houses for 506
+neighborhoods around Boston. Our task is to predict the median house
+value (\texttt{medv}) using only one predictor (\texttt{lstat}: percent
+of households with low socioeconomic status).
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{# First, install the MASS package using the command: install.packages("MASS")}
+
+\CommentTok{# load MASS package}
+\KeywordTok{library}\NormalTok{(MASS)}
+
+\CommentTok{# Check the dimensions of the Boston dataset}
+\KeywordTok{dim}\NormalTok{(Boston)}
+\CommentTok{#ans> [1] 506  14}
+\end{Highlighting}
+\end{Shaded}
+
+\textbf{STEP 1: Split the dataset}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{# Split the data by using the first 400 observations as the training}
+\CommentTok{# data and the remaining as the testing data}
+\NormalTok{train =}\StringTok{ }\DecValTok{1}\OperatorTok{:}\DecValTok{400}
+\NormalTok{test =}\StringTok{ }\OperatorTok{-}\NormalTok{train}
+
+\CommentTok{# Speficy that we are going to use only two variables (lstat and medv)}
+\NormalTok{variables =}\StringTok{ }\KeywordTok{which}\NormalTok{(}\KeywordTok{names}\NormalTok{(Boston) }\OperatorTok{==}\KeywordTok{c}\NormalTok{(}\StringTok{"lstat"}\NormalTok{, }\StringTok{"medv"}\NormalTok{))}
+\NormalTok{training_data =}\StringTok{ }\NormalTok{Boston[train, variables]}
+\NormalTok{testing_data =}\StringTok{ }\NormalTok{Boston[test, variables]}
+
+\CommentTok{# Check the dimensions of the new dataset}
+\KeywordTok{dim}\NormalTok{(training_data)}
+\CommentTok{#ans> [1] 400   2}
+\end{Highlighting}
+\end{Shaded}
+
+\textbf{STEP 2: Check for Linearity}
+
+In order to perfom linear regression in \texttt{R}, we will use the
+function \texttt{lm()}to fit a simple linear regression with
+\texttt{medv} as the response (dependent variable) and \texttt{lstat} as
+the predictor or independent variable, and then save it in
+\texttt{model}.
+
+But before we run our model, let's visually check if the relationship
+between x and y is linear.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{# Scatterplot of lstat vs. medv}
+\KeywordTok{plot}\NormalTok{(training_data}\OperatorTok{$}\NormalTok{lstat, training_data}\OperatorTok{$}\NormalTok{medv)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{center}\includegraphics[width=0.7\linewidth]{Machine-Learning_files/figure-latex/unnamed-chunk-31-1} \end{center}
+
+\begin{rmdexercise}
+On the figure above, modify the following:
+
+\begin{itemize}
+\tightlist
+\item
+  Figure title.
+\item
+  Axis titles.
+\item
+  Shape of observations and their colors.
+\item
+  Sizes of the chosen shape.
+\end{itemize}
+\end{rmdexercise}
+
+According to the plot, we see that the relationship is not linear. Let's
+try a transformation of our explanatory variable \texttt{lstat}.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{# Scatterplot of log(lstat) vs. medv}
+\KeywordTok{plot}\NormalTok{(}\KeywordTok{log}\NormalTok{(training_data}\OperatorTok{$}\NormalTok{lstat), training_data}\OperatorTok{$}\NormalTok{medv)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{center}\includegraphics[width=0.7\linewidth]{Machine-Learning_files/figure-latex/unnamed-chunk-33-1} \end{center}
+
+Look at the plot, it is more linear, so we can proceed and perform
+\texttt{lm()}:
+
+\textbf{STEP 3: Run the linear regression model}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{model =}\StringTok{ }\KeywordTok{lm}\NormalTok{(medv }\OperatorTok{~}\StringTok{ }\KeywordTok{log}\NormalTok{(lstat), }\DataTypeTok{data =}\NormalTok{ training_data)}
+\NormalTok{model}
+\CommentTok{#ans> }
+\CommentTok{#ans> Call:}
+\CommentTok{#ans> lm(formula = medv ~ log(lstat), data = training_data)}
+\CommentTok{#ans> }
+\CommentTok{#ans> Coefficients:}
+\CommentTok{#ans> (Intercept)   log(lstat)  }
+\CommentTok{#ans>        51.8        -12.2}
+\end{Highlighting}
+\end{Shaded}
+
+Notice that basic information when we print \texttt{model}. This only
+give us the slope \((-12.2)\) and the intercept \((51.8)\) of the linear
+model. Note that here we are looking at \texttt{log(lstat)} and not
+\texttt{lstat} anymore. So for every one unit increase in
+\texttt{lstat}, the median value of the house will decrease by
+\(e^{12.2}\). For more detailed information, we can use the
+\texttt{summary()} function:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{summary}\NormalTok{(model)}
+\CommentTok{#ans> }
+\CommentTok{#ans> Call:}
+\CommentTok{#ans> lm(formula = medv ~ log(lstat), data = training_data)}
+\CommentTok{#ans> }
+\CommentTok{#ans> Residuals:}
+\CommentTok{#ans>     Min      1Q  Median      3Q     Max }
+\CommentTok{#ans> -11.385  -3.908  -0.779   2.245  25.728 }
+\CommentTok{#ans> }
+\CommentTok{#ans> Coefficients:}
+\CommentTok{#ans>             Estimate Std. Error t value Pr(>|t|)    }
+\CommentTok{#ans> (Intercept)   51.783      1.097    47.2   <2e-16 ***}
+\CommentTok{#ans> log(lstat)   -12.203      0.472   -25.9   <2e-16 ***}
+\CommentTok{#ans> ---}
+\CommentTok{#ans> Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1}
+\CommentTok{#ans> }
+\CommentTok{#ans> Residual standard error: 5.6 on 398 degrees of freedom}
+\CommentTok{#ans> Multiple R-squared:  0.627,   Adjusted R-squared:  0.626 }
+\CommentTok{#ans> F-statistic:  669 on 1 and 398 DF,  p-value: <2e-16}
+\end{Highlighting}
+\end{Shaded}
+
+Now, we have access to p-values and standard errors for the
+coefficients, as well as the \(R^2\).
+
+\begin{itemize}
+\tightlist
+\item
+  The output states that the slope is statistically significant and
+  different from \(0\) and with a t-value= \(-25.9\) (p-value
+  \(< 0.05\)), which means that there is a significant relationship
+  between the percentage of households with low socioeconomic income and
+  the median house value.
+\item
+  This relationship is negative. That is as the percantage of household
+  with low socioeconomic income increases, the median house value
+  decreases.
+\item
+  Looking at \(R^2\), we can deduce that \(62.7\%\) of the model
+  variation is being explained by the predictor \texttt{log(lstat)}.
+  This is probably low, but indeed it would increase if we had more
+  independent (explanatory) variables. We can use the \texttt{names()}
+  function to see what other pieces of information are stored in our
+  linear model (\texttt{model}).
+\end{itemize}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{names}\NormalTok{(model)}
+\CommentTok{#ans>  [1] "coefficients"  "residuals"     "effects"       "rank"         }
+\CommentTok{#ans>  [5] "fitted.values" "assign"        "qr"            "df.residual"  }
+\CommentTok{#ans>  [9] "xlevels"       "call"          "terms"         "model"}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{model}\OperatorTok{$}\NormalTok{coefficients}
+\CommentTok{#ans> (Intercept)  log(lstat) }
+\CommentTok{#ans>        51.8       -12.2}
+\end{Highlighting}
+\end{Shaded}
+
+To obtain the confidence intervel for the linear model (\texttt{model}),
+we can use the \texttt{confint()} function:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{confint}\NormalTok{(model, }\DataTypeTok{level =} \FloatTok{0.95}\NormalTok{)}
+\CommentTok{#ans>             2.5 % 97.5 %}
+\CommentTok{#ans> (Intercept)  49.6   53.9}
+\CommentTok{#ans> log(lstat)  -13.1  -11.3}
+\end{Highlighting}
+\end{Shaded}
+
+So, a \(95\%\) confidence interval for the slope of \texttt{log(lstat)}
+is \((-13.13, -11.28)\). Notice that this confidence interval gives us
+the same result as the hypothesis test performed earlier, by stating
+that we are \(95\%\) confident that the slope of \texttt{lstat} is not
+zero (in fact it is less than zero, which means that the relationship is
+negative.)
+
+\textbf{STEP 4: Plot the regression model}
+
+Now, let's plot our regression line on top of our data.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{# Scatterplot of lstat vs. medv}
+\KeywordTok{plot}\NormalTok{(}\KeywordTok{log}\NormalTok{(training_data}\OperatorTok{$}\NormalTok{lstat), training_data}\OperatorTok{$}\NormalTok{medv)}
+
+\CommentTok{# Add the regression line to the existing scatterplot}
+\KeywordTok{abline}\NormalTok{(model)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{center}\includegraphics[width=0.7\linewidth]{Machine-Learning_files/figure-latex/unnamed-chunk-39-1} \end{center}
+
+Let's play with the look of the plot, and makes it perttier!
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{# Scatterplot of lstat vs. medv}
+\KeywordTok{plot}\NormalTok{(}\KeywordTok{log}\NormalTok{(training_data}\OperatorTok{$}\NormalTok{lstat), training_data}\OperatorTok{$}\NormalTok{medv,}
+\DataTypeTok{xlab =} \StringTok{"Log Transform of % of Houshold with Low Socioeconomic Income"}\NormalTok{,}
+\DataTypeTok{ylab =} \StringTok{"Median House Value"}\NormalTok{,}
+\DataTypeTok{col =} \StringTok{"red"}\NormalTok{,}
+\DataTypeTok{pch =} \DecValTok{20}\NormalTok{)}
+
+\CommentTok{# Make the line color blue, and the line's width =3 (play with the width!)}
+\KeywordTok{abline}\NormalTok{(model, }\DataTypeTok{col =} \StringTok{"blue"}\NormalTok{, }\DataTypeTok{lwd =}\DecValTok{3}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{center}\includegraphics[width=0.7\linewidth]{Machine-Learning_files/figure-latex/unnamed-chunk-40-1} \end{center}
+
+\textbf{STEP 5: Assess the model}
+
+Final thing we will do is to predict using our fitted model. We can use
+the \texttt{predict()} function for this purpose:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{# Predict what is the median value of the house with lstat= 5%}
+\KeywordTok{predict}\NormalTok{(model, }\KeywordTok{data.frame}\NormalTok{(}\DataTypeTok{lstat =} \KeywordTok{c}\NormalTok{(}\DecValTok{5}\NormalTok{)))}
+\CommentTok{#ans>    1 }
+\CommentTok{#ans> 32.1}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{# Predict what is the median values of houses with lstat= 5%, 10%, and 15%}
+\KeywordTok{predict}\NormalTok{(model, }\KeywordTok{data.frame}\NormalTok{(}\DataTypeTok{lstat =} \KeywordTok{c}\NormalTok{(}\DecValTok{5}\NormalTok{,}\DecValTok{10}\NormalTok{,}\DecValTok{15}\NormalTok{), }\DataTypeTok{interval =} \StringTok{"prediction"}\NormalTok{))}
+\CommentTok{#ans>    1    2    3 }
+\CommentTok{#ans> 32.1 23.7 18.7}
+\end{Highlighting}
+\end{Shaded}
+
+Now let's assess our model, by computing th mean squared error (MSE). To
+assess the model we created, then we will be using the test data!
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{# Save the testing median values for houses (testing y) in y}
+\NormalTok{y =}\StringTok{ }\NormalTok{testing_data}\OperatorTok{$}\NormalTok{medv}
+
+\CommentTok{# Compute the predicted value for this y (y hat)}
+\NormalTok{y_hat =}\StringTok{ }\KeywordTok{predict}\NormalTok{(model, }\KeywordTok{data.frame}\NormalTok{(}\DataTypeTok{lstat =}\NormalTok{ testing_data}\OperatorTok{$}\NormalTok{lstat))}
+
+\CommentTok{# Now we have both y and y_hat for our testing data. }
+\CommentTok{# let's find the mean square error}
+\NormalTok{error =}\StringTok{ }\NormalTok{y}\OperatorTok{-}\NormalTok{y_hat}
+\NormalTok{error_squared =}\StringTok{ }\NormalTok{error}\OperatorTok{^}\DecValTok{2}
+\NormalTok{MSE =}\StringTok{ }\KeywordTok{mean}\NormalTok{(error_squared)}
+\NormalTok{MSE}
+\CommentTok{#ans> [1] 17.7}
+\end{Highlighting}
+\end{Shaded}
 
 ◼
 

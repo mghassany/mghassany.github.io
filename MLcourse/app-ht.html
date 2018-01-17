@@ -32,8 +32,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black">
   
   
+<link rel="prev" href="app-introRStudio.html">
 
-<link rel="next" href="introduction.html">
 <script src="book_assets/jquery-2.2.3/jquery.min.js"></script>
 <link href="book_assets/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="book_assets/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
@@ -173,32 +173,82 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="header">
-<h1 class="title">Machine Learning</h1>
-<h4 class="author"><em>Mohamad Ghassany</em></h4>
-<h4 class="date"><em>2018-01-17</em></h4>
+<div id="app-ht" class="section level1">
+<h1><span class="header-section-number">B</span> Review on hypothesis testing</h1>
+<p>The process of hypothesis testing has an interesting analogy with a trial that helps on understanding the elements present in a formal hypothesis test in an intuitive way.</p>
+<table>
+<colgroup>
+<col width="40%" />
+<col width="59%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th align="left">Hypothesis testing</th>
+<th align="left">Trial</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">Null hypothesis <span class="math inline">\(H_0\)</span></td>
+<td align="left"><strong>Accused of comitting a crime</strong>. It has the “presumption of innocence”, which means that it is <em>not guilty</em> until there is enough evidence to supporting its guilt</td>
+</tr>
+<tr class="even">
+<td align="left">Sample <span class="math inline">\(X_1,\ldots,X_n\)</span></td>
+<td align="left">Collection of small <strong>evidences supporting innocence and guilt</strong>. These evidences contain a certain degree of uncontrollable randomness because of how they were collected and the context regarding the case</td>
+</tr>
+<tr class="odd">
+<td align="left">Statistic <span class="math inline">\(T_n\)</span></td>
+<td align="left"><strong>Summary of the evicences presented</strong> by the prosecutor and defense lawyer</td>
+</tr>
+<tr class="even">
+<td align="left">Distribution of <span class="math inline">\(T_n\)</span> under <span class="math inline">\(H_0\)</span></td>
+<td align="left">The <strong>judge</strong> conducting the trial. Evaluates the evidence presented by both sides and presents a verdict for <span class="math inline">\(H_0\)</span></td>
+</tr>
+<tr class="odd">
+<td align="left">Significance level <span class="math inline">\(\alpha\)</span></td>
+<td align="left"><span class="math inline">\(1-\alpha\)</span> is the <strong>strength of evidences required by the judge for condemning <span class="math inline">\(H_0\)</span></strong>. The judge allows evidences that on average condemn <span class="math inline">\(100\alpha\%\)</span> of the innocents, due to the randomness inherent to the evidence collection process. <span class="math inline">\(\alpha=0.05\)</span> is considered a reasonable level</td>
+</tr>
+<tr class="even">
+<td align="left"><span class="math inline">\(p\)</span>-value</td>
+<td align="left"><strong>Decision</strong> of the judge that measures the degree of compatibility, in a scale <span class="math inline">\(0\)</span>–<span class="math inline">\(1\)</span>, of the presumption of innocence with the summary of the evidences presented. If <span class="math inline">\(p\)</span>-value<span class="math inline">\(&lt;\alpha\)</span>, <span class="math inline">\(H_0\)</span> is declared guilty. Otherwise, is declared not guilty</td>
+</tr>
+<tr class="odd">
+<td align="left"><span class="math inline">\(H_0\)</span> is rejected</td>
+<td align="left"><span class="math inline">\(H_0\)</span> is declared guilty: there are <strong>strong evidences supporting its guilt</strong></td>
+</tr>
+<tr class="even">
+<td align="left"><span class="math inline">\(H_0\)</span> is not rejected</td>
+<td align="left"><span class="math inline">\(H_0\)</span> is declared not guilty: either is <strong>innocent or there are no enough evidences supporting its guilt</strong></td>
+</tr>
+</tbody>
+</table>
+<p>More formally, the <span class="math inline">\(p\)</span>-value of an hypothesis test about <span class="math inline">\(H0\)</span> is defined as:</p>
+<blockquote>
+<p>The <span class="math inline">\(p\)</span>-value is the probability of obtaining a statistic more unfavourable to <span class="math inline">\(H_0\)</span> than the observed, assuming that <span class="math inline">\(H_0\)</span> is true.</p>
+</blockquote>
+<p>Therefore, <strong>if the <span class="math inline">\(p\)</span>-value is small</strong> (smaller than the chosen level <span class="math inline">\(\alpha\)</span>), <strong>it is unlikely that the evidence against <span class="math inline">\(H_0\)</span> is due to randomness. As a consequence, <span class="math inline">\(H_0\)</span> is rejected</strong>. If the <span class="math inline">\(p\)</span>-value is large (larger than <span class="math inline">\(\alpha\)</span>), then it is more possible that the evidences against <span class="math inline">\(H_0\)</span> are merely due to the randomness of the data. In this case, we do not reject <span class="math inline">\(H_0\)</span>.</p>
+<div class="rmdinsight">
+<p>
+If <span class="math inline"><em>H</em><sub>0</sub></span> holds, then the <span class="math inline"><em>p</em></span>-value (which is a random variable) is distributed uniformly in <span class="math inline">(0, 1)</span>. If <span class="math inline"><em>H</em><sub>0</sub></span> does not hold, then the distribution of the <span class="math inline"><em>p</em></span>-value is not uniform but concentrated at <span class="math inline">0</span> (where the rejections of <span class="math inline"><em>H</em><sub>0</sub></span> take place).
+</p>
 </div>
-<div id="welcome" class="section level1 unnumbered">
-<h1>Welcome</h1>
-<!-- # Introduction -->
-<p>Welcome to this course. It is only a little introduction to Machine Learning.</p>
-<p>The aim of Machine Learning is to build computer systems that can adapt to their environments and learn form experience. Learning techniques and methods from this field are successfully applied to a variety of learning tasks in a broad range of areas, including, for example, spam recognition, text classification, gene discovery, financial forecasting. The course will give an overview of many concepts, techniques, and algorithms in machine learning, beginning with topics such as linear regression and classification and ending up with topics such as kmeans and Expectation Maximization. The course will give the student the basic ideas and intuition behind these methods, as well as a more formal statistical and computational understanding. Students will have an opportunity to experiment with machine learning techniques in R and apply them to a selected problem.</p>
-<div id="course-overview" class="section level2 unnumbered">
-<h2>Course Overview</h2>
-<center>
-<iframe src="files/ML_Course_Overview.pdf" width="640" height="349" frameborder="0" allowfullscreen>
-</iframe>
-</center>
 
 </div>
-</div>
+
+
+
+
+
+
+
+
             </section>
 
           </div>
         </div>
       </div>
+<a href="app-introRStudio.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
 
-<a href="introduction.html" class="navigation navigation-next navigation-unique" aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="book_assets/gitbook-2.6.7/js/app.min.js"></script>

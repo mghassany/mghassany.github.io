@@ -124,7 +124,7 @@
   \postauthor{\par}
   \predate{\centering\large\emph}
   \postdate{\par}
-  \date{2018-01-15}
+  \date{2018-01-17}
 
 % \defaultfontfeatures{
 %     Path = /home/ghassany/texmf/fonts/opentype/public/fontawesome/}
@@ -699,8 +699,8 @@ RSS &= (y_1 - \hat{\beta_0} - \hat{\beta_1} x_1)^2 + (y_2 - \hat{\beta_0} - \hat
 \end{aligned} \]
 
 The \emph{least squares} approach chooses \(\hat{\beta_0}\) and
-\(\hat{\beta_1}\) to minimize the RSS. The minimizing values can be show
-to be
+\(\hat{\beta_1}\) to minimize the RSS. The minimizing values can be
+shown to be
 
 \[  \begin{aligned}
 \hat{\beta_1} &=  \frac{\sum_{i=1}^{n} (x_i - \bar{x})(y_i - \bar{y})  }{\sum_{i=1}^{n} (x_i - \bar{x})^2 } = \frac{s_{xy}}{s_x^2} \\
@@ -726,11 +726,25 @@ where:
 \end{itemize}
 
 \begin{rmdinsight}
-Click here to see the influence of the distance employed in the sum of
-squares. Try to minimize the sum of squares for the different datasets.
-The choices of intercept and slope that minimize the sum of squared
-distances for a kind of distance are not the optimal for a different
-kind of distance.
+1- To find the optimal estimates for \(\beta_0\) and \(\beta_1\) we need
+a choice-criterion. In the case of the \emph{least squares} approach
+(more precisely, the \emph{ordinary least squares OLS}) this criterion
+is the residual sum of squares \emph{RSS}: we calculate \(\beta_0\) and
+\(\beta_1\) that minimise the \emph{RSS}.
+
+2- Minimizing the \emph{RSS} function requires to calculate the first
+order derivatives with respect to \(\beta_0\) and \(\beta_1\) and set
+them to zero.
+
+3- Click Click \textcolor{white}{[}\faVideoCamera\textcolor{white}{]}
+here and watch the video to understand more about the residuals and
+least squares.
+
+4- Click here to see the influence of the distance employed in the sum
+of squares. Try to minimize the sum of squares for the different
+datasets. The choices of intercept and slope that minimize the sum of
+squared distances for a kind of distance are not the optimal for a
+different kind of distance.
 \end{rmdinsight}
 
 \section{Assessing the Accuracy of the Coefficient
@@ -877,6 +891,14 @@ figures.
 \begin{rmdinsight}
 Below the ANOVA decomposition and its dependence on \(\sigma^2\) and
 \(\hat\sigma^2\). Application is also available here.
+
+Note that the \textbf{animation} will not be displayed the first time it
+is browsed (The reason is because it is hosted at \texttt{https}
+websites with auto-signed SSL certificates). \textbf{To see it}, click
+on the link above. You will get a warning from your browser saying that
+\emph{``Your connection is not private''}. Click in \emph{``Advanced''}
+and \textbf{allow an exception} in your browser. The next time the
+animation will show up correctly.
 \end{rmdinsight}
 
 The ANOVA table summarizes the decomposition of the variance. Here is
@@ -1147,7 +1169,7 @@ lists}\label{matrices-data-frames-and-lists}
 \CommentTok{#ans> [1] 2}
 \NormalTok{A[}\DecValTok{1}\NormalTok{, ] }\CommentTok{# First row}
 \CommentTok{#ans> [1] 1 3}
-\NormalTok{A[, }\DecValTok{2}\NormalTok{] }\CommentTok{# Seconds column}
+\NormalTok{A[, }\DecValTok{2}\NormalTok{] }\CommentTok{# Second column}
 \CommentTok{#ans> [1] 3 4}
 
 \CommentTok{# A data frame is a matrix with column names}
@@ -1952,6 +1974,140 @@ assess the model we created, then we will be using the test data!
 \end{Shaded}
 
 ◼
+
+\appendix \addcontentsline{toc}{chapter}{\appendixname}
+
+
+\chapter{\texorpdfstring{Introduction to
+\texttt{RStudio}}{Introduction to RStudio}}\label{app-introRStudio}
+
+\texttt{RStudio} is the most employed Integrated Development Environment
+(IDE) for \texttt{R} nowadays. When you start \texttt{RStudio} you will
+see a window similar to Figure \ref{fig:rstudio}. There are a lot of
+items in the GUI, most of them described in the
+\href{https://www.rstudio.com/wp-content/uploads/2016/01/rstudio-IDE-cheatsheet.pdf}{\texttt{RStudio}
+IDE Cheat Sheet}. The most important things to keep in mind are:
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  The code is written in scripts in the \emph{source panel} (upper-right
+  panel in Figure \ref{fig:rstudio});
+\item
+  for running a line or code selection from the script in the
+  \emph{console} (first tab in the lower-right panel in Figure
+  \ref{fig:rstudio}), you do it with the keyboard shortcut
+  \texttt{\textquotesingle{}Ctrl+Enter\textquotesingle{}} (Windows and
+  Linux) or \texttt{\textquotesingle{}Cmd+Enter\textquotesingle{}} (Mac
+  OS X).
+\end{enumerate}
+
+\begin{figure}[h!]
+
+{\centering \includegraphics[width=0.7\linewidth]{img/RStudio} 
+
+}
+
+\caption{Main window of `RStudio`. The red shows the code panel and the yellow shows the console output. Extracted from [here](https://www.rstudio.com/wp-content/uploads/2016/01/rstudio-IDE-cheatsheet.pdf).}\label{fig:rstudio}
+\end{figure}
+
+\chapter{Review on hypothesis testing}\label{app-ht}
+
+The process of hypothesis testing has an interesting analogy with a
+trial that helps on understanding the elements present in a formal
+hypothesis test in an intuitive way.
+
+\begin{longtable}[]{@{}ll@{}}
+\toprule
+\begin{minipage}[b]{0.38\columnwidth}\raggedright\strut
+Hypothesis testing\strut
+\end{minipage} & \begin{minipage}[b]{0.56\columnwidth}\raggedright\strut
+Trial\strut
+\end{minipage}\tabularnewline
+\midrule
+\endhead
+\begin{minipage}[t]{0.38\columnwidth}\raggedright\strut
+Null hypothesis \(H_0\)\strut
+\end{minipage} & \begin{minipage}[t]{0.56\columnwidth}\raggedright\strut
+\textbf{Accused of comitting a crime}. It has the ``presumption of
+innocence'', which means that it is \emph{not guilty} until there is
+enough evidence to supporting its guilt\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.38\columnwidth}\raggedright\strut
+Sample \(X_1,\ldots,X_n\)\strut
+\end{minipage} & \begin{minipage}[t]{0.56\columnwidth}\raggedright\strut
+Collection of small \textbf{evidences supporting innocence and guilt}.
+These evidences contain a certain degree of uncontrollable randomness
+because of how they were collected and the context regarding the
+case\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.38\columnwidth}\raggedright\strut
+Statistic \(T_n\)\strut
+\end{minipage} & \begin{minipage}[t]{0.56\columnwidth}\raggedright\strut
+\textbf{Summary of the evicences presented} by the prosecutor and
+defense lawyer\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.38\columnwidth}\raggedright\strut
+Distribution of \(T_n\) under \(H_0\)\strut
+\end{minipage} & \begin{minipage}[t]{0.56\columnwidth}\raggedright\strut
+The \textbf{judge} conducting the trial. Evaluates the evidence
+presented by both sides and presents a verdict for \(H_0\)\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.38\columnwidth}\raggedright\strut
+Significance level \(\alpha\)\strut
+\end{minipage} & \begin{minipage}[t]{0.56\columnwidth}\raggedright\strut
+\(1-\alpha\) is the \textbf{strength of evidences required by the judge
+for condemning \(H_0\)}. The judge allows evidences that on average
+condemn \(100\alpha\%\) of the innocents, due to the randomness inherent
+to the evidence collection process. \(\alpha=0.05\) is considered a
+reasonable level\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.38\columnwidth}\raggedright\strut
+\(p\)-value\strut
+\end{minipage} & \begin{minipage}[t]{0.56\columnwidth}\raggedright\strut
+\textbf{Decision} of the judge that measures the degree of
+compatibility, in a scale \(0\)--\(1\), of the presumption of innocence
+with the summary of the evidences presented. If \(p\)-value\(<\alpha\),
+\(H_0\) is declared guilty. Otherwise, is declared not guilty\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.38\columnwidth}\raggedright\strut
+\(H_0\) is rejected\strut
+\end{minipage} & \begin{minipage}[t]{0.56\columnwidth}\raggedright\strut
+\(H_0\) is declared guilty: there are \textbf{strong evidences
+supporting its guilt}\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.38\columnwidth}\raggedright\strut
+\(H_0\) is not rejected\strut
+\end{minipage} & \begin{minipage}[t]{0.56\columnwidth}\raggedright\strut
+\(H_0\) is declared not guilty: either is \textbf{innocent or there are
+no enough evidences supporting its guilt}\strut
+\end{minipage}\tabularnewline
+\bottomrule
+\end{longtable}
+
+More formally, the \(p\)-value of an hypothesis test about \(H0\) is
+defined as:
+
+\begin{quote}
+The \(p\)-value is the probability of obtaining a statistic more
+unfavourable to \(H_0\) than the observed, assuming that \(H_0\) is
+true.
+\end{quote}
+
+Therefore, \textbf{if the \(p\)-value is small} (smaller than the chosen
+level \(\alpha\)), \textbf{it is unlikely that the evidence against
+\(H_0\) is due to randomness. As a consequence, \(H_0\) is rejected}. If
+the \(p\)-value is large (larger than \(\alpha\)), then it is more
+possible that the evidences against \(H_0\) are merely due to the
+randomness of the data. In this case, we do not reject \(H_0\).
+
+\begin{rmdinsight}
+If \(H_0\) holds, then the \(p\)-value (which is a random variable) is
+distributed uniformly in \((0,1)\). If \(H_0\) does not hold, then the
+distribution of the \(p\)-value is not uniform but concentrated at \(0\)
+(where the rejections of \(H_0\) take place).
+\end{rmdinsight}
 
 
 \end{document}

@@ -25,7 +25,7 @@
 <meta name="author" content="Mohamad Ghassany">
 
 
-<meta name="date" content="2018-01-15">
+<meta name="date" content="2018-01-17">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -47,6 +47,15 @@
 
 
 
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-88489172-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-88489172-1');
+</script>
 
 
 <style type="text/css">
@@ -144,6 +153,9 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="1.9.2" data-path="pw-1.html"><a href="pw-1.html#predicting-house-value-boston-dataset"><i class="fa fa-check"></i><b>1.9.2</b> Predicting House Value: Boston dataset</a></li>
 </ul></li>
 </ul></li>
+<li class="appendix"><span><b>Appendix</b></span></li>
+<li class="chapter" data-level="A" data-path="app-introRStudio.html"><a href="app-introRStudio.html"><i class="fa fa-check"></i><b>A</b> Introduction to <code>RStudio</code></a></li>
+<li class="chapter" data-level="B" data-path="app-ht.html"><a href="app-ht.html"><i class="fa fa-check"></i><b>B</b> Review on hypothesis testing</a></li>
 </ul>
 
       </nav>
@@ -283,7 +295,7 @@ RSS &amp;= e_1^2 + e_2^2 + \ldots + e_n^2 \\
 RSS &amp;= (y_1 - \hat{\beta_0} - \hat{\beta_1} x_1)^2 + (y_2 - \hat{\beta_0} - \hat{\beta_1} x_2)^2 + \ldots + (y_n - \hat{\beta_0} - \hat{\beta_1} x_n)^2 \\
     &amp;= \sum_{i=1}^{n} (y_i - \hat{\beta_0} - \hat{\beta_1} x_i)^2
 \end{aligned} \]</span></p>
-<p>The <em>least squares</em> approach chooses <span class="math inline">\(\hat{\beta_0}\)</span> and <span class="math inline">\(\hat{\beta_1}\)</span> to minimize the RSS. The minimizing values can be show to be</p>
+<p>The <em>least squares</em> approach chooses <span class="math inline">\(\hat{\beta_0}\)</span> and <span class="math inline">\(\hat{\beta_1}\)</span> to minimize the RSS. The minimizing values can be shown to be</p>
 <p><span class="math display">\[  \begin{aligned}
 \hat{\beta_1} &amp;=  \frac{\sum_{i=1}^{n} (x_i - \bar{x})(y_i - \bar{y})  }{\sum_{i=1}^{n} (x_i - \bar{x})^2 } = \frac{s_{xy}}{s_x^2} \\
 \text{and} \\
@@ -297,7 +309,16 @@ RSS &amp;= (y_1 - \hat{\beta_0} - \hat{\beta_1} x_1)^2 + (y_2 - \hat{\beta_0} - 
 </ul>
 <div class="rmdinsight">
 <p>
-Click <a href="https://egarpor.shinyapps.io/least-squares/" target="_blank">here</a> to see the influence of the distance employed in the sum of squares. Try to minimize the sum of squares for the different datasets. The choices of intercept and slope that minimize the sum of squared distances for a kind of distance are not the optimal for a different kind of distance.
+1- To find the optimal estimates for <span class="math inline"><em>β</em><sub>0</sub></span> and <span class="math inline"><em>β</em><sub>1</sub></span> we need a choice-criterion. In the case of the <em>least squares</em> approach (more precisely, the <em>ordinary least squares OLS</em>) this criterion is the residual sum of squares <em>RSS</em>: we calculate <span class="math inline"><em>β</em><sub>0</sub></span> and <span class="math inline"><em>β</em><sub>1</sub></span> that minimise the <em>RSS</em>.
+</p>
+<p>
+2- Minimizing the <em>RSS</em> function requires to calculate the first order derivatives with respect to <span class="math inline"><em>β</em><sub>0</sub></span> and <span class="math inline"><em>β</em><sub>1</sub></span> and set them to zero.
+</p>
+<p>
+3- Click Click <a target="_blank" href="https://www.khanacademy.org/math/ap-statistics/bivariate-data-ap/least-squares-regression/v/introduction-to-residuals-and-least-squares-regression"> here <i class="fa fa-video-camera" aria-hidden="true"></i></a> and watch the video to understand more about the residuals and least squares.
+</p>
+<p>
+4- Click <a href="https://egarpor.shinyapps.io/least-squares/" target="_blank">here</a> to see the influence of the distance employed in the sum of squares. Try to minimize the sum of squares for the different datasets. The choices of intercept and slope that minimize the sum of squared distances for a kind of distance are not the optimal for a different kind of distance.
 </p>
 </div>
 </div>
@@ -362,6 +383,9 @@ Figure 1.1: Visualization of the ANOVA decomposition. SST measures the variation
 <div class="rmdinsight">
 <p>
 Below the ANOVA decomposition and its dependence on <span class="math inline"><em>σ</em><sup>2</sup></span> and <span class="math inline"><span class="math inline">\(\hat\sigma^2\)</span></span>. Application is also available <a href="https://ec2-35-177-34-200.eu-west-2.compute.amazonaws.com/anova/" target="_blank">here</a>.
+</p>
+<p>
+Note that the <strong>animation</strong> will not be displayed the first time it is browsed (The reason is because it is hosted at <code>https</code> websites with auto-signed SSL certificates). <strong>To see it</strong>, click on the link above. You will get a warning from your browser saying that <em>“Your connection is not private”</em>. Click in <em>“Advanced”</em> and <strong>allow an exception</strong> in your browser. The next time the animation will show up correctly.
 </p>
 </div>
 <iframe src="https://ec2-35-177-34-200.eu-west-2.compute.amazonaws.com/anova/?showcase=0" width="90%" height="900px">

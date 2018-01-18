@@ -25,7 +25,7 @@
 <meta name="author" content="Mohamad Ghassany">
 
 
-<meta name="date" content="2018-01-17">
+<meta name="date" content="2018-01-18">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -160,9 +160,9 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="2.3.1" data-path="multiple-linear-regression.html"><a href="multiple-linear-regression.html#other-considerations-in-regression-model"><i class="fa fa-check"></i><b>2.3.1</b> Other Considerations in Regression Model</a></li>
 </ul></li>
 <li class="chapter" data-level="2.4" data-path="multiple-linear-regression.html"><a href="multiple-linear-regression.html#how-to-select-the-best-performing-model"><i class="fa fa-check"></i><b>2.4</b> How to select the best performing model</a><ul>
-<li class="chapter" data-level="2.4.1" data-path="multiple-linear-regression.html"><a href="multiple-linear-regression.html#use-the-adjusted-r2-for-univariate-models"><i class="fa fa-check"></i><b>2.4.1</b> Use the Adjusted R2 for univariate models</a></li>
-<li class="chapter" data-level="2.4.2" data-path="multiple-linear-regression.html"><a href="multiple-linear-regression.html#have-a-look-at-the-residuals-or-error-terms"><i class="fa fa-check"></i><b>2.4.2</b> Have a look at the residuals or error terms</a></li>
-<li class="chapter" data-level="2.4.3" data-path="multiple-linear-regression.html"><a href="multiple-linear-regression.html#histogram-of-residuals"><i class="fa fa-check"></i><b>2.4.3</b> Histogram of residuals</a></li>
+<li><a href="multiple-linear-regression.html#use-the-adjusted-r2-for-univariate-models">Use the Adjusted <span class="math inline">\(R^2\)</span> for univariate models</a></li>
+<li class="chapter" data-level="" data-path="multiple-linear-regression.html"><a href="multiple-linear-regression.html#have-a-look-at-the-residuals-or-error-terms"><i class="fa fa-check"></i>Have a look at the residuals or error terms</a></li>
+<li class="chapter" data-level="" data-path="multiple-linear-regression.html"><a href="multiple-linear-regression.html#histogram-of-residuals"><i class="fa fa-check"></i>Histogram of residuals</a></li>
 </ul></li>
 </ul></li>
 <li class="appendix"><span><b>Appendix</b></span></li>
@@ -307,31 +307,31 @@ Too many features (e.g. <span class="math inline"><em>p</em> ≥ <em>n</em><
 <tbody>
 <tr class="odd">
 <td>Factor (Explained)</td>
-<td><span class="math inline">\(p-1\)</span></td>
-<td>TSS</td>
-<td>MST=SST/<span class="math inline">\((p-1)\)</span></td>
-<td>F=MST/MSE</td>
+<td><span class="math inline">\(p\)</span></td>
+<td>ESS=SSR</td>
+<td>MSR=ESS/<span class="math inline">\((p-1)\)</span></td>
+<td>F=MSR/MSE</td>
 <td>p-value</td>
 </tr>
 <tr class="even">
 <td>Error (Unexplained)</td>
-<td><span class="math inline">\(n-p\)</span></td>
-<td>RSS</td>
-<td>MSE=SSE/<span class="math inline">\((n-p)\)</span></td>
+<td><span class="math inline">\(n-p-1\)</span></td>
+<td>RSS=SSE</td>
+<td>MSE=RSS/<span class="math inline">\((n-p)\)</span></td>
 <td></td>
 <td></td>
 </tr>
 <tr class="odd">
 <td>Total</td>
 <td><span class="math inline">\(n-1\)</span></td>
-<td>SS</td>
+<td>SST=TSS</td>
 <td></td>
 <td></td>
 <td></td>
 </tr>
 </tbody>
 </table>
-<p>The ANOVA table has many pieces of information. What we care about is the <span class="math inline">\(F\)</span> Ratio and the corresponding p-value. We compare the <span class="math inline">\(F\)</span> Ratio with <span class="math inline">\(F_{(p-1,n-p)}\)</span> and a corresponding <span class="math inline">\(\alpha\)</span> value (error).</p>
+<p>The ANOVA table has many pieces of information. What we care about is the <span class="math inline">\(F\)</span> Ratio and the corresponding p-value. We compare the <span class="math inline">\(F\)</span> Ratio with <span class="math inline">\(F_{(p,n-p-1)}\)</span> and a corresponding <span class="math inline">\(\alpha\)</span> value (error).</p>
 <p><strong>p-values</strong></p>
 <p>The p-values provide information about whether each individual predictor is related to the response, after adjusting for the other predictors. Let’s look at the following table we obtain in general using a statistical software for example</p>
 <table>
@@ -442,14 +442,14 @@ There are more systematic criteria for choosing an “optimal” member in the p
 <p>Use the following interactive application and play around with different datasets and models. Notice how parameters change and become more confident with assessing simple linear models.</p>
 <iframe src="https://bjoernhartmann.shinyapps.io/linear_model_selection/?showcase=0" width="100%" height="900px">
 </iframe>
-<div id="use-the-adjusted-r2-for-univariate-models" class="section level3">
-<h3><span class="header-section-number">2.4.1</span> Use the Adjusted R2 for univariate models</h3>
-<p>If you only use one input variable, the <code>adjusted $R^2$</code> value gives you a good indication of how well your model performs. It illustrates how much variation is explained by your model.</p>
-<p>In contrast to the simple <code>$R^2$</code>, the adjusted <code>adjusted $R^2$</code> takes the number of input factors into account. It penalizes too many input factors and favors parsimonious models.</p>
-<p>The adjusted R2 is sensitive to the amount of noise in the data. As such, only compare this indicator of models for the same dataset than comparing it across different datasets.</p>
+<div id="use-the-adjusted-r2-for-univariate-models" class="section level3 unnumbered">
+<h3>Use the Adjusted <span class="math inline">\(R^2\)</span> for univariate models</h3>
+<p>If you only use one input variable, the adjusted <span class="math inline">\(R_{adj}^2\)</span> value gives you a good indication of how well your model performs. It illustrates how much variation is explained by your model.</p>
+<p>In contrast to the simple <span class="math inline">\(R^2\)</span>, the adjusted adjusted <span class="math inline">\(R_{adj}^2\)</span> takes the number of input factors into account. It penalizes too many input factors and favors parsimonious models.</p>
+<p>The adjusted <span class="math inline">\(R_{adj}^2\)</span> is sensitive to the amount of noise in the data. As such, only compare this indicator of models for the same dataset than comparing it across different datasets.</p>
 </div>
-<div id="have-a-look-at-the-residuals-or-error-terms" class="section level3">
-<h3><span class="header-section-number">2.4.2</span> Have a look at the residuals or error terms</h3>
+<div id="have-a-look-at-the-residuals-or-error-terms" class="section level3 unnumbered">
+<h3>Have a look at the residuals or error terms</h3>
 <p>What is often ignored are error terms or so-called residuals. They often tell you more than what you might think. The residuals are the difference between your predicted values and the actual values. Their benefit is that they can show both the magnitude as well as the direction of the errors.</p>
 <p>Let’s have a look at an example:</p>
 <center>
@@ -465,8 +465,8 @@ There are more systematic criteria for choosing an “optimal” member in the p
 </center>
 <p>In addition, you can observe whether the variance of your errors increases. In statistics, this is called <a href="https://en.wikipedia.org/wiki/Heteroscedasticity">Heteroscedasticity</a>. You can fix this easily with robust standard errors. Otherwise, your hypothesis tests are likely to be wrong.</p>
 </div>
-<div id="histogram-of-residuals" class="section level3">
-<h3><span class="header-section-number">2.4.3</span> Histogram of residuals</h3>
+<div id="histogram-of-residuals" class="section level3 unnumbered">
+<h3>Histogram of residuals</h3>
 <p>Finally, the histogram summarizes the magnitude of your error terms. It provides information about the bandwidth of errors and indicates how often which errors occurred.</p>
 <center>
 <img src="img/residuals_hist.png" /> <img src="img/residuals_hist2.png" />

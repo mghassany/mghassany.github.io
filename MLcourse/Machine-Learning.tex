@@ -124,7 +124,7 @@
   \postauthor{\par}
   \predate{\centering\large\emph}
   \postdate{\par}
-  \date{2018-01-17}
+  \date{2018-01-18}
 
 % \defaultfontfeatures{
 %     Path = /home/ghassany/texmf/fonts/opentype/public/fontawesome/}
@@ -845,22 +845,24 @@ related with the response:
 \begin{itemize}
 \tightlist
 \item
-  \(\text{SST}=\sum_{i=1}^n\left(Y_i-\bar Y\right)^2\), the
-  \textbf{total sum of squares}. This is the \emph{total variation} of
+  \(\text{SST}=\text{TSS}=\sum_{i=1}^n\left(Y_i-\bar Y\right)^2\), the
+  \textbf{Total Sum of Squares}. This is the \emph{total variation} of
   \(Y_1,\ldots,Y_n\), since \(\text{SST}=ns_y^2\), where \(s_y^2\) is
   the sample variance of \(Y_1,\ldots,Y_n\).
 \item
-  \(\text{SSR}=\sum_{i=1}^n\left(\hat Y_i-\bar Y\right)^2\), the
-  \textbf{regression sum of squares}\footnote{Recall that SSR is
-    different from RSS (Residual Sum of Squares}. This is the variation
-  explained by the regression line, that is, \emph{the variation from
-  \(\bar Y\) that is explained by the estimated conditional mean
+  \(\text{SSR}=\text{ESS}=\sum_{i=1}^n\left(\hat Y_i-\bar Y\right)^2\),
+  the \textbf{Regression Sum of Squares} or \textbf{Explained Sum of
+  Squares}\footnote{Recall that SSR is different from RSS (Residual Sum
+    of Squares)}. This is the variation explained by the regression
+  line, that is, \emph{the variation from \(\bar Y\) that is explained
+  by the estimated conditional mean
   \(\hat Y_i=\hat\beta_0+\hat\beta_1X_i\)}.
   \(\text{SSR}=ns_{\hat y}^2\), where \(s_{\hat y}^2\) is the sample
   variance of \(\hat Y_1,\ldots,\hat Y_n\).
 \item
-  \(\text{SSE}=\sum_{i=1}^n\left(Y_i-\hat Y_i\right)^2\), the
-  \textbf{sum of squared errors}\footnote{Recall that SSE and RSS (for
+  \(\text{SSE}=\text{RSS}=\sum_{i=1}^n\left(Y_i-\hat Y_i\right)^2\), the
+  \textbf{Sum of Squared Errors} or \textbf{Residual Sum of
+  Squares}\footnote{Recall that SSE and RSS (for
     \((\hat \beta_0,\hat \beta_1)\)) are just different names for
     referring to the same quantity:
     \(\text{SSE}=\sum_{i=1}^n\left(Y_i-\hat Y_i\right)^2=\sum_{i=1}^n\left(Y_i-\hat \beta_0-\hat \beta_1X_i\right)^2=\mathrm{RSS}\left(\hat \beta_0,\hat \beta_1\right)\).}.
@@ -906,14 +908,60 @@ given in the layout employed by \texttt{R}.
 
 \begin{longtable}[]{@{}llllll@{}}
 \toprule
-& Degrees of freedom & Sum Squares & Mean Squares & \(F\)-value &
-\(p\)-value\tabularnewline
+\begin{minipage}[b]{0.03\columnwidth}\raggedright\strut
+\strut
+\end{minipage} & \begin{minipage}[b]{0.15\columnwidth}\raggedright\strut
+Degrees of freedom\strut
+\end{minipage} & \begin{minipage}[b]{0.10\columnwidth}\raggedright\strut
+Sum Squares\strut
+\end{minipage} & \begin{minipage}[b]{0.12\columnwidth}\raggedright\strut
+Mean Squares\strut
+\end{minipage} & \begin{minipage}[b]{0.20\columnwidth}\raggedright\strut
+\(F\)-value\strut
+\end{minipage} & \begin{minipage}[b]{0.20\columnwidth}\raggedright\strut
+\(p\)-value\strut
+\end{minipage}\tabularnewline
 \midrule
 \endhead
-Predictor & \(1\) & SSR & \(\frac{\text{SSR}}{1}\) &
-\(\frac{\text{SSR}/1}{\text{SSE}/(n-2)}\) & \(p\)\tabularnewline
-Residuals & \(n - 2\) & SSE & \(\frac{\text{SSE}}{n-2}\) &
-&\tabularnewline
+\begin{minipage}[t]{0.03\columnwidth}\raggedright\strut
+Predictor\strut
+\end{minipage} & \begin{minipage}[t]{0.15\columnwidth}\raggedright\strut
+\(1\)\strut
+\end{minipage} & \begin{minipage}[t]{0.10\columnwidth}\raggedright\strut
+\(\text{SSR}=\sum_{i=1}^n\left(\hat Y_i-\bar Y\right)^2\)\strut
+\end{minipage} & \begin{minipage}[t]{0.12\columnwidth}\raggedright\strut
+\(\text{MSR}=\frac{\text{SSR}}{1}\)\strut
+\end{minipage} & \begin{minipage}[t]{0.20\columnwidth}\raggedright\strut
+\(\frac{\text{SSR}/1}{\text{SSE}/(n-2)}\)\strut
+\end{minipage} & \begin{minipage}[t]{0.20\columnwidth}\raggedright\strut
+\(p\)\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.03\columnwidth}\raggedright\strut
+Residuals\strut
+\end{minipage} & \begin{minipage}[t]{0.15\columnwidth}\raggedright\strut
+\(n - 2\)\strut
+\end{minipage} & \begin{minipage}[t]{0.10\columnwidth}\raggedright\strut
+\(\text{SSE}=\sum_{i=1}^n\left(Y_i-\hat Y_i\right)^2\)\strut
+\end{minipage} & \begin{minipage}[t]{0.12\columnwidth}\raggedright\strut
+\(\text{MSE}=\frac{\text{SSE}}{n-2}\)\strut
+\end{minipage} & \begin{minipage}[t]{0.20\columnwidth}\raggedright\strut
+\strut
+\end{minipage} & \begin{minipage}[t]{0.20\columnwidth}\raggedright\strut
+\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.03\columnwidth}\raggedright\strut
+Total\strut
+\end{minipage} & \begin{minipage}[t]{0.15\columnwidth}\raggedright\strut
+\(n-1\)\strut
+\end{minipage} & \begin{minipage}[t]{0.10\columnwidth}\raggedright\strut
+\(\text{SST}=\sum_{i=1}^n\left(Y_i-\bar Y\right)^2\)\strut
+\end{minipage} & \begin{minipage}[t]{0.12\columnwidth}\raggedright\strut
+\strut
+\end{minipage} & \begin{minipage}[t]{0.20\columnwidth}\raggedright\strut
+\strut
+\end{minipage} & \begin{minipage}[t]{0.20\columnwidth}\raggedright\strut
+\strut
+\end{minipage}\tabularnewline
 \bottomrule
 \end{longtable}
 
@@ -959,7 +1007,7 @@ To calculate \(R^2\), we use the formula
 \[ R^2 = \frac{\text{TSS} - \text{RSS}}{\text{TSS}} = 1- \frac{\text{RSS}}{\text{TSS}} \]
 
 where \(\text{TSS} = \sum (y_i - \bar{y})^2\) is the \emph{total sum of
-squared}.
+squares}.
 
 \(R^2\) measures the \emph{proportion of variability in} \(Y\)
 \emph{that can be explained using} \(X\). An \(R^2\) statistic that is
@@ -2188,17 +2236,17 @@ anything at all?} The answer comes from the \(F\)-test in the ANOVA
 Source & df & SS & MS & \(F\) & p-value\tabularnewline
 \midrule
 \endhead
-Factor (Explained) & \(p-1\) & TSS & MST=SST/\((p-1)\) & F=MST/MSE &
+Factor (Explained) & \(p\) & ESS=SSR & MSR=ESS/\((p-1)\) & F=MSR/MSE &
 p-value\tabularnewline
-Error (Unexplained) & \(n-p\) & RSS & MSE=SSE/\((n-p)\) &
+Error (Unexplained) & \(n-p-1\) & RSS=SSE & MSE=RSS/\((n-p)\) &
 &\tabularnewline
-Total & \(n-1\) & SS & & &\tabularnewline
+Total & \(n-1\) & SST=TSS & & &\tabularnewline
 \bottomrule
 \end{longtable}
 
 The ANOVA table has many pieces of information. What we care about is
 the \(F\) Ratio and the corresponding p-value. We compare the \(F\)
-Ratio with \(F_{(p-1,n-p)}\) and a corresponding \(\alpha\) value
+Ratio with \(F_{(p,n-p-1)}\) and a corresponding \(\alpha\) value
 (error).
 
 \textbf{p-values}
@@ -2384,24 +2432,27 @@ confident with assessing simple linear models.
 #ans> PhantomJS not found. You can install it with webshot::install_phantomjs(). If it is installed, please make sure the phantomjs executable can be found via the PATH variable.
 \end{verbatim}
 
-\subsection{Use the Adjusted R2 for univariate
-models}\label{use-the-adjusted-r2-for-univariate-models}
+\subsection*{\texorpdfstring{Use the Adjusted \(R^2\) for univariate
+models}{Use the Adjusted R\^{}2 for univariate models}}\label{use-the-adjusted-r2-for-univariate-models}
+\addcontentsline{toc}{subsection}{Use the Adjusted \(R^2\) for
+univariate models}
 
-If you only use one input variable, the \texttt{adjusted\ \$R\^{}2\$}
-value gives you a good indication of how well your model performs. It
+If you only use one input variable, the adjusted \(R_{adj}^2\) value
+gives you a good indication of how well your model performs. It
 illustrates how much variation is explained by your model.
 
-In contrast to the simple \texttt{\$R\^{}2\$}, the adjusted
-\texttt{adjusted\ \$R\^{}2\$} takes the number of input factors into
-account. It penalizes too many input factors and favors parsimonious
-models.
+In contrast to the simple \(R^2\), the adjusted adjusted \(R_{adj}^2\)
+takes the number of input factors into account. It penalizes too many
+input factors and favors parsimonious models.
 
-The adjusted R2 is sensitive to the amount of noise in the data. As
-such, only compare this indicator of models for the same dataset than
-comparing it across different datasets.
+The adjusted \(R_{adj}^2\) is sensitive to the amount of noise in the
+data. As such, only compare this indicator of models for the same
+dataset than comparing it across different datasets.
 
-\subsection{Have a look at the residuals or error
+\subsection*{Have a look at the residuals or error
 terms}\label{have-a-look-at-the-residuals-or-error-terms}
+\addcontentsline{toc}{subsection}{Have a look at the residuals or error
+terms}
 
 What is often ignored are error terms or so-called residuals. They often
 tell you more than what you might think. The residuals are the
@@ -2440,7 +2491,8 @@ increases. In statistics, this is called
 You can fix this easily with robust standard errors. Otherwise, your
 hypothesis tests are likely to be wrong.
 
-\subsection{Histogram of residuals}\label{histogram-of-residuals}
+\subsection*{Histogram of residuals}\label{histogram-of-residuals}
+\addcontentsline{toc}{subsection}{Histogram of residuals}
 
 Finally, the histogram summarizes the magnitude of your error terms. It
 provides information about the bandwidth of errors and indicates how

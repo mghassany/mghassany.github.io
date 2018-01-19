@@ -25,7 +25,7 @@
 <meta name="author" content="Mohamad Ghassany">
 
 
-<meta name="date" content="2018-01-18">
+<meta name="date" content="2018-01-19">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -160,7 +160,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="2.3.1" data-path="multiple-linear-regression.html"><a href="multiple-linear-regression.html#other-considerations-in-regression-model"><i class="fa fa-check"></i><b>2.3.1</b> Other Considerations in Regression Model</a></li>
 </ul></li>
 <li class="chapter" data-level="2.4" data-path="multiple-linear-regression.html"><a href="multiple-linear-regression.html#how-to-select-the-best-performing-model"><i class="fa fa-check"></i><b>2.4</b> How to select the best performing model</a><ul>
-<li><a href="multiple-linear-regression.html#use-the-adjusted-r2-for-univariate-models">Use the Adjusted <span class="math inline">\(R^2\)</span> for univariate models</a></li>
+<li><a href="multiple-linear-regression.html#use-the-adjusted-r_adj2-for-univariate-models">Use the Adjusted <span class="math inline">\(R_{adj}^2\)</span> for univariate models</a></li>
 <li class="chapter" data-level="" data-path="multiple-linear-regression.html"><a href="multiple-linear-regression.html#have-a-look-at-the-residuals-or-error-terms"><i class="fa fa-check"></i>Have a look at the residuals or error terms</a></li>
 <li class="chapter" data-level="" data-path="multiple-linear-regression.html"><a href="multiple-linear-regression.html#histogram-of-residuals"><i class="fa fa-check"></i>Histogram of residuals</a></li>
 </ul></li>
@@ -297,7 +297,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <div id="estimating-the-coefficients" class="section level2">
 <h2><span class="header-section-number">1.5</span> Estimating the Coefficients</h2>
 <p>Let <span class="math inline">\(\hat{y}_i = \hat{\beta_0} + \hat{\beta_1} x_i\)</span> be the prediction for <span class="math inline">\(Y\)</span> based on the <span class="math inline">\(i\)</span>th value of <span class="math inline">\(X\)</span>. Then <span class="math inline">\(e_i = y_i - \hat{y}_i\)</span> represents the <span class="math inline">\(i\)</span>th <strong><em>residual</em></strong>.</p>
-<p>We define the <strong><em>residual sum of squares</em></strong> (<strong>RSS</strong>) as</p>
+<p>We define the <strong><em>Residual Sum of Squares</em></strong> (<strong>RSS</strong>)<a href="#fn1" class="footnoteRef" id="fnref1"><sup>1</sup></a> as</p>
 <p><span class="math display">\[  \begin{aligned}
 RSS &amp;= e_1^2 + e_2^2 + \ldots + e_n^2 \\
     &amp;= \sum_{i=1}^{n} e_i^2
@@ -307,9 +307,9 @@ RSS &amp;= e_1^2 + e_2^2 + \ldots + e_n^2 \\
 RSS &amp;= (y_1 - \hat{\beta_0} - \hat{\beta_1} x_1)^2 + (y_2 - \hat{\beta_0} - \hat{\beta_1} x_2)^2 + \ldots + (y_n - \hat{\beta_0} - \hat{\beta_1} x_n)^2 \\
     &amp;= \sum_{i=1}^{n} (y_i - \hat{\beta_0} - \hat{\beta_1} x_i)^2
 \end{aligned} \]</span></p>
-<p>The <em>least squares</em> approach chooses <span class="math inline">\(\hat{\beta_0}\)</span> and <span class="math inline">\(\hat{\beta_1}\)</span> to minimize the RSS. The minimizing values can be shown to be</p>
+<p>The <em>least squares</em> approach chooses <span class="math inline">\(\hat{\beta_0}\)</span> and <span class="math inline">\(\hat{\beta_1}\)</span> to minimize the RSS. The minimizing values can be shown to be<a href="#fn2" class="footnoteRef" id="fnref2"><sup>2</sup></a></p>
 <p><span class="math display">\[  \begin{aligned}
-\hat{\beta_1} &amp;=  \frac{\sum_{i=1}^{n} (x_i - \bar{x})(y_i - \bar{y})  }{\sum_{i=1}^{n} (x_i - \bar{x})^2 } = \frac{s_{xy}}{s_x^2} \\
+\hat{\beta_1} &amp;=  \frac{\sum_{i=1}^{n} (x_i - \bar{x})(y_i - \bar{y})  }{\sum_{i=1}^{n} (x_i - \bar{x})^2 } = \frac{s_{xy}}{s_x^2} = (s_x^2)^{-1} s_{xy} \\
 \text{and} \\
 \hat{\beta_0} &amp;= \bar{y} - \hat{\beta_1} \bar{x}
 \end{aligned}  \]</span></p>
@@ -378,8 +378,8 @@ Before explaining ANOVA, it is important to recall an interesting result: <em>th
 <p>The ANOVA decomposition considers the following measures of variation related with the response:</p>
 <ul>
 <li><span class="math inline">\(\text{SST}=\text{TSS}=\sum_{i=1}^n\left(Y_i-\bar Y\right)^2\)</span>, the <strong>Total Sum of Squares</strong>. This is the <em>total variation</em> of <span class="math inline">\(Y_1,\ldots,Y_n\)</span>, since <span class="math inline">\(\text{SST}=ns_y^2\)</span>, where <span class="math inline">\(s_y^2\)</span> is the sample variance of <span class="math inline">\(Y_1,\ldots,Y_n\)</span>.</li>
-<li><span class="math inline">\(\text{SSR}=\text{ESS}=\sum_{i=1}^n\left(\hat Y_i-\bar Y\right)^2\)</span>, the <strong>Regression Sum of Squares</strong> or <strong>Explained Sum of Squares</strong><a href="#fn1" class="footnoteRef" id="fnref1"><sup>1</sup></a>. This is the variation explained by the regression line, that is, <em>the variation from <span class="math inline">\(\bar Y\)</span> that is explained by the estimated conditional mean <span class="math inline">\(\hat Y_i=\hat\beta_0+\hat\beta_1X_i\)</span></em>. <span class="math inline">\(\text{SSR}=ns_{\hat y}^2\)</span>, where <span class="math inline">\(s_{\hat y}^2\)</span> is the sample variance of <span class="math inline">\(\hat Y_1,\ldots,\hat Y_n\)</span>.</li>
-<li><span class="math inline">\(\text{SSE}=\text{RSS}=\sum_{i=1}^n\left(Y_i-\hat Y_i\right)^2\)</span>, the <strong>Sum of Squared Errors</strong> or <strong>Residual Sum of Squares</strong><a href="#fn2" class="footnoteRef" id="fnref2"><sup>2</sup></a>. Is the variation around the conditional mean. Recall that <span class="math inline">\(\text{SSE}=\sum_{i=1}^n \hat\varepsilon_i^2=(n-2)\hat\sigma^2\)</span>, where <span class="math inline">\(\hat\sigma^2\)</span> is the sample variance of <span class="math inline">\(\hat \varepsilon_1,\ldots,\hat \varepsilon_n\)</span>.</li>
+<li><span class="math inline">\(\text{SSR}=\text{ESS}=\sum_{i=1}^n\left(\hat Y_i-\bar Y\right)^2\)</span>, the <strong>Regression Sum of Squares</strong> or <strong>Explained Sum of Squares</strong><a href="#fn3" class="footnoteRef" id="fnref3"><sup>3</sup></a>. This is the variation explained by the regression line, that is, <em>the variation from <span class="math inline">\(\bar Y\)</span> that is explained by the estimated conditional mean <span class="math inline">\(\hat Y_i=\hat\beta_0+\hat\beta_1X_i\)</span></em>. <span class="math inline">\(\text{SSR}=ns_{\hat y}^2\)</span>, where <span class="math inline">\(s_{\hat y}^2\)</span> is the sample variance of <span class="math inline">\(\hat Y_1,\ldots,\hat Y_n\)</span>.</li>
+<li><span class="math inline">\(\text{SSE}=\text{RSS}=\sum_{i=1}^n\left(Y_i-\hat Y_i\right)^2\)</span>, the <strong>Sum of Squared Errors</strong> or <strong>Residual Sum of Squares</strong><a href="#fn4" class="footnoteRef" id="fnref4"><sup>4</sup></a>. Is the variation around the conditional mean. Recall that <span class="math inline">\(\text{SSE}=\sum_{i=1}^n \hat\varepsilon_i^2=(n-2)\hat\sigma^2\)</span>, where <span class="math inline">\(\hat\sigma^2\)</span> is the sample variance of <span class="math inline">\(\hat \varepsilon_1,\ldots,\hat \varepsilon_n\)</span>.</li>
 </ul>
 The ANOVA decomposition is
 <span class="math display">\[\begin{align*}
@@ -459,7 +459,7 @@ It happens that
 <span class="math display">\[\begin{align*}
 F=\frac{\text{SSR}/1}{\text{SSE}/(n-2)}\stackrel{H_0}{\sim} F_{1,n-2},
 \end{align*}\]</span>
-<p>where <span class="math inline">\(F_{1,n-2}\)</span> is the <em>Snedecor’s <span class="math inline">\(F\)</span> distribution</em><a href="#fn3" class="footnoteRef" id="fnref3"><sup>3</sup></a> with <span class="math inline">\(1\)</span> and <span class="math inline">\(n-2\)</span> degrees of freedom.</p>
+<p>where <span class="math inline">\(F_{1,n-2}\)</span> is the <em>Snedecor’s <span class="math inline">\(F\)</span> distribution</em><a href="#fn5" class="footnoteRef" id="fnref5"><sup>5</sup></a> with <span class="math inline">\(1\)</span> and <span class="math inline">\(n-2\)</span> degrees of freedom.</p>
 <p>If <span class="math inline">\(H_0\)</span> is true, then <span class="math inline">\(F\)</span> is expected to be <em>small</em> since SSR will be close to zero. The <span class="math inline">\(p\)</span>-value of this test is the same as the <span class="math inline">\(p\)</span>-value of the <span class="math inline">\(t\)</span>-test for <span class="math inline">\(H_0:\beta_1=0\)</span>.</p>
 </div>
 <div id="the-r2-statistic" class="section level3">
@@ -494,9 +494,11 @@ A large <span class="math inline"><em>R</em><sup>2</sup></span> means <em>nothin
 <div class="footnotes">
 <hr />
 <ol start="1">
-<li id="fn1"><p>Recall that SSR is different from RSS (Residual Sum of Squares)<a href="linear-regression.html#fnref1">↩</a></p></li>
-<li id="fn2"><p>Recall that SSE and RSS (for <span class="math inline">\((\hat \beta_0,\hat \beta_1)\)</span>) are just different names for referring to the same quantity: <span class="math inline">\(\text{SSE}=\sum_{i=1}^n\left(Y_i-\hat Y_i\right)^2=\sum_{i=1}^n\left(Y_i-\hat \beta_0-\hat \beta_1X_i\right)^2=\mathrm{RSS}\left(\hat \beta_0,\hat \beta_1\right)\)</span>.<a href="linear-regression.html#fnref2">↩</a></p></li>
-<li id="fn3"><p>The <span class="math inline">\(F_{n,m}\)</span> distribution arises as the quotient of two independent random variables <span class="math inline">\(\chi^2_n\)</span> and <span class="math inline">\(\chi^2_m\)</span>, <span class="math inline">\(\frac{\chi^2_n/n}{\chi^2_m/m}\)</span>.<a href="linear-regression.html#fnref3">↩</a></p></li>
+<li id="fn1"><p>Also known as <strong>SSE</strong>: Sum of Squared Errors.<a href="linear-regression.html#fnref1">↩</a></p></li>
+<li id="fn2"><p>They are unique and always exist. They can be obtained by solving <span class="math inline">\(\frac{\partial}{\partial \beta_0}\text{RSS}(\beta_0,\beta_1)=0\)</span> and <span class="math inline">\(\frac{\partial}{\partial \beta_1}\text{RSS}(\beta_0,\beta_1)=0\)</span>.<a href="linear-regression.html#fnref2">↩</a></p></li>
+<li id="fn3"><p>Recall that SSR is different from RSS (Residual Sum of Squares)<a href="linear-regression.html#fnref3">↩</a></p></li>
+<li id="fn4"><p>Recall that SSE and RSS (for <span class="math inline">\((\hat \beta_0,\hat \beta_1)\)</span>) are just different names for referring to the same quantity: <span class="math inline">\(\text{SSE}=\sum_{i=1}^n\left(Y_i-\hat Y_i\right)^2=\sum_{i=1}^n\left(Y_i-\hat \beta_0-\hat \beta_1X_i\right)^2=\mathrm{RSS}\left(\hat \beta_0,\hat \beta_1\right)\)</span>.<a href="linear-regression.html#fnref4">↩</a></p></li>
+<li id="fn5"><p>The <span class="math inline">\(F_{n,m}\)</span> distribution arises as the quotient of two independent random variables <span class="math inline">\(\chi^2_n\)</span> and <span class="math inline">\(\chi^2_m\)</span>, <span class="math inline">\(\frac{\chi^2_n/n}{\chi^2_m/m}\)</span>.<a href="linear-regression.html#fnref5">↩</a></p></li>
 </ol>
 </div>
             </section>

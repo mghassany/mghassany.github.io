@@ -25,7 +25,7 @@
 <meta name="author" content="Mohamad Ghassany">
 
 
-<meta name="date" content="2018-01-18">
+<meta name="date" content="2018-01-19">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -160,7 +160,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="2.3.1" data-path="multiple-linear-regression.html"><a href="multiple-linear-regression.html#other-considerations-in-regression-model"><i class="fa fa-check"></i><b>2.3.1</b> Other Considerations in Regression Model</a></li>
 </ul></li>
 <li class="chapter" data-level="2.4" data-path="multiple-linear-regression.html"><a href="multiple-linear-regression.html#how-to-select-the-best-performing-model"><i class="fa fa-check"></i><b>2.4</b> How to select the best performing model</a><ul>
-<li><a href="multiple-linear-regression.html#use-the-adjusted-r2-for-univariate-models">Use the Adjusted <span class="math inline">\(R^2\)</span> for univariate models</a></li>
+<li><a href="multiple-linear-regression.html#use-the-adjusted-r_adj2-for-univariate-models">Use the Adjusted <span class="math inline">\(R_{adj}^2\)</span> for univariate models</a></li>
 <li class="chapter" data-level="" data-path="multiple-linear-regression.html"><a href="multiple-linear-regression.html#have-a-look-at-the-residuals-or-error-terms"><i class="fa fa-check"></i>Have a look at the residuals or error terms</a></li>
 <li class="chapter" data-level="" data-path="multiple-linear-regression.html"><a href="multiple-linear-regression.html#histogram-of-residuals"><i class="fa fa-check"></i>Histogram of residuals</a></li>
 </ul></li>
@@ -249,13 +249,13 @@ RSS &amp;= \sum_{i=1}^{n} (y_i - \hat{y}_i)^2 \\
 \frac{\partial^2 RSS}{\partial \beta \partial \beta^T}   &amp;= 2\textbf{X}^T\textbf{X}.\\
 \end{aligned}
 \]</span></p>
-<p>Assuming (for the moment) that <span class="math inline">\(\textbf{X}\)</span> has full column rank, and hence <span class="math inline">\(\textbf{X}^T\textbf{X}\)</span> is positive definite<a href="#fn4" class="footnoteRef" id="fnref4"><sup>4</sup></a>, we set the first derivative to zero</p>
+<p>Assuming (for the moment) that <span class="math inline">\(\textbf{X}\)</span> has full column rank, and hence <span class="math inline">\(\textbf{X}^T\textbf{X}\)</span> is positive definite<a href="#fn6" class="footnoteRef" id="fnref6"><sup>6</sup></a>, we set the first derivative to zero</p>
 <p><span class="math display">\[\textbf{X}^T(\textbf{Y}-\textbf{X}\beta)=0\]</span> to obtain the unique solution</p>
 <p><span class="math display">\[ \hat{\beta} = (\textbf{X}^T \textbf{X})^{-1}\textbf{X}^T \textbf{Y} \]</span></p>
 <p>Note 1:</p>
 <div class="rmdinsight">
 <p>
-It is a remarkable property of matrix algebra that the results for the general linear regression model in matrix notation appear exactly as those for the simple linear regression model. Only the degrees of freedom and other constants related to the number of <span class="math inline"><em>X</em></span> variables and the dimensions of some matrices are different.
+It is a remarkable property of matrix algebra that the results for the general linear regression model in matrix notation appear exactly as those for the simple linear regression model. Only the degrees of freedom and other constants related to the number of <span class="math inline"><em>X</em></span> variables and the dimensions of some matrices are different. Which means there are some similarities between <span class="math inline"><span class="math inline">\(\hat{\beta} = (\textbf{X}^T \textbf{X})^{-1}\textbf{X}^T \textbf{Y}\)</span></span> and <span class="math inline"><span class="math inline">\(\hat\beta_1=(s_x^2)^{-1}s_{xy}\)</span></span> from the simple linear model: both are related to the covariance between <span class="math inline"><strong>X</strong></span> and <span class="math inline"><strong>Y</strong></span> weighted by the variance of <span class="math inline"><strong>X</strong></span>.
 </p>
 </div>
 <p>Note 2:</p>
@@ -291,7 +291,7 @@ Too many features (e.g. <span class="math inline"><em>p</em> ≥ <em>n</em><
 <p>This hypothesis test is performed by computing the <span class="math inline">\(F\)</span>-statistic (<em>Fisher</em>):</p>
 <p><span class="math display">\[ F = \frac{ (\text{TSS} - \text{RSS})/p}{\text{RSS}/(n-p-1)} \sim F_{p,n-p-1} \]</span></p>
 <p>where, as with simple linear regression, <span class="math inline">\(\text{TSS} = \sum (y_i - \bar{y})^2\)</span> and <span class="math inline">\(\text{RSS} = \sum (y_i - \hat{y}_i)^2\)</span>.</p>
-<p>When the <span class="math inline">\(F\)</span>-statistic value is close to 1, then <span class="math inline">\(H_0\)</span> is true, which means there is no relationship between the response and predictors. On the other hand, if <span class="math inline">\(H_1\)</span> is true, so we expect <span class="math inline">\(F\)</span> to be greater than 1.</p>
+<p>Note that <span class="math inline">\(F_{p,n-p-1}\)</span> represents the <em>Fisher-Snedecor’s <span class="math inline">\(F\)</span> distribution</em> with <span class="math inline">\(p\)</span> and <span class="math inline">\(n-p-1\)</span> degrees of freedom. If <span class="math inline">\(H_0\)</span> is true, then <span class="math inline">\(F\)</span> is expected to be <em>small</em> since ESS<a href="#fn7" class="footnoteRef" id="fnref7"><sup>7</sup></a> will be close to zero (little variation is explained by the regression model since <span class="math inline">\(\hat{\boldsymbol{\beta}}\approx\mathbf{0}\)</span>).</p>
 <p>So the question we ask here: <em>Is the whole regression explaining anything at all?</em> The answer comes from the <span class="math inline">\(F\)</span>-test in the ANOVA (ANalysis Of VAriance) table. This is what we get in an ANOVA table:</p>
 <table>
 <thead>
@@ -309,7 +309,7 @@ Too many features (e.g. <span class="math inline"><em>p</em> ≥ <em>n</em><
 <td>Factor (Explained)</td>
 <td><span class="math inline">\(p\)</span></td>
 <td>ESS=SSR</td>
-<td>MSR=ESS/<span class="math inline">\((p-1)\)</span></td>
+<td>MSR=ESS/<span class="math inline">\((p)\)</span></td>
 <td>F=MSR/MSE</td>
 <td>p-value</td>
 </tr>
@@ -317,7 +317,7 @@ Too many features (e.g. <span class="math inline"><em>p</em> ≥ <em>n</em><
 <td>Error (Unexplained)</td>
 <td><span class="math inline">\(n-p-1\)</span></td>
 <td>RSS=SSE</td>
-<td>MSE=RSS/<span class="math inline">\((n-p)\)</span></td>
+<td>MSE=RSS/<span class="math inline">\((n-p-1)\)</span></td>
 <td></td>
 <td></td>
 </tr>
@@ -332,6 +332,81 @@ Too many features (e.g. <span class="math inline"><em>p</em> ≥ <em>n</em><
 </tbody>
 </table>
 <p>The ANOVA table has many pieces of information. What we care about is the <span class="math inline">\(F\)</span> Ratio and the corresponding p-value. We compare the <span class="math inline">\(F\)</span> Ratio with <span class="math inline">\(F_{(p,n-p-1)}\)</span> and a corresponding <span class="math inline">\(\alpha\)</span> value (error).</p>
+<div class="rmdcaution">
+<p>
+The “ANOVA table” is a broad concept in statistics, with different variants. Here we are only covering the basic ANOVA table from the relation <span class="math inline">SST = SSR + SSE</span>. However, further sophistications are possible when <span class="math inline">SSR</span> is decomposed into the variations contributed by <em>each</em> predictor. In particular, for multiple linear regression <code>R</code>’s <code>anova</code> implements a <em>sequential (type I) ANOVA table</em>, which is <strong>not</strong> the previous table!
+</p>
+</div>
+<p>The <code>anova</code> function in <code>R</code> takes a model as an input and returns the following <em>sequential</em> ANOVA table<a href="#fn8" class="footnoteRef" id="fnref8"><sup>8</sup></a>:</p>
+<table>
+<colgroup>
+<col width="19%" />
+<col width="16%" />
+<col width="11%" />
+<col width="12%" />
+<col width="21%" />
+<col width="17%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th></th>
+<th>Degrees of freedom</th>
+<th>Sum Squares</th>
+<th>Mean Squares</th>
+<th><span class="math inline">\(F\)</span>-value</th>
+<th><span class="math inline">\(p\)</span>-value</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Predictor 1</td>
+<td><span class="math inline">\(1\)</span></td>
+<td>ESS<span class="math inline">\(_1\)</span></td>
+<td><span class="math inline">\(\frac{\text{ESS}_1}{1}\)</span></td>
+<td><span class="math inline">\(\frac{\text{ESS}_1/1}{\text{RSS}/(n-p-1)}\)</span></td>
+<td><span class="math inline">\(p_1\)</span></td>
+</tr>
+<tr class="even">
+<td>Predictor 2</td>
+<td><span class="math inline">\(1\)</span></td>
+<td>ESS<span class="math inline">\(_2\)</span></td>
+<td><span class="math inline">\(\frac{\text{ESS}_2}{1}\)</span></td>
+<td><span class="math inline">\(\frac{\text{ESS}_2/1}{\text{RSS}/(n-p-1)}\)</span></td>
+<td><span class="math inline">\(p_2\)</span></td>
+</tr>
+<tr class="odd">
+<td><span class="math inline">\(\vdots\)</span></td>
+<td><span class="math inline">\(\vdots\)</span></td>
+<td><span class="math inline">\(\vdots\)</span></td>
+<td><span class="math inline">\(\vdots\)</span></td>
+<td><span class="math inline">\(\vdots\)</span></td>
+<td><span class="math inline">\(\vdots\)</span></td>
+</tr>
+<tr class="even">
+<td>Predictor <span class="math inline">\(p\)</span></td>
+<td><span class="math inline">\(1\)</span></td>
+<td>ESS<span class="math inline">\(_p\)</span></td>
+<td><span class="math inline">\(\frac{\text{ESS}_p}{1}\)</span></td>
+<td><span class="math inline">\(\frac{\text{ESS}_p/1}{\text{RSS}/(n-p-1)}\)</span></td>
+<td><span class="math inline">\(p_p\)</span></td>
+</tr>
+<tr class="odd">
+<td>Residuals</td>
+<td><span class="math inline">\(n - p - 1\)</span></td>
+<td>RSS</td>
+<td><span class="math inline">\(\frac{\text{RSS}}{n-p-1}\)</span></td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+Here the ESS<span class="math inline">\(_j\)</span> represents the explained sum of squares (same as regression sum of squares) associated to the inclusion of <span class="math inline">\(X_j\)</span> in the model with predictors <span class="math inline">\(X_1,\ldots,X_{j-1}\)</span>, this is: <span class="math display">\[
+\text{ESS}_j=\text{ESS}(X_1,\ldots,X_j)-\text{ESS}(X_1,\ldots,X_{j-1}).
+\]</span> The <span class="math inline">\(p\)</span>-values <span class="math inline">\(p_1,\ldots,p_p\)</span> correspond to the testing of the hypotheses
+<span class="math display">\[\begin{align*}
+H_0:\beta_j=0\quad\text{vs.}\quad H_1:\beta_j\neq 0,
+\end{align*}\]</span>
+<p>carried out <em>inside the linear model</em> <span class="math inline">\(Y=\beta_0+\beta_1X_1+\ldots+\beta_jX_j+\varepsilon\)</span>. This is like the <span class="math inline">\(t\)</span>-test for <span class="math inline">\(\beta_j\)</span> for the model with predictors <span class="math inline">\(X_1,\ldots,X_j\)</span>. Recall that there is no <span class="math inline">\(F\)</span>-test in this version of the ANOVA table.</p>
 <p><strong>p-values</strong></p>
 <p>The p-values provide information about whether each individual predictor is related to the response, after adjusting for the other predictors. Let’s look at the following table we obtain in general using a statistical software for example</p>
 <table>
@@ -384,7 +459,7 @@ Too many features (e.g. <span class="math inline"><em>p</em> ≥ <em>n</em><
 <p><strong>Forward selection</strong>:</p>
 <ul>
 <li>Begin with the <em>null model</em> — a model that contains an intercept (constant) but no predictors.</li>
-<li>Fit p simple linear regressions and add to the null model the variable that results in the lowest RSS.</li>
+<li>Fit <span class="math inline">\(p\)</span> simple linear regressions and add to the null model the variable that results in the lowest RSS.</li>
 <li>Add to that model the variable that results in the lowest RSS amongst all two-variable models.</li>
 <li>Continue until some stopping rule is satisfied, for example when all remaining variables have a p-value above some threshold.</li>
 </ul>
@@ -442,11 +517,19 @@ There are more systematic criteria for choosing an “optimal” member in the p
 <p>Use the following interactive application and play around with different datasets and models. Notice how parameters change and become more confident with assessing simple linear models.</p>
 <iframe src="https://bjoernhartmann.shinyapps.io/linear_model_selection/?showcase=0" width="100%" height="900px">
 </iframe>
-<div id="use-the-adjusted-r2-for-univariate-models" class="section level3 unnumbered">
-<h3>Use the Adjusted <span class="math inline">\(R^2\)</span> for univariate models</h3>
+<div id="use-the-adjusted-r_adj2-for-univariate-models" class="section level3 unnumbered">
+<h3>Use the Adjusted <span class="math inline">\(R_{adj}^2\)</span> for univariate models</h3>
 <p>If you only use one input variable, the adjusted <span class="math inline">\(R_{adj}^2\)</span> value gives you a good indication of how well your model performs. It illustrates how much variation is explained by your model.</p>
-<p>In contrast to the simple <span class="math inline">\(R^2\)</span>, the adjusted adjusted <span class="math inline">\(R_{adj}^2\)</span> takes the number of input factors into account. It penalizes too many input factors and favors parsimonious models.</p>
+<p>In contrast to the simple <span class="math inline">\(R^2\)</span><a href="#fn9" class="footnoteRef" id="fnref9"><sup>9</sup></a>, the adjusted adjusted <span class="math inline">\(R_{adj}^2\)</span><a href="#fn10" class="footnoteRef" id="fnref10"><sup>10</sup></a> takes the number of input factors into account. It penalizes too many input factors and favors parsimonious models.</p>
 <p>The adjusted <span class="math inline">\(R_{adj}^2\)</span> is sensitive to the amount of noise in the data. As such, only compare this indicator of models for the same dataset than comparing it across different datasets.</p>
+
+<div class="figure" style="text-align: center"><span id="fig:R2"></span>
+<img src="img/R2vsAdjR2.png" alt="Comparison of \(R^2\) and \(R^2_{\text{adj}}\) for \(n=200\) and \(p\) ranging from \(1\) to \(198\). \(M=100\) datasets were simulated with only the first two predictors being significant. The thicker curves are the mean of each color’s curves." width="70%" />
+<p class="caption">
+Figure 2.1: Comparison of <span class="math inline">\(R^2\)</span> and <span class="math inline">\(R^2_{\text{adj}}\)</span> for <span class="math inline">\(n=200\)</span> and <span class="math inline">\(p\)</span> ranging from <span class="math inline">\(1\)</span> to <span class="math inline">\(198\)</span>. <span class="math inline">\(M=100\)</span> datasets were simulated with <strong>only the first two</strong> predictors being significant. The thicker curves are the mean of each color’s curves.
+</p>
+</div>
+<p>Figure <a href="multiple-linear-regression.html#fig:R2">2.1</a> contains the results of an experiment where 100 datasets were simulated with <strong>only the first two</strong> predictors being significant. As you can see <span class="math inline">\(R^2\)</span> increases linearly with the number of predictors considered, although only the first two ones were important! On the contrary, <span class="math inline">\(R^2_\text{adj}\)</span> only increases in the first two variables and then is flat on average, but it has a huge variability when <span class="math inline">\(p\)</span> approaches <span class="math inline">\(n-2\)</span>. The experiment evidences that <strong><span class="math inline">\(R^2_\text{adj}\)</span> is more adequate than the <span class="math inline">\(R^2\)</span> for evaluating the fit of a multiple linear regression</strong>.</p>
 </div>
 <div id="have-a-look-at-the-residuals-or-error-terms" class="section level3 unnumbered">
 <h3>Have a look at the residuals or error terms</h3>
@@ -484,8 +567,12 @@ There are more systematic criteria for choosing an “optimal” member in the p
 
 <div class="footnotes">
 <hr />
-<ol start="4">
-<li id="fn4"><p>Important to be sure that <span class="math inline">\(\hat{\beta}\)</span> is minimising RSS.<a href="multiple-linear-regression.html#fnref4">↩</a></p></li>
+<ol start="6">
+<li id="fn6"><p>Important to be sure that <span class="math inline">\(\hat{\beta}\)</span> is minimising RSS.<a href="multiple-linear-regression.html#fnref6">↩</a></p></li>
+<li id="fn7"><p>Recal that ESS is the explained sum of squares, ESS = TSS - RSS.<a href="multiple-linear-regression.html#fnref7">↩</a></p></li>
+<li id="fn8"><p>More complex – included here just for clarification of the <code>anova</code>’s output.<a href="multiple-linear-regression.html#fnref8">↩</a></p></li>
+<li id="fn9"><p>Recall that <span class="math inline">\(R^2 = 1- \frac{\text{RSS}}{\text{TSS}}\)</span><a href="multiple-linear-regression.html#fnref9">↩</a></p></li>
+<li id="fn10"><p>It is defined as <span class="math inline">\(R_{adj}^2 = 1- \frac{\text{RSS}/(n-p-1)}{\text{TSS}/(n-1)} = 1- \frac{\text{RSS}}{\text{TSS}}\times\frac{n-1}{n-p-1}\)</span><a href="multiple-linear-regression.html#fnref10">↩</a></p></li>
 </ol>
 </div>
             </section>

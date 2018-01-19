@@ -124,7 +124,7 @@
   \postauthor{\par}
   \predate{\centering\large\emph}
   \postdate{\par}
-  \date{2018-01-18}
+  \date{2018-01-19}
 
 % \defaultfontfeatures{
 %     Path = /home/ghassany/texmf/fonts/opentype/public/fontawesome/}
@@ -187,6 +187,25 @@
 \newenvironment{rmdnoicon}
   {\begin{rmdblock}}
   {\end{rmdblock}}
+
+
+\usepackage{color}
+\usepackage[dvipsnames]{xcolor}
+
+\makeatletter
+\renewcommand\section{\@startsection {section}{1}{\z@}%
+                                   {-3.5ex \@plus -1ex \@minus -.2ex}%
+                                   {2.3ex \@plus.2ex}%
+                                   {\normalfont\Large\bfseries\color{ForestGreen}}}
+\renewcommand\subsection{\@startsection{subsection}{2}{\z@}%
+                                     {-3.25ex\@plus -1ex \@minus -.2ex}%
+                                     {1.5ex \@plus .2ex}%
+                                     {\normalfont\large\bfseries\color{Violet}}}
+\renewcommand\subsubsection{\@startsection{subsubsection}{3}{\z@}%
+                                     {-3.25ex\@plus -1ex \@minus -.2ex}%
+                                     {1.5ex \@plus .2ex}%
+                                     {\normalfont\normalsize\bfseries\color{Violet}}}
+\makeatother
 
 \usepackage{amsthm}
 \newtheorem{theorem}{Theorem}[chapter]
@@ -684,7 +703,9 @@ for \(Y\) based on the \(i\)th value of \(X\). Then
 \(e_i = y_i - \hat{y}_i\) represents the \(i\)th
 \textbf{\emph{residual}}.
 
-We define the \textbf{\emph{residual sum of squares}} (\textbf{RSS}) as
+We define the \textbf{\emph{Residual Sum of Squares}}
+(\textbf{RSS})\footnote{Also known as \textbf{SSE}: Sum of Squared
+  Errors.} as
 
 \[  \begin{aligned}
 RSS &= e_1^2 + e_2^2 + \ldots + e_n^2 \\
@@ -700,10 +721,13 @@ RSS &= (y_1 - \hat{\beta_0} - \hat{\beta_1} x_1)^2 + (y_2 - \hat{\beta_0} - \hat
 
 The \emph{least squares} approach chooses \(\hat{\beta_0}\) and
 \(\hat{\beta_1}\) to minimize the RSS. The minimizing values can be
-shown to be
+shown to be\footnote{They are unique and always exist. They can be
+  obtained by solving
+  \(\frac{\partial}{\partial \beta_0}\text{RSS}(\beta_0,\beta_1)=0\) and
+  \(\frac{\partial}{\partial \beta_1}\text{RSS}(\beta_0,\beta_1)=0\).}
 
 \[  \begin{aligned}
-\hat{\beta_1} &=  \frac{\sum_{i=1}^{n} (x_i - \bar{x})(y_i - \bar{y})  }{\sum_{i=1}^{n} (x_i - \bar{x})^2 } = \frac{s_{xy}}{s_x^2} \\
+\hat{\beta_1} &=  \frac{\sum_{i=1}^{n} (x_i - \bar{x})(y_i - \bar{y})  }{\sum_{i=1}^{n} (x_i - \bar{x})^2 } = \frac{s_{xy}}{s_x^2} = (s_x^2)^{-1} s_{xy} \\
 \text{and} \\
 \hat{\beta_0} &= \bar{y} - \hat{\beta_1} \bar{x}
 \end{aligned}  \]
@@ -902,6 +926,10 @@ on the link above. You will get a warning from your browser saying that
 and \textbf{allow an exception} in your browser. The next time the
 animation will show up correctly.
 \end{rmdinsight}
+
+\begin{verbatim}
+#ans> PhantomJS not found. You can install it with webshot::install_phantomjs(). If it is installed, please make sure the phantomjs executable can be found via the PATH variable.
+\end{verbatim}
 
 The ANOVA table summarizes the decomposition of the variance. Here is
 given in the layout employed by \texttt{R}.
@@ -1338,8 +1366,7 @@ the \texttt{plot()} function, type \texttt{?plot}.
 
 \CommentTok{# Sampling from a Normal - 100 random points from a N(0, 1)}
 \KeywordTok{rnorm}\NormalTok{(}\DataTypeTok{n =} \DecValTok{10}\NormalTok{, }\DataTypeTok{mean =} \DecValTok{0}\NormalTok{, }\DataTypeTok{sd =} \DecValTok{1}\NormalTok{)}
-\CommentTok{#ans>  [1] -0.6563 -1.0385 -0.0699  0.9699  1.7918 -1.5374  0.0420 -0.8714}
-\CommentTok{#ans>  [9]  0.3257  0.4683}
+\CommentTok{#ans>  [1] -0.267  0.345 -1.539  0.545  0.260  0.438 -1.662  0.156 -2.252 -0.450}
 
 \CommentTok{# If you want to have always the same result, set the seed of the random number}
 \CommentTok{# generator}
@@ -2152,7 +2179,12 @@ It is a remarkable property of matrix algebra that the results for the
 general linear regression model in matrix notation appear exactly as
 those for the simple linear regression model. Only the degrees of
 freedom and other constants related to the number of \(X\) variables and
-the dimensions of some matrices are different.
+the dimensions of some matrices are different. Which means there are
+some similarities between
+\(\hat{\beta} = (\textbf{X}^T \textbf{X})^{-1}\textbf{X}^T \textbf{Y}\)
+and \(\hat\beta_1=(s_x^2)^{-1}s_{xy}\) from the simple linear model:
+both are related to the covariance between \(\mathbf{X}\) and
+\(\mathbf{Y}\) weighted by the variance of \(\mathbf{X}\).
 \end{rmdinsight}
 
 Note 2:
@@ -2222,10 +2254,12 @@ where, as with simple linear regression,
 \(\text{TSS} = \sum (y_i - \bar{y})^2\) and
 \(\text{RSS} = \sum (y_i - \hat{y}_i)^2\).
 
-When the \(F\)-statistic value is close to 1, then \(H_0\) is true,
-which means there is no relationship between the response and
-predictors. On the other hand, if \(H_1\) is true, so we expect \(F\) to
-be greater than 1.
+Note that \(F_{p,n-p-1}\) represents the \emph{Fisher-Snedecor's \(F\)
+distribution} with \(p\) and \(n-p-1\) degrees of freedom. If \(H_0\) is
+true, then \(F\) is expected to be \emph{small} since ESS\footnote{Recal
+  that ESS is the explained sum of squares, ESS = TSS - RSS.} will be
+close to zero (little variation is explained by the regression model
+since \(\hat{\boldsymbol{\beta}}\approx\mathbf{0}\)).
 
 So the question we ask here: \emph{Is the whole regression explaining
 anything at all?} The answer comes from the \(F\)-test in the ANOVA
@@ -2236,9 +2270,9 @@ anything at all?} The answer comes from the \(F\)-test in the ANOVA
 Source & df & SS & MS & \(F\) & p-value\tabularnewline
 \midrule
 \endhead
-Factor (Explained) & \(p\) & ESS=SSR & MSR=ESS/\((p-1)\) & F=MSR/MSE &
+Factor (Explained) & \(p\) & ESS=SSR & MSR=ESS/\((p)\) & F=MSR/MSE &
 p-value\tabularnewline
-Error (Unexplained) & \(n-p-1\) & RSS=SSE & MSE=RSS/\((n-p)\) &
+Error (Unexplained) & \(n-p-1\) & RSS=SSE & MSE=RSS/\((n-p-1)\) &
 &\tabularnewline
 Total & \(n-1\) & SST=TSS & & &\tabularnewline
 \bottomrule
@@ -2248,6 +2282,124 @@ The ANOVA table has many pieces of information. What we care about is
 the \(F\) Ratio and the corresponding p-value. We compare the \(F\)
 Ratio with \(F_{(p,n-p-1)}\) and a corresponding \(\alpha\) value
 (error).
+
+\begin{rmdcaution}
+The ``ANOVA table'' is a broad concept in statistics, with different
+variants. Here we are only covering the basic ANOVA table from the
+relation \(\text{SST} = \text{SSR} + \text{SSE}\). However, further
+sophistications are possible when \(\text{SSR}\) is decomposed into the
+variations contributed by \emph{each} predictor. In particular, for
+multiple linear regression \texttt{R}'s \texttt{anova} implements a
+\emph{sequential (type I) ANOVA table}, which is \textbf{not} the
+previous table!
+\end{rmdcaution}
+
+The \texttt{anova} function in \texttt{R} takes a model as an input and
+returns the following \emph{sequential} ANOVA table\footnote{More
+  complex -- included here just for clarification of the
+  \texttt{anova}'s output.}:
+
+\begin{longtable}[]{@{}llllll@{}}
+\toprule
+\begin{minipage}[b]{0.16\columnwidth}\raggedright\strut
+\strut
+\end{minipage} & \begin{minipage}[b]{0.14\columnwidth}\raggedright\strut
+Degrees of freedom\strut
+\end{minipage} & \begin{minipage}[b]{0.10\columnwidth}\raggedright\strut
+Sum Squares\strut
+\end{minipage} & \begin{minipage}[b]{0.11\columnwidth}\raggedright\strut
+Mean Squares\strut
+\end{minipage} & \begin{minipage}[b]{0.18\columnwidth}\raggedright\strut
+\(F\)-value\strut
+\end{minipage} & \begin{minipage}[b]{0.15\columnwidth}\raggedright\strut
+\(p\)-value\strut
+\end{minipage}\tabularnewline
+\midrule
+\endhead
+\begin{minipage}[t]{0.16\columnwidth}\raggedright\strut
+Predictor 1\strut
+\end{minipage} & \begin{minipage}[t]{0.14\columnwidth}\raggedright\strut
+\(1\)\strut
+\end{minipage} & \begin{minipage}[t]{0.10\columnwidth}\raggedright\strut
+ESS\(_1\)\strut
+\end{minipage} & \begin{minipage}[t]{0.11\columnwidth}\raggedright\strut
+\(\frac{\text{ESS}_1}{1}\)\strut
+\end{minipage} & \begin{minipage}[t]{0.18\columnwidth}\raggedright\strut
+\(\frac{\text{ESS}_1/1}{\text{RSS}/(n-p-1)}\)\strut
+\end{minipage} & \begin{minipage}[t]{0.15\columnwidth}\raggedright\strut
+\(p_1\)\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.16\columnwidth}\raggedright\strut
+Predictor 2\strut
+\end{minipage} & \begin{minipage}[t]{0.14\columnwidth}\raggedright\strut
+\(1\)\strut
+\end{minipage} & \begin{minipage}[t]{0.10\columnwidth}\raggedright\strut
+ESS\(_2\)\strut
+\end{minipage} & \begin{minipage}[t]{0.11\columnwidth}\raggedright\strut
+\(\frac{\text{ESS}_2}{1}\)\strut
+\end{minipage} & \begin{minipage}[t]{0.18\columnwidth}\raggedright\strut
+\(\frac{\text{ESS}_2/1}{\text{RSS}/(n-p-1)}\)\strut
+\end{minipage} & \begin{minipage}[t]{0.15\columnwidth}\raggedright\strut
+\(p_2\)\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.16\columnwidth}\raggedright\strut
+\(\vdots\)\strut
+\end{minipage} & \begin{minipage}[t]{0.14\columnwidth}\raggedright\strut
+\(\vdots\)\strut
+\end{minipage} & \begin{minipage}[t]{0.10\columnwidth}\raggedright\strut
+\(\vdots\)\strut
+\end{minipage} & \begin{minipage}[t]{0.11\columnwidth}\raggedright\strut
+\(\vdots\)\strut
+\end{minipage} & \begin{minipage}[t]{0.18\columnwidth}\raggedright\strut
+\(\vdots\)\strut
+\end{minipage} & \begin{minipage}[t]{0.15\columnwidth}\raggedright\strut
+\(\vdots\)\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.16\columnwidth}\raggedright\strut
+Predictor \(p\)\strut
+\end{minipage} & \begin{minipage}[t]{0.14\columnwidth}\raggedright\strut
+\(1\)\strut
+\end{minipage} & \begin{minipage}[t]{0.10\columnwidth}\raggedright\strut
+ESS\(_p\)\strut
+\end{minipage} & \begin{minipage}[t]{0.11\columnwidth}\raggedright\strut
+\(\frac{\text{ESS}_p}{1}\)\strut
+\end{minipage} & \begin{minipage}[t]{0.18\columnwidth}\raggedright\strut
+\(\frac{\text{ESS}_p/1}{\text{RSS}/(n-p-1)}\)\strut
+\end{minipage} & \begin{minipage}[t]{0.15\columnwidth}\raggedright\strut
+\(p_p\)\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.16\columnwidth}\raggedright\strut
+Residuals\strut
+\end{minipage} & \begin{minipage}[t]{0.14\columnwidth}\raggedright\strut
+\(n - p - 1\)\strut
+\end{minipage} & \begin{minipage}[t]{0.10\columnwidth}\raggedright\strut
+RSS\strut
+\end{minipage} & \begin{minipage}[t]{0.11\columnwidth}\raggedright\strut
+\(\frac{\text{RSS}}{n-p-1}\)\strut
+\end{minipage} & \begin{minipage}[t]{0.18\columnwidth}\raggedright\strut
+\strut
+\end{minipage} & \begin{minipage}[t]{0.15\columnwidth}\raggedright\strut
+\strut
+\end{minipage}\tabularnewline
+\bottomrule
+\end{longtable}
+
+Here the ESS\(_j\) represents the explained sum of squares (same as
+regression sum of squares) associated to the inclusion of \(X_j\) in the
+model with predictors \(X_1,\ldots,X_{j-1}\), this is: \[
+\text{ESS}_j=\text{ESS}(X_1,\ldots,X_j)-\text{ESS}(X_1,\ldots,X_{j-1}).
+\] The \(p\)-values \(p_1,\ldots,p_p\) correspond to the testing of the
+hypotheses
+
+\begin{align*}
+H_0:\beta_j=0\quad\text{vs.}\quad H_1:\beta_j\neq 0,
+\end{align*}
+
+carried out \emph{inside the linear model}
+\(Y=\beta_0+\beta_1X_1+\ldots+\beta_jX_j+\varepsilon\). This is like the
+\(t\)-test for \(\beta_j\) for the model with predictors
+\(X_1,\ldots,X_j\). Recall that there is no \(F\)-test in this version
+of the ANOVA table.
 
 \textbf{p-values}
 
@@ -2297,8 +2449,8 @@ subset of them. Here are two commonly use approaches:
   Begin with the \emph{null model} --- a model that contains an
   intercept (constant) but no predictors.
 \item
-  Fit p simple linear regressions and add to the null model the variable
-  that results in the lowest RSS.
+  Fit \(p\) simple linear regressions and add to the null model the
+  variable that results in the lowest RSS.
 \item
   Add to that model the variable that results in the lowest RSS amongst
   all two-variable models.
@@ -2428,26 +2580,53 @@ Use the following interactive application and play around with different
 datasets and models. Notice how parameters change and become more
 confident with assessing simple linear models.
 
-\begin{verbatim}
-#ans> PhantomJS not found. You can install it with webshot::install_phantomjs(). If it is installed, please make sure the phantomjs executable can be found via the PATH variable.
-\end{verbatim}
-
-\subsection*{\texorpdfstring{Use the Adjusted \(R^2\) for univariate
-models}{Use the Adjusted R\^{}2 for univariate models}}\label{use-the-adjusted-r2-for-univariate-models}
-\addcontentsline{toc}{subsection}{Use the Adjusted \(R^2\) for
+\subsection*{\texorpdfstring{Use the Adjusted \(R_{adj}^2\) for
+univariate
+models}{Use the Adjusted R\_\{adj\}\^{}2 for univariate models}}\label{use-the-adjusted-r_adj2-for-univariate-models}
+\addcontentsline{toc}{subsection}{Use the Adjusted \(R_{adj}^2\) for
 univariate models}
 
 If you only use one input variable, the adjusted \(R_{adj}^2\) value
 gives you a good indication of how well your model performs. It
 illustrates how much variation is explained by your model.
 
-In contrast to the simple \(R^2\), the adjusted adjusted \(R_{adj}^2\)
+In contrast to the simple \(R^2\)\footnote{Recall that
+  \(R^2 = 1- \frac{\text{RSS}}{\text{TSS}}\)}, the adjusted adjusted
+\(R_{adj}^2\)\footnote{It is defined as
+  \(R_{adj}^2 = 1- \frac{\text{RSS}/(n-p-1)}{\text{TSS}/(n-1)} = 1- \frac{\text{RSS}}{\text{TSS}}\times\frac{n-1}{n-p-1}\)}
 takes the number of input factors into account. It penalizes too many
 input factors and favors parsimonious models.
 
 The adjusted \(R_{adj}^2\) is sensitive to the amount of noise in the
 data. As such, only compare this indicator of models for the same
 dataset than comparing it across different datasets.
+
+
+
+
+
+
+\begin{figure}[h!]
+
+{\centering \includegraphics[width=0.7\linewidth]{img/R2vsAdjR2} 
+
+}
+
+\caption{Comparison of \(R^2\) and \(R^2_{\text{adj}}\) for
+\(n=200\) and \(p\) ranging from \(1\) to \(198\). \(M=100\) datasets
+were simulated with \textbf{only the first two} predictors being
+significant. The thicker curves are the mean of each color's curves.}\label{fig:R2}
+\end{figure}
+
+Figure \ref{fig:R2} contains the results of an experiment where 100
+datasets were simulated with \textbf{only the first two} predictors
+being significant. As you can see \(R^2\) increases linearly with the
+number of predictors considered, although only the first two ones were
+important! On the contrary, \(R^2_\text{adj}\) only increases in the
+first two variables and then is flat on average, but it has a huge
+variability when \(p\) approaches \(n-2\). The experiment evidences that
+\textbf{\(R^2_\text{adj}\) is more adequate than the \(R^2\) for
+evaluating the fit of a multiple linear regression}.
 
 \subsection*{Have a look at the residuals or error
 terms}\label{have-a-look-at-the-residuals-or-error-terms}

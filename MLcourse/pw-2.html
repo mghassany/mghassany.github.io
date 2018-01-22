@@ -319,7 +319,7 @@ Submit a report following the instructions above. In the first exercise you must
 <p><strong>12</strong>. To see if there is correlated variables print the correlation matrix using the <code>cor()</code> function (round the correlations with 2 digits).</p>
 <p><strong>13</strong>. Visualize the correlations using the <code>corrplot</code> package. To do so, install the <code>corrplot</code> package, load it, then use the function <code>corrplot.mixed()</code>. See this <a href="https://cran.r-project.org/web/packages/corrplot/vignettes/corrplot-intro.html">link</a> for examples and to understand how to use it.</p>
 <p><strong>14</strong>. What is the correlation between <code>tax</code> and <code>rad</code>?</p>
-<p><strong>15</strong>. Run the model again without <code>rad</code>. What happens to the <span class="math inline">\(R^2\)</span> ? and for the F-statistic?</p>
+<p><strong>15</strong>. Run the model again without <code>tax</code>. What happens to the <span class="math inline">\(R^2\)</span> ? and for the F-statistic?</p>
 <div class="rmdinsight">
 <p>
 Of course <span class="math inline"><em>R</em><sup>2</sup></span> should go a little lower because we deleted one of the variables. But check for the model significance (F-statistic) gets higher, which means the p-values gets lower and thus the model is more significant without <code>rad</code>.
@@ -327,25 +327,24 @@ Of course <span class="math inline"><em>R</em><sup>2</sup></span> should go a li
 <!-- **Extra**: Re run the model but delete `tax` instead of `rad`. -->
 </div>
 <p><strong>16</strong>. Calculate the mean squared error (MSE) for the last model.</p>
-<p><strong>17</strong>. Rerun the model but delete <code>tax</code> instead of <code>rad</code> and compare it with the previous model.</p>
 <p><strong>Anova</strong></p>
 <p>Next we will apply an analysis of variances (ANOVA) in order to test if there is a significant difference of means between two groups <span class="math inline">\(i\)</span> and <span class="math inline">\(j\)</span> (Consider group <span class="math inline">\(i\)</span> is the suburbs bounding the river and <span class="math inline">\(j\)</span> the suburbs which not). The hypotheses are</p>
 <p><span class="math display">\[ H_0 : \mu_i = \mu_j \]</span></p>
 <p><span class="math display">\[ H_1 : \mu_i \neq \mu_j \]</span></p>
 <p>Where <span class="math inline">\(\mu_i\)</span> is the mean of <code>medv</code> in group <span class="math inline">\(i\)</span>.</p>
-<p><strong>18</strong>. How many of the suburbs in this data set bound the Charles river?</p>
-<p><strong>19</strong>. Create Boxplots of the median value of houses with respect to the variable <code>chas</code>. Do we observe some difference between the median value of houses with respect to the neighborhood to Charles River?</p>
-<p><strong>20</strong>. Calculate <span class="math inline">\(\mu_i\)</span> and <span class="math inline">\(\mu_j\)</span> (in one line using the function <code>aggregate()</code>).</p>
-<p><strong>21</strong>. Apply an ANOVA test of <code>medv</code> whith respect to <code>chas</code> (use the function <code>aov()</code>). Print the result and the summary of it. what do you conclude ?</p>
+<p><strong>17</strong>. How many of the suburbs in this data set bound the Charles river?</p>
+<p><strong>18</strong>. Create Boxplots of the median value of houses with respect to the variable <code>chas</code>. Do we observe some difference between the median value of houses with respect to the neighborhood to Charles River?</p>
+<p><strong>19</strong>. Calculate <span class="math inline">\(\mu_i\)</span> and <span class="math inline">\(\mu_j\)</span> (in one line using the function <code>aggregate()</code>).</p>
+<p><strong>20</strong>. Apply an ANOVA test of <code>medv</code> whith respect to <code>chas</code> (use the function <code>aov()</code>). Print the result and the summary of it. what do you conclude ?</p>
 <p><strong>Qualitative predictors</strong></p>
 <p> <i class="fa fa-exclamation-triangle " aria-hidden="true"></i> <strong>Before starting the next question, please read section <a href="multiple-linear-regression.html#other-consid">2.3.1</a> and Appendix <a href="use-qual.html#use-qual">C</a> about using qualitative predictors in regression</strong>.</p>
-<p><strong>22</strong>. In the Boston data set there is a categorical variable <code>chas</code> which corresponds to Charles River (= 1 if a suburb bounds the river; 0 otherwise). Use command <code>str()</code> to see how this variable is present in the dataset. Notice that it is not codified as a factor, but it has values 0 or 1, so it is already dummyfied.</p>
-<p><strong>23</strong>. Fit a new model where the predictors are the Charles River and the Crime Rate. Interpret the coefficients of this model and conclude if the presence of the river adds a valuable information for explaining the house price.</p>
-<p><strong>24</strong>. Is <code>chas</code> is significant as well in the presence of more predictors?</p>
+<p><strong>21</strong>. In the Boston data set there is a categorical variable <code>chas</code> which corresponds to Charles River (= 1 if a suburb bounds the river; 0 otherwise). Use command <code>str()</code> to see how this variable is present in the dataset. Notice that it is not codified as a factor, but it has values 0 or 1, so it is already dummyfied.</p>
+<p><strong>22</strong>. Fit a new model where the predictors are the Charles River and the Crime Rate. Interpret the coefficients of this model and conclude if the presence of the river adds a valuable information for explaining the house price.</p>
+<p><strong>23</strong>. Is <code>chas</code> is significant as well in the presence of more predictors?</p>
 <p><strong>Interaction terms</strong></p>
 <p>As you saw in section <a href="multiple-linear-regression.html#other-consid">2.3.1</a> we may sometimes try models with intercation terms. Let’s say we have two predictors <span class="math inline">\(X_1\)</span> and <span class="math inline">\(X_2\)</span>, the way of adding these interactions in <code>lm</code> is through <code>:</code> and <code>*</code>. The operator <code>:</code> only adds the term <span class="math inline">\(X_1X_2\)</span> and <code>*</code> adds <span class="math inline">\(X_1\)</span>, <span class="math inline">\(X_2\)</span>, and <span class="math inline">\(X_1X_2\)</span>.</p>
-<p><strong>25</strong>. Fit a model whith first order interaction term where predictors are <code>lstat</code> and <code>age</code>. Print its summary.</p>
-<p><strong>26</strong>. Fit a model with all the first order interaction terms.</p>
+<p><strong>24</strong>. Fit a model whith first order interaction term where predictors are <code>lstat</code> and <code>age</code>. Print its summary.</p>
+<p><strong>25</strong>. Fit a model with all the first order interaction terms.</p>
 <p class="text-right">
 ◼
 </p>

@@ -2961,6 +2961,252 @@ predictors are \texttt{lstat} and \texttt{age}. Print its summary.
 
 ◼
 
+\part{Classification}\label{part-classification}
+
+\chapter{Logistic Regression}\label{logistic-regression}
+
+\section{Introduction}\label{introduction-1}
+
+In the previous chapters we discussed the linear regression model, which
+assumes that the response variable \(Y\) is quantitative. But in many
+situations, the response variable is instead qualitative (categorical).
+For example, eye color is qualitative, taking on values blue, brown, or
+green.
+
+The process for predicting qualitative responses is known as
+\textbf{\emph{classification}}.
+
+Given a feature vector \(X\) and a qualitative response \(Y\) taking
+values in the set \(\mathcal{C}\), the classification task is to build a
+function \(C(X)\) that takes as input the feature vector \(X\) and
+predicts its value for \(Y\); i.e. \(C(X) \in \mathcal{C}\). We are
+often more interested in estimating the probabilities that \(X\) belongs
+to each category in \(\mathcal{C}\).
+
+\begin{quote}
+If \(c\) is a category (\(c \in \mathcal{C}\)), by the probability that
+\(X\) belongs to \(c\) we mean \(p(X \in c) = \mathbb{P}(Y=c|X)\).
+\end{quote}
+
+In the binomial or binary logistic regression, the outcome can have only
+two possible types of values (e.g. ``Yes'' or ``No'', ``Success'' or
+``Failure''). Multinomial logistic refers to cases where the outcome can
+have three or more possible types of values (e.g., ``good'' vs. ``very
+good'' vs. ``best''). Generally outcome is coded as ``0'' and ``1'' in
+binary logistic regression.
+
+\section{Logistic Regression}\label{logistic-regression-1}
+
+Consider a data set where the response falls into one of two categories,
+Yes or No. Rather than modeling the response \(Y\) directly, logistic
+regression models the \emph{probability} that \(Y\) belongs to a
+particular category.
+
+\subsection{The Logistic Model}\label{the-logistic-model}
+
+Let us suppose the response has two categories and we use the generic
+0/1 coding for the response. How should we model the relationship
+between \(p(X) = \mathbb{P}(Y = 1|X)\) and \(X\)?
+
+The simplest situation is when \(Y\) is \emph{binary}: it can only take
+two values, codified for convenience as \(0\) (success) and \(1\)
+(failure).
+
+More formally, a binary variable is known as a \emph{Bernoulli
+variable}, which is the simplest non-trivial random variable. We say
+that \(Y\sim\mathrm{Ber}(p)\), \(0\leq p\leq1\), if \[
+Y=\left\{\begin{array}{ll}1,&\text{with probability }p,\\0,&\text{with probability }1-p,\end{array}\right.
+\] or, equivalently, if \(\mathbb{P}[Y=1]=p\) and
+\(\mathbb{P}[Y=0]=1-p\), which can be written compactly as
+\[\begin{aligned}
+\mathbb{P}[Y=y]=p^y(1-p)^{1-y},\quad y=0,1.
+\end{aligned}\] Recall that a \emph{binomial variable with size \(n\)
+and probability \(p\)}, \(\mathrm{Bi}(n,p)\), was obtained by adding
+\(n\) independent \(\mathrm{Ber}(p)\) (so \(\mathrm{Ber}(p)\) is the
+same as \(\mathrm{Bi}(1,p)\)).
+
+\begin{rmdinsight}
+A Bernoulli variable \(Y\) is completely determined by \(p\). \textbf{So
+its mean and variance}:
+
+\begin{itemize}
+\tightlist
+\item
+  \(\mathbb{E}[Y]=p\times1+(1-p)\times0=p\)
+\item
+  \(\mathbb{V}\mathrm{ar}[Y]=p(1-p)\).
+\end{itemize}
+
+In particular, recall that \(\mathbb{P}[Y=1]=\mathbb{E}[Y]=p\).
+\end{rmdinsight}
+
+Assume then that \(Y\) is a binary/Bernoulli variable and that \(X\) are
+predictors associated to them (no particular assumptions on them). The
+purpose in \emph{logistic regression} is to estimate \[
+p(x)=\mathbb{P}[Y=1|X=x]=\mathbb{E}[Y|X=x],
+\] this is, how the probability of \(Y=1\) is changing according to
+particular values, denoted by \(x\), of the random variables \(X\).
+
+\emph{Why not linear regression?} A tempting possibility is to consider
+the model \[
+p(x)=\beta_0+\beta_1 x.
+\] However, such a model will run into problems inevitably: negative
+probabilities and probabilities larger than one (\(p(x) < 0\) for some
+values of \(X\) and \(p(X) > 1\) for others). To avoid this problem, the
+solution is to consider a function to encapsulate the value of
+\(z=\beta_0+\beta_1 x\), in \(\mathbb{R}\), and map it to \([0,1]\).
+There are several alternatives to do so, based on distribution functions
+\(F:\mathbb{R}\longrightarrow[0,1]\) that deliver \(y=F(z)\in[0,1]\).
+Many functions meet this description. In logistic regression, we use the
+\emph{logistic function},
+
+\[ p(X) = \frac{e^{\beta_0 + \beta_1 X}}{1+e^{\beta_0 + \beta_1 X}} \]
+
+\begin{rmdinsight}
+\begin{itemize}
+\tightlist
+\item
+  No matter what values \(\beta_0\), \(\beta_1\) or \(X\) take, \(p(X)\)
+  will have values between 0 and 1.
+\item
+  The logistic function will always produce an \emph{S-shaped} curve.
+\item
+  The logistic \emph{distribution} function is:
+  \[F(z)=\mathrm{logistic}(z)=\frac{e^z}{1+e^z}=\frac{1}{1+e^{-z}}.\]
+\end{itemize}
+\end{rmdinsight}
+
+After a bit of manipulation of the previous equation, we find that
+
+\[ \frac{p(X)}{1-p(X)} = e^{\beta_0 + \beta_1 X} \]
+
+\begin{rmdinsight}
+The quantity \(p(X)/[1−p(X)]\) is called the \emph{odds}, and can take
+on any value between \(0\) and \(\infty\).
+\end{rmdinsight}
+
+By taking the logarithm of both sides of the equation, we arrive at
+
+\[ \log( \frac{p(X)}{1-p(X)} ) = \beta_0 + \beta_1 X \]
+
+\begin{rmdinsight}
+The left-hand side is called the \emph{log-odds} or \emph{logit}. We see
+that the logistic regression model has a logit that is linear in X.
+\end{rmdinsight}
+
+\subsection{Estimating the Regression
+Coefficients}\label{estimating-the-regression-coefficients-1}
+
+We estimate \(\beta_0\) and \(\beta_1\) using the \emph{Maximum
+Likelihood Estimation} method (MLE). The basic intuition behind using
+maximum likelihood to fit a logistic regression model is as follows: we
+seek estimates for \(\beta_0\) and \(\beta_1\) such that the predicted
+probability \(\hat{p}(x_i)\) of the response for each individual,
+corresponds as closely as possible to the individual's observed response
+status (recall that the response \(Y\) is categorical). The
+\emph{likelihood function} is
+
+\[ l(\beta_0,\beta_1) = \prod_{i=1}^n p(x_i)^{Y_i}(1-p(x_i))^{1-Y_i}. \]
+
+This likelihood is \textbf{the probability of the data based on the
+model}. It gives the probability of the observed zeros and ones in the
+data. The estimates \(\hat{\beta_0}\) and \(\hat{\beta_1}\) are chosen
+to \emph{maximize} this likelihood function. The interpretation of the
+likelihood function is the following:
+
+\begin{itemize}
+\tightlist
+\item
+  \(\prod_{i=1}^n\) appears because the sample elements are assumed to
+  be independent and we are computing the probability of observing the
+  whole sample \((x_{1},y_1),\ldots,(x_{n},y_n)\). This probability is
+  equal to the product of the \emph{probabilities of observing each
+  \((x_{i},y_i)\)}.
+\item
+  \(p(x_i)^{Y_i}(1-p(x_i))^{1-Y_i}\) is the probability of observing
+  \((x_{i},Y_i)\).
+\end{itemize}
+
+\begin{rmdinsight}
+In the linear regression setting, the least squares approach is a
+special case of maximum likelihood.
+\end{rmdinsight}
+
+We will not give mathematical details about the maximum likelihood and
+how to estimate the parameters. We will use R to fit the logistic
+regression models (using \texttt{glm} function).
+
+Use the following application (also available here) to see how the
+log-likelihood changes with respect to the values for
+\((\beta_0,\beta_1)\) in three data patterns. The logistic regression
+fit and its dependence on \(\beta_0\) (horizontal displacement) and
+\(\beta_1\) (steepness of the curve). Recall the effect of the sign of
+\(\beta_1\) in the curve: if positive, the logistic curve has an \(s\)
+form; if negative, the form is a reflected \(s\).
+
+Note that the \textbf{animation} will not be displayed the first time it
+is browsed (The reason is because it is hosted at \texttt{https}
+websites with auto-signed SSL certificates). \textbf{To see it}, click
+on the link above. You will get a warning from your browser saying that
+\emph{``Your connection is not private''}. Click in \emph{``Advanced''}
+and \textbf{allow an exception} in your browser. The next time the
+animation will show up correctly.
+
+\subsection{Prediction}\label{prediction-1}
+
+\textbf{Example}
+
+\begin{longtable}[]{@{}lllll@{}}
+\toprule
+& Coefficient & Std. error & \(Z\)-statistic & p-value\tabularnewline
+\midrule
+\endhead
+Constant & -10.6513 & 0.3612 & -29.5 & \textless{}0.0001\tabularnewline
+\(X\) & 0.0055 & 0.0002 & 24.9 & \textless{}0.0001\tabularnewline
+\bottomrule
+\end{longtable}
+
+In this example, \(\hat{\beta_0} = -10.6513\) and
+\(\hat{\beta_1} = 0.0055\). It produces the blue curve that separates
+that data in the following figure,
+
+\begin{figure}
+\centering
+\includegraphics{img/lr_example.png}
+\caption{}
+\end{figure}
+
+As for prediction, we use the model built with the estimated parameters
+to predict probabilities. For example,
+
+If \(X=1000\),
+
+\[ \hat{p}(X) = \frac{e^{\hat{\beta_0} + \hat{\beta_1} X}}{1+e^{\hat{\beta_0} + \hat{\beta_1} X}} = \frac{e^{-10.6513+0.0055 \times 1000}}{1+e^{-10.6513+0.0055 \times 1000}} = 0.006\]
+
+If \(X=2000\),
+
+\[ \hat{p}(X) = \frac{e^{\hat{\beta_0} + \hat{\beta_1} X}}{1+e^{\hat{\beta_0} + \hat{\beta_1} X}} = \frac{e^{-10.6513+0.0055 \times 2000}}{1+e^{-10.6513+0.0055 \times 2000}} = 0.586\]
+
+\section{Multiple Logistic
+Regression}\label{multiple-logistic-regression}
+
+We now consider the problem of predicting a binary response using
+multiple predictors. By analogy with the extension from simple to
+multiple linear regression in the previous chapters, we can generalize
+the simple logistic regression equation as follows:
+
+\[ \log( \frac{p(X)}{1-p(X)} ) = \beta_0 + \beta_1 X_1 +  \ldots + \beta_p X_p\]
+
+where \(X=(X_1,\ldots,X_p)\) are \(p\) predictors. The equation above
+can be rewritten as
+
+\[ p(X) = \frac{e^{\beta_0 + \beta_1 X_1 +  \ldots + \beta_p X_p}}{1+e^{\beta_0 + \beta_1 X_1 +  \ldots + \beta_p X_p}} \]
+
+Just as in the simple logistic regression we use the maximum likelihood
+method to estimate \(\beta_0,\beta_1,\ldots,\beta_p\).
+
+◼
+
 \appendix \addcontentsline{toc}{chapter}{\appendixname}
 
 

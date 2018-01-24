@@ -32,8 +32,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black">
   
   
-<link rel="prev" href="app-ht.html">
-
+<link rel="prev" href="pw-2.html">
+<link rel="next" href="app-introRStudio.html">
 <script src="book_assets/jquery-2.2.3/jquery.min.js"></script>
 <link href="book_assets/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="book_assets/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
@@ -206,64 +206,156 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="use-qual" class="section level1">
-<h1><span class="header-section-number">C</span> Use of qualitative predictors</h1>
-<p>An important situation is how to deal with <em>qualitative</em>, and not <em>quantitative</em>, predictors when we fit a regression model. Qualitative predictors, also known as <em>categorical</em> variables or, in <code>R</code>’s terminology, <em>factors</em>, are very common, for example in social sciences. Dealing with them requires some care and proper understanding of how these variables are represented.</p>
-<p>The simplest case is the situation with <strong>two levels</strong>. A binary variable <span class="math inline">\(C\)</span> with two levels (for example, <em>a</em> and <em>b</em>) can be represented as <span class="math display">\[
-D=\left\{\begin{array}{ll}
-1,&amp;\text{if }C=b,\\
-0,&amp;\text{if }C=a.
-\end{array}\right.
-\]</span> <span class="math inline">\(D\)</span> now is a <em>dummy variable</em>: it codifies with zeros and ones the two possible levels of the categorical variable. An example of <span class="math inline">\(C\)</span> could be <em>gender</em>, which has levels <em>male</em> and <em>female</em>. The dummy variable associated is <span class="math inline">\(D=0\)</span> if the gender is male and <span class="math inline">\(D=1\)</span> if the gender is female.</p>
-<p>The advantage of this <em>dummification</em> is its interpretability in regression models. Since level <em>a</em> corresponds to <span class="math inline">\(0\)</span>, it can be seen as the <em>reference level</em> to which level <em>b</em> is compared. This is the key point in dummification: <strong>set one level as the reference and codify the rest as departures from it</strong> with ones.</p>
-<p><code>R</code> does the dummification automatically (translates a categorical variable <span class="math inline">\(C\)</span> into its dummy version <span class="math inline">\(D\)</span>) if it detects that a factor variable is present in the regression model.</p>
-<p>Let’s see now the case with <strong>more than two levels</strong>, for example, a categorical variable <span class="math inline">\(C\)</span> with levels <em>a</em>, <em>b</em>, and <em>c</em>. If we take <em>a</em> as the reference level, this variable can be represented by <em>two</em> dummy variables: <span class="math display">\[
-D_1=\left\{\begin{array}{ll}1,&amp;\text{if }C=b,\\0,&amp; \text{if }C\neq b\end{array}\right.
-\]</span> and <span class="math display">\[
-D_2=\left\{\begin{array}{ll}1,&amp;\text{if }C=c,\\0,&amp; \text{if }C\neq c.\end{array}\right.
-\]</span> Then <span class="math inline">\(C=a\)</span> is represented by <span class="math inline">\(D_1=D_2=0\)</span>, <span class="math inline">\(C=b\)</span> is represented by <span class="math inline">\(D_1=1,D_2=0\)</span> and <span class="math inline">\(C=c\)</span> is represented by <span class="math inline">\(D_1=0,D_2=1\)</span>.</p>
-<p>In general, if we have a categorical variable with <span class="math inline">\(J\)</span> levels, then the number of dummy variables required is <span class="math inline">\(J-1\)</span>. Again, <code>R</code> does the dummification automatically for you if it detects that a factor variable is present in the regression model.</p>
+<div id="logistic-regression" class="section level1">
+<h1><span class="header-section-number">3</span> Logistic Regression</h1>
+<div id="introduction-1" class="section level2">
+<h2><span class="header-section-number">3.1</span> Introduction</h2>
+<p>In the previous chapters we discussed the linear regression model, which assumes that the response variable <span class="math inline">\(Y\)</span> is quantitative. But in many situations, the response variable is instead qualitative (categorical). For example, eye color is qualitative, taking on values blue, brown, or green.</p>
+<p>The process for predicting qualitative responses is known as <strong><em>classification</em></strong>.</p>
+<p>Given a feature vector <span class="math inline">\(X\)</span> and a qualitative response <span class="math inline">\(Y\)</span> taking values in the set <span class="math inline">\(\mathcal{C}\)</span>, the classification task is to build a function <span class="math inline">\(C(X)\)</span> that takes as input the feature vector <span class="math inline">\(X\)</span> and predicts its value for <span class="math inline">\(Y\)</span>; i.e. <span class="math inline">\(C(X) \in \mathcal{C}\)</span>. We are often more interested in estimating the probabilities that <span class="math inline">\(X\)</span> belongs to each category in <span class="math inline">\(\mathcal{C}\)</span>.</p>
+<blockquote>
+<p>If <span class="math inline">\(c\)</span> is a category (<span class="math inline">\(c \in \mathcal{C}\)</span>), by the probability that <span class="math inline">\(X\)</span> belongs to <span class="math inline">\(c\)</span> we mean <span class="math inline">\(p(X \in c) = \mathbb{P}(Y=c|X)\)</span>.</p>
+</blockquote>
+<p>In the binomial or binary logistic regression, the outcome can have only two possible types of values (e.g. “Yes” or “No”, “Success” or “Failure”). Multinomial logistic refers to cases where the outcome can have three or more possible types of values (e.g., “good” vs. “very good” vs. “best”). Generally outcome is coded as “0” and “1” in binary logistic regression.</p>
+</div>
+<div id="logistic-regression-1" class="section level2">
+<h2><span class="header-section-number">3.2</span> Logistic Regression</h2>
+<p>Consider a data set where the response falls into one of two categories, Yes or No. Rather than modeling the response <span class="math inline">\(Y\)</span> directly, logistic regression models the <em>probability</em> that <span class="math inline">\(Y\)</span> belongs to a particular category.</p>
+<div id="the-logistic-model" class="section level3">
+<h3><span class="header-section-number">3.2.1</span> The Logistic Model</h3>
+<p>Let us suppose the response has two categories and we use the generic 0/1 coding for the response. How should we model the relationship between <span class="math inline">\(p(X) = \mathbb{P}(Y = 1|X)\)</span> and <span class="math inline">\(X\)</span>?</p>
+<p>The simplest situation is when <span class="math inline">\(Y\)</span> is <em>binary</em>: it can only take two values, codified for convenience as <span class="math inline">\(0\)</span> (success) and <span class="math inline">\(1\)</span> (failure).</p>
+<p>More formally, a binary variable is known as a <em>Bernoulli variable</em>, which is the simplest non-trivial random variable. We say that <span class="math inline">\(Y\sim\mathrm{Ber}(p)\)</span>, <span class="math inline">\(0\leq p\leq1\)</span>, if <span class="math display">\[
+Y=\left\{\begin{array}{ll}1,&amp;\text{with probability }p,\\0,&amp;\text{with probability }1-p,\end{array}\right.
+\]</span> or, equivalently, if <span class="math inline">\(\mathbb{P}[Y=1]=p\)</span> and <span class="math inline">\(\mathbb{P}[Y=0]=1-p\)</span>, which can be written compactly as <span class="math display">\[\begin{aligned}
+\mathbb{P}[Y=y]=p^y(1-p)^{1-y},\quad y=0,1.
+\end{aligned}\]</span> Recall that a <em>binomial variable with size <span class="math inline">\(n\)</span> and probability <span class="math inline">\(p\)</span></em>, <span class="math inline">\(\mathrm{Bi}(n,p)\)</span>, was obtained by adding <span class="math inline">\(n\)</span> independent <span class="math inline">\(\mathrm{Ber}(p)\)</span> (so <span class="math inline">\(\mathrm{Ber}(p)\)</span> is the same as <span class="math inline">\(\mathrm{Bi}(1,p)\)</span>).</p>
 <div class="rmdinsight">
 <p>
-It may happen that one dummy variable, say <span class="math inline"><em>D</em><sub>1</sub></span> is not significant, while other dummy variables, say <span class="math inline"><em>D</em><sub>2</sub></span>, are significant.
-</p>
-</div>
-<div class="rmdcaution">
-<p>
-<strong>Do not codify a categorical variable as a discrete variable</strong>. This constitutes a major methodological fail that will flaw the subsequent statistical analysis.
-</p>
-<p>
-For example if you have a categorical variable <code>party</code> with levels <code>partyA</code>, <code>partyB</code>, and <code>partyC</code>, do not encode it as a discrete variable taking the values <code>1</code>, <code>2</code>, and <code>3</code>, respectively. If you do so:
+A Bernoulli variable <span class="math inline"><em>Y</em></span> is completely determined by <span class="math inline"><em>p</em></span>. <strong>So its mean and variance</strong>:
 </p>
 <ul>
 <li>
-You assume implicitly an order in the levels of <code>party</code>, since <code>partyA</code> is closer to <code>partyB</code> than to <code>partyC</code>.
+<span class="math inline">𝔼[<em>Y</em>]=<em>p</em> × 1 + (1 − <em>p</em>)×0 = <em>p</em></span>
 </li>
 <li>
-You assume implicitly that <code>partyC</code> is three times larger than <code>partyA</code>.
-</li>
-<li>
-The codification is completely arbitrary – why not considering <code>1</code>, <code>1.5</code>, and <code>1.75</code> instead of?
+<span class="math inline">𝕍<em>a</em><em>r</em>[<em>Y</em>]=<em>p</em>(1 − <em>p</em>)</span>.
 </li>
 </ul>
 <p>
-The right way of dealing with categorical variables in regression is to set the variable as a factor and let <code>R</code> do internally the dummification.
+In particular, recall that <span class="math inline">ℙ[<em>Y</em> = 1]=𝔼[<em>Y</em>]=<em>p</em></span>.
 </p>
 </div>
+<p>Assume then that <span class="math inline">\(Y\)</span> is a binary/Bernoulli variable and that <span class="math inline">\(X\)</span> are predictors associated to them (no particular assumptions on them). The purpose in <em>logistic regression</em> is to estimate <span class="math display">\[
+p(x)=\mathbb{P}[Y=1|X=x]=\mathbb{E}[Y|X=x],
+\]</span> this is, how the probability of <span class="math inline">\(Y=1\)</span> is changing according to particular values, denoted by <span class="math inline">\(x\)</span>, of the random variables <span class="math inline">\(X\)</span>.</p>
+<p><em>Why not linear regression?</em> A tempting possibility is to consider the model <span class="math display">\[
+p(x)=\beta_0+\beta_1 x.
+\]</span> However, such a model will run into problems inevitably: negative probabilities and probabilities larger than one (<span class="math inline">\(p(x) &lt; 0\)</span> for some values of <span class="math inline">\(X\)</span> and <span class="math inline">\(p(X) &gt; 1\)</span> for others). To avoid this problem, the solution is to consider a function to encapsulate the value of <span class="math inline">\(z=\beta_0+\beta_1 x\)</span>, in <span class="math inline">\(\mathbb{R}\)</span>, and map it to <span class="math inline">\([0,1]\)</span>. There are several alternatives to do so, based on distribution functions <span class="math inline">\(F:\mathbb{R}\longrightarrow[0,1]\)</span> that deliver <span class="math inline">\(y=F(z)\in[0,1]\)</span>. Many functions meet this description. In logistic regression, we use the <em>logistic function</em>,</p>
+<p><span class="math display">\[ p(X) = \frac{e^{\beta_0 + \beta_1 X}}{1+e^{\beta_0 + \beta_1 X}} \]</span></p>
+<div class="rmdinsight">
+<ul>
+<li>
+No matter what values <span class="math inline"><em>β</em><sub>0</sub></span>, <span class="math inline"><em>β</em><sub>1</sub></span> or <span class="math inline"><em>X</em></span> take, <span class="math inline"><em>p</em>(<em>X</em>)</span> will have values between 0 and 1.
+</li>
+<li>
+The logistic function will always produce an <em>S-shaped</em> curve.
+</li>
+<li>
+The logistic <em>distribution</em> function is: <br /><span class="math display"><span class="math display">\[F(z)=\mathrm{logistic}(z)=\frac{e^z}{1+e^z}=\frac{1}{1+e^{-z}}.\]</span></span><br />
+</li>
+</ul>
+</div>
+<p>After a bit of manipulation of the previous equation, we find that</p>
+<p><span class="math display">\[ \frac{p(X)}{1-p(X)} = e^{\beta_0 + \beta_1 X} \]</span></p>
+<div class="rmdinsight">
+<p>
+The quantity <span class="math inline"><em>p</em>(<em>X</em>)/[1 − <em>p</em>(<em>X</em>)]</span> is called the <em>odds</em>, and can take on any value between <span class="math inline">0</span> and <span class="math inline">∞</span>.
+</p>
+</div>
+<p>By taking the logarithm of both sides of the equation, we arrive at</p>
+<p><span class="math display">\[ \log( \frac{p(X)}{1-p(X)} ) = \beta_0 + \beta_1 X \]</span></p>
+<div class="rmdinsight">
+<p>
+The left-hand side is called the <em>log-odds</em> or <em>logit</em>. We see that the logistic regression model has a logit that is linear in X.
+</p>
+</div>
+</div>
+<div id="estimating-the-regression-coefficients-1" class="section level3">
+<h3><span class="header-section-number">3.2.2</span> Estimating the Regression Coefficients</h3>
+<p>We estimate <span class="math inline">\(\beta_0\)</span> and <span class="math inline">\(\beta_1\)</span> using the <em>Maximum Likelihood Estimation</em> method (MLE). The basic intuition behind using maximum likelihood to fit a logistic regression model is as follows: we seek estimates for <span class="math inline">\(\beta_0\)</span> and <span class="math inline">\(\beta_1\)</span> such that the predicted probability <span class="math inline">\(\hat{p}(x_i)\)</span> of the response for each individual, corresponds as closely as possible to the individual’s observed response status (recall that the response <span class="math inline">\(Y\)</span> is categorical). The <em>likelihood function</em> is</p>
+<p><span class="math display">\[ l(\beta_0,\beta_1) = \prod_{i=1}^n p(x_i)^{Y_i}(1-p(x_i))^{1-Y_i}. \]</span></p>
+<p>This likelihood is <strong>the probability of the data based on the model</strong>. It gives the probability of the observed zeros and ones in the data. The estimates <span class="math inline">\(\hat{\beta_0}\)</span> and <span class="math inline">\(\hat{\beta_1}\)</span> are chosen to <em>maximize</em> this likelihood function. The interpretation of the likelihood function is the following:</p>
+<ul>
+<li><span class="math inline">\(\prod_{i=1}^n\)</span> appears because the sample elements are assumed to be independent and we are computing the probability of observing the whole sample <span class="math inline">\((x_{1},y_1),\ldots,(x_{n},y_n)\)</span>. This probability is equal to the product of the <em>probabilities of observing each <span class="math inline">\((x_{i},y_i)\)</span></em>.</li>
+<li><span class="math inline">\(p(x_i)^{Y_i}(1-p(x_i))^{1-Y_i}\)</span> is the probability of observing <span class="math inline">\((x_{i},Y_i)\)</span>.</li>
+</ul>
+<div class="rmdinsight">
+<p>
+In the linear regression setting, the least squares approach is a special case of maximum likelihood.
+</p>
+</div>
+<p>We will not give mathematical details about the maximum likelihood and how to estimate the parameters. We will use R to fit the logistic regression models (using <code>glm</code> function).</p>
+<p>Use the following application (also available <a href="https://ec2-35-177-34-200.eu-west-2.compute.amazonaws.com/log-maximum-likelihood/" target="_blank">here</a>) to see how the log-likelihood changes with respect to the values for <span class="math inline">\((\beta_0,\beta_1)\)</span> in three data patterns. The logistic regression fit and its dependence on <span class="math inline">\(\beta_0\)</span> (horizontal displacement) and <span class="math inline">\(\beta_1\)</span> (steepness of the curve). Recall the effect of the sign of <span class="math inline">\(\beta_1\)</span> in the curve: if positive, the logistic curve has an <span class="math inline">\(s\)</span> form; if negative, the form is a reflected <span class="math inline">\(s\)</span>.</p>
+<iframe src="https://ec2-35-177-34-200.eu-west-2.compute.amazonaws.com/log-maximum-likelihood/?showcase=0" width="90%" height="900px">
+</iframe>
+<p>Note that the <strong>animation</strong> will not be displayed the first time it is browsed (The reason is because it is hosted at <code>https</code> websites with auto-signed SSL certificates). <strong>To see it</strong>, click on the link above. You will get a warning from your browser saying that <em>“Your connection is not private”</em>. Click in <em>“Advanced”</em> and <strong>allow an exception</strong> in your browser. The next time the animation will show up correctly.</p>
+</div>
+<div id="prediction-1" class="section level3">
+<h3><span class="header-section-number">3.2.3</span> Prediction</h3>
+<p><strong>Example</strong></p>
+<table>
+<thead>
+<tr class="header">
+<th></th>
+<th>Coefficient</th>
+<th>Std. error</th>
+<th><span class="math inline">\(Z\)</span>-statistic</th>
+<th>p-value</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Constant</td>
+<td>-10.6513</td>
+<td>0.3612</td>
+<td>-29.5</td>
+<td>&lt;0.0001</td>
+</tr>
+<tr class="even">
+<td><span class="math inline">\(X\)</span></td>
+<td>0.0055</td>
+<td>0.0002</td>
+<td>24.9</td>
+<td>&lt;0.0001</td>
+</tr>
+</tbody>
+</table>
+<p>In this example, <span class="math inline">\(\hat{\beta_0} = -10.6513\)</span> and <span class="math inline">\(\hat{\beta_1} = 0.0055\)</span>. It produces the blue curve that separates that data in the following figure,</p>
+<div class="figure">
+<img src="img/lr_example.png" />
 
 </div>
+<p>As for prediction, we use the model built with the estimated parameters to predict probabilities. For example,</p>
+<p>If <span class="math inline">\(X=1000\)</span>,</p>
+<p><span class="math display">\[ \hat{p}(X) = \frac{e^{\hat{\beta_0} + \hat{\beta_1} X}}{1+e^{\hat{\beta_0} + \hat{\beta_1} X}} = \frac{e^{-10.6513+0.0055 \times 1000}}{1+e^{-10.6513+0.0055 \times 1000}} = 0.006\]</span></p>
+<p>If <span class="math inline">\(X=2000\)</span>,</p>
+<p><span class="math display">\[ \hat{p}(X) = \frac{e^{\hat{\beta_0} + \hat{\beta_1} X}}{1+e^{\hat{\beta_0} + \hat{\beta_1} X}} = \frac{e^{-10.6513+0.0055 \times 2000}}{1+e^{-10.6513+0.0055 \times 2000}} = 0.586\]</span></p>
+</div>
+</div>
+<div id="multiple-logistic-regression" class="section level2">
+<h2><span class="header-section-number">3.3</span> Multiple Logistic Regression</h2>
+<p>We now consider the problem of predicting a binary response using multiple predictors. By analogy with the extension from simple to multiple linear regression in the previous chapters, we can generalize the simple logistic regression equation as follows:</p>
+<p><span class="math display">\[ \log( \frac{p(X)}{1-p(X)} ) = \beta_0 + \beta_1 X_1 +  \ldots + \beta_p X_p\]</span></p>
+<p>where <span class="math inline">\(X=(X_1,\ldots,X_p)\)</span> are <span class="math inline">\(p\)</span> predictors. The equation above can be rewritten as</p>
+<p><span class="math display">\[ p(X) = \frac{e^{\beta_0 + \beta_1 X_1 +  \ldots + \beta_p X_p}}{1+e^{\beta_0 + \beta_1 X_1 +  \ldots + \beta_p X_p}} \]</span></p>
+<p>Just as in the simple logistic regression we use the maximum likelihood method to estimate <span class="math inline">\(\beta_0,\beta_1,\ldots,\beta_p\)</span>.</p>
+<p align="right">
+◼
+</p>
 
-
-
-
-
-
-
-
-
-
-
-
+</div>
+</div>
 
 
 
@@ -272,8 +364,8 @@ The right way of dealing with categorical variables in regression is to set the 
           </div>
         </div>
       </div>
-<a href="app-ht.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-
+<a href="pw-2.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="app-introRStudio.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="book_assets/gitbook-2.6.7/js/app.min.js"></script>

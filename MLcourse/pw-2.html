@@ -25,7 +25,7 @@
 <meta name="author" content="Mohamad Ghassany">
 
 
-<meta name="date" content="2018-01-22">
+<meta name="date" content="2018-01-24">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -332,19 +332,23 @@ Of course <span class="math inline"><em>R</em><sup>2</sup></span> should go a li
 <p><span class="math display">\[ H_0 : \mu_i = \mu_j \]</span></p>
 <p><span class="math display">\[ H_1 : \mu_i \neq \mu_j \]</span></p>
 <p>Where <span class="math inline">\(\mu_i\)</span> is the mean of <code>medv</code> in group <span class="math inline">\(i\)</span>.</p>
-<p><strong>17</strong>. How many of the suburbs in this data set bound the Charles river?</p>
+<p><strong>17</strong>. In the Boston data set there is a categorical variable <code>chas</code> which corresponds to Charles River (= 1 if a suburb bounds the river; 0 otherwise). Use command <code>str()</code> to see how this variable is present in the dataset. How many of the suburbs in this data set bound the Charles river?</p>
 <p><strong>18</strong>. Create Boxplots of the median value of houses with respect to the variable <code>chas</code>. Do we observe some difference between the median value of houses with respect to the neighborhood to Charles River?</p>
 <p><strong>19</strong>. Calculate <span class="math inline">\(\mu_i\)</span> and <span class="math inline">\(\mu_j\)</span> (in one line using the function <code>aggregate()</code>).</p>
 <p><strong>20</strong>. Apply an ANOVA test of <code>medv</code> whith respect to <code>chas</code> (use the function <code>aov()</code>). Print the result and the summary of it. what do you conclude ?</p>
 <p><strong>Qualitative predictors</strong></p>
 <p> <i class="fa fa-exclamation-triangle " aria-hidden="true"></i> <strong>Before starting the next question, please read section <a href="multiple-linear-regression.html#other-consid">2.3.1</a> and Appendix <a href="use-qual.html#use-qual">C</a> about using qualitative predictors in regression</strong>.</p>
-<p><strong>21</strong>. In the Boston data set there is a categorical variable <code>chas</code> which corresponds to Charles River (= 1 if a suburb bounds the river; 0 otherwise). Use command <code>str()</code> to see how this variable is present in the dataset. Notice that it is not codified as a factor, but it has values 0 or 1, so it is already dummyfied.</p>
-<p><strong>22</strong>. Fit a new model where the predictors are the Charles River and the Crime Rate. Interpret the coefficients of this model and conclude if the presence of the river adds a valuable information for explaining the house price.</p>
-<p><strong>23</strong>. Is <code>chas</code> is significant as well in the presence of more predictors?</p>
+<div class="rmdinsight">
+<p>
+We are going to use the categorical variable <code>chas</code> which corresponds to Charles River (= 1 if a suburb bounds the river; 0 otherwise). Using the <code>str()</code> command you can notice that this variable is not codified as a factor, but it has values 0 or 1, so it is already dummyfied.
+</p>
+</div>
+<p><strong>21</strong>. Fit a new model where the predictors are the Charles River and the Crime Rate. Interpret the coefficients of this model and conclude if the presence of the river adds a valuable information for explaining the house price.</p>
+<p><strong>22</strong>. Is <code>chas</code> is significant as well in the presence of more predictors?</p>
 <p><strong>Interaction terms</strong></p>
 <p>As you saw in section <a href="multiple-linear-regression.html#other-consid">2.3.1</a> we may sometimes try models with intercation terms. Let’s say we have two predictors <span class="math inline">\(X_1\)</span> and <span class="math inline">\(X_2\)</span>, the way of adding these interactions in <code>lm</code> is through <code>:</code> and <code>*</code>. The operator <code>:</code> only adds the term <span class="math inline">\(X_1X_2\)</span> and <code>*</code> adds <span class="math inline">\(X_1\)</span>, <span class="math inline">\(X_2\)</span>, and <span class="math inline">\(X_1X_2\)</span>.</p>
-<p><strong>24</strong>. Fit a model whith first order interaction term where predictors are <code>lstat</code> and <code>age</code>. Print its summary.</p>
-<p><strong>25</strong>. Fit a model with all the first order interaction terms.</p>
+<p><strong>23</strong>. Fit a model whith first order interaction term where predictors are <code>lstat</code> and <code>age</code>. Print its summary.</p>
+<p><strong>24</strong>. Fit a model with all the first order interaction terms.</p>
 <p class="text-right">
 ◼
 </p>

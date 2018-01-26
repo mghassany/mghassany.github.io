@@ -25,7 +25,7 @@
 <meta name="author" content="Mohamad Ghassany">
 
 
-<meta name="date" content="2018-01-24">
+<meta name="date" content="2018-01-26">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -184,6 +184,9 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="3.2.3" data-path="logistic-regression.html"><a href="logistic-regression.html#prediction-1"><i class="fa fa-check"></i><b>3.2.3</b> Prediction</a></li>
 </ul></li>
 <li class="chapter" data-level="3.3" data-path="logistic-regression.html"><a href="logistic-regression.html#multiple-logistic-regression"><i class="fa fa-check"></i><b>3.3</b> Multiple Logistic Regression</a></li>
+<li class="chapter" data-level="3.4" data-path="logistic-regression.html"><a href="logistic-regression.html#logreg-examps"><i class="fa fa-check"></i><b>3.4</b> Example</a><ul>
+<li class="chapter" data-level="3.4.1" data-path="logistic-regression.html"><a href="logistic-regression.html#logreg-examps-challenger"><i class="fa fa-check"></i><b>3.4.1</b> Case study: <em>The Challenger disaster</em></a></li>
+</ul></li>
 </ul></li>
 <li class="appendix"><span><b>Appendix</b></span></li>
 <li class="chapter" data-level="A" data-path="app-introRStudio.html"><a href="app-introRStudio.html"><i class="fa fa-check"></i><b>A</b> Introduction to <code>RStudio</code></a></li>
@@ -350,15 +353,330 @@ In the linear regression setting, the least squares approach is a special case o
 <p>where <span class="math inline">\(X=(X_1,\ldots,X_p)\)</span> are <span class="math inline">\(p\)</span> predictors. The equation above can be rewritten as</p>
 <p><span class="math display">\[ p(X) = \frac{e^{\beta_0 + \beta_1 X_1 +  \ldots + \beta_p X_p}}{1+e^{\beta_0 + \beta_1 X_1 +  \ldots + \beta_p X_p}} \]</span></p>
 <p>Just as in the simple logistic regression we use the maximum likelihood method to estimate <span class="math inline">\(\beta_0,\beta_1,\ldots,\beta_p\)</span>.</p>
+</div>
+<div id="logreg-examps" class="section level2">
+<h2><span class="header-section-number">3.4</span> Example</h2>
+<div id="logreg-examps-challenger" class="section level3">
+<h3><span class="header-section-number">3.4.1</span> Case study: <em>The Challenger disaster</em></h3>
+<p>The <em>Challenger</em> disaster occurred on the 28th January of 1986, when the NASA Space Shuttle orbiter <em>Challenger</em> broke apart and disintegrated at 73 seconds into its flight, leading to the deaths of its seven crew members. The accident deeply shocked the US society, in part due to the attention the mission had received because of the presence of Christa McAuliffe, who would have been the first astronaut-teacher. Because of this, NASA TV broadcasted live the launch to US public schools, which resulted in millions of school children witnessing the accident. The accident had serious consequences for the NASA credibility and resulted in an interruption of 32 months in the shuttle program. The Presidential <em>Rogers Commission</em> (formed by astronaut Neil A. Armstrong and Nobel laureate Richard P. Feynman, among others) was created to investigate the disaster.</p>
+<div class="figure" style="text-align: center"><span id="fig:video3"></span>
+<iframe src="https://www.youtube.com/embed/fSTrmJtHLFU" width="70%" height="400px">
+</iframe>
+<p class="caption">
+Figure 3.1: Challenger launch and posterior explosion, as broadcasted live by NBC in 28/01/1986.
+</p>
+</div>
+<p>The Rogers Commission elaborated a report <span class="citation">(Presidential Commission on the Space Shuttle Challenger Accident <a href="#ref-Roberts1986">1986</a>)</span> with all the findings. The commission determined that the disintegration began with the <strong>failure of an O-ring seal in the solid rocket motor due to the unusual cold temperatures (-0.6 Celsius degrees)</strong> during the launch. This failure produced a breach of burning gas through the solid rocket motor that compromised the whole shuttle structure, resulting in its disintegration due to the extreme aerodynamic forces. The <strong>problematic with O-rings was something known</strong>: the night before the launch, there was a three-hour teleconference between motor engineers and NASA management, discussing the effect of low temperature forecasted for the launch on the O-ring performance. The conclusion, influenced by Figure <a href="logistic-regression.html#fig:rogerts">3.2</a>a, was:</p>
+<blockquote>
+<p><strong>“Temperature data [are] not conclusive on predicting primary O-ring blowby.”</strong></p>
+</blockquote>
+
+<div class="figure" style="text-align: center"><span id="fig:rogerts"></span>
+<img src="img/challenger.png" alt="Number of incidents in the O-rings (filed joints) versus temperatures. Panel a includes only flights with incidents. Panel b contains all flights (with and without incidents)." width="70%" />
+<p class="caption">
+Figure 3.2: Number of incidents in the O-rings (filed joints) versus temperatures. Panel <em>a</em> includes only flights with incidents. Panel <em>b</em> contains all flights (with and without incidents).
+</p>
+</div>
+<p>The Rogers Commission noted a major flaw in Figure <a href="logistic-regression.html#fig:rogerts">3.2</a>a: the <strong>flights with zero incidents were excluded</strong> from the plot because <em>it was felt</em> that <strong>these flights did not contribute any information about the temperature effect</strong> (Figure <a href="logistic-regression.html#fig:rogerts">3.2</a>b). The Rogers Commission concluded:</p>
+<blockquote>
+<p><strong>“A careful analysis of the flight history of O-ring performance would have revealed the correlation of O-ring damage in low temperature”</strong>.</p>
+</blockquote>
+<p>The purpose of this case study, inspired by <span class="citation">Dalal, Fowlkes, and Hoadley (<a href="#ref-Dalal1989">1989</a>)</span>, is to quantify what was the influence of the temperature in the probability of having at least one incident related with the O-rings. Specifically, we want to address the following questions:</p>
+<ul>
+<li>Q1. <em>Is the temperature associated with O-ring incidents?</em></li>
+<li>Q2. <em>In which way was the temperature affecting the probability of O-ring incidents?</em></li>
+<li>Q3. <em>What was the predicted probability of an incidient in an O-ring for the temperature of the launch day?</em></li>
+</ul>
+<p>To try to answer these questions we have the <code>challenger</code> ( <a target="_blank" href="datasets/challenger.txt"> dataset <i class="fa fa-table" aria-hidden="true"></i></a>). The dataset contains (as shown in the table below) information regarding the state of the solid rocket boosters after launch<a href="#fn11" class="footnoteRef" id="fnref11"><sup>11</sup></a> for 23 flights. Each row has, among others, the following variables:</p>
+<ul>
+<li><code>fail.field</code>, <code>fail.nozzle</code>: binary variables indicating whether there was an incident with the O-rings in the field joints or in the nozzles of the solid rocket boosters. <code>1</code> codifies an incident and <code>0</code> its absence. On the analysis, we focus on the O-rings of the field joint as being the most determinants for the accident.</li>
+<li><code>temp</code>: temperature in the day of launch. Measured in Celsius degrees.</li>
+<li><code>pres.field</code>, <code>pres.nozzle</code>: leak-check pressure tests of the O-rings. These tests assured that the rings would seal the joint.</li>
+</ul>
+
+<table>
+<caption><span id="tab:unnamed-chunk-61">Table 3.1: </span>The <code>challenger</code> dataset.</caption>
+<thead>
+<tr class="header">
+<th align="left">flight</th>
+<th align="left">date</th>
+<th align="right">fail.field</th>
+<th align="right">fail.nozzle</th>
+<th align="right">temp</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">1</td>
+<td align="left">12/04/81</td>
+<td align="right">0</td>
+<td align="right">0</td>
+<td align="right">18.9</td>
+</tr>
+<tr class="even">
+<td align="left">2</td>
+<td align="left">12/11/81</td>
+<td align="right">1</td>
+<td align="right">0</td>
+<td align="right">21.1</td>
+</tr>
+<tr class="odd">
+<td align="left">3</td>
+<td align="left">22/03/82</td>
+<td align="right">0</td>
+<td align="right">0</td>
+<td align="right">20.6</td>
+</tr>
+<tr class="even">
+<td align="left">5</td>
+<td align="left">11/11/82</td>
+<td align="right">0</td>
+<td align="right">0</td>
+<td align="right">20.0</td>
+</tr>
+<tr class="odd">
+<td align="left">6</td>
+<td align="left">04/04/83</td>
+<td align="right">0</td>
+<td align="right">1</td>
+<td align="right">19.4</td>
+</tr>
+<tr class="even">
+<td align="left">7</td>
+<td align="left">18/06/83</td>
+<td align="right">0</td>
+<td align="right">0</td>
+<td align="right">22.2</td>
+</tr>
+<tr class="odd">
+<td align="left">8</td>
+<td align="left">30/08/83</td>
+<td align="right">0</td>
+<td align="right">0</td>
+<td align="right">22.8</td>
+</tr>
+<tr class="even">
+<td align="left">9</td>
+<td align="left">28/11/83</td>
+<td align="right">0</td>
+<td align="right">0</td>
+<td align="right">21.1</td>
+</tr>
+<tr class="odd">
+<td align="left">41-B</td>
+<td align="left">03/02/84</td>
+<td align="right">1</td>
+<td align="right">1</td>
+<td align="right">13.9</td>
+</tr>
+<tr class="even">
+<td align="left">41-C</td>
+<td align="left">06/04/84</td>
+<td align="right">1</td>
+<td align="right">1</td>
+<td align="right">17.2</td>
+</tr>
+<tr class="odd">
+<td align="left">41-D</td>
+<td align="left">30/08/84</td>
+<td align="right">1</td>
+<td align="right">1</td>
+<td align="right">21.1</td>
+</tr>
+<tr class="even">
+<td align="left">41-G</td>
+<td align="left">05/10/84</td>
+<td align="right">0</td>
+<td align="right">0</td>
+<td align="right">25.6</td>
+</tr>
+<tr class="odd">
+<td align="left">51-A</td>
+<td align="left">08/11/84</td>
+<td align="right">0</td>
+<td align="right">0</td>
+<td align="right">19.4</td>
+</tr>
+<tr class="even">
+<td align="left">51-C</td>
+<td align="left">24/01/85</td>
+<td align="right">1</td>
+<td align="right">1</td>
+<td align="right">11.7</td>
+</tr>
+<tr class="odd">
+<td align="left">51-D</td>
+<td align="left">12/04/85</td>
+<td align="right">0</td>
+<td align="right">1</td>
+<td align="right">19.4</td>
+</tr>
+<tr class="even">
+<td align="left">51-B</td>
+<td align="left">29/04/85</td>
+<td align="right">0</td>
+<td align="right">1</td>
+<td align="right">23.9</td>
+</tr>
+<tr class="odd">
+<td align="left">51-G</td>
+<td align="left">17/06/85</td>
+<td align="right">0</td>
+<td align="right">1</td>
+<td align="right">21.1</td>
+</tr>
+<tr class="even">
+<td align="left">51-F</td>
+<td align="left">29/07/85</td>
+<td align="right">0</td>
+<td align="right">0</td>
+<td align="right">27.2</td>
+</tr>
+<tr class="odd">
+<td align="left">51-I</td>
+<td align="left">27/08/85</td>
+<td align="right">0</td>
+<td align="right">0</td>
+<td align="right">24.4</td>
+</tr>
+<tr class="even">
+<td align="left">51-J</td>
+<td align="left">03/10/85</td>
+<td align="right">0</td>
+<td align="right">0</td>
+<td align="right">26.1</td>
+</tr>
+<tr class="odd">
+<td align="left">61-A</td>
+<td align="left">30/10/85</td>
+<td align="right">1</td>
+<td align="right">0</td>
+<td align="right">23.9</td>
+</tr>
+<tr class="even">
+<td align="left">61-B</td>
+<td align="left">26/11/85</td>
+<td align="right">0</td>
+<td align="right">1</td>
+<td align="right">24.4</td>
+</tr>
+<tr class="odd">
+<td align="left">61-C</td>
+<td align="left">12/01/86</td>
+<td align="right">1</td>
+<td align="right">1</td>
+<td align="right">14.4</td>
+</tr>
+</tbody>
+</table>
+<p>Let’s begin the analysis by replicating Figures <a href="logistic-regression.html#fig:rogerts">3.2</a>a and <a href="logistic-regression.html#fig:rogerts">3.2</a>b and checking that linear regression is not the right tool for answering Q1–Q3. For that, we make two scatterplots of <code>nfails.field</code> (number of total incidents in the field joints) in function of <code>temp</code>, the first one excluding the launches without incidents (<code>subset = nfails.field &gt; 0</code>) and the second one for all the data.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(car)
+<span class="kw">scatterplot</span>(nfails.field <span class="op">~</span><span class="st"> </span>temp, <span class="dt">reg.line =</span> lm, <span class="dt">smooth =</span> <span class="ot">FALSE</span>, <span class="dt">spread =</span> <span class="ot">FALSE</span>,
+            <span class="dt">boxplots =</span> <span class="ot">FALSE</span>, <span class="dt">data =</span> challenger, <span class="dt">subset =</span> nfails.field <span class="op">&gt;</span><span class="st"> </span><span class="dv">0</span>)</code></pre></div>
+<p><img src="Machine-Learning_files/figure-html/unnamed-chunk-62-1.png" width="70%" style="display: block; margin: auto;" /></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">scatterplot</span>(nfails.field <span class="op">~</span><span class="st"> </span>temp, <span class="dt">reg.line =</span> lm, <span class="dt">smooth =</span> <span class="ot">FALSE</span>, <span class="dt">spread =</span> <span class="ot">FALSE</span>,
+            <span class="dt">boxplots =</span> <span class="ot">FALSE</span>, <span class="dt">data =</span> challenger)</code></pre></div>
+<p><img src="Machine-Learning_files/figure-html/unnamed-chunk-62-2.png" width="70%" style="display: block; margin: auto;" /></p>
+<p>There is a fundamental problem in using linear regression for this data: <strong>the response is not continuous</strong>. As a consequence, there is no linearity and the errors around the mean are not normal (indeed, they are strongly non normal). We can check this with the corresponding diagnostic plots:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">mod &lt;-<span class="st"> </span><span class="kw">lm</span>(nfails.field <span class="op">~</span><span class="st"> </span>temp, <span class="dt">data =</span> challenger)
+<span class="kw">par</span>(<span class="dt">mfrow =</span> <span class="dv">1</span><span class="op">:</span><span class="dv">2</span>)
+<span class="kw">plot</span>(mod, <span class="dv">1</span>)
+<span class="kw">plot</span>(mod, <span class="dv">2</span>)</code></pre></div>
+<p><img src="Machine-Learning_files/figure-html/unnamed-chunk-63-1.png" width="70%" style="display: block; margin: auto;" /></p>
+<p>Although linear regression is not the adequate tool for this data, it is able to detect the obvious difference between the two plots:</p>
+<ol style="list-style-type: decimal">
+<li><strong>The trend for launches with incidents is flat, hence suggesting there is no dependence on the temperature</strong> (Figure <a href="logistic-regression.html#fig:rogerts">3.2</a>a). This was one of the arguments behind NASA’s decision of launching the rocket at a temperature of -0.6 degrees.</li>
+<li>However, <strong>the trend for <em>all</em> launches indicates a clear negative dependence between temperature and number of incidents!</strong> (Figure <a href="logistic-regression.html#fig:rogerts">3.2</a>b). Think about it in this way: the minimum temperature for a launch without incidents ever recorded was above 18 degrees, and the Challenger was launched at -0.6 without clearly knowing the effects of such low temperatures.</li>
+</ol>
+<p>Instead of trying to predict the number of incidents, we will concentrate on modeling the <em>probability of expecting at least one incident given the temperature</em>, a simpler but also revealing approach. In other words, we look to estimate the following curve: <span class="math display">\[
+p(x)=\mathbb{P}(\text{incident}=1|\text{temperature}=x)
+\]</span> from <code>fail.field</code> and <code>temp</code>. This probability can not be properly modeled as a linear function like <span class="math inline">\(\beta_0+\beta_1x\)</span>, since inevitably will fall outside <span class="math inline">\([0,1]\)</span> for some value of <span class="math inline">\(x\)</span> (some will have negative probabilities or probabilities larger than one). The technique that solves this problem is the <strong>logistic regression</strong>. The logistic model in this case is <span class="math display">\[
+\mathbb{P}(\text{incident}=1|\text{temperature}=x)=\text{logistic}\left(\beta_0+\beta_1x\right)=\frac{1}{1+e^{-(\beta_0+\beta_1x)}},
+\]</span> with <span class="math inline">\(\beta_0\)</span> and <span class="math inline">\(\beta_1\)</span> unknown.</p>
+<p>Let’s fit the model to the data by estimating <span class="math inline">\(\beta_0\)</span> and <span class="math inline">\(\beta_1\)</span>.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">nasa &lt;-<span class="st"> </span><span class="kw">glm</span>(fail.field <span class="op">~</span><span class="st"> </span>temp, <span class="dt">family =</span> <span class="st">&quot;binomial&quot;</span>, <span class="dt">data =</span> challenger)
+<span class="kw">summary</span>(nasa)
+<span class="co">#ans&gt; </span>
+<span class="co">#ans&gt; Call:</span>
+<span class="co">#ans&gt; glm(formula = fail.field ~ temp, family = &quot;binomial&quot;, data = challenger)</span>
+<span class="co">#ans&gt; </span>
+<span class="co">#ans&gt; Deviance Residuals: </span>
+<span class="co">#ans&gt;    Min      1Q  Median      3Q     Max  </span>
+<span class="co">#ans&gt; -1.057  -0.757  -0.382   0.457   2.220  </span>
+<span class="co">#ans&gt; </span>
+<span class="co">#ans&gt; Coefficients:</span>
+<span class="co">#ans&gt;             Estimate Std. Error z value Pr(&gt;|z|)  </span>
+<span class="co">#ans&gt; (Intercept)    7.584      3.915    1.94    0.053 .</span>
+<span class="co">#ans&gt; temp          -0.417      0.194   -2.15    0.032 *</span>
+<span class="co">#ans&gt; ---</span>
+<span class="co">#ans&gt; Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</span>
+<span class="co">#ans&gt; </span>
+<span class="co">#ans&gt; (Dispersion parameter for binomial family taken to be 1)</span>
+<span class="co">#ans&gt; </span>
+<span class="co">#ans&gt;     Null deviance: 28.267  on 22  degrees of freedom</span>
+<span class="co">#ans&gt; Residual deviance: 20.335  on 21  degrees of freedom</span>
+<span class="co">#ans&gt; AIC: 24.33</span>
+<span class="co">#ans&gt; </span>
+<span class="co">#ans&gt; Number of Fisher Scoring iterations: 5</span>
+<span class="kw">exp</span>(<span class="kw">coef</span>(nasa)) <span class="co"># Exponentiated coefficients (&quot;odds ratios&quot;)</span>
+<span class="co">#ans&gt; (Intercept)        temp </span>
+<span class="co">#ans&gt;    1965.974       0.659</span></code></pre></div>
+<div class="rmdtip">
+<p>
+The <code>glm()</code> function fits <strong>g</strong>eneralized <strong>l</strong>inear <strong>m</strong>odels, a class of models that includes logistic regression. The syntax of the <code>glm()</code> function is similar to that of <code>lm()</code>, except that we must pass in the argument <code>family=binomial</code> in order to tell <code>R</code> to run a logistic regression rather than some other type of generalized linear model.
+</p>
+</div>
+<p>The summary of the logistic model is notably different from the linear regression, as the methodology behind is quite different. Nevertheless, we have tests for the significance of each coefficient. Here we obtain that <code>temp</code> is significantly different from zero, at least at a level <span class="math inline">\(\alpha=0.05\)</span>. Therefore we can conclude that <strong>the temperature is indeed affecting the probability of an incident with the O-rings</strong> (answers Q1).</p>
+<p>The coefficient of <code>temp</code>, <span class="math inline">\(\hat\beta_1\)</span>, can be regarded the “correlation between the temperature and the probability of having at least one incident”. This correlation, as evidenced by the sign of <span class="math inline">\(\hat\beta_1\)</span>, is negative. Let’s plot the fitted logistic curve to see that indeed the probability of incident and temperature are negatively correlated:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Plot data</span>
+<span class="kw">plot</span>(challenger<span class="op">$</span>temp, challenger<span class="op">$</span>fail.field, <span class="dt">xlim =</span> <span class="kw">c</span>(<span class="op">-</span><span class="dv">1</span>, <span class="dv">30</span>), <span class="dt">xlab =</span> <span class="st">&quot;Temperature&quot;</span>,
+     <span class="dt">ylab =</span> <span class="st">&quot;Incident probability&quot;</span>)
+
+<span class="co"># Draw the fitted logistic curve</span>
+x &lt;-<span class="st"> </span><span class="kw">seq</span>(<span class="op">-</span><span class="dv">1</span>, <span class="dv">30</span>, <span class="dt">l =</span> <span class="dv">200</span>)
+y &lt;-<span class="st"> </span><span class="kw">exp</span>(<span class="op">-</span>(nasa<span class="op">$</span>coefficients[<span class="dv">1</span>] <span class="op">+</span><span class="st"> </span>nasa<span class="op">$</span>coefficients[<span class="dv">2</span>] <span class="op">*</span><span class="st"> </span>x))
+y &lt;-<span class="st"> </span><span class="dv">1</span> <span class="op">/</span><span class="st"> </span>(<span class="dv">1</span> <span class="op">+</span><span class="st"> </span>y)
+<span class="kw">lines</span>(x, y, <span class="dt">col =</span> <span class="dv">2</span>, <span class="dt">lwd =</span> <span class="dv">2</span>)
+
+<span class="co"># The Challenger</span>
+<span class="kw">points</span>(<span class="op">-</span><span class="fl">0.6</span>, <span class="dv">1</span>, <span class="dt">pch =</span> <span class="dv">16</span>)
+<span class="kw">text</span>(<span class="op">-</span><span class="fl">0.6</span>, <span class="dv">1</span>, <span class="dt">labels =</span> <span class="st">&quot;Challenger&quot;</span>, <span class="dt">pos =</span> <span class="dv">4</span>)</code></pre></div>
+<p><img src="Machine-Learning_files/figure-html/unnamed-chunk-66-1.png" width="70%" style="display: block; margin: auto;" /> At the sight of this curve and the summary of the model we can conclude that <strong>the temperature was increasing the probability of an O-ring incident</strong> (Q2). Indeed, the confidence intervals for the coefficients show a significative negative correlation at level <span class="math inline">\(\alpha=0.05\)</span>:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">confint</span>(nasa, <span class="dt">level =</span> <span class="fl">0.95</span>)
+<span class="co">#ans&gt;              2.5 % 97.5 %</span>
+<span class="co">#ans&gt; (Intercept)  1.336 17.783</span>
+<span class="co">#ans&gt; temp        -0.924 -0.109</span></code></pre></div>
+<p>Finally, <strong>the probability of having at least one incident with the O-rings in the launch day was <span class="math inline">\(0.9996\)</span> according to the fitted logistic model</strong> (Q3). This is easily obtained:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">predict</span>(nasa, <span class="dt">newdata =</span> <span class="kw">data.frame</span>(<span class="dt">temp =</span> <span class="op">-</span><span class="fl">0.6</span>), <span class="dt">type =</span> <span class="st">&quot;response&quot;</span>)
+<span class="co">#ans&gt; 1 </span>
+<span class="co">#ans&gt; 1</span></code></pre></div>
+<p>Be aware that <code>type = &quot;response&quot;</code> has a different meaning in logistic regression. In linear models it returns a CI for the prediction. But, <code>type = &quot;response&quot;</code> means that the <em>probability</em> should be returned, instead of the value of the link function, which is returned with <code>type = &quot;link&quot;</code> (the default).</p>
+<p>Recall that there is a serious problem of <strong>extrapolation</strong> in the prediction, which makes it less precise (or more variable). But this extrapolation, together with the evidences raised by a simple analysis like we did, should have been strong arguments for postponing the launch.</p>
 <p align="right">
 ◼
 </p>
 
 </div>
 </div>
+</div>
 
 
 
+<h3>References</h3>
+<div id="refs" class="references">
+<div id="ref-Roberts1986">
+<p>Presidential Commission on the Space Shuttle Challenger Accident. 1986. <em>Report of the Presidential Commission on the Space Shuttle Challenger Accident (Vols. 1 &amp; 2)</em>. Washington, DC. <a href="http://history.nasa.gov/rogersrep/genindex.htm" class="uri">http://history.nasa.gov/rogersrep/genindex.htm</a>.</p>
+</div>
+<div id="ref-Dalal1989">
+<p>Dalal, Siddhartha R., Edward B. Fowlkes, and Bruce Hoadley. 1989. “Risk Analysis of the Space Shuttle: Pre-Challenger Prediction of Failure.” <em>Journal of the American Statistical Association</em> 84 (408): 945–57. doi:<a href="https://doi.org/10.1080/01621459.1989.10478858">10.1080/01621459.1989.10478858</a>.</p>
+</div>
+</div>
+<div class="footnotes">
+<hr />
+<ol start="11">
+<li id="fn11"><p>After the shuttle exits the atmosphere, the solid rocket boosters separate and descend to land using a parachute where they are carefully analyzed.<a href="logistic-regression.html#fnref11">↩</a></p></li>
+</ol>
+</div>
             </section>
 
           </div>

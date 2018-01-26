@@ -124,7 +124,7 @@
   \postauthor{\par}
   \predate{\centering\large\emph}
   \postdate{\par}
-  \date{2018-01-24}
+  \date{2018-01-26}
 
 % \defaultfontfeatures{
 %     Path = /home/ghassany/texmf/fonts/opentype/public/fontawesome/}
@@ -193,6 +193,12 @@
 \usepackage[dvipsnames]{xcolor}
 
 \makeatletter
+\renewcommand{\title}[1]{\renewcommand{\@title}{\color{\@titlecolor}#1}}
+\newcommand{\@titlecolor}{ForestGreen}
+\newcommand{\titlecolor}[1]{\renewcommand{\@titlecolor}{#1}}
+\renewcommand{\author}[1]{\renewcommand{\@author}{\color{\@authorcolor}#1}}
+\newcommand{\@authorcolor}{RoyalBlue}
+\newcommand{\authorcolor}[1]{\renewcommand{\@authorcolor}{#1}}
 \renewcommand\section{\@startsection {section}{1}{\z@}%
                                    {-3.5ex \@plus -1ex \@minus -.2ex}%
                                    {2.3ex \@plus.2ex}%
@@ -3205,6 +3211,355 @@ can be rewritten as
 Just as in the simple logistic regression we use the maximum likelihood
 method to estimate \(\beta_0,\beta_1,\ldots,\beta_p\).
 
+\section{Example}\label{logreg-examps}
+
+\subsection{\texorpdfstring{Case study: \emph{The Challenger
+disaster}}{Case study: The Challenger disaster}}\label{logreg-examps-challenger}
+
+The \emph{Challenger} disaster occurred on the 28th January of 1986,
+when the NASA Space Shuttle orbiter \emph{Challenger} broke apart and
+disintegrated at 73 seconds into its flight, leading to the deaths of
+its seven crew members. The accident deeply shocked the US society, in
+part due to the attention the mission had received because of the
+presence of Christa McAuliffe, who would have been the first
+astronaut-teacher. Because of this, NASA TV broadcasted live the launch
+to US public schools, which resulted in millions of school children
+witnessing the accident. The accident had serious consequences for the
+NASA credibility and resulted in an interruption of 32 months in the
+shuttle program. The Presidential \emph{Rogers Commission} (formed by
+astronaut Neil A. Armstrong and Nobel laureate Richard P. Feynman, among
+others) was created to investigate the disaster.
+
+\begin{verbatim}
+#ans> PhantomJS not found. You can install it with webshot::install_phantomjs(). If it is installed, please make sure the phantomjs executable can be found via the PATH variable.
+\end{verbatim}
+
+\label{fig:video3}Challenger launch and posterior explosion, as broadcasted
+live by NBC in 28/01/1986.
+
+The Rogers Commission elaborated a report \citep{Roberts1986} with all
+the findings. The commission determined that the disintegration began
+with the \textbf{failure of an O-ring seal in the solid rocket motor due
+to the unusual cold temperatures (-0.6 Celsius degrees)} during the
+launch. This failure produced a breach of burning gas through the solid
+rocket motor that compromised the whole shuttle structure, resulting in
+its disintegration due to the extreme aerodynamic forces. The
+\textbf{problematic with O-rings was something known}: the night before
+the launch, there was a three-hour teleconference between motor
+engineers and NASA management, discussing the effect of low temperature
+forecasted for the launch on the O-ring performance. The conclusion,
+influenced by Figure \ref{fig:rogerts}a, was:
+
+\begin{quote}
+\textbf{``Temperature data {[}are{]} not conclusive on predicting
+primary O-ring blowby.''}
+\end{quote}
+
+
+
+
+
+
+\begin{figure}[h!]
+
+{\centering \includegraphics[width=0.7\linewidth]{img/challenger} 
+
+}
+
+\caption{Number of incidents in the O-rings (filed joints)
+versus temperatures. Panel \emph{a} includes only flights with
+incidents. Panel \emph{b} contains all flights (with and without
+incidents).}\label{fig:rogerts}
+\end{figure}
+
+The Rogers Commission noted a major flaw in Figure \ref{fig:rogerts}a:
+the \textbf{flights with zero incidents were excluded} from the plot
+because \emph{it was felt} that \textbf{these flights did not contribute
+any information about the temperature effect} (Figure
+\ref{fig:rogerts}b). The Rogers Commission concluded:
+
+\begin{quote}
+\textbf{``A careful analysis of the flight history of O-ring performance
+would have revealed the correlation of O-ring damage in low
+temperature''}.
+\end{quote}
+
+The purpose of this case study, inspired by \citet{Dalal1989}, is to
+quantify what was the influence of the temperature in the probability of
+having at least one incident related with the O-rings. Specifically, we
+want to address the following questions:
+
+\begin{itemize}
+\tightlist
+\item
+  Q1. \emph{Is the temperature associated with O-ring incidents?}
+\item
+  Q2. \emph{In which way was the temperature affecting the probability
+  of O-ring incidents?}
+\item
+  Q3. \emph{What was the predicted probability of an incidient in an
+  O-ring for the temperature of the launch day?}
+\end{itemize}
+
+To try to answer these questions we have the \texttt{challenger}
+(\textcolor{white}{[}\faTable\textcolor{white}{]} dataset ). The dataset
+contains (as shown in the table below) information regarding the state
+of the solid rocket boosters after launch\footnote{After the shuttle
+  exits the atmosphere, the solid rocket boosters separate and descend
+  to land using a parachute where they are carefully analyzed.} for 23
+flights. Each row has, among others, the following variables:
+
+\begin{itemize}
+\tightlist
+\item
+  \texttt{fail.field}, \texttt{fail.nozzle}: binary variables indicating
+  whether there was an incident with the O-rings in the field joints or
+  in the nozzles of the solid rocket boosters. \texttt{1} codifies an
+  incident and \texttt{0} its absence. On the analysis, we focus on the
+  O-rings of the field joint as being the most determinants for the
+  accident.
+\item
+  \texttt{temp}: temperature in the day of launch. Measured in Celsius
+  degrees.
+\item
+  \texttt{pres.field}, \texttt{pres.nozzle}: leak-check pressure tests
+  of the O-rings. These tests assured that the rings would seal the
+  joint.
+\end{itemize}
+
+
+
+\begin{longtable}[t]{llrrr}
+\caption{\label{tab:unnamed-chunk-61}The \texttt{challenger} dataset.}\\
+\toprule
+flight & date & fail.field & fail.nozzle & temp\\
+\midrule
+1 & 12/04/81 & 0 & 0 & 18.9\\
+2 & 12/11/81 & 1 & 0 & 21.1\\
+3 & 22/03/82 & 0 & 0 & 20.6\\
+5 & 11/11/82 & 0 & 0 & 20.0\\
+6 & 04/04/83 & 0 & 1 & 19.4\\
+\addlinespace
+7 & 18/06/83 & 0 & 0 & 22.2\\
+8 & 30/08/83 & 0 & 0 & 22.8\\
+9 & 28/11/83 & 0 & 0 & 21.1\\
+41-B & 03/02/84 & 1 & 1 & 13.9\\
+41-C & 06/04/84 & 1 & 1 & 17.2\\
+\addlinespace
+41-D & 30/08/84 & 1 & 1 & 21.1\\
+41-G & 05/10/84 & 0 & 0 & 25.6\\
+51-A & 08/11/84 & 0 & 0 & 19.4\\
+51-C & 24/01/85 & 1 & 1 & 11.7\\
+51-D & 12/04/85 & 0 & 1 & 19.4\\
+\addlinespace
+51-B & 29/04/85 & 0 & 1 & 23.9\\
+51-G & 17/06/85 & 0 & 1 & 21.1\\
+51-F & 29/07/85 & 0 & 0 & 27.2\\
+51-I & 27/08/85 & 0 & 0 & 24.4\\
+51-J & 03/10/85 & 0 & 0 & 26.1\\
+\addlinespace
+61-A & 30/10/85 & 1 & 0 & 23.9\\
+61-B & 26/11/85 & 0 & 1 & 24.4\\
+61-C & 12/01/86 & 1 & 1 & 14.4\\
+\bottomrule
+\end{longtable}
+
+Let's begin the analysis by replicating Figures \ref{fig:rogerts}a and
+\ref{fig:rogerts}b and checking that linear regression is not the right
+tool for answering Q1--Q3. For that, we make two scatterplots of
+\texttt{nfails.field} (number of total incidents in the field joints) in
+function of \texttt{temp}, the first one excluding the launches without
+incidents (\texttt{subset\ =\ nfails.field\ \textgreater{}\ 0}) and the
+second one for all the data.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{library}\NormalTok{(car)}
+\CommentTok{#ans> Warning: package 'car' was built under R version 3.4.3}
+\KeywordTok{scatterplot}\NormalTok{(nfails.field }\OperatorTok{~}\StringTok{ }\NormalTok{temp, }\DataTypeTok{reg.line =}\NormalTok{ lm, }\DataTypeTok{smooth =} \OtherTok{FALSE}\NormalTok{, }\DataTypeTok{spread =} \OtherTok{FALSE}\NormalTok{,}
+            \DataTypeTok{boxplots =} \OtherTok{FALSE}\NormalTok{, }\DataTypeTok{data =}\NormalTok{ challenger, }\DataTypeTok{subset =}\NormalTok{ nfails.field }\OperatorTok{>}\StringTok{ }\DecValTok{0}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{center}\includegraphics[width=0.7\linewidth]{Machine-Learning_files/figure-latex/unnamed-chunk-62-1} \end{center}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{scatterplot}\NormalTok{(nfails.field }\OperatorTok{~}\StringTok{ }\NormalTok{temp, }\DataTypeTok{reg.line =}\NormalTok{ lm, }\DataTypeTok{smooth =} \OtherTok{FALSE}\NormalTok{, }\DataTypeTok{spread =} \OtherTok{FALSE}\NormalTok{,}
+            \DataTypeTok{boxplots =} \OtherTok{FALSE}\NormalTok{, }\DataTypeTok{data =}\NormalTok{ challenger)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{center}\includegraphics[width=0.7\linewidth]{Machine-Learning_files/figure-latex/unnamed-chunk-62-2} \end{center}
+
+There is a fundamental problem in using linear regression for this data:
+\textbf{the response is not continuous}. As a consequence, there is no
+linearity and the errors around the mean are not normal (indeed, they
+are strongly non normal). We can check this with the corresponding
+diagnostic plots:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{mod <-}\StringTok{ }\KeywordTok{lm}\NormalTok{(nfails.field }\OperatorTok{~}\StringTok{ }\NormalTok{temp, }\DataTypeTok{data =}\NormalTok{ challenger)}
+\KeywordTok{par}\NormalTok{(}\DataTypeTok{mfrow =} \DecValTok{1}\OperatorTok{:}\DecValTok{2}\NormalTok{)}
+\KeywordTok{plot}\NormalTok{(mod, }\DecValTok{1}\NormalTok{)}
+\KeywordTok{plot}\NormalTok{(mod, }\DecValTok{2}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{center}\includegraphics[width=0.7\linewidth]{Machine-Learning_files/figure-latex/unnamed-chunk-63-1} \end{center}
+
+Although linear regression is not the adequate tool for this data, it is
+able to detect the obvious difference between the two plots:
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  \textbf{The trend for launches with incidents is flat, hence
+  suggesting there is no dependence on the temperature} (Figure
+  \ref{fig:rogerts}a). This was one of the arguments behind NASA's
+  decision of launching the rocket at a temperature of -0.6 degrees.
+\item
+  However, \textbf{the trend for \emph{all} launches indicates a clear
+  negative dependence between temperature and number of incidents!}
+  (Figure \ref{fig:rogerts}b). Think about it in this way: the minimum
+  temperature for a launch without incidents ever recorded was above 18
+  degrees, and the Challenger was launched at -0.6 without clearly
+  knowing the effects of such low temperatures.
+\end{enumerate}
+
+Instead of trying to predict the number of incidents, we will
+concentrate on modeling the \emph{probability of expecting at least one
+incident given the temperature}, a simpler but also revealing approach.
+In other words, we look to estimate the following curve: \[
+p(x)=\mathbb{P}(\text{incident}=1|\text{temperature}=x)
+\] from \texttt{fail.field} and \texttt{temp}. This probability can not
+be properly modeled as a linear function like \(\beta_0+\beta_1x\),
+since inevitably will fall outside \([0,1]\) for some value of \(x\)
+(some will have negative probabilities or probabilities larger than
+one). The technique that solves this problem is the \textbf{logistic
+regression}. The logistic model in this case is \[
+\mathbb{P}(\text{incident}=1|\text{temperature}=x)=\text{logistic}\left(\beta_0+\beta_1x\right)=\frac{1}{1+e^{-(\beta_0+\beta_1x)}},
+\] with \(\beta_0\) and \(\beta_1\) unknown.
+
+Let's fit the model to the data by estimating \(\beta_0\) and
+\(\beta_1\).
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{nasa <-}\StringTok{ }\KeywordTok{glm}\NormalTok{(fail.field }\OperatorTok{~}\StringTok{ }\NormalTok{temp, }\DataTypeTok{family =} \StringTok{"binomial"}\NormalTok{, }\DataTypeTok{data =}\NormalTok{ challenger)}
+\KeywordTok{summary}\NormalTok{(nasa)}
+\CommentTok{#ans> }
+\CommentTok{#ans> Call:}
+\CommentTok{#ans> glm(formula = fail.field ~ temp, family = "binomial", data = challenger)}
+\CommentTok{#ans> }
+\CommentTok{#ans> Deviance Residuals: }
+\CommentTok{#ans>    Min      1Q  Median      3Q     Max  }
+\CommentTok{#ans> -1.057  -0.757  -0.382   0.457   2.220  }
+\CommentTok{#ans> }
+\CommentTok{#ans> Coefficients:}
+\CommentTok{#ans>             Estimate Std. Error z value Pr(>|z|)  }
+\CommentTok{#ans> (Intercept)    7.584      3.915    1.94    0.053 .}
+\CommentTok{#ans> temp          -0.417      0.194   -2.15    0.032 *}
+\CommentTok{#ans> ---}
+\CommentTok{#ans> Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1}
+\CommentTok{#ans> }
+\CommentTok{#ans> (Dispersion parameter for binomial family taken to be 1)}
+\CommentTok{#ans> }
+\CommentTok{#ans>     Null deviance: 28.267  on 22  degrees of freedom}
+\CommentTok{#ans> Residual deviance: 20.335  on 21  degrees of freedom}
+\CommentTok{#ans> AIC: 24.33}
+\CommentTok{#ans> }
+\CommentTok{#ans> Number of Fisher Scoring iterations: 5}
+\KeywordTok{exp}\NormalTok{(}\KeywordTok{coef}\NormalTok{(nasa)) }\CommentTok{# Exponentiated coefficients ("odds ratios")}
+\CommentTok{#ans> (Intercept)        temp }
+\CommentTok{#ans>    1965.974       0.659}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{rmdtip}
+The \texttt{glm()} function fits \textbf{g}eneralized \textbf{l}inear
+\textbf{m}odels, a class of models that includes logistic regression.
+The syntax of the \texttt{glm()} function is similar to that of
+\texttt{lm()}, except that we must pass in the argument
+\texttt{family=binomial} in order to tell \texttt{R} to run a logistic
+regression rather than some other type of generalized linear model.
+\end{rmdtip}
+
+The summary of the logistic model is notably different from the linear
+regression, as the methodology behind is quite different. Nevertheless,
+we have tests for the significance of each coefficient. Here we obtain
+that \texttt{temp} is significantly different from zero, at least at a
+level \(\alpha=0.05\). Therefore we can conclude that \textbf{the
+temperature is indeed affecting the probability of an incident with the
+O-rings} (answers Q1).
+
+The coefficient of \texttt{temp}, \(\hat\beta_1\), can be regarded the
+``correlation between the temperature and the probability of having at
+least one incident''. This correlation, as evidenced by the sign of
+\(\hat\beta_1\), is negative. Let's plot the fitted logistic curve to
+see that indeed the probability of incident and temperature are
+negatively correlated:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{# Plot data}
+\KeywordTok{plot}\NormalTok{(challenger}\OperatorTok{$}\NormalTok{temp, challenger}\OperatorTok{$}\NormalTok{fail.field, }\DataTypeTok{xlim =} \KeywordTok{c}\NormalTok{(}\OperatorTok{-}\DecValTok{1}\NormalTok{, }\DecValTok{30}\NormalTok{), }\DataTypeTok{xlab =} \StringTok{"Temperature"}\NormalTok{,}
+     \DataTypeTok{ylab =} \StringTok{"Incident probability"}\NormalTok{)}
+
+\CommentTok{# Draw the fitted logistic curve}
+\NormalTok{x <-}\StringTok{ }\KeywordTok{seq}\NormalTok{(}\OperatorTok{-}\DecValTok{1}\NormalTok{, }\DecValTok{30}\NormalTok{, }\DataTypeTok{l =} \DecValTok{200}\NormalTok{)}
+\NormalTok{y <-}\StringTok{ }\KeywordTok{exp}\NormalTok{(}\OperatorTok{-}\NormalTok{(nasa}\OperatorTok{$}\NormalTok{coefficients[}\DecValTok{1}\NormalTok{] }\OperatorTok{+}\StringTok{ }\NormalTok{nasa}\OperatorTok{$}\NormalTok{coefficients[}\DecValTok{2}\NormalTok{] }\OperatorTok{*}\StringTok{ }\NormalTok{x))}
+\NormalTok{y <-}\StringTok{ }\DecValTok{1} \OperatorTok{/}\StringTok{ }\NormalTok{(}\DecValTok{1} \OperatorTok{+}\StringTok{ }\NormalTok{y)}
+\KeywordTok{lines}\NormalTok{(x, y, }\DataTypeTok{col =} \DecValTok{2}\NormalTok{, }\DataTypeTok{lwd =} \DecValTok{2}\NormalTok{)}
+
+\CommentTok{# The Challenger}
+\KeywordTok{points}\NormalTok{(}\OperatorTok{-}\FloatTok{0.6}\NormalTok{, }\DecValTok{1}\NormalTok{, }\DataTypeTok{pch =} \DecValTok{16}\NormalTok{)}
+\KeywordTok{text}\NormalTok{(}\OperatorTok{-}\FloatTok{0.6}\NormalTok{, }\DecValTok{1}\NormalTok{, }\DataTypeTok{labels =} \StringTok{"Challenger"}\NormalTok{, }\DataTypeTok{pos =} \DecValTok{4}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{center}\includegraphics[width=0.7\linewidth]{Machine-Learning_files/figure-latex/unnamed-chunk-66-1} \end{center}
+
+At the sight of this curve and the summary of the model we can conclude
+that \textbf{the temperature was increasing the probability of an O-ring
+incident} (Q2). Indeed, the confidence intervals for the coefficients
+show a significative negative correlation at level \(\alpha=0.05\):
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{confint}\NormalTok{(nasa, }\DataTypeTok{level =} \FloatTok{0.95}\NormalTok{)}
+\CommentTok{#ans>              2.5 % 97.5 %}
+\CommentTok{#ans> (Intercept)  1.336 17.783}
+\CommentTok{#ans> temp        -0.924 -0.109}
+\end{Highlighting}
+\end{Shaded}
+
+Finally, \textbf{the probability of having at least one incident with
+the O-rings in the launch day was \(0.9996\) according to the fitted
+logistic model} (Q3). This is easily obtained:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{predict}\NormalTok{(nasa, }\DataTypeTok{newdata =} \KeywordTok{data.frame}\NormalTok{(}\DataTypeTok{temp =} \OperatorTok{-}\FloatTok{0.6}\NormalTok{), }\DataTypeTok{type =} \StringTok{"response"}\NormalTok{)}
+\CommentTok{#ans> 1 }
+\CommentTok{#ans> 1}
+\end{Highlighting}
+\end{Shaded}
+
+Be aware that \texttt{type\ =\ "response"} has a different meaning in
+logistic regression. In linear models it returns a CI for the
+prediction. But, \texttt{type\ =\ "response"} means that the
+\emph{probability} should be returned, instead of the value of the link
+function, which is returned with \texttt{type\ =\ "link"} (the default).
+
+Recall that there is a serious problem of \textbf{extrapolation} in the
+prediction, which makes it less precise (or more variable). But this
+extrapolation, together with the evidences raised by a simple analysis
+like we did, should have been strong arguments for postponing the
+launch.
+
 ◼
 
 \appendix \addcontentsline{toc}{chapter}{\appendixname}
@@ -3420,6 +3775,8 @@ The right way of dealing with categorical variables in regression is to
 set the variable as a factor and let \texttt{R} do internally the
 dummification.
 \end{rmdcaution}
+
+\bibliography{biblio}
 
 
 \end{document}

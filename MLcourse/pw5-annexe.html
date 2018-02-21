@@ -32,8 +32,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black">
   
   
-<link rel="prev" href="pw-4.html">
-<link rel="next" href="pw-5.html">
+<link rel="prev" href="use-qual.html">
+<link rel="next" href="references.html">
 <script src="book_assets/jquery-2.2.3/jquery.min.js"></script>
 <link href="book_assets/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="book_assets/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
@@ -249,145 +249,22 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="model-selection" class="section level1">
-<h1><span class="header-section-number">5</span> Model Selection</h1>
-<div id="linear-model-selection-and-best-subset-selection" class="section level2">
-<h2><span class="header-section-number">5.1</span> Linear Model Selection and Best Subset Selection</h2>
-<iframe width="560" height="349" src="https://www.youtube.com/embed/91si52nk3LA" frameborder="0" allowfullscreen>
-</iframe>
-</div>
-<div id="forward-stepwise-selection" class="section level2">
-<h2><span class="header-section-number">5.2</span> Forward Stepwise Selection</h2>
-<iframe width="560" height="349" src="https://www.youtube.com/embed/nLpJd_iKmrE" frameborder="0" allowfullscreen>
-</iframe>
-</div>
-<div id="backward-stepwise-selection" class="section level2">
-<h2><span class="header-section-number">5.3</span> Backward Stepwise Selection</h2>
-<iframe width="560" height="349" src="https://www.youtube.com/embed/NJhMSpI2Uj8" frameborder="0" allowfullscreen>
-</iframe>
-</div>
-<div id="estimating-test-error-using-mallows-cp-aic-bic-adjusted-r-squared" class="section level2">
-<h2><span class="header-section-number">5.4</span> Estimating Test Error Using Mallow’s Cp, AIC, BIC, Adjusted R-squared</h2>
-<iframe width="560" height="349" src="https://www.youtube.com/embed/LkifE44myLc" frameborder="0" allowfullscreen>
-</iframe>
-</div>
-<div id="estimating-test-error-using-cross-validation" class="section level2">
-<h2><span class="header-section-number">5.5</span> Estimating Test Error Using Cross-Validation</h2>
-<iframe width="560" height="349" src="https://www.youtube.com/embed/3p9JNaJCOb4" frameborder="0" allowfullscreen>
-</iframe>
-<!-- ## SVM tutorial in R -->
-<!-- Linear SVM classifier -->
-<!-- --------------------- -->
-<!-- Lets generate some data in two dimensions, and make them a little separated. -->
-<!-- ```{r} -->
-<!-- set.seed(10111) -->
-<!-- x=matrix(rnorm(40),20,2) -->
-<!-- y=rep(c(-1,1),c(10,10)) -->
-<!-- x[y==1,]=x[y==1,]+1 -->
-<!-- plot(x,col=y+3,pch=19) -->
-<!-- ``` -->
-<!-- Now we will load the package `e1071` which contains the `svm` function we will use. We then compute the fit. Notice that we have to specify a `cost` parameter, which is a tuning parameter.  -->
-<!-- ```{r} -->
-<!-- library(e1071) -->
-<!-- dat=data.frame(x,y=as.factor(y)) -->
-<!-- svmfit=svm(y~.,data=dat,kernel="linear",cost=10,scale=FALSE) -->
-<!-- print(svmfit) -->
-<!-- plot(svmfit,dat) -->
-<!-- ``` -->
-<!-- As mentioned in the the chapter, the plot function is somewhat crude, and plots X2 on the horizontal axis (unlike what R would do automatically for a matrix). Lets see how we might make our own plot. -->
-<!-- The first thing we will do is make a grid of values for X1 and X2. We will write a function to do that, -->
-<!-- in case we want to reuse it. It uses the handy function `expand.grid`, and produces the coordinates of `n*n` points on a lattice covering the domain of `x`. Having made the lattice, we make a prediction at each point on the lattice. We then plot the lattice, color-coded according to the classification. Now we can see the decision boundary. -->
-<!-- The support points (points on the margin, or on the wrong side of the margin) are indexed in the `$index` component of the fit. -->
-<!-- ```{r} -->
-<!-- make.grid=function(x,n=75){ -->
-<!--   grange=apply(x,2,range) -->
-<!--   x1=seq(from=grange[1,1],to=grange[2,1],length=n) -->
-<!--   x2=seq(from=grange[1,2],to=grange[2,2],length=n) -->
-<!--   expand.grid(X1=x1,X2=x2) -->
-<!--   } -->
-<!-- xgrid=make.grid(x) -->
-<!-- ygrid=predict(svmfit,xgrid) -->
-<!-- plot(xgrid,col=c("red","blue")[as.numeric(ygrid)],pch=20,cex=.2) -->
-<!-- points(x,col=y+3,pch=19) -->
-<!-- points(x[svmfit$index,],pch=5,cex=2) -->
-<!-- ``` -->
-<!-- The `svm` function is not too friendly, in that we have to do some work to get back the linear coefficients, as described in the text. Probably the reason is that this only makes sense for linear kernels, and the function is more general. Here we will use a formula to extract the coefficients; for those interested in where this comes from, have a look in chapter 12 of ESL ("Elements of Statistical Learning"). -->
-<!-- We extract the linear coefficients, and then using simple algebra, we include the decision boundary and the two margins. -->
-<!-- ```{r} -->
-<!-- beta=drop(t(svmfit$coefs)%*%x[svmfit$index,]) -->
-<!-- beta0=svmfit$rho -->
-<!-- plot(xgrid,col=c("red","blue")[as.numeric(ygrid)],pch=20,cex=.2) -->
-<!-- points(x,col=y+3,pch=19) -->
-<!-- points(x[svmfit$index,],pch=5,cex=2) -->
-<!-- abline(beta0/beta[2],-beta[1]/beta[2]) -->
-<!-- abline((beta0-1)/beta[2],-beta[1]/beta[2],lty=2) -->
-<!-- abline((beta0+1)/beta[2],-beta[1]/beta[2],lty=2) -->
-<!-- ``` -->
-<!-- Just like for the other models in this book, the tuning parameter `C` has to be selected. -->
-<!-- Different values will give different solutions. Rerun the code above, but using `C=1`, and see what we mean. One can use cross-validation to do this. -->
-<!-- Nonlinear SVM -->
-<!-- -------------- -->
-<!-- Instead, we will run the SVM on some data where a non-linear boundary is called for. We will use the mixture data from ESL -->
-<!-- ```{r} -->
-<!-- load("datasets/ESL.mixture.rda") -->
-<!-- names(ESL.mixture) -->
-<!-- rm(x,y) -->
-<!-- attach(ESL.mixture) -->
-<!-- ``` -->
-<!-- These data are also two dimensional. Lets plot them and fit a nonlinear SVM, using a radial kernel. -->
-<!-- ```{r} -->
-<!-- plot(x,col=y+1) -->
-<!-- dat=data.frame(y=factor(y),x) -->
-<!-- fit=svm(factor(y)~.,data=dat,scale=FALSE,kernel="radial",cost=5) -->
-<!-- ``` -->
-<!-- Now we are going to create a grid, as before, and make predictions on the grid. -->
-<!-- These data have the grid points for each variable included on the data frame. -->
-<!-- ```{r} -->
-<!-- xgrid=expand.grid(X1=px1,X2=px2) -->
-<!-- ygrid=predict(fit,xgrid) -->
-<!-- plot(xgrid,col=as.numeric(ygrid),pch=20,cex=.2) -->
-<!-- points(x,col=y+1,pch=19) -->
-<!-- ``` -->
-<!-- We can go further, and have the predict function produce the actual function estimates at each of our grid points. We can include the actual decision boundary on the plot by making use of the contour function. On the dataframe is also `prob`, which is the true probability of class 1 for these data, at the gridpoints. If we plot its 0.5 contour, that will give us the _Bayes Decision Boundary_, which is the best one could ever do. -->
-<!-- ```{r} -->
-<!-- func=predict(fit,xgrid,decision.values=TRUE) -->
-<!-- func=attributes(func)$decision -->
-<!-- xgrid=expand.grid(X1=px1,X2=px2) -->
-<!-- ygrid=predict(fit,xgrid) -->
-<!-- plot(xgrid,col=as.numeric(ygrid),pch=20,cex=.2) -->
-<!-- points(x,col=y+1,pch=19) -->
-<!-- contour(px1,px2,matrix(func,69,99),level=0,add=TRUE) -->
-<!-- contour(px1,px2,matrix(prob,69,99),level=.5,add=TRUE,col="blue",lwd=2) -->
-<!-- ``` -->
-<!-- We see in this case that the radial kernel has done an excellent job. -->
-</div>
-<div id="examples" class="section level2">
-<h2><span class="header-section-number">5.6</span> Examples</h2>
-<div id="best-subset-selection" class="section level3">
-<h3><span class="header-section-number">5.6.1</span> Best Subset Selection</h3>
-<iframe width="560" height="349" src="https://www.youtube.com/embed/3kwdDGnV8MM" frameborder="0" allowfullscreen>
-</iframe>
-</div>
-<div id="forward-stepwise-selection-and-model-selection-using-validation-set" class="section level3">
-<h3><span class="header-section-number">5.6.2</span> Forward Stepwise Selection and Model Selection Using Validation Set</h3>
-<iframe width="560" height="349" src="https://www.youtube.com/embed/mv-vdysZIb4" frameborder="0" allowfullscreen>
-</iframe>
-</div>
-<div id="model-selection-using-cross-validation" class="section level3">
-<h3><span class="header-section-number">5.6.3</span> Model Selection Using Cross-Validation</h3>
-<iframe width="560" height="349" src="https://www.youtube.com/embed/F8MMHCCoALU" frameborder="0" allowfullscreen>
-</iframe>
-
-</div>
-</div>
+<div id="pw5---annexe" class="section level1">
+<h1><span class="header-section-number">D</span> PW5 - Annexe</h1>
+<p>Concernant la séance 5: J’ai remarqué que la majorité n’a pas compris ce qu’il fallait faire! Le but de la séance est d’exploiter et analyser un jeu de données. La première chose à faire est la phase descriptive où on décrit les données, les variables, quelques figures descriptives, etc.. Ensuite il faut regarder la variable cible, qu’on souhaite modéliser et prédire. Selon le type de cette variable on décide la direction de l’analyse:</p>
+<p>1- Variable cible <strong>quantitative</strong>: On fait la <strong>regression</strong>. Donc ce qui est important dans ce cas est d’étudier les corrélations entre les variables (prédicteurs) et en particulier entre les corrélations entre les prédicteurs et la variable cible. Ensuite sur le training set construire le modèle de régression. Pour cette tâche, vous pouvez commencer par un modèle qui prend tous les prédicteurs, et ensuite commencer à enlever les prédicteurs non significatives (comme on a fait en tp, c’est en fait la méthode backward). Vous pouvez tout de même pour la régression appliquer les méthodes décrites dans les vidéos du chapitre 5 pour faciliter la recherche du meilleur modèle. Une fois le modèle est trouvé, reste à faire la prédiction (sur le test set) et la performance du modèle.</p>
+<p>2- Variable cible <strong>qualitative</strong>: Alors on fait la <strong>classification</strong>. Comme la variable cible est qualitative vous pouvez étudier la relation entre les prédicteurs et cette variable (boxplots, mosaicplots, etc..). Si la variable cible a 2 classes, vous pouvez construire des modèles de classifications vus en cours, prédire, ensuite comparer la performance de vos modèles (matrices de confusion, accuracy, courbes roc, etc..). Attention, on peut suivre les méthodes expliquées dans les vidéos du chapitre 5, mais pas avec les mêmes codes! la démarche expliquée dans les vidéos est commune, mais pour la classification il faut utiliser une autre librairie que “leaps”, par exemple “bestglm”.</p>
+<p>Si la variable cible a plus que 2 classes, pas besoin d’appliquer la régression logistique (raison expliquée dans le cours!), il suffit d’appliquer les méthodes discriminantes du chapitre 4. Attention, la courbe roc n’est pas applicable dans ce cas, on compare la performance en utilisant la matrice de confusion (au moins l’accuracy!). Mais d’autre part, vous pouvez quand même transformer le problème en deux classes, il s’agit de l’approche one-vs-all: c’est à dire considérer la classe 0 contre tous les autres classes à la fois.</p>
+<p>Ps, il ne vous faut pas la correction des tps pour pouvoir faire tout ce qui est décrit ci dessus. Vous avez suffisamment des exemples dans le cous, et dans l’énoncé du tp4, vous avez un exemple détaillé avec des commentaires aussi.</p>
+<p>Voilà.</p>
 </div>
             </section>
 
           </div>
         </div>
       </div>
-<a href="pw-4.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="pw-5.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="use-qual.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="references.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="book_assets/gitbook-2.6.7/js/app.min.js"></script>

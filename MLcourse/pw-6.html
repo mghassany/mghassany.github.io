@@ -32,8 +32,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black">
   
   
-<link rel="prev" href="pw5-annexe.html">
-
+<link rel="prev" href="principal-components-analysis.html">
+<link rel="next" href="app-introRStudio.html">
 <script src="book_assets/jquery-2.2.3/jquery.min.js"></script>
 <link href="book_assets/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="book_assets/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
@@ -281,31 +281,169 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="references" class="section level1">
-<h1><span class="header-section-number">E</span> References</h1>
-
-<div id="refs" class="references">
-<div>
-<p>Dalal, Siddhartha R., Edward B. Fowlkes, and Bruce Hoadley. 1989. “Risk Analysis of the Space Shuttle: Pre-Challenger Prediction of Failure.” <em>Journal of the American Statistical Association</em> 84 (408): 945–57. doi:<a href="https://doi.org/10.1080/01621459.1989.10478858">10.1080/01621459.1989.10478858</a>.</p>
+<div id="pw-6" class="section level1 unnumbered">
+<h1>PW 6</h1>
+<div id="the-iris-dataset" class="section level2 unnumbered">
+<h2>The Iris Dataset</h2>
+<p>The iris dataset contains measurements for 150 iris flowers from three different species.</p>
+<p>The three classes in the Iris dataset are:</p>
+<ol style="list-style-type: decimal">
+<li><em>Iris-setosa</em> (<span class="math inline">\(n_1=50\)</span>)</li>
+<li><em>Iris-versicolor</em> (<span class="math inline">\(n_2=50\)</span>)</li>
+<li><em>Iris-virginica</em> (<span class="math inline">\(n_3=50\)</span>)</li>
+</ol>
+<p>And the four features in Iris dataset are:</p>
+<ol style="list-style-type: decimal">
+<li><em>sepal length</em> in cm</li>
+<li><em>sepal width</em> in cm</li>
+<li><em>petal length</em> in cm</li>
+<li><em>petal width</em> in cm</li>
+</ol>
+<p><img src="img/iris.png" width="85%" style="display: block; margin: auto;" /></p>
 </div>
-<div>
-<p>Presidential Commission on the Space Shuttle Challenger Accident. 1986. <em>Report of the Presidential Commission on the Space Shuttle Challenger Accident (Vols. 1 &amp; 2)</em>. Washington, DC. <a href="http://history.nasa.gov/rogersrep/genindex.htm" class="uri">http://history.nasa.gov/rogersrep/genindex.htm</a>.</p>
+<div id="building-the-pca-approach" class="section level2 unnumbered">
+<h2>Building the PCA approach</h2>
+<div class="rmdtip">
+<p>
+<strong>Summary of the PCA Approach</strong>:
+</p>
+<ul>
+<li>
+Standardize the data.
+</li>
+<li>
+Obtain the Eigenvectors and Eigenvalues from the covariance matrix or correlation matrix.
+</li>
+<li>
+Sort eigenvalues in descending order and choose the <span class="math inline"><em>k</em></span> eigenvectors that correspond to the <span class="math inline"><em>k</em></span> largest eigenvalues, where <span class="math inline"><em>k</em></span> is the number of dimensions of the new feature subspace (<span class="math inline"><em>k</em> ≤ <em>p</em></span>).
+</li>
+<li>
+Construct the projection matrix <span class="math inline"><strong>A</strong></span> from the selected <span class="math inline"><em>k</em></span> eigenvectors.
+</li>
+<li>
+Transform the original dataset <span class="math inline"><em>X</em></span> via <span class="math inline"><strong>A</strong></span> to obtain a <span class="math inline"><em>k</em></span>-dimensional feature subspace <span class="math inline"><strong>Y</strong></span>.
+</li>
+</ul>
+</div>
+<div id="data-pre-processing" class="section level3 unnumbered">
+<h3>Data pre-processing</h3>
+<p><strong>1.</strong> Download the iris dataset from  <a target="_blank" href="datasets/iris.data"> here <i class="fa fa-table" aria-hidden="true"></i></a> and import it into <code>R</code>.</p>
+<pre><code>#ans&gt; Warning in file(file, &quot;rt&quot;): cannot open URL &#39;http://mghassany.com/
+#ans&gt; MLcourse/datasets/iris.data&#39;: HTTP status was &#39;404 Not Found&#39;
+#ans&gt; Error in file(file, &quot;rt&quot;): cannot open the connection</code></pre>
+<p><strong>2.</strong> Show the last 5 rows of the iris dataset.</p>
+<p><strong>Exploratory analysis</strong></p>
+<p><strong>3.</strong> To explore how the 3 different flower classes are distributed along the 4 different features, visualize them via histograms.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># load ggplot2, install it if needed</span>
+<span class="kw">library</span>(ggplot2)
+
+<span class="co"># histogram of sepal_length</span>
+<span class="kw">ggplot</span>(iris, <span class="kw">aes</span>(<span class="dt">x=</span>sepal_length, <span class="dt">fill=</span>class)) <span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_histogram</span>(<span class="dt">binwidth=</span>.<span class="dv">2</span>, <span class="dt">alpha=</span>.<span class="dv">5</span>)
+<span class="co"># histogram of sepal_width</span>
+<span class="kw">ggplot</span>(iris, <span class="kw">aes</span>(<span class="dt">x=</span>sepal_width, <span class="dt">fill=</span>class)) <span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_histogram</span>(<span class="dt">binwidth=</span>.<span class="dv">2</span>, <span class="dt">alpha=</span>.<span class="dv">5</span>)
+<span class="co"># histogram of petal_length</span>
+<span class="kw">ggplot</span>(iris, <span class="kw">aes</span>(<span class="dt">x=</span>petal_length, <span class="dt">fill=</span>class)) <span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_histogram</span>(<span class="dt">binwidth=</span>.<span class="dv">2</span>, <span class="dt">alpha=</span>.<span class="dv">5</span>)
+<span class="co"># histogram of petal_width</span>
+<span class="kw">ggplot</span>(iris, <span class="kw">aes</span>(<span class="dt">x=</span>petal_width, <span class="dt">fill=</span>class)) <span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_histogram</span>(<span class="dt">binwidth=</span>.<span class="dv">2</span>, <span class="dt">alpha=</span>.<span class="dv">5</span>)</code></pre></div>
+<p><strong>4.</strong> Compare the means and the quartiles of the 3 different flower classes for the 4 different features (Plot 4 boxplots into the same figure).</p>
+<p><strong>5.</strong> Split the iris dataset into data <span class="math inline">\(X\)</span> and class labels <span class="math inline">\(y\)</span>.</p>
+<div class="rmdinsight">
+<p>
+The iris dataset is now stored in form of a <span class="math inline">150 × 4</span> matrix where the columns are the different features, and every row represents a separate flower sample. Each sample row <span class="math inline"><em>X</em><sup><em>i</em></sup></span> can be pictured as a 4-dimensional vector
+</p>
+<p>
+<br /><span class="math display"><span class="math display">\[ (X^i)^T = \begin{pmatrix} X_1^i \\ X_2^i \\ X_3^i \\ X_4^i \end{pmatrix}
+= \begin{pmatrix} \text{sepal length} \\ \text{sepal width} \\\text{petal length} \\ \text{petal width} \end{pmatrix}\]</span></span><br />
+</p>
 </div>
 </div>
+<div id="eigendecomposition---computing-eigenvectors-and-eigenvalues" class="section level3 unnumbered">
+<h3>Eigendecomposition - Computing Eigenvectors and Eigenvalues</h3>
+<div class="rmdinsight">
+<p>
+The eigenvectors and eigenvalues of a covariance (or correlation) matrix represent the “core” of a PCA: The eigenvectors (principal components) determine the directions of the new feature space, and the eigenvalues determine their magnitude. In other words, the eigenvalues explain the variance of the data along the new feature axes.
+</p>
 </div>
+<p><strong>Standardizing</strong></p>
+<p><strong>6.</strong> Scale the 4 features. Store the scaled matrix into a new one (for example, name it <code>x_scaled</code>).</p>
+<p><strong>Covariance Matrix</strong></p>
+<p><strong>7.</strong> The classic approach to PCA is to perform the eigendecomposition on the covariance matrix <span class="math inline">\(\Sigma\)</span>, which is a <span class="math inline">\(p\times p\)</span> matrix where each element represents the covariance between two features. Compute the Covariance Matrix of the scaled features (Print the results).</p>
+<div class="rmdtip">
+<p>
+We can summarize the calculation of the covariance matrix via the following matrix equation: <br /><span class="math display"><span class="math display">\[ \Sigma = \frac{1}{n-1} \left( (\mathbf{X} - \mathbf{\bar{X}})^T\;(\mathbf{X} - \mathbf{\bar{X}}) \right) \]</span></span><br /> where <span class="math inline"><span class="math inline">\(\mathbf{\bar{X}}\)</span></span> is the mean vector <span class="math inline"><span class="math inline">\(\mathbf{\bar{X}} = \frac{1}{n} \sum\limits_{k=1}^n x_{k}\)</span></span>.
+</p>
+<p>
+The mean vector is a <span class="math inline"><em>p</em></span>-dimensional vector where each value in this vector represents the sample mean of a feature column in the dataset.
+</p>
+</div>
+<p><strong>8.</strong> Perform an eigendecomposition on the covariance matrix. Compute the Eigenvectors and the Eigenvalues (you can use the <code>eigen()</code> function). What do you obtain?</p>
+<p><strong>Correlation Matrix</strong></p>
+<div class="rmdinsight">
+<p>
+Especially, in the field of “Finance”, the correlation matrix typically used instead of the covariance matrix. However, the eigendecomposition of the covariance matrix (if the input data was standardized) yields the same results as a eigendecomposition on the correlation matrix, since the correlation matrix can be understood as the normalized covariance matrix.
+</p>
+</div>
+<p><strong>9.</strong> Perform an eigendecomposition of the standardized data based on the correlation matrix.</p>
+<p><strong>10.</strong> Perform an eigendecomposition of the raw data based on the correlation matrix. Compare the obtained results with the previous question.</p>
+<div class="rmdinsight">
+<p>
+We should see that all three approaches yield the same eigenvectors and eigenvalue pairs:
+</p>
+<ul>
+<li>
+Eigendecomposition of the covariance matrix after standardizing the data.
+</li>
+<li>
+Eigendecomposition of the correlation matrix.
+</li>
+<li>
+Eigendecomposition of the correlation matrix after standardizing the data.
+</li>
+</ul>
+</div>
+</div>
+<div id="selecting-principal-components" class="section level3 unnumbered">
+<h3>Selecting Principal Components</h3>
+<div class="rmdinsight">
+<p>
+The <code>eigen()</code> function will, by default, sort the eigenvalues in decreasing order.
+</p>
+</div>
+<p><strong>Explained Variance</strong></p>
+<p><strong>11.</strong> Calculate the individual explained variation and the cumulative explained variation of each principal component. Show the results.</p>
+<p><strong>12.</strong> Plot the individual explained variation. (scree plot)</p>
+</div>
+<div id="projection-matrix" class="section level3 unnumbered">
+<h3>Projection Matrix</h3>
+<p><strong>13.</strong> Construct the projection matrix that will be used to transform the Iris data onto the new feature subspace.</p>
+<div class="rmdtip">
+<p>
+The “projection matrix” is basically just a matrix of our concatenated top <span class="math inline"><em>k</em></span> eigenvectors. Here, the projection matrix <span class="math inline"><strong>A</strong></span> is a <span class="math inline">4 × 2</span>-dimensional matrix.
+</p>
+</div>
+<p><strong>Projection Onto the New Feature Space</strong></p>
+<p>In this last step we will use the <span class="math inline">\(4 \times 2\)</span>-dimensional projection matrix <span class="math inline">\(\mathbf{A}\)</span> to transform our samples (observations) onto the new subspace via the equation <span class="math inline">\(\mathbf{Y}=X \times \mathbf{A}\)</span> where <span class="math inline">\(\mathbf{Y}\)</span> is a <span class="math inline">\(150 \times 2\)</span> matrix of our transformed samples.</p>
+<p><strong>14.</strong> Compute <span class="math inline">\(\mathbf{Y}\)</span> (Recall the <span class="math inline">\(\mathbf{Y}\)</span> is the matrix of scores, <span class="math inline">\(\mathbf{A}\)</span> is the matrix of loadings).</p>
+<p><strong>Visualization</strong></p>
+<p><strong>15.</strong> Plot the observations on the new feature space. Name the axis PC1 and PC2.</p>
+<p><strong>16.</strong> On the same plot, color the observations (the flowers) with respect to their flower classes.</p>
+</div>
+</div>
+<div id="verifications-with-princomp" class="section level2 unnumbered">
+<h2>Verifications with princomp()</h2>
+<p><strong>17.</strong> Use the <code>princomp()</code> function as explained in Chapter 6. Compare the first 5 scores obtained using <code>princomp()</code> with your results above.</p>
+<p><strong>18.</strong> Plot together the scores for PC1 and PC2 and the variables expressed in terms of PC1 and PC2 using <code>biplot()</code>.</p>
+<p><strong>29.</strong> Interpret the results.</p>
+<p align="right">
+◼
+</p>
 
-
-
-
-
-
-
-
-
-
-
-
-
+</div>
+</div>
 
 
 
@@ -314,8 +452,8 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
           </div>
         </div>
       </div>
-<a href="pw5-annexe.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-
+<a href="principal-components-analysis.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="app-introRStudio.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="book_assets/gitbook-2.6.7/js/app.min.js"></script>

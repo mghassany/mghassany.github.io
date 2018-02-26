@@ -96,7 +96,7 @@ code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* Com
 code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
 </style>
 
-<link rel="stylesheet" href="css/style.css" type="text/css" />
+<link rel="stylesheet" href="css\style.css" type="text/css" />
 </head>
 
 <body>
@@ -633,13 +633,13 @@ Figure 3.2: Number of incidents in the O-rings (filed joints) versus temperature
 </table>
 <p>Let’s begin the analysis by replicating Figures <a href="logistic-regression.html#fig:rogerts">3.2</a>a and <a href="logistic-regression.html#fig:rogerts">3.2</a>b and checking that linear regression is not the right tool for answering Q1–Q3. For that, we make two scatterplots of <code>nfails.field</code> (number of total incidents in the field joints) in function of <code>temp</code>, the first one excluding the launches without incidents (<code>subset = nfails.field &gt; 0</code>) and the second one for all the data.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(car)
-<span class="co">#ans&gt; Error in library(car): there is no package called &#39;car&#39;</span>
+<span class="co">#ans&gt; Warning: package &#39;car&#39; was built under R version 3.4.3</span>
 <span class="kw">scatterplot</span>(nfails.field <span class="op">~</span><span class="st"> </span>temp, <span class="dt">reg.line =</span> lm, <span class="dt">smooth =</span> <span class="ot">FALSE</span>, <span class="dt">spread =</span> <span class="ot">FALSE</span>,
-            <span class="dt">boxplots =</span> <span class="ot">FALSE</span>, <span class="dt">data =</span> challenger, <span class="dt">subset =</span> nfails.field <span class="op">&gt;</span><span class="st"> </span><span class="dv">0</span>)
-<span class="co">#ans&gt; Error in eval(expr, envir, enclos): could not find function &quot;scatterplot&quot;</span>
-<span class="kw">scatterplot</span>(nfails.field <span class="op">~</span><span class="st"> </span>temp, <span class="dt">reg.line =</span> lm, <span class="dt">smooth =</span> <span class="ot">FALSE</span>, <span class="dt">spread =</span> <span class="ot">FALSE</span>,
-            <span class="dt">boxplots =</span> <span class="ot">FALSE</span>, <span class="dt">data =</span> challenger)
-<span class="co">#ans&gt; Error in eval(expr, envir, enclos): could not find function &quot;scatterplot&quot;</span></code></pre></div>
+            <span class="dt">boxplots =</span> <span class="ot">FALSE</span>, <span class="dt">data =</span> challenger, <span class="dt">subset =</span> nfails.field <span class="op">&gt;</span><span class="st"> </span><span class="dv">0</span>)</code></pre></div>
+<p><img src="Machine-Learning_files/figure-html/unnamed-chunk-62-1.png" width="70%" style="display: block; margin: auto;" /></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">scatterplot</span>(nfails.field <span class="op">~</span><span class="st"> </span>temp, <span class="dt">reg.line =</span> lm, <span class="dt">smooth =</span> <span class="ot">FALSE</span>, <span class="dt">spread =</span> <span class="ot">FALSE</span>,
+            <span class="dt">boxplots =</span> <span class="ot">FALSE</span>, <span class="dt">data =</span> challenger)</code></pre></div>
+<p><img src="Machine-Learning_files/figure-html/unnamed-chunk-62-2.png" width="70%" style="display: block; margin: auto;" /></p>
 <p>There is a fundamental problem in using linear regression for this data: <strong>the response is not continuous</strong>. As a consequence, there is no linearity and the errors around the mean are not normal (indeed, they are strongly non normal). We can check this with the corresponding diagnostic plots:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">mod &lt;-<span class="st"> </span><span class="kw">lm</span>(nfails.field <span class="op">~</span><span class="st"> </span>temp, <span class="dt">data =</span> challenger)
 <span class="kw">par</span>(<span class="dt">mfrow =</span> <span class="dv">1</span><span class="op">:</span><span class="dv">2</span>)

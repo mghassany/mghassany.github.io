@@ -96,7 +96,7 @@ code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* Com
 code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
 </style>
 
-<link rel="stylesheet" href="css/style.css" type="text/css" />
+<link rel="stylesheet" href="css\style.css" type="text/css" />
 </head>
 
 <body>
@@ -435,7 +435,7 @@ Principal component analysis using the covariance function should only be consid
 <p><strong>Note</strong>: <span class="math inline">\(Z_j\)</span> has mean = 0 and variance = 1.</p>
 <div class="rmdinsight">
 <p>
-The variance-covariance matrix of the standardized data is equal to the correlation matrix for the unstandardized data. Therefore, principal component analysis using the standardized data is equivalent to principal component analysis using the correlation matrix.
+The variance-covariance matrix of the standardized data is equal to the correlation matrix for the unstandardized data. Therefore, principal component analysis using the standardized data is equivalent to principal component analysis using the correlation matrix. <strong>Remark</strong>: You are going to prove it in the practical work session.
 </p>
 </div>
 </div>
@@ -462,7 +462,7 @@ The variance-covariance matrix of the standardized data is equal to the correlat
 <ul>
 <li>
 <p>
-You can read this tutorial <a target="_blank" href="files/PrincipalComponents.pdf"><i class="fa fa-file-pdf-o" aria-hidden="true"></i></a>. In the document, there is an introduction about the mathemtical concepts used in PCA. Plus a detailed example of PCA.
+You can read this <a target="_blank" href="files/PrincipalComponents.pdf">tutorial <i class="fa fa-file-pdf-o" aria-hidden="true"></i></a>. In the document, there is an introduction about the mathemtical concepts used in PCA. Plus a detailed example of PCA.
 </p>
 </li>
 <li>
@@ -479,7 +479,7 @@ You can watch these videos for a nice explanation of PCA <a target="_blank"  hre
 <div id="employement-in-european-countries-in-the-late-70s" class="section level3 unnumbered">
 <h3>Employement in European countries in the late 70s</h3>
 <p>The purpose of this case study is to reveal the structure of the job market and economy in different developed countries. The final aim is to have a meaningful and rigorous plot that is able to show the most important features of the countries in a concise form.</p>
-<p>The dataset <code>eurojob</code> (<a href="datasets/eurojob.txt">download</a>) contains the data employed in this case study. It contains the percentage of workforce employed in 1979 in 9 industries for 26 European countries. The industries measured are:</p>
+<p>The dataset <a target="_blank" href="datasets/eurojob.txt"><code>eurojob</code> <i class="fa fa-table" aria-hidden="true"></i></a> contains the data employed in this case study. It contains the percentage of workforce employed in 1979 in 9 industries for 26 European countries. The industries measured are:</p>
 <ul>
 <li>Agriculture (<code>Agr</code>)</li>
 <li>Mining (<code>Min</code>)</li>
@@ -866,12 +866,10 @@ eurojob<span class="op">$</span>Country &lt;-<span class="st"> </span><span clas
 
 <span class="co"># Scatterplot matrix</span>
 <span class="kw">library</span>(car)
-<span class="co">#ans&gt; Error in library(car): there is no package called &#39;car&#39;</span>
 <span class="kw">scatterplotMatrix</span>(eurojob, <span class="dt">reg.line =</span> lm, <span class="dt">smooth =</span> <span class="ot">FALSE</span>, <span class="dt">spread =</span> <span class="ot">FALSE</span>,
                   <span class="dt">span =</span> <span class="fl">0.5</span>, <span class="dt">ellipse =</span> <span class="ot">FALSE</span>, <span class="dt">levels =</span> <span class="kw">c</span>(.<span class="dv">5</span>, .<span class="dv">9</span>), <span class="dt">id.n =</span> <span class="dv">0</span>,
-                  <span class="dt">diagonal =</span> <span class="st">&#39;histogram&#39;</span>)
-<span class="co">#ans&gt; Error in eval(expr, envir, enclos): could not find function &quot;scatterplotMatrix&quot;</span></code></pre></div>
-<p>We definitely need a way of visualizing and quantifying the relations between variables for a moderate to large amount of variables. PCA will be a handy way. Recall what PCA does:</p>
+                  <span class="dt">diagonal =</span> <span class="st">&#39;histogram&#39;</span>)</code></pre></div>
+<p><img src="Machine-Learning_files/figure-html/unnamed-chunk-124-1.png" width="70%" style="display: block; margin: auto;" /> We definitely need a way of visualizing and quantifying the relations between variables for a moderate to large amount of variables. PCA will be a handy way. Recall what PCA does:</p>
 <ol style="list-style-type: decimal">
 <li>Takes the data for the variables <span class="math inline">\(X_1,\ldots,X_p\)</span>.</li>
 <li>Using this data, looks for new variables <span class="math inline">\(\text{PC}_1,\ldots \text{PC}_p\)</span> such that:
@@ -974,9 +972,9 @@ pca<span class="op">$</span>loadings
 <span class="co"># Scatterplot matrix of the scores - they are uncorrelated!</span>
 <span class="kw">scatterplotMatrix</span>(pca<span class="op">$</span>scores, <span class="dt">reg.line =</span> lm, <span class="dt">smooth =</span> <span class="ot">FALSE</span>, <span class="dt">spread =</span> <span class="ot">FALSE</span>,
                   <span class="dt">span =</span> <span class="fl">0.5</span>, <span class="dt">ellipse =</span> <span class="ot">FALSE</span>, <span class="dt">levels =</span> <span class="kw">c</span>(.<span class="dv">5</span>, .<span class="dv">9</span>), <span class="dt">id.n =</span> <span class="dv">0</span>,
-                  <span class="dt">diagonal =</span> <span class="st">&#39;histogram&#39;</span>)
-<span class="co">#ans&gt; Error in eval(expr, envir, enclos): could not find function &quot;scatterplotMatrix&quot;</span>
-
+                  <span class="dt">diagonal =</span> <span class="st">&#39;histogram&#39;</span>)</code></pre></div>
+<p><img src="Machine-Learning_files/figure-html/unnamed-chunk-125-1.png" width="70%" style="display: block; margin: auto;" /></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">
 <span class="co"># Means of the variables - before PCA the variables are centered</span>
 pca<span class="op">$</span>center
 <span class="co">#ans&gt;    Agr    Min    Man    Pow    Con    Ser    Fin    Soc    Tra </span>
@@ -1003,11 +1001,11 @@ pca<span class="op">$</span>scale
 
 <span class="co"># Scree plot - the variance of each component</span>
 <span class="kw">plot</span>(pca)</code></pre></div>
-<p><img src="Machine-Learning_files/figure-html/unnamed-chunk-125-1.png" width="70%" style="display: block; margin: auto;" /></p>
+<p><img src="Machine-Learning_files/figure-html/unnamed-chunk-125-2.png" width="70%" style="display: block; margin: auto;" /></p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">
 <span class="co"># With connected lines - useful for looking for the &quot;elbow&quot;</span>
 <span class="kw">plot</span>(pca, <span class="dt">type =</span> <span class="st">&quot;l&quot;</span>)</code></pre></div>
-<p><img src="Machine-Learning_files/figure-html/unnamed-chunk-125-2.png" width="70%" style="display: block; margin: auto;" /></p>
+<p><img src="Machine-Learning_files/figure-html/unnamed-chunk-125-3.png" width="70%" style="display: block; margin: auto;" /></p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">
 <span class="co"># PC1 and PC2</span>
 pca<span class="op">$</span>loadings[, <span class="dv">1</span><span class="op">:</span><span class="dv">2</span>]

@@ -7,7 +7,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <title>Machine Learning</title>
   <meta name="description" content="Machine Learning course">
-  <meta name="generator" content="bookdown 0.5 and GitBook 2.6.7">
+  <meta name="generator" content="bookdown 0.6 and GitBook 2.6.7">
 
   <meta property="og:title" content="Machine Learning" />
   <meta property="og:type" content="book" />
@@ -25,7 +25,7 @@
 <meta name="author" content="Mohamad Ghassany">
 
 
-<meta name="date" content="2018-02-26">
+<meta name="date" content="2018-03-01">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -96,7 +96,7 @@ code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* Com
 code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
 </style>
 
-<link rel="stylesheet" href="css/style.css" type="text/css" />
+<link rel="stylesheet" href="css\style.css" type="text/css" />
 </head>
 
 <body>
@@ -285,8 +285,9 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <h1>PW 6</h1>
 <div id="the-iris-dataset" class="section level2 unnumbered">
 <h2>The Iris Dataset</h2>
-<p>The iris dataset contains measurements for 150 iris flowers from three different species.</p>
-<p>The three classes in the Iris dataset are:</p>
+<p>The <strong><em>Iris flower dataset</em></strong> or <strong><em>Fisher’s Iris dataset</em></strong> is a multivariate data set introduced by the British statistician and biologist <a href="https://en.wikipedia.org/wiki/Ronald_Fisher">Ronald Fisher</a> in his <strong>1936</strong> paper<span class="citation">(FISHER <a href="#ref-Fisher1936">1936</a>)</span>.</p>
+<p>The data set consists of 50 samples from each of three species of Iris. Four features were measured from each sample.</p>
+<p>The three species in the Iris dataset are:</p>
 <ol style="list-style-type: decimal">
 <li><em>Iris-setosa</em> (<span class="math inline">\(n_1=50\)</span>)</li>
 <li><em>Iris-versicolor</em> (<span class="math inline">\(n_2=50\)</span>)</li>
@@ -328,9 +329,6 @@ Transform the original dataset <span class="math inline"><em>X</em></span> via <
 <div id="data-pre-processing" class="section level3 unnumbered">
 <h3>Data pre-processing</h3>
 <p><strong>1.</strong> Download the iris dataset from  <a target="_blank" href="datasets/iris.data"> here <i class="fa fa-table" aria-hidden="true"></i></a> and import it into <code>R</code>.</p>
-<pre><code>#ans&gt; Warning in file(file, &quot;rt&quot;): cannot open URL &#39;http://mghassany.com/
-#ans&gt; MLcourse/datasets/iris.data&#39;: HTTP status was &#39;404 Not Found&#39;
-#ans&gt; Error in file(file, &quot;rt&quot;): cannot open the connection</code></pre>
 <p><strong>2.</strong> Show the last 5 rows of the iris dataset.</p>
 <p><strong>Exploratory analysis</strong></p>
 <p><strong>3.</strong> To explore how the 3 different flower classes are distributed along the 4 different features, visualize them via histograms.</p>
@@ -447,6 +445,12 @@ The “projection matrix” is basically just a matrix of our concatenated top <
 
 
 
+<h3><span class="header-section-number">E</span> References</h3>
+<div id="refs" class="references">
+<div id="ref-Fisher1936">
+<p>FISHER, R. A. 1936. “THE Use of Multiple Measurements in Taxonomic Problems.” <em>Annals of Eugenics</em> 7 (2). Blackwell Publishing Ltd: 179–88. doi:<a href="https://doi.org/10.1111/j.1469-1809.1936.tb02137.x">10.1111/j.1469-1809.1936.tb02137.x</a>.</p>
+</div>
+</div>
             </section>
 
           </div>
@@ -494,9 +498,11 @@ gitbook.start({
   (function () {
     var script = document.createElement("script");
     script.type = "text/javascript";
-    script.src  = "https://cdn.bootcss.com/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML";
-    if (location.protocol !== "file:" && /^https?:/.test(script.src))
-      script.src  = script.src.replace(/^https?:/, '');
+    var src = "";
+    if (src === "" || src === "true") src = "https://cdn.bootcss.com/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:" && /^https?:/.test(src))
+      src = src.replace(/^https?:/, '');
+    script.src = src;
     document.getElementsByTagName("head")[0].appendChild(script);
   })();
 </script>

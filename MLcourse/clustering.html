@@ -32,8 +32,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black">
   
   
-<link rel="prev" href="pw-4.html">
-<link rel="next" href="pw-5.html">
+<link rel="prev" href="pw-6.html">
+<link rel="next" href="app-introRStudio.html">
 <script src="book_assets/jquery-2.2.3/jquery.min.js"></script>
 <link href="book_assets/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="book_assets/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
@@ -292,145 +292,197 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="model-selection" class="section level1">
-<h1><span class="header-section-number">5</span> Model Selection</h1>
-<div id="linear-model-selection-and-best-subset-selection" class="section level2">
-<h2><span class="header-section-number">5.1</span> Linear Model Selection and Best Subset Selection</h2>
-<iframe width="560" height="349" src="https://www.youtube.com/embed/91si52nk3LA" frameborder="0" allowfullscreen>
-</iframe>
+<div id="clustering" class="section level1">
+<h1><span class="header-section-number">7</span> Clustering</h1>
+<div id="unsupervised-learning-1" class="section level2">
+<h2><span class="header-section-number">7.1</span> Unsupervised Learning</h2>
+<p>Previously we considered <em>supervised</em> learning methods such as regression and classification, where we typically have access to a set of <span class="math inline">\(p\)</span> features <span class="math inline">\(X_1,X_2,\ldots,X_p\)</span>, measured on <span class="math inline">\(n\)</span> observations, and a response <span class="math inline">\(Y\)</span> also measured on those same <span class="math inline">\(n\)</span> observations (what we call <strong>labels</strong>). The goal was then to predict <span class="math inline">\(Y\)</span> using <span class="math inline">\(X_1,X_2,\ldots,X_p\)</span>. From now on we will instead focus on <strong>unsupervised</strong> learning, a set of statistical tools where we have only a set of features <span class="math inline">\(X_1,X_2,\ldots,X_p\)</span> measured on <span class="math inline">\(n\)</span> observations. We are not interested in prediction, because we do not have an associated response variable <span class="math inline">\(Y\)</span>. Rather, the goal is to discover interesting things about the measurements on <span class="math inline">\(X_1,X_2,\ldots,X_p\)</span>. Is there an informative way to visualize the data? Can we discover subgroups among the variables or among the observations? Unsupervised learning refers to a diverse set of techniques for answering questions such as these. In this chapter, we will focus on a particular type of unsupervised learning: Principal Components Analysis (PCA), a tool used for <em>data visualization</em> or <em>data pre-processing</em> before supervised techniques are applied. In the next chapters, we will talk about clustering, another particular type of unsupervised learning. Clustering is a broad class of methods for discovering unknown subgroups in data.</p>
+<p>Unsupervised learning is often much more challenging than supervised learning. The exercise tends to be more subjective, and there is no simple goal for the analysis, such as prediction of a response. Unsupervised learning is often performed as part of an <em>exploratory data analysis</em>. It is hard to assess the results obtained from unsupervised learning methods. If we fit a predictive model using a supervised learning technique, then it is possible to check our work by seeing how well our model predicts the response <span class="math inline">\(Y\)</span> on observations not used in fitting the model. But in unsupervised learning, there is no way to check our work because we don’t know the true answer: the problem is <em>unsupervised</em>.</p>
 </div>
-<div id="forward-stepwise-selection" class="section level2">
-<h2><span class="header-section-number">5.2</span> Forward Stepwise Selection</h2>
-<iframe width="560" height="349" src="https://www.youtube.com/embed/nLpJd_iKmrE" frameborder="0" allowfullscreen>
-</iframe>
+<div id="clustering-kmeans" class="section level2">
+<h2><span class="header-section-number">7.2</span> Clustering: kmeans</h2>
+<p><strong>Clustering</strong> (or Cluster analysis) is the collection of techniques designed to find subgroups or <em>clusters</em> in a dataset of variables <span class="math inline">\(X_1,\ldots,X_p\)</span>. Depending on the similarities between the observations, these are partitioned in homogeneous groups as separated as possible between them. Clustering methods can be classified into two main categories:</p>
+<ul>
+<li><strong>Partition methods</strong>. Given a fixed number of cluster <span class="math inline">\(k\)</span>, these methods aim to assign each observation of <span class="math inline">\(X_1,\ldots,X_p\)</span> to a unique cluster, in such a way that the <em>within-cluster variation</em> is as small as possible (the clusters are as homogeneous as possible) while the <em>between cluster variation</em> is as large as possible (the clusters are as separated as possible).</li>
+<li><strong>Hierarchical methods</strong>. These methods construct a hierarchy for the observations in terms of their similitudes. This results in a tree-based representation of the data in terms of a <em>dendogram</em>, which depicts how the observations are clustered at different levels – from the smallest groups of one element to the largest representing the whole dataset.</li>
+</ul>
+<p>In this chapter we will see the basics of the most well-known <strong>partition method</strong>, namely <em><span class="math inline">\(k\)</span>-means clustering</em>.</p>
 </div>
-<div id="backward-stepwise-selection" class="section level2">
-<h2><span class="header-section-number">5.3</span> Backward Stepwise Selection</h2>
-<iframe width="560" height="349" src="https://www.youtube.com/embed/NJhMSpI2Uj8" frameborder="0" allowfullscreen>
-</iframe>
+<div id="introduction-4" class="section level2">
+<h2><span class="header-section-number">7.3</span> Introduction</h2>
+<p><strong>Clustering</strong> (or Cluster analysis) is the process of partitioning a set of data objects (observations) into subsets. Each subset is a <strong>cluster</strong>, such that objects in a cluster are similar to one another, yet dissimilar to objects in other clusters.</p>
+<p>The set of clusters resulting from a cluster analysis can be referred to as a clustering. In this context, different clustering methods may generate different clusterings on the same data set. The partitioning is not performed by humans, but by the clustering algorithm. Hence, clustering is useful in that it can lead to the discovery of previously unknown groups within the data.</p>
+<p>Example: Imagine a Director of Customer Relationships at an Electronics magazine, and he has five managers working for him. He would like to organize all the company’s customers into five groups so that each group can be assigned to a different manager. Strategically, he would like that the customers in each group are as similar as possible. Moreover, two given customers having very different business patterns should not be placed in the same group. His intention behind this business strategy is to develop customer relationship campaigns that specifically target each group, based on common features shared by the customers per group. Unlike in classification, the class <strong>label</strong> of each customer is unknown. He needs to discover these groupings. Given a large number of customers and many attributes describing customer profiles, it can be very costly or even infeasible to have a human study the data and manually come up with a way to partition the customers into strategic groups. He needs a <em>clustering</em> tool to help.</p>
+<p>Clustering has been widely used in many applications such as business intelligence, image pattern recognition, Web search, biology, and security. In business intelligence, clustering can be used to organize a large number of customers into groups, where customers within a group share strong similar characteristics. In image recognition, clustering can be used to discover clusters or “subclasses” in handwritten character recognition systems. Suppose we have a data set of handwritten digits, where each digit is labeled as either 1, 2, 3, and so on. Clustering has also found many applications in Web search. For example, a keyword search may often return a very large number of hits (i.e., pages relevant to the search) due to the extremely large number of web pages. Clustering can be used to organize the search results into groups and present the results in a concise and easily accessible way. Moreover, clustering techniques have been developed to cluster documents into topics, which are commonly used in information retrieval practice.</p>
+<p>Clustering is also called <strong>data segmentation</strong> in some applications because clustering partitions large data sets into groups according to their <em>similarity</em>.</p>
+<p>As a branch of statistics, clustering has been extensively studied, with the main focus on <em>distance-based cluster analysis</em>. Clustering tools were proposed like <strong><span class="math inline">\(k\)</span>-means</strong>, <strong>fuzzy <span class="math inline">\(c\)</span>-means</strong>, and several other methods.</p>
+<p>Many clustering algorithms have been introduced in the literature. Since clusters can formally be seen as subsets of the data set, one possible classification of clustering methods can be according to whether the subsets are <strong>fuzzy</strong> or <strong>crisp</strong> (<strong>hard</strong>).</p>
+<div id="hard-clustering" class="section level3 unnumbered">
+<h3>Hard clustering</h3>
+<p>Hard clustering methods are based on classical set theory, and require that an object either does or does not belong to a cluster. Hard clustering means partitioning the data into a specified number of mutually exclusive subsets. The most common hard clustering method is <span class="math inline">\(k\)</span>-means.</p>
 </div>
-<div id="estimating-test-error-using-mallows-cp-aic-bic-adjusted-r-squared" class="section level2">
-<h2><span class="header-section-number">5.4</span> Estimating Test Error Using Mallow’s Cp, AIC, BIC, Adjusted R-squared</h2>
-<iframe width="560" height="349" src="https://www.youtube.com/embed/LkifE44myLc" frameborder="0" allowfullscreen>
-</iframe>
+<div id="fuzzy-clustering" class="section level3 unnumbered">
+<h3>Fuzzy clustering</h3>
+<p>Fuzzy clustering methods, however, allow the objects to belong to several clusters simultaneously, with different degrees of membership. In many situations, fuzzy clustering is more natural than hard clustering. The most know technique of fuzzy clustering is the fuzzy <span class="math inline">\(c\)</span>-means.</p>
 </div>
-<div id="estimating-test-error-using-cross-validation" class="section level2">
-<h2><span class="header-section-number">5.5</span> Estimating Test Error Using Cross-Validation</h2>
-<iframe width="560" height="349" src="https://www.youtube.com/embed/3p9JNaJCOb4" frameborder="0" allowfullscreen>
-</iframe>
-<!-- ## SVM tutorial in R -->
-<!-- Linear SVM classifier -->
-<!-- --------------------- -->
-<!-- Lets generate some data in two dimensions, and make them a little separated. -->
-<!-- ```{r} -->
-<!-- set.seed(10111) -->
-<!-- x=matrix(rnorm(40),20,2) -->
-<!-- y=rep(c(-1,1),c(10,10)) -->
-<!-- x[y==1,]=x[y==1,]+1 -->
-<!-- plot(x,col=y+3,pch=19) -->
-<!-- ``` -->
-<!-- Now we will load the package `e1071` which contains the `svm` function we will use. We then compute the fit. Notice that we have to specify a `cost` parameter, which is a tuning parameter.  -->
-<!-- ```{r} -->
-<!-- library(e1071) -->
-<!-- dat=data.frame(x,y=as.factor(y)) -->
-<!-- svmfit=svm(y~.,data=dat,kernel="linear",cost=10,scale=FALSE) -->
-<!-- print(svmfit) -->
-<!-- plot(svmfit,dat) -->
-<!-- ``` -->
-<!-- As mentioned in the the chapter, the plot function is somewhat crude, and plots X2 on the horizontal axis (unlike what R would do automatically for a matrix). Lets see how we might make our own plot. -->
-<!-- The first thing we will do is make a grid of values for X1 and X2. We will write a function to do that, -->
-<!-- in case we want to reuse it. It uses the handy function `expand.grid`, and produces the coordinates of `n*n` points on a lattice covering the domain of `x`. Having made the lattice, we make a prediction at each point on the lattice. We then plot the lattice, color-coded according to the classification. Now we can see the decision boundary. -->
-<!-- The support points (points on the margin, or on the wrong side of the margin) are indexed in the `$index` component of the fit. -->
-<!-- ```{r} -->
-<!-- make.grid=function(x,n=75){ -->
-<!--   grange=apply(x,2,range) -->
-<!--   x1=seq(from=grange[1,1],to=grange[2,1],length=n) -->
-<!--   x2=seq(from=grange[1,2],to=grange[2,2],length=n) -->
-<!--   expand.grid(X1=x1,X2=x2) -->
-<!--   } -->
-<!-- xgrid=make.grid(x) -->
-<!-- ygrid=predict(svmfit,xgrid) -->
-<!-- plot(xgrid,col=c("red","blue")[as.numeric(ygrid)],pch=20,cex=.2) -->
-<!-- points(x,col=y+3,pch=19) -->
-<!-- points(x[svmfit$index,],pch=5,cex=2) -->
-<!-- ``` -->
-<!-- The `svm` function is not too friendly, in that we have to do some work to get back the linear coefficients, as described in the text. Probably the reason is that this only makes sense for linear kernels, and the function is more general. Here we will use a formula to extract the coefficients; for those interested in where this comes from, have a look in chapter 12 of ESL ("Elements of Statistical Learning"). -->
-<!-- We extract the linear coefficients, and then using simple algebra, we include the decision boundary and the two margins. -->
-<!-- ```{r} -->
-<!-- beta=drop(t(svmfit$coefs)%*%x[svmfit$index,]) -->
-<!-- beta0=svmfit$rho -->
-<!-- plot(xgrid,col=c("red","blue")[as.numeric(ygrid)],pch=20,cex=.2) -->
-<!-- points(x,col=y+3,pch=19) -->
-<!-- points(x[svmfit$index,],pch=5,cex=2) -->
-<!-- abline(beta0/beta[2],-beta[1]/beta[2]) -->
-<!-- abline((beta0-1)/beta[2],-beta[1]/beta[2],lty=2) -->
-<!-- abline((beta0+1)/beta[2],-beta[1]/beta[2],lty=2) -->
-<!-- ``` -->
-<!-- Just like for the other models in this book, the tuning parameter `C` has to be selected. -->
-<!-- Different values will give different solutions. Rerun the code above, but using `C=1`, and see what we mean. One can use cross-validation to do this. -->
-<!-- Nonlinear SVM -->
-<!-- -------------- -->
-<!-- Instead, we will run the SVM on some data where a non-linear boundary is called for. We will use the mixture data from ESL -->
-<!-- ```{r} -->
-<!-- load("datasets/ESL.mixture.rda") -->
-<!-- names(ESL.mixture) -->
-<!-- rm(x,y) -->
-<!-- attach(ESL.mixture) -->
-<!-- ``` -->
-<!-- These data are also two dimensional. Lets plot them and fit a nonlinear SVM, using a radial kernel. -->
-<!-- ```{r} -->
-<!-- plot(x,col=y+1) -->
-<!-- dat=data.frame(y=factor(y),x) -->
-<!-- fit=svm(factor(y)~.,data=dat,scale=FALSE,kernel="radial",cost=5) -->
-<!-- ``` -->
-<!-- Now we are going to create a grid, as before, and make predictions on the grid. -->
-<!-- These data have the grid points for each variable included on the data frame. -->
-<!-- ```{r} -->
-<!-- xgrid=expand.grid(X1=px1,X2=px2) -->
-<!-- ygrid=predict(fit,xgrid) -->
-<!-- plot(xgrid,col=as.numeric(ygrid),pch=20,cex=.2) -->
-<!-- points(x,col=y+1,pch=19) -->
-<!-- ``` -->
-<!-- We can go further, and have the predict function produce the actual function estimates at each of our grid points. We can include the actual decision boundary on the plot by making use of the contour function. On the dataframe is also `prob`, which is the true probability of class 1 for these data, at the gridpoints. If we plot its 0.5 contour, that will give us the _Bayes Decision Boundary_, which is the best one could ever do. -->
-<!-- ```{r} -->
-<!-- func=predict(fit,xgrid,decision.values=TRUE) -->
-<!-- func=attributes(func)$decision -->
-<!-- xgrid=expand.grid(X1=px1,X2=px2) -->
-<!-- ygrid=predict(fit,xgrid) -->
-<!-- plot(xgrid,col=as.numeric(ygrid),pch=20,cex=.2) -->
-<!-- points(x,col=y+1,pch=19) -->
-<!-- contour(px1,px2,matrix(func,69,99),level=0,add=TRUE) -->
-<!-- contour(px1,px2,matrix(prob,69,99),level=.5,add=TRUE,col="blue",lwd=2) -->
-<!-- ``` -->
-<!-- We see in this case that the radial kernel has done an excellent job. -->
 </div>
-<div id="examples" class="section level2">
-<h2><span class="header-section-number">5.6</span> Examples</h2>
-<div id="best-subset-selection" class="section level3">
-<h3><span class="header-section-number">5.6.1</span> Best Subset Selection</h3>
-<iframe width="560" height="349" src="https://www.youtube.com/embed/3kwdDGnV8MM" frameborder="0" allowfullscreen>
-</iframe>
+<div id="k-means" class="section level2">
+<h2><span class="header-section-number">7.4</span> <span class="math inline">\(k\)</span>-Means</h2>
+<p>If you have ever watched a group of tourists with a couple of tour guides who hold umbrellas up so that everybody can see them and follow them, then you have seen a dynamic version of the <span class="math inline">\(k\)</span>-means algorithm. <span class="math inline">\(k\)</span>-means is even simpler, because the data (playing the part of the tourists) does not move, only the tour guides move.</p>
+<p>Suppose that we want to divide our input data into <span class="math inline">\(K\)</span> categories, where we know the value of <span class="math inline">\(K\)</span>. We allocate <span class="math inline">\(K\)</span> <em>cluster centres</em> (also called <em>prototypes</em> or <em>centroids</em>) to our input space, and we would like to position these centres so that there is one cluster centre in the middle of each cluster. However, we don’t know where the clusters are, let alone where their ‘middle’ is, so we need an algorithm that will find them. Learning algorithms generally try to minimize some sort of error, so we need to think of an error criterion that describes this aim. There are two things that we need to define:</p>
+<p><strong>A distance measure</strong>: In order to talk about distances between points, we need some way to measure distances. It is often the normal <strong>Euclidean</strong> distance, but there are other alternatives like Manhattan distance, Correlation distance, Chessboard distance and other.</p>
+<p>The Euclidean distance: Let <span class="math inline">\(x=(x_1,x_2)\)</span> and <span class="math inline">\(y=(y_1,y_2)\)</span> two observations in a two-dimensional space. The Euclidean distance <span class="math inline">\(d_{x,y}\)</span> between <span class="math inline">\(x\)</span> and <span class="math inline">\(y\)</span> is</p>
+<span class="math display">\[\begin{align*}  
+d_{x,y}^2 &amp;= (x_1-y_1)^2+(x_2 - y_2)^2  \\
+d_{x,y} &amp;= \sqrt{(x_1-y_1)^2+(x_2 - y_2)^2}
+\end{align*}\]</span>
+<p><strong>The mean average</strong>: Once we have a distance measure, we can compute the central point of a set of data points, which is the mean average. Actually, this is only true in Euclidean space, which is the one we are used to, where everything is nice and flat.</p>
+<p>We can now think about a suitable way of positioning the cluster centres: we compute the mean point of each cluster, <span class="math inline">\(\textbf{v}_k\)</span>, <span class="math inline">\(i=1,\ldots,K\)</span>, and put the cluster centre there. This is equivalent to minimizing the Euclidean distance (which is the sum-of-squares error) from each data point to its cluster centre. Then we decide which points belong to which clusters by associating each point with the cluster centre that it is closest to. This changes as the algorithm iterates. We start by positioning the cluster centres <strong>randomly</strong> though the input space, since we don’t know where to put them, and we update their positions according to the data. We decide which cluster each data point belongs to by computing the distance between each data point and all of the cluster centres, and assigning it to the cluster that is the closest. For all the point that are assigned to a cluster, we then compute the mean of them, and move the cluster centre to that place. We iterate the algorithm until the cluster centres stop moving.</p>
+<p>It is convenient at this point to define some notation to describe the assignment of data points to clusters. For each data point <span class="math inline">\(x_i\)</span>, we introduce a corresponding set of binary indicator variables <span class="math inline">\(u_{ki} \in {0,1}\)</span>, where <span class="math inline">\(k=1,\ldots,K\)</span> describing which of the <span class="math inline">\(K\)</span> clusters the data point <span class="math inline">\(x_i\)</span> is assigned to, so that if data point <span class="math inline">\(x_i\)</span> is assigned to cluster <span class="math inline">\(k\)</span> then <span class="math inline">\(u_{ki}= 1\)</span>, and <span class="math inline">\(u_{kj}= 0\)</span> for <span class="math inline">\(j \neq i\)</span>. This is known as the <span class="math inline">\(1\)</span>-of-<span class="math inline">\(K\)</span> coding scheme. We can then define an objective function (and sometimes called a <em>distortion measure</em>), given by</p>
+<p><span class="math display">\[J= \sum_{i=1}^{N} \sum_{i=k=1}^{K} u_{ki} \| x_{i}- \mathbf{v}_{k} \|^2\]</span></p>
+<p>which represents the sum of the squares of the distances of each data point to its assigned vector <span class="math inline">\(\mathbf{v}_{k}\)</span>. The goal is to find values for the <span class="math inline">\(\{u_{ki}\}\)</span> and the <span class="math inline">\(\{\mathbf{v}_{k}\}\)</span> so as to minimize <span class="math inline">\(J\)</span>. We can do this through an iterative procedure in which each iteration involves two successive steps corresponding to successive optimizations with respect to the <span class="math inline">\(u_{ki}\)</span> and the <span class="math inline">\(\mathbf{v}_{k}\)</span>. The algorithm of <span class="math inline">\(k\)</span>-means is described in the following algorithm:</p>
+<table>
+<colgroup>
+<col width="37%" />
+<col width="62%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>The <span class="math inline">\(k\)</span>-means algorithm</th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><p><strong>Data</strong>:</p></td>
+<td><p><span class="math inline">\(\textbf{X}=\{x_{ij}, i=1,\ldots,n, j=1,\ldots,p\}\)</span></p></td>
+</tr>
+<tr class="even">
+<td><p><strong>Result</strong>:</p></td>
+<td><p>Cluster centres (Prototypes)</p></td>
+</tr>
+<tr class="odd">
+<td><p><strong>Initialization</strong>:</p></td>
+<td><ul>
+<li>Choose a value for <span class="math inline">\(K\)</span>.</li>
+<li>Choose <span class="math inline">\(K\)</span> random positions in the input space.</li>
+<li>Assign the prototypes <span class="math inline">\(\mathbf{v}_{k}\)</span> to those positions</li>
+</ul></td>
+</tr>
+<tr class="even">
+<td><p><strong>Learning</strong>: <strong>repeat</strong></p></td>
+<td><p><strong>for</strong> <em>each data point <span class="math inline">\(x_i\)</span></em> <strong>do</strong></p>
+<ul>
+<li>compute the distance to each prototype: <span class="math display">\[d_{ki}= \text{min}_k d(x_i,\mathbf{v}_k)\]</span></li>
+<li>assign the data point to the nearest prototype with distance <span class="math display">\[u_{ki}= \left\lbrace \begin{array}{ll}  1   &amp; \mbox{if} \quad k = argmin_j \| x_i -\mathbf{v}_k \|^2 \\  0 &amp; \mbox{otherwise} \end{array} \right.\]</span></li>
+</ul>
+<p><strong>for</strong> <em>each prototype</em> <strong>do</strong></p>
+<ul>
+<li>move the position of the prototype to the mean of the points in that cluster: <span class="math display">\[\mathbf{v}_k = \frac{\sum_i u_{ki} x_i}{\sum_i u_{ki}}\]</span></li>
+</ul>
+<p>Until the prototypes stop moving.</p></td>
+</tr>
+</tbody>
+</table>
+<div class="rmdinsight">
+<p>
+The <span class="math inline"><em>k</em></span>-means algorithm produces
+</p>
+<ul>
+<li>
+A final estimate of cluster centroids (i.e. their coordinates).
+</li>
+<li>
+An assignment of each point to their respective cluster.
+</li>
+</ul>
 </div>
-<div id="forward-stepwise-selection-and-model-selection-using-validation-set" class="section level3">
-<h3><span class="header-section-number">5.6.2</span> Forward Stepwise Selection and Model Selection Using Validation Set</h3>
-<iframe width="560" height="349" src="https://www.youtube.com/embed/mv-vdysZIb4" frameborder="0" allowfullscreen>
-</iframe>
+<p>The denominator in the expression <span class="math inline">\(\mathbf{v}_k = \frac{\sum_i u_{ki} x_i}{\sum_i u_{ki}}\)</span> is equal to the number of points assigned to cluster <span class="math inline">\(k\)</span>, and so this result has a simple interpretation, namely set <span class="math inline">\(\mathbf{v}_k\)</span> equal to the mean of all of the data points <span class="math inline">\(x_i\)</span> assigned to cluster <span class="math inline">\(k\)</span>. For this reason, the procedure is known as the <span class="math inline">\(k\)</span>-means algorithm.</p>
+<p>The two phases of re-assigning data points to clusters and re-computing the cluster means are repeated in turn until there is no further change in the assignments (or until some maximum number of iterations is exceeded). Because each phase reduces the value of the objective function <span class="math inline">\(J\)</span>, convergence of the algorithm is assured. However, it may converge to a local rather than global minimum of <span class="math inline">\(J\)</span>.</p>
+<p>The <span class="math inline">\(k\)</span>-means algorithm is illustrated using the Old Faithful data set<a href="#fn12" class="footnoteRef" id="fnref12"><sup>12</sup></a> in following figure.</p>
+<div class="figure" style="text-align: center"><span id="fig:oldfaithful"></span>
+<img src="img/kmeans.png" alt="Illustration of the $k$-means algorithm using the re-scaled Old Faithful data set, where $k=2$. We can see how the $k$-means algorithm works. (a) The first thing $k$-means has to do is assign an initial set of centroids. (b) The next stage in the algorithm assigns every point in the dataset to the closest centroid. (c) The next stage is the re-calculate the centroids based on the new cluster assignments of the data points. (d) Now we have completed one full cycle of the algorithm we can continue and re-assign points to their (new) closest cluster centroid. (e) And we can update the centroid positions one more time based on the re-assigned points. (g)(h)(f) The algorithm stops when we obtain the same results in consecutive iterations." width="90%" />
+<p class="caption">
+Figure 7.1: Illustration of the <span class="math inline">\(k\)</span>-means algorithm using the re-scaled Old Faithful data set, where <span class="math inline">\(k=2\)</span>. We can see how the <span class="math inline">\(k\)</span>-means algorithm works. (a) The first thing <span class="math inline">\(k\)</span>-means has to do is assign an initial set of centroids. (b) The next stage in the algorithm assigns every point in the dataset to the closest centroid. (c) The next stage is the re-calculate the centroids based on the new cluster assignments of the data points. (d) Now we have completed one full cycle of the algorithm we can continue and re-assign points to their (new) closest cluster centroid. (e) And we can update the centroid positions one more time based on the re-assigned points. (g)(h)(f) The algorithm stops when we obtain the same results in consecutive iterations.
+</p>
 </div>
-<div id="model-selection-using-cross-validation" class="section level3">
-<h3><span class="header-section-number">5.6.3</span> Model Selection Using Cross-Validation</h3>
-<iframe width="560" height="349" src="https://www.youtube.com/embed/F8MMHCCoALU" frameborder="0" allowfullscreen>
+<p>The <span class="math inline">\(k\)</span>-means algorithm is illustrated using the Iris data set in following interactive figure<a href="#fn13" class="footnoteRef" id="fnref13"><sup>13</sup></a>. (Try to modify the X and Y variables and the numbers of chosen clusters and see the result)</p>
+<center>
+<iframe src="https://jjallaire.shinyapps.io/shiny-kmeans/?showcase=0" width="90%" height="900px">
 </iframe>
+</center>
+</div>
+<div id="k-means-in-r" class="section level2">
+<h2><span class="header-section-number">7.5</span> <span class="math inline">\(k\)</span>-means in <code>R</code></h2>
+<p>We will use an example with simulated data to demonstrate how the <span class="math inline">\(k\)</span>-means algorithm works. Here we simulate some data from three clusters and plot the dataset below.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">set.seed</span>(<span class="dv">1234</span>)
+x &lt;-<span class="st"> </span><span class="kw">rnorm</span>(<span class="dv">12</span>,<span class="dt">mean=</span><span class="kw">rep</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">3</span>,<span class="dt">each=</span><span class="dv">4</span>),<span class="dt">sd=</span><span class="fl">0.2</span>)
+y &lt;-<span class="st"> </span><span class="kw">rnorm</span>(<span class="dv">12</span>,<span class="dt">mean=</span><span class="kw">rep</span>(<span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">1</span>),<span class="dt">each=</span><span class="dv">4</span>),<span class="dt">sd=</span><span class="fl">0.2</span>)
+<span class="kw">plot</span>(x,y,<span class="dt">col=</span><span class="st">&quot;blue&quot;</span>,<span class="dt">pch=</span><span class="dv">19</span>,<span class="dt">cex=</span><span class="dv">2</span>)
+<span class="kw">text</span>(x<span class="op">+</span><span class="fl">0.05</span>,y<span class="op">+</span><span class="fl">0.05</span>,<span class="dt">labels=</span><span class="kw">as.character</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">12</span>))</code></pre></div>
+<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-164"></span>
+<img src="Machine-Learning_files/figure-html/unnamed-chunk-164-1.png" alt="Simulated dataset" width="70%" />
+<p class="caption">
+Figure 7.2: Simulated dataset
+</p>
+</div>
+<p>The <code>kmeans()</code> function in R implements the <span class="math inline">\(k\)</span>-means algorithm and can be found in the <code>stats</code> package, which comes with R and is usually already loaded when you start R. Two key parameters that you have to specify are <code>x</code>, which is a matrix or data frame of data, and <code>centers</code> which is either an integer indicating the number of clusters or a matrix indicating the locations of the initial cluster centroids. The data should be organized so that each row is an observation and each column is a variable or feature of that observation.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">dataFrame &lt;-<span class="st"> </span><span class="kw">data.frame</span>(x,y)
+kmeansObj &lt;-<span class="st"> </span><span class="kw">kmeans</span>(dataFrame,<span class="dt">centers=</span><span class="dv">3</span>)
+<span class="kw">names</span>(kmeansObj)
+<span class="co">#ans&gt; [1] &quot;cluster&quot;      &quot;centers&quot;      &quot;totss&quot;        &quot;withinss&quot;    </span>
+<span class="co">#ans&gt; [5] &quot;tot.withinss&quot; &quot;betweenss&quot;    &quot;size&quot;         &quot;iter&quot;        </span>
+<span class="co">#ans&gt; [9] &quot;ifault&quot;</span></code></pre></div>
+<p>You can see which cluster each data point got assigned to by looking at the <code>cluster</code> element of the list returned by the <code>kmeans()</code> function.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">kmeansObj<span class="op">$</span>cluster
+<span class="co">#ans&gt;  [1] 3 3 3 3 1 1 1 1 2 2 2 2</span></code></pre></div>
+<p>Here is a plot of the <span class="math inline">\(k\)</span>-means clustering solution.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">plot</span>(x,y,<span class="dt">col=</span>kmeansObj<span class="op">$</span>cluster,<span class="dt">pch=</span><span class="dv">19</span>,<span class="dt">cex=</span><span class="dv">2</span>)
+<span class="kw">points</span>(kmeansObj<span class="op">$</span>centers,<span class="dt">col=</span><span class="dv">1</span><span class="op">:</span><span class="dv">3</span>,<span class="dt">pch=</span><span class="dv">3</span>,<span class="dt">cex=</span><span class="dv">3</span>,<span class="dt">lwd=</span><span class="dv">3</span>)</code></pre></div>
+<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-167"></span>
+<img src="Machine-Learning_files/figure-html/unnamed-chunk-167-1.png" alt="$k$-means clustering solution" width="70%" />
+<p class="caption">
+Figure 7.3: <span class="math inline">\(k\)</span>-means clustering solution
+</p>
+</div>
+<div id="cluster-validity-choosing-the-number-of-clusters" class="section level3">
+<h3><span class="header-section-number">7.5.1</span> Cluster Validity, Choosing the Number of Clusters</h3>
+<p>The result of a clustering algorithm can be very different from each other on the same data set as the other input parameters of an algorithm can extremely modify the behavior and execution of the algorithm. The aim of the cluster validity is to find the partitioning that best fits the underlying data. Usually 2D data sets are used for evaluating clustering algorithms as the reader easily can verify the result. But in case of high dimensional data the visualization and visual validation is not a trivial tasks therefore some formal methods are needed.</p>
+<p>The process of evaluating the results of a clustering algorithm is called cluster validity assessment. Two measurement criteria have been proposed for evaluating and selecting an optimal clustering scheme:</p>
+<ul>
+<li><p><em>Compactness</em>: The member of each cluster should be as close to each other as possible. A common measure of compactness is the variance.</p></li>
+<li><p><em>Separation</em>: The clusters themselves should be widely separated. There are three common approaches measuring the distance between two different clusters: distance between the closest member of the clusters, distance between the most distant members and distance between the centres of the clusters.</p></li>
+</ul>
+<p>There are three different techniques for evaluating the result of the clustering algorithms, and several <em>Validity measures</em> are proposed: Validity measures are scalar indices that assess the goodness of the obtained partition. Clustering algorithms generally aim at locating well separated and compact clusters. When the number of clusters is chosen equal to the number of groups that actually exist in the data, it can be expected that the clustering algorithm will identify them correctly. When this is not the case, misclassifications appear, and the clusters are not likely to be well separated and compact. Hence, most cluster validity measures are designed to quantify the separation and the compactness of the clusters.</p>
+<div class="rmdinsight">
+<p>
+Check this answer on <code>stackoverflow</code> containing <code>R</code> code for several methods of computing an optimal value of <span class="math inline"><em>k</em></span> for <span class="math inline"><em>k</em></span>-means cluster analysis: <a target="_blank"  href="http://stackoverflow.com/a/15376462"><i class="fa fa-stack-overflow" aria-hidden="true"></i> here</a>.
+</p>
+</div>
+<p align="right">
+◼
+</p>
 
 </div>
 </div>
+</div>
+
+
+
+<div class="footnotes">
+<hr />
+<ol start="12">
+<li id="fn12"><p>Old Faithful, is a hydrothermal geyser in Yellowstone National Park in the state of Wyoming, U.S.A., and is a popular tourist attraction. Its name stems from the supposed regularity of its eruptions. The data set comprises 272 observations, each of which represents a single eruption and contains two variables corresponding to the duration in minutes of the eruption, and the time until the next eruption, also in minutes.<a href="clustering.html#fnref12">↩</a></p></li>
+<li id="fn13"><p>Made by Joseph J. Allaire <a href="https://github.com/jjallaire" class="uri">https://github.com/jjallaire</a><a href="clustering.html#fnref13">↩</a></p></li>
+</ol>
 </div>
             </section>
 
           </div>
         </div>
       </div>
-<a href="pw-4.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="pw-5.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="pw-6.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="app-introRStudio.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="book_assets/gitbook-2.6.7/js/app.min.js"></script>

@@ -32,8 +32,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black">
   
   
-<link rel="prev" href="pw-4.html">
-<link rel="next" href="pw-5.html">
+<link rel="prev" href="clustering.html">
+<link rel="next" href="app-introRStudio.html">
 <script src="book_assets/jquery-2.2.3/jquery.min.js"></script>
 <link href="book_assets/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="book_assets/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
@@ -300,145 +300,141 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="model-selection" class="section level1">
-<h1><span class="header-section-number">5</span> Model Selection</h1>
-<div id="linear-model-selection-and-best-subset-selection" class="section level2">
-<h2><span class="header-section-number">5.1</span> Linear Model Selection and Best Subset Selection</h2>
-<iframe width="560" height="349" src="https://www.youtube.com/embed/91si52nk3LA" frameborder="0" allowfullscreen>
-</iframe>
+<div id="pw-7" class="section level1 unnumbered">
+<h1>PW 7</h1>
+<p>In this practical work we will apply the <span class="math inline">\(k\)</span>-means clustering algorithm using the standard function <code>kmeans()</code> in <code>R</code>, we will use the dataset <code>La Liga 2015/2016</code>.</p>
+<!-- Use the following YAML header for the report that you must submit at the end of the session: -->
+<!-- ``` -->
+<!-- --- -->
+<!-- title: "Week 7" -->
+<!-- subtitle: "$k$-means clustering" -->
+<!-- author: LastName FirstName -->
+<!-- date: "05/03/2017" -->
+<!-- output: -->
+<!--   html_document: -->
+<!--     toc: true -->
+<!--     toc_depth: 2 -->
+<!--     toc_float: true -->
+<!--     theme: readable -->
+<!--     highlight: pygments -->
+<!-- --- -->
+<!-- ``` -->
+<div id="k-means-clustering" class="section level2 unnumbered">
+<h2><span class="math inline">\(k\)</span>-means clustering</h2>
+<p><strong>1.</strong> Download the dataset:  <a target="_blank" href="datasets/la-liga-15-16.csv"> LaLiga 2015-2016 <i class="fa fa-table" aria-hidden="true"></i></a> and import it into <code>R</code>. Put the argument <code>row.names</code> to 1.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># You can import directly from my website (instead of downloading it..)</span>
+laliga &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&quot;http://mghassany.com/MLcourse/datasets/la-liga-15-16.csv&quot;</span>, <span class="dt">row.names=</span><span class="dv">1</span>)</code></pre></div>
+<p><strong>2.</strong> Print the first two rows of the dataset and the total number of features in this dataset.</p>
+<div id="pointscards" class="section level3 unnumbered">
+<h3><code>pointsCards</code></h3>
+<p><strong>3.</strong> We will first consider a smaller dataset to easily understand the results of <span class="math inline">\(k\)</span>-means. Create a new dataset in which you consider only <code>Points</code> and <code>Yellow.cards</code> from the original dataset. Name it <code>pointsCards</code></p>
+<p><strong>4.</strong> Apply <span class="math inline">\(k\)</span>-means on <code>pointsCards</code>. Chose <span class="math inline">\(k=2\)</span> clusters and put the number of iterations to 20. Store your results into <code>km</code>. (<strong>Remark</strong>: <code>kmeans()</code> uses a random initialization of the clusters, so the results may vary from one call to another. Use <code>set.seed()</code> to have reproducible outputs).</p>
+<p><strong>5.</strong> Print and describe what is inside <code>km</code>.</p>
+<p><strong>6.</strong> What are the coordinates of the centers of the clusters (called also prototypes or centroids) ?</p>
+<p><strong>7.</strong> Plot the data (<code>Yellow.cards</code> vs <code>Points</code>). Color the points corresponding to their cluster.</p>
+<p><strong>8.</strong> Add to the previous plot the clusters centroids and add the names of the observations.</p>
+<p><strong>9.</strong> Re-run <span class="math inline">\(k\)</span>-means on <code>pointsCards</code> using 3 and 4 clusters and store the results into <code>km3</code> and <code>km4</code> respectively. Visualize the results like in question <strong>7</strong> and <strong>8</strong>.</p>
+<div class="rmdcaution">
+<p>
+How many clusters <span class="math inline"><em>k</em></span> do we need in practice? There is not a single answer: the advice is to try several and compare. Inspecting the ‘between_SS / total_SS’ for a good trade-off between the number of clusters and the percentage of total variation explained usually gives a good starting point for deciding on <span class="math inline"><em>k</em></span> (criterion to select <span class="math inline"><em>k</em></span> similar to PCA).
+</p>
+<p>
+There is several methods of computing an optimal value of <span class="math inline"><em>k</em></span> with <code>R</code> code on following <code>stackoverflow</code> answer: <a target="_blank"  href="http://stackoverflow.com/a/15376462"><i class="fa fa-stack-overflow" aria-hidden="true"></i> here</a>.
+</p>
 </div>
-<div id="forward-stepwise-selection" class="section level2">
-<h2><span class="header-section-number">5.2</span> Forward Stepwise Selection</h2>
-<iframe width="560" height="349" src="https://www.youtube.com/embed/nLpJd_iKmrE" frameborder="0" allowfullscreen>
-</iframe>
+<p><strong>10.</strong> Visualize the “within groups sum of squares” of the <span class="math inline">\(k\)</span>-means clustering results (use the code in the link above).</p>
+<p><strong>11.</strong> Modify the code of the previous question in order to visualize the ‘between_SS / total_SS’. Interpret the results.</p>
 </div>
-<div id="backward-stepwise-selection" class="section level2">
-<h2><span class="header-section-number">5.3</span> Backward Stepwise Selection</h2>
-<iframe width="560" height="349" src="https://www.youtube.com/embed/NJhMSpI2Uj8" frameborder="0" allowfullscreen>
-</iframe>
+<div id="laliga" class="section level3 unnumbered">
+<h3><code>laliga</code></h3>
+<p>So far, you have only taken the information of two variables for performing clustering. Now you will apply <code>kmeans()</code> on the original dataset <code>laliga</code>. Using PCA, we can visualize the clustering performed with all the available variables in the dataset.</p>
+<p>By default, <code>kmeans()</code> does not standardize the variables, which will affect the clustering result. As a consequence, the clustering of a dataset will be different if one variable is expressed in millions or in tenths. If you want to avoid this distortion, use scale to automatically center and standardize the dataset (the result will be a matrix, so you need to transform it to a data frame again).</p>
+<p><strong>12.</strong> Scale the dataset and transform it to a data frame again. Store the scaled dataset into <code>laliga_scaled</code>.</p>
+<p><strong>13.</strong> Apply <code>kmeans()</code> on <code>laliga</code> and on <code>laliga_scaled</code> using 3 clusters and 20 iterations. Store the results into <code>km.laliga</code> and <code>km.laliga.scaled</code> respectively (do not forget to set a seed)</p>
+<p><strong>14.</strong> How muny observations there are in each cluster of <code>km.laliga</code> and <code>km.laliga.scaled</code> ? (you can use <code>table()</code>). Do you obtain the same results when you perform <code>kmeans()</code> on the scaled and unscaled data?</p>
 </div>
-<div id="estimating-test-error-using-mallows-cp-aic-bic-adjusted-r-squared" class="section level2">
-<h2><span class="header-section-number">5.4</span> Estimating Test Error Using Mallow’s Cp, AIC, BIC, Adjusted R-squared</h2>
-<iframe width="560" height="349" src="https://www.youtube.com/embed/LkifE44myLc" frameborder="0" allowfullscreen>
-</iframe>
+<div id="pca" class="section level3 unnumbered">
+<h3><code>PCA</code></h3>
+<p><strong>15.</strong> Apply PCA on <code>laliga</code> dataset and store you results in <code>pcalaliga</code>. Do we need to apply PCA on the scaled dataset? Justify your answer.</p>
+<p><strong>16.</strong> Plot the observations and the variables on the first two principal components using <code>biplot()</code> function.</p>
+<p><strong>17.</strong> Redo the biplot (but with the <code>plot()</code> function) with colors indicating the cluster assignments.</p>
+<p><strong>18.</strong> Recall that the figure of question <strong>17</strong> is a visualization with PC1 and PC2 of the clustering done with all the variables, not just PC1 and PC2. Now apply the <code>kmeans()</code> clustering with only the first two PCs. Visualize the results and compare with the question <strong>17</strong>.</p>
+<div class="rmdinsight">
+<p>
+By applying <span class="math inline"><em>k</em></span>-means only on the PCs we obtain different and less accurate result, but it is still an insightful way.
+</p>
 </div>
-<div id="estimating-test-error-using-cross-validation" class="section level2">
-<h2><span class="header-section-number">5.5</span> Estimating Test Error Using Cross-Validation</h2>
-<iframe width="560" height="349" src="https://www.youtube.com/embed/3p9JNaJCOb4" frameborder="0" allowfullscreen>
-</iframe>
-<!-- ## SVM tutorial in R -->
-<!-- Linear SVM classifier -->
-<!-- --------------------- -->
-<!-- Lets generate some data in two dimensions, and make them a little separated. -->
-<!-- ```{r} -->
-<!-- set.seed(10111) -->
-<!-- x=matrix(rnorm(40),20,2) -->
-<!-- y=rep(c(-1,1),c(10,10)) -->
-<!-- x[y==1,]=x[y==1,]+1 -->
-<!-- plot(x,col=y+3,pch=19) -->
-<!-- ``` -->
-<!-- Now we will load the package `e1071` which contains the `svm` function we will use. We then compute the fit. Notice that we have to specify a `cost` parameter, which is a tuning parameter.  -->
-<!-- ```{r} -->
-<!-- library(e1071) -->
-<!-- dat=data.frame(x,y=as.factor(y)) -->
-<!-- svmfit=svm(y~.,data=dat,kernel="linear",cost=10,scale=FALSE) -->
-<!-- print(svmfit) -->
-<!-- plot(svmfit,dat) -->
-<!-- ``` -->
-<!-- As mentioned in the the chapter, the plot function is somewhat crude, and plots X2 on the horizontal axis (unlike what R would do automatically for a matrix). Lets see how we might make our own plot. -->
-<!-- The first thing we will do is make a grid of values for X1 and X2. We will write a function to do that, -->
-<!-- in case we want to reuse it. It uses the handy function `expand.grid`, and produces the coordinates of `n*n` points on a lattice covering the domain of `x`. Having made the lattice, we make a prediction at each point on the lattice. We then plot the lattice, color-coded according to the classification. Now we can see the decision boundary. -->
-<!-- The support points (points on the margin, or on the wrong side of the margin) are indexed in the `$index` component of the fit. -->
-<!-- ```{r} -->
-<!-- make.grid=function(x,n=75){ -->
-<!--   grange=apply(x,2,range) -->
-<!--   x1=seq(from=grange[1,1],to=grange[2,1],length=n) -->
-<!--   x2=seq(from=grange[1,2],to=grange[2,2],length=n) -->
-<!--   expand.grid(X1=x1,X2=x2) -->
-<!--   } -->
-<!-- xgrid=make.grid(x) -->
-<!-- ygrid=predict(svmfit,xgrid) -->
-<!-- plot(xgrid,col=c("red","blue")[as.numeric(ygrid)],pch=20,cex=.2) -->
-<!-- points(x,col=y+3,pch=19) -->
-<!-- points(x[svmfit$index,],pch=5,cex=2) -->
-<!-- ``` -->
-<!-- The `svm` function is not too friendly, in that we have to do some work to get back the linear coefficients, as described in the text. Probably the reason is that this only makes sense for linear kernels, and the function is more general. Here we will use a formula to extract the coefficients; for those interested in where this comes from, have a look in chapter 12 of ESL ("Elements of Statistical Learning"). -->
-<!-- We extract the linear coefficients, and then using simple algebra, we include the decision boundary and the two margins. -->
-<!-- ```{r} -->
-<!-- beta=drop(t(svmfit$coefs)%*%x[svmfit$index,]) -->
-<!-- beta0=svmfit$rho -->
-<!-- plot(xgrid,col=c("red","blue")[as.numeric(ygrid)],pch=20,cex=.2) -->
-<!-- points(x,col=y+3,pch=19) -->
-<!-- points(x[svmfit$index,],pch=5,cex=2) -->
-<!-- abline(beta0/beta[2],-beta[1]/beta[2]) -->
-<!-- abline((beta0-1)/beta[2],-beta[1]/beta[2],lty=2) -->
-<!-- abline((beta0+1)/beta[2],-beta[1]/beta[2],lty=2) -->
-<!-- ``` -->
-<!-- Just like for the other models in this book, the tuning parameter `C` has to be selected. -->
-<!-- Different values will give different solutions. Rerun the code above, but using `C=1`, and see what we mean. One can use cross-validation to do this. -->
-<!-- Nonlinear SVM -->
-<!-- -------------- -->
-<!-- Instead, we will run the SVM on some data where a non-linear boundary is called for. We will use the mixture data from ESL -->
-<!-- ```{r} -->
-<!-- load("datasets/ESL.mixture.rda") -->
-<!-- names(ESL.mixture) -->
-<!-- rm(x,y) -->
-<!-- attach(ESL.mixture) -->
-<!-- ``` -->
-<!-- These data are also two dimensional. Lets plot them and fit a nonlinear SVM, using a radial kernel. -->
-<!-- ```{r} -->
-<!-- plot(x,col=y+1) -->
-<!-- dat=data.frame(y=factor(y),x) -->
-<!-- fit=svm(factor(y)~.,data=dat,scale=FALSE,kernel="radial",cost=5) -->
-<!-- ``` -->
-<!-- Now we are going to create a grid, as before, and make predictions on the grid. -->
-<!-- These data have the grid points for each variable included on the data frame. -->
-<!-- ```{r} -->
-<!-- xgrid=expand.grid(X1=px1,X2=px2) -->
-<!-- ygrid=predict(fit,xgrid) -->
-<!-- plot(xgrid,col=as.numeric(ygrid),pch=20,cex=.2) -->
-<!-- points(x,col=y+1,pch=19) -->
-<!-- ``` -->
-<!-- We can go further, and have the predict function produce the actual function estimates at each of our grid points. We can include the actual decision boundary on the plot by making use of the contour function. On the dataframe is also `prob`, which is the true probability of class 1 for these data, at the gridpoints. If we plot its 0.5 contour, that will give us the _Bayes Decision Boundary_, which is the best one could ever do. -->
-<!-- ```{r} -->
-<!-- func=predict(fit,xgrid,decision.values=TRUE) -->
-<!-- func=attributes(func)$decision -->
-<!-- xgrid=expand.grid(X1=px1,X2=px2) -->
-<!-- ygrid=predict(fit,xgrid) -->
-<!-- plot(xgrid,col=as.numeric(ygrid),pch=20,cex=.2) -->
-<!-- points(x,col=y+1,pch=19) -->
-<!-- contour(px1,px2,matrix(func,69,99),level=0,add=TRUE) -->
-<!-- contour(px1,px2,matrix(prob,69,99),level=.5,add=TRUE,col="blue",lwd=2) -->
-<!-- ``` -->
-<!-- We see in this case that the radial kernel has done an excellent job. -->
 </div>
-<div id="examples" class="section level2">
-<h2><span class="header-section-number">5.6</span> Examples</h2>
-<div id="best-subset-selection" class="section level3">
-<h3><span class="header-section-number">5.6.1</span> Best Subset Selection</h3>
-<iframe width="560" height="349" src="https://www.youtube.com/embed/3kwdDGnV8MM" frameborder="0" allowfullscreen>
-</iframe>
-</div>
-<div id="forward-stepwise-selection-and-model-selection-using-validation-set" class="section level3">
-<h3><span class="header-section-number">5.6.2</span> Forward Stepwise Selection and Model Selection Using Validation Set</h3>
-<iframe width="560" height="349" src="https://www.youtube.com/embed/mv-vdysZIb4" frameborder="0" allowfullscreen>
-</iframe>
-</div>
-<div id="model-selection-using-cross-validation" class="section level3">
-<h3><span class="header-section-number">5.6.3</span> Model Selection Using Cross-Validation</h3>
-<iframe width="560" height="349" src="https://www.youtube.com/embed/F8MMHCCoALU" frameborder="0" allowfullscreen>
-</iframe>
+<div id="implementing-k-means" class="section level3 unnumbered">
+<h3><code>Implementing k-means</code></h3>
+<p>In this part, you will perform <span class="math inline">\(k\)</span>-means clustering manually, with <span class="math inline">\(k=2\)</span>, on a small example with <span class="math inline">\(n=6\)</span> observations and <span class="math inline">\(p=2\)</span> features. The observations are as follows.</p>
+<center>
+<table>
+<thead>
+<tr class="header">
+<th align="center"><strong>Observation</strong></th>
+<th align="center"><strong><span class="math inline">\(X_1\)</span></strong></th>
+<th align="center"><strong><span class="math inline">\(X_2\)</span></strong></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="center">1</td>
+<td align="center">1</td>
+<td align="center">4</td>
+</tr>
+<tr class="even">
+<td align="center">2</td>
+<td align="center">1</td>
+<td align="center">3</td>
+</tr>
+<tr class="odd">
+<td align="center">3</td>
+<td align="center">0</td>
+<td align="center">4</td>
+</tr>
+<tr class="even">
+<td align="center">4</td>
+<td align="center">5</td>
+<td align="center">1</td>
+</tr>
+<tr class="odd">
+<td align="center">5</td>
+<td align="center">6</td>
+<td align="center">2</td>
+</tr>
+<tr class="even">
+<td align="center">6</td>
+<td align="center">4</td>
+<td align="center">0</td>
+</tr>
+</tbody>
+</table>
+</center>
+<p><strong>19.</strong> Plot the observations.</p>
+<p><strong>20.</strong> Randomly assign a cluster label to each observation. You can use the <code>sample()</code> command in <code>R</code> to do this. Report the cluster labels for each observation.</p>
+<p><strong>21.</strong> Compute the centroid for each cluster.</p>
+<p><strong>22.</strong> Create a function that calculates the Euclidean distance for two observations.</p>
+<p><strong>23.</strong> Assign each observation to the centroid to which it is closest, in terms of Euclidean distance. Report the cluster labels for each observation.</p>
+<p><strong>24.</strong> Repeat <strong>21</strong> and <strong>23</strong> until the answers obtained stop changing.</p>
+<p><strong>25.</strong> In your plot from <strong>19</strong>, color the observations according to the cluster labels obtained.</p>
+<p align="right">
+◼
+</p>
 
 </div>
 </div>
 </div>
+
+
+
             </section>
 
           </div>
         </div>
       </div>
-<a href="pw-4.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="pw-5.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="clustering.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="app-introRStudio.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="book_assets/gitbook-2.6.7/js/app.min.js"></script>

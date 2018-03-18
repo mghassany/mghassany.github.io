@@ -124,7 +124,7 @@
   \postauthor{\par}
   \predate{\centering\large\emph}
   \postdate{\par}
-  \date{2018-03-02}
+  \date{2018-03-18}
 
 % \defaultfontfeatures{
 %     Path = /home/ghassany/texmf/fonts/opentype/public/fontawesome/}
@@ -5700,6 +5700,1418 @@ plot called \emph{biplot} that summarizes all the analysis for two PCs.
 \end{Shaded}
 
 \begin{center}\includegraphics[width=0.9\linewidth]{Machine-Learning_files/figure-latex/unnamed-chunk-128-1} \end{center}
+
+◼
+
+\chapter*{PW 6}\label{pw-6}
+\addcontentsline{toc}{chapter}{PW 6}
+
+\subsection*{The Iris Dataset}\label{the-iris-dataset}
+\addcontentsline{toc}{subsection}{The Iris Dataset}
+
+The \textbf{\emph{Iris flower dataset}} or \textbf{\emph{Fisher's Iris
+dataset}} is a multivariate data set introduced by the British
+statistician and biologist
+\href{https://en.wikipedia.org/wiki/Ronald_Fisher}{Ronald Fisher} in his
+\textbf{1936} paper \citep{Fisher1936}.
+
+The data set consists of 50 samples from each of three species of Iris.
+Four features were measured from each sample.
+
+The three species in the Iris dataset are:
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  \emph{Iris-setosa} (\(n_1=50\))
+\item
+  \emph{Iris-versicolor} (\(n_2=50\))
+\item
+  \emph{Iris-virginica} (\(n_3=50\))
+\end{enumerate}
+
+And the four features in Iris dataset are:
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  \emph{sepal length} in cm
+\item
+  \emph{sepal width} in cm
+\item
+  \emph{petal length} in cm
+\item
+  \emph{petal width} in cm
+\end{enumerate}
+
+\begin{center}\includegraphics[width=0.85\linewidth]{img/iris} \end{center}
+
+\subsection*{Loading Data}\label{loading-data-1}
+\addcontentsline{toc}{subsection}{Loading Data}
+
+\textbf{1.} Download the iris dataset from
+\textcolor{white}{[}\faTable\textcolor{white}{]} here and import it into
+\texttt{R}.
+
+\subsection*{Exploratory analysis}\label{exploratory-analysis}
+\addcontentsline{toc}{subsection}{Exploratory analysis}
+
+\textbf{2.} Compare the means and the quartiles of the 3 different
+flower classes for the 4 different features (Plot 4 boxplots into the
+same figure. \textbf{Hint}: use \texttt{par(mfrow=c(2,2))}.
+
+\begin{center}\includegraphics[width=0.7\linewidth]{Machine-Learning_files/figure-latex/unnamed-chunk-133-1} \end{center}
+
+\textbf{3.} To explore how the 3 different flower classes are
+distributed along the 4 different features, visualize them via
+histograms using the following code.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{# Let's use the ggplot2 library}
+\CommentTok{# ggplot2 is the most advanced package for data visualization}
+\CommentTok{# gg corresponds to The Grammar of Graphics.}
+\KeywordTok{library}\NormalTok{(ggplot2) }\CommentTok{#of course you must install it first if you don't have it already}
+
+\CommentTok{# histogram of sepal_length}
+\KeywordTok{ggplot}\NormalTok{(iris, }\KeywordTok{aes}\NormalTok{(}\DataTypeTok{x=}\NormalTok{sepal_length, }\DataTypeTok{fill=}\NormalTok{class)) }\OperatorTok{+}
+\StringTok{  }\KeywordTok{geom_histogram}\NormalTok{(}\DataTypeTok{binwidth=}\NormalTok{.}\DecValTok{2}\NormalTok{, }\DataTypeTok{alpha=}\NormalTok{.}\DecValTok{5}\NormalTok{)}
+\CommentTok{# histogram of sepal_width}
+\KeywordTok{ggplot}\NormalTok{(iris, }\KeywordTok{aes}\NormalTok{(}\DataTypeTok{x=}\NormalTok{sepal_width, }\DataTypeTok{fill=}\NormalTok{class)) }\OperatorTok{+}
+\StringTok{  }\KeywordTok{geom_histogram}\NormalTok{(}\DataTypeTok{binwidth=}\NormalTok{.}\DecValTok{2}\NormalTok{, }\DataTypeTok{alpha=}\NormalTok{.}\DecValTok{5}\NormalTok{)}
+\CommentTok{# histogram of petal_length}
+\KeywordTok{ggplot}\NormalTok{(iris, }\KeywordTok{aes}\NormalTok{(}\DataTypeTok{x=}\NormalTok{petal_length, }\DataTypeTok{fill=}\NormalTok{class)) }\OperatorTok{+}
+\StringTok{  }\KeywordTok{geom_histogram}\NormalTok{(}\DataTypeTok{binwidth=}\NormalTok{.}\DecValTok{2}\NormalTok{, }\DataTypeTok{alpha=}\NormalTok{.}\DecValTok{5}\NormalTok{)}
+\CommentTok{# histogram of petal_width}
+\KeywordTok{ggplot}\NormalTok{(iris, }\KeywordTok{aes}\NormalTok{(}\DataTypeTok{x=}\NormalTok{petal_width, }\DataTypeTok{fill=}\NormalTok{class)) }\OperatorTok{+}
+\StringTok{  }\KeywordTok{geom_histogram}\NormalTok{(}\DataTypeTok{binwidth=}\NormalTok{.}\DecValTok{2}\NormalTok{, }\DataTypeTok{alpha=}\NormalTok{.}\DecValTok{5}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{center}\includegraphics[width=0.7\linewidth]{Machine-Learning_files/figure-latex/unnamed-chunk-135-1} \end{center}
+
+\subsection*{\texorpdfstring{PCA using
+\texttt{Factoshiny}}{PCA using Factoshiny}}\label{pca-using-factoshiny}
+\addcontentsline{toc}{subsection}{PCA using \texttt{Factoshiny}}
+
+\begin{rmdtip}
+\texttt{Factoshiny} is a package to perform PCA interactively (it uses
+the \texttt{R} packages \texttt{FactoMineR} and \texttt{Shiny}).
+\end{rmdtip}
+
+\textbf{4.} After installing the package \texttt{Factoshiny}, apply the
+following code and play with the application from your browser.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{library}\NormalTok{(Factoshiny)}
+\NormalTok{res.shiny <-}\StringTok{ }\KeywordTok{PCAshiny}\NormalTok{(iris) }\CommentTok{# iris here is the name of the dataset}
+\end{Highlighting}
+\end{Shaded}
+
+\subsection*{\texorpdfstring{PCA using
+\texttt{princomp()}}{PCA using princomp()}}\label{pca-using-princomp}
+\addcontentsline{toc}{subsection}{PCA using \texttt{princomp()}}
+
+\begin{rmdtip}
+\texttt{princomp()} and \texttt{prcomp()} are built-in \texttt{R}
+functions. They both perform PCA.
+\end{rmdtip}
+
+\textbf{5.} Apply a PCA on the Iris dataset using the
+\texttt{princomp()}.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{pcairis=}\KeywordTok{princomp}\NormalTok{(iris[,}\OperatorTok{-}\DecValTok{5}\NormalTok{], }\DataTypeTok{cor=}\NormalTok{T) }
+\CommentTok{# Note that we take only the numerical columns to apply PCA.}
+\CommentTok{# now pcairis is a R object of type princomp}
+
+\CommentTok{# To display the internal structure of pcairis}
+\KeywordTok{str}\NormalTok{(pcairis)}
+\CommentTok{#ans> List of 7}
+\CommentTok{#ans>  $ sdev    : Named num [1:4] 1.706 0.96 0.384 0.144}
+\CommentTok{#ans>   ..- attr(*, "names")= chr [1:4] "Comp.1" "Comp.2" "Comp.3" "Comp.4"}
+\CommentTok{#ans>  $ loadings: loadings [1:4, 1:4] 0.522 -0.263 0.581 0.566 -0.372 ...}
+\CommentTok{#ans>   ..- attr(*, "dimnames")=List of 2}
+\CommentTok{#ans>   .. ..$ : chr [1:4] "sepal_length" "sepal_width" "petal_length" "petal_width"}
+\CommentTok{#ans>   .. ..$ : chr [1:4] "Comp.1" "Comp.2" "Comp.3" "Comp.4"}
+\CommentTok{#ans>  $ center  : Named num [1:4] 5.84 3.05 3.76 1.2}
+\CommentTok{#ans>   ..- attr(*, "names")= chr [1:4] "sepal_length" "sepal_width" "petal_length" "petal_width"}
+\CommentTok{#ans>  $ scale   : Named num [1:4] 0.825 0.432 1.759 0.761}
+\CommentTok{#ans>   ..- attr(*, "names")= chr [1:4] "sepal_length" "sepal_width" "petal_length" "petal_width"}
+\CommentTok{#ans>  $ n.obs   : int 150}
+\CommentTok{#ans>  $ scores  : num [1:150, 1:4] -2.26 -2.09 -2.37 -2.3 -2.39 ...}
+\CommentTok{#ans>   ..- attr(*, "dimnames")=List of 2}
+\CommentTok{#ans>   .. ..$ : NULL}
+\CommentTok{#ans>   .. ..$ : chr [1:4] "Comp.1" "Comp.2" "Comp.3" "Comp.4"}
+\CommentTok{#ans>  $ call    : language princomp(x = iris[, -5], cor = T)}
+\CommentTok{#ans>  - attr(*, "class")= chr "princomp"}
+
+\CommentTok{# To see the variance explained by the the pcs}
+\KeywordTok{summary}\NormalTok{(pcairis) }
+\CommentTok{#ans> Importance of components:}
+\CommentTok{#ans>                        Comp.1 Comp.2 Comp.3  Comp.4}
+\CommentTok{#ans> Standard deviation      1.706  0.960 0.3839 0.14355}
+\CommentTok{#ans> Proportion of Variance  0.728  0.230 0.0368 0.00515}
+\CommentTok{#ans> Cumulative Proportion   0.728  0.958 0.9948 1.00000}
+
+\CommentTok{# To plot the variance explained by each pc}
+\KeywordTok{plot}\NormalTok{(pcairis) }
+\end{Highlighting}
+\end{Shaded}
+
+\begin{center}\includegraphics[width=0.7\linewidth]{Machine-Learning_files/figure-latex/unnamed-chunk-139-1} \end{center}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+
+\CommentTok{# To plot together the scores for PC1 and PC2 and the }
+\CommentTok{# variables expressed in terms of PC1 and PC2.}
+\KeywordTok{biplot}\NormalTok{(pcairis) }
+\end{Highlighting}
+\end{Shaded}
+
+\begin{center}\includegraphics[width=0.7\linewidth]{Machine-Learning_files/figure-latex/unnamed-chunk-139-2} \end{center}
+
+\begin{rmdinsight}
+If you want to go deeper in the analysis and the interpretation of the
+PCA results, you can use the package \texttt{FactoMineR} in which there
+is a lot of useful functions. Take a look at this link for a detailed
+example.
+\end{rmdinsight}
+
+\subsection*{Step-by-step PCA}\label{step-by-step-pca}
+\addcontentsline{toc}{subsection}{Step-by-step PCA}
+
+In order to understand how PCA works, let's implement it step-by-step.
+
+\begin{rmdtip}
+\textbf{Summary of the PCA Approach}:
+
+\begin{itemize}
+\tightlist
+\item
+  Standardize the data.
+\item
+  Obtain the Eigenvectors and Eigenvalues from the covariance matrix or
+  correlation matrix.
+\item
+  Sort eigenvalues in descending order and choose the \(k\) eigenvectors
+  that correspond to the \(k\) largest eigenvalues, where \(k\) is the
+  number of dimensions of the new feature subspace (\(k \le p\)).
+\item
+  Construct the projection matrix \(\mathbf{A}\) from the selected \(k\)
+  eigenvectors.
+\item
+  Transform the original dataset \(X\) via \(\mathbf{A}\) to obtain a
+  \(k\)-dimensional feature subspace \(\mathbf{Y}\).
+\end{itemize}
+\end{rmdtip}
+
+\textbf{6.} First step, split the iris dataset into data \(X\) and class
+labels \(y\).
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{X <-}\StringTok{ }\NormalTok{iris[,}\OperatorTok{-}\DecValTok{5}\NormalTok{]}
+\NormalTok{y <-}\StringTok{ }\NormalTok{iris[,}\DecValTok{5}\NormalTok{]}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{rmdinsight}
+The iris dataset is now stored in form of a \(150 \times 4\) matrix
+where the columns are the different features, and every row represents a
+separate flower sample. Each sample row \(X^i\) can be pictured as a
+4-dimensional vector
+
+\[ (X^i)^T = \begin{pmatrix} X_1^i \\ X_2^i \\ X_3^i \\ X_4^i \end{pmatrix}
+= \begin{pmatrix} \text{sepal length} \\ \text{sepal width} \\\text{petal length} \\ \text{petal width} \end{pmatrix}\]
+\end{rmdinsight}
+
+\begin{rmdinsight}
+\textbf{Eigendecomposition - Computing Eigenvectors and Eigenvalues}
+
+The eigenvectors and eigenvalues of a covariance (or correlation) matrix
+represent the ``core'' of a PCA: The eigenvectors (principal components)
+determine the directions of the new feature space, and the eigenvalues
+determine their magnitude. In other words, the eigenvalues explain the
+variance of the data along the new feature axes.
+\end{rmdinsight}
+
+\textbf{Standardizing}
+
+\textbf{7.} Scale the 4 features. Store the scaled matrix into a new one
+(for example, name it \texttt{X\_scaled}).
+
+\textbf{Covariance Matrix}
+
+\textbf{8.} The classic approach to PCA is to perform the
+eigendecomposition on the covariance matrix \(\Sigma\), which is a
+\(p\times p\) matrix where each element represents the covariance
+between two features. Compute the Covariance Matrix of the scaled
+features (Print the results).
+
+\begin{rmdtip}
+We can summarize the calculation of the covariance matrix via the
+following matrix equation:
+\[ \Sigma = \frac{1}{n-1} \left( (\mathbf{X} - \mathbf{\bar{X}})^T\;(\mathbf{X} - \mathbf{\bar{X}}) \right) \]
+where \(\mathbf{\bar{X}}\) is the mean vector
+\(\mathbf{\bar{X}} = \frac{1}{n} \sum\limits_{k=1}^n x_{k}\).
+
+The mean vector is a \(p\)-dimensional vector where each value in this
+vector represents the sample mean of a feature column in the dataset.
+\end{rmdtip}
+
+\textbf{9.} Perform an eigendecomposition on the covariance matrix.
+Compute the Eigenvectors and the Eigenvalues (you can use the
+\texttt{eigen()} function). What do you obtain?
+
+\textbf{Correlation Matrix}
+
+\begin{rmdinsight}
+Especially, in the field of ``Finance'', the correlation matrix
+typically used instead of the covariance matrix. However, the
+eigendecomposition of the covariance matrix (if the input data was
+standardized) yields the same results as a eigendecomposition on the
+correlation matrix, since the correlation matrix can be understood as
+the normalized covariance matrix.
+\end{rmdinsight}
+
+\textbf{10.} Perform an eigendecomposition of the standardized data
+based on the correlation matrix.
+
+\textbf{11.} Perform an eigendecomposition of the raw data based on the
+correlation matrix. Compare the obtained results with the previous
+question.
+
+\begin{rmdinsight}
+We should see that all three approaches yield the same eigenvectors and
+eigenvalue pairs:
+
+\begin{itemize}
+\tightlist
+\item
+  Eigendecomposition of the covariance matrix after standardizing the
+  data.
+\item
+  Eigendecomposition of the correlation matrix.
+\item
+  Eigendecomposition of the correlation matrix after standardizing the
+  data.
+\end{itemize}
+\end{rmdinsight}
+
+\textbf{Selecting Principal Components}
+
+\begin{rmdinsight}
+The \texttt{eigen()} function will, by default, sort the eigenvalues in
+decreasing order.
+\end{rmdinsight}
+
+\textbf{Explained Variance}
+
+\textbf{12.} Calculate the individual explained variation and the
+cumulative explained variation of each principal component. Show the
+results.
+
+\textbf{13.} Plot the individual explained variation. (scree plot)
+
+\textbf{Projection Matrix}
+
+\textbf{14.} Construct the projection matrix that will be used to
+transform the Iris data onto the new feature subspace.
+
+\begin{rmdtip}
+The ``projection matrix'' is basically just a matrix of our concatenated
+top \(k\) eigenvectors. Here, the projection matrix \(\mathbf{A}\) is a
+\(4 \times 2\)-dimensional matrix.
+\end{rmdtip}
+
+\textbf{Projection Onto the New Feature Space}
+
+In this last step we will use the \(4 \times 2\)-dimensional projection
+matrix \(\mathbf{A}\) to transform our samples (observations) onto the
+new subspace via the equation \(\mathbf{Y}=X \times \mathbf{A}\) where
+\(\mathbf{Y}\) is a \(150 \times 2\) matrix of our transformed samples.
+
+\textbf{15.} Compute \(\mathbf{Y}\) (Recall the \(\mathbf{Y}\) is the
+matrix of scores, \(\mathbf{A}\) is the matrix of loadings).
+
+\textbf{Visualization}
+
+\textbf{16.} Plot the observations on the new feature space. Name the
+axis PC1 and PC2.
+
+\textbf{17.} On the same plot, color the observations (the flowers) with
+respect to their flower classes.
+
+◼
+
+\part{Unsupervised
+Learning}\label{part-unsupervised-learning}
+
+\chapter{Clustering}\label{clustering}
+
+\section{Unsupervised Learning}\label{unsupervised-learning-1}
+
+Previously we considered \emph{supervised} learning methods such as
+regression and classification, where we typically have access to a set
+of \(p\) features \(X_1,X_2,\ldots,X_p\), measured on \(n\)
+observations, and a response \(Y\) also measured on those same \(n\)
+observations (what we call \textbf{labels}). The goal was then to
+predict \(Y\) using \(X_1,X_2,\ldots,X_p\). From now on we will instead
+focus on \textbf{unsupervised} learning, a set of statistical tools
+where we have only a set of features \(X_1,X_2,\ldots,X_p\) measured on
+\(n\) observations. We are not interested in prediction, because we do
+not have an associated response variable \(Y\). Rather, the goal is to
+discover interesting things about the measurements on
+\(X_1,X_2,\ldots,X_p\). Is there an informative way to visualize the
+data? Can we discover subgroups among the variables or among the
+observations? Unsupervised learning refers to a diverse set of
+techniques for answering questions such as these. In this chapter, we
+will focus on a particular type of unsupervised learning: Principal
+Components Analysis (PCA), a tool used for \emph{data visualization} or
+\emph{data pre-processing} before supervised techniques are applied. In
+the next chapters, we will talk about clustering, another particular
+type of unsupervised learning. Clustering is a broad class of methods
+for discovering unknown subgroups in data.
+
+Unsupervised learning is often much more challenging than supervised
+learning. The exercise tends to be more subjective, and there is no
+simple goal for the analysis, such as prediction of a response.
+Unsupervised learning is often performed as part of an \emph{exploratory
+data analysis}. It is hard to assess the results obtained from
+unsupervised learning methods. If we fit a predictive model using a
+supervised learning technique, then it is possible to check our work by
+seeing how well our model predicts the response \(Y\) on observations
+not used in fitting the model. But in unsupervised learning, there is no
+way to check our work because we don't know the true answer: the problem
+is \emph{unsupervised}.
+
+\section{Clustering: kmeans}\label{clustering-kmeans}
+
+\textbf{Clustering} (or Cluster analysis) is the collection of
+techniques designed to find subgroups or \emph{clusters} in a dataset of
+variables \(X_1,\ldots,X_p\). Depending on the similarities between the
+observations, these are partitioned in homogeneous groups as separated
+as possible between them. Clustering methods can be classified into two
+main categories:
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{Partition methods}. Given a fixed number of cluster \(k\),
+  these methods aim to assign each observation of \(X_1,\ldots,X_p\) to
+  a unique cluster, in such a way that the \emph{within-cluster
+  variation} is as small as possible (the clusters are as homogeneous as
+  possible) while the \emph{between cluster variation} is as large as
+  possible (the clusters are as separated as possible).
+\item
+  \textbf{Hierarchical methods}. These methods construct a hierarchy for
+  the observations in terms of their similitudes. This results in a
+  tree-based representation of the data in terms of a \emph{dendogram},
+  which depicts how the observations are clustered at different levels
+  -- from the smallest groups of one element to the largest representing
+  the whole dataset.
+\end{itemize}
+
+In this chapter we will see the basics of the most well-known
+\textbf{partition method}, namely \emph{\(k\)-means clustering}.
+
+\section{Introduction}\label{introduction-4}
+
+\textbf{Clustering} (or Cluster analysis) is the process of partitioning
+a set of data objects (observations) into subsets. Each subset is a
+\textbf{cluster}, such that objects in a cluster are similar to one
+another, yet dissimilar to objects in other clusters.
+
+The set of clusters resulting from a cluster analysis can be referred to
+as a clustering. In this context, different clustering methods may
+generate different clusterings on the same data set. The partitioning is
+not performed by humans, but by the clustering algorithm. Hence,
+clustering is useful in that it can lead to the discovery of previously
+unknown groups within the data.
+
+Example: Imagine a Director of Customer Relationships at an Electronics
+magazine, and he has five managers working for him. He would like to
+organize all the company's customers into five groups so that each group
+can be assigned to a different manager. Strategically, he would like
+that the customers in each group are as similar as possible. Moreover,
+two given customers having very different business patterns should not
+be placed in the same group. His intention behind this business strategy
+is to develop customer relationship campaigns that specifically target
+each group, based on common features shared by the customers per group.
+Unlike in classification, the class \textbf{label} of each customer is
+unknown. He needs to discover these groupings. Given a large number of
+customers and many attributes describing customer profiles, it can be
+very costly or even infeasible to have a human study the data and
+manually come up with a way to partition the customers into strategic
+groups. He needs a \emph{clustering} tool to help.
+
+Clustering has been widely used in many applications such as business
+intelligence, image pattern recognition, Web search, biology, and
+security. In business intelligence, clustering can be used to organize a
+large number of customers into groups, where customers within a group
+share strong similar characteristics. In image recognition, clustering
+can be used to discover clusters or ``subclasses'' in handwritten
+character recognition systems. Suppose we have a data set of handwritten
+digits, where each digit is labeled as either 1, 2, 3, and so on.
+Clustering has also found many applications in Web search. For example,
+a keyword search may often return a very large number of hits (i.e.,
+pages relevant to the search) due to the extremely large number of web
+pages. Clustering can be used to organize the search results into groups
+and present the results in a concise and easily accessible way.
+Moreover, clustering techniques have been developed to cluster documents
+into topics, which are commonly used in information retrieval practice.
+
+Clustering is also called \textbf{data segmentation} in some
+applications because clustering partitions large data sets into groups
+according to their \emph{similarity}.
+
+As a branch of statistics, clustering has been extensively studied, with
+the main focus on \emph{distance-based cluster analysis}. Clustering
+tools were proposed like \textbf{\(k\)-means}, \textbf{fuzzy
+\(c\)-means}, and several other methods.
+
+Many clustering algorithms have been introduced in the literature. Since
+clusters can formally be seen as subsets of the data set, one possible
+classification of clustering methods can be according to whether the
+subsets are \textbf{fuzzy} or \textbf{crisp} (\textbf{hard}).
+
+\subsection*{Hard clustering}\label{hard-clustering}
+\addcontentsline{toc}{subsection}{Hard clustering}
+
+Hard clustering methods are based on classical set theory, and require
+that an object either does or does not belong to a cluster. Hard
+clustering means partitioning the data into a specified number of
+mutually exclusive subsets. The most common hard clustering method is
+\(k\)-means.
+
+\subsection*{Fuzzy clustering}\label{fuzzy-clustering}
+\addcontentsline{toc}{subsection}{Fuzzy clustering}
+
+Fuzzy clustering methods, however, allow the objects to belong to
+several clusters simultaneously, with different degrees of membership.
+In many situations, fuzzy clustering is more natural than hard
+clustering. The most know technique of fuzzy clustering is the fuzzy
+\(c\)-means.
+
+\section{\texorpdfstring{\(k\)-Means}{k-Means}}\label{k-means}
+
+If you have ever watched a group of tourists with a couple of tour
+guides who hold umbrellas up so that everybody can see them and follow
+them, then you have seen a dynamic version of the \(k\)-means algorithm.
+\(k\)-means is even simpler, because the data (playing the part of the
+tourists) does not move, only the tour guides move.
+
+Suppose that we want to divide our input data into \(K\) categories,
+where we know the value of \(K\). We allocate \(K\) \emph{cluster
+centres} (also called \emph{prototypes} or \emph{centroids}) to our
+input space, and we would like to position these centres so that there
+is one cluster centre in the middle of each cluster. However, we don't
+know where the clusters are, let alone where their `middle' is, so we
+need an algorithm that will find them. Learning algorithms generally try
+to minimize some sort of error, so we need to think of an error
+criterion that describes this aim. There are two things that we need to
+define:
+
+\textbf{A distance measure}: In order to talk about distances between
+points, we need some way to measure distances. It is often the normal
+\textbf{Euclidean} distance, but there are other alternatives like
+Manhattan distance, Correlation distance, Chessboard distance and other.
+
+The Euclidean distance: Let \(x=(x_1,x_2)\) and \(y=(y_1,y_2)\) two
+observations in a two-dimensional space. The Euclidean distance
+\(d_{x,y}\) between \(x\) and \(y\) is
+
+\begin{align*}  
+d_{x,y}^2 &= (x_1-y_1)^2+(x_2 - y_2)^2  \\
+d_{x,y} &= \sqrt{(x_1-y_1)^2+(x_2 - y_2)^2}
+\end{align*}
+
+\textbf{The mean average}: Once we have a distance measure, we can
+compute the central point of a set of data points, which is the mean
+average. Actually, this is only true in Euclidean space, which is the
+one we are used to, where everything is nice and flat.
+
+We can now think about a suitable way of positioning the cluster
+centres: we compute the mean point of each cluster, \(\textbf{v}_k\),
+\(i=1,\ldots,K\), and put the cluster centre there. This is equivalent
+to minimizing the Euclidean distance (which is the sum-of-squares error)
+from each data point to its cluster centre. Then we decide which points
+belong to which clusters by associating each point with the cluster
+centre that it is closest to. This changes as the algorithm iterates. We
+start by positioning the cluster centres \textbf{randomly} though the
+input space, since we don't know where to put them, and we update their
+positions according to the data. We decide which cluster each data point
+belongs to by computing the distance between each data point and all of
+the cluster centres, and assigning it to the cluster that is the
+closest. For all the point that are assigned to a cluster, we then
+compute the mean of them, and move the cluster centre to that place. We
+iterate the algorithm until the cluster centres stop moving.
+
+It is convenient at this point to define some notation to describe the
+assignment of data points to clusters. For each data point \(x_i\), we
+introduce a corresponding set of binary indicator variables
+\(u_{ki} \in {0,1}\), where \(k=1,\ldots,K\) describing which of the
+\(K\) clusters the data point \(x_i\) is assigned to, so that if data
+point \(x_i\) is assigned to cluster \(k\) then \(u_{ki}= 1\), and
+\(u_{kj}= 0\) for \(j \neq i\). This is known as the \(1\)-of-\(K\)
+coding scheme. We can then define an objective function (and sometimes
+called a \emph{distortion measure}), given by
+
+\[J= \sum_{i=1}^{N} \sum_{i=k=1}^{K} u_{ki} \| x_{i}- \mathbf{v}_{k} \|^2\]
+
+which represents the sum of the squares of the distances of each data
+point to its assigned vector \(\mathbf{v}_{k}\). The goal is to find
+values for the \(\{u_{ki}\}\) and the \(\{\mathbf{v}_{k}\}\) so as to
+minimize \(J\). We can do this through an iterative procedure in which
+each iteration involves two successive steps corresponding to successive
+optimizations with respect to the \(u_{ki}\) and the \(\mathbf{v}_{k}\).
+The algorithm of \(k\)-means is described in the following algorithm:
+
+\begin{longtable}[]{@{}ll@{}}
+\toprule
+\begin{minipage}[b]{0.36\columnwidth}\raggedright\strut
+The \(k\)-means algorithm\strut
+\end{minipage} & \begin{minipage}[b]{0.58\columnwidth}\raggedright\strut
+\strut
+\end{minipage}\tabularnewline
+\midrule
+\endhead
+\begin{minipage}[t]{0.36\columnwidth}\raggedright\strut
+\textbf{Data}:\strut
+\end{minipage} & \begin{minipage}[t]{0.58\columnwidth}\raggedright\strut
+\(\textbf{X}=\{x_{ij}, i=1,\ldots,n, j=1,\ldots,p\}\)\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.36\columnwidth}\raggedright\strut
+\textbf{Result}:\strut
+\end{minipage} & \begin{minipage}[t]{0.58\columnwidth}\raggedright\strut
+Cluster centres (Prototypes)\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.48\columnwidth}\raggedright\strut
+\textbf{Initialization}:\strut
+\end{minipage} & \begin{minipage}[t]{0.48\columnwidth}\raggedright\strut
+\begin{itemize}
+\tightlist
+\item
+  Choose a value for \(K\).
+\item
+  Choose \(K\) random positions in the input space.
+\item
+  Assign the prototypes \(\mathbf{v}_{k}\) to those positions
+\end{itemize}\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.48\columnwidth}\raggedright\strut
+\textbf{Learning}: \textbf{repeat}\strut
+\end{minipage} & \begin{minipage}[t]{0.48\columnwidth}\raggedright\strut
+\textbf{for} \emph{each data point \(x_i\)} \textbf{do}
+
+\begin{itemize}
+\tightlist
+\item
+  compute the distance to each prototype:
+  \[d_{ki}= \text{min}_k d(x_i,\mathbf{v}_k)\]
+\item
+  assign the data point to the nearest prototype with distance
+  \[u_{ki}= \left\lbrace \begin{array}{ll}  1   & \mbox{if} \quad k = argmin_j \| x_i -\mathbf{v}_k \|^2 \\  0 & \mbox{otherwise} \end{array} \right.\]
+\end{itemize}
+
+\textbf{for} \emph{each prototype} \textbf{do}
+
+\begin{itemize}
+\tightlist
+\item
+  move the position of the prototype to the mean of the points in that
+  cluster: \[\mathbf{v}_k = \frac{\sum_i u_{ki} x_i}{\sum_i u_{ki}}\]
+\end{itemize}
+
+Until the prototypes stop moving.\strut
+\end{minipage}\tabularnewline
+\bottomrule
+\end{longtable}
+
+\begin{rmdinsight}
+The \(k\)-means algorithm produces
+
+\begin{itemize}
+\tightlist
+\item
+  A final estimate of cluster centroids (i.e.~their coordinates).
+\item
+  An assignment of each point to their respective cluster.
+\end{itemize}
+\end{rmdinsight}
+
+The denominator in the expression
+\(\mathbf{v}_k = \frac{\sum_i u_{ki} x_i}{\sum_i u_{ki}}\) is equal to
+the number of points assigned to cluster \(k\), and so this result has a
+simple interpretation, namely set \(\mathbf{v}_k\) equal to the mean of
+all of the data points \(x_i\) assigned to cluster \(k\). For this
+reason, the procedure is known as the \(k\)-means algorithm.
+
+The two phases of re-assigning data points to clusters and re-computing
+the cluster means are repeated in turn until there is no further change
+in the assignments (or until some maximum number of iterations is
+exceeded). Because each phase reduces the value of the objective
+function \(J\), convergence of the algorithm is assured. However, it may
+converge to a local rather than global minimum of \(J\).
+
+The \(k\)-means algorithm is illustrated using the Old Faithful data set
+\footnote{Old Faithful, is a hydrothermal geyser in Yellowstone National
+  Park in the state of Wyoming, U.S.A., and is a popular tourist
+  attraction. Its name stems from the supposed regularity of its
+  eruptions. The data set comprises 272 observations, each of which
+  represents a single eruption and contains two variables corresponding
+  to the duration in minutes of the eruption, and the time until the
+  next eruption, also in minutes.} in following figure.
+
+\begin{figure}
+
+{\centering \includegraphics[width=0.9\linewidth]{img/kmeans} 
+
+}
+
+\caption{Illustration of the $k$-means algorithm using the re-scaled Old Faithful data set, where $k=2$. We can see how the $k$-means algorithm works. (a) The first thing $k$-means has to do is assign an initial set of centroids. (b) The next stage in the algorithm assigns every point in the dataset to the closest centroid. (c) The next stage is the re-calculate the centroids based on the new cluster assignments of the data points. (d) Now we have completed one full cycle of the algorithm we can continue and re-assign points to their (new) closest cluster centroid. (e) And we can update the centroid positions one more time based on the re-assigned points. (g)(h)(f) The algorithm stops when we obtain the same results in consecutive iterations.}\label{fig:oldfaithful}
+\end{figure}
+
+The \(k\)-means algorithm is illustrated using the Iris data set in
+following interactive figure\footnote{Made by Joseph J. Allaire
+  \url{https://github.com/jjallaire}}. (Try to modify the X and Y
+variables and the numbers of chosen clusters and see the result)
+
+\section{\texorpdfstring{\(k\)-means in
+\texttt{R}}{k-means in R}}\label{k-means-in-r}
+
+We will use an example with simulated data to demonstrate how the
+\(k\)-means algorithm works. Here we simulate some data from three
+clusters and plot the dataset below.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{set.seed}\NormalTok{(}\DecValTok{1234}\NormalTok{)}
+\NormalTok{x <-}\StringTok{ }\KeywordTok{rnorm}\NormalTok{(}\DecValTok{12}\NormalTok{,}\DataTypeTok{mean=}\KeywordTok{rep}\NormalTok{(}\DecValTok{1}\OperatorTok{:}\DecValTok{3}\NormalTok{,}\DataTypeTok{each=}\DecValTok{4}\NormalTok{),}\DataTypeTok{sd=}\FloatTok{0.2}\NormalTok{)}
+\NormalTok{y <-}\StringTok{ }\KeywordTok{rnorm}\NormalTok{(}\DecValTok{12}\NormalTok{,}\DataTypeTok{mean=}\KeywordTok{rep}\NormalTok{(}\KeywordTok{c}\NormalTok{(}\DecValTok{1}\NormalTok{,}\DecValTok{2}\NormalTok{,}\DecValTok{1}\NormalTok{),}\DataTypeTok{each=}\DecValTok{4}\NormalTok{),}\DataTypeTok{sd=}\FloatTok{0.2}\NormalTok{)}
+\KeywordTok{plot}\NormalTok{(x,y,}\DataTypeTok{col=}\StringTok{"blue"}\NormalTok{,}\DataTypeTok{pch=}\DecValTok{19}\NormalTok{,}\DataTypeTok{cex=}\DecValTok{2}\NormalTok{)}
+\KeywordTok{text}\NormalTok{(x}\OperatorTok{+}\FloatTok{0.05}\NormalTok{,y}\OperatorTok{+}\FloatTok{0.05}\NormalTok{,}\DataTypeTok{labels=}\KeywordTok{as.character}\NormalTok{(}\DecValTok{1}\OperatorTok{:}\DecValTok{12}\NormalTok{))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{figure}
+
+{\centering \includegraphics[width=0.7\linewidth]{Machine-Learning_files/figure-latex/unnamed-chunk-164-1} 
+
+}
+
+\caption{Simulated dataset}\label{fig:unnamed-chunk-164}
+\end{figure}
+
+The \texttt{kmeans()} function in R implements the \(k\)-means algorithm
+and can be found in the \texttt{stats} package, which comes with R and
+is usually already loaded when you start R. Two key parameters that you
+have to specify are \texttt{x}, which is a matrix or data frame of data,
+and \texttt{centers} which is either an integer indicating the number of
+clusters or a matrix indicating the locations of the initial cluster
+centroids. The data should be organized so that each row is an
+observation and each column is a variable or feature of that
+observation.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{dataFrame <-}\StringTok{ }\KeywordTok{data.frame}\NormalTok{(x,y)}
+\NormalTok{kmeansObj <-}\StringTok{ }\KeywordTok{kmeans}\NormalTok{(dataFrame,}\DataTypeTok{centers=}\DecValTok{3}\NormalTok{)}
+\KeywordTok{names}\NormalTok{(kmeansObj)}
+\CommentTok{#ans> [1] "cluster"      "centers"      "totss"        "withinss"    }
+\CommentTok{#ans> [5] "tot.withinss" "betweenss"    "size"         "iter"        }
+\CommentTok{#ans> [9] "ifault"}
+\end{Highlighting}
+\end{Shaded}
+
+You can see which cluster each data point got assigned to by looking at
+the \texttt{cluster} element of the list returned by the
+\texttt{kmeans()} function.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{kmeansObj}\OperatorTok{$}\NormalTok{cluster}
+\CommentTok{#ans>  [1] 3 3 3 3 1 1 1 1 2 2 2 2}
+\end{Highlighting}
+\end{Shaded}
+
+Here is a plot of the \(k\)-means clustering solution.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{plot}\NormalTok{(x,y,}\DataTypeTok{col=}\NormalTok{kmeansObj}\OperatorTok{$}\NormalTok{cluster,}\DataTypeTok{pch=}\DecValTok{19}\NormalTok{,}\DataTypeTok{cex=}\DecValTok{2}\NormalTok{)}
+\KeywordTok{points}\NormalTok{(kmeansObj}\OperatorTok{$}\NormalTok{centers,}\DataTypeTok{col=}\DecValTok{1}\OperatorTok{:}\DecValTok{3}\NormalTok{,}\DataTypeTok{pch=}\DecValTok{3}\NormalTok{,}\DataTypeTok{cex=}\DecValTok{3}\NormalTok{,}\DataTypeTok{lwd=}\DecValTok{3}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{figure}
+
+{\centering \includegraphics[width=0.7\linewidth]{Machine-Learning_files/figure-latex/unnamed-chunk-167-1} 
+
+}
+
+\caption{$k$-means clustering solution}\label{fig:unnamed-chunk-167}
+\end{figure}
+
+\subsection{Cluster Validity, Choosing the Number of
+Clusters}\label{cluster-validity-choosing-the-number-of-clusters}
+
+The result of a clustering algorithm can be very different from each
+other on the same data set as the other input parameters of an algorithm
+can extremely modify the behavior and execution of the algorithm. The
+aim of the cluster validity is to find the partitioning that best fits
+the underlying data. Usually 2D data sets are used for evaluating
+clustering algorithms as the reader easily can verify the result. But in
+case of high dimensional data the visualization and visual validation is
+not a trivial tasks therefore some formal methods are needed.
+
+The process of evaluating the results of a clustering algorithm is
+called cluster validity assessment. Two measurement criteria have been
+proposed for evaluating and selecting an optimal clustering scheme:
+
+\begin{itemize}
+\item
+  \emph{Compactness}: The member of each cluster should be as close to
+  each other as possible. A common measure of compactness is the
+  variance.
+\item
+  \emph{Separation}: The clusters themselves should be widely separated.
+  There are three common approaches measuring the distance between two
+  different clusters: distance between the closest member of the
+  clusters, distance between the most distant members and distance
+  between the centres of the clusters.
+\end{itemize}
+
+There are three different techniques for evaluating the result of the
+clustering algorithms, and several \emph{Validity measures} are
+proposed: Validity measures are scalar indices that assess the goodness
+of the obtained partition. Clustering algorithms generally aim at
+locating well separated and compact clusters. When the number of
+clusters is chosen equal to the number of groups that actually exist in
+the data, it can be expected that the clustering algorithm will identify
+them correctly. When this is not the case, misclassifications appear,
+and the clusters are not likely to be well separated and compact. Hence,
+most cluster validity measures are designed to quantify the separation
+and the compactness of the clusters.
+
+\begin{rmdinsight}
+Check this answer on \texttt{stackoverflow} containing \texttt{R} code
+for several methods of computing an optimal value of \(k\) for
+\(k\)-means cluster analysis:
+\textcolor{white}{[}\faStackOverflow\textcolor{white}{]} here.
+\end{rmdinsight}
+
+◼
+
+\chapter*{PW 7}\label{pw-7}
+\addcontentsline{toc}{chapter}{PW 7}
+
+In this practical work we will apply the \(k\)-means clustering
+algorithm using the standard function \texttt{kmeans()} in \texttt{R},
+we will use the dataset \texttt{La\ Liga\ 2015/2016}.
+
+\section*{\texorpdfstring{\(k\)-means
+clustering}{k-means clustering}}\label{k-means-clustering}
+\addcontentsline{toc}{section}{\(k\)-means clustering}
+
+\textbf{1.} Download the dataset:
+\textcolor{white}{[}\faTable\textcolor{white}{]} LaLiga 2015-2016 and
+import it into \texttt{R}. Put the argument \texttt{row.names} to 1.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{# You can import directly from my website (instead of downloading it..)}
+\NormalTok{laliga <-}\StringTok{ }\KeywordTok{read.csv}\NormalTok{(}\StringTok{"http://mghassany.com/MLcourse/datasets/la-liga-15-16.csv"}\NormalTok{, }\DataTypeTok{row.names=}\DecValTok{1}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\textbf{2.} Print the first two rows of the dataset and the total number
+of features in this dataset.
+
+\subsection*{\texorpdfstring{\texttt{pointsCards}}{pointsCards}}\label{pointscards}
+\addcontentsline{toc}{subsection}{\texttt{pointsCards}}
+
+\textbf{3.} We will first consider a smaller dataset to easily
+understand the results of \(k\)-means. Create a new dataset in which you
+consider only \texttt{Points} and \texttt{Yellow.cards} from the
+original dataset. Name it \texttt{pointsCards}
+
+\textbf{4.} Apply \(k\)-means on \texttt{pointsCards}. Chose \(k=2\)
+clusters and put the number of iterations to 20. Store your results into
+\texttt{km}. (\textbf{Remark}: \texttt{kmeans()} uses a random
+initialization of the clusters, so the results may vary from one call to
+another. Use \texttt{set.seed()} to have reproducible outputs).
+
+\textbf{5.} Print and describe what is inside \texttt{km}.
+
+\textbf{6.} What are the coordinates of the centers of the clusters
+(called also prototypes or centroids) ?
+
+\textbf{7.} Plot the data (\texttt{Yellow.cards} vs \texttt{Points}).
+Color the points corresponding to their cluster.
+
+\textbf{8.} Add to the previous plot the clusters centroids and add the
+names of the observations.
+
+\textbf{9.} Re-run \(k\)-means on \texttt{pointsCards} using 3 and 4
+clusters and store the results into \texttt{km3} and \texttt{km4}
+respectively. Visualize the results like in question \textbf{7} and
+\textbf{8}.
+
+\begin{rmdcaution}
+How many clusters \(k\) do we need in practice? There is not a single
+answer: the advice is to try several and compare. Inspecting the
+`between\_SS / total\_SS' for a good trade-off between the number of
+clusters and the percentage of total variation explained usually gives a
+good starting point for deciding on \(k\) (criterion to select \(k\)
+similar to PCA).
+
+There is several methods of computing an optimal value of \(k\) with
+\texttt{R} code on following \texttt{stackoverflow} answer:
+\textcolor{white}{[}\faStackOverflow\textcolor{white}{]} here.
+\end{rmdcaution}
+
+\textbf{10.} Visualize the ``within groups sum of squares'' of the
+\(k\)-means clustering results (use the code in the link above).
+
+\textbf{11.} Modify the code of the previous question in order to
+visualize the `between\_SS / total\_SS'. Interpret the results.
+
+\subsection*{\texorpdfstring{\texttt{laliga}}{laliga}}\label{laliga}
+\addcontentsline{toc}{subsection}{\texttt{laliga}}
+
+So far, you have only taken the information of two variables for
+performing clustering. Now you will apply \texttt{kmeans()} on the
+original dataset \texttt{laliga}. Using PCA, we can visualize the
+clustering performed with all the available variables in the dataset.
+
+By default, \texttt{kmeans()} does not standardize the variables, which
+will affect the clustering result. As a consequence, the clustering of a
+dataset will be different if one variable is expressed in millions or in
+tenths. If you want to avoid this distortion, use scale to automatically
+center and standardize the dataset (the result will be a matrix, so you
+need to transform it to a data frame again).
+
+\textbf{12.} Scale the dataset and transform it to a data frame again.
+Store the scaled dataset into \texttt{laliga\_scaled}.
+
+\textbf{13.} Apply \texttt{kmeans()} on \texttt{laliga} and on
+\texttt{laliga\_scaled} using 3 clusters and 20 iterations. Store the
+results into \texttt{km.laliga} and \texttt{km.laliga.scaled}
+respectively (do not forget to set a seed)
+
+\textbf{14.} How muny observations there are in each cluster of
+\texttt{km.laliga} and \texttt{km.laliga.scaled} ? (you can use
+\texttt{table()}). Do you obtain the same results when you perform
+\texttt{kmeans()} on the scaled and unscaled data?
+
+\subsection*{\texorpdfstring{\texttt{PCA}}{PCA}}\label{pca}
+\addcontentsline{toc}{subsection}{\texttt{PCA}}
+
+\textbf{15.} Apply PCA on \texttt{laliga} dataset and store you results
+in \texttt{pcalaliga}. Do we need to apply PCA on the scaled dataset?
+Justify your answer.
+
+\textbf{16.} Plot the observations and the variables on the first two
+principal components using \texttt{biplot()} function.
+
+\textbf{17.} Redo the biplot (but with the \texttt{plot()} function)
+with colors indicating the cluster assignments.
+
+\textbf{18.} Recall that the figure of question \textbf{17} is a
+visualization with PC1 and PC2 of the clustering done with all the
+variables, not just PC1 and PC2. Now apply the \texttt{kmeans()}
+clustering with only the first two PCs. Visualize the results and
+compare with the question \textbf{17}.
+
+\begin{rmdinsight}
+By applying \(k\)-means only on the PCs we obtain different and less
+accurate result, but it is still an insightful way.
+\end{rmdinsight}
+
+\subsection*{\texorpdfstring{\texttt{Implementing\ k-means}}{Implementing k-means}}\label{implementing-k-means}
+\addcontentsline{toc}{subsection}{\texttt{Implementing\ k-means}}
+
+In this part, you will perform \(k\)-means clustering manually, with
+\(k=2\), on a small example with \(n=6\) observations and \(p=2\)
+features. The observations are as follows.
+
+\begin{longtable}[]{@{}ccc@{}}
+\toprule
+\textbf{Observation} & \textbf{\(X_1\)} &
+\textbf{\(X_2\)}\tabularnewline
+\midrule
+\endhead
+1 & 1 & 4\tabularnewline
+2 & 1 & 3\tabularnewline
+3 & 0 & 4\tabularnewline
+4 & 5 & 1\tabularnewline
+5 & 6 & 2\tabularnewline
+6 & 4 & 0\tabularnewline
+\bottomrule
+\end{longtable}
+
+\textbf{19.} Plot the observations.
+
+\textbf{20.} Randomly assign a cluster label to each observation. You
+can use the \texttt{sample()} command in \texttt{R} to do this. Report
+the cluster labels for each observation.
+
+\textbf{21.} Compute the centroid for each cluster.
+
+\textbf{22.} Create a function that calculates the Euclidean distance
+for two observations.
+
+\textbf{23.} Assign each observation to the centroid to which it is
+closest, in terms of Euclidean distance. Report the cluster labels for
+each observation.
+
+\textbf{24.} Repeat \textbf{21} and \textbf{23} until the answers
+obtained stop changing.
+
+\textbf{25.} In your plot from \textbf{19}, color the observations
+according to the cluster labels obtained.
+
+◼
+
+\chapter{Hierarchical Clustering}\label{hierarchical-clustering}
+
+In the last chapter we introduced the \(k\)-means algorithm. One
+potential disadvantage of \(k\)-means clustering is that it requires us
+to prespecify the number of clusters \(k\). Hierarchical clustering is
+an alternative approach which does not require that we commit to a
+particular choice of \(k\). Hierarchical clustering has an added
+advantage over \(k\)-means clustering in that it results in an
+attractive tree-based representation of the observations, called a
+\textbf{\emph{dendrogram}}.
+
+The most common type of hierarchical clustering is the
+\emph{agglomerative} clustering (or \emph{bottom-up} clustering). It
+refers to the fact that a dendrogram (generally depicted as an
+upside-down tree) is built starting from the leaves and combining
+clusters up to the trunk.
+
+\section{Dendrogram}\label{dendrogram}
+
+Suppose that we have the simulated data in the following figure:
+
+\begin{figure}
+
+{\centering \includegraphics[width=0.6\linewidth]{img/dendro} 
+
+}
+
+\caption{Simulated data of 45 observations generated from a three-class model.}\label{fig:dendro}
+\end{figure}
+
+The data in the figure above consists of 45 observations in
+two-dimensional space. The data were generated from a three-class model;
+the true class labels for each observation are shown in distinct colors.
+However, suppose that the data were observed without the class labels,
+and that we wanted to perform hierarchical clustering of the data.
+Hierarchical clustering (with complete linkage, to be discussed later)
+yields the result shown in Figure \ref{fig:dendro2}. How can we
+interpret this dendrogram?
+
+\begin{figure}
+
+{\centering \includegraphics[width=0.5\linewidth]{img/dendro2} 
+
+}
+
+\caption{Dendrogram}\label{fig:dendro2}
+\end{figure}
+
+In the dendrogram of Figure \ref{fig:dendro2}, each leaf of the
+dendrogram represents one of the 45 observations. However, as we move up
+the tree, some leaves begin to fuse into branches. These correspond to
+observations that are similar to each other. As we move higher up the
+tree, branches themselves fuse, either with leaves or other branches.
+The earlier (lower in the tree) fusions occur, the more similar the
+groups of observations are to each other. On the other hand,
+observations that fuse later (near the top of the tree) can be quite
+different. In fact, this statement can be made precise: for any two
+observations, we can look for the point in the tree where branches
+containing those two observations are first fused. The height of this
+fusion, as measured on the vertical axis, indicates how different the
+two observations are. Thus, observations that fuse at the very bottom of
+the tree are quite similar to each other, whereas observations that fuse
+close to the top of the tree will tend to be quite different.
+
+An example of interpreting a dendrogram is presented in Figure
+\ref{fig:dendro3}
+
+\begin{figure}
+
+{\centering \includegraphics[width=1\linewidth]{img/dendro3} 
+
+}
+
+\caption{An illustration of how to properly interpret a dendrogram with nine observations in two-dimensional space. Left: a dendrogram generated using Euclidean distance and complete linkage. Observations 5 and 7 are quite similar to each other, as are observations 1 and 6. However, observation 9 is no more similar to observation 2 than it is to observations 8, 5, and 7, even though observations 9 and 2 are close together in terms of horizontal distance. This is because observations 2, 8, 5, and 7 all fuse with observation 9 at the same height, approximately 1.8. Right: the raw data used to generate the dendrogram can be used to confirm that indeed, observation 9 is no more similar to observation 2 than it is to observations 8, 5, and 7.}\label{fig:dendro3}
+\end{figure}
+
+Now that we understand how to interpret the dendrogram of Figure
+\ref{fig:dendro2}, we can move on to the issue of identifying clusters
+on the basis of a dendrogram. In order to do this, we make a horizontal
+cut across the dendrogram, as shown in the following Figure
+\ref{fig:dendro4} where we cut the dendro4 at a height of nine results
+in two clusters.
+
+\begin{figure}
+
+{\centering \includegraphics[width=0.5\linewidth]{img/dendro4} 
+
+}
+
+\caption{The dendrogram from the simulated dataset, cut at a height of nine (indicated by the dashed line). This cut results in two distinct clusters, shown in different colors.}\label{fig:dendro4}
+\end{figure}
+
+The distinct sets of observations beneath the cut can be interpreted as
+clusters. In Figure \ref{fig:dendro5}, cutting the dendrogram at a
+height of five results in three clusters.
+
+\begin{figure}
+
+{\centering \includegraphics[width=0.5\linewidth]{img/dendro5} 
+
+}
+
+\caption{The dendrogram from the simulated dataset, cut at a height of five (indicated by the dashed line). This cut results in three distinct clusters, shown in different colors.}\label{fig:dendro5}
+\end{figure}
+
+The term \emph{hierarchical} refers to the fact that clusters obtained
+by cutting the dendrogram at a given height are necessarily nested
+within the clusters obtained by cutting the dendrogram at any greater
+height.
+
+\section{The Hierarchical Clustering
+Algorithm}\label{the-hierarchical-clustering-algorithm}
+
+The hierarchical clustering dendrogram is obtained via an extremely
+simple algorithm. We begin by defining some sort of \emph{dissimilarity}
+measure between each pair of observations. Most often, Euclidean
+distance is used. The algorithm proceeds iteratively. Starting out at
+the bottom of the dendrogram, each of the n observations is treated as
+its own cluster. The two clusters that are most similar to each other
+are then fused so that there now are \(n−1\) clusters. Next the two
+clusters that are most similar to each other are fused again, so that
+there now are \(n − 2\) clusters. The algorithm proceeds in this fashion
+until all of the observations belong to one single cluster, and the
+dendrogram is complete.
+
+Figure \ref{fig:cah} depicts the first few steps of the algorithm.
+
+\begin{figure}
+
+{\centering \includegraphics[width=0.7\linewidth]{img/cah} 
+
+}
+
+\caption{An illustration of the first few steps of the hierarchical clustering algorithm, with complete linkage and Euclidean distance. Top Left: initially, there are nine distinct clusters {1}, {2}, ..., {9}. Top Right: the two clusters that are closest together, {5} and {7}, are fused into a single cluster. Bottom Left: the two clusters that are closest together, {6} and {1},are fused into a single cluster. Bottom Right: the two clusters that are closest together using complete linkage, {8} and the cluster {5, 7}, are fused into a single cluster.}\label{fig:cah}
+\end{figure}
+
+To summarize, the hierarchical clustering algorithm is given in the
+following Algorithm:
+
+\begin{longtable}[]{@{}l@{}}
+\toprule
+\begin{minipage}[t]{0.97\columnwidth}\raggedright\strut
+\textbf{Hierarchical Clustering}:\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.97\columnwidth}\raggedright\strut
+\textbf{1- Initialisation}: Begin with \(n\) observations and a measure
+(such as Euclidean distance) of all the \(C^2_n = n(n−1)/2\) pairwise
+dissimilarities. Treat each observation as its own cluster.\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.97\columnwidth}\raggedright\strut
+\textbf{2- For} \(i=n,n-1,\ldots,2\):\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.97\columnwidth}\raggedright\strut
+(a) Examine all pairwise inter-cluster dissimilarities among the \(i\)
+clusters and identify the pair of clusters that are least dissimilar
+(that is, most similar). Fuse these two clusters. The dissimilarity
+between these two clusters indicates the height in the dendrogram at
+which the fusion should be placed.\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.97\columnwidth}\raggedright\strut
+(b) Compute the new pairwise inter-cluster dissimilarities among the
+\(i − 1\) remaining clusters.\strut
+\end{minipage}\tabularnewline
+\bottomrule
+\end{longtable}
+
+This algorithm seems simple enough, but one issue has not been
+addressed. Consider the bottom right panel in Figure \ref{fig:cah}. How
+did we determine that the cluster \{5, 7\} should be fused with the
+cluster \{8\}? We have a concept of the dissimilarity between pairs of
+observations, but how do we define the dissimilarity between two
+clusters if one or both of the clusters contains multiple observations?
+The concept of dissimilarity between a pair of observations needs to be
+extended to a pair of groups of observations. This extension is achieved
+by developing the notion of \textbf{\emph{linkage}}, which defines the
+dissimilarity between two groups of observations. The four most common
+types of linkage: complete, average, single, and centroid are briefly
+are described like follows:
+
+\begin{itemize}
+\item
+  \textbf{Complete}: Maximal intercluster dissimilarity. Compute all
+  pairwise dissimilarities between the observations in cluster A and the
+  observations in cluster B, and record the largest of these
+  dissimilarities.
+\item
+  \textbf{Single}: Minimal intercluster dissimilarity. Compute all
+  pairwise dissimilarities between the observations in cluster A and the
+  observations in cluster B, and record the smallest of these
+  dissimilarities. Single linkage can result in extended, trailing
+  clusters in which single observations are fused one-at-a-time
+\item
+  \textbf{Average}: Mean intercluster dissimilarity. Compute all
+  pairwise dissimilarities between the observations in cluster A and the
+  observations in cluster B, and record the average of these
+  dissimilarities.
+\item
+  \textbf{Centroid}: Dissimilarity between the centroid for cluster A (a
+  mean vector of length p) and the centroid for cluster B. Centroid
+  linkage can result in undesirable inversions.
+\end{itemize}
+
+Average and complete linkage are generally preferred over single
+linkage, as they tend to yield more balanced dendrograms. Centroid
+linkage is often used in genomics.
+
+The dissimilarities computed in Step 2(b) of the hierarchical clustering
+algorithm will depend on the type of linkage used, as well as on the
+choice of dissimilarity measure. Hence, the resulting dendrogram
+typically depends quite strongly on the type of linkage used, as is
+shown in Figure \ref{fig:linkage}.
+
+\begin{figure}
+
+{\centering \includegraphics[width=0.7\linewidth]{img/linkage} 
+
+}
+
+\caption{Average, complete, and single linkage applied to an example data set. Average and complete linkage tend to yield more balanced clusters.}\label{fig:linkage}
+\end{figure}
+
+\section{\texorpdfstring{Hierarchical clustering in
+\texttt{R}}{Hierarchical clustering in R}}\label{hierarchical-clustering-in-r}
+
+Let's illustrate how to perform hierarchical clustering on dataset
+\texttt{laliga}.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{# Load the dataset}
+\NormalTok{laliga <-}\StringTok{ }\KeywordTok{read.csv}\NormalTok{(}\StringTok{"http://mghassany.com/MLcourse/datasets/la-liga-15-16.csv"}\NormalTok{, }\DataTypeTok{row.names=}\DecValTok{1}\NormalTok{)}
+
+\CommentTok{# Work with standardized data}
+\NormalTok{laliga_scaled <-}\StringTok{ }\KeywordTok{data.frame}\NormalTok{(}\KeywordTok{scale}\NormalTok{(laliga))}
+
+\CommentTok{# Compute dissimilary matrix - in this case Euclidean distance}
+\NormalTok{d <-}\StringTok{ }\KeywordTok{dist}\NormalTok{(laliga_scaled)}
+
+\CommentTok{# Hierarchical clustering with complete linkage}
+\NormalTok{treeComp <-}\StringTok{ }\KeywordTok{hclust}\NormalTok{(d, }\DataTypeTok{method =} \StringTok{"complete"}\NormalTok{)}
+\KeywordTok{plot}\NormalTok{(treeComp)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{center}\includegraphics[width=0.7\linewidth]{Machine-Learning_files/figure-latex/unnamed-chunk-191-1} \end{center}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+
+\CommentTok{# With average linkage}
+\NormalTok{treeAve <-}\StringTok{ }\KeywordTok{hclust}\NormalTok{(d, }\DataTypeTok{method =} \StringTok{"average"}\NormalTok{)}
+\KeywordTok{plot}\NormalTok{(treeAve)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{center}\includegraphics[width=0.7\linewidth]{Machine-Learning_files/figure-latex/unnamed-chunk-191-2} \end{center}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+
+\CommentTok{# With single linkage}
+\NormalTok{treeSingle <-}\StringTok{ }\KeywordTok{hclust}\NormalTok{(d, }\DataTypeTok{method =} \StringTok{"single"}\NormalTok{)}
+\KeywordTok{plot}\NormalTok{(treeSingle) }\CommentTok{# Chaining}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{center}\includegraphics[width=0.7\linewidth]{Machine-Learning_files/figure-latex/unnamed-chunk-191-3} \end{center}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+
+\CommentTok{# Set the number of clusters after inspecting visually}
+\CommentTok{# the dendogram for "long" groups of hanging leaves}
+\CommentTok{# These are the cluster assignments}
+\KeywordTok{cutree}\NormalTok{(treeComp, }\DataTypeTok{k =} \DecValTok{2}\NormalTok{) }\CommentTok{# (Barcelona, Real Madrid) and (rest)}
+\CommentTok{#ans>       Barcelona     Real Madrid Atletico Madrid      Villarreal }
+\CommentTok{#ans>               1               1               1               2 }
+\CommentTok{#ans>        Athletic           Celta         Sevilla          Malaga }
+\CommentTok{#ans>               2               2               2               2 }
+\CommentTok{#ans>   Real Sociedad           Betis      Las Palmas        Valencia }
+\CommentTok{#ans>               2               2               2               2 }
+\CommentTok{#ans>           Eibar        Espanyol       Deportivo         Granada }
+\CommentTok{#ans>               2               2               2               2 }
+\CommentTok{#ans>  Sporting Gijon  Rayo Vallecano          Getafe         Levante }
+\CommentTok{#ans>               2               2               2               2}
+\KeywordTok{cutree}\NormalTok{(treeComp, }\DataTypeTok{k =} \DecValTok{3}\NormalTok{) }\CommentTok{# (Barcelona, Real Madrid), (Atlético Madrid) and (rest)}
+\CommentTok{#ans>       Barcelona     Real Madrid Atletico Madrid      Villarreal }
+\CommentTok{#ans>               1               1               2               3 }
+\CommentTok{#ans>        Athletic           Celta         Sevilla          Malaga }
+\CommentTok{#ans>               3               3               3               3 }
+\CommentTok{#ans>   Real Sociedad           Betis      Las Palmas        Valencia }
+\CommentTok{#ans>               3               3               3               3 }
+\CommentTok{#ans>           Eibar        Espanyol       Deportivo         Granada }
+\CommentTok{#ans>               3               3               3               3 }
+\CommentTok{#ans>  Sporting Gijon  Rayo Vallecano          Getafe         Levante }
+\CommentTok{#ans>               3               3               3               3}
+\CommentTok{# Compare differences - treeComp makes more sense than treeAve}
+\KeywordTok{cutree}\NormalTok{(treeComp, }\DataTypeTok{k =} \DecValTok{4}\NormalTok{) }
+\CommentTok{#ans>       Barcelona     Real Madrid Atletico Madrid      Villarreal }
+\CommentTok{#ans>               1               1               2               3 }
+\CommentTok{#ans>        Athletic           Celta         Sevilla          Malaga }
+\CommentTok{#ans>               3               3               3               3 }
+\CommentTok{#ans>   Real Sociedad           Betis      Las Palmas        Valencia }
+\CommentTok{#ans>               3               3               3               4 }
+\CommentTok{#ans>           Eibar        Espanyol       Deportivo         Granada }
+\CommentTok{#ans>               4               4               3               4 }
+\CommentTok{#ans>  Sporting Gijon  Rayo Vallecano          Getafe         Levante }
+\CommentTok{#ans>               4               4               4               4}
+\end{Highlighting}
+\end{Shaded}
+
+◼
+
+\chapter*{PW 8}\label{pw-8}
+\addcontentsline{toc}{chapter}{PW 8}
+
+\section*{\texorpdfstring{Distances
+\texttt{dist()}}{Distances dist()}}\label{distances-dist}
+\addcontentsline{toc}{section}{Distances \texttt{dist()}}
+
+To calculate the distance in \texttt{R} we use the \texttt{dist()}
+function. Here is a tutorial of how use it.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{# Generate a matrix M of values from 1 to 15 with 5 rows and 3 columns}
+\NormalTok{M <-}\StringTok{ }\KeywordTok{matrix}\NormalTok{(}\DecValTok{1}\OperatorTok{:}\DecValTok{15}\NormalTok{,}\DecValTok{5}\NormalTok{,}\DecValTok{3}\NormalTok{)}
+\NormalTok{M}
+\CommentTok{#ans>      [,1] [,2] [,3]}
+\CommentTok{#ans> [1,]    1    6   11}
+\CommentTok{#ans> [2,]    2    7   12}
+\CommentTok{#ans> [3,]    3    8   13}
+\CommentTok{#ans> [4,]    4    9   14}
+\CommentTok{#ans> [5,]    5   10   15}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{# - Compute the distance between rows of M.}
+\CommentTok{# - The default distance is the euclidian distance.}
+\CommentTok{# - Since there are 3 columns, it is the euclidian}
+\CommentTok{#        distance between tri-dimensional points.}
+\KeywordTok{dist}\NormalTok{(M)}
+\CommentTok{#ans>      1    2    3    4}
+\CommentTok{#ans> 2 1.73               }
+\CommentTok{#ans> 3 3.46 1.73          }
+\CommentTok{#ans> 4 5.20 3.46 1.73     }
+\CommentTok{#ans> 5 6.93 5.20 3.46 1.73}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{# To compute the Manhattan distance }
+\KeywordTok{dist}\NormalTok{(M, }\DataTypeTok{method=} \StringTok{"manhattan"}\NormalTok{)}
+\CommentTok{#ans>    1  2  3  4}
+\CommentTok{#ans> 2  3         }
+\CommentTok{#ans> 3  6  3      }
+\CommentTok{#ans> 4  9  6  3   }
+\CommentTok{#ans> 5 12  9  6  3}
+\end{Highlighting}
+\end{Shaded}
+
+\section*{\texorpdfstring{Dendrogram
+\texttt{hclust()}}{Dendrogram hclust()}}\label{dendrogram-hclust}
+\addcontentsline{toc}{section}{Dendrogram \texttt{hclust()}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{# First we construct the dendrogram }
+\NormalTok{dendro <-}\StringTok{ }\KeywordTok{hclust}\NormalTok{(}\KeywordTok{dist}\NormalTok{(M))}
+
+\CommentTok{# Then we plot it}
+\KeywordTok{plot}\NormalTok{(dendro)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{center}\includegraphics[width=0.7\linewidth]{Machine-Learning_files/figure-latex/unnamed-chunk-196-1} \end{center}
+
+\section*{Hierarchical clustering on Iris
+dataset}\label{hierarchical-clustering-on-iris-dataset}
+\addcontentsline{toc}{section}{Hierarchical clustering on Iris dataset}
+
+\begin{center}\includegraphics[width=0.85\linewidth]{img/iris} \end{center}
+
+\textbf{1.} Download the iris dataset from
+\textcolor{white}{[}\faTable\textcolor{white}{]} here and import it into
+\texttt{R}.
+
+\textbf{2.} Choose randomly 40 observations of the iris dataset and
+store the sample dataset into \texttt{sampleiris}.
+
+\textbf{3.} Calculate the euclidean distances between the flowers. Store
+the results in a matrix called \texttt{D}. (\textbf{Remark}: the last
+column of the dataset is the class labels of the flowers)
+
+\textbf{4.} Construct a dendrogram on the iris dataset using the method
+\emph{average}. Store the result in \texttt{dendro.avg}.
+
+\textbf{5.} Plot the dendrogram.
+
+\textbf{6.} Plot again the dendrogram using the following command:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{plot}\NormalTok{(dendro.avg, }\DataTypeTok{hang=}\OperatorTok{-}\DecValTok{1}\NormalTok{, }\DataTypeTok{label=}\NormalTok{sampleiris}\OperatorTok{$}\NormalTok{class)}
+\end{Highlighting}
+\end{Shaded}
+
+\textbf{7.} To cut the dendrogram and obtain a clustering use the
+\texttt{cutree}. You can choose the number of clusters you wish to
+obtain, or you can cut by choosing the height from the dendrogram
+figure. Cut the dendrogram in order to obtain 3 clusters. Store the
+results into vector \texttt{groups.avg}.
+
+\textbf{8.} Visualize the cut tree using the function
+\texttt{rect.hclust()}. You can choose the colors of the rectangles too!
+
+\textbf{9.} Compare the obtained results obtained with Hierarchical
+clustering and the real class labels of the flowers (function
+\texttt{table()}). Interpret the results.
+
+\textbf{Bonus}: You can cut the tree manually (on demand!). To do so,
+plot a dendrogram first then use the function \texttt{identify()}. On
+the figure, click on the clusters you wish to obtain. Then hit
+\texttt{Escape} to finish.
+
+\textbf{10.} Now apply the Hierarchical clustering on the iris dataset
+(the 150 observations). Choose 3 clusters and compare the results with
+the real class labels. Compare different methods of Hierarchical
+clustering (\emph{average}, \emph{complete} and \emph{single} linkages).
 
 ◼
 

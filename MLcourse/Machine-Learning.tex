@@ -125,7 +125,7 @@
   \postauthor{\par}
       \predate{\centering\large\emph}
   \postdate{\par}
-    \date{2018-09-07}
+    \date{2018-09-10}
 
 % \defaultfontfeatures{
 %     Path = /home/ghassany/texmf/fonts/opentype/public/fontawesome/}
@@ -2825,6 +2825,86 @@ distributed uniformly in \((0,1)\). If \(H_0\) does not hold, then the
 distribution of the \(p\)-value is not uniform but concentrated at \(0\)
 (where the rejections of \(H_0\) take place).
 \end{rmdinsight}
+
+\chapter{Use of qualitative predictors}\label{use-qual}
+
+An important situation is how to deal with \emph{qualitative}, and not
+\emph{quantitative}, predictors when we fit a regression model.
+Qualitative predictors, also known as \emph{categorical} variables or,
+in \texttt{R}'s terminology, \emph{factors}, are very common, for
+example in social sciences. Dealing with them requires some care and
+proper understanding of how these variables are represented.
+
+The simplest case is the situation with \textbf{two levels}. A binary
+variable \(C\) with two levels (for example, \emph{a} and \emph{b}) can
+be represented as \[
+D=\left\{\begin{array}{ll}
+1,&\text{if }C=b,\\
+0,&\text{if }C=a.
+\end{array}\right.
+\] \(D\) now is a \emph{dummy variable}: it codifies with zeros and ones
+the two possible levels of the categorical variable. An example of \(C\)
+could be \emph{gender}, which has levels \emph{male} and \emph{female}.
+The dummy variable associated is \(D=0\) if the gender is male and
+\(D=1\) if the gender is female.
+
+The advantage of this \emph{dummification} is its interpretability in
+regression models. Since level \emph{a} corresponds to \(0\), it can be
+seen as the \emph{reference level} to which level \emph{b} is compared.
+This is the key point in dummification: \textbf{set one level as the
+reference and codify the rest as departures from it} with ones.
+
+\texttt{R} does the dummification automatically (translates a
+categorical variable \(C\) into its dummy version \(D\)) if it detects
+that a factor variable is present in the regression model.
+
+Let's see now the case with \textbf{more than two levels}, for example,
+a categorical variable \(C\) with levels \emph{a}, \emph{b}, and
+\emph{c}. If we take \emph{a} as the reference level, this variable can
+be represented by \emph{two} dummy variables: \[
+D_1=\left\{\begin{array}{ll}1,&\text{if }C=b,\\0,& \text{if }C\neq b\end{array}\right.
+\] and \[
+D_2=\left\{\begin{array}{ll}1,&\text{if }C=c,\\0,& \text{if }C\neq c.\end{array}\right.
+\] Then \(C=a\) is represented by \(D_1=D_2=0\), \(C=b\) is represented
+by \(D_1=1,D_2=0\) and \(C=c\) is represented by \(D_1=0,D_2=1\).
+
+In general, if we have a categorical variable with \(J\) levels, then
+the number of dummy variables required is \(J-1\). Again, \texttt{R}
+does the dummification automatically for you if it detects that a factor
+variable is present in the regression model.
+
+\begin{rmdinsight}
+It may happen that one dummy variable, say \(D_1\) is not significant,
+while other dummy variables, say \(D_2\), are significant.
+\end{rmdinsight}
+
+\begin{rmdcaution}
+\textbf{Do not codify a categorical variable as a discrete variable}.
+This constitutes a major methodological fail that will flaw the
+subsequent statistical analysis.
+
+For example if you have a categorical variable \texttt{party} with
+levels \texttt{partyA}, \texttt{partyB}, and \texttt{partyC}, do not
+encode it as a discrete variable taking the values \texttt{1},
+\texttt{2}, and \texttt{3}, respectively. If you do so:
+
+\begin{itemize}
+\tightlist
+\item
+  You assume implicitly an order in the levels of \texttt{party}, since
+  \texttt{partyA} is closer to \texttt{partyB} than to \texttt{partyC}.
+\item
+  You assume implicitly that \texttt{partyC} is three times larger than
+  \texttt{partyA}.
+\item
+  The codification is completely arbitrary -- why not considering
+  \texttt{1}, \texttt{1.5}, and \texttt{1.75} instead of?
+\end{itemize}
+
+The right way of dealing with categorical variables in regression is to
+set the variable as a factor and let \texttt{R} do internally the
+dummification.
+\end{rmdcaution}
 
 \bibliography{biblio.bib}
 

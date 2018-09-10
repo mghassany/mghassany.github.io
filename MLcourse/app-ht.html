@@ -25,7 +25,7 @@
 <meta name="author" content="Mohamad Ghassany">
 
 
-<meta name="date" content="2018-09-07">
+<meta name="date" content="2018-09-10">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -33,7 +33,7 @@
   
   
 <link rel="prev" href="app-introRStudio.html">
-
+<link rel="next" href="use-qual.html">
 <script src="book_assets/jquery-2.2.3/jquery.min.js"></script>
 <link href="book_assets/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="book_assets/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
@@ -168,6 +168,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="appendix"><span><b>Appendix</b></span></li>
 <li class="chapter" data-level="A" data-path="app-introRStudio.html"><a href="app-introRStudio.html"><i class="fa fa-check"></i><b>A</b> Introduction to <code>RStudio</code></a></li>
 <li class="chapter" data-level="B" data-path="app-ht.html"><a href="app-ht.html"><i class="fa fa-check"></i><b>B</b> Review on hypothesis testing</a></li>
+<li class="chapter" data-level="C" data-path="use-qual.html"><a href="use-qual.html"><i class="fa fa-check"></i><b>C</b> Use of qualitative predictors</a></li>
 </ul>
 
       </nav>
@@ -244,72 +245,14 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 If <span class="math inline"><span class="math inline">\(H_0\)</span></span> holds, then the <span class="math inline"><span class="math inline">\(p\)</span></span>-value (which is a random variable) is distributed uniformly in <span class="math inline"><span class="math inline">\((0,1)\)</span></span>. If <span class="math inline"><span class="math inline">\(H_0\)</span></span> does not hold, then the distribution of the <span class="math inline"><span class="math inline">\(p\)</span></span>-value is not uniform but concentrated at <span class="math inline"><span class="math inline">\(0\)</span></span> (where the rejections of <span class="math inline"><span class="math inline">\(H_0\)</span></span> take place).
 </p>
 </div>
-<!-- # Use of qualitative predictors {#use-qual} -->
-<!-- An important situation is how to deal with *qualitative*, and not *quantitative*, predictors when we fit a regression model. Qualitative predictors, also known as *categorical* variables or, in `R`'s terminology, *factors*, are very common, for example in social sciences. Dealing with them requires some care and proper understanding of how these variables are represented. -->
-<!-- The simplest case is the situation with **two levels**. A binary variable $C$ with two levels (for example, *a* and *b*) can be represented as -->
-<!-- \[ -->
-<!-- D=\left\{\begin{array}{ll} -->
-<!-- 1,&\text{if }C=b,\\ -->
-<!-- 0,&\text{if }C=a. -->
-<!-- \end{array}\right. -->
-<!-- \] -->
-<!-- $D$ now is a *dummy variable*: it codifies with zeros and ones the two possible levels of the categorical variable. An example of $C$ could be *gender*, which has levels *male* and *female*. The dummy variable associated is $D=0$ if the gender is male and $D=1$ if the gender is female. -->
-<!-- The advantage of this *dummification* is its interpretability in regression models. Since level *a* corresponds to $0$, it can be seen as the *reference level* to which level *b* is compared. This is the key point in dummification: **set one level as the reference and codify the rest as departures from it** with ones. -->
-<!-- `R` does the dummification automatically (translates a categorical variable $C$ into its dummy version $D$) if it detects that a factor variable is present in the regression model. -->
-<!-- Let's see now the case with **more than two levels**, for example, a categorical variable $C$ with levels *a*, *b*, and *c*. If we take *a* as the reference level, this variable can be represented by *two* dummy variables: -->
-<!-- \[ -->
-<!-- D_1=\left\{\begin{array}{ll}1,&\text{if }C=b,\\0,& \text{if }C\neq b\end{array}\right. -->
-<!-- \] -->
-<!-- and -->
-<!-- \[ -->
-<!-- D_2=\left\{\begin{array}{ll}1,&\text{if }C=c,\\0,& \text{if }C\neq c.\end{array}\right. -->
-<!-- \] -->
-<!-- Then $C=a$ is represented by $D_1=D_2=0$, $C=b$ is represented by $D_1=1,D_2=0$ and $C=c$ is represented by $D_1=0,D_2=1$.  -->
-<!-- In general, if we have a categorical variable with $J$ levels, then the number of dummy variables required is $J-1$. Again, `R` does the dummification automatically for you if it detects that a factor variable is present in the regression model.  -->
-<!-- ```{block, insdummy, type = 'rmdinsight', cache = TRUE} -->
-<!-- It may happen that one dummy variable, say $D_1$ is not significant, while other dummy variables, say $D_2$, are significant. -->
-<!-- ``` -->
-<!-- ```{block, caucateg, type = 'rmdcaution', cache = TRUE} -->
-<!-- **Do not codify a categorical variable as a discrete variable**. This constitutes a major methodological fail that will flaw the subsequent statistical analysis. -->
-<!-- For example if you have a categorical variable `party` with levels `partyA`, `partyB`, and `partyC`, do not encode it as a discrete variable taking the values `1`, `2`, and `3`, respectively. If you do so: -->
-<!-- - You assume implicitly an order in the levels of `party`, since `partyA` is closer to `partyB` than to `partyC`. -->
-<!-- - You assume implicitly that `partyC` is three times larger than `partyA`. -->
-<!-- - The codification is completely arbitrary -- why not considering `1`, `1.5`, and `1.75` instead of? -->
-<!-- The right way of dealing with categorical variables in regression is to set the variable as a factor and let `R` do internally the dummification. -->
-<!-- ``` -->
-<!-- # PW5 - Annexe -->
-<!-- Concernant la séance 5: J'ai remarqué que la majorité n'a pas compris ce qu'il fallait faire! Le but de la séance est d'exploiter et analyser un jeu de données. La première chose à faire est la phase descriptive où on décrit les données, les variables, quelques figures descriptives, etc.. Ensuite il faut regarder la variable cible, qu'on souhaite modéliser et prédire. Selon le type de cette variable on décide la direction de l'analyse: -->
-<!-- 1- Variable cible **quantitative**: On fait la **regression**. Donc ce qui est important dans ce cas est d'étudier les corrélations entre les variables (prédicteurs) et en particulier entre les corrélations entre les prédicteurs et la variable cible. Ensuite sur le training set construire le modèle de régression. Pour cette tâche, vous pouvez commencer par un modèle qui prend tous les prédicteurs, et ensuite commencer à enlever les prédicteurs non significatives (comme on a fait en tp, c'est en fait la méthode backward). Vous pouvez tout de même pour la régression appliquer les méthodes décrites dans les vidéos du chapitre 5 pour faciliter la recherche du meilleur modèle. Une fois le modèle est trouvé, reste à faire la prédiction (sur le test set) et la performance du modèle. -->
-<!-- 2- Variable cible **qualitative**: Alors on fait la **classification**. Comme la variable cible est qualitative vous pouvez étudier la relation entre les prédicteurs et cette variable (boxplots, mosaicplots, etc..).  -->
-<!-- Si la variable cible a 2 classes, vous pouvez construire des modèles de classifications vus en cours, prédire, ensuite comparer la performance de vos modèles (matrices de confusion, accuracy, courbes roc, etc..). Attention, on peut suivre les méthodes expliquées dans les vidéos du chapitre 5, mais pas avec les mêmes codes! la démarche expliquée dans les vidéos est commune, mais pour la classification il faut utiliser une autre librairie que "leaps", par exemple "bestglm". -->
-<!-- Si la variable cible a plus que 2 classes, pas besoin d'appliquer la régression logistique (raison expliquée dans le cours!), il suffit d'appliquer les méthodes discriminantes du chapitre 4. Attention, la courbe roc n'est pas applicable dans ce cas, on compare la performance en utilisant la matrice de confusion (au moins l'accuracy!). Mais d'autre part, vous pouvez quand même transformer le problème en deux classes, il s'agit de l'approche one-vs-all: c'est à dire considérer la classe 0 contre tous les autres classes à la fois. -->
-<!-- Ps, il ne vous faut pas la correction des tps pour pouvoir faire tout ce qui est décrit ci dessus. Vous avez suffisamment des exemples dans le cous, et dans l'énoncé du tp4, vous avez un exemple détaillé avec des commentaires aussi. -->
-<!-- Voilà.  -->
-<!-- # References -->
-
 </div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
             </section>
 
           </div>
         </div>
       </div>
-<a href="app-introRStudio.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-
+<a href="app-introRStudio.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="use-qual.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="book_assets/gitbook-2.6.7/js/app.min.js"></script>

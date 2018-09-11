@@ -125,7 +125,7 @@
   \postauthor{\par}
       \predate{\centering\large\emph}
   \postdate{\par}
-    \date{2018-09-10}
+    \date{2018-09-11}
 
 % \defaultfontfeatures{
 %     Path = /home/ghassany/texmf/fonts/opentype/public/fontawesome/}
@@ -1370,7 +1370,8 @@ the \texttt{plot()} function, type \texttt{?plot}.
 
 \CommentTok{# Sampling from a Normal - 100 random points from a N(0, 1)}
 \KeywordTok{rnorm}\NormalTok{(}\DataTypeTok{n =} \DecValTok{10}\NormalTok{, }\DataTypeTok{mean =} \DecValTok{0}\NormalTok{, }\DataTypeTok{sd =} \DecValTok{1}\NormalTok{)}
-\CommentTok{#ans>  [1] -1.164 -0.318 -0.315  0.163  0.665 -1.398 -1.253 -0.362 -0.720 -0.871}
+\CommentTok{#ans>  [1] -0.02861 -0.35848  0.89207  0.00277  0.21199 -1.73837 -0.32862}
+\CommentTok{#ans>  [8] -1.45277  0.32805  0.30720}
 
 \CommentTok{# If you want to have always the same result, set the seed of the random number}
 \CommentTok{# generator}
@@ -1773,8 +1774,7 @@ Do the following:
 \end{itemize}
 \end{rmdexercise}
 
-\subsection{Predicting House Value: Boston
-dataset}\label{predicting-house-value-boston-dataset}
+\subsection{Predicting House Value: Boston dataset}\label{boston}
 
 We are going to use a dataset called Boston which is part of the
 \texttt{MASS} package. It recordes the median value of houses for 506
@@ -2689,6 +2689,175 @@ histogram, errors occur within a range of -338 and 520. In the second
 histogram, errors occur within -293 and 401. So the outliers are much
 lower. Furthermore, most errors in the model of the second histogram are
 closer to zero. So we would favor the second model.
+
+◼
+
+\chapter*{PW 2}\label{pw-2}
+\addcontentsline{toc}{chapter}{PW 2}
+
+\section*{Multiple Linear
+Regression}\label{multiple-linear-regression-1}
+\addcontentsline{toc}{section}{Multiple Linear Regression}
+
+In this practical work, we will continue the analysis of the Boston data
+set that we started last week (section \ref{boston}). Recall that this
+dataset records the median value of houses for 506 neighborhoods around
+Boston. Our task is to predict the median house value (\texttt{medv}).
+
+\textbf{1}. Load the Boston dataset from \texttt{MASS} package.
+
+\textbf{2}. Split the dataset into traning set and testing set. (keep
+all the variables of the Boston data set)
+
+\textbf{3}. Check if there is a linear relationship between the
+variables \texttt{medv} and \texttt{age}. (use \texttt{cor()} function).
+
+\textbf{4}. Fit a model of housing prices in function of age and plot
+the observations and the regression line.
+
+\textbf{5}. Train a regression model using both \texttt{lstat} and
+\texttt{age} as predictors of median house value. (Remember that we
+transformed \texttt{lstat}, use the same transformation here). What is
+the obtained model?
+
+\textbf{6}. Print the summary of the obtained regression model.
+
+\textbf{7}. Are the predictors significant ?
+
+\textbf{8}. Is the model as a whole significant? Answer on this question
+must be detailed.
+
+\textbf{9}. Train a new model using all the variables of the dataset.
+(We can use \texttt{.} as a short cut instead of writing down all the
+variables names)
+
+\textbf{10}. When using all the variables as predictors, we didn't
+transform \texttt{lstat}. Re train the model using \texttt{log(lstat)}
+instead of \texttt{lstat}.
+
+\textbf{11}. Did \(R^2\) improve ?
+
+\textbf{12}. To see if there is correlated variables print the
+correlation matrix using the \texttt{cor()} function (round the
+correlations with 2 digits).
+
+\textbf{13}. Visualize the correlations using the \texttt{corrplot}
+package. To do so, install the \texttt{corrplot} package, load it, then
+use the function \texttt{corrplot.mixed()}. See this
+\href{https://cran.r-project.org/web/packages/corrplot/vignettes/corrplot-intro.html}{link}
+for examples and to understand how to use it.
+
+\textbf{14}. What is the correlation between \texttt{tax} and
+\texttt{rad}?
+
+\textbf{15}. Run the model again without \texttt{tax}. What happens to
+the \(R^2\) ? and for the F-statistic?
+
+\begin{rmdinsight}
+Of course \(R^2\) should go a little lower because we deleted one of the
+variables. But check for the model significance (F-statistic) gets
+higher, which means the p-values gets lower and thus the model is more
+significant without \texttt{rad}.
+\end{rmdinsight}
+
+\textbf{16}. Calculate the mean squared error (MSE) for the last model.
+
+\textbf{Anova}
+
+Next we will apply an analysis of variances (ANOVA) in order to test if
+there is a significant difference of means between two groups \(i\) and
+\(j\) (Consider group \(i\) is the suburbs bounding the river and \(j\)
+the suburbs which not). The hypotheses are
+
+\[ H_0 : \mu_i = \mu_j \]
+
+\[ H_1 : \mu_i \neq \mu_j \]
+
+Where \(\mu_i\) is the mean of \texttt{medv} in group \(i\).
+
+\textbf{17}. In the Boston data set there is a categorical variable
+\texttt{chas} which corresponds to Charles River (= 1 if a suburb bounds
+the river; 0 otherwise). Use command \texttt{str()} to see how this
+variable is present in the dataset. How many of the suburbs in this data
+set bound the Charles river?
+
+\textbf{18}. Create Boxplots of the median value of houses with respect
+to the variable \texttt{chas}. Do we observe some difference between the
+median value of houses with respect to the neighborhood to Charles
+River?
+
+\textbf{19}. Calculate \(\mu_i\) and \(\mu_j\) (in one line using the
+function \texttt{aggregate()}).
+
+\textbf{20}. Apply an ANOVA test of \texttt{medv} whith respect to
+\texttt{chas} (use the function \texttt{aov()}). Print the result and
+the summary of it. what do you conclude ?
+
+\textbf{Qualitative predictors}
+
+\textcolor{white}{[}\faExclamationTriangle\textcolor{white}{]}
+\textbf{Before starting the next question, please read section
+\ref{other-consid} and Appendix \ref{use-qual} about using qualitative
+predictors in regression}.
+
+\begin{rmdinsight}
+We are going to use the categorical variable \texttt{chas} which
+corresponds to Charles River (= 1 if a suburb bounds the river; 0
+otherwise). Using the \texttt{str()} command you can notice that this
+variable is not codified as a factor, but it has values 0 or 1, so it is
+already dummyfied.
+\end{rmdinsight}
+
+\textbf{21}. Fit a new model where the predictors are the Charles River
+and the Crime Rate. Interpret the coefficients of this model and
+conclude if the presence of the river adds a valuable information for
+explaining the house price.
+
+\textbf{22}. Is \texttt{chas} is significant as well in the presence of
+more predictors?
+
+\textbf{Interaction terms}
+
+As you saw in section \ref{other-consid} we may sometimes try models
+with intercation terms. Let's say we have two predictors \(X_1\) and
+\(X_2\), the way of adding these interactions in \texttt{lm} is through
+\texttt{:} and \texttt{*}. The operator \texttt{:} only adds the term
+\(X_1X_2\) and \texttt{*} adds \(X_1\), \(X_2\), and \(X_1X_2\).
+
+\textbf{23}. Fit a model whith first order interaction term where
+predictors are \texttt{lstat} and \texttt{age}. Print its summary.
+
+\textbf{24}. Fit a model with all the first order interaction terms.
+
+\section*{Reporting}\label{reporting}
+\addcontentsline{toc}{section}{Reporting}
+
+In \texttt{R} there is some packages to make it \textbf{easy to create
+reproducible web-based reports}. To do so, click on
+\texttt{File\ -\textgreater{}\ Knit\ document} or
+\texttt{File\ -\textgreater{}\ Compile\ report..}. The output is a html
+report containing the results of your \texttt{R} codes. If your file is
+named \texttt{report.R}, your report is named \texttt{report.html}.
+
+\textbf{25}. Compile a report based on your script.
+
+\begin{rmdcaution}
+\begin{itemize}
+\tightlist
+\item
+  Make sure to have the latest version of \texttt{Rstudio}.
+\item
+  If you have problems with compiling (problem in installing packages,
+  etc..) close your \texttt{Rstudio} and reopen it with administrative
+  tools and retry.
+\item
+  Be ready to submit your report (your \texttt{.html} file) at the end
+  of each class.
+\item
+  You report must be named:
+  \texttt{YouLastName\_YourFirstName\_WeekNumber.html}
+\end{itemize}
+\end{rmdcaution}
 
 ◼
 

@@ -32,8 +32,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black">
   
   
-<link rel="prev" href="pw-2.html">
-<link rel="next" href="app-ht.html">
+<link rel="prev" href="multiple-linear-regression.html">
+<link rel="next" href="app-introRStudio.html">
 <script src="book_assets/jquery-2.2.3/jquery.min.js"></script>
 <link href="book_assets/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="book_assets/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
@@ -190,27 +190,92 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="app-introRStudio" class="section level1">
-<h1><span class="header-section-number">A</span> Introduction to <code>RStudio</code></h1>
-<p><code>RStudio</code> is the most employed Integrated Development Environment (IDE) for <code>R</code> nowadays. When you start <code>RStudio</code> you will see a window similar to Figure <a href="app-introRStudio.html#fig:rstudio">A.1</a>. There are a lot of items in the GUI, most of them described in the <a href="https://www.rstudio.com/wp-content/uploads/2016/01/rstudio-IDE-cheatsheet.pdf"><code>RStudio</code> IDE Cheat Sheet</a>. The most important things to keep in mind are:</p>
-<ol style="list-style-type: decimal">
-<li>The code is written in scripts in the <em>source panel</em> (upper-right panel in Figure <a href="app-introRStudio.html#fig:rstudio">A.1</a>);</li>
-<li>for running a line or code selection from the script in the <em>console</em> (first tab in the lower-right panel in Figure <a href="app-introRStudio.html#fig:rstudio">A.1</a>), you do it with the keyboard shortcut <code>'Ctrl+Enter'</code> (Windows and Linux) or <code>'Cmd+Enter'</code> (Mac OS X).</li>
-</ol>
-<div class="figure" style="text-align: center"><span id="fig:rstudio"></span>
-<img src="img/RStudio.png" alt="Main window of `RStudio`. The red shows the code panel and the yellow shows the console output. Extracted from [here](https://www.rstudio.com/wp-content/uploads/2016/01/rstudio-IDE-cheatsheet.pdf)." width="70%" />
-<p class="caption">
-Figure A.1: Main window of <code>RStudio</code>. The red shows the code panel and the yellow shows the console output. Extracted from <a href="https://www.rstudio.com/wp-content/uploads/2016/01/rstudio-IDE-cheatsheet.pdf">here</a>.
+<div id="pw-2" class="section level1 unnumbered">
+<h1>PW 2</h1>
+<div id="multiple-linear-regression-1" class="section level2 unnumbered">
+<h2>Multiple Linear Regression</h2>
+<p>In this practical work, we will continue the analysis of the Boston data set that we started last week (section <a href="pw-1.html#boston">1.9.2</a>). Recall that this dataset records the median value of houses for 506 neighborhoods around Boston. Our task is to predict the median house value (<code>medv</code>).</p>
+<p><strong>1</strong>. Load the Boston dataset from <code>MASS</code> package.</p>
+<p><strong>2</strong>. Split the dataset into traning set and testing set. (keep all the variables of the Boston data set)</p>
+<p><strong>3</strong>. Check if there is a linear relationship between the variables <code>medv</code> and <code>age</code>. (use <code>cor()</code> function).</p>
+<p><strong>4</strong>. Fit a model of housing prices in function of age and plot the observations and the regression line.</p>
+<p><strong>5</strong>. Train a regression model using both <code>lstat</code> and <code>age</code> as predictors of median house value. (Remember that we transformed <code>lstat</code>, use the same transformation here). What is the obtained model?</p>
+<p><strong>6</strong>. Print the summary of the obtained regression model.</p>
+<p><strong>7</strong>. Are the predictors significant ?</p>
+<p><strong>8</strong>. Is the model as a whole significant? Answer on this question must be detailed.</p>
+<p><strong>9</strong>. Train a new model using all the variables of the dataset. (We can use <code>.</code> as a short cut instead of writing down all the variables names)</p>
+<p><strong>10</strong>. When using all the variables as predictors, we didn’t transform <code>lstat</code>. Re train the model using <code>log(lstat)</code> instead of <code>lstat</code>.</p>
+<p><strong>11</strong>. Did <span class="math inline">\(R^2\)</span> improve ?</p>
+<p><strong>12</strong>. To see if there is correlated variables print the correlation matrix using the <code>cor()</code> function (round the correlations with 2 digits).</p>
+<p><strong>13</strong>. Visualize the correlations using the <code>corrplot</code> package. To do so, install the <code>corrplot</code> package, load it, then use the function <code>corrplot.mixed()</code>. See this <a href="https://cran.r-project.org/web/packages/corrplot/vignettes/corrplot-intro.html">link</a> for examples and to understand how to use it.</p>
+<p><strong>14</strong>. What is the correlation between <code>tax</code> and <code>rad</code>?</p>
+<p><strong>15</strong>. Run the model again without <code>tax</code>. What happens to the <span class="math inline">\(R^2\)</span> ? and for the F-statistic?</p>
+<div class="rmdinsight">
+<p>
+Of course <span class="math inline"><span class="math inline">\(R^2\)</span></span> should go a little lower because we deleted one of the variables. But check for the model significance (F-statistic) gets higher, which means the p-values gets lower and thus the model is more significant without <code>rad</code>.
+</p>
+<!-- **Extra**: Re run the model but delete `tax` instead of `rad`. -->
+</div>
+<p><strong>16</strong>. Calculate the mean squared error (MSE) for the last model.</p>
+<p><strong>Anova</strong></p>
+<p>Next we will apply an analysis of variances (ANOVA) in order to test if there is a significant difference of means between two groups <span class="math inline">\(i\)</span> and <span class="math inline">\(j\)</span> (Consider group <span class="math inline">\(i\)</span> is the suburbs bounding the river and <span class="math inline">\(j\)</span> the suburbs which not). The hypotheses are</p>
+<p><span class="math display">\[ H_0 : \mu_i = \mu_j \]</span></p>
+<p><span class="math display">\[ H_1 : \mu_i \neq \mu_j \]</span></p>
+<p>Where <span class="math inline">\(\mu_i\)</span> is the mean of <code>medv</code> in group <span class="math inline">\(i\)</span>.</p>
+<p><strong>17</strong>. In the Boston data set there is a categorical variable <code>chas</code> which corresponds to Charles River (= 1 if a suburb bounds the river; 0 otherwise). Use command <code>str()</code> to see how this variable is present in the dataset. How many of the suburbs in this data set bound the Charles river?</p>
+<p><strong>18</strong>. Create Boxplots of the median value of houses with respect to the variable <code>chas</code>. Do we observe some difference between the median value of houses with respect to the neighborhood to Charles River?</p>
+<p><strong>19</strong>. Calculate <span class="math inline">\(\mu_i\)</span> and <span class="math inline">\(\mu_j\)</span> (in one line using the function <code>aggregate()</code>).</p>
+<p><strong>20</strong>. Apply an ANOVA test of <code>medv</code> whith respect to <code>chas</code> (use the function <code>aov()</code>). Print the result and the summary of it. what do you conclude ?</p>
+<p><strong>Qualitative predictors</strong></p>
+<p> <i class="fa fa-exclamation-triangle " aria-hidden="true"></i> <strong>Before starting the next question, please read section <a href="multiple-linear-regression.html#other-consid">2.3.1</a> and Appendix <a href="use-qual.html#use-qual">C</a> about using qualitative predictors in regression</strong>.</p>
+<div class="rmdinsight">
+<p>
+We are going to use the categorical variable <code>chas</code> which corresponds to Charles River (= 1 if a suburb bounds the river; 0 otherwise). Using the <code>str()</code> command you can notice that this variable is not codified as a factor, but it has values 0 or 1, so it is already dummyfied.
 </p>
 </div>
+<p><strong>21</strong>. Fit a new model where the predictors are the Charles River and the Crime Rate. Interpret the coefficients of this model and conclude if the presence of the river adds a valuable information for explaining the house price.</p>
+<p><strong>22</strong>. Is <code>chas</code> is significant as well in the presence of more predictors?</p>
+<p><strong>Interaction terms</strong></p>
+<p>As you saw in section <a href="multiple-linear-regression.html#other-consid">2.3.1</a> we may sometimes try models with intercation terms. Let’s say we have two predictors <span class="math inline">\(X_1\)</span> and <span class="math inline">\(X_2\)</span>, the way of adding these interactions in <code>lm</code> is through <code>:</code> and <code>*</code>. The operator <code>:</code> only adds the term <span class="math inline">\(X_1X_2\)</span> and <code>*</code> adds <span class="math inline">\(X_1\)</span>, <span class="math inline">\(X_2\)</span>, and <span class="math inline">\(X_1X_2\)</span>.</p>
+<p><strong>23</strong>. Fit a model whith first order interaction term where predictors are <code>lstat</code> and <code>age</code>. Print its summary.</p>
+<p><strong>24</strong>. Fit a model with all the first order interaction terms.</p>
 </div>
+<div id="reporting" class="section level2 unnumbered">
+<h2>Reporting</h2>
+<p>In <code>R</code> there is some packages to make it <strong>easy to create reproducible web-based reports</strong>. To do so, click on <code>File -&gt; Knit document</code> or <code>File -&gt; Compile report..</code>. The output is a html report containing the results of your <code>R</code> codes. If your file is named <code>report.R</code>, your report is named <code>report.html</code>.</p>
+<p><strong>25</strong>. Compile a report based on your script.</p>
+<div class="rmdcaution">
+<ul>
+<li>
+Make sure to have the latest version of <code>Rstudio</code>.
+</li>
+<li>
+If you have problems with compiling (problem in installing packages, etc..) close your <code>Rstudio</code> and reopen it with administrative tools and retry.
+</li>
+<li>
+Be ready to submit your report (your <code>.html</code> file) at the end of each class.
+</li>
+<li>
+You report must be named: <code>YouLastName_YourFirstName_WeekNumber.html</code>
+</li>
+</ul>
+</div>
+<p class="text-right">
+◼
+</p>
+
+</div>
+</div>
+
+
+
             </section>
 
           </div>
         </div>
       </div>
-<a href="pw-2.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="app-ht.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="multiple-linear-regression.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="app-introRStudio.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="book_assets/gitbook-2.6.7/js/app.min.js"></script>

@@ -32,8 +32,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black">
   
   
-<link rel="prev" href="app-introRStudio.html">
-<link rel="next" href="use-qual.html">
+<link rel="prev" href="use-qual.html">
+<link rel="next" href="references.html">
 <script src="book_assets/jquery-2.2.3/jquery.min.js"></script>
 <link href="book_assets/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="book_assets/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
@@ -217,64 +217,58 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="app-ht" class="section level1">
-<h1><span class="header-section-number">B</span> Review on hypothesis testing</h1>
-<p>The process of hypothesis testing has an interesting analogy with a trial that helps on understanding the elements present in a formal hypothesis test in an intuitive way.</p>
-<table>
-<colgroup>
-<col width="40%" />
-<col width="59%" />
-</colgroup>
-<thead>
-<tr class="header">
-<th align="left">Hypothesis testing</th>
-<th align="left">Trial</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td align="left">Null hypothesis <span class="math inline">\(H_0\)</span></td>
-<td align="left"><strong>Accused of comitting a crime</strong>. It has the “presumption of innocence”, which means that it is <em>not guilty</em> until there is enough evidence to supporting its guilt</td>
-</tr>
-<tr class="even">
-<td align="left">Sample <span class="math inline">\(X_1,\ldots,X_n\)</span></td>
-<td align="left">Collection of small <strong>evidences supporting innocence and guilt</strong>. These evidences contain a certain degree of uncontrollable randomness because of how they were collected and the context regarding the case</td>
-</tr>
-<tr class="odd">
-<td align="left">Statistic <span class="math inline">\(T_n\)</span></td>
-<td align="left"><strong>Summary of the evicences presented</strong> by the prosecutor and defense lawyer</td>
-</tr>
-<tr class="even">
-<td align="left">Distribution of <span class="math inline">\(T_n\)</span> under <span class="math inline">\(H_0\)</span></td>
-<td align="left">The <strong>judge</strong> conducting the trial. Evaluates the evidence presented by both sides and presents a verdict for <span class="math inline">\(H_0\)</span></td>
-</tr>
-<tr class="odd">
-<td align="left">Significance level <span class="math inline">\(\alpha\)</span></td>
-<td align="left"><span class="math inline">\(1-\alpha\)</span> is the <strong>strength of evidences required by the judge for condemning <span class="math inline">\(H_0\)</span></strong>. The judge allows evidences that on average condemn <span class="math inline">\(100\alpha\%\)</span> of the innocents, due to the randomness inherent to the evidence collection process. <span class="math inline">\(\alpha=0.05\)</span> is considered a reasonable level</td>
-</tr>
-<tr class="even">
-<td align="left"><span class="math inline">\(p\)</span>-value</td>
-<td align="left"><strong>Decision</strong> of the judge that measures the degree of compatibility, in a scale <span class="math inline">\(0\)</span>–<span class="math inline">\(1\)</span>, of the presumption of innocence with the summary of the evidences presented. If <span class="math inline">\(p\)</span>-value<span class="math inline">\(&lt;\alpha\)</span>, <span class="math inline">\(H_0\)</span> is declared guilty. Otherwise, is declared not guilty</td>
-</tr>
-<tr class="odd">
-<td align="left"><span class="math inline">\(H_0\)</span> is rejected</td>
-<td align="left"><span class="math inline">\(H_0\)</span> is declared guilty: there are <strong>strong evidences supporting its guilt</strong></td>
-</tr>
-<tr class="even">
-<td align="left"><span class="math inline">\(H_0\)</span> is not rejected</td>
-<td align="left"><span class="math inline">\(H_0\)</span> is declared not guilty: either is <strong>innocent or there are no enough evidences supporting its guilt</strong></td>
-</tr>
-</tbody>
-</table>
-<p>More formally, the <span class="math inline">\(p\)</span>-value of an hypothesis test about <span class="math inline">\(H0\)</span> is defined as:</p>
-<blockquote>
-<p>The <span class="math inline">\(p\)</span>-value is the probability of obtaining a statistic more unfavourable to <span class="math inline">\(H_0\)</span> than the observed, assuming that <span class="math inline">\(H_0\)</span> is true.</p>
-</blockquote>
-<p>Therefore, <strong>if the <span class="math inline">\(p\)</span>-value is small</strong> (smaller than the chosen level <span class="math inline">\(\alpha\)</span>), <strong>it is unlikely that the evidence against <span class="math inline">\(H_0\)</span> is due to randomness. As a consequence, <span class="math inline">\(H_0\)</span> is rejected</strong>. If the <span class="math inline">\(p\)</span>-value is large (larger than <span class="math inline">\(\alpha\)</span>), then it is more possible that the evidences against <span class="math inline">\(H_0\)</span> are merely due to the randomness of the data. In this case, we do not reject <span class="math inline">\(H_0\)</span>.</p>
-<div class="rmdinsight">
-<p>
-If <span class="math inline"><span class="math inline">\(H_0\)</span></span> holds, then the <span class="math inline"><span class="math inline">\(p\)</span></span>-value (which is a random variable) is distributed uniformly in <span class="math inline"><span class="math inline">\((0,1)\)</span></span>. If <span class="math inline"><span class="math inline">\(H_0\)</span></span> does not hold, then the distribution of the <span class="math inline"><span class="math inline">\(p\)</span></span>-value is not uniform but concentrated at <span class="math inline"><span class="math inline">\(0\)</span></span> (where the rejections of <span class="math inline"><span class="math inline">\(H_0\)</span></span> take place).
-</p>
+<div id="model-selection" class="section level1">
+<h1><span class="header-section-number">D</span> Model Selection</h1>
+<div id="linear-model-selection-and-best-subset-selection" class="section level3 unnumbered">
+<h3>Linear Model Selection and Best Subset Selection</h3>
+<iframe width="560" height="349" src="https://www.youtube.com/embed/91si52nk3LA" frameborder="0" allowfullscreen>
+</iframe>
+</div>
+<div id="forward-stepwise-selection" class="section level3 unnumbered">
+<h3>Forward Stepwise Selection</h3>
+<iframe width="560" height="349" src="https://www.youtube.com/embed/nLpJd_iKmrE" frameborder="0" allowfullscreen>
+</iframe>
+</div>
+<div id="backward-stepwise-selection" class="section level3 unnumbered">
+<h3>Backward Stepwise Selection</h3>
+<iframe width="560" height="349" src="https://www.youtube.com/embed/NJhMSpI2Uj8" frameborder="0" allowfullscreen>
+</iframe>
+</div>
+<div id="estimating-test-error-using-mallows-cp-aic-bic-adjusted-r-squared" class="section level3 unnumbered">
+<h3>Estimating Test Error Using Mallow’s Cp, AIC, BIC, Adjusted R-squared</h3>
+<iframe width="560" height="349" src="https://www.youtube.com/embed/LkifE44myLc" frameborder="0" allowfullscreen>
+</iframe>
+</div>
+<div id="estimating-test-error-using-cross-validation" class="section level3 unnumbered">
+<h3>Estimating Test Error Using Cross-Validation</h3>
+<iframe width="560" height="349" src="https://www.youtube.com/embed/3p9JNaJCOb4" frameborder="0" allowfullscreen>
+</iframe>
+</div>
+<div id="examples" class="section level2 unnumbered">
+<h2>Examples</h2>
+<div id="best-subset-selection" class="section level3 unnumbered">
+<h3>Best Subset Selection</h3>
+<iframe width="560" height="349" src="https://www.youtube.com/embed/3kwdDGnV8MM" frameborder="0" allowfullscreen>
+</iframe>
+</div>
+<div id="forward-stepwise-selection-and-model-selection-using-validation-set" class="section level3 unnumbered">
+<h3>Forward Stepwise Selection and Model Selection Using Validation Set</h3>
+<iframe width="560" height="349" src="https://www.youtube.com/embed/mv-vdysZIb4" frameborder="0" allowfullscreen>
+</iframe>
+</div>
+<div id="model-selection-using-cross-validation" class="section level3 unnumbered">
+<h3>Model Selection Using Cross-Validation</h3>
+<iframe width="560" height="349" src="https://www.youtube.com/embed/F8MMHCCoALU" frameborder="0" allowfullscreen>
+</iframe>
+<!-- # PW5 - Annexe -->
+<!-- Concernant la séance 5: J'ai remarqué que la majorité n'a pas compris ce qu'il fallait faire! Le but de la séance est d'exploiter et analyser un jeu de données. La première chose à faire est la phase descriptive où on décrit les données, les variables, quelques figures descriptives, etc.. Ensuite il faut regarder la variable cible, qu'on souhaite modéliser et prédire. Selon le type de cette variable on décide la direction de l'analyse: -->
+<!-- 1- Variable cible **quantitative**: On fait la **regression**. Donc ce qui est important dans ce cas est d'étudier les corrélations entre les variables (prédicteurs) et en particulier entre les corrélations entre les prédicteurs et la variable cible. Ensuite sur le training set construire le modèle de régression. Pour cette tâche, vous pouvez commencer par un modèle qui prend tous les prédicteurs, et ensuite commencer à enlever les prédicteurs non significatives (comme on a fait en tp, c'est en fait la méthode backward). Vous pouvez tout de même pour la régression appliquer les méthodes décrites dans les vidéos du chapitre 5 pour faciliter la recherche du meilleur modèle. Une fois le modèle est trouvé, reste à faire la prédiction (sur le test set) et la performance du modèle. -->
+<!-- 2- Variable cible **qualitative**: Alors on fait la **classification**. Comme la variable cible est qualitative vous pouvez étudier la relation entre les prédicteurs et cette variable (boxplots, mosaicplots, etc..).  -->
+<!-- Si la variable cible a 2 classes, vous pouvez construire des modèles de classifications vus en cours, prédire, ensuite comparer la performance de vos modèles (matrices de confusion, accuracy, courbes roc, etc..). Attention, on peut suivre les méthodes expliquées dans les vidéos du chapitre 5, mais pas avec les mêmes codes! la démarche expliquée dans les vidéos est commune, mais pour la classification il faut utiliser une autre librairie que "leaps", par exemple "bestglm". -->
+<!-- Si la variable cible a plus que 2 classes, pas besoin d'appliquer la régression logistique (raison expliquée dans le cours!), il suffit d'appliquer les méthodes discriminantes du chapitre 4. Attention, la courbe roc n'est pas applicable dans ce cas, on compare la performance en utilisant la matrice de confusion (au moins l'accuracy!). Mais d'autre part, vous pouvez quand même transformer le problème en deux classes, il s'agit de l'approche one-vs-all: c'est à dire considérer la classe 0 contre tous les autres classes à la fois. -->
+<!-- Ps, il ne vous faut pas la correction des tps pour pouvoir faire tout ce qui est décrit ci dessus. Vous avez suffisamment des exemples dans le cous, et dans l'énoncé du tp4, vous avez un exemple détaillé avec des commentaires aussi. -->
+<!-- Voilà.  -->
+</div>
 </div>
 </div>
             </section>
@@ -282,8 +276,8 @@ If <span class="math inline"><span class="math inline">\(H_0\)</span></span> hol
           </div>
         </div>
       </div>
-<a href="app-introRStudio.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="use-qual.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="use-qual.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="references.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="book_assets/gitbook-2.6.7/js/app.min.js"></script>

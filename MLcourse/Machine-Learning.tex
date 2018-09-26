@@ -125,7 +125,7 @@
   \postauthor{\par}
       \predate{\centering\large\emph}
   \postdate{\par}
-    \date{2018-09-25}
+    \date{2018-09-26}
 
 % \defaultfontfeatures{
 %     Path = /home/ghassany/texmf/fonts/opentype/public/fontawesome/}
@@ -3457,6 +3457,299 @@ prediction, which makes it less precise (or more variable). But this
 extrapolation, together with the evidences raised by a simple analysis
 like we did, should have been strong arguments for postponing the
 launch.
+
+◼
+
+\chapter*{PW 3}\label{pw-3}
+\addcontentsline{toc}{chapter}{PW 3}
+
+\section*{Social Networks Ads}\label{social-networks-ads}
+\addcontentsline{toc}{section}{Social Networks Ads}
+
+In this PW we are going to analyse the \texttt{Social\_Network\_Ads}
+\textcolor{white}{[}\faTable\textcolor{white}{]}dataset . This dataset
+contains informations of users of a social network. The social network
+has several business clients and its business clients put ads on the
+social network for marketing compaigns purposes. For this dataset, a
+company has put ads for one of its new products and the social network
+gathered some informations about wich users responded positively to the
+ad by buying the product and those who responded negatively by not
+buying the product.
+
+\textbf{1.} Download the \texttt{Social\_Network\_Ads}
+\textcolor{white}{[}\faTable\textcolor{white}{]}dataset and import it
+into \texttt{R}.
+
+\textbf{2.} \textbf{Explore} and \textbf{Describe} the dataset (you can
+use \texttt{str()} and \texttt{summary()} functions, you can calculate
+and visualize the correlations, show some histograms, scatterplots, pie
+charts, etc..).
+
+\begin{rmdtip}
+We will consider the variables \texttt{Age} and \texttt{EstimatedSalary}
+as input variables (features) to see the correlations between them and
+the decision of the user to buy (or not) the product.
+\end{rmdtip}
+
+\textbf{3.} Now we are going to split the dataset into training set and
+test set. Last week we did it manually. From now on we will split it
+randomly, you can use this code (after undestanding it of course):
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{library}\NormalTok{(caTools) }\CommentTok{# install it first in the console}
+\KeywordTok{set.seed}\NormalTok{(}\DecValTok{123}\NormalTok{)}
+\CommentTok{# we use the function set.seed() with the same seed number}
+\CommentTok{# to randomly generate the same values, you already know that right? }
+\CommentTok{#and you know why we want to generate the same values, am I wrong? }
+\NormalTok{split =}\StringTok{ }\KeywordTok{sample.split}\NormalTok{(dataset}\OperatorTok{$}\NormalTok{Purchased, }\DataTypeTok{SplitRatio =} \FloatTok{0.75}\NormalTok{)}
+\CommentTok{# here we chose the SplitRatio to 75% of the dataset,}
+\CommentTok{# and 25% for the test set.}
+\NormalTok{training_set =}\StringTok{ }\KeywordTok{subset}\NormalTok{(dataset, split }\OperatorTok{==}\StringTok{ }\OtherTok{TRUE}\NormalTok{)}
+\CommentTok{# we use subset to split the dataset}
+\NormalTok{test_set =}\StringTok{ }\KeywordTok{subset}\NormalTok{(dataset, split }\OperatorTok{==}\StringTok{ }\OtherTok{FALSE}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\textbf{4.} Scale the input variables in both training set and test set.
+Do you know what is scaling? Explain it one sentence.
+
+\textbf{5.} Now fit a \textbf{simple} logistic regression model of
+\texttt{Purchased} in function of \texttt{Age}.
+
+\textbf{6.} As you saw in the Logistic Regression chapter and in the
+previous question, we choose argument \texttt{family} to be
+\texttt{binomial} when we use the function \texttt{glm}. Explain why!
+
+\textbf{7.} Write in a equation the model you obtained in question
+\textbf{5}? (Read the following note concerning this question).
+
+\begin{rmdtip}
+Note that:
+
+1- There is three different ways to express the equation of a Logistic
+Regression model.
+
+2- Use inline codes to call the coefficients instead of writing them
+manually.
+
+3- You can use Latex to simplify writing equations, you just need to put
+the equation code between two
+\texttt{\textbackslash{}\$\textbackslash{}\$}. For example:
+\texttt{\textbackslash{}\$e\^{}\{\textbackslash{}\textbackslash{}beta\_0+\textbackslash{}\textbackslash{}beta\_1\ X\}\textbackslash{}\$}
+will give \(e^{\beta_0+\beta_1 X}\). Try some equations on this
+\href{https://www.codecogs.com/latex/eqneditor.php}{website}).
+
+4- In fact, for any equation shown on this website, you can right click
+on it and see its corresonding Latex code.
+\end{rmdtip}
+
+\textbf{8.} Is the feature \texttt{Age} significant to the model?
+Justify your answer.
+
+\textbf{9.} What is the value of AIC of the model?
+
+\begin{rmdinsight}
+The \textbf{AIC} is the \textbf{Akaike Information Criterion}. You will
+use this while comparing multiple models. The model with lower value of
+AIC is better. Suppose that we have a statistical model of some data.
+Let \({\hat {L}}\) be the maximum value of the likelihood function for
+the model; let \(k\) be the number of estimated parameters in the model.
+Then the AIC value of the model is the following.
+
+\[ \text{AIC} = 2 k-2 \ln(\hat{L})\]
+
+where
+
+\begin{itemize}
+\tightlist
+\item
+  \(\hat{L}\) = the maximized value of the likelihood function of the
+  model \(M\), i.e. \(\hat{L}=p(x|{\hat{\beta }},M)\), where
+  \(\hat{\beta}\) are the parameter values that maximize the likelihood
+  function.
+\item
+  \(x\) = the observed data.
+\item
+  \(k\) = the number of free parameters to be estimated. If the model
+  under consideration is a linear regression, \(k\) is the number of
+  regressors, including the intercept.
+\end{itemize}
+\end{rmdinsight}
+
+\textbf{10.} Plot \texttt{Purchased} in function of \texttt{Age} and add
+the curve of the obtained logistic regression model.
+
+(\textbf{Hints}: One way to do it is to first plot the observations,
+then use the \texttt{curve()} function with option \texttt{add=TRUE} in
+order to add the curve to the plot. Pay attention that the argument
+``type'' of the function \texttt{predict()} must be \texttt{reponse})
+
+You must obtain something like
+
+\begin{figure}
+\centering
+\includegraphics{img/glm1.png}
+\caption{}
+\end{figure}
+
+\begin{rmdinsight}
+\textbf{Extra}: A great R package for visualization if \texttt{ggplot2}.
+Take a look on this
+\href{http://www.r-graph-gallery.com/portfolio/ggplot2-package/}{link}
+for some examples. With this library we obtain the following plot for
+our model,
+
+\begin{figure}
+\centering
+\includegraphics{img/glm_ggplot.png}
+\caption{}
+\end{figure}
+\end{rmdinsight}
+
+I obtained the last figure with these lines of code,
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{library}\NormalTok{(ggplot2)}
+\KeywordTok{ggplot}\NormalTok{(training_set, }\KeywordTok{aes}\NormalTok{(}\DataTypeTok{x=}\NormalTok{Age, }\DataTypeTok{y=}\NormalTok{Purchased)) }\OperatorTok{+}
+\StringTok{  }\KeywordTok{geom_point}\NormalTok{() }\OperatorTok{+}
+\StringTok{  }\KeywordTok{stat_smooth}\NormalTok{(}\DataTypeTok{method=}\StringTok{"glm"}\NormalTok{, }\DataTypeTok{method.args=}\KeywordTok{list}\NormalTok{(}\DataTypeTok{family=}\StringTok{"binomial"}\NormalTok{), }\DataTypeTok{se=}\OtherTok{FALSE}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\textbf{11.} Now let us take another feature into account in the model.
+Fit a logistic regression model of purchasing the product in function of
+the age of a user and its salary.
+
+\textbf{12.} Are the predictors significant to the new model?
+
+\textbf{13.} Do we obtain a better model by adding the estimated salary?
+
+\textbf{14.} \textbf{Predictions}: On the test set, predict the
+probability of purchasing the product by the users using the obtained
+model.
+
+\textbf{15.} Take a look on your predicted values for the variable
+\texttt{Purchased}. We predicted the probability that the user will
+purchase the product right? Now in order to compare your results with
+the real answers, transform the predicted values to 0 or 1 (1 if
+\textgreater{}0.5).
+
+\textbf{Hint}: You can easily do it with the \texttt{ifelse()} function.
+
+Now read the following about the evaluation of a classifier (of a
+classification model).
+
+\begin{rmdinsight}
+\textbf{Confusion matrix}: is a tabular representation of Actual vs
+Predicted values. This helps us to find the accuracy of the model. The
+different results from a binary classifier are true positives, true
+negatives, false positives, and false negatives. This is how the
+confusion matrix looks like:
+
+\includegraphics{img/cm.png} (Image source:
+\href{https://en.wikipedia.org/wiki/Confusion_matrix}{Wikipedia})
+
+You can calculate the \textbf{accuracy} of your model with:
+
+\begin{figure}
+\centering
+\includegraphics{img/cm1.png}
+\caption{}
+\end{figure}
+
+\textbf{Accuracy} is a key measure of performance, and is more
+specifically the rate at which the model is able to predict the correct
+value (classification or regression) for a given data point or
+observation. In other words, accuracy is the proportion of correct
+predictions out of all predictions made.
+
+The other two metrics from the confusion matrix worth discussing are
+\textbf{Precision} and \textbf{Recall}.
+
+Precision (positive predictive value) is the ratio of true positives to
+the total amount of positive predictions made (i.e., true or false).
+Said another way, precision measures the proportion of accurate positive
+predictions out of all positive predictions made.
+
+Recall on the other hand, or true positive rate, is the ratio of true
+positives to the total amount of actual positives, whether predicted
+correctly or not. So in other words, recall measures the proportion of
+accurate positive predictions out of all actual positive observations.
+
+A metric that is associated with precision and recall is called the
+F-score (also called F1 score), which combines them mathematically, and
+somewhat like a weighted average, in order to produce a single measure
+of performance based on the simultaneous values of both. Its values
+range from 0 (worst) to 1 (best).
+
+Another important concept to know about is the \textbf{\emph{Receiver
+Operating Characteristic}}, which when plotted, results in what's known
+as an \textbf{ROC} curve.
+
+\textbf{ROC Curve}: An ROC curve is a two-dimensional plot of
+\emph{sensitivity} (recall, or true positive rate) vs \emph{specificity}
+(false positive rate). The area under the curve is referred to as the
+\textbf{\emph{AUC}}, and is a numeric metric used to represent the
+quality and performance of the classifier (model).
+
+\begin{figure}
+\centering
+\includegraphics{img/roc.png}
+\caption{}
+\end{figure}
+
+An AUC of 0.5 is essentially the same as random guessing without a
+model, whereas an AUC of 1.0 is considered a perfect classifier.
+Generally, the higher the AUC value the better, and an AUC above 0.8 is
+considered quite good.
+
+The higher the AUC value, the closer the curve gets to the upper left
+corner of the plot. One can easily see from the ROC curves then that the
+goal is to find and tune a model that maximizes the true positive rate,
+while simultaneously minimizing the false positive rate. Said another
+way, the goal as shown by the ROC curve is to correctly predict as many
+of the actual positives as possible, while also predicting as many of
+the actual negatives as possible, and therefore minimize errors
+(incorrect classifications) for both.
+\end{rmdinsight}
+
+\textbf{16.} Now in order to evaluate the model and its predictions,
+compute the confusion matrix. What do you obtain ?
+
+(\textbf{Hint}: you can use the \texttt{table()} function).
+
+\textbf{17.} Calculate the accuracy, specificity, sensitivity and the
+precision of the model.
+
+(\textbf{Note}: You can create a function that takes a confusion matrix
+in input and returns the needed metrics)
+
+\textbf{18.} Plot the ROC curve and calculate AUC value.
+
+\begin{rmdinsight}
+\textbf{Hints}: to plot it, install the \texttt{ROCR} package. Load and
+use the functions:
+
+\begin{itemize}
+\tightlist
+\item
+  \texttt{prediction()} to calculate the elements of the confusion
+  matrix.
+\item
+  \texttt{performance()} to calculate the AUC.
+\item
+  \texttt{plot()} to plot the ROC curve, you can plot the performance
+  calculated before.
+\item
+  \texttt{abline()} to plot a line of equation \texttt{y=x}.
+\end{itemize}
+\end{rmdinsight}
+
+\textbf{19.} Compare the AUC of the two models you fitted (one with only
+age and one with age and estimated salary) and plot their ROC curves in
+the same figure.
 
 ◼
 

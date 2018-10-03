@@ -25,7 +25,7 @@
 <meta name="author" content="Mohamad Ghassany">
 
 
-<meta name="date" content="2018-10-01">
+<meta name="date" content="2018-10-03">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -297,6 +297,15 @@ dataset &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span cla
 <span class="co"># in lines we have the first argument, and in columns we have the second argument.</span>
 <span class="co"># Don&#39;t forget this when you use table() to show a confusion matrix!</span>
 <span class="kw">mosaicplot</span>(<span class="op">~</span><span class="st"> </span>Purchased <span class="op">+</span><span class="st"> </span>Gender, <span class="dt">data=</span>dataset,<span class="dt">main =</span> <span class="st">&quot;MosaicPlot of two categorical variables: Puchased &amp; Gender&quot;</span>,<span class="dt">color =</span> <span class="dv">2</span><span class="op">:</span><span class="dv">3</span>, <span class="dt">las =</span> <span class="dv">1</span>)
+
+<span class="co"># since these 2 variables are categorical, we can apply</span>
+<span class="co"># a Chi-square test. The null hypothesis is the independance between</span>
+<span class="co"># these variables. You will notice that p-value = 0.4562 which is higher than 0.5</span>
+<span class="co"># so we cannot reject the null hypothesis. </span>
+<span class="co"># conclusion: there is no dependance between Gender and Purchased (who</span>
+<span class="co"># said that women buy more than men? hah!)</span>
+
+<span class="kw">chisq.test</span>(dataset<span class="op">$</span>Purchased, dataset<span class="op">$</span>Gender)
 
 <span class="co"># Let&#39;s say we want to remove the first two columns as we are not going to use them.</span>
 <span class="co"># But, we can in fact use a categorical variable as a predictor in logistic regression.</span>

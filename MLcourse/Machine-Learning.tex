@@ -125,7 +125,7 @@
   \postauthor{\par}
       \predate{\centering\large\emph}
   \postdate{\par}
-    \date{2018-09-26}
+    \date{2018-10-03}
 
 % \defaultfontfeatures{
 %     Path = /home/ghassany/texmf/fonts/opentype/public/fontawesome/}
@@ -213,6 +213,10 @@
                                      {1.5ex \@plus .2ex}%
                                      {\normalfont\normalsize\bfseries\color{Violet}}}
 \makeatother
+
+
+\newcommand{\lt}{<}
+\newcommand{\gt}{>}
 
 \usepackage{amsthm}
 \newtheorem{theorem}{Theorem}[chapter]
@@ -3735,6 +3739,878 @@ use the functions:
 \textbf{19.} Compare the AUC of the two models you fitted (one with only
 age and one with age and estimated salary) and plot their ROC curves in
 the same figure.
+
+◼
+
+\chapter{Discriminant Analysis}\label{discriminant-analysis}
+
+Discriminant analysis is a popular method for multiple-class
+classiﬁcation. We will start first by the \emph{Linear Discriminant
+Analysis (LDA)}.
+
+\section{Introduction}\label{introduction-2}
+
+As we saw in the previous chapter, Logistic regression involves directly
+modeling \(\mathbb{P} (Y = k|X = x)\) using the \emph{logistic
+function}, for the case of two response classes. In logistic regression,
+we model the conditional distribution of the response \(Y\), given the
+predictor(s) \(X\). We now consider an alternative and less direct
+approach to estimating these probabilities. In this alternative
+approach, \textbf{\emph{we model the distribution}} of the predictors
+\(X\) \textbf{\emph{separately}} in each of the response classes
+(i.e.~given \(Y\)), and then use \textbf{Bayes' theorem} to flip these
+around into estimates for \(\mathbb{P} (Y = k|X = x)\). When these
+distributions are assumed to be \emph{Normal}, it turns out that the
+model is very similar in form to logistic regression.
+
+\textbf{Why not logistic regression?} Why do we need another method,
+when we have logistic regression? There are several reasons:
+
+\begin{itemize}
+\tightlist
+\item
+  When the classes are well-separated, the parameter estimates for the
+  logistic regression model are surprisingly unstable. Linear
+  discriminant analysis does not suﬀer from this problem.
+\item
+  If \(n\) is small and the distribution of the predictors \(X\) is
+  approximately normal in each of the classes, the linear discriminant
+  model is again more stable than the logistic regression model.
+\item
+  Linear discriminant analysis is popular when we have \emph{more than
+  two response classes}.
+\end{itemize}
+
+\section{Bayes' Theorem}\label{bayes-theorem}
+
+Bayes' theorem is stated mathematically as the following equation:
+
+\[ P(A | B) = \frac{P(A \cap B)}{P(B)} =  \frac{P(B|A) P(A)}{P(B)}\]
+
+where \(A\) and \(B\) are events and \(P(B) \neq 0\).
+
+\begin{itemize}
+\tightlist
+\item
+  \(P(A | B)\), a conditional probability, is the probability of
+  observing event \(A\) given that \(B\) is true. It is called the
+  \textbf{\emph{posterior}} probability.
+\item
+  \(P(A)\), is called the \textbf{\emph{prior}}, is the initial degree
+  of belief in A.
+\item
+  \(P(B)\) is the \textbf{\emph{likelihood}}.
+\end{itemize}
+
+\begin{rmdinsight}
+The posterior probability can be written in the memorable form as :
+
+Posterior probability \(\propto\) Likelihood \(\times\) Prior
+probability.
+\end{rmdinsight}
+
+\textbf{Extended form}:
+
+Suppose we have a partition \(\{A_i\}\) of the sample space, the even
+space is given or conceptualized in terms of \(P(A_j)\) and
+\(P(B | A_j)\). It is then useful to compute \(P(B)\) using the law of
+total probability:
+
+\[ P(B) = \sum_j P(B|A_j) P(A_j) \]
+
+\[ \Rightarrow P(A_i|B) = \frac{P(B|A_i) P(A_i)}{\sum_j P(B|A_j) P(A_j)} \]
+
+\textbf{Bayes' Theorem for Classification}:
+
+Suppose that we wish to classify an observation into one of \(K\)
+classes, where \(K \geq 2\). In other words, the qualitative response
+variable \(Y\) can take on \(K\) possible distinct and unordered values.
+
+Let \(\pi_k\) represent the overall or \emph{prior} probability that a
+randomly chosen observation comes from the \(k\)-th class; this is the
+probability that a given observation is associated with the \(k\)-th
+category of the response variable \(Y\).
+
+Let \(f_k(X) \equiv P(X = x|Y = k)\) denote the \emph{density function}
+of \(X\) for an observation that comes from the \(k\)-th class. In other
+words, \(f_k(x)\) is relatively large if there is a high probability
+that an observation in the \(k\)-th class has \(X \approx x\), and
+\(f_k(x)\) is small if it is very unlikely that an observation in the
+\(k\)-th class has \(X \approx x\). Then \emph{Bayes' theorem} states
+that
+
+\begin{equation}
+P(Y=k|X=x) = \frac{ \pi_k f_k(x)}{\sum_{c=1}^K \pi_c f_c(x)}
+\label{eq:bayes}
+\end{equation}
+
+As we did in the last chapter, we will use the abbreviation
+\(p_k(X) =P(Y = k|X)\).
+
+The equation above stated by \emph{Bayes' theorem} suggests that instead
+of directly computing \(p_k(X)\) as we did in the logistic regression,
+we can simply plug in estimates of \(\pi_k\) and \(f_k(X)\) into the
+equation. In general, estimating \(\pi_k\) is easy (the fraction of the
+training observations that belong to the \(k\)-th class). But estimating
+\(f_k(X)\) tends to be more challenging.
+
+\begin{quote}
+Recall that \(p_k(x)\) is the \emph{posterior} probability that an
+observation \(X=x\) belongs to \(k\)-th class.
+\end{quote}
+
+\begin{quote}
+If we can find a way to estimate \(f_k(X)\), we can develop a classifier
+with the lowest possibe error rate out of all classifiers.
+\end{quote}
+
+\section{\texorpdfstring{LDA for
+\(p=1\)}{LDA for p=1}}\label{lda-for-p1}
+
+Assume that \(p=1\), which mean we have only one predictor. We would
+like to obtain an estimate for \(f_k(x)\) that we can plug into the
+Equation \eqref{eq:bayes} in order to estimate \(p_k(x)\). \textbf{We will
+then classify an observation to the class for which \(p_k(x)\) is
+greatest}.
+
+In order to estimate \(f_k(x)\), we will first make some assumptions
+about its form.
+
+Suppose we assume that \(f_k(x)\) is \emph{normal} (\emph{Gaussian}). In
+the one-dimensional setting, the normal density take the form
+
+\begin{equation}
+f_k(x)= \frac{1}{\sigma_k\sqrt{2\pi}} \exp \big( - \frac{1}{2\sigma_k^2 } (x-\mu_k)^2\big)
+\label{eq:normal01}
+\end{equation}
+
+where \(\mu_k\) and \(\sigma_k^2\) are the mean and variance parameters
+for \(k\)-th class. Let us assume that
+\(\sigma_1^2 = \ldots = \sigma_K^2 = \sigma\) (which means there is a
+shared variance term across all \(K\) classes). Plugging Eq.
+\eqref{eq:normal01} into the Bayes formula in Eq. \eqref{eq:bayes} we get,
+
+\begin{equation}
+p_k(x) = \frac{  \pi_k \frac{1}{\sigma \sqrt{2\pi}} e^{-\frac{1}{2} \big(\frac{x-\mu_k}{\sigma}\big)^2 } }{  \sum_{c=1}^K  \pi_c \frac{1}{\sigma \sqrt{2\pi}} e^{-\frac{1}{2} \big(\frac{x-\mu_c}{\sigma}\big)^2 } }
+\label{eq:pkx}
+\end{equation}
+
+\begin{rmdcaution}
+Note that \(\pi_k\) and \(\pi_c\) denote the prior probabilities. And
+\(\pi\) is the mathematical constant \(\pi \approx 3.14159\).
+\end{rmdcaution}
+
+To classify at the value \(X = x\), we need to see which of the
+\(p_k(x)\) is largest. Taking logs, and discarding terms that do not
+depend on \(k\), we see that this is equivalent to assigning \(x\) to
+the class with the largest \textbf{\emph{discriminant score}}:
+
+\begin{equation}
+\delta_k(x) = x.\frac{\mu_k}{\sigma^2} - \frac{\mu_k^2}{2\sigma^2} + \log (\pi_k)
+\label{eq:discscore}
+\end{equation}
+
+Note that \(\delta_k(x)\) is a \emph{linear} function of \(x\).
+
+\begin{rmdinsight}
+\begin{itemize}
+\tightlist
+\item
+  The decision surfaces for a linear discriminant classifiers are
+  defined by the linear equations \(\delta_k(x) = \delta_c(x)\).
+\item
+  Example: If \(K=2\) and \(\pi_1=\pi_2\), then the \textbf{desicion
+  boundary} is at \(x=\frac{\mu_1+\mu2}{2}\) (\textbf{Prove it!}).
+\item
+  An example where \(\mu_1=-1.5\), \(\mu_2=1.5\), \(\pi_1=\pi_2=0.5\)
+  and \(\sigma^2=1\) is shown in this following figure
+\end{itemize}
+
+\includegraphics{img/decbound.png}
+
+\begin{itemize}
+\item
+  See this \textcolor{white}{[}\faVideoCamera\textcolor{white}{]} video
+  to understand more about \emph{decision boundary} (Applied on logistic
+  regression).
+\item
+  As we classify a new point according to which density is highest, when
+  the priors are diﬀerent we take them into account as well, and compare
+  \(\pi_k f_k(x)\). On the right of the following figure, we favor the
+  pink class (remark that the decision boundary has shifted to the
+  left).
+\end{itemize}
+
+\includegraphics{img/decbound2.png}
+\end{rmdinsight}
+
+\section{Estimating the parameters}\label{estimating-the-parameters}
+
+Typically we don't know these parameters; we just have the training
+data. In that case we simply estimate the parameters and plug them into
+the rule.
+
+Let \(n\) the total number of training observations, and \(n_k\) the
+number of training observations in the \(k\)-th class. The following
+estimates are used:
+
+\begin{align*}
+\hat{\pi}_k &= \frac{n_k}{n} \\
+\hat{\mu}_k &= \frac{1}{n_k} \sum_{i: y_i=k} x_i \\
+\hat{\sigma}^2 &= \frac{1}{n - K} \sum_{k=1}^K \sum_{i: y_i=k} (x_i-\hat{\mu}_k)^2 \\
+ &= \sum_{k=1}^K \frac{n_k-1}{n - K} . \hat{\sigma}_k^2
+\end{align*}
+
+where
+\(\hat{\sigma}_k^2 = \frac{1}{n_k-1}\sum_{i: y_i=k}(x_i-\hat{\mu}_k)^2\)
+is the usual formula for the estimated variance in the -\(k\)-th class.
+
+The linear discriminant analysis (LDA) classifier plugs these estimates
+in Eq. \eqref{eq:discscore} and assigns an observation \(X=x\) to the
+class for which
+
+\begin{equation}
+\hat{\delta}_k(x) = x.\frac{\hat{\mu}_k}{\hat{\sigma}^2} - \frac{\hat{\mu}_k^2}{2\hat{\sigma}^2} + \log (\hat{\pi}_k)
+\label{eq:discscoreest}
+\end{equation}
+
+is largest.
+
+The \emph{discriminant functions} in Eq. \eqref{eq:discscoreest} are
+linear functions of \(x\).
+
+\begin{quote}
+Recall that we assumed that the observations come from a normal
+distribution with a common variance \(\sigma^2\).
+\end{quote}
+
+\section{\texorpdfstring{LDA for
+\(p > 1\)}{LDA for p \textgreater{} 1}}\label{lda-for-p-1}
+
+Let us now suppose that we have multiple predictors. We assume that
+\(X=(X_1,X_2,\ldots,X_p)\) is drawn from \emph{multivariate Gaussian}
+distribution (assuming they have a common covariance matrix, e.g.~same
+variances as in the case of \(p=1\)). The multivariate Gaussian
+distribution assumes that each individual predictor follows a
+one-dimensional normal distribution as in Eq. \eqref{eq:normal01}, with
+some correlation between each pair of predictors.
+
+To indicate that a \(p\)-dimensional random variable \(X\) has a
+multivariate Gaussian distribution, we write
+\(X \sim \mathcal{N}(\mu,\Sigma)\). Where
+
+\[ \mu = E(X) = \begin{pmatrix}
+    \mu_1 \\
+    \mu_2 \\
+    \vdots \\
+    \mu_p
+\end{pmatrix} \]
+
+and, \[ \Sigma = Cov(X) = \begin{pmatrix}
+    \sigma_1^2 & Cov[X_1, X_2]  & \dots  & Cov[X_1, X_p] \\
+    Cov[X_2, X_1] & \sigma_2^2  & \dots  & Cov[X_2, X_p] \\
+    \vdots & \vdots &  \ddots & \vdots \\
+    Cov[X_p, X_1] & Cov[X_p, X_2]  & \dots  & \sigma_p^2
+\end{pmatrix}  \]
+
+\begin{quote}
+\(\Sigma\) is the \(p\times p\) covariance matrix of \(X\).
+\end{quote}
+
+Formally, the multivariate Gaussian density is deﬁned as
+
+\[f(x) = \frac{1}{(2\pi)^{p/2} |\Sigma|^{1/2}} \exp \bigg( - \frac{1}{2} (x-\mu)^T \Sigma^{-1} (x-\mu) \bigg)
+\]
+
+Plugging the density function for the \(k\)-th class, \(f_k(X=x)\), into
+Eq. \eqref{eq:bayes} reveals that the Bayes classifier assigns an
+observation \(X=x\) to the class for which
+
+\begin{equation}
+\delta_k(x) = x^T \Sigma^{-1} \mu_k - \frac{1}{2} \mu_k^T \Sigma^{-1}  \mu_k + \log \pi_k
+\label{eq:discscorematrix}
+\end{equation}
+
+is largest. This is the vector/matrix version of \eqref{eq:discscore}.
+
+An example is shown in the following figure. Three equally-sized
+Gaussian classes are shown with class-specific mean vectors and a common
+covariance matrix (\(\pi_1=\pi_2=\pi_3=1/3\)). The three ellipses
+represent regions that contain \(95\%\) of the probability for each of
+the three classes. The dashed lines are the Bayes decision boundaries.
+
+\includegraphics{img/lda2.png}
+
+Recall that the decision boundaries represent the set of values \(x\)
+for which \(\delta_k(x)=\delta_c(x)\); i.e.~for \(k\neq c\)
+
+\[ x^T \Sigma^{-1} \mu_k - \frac{1}{2} \mu_k^T \Sigma^{-1}  \mu_k = x^T \Sigma^{-1} \mu_c - \frac{1}{2} \mu_c^T \Sigma^{-1}  \mu_c  \]
+
+Note that there are three lines representing the Bayes decision
+boundaries because there are three pairs of classes among the three
+classes. That is, one Bayes decision boundary separates class 1 from
+class 2, one separates class 1 from class 3, and one separates class 2
+from class 3. These three Bayes decision boundaries divide the predictor
+space into three regions. The Bayes classiﬁer will classify an
+observation according to the region in which it is located.
+
+Once again, we need to estimate the unknown parameters
+\(\mu_1,\ldots,\mu_k,\) and \(\pi_1,\ldots,\pi_k,\) and \(\Sigma\); the
+formulas are similar to those used in the one-dimensional case. To
+assign a new observation \(X = x\), LDA plugs these estimates into Eq.
+\eqref{eq:discscorematrix} and classiﬁes to the class for which
+\(\delta_k(x)\) is largest.
+
+Note that in Eq. \eqref{eq:discscorematrix} \(\delta_k(x)\) is a
+\emph{linear} function of \(x\); that is, the LDA decision rule depends
+on x only through a linear combination of its elements. This is the
+reason for the word linear in LDA.
+
+\section{Making predictions}\label{making-predictions}
+
+Once we have estimates \(\hat{\delta}_k(x)\), we can turn these into
+estimates for class probabilities:
+
+\[ \hat{P}(Y=k|X=x)= \frac{e^{\hat{\delta}_k(x)}}{\sum_{c=1}^K e^{\hat{\delta}_c(x)}} \]
+
+So classifying to the largest \(\hat{\delta}_k(x)\) amounts to
+classifying to the class for which \(\hat{P}(Y=k|X=x)\) is largest.
+
+When \(K=2\), we classify to class 2 if \(\hat{P}(Y=2|X=x) \geq 0.5\),
+else to class 1.
+
+\section{Other forms of Discriminant
+Analysis}\label{other-forms-of-discriminant-analysis}
+
+\[P(Y=k|X=x) = \frac{ \pi_k f_k(x)}{\sum_{c=1}^K \pi_c f_c(x)}\]
+
+We saw before that when \(f_k(x)\) are Gaussian densities, whith the
+same covariance matrix \(\Sigma\) in each class, this leads to Linear
+Discriminant Analysis (LDA).
+
+By altering the forms for \(f_k(x)\), we get different classifiers.
+
+\begin{itemize}
+\tightlist
+\item
+  With Gaussians but different \(\Sigma_k\) in each class, we get
+  \emph{Quadratic Discriminant Analysis (QDA)}.
+\item
+  With \(f_k(x) = \prod_{j=1}^p f_{jk}(x_j)\) (conditional independence
+  model) in each class we get \emph{Naive Bayes}. (For Gaussian, this
+  mean the \(\Sigma_k\) are diagonal, e.g.
+  \(Cov(X_i,X_j)=0 \,\, \forall \, \, 1\leq i,j \leq p\)).
+\item
+  Many other forms by proposing specific density models for \(f_k(x)\),
+  including \emph{nonparametric approaches}.
+\end{itemize}
+
+\subsection{Quadratic Discriminant Analysis
+(QDA)}\label{quadratic-discriminant-analysis-qda}
+
+Like LDA, the QDA classiﬁer results from assuming that the observations
+from each class are drawn from a Gaussian distribution, and plugging
+estimates for the parameters into Bayes' theorem in order to perform
+prediction.
+
+However, unlike LDA, QDA assumes that each class has its own covariance
+matrix. Under this assumption, the Bayes classiﬁer assigns an
+observation \(X = x\) to the class for which
+
+\begin{align*}
+\delta_k(x) &= - \frac{1}{2} (x-\mu)^T \Sigma_k^{-1} (x-\mu) - \frac{1}{2} \log |\Sigma_k| + \log \pi_k \\
+            &= - \frac{1}{2} x^T \Sigma_k^{-1} x + \frac{1}{2} x^T \Sigma_k^{-1} \mu_k - \frac{1}{2} \mu_k^T \Sigma_k^{-1} \mu_k - \frac{1}{2} \log |\Sigma_k| + \log \pi_k
+\end{align*}
+
+is largest.
+
+Unlike in LDA, the quantity \(x\) appears as a quadratic function in
+QDA. This is where QDA gets its name.
+
+\begin{rmdcaution}
+The decision boundary in QDA is non-linear. It is quadratic (a curve).
+\end{rmdcaution}
+
+\subsection{Naive Bayes}\label{naive-bayes}
+
+We use Naive Bayes classifier if the features are independant in each
+class. It is useful when \(p\) is large (unklike LDA and QDA).
+
+Naive Bayes assumes that each \(\Sigma_k\) is diagonal, so
+
+\begin{align*}
+\delta_k(x) &\propto \log \bigg[\pi_k \prod_{j=1}^p f_{kj}(x_j) \bigg] \\
+            &= -\frac{1}{2} \sum_{j=1}^p \frac{(x_j-\mu_{kj})^2}{\sigma_{kj}^2} + \log \pi_k
+\end{align*}
+
+It can used for mixed feature vectors (qualitative and quantitative). If
+\(X_j\) is qualitative, we replace \(f_{kj}(x_j)\) by probability mass
+function (histogram) over discrete categories.
+
+\section{LDA vs Logistic Regression}\label{lda-vs-logistic-regression}
+
+the logistic regression and LDA methods are closely connected. Consider
+the two-class setting with \(p =1\) predictor, and let \(p_1(x)\) and
+\(p_2(x)=1−p_1(x)\) be the probabilities that the observation \(X = x\)
+belongs to class 1 and class 2, respectively. In the LDA framework, we
+can see from Eq. \eqref{eq:discscore} (and a bit of simple algebra) that
+the log odds is given by
+
+\[ \log \bigg(\frac{p_1(x)}{1-p_1(x)}\bigg) = \log \bigg(\frac{p_1(x)}{p_2(x)}\bigg) = c_0 + c_1 x\]
+
+where \(c_0\) and \(c_1\) are functions of \(\mu_1, \mu_2,\) and
+\(\sigma^2\).
+
+On the other hand, we know that in logistic regression
+
+\[ \log \bigg(\frac{p_1}{1-p_1}\bigg) = \beta_0 + \beta_1 x\]
+
+Both of the equations above are linear functions of \(x\). Hence both
+logistic regression and LDA produce linear decision boundaries. The only
+diﬀerence between the two approaches lies in the fact that \(\beta_0\)
+and \(\beta_1\) are estimated using \emph{maximum likelihood}, whereas
+\(c_0\) and \(c_1\) are computed using the estimated mean and variance
+from a \emph{normal distribution}. This same connection between LDA and
+logistic regression also holds for multidimensional data with \(p> 1\).
+
+\begin{rmdinsight}
+\begin{itemize}
+\tightlist
+\item
+  Logistic regression uses the conditional likelihood based on
+  \(P(Y|X)\) (known as \emph{discriminative learning}).
+\item
+  LDA uses the full likelihood based on \(P(X,Y )\) (known as
+  \emph{generative learning}).
+\item
+  Despite these differences, in practice the results are often very
+  similar.
+\end{itemize}
+
+\textbf{Remark}: Logistic regression can also fit quadratic boundaries
+like QDA, by explicitly including quadratic terms in the model.
+\end{rmdinsight}
+
+◼
+
+\chapter*{PW 4}\label{pw-4}
+\addcontentsline{toc}{chapter}{PW 4}
+
+This week we are going to continue the analysis of the
+\texttt{Social\_Network\_Ads}
+\textcolor{white}{[}\faTable\textcolor{white}{]}dataset . Recall that
+this dataset contains informations of users of a social network and if
+they bought a specified product. Last week we built a Logistic
+Regression model for the variable \texttt{Purchased} in function of
+\texttt{Age} and \texttt{EstimatedSalary}. We will consider the same
+variables this week but we will fit different models using methods such
+as LDA, QDA, and Naive Bayes.
+
+\section*{Logistic Regression}\label{logistic-regression-2}
+\addcontentsline{toc}{section}{Logistic Regression}
+
+\textbf{1.} First, let's do the pre-processing steps you were asked to
+do during the last session and fit a \textbf{logistic regression} model.
+Please read and understand very well the following code (read the
+comments!). Then copy what is necessary for today's session to your
+report (but remove my comments!).
+
+If you lost the dataset, you can download it from
+\textcolor{white}{[}\faTable\textcolor{white}{]}here .
+
+\begin{Shaded}
+\begin{Highlighting}[]
+
+\CommentTok{# Loading the dataset.. I have putted it into a folder called "datasets"}
+\NormalTok{dataset <-}\StringTok{ }\KeywordTok{read.csv}\NormalTok{(}\StringTok{'http://www.mghassany.com/MLcourse/datasets/Social_Network_Ads.csv'}\NormalTok{)}
+
+\CommentTok{# Describing and Exploring the dataset}
+
+\KeywordTok{str}\NormalTok{(dataset) }\CommentTok{# to show the structure of the dataset. }
+\KeywordTok{summary}\NormalTok{(dataset) }\CommentTok{# will show some statistics of every column. }
+\CommentTok{# Remark what it shows when the column is a numerical or categorical variable.}
+\CommentTok{# Remark that it has no sense for the variable User.ID}
+
+\KeywordTok{boxplot}\NormalTok{(Age }\OperatorTok{~}\StringTok{ }\NormalTok{Purchased, }\DataTypeTok{data=}\NormalTok{dataset, }\DataTypeTok{col =} \StringTok{"blue"}\NormalTok{, }\DataTypeTok{main=}\StringTok{"Boxplot Age ~ Purchased"}\NormalTok{)}
+\CommentTok{# You know what is a boxplot right? I will let you interpret it.}
+\KeywordTok{boxplot}\NormalTok{(EstimatedSalary }\OperatorTok{~}\StringTok{ }\NormalTok{Purchased, }\DataTypeTok{data=}\NormalTok{dataset,}\DataTypeTok{col =} \StringTok{"red"}\NormalTok{, }\DataTypeTok{main=}\StringTok{"Boxplot EstimatedSalary ~ Purchased"}\NormalTok{)}
+\CommentTok{# Another boxplot}
+
+\KeywordTok{aov}\NormalTok{(EstimatedSalary }\OperatorTok{~}\NormalTok{Purchased, }\DataTypeTok{data=}\NormalTok{dataset)}
+\CommentTok{# Anova test, but we need to show the summary of }
+\CommentTok{# it in order to see the p-value and to interpret.}
+
+\KeywordTok{summary}\NormalTok{(}\KeywordTok{aov}\NormalTok{(EstimatedSalary }\OperatorTok{~}\NormalTok{Purchased, }\DataTypeTok{data=}\NormalTok{dataset))}
+\CommentTok{# What do you conclude ?}
+\CommentTok{# Now another anova test for the variable Age}
+\KeywordTok{summary}\NormalTok{(}\KeywordTok{aov}\NormalTok{(Age }\OperatorTok{~}\NormalTok{Purchased, }\DataTypeTok{data=}\NormalTok{dataset))}
+
+\CommentTok{# There is a categorical variable in the dataset, which is Gender.}
+\CommentTok{# Of course we cannot show a boxplot of Gender and Purchased.}
+\CommentTok{# But we can show a table, or a mosaic plot, both tell the same thing.}
+\KeywordTok{table}\NormalTok{(dataset}\OperatorTok{$}\NormalTok{Gender,dataset}\OperatorTok{$}\NormalTok{Purchased)}
+\CommentTok{# Remark for the function table(), that}
+\CommentTok{# in lines we have the first argument, and in columns we have the second argument.}
+\CommentTok{# Don't forget this when you use table() to show a confusion matrix!}
+\KeywordTok{mosaicplot}\NormalTok{(}\OperatorTok{~}\StringTok{ }\NormalTok{Purchased }\OperatorTok{+}\StringTok{ }\NormalTok{Gender, }\DataTypeTok{data=}\NormalTok{dataset,}\DataTypeTok{main =} \StringTok{"MosaicPlot of two categorical variables: Puchased & Gender"}\NormalTok{,}\DataTypeTok{color =} \DecValTok{2}\OperatorTok{:}\DecValTok{3}\NormalTok{, }\DataTypeTok{las =} \DecValTok{1}\NormalTok{)}
+
+\CommentTok{# since these 2 variables are categorical, we can apply}
+\CommentTok{# a Chi-square test. The null hypothesis is the independance between}
+\CommentTok{# these variables. You will notice that p-value = 0.4562 which is higher than 0.5}
+\CommentTok{# so we cannot reject the null hypothesis. }
+\CommentTok{# conclusion: there is no dependance between Gender and Purchased (who}
+\CommentTok{# said that women buy more than men? hah!)}
+
+\KeywordTok{chisq.test}\NormalTok{(dataset}\OperatorTok{$}\NormalTok{Purchased, dataset}\OperatorTok{$}\NormalTok{Gender)}
+
+\CommentTok{# Let's say we want to remove the first two columns as we are not going to use them.}
+\CommentTok{# But, we can in fact use a categorical variable as a predictor in logistic regression.}
+\CommentTok{# It will treat it the same way as in regression. Check Appendix C.}
+\CommentTok{# Try it by yourself if you would like to.}
+\NormalTok{dataset =}\StringTok{ }\NormalTok{dataset[}\DecValTok{3}\OperatorTok{:}\DecValTok{5}\NormalTok{]}
+\KeywordTok{str}\NormalTok{(dataset) }\CommentTok{# show the new structure of dataset}
+
+
+\CommentTok{# splitting the dataset into training and testing sets}
+\KeywordTok{library}\NormalTok{(caTools)}
+\KeywordTok{set.seed}\NormalTok{(}\DecValTok{123}\NormalTok{) }\CommentTok{# CHANGE THE VALUE OF SEED. PUT YOUR STUDENT'S NUMBER INSTEAD OF 123.}
+\NormalTok{split =}\StringTok{ }\KeywordTok{sample.split}\NormalTok{(dataset}\OperatorTok{$}\NormalTok{Purchased, }\DataTypeTok{SplitRatio =} \FloatTok{0.75}\NormalTok{)}
+\NormalTok{training_set =}\StringTok{ }\KeywordTok{subset}\NormalTok{(dataset, split }\OperatorTok{==}\StringTok{ }\OtherTok{TRUE}\NormalTok{)}
+\NormalTok{test_set =}\StringTok{ }\KeywordTok{subset}\NormalTok{(dataset, split }\OperatorTok{==}\StringTok{ }\OtherTok{FALSE}\NormalTok{)}
+
+\CommentTok{# scaling}
+\CommentTok{# So here, we have two continuous predictors, Age and EstimatedSalary.}
+\CommentTok{# There is a very big difference in their scales (units).}
+\CommentTok{# That's why we scale them. But it is not always necessary.}
+
+\NormalTok{training_set[}\OperatorTok{-}\DecValTok{3}\NormalTok{] <-}\StringTok{ }\KeywordTok{scale}\NormalTok{(training_set[}\OperatorTok{-}\DecValTok{3}\NormalTok{]) }\CommentTok{#only first two columns}
+\NormalTok{test_set[}\OperatorTok{-}\DecValTok{3}\NormalTok{] <-}\StringTok{ }\KeywordTok{scale}\NormalTok{(test_set[}\OperatorTok{-}\DecValTok{3}\NormalTok{])}
+
+\CommentTok{# Note that, we replace the columns of Age and EstimatedSalary in the training and}
+\CommentTok{# test sets but their scaled versions. I noticed in a lot of reports that you scaled}
+\CommentTok{# but you did not do the replacing.}
+\CommentTok{# Note too that if you do it column by column you will have a problem because }
+\CommentTok{# it will replace the column by a matrix, you need to retransform it to a vector then.}
+\CommentTok{# Last note, to call the columns Age and EstimatedSalary we can it like I did or }
+\CommentTok{# training_set[c(1,2)] or training_set[,c(1,2)] or training_set[,c("Age","EstimatedSalary")]}
+
+
+
+\CommentTok{# logistic regression}
+
+\NormalTok{classifier.logreg <-}\StringTok{ }\KeywordTok{glm}\NormalTok{(Purchased }\OperatorTok{~}\StringTok{ }\NormalTok{Age }\OperatorTok{+}\StringTok{ }\NormalTok{EstimatedSalary , }\DataTypeTok{family =}\NormalTok{ binomial, }\DataTypeTok{data=}\NormalTok{training_set)}
+\NormalTok{classifier.logreg}
+\KeywordTok{summary}\NormalTok{(classifier.logreg)}
+
+\CommentTok{# prediction}
+\NormalTok{pred.glm =}\StringTok{ }\KeywordTok{predict}\NormalTok{(classifier.logreg, }\DataTypeTok{newdata =}\NormalTok{ test_set[,}\OperatorTok{-}\DecValTok{3}\NormalTok{], }\DataTypeTok{type=}\StringTok{"response"}\NormalTok{)}
+\CommentTok{# Do not forget to put type response. }
+\CommentTok{# By the way, you know what you get when you do not put it, right?}
+
+\CommentTok{# Now let's assign observations to classes with respect to the probabilities}
+\NormalTok{pred.glm_0_}\DecValTok{1}\NormalTok{ =}\StringTok{ }\KeywordTok{ifelse}\NormalTok{(pred.glm }\OperatorTok{>=}\StringTok{ }\FloatTok{0.5}\NormalTok{, }\DecValTok{1}\NormalTok{,}\DecValTok{0}\NormalTok{)}
+\CommentTok{# I created a new vector, because we need the probabilities later for the ROC curve.}
+
+\CommentTok{# show some values of the vectors}
+\KeywordTok{head}\NormalTok{(pred.glm)}
+\KeywordTok{head}\NormalTok{(pred.glm_0_}\DecValTok{1}\NormalTok{)}
+
+\CommentTok{# confusion matrix}
+\NormalTok{cm =}\StringTok{ }\KeywordTok{table}\NormalTok{(test_set[,}\DecValTok{3}\NormalTok{], pred.glm_0_}\DecValTok{1}\NormalTok{)}
+\NormalTok{cm}
+\CommentTok{# First line to store it into cm, second line to show the matrix! }
+
+\CommentTok{# You remember my note about table() function and the order of the arguments?}
+\NormalTok{cm =}\StringTok{ }\KeywordTok{table}\NormalTok{(pred.glm_0_}\DecValTok{1}\NormalTok{, test_set[,}\DecValTok{3}\NormalTok{])}
+\NormalTok{cm}
+
+\CommentTok{# You can show the confusion matrix in a mosaic plot by the way}
+\KeywordTok{mosaicplot}\NormalTok{(cm,}\DataTypeTok{col=}\KeywordTok{sample}\NormalTok{(}\DecValTok{1}\OperatorTok{:}\DecValTok{8}\NormalTok{,}\DecValTok{2}\NormalTok{)) }\CommentTok{# colors are random between 8 colors.}
+
+\CommentTok{# ROC}
+\KeywordTok{require}\NormalTok{(ROCR)}
+\NormalTok{score <-}\StringTok{ }\KeywordTok{prediction}\NormalTok{(pred.glm,test_set[,}\DecValTok{3}\NormalTok{]) }\CommentTok{# we use the predicted probabilities not the 0 or 1}
+\KeywordTok{performance}\NormalTok{(score,}\StringTok{"auc"}\NormalTok{) }\CommentTok{# y.values}
+\KeywordTok{plot}\NormalTok{(}\KeywordTok{performance}\NormalTok{(score,}\StringTok{"tpr"}\NormalTok{,}\StringTok{"fpr"}\NormalTok{),}\DataTypeTok{col=}\StringTok{"green"}\NormalTok{)}
+\KeywordTok{abline}\NormalTok{(}\DecValTok{0}\NormalTok{,}\DecValTok{1}\NormalTok{,}\DataTypeTok{lty=}\DecValTok{8}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+So now we have a logistic regression model stored in
+\texttt{classifier.logreg}. It is a model of \texttt{Purchased} in
+function of \texttt{Age} and \texttt{EstimatedSalary}. We will use this
+model to show the decision boundary in the next part of this PW. Then we
+will compare this model to other models obtained by Discriminant
+Analysis approaches.
+
+\section*{Decision Boundary of Logistic
+Regression}\label{decision-boundary-of-logistic-regression}
+\addcontentsline{toc}{section}{Decision Boundary of Logistic Regression}
+
+Now you are going to visualize the decision boundary for logistic
+regression.
+
+\begin{rmdinsight}
+\begin{itemize}
+\tightlist
+\item
+  Since the decision boundary of logistic regression is a linear
+  (\emph{you know why right?}) and the dimension of the feature space is
+  2 (\texttt{Age} and \texttt{EstimatedSalary}), the decision boundary
+  in this 2-dimensional space is a line that separates the predicted
+  classes ``0'' and ``1'' (values of the response \texttt{Purchased}).
+\item
+  For logistic regression, we predict \(y=1\) if \(\beta^T X \geq 0\)
+  (right side of the line) and \(y=0\) if \(\beta^T \lt 0\) (left side
+  of the line). Where
+\end{itemize}
+
+\[ \beta = \begin{pmatrix} \beta_0 \\ \beta_1 \\ \beta2 \end{pmatrix} \,\, \text{and} \,\, X = \begin{pmatrix}
+  1 \\
+  X_1 \\
+  X_2
+  \end{pmatrix}\]
+
+So we predict \(y=1\) if \(\beta_0 + \beta_1 X_1 + \beta_2 X_2 \geq 0\)
+which means that the equation of the decision boundary (a line here) is
+\(X_2 = - \frac{\beta_1}{\beta_2}X_1 - \frac{\beta_0}{\beta_2}\)
+\end{rmdinsight}
+
+\textbf{2.} Plot the decision boundary obtained with logistic
+regression. In order to do so, calculate the intercept and the slope of
+the line presenting the decision boundary, then plot
+\texttt{EstimatedSalary} in function of \texttt{Age} (from the
+\texttt{test\_set}) and add the line using \texttt{abline()}.
+
+\textbf{3.} In order to verify that your line (decision boundary) is
+well plotted, color the points on the last Figure with respect to the
+predicted response.
+
+\textbf{Hints}:
+
+\begin{itemize}
+\tightlist
+\item
+  If your predictions are stored in \texttt{y\_pred}, you can do it
+  using
+  \texttt{bg\ =\ ifelse(y\_pred\ ==\ 1,\ \textquotesingle{}color1\textquotesingle{},\ \textquotesingle{}color2\textquotesingle{})},
+  and precise the argument \texttt{pch} to be 21 (you can choose pch to
+  be a value between 21 and 25, try it).
+\item
+  Then, add the line using \texttt{abline()}, put the line width = 2 to
+  make it more visible. Do not forget to title the Figure).
+\end{itemize}
+
+\textbf{4.} Now make the same plot but color the points with respect to
+their real labels (the variable \texttt{Purchased}). From this figure,
+count the number of the false positive predictions and compare it to the
+value obtained in the confusion matrix.
+
+\section*{Linear Discriminant Analysis
+(LDA)}\label{linear-discriminant-analysis-lda}
+\addcontentsline{toc}{section}{Linear Discriminant Analysis (LDA)}
+
+Let us apply linear discriminant analysis (LDA) now. First we will make
+use of the \texttt{lda()} function in the package \texttt{MASS}. Second,
+you are going to create the model and predict the classes by yourself
+without using the \texttt{lda()} function. And we will visualize the
+decision boundary of LDA.
+
+\textbf{5.} Fit a LDA model of \texttt{Purchased} in function of
+\texttt{Age} and \texttt{EstimatedSalary}. Name the model
+\texttt{classifier.lda}.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{library}\NormalTok{(MASS)}
+\NormalTok{classifier.lda <-}\StringTok{ }\KeywordTok{lda}\NormalTok{(Purchased}\OperatorTok{~}\NormalTok{Age}\OperatorTok{+}\NormalTok{EstimatedSalary, }\DataTypeTok{data=}\NormalTok{training_set)}
+\end{Highlighting}
+\end{Shaded}
+
+\textbf{6.} Call \texttt{classifier.lda} and see what does it compute.
+
+\textbf{Plus:} If you enter the following you will be returned with a
+list of summary information concerning the computation:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{classifier.lda}\OperatorTok{$}\NormalTok{prior}
+\NormalTok{classifier.lda}\OperatorTok{$}\NormalTok{means}
+\end{Highlighting}
+\end{Shaded}
+
+\textbf{7.} On the test set, predict the probability of purchasing the
+product by the users using the model \texttt{classifier.lda}. Remark
+that when we predict using LDA, we obtain a list instead of a matrix, do
+\texttt{str()} for your predictions to see what do you get.
+
+\textbf{Remark}: we get the predicted class here, without being
+obligated to round the predictions as we did for logistic regression.
+
+\textbf{8.} Compute the confusion matrix and compare the predictions
+results obtained by LDA to the ones obtained by logistic regression.
+What do you remark?
+
+(\textbf{Hint}: compare the accuracy)
+
+\textbf{9.} Now let us plot the decision boundary obtained with LDA. You
+saw in the course that decision boundary for LDA represent the set of
+values \(x\) where \(\delta_k(x) = \delta_c(x)\). Recall that
+\[ \delta_k(X) = x^T \Sigma^{-1} \mu_k - \frac{1}{2} \mu_k^T \Sigma^{-1}  \mu_k + \log \pi_k \]
+
+Here in our case, we have 2 classes (\(K=2\)) and 2 predictors
+(\(p=2\)). So the decision boundary (which is linear in the case of LDA,
+and line in our case since \(p=2\)) will verify the equation
+\(\delta_0(x) = \delta_1(x)\) Since we have two classes ``0'' and ``1''.
+In the case of LDA this leads to linear boundary and is easy to be
+plotted. But in more complicated cases it is difficult to manually
+simplify the equations and plot the decision boundary. Anyway, there is
+a smart method to plot (but a little bit costy) the decision boundary in
+\texttt{R} using the function \texttt{contour()}, the corresponding code
+is the following (you must adapt it and use it to plot your decision
+boundary):
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{# create a grid corresponding to the scales of Age and EstimatedSalary}
+\CommentTok{# and fill this grid with lot of points}
+\NormalTok{X1 =}\StringTok{ }\KeywordTok{seq}\NormalTok{(}\KeywordTok{min}\NormalTok{(training_set[, }\DecValTok{1}\NormalTok{]) }\OperatorTok{-}\StringTok{ }\DecValTok{1}\NormalTok{, }\KeywordTok{max}\NormalTok{(training_set[, }\DecValTok{1}\NormalTok{]) }\OperatorTok{+}\StringTok{ }\DecValTok{1}\NormalTok{, }\DataTypeTok{by =} \FloatTok{0.01}\NormalTok{)}
+\NormalTok{X2 =}\StringTok{ }\KeywordTok{seq}\NormalTok{(}\KeywordTok{min}\NormalTok{(training_set[, }\DecValTok{2}\NormalTok{]) }\OperatorTok{-}\StringTok{ }\DecValTok{1}\NormalTok{, }\KeywordTok{max}\NormalTok{(training_set[, }\DecValTok{2}\NormalTok{]) }\OperatorTok{+}\StringTok{ }\DecValTok{1}\NormalTok{, }\DataTypeTok{by =} \FloatTok{0.01}\NormalTok{)}
+\NormalTok{grid_set =}\StringTok{ }\KeywordTok{expand.grid}\NormalTok{(X1, X2)}
+\CommentTok{# Adapt the variable names}
+\KeywordTok{colnames}\NormalTok{(grid_set) =}\StringTok{ }\KeywordTok{c}\NormalTok{(}\StringTok{'Age'}\NormalTok{, }\StringTok{'EstimatedSalary'}\NormalTok{)}
+
+\CommentTok{# plot 'Estimated Salary' ~ 'Age'}
+\KeywordTok{plot}\NormalTok{(test_set[, }\DecValTok{1}\OperatorTok{:}\DecValTok{2}\NormalTok{],}
+     \DataTypeTok{main =} \StringTok{'Decision Boundary LDA'}\NormalTok{,}
+     \DataTypeTok{xlab =} \StringTok{'Age'}\NormalTok{, }\DataTypeTok{ylab =} \StringTok{'Estimated Salary'}\NormalTok{,}
+     \DataTypeTok{xlim =} \KeywordTok{range}\NormalTok{(X1), }\DataTypeTok{ylim =} \KeywordTok{range}\NormalTok{(X2))}
+
+\CommentTok{# color the plotted points with their real label (class)}
+\KeywordTok{points}\NormalTok{(test_set[}\DecValTok{1}\OperatorTok{:}\DecValTok{2}\NormalTok{], }\DataTypeTok{pch =} \DecValTok{21}\NormalTok{, }\DataTypeTok{bg =} \KeywordTok{ifelse}\NormalTok{(test_set[, }\DecValTok{3}\NormalTok{] }\OperatorTok{==}\StringTok{ }\DecValTok{1}\NormalTok{, }\StringTok{'green4'}\NormalTok{, }\StringTok{'red3'}\NormalTok{))}
+
+\CommentTok{# Make predictions on the points of the grid, this will take some time}
+\NormalTok{pred_grid =}\StringTok{ }\KeywordTok{predict}\NormalTok{(classifier.lda, }\DataTypeTok{newdata =}\NormalTok{ grid_set)}\OperatorTok{$}\NormalTok{class}
+
+\CommentTok{# Separate the predictions by a contour}
+\KeywordTok{contour}\NormalTok{(X1, X2, }\KeywordTok{matrix}\NormalTok{(}\KeywordTok{as.numeric}\NormalTok{(pred_grid), }\KeywordTok{length}\NormalTok{(X1), }\KeywordTok{length}\NormalTok{(X2)), }\DataTypeTok{add =} \OtherTok{TRUE}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\textbf{10.} Now let us build a LDA model for our data set without using
+the \texttt{lda()} function. You are free to do it by creating a
+function or without creating one. Go back to question \textbf{6} and see
+what did you obtain by using \texttt{lda()}. It computes the prior
+probability of group membership and the estimated group means for each
+of the two groups. Additional information that is not provided, but may
+be important, is the single covariance matrix that is being used for the
+various groupings.
+
+\begin{rmdinsight}
+In LDA, we compute for every observation \(x\) its discriminant score
+\(\delta_k(x)\). Then we attribute \(x\) to the class that has the
+highest \(\delta\). Recall that
+
+\[\delta_k(x) = x^T \Sigma^{-1} \mu_k - \frac{1}{2} \mu_k^T \Sigma^{-1}  \mu_k + \log \pi_k\]
+
+So to compute \(\delta_k(x)\) we need to estimate \(\pi_k\), \(\mu_k\)
+and \(\Sigma\).
+
+Note that \[x=\begin{pmatrix}
+            X_1 \\
+            X_2
+            \end{pmatrix}\] and here \(X_1\)=\texttt{Age} and
+\(X_2\)=\texttt{EstimatedSalary}.
+\end{rmdinsight}
+
+So let us do it step by step, first we will do the estimates:
+
+\textbf{10.1} Subset the training set into two sets: \texttt{class0}
+where \texttt{Purchased\ =\ 0} and \texttt{class1} where
+\texttt{Purchased\ =\ 1}).
+
+\textbf{10.2} Compute \(\pi_0\) and \(\pi_1\).
+
+\[\pi_i = N_i / N, \,\, \text{where} \,\, N_i \,\, \text{is the number of data points in group } i\]
+
+\textbf{10.3} Compute \(\mu_0\) and \(\mu_1\). \[\mu_0 = \begin{pmatrix}
+   \mu_0(X_1) \\
+   \mu_0(X_2)
+   \end{pmatrix} \,\, \text{and} \,\, \mu_1 = \begin{pmatrix}
+   \mu_1(X_1) \\
+   \mu_1(X_2)
+   \end{pmatrix}\]
+
+where, for example, \(\mu_0(X_1)\) is the mean of the variable \(X_1\)
+in the group \(0\) (the subset \texttt{class0}).
+
+\textbf{10.4} Compute \(\Sigma\). In the case of two classes like here,
+it is computed by calculating the following:
+
+\[\Sigma = \frac{(N_0-1)\Sigma_0 + (N_1-1)\Sigma_1}{N_0+N_1-2}\]
+
+where \(\Sigma_i\) is the estimated covariance matrix for specific group
+\(i\).
+
+\textbf{Remark:} Recall that in LDA we use the same \(\Sigma\). But in
+QDA we do not.
+
+\textbf{10.5.} Now that we have computed all the needed estimates, we
+can calculate \(\delta_0(x)\) and \(\delta_1(x)\) for any observation
+\(x\). And we will attribute \(x\) to the class with the highest
+\(\delta\). First, try it for \(x\) where \(x^T=(1,1.5)\), what is class
+prediction for this spesific \(x\)?
+
+\textbf{10.6.} Compute the discriminant scores \(\delta\) for the test
+set (a matrix \(100\times 2\)), predict the classes and compare your
+results with the results obtained with the \texttt{lda()} function.
+
+\section*{Quadratic Discriminant Analysis
+(QDA)}\label{quadratic-discriminant-analysis-qda-1}
+\addcontentsline{toc}{section}{Quadratic Discriminant Analysis (QDA)}
+
+Training and assessing a QDA model in \texttt{R} is very similar in
+syntax to training and assessing a LDA model. The only difference is in
+the function name \texttt{qda()}
+
+\textbf{11.} Fit a QDA model of \texttt{Purchased} in function of
+\texttt{Age} and \texttt{EstimatedSalary}. Name the model
+\texttt{classifier.qda}.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{# qda() is a function of library(MASS)}
+\NormalTok{classifier.qda <-}\StringTok{ }\KeywordTok{qda}\NormalTok{(Purchased}\OperatorTok{~}\NormalTok{., }\DataTypeTok{data =}\NormalTok{ training_set)}
+\end{Highlighting}
+\end{Shaded}
+
+\textbf{12.} Make predictions on the \texttt{test\_set} using the QDA
+model \texttt{classifier.qda}. Show the confusion matrix and compare the
+results with the predictions obtained using the LDA model
+\texttt{classifier.lda}.
+
+\textbf{13.} Plot the decision boundary obtained with QDA. Color the
+points with the real labels.
+
+\section*{Comparison}\label{comparison}
+\addcontentsline{toc}{section}{Comparison}
+
+\textbf{14.} In order to compare the methods we used, plot on the same
+Figure the ROC curve for each classifier we fitted and compare the
+correspondant AUC. What was the best model for this dataset?
+
+\textbf{Remark:} If you use the \texttt{ROCR} package:
+
+\begin{itemize}
+\tightlist
+\item
+  For Logistic regression, use the predicted probabilities in the
+  \texttt{prediction()} (and not the round values ``0'' or ``1'').
+\item
+  For LDA and QDA, put \texttt{pred.lda\$posterior{[},2{]}} in the
+  \texttt{prediction()} function (those are the posterior probabilities
+  that observations belong to class ``1'').
+\end{itemize}
 
 ◼
 

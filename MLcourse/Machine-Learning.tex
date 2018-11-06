@@ -125,7 +125,7 @@
   \postauthor{\par}
       \predate{\centering\large\emph}
   \postdate{\par}
-    \date{2018-11-02}
+    \date{2018-11-06}
 
 % \defaultfontfeatures{
 %     Path = /home/ghassany/texmf/fonts/opentype/public/fontawesome/}
@@ -5551,10 +5551,7 @@ use the \texttt{factoextra} package like follows:
 \begin{Highlighting}[]
 \CommentTok{# loading factoextra library}
 \KeywordTok{require}\NormalTok{(factoextra)}
-\CommentTok{#ans> Loading required package: factoextra}
-\CommentTok{#ans> Loading required package: ggplot2}
-\CommentTok{#ans> Welcome! Related Books: `Practical Guide To Cluster Analysis in R` at https://goo.gl/13EFCZ}
-\CommentTok{# Calculating pca using prcomp from factoextra}
+\CommentTok{# Calculating pca using prcomp(), which is a built-in function in R }
 \NormalTok{res.pca <-}\StringTok{ }\KeywordTok{prcomp}\NormalTok{(eurojob, }\DataTypeTok{scale =} \OtherTok{TRUE}\NormalTok{)}
 
 \CommentTok{# Graph of individuals}
@@ -5592,6 +5589,370 @@ use the \texttt{factoextra} package like follows:
 \end{Shaded}
 
 \begin{center}\includegraphics[width=0.9\linewidth]{Machine-Learning_files/figure-latex/unnamed-chunk-126-3} \end{center}
+
+◼
+
+\chapter*{PW 6}\label{pw-6}
+\addcontentsline{toc}{chapter}{PW 6}
+
+\subsection*{The Iris Dataset}\label{the-iris-dataset}
+\addcontentsline{toc}{subsection}{The Iris Dataset}
+
+The \textbf{\emph{Iris flower dataset}} or \textbf{\emph{Fisher's Iris
+dataset}} is a multivariate data set introduced by the British
+statistician and biologist
+\href{https://en.wikipedia.org/wiki/Ronald_Fisher}{Ronald Fisher} in his
+\textbf{1936} paper \citep{Fisher1936}.
+
+The data set consists of 50 samples from each of three species of Iris.
+Four features were measured from each sample.
+
+The three species in the Iris dataset are:
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  \emph{Iris-setosa} (\(n_1=50\))
+\item
+  \emph{Iris-versicolor} (\(n_2=50\))
+\item
+  \emph{Iris-virginica} (\(n_3=50\))
+\end{enumerate}
+
+And the four features in Iris dataset are:
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  \emph{sepal length} in cm
+\item
+  \emph{sepal width} in cm
+\item
+  \emph{petal length} in cm
+\item
+  \emph{petal width} in cm
+\end{enumerate}
+
+\begin{center}\includegraphics[width=0.85\linewidth]{img/iris} \end{center}
+
+\subsection*{Loading Data}\label{loading-data-1}
+\addcontentsline{toc}{subsection}{Loading Data}
+
+\textbf{1.} Download the iris dataset from
+\textcolor{white}{[}\faTable\textcolor{white}{]} here and import it into
+\texttt{R}.
+
+\subsection*{Exploratory analysis}\label{exploratory-analysis}
+\addcontentsline{toc}{subsection}{Exploratory analysis}
+
+\textbf{2.} Compare the means and the quartiles of the 3 different
+flower classes for the 4 different features (Plot 4 boxplots into the
+same figure).
+
+\begin{rmdtip}
+\textbf{Hint}: you can use \texttt{par(mfrow=c(2,2))} to show multiple
+plots on the same figure (\(2 \times 2\) plots here). Like follows:
+\end{rmdtip}
+
+\begin{center}\includegraphics[width=0.7\linewidth]{Machine-Learning_files/figure-latex/unnamed-chunk-132-1} \end{center}
+
+\textbf{3.} To explore how the 3 different flower classes are
+distributed along the 4 different features, visualize them via
+histograms using the following code.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{# Let's use the ggplot2 library}
+\CommentTok{# ggplot2 is the most advanced package for data visualization}
+\CommentTok{# gg corresponds to The Grammar of Graphics.}
+\KeywordTok{library}\NormalTok{(ggplot2) }\CommentTok{#of course you must install it first if you don't have it already}
+
+\CommentTok{# histogram of sepal_length}
+\KeywordTok{ggplot}\NormalTok{(iris, }\KeywordTok{aes}\NormalTok{(}\DataTypeTok{x=}\NormalTok{sepal_length, }\DataTypeTok{fill=}\NormalTok{class)) }\OperatorTok{+}
+\StringTok{  }\KeywordTok{geom_histogram}\NormalTok{(}\DataTypeTok{binwidth=}\NormalTok{.}\DecValTok{2}\NormalTok{, }\DataTypeTok{alpha=}\NormalTok{.}\DecValTok{5}\NormalTok{)}
+\CommentTok{# histogram of sepal_width}
+\KeywordTok{ggplot}\NormalTok{(iris, }\KeywordTok{aes}\NormalTok{(}\DataTypeTok{x=}\NormalTok{sepal_width, }\DataTypeTok{fill=}\NormalTok{class)) }\OperatorTok{+}
+\StringTok{  }\KeywordTok{geom_histogram}\NormalTok{(}\DataTypeTok{binwidth=}\NormalTok{.}\DecValTok{2}\NormalTok{, }\DataTypeTok{alpha=}\NormalTok{.}\DecValTok{5}\NormalTok{)}
+\CommentTok{# histogram of petal_length}
+\KeywordTok{ggplot}\NormalTok{(iris, }\KeywordTok{aes}\NormalTok{(}\DataTypeTok{x=}\NormalTok{petal_length, }\DataTypeTok{fill=}\NormalTok{class)) }\OperatorTok{+}
+\StringTok{  }\KeywordTok{geom_histogram}\NormalTok{(}\DataTypeTok{binwidth=}\NormalTok{.}\DecValTok{2}\NormalTok{, }\DataTypeTok{alpha=}\NormalTok{.}\DecValTok{5}\NormalTok{)}
+\CommentTok{# histogram of petal_width}
+\KeywordTok{ggplot}\NormalTok{(iris, }\KeywordTok{aes}\NormalTok{(}\DataTypeTok{x=}\NormalTok{petal_width, }\DataTypeTok{fill=}\NormalTok{class)) }\OperatorTok{+}
+\StringTok{  }\KeywordTok{geom_histogram}\NormalTok{(}\DataTypeTok{binwidth=}\NormalTok{.}\DecValTok{2}\NormalTok{, }\DataTypeTok{alpha=}\NormalTok{.}\DecValTok{5}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{center}\includegraphics[width=0.7\linewidth]{Machine-Learning_files/figure-latex/unnamed-chunk-134-1} \end{center}
+
+\subsection*{\texorpdfstring{PCA using
+\texttt{princomp()}}{PCA using princomp()}}\label{pca-using-princomp}
+\addcontentsline{toc}{subsection}{PCA using \texttt{princomp()}}
+
+```
+
+\begin{rmdtip}
+\texttt{princomp()} and \texttt{prcomp()} are built-in \texttt{R}
+functions. They both perform PCA.
+\end{rmdtip}
+
+\textbf{4.} Apply a PCA on the Iris dataset using the
+\texttt{princomp()}.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{pcairis=}\KeywordTok{princomp}\NormalTok{(iris[,}\OperatorTok{-}\DecValTok{5}\NormalTok{], }\DataTypeTok{cor=}\NormalTok{T) }
+\CommentTok{# Note that we take only the numerical columns to apply PCA.}
+\CommentTok{# now pcairis is a R object of type princomp}
+
+\CommentTok{# To display the internal structure of pcairis}
+\KeywordTok{str}\NormalTok{(pcairis)}
+\CommentTok{#ans> List of 7}
+\CommentTok{#ans>  $ sdev    : Named num [1:4] 1.706 0.96 0.384 0.144}
+\CommentTok{#ans>   ..- attr(*, "names")= chr [1:4] "Comp.1" "Comp.2" "Comp.3" "Comp.4"}
+\CommentTok{#ans>  $ loadings: 'loadings' num [1:4, 1:4] 0.522 -0.263 0.581 0.566 0.372 ...}
+\CommentTok{#ans>   ..- attr(*, "dimnames")=List of 2}
+\CommentTok{#ans>   .. ..$ : chr [1:4] "sepal_length" "sepal_width" "petal_length" "petal_width"}
+\CommentTok{#ans>   .. ..$ : chr [1:4] "Comp.1" "Comp.2" "Comp.3" "Comp.4"}
+\CommentTok{#ans>  $ center  : Named num [1:4] 5.84 3.05 3.76 1.2}
+\CommentTok{#ans>   ..- attr(*, "names")= chr [1:4] "sepal_length" "sepal_width" "petal_length" "petal_width"}
+\CommentTok{#ans>  $ scale   : Named num [1:4] 0.825 0.432 1.759 0.761}
+\CommentTok{#ans>   ..- attr(*, "names")= chr [1:4] "sepal_length" "sepal_width" "petal_length" "petal_width"}
+\CommentTok{#ans>  $ n.obs   : int 150}
+\CommentTok{#ans>  $ scores  : num [1:150, 1:4] -2.26 -2.09 -2.37 -2.3 -2.39 ...}
+\CommentTok{#ans>   ..- attr(*, "dimnames")=List of 2}
+\CommentTok{#ans>   .. ..$ : NULL}
+\CommentTok{#ans>   .. ..$ : chr [1:4] "Comp.1" "Comp.2" "Comp.3" "Comp.4"}
+\CommentTok{#ans>  $ call    : language princomp(x = iris[, -5], cor = T)}
+\CommentTok{#ans>  - attr(*, "class")= chr "princomp"}
+
+\CommentTok{# To see the variance explained by the the pcs}
+\KeywordTok{summary}\NormalTok{(pcairis) }
+\CommentTok{#ans> Importance of components:}
+\CommentTok{#ans>                        Comp.1 Comp.2 Comp.3  Comp.4}
+\CommentTok{#ans> Standard deviation      1.706  0.960 0.3839 0.14355}
+\CommentTok{#ans> Proportion of Variance  0.728  0.230 0.0368 0.00515}
+\CommentTok{#ans> Cumulative Proportion   0.728  0.958 0.9948 1.00000}
+
+\CommentTok{# To plot the variance explained by each pc}
+\KeywordTok{plot}\NormalTok{(pcairis) }
+\end{Highlighting}
+\end{Shaded}
+
+\begin{center}\includegraphics[width=0.7\linewidth]{Machine-Learning_files/figure-latex/unnamed-chunk-138-1} \end{center}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+
+\CommentTok{# To plot together the scores for PC1 and PC2 and the }
+\CommentTok{# variables expressed in terms of PC1 and PC2.}
+\KeywordTok{biplot}\NormalTok{(pcairis) }
+\end{Highlighting}
+\end{Shaded}
+
+\begin{center}\includegraphics[width=0.7\linewidth]{Machine-Learning_files/figure-latex/unnamed-chunk-138-2} \end{center}
+
+\subsection*{\texorpdfstring{Deeper PCA using \texttt{factoextra}
+package}{Deeper PCA using factoextra package}}\label{deeper-pca-using-factoextra-package}
+\addcontentsline{toc}{subsection}{Deeper PCA using \texttt{factoextra}
+package}
+
+\begin{rmdinsight}
+To help in the interpretation and in the visualization of PCA we are
+going to use the package named \texttt{factoextra}.
+
+No matter which function or package you decide to use for computing
+principal component methods, the \texttt{factoextra} R package can help
+to extract easily, in a human readable data format, the analysis results
+from the different functions mentioned above. \texttt{factoextra}
+provides also convenient solutions to create \texttt{ggplot2}-based
+beautiful graphs.
+
+You can take a look at this link for a detailed example.
+\end{rmdinsight}
+
+\textbf{5.} Using \texttt{factoextra} packag plot the following:
+
+\begin{itemize}
+\tightlist
+\item
+  The scree plot.
+\item
+  The graph of individuals.
+\item
+  The graph of variables.
+\item
+  The biplot graph.
+\item
+  The contributions of the variables to the first 2 principal
+  components.
+\end{itemize}
+
+\subsection*{Step-by-step PCA}\label{step-by-step-pca}
+\addcontentsline{toc}{subsection}{Step-by-step PCA}
+
+In order to understand how PCA works, let's implement it step-by-step.
+
+\begin{rmdtip}
+\textbf{Summary of the PCA Approach}:
+
+\begin{itemize}
+\tightlist
+\item
+  Standardize the data.
+\item
+  Obtain the Eigenvectors and Eigenvalues from the covariance matrix or
+  correlation matrix.
+\item
+  Sort eigenvalues in descending order and choose the \(k\) eigenvectors
+  that correspond to the \(k\) largest eigenvalues, where \(k\) is the
+  number of dimensions of the new feature subspace (\(k \le p\)).
+\item
+  Construct the projection matrix \(\mathbf{A}\) from the selected \(k\)
+  eigenvectors.
+\item
+  Transform the original dataset \(X\) via \(\mathbf{A}\) to obtain a
+  \(k\)-dimensional feature subspace \(\mathbf{Y}\).
+\end{itemize}
+\end{rmdtip}
+
+\textbf{6.} First step, split the iris dataset into data \(X\) and class
+labels \(y\).
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{X <-}\StringTok{ }\NormalTok{iris[,}\OperatorTok{-}\DecValTok{5}\NormalTok{]}
+\NormalTok{y <-}\StringTok{ }\NormalTok{iris[,}\DecValTok{5}\NormalTok{]}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{rmdinsight}
+The iris dataset is now stored in form of a \(150 \times 4\) matrix
+where the columns are the different features, and every row represents a
+separate flower sample. Each sample row \(X^i\) can be pictured as a
+4-dimensional vector
+
+\[ (X^i)^T = \begin{pmatrix} X_1^i \\ X_2^i \\ X_3^i \\ X_4^i \end{pmatrix}
+= \begin{pmatrix} \text{sepal length} \\ \text{sepal width} \\\text{petal length} \\ \text{petal width} \end{pmatrix}\]
+\end{rmdinsight}
+
+\begin{rmdinsight}
+\textbf{Eigendecomposition - Computing Eigenvectors and Eigenvalues}
+
+The eigenvectors and eigenvalues of a covariance (or correlation) matrix
+represent the ``core'' of a PCA: The eigenvectors (principal components)
+determine the directions of the new feature space, and the eigenvalues
+determine their magnitude. In other words, the eigenvalues explain the
+variance of the data along the new feature axes.
+\end{rmdinsight}
+
+\textbf{Standardizing}
+
+\textbf{7.} Scale the 4 features. Store the scaled matrix into a new one
+(for example, name it \texttt{X\_scaled}).
+
+\textbf{Covariance Matrix}
+
+\textbf{8.} The classic approach to PCA is to perform the
+eigendecomposition on the covariance matrix \(\Sigma\), which is a
+\(p\times p\) matrix where each element represents the covariance
+between two features. Compute the Covariance Matrix of the scaled
+features (Print the results).
+
+\begin{rmdtip}
+We can summarize the calculation of the covariance matrix via the
+following matrix equation:
+\[ \Sigma = \frac{1}{n-1} \left( (\mathbf{X} - \mathbf{\bar{X}})^T\;(\mathbf{X} - \mathbf{\bar{X}}) \right) \]
+where \(\mathbf{\bar{X}}\) is the mean vector
+\(\mathbf{\bar{X}} = \frac{1}{n} \sum\limits_{k=1}^n x_{k}\).
+
+The mean vector is a \(p\)-dimensional vector where each value in this
+vector represents the sample mean of a feature column in the dataset.
+\end{rmdtip}
+
+\textbf{9.} Perform an eigendecomposition on the covariance matrix.
+Compute the Eigenvectors and the Eigenvalues (you can use the
+\texttt{eigen()} function). What do you obtain?
+
+\textbf{Correlation Matrix}
+
+\begin{rmdinsight}
+Especially, in the field of ``Finance'', the correlation matrix
+typically used instead of the covariance matrix. However, the
+eigendecomposition of the covariance matrix (if the input data was
+standardized) yields the same results as a eigendecomposition on the
+correlation matrix, since the correlation matrix can be understood as
+the normalized covariance matrix.
+\end{rmdinsight}
+
+\textbf{10.} Perform an eigendecomposition of the standardized data
+based on the correlation matrix.
+
+\textbf{11.} Perform an eigendecomposition of the raw data based on the
+correlation matrix. Compare the obtained results with the previous
+question.
+
+\begin{rmdinsight}
+We should see that all three approaches yield the same eigenvectors and
+eigenvalue pairs:
+
+\begin{itemize}
+\tightlist
+\item
+  Eigendecomposition of the covariance matrix after standardizing the
+  data.
+\item
+  Eigendecomposition of the correlation matrix.
+\item
+  Eigendecomposition of the correlation matrix after standardizing the
+  data.
+\end{itemize}
+\end{rmdinsight}
+
+\textbf{Selecting Principal Components}
+
+\begin{rmdinsight}
+The \texttt{eigen()} function will, by default, sort the eigenvalues in
+decreasing order.
+\end{rmdinsight}
+
+\textbf{Explained Variance}
+
+\textbf{12.} Calculate the individual explained variation and the
+cumulative explained variation of each principal component. Show the
+results.
+
+\textbf{13.} Plot the individual explained variation. (scree plot)
+
+\textbf{Projection Matrix}
+
+\textbf{14.} Construct the projection matrix that will be used to
+transform the Iris data onto the new feature subspace.
+
+\begin{rmdtip}
+The ``projection matrix'' is basically just a matrix of our concatenated
+top \(k\) eigenvectors. Here, the projection matrix \(\mathbf{A}\) is a
+\(4 \times 2\)-dimensional matrix.
+\end{rmdtip}
+
+\textbf{Projection Onto the New Feature Space}
+
+In this last step we will use the \(4 \times 2\)-dimensional projection
+matrix \(\mathbf{A}\) to transform our samples (observations) onto the
+new subspace via the equation \(\mathbf{Y}=X \times \mathbf{A}\) where
+\(\mathbf{Y}\) is a \(150 \times 2\) matrix of our transformed samples.
+
+\textbf{15.} Compute \(\mathbf{Y}\) (Recall the \(\mathbf{Y}\) is the
+matrix of scores, \(\mathbf{A}\) is the matrix of loadings).
+
+\textbf{Visualization}
+
+\textbf{16.} Plot the observations on the new feature space. Name the
+axis PC1 and PC2.
+
+\textbf{17.} On the same plot, color the observations (the flowers) with
+respect to their flower classes.
 
 ◼
 

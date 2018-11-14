@@ -32,8 +32,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black">
   
   
-<link rel="prev" href="logistic-regression.html">
-<link rel="next" href="discriminant-analysis.html">
+<link rel="prev" href="pw-4.html">
+<link rel="next" href="principal-components-analysis.html">
 <script src="book_assets/jquery-2.2.3/jquery.min.js"></script>
 <link href="book_assets/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="book_assets/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
@@ -272,179 +272,44 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="pw-3" class="section level1 unnumbered">
-<h1>PW 3</h1>
-<div id="social-networks-ads" class="section level2 unnumbered">
-<h2>Social Networks Ads</h2>
-<p>In this PW we are going to analyse the <code>Social_Network_Ads</code> <a target="_blank" href="datasets/Social_Network_Ads.csv">dataset <i class="fa fa-table" aria-hidden="true"></i></a>. This dataset contains informations of users of a social network. The social network has several business clients and its business clients put ads on the social network for marketing compaigns purposes. For this dataset, a company has put ads for one of its new products and the social network gathered some informations about wich users responded positively to the ad by buying the product and those who responded negatively by not buying the product.</p>
-<p><strong>1.</strong> Download the <code>Social_Network_Ads</code> <a target="_blank" href="datasets/Social_Network_Ads.csv">dataset <i class="fa fa-table" aria-hidden="true"></i></a> and import it into <code>R</code>.</p>
-<p><strong>2.</strong> <strong>Explore</strong> and <strong>Describe</strong> the dataset (you can use <code>str()</code> and <code>summary()</code> functions, you can calculate and visualize the correlations, show some histograms, scatterplots, pie charts, etc..).</p>
-<div class="rmdtip">
-<p>
-We will consider the variables <code>Age</code> and <code>EstimatedSalary</code> as input variables (features) to see the correlations between them and the decision of the user to buy (or not) the product.
-</p>
-</div>
-<!-- **3.** Is the target variable `Purchased` is of type factor? If not, Encode it as a factor with levels 0 and 1. -->
-<!-- ```{r eval=F, echo=F} -->
-<!-- dataset$Purchased = factor(dataset$Purchased, levels = c(0, 1)) -->
+<div id="special-session" class="section level1">
+<h1><span class="header-section-number">5</span> Special Session</h1>
+<p>This session is special. You are given a dataset on Devinci Online, go download it and analyze it. You must submit a report (html) of your analysis at the end of the session. This report is the most important one for your evaluation.</p>
+<p>Pay attention to the objective of the dataset, your analysis depends on your dataset’s understanding. The data analysis must include all the following steps: importing the dataset, exploring the dataset and describing it, data preprocessing, data splitting, building models and assessing models.</p>
+<p>Here are somes rules for this special session:</p>
+<ul>
+<li><p>The dataset will be available on Devinci Online during the session.</p></li>
+<li><p>When you use the function <code>set.seed()</code> to split the dataset, use your <strong>student’s number</strong>.</p></li>
+<li><p>The professor will not give you any hint. You can ask questions but the professor will not answer all of your questions. It depends on the question.</p></li>
+<li><p>Of course every student must work individually and no discussions are allowed.</p></li>
+<li><p>You have the right to access internet, the course’s website, and even googling some R tips for your codes. But you are not allowed to open any Social Network website neither your email. If you open one of these you will get directly zero.</p></li>
+<li><p>The professor has the right to verify by himself if you are opening any Social network/email website.</p></li>
+<li><p>The report must be written in english of course.</p></li>
+<li><p>There won’t be a quiz in this special session in order to give you the complete 3 hours to analyze the dataset.</p></li>
+</ul>
+<!-- But you must apply the techniques you learned in chapter 5 in order to select the perfect model. -->
+<ul>
+<li>Your report must be clear. Every step or decision you make must be explained. Your code must be commented and your results must be interpreted.</li>
+</ul>
+<p>Good Luck!</p>
+<!-- ```{r, learnr, echo = FALSE, dev = 'png', cache = TRUE, fig.align = 'center', fig.pos = 'h!', out.width = '100%'} -->
+<!-- knitr::include_app('https://mghassany.shinyapps.io/learnr/', height = '900px') -->
 <!-- ``` -->
-<p><strong>3.</strong> Now we are going to split the dataset into training set and test set. Last week we did it manually. From now on we will split it randomly, you can use this code (after undestanding it of course):</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(caTools) <span class="co"># install it first in the console</span>
-<span class="kw">set.seed</span>(<span class="dv">123</span>)
-<span class="co"># we use the function set.seed() with the same seed number</span>
-<span class="co"># to randomly generate the same values, you already know that right? </span>
-<span class="co">#and you know why we want to generate the same values, am I wrong? </span>
-split =<span class="st"> </span><span class="kw">sample.split</span>(dataset<span class="op">$</span>Purchased, <span class="dt">SplitRatio =</span> <span class="fl">0.75</span>)
-<span class="co"># here we chose the SplitRatio to 75% of the dataset,</span>
-<span class="co"># and 25% for the test set.</span>
-training_set =<span class="st"> </span><span class="kw">subset</span>(dataset, split <span class="op">==</span><span class="st"> </span><span class="ot">TRUE</span>)
-<span class="co"># we use subset to split the dataset</span>
-test_set =<span class="st"> </span><span class="kw">subset</span>(dataset, split <span class="op">==</span><span class="st"> </span><span class="ot">FALSE</span>)</code></pre></div>
-<p><strong>4.</strong> Scale the input variables in both training set and test set. Do you know what is scaling? Explain it one sentence.</p>
-<p><strong>5.</strong> Now fit a <strong>simple</strong> logistic regression model of <code>Purchased</code> in function of <code>Age</code>.</p>
-<p><strong>6.</strong> As you saw in the Logistic Regression chapter and in the previous question, we choose argument <code>family</code> to be <code>binomial</code> when we use the function <code>glm</code>. Explain why!</p>
-<p><strong>7.</strong> Write in a equation the model you obtained in question <strong>5</strong>? (Read the following note concerning this question).</p>
-<div class="rmdtip">
-<p>
-Note that there is three different ways to express the equation of a Logistic Regression model.
-</p>
-<!-- 2- Use inline codes to call the coefficients instead of writing them manually.  -->
-<!-- 3- You can use Latex to simplify writing equations, you just need to put the equation code between two `\$\$`. For example: `\$e^{\\beta_0+\\beta_1 X}\$` will give $e^{\beta_0+\beta_1 X}$. Try some equations on this [website](https://www.codecogs.com/latex/eqneditor.php)). -->
-<!-- 4- In fact, for any equation shown on this website, you can right click on it and see its corresonding Latex code. -->
-</div>
-<p><strong>8.</strong> Is the feature <code>Age</code> significant to the model? Justify your answer.</p>
-<p><strong>9.</strong> What is the value of AIC of the model?</p>
-<div class="rmdinsight">
-<p>
-The <strong>AIC</strong> is the <strong>Akaike Information Criterion</strong>. You will use this while comparing multiple models. The model with lower value of AIC is better. Suppose that we have a statistical model of some data. Let <span class="math inline"><span class="math inline">\({\hat {L}}\)</span></span> be the maximum value of the likelihood function for the model; let <span class="math inline"><span class="math inline">\(k\)</span></span> be the number of estimated parameters in the model. Then the AIC value of the model is the following.
-</p>
-<p>
-<span class="math display"><span class="math display">\[ \text{AIC} = 2 k-2 \ln(\hat{L})\]</span></span>
-</p>
-<p>
-where
-</p>
-<ul>
-<li>
-<span class="math inline"><span class="math inline">\(\hat{L}\)</span></span> = the maximized value of the likelihood function of the model <span class="math inline"><span class="math inline">\(M\)</span></span>, i.e. <span class="math inline"><span class="math inline">\(\hat{L}=p(x|{\hat{\beta }},M)\)</span></span>, where <span class="math inline"><span class="math inline">\(\hat{\beta}\)</span></span> are the parameter values that maximize the likelihood function.
-</li>
-<li>
-<span class="math inline"><span class="math inline">\(x\)</span></span> = the observed data.
-</li>
-<li>
-<span class="math inline"><span class="math inline">\(k\)</span></span> = the number of free parameters to be estimated. If the model under consideration is a linear regression, <span class="math inline"><span class="math inline">\(k\)</span></span> is the number of regressors, including the intercept.
-</li>
-</ul>
-</div>
-<p><strong>10.</strong> Plot <code>Purchased</code> in function of <code>Age</code> and add the curve of the obtained logistic regression model.</p>
-<p>(<strong>Hints</strong>: One way to do it is to first plot the observations, then use the <code>curve()</code> function with option <code>add=TRUE</code> in order to add the curve to the plot. Pay attention that the argument “type” of the function <code>predict()</code> must be <code>reponse</code>)</p>
-<p>You must obtain something like</p>
-<div class="figure">
-<img src="img/glm1.png" />
-
-</div>
-<div class="rmdinsight">
-<p>
-<strong>Extra</strong>: A great R package for visualization if <code>ggplot2</code>. Take a look on this <a href="http://www.r-graph-gallery.com/portfolio/ggplot2-package/">link</a> for some examples. With this library we obtain the following plot for our model,
-</p>
-<div class="figure">
-<p><img src="img/glm_ggplot.png" /></p>
-</div>
-</div>
-<p>I obtained the last figure with these lines of code,</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(ggplot2)
-<span class="kw">ggplot</span>(training_set, <span class="kw">aes</span>(<span class="dt">x=</span>Age, <span class="dt">y=</span>Purchased)) <span class="op">+</span>
-<span class="st">  </span><span class="kw">geom_point</span>() <span class="op">+</span>
-<span class="st">  </span><span class="kw">stat_smooth</span>(<span class="dt">method=</span><span class="st">&quot;glm&quot;</span>, <span class="dt">method.args=</span><span class="kw">list</span>(<span class="dt">family=</span><span class="st">&quot;binomial&quot;</span>), <span class="dt">se=</span><span class="ot">FALSE</span>)</code></pre></div>
-<p><strong>11.</strong> Now let us take another feature into account in the model. Fit a logistic regression model of purchasing the product in function of the age of a user and its salary.</p>
-<p><strong>12.</strong> Are the predictors significant to the new model?</p>
-<p><strong>13.</strong> Do we obtain a better model by adding the estimated salary?</p>
-<p><strong>14.</strong> <strong>Predictions</strong>: On the test set, predict the probability of purchasing the product by the users using the obtained model.</p>
-<p><strong>15.</strong> Take a look on your predicted values for the variable <code>Purchased</code>. We predicted the probability that the user will purchase the product right? Now in order to compare your results with the real answers, transform the predicted values to 0 or 1 (1 if &gt;0.5).</p>
-<p><strong>Hint</strong>: You can easily do it with the <code>ifelse()</code> function.</p>
-<p>Now read the following about the evaluation of a classifier (of a classification model).</p>
-<div class="rmdinsight">
-<p>
-<strong>Confusion matrix</strong>: is a tabular representation of Actual vs Predicted values. This helps us to find the accuracy of the model. The different results from a binary classifier are true positives, true negatives, false positives, and false negatives. This is how the confusion matrix looks like:
-</p>
-<p>
-<img src="img/cm.png" /> (Image source: <a href="https://en.wikipedia.org/wiki/Confusion_matrix">Wikipedia</a>)
-</p>
-<p>
-You can calculate the <strong>accuracy</strong> of your model with:
-</p>
-<div class="figure">
-<p><img src="img/cm1.png" /></p>
-</div>
-<p>
-<strong>Accuracy</strong> is a key measure of performance, and is more specifically the rate at which the model is able to predict the correct value (classification or regression) for a given data point or observation. In other words, accuracy is the proportion of correct predictions out of all predictions made.
-</p>
-<p>
-The other two metrics from the confusion matrix worth discussing are <strong>Precision</strong> and <strong>Recall</strong>.
-</p>
-<p>
-Precision (positive predictive value) is the ratio of true positives to the total amount of positive predictions made (i.e., true or false). Said another way, precision measures the proportion of accurate positive predictions out of all positive predictions made.
-</p>
-<p>
-Recall on the other hand, or true positive rate, is the ratio of true positives to the total amount of actual positives, whether predicted correctly or not. So in other words, recall measures the proportion of accurate positive predictions out of all actual positive observations.
-</p>
-<p>
-A metric that is associated with precision and recall is called the F-score (also called F1 score), which combines them mathematically, and somewhat like a weighted average, in order to produce a single measure of performance based on the simultaneous values of both. Its values range from 0 (worst) to 1 (best).
-</p>
-<p>
-Another important concept to know about is the <strong><em>Receiver Operating Characteristic</em></strong>, which when plotted, results in what’s known as an <strong>ROC</strong> curve.
-</p>
-<p>
-<strong>ROC Curve</strong>: An ROC curve is a two-dimensional plot of <em>sensitivity</em> (recall, or true positive rate) vs <em>1- specificity</em> (false positive rate). The area under the curve is referred to as the <strong><em>AUC</em></strong>, and is a numeric metric used to represent the quality and performance of the classifier (model).
-</p>
-<div class="figure">
-<p><img src="img/roc.png" /></p>
-</div>
-<p>
-An AUC of 0.5 is essentially the same as random guessing without a model, whereas an AUC of 1.0 is considered a perfect classifier. Generally, the higher the AUC value the better, and an AUC above 0.8 is considered quite good.
-</p>
-<p>
-The higher the AUC value, the closer the curve gets to the upper left corner of the plot. One can easily see from the ROC curves then that the goal is to find and tune a model that maximizes the true positive rate, while simultaneously minimizing the false positive rate. Said another way, the goal as shown by the ROC curve is to correctly predict as many of the actual positives as possible, while also predicting as many of the actual negatives as possible, and therefore minimize errors (incorrect classifications) for both.
-</p>
-</div>
-<p><strong>16.</strong> Now in order to evaluate the model and its predictions, compute the confusion matrix. What do you obtain ?</p>
-<p>(<strong>Hint</strong>: you can use the <code>table()</code> function).</p>
-<p><strong>17.</strong> Calculate the accuracy, specificity, sensitivity and the precision of the model.</p>
-<p>(<strong>Note</strong>: You can create a function that takes a confusion matrix in input and returns the needed metrics)</p>
-<p><strong>18.</strong> Plot the ROC curve and calculate AUC value.</p>
-<div class="rmdinsight">
-<p>
-<strong>Hints</strong>: to plot it, install the <code>ROCR</code> package. Load and use the functions:
-</p>
-<ul>
-<li>
-<code>prediction()</code> to calculate the elements of the confusion matrix.
-</li>
-<li>
-<code>performance()</code> to calculate the AUC.
-</li>
-<li>
-<code>plot()</code> to plot the ROC curve, you can plot the performance calculated before.
-</li>
-<li>
-<code>abline()</code> to plot a line of equation <code>y=x</code>.
-</li>
-</ul>
-</div>
-<p><strong>19.</strong> Compare the AUC of the two models you fitted (one with only age and one with age and estimated salary) and plot their ROC curves in the same figure.</p>
 <p class="text-right">
 ◼
 </p>
 
 </div>
-</div>
+
+
+
             </section>
 
           </div>
         </div>
       </div>
-<a href="logistic-regression.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="discriminant-analysis.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="pw-4.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="principal-components-analysis.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="book_assets/gitbook-2.6.7/js/app.min.js"></script>

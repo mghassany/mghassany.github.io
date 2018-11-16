@@ -1,0 +1,546 @@
+<!DOCTYPE html>
+<html >
+
+<head>
+
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>Machine Learning</title>
+  <meta name="description" content="Machine Learning course">
+  <meta name="generator" content="bookdown 0.7 and GitBook 2.6.7">
+
+  <meta property="og:title" content="Machine Learning" />
+  <meta property="og:type" content="book" />
+  
+  
+  <meta property="og:description" content="Machine Learning course" />
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Machine Learning" />
+  
+  <meta name="twitter:description" content="Machine Learning course" />
+  
+
+<meta name="author" content="Mohamad Ghassany">
+
+
+<meta name="date" content="2018-11-16">
+
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  
+  
+<link rel="prev" href="pw-6.html">
+<link rel="next" href="app-introRStudio.html">
+<script src="book_assets/jquery-2.2.3/jquery.min.js"></script>
+<link href="book_assets/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="book_assets/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="book_assets/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="book_assets/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="book_assets/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+
+
+
+
+
+
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-88489172-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-88489172-1');
+</script>
+
+
+<style type="text/css">
+div.sourceCode { overflow-x: auto; }
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+  margin: 0; padding: 0; vertical-align: baseline; border: none; }
+table.sourceCode { width: 100%; line-height: 100%; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
+td.sourceCode { padding-left: 5px; }
+code > span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code > span.dt { color: #902000; } /* DataType */
+code > span.dv { color: #40a070; } /* DecVal */
+code > span.bn { color: #40a070; } /* BaseN */
+code > span.fl { color: #40a070; } /* Float */
+code > span.ch { color: #4070a0; } /* Char */
+code > span.st { color: #4070a0; } /* String */
+code > span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code > span.ot { color: #007020; } /* Other */
+code > span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code > span.fu { color: #06287e; } /* Function */
+code > span.er { color: #ff0000; font-weight: bold; } /* Error */
+code > span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+code > span.cn { color: #880000; } /* Constant */
+code > span.sc { color: #4070a0; } /* SpecialChar */
+code > span.vs { color: #4070a0; } /* VerbatimString */
+code > span.ss { color: #bb6688; } /* SpecialString */
+code > span.im { } /* Import */
+code > span.va { color: #19177c; } /* Variable */
+code > span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code > span.op { color: #666666; } /* Operator */
+code > span.bu { } /* BuiltIn */
+code > span.ex { } /* Extension */
+code > span.pp { color: #bc7a00; } /* Preprocessor */
+code > span.at { color: #7d9029; } /* Attribute */
+code > span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code > span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+</style>
+
+<link rel="stylesheet" href="css\style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">ESILV Machine Learning</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Welcome</a><ul>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#course-overview"><i class="fa fa-check"></i>Course Overview</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="introduction.html"><a href="introduction.html"><i class="fa fa-check"></i>Introduction</a><ul>
+<li class="chapter" data-level="" data-path="introduction.html"><a href="introduction.html#what-is-machine-learning"><i class="fa fa-check"></i>What is Machine Learning ?</a></li>
+<li class="chapter" data-level="" data-path="introduction.html"><a href="introduction.html#supervised-learning"><i class="fa fa-check"></i>Supervised Learning</a></li>
+<li class="chapter" data-level="" data-path="introduction.html"><a href="introduction.html#unsupervised-learning"><i class="fa fa-check"></i>Unsupervised Learning</a></li>
+</ul></li>
+<li class="part"><span><b>I Supervised Learning</b></span></li>
+<li class="part"><span><b>Regression</b></span></li>
+<li class="chapter" data-level="1" data-path="linear-regression.html"><a href="linear-regression.html"><i class="fa fa-check"></i><b>1</b> Linear Regression</a><ul>
+<li class="chapter" data-level="1.1" data-path="linear-regression.html"><a href="linear-regression.html#notation"><i class="fa fa-check"></i><b>1.1</b> Notation</a></li>
+<li class="chapter" data-level="1.2" data-path="linear-regression.html"><a href="linear-regression.html#model-representation"><i class="fa fa-check"></i><b>1.2</b> Model Representation</a></li>
+<li class="chapter" data-level="1.3" data-path="linear-regression.html"><a href="linear-regression.html#why-estimate-f"><i class="fa fa-check"></i><b>1.3</b> Why Estimate <span class="math inline">\(f\)</span> ?</a><ul>
+<li class="chapter" data-level="" data-path="linear-regression.html"><a href="linear-regression.html#prediction"><i class="fa fa-check"></i>Prediction</a></li>
+<li class="chapter" data-level="" data-path="linear-regression.html"><a href="linear-regression.html#inference"><i class="fa fa-check"></i>Inference</a></li>
+</ul></li>
+<li class="chapter" data-level="1.4" data-path="linear-regression.html"><a href="linear-regression.html#simple-linear-regression-model"><i class="fa fa-check"></i><b>1.4</b> Simple Linear Regression Model</a></li>
+<li class="chapter" data-level="1.5" data-path="linear-regression.html"><a href="linear-regression.html#estimating-the-coefficients"><i class="fa fa-check"></i><b>1.5</b> Estimating the Coefficients</a></li>
+<li class="chapter" data-level="1.6" data-path="linear-regression.html"><a href="linear-regression.html#assessing-the-accuracy-of-the-coefficient-estimates"><i class="fa fa-check"></i><b>1.6</b> Assessing the Accuracy of the Coefficient Estimates</a><ul>
+<li class="chapter" data-level="" data-path="linear-regression.html"><a href="linear-regression.html#hypothesis-testing"><i class="fa fa-check"></i>Hypothesis testing</a></li>
+</ul></li>
+<li class="chapter" data-level="1.7" data-path="linear-regression.html"><a href="linear-regression.html#anova-and-model-fit"><i class="fa fa-check"></i><b>1.7</b> ANOVA and model fit</a><ul>
+<li class="chapter" data-level="1.7.1" data-path="linear-regression.html"><a href="linear-regression.html#anova"><i class="fa fa-check"></i><b>1.7.1</b> ANOVA</a></li>
+<li class="chapter" data-level="1.7.2" data-path="linear-regression.html"><a href="linear-regression.html#the-r2-statistic"><i class="fa fa-check"></i><b>1.7.2</b> The <span class="math inline">\(R^2\)</span> Statistic</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="pw-1.html"><a href="pw-1.html"><i class="fa fa-check"></i>PW 1</a><ul>
+<li class="chapter" data-level="1.8" data-path="pw-1.html"><a href="pw-1.html#some-r-basics"><i class="fa fa-check"></i><b>1.8</b> Some <code>R</code> basics</a><ul>
+<li class="chapter" data-level="1.8.1" data-path="pw-1.html"><a href="pw-1.html#basic-commands"><i class="fa fa-check"></i><b>1.8.1</b> Basic Commands</a></li>
+<li class="chapter" data-level="1.8.2" data-path="pw-1.html"><a href="pw-1.html#vectors"><i class="fa fa-check"></i><b>1.8.2</b> Vectors</a></li>
+<li class="chapter" data-level="1.8.3" data-path="pw-1.html"><a href="pw-1.html#matrices-data-frames-and-lists"><i class="fa fa-check"></i><b>1.8.3</b> Matrices, data frames and lists</a></li>
+<li class="chapter" data-level="1.8.4" data-path="pw-1.html"><a href="pw-1.html#graphics"><i class="fa fa-check"></i><b>1.8.4</b> Graphics</a></li>
+<li class="chapter" data-level="1.8.5" data-path="pw-1.html"><a href="pw-1.html#distributions"><i class="fa fa-check"></i><b>1.8.5</b> Distributions</a></li>
+<li class="chapter" data-level="1.8.6" data-path="pw-1.html"><a href="pw-1.html#working-directory"><i class="fa fa-check"></i><b>1.8.6</b> Working directory</a></li>
+<li class="chapter" data-level="1.8.7" data-path="pw-1.html"><a href="pw-1.html#loading-data"><i class="fa fa-check"></i><b>1.8.7</b> Loading Data</a></li>
+</ul></li>
+<li class="chapter" data-level="1.9" data-path="pw-1.html"><a href="pw-1.html#regression"><i class="fa fa-check"></i><b>1.9</b> Regression</a><ul>
+<li class="chapter" data-level="1.9.1" data-path="pw-1.html"><a href="pw-1.html#the-lm-function"><i class="fa fa-check"></i><b>1.9.1</b> The <code>lm</code> function</a></li>
+<li class="chapter" data-level="1.9.2" data-path="pw-1.html"><a href="pw-1.html#boston"><i class="fa fa-check"></i><b>1.9.2</b> Predicting House Value: Boston dataset</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="multiple-linear-regression.html"><a href="multiple-linear-regression.html"><i class="fa fa-check"></i><b>2</b> Multiple Linear Regression</a><ul>
+<li class="chapter" data-level="2.1" data-path="multiple-linear-regression.html"><a href="multiple-linear-regression.html#the-model"><i class="fa fa-check"></i><b>2.1</b> The Model</a></li>
+<li class="chapter" data-level="2.2" data-path="multiple-linear-regression.html"><a href="multiple-linear-regression.html#estimating-the-regression-coefficients"><i class="fa fa-check"></i><b>2.2</b> Estimating the Regression Coefficients</a></li>
+<li class="chapter" data-level="2.3" data-path="multiple-linear-regression.html"><a href="multiple-linear-regression.html#some-important-questions"><i class="fa fa-check"></i><b>2.3</b> Some important questions</a><ul>
+<li class="chapter" data-level="2.3.1" data-path="multiple-linear-regression.html"><a href="multiple-linear-regression.html#other-consid"><i class="fa fa-check"></i><b>2.3.1</b> Other Considerations in Regression Model</a></li>
+</ul></li>
+<li class="chapter" data-level="2.4" data-path="multiple-linear-regression.html"><a href="multiple-linear-regression.html#how-to-select-the-best-performing-model"><i class="fa fa-check"></i><b>2.4</b> How to select the best performing model</a><ul>
+<li><a href="multiple-linear-regression.html#use-the-adjusted-r_adj2-for-univariate-models">Use the Adjusted <span class="math inline">\(R_{adj}^2\)</span> for univariate models</a></li>
+<li class="chapter" data-level="" data-path="multiple-linear-regression.html"><a href="multiple-linear-regression.html#have-a-look-at-the-residuals-or-error-terms"><i class="fa fa-check"></i>Have a look at the residuals or error terms</a></li>
+<li class="chapter" data-level="" data-path="multiple-linear-regression.html"><a href="multiple-linear-regression.html#histogram-of-residuals"><i class="fa fa-check"></i>Histogram of residuals</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="pw-2.html"><a href="pw-2.html"><i class="fa fa-check"></i>PW 2</a><ul>
+<li class="chapter" data-level="" data-path="pw-2.html"><a href="pw-2.html#multiple-linear-regression-1"><i class="fa fa-check"></i>Multiple Linear Regression</a></li>
+<li class="chapter" data-level="" data-path="pw-2.html"><a href="pw-2.html#reporting"><i class="fa fa-check"></i>Reporting</a></li>
+</ul></li>
+<li class="part"><span><b>Classification</b></span></li>
+<li class="chapter" data-level="3" data-path="logistic-regression.html"><a href="logistic-regression.html"><i class="fa fa-check"></i><b>3</b> Logistic Regression</a><ul>
+<li class="chapter" data-level="3.1" data-path="logistic-regression.html"><a href="logistic-regression.html#introduction-1"><i class="fa fa-check"></i><b>3.1</b> Introduction</a></li>
+<li class="chapter" data-level="3.2" data-path="logistic-regression.html"><a href="logistic-regression.html#logistic-regression-1"><i class="fa fa-check"></i><b>3.2</b> Logistic Regression</a><ul>
+<li class="chapter" data-level="3.2.1" data-path="logistic-regression.html"><a href="logistic-regression.html#the-logistic-model"><i class="fa fa-check"></i><b>3.2.1</b> The Logistic Model</a></li>
+<li class="chapter" data-level="3.2.2" data-path="logistic-regression.html"><a href="logistic-regression.html#estimating-the-regression-coefficients-1"><i class="fa fa-check"></i><b>3.2.2</b> Estimating the Regression Coefficients</a></li>
+<li class="chapter" data-level="3.2.3" data-path="logistic-regression.html"><a href="logistic-regression.html#prediction-1"><i class="fa fa-check"></i><b>3.2.3</b> Prediction</a></li>
+</ul></li>
+<li class="chapter" data-level="3.3" data-path="logistic-regression.html"><a href="logistic-regression.html#multiple-logistic-regression"><i class="fa fa-check"></i><b>3.3</b> Multiple Logistic Regression</a></li>
+<li class="chapter" data-level="3.4" data-path="logistic-regression.html"><a href="logistic-regression.html#logreg-examps"><i class="fa fa-check"></i><b>3.4</b> Example</a><ul>
+<li class="chapter" data-level="3.4.1" data-path="logistic-regression.html"><a href="logistic-regression.html#logreg-examps-challenger"><i class="fa fa-check"></i><b>3.4.1</b> Case study: <em>The Challenger disaster</em></a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="pw-3.html"><a href="pw-3.html"><i class="fa fa-check"></i>PW 3</a><ul>
+<li class="chapter" data-level="" data-path="pw-3.html"><a href="pw-3.html#social-networks-ads"><i class="fa fa-check"></i>Social Networks Ads</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="discriminant-analysis.html"><a href="discriminant-analysis.html"><i class="fa fa-check"></i><b>4</b> Discriminant Analysis</a><ul>
+<li class="chapter" data-level="4.1" data-path="discriminant-analysis.html"><a href="discriminant-analysis.html#introduction-2"><i class="fa fa-check"></i><b>4.1</b> Introduction</a></li>
+<li class="chapter" data-level="4.2" data-path="discriminant-analysis.html"><a href="discriminant-analysis.html#bayes-theorem"><i class="fa fa-check"></i><b>4.2</b> Bayes’ Theorem</a></li>
+<li class="chapter" data-level="4.3" data-path="discriminant-analysis.html"><a href="discriminant-analysis.html#lda-for-p1"><i class="fa fa-check"></i><b>4.3</b> LDA for <span class="math inline">\(p=1\)</span></a></li>
+<li class="chapter" data-level="4.4" data-path="discriminant-analysis.html"><a href="discriminant-analysis.html#estimating-the-parameters"><i class="fa fa-check"></i><b>4.4</b> Estimating the parameters</a></li>
+<li class="chapter" data-level="4.5" data-path="discriminant-analysis.html"><a href="discriminant-analysis.html#lda-for-p-1"><i class="fa fa-check"></i><b>4.5</b> LDA for <span class="math inline">\(p &gt; 1\)</span></a></li>
+<li class="chapter" data-level="4.6" data-path="discriminant-analysis.html"><a href="discriminant-analysis.html#making-predictions"><i class="fa fa-check"></i><b>4.6</b> Making predictions</a></li>
+<li class="chapter" data-level="4.7" data-path="discriminant-analysis.html"><a href="discriminant-analysis.html#other-forms-of-discriminant-analysis"><i class="fa fa-check"></i><b>4.7</b> Other forms of Discriminant Analysis</a><ul>
+<li class="chapter" data-level="4.7.1" data-path="discriminant-analysis.html"><a href="discriminant-analysis.html#quadratic-discriminant-analysis-qda"><i class="fa fa-check"></i><b>4.7.1</b> Quadratic Discriminant Analysis (QDA)</a></li>
+<li class="chapter" data-level="4.7.2" data-path="discriminant-analysis.html"><a href="discriminant-analysis.html#naive-bayes"><i class="fa fa-check"></i><b>4.7.2</b> Naive Bayes</a></li>
+</ul></li>
+<li class="chapter" data-level="4.8" data-path="discriminant-analysis.html"><a href="discriminant-analysis.html#lda-vs-logistic-regression"><i class="fa fa-check"></i><b>4.8</b> LDA vs Logistic Regression</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="pw-4.html"><a href="pw-4.html"><i class="fa fa-check"></i>PW 4</a><ul>
+<li class="chapter" data-level="" data-path="pw-4.html"><a href="pw-4.html#logistic-regression-2"><i class="fa fa-check"></i>Logistic Regression</a></li>
+<li class="chapter" data-level="" data-path="pw-4.html"><a href="pw-4.html#decision-boundary-of-logistic-regression"><i class="fa fa-check"></i>Decision Boundary of Logistic Regression</a></li>
+<li class="chapter" data-level="" data-path="pw-4.html"><a href="pw-4.html#linear-discriminant-analysis-lda"><i class="fa fa-check"></i>Linear Discriminant Analysis (LDA)</a></li>
+<li class="chapter" data-level="" data-path="pw-4.html"><a href="pw-4.html#quadratic-discriminant-analysis-qda-1"><i class="fa fa-check"></i>Quadratic Discriminant Analysis (QDA)</a></li>
+<li class="chapter" data-level="" data-path="pw-4.html"><a href="pw-4.html#comparison"><i class="fa fa-check"></i>Comparison</a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="special-session.html"><a href="special-session.html"><i class="fa fa-check"></i><b>5</b> Special Session</a></li>
+<li class="part"><span><b>II Dimensionality Reduction</b></span></li>
+<li class="chapter" data-level="6" data-path="principal-components-analysis.html"><a href="principal-components-analysis.html"><i class="fa fa-check"></i><b>6</b> Principal Components Analysis</a><ul>
+<li class="chapter" data-level="6.1" data-path="principal-components-analysis.html"><a href="principal-components-analysis.html#introduction-3"><i class="fa fa-check"></i><b>6.1</b> Introduction</a></li>
+<li class="chapter" data-level="6.2" data-path="principal-components-analysis.html"><a href="principal-components-analysis.html#principal-components"><i class="fa fa-check"></i><b>6.2</b> Principal Components</a><ul>
+<li class="chapter" data-level="" data-path="principal-components-analysis.html"><a href="principal-components-analysis.html#notations-and-procedure"><i class="fa fa-check"></i>Notations and Procedure</a></li>
+<li><a href="principal-components-analysis.html#first-principal-component-textpc_1-y_1">First Principal Component (<span class="math inline">\(\text{PC}_1\)</span>): <span class="math inline">\(Y_1\)</span></a></li>
+<li><a href="principal-components-analysis.html#second-principal-component-textpc_2-y_2">Second Principal Component (<span class="math inline">\(\text{PC}_2\)</span>): <span class="math inline">\(Y_2\)</span></a></li>
+<li><a href="principal-components-analysis.html#ith-principal-component-textpc_i-y_i"><span class="math inline">\(i^{th}\)</span> Principal Component (<span class="math inline">\(\text{PC}_i\)</span>): <span class="math inline">\(Y_i\)</span></a></li>
+</ul></li>
+<li class="chapter" data-level="6.3" data-path="principal-components-analysis.html"><a href="principal-components-analysis.html#how-do-we-find-the-coefficients"><i class="fa fa-check"></i><b>6.3</b> How do we find the coefficients?</a><ul>
+<li class="chapter" data-level="" data-path="principal-components-analysis.html"><a href="principal-components-analysis.html#why-it-may-be-possible-to-reduce-dimensions"><i class="fa fa-check"></i>Why It May Be Possible to Reduce Dimensions</a></li>
+<li class="chapter" data-level="" data-path="principal-components-analysis.html"><a href="principal-components-analysis.html#procedure"><i class="fa fa-check"></i>Procedure</a></li>
+</ul></li>
+<li class="chapter" data-level="6.4" data-path="principal-components-analysis.html"><a href="principal-components-analysis.html#standardization-of-the-features"><i class="fa fa-check"></i><b>6.4</b> Standardization of the features</a></li>
+<li class="chapter" data-level="6.5" data-path="principal-components-analysis.html"><a href="principal-components-analysis.html#projection-of-the-data"><i class="fa fa-check"></i><b>6.5</b> Projection of the data</a><ul>
+<li class="chapter" data-level="" data-path="principal-components-analysis.html"><a href="principal-components-analysis.html#scores"><i class="fa fa-check"></i>Scores</a></li>
+<li class="chapter" data-level="" data-path="principal-components-analysis.html"><a href="principal-components-analysis.html#visualization"><i class="fa fa-check"></i>Visualization</a></li>
+<li class="chapter" data-level="" data-path="principal-components-analysis.html"><a href="principal-components-analysis.html#extra"><i class="fa fa-check"></i>Extra</a></li>
+</ul></li>
+<li class="chapter" data-level="6.6" data-path="principal-components-analysis.html"><a href="principal-components-analysis.html#case-study"><i class="fa fa-check"></i><b>6.6</b> Case study</a><ul>
+<li class="chapter" data-level="" data-path="principal-components-analysis.html"><a href="principal-components-analysis.html#employement-in-european-countries-in-the-late-70s"><i class="fa fa-check"></i>Employement in European countries in the late 70s</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="pw-6.html"><a href="pw-6.html"><i class="fa fa-check"></i>PW 6</a><ul>
+<li class="chapter" data-level="" data-path="pw-6.html"><a href="pw-6.html#the-iris-dataset"><i class="fa fa-check"></i>The Iris Dataset</a></li>
+<li class="chapter" data-level="" data-path="pw-6.html"><a href="pw-6.html#loading-data-1"><i class="fa fa-check"></i>Loading Data</a></li>
+<li class="chapter" data-level="" data-path="pw-6.html"><a href="pw-6.html#exploratory-analysis"><i class="fa fa-check"></i>Exploratory analysis</a></li>
+<li><a href="pw-6.html#pca-using-princomp">PCA using <code>princomp()</code></a></li>
+<li><a href="pw-6.html#deeper-pca-using-factoextra-package">Deeper PCA using <code>factoextra</code> package</a></li>
+<li class="chapter" data-level="" data-path="pw-6.html"><a href="pw-6.html#step-by-step-pca"><i class="fa fa-check"></i>Step-by-step PCA</a></li>
+</ul></li>
+<li class="part"><span><b>III Unsupervised Learning</b></span></li>
+<li class="chapter" data-level="7" data-path="clustering.html"><a href="clustering.html"><i class="fa fa-check"></i><b>7</b> Clustering</a><ul>
+<li class="chapter" data-level="7.1" data-path="clustering.html"><a href="clustering.html#unsupervised-learning-1"><i class="fa fa-check"></i><b>7.1</b> Unsupervised Learning</a></li>
+<li class="chapter" data-level="7.2" data-path="clustering.html"><a href="clustering.html#clustering-1"><i class="fa fa-check"></i><b>7.2</b> Clustering</a></li>
+<li class="chapter" data-level="7.3" data-path="clustering.html"><a href="clustering.html#introduction-4"><i class="fa fa-check"></i><b>7.3</b> Introduction</a><ul>
+<li class="chapter" data-level="" data-path="clustering.html"><a href="clustering.html#hard-clustering"><i class="fa fa-check"></i>Hard clustering</a></li>
+<li class="chapter" data-level="" data-path="clustering.html"><a href="clustering.html#fuzzy-clustering"><i class="fa fa-check"></i>Fuzzy clustering</a></li>
+</ul></li>
+<li class="chapter" data-level="7.4" data-path="clustering.html"><a href="clustering.html#k-means"><i class="fa fa-check"></i><b>7.4</b> <span class="math inline">\(k\)</span>-Means</a></li>
+<li class="chapter" data-level="7.5" data-path="clustering.html"><a href="clustering.html#k-means-in-r"><i class="fa fa-check"></i><b>7.5</b> <span class="math inline">\(k\)</span>-means in <code>R</code></a><ul>
+<li class="chapter" data-level="7.5.1" data-path="clustering.html"><a href="clustering.html#cluster-validity-choosing-the-number-of-clusters"><i class="fa fa-check"></i><b>7.5.1</b> Cluster Validity, Choosing the Number of Clusters</a></li>
+</ul></li>
+</ul></li>
+<li class="appendix"><span><b>Appendix</b></span></li>
+<li class="chapter" data-level="A" data-path="app-introRStudio.html"><a href="app-introRStudio.html"><i class="fa fa-check"></i><b>A</b> Introduction to <code>RStudio</code></a></li>
+<li class="chapter" data-level="B" data-path="app-ht.html"><a href="app-ht.html"><i class="fa fa-check"></i><b>B</b> Review on hypothesis testing</a></li>
+<li class="chapter" data-level="C" data-path="use-qual.html"><a href="use-qual.html"><i class="fa fa-check"></i><b>C</b> Use of qualitative predictors</a></li>
+<li class="chapter" data-level="D" data-path="model-selection.html"><a href="model-selection.html"><i class="fa fa-check"></i><b>D</b> Model Selection</a><ul>
+<li class="chapter" data-level="" data-path="model-selection.html"><a href="model-selection.html#linear-model-selection-and-best-subset-selection"><i class="fa fa-check"></i>Linear Model Selection and Best Subset Selection</a></li>
+<li class="chapter" data-level="" data-path="model-selection.html"><a href="model-selection.html#forward-stepwise-selection"><i class="fa fa-check"></i>Forward Stepwise Selection</a></li>
+<li class="chapter" data-level="" data-path="model-selection.html"><a href="model-selection.html#backward-stepwise-selection"><i class="fa fa-check"></i>Backward Stepwise Selection</a></li>
+<li class="chapter" data-level="" data-path="model-selection.html"><a href="model-selection.html#estimating-test-error-using-mallows-cp-aic-bic-adjusted-r-squared"><i class="fa fa-check"></i>Estimating Test Error Using Mallow’s Cp, AIC, BIC, Adjusted R-squared</a></li>
+<li class="chapter" data-level="" data-path="model-selection.html"><a href="model-selection.html#estimating-test-error-using-cross-validation"><i class="fa fa-check"></i>Estimating Test Error Using Cross-Validation</a></li>
+<li class="chapter" data-level="" data-path="model-selection.html"><a href="model-selection.html#examples"><i class="fa fa-check"></i>Examples</a><ul>
+<li class="chapter" data-level="" data-path="model-selection.html"><a href="model-selection.html#best-subset-selection"><i class="fa fa-check"></i>Best Subset Selection</a></li>
+<li class="chapter" data-level="" data-path="model-selection.html"><a href="model-selection.html#forward-stepwise-selection-and-model-selection-using-validation-set"><i class="fa fa-check"></i>Forward Stepwise Selection and Model Selection Using Validation Set</a></li>
+<li class="chapter" data-level="" data-path="model-selection.html"><a href="model-selection.html#model-selection-using-cross-validation"><i class="fa fa-check"></i>Model Selection Using Cross-Validation</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="E" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i><b>E</b> References</a></li>
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Machine Learning</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="clustering" class="section level1">
+<h1><span class="header-section-number">7</span> Clustering</h1>
+<div id="unsupervised-learning-1" class="section level2">
+<h2><span class="header-section-number">7.1</span> Unsupervised Learning</h2>
+<p>Previously we considered <em>supervised</em> learning methods such as regression and classification, where we typically have access to a set of <span class="math inline">\(p\)</span> features <span class="math inline">\(X_1,X_2,\ldots,X_p\)</span>, measured on <span class="math inline">\(n\)</span> observations, and a response <span class="math inline">\(Y\)</span> also measured on those same <span class="math inline">\(n\)</span> observations (what we call <strong>labels</strong>). The goal was then to predict <span class="math inline">\(Y\)</span> using <span class="math inline">\(X_1,X_2,\ldots,X_p\)</span>. From now on we will instead focus on <strong>unsupervised</strong> learning, a set of statistical tools where we have only a set of features <span class="math inline">\(X_1,X_2,\ldots,X_p\)</span> measured on <span class="math inline">\(n\)</span> observations. We are not interested in prediction, because we do not have an associated response variable <span class="math inline">\(Y\)</span>. Rather, the goal is to discover interesting things about the measurements on <span class="math inline">\(X_1,X_2,\ldots,X_p\)</span>. Is there an informative way to visualize the data? Can we discover subgroups among the variables or among the observations? Unsupervised learning refers to a diverse set of techniques for answering questions such as these. In this chapter, we will focus on a particular type of unsupervised learning: Principal Components Analysis (PCA), a tool used for <em>data visualization</em> or <em>data pre-processing</em> before supervised techniques are applied. In the next chapters, we will talk about clustering, another particular type of unsupervised learning. Clustering is a broad class of methods for discovering unknown subgroups in data.</p>
+<p>Unsupervised learning is often much more challenging than supervised learning. The exercise tends to be more subjective, and there is no simple goal for the analysis, such as prediction of a response. Unsupervised learning is often performed as part of an <em>exploratory data analysis</em>. It is hard to assess the results obtained from unsupervised learning methods. If we fit a predictive model using a supervised learning technique, then it is possible to check our work by seeing how well our model predicts the response <span class="math inline">\(Y\)</span> on observations not used in fitting the model. But in unsupervised learning, there is no way to check our work because we don’t know the true answer: the problem is <em>unsupervised</em>.</p>
+</div>
+<div id="clustering-1" class="section level2">
+<h2><span class="header-section-number">7.2</span> Clustering</h2>
+<p><strong>Clustering</strong> (or Cluster analysis) is the collection of techniques designed to find subgroups or <em>clusters</em> in a dataset of variables <span class="math inline">\(X_1,\ldots,X_p\)</span>. Depending on the similarities between the observations, these are partitioned in homogeneous groups as separated as possible between them. Clustering methods can be classified into these main categories:</p>
+<ul>
+<li><strong>Partition methods</strong>: Given a fixed number of cluster <span class="math inline">\(k\)</span>, these methods aim to assign each observation of <span class="math inline">\(X_1,\ldots,X_p\)</span> to a unique cluster, in such a way that the <em>within-cluster variation</em> is as small as possible (the clusters are as homogeneous as possible) while the <em>between cluster variation</em> is as large as possible (the clusters are as separated as possible).</li>
+<li><strong>Distribution models</strong>: These clustering models are based on the notion of how probable is it that all data points in the cluster belong to the same distribution (For example: Normal, Poisson, etc..). A popular example of these models is Expectation-maximization algorithm using multivariate Normal distributions.</li>
+<li><strong>Hierarchical methods</strong>: These methods construct a hierarchy for the observations in terms of their similitudes. This results in a tree-based representation of the data in terms of a <em>dendogram</em>, which depicts how the observations are clustered at different levels – from the smallest groups of one element to the largest representing the whole dataset.</li>
+<li><strong>Density Models</strong>: These models search the data space for areas of varied density of data points in the data space. It isolates various different density regions and assign the data points within these regions in the same cluster. Popular examples of density models are DBSCAN and OPTICS.</li>
+</ul>
+<div class="figure" style="text-align: center"><span id="fig:clusteringcomparison"></span>
+<img src="img/clustering_comparison.png" alt="Performance comparison of different clustering methods on different datasets" width="65%" />
+<p class="caption">
+Figure 7.1: Performance comparison of different clustering methods on different datasets
+</p>
+</div>
+<!-- Link of the comparison https://cdn-images-1.medium.com/max/1200/1*oNt9G9UpVhtyFLDBwEMf8Q.png 
+
+https://scikit-learn.org/stable/auto_examples/cluster/plot_cluster_comparison.html
+-->
+<p>In this chapter we will see the basics of the <strong>partition methods</strong>, and one of the most well-known clustering techniques, namely <strong><em><span class="math inline">\(k\)</span>-means clustering</em></strong>.</p>
+</div>
+<div id="introduction-4" class="section level2">
+<h2><span class="header-section-number">7.3</span> Introduction</h2>
+<p><strong>Clustering</strong> (or Cluster analysis) is the process of partitioning a set of data objects (observations) into subsets. Each subset is a <strong>cluster</strong>, such that objects in a cluster are similar to one another, yet dissimilar to objects in other clusters.</p>
+<p>The set of clusters resulting from a cluster analysis can be referred to as a clustering. In this context, different clustering methods may generate different clusterings on the same data set. The partitioning is not performed by humans, but by the clustering algorithm. Hence, clustering is useful in that it can lead to the discovery of previously unknown groups within the data.</p>
+<div class="rmdinsight">
+<p>
+Different clustering methods may generate different clusterings on the same data set.
+</p>
+</div>
+<p>Example: Imagine a Director of Customer Relationships at an Electronics magazine, and he has five managers working for him. He would like to organize all the company’s customers into five groups so that each group can be assigned to a different manager. Strategically, he would like that the customers in each group are as similar as possible. Moreover, two given customers having very different business patterns should not be placed in the same group. His intention behind this business strategy is to develop customer relationship campaigns that specifically target each group, based on common features shared by the customers per group. Unlike in classification, the class <strong>label</strong> of each customer is unknown. He needs to discover these groupings. Given a large number of customers and many attributes describing customer profiles, it can be very costly or even infeasible to have a human study the data and manually come up with a way to partition the customers into strategic groups. He needs a <em>clustering</em> tool to help.</p>
+<p>Clustering has been widely used in many applications such as business intelligence, image pattern recognition, Web search, biology, and security. In business intelligence, clustering can be used to organize a large number of customers into groups, where customers within a group share strong similar characteristics. In image recognition, clustering can be used to discover clusters or “subclasses” in handwritten character recognition systems. Clustering has also found many applications in Web search. For example, a keyword search may often return a very large number of hits (i.e., pages relevant to the search) due to the extremely large number of web pages. Clustering can be used to organize the search results into groups and present the results in a concise and easily accessible way. Moreover, clustering techniques have been developed to cluster documents into topics (remember the google news example?), which are commonly used in information retrieval practice.</p>
+<p>Clustering is also called <strong>data segmentation</strong> in some applications because clustering partitions large data sets into groups according to their <em>similarity</em>.</p>
+<p>As a branch of statistics, clustering has been extensively studied, with the main focus on <em>distance-based cluster analysis</em>. Clustering tools were proposed like <strong><span class="math inline">\(k\)</span>-means</strong>, <strong>fuzzy <span class="math inline">\(c\)</span>-means</strong>, and several other methods.</p>
+<p>Many clustering algorithms have been introduced in the literature. Since clusters can formally be seen as subsets of the data set, one possible classification of clustering methods can be according to whether the subsets are <strong>fuzzy</strong> or <strong>crisp</strong> (<strong>hard</strong>).</p>
+<div id="hard-clustering" class="section level3 unnumbered">
+<h3>Hard clustering</h3>
+<p>Hard clustering methods are based on classical set theory, and require that an object either does or does not belong to a cluster. Hard clustering means partitioning the data into a specified number of mutually exclusive subsets. The most common hard clustering method is <span class="math inline">\(k\)</span>-means.</p>
+</div>
+<div id="fuzzy-clustering" class="section level3 unnumbered">
+<h3>Fuzzy clustering</h3>
+<p>Fuzzy clustering methods, however, allow the objects to belong to several clusters simultaneously, with different degrees of membership. In many situations, fuzzy clustering is more natural than hard clustering. The most known technique of fuzzy clustering is the fuzzy <span class="math inline">\(c\)</span>-means.</p>
+</div>
+</div>
+<div id="k-means" class="section level2">
+<h2><span class="header-section-number">7.4</span> <span class="math inline">\(k\)</span>-Means</h2>
+<p>If you have ever watched a group of tourists with a couple of tour guides who hold umbrellas up so that everybody can see them and follow them, then you have seen a dynamic version of the <span class="math inline">\(k\)</span>-means algorithm. <span class="math inline">\(k\)</span>-means is even simpler, because the data (playing the part of the tourists) does not move, only the tour guides move.</p>
+<p>Suppose that we want to divide our input data into <span class="math inline">\(K\)</span> categories, where we know the value of <span class="math inline">\(K\)</span>. We allocate <span class="math inline">\(K\)</span> <em>cluster centres</em> (also called <em>prototypes</em> or <em>centroids</em>) to our input space, and we would like to position these centres so that there is one cluster centre in the middle of each cluster. However, we don’t know where the clusters are, let alone where their ‘middle’ is, so we need an algorithm that will find them. Learning algorithms generally try to minimize some sort of error, so we need to think of an error criterion that describes this aim. There are two things that we need to define:</p>
+<p><strong>A distance measure</strong>: In order to talk about distances between points, we need some way to measure distances. It is often the normal <strong>Euclidean</strong> distance, but there are other alternatives like Manhattan distance, Correlation distance, Chessboard distance and other.</p>
+<p>The Euclidean distance: Let <span class="math inline">\(x=(x_1,x_2)\)</span> and <span class="math inline">\(y=(y_1,y_2)\)</span> two observations in a two-dimensional space. The Euclidean distance <span class="math inline">\(d_{x,y}\)</span> between <span class="math inline">\(x\)</span> and <span class="math inline">\(y\)</span> is</p>
+<span class="math display">\[\begin{align*}  
+d_{x,y}^2 &amp;= (x_1-y_1)^2+(x_2 - y_2)^2  \\
+d_{x,y} &amp;= \sqrt{(x_1-y_1)^2+(x_2 - y_2)^2}
+\end{align*}\]</span>
+<p><strong>The mean average</strong>: Once we have a distance measure, we can compute the central point of a set of data points, which is the mean average. Actually, this is only true in Euclidean space, which is the one we are used to, where everything is nice and flat.</p>
+<p>We can now think about a suitable way of positioning the cluster centres: we compute the mean point of each cluster, <span class="math inline">\(\textbf{v}_k\)</span>, <span class="math inline">\(i=1,\ldots,K\)</span>, and put the cluster centre there. This is equivalent to minimizing the Euclidean distance (which is the sum-of-squares error) from each data point to its cluster centre. Then we decide which points belong to which clusters by associating each point with the cluster centre that it is closest to. This changes as the algorithm iterates. We start by positioning the cluster centres <strong>randomly</strong> though the input space, since we don’t know where to put them, and we update their positions according to the data. We decide which cluster each data point belongs to by computing the distance between each data point and all of the cluster centres, and assigning it to the cluster that is the closest. For all the point that are assigned to a cluster, we then compute the mean of them, and move the cluster centre to that place. We iterate the algorithm until the cluster centres stop moving.</p>
+<p>It is convenient at this point to define some notation to describe the assignment of data points to clusters. For each data point <span class="math inline">\(x_i\)</span>, we introduce a corresponding set of binary indicator variables <span class="math inline">\(u_{ki} \in {0,1}\)</span>, where <span class="math inline">\(k=1,\ldots,K\)</span> describing which of the <span class="math inline">\(K\)</span> clusters the data point <span class="math inline">\(x_i\)</span> is assigned to, so that if data point <span class="math inline">\(x_i\)</span> is assigned to cluster <span class="math inline">\(k\)</span> then <span class="math inline">\(u_{ki}= 1\)</span>, and <span class="math inline">\(u_{kj}= 0\)</span> for <span class="math inline">\(j \neq i\)</span>. This is known as the <span class="math inline">\(1\)</span>-of-<span class="math inline">\(K\)</span> coding scheme. We can then define an objective function (and sometimes called a <em>distortion measure</em>), given by</p>
+<p><span class="math display">\[J= \sum_{i=1}^{N} \sum_{i=k=1}^{K} u_{ki} \| x_{i}- \mathbf{v}_{k} \|^2\]</span></p>
+<p>which represents the sum of the squares of the distances of each data point to its assigned vector <span class="math inline">\(\mathbf{v}_{k}\)</span>. The goal is to find values for the <span class="math inline">\(\{u_{ki}\}\)</span> and the <span class="math inline">\(\{\mathbf{v}_{k}\}\)</span> so as to minimize <span class="math inline">\(J\)</span>. We can do this through an iterative procedure in which each iteration involves two successive steps corresponding to successive optimizations with respect to the <span class="math inline">\(u_{ki}\)</span> and the <span class="math inline">\(\mathbf{v}_{k}\)</span>. The algorithm of <span class="math inline">\(k\)</span>-means is described in the following algorithm:</p>
+<table>
+<colgroup>
+<col width="37%" />
+<col width="62%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>The <span class="math inline">\(k\)</span>-means algorithm</th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><p><strong>Data</strong>:</p></td>
+<td><p><span class="math inline">\(\textbf{X}=\{x_{ij}, i=1,\ldots,n, j=1,\ldots,p\}\)</span></p></td>
+</tr>
+<tr class="even">
+<td><p><strong>Result</strong>:</p></td>
+<td><p>Cluster centres (Prototypes)</p></td>
+</tr>
+<tr class="odd">
+<td><p><strong>Initialization</strong>:</p></td>
+<td><ul>
+<li>Choose a value for <span class="math inline">\(K\)</span>.</li>
+<li>Choose <span class="math inline">\(K\)</span> random positions in the input space.</li>
+<li>Assign the prototypes <span class="math inline">\(\mathbf{v}_{k}\)</span> to those positions</li>
+</ul></td>
+</tr>
+<tr class="even">
+<td><p><strong>Learning</strong>: <strong>repeat</strong></p></td>
+<td><p><strong>for</strong> <em>each data point <span class="math inline">\(x_i\)</span></em> <strong>do</strong></p>
+<ul>
+<li>compute the distance to each prototype: <span class="math display">\[d_{ki}= \text{min}_k d(x_i,\mathbf{v}_k)\]</span></li>
+<li>assign the data point to the nearest prototype with distance <span class="math display">\[u_{ki}= \left\lbrace \begin{array}{ll}  1   &amp; \mbox{if} \quad k = argmin_j \| x_i -\mathbf{v}_k \|^2 \\  0 &amp; \mbox{otherwise} \end{array} \right.\]</span></li>
+</ul>
+<p><strong>for</strong> <em>each prototype</em> <strong>do</strong></p>
+<ul>
+<li>move the position of the prototype to the mean of the points in that cluster: <span class="math display">\[\mathbf{v}_k = \frac{\sum_i u_{ki} x_i}{\sum_i u_{ki}}\]</span></li>
+</ul>
+<p>Until the prototypes stop moving.</p></td>
+</tr>
+</tbody>
+</table>
+<div class="rmdinsight">
+<p>
+The <span class="math inline"><span class="math inline">\(k\)</span></span>-means algorithm produces
+</p>
+<ul>
+<li>
+A final estimate of cluster centroids (i.e. their coordinates).
+</li>
+<li>
+An assignment of each point to their respective cluster.
+</li>
+</ul>
+</div>
+<p>The denominator in the expression <span class="math inline">\(\mathbf{v}_k = \frac{\sum_i u_{ki} x_i}{\sum_i u_{ki}}\)</span> is equal to the number of points assigned to cluster <span class="math inline">\(k\)</span>, and so this result has a simple interpretation, namely set <span class="math inline">\(\mathbf{v}_k\)</span> equal to the mean of all of the data points <span class="math inline">\(x_i\)</span> assigned to cluster <span class="math inline">\(k\)</span>. For this reason, the procedure is known as the <span class="math inline">\(k\)</span>-means algorithm.</p>
+<p>The two phases of re-assigning data points to clusters and re-computing the cluster means are repeated in turn until there is no further change in the assignments (or until some maximum number of iterations is exceeded). Because each phase reduces the value of the objective function <span class="math inline">\(J\)</span>, convergence of the algorithm is assured. However, it may converge to a local rather than global minimum of <span class="math inline">\(J\)</span>.</p>
+<p>The <span class="math inline">\(k\)</span>-means algorithm is illustrated using the Old Faithful data set<a href="#fn12" class="footnoteRef" id="fnref12"><sup>12</sup></a> in following figure.</p>
+<div class="figure" style="text-align: center"><span id="fig:oldfaithful"></span>
+<img src="img/kmeans.png" alt="Illustration of the $k$-means algorithm using the re-scaled Old Faithful data set, where $k=2$. We can see how the $k$-means algorithm works. (a) The first thing $k$-means has to do is assign an initial set of centroids. (b) The next stage in the algorithm assigns every point in the dataset to the closest centroid. (c) The next stage is the re-calculate the centroids based on the new cluster assignments of the data points. (d) Now we have completed one full cycle of the algorithm we can continue and re-assign points to their (new) closest cluster centroid. (e) And we can update the centroid positions one more time based on the re-assigned points. (g)(h)(f) The algorithm stops when we obtain the same results in consecutive iterations." width="90%" />
+<p class="caption">
+Figure 7.2: Illustration of the <span class="math inline">\(k\)</span>-means algorithm using the re-scaled Old Faithful data set, where <span class="math inline">\(k=2\)</span>. We can see how the <span class="math inline">\(k\)</span>-means algorithm works. (a) The first thing <span class="math inline">\(k\)</span>-means has to do is assign an initial set of centroids. (b) The next stage in the algorithm assigns every point in the dataset to the closest centroid. (c) The next stage is the re-calculate the centroids based on the new cluster assignments of the data points. (d) Now we have completed one full cycle of the algorithm we can continue and re-assign points to their (new) closest cluster centroid. (e) And we can update the centroid positions one more time based on the re-assigned points. (g)(h)(f) The algorithm stops when we obtain the same results in consecutive iterations.
+</p>
+</div>
+<p>The <span class="math inline">\(k\)</span>-means algorithm is illustrated using the Iris data set in following interactive figure<a href="#fn13" class="footnoteRef" id="fnref13"><sup>13</sup></a>. (Try to modify the X and Y variables and the numbers of chosen clusters and see the result)</p>
+<center>
+<iframe src="https://jjallaire.shinyapps.io/shiny-kmeans/?showcase=0" width="90%" height="900px">
+</iframe>
+</center>
+</div>
+<div id="k-means-in-r" class="section level2">
+<h2><span class="header-section-number">7.5</span> <span class="math inline">\(k\)</span>-means in <code>R</code></h2>
+<p>We will use an example with simulated data to demonstrate how the <span class="math inline">\(k\)</span>-means algorithm works. Here we simulate some data from three clusters and plot the dataset below.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">set.seed</span>(<span class="dv">1234</span>)
+x &lt;-<span class="st"> </span><span class="kw">rnorm</span>(<span class="dv">12</span>,<span class="dt">mean=</span><span class="kw">rep</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">3</span>,<span class="dt">each=</span><span class="dv">4</span>),<span class="dt">sd=</span><span class="fl">0.2</span>)
+y &lt;-<span class="st"> </span><span class="kw">rnorm</span>(<span class="dv">12</span>,<span class="dt">mean=</span><span class="kw">rep</span>(<span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">1</span>),<span class="dt">each=</span><span class="dv">4</span>),<span class="dt">sd=</span><span class="fl">0.2</span>)
+<span class="kw">plot</span>(x,y,<span class="dt">col=</span><span class="st">&quot;blue&quot;</span>,<span class="dt">pch=</span><span class="dv">19</span>,<span class="dt">cex=</span><span class="dv">2</span>)
+<span class="kw">text</span>(x<span class="op">+</span><span class="fl">0.05</span>,y<span class="op">+</span><span class="fl">0.05</span>,<span class="dt">labels=</span><span class="kw">as.character</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">12</span>))</code></pre></div>
+<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-165"></span>
+<img src="Machine-Learning_files/figure-html/unnamed-chunk-165-1.png" alt="Simulated dataset" width="70%" />
+<p class="caption">
+Figure 7.3: Simulated dataset
+</p>
+</div>
+<p>The <code>kmeans()</code> function in R implements the <span class="math inline">\(k\)</span>-means algorithm and can be found in the <code>stats</code> package, which comes with R and is usually already loaded when you start R. Two key parameters that you have to specify are <code>x</code>, which is a matrix or data frame of data, and <code>centers</code> which is either an integer indicating the number of clusters or a matrix indicating the locations of the initial cluster centroids. The data should be organized so that each row is an observation and each column is a variable or feature of that observation.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">dataFrame &lt;-<span class="st"> </span><span class="kw">data.frame</span>(x,y)
+kmeansObj &lt;-<span class="st"> </span><span class="kw">kmeans</span>(dataFrame,<span class="dt">centers=</span><span class="dv">3</span>)
+<span class="kw">names</span>(kmeansObj)
+<span class="co">#ans&gt; [1] &quot;cluster&quot;      &quot;centers&quot;      &quot;totss&quot;        &quot;withinss&quot;    </span>
+<span class="co">#ans&gt; [5] &quot;tot.withinss&quot; &quot;betweenss&quot;    &quot;size&quot;         &quot;iter&quot;        </span>
+<span class="co">#ans&gt; [9] &quot;ifault&quot;</span></code></pre></div>
+<p>You can see which cluster each data point got assigned to by looking at the <code>cluster</code> element of the list returned by the <code>kmeans()</code> function.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">kmeansObj<span class="op">$</span>cluster
+<span class="co">#ans&gt;  [1] 3 3 3 3 1 1 1 1 2 2 2 2</span></code></pre></div>
+<p>Here is a plot of the <span class="math inline">\(k\)</span>-means clustering solution.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">plot</span>(x,y,<span class="dt">col=</span>kmeansObj<span class="op">$</span>cluster,<span class="dt">pch=</span><span class="dv">19</span>,<span class="dt">cex=</span><span class="dv">2</span>)
+<span class="kw">points</span>(kmeansObj<span class="op">$</span>centers,<span class="dt">col=</span><span class="dv">1</span><span class="op">:</span><span class="dv">3</span>,<span class="dt">pch=</span><span class="dv">3</span>,<span class="dt">cex=</span><span class="dv">3</span>,<span class="dt">lwd=</span><span class="dv">3</span>)</code></pre></div>
+<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-168"></span>
+<img src="Machine-Learning_files/figure-html/unnamed-chunk-168-1.png" alt="$k$-means clustering solution" width="70%" />
+<p class="caption">
+Figure 7.4: <span class="math inline">\(k\)</span>-means clustering solution
+</p>
+</div>
+<div id="cluster-validity-choosing-the-number-of-clusters" class="section level3">
+<h3><span class="header-section-number">7.5.1</span> Cluster Validity, Choosing the Number of Clusters</h3>
+<p>The result of a clustering algorithm can be very different from each other on the same data set as the other input parameters of an algorithm can extremely modify the behavior and execution of the algorithm. The aim of the cluster validity is to find the partitioning that best fits the underlying data. Usually 2D data sets are used for evaluating clustering algorithms as the reader easily can verify the result. But in case of high dimensional data the visualization and visual validation is not a trivial tasks therefore some formal methods are needed.</p>
+<p>The process of evaluating the results of a clustering algorithm is called cluster validity assessment. Two measurement criteria have been proposed for evaluating and selecting an optimal clustering scheme:</p>
+<ul>
+<li><p><em>Compactness</em>: The member of each cluster should be as close to each other as possible. A common measure of compactness is the variance.</p></li>
+<li><p><em>Separation</em>: The clusters themselves should be widely separated. There are three common approaches measuring the distance between two different clusters: distance between the closest member of the clusters, distance between the most distant members and distance between the centres of the clusters.</p></li>
+</ul>
+<p>There are three different techniques for evaluating the result of the clustering algorithms, and several <em>Validity measures</em> are proposed: Validity measures are scalar indices that assess the goodness of the obtained partition. Clustering algorithms generally aim at locating well separated and compact clusters. When the number of clusters is chosen equal to the number of groups that actually exist in the data, it can be expected that the clustering algorithm will identify them correctly. When this is not the case, misclassifications appear, and the clusters are not likely to be well separated and compact. Hence, most cluster validity measures are designed to quantify the separation and the compactness of the clusters.</p>
+<div class="rmdinsight">
+<p>
+Check this answer on <code>stackoverflow</code> containing <code>R</code> code for several methods of computing an optimal value of <span class="math inline"><span class="math inline">\(k\)</span></span> for <span class="math inline"><span class="math inline">\(k\)</span></span>-means cluster analysis: <a target="_blank"  href="http://stackoverflow.com/a/15376462"><i class="fa fa-stack-overflow" aria-hidden="true"></i> here</a>.
+</p>
+</div>
+<p align="right">
+◼
+</p>
+
+</div>
+</div>
+</div>
+
+
+
+<div class="footnotes">
+<hr />
+<ol start="12">
+<li id="fn12"><p>Old Faithful, is a hydrothermal geyser in Yellowstone National Park in the state of Wyoming, U.S.A., and is a popular tourist attraction. Its name stems from the supposed regularity of its eruptions. The data set comprises 272 observations, each of which represents a single eruption and contains two variables corresponding to the duration in minutes of the eruption, and the time until the next eruption, also in minutes.<a href="clustering.html#fnref12">↩</a></p></li>
+<li id="fn13"><p>Made by Joseph J. Allaire <a href="https://github.com/jjallaire" class="uri">https://github.com/jjallaire</a><a href="clustering.html#fnref13">↩</a></p></li>
+</ol>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="pw-6.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="app-introRStudio.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="book_assets/gitbook-2.6.7/js/app.min.js"></script>
+<script src="book_assets/gitbook-2.6.7/js/lunr.js"></script>
+<script src="book_assets/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="book_assets/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="book_assets/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="book_assets/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="book_assets/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": false,
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"download": ["Machine-Learning.pdf"],
+"toc": {
+"collapse": "section",
+"scroll_highlight": true
+},
+"toolbar": {
+"position": "fixed"
+},
+"search": true
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "";
+    if (src === "" || src === "true") src = "https://cdn.bootcss.com/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:" && /^https?:/.test(src))
+      src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>

@@ -125,7 +125,7 @@
   \postauthor{\par}
       \predate{\centering\large\emph}
   \postdate{\par}
-    \date{2018-11-06}
+    \date{2018-11-16}
 
 % \defaultfontfeatures{
 %     Path = /home/ghassany/texmf/fonts/opentype/public/fontawesome/}
@@ -4615,8 +4615,7 @@ justify it?
 
 ◼
 
-\chapter*{PW 5}\label{pw-5}
-\addcontentsline{toc}{chapter}{PW 5}
+\chapter{Special Session}\label{special-session}
 
 This session is special. You are given a dataset on Devinci Online, go
 download it and analyze it. You must submit a report (html) of your
@@ -5953,6 +5952,492 @@ axis PC1 and PC2.
 
 \textbf{17.} On the same plot, color the observations (the flowers) with
 respect to their flower classes.
+
+◼
+
+\part{Unsupervised
+Learning}\label{part-unsupervised-learning}
+
+\chapter{Clustering}\label{clustering}
+
+\section{Unsupervised Learning}\label{unsupervised-learning-1}
+
+Previously we considered \emph{supervised} learning methods such as
+regression and classification, where we typically have access to a set
+of \(p\) features \(X_1,X_2,\ldots,X_p\), measured on \(n\)
+observations, and a response \(Y\) also measured on those same \(n\)
+observations (what we call \textbf{labels}). The goal was then to
+predict \(Y\) using \(X_1,X_2,\ldots,X_p\). From now on we will instead
+focus on \textbf{unsupervised} learning, a set of statistical tools
+where we have only a set of features \(X_1,X_2,\ldots,X_p\) measured on
+\(n\) observations. We are not interested in prediction, because we do
+not have an associated response variable \(Y\). Rather, the goal is to
+discover interesting things about the measurements on
+\(X_1,X_2,\ldots,X_p\). Is there an informative way to visualize the
+data? Can we discover subgroups among the variables or among the
+observations? Unsupervised learning refers to a diverse set of
+techniques for answering questions such as these. In this chapter, we
+will focus on a particular type of unsupervised learning: Principal
+Components Analysis (PCA), a tool used for \emph{data visualization} or
+\emph{data pre-processing} before supervised techniques are applied. In
+the next chapters, we will talk about clustering, another particular
+type of unsupervised learning. Clustering is a broad class of methods
+for discovering unknown subgroups in data.
+
+Unsupervised learning is often much more challenging than supervised
+learning. The exercise tends to be more subjective, and there is no
+simple goal for the analysis, such as prediction of a response.
+Unsupervised learning is often performed as part of an \emph{exploratory
+data analysis}. It is hard to assess the results obtained from
+unsupervised learning methods. If we fit a predictive model using a
+supervised learning technique, then it is possible to check our work by
+seeing how well our model predicts the response \(Y\) on observations
+not used in fitting the model. But in unsupervised learning, there is no
+way to check our work because we don't know the true answer: the problem
+is \emph{unsupervised}.
+
+\section{Clustering}\label{clustering-1}
+
+\textbf{Clustering} (or Cluster analysis) is the collection of
+techniques designed to find subgroups or \emph{clusters} in a dataset of
+variables \(X_1,\ldots,X_p\). Depending on the similarities between the
+observations, these are partitioned in homogeneous groups as separated
+as possible between them. Clustering methods can be classified into
+these main categories:
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{Partition methods}: Given a fixed number of cluster \(k\),
+  these methods aim to assign each observation of \(X_1,\ldots,X_p\) to
+  a unique cluster, in such a way that the \emph{within-cluster
+  variation} is as small as possible (the clusters are as homogeneous as
+  possible) while the \emph{between cluster variation} is as large as
+  possible (the clusters are as separated as possible).
+\item
+  \textbf{Distribution models}: These clustering models are based on the
+  notion of how probable is it that all data points in the cluster
+  belong to the same distribution (For example: Normal, Poisson, etc..).
+  A popular example of these models is Expectation-maximization
+  algorithm using multivariate Normal distributions.
+\item
+  \textbf{Hierarchical methods}: These methods construct a hierarchy for
+  the observations in terms of their similitudes. This results in a
+  tree-based representation of the data in terms of a \emph{dendogram},
+  which depicts how the observations are clustered at different levels
+  -- from the smallest groups of one element to the largest representing
+  the whole dataset.
+\item
+  \textbf{Density Models}: These models search the data space for areas
+  of varied density of data points in the data space. It isolates
+  various different density regions and assign the data points within
+  these regions in the same cluster. Popular examples of density models
+  are DBSCAN and OPTICS.
+\end{itemize}
+
+\begin{figure}
+
+{\centering \includegraphics[width=0.65\linewidth]{img/clustering_comparison} 
+
+}
+
+\caption{Performance comparison of different clustering methods on different datasets}\label{fig:clusteringcomparison}
+\end{figure}
+
+In this chapter we will see the basics of the \textbf{partition
+methods}, and one of the most well-known clustering techniques, namely
+\textbf{\emph{\(k\)-means clustering}}.
+
+\section{Introduction}\label{introduction-4}
+
+\textbf{Clustering} (or Cluster analysis) is the process of partitioning
+a set of data objects (observations) into subsets. Each subset is a
+\textbf{cluster}, such that objects in a cluster are similar to one
+another, yet dissimilar to objects in other clusters.
+
+The set of clusters resulting from a cluster analysis can be referred to
+as a clustering. In this context, different clustering methods may
+generate different clusterings on the same data set. The partitioning is
+not performed by humans, but by the clustering algorithm. Hence,
+clustering is useful in that it can lead to the discovery of previously
+unknown groups within the data.
+
+\begin{rmdinsight}
+Different clustering methods may generate different clusterings on the
+same data set.
+\end{rmdinsight}
+
+Example: Imagine a Director of Customer Relationships at an Electronics
+magazine, and he has five managers working for him. He would like to
+organize all the company's customers into five groups so that each group
+can be assigned to a different manager. Strategically, he would like
+that the customers in each group are as similar as possible. Moreover,
+two given customers having very different business patterns should not
+be placed in the same group. His intention behind this business strategy
+is to develop customer relationship campaigns that specifically target
+each group, based on common features shared by the customers per group.
+Unlike in classification, the class \textbf{label} of each customer is
+unknown. He needs to discover these groupings. Given a large number of
+customers and many attributes describing customer profiles, it can be
+very costly or even infeasible to have a human study the data and
+manually come up with a way to partition the customers into strategic
+groups. He needs a \emph{clustering} tool to help.
+
+Clustering has been widely used in many applications such as business
+intelligence, image pattern recognition, Web search, biology, and
+security. In business intelligence, clustering can be used to organize a
+large number of customers into groups, where customers within a group
+share strong similar characteristics. In image recognition, clustering
+can be used to discover clusters or ``subclasses'' in handwritten
+character recognition systems. Clustering has also found many
+applications in Web search. For example, a keyword search may often
+return a very large number of hits (i.e., pages relevant to the search)
+due to the extremely large number of web pages. Clustering can be used
+to organize the search results into groups and present the results in a
+concise and easily accessible way. Moreover, clustering techniques have
+been developed to cluster documents into topics (remember the google
+news example?), which are commonly used in information retrieval
+practice.
+
+Clustering is also called \textbf{data segmentation} in some
+applications because clustering partitions large data sets into groups
+according to their \emph{similarity}.
+
+As a branch of statistics, clustering has been extensively studied, with
+the main focus on \emph{distance-based cluster analysis}. Clustering
+tools were proposed like \textbf{\(k\)-means}, \textbf{fuzzy
+\(c\)-means}, and several other methods.
+
+Many clustering algorithms have been introduced in the literature. Since
+clusters can formally be seen as subsets of the data set, one possible
+classification of clustering methods can be according to whether the
+subsets are \textbf{fuzzy} or \textbf{crisp} (\textbf{hard}).
+
+\subsection*{Hard clustering}\label{hard-clustering}
+\addcontentsline{toc}{subsection}{Hard clustering}
+
+Hard clustering methods are based on classical set theory, and require
+that an object either does or does not belong to a cluster. Hard
+clustering means partitioning the data into a specified number of
+mutually exclusive subsets. The most common hard clustering method is
+\(k\)-means.
+
+\subsection*{Fuzzy clustering}\label{fuzzy-clustering}
+\addcontentsline{toc}{subsection}{Fuzzy clustering}
+
+Fuzzy clustering methods, however, allow the objects to belong to
+several clusters simultaneously, with different degrees of membership.
+In many situations, fuzzy clustering is more natural than hard
+clustering. The most known technique of fuzzy clustering is the fuzzy
+\(c\)-means.
+
+\section{\texorpdfstring{\(k\)-Means}{k-Means}}\label{k-means}
+
+If you have ever watched a group of tourists with a couple of tour
+guides who hold umbrellas up so that everybody can see them and follow
+them, then you have seen a dynamic version of the \(k\)-means algorithm.
+\(k\)-means is even simpler, because the data (playing the part of the
+tourists) does not move, only the tour guides move.
+
+Suppose that we want to divide our input data into \(K\) categories,
+where we know the value of \(K\). We allocate \(K\) \emph{cluster
+centres} (also called \emph{prototypes} or \emph{centroids}) to our
+input space, and we would like to position these centres so that there
+is one cluster centre in the middle of each cluster. However, we don't
+know where the clusters are, let alone where their `middle' is, so we
+need an algorithm that will find them. Learning algorithms generally try
+to minimize some sort of error, so we need to think of an error
+criterion that describes this aim. There are two things that we need to
+define:
+
+\textbf{A distance measure}: In order to talk about distances between
+points, we need some way to measure distances. It is often the normal
+\textbf{Euclidean} distance, but there are other alternatives like
+Manhattan distance, Correlation distance, Chessboard distance and other.
+
+The Euclidean distance: Let \(x=(x_1,x_2)\) and \(y=(y_1,y_2)\) two
+observations in a two-dimensional space. The Euclidean distance
+\(d_{x,y}\) between \(x\) and \(y\) is
+
+\begin{align*}  
+d_{x,y}^2 &= (x_1-y_1)^2+(x_2 - y_2)^2  \\
+d_{x,y} &= \sqrt{(x_1-y_1)^2+(x_2 - y_2)^2}
+\end{align*}
+
+\textbf{The mean average}: Once we have a distance measure, we can
+compute the central point of a set of data points, which is the mean
+average. Actually, this is only true in Euclidean space, which is the
+one we are used to, where everything is nice and flat.
+
+We can now think about a suitable way of positioning the cluster
+centres: we compute the mean point of each cluster, \(\textbf{v}_k\),
+\(i=1,\ldots,K\), and put the cluster centre there. This is equivalent
+to minimizing the Euclidean distance (which is the sum-of-squares error)
+from each data point to its cluster centre. Then we decide which points
+belong to which clusters by associating each point with the cluster
+centre that it is closest to. This changes as the algorithm iterates. We
+start by positioning the cluster centres \textbf{randomly} though the
+input space, since we don't know where to put them, and we update their
+positions according to the data. We decide which cluster each data point
+belongs to by computing the distance between each data point and all of
+the cluster centres, and assigning it to the cluster that is the
+closest. For all the point that are assigned to a cluster, we then
+compute the mean of them, and move the cluster centre to that place. We
+iterate the algorithm until the cluster centres stop moving.
+
+It is convenient at this point to define some notation to describe the
+assignment of data points to clusters. For each data point \(x_i\), we
+introduce a corresponding set of binary indicator variables
+\(u_{ki} \in {0,1}\), where \(k=1,\ldots,K\) describing which of the
+\(K\) clusters the data point \(x_i\) is assigned to, so that if data
+point \(x_i\) is assigned to cluster \(k\) then \(u_{ki}= 1\), and
+\(u_{kj}= 0\) for \(j \neq i\). This is known as the \(1\)-of-\(K\)
+coding scheme. We can then define an objective function (and sometimes
+called a \emph{distortion measure}), given by
+
+\[J= \sum_{i=1}^{N} \sum_{i=k=1}^{K} u_{ki} \| x_{i}- \mathbf{v}_{k} \|^2\]
+
+which represents the sum of the squares of the distances of each data
+point to its assigned vector \(\mathbf{v}_{k}\). The goal is to find
+values for the \(\{u_{ki}\}\) and the \(\{\mathbf{v}_{k}\}\) so as to
+minimize \(J\). We can do this through an iterative procedure in which
+each iteration involves two successive steps corresponding to successive
+optimizations with respect to the \(u_{ki}\) and the \(\mathbf{v}_{k}\).
+The algorithm of \(k\)-means is described in the following algorithm:
+
+\begin{longtable}[]{@{}ll@{}}
+\toprule
+\begin{minipage}[b]{0.36\columnwidth}\raggedright\strut
+The \(k\)-means algorithm\strut
+\end{minipage} & \begin{minipage}[b]{0.58\columnwidth}\raggedright\strut
+\strut
+\end{minipage}\tabularnewline
+\midrule
+\endhead
+\begin{minipage}[t]{0.36\columnwidth}\raggedright\strut
+\textbf{Data}:\strut
+\end{minipage} & \begin{minipage}[t]{0.58\columnwidth}\raggedright\strut
+\(\textbf{X}=\{x_{ij}, i=1,\ldots,n, j=1,\ldots,p\}\)\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.36\columnwidth}\raggedright\strut
+\textbf{Result}:\strut
+\end{minipage} & \begin{minipage}[t]{0.58\columnwidth}\raggedright\strut
+Cluster centres (Prototypes)\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.48\columnwidth}\raggedright\strut
+\textbf{Initialization}:\strut
+\end{minipage} & \begin{minipage}[t]{0.48\columnwidth}\raggedright\strut
+\begin{itemize}
+\tightlist
+\item
+  Choose a value for \(K\).
+\item
+  Choose \(K\) random positions in the input space.
+\item
+  Assign the prototypes \(\mathbf{v}_{k}\) to those positions
+\end{itemize}\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.48\columnwidth}\raggedright\strut
+\textbf{Learning}: \textbf{repeat}\strut
+\end{minipage} & \begin{minipage}[t]{0.48\columnwidth}\raggedright\strut
+\textbf{for} \emph{each data point \(x_i\)} \textbf{do}
+
+\begin{itemize}
+\tightlist
+\item
+  compute the distance to each prototype:
+  \[d_{ki}= \text{min}_k d(x_i,\mathbf{v}_k)\]
+\item
+  assign the data point to the nearest prototype with distance
+  \[u_{ki}= \left\lbrace \begin{array}{ll}  1   & \mbox{if} \quad k = argmin_j \| x_i -\mathbf{v}_k \|^2 \\  0 & \mbox{otherwise} \end{array} \right.\]
+\end{itemize}
+
+\textbf{for} \emph{each prototype} \textbf{do}
+
+\begin{itemize}
+\tightlist
+\item
+  move the position of the prototype to the mean of the points in that
+  cluster: \[\mathbf{v}_k = \frac{\sum_i u_{ki} x_i}{\sum_i u_{ki}}\]
+\end{itemize}
+
+Until the prototypes stop moving.\strut
+\end{minipage}\tabularnewline
+\bottomrule
+\end{longtable}
+
+\begin{rmdinsight}
+The \(k\)-means algorithm produces
+
+\begin{itemize}
+\tightlist
+\item
+  A final estimate of cluster centroids (i.e.~their coordinates).
+\item
+  An assignment of each point to their respective cluster.
+\end{itemize}
+\end{rmdinsight}
+
+The denominator in the expression
+\(\mathbf{v}_k = \frac{\sum_i u_{ki} x_i}{\sum_i u_{ki}}\) is equal to
+the number of points assigned to cluster \(k\), and so this result has a
+simple interpretation, namely set \(\mathbf{v}_k\) equal to the mean of
+all of the data points \(x_i\) assigned to cluster \(k\). For this
+reason, the procedure is known as the \(k\)-means algorithm.
+
+The two phases of re-assigning data points to clusters and re-computing
+the cluster means are repeated in turn until there is no further change
+in the assignments (or until some maximum number of iterations is
+exceeded). Because each phase reduces the value of the objective
+function \(J\), convergence of the algorithm is assured. However, it may
+converge to a local rather than global minimum of \(J\).
+
+The \(k\)-means algorithm is illustrated using the Old Faithful data set
+\footnote{Old Faithful, is a hydrothermal geyser in Yellowstone National
+  Park in the state of Wyoming, U.S.A., and is a popular tourist
+  attraction. Its name stems from the supposed regularity of its
+  eruptions. The data set comprises 272 observations, each of which
+  represents a single eruption and contains two variables corresponding
+  to the duration in minutes of the eruption, and the time until the
+  next eruption, also in minutes.} in following figure.
+
+\begin{figure}
+
+{\centering \includegraphics[width=0.9\linewidth]{img/kmeans} 
+
+}
+
+\caption{Illustration of the $k$-means algorithm using the re-scaled Old Faithful data set, where $k=2$. We can see how the $k$-means algorithm works. (a) The first thing $k$-means has to do is assign an initial set of centroids. (b) The next stage in the algorithm assigns every point in the dataset to the closest centroid. (c) The next stage is the re-calculate the centroids based on the new cluster assignments of the data points. (d) Now we have completed one full cycle of the algorithm we can continue and re-assign points to their (new) closest cluster centroid. (e) And we can update the centroid positions one more time based on the re-assigned points. (g)(h)(f) The algorithm stops when we obtain the same results in consecutive iterations.}\label{fig:oldfaithful}
+\end{figure}
+
+The \(k\)-means algorithm is illustrated using the Iris data set in
+following interactive figure\footnote{Made by Joseph J. Allaire
+  \url{https://github.com/jjallaire}}. (Try to modify the X and Y
+variables and the numbers of chosen clusters and see the result)
+
+\section{\texorpdfstring{\(k\)-means in
+\texttt{R}}{k-means in R}}\label{k-means-in-r}
+
+We will use an example with simulated data to demonstrate how the
+\(k\)-means algorithm works. Here we simulate some data from three
+clusters and plot the dataset below.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{set.seed}\NormalTok{(}\DecValTok{1234}\NormalTok{)}
+\NormalTok{x <-}\StringTok{ }\KeywordTok{rnorm}\NormalTok{(}\DecValTok{12}\NormalTok{,}\DataTypeTok{mean=}\KeywordTok{rep}\NormalTok{(}\DecValTok{1}\OperatorTok{:}\DecValTok{3}\NormalTok{,}\DataTypeTok{each=}\DecValTok{4}\NormalTok{),}\DataTypeTok{sd=}\FloatTok{0.2}\NormalTok{)}
+\NormalTok{y <-}\StringTok{ }\KeywordTok{rnorm}\NormalTok{(}\DecValTok{12}\NormalTok{,}\DataTypeTok{mean=}\KeywordTok{rep}\NormalTok{(}\KeywordTok{c}\NormalTok{(}\DecValTok{1}\NormalTok{,}\DecValTok{2}\NormalTok{,}\DecValTok{1}\NormalTok{),}\DataTypeTok{each=}\DecValTok{4}\NormalTok{),}\DataTypeTok{sd=}\FloatTok{0.2}\NormalTok{)}
+\KeywordTok{plot}\NormalTok{(x,y,}\DataTypeTok{col=}\StringTok{"blue"}\NormalTok{,}\DataTypeTok{pch=}\DecValTok{19}\NormalTok{,}\DataTypeTok{cex=}\DecValTok{2}\NormalTok{)}
+\KeywordTok{text}\NormalTok{(x}\OperatorTok{+}\FloatTok{0.05}\NormalTok{,y}\OperatorTok{+}\FloatTok{0.05}\NormalTok{,}\DataTypeTok{labels=}\KeywordTok{as.character}\NormalTok{(}\DecValTok{1}\OperatorTok{:}\DecValTok{12}\NormalTok{))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{figure}
+
+{\centering \includegraphics[width=0.7\linewidth]{Machine-Learning_files/figure-latex/unnamed-chunk-165-1} 
+
+}
+
+\caption{Simulated dataset}\label{fig:unnamed-chunk-165}
+\end{figure}
+
+The \texttt{kmeans()} function in R implements the \(k\)-means algorithm
+and can be found in the \texttt{stats} package, which comes with R and
+is usually already loaded when you start R. Two key parameters that you
+have to specify are \texttt{x}, which is a matrix or data frame of data,
+and \texttt{centers} which is either an integer indicating the number of
+clusters or a matrix indicating the locations of the initial cluster
+centroids. The data should be organized so that each row is an
+observation and each column is a variable or feature of that
+observation.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{dataFrame <-}\StringTok{ }\KeywordTok{data.frame}\NormalTok{(x,y)}
+\NormalTok{kmeansObj <-}\StringTok{ }\KeywordTok{kmeans}\NormalTok{(dataFrame,}\DataTypeTok{centers=}\DecValTok{3}\NormalTok{)}
+\KeywordTok{names}\NormalTok{(kmeansObj)}
+\CommentTok{#ans> [1] "cluster"      "centers"      "totss"        "withinss"    }
+\CommentTok{#ans> [5] "tot.withinss" "betweenss"    "size"         "iter"        }
+\CommentTok{#ans> [9] "ifault"}
+\end{Highlighting}
+\end{Shaded}
+
+You can see which cluster each data point got assigned to by looking at
+the \texttt{cluster} element of the list returned by the
+\texttt{kmeans()} function.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{kmeansObj}\OperatorTok{$}\NormalTok{cluster}
+\CommentTok{#ans>  [1] 3 3 3 3 1 1 1 1 2 2 2 2}
+\end{Highlighting}
+\end{Shaded}
+
+Here is a plot of the \(k\)-means clustering solution.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{plot}\NormalTok{(x,y,}\DataTypeTok{col=}\NormalTok{kmeansObj}\OperatorTok{$}\NormalTok{cluster,}\DataTypeTok{pch=}\DecValTok{19}\NormalTok{,}\DataTypeTok{cex=}\DecValTok{2}\NormalTok{)}
+\KeywordTok{points}\NormalTok{(kmeansObj}\OperatorTok{$}\NormalTok{centers,}\DataTypeTok{col=}\DecValTok{1}\OperatorTok{:}\DecValTok{3}\NormalTok{,}\DataTypeTok{pch=}\DecValTok{3}\NormalTok{,}\DataTypeTok{cex=}\DecValTok{3}\NormalTok{,}\DataTypeTok{lwd=}\DecValTok{3}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{figure}
+
+{\centering \includegraphics[width=0.7\linewidth]{Machine-Learning_files/figure-latex/unnamed-chunk-168-1} 
+
+}
+
+\caption{$k$-means clustering solution}\label{fig:unnamed-chunk-168}
+\end{figure}
+
+\subsection{Cluster Validity, Choosing the Number of
+Clusters}\label{cluster-validity-choosing-the-number-of-clusters}
+
+The result of a clustering algorithm can be very different from each
+other on the same data set as the other input parameters of an algorithm
+can extremely modify the behavior and execution of the algorithm. The
+aim of the cluster validity is to find the partitioning that best fits
+the underlying data. Usually 2D data sets are used for evaluating
+clustering algorithms as the reader easily can verify the result. But in
+case of high dimensional data the visualization and visual validation is
+not a trivial tasks therefore some formal methods are needed.
+
+The process of evaluating the results of a clustering algorithm is
+called cluster validity assessment. Two measurement criteria have been
+proposed for evaluating and selecting an optimal clustering scheme:
+
+\begin{itemize}
+\item
+  \emph{Compactness}: The member of each cluster should be as close to
+  each other as possible. A common measure of compactness is the
+  variance.
+\item
+  \emph{Separation}: The clusters themselves should be widely separated.
+  There are three common approaches measuring the distance between two
+  different clusters: distance between the closest member of the
+  clusters, distance between the most distant members and distance
+  between the centres of the clusters.
+\end{itemize}
+
+There are three different techniques for evaluating the result of the
+clustering algorithms, and several \emph{Validity measures} are
+proposed: Validity measures are scalar indices that assess the goodness
+of the obtained partition. Clustering algorithms generally aim at
+locating well separated and compact clusters. When the number of
+clusters is chosen equal to the number of groups that actually exist in
+the data, it can be expected that the clustering algorithm will identify
+them correctly. When this is not the case, misclassifications appear,
+and the clusters are not likely to be well separated and compact. Hence,
+most cluster validity measures are designed to quantify the separation
+and the compactness of the clusters.
+
+\begin{rmdinsight}
+Check this answer on \texttt{stackoverflow} containing \texttt{R} code
+for several methods of computing an optimal value of \(k\) for
+\(k\)-means cluster analysis:
+\textcolor{white}{[}\faStackOverflow\textcolor{white}{]} here.
+\end{rmdinsight}
 
 ◼
 

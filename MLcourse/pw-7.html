@@ -25,7 +25,7 @@
 <meta name="author" content="Mohamad Ghassany">
 
 
-<meta name="date" content="2018-11-16">
+<meta name="date" content="2018-11-20">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -252,9 +252,14 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="pw-7.html"><a href="pw-7.html"><i class="fa fa-check"></i>PW 7</a><ul>
+<li class="chapter" data-level="" data-path="pw-7.html"><a href="pw-7.html#reporting-1"><i class="fa fa-check"></i>Reporting</a><ul>
+<li class="chapter" data-level="" data-path="pw-7.html"><a href="pw-7.html#markdown"><i class="fa fa-check"></i>Markdown</a></li>
+<li class="chapter" data-level="" data-path="pw-7.html"><a href="pw-7.html#r-markdown"><i class="fa fa-check"></i>R Markdown</a></li>
+<li class="chapter" data-level="" data-path="pw-7.html"><a href="pw-7.html#the-report-to-be-submitted"><i class="fa fa-check"></i>The report to be submitted</a></li>
+</ul></li>
 <li><a href="pw-7.html#k-means-clustering"><span class="math inline">\(k\)</span>-means clustering</a><ul>
 <li><a href="pw-7.html#pointscards"><code>pointsCards</code></a></li>
-<li><a href="pw-7.html#laliga"><code>laliga</code></a></li>
+<li><a href="pw-7.html#ligue-1"><code>Ligue 1</code></a></li>
 <li><a href="pw-7.html#pca"><code>PCA</code></a></li>
 <li><a href="pw-7.html#implementing-k-means"><code>Implementing k-means</code></a></li>
 </ul></li>
@@ -295,7 +300,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
             <section class="normal" id="section-">
 <div id="pw-7" class="section level1 unnumbered">
 <h1>PW 7</h1>
-<p>In this practical work we will apply the <span class="math inline">\(k\)</span>-means clustering algorithm using the standard function <code>kmeans()</code> in <code>R</code>, we will use the dataset <code>La Liga 2015/2016</code>.</p>
+<p>In this practical work we will learn how to create a report in <code>Rstudio</code> using <code>Rmarkdown</code> files. Then we will apply the <span class="math inline">\(k\)</span>-means clustering algorithm using the standard function <code>kmeans()</code> in <code>R</code>, we will use the dataset <code>Ligue1 2017/2018</code>.</p>
 <!-- Use the following YAML header for the report that you must submit at the end of the session: -->
 <!-- ``` -->
 <!-- --- -->
@@ -312,11 +317,121 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <!--     highlight: pygments -->
 <!-- --- -->
 <!-- ``` -->
+<div id="reporting-1" class="section level2 unnumbered">
+<h2>Reporting</h2>
+<div id="markdown" class="section level3 unnumbered">
+<h3>Markdown</h3>
+<p>Markdown is a lightweight markup language with plain text formatting syntax designed so that it can be converted to HTML and many other formats (pdf, docx, etc..).</p>
+<p>Click <a href="http://agea.github.io/tutorial.md/">here</a> to see an example of a markdown (<code>.md</code>) syntaxes and the result in HTML. The markdown syntaxes are on right and their HTML result is on left. You can modify the source text to see the result.</p>
+<div class="rmdtip">
+<p>
+<strong>Extra</strong>: There is some markdown online editors you can use, like <a href="http://dillinger.io/">dillinger.io/</a>. See the Markdown source file and the HTML preview. Play with the source text to see the result in the preview.
+</p>
+</div>
+</div>
+<div id="r-markdown" class="section level3 unnumbered">
+<h3>R Markdown</h3>
+<p>R Markdown is a variant of Markdown that has embedded <code>R</code> code chunks, to be used with the <code>knitr</code> package to make it <strong>easy to create reproducible web-based reports</strong>.</p>
+<!-- First, in `Rstudio` create a new `R Notebook` file. A default template will be opened. There is some `R` code in `R chunks`, run them then click on `Preview` and save your file. Then your html report will be opened in the viewer pane. -->
+<!-- Every time you click on `Preview` the html file in the viewer pane will be updated. If your file is named `report.Rmd`, your report is named `report.nb.html`. -->
+<!-- ```{block, type = 'rmdcaution'} -->
+<!-- * If there is no `R Notebook` button, this means you don't have the last version of `Rstudio`. -->
+<!-- * In this case, click on `R Markdown` buttonn make sure that you select HTML as output. This produces a `html_document` and you need to click on `knit` button to compile it. -->
+<!-- * If you have problems creating a `R Markdown` file (problem in installing packages, etc..) close your `Rstudio` and reopen it with administrative tools and retry. -->
+<!-- * If it doesn't work and in order to not loose more time, write your script in an `.R` file with your comments and submit it. -->
+<!-- ``` -->
+<!-- ```{block, type = 'rmdcaution'} -->
+<!-- * Be ready to submit your report (your `.nb.html` file) at the end of each class. -->
+<!-- * You report must be named: -->
+<!-- `YouLastName_YourFirstName_WeekNumber.nb.html` -->
+<!-- ``` -->
+<p>First, in <code>Rstudio</code> create a new <code>R Markdown</code> file. A default template will be opened. There is some <code>R</code> code in <code>R chunks</code>. Clink on <code>knit</code>, save your file and see the produced output. The output is a html report containing the results of the <code>R</code> codes. If your file is named <code>report.Rmd</code>, your report is named <code>report.html</code>.</p>
+<div class="rmdcaution">
+<ul>
+<li>
+Make sure to have the latest version of <code>Rstudio</code>.
+</li>
+<li>
+If you have problems creating a <code>R Markdown</code> file (problem in installing packages, etc..) close your <code>Rstudio</code> and reopen it with administrative tools and retry.
+</li>
+<li>
+If it doesn’t work and in order to not lose more time, write your script in an <code>.R</code> file with your comments and submit it.
+</li>
+</ul>
+</div>
+<div class="rmdcaution">
+<ul>
+<li>
+<p>
+Be ready to submit your report (your <code>.html</code> file) at the end of each class.
+</p>
+</li>
+<li>
+<p>
+You report must be named:
+</p>
+</li>
+</ul>
+<p>
+<code>YouLastName_YourFirstName_WeekNumber.html</code>
+</p>
+</div>
+<p>You can find all the informations about R Markdown on this site: <a href="http://rmarkdown.rstudio.com/lesson-1.html">rmarkdown.rstudio.com</a>.</p>
+<p>You may also find the following resources helpful:</p>
+<ul>
+<li><a href="https://www.rstudio.com/wp-content/uploads/2015/03/rmarkdown-reference.pdf">The R Markdown Reference Guide</a></li>
+<li><a href="https://www.rstudio.com/wp-content/uploads/2016/03/rmarkdown-cheatsheet-2.0.pdf">The R Markdown Cheatsheet</a></li>
+</ul>
+</div>
+<div id="the-report-to-be-submitted" class="section level3 unnumbered">
+<h3>The report to be submitted</h3>
+<p>In <code>Rstudio</code>, start by creating a R Markdown file. When you create it a default template will be opened with the following first lines:</p>
+<pre><code>---
+title: &quot;Untitled&quot;
+output: html_document
+---</code></pre>
+<p>These lines are the YAML header in which you choose the settings of your report (title, author, date, appearance, etc..)</p>
+<p>For your submitted report, use the following YAML header:</p>
+<pre><code>---
+title: &quot;Week 7&quot;
+subtitle: &quot;Clustering&quot;
+author: LastName FirstName
+date: &quot;`#r format(Sys.time())`&quot; # remove the # to show the date
+output:
+  html_document:
+    toc: true
+    toc_depth: 2
+    theme: flatly
+---</code></pre>
+<div class="rmdcaution">
+<p>
+<strong>Very Important Remark</strong>: Click on the settings button of Rstudio’s text editor and choose to Chunk Output in Console.
+</p>
+<div class="figure">
+<p><img src="img/chunk_output_in_console.png" /></p>
+</div>
+</div>
+<p>In the core of your report:</p>
+<ul>
+<li>Put every exercise in a section, name the section <code>Exercise i</code> (i is the exercise’s number).</li>
+<li>Paste the exercise content.</li>
+<li>Write the code of the exercise in R chunks.</li>
+<li>Run the chunk to make sure it works.</li>
+<li>If there is a need, explain the results.</li>
+<li>Click on <code>knit</code></li>
+</ul>
+<div class="rmdexercise">
+<p>
+Submit a report following the instructions above. In the first exercise you must continue the analysis of the Boston data set.
+</p>
+</div>
+</div>
+</div>
 <div id="k-means-clustering" class="section level2 unnumbered">
 <h2><span class="math inline">\(k\)</span>-means clustering</h2>
-<p><strong>1.</strong> Download the dataset:  <a target="_blank" href="datasets/la-liga-15-16.csv"> LaLiga 2015-2016 <i class="fa fa-table" aria-hidden="true"></i></a> and import it into <code>R</code>. Put the argument <code>row.names</code> to 1.</p>
+<p><strong>1.</strong> Download the dataset:  <a target="_blank" href="datasets/ligue1_17_18.csv"> Ligue1 2017-2018 <i class="fa fa-table" aria-hidden="true"></i></a> and import it into <code>R</code>. Put the argument <code>row.names</code> to 1.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># You can import directly from my website (instead of downloading it..)</span>
-laliga &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&quot;http://mghassany.com/MLcourse/datasets/la-liga-15-16.csv&quot;</span>, <span class="dt">row.names=</span><span class="dv">1</span>)</code></pre></div>
+ligue1 &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&quot;http://mghassany.com/MLcourse/datasets/ligue1_17_18.csv&quot;</span>, <span class="dt">row.names=</span><span class="dv">1</span>, <span class="dt">sep=</span><span class="st">&quot;;&quot;</span>)</code></pre></div>
 <p><strong>2.</strong> Print the first two rows of the dataset and the total number of features in this dataset.</p>
 <div id="pointscards" class="section level3 unnumbered">
 <h3><code>pointsCards</code></h3>
@@ -338,20 +453,26 @@ There is several methods of computing an optimal value of <span class="math inli
 <p><strong>10.</strong> Visualize the “within groups sum of squares” of the <span class="math inline">\(k\)</span>-means clustering results (use the code in the link above).</p>
 <p><strong>11.</strong> Modify the code of the previous question in order to visualize the ‘between_SS / total_SS’. Interpret the results.</p>
 </div>
-<div id="laliga" class="section level3 unnumbered">
-<h3><code>laliga</code></h3>
-<p>So far, you have only taken the information of two variables for performing clustering. Now you will apply <code>kmeans()</code> on the original dataset <code>laliga</code>. Using PCA, we can visualize the clustering performed with all the available variables in the dataset.</p>
+<div id="ligue-1" class="section level3 unnumbered">
+<h3><code>Ligue 1</code></h3>
+<p>So far, you have only taken the information of two variables for performing clustering. Now you will apply <code>kmeans()</code> on the original dataset <code>ligue1</code>. Using PCA, we can visualize the clustering performed with all the available variables in the dataset.</p>
 <p>By default, <code>kmeans()</code> does not standardize the variables, which will affect the clustering result. As a consequence, the clustering of a dataset will be different if one variable is expressed in millions or in tenths. If you want to avoid this distortion, use scale to automatically center and standardize the dataset (the result will be a matrix, so you need to transform it to a data frame again).</p>
-<p><strong>12.</strong> Scale the dataset and transform it to a data frame again. Store the scaled dataset into <code>laliga_scaled</code>.</p>
-<p><strong>13.</strong> Apply <code>kmeans()</code> on <code>laliga</code> and on <code>laliga_scaled</code> using 3 clusters and 20 iterations. Store the results into <code>km.laliga</code> and <code>km.laliga.scaled</code> respectively (do not forget to set a seed)</p>
-<p><strong>14.</strong> How muny observations there are in each cluster of <code>km.laliga</code> and <code>km.laliga.scaled</code> ? (you can use <code>table()</code>). Do you obtain the same results when you perform <code>kmeans()</code> on the scaled and unscaled data?</p>
+<p><strong>12.</strong> Scale the dataset and transform it to a data frame again. Store the scaled dataset into <code>ligue1_scaled</code>.</p>
+<p><strong>13.</strong> Apply <code>kmeans()</code> on <code>ligue1</code> and on <code>ligue1_scaled</code> using 3 clusters and 20 iterations. Store the results into <code>km.ligue1</code> and <code>km.ligue1.scaled</code> respectively (do not forget to set a seed)</p>
+<p><strong>14.</strong> How muny observations there are in each cluster of <code>km.ligue1</code> and <code>km.ligue1.scaled</code> ? (you can use <code>table()</code>). Do you obtain the same results when you perform <code>kmeans()</code> on the scaled and unscaled data?</p>
 </div>
 <div id="pca" class="section level3 unnumbered">
 <h3><code>PCA</code></h3>
-<p><strong>15.</strong> Apply PCA on <code>laliga</code> dataset and store you results in <code>pcalaliga</code>. Do we need to apply PCA on the scaled dataset? Justify your answer.</p>
-<p><strong>16.</strong> Plot the observations and the variables on the first two principal components using <code>biplot()</code> function.</p>
-<p><strong>17.</strong> Redo the biplot (but with the <code>plot()</code> function) with colors indicating the cluster assignments.</p>
-<p><strong>18.</strong> Recall that the figure of question <strong>17</strong> is a visualization with PC1 and PC2 of the clustering done with all the variables, not just PC1 and PC2. Now apply the <code>kmeans()</code> clustering with only the first two PCs. Visualize the results and compare with the question <strong>17</strong>.</p>
+<p><strong>15.</strong> Apply PCA on <code>ligue1</code> dataset and store you results in <code>pcaligue1</code>. Do we need to apply PCA on the scaled dataset? Justify your answer.</p>
+<p><strong>16.</strong> Plot the observations and the variables on the first two principal components (biplot). Interpret the results.</p>
+<p><strong>17.</strong> Visualize the teams on the first two principal components and color them with respect to their cluster.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># You can use the following code, based on `factoextra` library.</span>
+<span class="kw">fviz_cluster</span>(km.ligue1, <span class="dt">data =</span> ligue1, <span class="co"># km.ligue1 is where you stored your kmeans results</span>
+              <span class="dt">palette =</span> <span class="kw">c</span>(<span class="st">&quot;red&quot;</span>, <span class="st">&quot;blue&quot;</span>, <span class="st">&quot;green&quot;</span>), <span class="co"># 3 colors since 3 clusters</span>
+              <span class="dt">ggtheme =</span> <span class="kw">theme_minimal</span>(),
+              <span class="dt">main =</span> <span class="st">&quot;Clustering Plot&quot;</span>
+)</code></pre></div>
+<p><strong>18.</strong> Recall that the figure of question <strong>17</strong> is a visualization with PC1 and PC2 of the clustering done with all the variables, not on PC1 and PC2. Now apply the <code>kmeans()</code> clustering taking only the first two PCs instead the variables of original dataset. Visualize the results and compare with the question <strong>17</strong>.</p>
 <div class="rmdinsight">
 <p>
 By applying <span class="math inline"><span class="math inline">\(k\)</span></span>-means only on the PCs we obtain different and less accurate result, but it is still an insightful way.

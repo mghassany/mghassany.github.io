@@ -125,7 +125,7 @@
   \postauthor{\par}
       \predate{\centering\large\emph}
   \postdate{\par}
-    \date{2018-11-20}
+    \date{2018-11-30}
 
 % \defaultfontfeatures{
 %     Path = /home/ghassany/texmf/fonts/opentype/public/fontawesome/}
@@ -6695,7 +6695,7 @@ Store the scaled dataset into \texttt{ligue1\_scaled}.
 results into \texttt{km.ligue1} and \texttt{km.ligue1.scaled}
 respectively (do not forget to set a seed)
 
-\textbf{14.} How muny observations there are in each cluster of
+\textbf{14.} How many observations there are in each cluster of
 \texttt{km.ligue1} and \texttt{km.ligue1.scaled} ? (you can use
 \texttt{table()}). Do you obtain the same results when you perform
 \texttt{kmeans()} on the scaled and unscaled data?
@@ -6778,6 +6778,436 @@ obtained stop changing.
 
 \textbf{25.} In your plot from \textbf{19}, color the observations
 according to the cluster labels obtained.
+
+◼
+
+\chapter{Gaussian Mixture Models \&
+EM}\label{gaussian-mixture-models-em}
+
+In the previous chapter we saw the \(k\)-means algorithm which is
+considered as a hard clustering technique, such that each point is
+allocated to only one cluster. In \(k\)-means, a cluster is described
+only by its centroid. This is not too flexible, as we may have problems
+with clusters that are \emph{overlapping}, or ones that are not of
+\emph{circular shape}.
+
+In this chapter, we will introduce a model-based clustering technique,
+which is \textbf{E}xpectation \textbf{M}aximization (EM). We will apply
+it using Gaussian Mixture Models (GMM).
+
+With EM Clustering, we can go a step further and describe each cluster
+by its centroid (mean), covariance (so that we can have elliptical
+clusters), and weight (the size of the cluster). The probability that a
+point belongs to a cluster is now given by a multivariate Gaussian
+probability distribution (multivariate - depending on multiple
+variables). That also means that we can calculate the probability of a
+point being under a Gaussian `bell', i.e.~the probability of a point
+belonging to a cluster. A comparison between the performances of
+\(k\)-means and EM clustering on an artificial dataset is shown in
+Figure \ref{fig:ClusterAnalysisMouse}.
+
+\begin{figure}
+
+{\centering \includegraphics[width=0.8\linewidth]{img/ClusterAnalysis_Mouse} 
+
+}
+
+\caption{Comparison of $k$-means and EM on artificial data called [Mouse](https://elki-project.github.io/datasets/) dataset. Using the Variances, the EM algorithm can describe the normal distributions exact, while $k$-means splits the data in [Voronoi](https://bit.ly/1rVyJkt)-Cells.}\label{fig:ClusterAnalysisMouse}
+\end{figure}
+
+We start this chapter by reminding what is a Gaussian distribution, then
+introduce the Mixture of Gaussians and finish by explaining the
+Expectation-Maximization algorithm.
+
+\section{The Gaussian distribution}\label{the-gaussian-distribution}
+
+The Gaussian, also known as the normal distribution, is a widely used
+model for the distribution of continuous variables. In the case of a
+single variable \(x\), the Gaussian distribution can be written in the
+form
+
+\begin{equation}
+\mathcal{N}(x|m,\sigma^2)=\frac{1}{(2 \pi \sigma^2 )^{1/2}} \exp \left\lbrace - \frac{1}{2 \sigma^2} (x-m)^2\right\rbrace
+\label{eq:normaldist1}
+\end{equation}
+
+where \(m\) is the mean and \(\sigma^2\) is the variance.
+
+For a \(D\)-dimensional vector \(X\), the multivariate Gaussian
+distribution take the form
+
+\begin{equation}
+\mathcal{N}(X|\mu,\Sigma)=\frac{1}{(2 \pi)^{D/2}} \frac{1}{|\Sigma|^{1/2}} \exp \left\lbrace - \frac{1}{2} (X-\mu)^T \Sigma^{-1} (X-\mu) \right\rbrace
+\label{eq:normaldist2}
+\end{equation}
+
+where \(\mu\) is a \(D\)-dimensional mean vector, \(\Sigma\) is a
+\(D\times D\) covariance matrix, and \(|\Sigma|\) denotes the
+determinant of \(\Sigma\).
+
+The Gaussian distribution arises in many different contexts and can be
+motivated from a variety of different perspectives. For example, when we
+consider the sum of multiple random variables. The \emph{central limit
+theorem} (due to Laplace) tells us that, subject to certain mild
+conditions, the sum of a set of random variables, which is of course
+itself a random variable, has a distribution that becomes increasingly
+Gaussian as the number of terms in the sum increases.
+
+\section{Mixture of Gaussians}\label{mixture-of-gaussians}
+
+While the Gaussian distribution has some important analytical
+properties, it suffers from significant limitations when it comes to
+modeling real data sets. Consider the example shown in Figure
+\ref{fig:gaussianfaithful} applied on the 'Old Faithful' data set, this
+data set comprises 272 measurements of the eruption of the
+\href{https://en.wikipedia.org/wiki/Old_Faithful}{Old Faithful geyser}
+at Yellowstone National Park in the USA. Each measurement comprises the
+duration of the eruption in minutes (horizontal axis) and the time in
+minutes to the next eruption (vertical axis). We see that the data set
+forms two dominant clumps, and that a simple Gaussian distribution is
+unable to capture this structure, whereas a linear superposition of two
+Gaussians gives a better characterization of the data set. Such
+superpositions, formed by taking linear combinations of more basic
+distributions such as Gaussians, can be formulated as probabilistic
+models known as \emph{mixture distributions}.
+
+\begin{figure}
+
+{\centering \includegraphics[width=0.8\linewidth]{img/gaussian_faithful} 
+
+}
+
+\caption{Plots of the ’old faithful’ data in which the blue curves show contours of constant probability density. On the left is a single Gaussian ditribution which has been fitted to the data using maximum likelihood. On the right the distribution is given by a linear combination of two Gaussians which has been fitted to the data by maximum likelihood using the EM technique, and which gives a better representation of the data}\label{fig:gaussianfaithful}
+\end{figure}
+
+In Figure \ref{fig:gaussianmixture} we see that a linear combination of
+Gaussians can give rise to very complex densities. By using a sufficient
+number of Gaussians, and by adjusting their means and covariances as
+well as the coefficients in the linear combination, almost any
+continuous density can be approximated to arbitrary accuracy.
+
+\begin{figure}
+
+{\centering \includegraphics[width=0.7\linewidth]{img/gaussian_mixture} 
+
+}
+
+\caption{Example of a Gaussian mixture distribution in one dimension showing three Gaussians (each scaled by a coefficient) in blue and their sum in red.}\label{fig:gaussianmixture}
+\end{figure}
+
+We therefore consider a superposition of \(K\) Gaussian densities of the
+form
+
+\[\label{eq:gaussian}
+p(x)= \sum_{k=1}^{K} \pi_k \mathcal{N}(x| \mu_k, \Sigma_k)\]
+
+which is called a \emph{mixture of Gaussians}. Each Gaussian density
+\(\mathcal{N}(x| \mu_k, \Sigma_k)\) is called a \emph{component} of the
+mixture and has its own mean \(\mu_k\) and covariance \(\Sigma_k\).
+
+The parameters \(\pi_k\) are called \emph{mixing coefficients}. They
+verify the conditions
+\[\sum_{k=1}^{K} \pi_k = 1 \quad \text{and} \quad 0 \leq \pi_k \leq 1\]
+
+In order to find an equivalent formulation of the Gaussian mixture
+involving an explicit \textbf{latent} variable, we introduce a
+\(K\)-dimensional binary random variable \(z\) having a 1-of-\(K\)
+representation in which a particular element \(z_k\) is equal to 1 and
+all other elements are equal to 0. The values of \(z_k\) therefore
+satisfy \(z_k \in \{0,1\}\) and \(\sum_k z_k =1\), and we see that there
+are \(K\) possible states for the vector \(z\) according to which
+element is nonzero. The marginal distribution over \(z\) is specified in
+terms of the mixing coefficients \(\pi_k\) , such that
+\[p(z_k=1)=\pi_k\]
+
+\begin{rmdinsight}
+A \href{https://en.wikipedia.org/wiki/Latent_variable}{latent variable}
+is a variable that is not directly measurable, but its value can be
+inferred by taking other measurements.
+
+This happens a lot in machine learning, robotics, statistics and other
+fields. For example, you may not be able to directly quantify
+intelligence (it's not a countable thing like the number of brain cells
+you have), but we think it exists and we can run experiments that may
+tell us about intelligence. So your intelligence is a latent variable
+that affects your performance on multiple tasks even though it can not
+be directly measured
+(\href{https://www.quora.com/What-is-a-latent-variable}{link}).
+\end{rmdinsight}
+
+The conditional distribution of \(x\) given a particular value for \(z\)
+is a Gaussian
+
+\[p(x|z_k=1)= \mathcal{N}(x| \mu_k, \Sigma_k)\]
+
+The joint distribution is given by \(p(z)p(x|z)\), and the marginal
+distribution of \(x\) is then obtained by summing the joint distribution
+over all possible states of \(z\) to give
+
+\[p(x)= \sum_z p(z)p(x|z) = \sum_{k=1}^{K} \pi_k \mathcal{N}(x| \mu_k, \Sigma_k)\]
+
+Now, we are able to work with the joint distribution \(p(x|z)\) instead
+of the marginal distribution \(p(x)\). This leads to significant
+simplification, most notably through the introduction of the
+Expectation-Maximization (EM) algorithm.
+
+Another quantity that play an important role is the conditional
+probability of \(z\) given \(x\). We shall use \(r(z_k)\) to denote
+\(p(z_k = 1|x)\), whose value can be found using Bayes' theorem
+
+\begin{align}
+r(z_k)= p(z_k = 1|x) &= \frac{ p(z_k = 1) p(x|(z_k=1)}{\displaystyle \sum_{j=1}^{K} p(z_j = 1) p(x|(z_j=1)} \nonumber \\
+&= \frac{\pi_k \mathcal{N}(x| \mu_k, \Sigma_k)}{\displaystyle \sum_{j=1}^{K} \pi_j \mathcal{N}(x| \mu_j, \Sigma_j)} 
+\label{eq:responsibilities}
+\end{align}
+
+We shall view \(\pi_k\) as the prior probability of \(z_k = 1\), and the
+quantity \(r(z_k)\) as the corresponding posterior probability once we
+have observed \(x\). As we shall see in next section, \(r(z_k)\) can
+also be viewed as the \emph{responsibility} that component \(k\) takes
+for 'explaining' the observation \(x\).
+
+\begin{rmdtip}
+Doesn't this reminds you of the Equation
+\protect\hyperlink{eq:bayes}{4.1} when we used Bayes' theorm for
+Classification? where \(p_k(x)\) was the \emph{posterior} probability
+that an observation \(X=x\) belongs to \(k\)-th class. The difference is
+that here the data is unlabled (we have no class), so we create a
+\textbf{latent} (hidden, unobserved) variable \(z\) that will play a
+similar role.
+\end{rmdtip}
+
+In Figure \ref{fig:gaussianmixture500samples} the role of the
+responsibilities is illustrated on a sample of 500 points drawn from a
+mixture of three Gaussians.
+
+\begin{figure}
+
+{\centering \includegraphics[width=0.9\linewidth]{img/gaussianmixture_500samples} 
+
+}
+
+\caption{Example of 500 points drawn from a mixture of 3 Gaussians. (a) Samples from the joint distribution $p(z)p(x|z)$ in which the three states of $z$, corresponding to the three components of the mixture, are depicted in red, green, and blue, and (b) the corresponding samples from the marginal distribution $p(x)$, which is obtained by simply ignoring the values of $z$ and just plotting the $x$ values. The data set in (a) is said to be complete, whereas that in (b) is incomplete. (c) The same samples in which the colours represent the value of the responsibilities $r(z_{nk})$ associated with data point $x_n$, obtained by plotting the corresponding point using proportions of red, blue, and green ink given by $r(z_{nk})$ for $k = 1,2,3$, respectively.}\label{fig:gaussianmixture500samples}
+\end{figure}
+
+So the form of the Gaussian mixture distribution is governed by the
+parameters \(\pi\), \(\mu\) and \(\Sigma\), where we have used the
+notation \(\pi=\{\pi_1,\ldots,\pi_K\}\), \(\mu=\{\mu_1,\ldots,\mu_K\}\)
+and \(\Sigma=\{\Sigma_1,\ldots,\Sigma_K\}\). One way to set the values
+of these parameters is to use maximum likelihood. The log of the
+likelihood function is given by
+
+\[\ln p(X|\pi,\mu,\Sigma)=\sum_{n=1}^{N} \ln \left\lbrace \sum_{k=1}^{K} \pi_k \mathcal{N}(x_n | \mu_k, \Sigma_k) \right\rbrace\]
+We immediately see that the situation is now much more complex than with
+a single Gaussian, due to the presence of the summation over \(k\)
+inside the logarithm. As a result, the maximum likelihood solution for
+the parameters no longer has a closed-form analytical solution. One
+approach to maximizing the likelihood function is to use iterative
+numerical optimization techniques. Alternatively we can employ a
+powerful framework called \textbf{E}xpectation \textbf{M}aximization,
+which will be discussed in this chapter.
+
+\section{EM for Gaussian Mixtures}\label{em-for-gaussian-mixtures}
+
+Suppose we have a data set of observations \(\{x_1, \ldots, x_N\}\),
+which gives a data set \(X\) of size \(N \times D\), and we wish to
+model this data using a mixture of Gaussians. Similarly, the
+corresponding latent variable are denoted by a \(N \times K\) matrix
+\(Z\) with rows \(z_n^K\).
+
+\begin{rmdinsight}
+Recall that the objective is to estimate the parameters \(\pi\), \(\mu\)
+and \(\Sigma\) in order to estimate the posterior probabilities (named
+also \emph{responsibilities}, called \(\, r(z_k)\) in this chapter). To
+do so, we find the estimators that maximize the log of the likelihood
+function.
+\end{rmdinsight}
+
+If we assume that the data points are i.i.d. (independent and
+identically distributed), then we can calculate the log of the
+likelihood function, which is given by
+
+\begin{equation}
+\label{eq:gaussianlikelihood}
+\ln p(X|\pi,\mu,\Sigma)=\sum_{n=1}^{N} \ln \left\lbrace \sum_{k=1}^{K} \pi_k \mathcal{N}(x_n | \mu_k, \Sigma_k) \right\rbrace
+\end{equation}
+
+An elegant and powerful method for finding maximum likelihood solutions
+for this models with latent variables is called the \textbf{E}xpectation
+\textbf{M}aximization algorithm, or EM algorithm.
+
+Setting the derivatives of \(\ln p(X|\pi,\mu,\Sigma)\) in
+\eqref{eq:gaussianlikelihood} respectively with respect to the
+\(\mu_k,\Sigma_k\) and \(\pi_k\) to zero, we obtain
+
+\begin{equation}
+\label{eq:means}
+\mu_k = \frac{1}{N_k} \sum_{n=1}^{N} r(z_{nk}) x_n
+\end{equation}
+
+where we define \[N_k= \sum_{n=1}^{N}r(z_{nk})\]
+
+We can interpret \(N_k\) as the effective number of points assigned to
+cluster \(k\). Note carefully the form of this solution. We see that the
+mean \(\mu_k\) for the \(k\)-th Gaussian component is obtained by taking
+a weighted mean of all of the points in the data set, in which the
+weighting factor for data point \(x_n\) is given by the posterior
+probability \(r(z_{nk})\) that component \(k\) was responsible for
+generating \(x_n\).
+
+As for \(\sigma_k\) we obtain
+
+\begin{equation}
+\label{eq:sigma}
+\Sigma_k= \frac{1}{N_k} \sum_{n=1}^{N} r(z_{nk}) (x_n - \mu_k)(x_n - \mu_k)^T
+\end{equation}
+
+which has the same form as the corresponding result for a single
+Gaussian fitted to the data set, but again with each data point weighted
+by the corresponding posterior probability and with the denominator
+given by the effective number of points associated with the
+corresponding component.
+
+Finally, for the mixing coefficients \(\pi_k\) we obtain
+
+\begin{equation}
+\label{eq:pi}
+\pi_k=\frac{N_k}{N}
+\end{equation}
+
+so that the mixing coefficient for the \(k\)-th component is given by
+the average responsibility which that component takes for explaining the
+data points.
+
+We first choose some initial values for the means, covariances, and
+mixing coefficients. Then we alternate between the following two updates
+that we shall call the \textbf{E} step and the \textbf{M} step. In the
+\emph{expectation} step, or E step, we use the current values for the
+parameters to evaluate the posterior probabilities, or responsibilities,
+given by Eq. \eqref{eq:responsibilities}. We then use these probabilities
+in the \emph{maximization} step, or M step, to re-estimate the means,
+covariances, and mixing coefficients using the results in Equations
+\eqref{eq:means}, \eqref{eq:sigma} and \eqref{eq:pi}. The algorithm of EM for
+mixtures of Gaussians is shown in the following Algorithm:
+
+\begin{longtable}[]{@{}ll@{}}
+\toprule
+\begin{minipage}[b]{0.36\columnwidth}\raggedright\strut
+The EM for Gaussian mixtures\strut
+\end{minipage} & \begin{minipage}[b]{0.58\columnwidth}\raggedright\strut
+\strut
+\end{minipage}\tabularnewline
+\midrule
+\endhead
+\begin{minipage}[t]{0.36\columnwidth}\raggedright\strut
+\textbf{Data}:\strut
+\end{minipage} & \begin{minipage}[t]{0.58\columnwidth}\raggedright\strut
+\(\mathbf{X}= \{x_{kd}, \,\,\,\, k=1,\ldots,N, d=1,\ldots,D\}\) where
+\(D\) is the dimension of the feature space. \(Z\) the latent variables
+matrix.\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.36\columnwidth}\raggedright\strut
+\textbf{Result}:\strut
+\end{minipage} & \begin{minipage}[t]{0.58\columnwidth}\raggedright\strut
+Posterior probabilities \(r(z_{nk})\) and the model parameters
+\(\mu,\Sigma\) and \(\pi\).\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.48\columnwidth}\raggedright\strut
+\textbf{Initialization}:\strut
+\end{minipage} & \begin{minipage}[t]{0.48\columnwidth}\raggedright\strut
+\begin{itemize}
+\tightlist
+\item
+  Choose a value for \(K\), \(1 < K < N\).
+\item
+  Initialize the means \(\mu_k\), the covariances \(\Sigma_k\) and
+  mixing coefficients \(\pi_k\) randomly.
+\item
+  Evaluate the initial value of the log likelihood.
+\end{itemize}\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.48\columnwidth}\raggedright\strut
+\textbf{Learning}: \textbf{repeat}\strut
+\end{minipage} & \begin{minipage}[t]{0.48\columnwidth}\raggedright\strut
+\textbf{E step}:
+
+\begin{itemize}
+\tightlist
+\item
+  Evaluate the responsibilities using the current parameter values:
+  \[r(z_{nk})= \frac{\pi_k \mathcal{N}(x| \mu_k, \Sigma_k)}{\displaystyle \sum_{j=1}^{K} \pi_j \mathcal{N}(x| \mu_j, \Sigma_j)}\]
+\end{itemize}
+
+\textbf{M step}:
+
+\begin{itemize}
+\item
+  Re-estimate the parameters using the current responsibilities:
+  \[\mu_k = \frac{1}{N_k} \sum_{n=1}^{N} r(z_{nk}) x_n\]
+  \[\Sigma_k= \frac{1}{N_k} \sum_{n=1}^{N} r(z_{nk}) (x_n - \mu_k)(x_n - \mu_k)^T\]
+  \[\pi_k=\frac{N_k}{N}\]
+  \[\text{where} \quad N_k= \sum_{n=1}^{N}r(z_{nk})\]
+\item
+  Evaluate the log likelihood:
+  \[\ln p(X|\pi,\mu,\Sigma)=\sum_{n=1}^{N} \ln \left\lbrace \sum_{k=1}^{K} \pi_k \mathcal{N}(x_n | \mu_k, \Sigma_k) \right\rbrace\]
+  Until convergence of either the parameters or the log likelihood. If
+  the convergence criterion is not satisfied return to E step.
+\end{itemize}\strut
+\end{minipage}\tabularnewline
+\bottomrule
+\end{longtable}
+
+The EM algorithm for a mixture of two Gaussians applied to the rescaled
+Old Faithful data set is illustrated in Figure \ref{fig:emfaithful}. In
+plot (a) we see the initial configuration, the Gaussian component are
+shown as blue and red circles. Plot (b) shows the result of the initial
+E step where we update the responsibilities. Plot (c) shows the M step
+where we update the parameters. Plots (d), (e), and (f) show the results
+after 2, 5, and 20 complete cycles of EM, respectively. In plot (f) the
+algorithm is close to convergence.
+
+\begin{figure}
+
+{\centering \includegraphics[width=0.8\linewidth]{img/em_faithful} 
+
+}
+
+\caption{Illustration of the EM algorithm using the Old Faithful dataset. A mixture of two Gaussians is used.}\label{fig:emfaithful}
+\end{figure}
+
+\begin{rmdinsight}
+Summary of this chapter:
+
+\begin{itemize}
+\tightlist
+\item
+  Gaussian Mixture Models (GMM) take a Gaussian and add another
+  Gaussian(s).
+\item
+  This allows to model more complex data.
+\item
+  We fit a GMM with the Expectation-Maximization (EM) algorithm.
+\item
+  Expectation-Maximization (EM) algorithm is a series of steps to find
+  good parameter estimates when there are latent variables.
+\item
+  EM steps:
+
+  \begin{enumerate}
+  \def\labelenumi{\arabic{enumi}.}
+  \tightlist
+  \item
+    Initialize t he parameter estimates.
+  \item
+    Given the current parameter estimates, find the minimum log
+    likelihood for \(Z\) (data + latent variables).
+  \item
+    Givent the current data, find better parameter estimates.
+  \item
+    Repeat steps 2 \& 3.
+  \end{enumerate}
+\end{itemize}
+\end{rmdinsight}
 
 ◼
 

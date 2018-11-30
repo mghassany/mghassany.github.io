@@ -32,8 +32,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black">
   
   
-<link rel="prev" href="pw-1.html">
-<link rel="next" href="pw-2.html">
+<link rel="prev" href="pw-7.html">
+<link rel="next" href="app-introRStudio.html">
 <script src="book_assets/jquery-2.2.3/jquery.min.js"></script>
 <link href="book_assets/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="book_assets/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
@@ -303,400 +303,313 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="multiple-linear-regression" class="section level1">
-<h1><span class="header-section-number">2</span> Multiple Linear Regression</h1>
-<p>Simple linear regression is a useful approach for predicting a response on the basis of a single predictor variable. However, in practice we often have more than one predictor. In the previous chapter, we took for example the prediction of housing prices considering we had the size of each house. We had a single feature <span class="math inline">\(X\)</span>, the size of the house. But now imagine if we had not only the size of the house as a feature but we also knew the number of bedrooms, the number of flours and the age of the house in years. It seems like this would give us a lot more information with which to predict the price.</p>
-<div id="the-model" class="section level2">
-<h2><span class="header-section-number">2.1</span> The Model</h2>
-<p>In general, suppose that we have <span class="math inline">\(p\)</span> distinct predictors. Then the multiple linear regression model takes the form</p>
-<p><span class="math display">\[ Y = \beta_0 + \beta_1 X_1 + \beta_2 X_2 + \dots + \beta_p X_p + \epsilon \]</span></p>
-<p>where <span class="math inline">\(X_j\)</span> represents the <span class="math inline">\(j\)</span>th predictor and <span class="math inline">\(\beta_j\)</span> quantifies the association between that variable and the response. We interpret <span class="math inline">\(\beta_j\)</span> as the average effect on <span class="math inline">\(Y\)</span> of a one unit increase in <span class="math inline">\(X_j\)</span>, <em>holding all other predictors fixed</em>.</p>
-<p>In matrix terms, supposing we have <span class="math inline">\(n\)</span> observations and <span class="math inline">\(p\)</span> variables, we need to define the following matrices:</p>
-<span class="math display">\[\begin{equation}
- \textbf{Y}_{n \times 1} = \begin{pmatrix}
-    Y_{1} \\
-    Y_{2} \\
-    \vdots \\
-    Y_{n}
-\end{pmatrix}   \,\,\,\,\,\,\,\,\,\,\,\,  \textbf{X}_{n \times (p+1)}  = \begin{pmatrix}
-    1      &amp; X_{11} &amp; X_{12} &amp; \dots  &amp; X_{1p} \\
-    1      &amp; X_{21} &amp; X_{22} &amp; \dots  &amp; X_{2p} \\
-    \vdots &amp; \vdots &amp; \vdots &amp; \ddots &amp; \vdots \\
-    1      &amp; X_{n1} &amp; X_{n2} &amp; \dots  &amp; X_{np}
-\end{pmatrix}
-\end{equation}\]</span>
-<span class="math display">\[\begin{equation}
- {\mathbb{\beta}}_{(p+1) \times 1} = \begin{pmatrix}
-    \beta_{0} \\
-    \beta_{1} \\
-    \vdots \\
-    \beta_{p}
-    \end{pmatrix}   \,\,\,\,\,\,\,\,\,\,\,\,  {\epsilon}_{n \times 1} = \begin{pmatrix}
-        \epsilon_{1} \\
-        \epsilon_{2} \\
-        \vdots \\
-        \epsilon_{n}
-    \end{pmatrix}
-\end{equation}\]</span>
-<p>In matrix terms, the general linear regression model is</p>
-<p><span class="math display">\[ \textbf{Y}_{n \times 1} = \textbf{X}_{n \times (p+1)} {\mathbb{\beta}}_{(p+1) \times 1} + {\epsilon}_{n \times 1} \]</span></p>
-<p>where,</p>
-<ul>
-<li><span class="math inline">\(\textbf{Y}\)</span> is a vector of responses.</li>
-<li><span class="math inline">\(\mathbb{\beta}\)</span> is a vector of parameters.</li>
-<li><span class="math inline">\(\textbf{X}\)</span> is a matrix of constants.</li>
-<li><span class="math inline">\(\epsilon\)</span> is a vector of independent <em>normal</em> (Gaussian) random variables.</li>
-</ul>
+<div id="gaussian-mixture-models-em" class="section level1">
+<h1><span class="header-section-number">8</span> Gaussian Mixture Models &amp; EM</h1>
+<!-- https://www.youtube.com/watch?v=qMTuMa86NzU -->
+<!-- To label equation use \begin{equation} and (\#eq:normaldist1) -->
+<!-- To cite equation use \@ref(eq:normal01) -->
+<p>In the previous chapter we saw the <span class="math inline">\(k\)</span>-means algorithm which is considered as a hard clustering technique, such that each point is allocated to only one cluster. In <span class="math inline">\(k\)</span>-means, a cluster is described only by its centroid. This is not too flexible, as we may have problems with clusters that are <em>overlapping</em>, or ones that are not of <em>circular shape</em>.</p>
+<p>In this chapter, we will introduce a model-based clustering technique, which is <strong>E</strong>xpectation <strong>M</strong>aximization (EM). We will apply it using Gaussian Mixture Models (GMM).</p>
+<p>With EM Clustering, we can go a step further and describe each cluster by its centroid (mean), covariance (so that we can have elliptical clusters), and weight (the size of the cluster). The probability that a point belongs to a cluster is now given by a multivariate Gaussian probability distribution (multivariate - depending on multiple variables). That also means that we can calculate the probability of a point being under a Gaussian ‘bell’, i.e. the probability of a point belonging to a cluster. A comparison between the performances of <span class="math inline">\(k\)</span>-means and EM clustering on an artificial dataset is shown in Figure <a href="gaussian-mixture-models-em.html#fig:ClusterAnalysisMouse">8.1</a>.</p>
+<div class="figure" style="text-align: center"><span id="fig:ClusterAnalysisMouse"></span>
+<img src="img/ClusterAnalysis_Mouse.png" alt="Comparison of $k$-means and EM on artificial data called [Mouse](https://elki-project.github.io/datasets/) dataset. Using the Variances, the EM algorithm can describe the normal distributions exact, while $k$-means splits the data in [Voronoi](https://bit.ly/1rVyJkt)-Cells." width="80%" />
+<p class="caption">
+Figure 8.1: Comparison of <span class="math inline">\(k\)</span>-means and EM on artificial data called <a href="https://elki-project.github.io/datasets/">Mouse</a> dataset. Using the Variances, the EM algorithm can describe the normal distributions exact, while <span class="math inline">\(k\)</span>-means splits the data in <a href="https://bit.ly/1rVyJkt">Voronoi</a>-Cells.
+</p>
 </div>
-<div id="estimating-the-regression-coefficients" class="section level2">
-<h2><span class="header-section-number">2.2</span> Estimating the Regression Coefficients</h2>
-<p>As was the case in the simple linear regression setting, the regression coefficients <span class="math inline">\(\beta_{0}, \beta_{1}, \ldots, \beta_{p}\)</span> are unknown, and must be estimated. Given estimates <span class="math inline">\(\hat{\beta_{0}}, \hat{\beta_{1}}, \ldots, \hat{\beta_{p}}\)</span>, we can make predictions using the formula</p>
-<p><span class="math display">\[ \hat{y} = \hat{\beta_{0}} + \hat{\beta_{1}} x_1 + \hat{\beta_{2}} x_2 + \ldots, \hat{\beta_{p}} x_p \]</span></p>
-<p>We choose <span class="math inline">\(\beta_{0}, \beta_{1}, \ldots, \beta_{p}\)</span> to minimize the residual sum of squares</p>
-<p><span class="math display">\[ \begin{aligned}
-RSS &amp;= \sum_{i=1}^{n} (y_i - \hat{y}_i)^2 \\
-    &amp;= \sum_{i=1}^{n} (y_1 - \hat{\beta_0} - \hat{\beta_1} \hat{x}_{i1}  - \hat{\beta_2} \hat{x}_{i2} - \ldots  -  \hat{\beta_p} \hat{x}_{ip})^2 \\
-\end{aligned}
-\]</span></p>
-<p>The values <span class="math inline">\(\hat{\beta_{0}}, \hat{\beta_{1}}, \ldots, \hat{\beta_{p}}\)</span> that minimize the RSS are the multiple least squares regression coefficient estimates, they are calculated using this formula (in matrix terms):</p>
-<p><span class="math display">\[ \hat{\beta} = (\textbf{X}^T \textbf{X})^{-1}\textbf{X}^T \textbf{Y} \]</span></p>
-<p>To obtain <span class="math inline">\(\hat{\beta}\)</span>, we can write the residual sum of squares as</p>
-<p><span class="math display">\[ RSS = (\textbf{Y}-\textbf{X}\beta)^T(\textbf{Y}-\textbf{X}\beta) \]</span></p>
-<p>This is a quadratic function in the <span class="math inline">\(p+1\)</span> parameters. Differentiating with respect to <span class="math inline">\(\beta\)</span> we obtain <span class="math display">\[ \begin{aligned}
-\frac{\partial RSS}{\partial \beta} &amp;= -2\textbf{X}^T(\textbf{Y}-\textbf{X}\beta) \\
-\frac{\partial^2 RSS}{\partial \beta \partial \beta^T}   &amp;= 2\textbf{X}^T\textbf{X}.\\
-\end{aligned}
-\]</span></p>
-<p>Assuming (for the moment) that <span class="math inline">\(\textbf{X}\)</span> has full column rank, and hence <span class="math inline">\(\textbf{X}^T\textbf{X}\)</span> is positive definite<a href="#fn6" class="footnoteRef" id="fnref6"><sup>6</sup></a>, we set the first derivative to zero</p>
-<p><span class="math display">\[\textbf{X}^T(\textbf{Y}-\textbf{X}\beta)=0\]</span> to obtain the unique solution</p>
-<p><span class="math display">\[ \hat{\beta} = (\textbf{X}^T \textbf{X})^{-1}\textbf{X}^T \textbf{Y} \]</span></p>
-<p>Note 1:</p>
+<p>We start this chapter by reminding what is a Gaussian distribution, then introduce the Mixture of Gaussians and finish by explaining the Expectation-Maximization algorithm.</p>
+<div id="the-gaussian-distribution" class="section level2">
+<h2><span class="header-section-number">8.1</span> The Gaussian distribution</h2>
+<p>The Gaussian, also known as the normal distribution, is a widely used model for the distribution of continuous variables. In the case of a single variable <span class="math inline">\(x\)</span>, the Gaussian distribution can be written in the form</p>
+<span class="math display" id="eq:normaldist1">\[\begin{equation}
+\mathcal{N}(x|m,\sigma^2)=\frac{1}{(2 \pi \sigma^2 )^{1/2}} \exp \left\lbrace - \frac{1}{2 \sigma^2} (x-m)^2\right\rbrace
+\tag{8.1}
+\end{equation}\]</span>
+<p>where <span class="math inline">\(m\)</span> is the mean and <span class="math inline">\(\sigma^2\)</span> is the variance.</p>
+<p>For a <span class="math inline">\(D\)</span>-dimensional vector <span class="math inline">\(X\)</span>, the multivariate Gaussian distribution take the form</p>
+<span class="math display" id="eq:normaldist2">\[\begin{equation}
+\mathcal{N}(X|\mu,\Sigma)=\frac{1}{(2 \pi)^{D/2}} \frac{1}{|\Sigma|^{1/2}} \exp \left\lbrace - \frac{1}{2} (X-\mu)^T \Sigma^{-1} (X-\mu) \right\rbrace
+\tag{8.2}
+\end{equation}\]</span>
+<p>where <span class="math inline">\(\mu\)</span> is a <span class="math inline">\(D\)</span>-dimensional mean vector, <span class="math inline">\(\Sigma\)</span> is a <span class="math inline">\(D\times D\)</span> covariance matrix, and <span class="math inline">\(|\Sigma|\)</span> denotes the determinant of <span class="math inline">\(\Sigma\)</span>.</p>
+<!-- ```{r} -->
+<!-- #          Normal Distribution PDF -->
+<!-- #range -->
+<!-- x=seq(-5,5,length=300) -->
+<!-- #plot each curve -->
+<!-- plot(x,dnorm(x,mean=0,sd=sqrt(.2)),type="l",lwd=2,col="blue",main='Normal Distribution PDF',xlim=c(-5,5),ylim=c(0,1),xlab='X', -->
+<!-- ylab=latex2exp::TeX('$N(x|m,\\sigma^2)$')) -->
+<!-- curve(dnorm(x,mean=0,sd=1), add=TRUE,type="l",lwd=2,col="red") -->
+<!-- curve(dnorm(x,mean=0,sd=sqrt(5)), add=TRUE,type="l",lwd=2,col="brown") -->
+<!-- curve(dnorm(x,mean=-2,sd=sqrt(.5)), add=TRUE,type="l",lwd=2,col="green") -->
+<!-- legend(3,0.9,inset = 0, -->
+<!--         legend = latex2exp::TeX(c("$\\mu = 0$, $\\sigma^2 = 0.2$", "$\\mu = 0$, $\\sigma^2 = 1$","$\\mu = 0$, $\\sigma^2 = 5.0$","$\\mu = -2.0$, $\\sigma^2 = 0.5$")),  -->
+<!--         col=c("blue","red","brown","green"), lty=1:4, cex=.5, horiz = TRUE) -->
+<!-- ``` -->
+<p>The Gaussian distribution arises in many different contexts and can be motivated from a variety of different perspectives. For example, when we consider the sum of multiple random variables. The <em>central limit theorem</em> (due to Laplace) tells us that, subject to certain mild conditions, the sum of a set of random variables, which is of course itself a random variable, has a distribution that becomes increasingly Gaussian as the number of terms in the sum increases.</p>
+</div>
+<div id="mixture-of-gaussians" class="section level2">
+<h2><span class="header-section-number">8.2</span> Mixture of Gaussians</h2>
+<p>While the Gaussian distribution has some important analytical properties, it suffers from significant limitations when it comes to modeling real data sets. Consider the example shown in Figure <a href="gaussian-mixture-models-em.html#fig:gaussianfaithful">8.2</a> applied on the ’Old Faithful’ data set, this data set comprises 272 measurements of the eruption of the <a href="https://en.wikipedia.org/wiki/Old_Faithful">Old Faithful geyser</a> at Yellowstone National Park in the USA. Each measurement comprises the duration of the eruption in minutes (horizontal axis) and the time in minutes to the next eruption (vertical axis). We see that the data set forms two dominant clumps, and that a simple Gaussian distribution is unable to capture this structure, whereas a linear superposition of two Gaussians gives a better characterization of the data set. Such superpositions, formed by taking linear combinations of more basic distributions such as Gaussians, can be formulated as probabilistic models known as <em>mixture distributions</em>.</p>
+<div class="figure" style="text-align: center"><span id="fig:gaussianfaithful"></span>
+<img src="img/gaussian_faithful.png" alt="Plots of the ’old faithful’ data in which the blue curves show contours of constant probability density. On the left is a single Gaussian ditribution which has been fitted to the data using maximum likelihood. On the right the distribution is given by a linear combination of two Gaussians which has been fitted to the data by maximum likelihood using the EM technique, and which gives a better representation of the data" width="80%" />
+<p class="caption">
+Figure 8.2: Plots of the ’old faithful’ data in which the blue curves show contours of constant probability density. On the left is a single Gaussian ditribution which has been fitted to the data using maximum likelihood. On the right the distribution is given by a linear combination of two Gaussians which has been fitted to the data by maximum likelihood using the EM technique, and which gives a better representation of the data
+</p>
+</div>
+<p>In Figure <a href="gaussian-mixture-models-em.html#fig:gaussianmixture">8.3</a> we see that a linear combination of Gaussians can give rise to very complex densities. By using a sufficient number of Gaussians, and by adjusting their means and covariances as well as the coefficients in the linear combination, almost any continuous density can be approximated to arbitrary accuracy.</p>
+<div class="figure" style="text-align: center"><span id="fig:gaussianmixture"></span>
+<img src="img/gaussian_mixture.png" alt="Example of a Gaussian mixture distribution in one dimension showing three Gaussians (each scaled by a coefficient) in blue and their sum in red." width="70%" />
+<p class="caption">
+Figure 8.3: Example of a Gaussian mixture distribution in one dimension showing three Gaussians (each scaled by a coefficient) in blue and their sum in red.
+</p>
+</div>
+<p>We therefore consider a superposition of <span class="math inline">\(K\)</span> Gaussian densities of the form</p>
+<p><span class="math display">\[\label{eq:gaussian}
+p(x)= \sum_{k=1}^{K} \pi_k \mathcal{N}(x| \mu_k, \Sigma_k)\]</span></p>
+<p>which is called a <em>mixture of Gaussians</em>. Each Gaussian density <span class="math inline">\(\mathcal{N}(x| \mu_k, \Sigma_k)\)</span> is called a <em>component</em> of the mixture and has its own mean <span class="math inline">\(\mu_k\)</span> and covariance <span class="math inline">\(\Sigma_k\)</span>.</p>
+<p>The parameters <span class="math inline">\(\pi_k\)</span> are called <em>mixing coefficients</em>. They verify the conditions <span class="math display">\[\sum_{k=1}^{K} \pi_k = 1 \quad \text{and} \quad 0 \leq \pi_k \leq 1\]</span></p>
+<p>In order to find an equivalent formulation of the Gaussian mixture involving an explicit <strong>latent</strong> variable, we introduce a <span class="math inline">\(K\)</span>-dimensional binary random variable <span class="math inline">\(z\)</span> having a 1-of-<span class="math inline">\(K\)</span> representation in which a particular element <span class="math inline">\(z_k\)</span> is equal to 1 and all other elements are equal to 0. The values of <span class="math inline">\(z_k\)</span> therefore satisfy <span class="math inline">\(z_k \in \{0,1\}\)</span> and <span class="math inline">\(\sum_k z_k =1\)</span>, and we see that there are <span class="math inline">\(K\)</span> possible states for the vector <span class="math inline">\(z\)</span> according to which element is nonzero. The marginal distribution over <span class="math inline">\(z\)</span> is specified in terms of the mixing coefficients <span class="math inline">\(\pi_k\)</span> , such that <span class="math display">\[p(z_k=1)=\pi_k\]</span></p>
 <div class="rmdinsight">
 <p>
-It is a remarkable property of matrix algebra that the results for the general linear regression model in matrix notation appear exactly as those for the simple linear regression model. Only the degrees of freedom and other constants related to the number of <span class="math inline"><span class="math inline">\(X\)</span></span> variables and the dimensions of some matrices are different. Which means there are some similarities between <span class="math inline"><span class="math inline">\(\hat{\beta} = (\textbf{X}^T \textbf{X})^{-1}\textbf{X}^T \textbf{Y}\)</span></span> and <span class="math inline"><span class="math inline">\(\hat\beta_1=(s_x^2)^{-1}s_{xy}\)</span></span> from the simple linear model: both are related to the covariance between <span class="math inline"><span class="math inline">\(\mathbf{X}\)</span></span> and <span class="math inline"><span class="math inline">\(\mathbf{Y}\)</span></span> weighted by the variance of <span class="math inline"><span class="math inline">\(\mathbf{X}\)</span></span>.
+A <a href="https://en.wikipedia.org/wiki/Latent_variable">latent variable</a> is a variable that is not directly measurable, but its value can be inferred by taking other measurements.
+</p>
+<p>
+This happens a lot in machine learning, robotics, statistics and other fields. For example, you may not be able to directly quantify intelligence (it’s not a countable thing like the number of brain cells you have), but we think it exists and we can run experiments that may tell us about intelligence. So your intelligence is a latent variable that affects your performance on multiple tasks even though it can not be directly measured (<a href="https://www.quora.com/What-is-a-latent-variable">link</a>).
 </p>
 </div>
-<p>Note 2:</p>
+<p>The conditional distribution of <span class="math inline">\(x\)</span> given a particular value for <span class="math inline">\(z\)</span> is a Gaussian</p>
+<p><span class="math display">\[p(x|z_k=1)= \mathcal{N}(x| \mu_k, \Sigma_k)\]</span></p>
+<p>The joint distribution is given by <span class="math inline">\(p(z)p(x|z)\)</span>, and the marginal distribution of <span class="math inline">\(x\)</span> is then obtained by summing the joint distribution over all possible states of <span class="math inline">\(z\)</span> to give</p>
+<p><span class="math display">\[p(x)= \sum_z p(z)p(x|z) = \sum_{k=1}^{K} \pi_k \mathcal{N}(x| \mu_k, \Sigma_k)\]</span></p>
+<p>Now, we are able to work with the joint distribution <span class="math inline">\(p(x|z)\)</span> instead of the marginal distribution <span class="math inline">\(p(x)\)</span>. This leads to significant simplification, most notably through the introduction of the Expectation-Maximization (EM) algorithm.</p>
+<p>Another quantity that play an important role is the conditional probability of <span class="math inline">\(z\)</span> given <span class="math inline">\(x\)</span>. We shall use <span class="math inline">\(r(z_k)\)</span> to denote <span class="math inline">\(p(z_k = 1|x)\)</span>, whose value can be found using Bayes’ theorem</p>
+<span class="math display" id="eq:responsibilities">\[\begin{align}
+r(z_k)= p(z_k = 1|x) &amp;= \frac{ p(z_k = 1) p(x|(z_k=1)}{\displaystyle \sum_{j=1}^{K} p(z_j = 1) p(x|(z_j=1)} \nonumber \\
+&amp;= \frac{\pi_k \mathcal{N}(x| \mu_k, \Sigma_k)}{\displaystyle \sum_{j=1}^{K} \pi_j \mathcal{N}(x| \mu_j, \Sigma_j)} 
+\tag{8.3}
+\end{align}\]</span>
+<p>We shall view <span class="math inline">\(\pi_k\)</span> as the prior probability of <span class="math inline">\(z_k = 1\)</span>, and the quantity <span class="math inline">\(r(z_k)\)</span> as the corresponding posterior probability once we have observed <span class="math inline">\(x\)</span>. As we shall see in next section, <span class="math inline">\(r(z_k)\)</span> can also be viewed as the <em>responsibility</em> that component <span class="math inline">\(k\)</span> takes for ’explaining’ the observation <span class="math inline">\(x\)</span>.</p>
+<div class="rmdtip">
+<p>
+Doesn’t this reminds you of the Equation <a href="discriminant-analysis.html#eq:bayes">4.1</a> when we used Bayes’ theorm for Classification? where <span class="math inline"><span class="math inline">\(p_k(x)\)</span></span> was the <em>posterior</em> probability that an observation <span class="math inline"><span class="math inline">\(X=x\)</span></span> belongs to <span class="math inline"><span class="math inline">\(k\)</span></span>-th class. The difference is that here the data is unlabled (we have no class), so we create a <strong>latent</strong> (hidden, unobserved) variable <span class="math inline"><span class="math inline">\(z\)</span></span> that will play a similar role.
+</p>
+</div>
+<p>In Figure <a href="gaussian-mixture-models-em.html#fig:gaussianmixture500samples">8.4</a> the role of the responsibilities is illustrated on a sample of 500 points drawn from a mixture of three Gaussians.</p>
+<div class="figure" style="text-align: center"><span id="fig:gaussianmixture500samples"></span>
+<img src="img/gaussianmixture_500samples.png" alt="Example of 500 points drawn from a mixture of 3 Gaussians. (a) Samples from the joint distribution $p(z)p(x|z)$ in which the three states of $z$, corresponding to the three components of the mixture, are depicted in red, green, and blue, and (b) the corresponding samples from the marginal distribution $p(x)$, which is obtained by simply ignoring the values of $z$ and just plotting the $x$ values. The data set in (a) is said to be complete, whereas that in (b) is incomplete. (c) The same samples in which the colours represent the value of the responsibilities $r(z_{nk})$ associated with data point $x_n$, obtained by plotting the corresponding point using proportions of red, blue, and green ink given by $r(z_{nk})$ for $k = 1,2,3$, respectively." width="90%" />
+<p class="caption">
+Figure 8.4: Example of 500 points drawn from a mixture of 3 Gaussians. (a) Samples from the joint distribution <span class="math inline">\(p(z)p(x|z)\)</span> in which the three states of <span class="math inline">\(z\)</span>, corresponding to the three components of the mixture, are depicted in red, green, and blue, and (b) the corresponding samples from the marginal distribution <span class="math inline">\(p(x)\)</span>, which is obtained by simply ignoring the values of <span class="math inline">\(z\)</span> and just plotting the <span class="math inline">\(x\)</span> values. The data set in (a) is said to be complete, whereas that in (b) is incomplete. (c) The same samples in which the colours represent the value of the responsibilities <span class="math inline">\(r(z_{nk})\)</span> associated with data point <span class="math inline">\(x_n\)</span>, obtained by plotting the corresponding point using proportions of red, blue, and green ink given by <span class="math inline">\(r(z_{nk})\)</span> for <span class="math inline">\(k = 1,2,3\)</span>, respectively.
+</p>
+</div>
+<p>So the form of the Gaussian mixture distribution is governed by the parameters <span class="math inline">\(\pi\)</span>, <span class="math inline">\(\mu\)</span> and <span class="math inline">\(\Sigma\)</span>, where we have used the notation <span class="math inline">\(\pi=\{\pi_1,\ldots,\pi_K\}\)</span>, <span class="math inline">\(\mu=\{\mu_1,\ldots,\mu_K\}\)</span> and <span class="math inline">\(\Sigma=\{\Sigma_1,\ldots,\Sigma_K\}\)</span>. One way to set the values of these parameters is to use maximum likelihood. The log of the likelihood function is given by</p>
+<p><span class="math display">\[\ln p(X|\pi,\mu,\Sigma)=\sum_{n=1}^{N} \ln \left\lbrace \sum_{k=1}^{K} \pi_k \mathcal{N}(x_n | \mu_k, \Sigma_k) \right\rbrace\]</span> We immediately see that the situation is now much more complex than with a single Gaussian, due to the presence of the summation over <span class="math inline">\(k\)</span> inside the logarithm. As a result, the maximum likelihood solution for the parameters no longer has a closed-form analytical solution. One approach to maximizing the likelihood function is to use iterative numerical optimization techniques. Alternatively we can employ a powerful framework called <strong>E</strong>xpectation <strong>M</strong>aximization, which will be discussed in this chapter.</p>
+</div>
+<div id="em-for-gaussian-mixtures" class="section level2">
+<h2><span class="header-section-number">8.3</span> EM for Gaussian Mixtures</h2>
+<p>Suppose we have a data set of observations <span class="math inline">\(\{x_1, \ldots, x_N\}\)</span>, which gives a data set <span class="math inline">\(X\)</span> of size <span class="math inline">\(N \times D\)</span>, and we wish to model this data using a mixture of Gaussians. Similarly, the corresponding latent variable are denoted by a <span class="math inline">\(N \times K\)</span> matrix <span class="math inline">\(Z\)</span> with rows <span class="math inline">\(z_n^K\)</span>.</p>
 <div class="rmdinsight">
 <p>
-If <span class="math inline"><span class="math inline">\(\textbf{X}^T \textbf{X}\)</span></span> is noninvertible, the common causes might be having:
-</p>
-<ul>
-<li>
-Redundant features, where two features are very closely related (i.e. they are linearly dependent)
-</li>
-<li>
-Too many features (e.g. <span class="math inline"><span class="math inline">\(p \geq n\)</span></span>). In this case, we delete some features or we use “regularization” (to be, maybe, explained in a later lesson).
-</li>
-</ul>
-</div>
-</div>
-<div id="some-important-questions" class="section level2">
-<h2><span class="header-section-number">2.3</span> Some important questions</h2>
-<p>When we perform multiple linear regression, we usually are interested in answering a few important questions.</p>
-<ol style="list-style-type: decimal">
-<li>Is at least one of the predictors <span class="math inline">\(X_1 ,X_2 ,\ldots,X_p\)</span> useful in predicting the response?</li>
-<li>Do all the predictors help to explain <span class="math inline">\(Y\)</span>, or is only a subset of the predictors useful?</li>
-<li>How well does the model fit the data?</li>
-<li>Given a set of predictor values, what response value should we predict, and how accurate is our prediction?</li>
-</ol>
-<p><strong><em>Relationship Between the Response and Predictors?</em></strong></p>
-<p><strong><span class="math inline">\(F\)</span>-Statistic</strong></p>
-<p>Recall that in the simple linear regression setting, in order to determine whether there is a relationship between the response and the predictor we can simply check whether <span class="math inline">\(\beta_1 = 0\)</span>. In the multiple regression setting with <span class="math inline">\(p\)</span> predictors, we need to ask whether all of the regression coefficients are zero, i.e. whether <span class="math inline">\(\beta_1 = \beta_2 = \ldots = \beta_p = 0\)</span>. As in the simple linear regression setting, we use a hypothesis test to answer this question. We test the null hypothesis,</p>
-<p><span class="math display">\[ H_0 : \beta_1 = \beta_2 = \ldots = \beta_p = 0 \]</span></p>
-<p>versus the alternative hypothesis</p>
-<p><span class="math display">\[ H_1 : \text{at least one} \, \beta_j \, \text{is non-zero} \]</span></p>
-<p>This hypothesis test is performed by computing the <span class="math inline">\(F\)</span>-statistic (<em>Fisher</em>):</p>
-<p><span class="math display">\[ F = \frac{ (\text{TSS} - \text{RSS})/p}{\text{RSS}/(n-p-1)} \sim F_{p,n-p-1} \]</span></p>
-<p>where, as with simple linear regression, <span class="math inline">\(\text{TSS} = \sum (y_i - \bar{y})^2\)</span> and <span class="math inline">\(\text{RSS} = \sum (y_i - \hat{y}_i)^2\)</span>.</p>
-<p>Note that <span class="math inline">\(F_{p,n-p-1}\)</span> represents the <em>Fisher-Snedecor’s <span class="math inline">\(F\)</span> distribution</em> with <span class="math inline">\(p\)</span> and <span class="math inline">\(n-p-1\)</span> degrees of freedom. If <span class="math inline">\(H_0\)</span> is true, then <span class="math inline">\(F\)</span> is expected to be <em>small</em> since ESS<a href="#fn7" class="footnoteRef" id="fnref7"><sup>7</sup></a> will be close to zero (little variation is explained by the regression model since <span class="math inline">\(\hat{\boldsymbol{\beta}}\approx\mathbf{0}\)</span>).</p>
-<p>So the question we ask here: <em>Is the whole regression explaining anything at all?</em> The answer comes from the <span class="math inline">\(F\)</span>-test in the ANOVA (ANalysis Of VAriance) table. This is what we get in an ANOVA table:</p>
-<table>
-<thead>
-<tr class="header">
-<th>Source</th>
-<th>df</th>
-<th>SS</th>
-<th>MS</th>
-<th><span class="math inline">\(F\)</span></th>
-<th>p-value</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>Factor (Explained)</td>
-<td><span class="math inline">\(p\)</span></td>
-<td>ESS=SSR</td>
-<td>MSR=ESS/<span class="math inline">\((p)\)</span></td>
-<td>F=MSR/MSE</td>
-<td>p-value</td>
-</tr>
-<tr class="even">
-<td>Error (Unexplained)</td>
-<td><span class="math inline">\(n-p-1\)</span></td>
-<td>RSS=SSE</td>
-<td>MSE=RSS/<span class="math inline">\((n-p-1)\)</span></td>
-<td></td>
-<td></td>
-</tr>
-<tr class="odd">
-<td>Total</td>
-<td><span class="math inline">\(n-1\)</span></td>
-<td>TSS=SST</td>
-<td></td>
-<td></td>
-<td></td>
-</tr>
-</tbody>
-</table>
-<p>The ANOVA table has many pieces of information. What we care about is the <span class="math inline">\(F\)</span> Ratio and the corresponding p-value. We compare the <span class="math inline">\(F\)</span> Ratio with <span class="math inline">\(F_{(p,n-p-1)}\)</span> and a corresponding <span class="math inline">\(\alpha\)</span> value (error).</p>
-<div class="rmdcaution">
-<p>
-The “ANOVA table” is a broad concept in statistics, with different variants. Here we are only covering the basic ANOVA table from the relation <span class="math inline"><span class="math inline">\(\text{SST} = \text{SSR} + \text{SSE}\)</span></span>. However, further sophistications are possible when <span class="math inline"><span class="math inline">\(\text{SSR}\)</span></span> is decomposed into the variations contributed by <em>each</em> predictor. In particular, for multiple linear regression <code>R</code>’s <code>anova</code> implements a <em>sequential (type I) ANOVA table</em>, which is <strong>not</strong> the previous table!
+Recall that the objective is to estimate the parameters <span class="math inline"><span class="math inline">\(\pi\)</span></span>, <span class="math inline"><span class="math inline">\(\mu\)</span></span> and <span class="math inline"><span class="math inline">\(\Sigma\)</span></span> in order to estimate the posterior probabilities (named also <em>responsibilities</em>, called <span class="math inline"><span class="math inline">\(\, r(z_k)\)</span></span> in this chapter). To do so, we find the estimators that maximize the log of the likelihood function.
 </p>
 </div>
-<p>The <code>anova</code> function in <code>R</code> takes a model as an input and returns the following <em>sequential</em> ANOVA table<a href="#fn8" class="footnoteRef" id="fnref8"><sup>8</sup></a>:</p>
+<p>If we assume that the data points are i.i.d. (independent and identically distributed), then we can calculate the log of the likelihood function, which is given by</p>
+<span class="math display" id="eq:gaussianlikelihood">\[\begin{equation}
+\tag{8.4}
+\ln p(X|\pi,\mu,\Sigma)=\sum_{n=1}^{N} \ln \left\lbrace \sum_{k=1}^{K} \pi_k \mathcal{N}(x_n | \mu_k, \Sigma_k) \right\rbrace
+\end{equation}\]</span>
+<p>An elegant and powerful method for finding maximum likelihood solutions for this models with latent variables is called the <strong>E</strong>xpectation <strong>M</strong>aximization algorithm, or EM algorithm.</p>
+<p>Setting the derivatives of <span class="math inline">\(\ln p(X|\pi,\mu,\Sigma)\)</span> in <a href="gaussian-mixture-models-em.html#eq:gaussianlikelihood">(8.4)</a> respectively with respect to the <span class="math inline">\(\mu_k,\Sigma_k\)</span> and <span class="math inline">\(\pi_k\)</span> to zero, we obtain</p>
+<span class="math display" id="eq:means">\[\begin{equation}
+\tag{8.5}
+\mu_k = \frac{1}{N_k} \sum_{n=1}^{N} r(z_{nk}) x_n
+\end{equation}\]</span>
+<p>where we define <span class="math display">\[N_k= \sum_{n=1}^{N}r(z_{nk})\]</span></p>
+<p>We can interpret <span class="math inline">\(N_k\)</span> as the effective number of points assigned to cluster <span class="math inline">\(k\)</span>. Note carefully the form of this solution. We see that the mean <span class="math inline">\(\mu_k\)</span> for the <span class="math inline">\(k\)</span>-th Gaussian component is obtained by taking a weighted mean of all of the points in the data set, in which the weighting factor for data point <span class="math inline">\(x_n\)</span> is given by the posterior probability <span class="math inline">\(r(z_{nk})\)</span> that component <span class="math inline">\(k\)</span> was responsible for generating <span class="math inline">\(x_n\)</span>.</p>
+<p>As for <span class="math inline">\(\sigma_k\)</span> we obtain</p>
+<span class="math display" id="eq:sigma">\[\begin{equation}
+\tag{8.6}
+\Sigma_k= \frac{1}{N_k} \sum_{n=1}^{N} r(z_{nk}) (x_n - \mu_k)(x_n - \mu_k)^T
+\end{equation}\]</span>
+<p>which has the same form as the corresponding result for a single Gaussian fitted to the data set, but again with each data point weighted by the corresponding posterior probability and with the denominator given by the effective number of points associated with the corresponding component.</p>
+<p>Finally, for the mixing coefficients <span class="math inline">\(\pi_k\)</span> we obtain</p>
+<span class="math display" id="eq:pi">\[\begin{equation}
+\tag{8.7}
+\pi_k=\frac{N_k}{N}
+\end{equation}\]</span>
+<p>so that the mixing coefficient for the <span class="math inline">\(k\)</span>-th component is given by the average responsibility which that component takes for explaining the data points.</p>
+<p>We first choose some initial values for the means, covariances, and mixing coefficients. Then we alternate between the following two updates that we shall call the <strong>E</strong> step and the <strong>M</strong> step. In the <em>expectation</em> step, or E step, we use the current values for the parameters to evaluate the posterior probabilities, or responsibilities, given by Eq. <a href="gaussian-mixture-models-em.html#eq:responsibilities">(8.3)</a>. We then use these probabilities in the <em>maximization</em> step, or M step, to re-estimate the means, covariances, and mixing coefficients using the results in Equations <a href="gaussian-mixture-models-em.html#eq:means">(8.5)</a>, <a href="gaussian-mixture-models-em.html#eq:sigma">(8.6)</a> and <a href="gaussian-mixture-models-em.html#eq:pi">(8.7)</a>. The algorithm of EM for mixtures of Gaussians is shown in the following Algorithm:</p>
 <table>
 <colgroup>
-<col width="19%" />
-<col width="16%" />
-<col width="11%" />
-<col width="12%" />
-<col width="21%" />
-<col width="17%" />
+<col width="37%" />
+<col width="62%" />
 </colgroup>
 <thead>
 <tr class="header">
+<th>The EM for Gaussian mixtures</th>
 <th></th>
-<th>Degrees of freedom</th>
-<th>Sum Squares</th>
-<th>Mean Squares</th>
-<th><span class="math inline">\(F\)</span>-value</th>
-<th><span class="math inline">\(p\)</span>-value</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<td>Predictor 1</td>
-<td><span class="math inline">\(1\)</span></td>
-<td>ESS<span class="math inline">\(_1\)</span></td>
-<td><span class="math inline">\(\frac{\text{ESS}_1}{1}\)</span></td>
-<td><span class="math inline">\(\frac{\text{ESS}_1/1}{\text{RSS}/(n-p-1)}\)</span></td>
-<td><span class="math inline">\(p_1\)</span></td>
+<td><p><strong>Data</strong>:</p></td>
+<td><p><span class="math inline">\(\mathbf{X}= \{x_{kd}, \,\,\,\, k=1,\ldots,N, d=1,\ldots,D\}\)</span> where <span class="math inline">\(D\)</span> is the dimension of the feature space. <span class="math inline">\(Z\)</span> the latent variables matrix.</p></td>
 </tr>
 <tr class="even">
-<td>Predictor 2</td>
-<td><span class="math inline">\(1\)</span></td>
-<td>ESS<span class="math inline">\(_2\)</span></td>
-<td><span class="math inline">\(\frac{\text{ESS}_2}{1}\)</span></td>
-<td><span class="math inline">\(\frac{\text{ESS}_2/1}{\text{RSS}/(n-p-1)}\)</span></td>
-<td><span class="math inline">\(p_2\)</span></td>
+<td><p><strong>Result</strong>:</p></td>
+<td><p>Posterior probabilities <span class="math inline">\(r(z_{nk})\)</span> and the model parameters <span class="math inline">\(\mu,\Sigma\)</span> and <span class="math inline">\(\pi\)</span>.</p></td>
 </tr>
 <tr class="odd">
-<td><span class="math inline">\(\vdots\)</span></td>
-<td><span class="math inline">\(\vdots\)</span></td>
-<td><span class="math inline">\(\vdots\)</span></td>
-<td><span class="math inline">\(\vdots\)</span></td>
-<td><span class="math inline">\(\vdots\)</span></td>
-<td><span class="math inline">\(\vdots\)</span></td>
+<td><p><strong>Initialization</strong>:</p></td>
+<td><ul>
+<li>Choose a value for <span class="math inline">\(K\)</span>, <span class="math inline">\(1 &lt; K &lt; N\)</span>.</li>
+<li>Initialize the means <span class="math inline">\(\mu_k\)</span>, the covariances <span class="math inline">\(\Sigma_k\)</span> and mixing coefficients <span class="math inline">\(\pi_k\)</span> randomly.</li>
+<li>Evaluate the initial value of the log likelihood.</li>
+</ul></td>
 </tr>
 <tr class="even">
-<td>Predictor <span class="math inline">\(p\)</span></td>
-<td><span class="math inline">\(1\)</span></td>
-<td>ESS<span class="math inline">\(_p\)</span></td>
-<td><span class="math inline">\(\frac{\text{ESS}_p}{1}\)</span></td>
-<td><span class="math inline">\(\frac{\text{ESS}_p/1}{\text{RSS}/(n-p-1)}\)</span></td>
-<td><span class="math inline">\(p_p\)</span></td>
-</tr>
-<tr class="odd">
-<td>Residuals</td>
-<td><span class="math inline">\(n - p - 1\)</span></td>
-<td>RSS</td>
-<td><span class="math inline">\(\frac{\text{RSS}}{n-p-1}\)</span></td>
-<td></td>
-<td></td>
+<td><p><strong>Learning</strong>: <strong>repeat</strong></p></td>
+<td><p><strong>E step</strong>:</p>
+<ul>
+<li>Evaluate the responsibilities using the current parameter values: <span class="math display">\[r(z_{nk})= \frac{\pi_k \mathcal{N}(x| \mu_k, \Sigma_k)}{\displaystyle \sum_{j=1}^{K} \pi_j \mathcal{N}(x| \mu_j, \Sigma_j)}\]</span></li>
+</ul>
+<p><strong>M step</strong>:</p>
+<ul>
+<li><p>Re-estimate the parameters using the current responsibilities: <span class="math display">\[\mu_k = \frac{1}{N_k} \sum_{n=1}^{N} r(z_{nk}) x_n\]</span> <span class="math display">\[\Sigma_k= \frac{1}{N_k} \sum_{n=1}^{N} r(z_{nk}) (x_n - \mu_k)(x_n - \mu_k)^T\]</span> <span class="math display">\[\pi_k=\frac{N_k}{N}\]</span> <span class="math display">\[\text{where} \quad N_k= \sum_{n=1}^{N}r(z_{nk})\]</span></p></li>
+<li><p>Evaluate the log likelihood: <span class="math display">\[\ln p(X|\pi,\mu,\Sigma)=\sum_{n=1}^{N} \ln \left\lbrace \sum_{k=1}^{K} \pi_k \mathcal{N}(x_n | \mu_k, \Sigma_k) \right\rbrace\]</span> Until convergence of either the parameters or the log likelihood. If the convergence criterion is not satisfied return to E step.</p></li>
+</ul></td>
 </tr>
 </tbody>
 </table>
-Here the ESS<span class="math inline">\(_j\)</span> represents the explained sum of squares (same as regression sum of squares) associated to the inclusion of <span class="math inline">\(X_j\)</span> in the model with predictors <span class="math inline">\(X_1,\ldots,X_{j-1}\)</span>, this is: <span class="math display">\[
-\text{ESS}_j=\text{ESS}(X_1,\ldots,X_j)-\text{ESS}(X_1,\ldots,X_{j-1}).
-\]</span> The <span class="math inline">\(p\)</span>-values <span class="math inline">\(p_1,\ldots,p_p\)</span> correspond to the testing of the hypotheses
-<span class="math display">\[\begin{align*}
-H_0:\beta_j=0\quad\text{vs.}\quad H_1:\beta_j\neq 0,
-\end{align*}\]</span>
-<p>carried out <em>inside the linear model</em> <span class="math inline">\(Y=\beta_0+\beta_1X_1+\ldots+\beta_jX_j+\varepsilon\)</span>. This is like the <span class="math inline">\(t\)</span>-test for <span class="math inline">\(\beta_j\)</span> for the model with predictors <span class="math inline">\(X_1,\ldots,X_j\)</span>. Recall that there is no <span class="math inline">\(F\)</span>-test in this version of the ANOVA table.</p>
-<p><strong>p-values</strong></p>
-<p>The p-values provide information about whether each individual predictor is related to the response, after adjusting for the other predictors. Let’s look at the following table we obtain in general using a statistical software for example</p>
-<table>
-<thead>
-<tr class="header">
-<th></th>
-<th>Coefficient</th>
-<th>Std. error</th>
-<th><span class="math inline">\(t\)</span>-statistic</th>
-<th>p-value</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>Constant</td>
-<td>2.939</td>
-<td>0.3119</td>
-<td>9.42</td>
-<td>&lt;0.0001</td>
-</tr>
-<tr class="even">
-<td><span class="math inline">\(X_1\)</span></td>
-<td>0.046</td>
-<td>0.0014</td>
-<td>32.81</td>
-<td>&lt;0.0001</td>
-</tr>
-<tr class="odd">
-<td><span class="math inline">\(X_2\)</span></td>
-<td>0.189</td>
-<td>0.0086</td>
-<td>21.89</td>
-<td>&lt;0.0001</td>
-</tr>
-<tr class="even">
-<td><span class="math inline">\(X_3\)</span></td>
-<td>-0.001</td>
-<td>0.0059</td>
-<td>-0.18</td>
-<td>0.8599</td>
-</tr>
-</tbody>
-</table>
-<p>In this table we have the following model</p>
-<p><span class="math display">\[ Y = 2.939 + 0.046 X_1 + 0.189 X_2 - 0.001 X_3 \]</span></p>
-<p>Note that for each individual predictor a <span class="math inline">\(t\)</span>-statistic and a p-value were reported. These p-values indicate that <span class="math inline">\(X_1\)</span> and <span class="math inline">\(X_2\)</span> are related to <span class="math inline">\(Y\)</span>, but that there is no evidence that <span class="math inline">\(X_3\)</span> is associated with <span class="math inline">\(Y\)</span>, in the presence of these two.</p>
-<p><strong><em>Deciding on Important Variables</em></strong></p>
-<p>The most direct approach is called <em>all subsets</em> or <em>best subsets</em> regression: we compute the least squares fit for all possible subsets and then choose between them based on some criterion that balances training error with model size.</p>
-<p>However we often can’t examine all possible models, since they are <span class="math inline">\(2^p\)</span> of them; for example when <span class="math inline">\(p = 40\)</span> there are over a billion models! Instead we need an automated approach that searches through a subset of them. Here are two commonly use approaches:</p>
-<p><strong>Forward selection</strong>:</p>
-<ul>
-<li>Begin with the <em>null model</em> — a model that contains an intercept (constant) but no predictors.</li>
-<li>Fit <span class="math inline">\(p\)</span> simple linear regressions and add to the null model the variable that results in the lowest RSS.</li>
-<li>Add to that model the variable that results in the lowest RSS amongst all two-variable models.</li>
-<li>Continue until some stopping rule is satisfied, for example when all remaining variables have a p-value above some threshold.</li>
-</ul>
-<p><strong>Backward selection</strong>:</p>
-<ul>
-<li>Start with all variables in the model.</li>
-<li>Remove the variable with the largest p-value — that is, the variable that is the least statistically significant.</li>
-<li>The new <span class="math inline">\((p − 1)\)</span>-variable model is fit, and the variable with the largest p-value is removed.</li>
-<li>Continue until a stopping rule is reached. For instance, we may stop when all remaining variables have a significant p-value defined by some significance threshold.</li>
-</ul>
+<p>The EM algorithm for a mixture of two Gaussians applied to the rescaled Old Faithful data set is illustrated in Figure <a href="gaussian-mixture-models-em.html#fig:emfaithful">8.5</a>. In plot (a) we see the initial configuration, the Gaussian component are shown as blue and red circles. Plot (b) shows the result of the initial E step where we update the responsibilities. Plot (c) shows the M step where we update the parameters. Plots (d), (e), and (f) show the results after 2, 5, and 20 complete cycles of EM, respectively. In plot (f) the algorithm is close to convergence.</p>
+<div class="figure" style="text-align: center"><span id="fig:emfaithful"></span>
+<img src="img/em_faithful.png" alt="Illustration of the EM algorithm using the Old Faithful dataset. A mixture of two Gaussians is used." width="80%" />
+<p class="caption">
+Figure 8.5: Illustration of the EM algorithm using the Old Faithful dataset. A mixture of two Gaussians is used.
+</p>
+</div>
+<!-- 
+## The EM Algorithm in General
+
+In this section, we present the general view of the EM algorithm. The
+goal of the EM algorithm is to find maximum likelihood solutions for
+models having latent variables. We denote $X$ the data matrix, $Z$ the
+latent variables matrix. Let us denote $\theta$ the set of all model
+parameters. Then the log likelihood function is given by
+
+$$\ln p(X|\theta) = \ln \left\lbrace \sum_Z p(X,Z|\theta) \right\rbrace$$
+
+Note that if the latent variables are continuous we get similar
+equations, we only replace the over $Z$ with an integral.
+
+The presence of the sum prevents the logarithm from acting directly on
+the joint distribution, resulting in complicated expressions for the
+maximum likelihood solution.
+
+Suppose that, for each observation in $X$, we were told the
+corresponding value of the latent variable $Z$. We shall call $\{X,Z\}$
+the *complete* data set, and we shall refer to the actual observed data
+$X$ as *incomplete*. The likelihood function for the complete data set
+simply takes the form $\ln p(X,Z|\theta)$, and we shall suppose that
+maximization of this complete-data log likelihood function is
+straightforward.
+
+**Initialization**:\
+-Choose an initial setting for the parameters $\theta^{\text{old}}$.\
+**Learning**: repeat\
+Until convergence of either the parameters or the log likelihood. If the
+convergence criterion is not satisfied then let $$\theta^{\text{old}}
+\leftarrow \theta^{\text{new}}$$ and return to the E step.
+
+In practice, however, we are not given the complete data set $\{X,Z\}$,
+but only the incomplete data $X$. Our state of knowledge of the values
+of the latent variables in $Z$ is given only by the posterior
+distribution $p(Z|X, \theta)$. Because we cannot use the complete-data
+log likelihood, we consider instead its expected value under the
+posterior distribution of the latent variable, which corresponds to the
+E step of the EM algorithm. In the subsequent M step, we maximize this
+expectation. If the current estimate for the parameters is denoted
+$\theta^{\text{old}}$, then a pair of successive E and M steps gives
+rise to a revised estimate $\theta^{\text{new}}$. The algorithm is
+initialized by choosing some starting value for the parameters
+$\theta_0$.
+
+In the E step, we use the current parameter values $\theta^{\text{old}}$
+to find the posterior distribution of the latent variables given by
+$p(Z|X, \theta^{\text{old}})$. We then use this posterior distribution
+to find the expectation of the complete-data log likelihood evaluated
+for some general parameter value $\theta$. This expectation, denoted
+$\mathcal{Q}(\theta,\theta^{\text{old}})$, is given by
+
+$$\label{eq:complete-likelihood}
+ \mathcal{Q}(\theta,\theta^{\text{old}}) = \sum_Z p(Z|X, \theta^{\text{old}}) \ln p(X,Z|\theta)$$
+
+In the M step, we determine the revised parameter estimate
+$\theta^{\text{new}}$ by maximizing this function
+
+$$\theta^{\text{new}} = \argmax_{\theta}  \mathcal{Q}(\theta,\theta^{\text{old}})$$
+
+Note that in the definition of
+$\mathcal{Q}(\theta,\theta^{\text{old}})$, the logarithm acts directly
+on the joint distribution $p(X,Z|\theta)$, so the corresponding M-step
+maximization will, by supposition, be tractable.
+
+The general EM algorithm is summarized in Algorithm \[algo:em:general\].
+It has the property that each cycle of EM will increase the
+incomplete-data log likelihood (unless it is already at a local
+maximum). -->
 <div class="rmdinsight">
 <p>
-There are more systematic criteria for choosing an “optimal” member in the path of models produced by forward or backward stepwise selection. These include <em>Mallow’s <span class="math inline"><span class="math inline">\(C_p\)</span></span></em> , <em>Akaike information criterion (AIC)</em>, <em>Bayesian information criterion (BIC)</em>, <em>adjusted <span class="math inline"><span class="math inline">\(R^2\)</span></span></em> and <em>Cross-validation (CV)</em>.
+Summary of this chapter:
 </p>
-</div>
-<p><strong><em>Model Fit</em></strong></p>
-<p>Two of the most common numerical measures of model fit are the RSE and <span class="math inline">\(R^2\)</span>, the fraction of variance explained. These quantities are computed and interpreted in the same fashion as for simple linear regression. Recall that in simple regression, <span class="math inline">\(R^2\)</span> is the square of the correlation of the response and the variable. In multiple linear regression, it turns out that it equals <span class="math inline">\(Cor(Y, \hat{Y})^2\)</span> , the square of the correlation between the response and the fitted linear model; in fact one property of the fitted linear model is that it maximizes this correlation among all possible linear models. An <span class="math inline">\(R^2\)</span> value close to 1 indicates that the model explains a large portion of the variance in the response variable.</p>
-<p>In general RSE is defined as</p>
-<p><span class="math display">\[ \text{RSE} = \sqrt{\frac{1}{n-p-1}\text{RSS}} \]</span></p>
-<div id="other-consid" class="section level3">
-<h3><span class="header-section-number">2.3.1</span> Other Considerations in Regression Model</h3>
-<p><strong>Qualitative Predictors</strong></p>
 <ul>
-<li>If we have a categorial (qualitative) variable (feature), how do we fit into a regression equation?</li>
-<li>For example, if <span class="math inline">\(X_1\)</span> is the gender (male or female).</li>
-<li>We can code, for example, male = 0 and female = 1.</li>
-<li>Suppose <span class="math inline">\(X_2\)</span> is a quantitative variable, the regression equation becomes:</li>
-</ul>
-<p><span class="math display">\[ Y_i \approx \beta_0 + \beta_1 X_1 + \beta_2 X_2 = \begin{cases}
-  \beta_0 + \beta_2 X_2 &amp; \text{ if male} \\
-  \beta_0 + \beta_1 X_1 + \beta_2 X_2 &amp; \text{ if female}
-\end{cases} \]</span></p>
-<ul>
-<li>Another possible coding scheme is to let male = -1 and female = 1, the regression equation is then:</li>
-</ul>
-<p><span class="math display">\[ Y_i \approx \beta_0 + \beta_1 X_1 + \beta_2 X_2 = \begin{cases}
-  \beta_0 -\beta_1 X_1 + \beta_2 X_2 &amp; \text{ if male} \\
-  \beta_0 + \beta_1 X_1 + \beta_2 X_2 &amp; \text{ if female}
-\end{cases} \]</span></p>
-<p><strong>Interaction Terms</strong></p>
-<ul>
-<li>When the effect on <span class="math inline">\(Y\)</span> of increasing <span class="math inline">\(X_1\)</span> depends on another <span class="math inline">\(X_2\)</span>.</li>
-<li>We may in this case try the model</li>
-</ul>
-<p><span class="math display">\[ Y_i = \beta_0 + \beta_1 X_1 + \beta_2 X_2 + \beta_3 X_1 X_2 \]</span></p>
-<ul>
-<li><span class="math inline">\(X_1 X_2\)</span> is the Interaction term.</li>
+<li>
+Gaussian Mixture Models (GMM) take a Gaussian and add another Gaussian(s).
+</li>
+<li>
+This allows to model more complex data.
+</li>
+<li>
+We fit a GMM with the Expectation-Maximization (EM) algorithm.
+</li>
+<li>
+Expectation-Maximization (EM) algorithm is a series of steps to find good parameter estimates when there are latent variables.
+</li>
+<li>
+EM steps:
+<ol style="list-style-type: decimal">
+<li>
+Initialize t he parameter estimates.
+</li>
+<li>
+Given the current parameter estimates, find the minimum log likelihood for <span class="math inline"><span class="math inline">\(Z\)</span></span> (data + latent variables).
+</li>
+<li>
+Givent the current data, find better parameter estimates.
+</li>
+<li>
+Repeat steps 2 &amp; 3.
+</li>
+</ol>
+</li>
 </ul>
 </div>
-</div>
-<div id="how-to-select-the-best-performing-model" class="section level2">
-<h2><span class="header-section-number">2.4</span> How to select the best performing model</h2>
-<p>After trying different linear models, you need to make a choice which model you want to use. More specifically, the questions that one can ask: “How to determine which model suits best to my data? Do I just look at the R square, SSE, etc.?” and “As the interpretation of that model (quadratic, root, etc.) will be very different, won’t it be an issue?”</p>
-<p>The second question can be answered easily. First, find a model that best suits to your data and then interpret its results. It is good if you have ideas how your data might be explained. However, interpret the best model, only. Now we will address the first question. Note that there are multiple ways to select a best model. In addition, this approach only applies to univariate models (simple models) whith just one input variable.</p>
-<p>Use the following interactive application and play around with different datasets and models. Notice how parameters change and become more confident with assessing simple linear models.</p>
-<iframe src="https://bjoernhartmann.shinyapps.io/linear_model_selection/?showcase=0" width="100%" height="900px">
-</iframe>
-<div id="use-the-adjusted-r_adj2-for-univariate-models" class="section level3 unnumbered">
-<h3>Use the Adjusted <span class="math inline">\(R_{adj}^2\)</span> for univariate models</h3>
-<p>If you only use one input variable, the adjusted <span class="math inline">\(R_{adj}^2\)</span> value gives you a good indication of how well your model performs. It illustrates how much variation is explained by your model.</p>
-<p>In contrast to the simple <span class="math inline">\(R^2\)</span><a href="#fn9" class="footnoteRef" id="fnref9"><sup>9</sup></a>, the adjusted adjusted <span class="math inline">\(R_{adj}^2\)</span><a href="#fn10" class="footnoteRef" id="fnref10"><sup>10</sup></a> takes the number of input factors into account. It penalizes too many input factors and favors parsimonious models.</p>
-<p>The adjusted <span class="math inline">\(R_{adj}^2\)</span> is sensitive to the amount of noise in the data. As such, only compare this indicator of models for the same dataset than comparing it across different datasets.</p>
-
-<div class="figure" style="text-align: center"><span id="fig:R2"></span>
-<img src="img/R2vsAdjR2.png" alt="Comparison of \(R^2\) and \(R^2_{\text{adj}}\) for \(n=200\) and \(p\) ranging from \(1\) to \(198\). \(M=100\) datasets were simulated with only the first two predictors being significant. The thicker curves are the mean of each color’s curves." width="70%" />
-<p class="caption">
-Figure 2.1: Comparison of <span class="math inline">\(R^2\)</span> and <span class="math inline">\(R^2_{\text{adj}}\)</span> for <span class="math inline">\(n=200\)</span> and <span class="math inline">\(p\)</span> ranging from <span class="math inline">\(1\)</span> to <span class="math inline">\(198\)</span>. <span class="math inline">\(M=100\)</span> datasets were simulated with <strong>only the first two</strong> predictors being significant. The thicker curves are the mean of each color’s curves.
-</p>
-</div>
-<p>Figure <a href="multiple-linear-regression.html#fig:R2">2.1</a> contains the results of an experiment where 100 datasets were simulated with <strong>only the first two</strong> predictors being significant. As you can see <span class="math inline">\(R^2\)</span> increases linearly with the number of predictors considered, although only the first two ones were important! On the contrary, <span class="math inline">\(R^2_\text{adj}\)</span> only increases in the first two variables and then is flat on average, but it has a huge variability when <span class="math inline">\(p\)</span> approaches <span class="math inline">\(n-2\)</span>. The experiment evidences that <strong><span class="math inline">\(R^2_\text{adj}\)</span> is more adequate than the <span class="math inline">\(R^2\)</span> for evaluating the fit of a multiple linear regression</strong>.</p>
-</div>
-<div id="have-a-look-at-the-residuals-or-error-terms" class="section level3 unnumbered">
-<h3>Have a look at the residuals or error terms</h3>
-<p>What is often ignored are error terms or so-called residuals. They often tell you more than what you might think. The residuals are the difference between your predicted values and the actual values. Their benefit is that they can show both the magnitude as well as the direction of the errors.</p>
-<p>Let’s have a look at an example:</p>
-<center>
-<img src="img/residuals.png" />
-</center>
-<p>Here, we try to predict a polynomial dataset with a linear function. Analyzing the residuals shows that there are areas where the model has an upward or downward bias.</p>
-<p>For <code>50 &lt; x &lt; 100</code>, the residuals are above zero. So in this area, the actual values have been higher than the predicted values — our model has a downward bias.</p>
-<p>For <code>100 &lt; x &lt; 150</code>, however, the residuals are below zero. Thus, the actual values have been lower than the predicted values — the model has an upward bias.</p>
-<p>It is always good to know, whether your model suggests too high or too low values. But you usually do not want to have patterns like this.</p>
-<p>The residuals should be zero on average (as indicated by the mean) and they should be equally distributed. Predicting the same dataset with a polynomial function of <code>3 degrees</code> suggests a much better fit:</p>
-<center>
-<img src="img/residuals2.png" />
-</center>
-<p>In addition, you can observe whether the variance of your errors increases. In statistics, this is called <a href="https://en.wikipedia.org/wiki/Heteroscedasticity">Heteroscedasticity</a>. You can fix this easily with robust standard errors. Otherwise, your hypothesis tests are likely to be wrong.</p>
-</div>
-<div id="histogram-of-residuals" class="section level3 unnumbered">
-<h3>Histogram of residuals</h3>
-<p>Finally, the histogram summarizes the magnitude of your error terms. It provides information about the bandwidth of errors and indicates how often which errors occurred.</p>
-<center>
-<img src="img/residuals_hist.png" /> <img src="img/residuals_hist2.png" />
-</center>
-<p>The above screenshots show two models for the same dataset. In the first histogram, errors occur within a range of -338 and 520. In the second histogram, errors occur within -293 and 401. So the outliers are much lower. Furthermore, most errors in the model of the second histogram are closer to zero. So we would favor the second model.</p>
 <p align="right">
 ◼
 </p>
 
 </div>
 </div>
-</div>
-<div class="footnotes">
-<hr />
-<ol start="6">
-<li id="fn6"><p>Important to be sure that <span class="math inline">\(\hat{\beta}\)</span> is minimising RSS.<a href="multiple-linear-regression.html#fnref6">↩</a></p></li>
-<li id="fn7"><p>Recal that ESS is the explained sum of squares, ESS = TSS - RSS.<a href="multiple-linear-regression.html#fnref7">↩</a></p></li>
-<li id="fn8"><p>More complex – included here just for clarification of the <code>anova</code>’s output.<a href="multiple-linear-regression.html#fnref8">↩</a></p></li>
-<li id="fn9"><p>Recall that <span class="math inline">\(R^2 = 1- \frac{\text{RSS}}{\text{TSS}}\)</span><a href="multiple-linear-regression.html#fnref9">↩</a></p></li>
-<li id="fn10"><p>It is defined as <span class="math inline">\(R_{adj}^2 = 1- \frac{\text{RSS}/(n-p-1)}{\text{TSS}/(n-1)} = 1- \frac{\text{RSS}}{\text{TSS}}\times\frac{n-1}{n-p-1}\)</span><a href="multiple-linear-regression.html#fnref10">↩</a></p></li>
-</ol>
-</div>
+
+
+
             </section>
 
           </div>
         </div>
       </div>
-<a href="pw-1.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="pw-2.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="pw-7.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="app-introRStudio.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="book_assets/gitbook-2.6.7/js/app.min.js"></script>

@@ -125,7 +125,7 @@
   \postauthor{\par}
       \predate{\centering\large\emph}
   \postdate{\par}
-    \date{2018-11-30}
+    \date{2018-12-04}
 
 % \defaultfontfeatures{
 %     Path = /home/ghassany/texmf/fonts/opentype/public/fontawesome/}
@@ -7207,6 +7207,327 @@ Summary of this chapter:
     Repeat steps 2 \& 3.
   \end{enumerate}
 \end{itemize}
+\end{rmdinsight}
+
+◼
+
+\chapter*{PW 8}\label{pw-8}
+\addcontentsline{toc}{chapter}{PW 8}
+
+In the first part of this PW you will:
+
+\begin{itemize}
+\tightlist
+\item
+  Learn how to fit a Gaussian Mixture Model (GMM) using the
+  \texttt{mclust} R package.
+\item
+  Compare \(k\)-means and GMM on artificial data (2-D data).
+\item
+  Fit a GMM on univariate (1-D) simulated data.
+\end{itemize}
+
+In the second part of this PW you will build an algorithm from
+\textbf{scratch}. Your algorithm must fit a GMM model using the
+\textbf{E}xpectation-\textbf{M}aximization (EM) technique on any multi
+dimensional dataset.
+
+\section*{Report template}\label{report-template}
+\addcontentsline{toc}{section}{Report template}
+
+For this session, write your report in a RMarkdown script, in which you
+must use the following YAML header settings (replace the default YAML
+header by this one, edit the author's name and show the date):
+
+\begin{verbatim}
+---
+title: "Week 8"
+subtitle: "Gaussian Mixture Models & EM"
+author: LastName FirstName
+date: "`#r format(Sys.time())`" # remove the # to show the date
+output:
+  html_document:
+    toc: true
+    toc_depth: 2
+    toc_float: true
+    theme: cerulean
+    highlight: espresso
+---
+\end{verbatim}
+
+\section{\texorpdfstring{EM using
+\texttt{mclust}}{EM using mclust}}\label{em-using-mclust}
+
+\subsection*{\texorpdfstring{GMM vs
+\(k\)-means}{GMM vs k-means}}\label{gmm-vs-k-means}
+\addcontentsline{toc}{subsection}{GMM vs \(k\)-means}
+
+In this section, we will use two artificial (simulated) datasets in
+which we know the ground truth (true labels) in order to compare the
+performances of \(k\)-means and GMM. To fit a GMM using EM technique you
+need to install and use the package \texttt{mclust}.
+
+\textbf{1.} Download and import
+\textcolor{white}{[}\faTable\textcolor{white}{]} Data1 and
+\textcolor{white}{[}\faTable\textcolor{white}{]} Data2 . Plot both of
+the datasets on the same window. Color the observations with respect to
+the ground truth, like in Figure \ref{fig:fig1}.
+
+\begin{figure}
+
+{\centering \includegraphics[width=0.7\linewidth]{Machine-Learning_files/figure-latex/fig1-1} 
+
+}
+
+\caption{Data1 is plotted on left. Data2 on right. Colors shown with respect to ground truth.}\label{fig:fig1}
+\end{figure}
+
+\textbf{2.} Apply \(k\)-means on both datasets with 4 clusters. Plot
+both of the dataset on the same window and color the observations with
+respect to \(k\)-means results. Interpret the results.
+
+\begin{rmdinsight}
+One way to think about the \(k\)-means model is that it places a circle
+(or, in higher dimensions, a hyper-sphere) at the center of each
+cluster, with a radius defined by the most distant point in the cluster.
+This radius acts as a hard cutoff for cluster assignment within the
+training set: any point outside this circle is not considered a member
+of the cluster. You can try to visualize the circles on your plots.
+\end{rmdinsight}
+
+\textbf{3.} Now fit a GMM model on the datasets. To do so, load the
+\texttt{mclust} library. Then you can use the function \texttt{Mclust()}
+on your data (this function will choose automatically the number of
+mixtures, basing on BIC criterion). Use the clustering results from your
+GMM model to visualize the results on both of the datasets, color the
+observations with respect to the clusters obtained from the GMM model.
+Interpret the results.
+
+\textbf{In the following questions from this section, explore the
+\texttt{mclust} library and what it offers. Apply its functions on
+Data2.}
+
+\begin{rmdinsight}
+\texttt{mclust} is a contributed \texttt{R} package for model-based
+clustering, classification, and density estimation based on finite
+normal mixture modelling. It provides functions for parameter estimation
+via the EM algorithm for normal mixture models with a variety of
+covariance structures, and functions for simulation from these models.
+Also included are functions that combine model-based hierarchical
+clustering, EM for mixture estimation and the Bayesian Information
+Criterion (BIC) in comprehensive strategies for clustering, density
+estimation and discriminant analysis. Additional functionalities are
+available for displaying and visualizing fitted models along with
+clustering, classification, and density estimation results.
+\end{rmdinsight}
+
+\textbf{4.} Show the summary of the GMM model you fitted on Data2.
+Explain what it shows.
+
+\textbf{5.} \texttt{mclust} package offers some visualization. To plot
+your two-dimensional data, use the standard plot function applied on
+your model. Apply the following code, given that the model is named
+\texttt{gmm\_model}, and interpret what it shows.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{plot}\NormalTok{(gmm_model, }\DataTypeTok{what =} \StringTok{"classification"}\NormalTok{)}
+\KeywordTok{plot}\NormalTok{(gmm_model, }\DataTypeTok{what =} \StringTok{"uncertainty"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\textbf{6.} \texttt{mclust} package uses the Bayesian Information
+Criterion (BIC) to choose the best number of mixtures. To see the values
+of BIC for different number of mixtures use the following code.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{plot}\NormalTok{(gmm_model, }\DataTypeTok{what =} \StringTok{"BIC"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+Information criteria are based on penalised forms of the log-likelihood.
+As the likelihood increases with the addition of more components, a
+penalty term for the number of estimated parameters is subtracted from
+the log-likelihood. The BIC is a popular choice in the context of GMMs,
+and takes the form
+
+\[ \text{BIC} \approx 2 \ell (X|\hat{\theta}) - \nu \log (n)\]
+
+where \(\theta\) is the set of parameters (in GMM it is
+\(\theta=\{\mu,\Sigma,\pi\})\), and \(\ell (X|\hat{\theta})\) is the
+log-likelihood at the Maximum Likelihood Estimators \(\hat{\theta}\) for
+the model, \(n\) is the sample size, and \(\nu\) is the number of
+estimated parameters. We select the model that maximises BIC.
+
+\begin{rmdinsight}
+What you see on the figure showing the BIC values are different
+parameterisations of the within-group covariance matrix \(\Sigma_k\). In
+GMM, clusters are ellipsoidal, centered at the mean vector \(\mu_k\),
+and with other geometric features, such as volume, shape and
+orientation, determined by the covariance matrix \(\Sigma_k\).
+
+\begin{figure}
+\centering
+\includegraphics{img/gmm_mclust_sigma.png}
+\caption{}
+\end{figure}
+\end{rmdinsight}
+
+\textbf{7.} Though GMM is often categorized as a clustering algorithm,
+fundamentally it is an algorithm for density estimation. That is to say,
+the result of a GMM fit to some data is technically not a clustering
+model, but a generative probabilistic model describing the distribution
+of the data. Density estimation plays an important role in applied
+statistical data analysis and theoretical research. A density estimate
+based on GMM can be obtained using the function
+\texttt{densityMclust()}. Apply it on Data2 and visualize the estimated
+densities (show an ``image'' and a ``perspective'' plot of the bivariate
+density estimate).
+
+\subsection*{EM on 1D}\label{em-on-1d}
+\addcontentsline{toc}{subsection}{EM on 1D}
+
+In this part you must fit a GMM model on a one dimensional simulated
+data.
+
+\textbf{8.} Create a data table of 300 observations in which you have
+two columns:
+
+\begin{itemize}
+\tightlist
+\item
+  The first column contains generated data. Those data are generated
+  from three Gaussian distributions with different parameters.
+\item
+  The second column corresponds to the groud truth (every observation
+  was generated from which Gaussian).
+\item
+  Hint: functions you may need are \texttt{rnorm()}, \texttt{rep()},
+  \texttt{rbind()} or \texttt{cbind()}.
+\item
+  You must of course \textbf{set a seed} (your sutdent\_pk). An example
+  of 9 generated values from three Gaussians is shown in the following
+  table:
+\end{itemize}
+
+\begin{longtable}[]{@{}cc@{}}
+\toprule
+\begin{minipage}[b]{0.13\columnwidth}\centering\strut
+X\strut
+\end{minipage} & \begin{minipage}[b]{0.13\columnwidth}\centering\strut
+source\strut
+\end{minipage}\tabularnewline
+\midrule
+\endhead
+\begin{minipage}[t]{0.13\columnwidth}\centering\strut
+-5.626\strut
+\end{minipage} & \begin{minipage}[t]{0.13\columnwidth}\centering\strut
+1\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.13\columnwidth}\centering\strut
+-4.816\strut
+\end{minipage} & \begin{minipage}[t]{0.13\columnwidth}\centering\strut
+1\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.13\columnwidth}\centering\strut
+-5.836\strut
+\end{minipage} & \begin{minipage}[t]{0.13\columnwidth}\centering\strut
+1\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.13\columnwidth}\centering\strut
+1.595\strut
+\end{minipage} & \begin{minipage}[t]{0.13\columnwidth}\centering\strut
+2\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.13\columnwidth}\centering\strut
+0.3295\strut
+\end{minipage} & \begin{minipage}[t]{0.13\columnwidth}\centering\strut
+2\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.13\columnwidth}\centering\strut
+-0.8205\strut
+\end{minipage} & \begin{minipage}[t]{0.13\columnwidth}\centering\strut
+2\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.13\columnwidth}\centering\strut
+5.487\strut
+\end{minipage} & \begin{minipage}[t]{0.13\columnwidth}\centering\strut
+3\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.13\columnwidth}\centering\strut
+5.738\strut
+\end{minipage} & \begin{minipage}[t]{0.13\columnwidth}\centering\strut
+3\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.13\columnwidth}\centering\strut
+5.576\strut
+\end{minipage} & \begin{minipage}[t]{0.13\columnwidth}\centering\strut
+3\strut
+\end{minipage}\tabularnewline
+\bottomrule
+\end{longtable}
+
+\textbf{9.} Show you generated data on one axe (this kind of figures are
+called stripchart), color them with respect to ground truth, you must
+obtain something like:
+
+\begin{center}\includegraphics[width=0.7\linewidth]{Machine-Learning_files/figure-latex/unnamed-chunk-214-1} \end{center}
+
+\textbf{10.} Plot the histogram corresponding to your generated data.
+Interpret it.
+
+\textbf{11.} Fit a GMM model on your generated data. Print the summary
+and visualize your results. Explain your results.
+
+\textbf{12.} Apply a density estimate on your generated data and
+visualize it. Interpret the obtained figure.
+
+\section{EM from scratch}\label{em-from-scratch}
+
+In this second part of this PW you will build a GMM model from scratch,
+you must develop the EM technique to fit the model.
+
+\textbf{2.1} Generate a two-dimensional dataset from a \(k\)-component
+Gaussian mixture density with different means and different covariance
+matrices. It is up to you to choose the mixing proportions
+\(\{\pi_1,\ldots,\pi_k\}\).
+
+\textbf{2.2} Implement the EM algorithm to fit a GMM on your generated
+data:
+
+\begin{itemize}
+\tightlist
+\item
+  Initialize the mixing proportions and the covariance matrices (e.g.,
+  you can initialize with equal mixing proportions and Identity
+  covariance matrices).
+\item
+  Initialize the means ``randomly'' (by your own choice of \(k\)).
+\item
+  In the EM training loop, store the value of the observed-data
+  log-likelihood at each iteration.
+\item
+  At convergence, plot the log-likelihood curve.
+\end{itemize}
+
+\textbf{2.3} Create a function that selects the number of mixture
+components by computing the values of BIC criterion for \(k\) varying
+from 1 to 10.
+
+\textbf{2.4} On your generated data, compare your results obtained with
+the algorithm you developed and the ground truth (in terms of the chosen
+number of mixture components; and in terms of error rate).
+
+\textbf{2.5} Apply the algorithm you developed on
+\textcolor{white}{[}\faTable\textcolor{white}{]} Iris dataset.
+
+\begin{rmdinsight}
+To visualize your results on Iris dataset, you can use PCA projection
+and coloring with respect to clustering results.
+
+The package \texttt{mclust} provides also a dimensionality reduction
+technique in function \texttt{MclustDR()}.
 \end{rmdinsight}
 
 ◼

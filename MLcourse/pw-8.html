@@ -32,8 +32,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black">
   
   
-<link rel="prev" href="pw-4.html">
-<link rel="next" href="principal-components-analysis.html">
+<link rel="prev" href="gaussian-mixture-models-em.html">
+<link rel="next" href="app-introRStudio.html">
 <script src="book_assets/jquery-2.2.3/jquery.min.js"></script>
 <link href="book_assets/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="book_assets/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
@@ -311,33 +311,197 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="special-session" class="section level1">
-<h1><span class="header-section-number">5</span> Special Session</h1>
-<p>This session is special. You are given a dataset on Devinci Online, go download it and analyze it. You must submit a report (html) of your analysis at the end of the session. This report is the most important one for your evaluation.</p>
-<p>Pay attention to the objective of the dataset, your analysis depends on your dataset’s understanding. The data analysis must include all the following steps: importing the dataset, exploring the dataset and describing it, data preprocessing, data splitting, building models and assessing models.</p>
-<p>Here are somes rules for this special session:</p>
+<div id="pw-8" class="section level1 unnumbered">
+<h1>PW 8</h1>
+<!-- https://www.python-course.eu/expectation_maximization_and_gaussian_mixture_models.php -->
+<!-- mclust -->
+<!-- https://chamroukhi.users.lmno.cnrs.fr/teaching.php -->
+<!-- https://chamroukhi.users.lmno.cnrs.fr/Teaching/ApprentissageM2/tp-EM-GMM.pdf -->
+<!-- From my Firefox session: -->
+<!-- In Depth: Gaussian Mixture Models | Python Data Science Handbook -->
+<!-- https://jakevdp.github.io/PythonDataScienceHandbook/05.12-gaussian-mixtures.html -->
+<!-- A quick tour of mclust -->
+<!-- https://cran.r-project.org/web/packages/mclust/vignettes/mclust.html -->
+<!-- mclust: an R package for normal mixture modeling -->
+<!-- https://www.stat.washington.edu/mclust/ -->
+<!-- mclust Version 4 for R: Normal Mixture Modeling for Model-Based Clustering, Classification, and Density Estimation - tr597.pdf -->
+<!-- https://www.stat.washington.edu/sites/default/files/files/reports/2012/tr597.pdf -->
+<!-- tp-EM-GMM.pdf -->
+<!-- https://chamroukhi.users.lmno.cnrs.fr/Teaching/ApprentissageM2/tp-EM-GMM.pdf -->
+<!-- Machine Learning with Python: Expectation Maximization and Gaussian Mixture Models in Python -->
+<!-- https://www.python-course.eu/expectation_maximization_and_gaussian_mixture_models.php -->
+<!-- Fitting a Mixture Model Using the Expectation-Maximization Algorithm in R -->
+<!-- http://tinyheero.github.io/2016/01/03/gmm-em.html -->
+<!-- Using Mixture Models for Clustering -->
+<!-- http://tinyheero.github.io/2015/10/13/mixture-model.html -->
+<!-- Practical session on Clustering methods -->
+<!-- http://perso.mines-paristech.fr/fabien.moutarde/ES_MachineLearning/Practical_clustering/Practical_clustering.htm -->
+<!-- Mines ParisTech machine learning practical session: Model selection and clustering, 13 May 2011. -->
+<!-- http://members.cbio.mines-paristech.fr/~thocking/mines-course/2011-05-13-clustering/2011-05-13-clustering.html -->
+<p>In the first part of this PW you will:</p>
 <ul>
-<li><p>The dataset will be available on Devinci Online during the session.</p></li>
-<li><p>When you use the function <code>set.seed()</code> to split the dataset, use your <strong>student’s number</strong>.</p></li>
-<li><p>The professor will not give you any hint. You can ask questions but the professor will not answer all of your questions. It depends on the question.</p></li>
-<li><p>Of course every student must work individually and no discussions are allowed.</p></li>
-<li><p>You have the right to access internet, the course’s website, and even googling some R tips for your codes. But you are not allowed to open any Social Network website neither your email. If you open one of these you will get directly zero.</p></li>
-<li><p>The professor has the right to verify by himself if you are opening any Social network/email website.</p></li>
-<li><p>The report must be written in english of course.</p></li>
-<li><p>There won’t be a quiz in this special session in order to give you the complete 3 hours to analyze the dataset.</p></li>
+<li>Learn how to fit a Gaussian Mixture Model (GMM) using the <code>mclust</code> R package.</li>
+<li>Compare <span class="math inline">\(k\)</span>-means and GMM on artificial data (2-D data).</li>
+<li>Fit a GMM on univariate (1-D) simulated data.</li>
 </ul>
-<!-- But you must apply the techniques you learned in chapter 5 in order to select the perfect model. -->
+<p>In the second part of this PW you will build an algorithm from <strong>scratch</strong>. Your algorithm must fit a GMM model using the <strong>E</strong>xpectation-<strong>M</strong>aximization (EM) technique on any multi dimensional dataset.</p>
+<div id="report-template" class="section level2 unnumbered">
+<h2>Report template</h2>
+<p>For this session, write your report in a RMarkdown script, in which you must use the following YAML header settings (replace the default YAML header by this one, edit the author’s name and show the date):</p>
+<pre><code>---
+title: &quot;Week 8&quot;
+subtitle: &quot;Gaussian Mixture Models &amp; EM&quot;
+author: LastName FirstName
+date: &quot;`#r format(Sys.time())`&quot; # remove the # to show the date
+output:
+  html_document:
+    toc: true
+    toc_depth: 2
+    toc_float: true
+    theme: cerulean
+    highlight: espresso
+---</code></pre>
+</div>
+<div id="em-using-mclust" class="section level2">
+<h2><span class="header-section-number">8.4</span> EM using <code>mclust</code></h2>
+<div id="gmm-vs-k-means" class="section level3 unnumbered">
+<h3>GMM vs <span class="math inline">\(k\)</span>-means</h3>
+<p>In this section, we will use two artificial (simulated) datasets in which we know the ground truth (true labels) in order to compare the performances of <span class="math inline">\(k\)</span>-means and GMM. To fit a GMM using EM technique you need to install and use the package <code>mclust</code>.</p>
+<p><strong>1.</strong> Download and import  <a target="_blank" href="datasets/data1.csv"> Data1 <i class="fa fa-table" aria-hidden="true"></i></a> and  <a target="_blank" href="datasets/data2.csv"> Data2 <i class="fa fa-table" aria-hidden="true"></i></a>. Plot both of the datasets on the same window. Color the observations with respect to the ground truth, like in Figure <a href="pw-8.html#fig:fig1">8.6</a>.</p>
+<div class="figure" style="text-align: center"><span id="fig:fig1"></span>
+<img src="Machine-Learning_files/figure-html/fig1-1.png" alt="Data1 is plotted on left. Data2 on right. Colors shown with respect to ground truth." width="70%" />
+<p class="caption">
+Figure 8.6: Data1 is plotted on left. Data2 on right. Colors shown with respect to ground truth.
+</p>
+</div>
+<p><strong>2.</strong> Apply <span class="math inline">\(k\)</span>-means on both datasets with 4 clusters. Plot both of the dataset on the same window and color the observations with respect to <span class="math inline">\(k\)</span>-means results. Interpret the results.</p>
+<div class="rmdinsight">
+<p>
+One way to think about the <span class="math inline"><span class="math inline">\(k\)</span></span>-means model is that it places a circle (or, in higher dimensions, a hyper-sphere) at the center of each cluster, with a radius defined by the most distant point in the cluster. This radius acts as a hard cutoff for cluster assignment within the training set: any point outside this circle is not considered a member of the cluster. You can try to visualize the circles on your plots.
+</p>
+</div>
+<p><strong>3.</strong> Now fit a GMM model on the datasets. To do so, load the <code>mclust</code> library. Then you can use the function <code>Mclust()</code> on your data (this function will choose automatically the number of mixtures, basing on BIC criterion). Use the clustering results from your GMM model to visualize the results on both of the datasets, color the observations with respect to the clusters obtained from the GMM model. Interpret the results.</p>
+<p><strong>In the following questions from this section, explore the <code>mclust</code> library and what it offers. Apply its functions on Data2.</strong></p>
+<div class="rmdinsight">
+<p>
+<code>mclust</code> is a contributed <code>R</code> package for model-based clustering, classification, and density estimation based on finite normal mixture modelling. It provides functions for parameter estimation via the EM algorithm for normal mixture models with a variety of covariance structures, and functions for simulation from these models. Also included are functions that combine model-based hierarchical clustering, EM for mixture estimation and the Bayesian Information Criterion (BIC) in comprehensive strategies for clustering, density estimation and discriminant analysis. Additional functionalities are available for displaying and visualizing fitted models along with clustering, classification, and density estimation results.
+</p>
+</div>
+<p><strong>4.</strong> Show the summary of the GMM model you fitted on Data2. Explain what it shows.</p>
+<p><strong>5.</strong> <code>mclust</code> package offers some visualization. To plot your two-dimensional data, use the standard plot function applied on your model. Apply the following code, given that the model is named <code>gmm_model</code>, and interpret what it shows.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">plot</span>(gmm_model, <span class="dt">what =</span> <span class="st">&quot;classification&quot;</span>)
+<span class="kw">plot</span>(gmm_model, <span class="dt">what =</span> <span class="st">&quot;uncertainty&quot;</span>)</code></pre></div>
+<p><strong>6.</strong> <code>mclust</code> package uses the Bayesian Information Criterion (BIC) to choose the best number of mixtures. To see the values of BIC for different number of mixtures use the following code.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">plot</span>(gmm_model, <span class="dt">what =</span> <span class="st">&quot;BIC&quot;</span>)</code></pre></div>
+<p>Information criteria are based on penalised forms of the log-likelihood. As the likelihood increases with the addition of more components, a penalty term for the number of estimated parameters is subtracted from the log-likelihood. The BIC is a popular choice in the context of GMMs, and takes the form</p>
+<p><span class="math display">\[ \text{BIC} \approx 2 \ell (X|\hat{\theta}) - \nu \log (n)\]</span></p>
+<p>where <span class="math inline">\(\theta\)</span> is the set of parameters (in GMM it is <span class="math inline">\(\theta=\{\mu,\Sigma,\pi\})\)</span>, and <span class="math inline">\(\ell (X|\hat{\theta})\)</span> is the log-likelihood at the Maximum Likelihood Estimators <span class="math inline">\(\hat{\theta}\)</span> for the model, <span class="math inline">\(n\)</span> is the sample size, and <span class="math inline">\(\nu\)</span> is the number of estimated parameters. We select the model that maximises BIC.</p>
+<div class="rmdinsight">
+<p>
+What you see on the figure showing the BIC values are different parameterisations of the within-group covariance matrix <span class="math inline"><span class="math inline">\(\Sigma_k\)</span></span>. In GMM, clusters are ellipsoidal, centered at the mean vector <span class="math inline"><span class="math inline">\(\mu_k\)</span></span>, and with other geometric features, such as volume, shape and orientation, determined by the covariance matrix <span class="math inline"><span class="math inline">\(\Sigma_k\)</span></span>.
+</p>
+<div class="figure">
+<p><img src="img/gmm_mclust_sigma.png" /></p>
+</div>
+</div>
+<p><strong>7.</strong> Though GMM is often categorized as a clustering algorithm, fundamentally it is an algorithm for density estimation. That is to say, the result of a GMM fit to some data is technically not a clustering model, but a generative probabilistic model describing the distribution of the data. Density estimation plays an important role in applied statistical data analysis and theoretical research. A density estimate based on GMM can be obtained using the function <code>densityMclust()</code>. Apply it on Data2 and visualize the estimated densities (show an “image” and a “perspective” plot of the bivariate density estimate).</p>
+</div>
+<div id="em-on-1d" class="section level3 unnumbered">
+<h3>EM on 1D</h3>
+<p>In this part you must fit a GMM model on a one dimensional simulated data.</p>
+<p><strong>8.</strong> Create a data table of 300 observations in which you have two columns:</p>
 <ul>
-<li>Your report must be clear. Every step or decision you make must be explained. Your code must be commented and your results must be interpreted.</li>
+<li>The first column contains generated data. Those data are generated from three Gaussian distributions with different parameters.</li>
+<li>The second column corresponds to the groud truth (every observation was generated from which Gaussian).</li>
+<li>Hint: functions you may need are <code>rnorm()</code>, <code>rep()</code>, <code>rbind()</code> or <code>cbind()</code>.</li>
+<li>You must of course <strong>set a seed</strong> (your sutdent_pk). An example of 9 generated values from three Gaussians is shown in the following table:</li>
 </ul>
-<p>Good Luck!</p>
-<!-- ```{r, learnr, echo = FALSE, dev = 'png', cache = TRUE, fig.align = 'center', fig.pos = 'h!', out.width = '100%'} -->
-<!-- knitr::include_app('https://mghassany.shinyapps.io/learnr/', height = '900px') -->
-<!-- ``` -->
-<p class="text-right">
+<center>
+<table style="width:28%;">
+<colgroup>
+<col width="13%" />
+<col width="13%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th align="center">X</th>
+<th align="center">source</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="center">-5.626</td>
+<td align="center">1</td>
+</tr>
+<tr class="even">
+<td align="center">-4.816</td>
+<td align="center">1</td>
+</tr>
+<tr class="odd">
+<td align="center">-5.836</td>
+<td align="center">1</td>
+</tr>
+<tr class="even">
+<td align="center">1.595</td>
+<td align="center">2</td>
+</tr>
+<tr class="odd">
+<td align="center">0.3295</td>
+<td align="center">2</td>
+</tr>
+<tr class="even">
+<td align="center">-0.8205</td>
+<td align="center">2</td>
+</tr>
+<tr class="odd">
+<td align="center">5.487</td>
+<td align="center">3</td>
+</tr>
+<tr class="even">
+<td align="center">5.738</td>
+<td align="center">3</td>
+</tr>
+<tr class="odd">
+<td align="center">5.576</td>
+<td align="center">3</td>
+</tr>
+</tbody>
+</table>
+</center>
+<p><strong>9.</strong> Show you generated data on one axe (this kind of figures are called stripchart), color them with respect to ground truth, you must obtain something like:</p>
+<p><img src="Machine-Learning_files/figure-html/unnamed-chunk-214-1.png" width="70%" style="display: block; margin: auto;" /></p>
+<p><strong>10.</strong> Plot the histogram corresponding to your generated data. Interpret it.</p>
+<p><strong>11.</strong> Fit a GMM model on your generated data. Print the summary and visualize your results. Explain your results.</p>
+<p><strong>12.</strong> Apply a density estimate on your generated data and visualize it. Interpret the obtained figure.</p>
+</div>
+</div>
+<div id="em-from-scratch" class="section level2">
+<h2><span class="header-section-number">8.5</span> EM from scratch</h2>
+<p>In this second part of this PW you will build a GMM model from scratch, you must develop the EM technique to fit the model.</p>
+<p><strong>2.1</strong> Generate a two-dimensional dataset from a <span class="math inline">\(k\)</span>-component Gaussian mixture density with different means and different covariance matrices. It is up to you to choose the mixing proportions <span class="math inline">\(\{\pi_1,\ldots,\pi_k\}\)</span>.</p>
+<p><strong>2.2</strong> Implement the EM algorithm to fit a GMM on your generated data:</p>
+<ul>
+<li>Initialize the mixing proportions and the covariance matrices (e.g., you can initialize with equal mixing proportions and Identity covariance matrices).</li>
+<li>Initialize the means “randomly” (by your own choice of <span class="math inline">\(k\)</span>).</li>
+<li>In the EM training loop, store the value of the observed-data log-likelihood at each iteration.</li>
+<li>At convergence, plot the log-likelihood curve.</li>
+</ul>
+<p><strong>2.3</strong> Create a function that selects the number of mixture components by computing the values of BIC criterion for <span class="math inline">\(k\)</span> varying from 1 to 10.</p>
+<p><strong>2.4</strong> On your generated data, compare your results obtained with the algorithm you developed and the ground truth (in terms of the chosen number of mixture components; and in terms of error rate).</p>
+<p><strong>2.5</strong> Apply the algorithm you developed on  <a target="_blank" href="datasets/iris.data"> Iris <i class="fa fa-table" aria-hidden="true"></i></a> dataset.</p>
+<div class="rmdinsight">
+<p>
+To visualize your results on Iris dataset, you can use PCA projection and coloring with respect to clustering results.
+</p>
+<p>
+The package <code>mclust</code> provides also a dimensionality reduction technique in function <code>MclustDR()</code>.
+</p>
+</div>
+<p align="right">
 ◼
 </p>
 
+</div>
 </div>
 
 
@@ -347,8 +511,8 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
           </div>
         </div>
       </div>
-<a href="pw-4.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="principal-components-analysis.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="gaussian-mixture-models-em.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="app-introRStudio.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="book_assets/gitbook-2.6.7/js/app.min.js"></script>

@@ -25,7 +25,7 @@
 <meta name="author" content="Mohamad Ghassany">
 
 
-<meta name="date" content="2018-12-08">
+<meta name="date" content="2018-12-19">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -421,49 +421,62 @@ Figure 9.7: Average, complete, and single linkage applied to an example data set
 </div>
 <div id="hierarchical-clustering-in-r" class="section level2">
 <h2><span class="header-section-number">9.3</span> Hierarchical clustering in <code>R</code></h2>
-<p>Let’s illustrate how to perform hierarchical clustering on dataset <code>laliga</code>.</p>
+<p>Let’s illustrate how to perform hierarchical clustering on dataset  <a target="_blank" href="datasets/ligue1_17_18.csv"> Ligue1 2017-2018 <i class="fa fa-table" aria-hidden="true"></i></a>.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Load the dataset</span>
-laliga &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&quot;http://mghassany.com/MLcourse/datasets/la-liga-15-16.csv&quot;</span>, <span class="dt">row.names=</span><span class="dv">1</span>)
-<span class="co">#ans&gt; Warning in file(file, &quot;rt&quot;): échec de InternetOpenUrl : &#39;La connexion avec</span>
-<span class="co">#ans&gt; le serveur a été réinitialisée&#39;</span>
-<span class="co">#ans&gt; Error in file(file, &quot;rt&quot;): impossible d&#39;ouvrir la connexion</span>
+ligue1 &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&quot;datasets/ligue1_17_18.csv&quot;</span>, <span class="dt">row.names=</span><span class="dv">1</span>,<span class="dt">sep=</span><span class="st">&quot;;&quot;</span>)
 
 <span class="co"># Work with standardized data</span>
-laliga_scaled &lt;-<span class="st"> </span><span class="kw">data.frame</span>(<span class="kw">scale</span>(laliga))
-<span class="co">#ans&gt; Error in scale(laliga): objet &#39;laliga&#39; introuvable</span>
+ligue1_scaled &lt;-<span class="st"> </span><span class="kw">data.frame</span>(<span class="kw">scale</span>(ligue1))
 
 <span class="co"># Compute dissimilary matrix - in this case Euclidean distance</span>
-d &lt;-<span class="st"> </span><span class="kw">dist</span>(laliga_scaled)
-<span class="co">#ans&gt; Error in as.matrix(x): objet &#39;laliga_scaled&#39; introuvable</span>
+d &lt;-<span class="st"> </span><span class="kw">dist</span>(ligue1_scaled)
 
 <span class="co"># Hierarchical clustering with complete linkage</span>
 treeComp &lt;-<span class="st"> </span><span class="kw">hclust</span>(d, <span class="dt">method =</span> <span class="st">&quot;complete&quot;</span>)
-<span class="co">#ans&gt; Error in hclust(d, method = &quot;complete&quot;): objet &#39;d&#39; introuvable</span>
-<span class="kw">plot</span>(treeComp)
-<span class="co">#ans&gt; Error in plot(treeComp): objet &#39;treeComp&#39; introuvable</span>
-
+<span class="kw">plot</span>(treeComp)</code></pre></div>
+<p><img src="Machine-Learning_files/figure-html/unnamed-chunk-219-1.png" width="70%" style="display: block; margin: auto;" /></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">
 <span class="co"># With average linkage</span>
 treeAve &lt;-<span class="st"> </span><span class="kw">hclust</span>(d, <span class="dt">method =</span> <span class="st">&quot;average&quot;</span>)
-<span class="co">#ans&gt; Error in hclust(d, method = &quot;average&quot;): objet &#39;d&#39; introuvable</span>
-<span class="kw">plot</span>(treeAve)
-<span class="co">#ans&gt; Error in plot(treeAve): objet &#39;treeAve&#39; introuvable</span>
-
+<span class="kw">plot</span>(treeAve)</code></pre></div>
+<p><img src="Machine-Learning_files/figure-html/unnamed-chunk-219-2.png" width="70%" style="display: block; margin: auto;" /></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">
 <span class="co"># With single linkage</span>
 treeSingle &lt;-<span class="st"> </span><span class="kw">hclust</span>(d, <span class="dt">method =</span> <span class="st">&quot;single&quot;</span>)
-<span class="co">#ans&gt; Error in hclust(d, method = &quot;single&quot;): objet &#39;d&#39; introuvable</span>
-<span class="kw">plot</span>(treeSingle) <span class="co"># Chaining</span>
-<span class="co">#ans&gt; Error in plot(treeSingle): objet &#39;treeSingle&#39; introuvable</span>
-
+<span class="kw">plot</span>(treeSingle) <span class="co"># Chaining</span></code></pre></div>
+<p><img src="Machine-Learning_files/figure-html/unnamed-chunk-219-3.png" width="70%" style="display: block; margin: auto;" /></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">
 <span class="co"># Set the number of clusters after inspecting visually</span>
 <span class="co"># the dendogram for &quot;long&quot; groups of hanging leaves</span>
 <span class="co"># These are the cluster assignments</span>
 <span class="kw">cutree</span>(treeComp, <span class="dt">k =</span> <span class="dv">2</span>) <span class="co"># (Barcelona, Real Madrid) and (rest)</span>
-<span class="co">#ans&gt; Error in nrow(tree$merge): objet &#39;treeComp&#39; introuvable</span>
+<span class="co">#ans&gt;      Paris-SG        Monaco          Lyon     Marseille        Rennes </span>
+<span class="co">#ans&gt;             1             1             1             1             2 </span>
+<span class="co">#ans&gt;      Bordeaux Saint-Etienne          Nice        Nantes   Montpellier </span>
+<span class="co">#ans&gt;             2             2             2             2             2 </span>
+<span class="co">#ans&gt;         Dijon      Guingamp        Amiens        Angers    Strasbourg </span>
+<span class="co">#ans&gt;             2             2             2             2             2 </span>
+<span class="co">#ans&gt;          Caen         Lille      Toulouse        Troyes          Metz </span>
+<span class="co">#ans&gt;             2             2             2             2             2</span>
 <span class="kw">cutree</span>(treeComp, <span class="dt">k =</span> <span class="dv">3</span>) <span class="co"># (Barcelona, Real Madrid), (Atlético Madrid) and (rest)</span>
-<span class="co">#ans&gt; Error in nrow(tree$merge): objet &#39;treeComp&#39; introuvable</span>
+<span class="co">#ans&gt;      Paris-SG        Monaco          Lyon     Marseille        Rennes </span>
+<span class="co">#ans&gt;             1             1             1             1             2 </span>
+<span class="co">#ans&gt;      Bordeaux Saint-Etienne          Nice        Nantes   Montpellier </span>
+<span class="co">#ans&gt;             2             2             2             2             2 </span>
+<span class="co">#ans&gt;         Dijon      Guingamp        Amiens        Angers    Strasbourg </span>
+<span class="co">#ans&gt;             3             3             3             3             3 </span>
+<span class="co">#ans&gt;          Caen         Lille      Toulouse        Troyes          Metz </span>
+<span class="co">#ans&gt;             3             3             3             3             3</span>
 <span class="co"># Compare differences - treeComp makes more sense than treeAve</span>
 <span class="kw">cutree</span>(treeComp, <span class="dt">k =</span> <span class="dv">4</span>) 
-<span class="co">#ans&gt; Error in nrow(tree$merge): objet &#39;treeComp&#39; introuvable</span></code></pre></div>
+<span class="co">#ans&gt;      Paris-SG        Monaco          Lyon     Marseille        Rennes </span>
+<span class="co">#ans&gt;             1             2             2             2             3 </span>
+<span class="co">#ans&gt;      Bordeaux Saint-Etienne          Nice        Nantes   Montpellier </span>
+<span class="co">#ans&gt;             3             3             3             3             3 </span>
+<span class="co">#ans&gt;         Dijon      Guingamp        Amiens        Angers    Strasbourg </span>
+<span class="co">#ans&gt;             4             4             4             4             4 </span>
+<span class="co">#ans&gt;          Caen         Lille      Toulouse        Troyes          Metz </span>
+<span class="co">#ans&gt;             4             4             4             4             4</span></code></pre></div>
 <p align="right">
 ◼
 </p>

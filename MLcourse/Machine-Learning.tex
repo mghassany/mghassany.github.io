@@ -125,7 +125,7 @@
   \postauthor{\par}
       \predate{\centering\large\emph}
   \postdate{\par}
-    \date{2018-12-06}
+    \date{2018-12-19}
 
 % \defaultfontfeatures{
 %     Path = /home/ghassany/texmf/fonts/opentype/public/fontawesome/}
@@ -7757,18 +7757,18 @@ shown in Figure \ref{fig:linkage}.
 \texttt{R}}{Hierarchical clustering in R}}\label{hierarchical-clustering-in-r}
 
 Let's illustrate how to perform hierarchical clustering on dataset
-\texttt{laliga}.
+\textcolor{white}{[}\faTable\textcolor{white}{]} Ligue1 2017-2018 .
 
 \begin{Shaded}
 \begin{Highlighting}[]
 \CommentTok{# Load the dataset}
-\NormalTok{laliga <-}\StringTok{ }\KeywordTok{read.csv}\NormalTok{(}\StringTok{"http://mghassany.com/MLcourse/datasets/la-liga-15-16.csv"}\NormalTok{, }\DataTypeTok{row.names=}\DecValTok{1}\NormalTok{)}
+\NormalTok{ligue1 <-}\StringTok{ }\KeywordTok{read.csv}\NormalTok{(}\StringTok{"datasets/ligue1_17_18.csv"}\NormalTok{, }\DataTypeTok{row.names=}\DecValTok{1}\NormalTok{,}\DataTypeTok{sep=}\StringTok{";"}\NormalTok{)}
 
 \CommentTok{# Work with standardized data}
-\NormalTok{laliga_scaled <-}\StringTok{ }\KeywordTok{data.frame}\NormalTok{(}\KeywordTok{scale}\NormalTok{(laliga))}
+\NormalTok{ligue1_scaled <-}\StringTok{ }\KeywordTok{data.frame}\NormalTok{(}\KeywordTok{scale}\NormalTok{(ligue1))}
 
 \CommentTok{# Compute dissimilary matrix - in this case Euclidean distance}
-\NormalTok{d <-}\StringTok{ }\KeywordTok{dist}\NormalTok{(laliga_scaled)}
+\NormalTok{d <-}\StringTok{ }\KeywordTok{dist}\NormalTok{(ligue1_scaled)}
 
 \CommentTok{# Hierarchical clustering with complete linkage}
 \NormalTok{treeComp <-}\StringTok{ }\KeywordTok{hclust}\NormalTok{(d, }\DataTypeTok{method =} \StringTok{"complete"}\NormalTok{)}
@@ -7807,39 +7807,33 @@ Let's illustrate how to perform hierarchical clustering on dataset
 \CommentTok{# the dendogram for "long" groups of hanging leaves}
 \CommentTok{# These are the cluster assignments}
 \KeywordTok{cutree}\NormalTok{(treeComp, }\DataTypeTok{k =} \DecValTok{2}\NormalTok{) }\CommentTok{# (Barcelona, Real Madrid) and (rest)}
-\CommentTok{#ans>       Barcelona     Real Madrid Atletico Madrid      Villarreal }
-\CommentTok{#ans>               1               1               1               2 }
-\CommentTok{#ans>        Athletic           Celta         Sevilla          Malaga }
-\CommentTok{#ans>               2               2               2               2 }
-\CommentTok{#ans>   Real Sociedad           Betis      Las Palmas        Valencia }
-\CommentTok{#ans>               2               2               2               2 }
-\CommentTok{#ans>           Eibar        Espanyol       Deportivo         Granada }
-\CommentTok{#ans>               2               2               2               2 }
-\CommentTok{#ans>  Sporting Gijon  Rayo Vallecano          Getafe         Levante }
-\CommentTok{#ans>               2               2               2               2}
+\CommentTok{#ans>      Paris-SG        Monaco          Lyon     Marseille        Rennes }
+\CommentTok{#ans>             1             1             1             1             2 }
+\CommentTok{#ans>      Bordeaux Saint-Etienne          Nice        Nantes   Montpellier }
+\CommentTok{#ans>             2             2             2             2             2 }
+\CommentTok{#ans>         Dijon      Guingamp        Amiens        Angers    Strasbourg }
+\CommentTok{#ans>             2             2             2             2             2 }
+\CommentTok{#ans>          Caen         Lille      Toulouse        Troyes          Metz }
+\CommentTok{#ans>             2             2             2             2             2}
 \KeywordTok{cutree}\NormalTok{(treeComp, }\DataTypeTok{k =} \DecValTok{3}\NormalTok{) }\CommentTok{# (Barcelona, Real Madrid), (Atlético Madrid) and (rest)}
-\CommentTok{#ans>       Barcelona     Real Madrid Atletico Madrid      Villarreal }
-\CommentTok{#ans>               1               1               2               3 }
-\CommentTok{#ans>        Athletic           Celta         Sevilla          Malaga }
-\CommentTok{#ans>               3               3               3               3 }
-\CommentTok{#ans>   Real Sociedad           Betis      Las Palmas        Valencia }
-\CommentTok{#ans>               3               3               3               3 }
-\CommentTok{#ans>           Eibar        Espanyol       Deportivo         Granada }
-\CommentTok{#ans>               3               3               3               3 }
-\CommentTok{#ans>  Sporting Gijon  Rayo Vallecano          Getafe         Levante }
-\CommentTok{#ans>               3               3               3               3}
+\CommentTok{#ans>      Paris-SG        Monaco          Lyon     Marseille        Rennes }
+\CommentTok{#ans>             1             1             1             1             2 }
+\CommentTok{#ans>      Bordeaux Saint-Etienne          Nice        Nantes   Montpellier }
+\CommentTok{#ans>             2             2             2             2             2 }
+\CommentTok{#ans>         Dijon      Guingamp        Amiens        Angers    Strasbourg }
+\CommentTok{#ans>             3             3             3             3             3 }
+\CommentTok{#ans>          Caen         Lille      Toulouse        Troyes          Metz }
+\CommentTok{#ans>             3             3             3             3             3}
 \CommentTok{# Compare differences - treeComp makes more sense than treeAve}
 \KeywordTok{cutree}\NormalTok{(treeComp, }\DataTypeTok{k =} \DecValTok{4}\NormalTok{) }
-\CommentTok{#ans>       Barcelona     Real Madrid Atletico Madrid      Villarreal }
-\CommentTok{#ans>               1               1               2               3 }
-\CommentTok{#ans>        Athletic           Celta         Sevilla          Malaga }
-\CommentTok{#ans>               3               3               3               3 }
-\CommentTok{#ans>   Real Sociedad           Betis      Las Palmas        Valencia }
-\CommentTok{#ans>               3               3               3               4 }
-\CommentTok{#ans>           Eibar        Espanyol       Deportivo         Granada }
-\CommentTok{#ans>               4               4               3               4 }
-\CommentTok{#ans>  Sporting Gijon  Rayo Vallecano          Getafe         Levante }
-\CommentTok{#ans>               4               4               4               4}
+\CommentTok{#ans>      Paris-SG        Monaco          Lyon     Marseille        Rennes }
+\CommentTok{#ans>             1             2             2             2             3 }
+\CommentTok{#ans>      Bordeaux Saint-Etienne          Nice        Nantes   Montpellier }
+\CommentTok{#ans>             3             3             3             3             3 }
+\CommentTok{#ans>         Dijon      Guingamp        Amiens        Angers    Strasbourg }
+\CommentTok{#ans>             4             4             4             4             4 }
+\CommentTok{#ans>          Caen         Lille      Toulouse        Troyes          Metz }
+\CommentTok{#ans>             4             4             4             4             4}
 \end{Highlighting}
 \end{Shaded}
 

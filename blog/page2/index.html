@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
 
-  <title>My TimeLine Viz</title>
+  <title>Blog</title>
 
   <meta name="author" content="Mohamad Ghassany" />
 
@@ -48,19 +48,19 @@
   
 
   
-  <meta property="og:title" content="My TimeLine Viz" />
+  <meta property="og:title" content="Blog" />
   
 
    
-  <meta property="og:description" content="I created, for fun, a timeline visualization since my master degree. I created it using R library timevis. I included the app in Shiny apps. I used the the groups visualization and modified the css file. Here is my timeline. You can zoom in/out, to see for example at what...">
+  <meta property="og:description" content="{% for post in paginator.posts %} {{ post.title }} {% if post.subtitle %} {{ post.subtitle }} {% endif %} Posted on {{ post.date | date: &quot;%B %-d, %Y&quot; }} {{ post.content | truncatewords: 50 | strip_html}} [Read&amp;nbsp;More] {% endfor %} {% if paginator.total_pages &gt; 1 %} {% if paginator.previous_page %}...">
   
 
 
   <meta property="og:type" content="website" />
 
   
-  <meta property="og:url" content="http://mghassany.com/blog/my-timetable/" />
-  <link rel="canonical" href="http://mghassany.com/blog/my-timetable/" />
+  <meta property="og:url" content="http://mghassany.com/blog/page2/" />
+  <link rel="canonical" href="http://mghassany.com/blog/page2/" />
   
 
   
@@ -74,11 +74,11 @@
   <meta name="twitter:creator" content="@m_ghass" />
 
   
-  <meta name="twitter:title" content="My TimeLine Viz" />
+  <meta name="twitter:title" content="Blog" />
   
 
   
-  <meta name="twitter:description" content="I created, for fun, a timeline visualization since my master degree. I created it using R library timevis. I included the app in Shiny apps. I used the the groups visualization and modified the css file. Here is my timeline. You can zoom in/out, to see for example at what...">
+  <meta name="twitter:description" content="{% for post in paginator.posts %} {{ post.title }} {% if post.subtitle %} {{ post.subtitle }} {% endif %} Posted on {{ post.date | date: &quot;%B %-d, %Y&quot; }} {{ post.content | truncatewords: 50 | strip_html}} [Read&amp;nbsp;More] {% endfor %} {% if paginator.total_pages &gt; 1 %} {% if paginator.previous_page %}...">
   
 
   
@@ -205,12 +205,10 @@
   <div class="container">
     <div class="row">
       <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
-        <div class="post-heading">
-          <h1>My TimeLine Viz</h1>
+        <div class="page-heading">
+          <h1>Blog</h1>
 		  
 		  
-		  
-		  <span class="post-meta">Posted on December 6, 2017</span>
 		  
         </div>
       </div>
@@ -222,54 +220,50 @@
 
 
 
-<link href="/css/syntax.css" rel="stylesheet" >
-
-<script type="text/javascript"
-    src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
-</script>
-
-<div class="container">
+<div class="container" role="main">
   <div class="row">
     <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
-
-      <article role="main" class="blog-post">
-        <p>I created, for fun, a timeline visualization since my master degree.
-I created it using <code class="highlighter-rouge">R</code> library <a href="https://daattali.com/shiny/timevis-demo/">timevis</a>. I included the app in <a href="https://www.shinyapps.io/">Shiny apps</a>.
-I used the the <code class="highlighter-rouge">groups</code> visualization and modified the <code class="highlighter-rouge">css</code> file.</p>
-
-<p>Here is my timeline. You can zoom in/out, to see for example at what time exatly my son was born <i class="fa fa-smile-o" style="color:#00B4A1" aria-hidden="true"></i>.</p>
-
-<iframe src="https://mghassany.shinyapps.io/timevis_MG/" style="border:none;width:800px;height:700px;"></iframe>
-
-
-      </article>
+      <div class="posts-list">
+  
+  <article class="post-preview">
+    <a href="/blog/test-markdown/">
+      <h2 class="post-title">Test markdown</h2>
 
       
-
+      <h3 class="post-subtitle">
+        Each post also has a subtitle
+      </h3>
       
+    </a>
 
-      <ul class="pager blog-pager">
-        
-        <li class="previous">
-          <a href="/blog/generating-statistical-tables/" data-toggle="tooltip" data-placement="top" title="Generating statistical tables">&larr; Previous Post</a>
-        </li>
-        
-        
-        <li class="next">
-          <a href="/blog/notes-cc2-probas19/" data-toggle="tooltip" data-placement="top" title="Notes CC2 Probabilités 2">Next Post &rarr;</a>
-        </li>
-        
-      </ul>
+    <p class="post-meta">
+      Posted on February 20, 2015
+    </p>
 
-      
-        <div class="disqus-comments">
-          
+    <div class="post-entry">
+      This is an original post from the creator of the template to test Markdown. You can write regular markdown here and Jekyll will automatically convert it to a nice webpage. I strongly encourage you to take 5 minutes to learn how to write in markdown - it’ll teach...
+      <a href="/blog/test-markdown/" class="post-read-more">[Read&nbsp;More]</a>
+    </div>
 
-        </div>
-      
+   </article>
+  
+</div>
+
+
+<ul class="pager main-pager">
+  
+  <li class="previous">
+    <a href="/blog/">&larr; Newer Posts</a>
+  </li>
+  
+  
+</ul>
+
+	    
     </div>
   </div>
 </div>
+
 
     <footer>
   <div class="container beautiful-jekyll-footer">

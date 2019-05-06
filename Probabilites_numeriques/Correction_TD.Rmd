@@ -1,0 +1,682 @@
+---
+title: "Corrections TD"
+subtitle: "Probabilités Numériques"
+author: "Mohamad Ghassany"
+output:
+  # prettydoc::html_pretty:
+  #   theme: leonids #cayman #hpstr #architect #cayman #tactile #leonids
+  #   css: css/style.css
+  rmdformats::readthedown:
+    highlight: kate
+    css: css/style.css
+editor_options: 
+  chunk_output_type: inline
+---
+
+# TD2
+
+## Exercice 2
+
+### Question b)
+
+La loi de Wigner a une densité $f(x)=\sqrt{4-x^2}/2\pi$ sur $[-2,2]$. On va d'abord simuler des valeurs suivants cette loi. On va faire cette simulation manuellement (au contraire d'autres lois déjà prédifinies sur R, comme la fonction `rnorm()` qui permet de simuler des valeurs suivants la loi Normale).
+
+La courbe de la densité est de la forme:
+
+```{r}
+curve(sqrt(4-x^2)/(2*pi),from=-2,to=2)
+```
+
+L'idée pour simuler un nombre fixe des valeurs suivant cette loi est de générer un des points sur le rectangle de la figures ci dessus, si le point est au dessous de demi cercle on le garde, sinon on le rejette. 
+
+Pour simuler un point on génére son abscisse et son ordonné selon la loi uniforme. Le point est en dessous du demi cerle si son ordonné est inférieur à $\sqrt{4-abscisse^2}/2\pi$
+
+```{r}
+N<-10000
+U<-rep(NA, N) # le vecteur contenant les 10000 valeurs simulés suivant la loi de Wigner
+for (k in (1:N)) 
+{ # on génére un point
+  x<-runif(1,-2,2) # l'abscise selon la loi unifome entre -2 et 2   
+  y<-runif(1,0,0.4) # l'ordonné selon la loi uniforme entre 0 et 0.4 (un peu en dessus du cercle)    
+  while (y>sqrt(4-x^2)/(2*pi)) # si le point généré est à l'extérieur de demi cercle on re génére un autre point jusqu'à que le point généré est en dessous.
+    {   x<-runif(1,-2,2)    
+        y<-runif(1,0,2)
+    }  
+  U[k]<-x # on garde les abscisses
+} # A ce moment, U contient N v.a. distribuées selon la loi de Wigner. 
+```
+
+Ensuite pour montrer la loi des grands nombres on calcule la moyenne cumulative qui doit converger vers l'espérance théorique (qui est 0)
+
+```{r}
+arithm<-(1:N)  # =[1,2,3,...N]
+S<-cumsum(U)/arithm
+plot(arithm,S,xlim=c(0,N), ylim=c(-1,1),type ="l", main ="Visualisation Loi des Grands Nombres pour n variant de 1 a 1000", xlab = "n", ylab = "S_n") 
+abline(h=0, col="red")
+```
+
+## Exercice 3
+
+Il faut calculer $I_1 = \int_0^1 cos(x^3) exp(-x) dx$. Ce qui correspont à l'aire de la région en bleu de la figure suivante
+
+```{r, echo=F}
+curve(cos(x^3)*exp(-x), from=0, to =1, ylim=c(0,1))
+cord.x <- c(0,seq(0,1,0.01),1)
+cord.y <- c(0,cos(seq(0,1,0.01)^3)*exp(-seq(0,1,0.01)),0)
+polygon(cord.x,cord.y,col='skyblue')
+```
+
+### Première méthode
+
+Selon la méthode de Monte Carlo:
+
+$$ I_1 = \int_0^1 cos(x^3) exp(-x) dx = \int_\mathbb{R} cos(x^3) exp(-x) \times 1_{[0,1]}(x) dx  = \frac{1}{N} \sum_{i=1}^N cos(x_i^3) exp(-x_i) $$
+où $x_i$ est une valeur d'une variable aléatoire suivant la loi uniforme sur $[0,1]$, et $N$ est très grand. Donc
+
+```{r}
+n = 10000
+u = runif(n,0,1)
+I1 = sum(cos(u^3)*exp(-u))/n
+cat("valeur approchée de I_1 = ", I1)
+```
+
+### Deuxième méthode
+
+Ce qu'on va faire maintenant est de simuler beaucoup des points dans le carré entre 0 et 1. L'aire qu'on souhaite calculer sera la proportion des points qui est dans la région bleue de la figure suivante divisée par l'aire de rectange rouge (donc 1) :
+
+```{r, echo=F, warning=F}
+curve(cos(x^3)*exp(-x), from=0, to =1, ylim=c(0,1.2), clim=c(0,1.2))
+par(add=T)
+abline(h=1)
+abline(v=1)
+cord.x=c(0,1,1,0)
+cord.y=c(0,0,1,1)
+polygon(cord.x,cord.y,col='red')
+cord.x <- c(0,seq(0,1,0.01),1)
+cord.y <- c(0,cos(seq(0,1,0.01)^3)*exp(-seq(0,1,0.01)),0)
+polygon(cord.x,cord.y,col='skyblue')
+```
+
+```{r}
+N = 10000
+x = runif(N,0,1)
+y = runif(N,0,1)
+s = cos(x^3)*exp(-x) > y # ceci va retourner TRUE ou FALSE
+I1 = sum(s)/N
+cat("valeur approchée de I_1 = ", I1)
+```
+
+Remarque: A savoir qu'ici on considère pour chaque point généré on a une épreuve de Bernoulli qu'on peut appeler $S$ qui vaut 1 si le point est en dessous de la courve et 0 sinon. On va se baser sur ce principe dans les exercices suivants.
+
+
+## Exercice 5
+
+### Question 1
+
+Ici on génére des points sur le carré [-1,1] x [-1,1]. Nous souhaitons calculer $E(1_{X\in D})$. Appelons $S = 1_{X\in D}$ une variable aléatoire (qui vaut 1 si le point est dans le disque et 0 sinon). A savoir que $S$ est une variable qui suit la loi de Bernoulli de paramètre $p$. Donc $E(S)=p$. On va générer selon la loi uniforme des points dans le carré et estimer $p$ par la proportion des points à l'intérieur du disque.
+
+Remarques: 
+
+- L'équation du cercle est $x^2+y^2=1$ et son aire est $\pi R^2 = \pi$.
+- $p$ vaut théoriquement $\pi/4$. L'aire de disque divisée par l'aire de carré.
+
+```{r, echo=F}
+curve(sqrt(1-x^2), from=-1, to =1, ylim=c(-1,1))
+curve(-sqrt(1-x^2), from=-1, to =1, add=T)
+abline(h=-1)
+abline(h=1)
+abline(v=1)
+abline(v=-1)
+cord.x=c(-1,-1,1,1)
+cord.y=c(1,-1,-1,1)
+polygon(cord.x,cord.y,col='red')
+cord.x <- c(-1,seq(-1,1,0.01),1)
+cord.y <- c(0,sqrt(1-seq(-1,1,0.01)^2),0)
+cord.y2 <- c(0,-sqrt(1-seq(-1,1,0.01)^2),0)
+polygon(cord.x,cord.y,col='skyblue')
+polygon(cord.x,cord.y2,col='skyblue')
+```
+
+```{r}
+n=1000
+x=runif(n,-1,1)
+y=runif(n,-1,1) 
+E = sum(x^2+y^2 < 1)/n
+cat("valeur approchée de E = ", E)
+```
+
+**MàJ**: Pour aider à la compréhension de l'approche on peut voir dans la figure à gauche les points générés selon les lois uniformes sur [-1,1]. Dans la figure à droite on a colorié les points selon la condition $x^2+y^2 < 1$.
+
+```{r }
+par(mfrow=c(1,2))
+plot(x,y, pch=21, bg="black")
+plot(x,y, pch=21, bg=ifelse(x^2+y^2 < 1,"red","blue"))
+```
+
+
+Remarque: d'autre part: $\pi/4 =$ `r pi/4`. 
+
+### Question 2
+
+On souhaite approximer $V(S)$ qui vaut théoriquement $p(1-p)=\frac{\pi}{4}(1-\frac{\pi}{4})$=`r pi/4*(1-pi/4)`. 
+
+Pour se faire on va utiliser deux variables aléatoires $S_1$ et $S_2$ suivant la loi uniforme sur [-1,1] et **indépendantes**. A remarque qu'on peut se servir de ces deux lois pour calculer $V(S)$ car $V(S) =\frac{1}{2}V(S_1-S_2)$ car $V(S_1-S_2) = V(S_1) + V(S_2)$ et $V(S_1)=V(S_2)$ car $S_1$ et $S_2$ sont indépendantes et ont la même loi. 
+
+A remarquer aussi que $\frac{1}{2}V(S_1-S_2) = \frac{1}{2} E[(S_1-S_2)^2]$.
+
+Donc
+
+```{r}
+n=1000
+# simulation de S1
+x1 = runif(1000,-1,1)
+y1 = runif(1000,-1,1)
+s1 = x1^2 + y1^2 <= 1
+# simulation de S2
+x2 = runif(1000,-1,1)
+y2 = runif(1000,-1,1)
+s2 = x2^2 + y2^2 <= 1
+
+E = 1/2 *  sum((s1 - s2)^2)/n 
+cat("valeur approchée de E = ", E)
+```
+
+### Question 3
+
+![](td2_5_3.PNG)
+
+# TD3
+
+## Simulation de variables aléatoires par inversion de la fonction de répartition
+
+```{block, type='rmdinsight'}
+Pour simuler (générer) une variable aléatoire $X$ de loi de répartition $F$
+dont on sait calculer l'inverse généralisée $F^{-1}$, on peut simuler une
+variable aléatoire de loi uniforme $U$ sur l'intervalle $[0,1]$ et poser
+$X=F^{-1}(U)$. 
+```
+
+### Exercice 1
+
+* Densité: $f(x)=(1/2) cos(x) \times 1_{\{-\pi/2 \leq x \leq \pi/2\}}$
+* Fonction de répartition réciproque: $F^{-1}(x)=arcsin(2x-1)$
+
+```{r}
+# création de la fonction rcos qui va simuler N valeurs aléatoires suivant la densité f(x) ci dessus.
+rcos=function(N)
+{
+  u=runif(N,0,1)
+  return(asin(2*u-1))
+}
+```
+
+Vérification de la simulation par un histogramme:
+
+```{r}
+par(mfrow=c(1,2))
+# densité théorique
+curve(1/2 * (cos(x)), from=-pi/2, to = + pi/2, main="courbe de la densité", lwd=3, col="red")
+hist(rcos(10000), probability = T, col="red")
+```
+
+**Remarque**: il est utile aussi de superposer les deux figures:
+
+```{r}
+hist(rcos(10000), probability = T, col="red")
+curve(1/2 * (cos(x)), from=-pi/2, to = + pi/2, add=T, main="courbe de la densité", lwd=3, col="blue")
+```
+
+### Exercice 2
+
+#### Loi Exponentielle $\mathcal{E}(1)$
+
+* Densité: $f(x)=e^{-x} \times 1_{\mathbb{R}^+}$
+* Fonction de répartition réciproque: $F^{-1}(x)=- \ln(1-x)$
+* **Remarque**: Si $U \thicksim \mathcal{U}(0,1)$ alors $1-U \thicksim \mathcal{U}(0,1)$
+
+```{r}
+# simulation loi exponentiolle de paramètre 1
+rexpo <- function(N){
+  u = runif(N,0,1)
+  return(-log(u))
+}
+
+par(mfrow=c(1,2))
+# densité théorique
+curve(exp(-x), from=0,to=10, main="courbe de la densité", lwd=3, col="green")
+hist(rexpo(10000), probability = T, col="green")
+
+```
+
+#### Loi Cauchy
+
+* Densité: $f(x)=\frac{1}{\pi(1+x^2)} \quad \forall x \in \mathbb{R}$
+* Fonction de répartition réciproque: $F^{-1}(x)=tan(\pi(x-\frac{1}{2}))$
+
+```{r}
+# simulation loi cauchy 
+rcauchy=function(N)
+{
+  u=runif(N,0,1)
+  return(tan(pi*(u-1/2)))
+}
+
+par(mfrow=c(1,2))
+# densité théorique
+curve(1/(pi*(1+x^2)), from=-10, to = + 10, main="courbe de la densité", lwd=3, col="blue")
+hist(rcauchy(1000),probability = T, col="blue")
+```
+
+Il est intéressant de remarquer que des valeurs extrêmes ont été simulés. Pour voir en plus clair l'histogramme on peut controler le nombre de batôns:
+
+```{r}
+par(mfrow=c(1,2))
+# densité théorique
+curve(1/(pi*(1+x^2)), from=-10, to = + 10, main="courbe de la densité", lwd=3, col="blue")
+x=rcauchy(10000)
+hist(x,breaks= c(min(x),seq(-20,20,0.5), max(x)), xlim=c(-15,15),probability = T, col="blue")
+```
+
+### Exercice 3
+
+```{r}
+Tirage=function(N)
+{
+  p = c(0.4982, 0.2103, 0.1270, 0.0730, 0.0418, 0.0241, 0.0132, 0.0069, 0.0035, 0.0015, 0.0005)
+  Ech=sample(1:11,p=p,size=N,replace=TRUE)
+  return(Ech)
+}
+
+par(mfrow=c(1,2))
+p = c(0.4982, 0.2103, 0.1270, 0.0730, 0.0418, 0.0241, 0.0132, 0.0069, 0.0035, 0.0015, 0.0005)
+barplot(p, names.arg = 1:11,main="diagramme en bâtons de la loi de X (discrète)")
+hist(Tirage(10000), col="grey", probability = T)
+
+# Espérance théorique
+Esp = sum((1:11)*p)
+Esp
+# moyenne des simulations
+moy = mean(Tirage(10000))
+moy
+
+
+```
+
+## Simulation de variables aléatoires par la méthode du rejet
+
+```{block, type='rmdinsight'}
+**Rappels : Principe de la méthode du rejet**
+Pour simuler (ou générer) une variable aléatoire de densité $f$ bornée par
+$M$ et à support compact sur $[a,b]$, on simule des variables aléatoires
+uniformes sur $[a,b]\times[0,M]$ (qui représente le pavé contenant le graphe de $f$), jusqu’à ce que l’un des points tirés appartiennent à l’hypographe de $f$.
+On prend alors pour réalisation de la loi $f$ l’abscisse de ce point.
+```
+
+### Exercice 5
+
+La loi de Wigner a une densité $f(x)=\sqrt{4-x^2}/2\pi$ sur $[-2,2]$. On va d'abord simuler des valeurs suivants cette loi. On va faire cette simulation manuellement (au contraire d'autres lois déjà prédifinies sur R, comme la fonction `rnorm()` qui permet de simuler des valeurs suivants la loi Normale).
+
+La courbe de la densité est de la forme:
+
+```{r}
+curve(sqrt(4-x^2)/(2*pi),from=-2,to=2)
+```
+
+L'idée pour simuler un nombre fixe des valeurs suivant cette loi est de générer un des points sur le rectangle de la figures ci dessus, si le point est au dessous de demi cercle on le garde, sinon on le rejette. 
+
+Pour simuler un point on génére son abscisse et son ordonné selon la loi uniforme. Le point est en dessous du demi cerle si son ordonné est inférieur à $\sqrt{4-abscisse^2}/2\pi$
+
+```{r}
+N<-10000
+ # le vecteur contenant les 10000 valeurs simulés suivant la loi de Wigner
+rWigner <- function(N){
+U<-rep(NA, N)
+for (k in (1:N)) 
+{ # on génére un point
+  x<-runif(1,-2,2) # l'abscise selon la loi unifome entre -2 et 2   
+  y<-runif(1,0,0.4) # l'ordonné selon la loi uniforme entre 0 et 0.4 (un peu en dessus du cercle)    
+  while (y>sqrt(4-x^2)/(2*pi)) # si le point généré est à l'extérieur de demi cercle on re génére un autre point jusqu'à que le point généré est en dessous.
+    {   x<-runif(1,-2,2)    
+        y<-runif(1,0,2)
+    }  
+  U[k]<-x # on garde les abscisses
+} # A ce moment, U contient N v.a. distribuées selon la loi de Wigner. 
+return(U)
+}
+```
+
+Vérification de la simulation par un histogramme:
+
+```{r}
+par(mfrow=c(1,2))
+# densité théorique
+curve(sqrt(4-x^2)/(2*pi),from=-2,to=2, main="courbe de la densité de Wigner", lwd=3, col="red")
+hist(rWigner(10000), probability = T, col="red")
+```
+
+### Extra 1: Simulation de la loi normale centrée réduite
+
+```{block, type='rmdinsight'}
+La fonction réciproque de la fonction de répartition de la loi normale centrée réduite n'est pas calculable analytiquement. Une façon pour simuler cette loi est d'utiliser la méthode de rejet.
+```
+
+La courbe de la loi normale centrée réduite est toujours en dessous de la courbe de la loi exponentielle de paramètre 1:
+
+```{r}
+curve(exp(-x), from=0,to=7, col = "blue", lwd=3, ylab="")
+curve(exp(-0.5*x^2)/sqrt(2*pi), add=T, col="red",lwd=3,ylab="")
+legend("topright" , legend=c("Exponentielle", "Normale centrée réduite (sur R+)"),
+       col=c("blue", "red"), lty=c(1,1), lwd=c(3,3), cex=0.6)
+```
+
+L'idée est de simuler des points qui sont en dessous de la densité de la loi exponentielle. Donc les abscisses suivent la loi exponentielle, les ordonnés suivent la loi uniforme sur $[0,1]$, et on multiplie les ordonnés par la densité exponentielle $e^{-x}$ pour avoir les points simulés en dessous de la densité exponentielle. On obtiens le suivant:
+
+```{r}
+x = rexp(1000)
+y=runif(1000)
+plot(x,y*exp(-x), pch=21, bg="black")
+curve(exp(-x), add=T, col = "blue", lwd=3)
+curve(exp(-0.5*x^2)/sqrt(2*pi), add=T, col="red",lwd=3)
+```
+
+Ensuite, on rejette les points que sont entre les deux courbes:
+
+```{r}
+x = rexp(1000)
+y=runif(1000)
+plot(x,y*exp(-x), pch=21, bg=ifelse(exp(-0.5*x^2)/sqrt(2*pi)<exp(-x)*y,"yellow","green"))
+curve(exp(-x), add=T, col = "blue", lwd=3)
+curve(exp(-0.5*x^2)/sqrt(2*pi), add=T, col="red",lwd=3)
+```
+
+Comme vous l'avez remarqué, on garde les points en dessous de la densité normale, mais ceux ci ne couvrent que la partie $\mathbb{R}^+$ de la loi normale centrée réduite. C'est pour cela qu'on rajoute une condition alétoire qui permet de garder l'opposé de l'abscisse avec une chance 1/2 : `if (runif(1)<0.5){X[i]=-X[i]}`.  
+
+```{r}
+#générer une loi normale à partir d'une loi expo, méthode du rejet
+SimulN=function(N)
+{
+  X=rep(0,N)
+  for (i in 1:N)
+  {
+    X[i]=rexp(1)
+    Y=runif(1)
+    while(1/sqrt(2*pi)*exp(-X[i]^2/2)<exp(-X[i])*Y)
+    {
+      X[i]=rexp(1)
+      Y=runif(1)
+    }
+    if (runif(1)<0.5)
+    {
+      X[i]=-X[i]
+    }
+  }  
+  return(X)
+}
+```
+
+Simulons maintenant des valeurs un échantillon pour voir si on génére bien une variable alétoire normale centrée réduite. 
+
+```{r}
+hist(SimulN(10000), probability = T, col="yellow")
+curve(exp(-0.5*x^2)/sqrt(2*pi), add=T, col="red",lwd=3)
+```
+
+### Extra 2: Simulation des lois discrètes
+
+#### Simulation de loi géométique
+
+```{r}
+
+#Loi géométrique, simulation par repetition de Bernouilli
+rgeom=function(N,p)
+{
+  X=rep(0,N)
+  for (i in 1:N)
+  {
+    X[i]=0
+    T=runif(1)
+    while(T>p)
+    {
+      X[i]=X[i]+1
+      T=runif(1)
+    }
+  }
+  return(X)
+}
+
+hist(rgeom(10000, 0.3), probability = T, col = "darkgreen")
+```
+
+
+#### Simulation de loi de Poisson
+
+```{r}
+#methode du rejet, loi de Poisson (ex6)
+rpoisson=function(N,L)
+{
+  X=rep(0,N)
+  for (i in 1:N)
+  {
+    X[i]=rgeom(1,1-L)
+    T=runif(1)
+    while(L^X[i]*exp(-L)/factorial(X[i])<(L^X[i]*exp(-L)*T))
+    {
+      X[i]=rgeom(1,1-L)
+      T=runif(1)
+      
+    }
+  }
+  return(X)
+}
+
+hist(rpoisson(10000,0.6), probability = T, col="darkblue")
+```
+
+# TD4
+
+On va appliquer sur l'exemple suivant: Soit $I = \int_0^1 e^x dx = E[e^U] = E[f(U)] \quad \text{où} \, U \thicksim U(0,1)$
+
+Remarque: la valeur théorique de $I$ est $e-1\approx 1.72$.
+
+## Estimation par MC: 
+
+$$I = E[e^U] = \frac{1}{N}\sum_{i=1}^N e^{u_i} \quad \text{où les } u_i \thicksim U(0,1) $$
+
+```{r}
+N=1000
+U=runif(N,0,1)
+#Monte Carlo simple
+MC=exp(U)
+EMC=mean(MC)
+cat("valeur approchée de I par MC simple = ",EMC)
+```
+
+Calculons la variance de cet estimateur MC simple:
+
+```{r}
+cat("variance de l'estimateur MC simple = ",var(MC))
+```
+
+## Réduction de variance par variable de contrôle
+
+L'idée est d'écrire
+
+$$ E[f(X)] = E[f(X)-h(X)] + E[h(X)]$$
+où
+
+- $E[h(X)]$ explicite
+- $V[f(X)-h(X)] << V[f(X)]$
+- intuituivement $f(X)$ et $h(X)$ proches.
+
+Donc pour I, on va considérer $f(U)= e^U$. On va choisir $h(U)=1+U$ comme $e^x \approx 1 + x$ près de 0 (dl d'ordre 1).
+
+* D'une part $E[h(U)] = E[1+U] = 3/2$.
+
+* Donc $I = E[f(U)-h(U)]+ E[h(U)] = E[e^U -1 -U] + E[h(U)]= \int_0^1 (e^x - 1 - x) dx + \frac{3}{2}$
+
+* On calcule $\int_0^1 (e^x - 1 - x) dx$ par la méthode MC $= \frac{1}{N} \sum_{i=1}^N (e^{u_i}-1-u_i)$ où $u_i \thicksim U(0,1)$.
+
+Donc
+
+$$I= \frac{1}{N} \sum_{i=1}^N (e^{u_i}-1-u_i) + \frac{3}{2}$$
+
+Nous remarquerons que
+
+* Pour MC simple, $V[f(U)]=V(e^U) \approx 0.242$
+
+* Pour MC avec variable de contrôle $V[f(U)-h(U)] = V[e^U-1-U] = ... \approx 0.0436$
+
+<!-- * Selon mon calcul $V[e^U-1-U]=-\frac{1}{2}e^2 +3e-\frac{53}{12}$ -->
+
+
+```{r}
+#Monte Carlo avec variable de controle 1+U, et biais : E(U+1)=3/2
+MCVC=exp(U)-(U+1)
+EMCVC=mean(exp(U)-(U+1))+3/2
+cat("valeur approchée de I par MCVC = ",EMCVC)
+```
+
+
+```{r}
+cat("variance de l'estimateur MCVC = ",var(MCVC))
+```
+
+Affichons maintenant les estimations par les deux méthodes en fonction de N:
+
+```{r, echo=F}
+plot(1:N, cumsum(exp(U))/(1:N),type="l", ylim=c(1.5,2), col="black", lwd=2, ylab = "Estimations")
+abline(h=exp(1)-1, col="blue", lwd=2)
+lines(1:N, cumsum(exp(U)-(U+1))/(1:N)+3/2, col="red", lwd=2)
+legend("topright", legend=c("MC","Valeur théorique","MCVC ordre 1"), col=c("black","blue","red"),lty=c(1,1), lwd=c(2,2))
+```
+
+Maintenant testons une variable de contrôle d'ordre supérieur. On prends $h(U)=1+U + \frac{U^2}{2!}$.
+
+```{r}
+#Monte Carlo avec variable de controle 1+U+U^2/2,
+# E(1+U+U^2/2)=1+1/2+1/2*(1/12+1/4)
+MCVC2=exp(U)-(1+U+U^2/2)
+EMCVC2=mean(MCVC2)+3/2+1/6
+cat("valeur approchée de I par MCVC d'ordre 2 = ",EMCVC2)
+```
+
+
+```{r}
+cat("variance de l'estimateur MCVC d'ordre 2 = ",var(MCVC2))
+```
+
+
+```{r, echo=F}
+plot(1:N, cumsum(exp(U))/(1:N),type="l", ylim=c(1.5,2), col="black", lwd=2, ylab = "Estimations")
+abline(h=exp(1)-1, col="blue", lwd=2)
+lines(1:N, cumsum(exp(U)-(U+1))/(1:N)+3/2, col="red", lwd=2)
+lines(1:N, cumsum(exp(U)-(1+U+U^2/2))/(1:N)+3/2+1/6, col="green", lwd=2)
+legend("topright", legend=c("MC","Valeur théorique","MCVC ordre 1","MCVC ordre 2"), col=c("black","blue","red","green"),lty=c(1,1,1), lwd=c(2,2,2))
+```
+
+## Réduction de variance par variables antithétiques
+
+L'idée est que si on calcule $I = \int_0^1 f(x) dx$ on prend 
+$$I = \frac{1}{2} \int_0^1 (f(x)+f(1-x)) dx$$
+Et donc $I = \frac{1}{2N} \sum_{i=1}^N (f(U_i)+f(1-U_i))$
+
+```{r}
+#variables antithétiques 
+U=runif(N,0,1)
+EMCA=1/2*mean(exp(U)+exp(1-U))
+cat("valeur approchée de I par MC variables antithétiues = ",EMCA)
+cat("variance de l'estimateur MCA = ",var(exp(U)+exp(1-U)))
+```
+
+
+```{r echo=F}
+plot(1:N, cumsum(exp(U))/(1:N),type="l", ylim=c(1.5,2), col="black", lwd=2, ylab = "Estimations")
+abline(h=exp(1)-1, col="blue", lwd=2)
+lines(1:N, cumsum(exp(U)-(U+1))/(1:N)+3/2, col="red", lwd=2)
+lines(1:N, cumsum(exp(U)-(1+U+U^2/2))/(1:N)+3/2+1/6, col="green", lwd=2)
+lines(1:N, cumsum(0.5*(exp(U)+exp(1-U)))/(1:N), col="yellow", lwd=2)
+legend("topright", legend=c("MC","Valeur théorique","MCVC ordre 1","MCVC ordre 2","MCVA"), col=c("black","blue","red","green","yellow"),lty=c(1,1,1,1), lwd=c(2,2,2,2))
+```
+
+
+## Exemple supplémentaire
+
+Soit $I = \int_0^2cos(x)dx$
+
+Remarque: l'exemple est à travailler sur papier d'abord. Attention on calcule l'intégrale entre 0 et 2.
+
+```{r}
+#Monte Carlo avec integrale de 0 à 2 de cos(x)
+U=runif(N,0,2)
+EMC=mean(2*cos(U))
+print(EMC)
+print(var(2*cos(U)))
+```
+
+
+```{r}
+# MC avec VC d'ordre 2
+EMCVC=mean(2*cos(U)-2+U^2)-4/3+2
+print(EMCVC)
+print(var(2*cos(U)-2+U^2))
+```
+
+```{r}
+# MC avec VC d'ordre 2
+EMCVC2=mean(2*cos(U)-2+U^2-U^4/12)-4/3+2+(16/5)/12
+print(EMCVC2)
+print(var(2*cos(U)-2+U^2-U^4/12))
+```
+
+```{r}
+# MC avec variables antithétiques
+U=runif(N,0,2)
+VA = mean(cos(U)+cos(2-U)) # attention ici f(u)+f(2-u) car u est uniforme sur [0,2]
+VA
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

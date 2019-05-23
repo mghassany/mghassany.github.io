@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Chapitre 2 Estimation ponctuelle | Statistique Inférentielle</title>
+  <meta name="description" content="Cours de Statistique Inférentielle A3 ESILV" />
+  <meta name="generator" content="bookdown 0.10 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Chapitre 2 Estimation ponctuelle | Statistique Inférentielle" />
+  <meta property="og:type" content="book" />
+  
+  
+  <meta property="og:description" content="Cours de Statistique Inférentielle A3 ESILV" />
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Chapitre 2 Estimation ponctuelle | Statistique Inférentielle" />
+  
+  <meta name="twitter:description" content="Cours de Statistique Inférentielle A3 ESILV" />
+  
+
+<meta name="author" content="Mohamad Ghassany" />
+
+
+<meta name="date" content="2019-05-23" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="introduction-1.html">
+<link rel="next" href="intervalle-de-confiance.html">
+<script src="book_assets/jquery-2.2.3/jquery.min.js"></script>
+<link href="book_assets/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="book_assets/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="book_assets/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="book_assets/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="book_assets/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="book_assets/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+
+
+
+
+
+
+
+<script src="book_assets/kePrint-0.0.1/kePrint.js"></script>
+
+
+
+<link rel="stylesheet" href="css\style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li class='beforeimg'>            
+   <a href="https://www.esilv.fr/">
+       <img src="img/Logo_ESILV_tout_blanc.png" style="width:75%; padding:0px 0; display:block; margin: 0 auto;" alt="ESILV logo">
+    </a>
+</li>
+<li class='before'><a href="./">Statistique Inférentielle</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Introduction</a></li>
+<li class="part"><span><b>Complément de formation Statistique</b></span></li>
+<li class="chapter" data-level="" data-path="variables-aleatoires-discretes.html"><a href="variables-aleatoires-discretes.html"><i class="fa fa-check"></i>Variables Aléatoires Discrètes</a><ul>
+<li class="chapter" data-level="0.1" data-path="variables-aleatoires-discretes.html"><a href="variables-aleatoires-discretes.html#notion-de-variable-aleatoire-reelle-v.a.r."><i class="fa fa-check"></i><b>0.1</b> Notion de variable aléatoire réelle (v.a.r.)</a></li>
+<li class="chapter" data-level="0.2" data-path="variables-aleatoires-discretes.html"><a href="variables-aleatoires-discretes.html#variables-aleatoires-discretes-1"><i class="fa fa-check"></i><b>0.2</b> Variables aléatoires discrètes</a><ul>
+<li class="chapter" data-level="" data-path="variables-aleatoires-discretes.html"><a href="variables-aleatoires-discretes.html#definition-loi-de-probabilite"><i class="fa fa-check"></i>Définition, loi de probabilité</a></li>
+<li class="chapter" data-level="" data-path="variables-aleatoires-discretes.html"><a href="variables-aleatoires-discretes.html#fonction-de-repartition-dune-variable-aleatoire-discrete"><i class="fa fa-check"></i>Fonction de répartition d’une variable aléatoire discrète</a></li>
+</ul></li>
+<li class="chapter" data-level="0.3" data-path="variables-aleatoires-discretes.html"><a href="variables-aleatoires-discretes.html#moments-dune-variable-aleatoire-discrete"><i class="fa fa-check"></i><b>0.3</b> Moments d’une variable aléatoire discrète</a><ul>
+<li class="chapter" data-level="" data-path="variables-aleatoires-discretes.html"><a href="variables-aleatoires-discretes.html#esperance-mathematique"><i class="fa fa-check"></i>Espérance mathématique</a></li>
+<li class="chapter" data-level="" data-path="variables-aleatoires-discretes.html"><a href="variables-aleatoires-discretes.html#esperance-dune-fonction-dune-variable-aleatoire"><i class="fa fa-check"></i>Espérance d’une fonction d’une variable aléatoire</a></li>
+<li class="chapter" data-level="" data-path="variables-aleatoires-discretes.html"><a href="variables-aleatoires-discretes.html#variance"><i class="fa fa-check"></i>Variance</a></li>
+<li class="chapter" data-level="" data-path="variables-aleatoires-discretes.html"><a href="variables-aleatoires-discretes.html#ecart-type"><i class="fa fa-check"></i>Ecart-type</a></li>
+<li class="chapter" data-level="" data-path="variables-aleatoires-discretes.html"><a href="variables-aleatoires-discretes.html#moments-non-centres-et-centres"><i class="fa fa-check"></i>Moments non centrés et centrés</a></li>
+</ul></li>
+<li class="chapter" data-level="0.4" data-path="variables-aleatoires-discretes.html"><a href="variables-aleatoires-discretes.html#couple-de-variables-aleatoires-discretes"><i class="fa fa-check"></i><b>0.4</b> Couple de variables aléatoires discrètes</a><ul>
+<li class="chapter" data-level="" data-path="variables-aleatoires-discretes.html"><a href="variables-aleatoires-discretes.html#table-de-probabilite-conjointe"><i class="fa fa-check"></i>Table de probabilité conjointe</a></li>
+<li class="chapter" data-level="" data-path="variables-aleatoires-discretes.html"><a href="variables-aleatoires-discretes.html#lois-marginales"><i class="fa fa-check"></i>Lois marginales</a></li>
+<li class="chapter" data-level="" data-path="variables-aleatoires-discretes.html"><a href="variables-aleatoires-discretes.html#lois-conditionnelles"><i class="fa fa-check"></i>Lois conditionnelles</a></li>
+<li class="chapter" data-level="" data-path="variables-aleatoires-discretes.html"><a href="variables-aleatoires-discretes.html#independance-de-variables-aleatoires"><i class="fa fa-check"></i>Indépendance de variables aléatoires</a></li>
+<li class="chapter" data-level="" data-path="variables-aleatoires-discretes.html"><a href="variables-aleatoires-discretes.html#covariance"><i class="fa fa-check"></i>Covariance</a></li>
+<li class="chapter" data-level="" data-path="variables-aleatoires-discretes.html"><a href="variables-aleatoires-discretes.html#coefficient-de-correlation-lineaire"><i class="fa fa-check"></i>Coefficient de corrélation linéaire</a></li>
+</ul></li>
+<li class="chapter" data-level="0.5" data-path="variables-aleatoires-discretes.html"><a href="variables-aleatoires-discretes.html#lois-usuelles-discretes"><i class="fa fa-check"></i><b>0.5</b> Lois usuelles discrètes</a><ul>
+<li class="chapter" data-level="0.5.1" data-path="variables-aleatoires-discretes.html"><a href="variables-aleatoires-discretes.html#loi-uniforme-discrete-mathcalun"><i class="fa fa-check"></i><b>0.5.1</b> Loi uniforme discrète <span class="math inline">\(\mathcal{U}(n)\)</span></a></li>
+<li class="chapter" data-level="0.5.2" data-path="variables-aleatoires-discretes.html"><a href="variables-aleatoires-discretes.html#loi-de-bernoulli-mathcalbp"><i class="fa fa-check"></i><b>0.5.2</b> Loi de Bernoulli <span class="math inline">\(\mathcal{B}(p)\)</span></a></li>
+<li class="chapter" data-level="0.5.3" data-path="variables-aleatoires-discretes.html"><a href="variables-aleatoires-discretes.html#loi-binomiale-mathcalbnp"><i class="fa fa-check"></i><b>0.5.3</b> Loi Binomiale <span class="math inline">\(\mathcal{B}(n,p)\)</span></a></li>
+<li><a href="variables-aleatoires-discretes.html#loi-de-poisson-mathcalplambda">Loi de Poisson <span class="math inline">\(\mathcal{P}(\lambda)\)</span></a></li>
+<li class="chapter" data-level="" data-path="variables-aleatoires-discretes.html"><a href="variables-aleatoires-discretes.html#approximation-dune-loi-binomiale"><i class="fa fa-check"></i>Approximation d’une loi binomiale</a></li>
+<li><a href="variables-aleatoires-discretes.html#loi-geometrique-ou-de-pascal-mathcalgp">Loi Géométrique ou de Pascal <span class="math inline">\(\mathcal{G}(p)\)</span></a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="variables-aleatoires-continues.html"><a href="variables-aleatoires-continues.html"><i class="fa fa-check"></i>Variables Aléatoires Continues</a><ul>
+<li class="chapter" data-level="0.6" data-path="variables-aleatoires-continues.html"><a href="variables-aleatoires-continues.html#densite-dune-variable-aleatoire-continue"><i class="fa fa-check"></i><b>0.6</b> Densité d’une variable aléatoire continue</a></li>
+<li class="chapter" data-level="0.7" data-path="variables-aleatoires-continues.html"><a href="variables-aleatoires-continues.html#fonction-de-repartition-dune-v.a.c"><i class="fa fa-check"></i><b>0.7</b> Fonction de répartition d’une v.a.c</a></li>
+<li class="chapter" data-level="0.8" data-path="variables-aleatoires-continues.html"><a href="variables-aleatoires-continues.html#fonction-dune-variable-aleatoire-continue"><i class="fa fa-check"></i><b>0.8</b> Fonction d’une variable aléatoire continue</a><ul>
+<li><a href="variables-aleatoires-continues.html#calcul-de-densites-pour-hxaxb">Calcul de densités pour <span class="math inline">\(h(X)=aX+b\)</span></a></li>
+<li><a href="variables-aleatoires-continues.html#calcul-de-densites-pour-hxx2">Calcul de densités pour <span class="math inline">\(h(X)=X^2\)</span></a></li>
+<li><a href="variables-aleatoires-continues.html#calcul-de-densites-pour-hxex">Calcul de densités pour <span class="math inline">\(h(X)=e^X\)</span></a></li>
+</ul></li>
+<li class="chapter" data-level="0.9" data-path="variables-aleatoires-continues.html"><a href="variables-aleatoires-continues.html#esperance-et-variance-de-variables-aleatoires-continues"><i class="fa fa-check"></i><b>0.9</b> Espérance et variance de variables aléatoires continues</a><ul>
+<li class="chapter" data-level="" data-path="variables-aleatoires-continues.html"><a href="variables-aleatoires-continues.html#esperance-dune-v.a.c"><i class="fa fa-check"></i>Espérance d’une v.a.c</a></li>
+<li class="chapter" data-level="" data-path="variables-aleatoires-continues.html"><a href="variables-aleatoires-continues.html#variance-dune-v.a.c"><i class="fa fa-check"></i>Variance d’une v.a.c</a></li>
+</ul></li>
+<li class="chapter" data-level="0.10" data-path="variables-aleatoires-continues.html"><a href="variables-aleatoires-continues.html#lois-usuelles-de-v.a.c"><i class="fa fa-check"></i><b>0.10</b> Lois usuelles de v.a.c</a><ul>
+<li><a href="variables-aleatoires-continues.html#loi-uniforme-uab">Loi uniforme <span class="math inline">\(U(a,b)\)</span></a></li>
+<li><a href="variables-aleatoires-continues.html#loi-exponentielle-mathcalelambda">Loi exponentielle <span class="math inline">\(\mathcal{E}(\lambda)\)</span></a></li>
+<li><a href="variables-aleatoires-continues.html#loi-normale-ou-de-laplace-gauss-mathcalnmusigma2">Loi Normale ou de Laplace-Gauss <span class="math inline">\(\mathcal{N}(\mu,\sigma^2)\)</span></a></li>
+<li class="chapter" data-level="" data-path="variables-aleatoires-continues.html"><a href="variables-aleatoires-continues.html#etude-de-la-densite-de-la-loi-normale"><i class="fa fa-check"></i>Étude de la densité de la loi Normale</a></li>
+<li><a href="variables-aleatoires-continues.html#loi-normale-centree-reduite-mathcaln01">Loi Normale centrée réduite <span class="math inline">\(\mathcal{N}(0,1)\)</span></a></li>
+<li class="chapter" data-level="" data-path="variables-aleatoires-continues.html"><a href="variables-aleatoires-continues.html#relation-entre-loi-normale-et-loi-normale-centree-reduite"><i class="fa fa-check"></i>Relation entre loi normale et loi normale centrée réduite</a></li>
+<li class="chapter" data-level="" data-path="variables-aleatoires-continues.html"><a href="variables-aleatoires-continues.html#calcul-des-probabilites-dune-loi-normale"><i class="fa fa-check"></i>Calcul des probabilités d’une loi normale</a></li>
+<li class="chapter" data-level="" data-path="variables-aleatoires-continues.html"><a href="variables-aleatoires-continues.html#approximation-normale-dune-repartition-binomiale"><i class="fa fa-check"></i>Approximation normale d’une répartition binomiale</a></li>
+<li><a href="variables-aleatoires-continues.html#loi-de-chi2-de-pearson">Loi de <span class="math inline">\(\chi^{2}\)</span> de Pearson</a></li>
+<li><a href="variables-aleatoires-continues.html#loi-de-student-stn">Loi de Student <span class="math inline">\(St(n)\)</span></a></li>
+<li><a href="variables-aleatoires-continues.html#loi-de-fisher-snedecor-mathcalfnm">Loi de Fisher-Snedecor <span class="math inline">\(\mathcal{F}(n,m)\)</span></a></li>
+</ul></li>
+<li class="chapter" data-level="0.11" data-path="variables-aleatoires-continues.html"><a href="variables-aleatoires-continues.html#couple-de-variables-aleatoires-continues"><i class="fa fa-check"></i><b>0.11</b> Couple de variables aléatoires continues</a><ul>
+<li class="chapter" data-level="" data-path="variables-aleatoires-continues.html"><a href="variables-aleatoires-continues.html#densite-conjointe"><i class="fa fa-check"></i>Densité conjointe</a></li>
+<li class="chapter" data-level="" data-path="variables-aleatoires-continues.html"><a href="variables-aleatoires-continues.html#densites-marginales"><i class="fa fa-check"></i>Densités marginales</a></li>
+<li class="chapter" data-level="" data-path="variables-aleatoires-continues.html"><a href="variables-aleatoires-continues.html#esperance-dune-fonction-du-couple"><i class="fa fa-check"></i>Espérance d’une fonction du couple</a></li>
+<li class="chapter" data-level="" data-path="variables-aleatoires-continues.html"><a href="variables-aleatoires-continues.html#independance"><i class="fa fa-check"></i>Indépendance</a></li>
+<li class="chapter" data-level="" data-path="variables-aleatoires-continues.html"><a href="variables-aleatoires-continues.html#distribution-conditionnelle"><i class="fa fa-check"></i>Distribution conditionnelle</a></li>
+</ul></li>
+</ul></li>
+<li class="part"><span><b>Statistique Inférentielle</b></span></li>
+<li class="chapter" data-level="1" data-path="introduction-1.html"><a href="introduction-1.html"><i class="fa fa-check"></i><b>1</b> Introduction</a></li>
+<li class="chapter" data-level="2" data-path="estimation-ponctuelle.html"><a href="estimation-ponctuelle.html"><i class="fa fa-check"></i><b>2</b> Estimation ponctuelle</a></li>
+<li class="chapter" data-level="3" data-path="intervalle-de-confiance.html"><a href="intervalle-de-confiance.html"><i class="fa fa-check"></i><b>3</b> Intervalle de confiance</a></li>
+<li class="chapter" data-level="4" data-path="tests-dhpotheses.html"><a href="tests-dhpotheses.html"><i class="fa fa-check"></i><b>4</b> Tests d’hpothèses</a></li>
+<li class="appendix"><span><b>Annexe</b></span></li>
+<li class="chapter" data-level="A" data-path="tab-normale.html"><a href="tab-normale.html"><i class="fa fa-check"></i><b>A</b> Table de la loi Normale centrée réduite</a></li>
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Statistique Inférentielle</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="estimation-ponctuelle" class="section level1">
+<h1><span class="header-section-number">Chapitre 2</span> Estimation ponctuelle</h1>
+
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="introduction-1.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="intervalle-de-confiance.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="book_assets/gitbook-2.6.7/js/app.min.js"></script>
+<script src="book_assets/gitbook-2.6.7/js/lunr.js"></script>
+<script src="book_assets/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="book_assets/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="book_assets/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="book_assets/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="book_assets/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": false,
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"history": {
+"link": null,
+"text": null
+},
+"download": ["Statistique_infentielle.pdf"],
+"toc": {
+"collapse": "section",
+"scroll_highlight": true
+},
+"toolbar": {
+"position": "fixed"
+},
+"search": true
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:" && /^https?:/.test(src))
+      src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>

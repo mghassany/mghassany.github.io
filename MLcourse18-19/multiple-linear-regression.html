@@ -1,41 +1,41 @@
 <!DOCTYPE html>
-<html >
-
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
 <head>
 
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>Machine Learning</title>
-  <meta name="description" content="Machine Learning course">
-  <meta name="generator" content="bookdown 0.7 and GitBook 2.6.7">
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>2 Multiple Linear Regression | Machine Learning</title>
+  <meta name="description" content="2 Multiple Linear Regression | Machine Learning course" />
+  <meta name="generator" content="bookdown 0.10 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Machine Learning" />
+  <meta property="og:title" content="2 Multiple Linear Regression | Machine Learning" />
   <meta property="og:type" content="book" />
   
   
-  <meta property="og:description" content="Machine Learning course" />
+  <meta property="og:description" content="2 Multiple Linear Regression | Machine Learning course" />
   
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Machine Learning" />
+  <meta name="twitter:title" content="2 Multiple Linear Regression | Machine Learning" />
   
-  <meta name="twitter:description" content="Machine Learning course" />
+  <meta name="twitter:description" content="2 Multiple Linear Regression | Machine Learning course" />
   
 
-<meta name="author" content="Mohamad Ghassany">
+<meta name="author" content="Mohamad Ghassany" />
 
 
-<meta name="date" content="2018-12-21">
+<meta name="date" content="2019-05-29" />
 
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="apple-mobile-web-app-capable" content="yes">
-  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
 <link rel="prev" href="pw-1.html">
 <link rel="next" href="pw-2.html">
 <script src="book_assets/jquery-2.2.3/jquery.min.js"></script>
 <link href="book_assets/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="book_assets/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
 <link href="book_assets/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
 <link href="book_assets/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
 <link href="book_assets/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
@@ -59,41 +59,67 @@
 
 
 <style type="text/css">
-div.sourceCode { overflow-x: auto; }
-table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
-  margin: 0; padding: 0; vertical-align: baseline; border: none; }
-table.sourceCode { width: 100%; line-height: 100%; }
-td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
-td.sourceCode { padding-left: 5px; }
-code > span.kw { color: #007020; font-weight: bold; } /* Keyword */
-code > span.dt { color: #902000; } /* DataType */
-code > span.dv { color: #40a070; } /* DecVal */
-code > span.bn { color: #40a070; } /* BaseN */
-code > span.fl { color: #40a070; } /* Float */
-code > span.ch { color: #4070a0; } /* Char */
-code > span.st { color: #4070a0; } /* String */
-code > span.co { color: #60a0b0; font-style: italic; } /* Comment */
-code > span.ot { color: #007020; } /* Other */
-code > span.al { color: #ff0000; font-weight: bold; } /* Alert */
-code > span.fu { color: #06287e; } /* Function */
-code > span.er { color: #ff0000; font-weight: bold; } /* Error */
-code > span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
-code > span.cn { color: #880000; } /* Constant */
-code > span.sc { color: #4070a0; } /* SpecialChar */
-code > span.vs { color: #4070a0; } /* VerbatimString */
-code > span.ss { color: #bb6688; } /* SpecialString */
-code > span.im { } /* Import */
-code > span.va { color: #19177c; } /* Variable */
-code > span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
-code > span.op { color: #666666; } /* Operator */
-code > span.bu { } /* BuiltIn */
-code > span.ex { } /* Extension */
-code > span.pp { color: #bc7a00; } /* Preprocessor */
-code > span.at { color: #7d9029; } /* Attribute */
-code > span.do { color: #ba2121; font-style: italic; } /* Documentation */
-code > span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
-code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
-code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource a.sourceLine
+  { position: relative; left: -4em; }
+pre.numberSource a.sourceLine::before
+  { content: attr(title);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  }
+@media screen {
+a.sourceLine::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
 </style>
 
 <link rel="stylesheet" href="css\style.css" type="text/css" />
@@ -329,14 +355,15 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
             <section class="normal" id="section-">
 <div id="multiple-linear-regression" class="section level1">
 <h1><span class="header-section-number">2</span> Multiple Linear Regression</h1>
-<p>Simple linear regression is a useful approach for predicting a response on the basis of a single predictor variable. However, in practice we often have more than one predictor. In the previous chapter, we took for example the prediction of housing prices considering we had the size of each house. We had a single feature <span class="math inline">\(X\)</span>, the size of the house. But now imagine if we had not only the size of the house as a feature but we also knew the number of bedrooms, the number of flours and the age of the house in years. It seems like this would give us a lot more information with which to predict the price.</p>
+<p>Simple linear regression is a useful approach for predicting a response on the basis of a single predictor variable. However, in practice we often have more than one predictor.
+In the previous chapter, we took for example the prediction of housing prices considering we had the size of each house. We had a single feature <span class="math inline">\(X\)</span>, the size of the house. But now imagine if we had not only the size of the house as a feature but we also knew the number of bedrooms, the number of flours and the age of the house in years. It seems like this would give us a lot more information with which to predict the price.</p>
 <div id="the-model" class="section level2">
 <h2><span class="header-section-number">2.1</span> The Model</h2>
 <p>In general, suppose that we have <span class="math inline">\(p\)</span> distinct predictors. Then the multiple linear regression model takes the form</p>
 <p><span class="math display">\[ Y = \beta_0 + \beta_1 X_1 + \beta_2 X_2 + \dots + \beta_p X_p + \epsilon \]</span></p>
 <p>where <span class="math inline">\(X_j\)</span> represents the <span class="math inline">\(j\)</span>th predictor and <span class="math inline">\(\beta_j\)</span> quantifies the association between that variable and the response. We interpret <span class="math inline">\(\beta_j\)</span> as the average effect on <span class="math inline">\(Y\)</span> of a one unit increase in <span class="math inline">\(X_j\)</span>, <em>holding all other predictors fixed</em>.</p>
 <p>In matrix terms, supposing we have <span class="math inline">\(n\)</span> observations and <span class="math inline">\(p\)</span> variables, we need to define the following matrices:</p>
-<span class="math display">\[\begin{equation}
+<p><span class="math display">\[\begin{equation}
  \textbf{Y}_{n \times 1} = \begin{pmatrix}
     Y_{1} \\
     Y_{2} \\
@@ -348,8 +375,8 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
     \vdots &amp; \vdots &amp; \vdots &amp; \ddots &amp; \vdots \\
     1      &amp; X_{n1} &amp; X_{n2} &amp; \dots  &amp; X_{np}
 \end{pmatrix}
-\end{equation}\]</span>
-<span class="math display">\[\begin{equation}
+\end{equation}\]</span></p>
+<p><span class="math display">\[\begin{equation}
  {\mathbb{\beta}}_{(p+1) \times 1} = \begin{pmatrix}
     \beta_{0} \\
     \beta_{1} \\
@@ -361,7 +388,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
         \vdots \\
         \epsilon_{n}
     \end{pmatrix}
-\end{equation}\]</span>
+\end{equation}\]</span></p>
 <p>In matrix terms, the general linear regression model is</p>
 <p><span class="math display">\[ \textbf{Y}_{n \times 1} = \textbf{X}_{n \times (p+1)} {\mathbb{\beta}}_{(p+1) \times 1} + {\epsilon}_{n \times 1} \]</span></p>
 <p>where,</p>
@@ -386,13 +413,15 @@ RSS &amp;= \sum_{i=1}^{n} (y_i - \hat{y}_i)^2 \\
 <p><span class="math display">\[ \hat{\beta} = (\textbf{X}^T \textbf{X})^{-1}\textbf{X}^T \textbf{Y} \]</span></p>
 <p>To obtain <span class="math inline">\(\hat{\beta}\)</span>, we can write the residual sum of squares as</p>
 <p><span class="math display">\[ RSS = (\textbf{Y}-\textbf{X}\beta)^T(\textbf{Y}-\textbf{X}\beta) \]</span></p>
-<p>This is a quadratic function in the <span class="math inline">\(p+1\)</span> parameters. Differentiating with respect to <span class="math inline">\(\beta\)</span> we obtain <span class="math display">\[ \begin{aligned}
+<p>This is a quadratic function in the <span class="math inline">\(p+1\)</span> parameters. Differentiating with respect to <span class="math inline">\(\beta\)</span> we obtain
+<span class="math display">\[ \begin{aligned}
 \frac{\partial RSS}{\partial \beta} &amp;= -2\textbf{X}^T(\textbf{Y}-\textbf{X}\beta) \\
 \frac{\partial^2 RSS}{\partial \beta \partial \beta^T}   &amp;= 2\textbf{X}^T\textbf{X}.\\
 \end{aligned}
 \]</span></p>
-<p>Assuming (for the moment) that <span class="math inline">\(\textbf{X}\)</span> has full column rank, and hence <span class="math inline">\(\textbf{X}^T\textbf{X}\)</span> is positive definite<a href="#fn6" class="footnoteRef" id="fnref6"><sup>6</sup></a>, we set the first derivative to zero</p>
-<p><span class="math display">\[\textbf{X}^T(\textbf{Y}-\textbf{X}\beta)=0\]</span> to obtain the unique solution</p>
+<p>Assuming (for the moment) that <span class="math inline">\(\textbf{X}\)</span> has full column rank, and hence <span class="math inline">\(\textbf{X}^T\textbf{X}\)</span> is positive definite<a href="#fn6" class="footnote-ref" id="fnref6"><sup>6</sup></a>, we set the first derivative to zero</p>
+<p><span class="math display">\[\textbf{X}^T(\textbf{Y}-\textbf{X}\beta)=0\]</span>
+to obtain the unique solution</p>
 <p><span class="math display">\[ \hat{\beta} = (\textbf{X}^T \textbf{X})^{-1}\textbf{X}^T \textbf{Y} \]</span></p>
 <p>Note 1:</p>
 <div class="rmdinsight">
@@ -410,7 +439,7 @@ If <span class="math inline"><span class="math inline">\(\textbf{X}^T \textbf{X}
 Redundant features, where two features are very closely related (i.e. they are linearly dependent)
 </li>
 <li>
-Too many features (e.g. <span class="math inline"><span class="math inline">\(p \geq n\)</span></span>). In this case, we delete some features or we use “regularization” (to be, maybe, explained in a later lesson).
+Too many features (e.g. <span class="math inline"><span class="math inline">\(p \geq n\)</span></span>). In this case, we delete some features or we use “regularization” (to be, maybe, explained in a later lesson).
 </li>
 </ul>
 </div>
@@ -433,7 +462,7 @@ Too many features (e.g. <span class="math inline"><span class="math inline">\(p 
 <p>This hypothesis test is performed by computing the <span class="math inline">\(F\)</span>-statistic (<em>Fisher</em>):</p>
 <p><span class="math display">\[ F = \frac{ (\text{TSS} - \text{RSS})/p}{\text{RSS}/(n-p-1)} \sim F_{p,n-p-1} \]</span></p>
 <p>where, as with simple linear regression, <span class="math inline">\(\text{TSS} = \sum (y_i - \bar{y})^2\)</span> and <span class="math inline">\(\text{RSS} = \sum (y_i - \hat{y}_i)^2\)</span>.</p>
-<p>Note that <span class="math inline">\(F_{p,n-p-1}\)</span> represents the <em>Fisher-Snedecor’s <span class="math inline">\(F\)</span> distribution</em> with <span class="math inline">\(p\)</span> and <span class="math inline">\(n-p-1\)</span> degrees of freedom. If <span class="math inline">\(H_0\)</span> is true, then <span class="math inline">\(F\)</span> is expected to be <em>small</em> since ESS<a href="#fn7" class="footnoteRef" id="fnref7"><sup>7</sup></a> will be close to zero (little variation is explained by the regression model since <span class="math inline">\(\hat{\boldsymbol{\beta}}\approx\mathbf{0}\)</span>).</p>
+<p>Note that <span class="math inline">\(F_{p,n-p-1}\)</span> represents the <em>Fisher-Snedecor’s <span class="math inline">\(F\)</span> distribution</em> with <span class="math inline">\(p\)</span> and <span class="math inline">\(n-p-1\)</span> degrees of freedom. If <span class="math inline">\(H_0\)</span> is true, then <span class="math inline">\(F\)</span> is expected to be <em>small</em> since ESS<a href="#fn7" class="footnote-ref" id="fnref7"><sup>7</sup></a> will be close to zero (little variation is explained by the regression model since <span class="math inline">\(\hat{\boldsymbol{\beta}}\approx\mathbf{0}\)</span>).</p>
 <p>So the question we ask here: <em>Is the whole regression explaining anything at all?</em> The answer comes from the <span class="math inline">\(F\)</span>-test in the ANOVA (ANalysis Of VAriance) table. This is what we get in an ANOVA table:</p>
 <table>
 <thead>
@@ -479,15 +508,15 @@ Too many features (e.g. <span class="math inline"><span class="math inline">\(p 
 The “ANOVA table” is a broad concept in statistics, with different variants. Here we are only covering the basic ANOVA table from the relation <span class="math inline"><span class="math inline">\(\text{SST} = \text{SSR} + \text{SSE}\)</span></span>. However, further sophistications are possible when <span class="math inline"><span class="math inline">\(\text{SSR}\)</span></span> is decomposed into the variations contributed by <em>each</em> predictor. In particular, for multiple linear regression <code>R</code>’s <code>anova</code> implements a <em>sequential (type I) ANOVA table</em>, which is <strong>not</strong> the previous table!
 </p>
 </div>
-<p>The <code>anova</code> function in <code>R</code> takes a model as an input and returns the following <em>sequential</em> ANOVA table<a href="#fn8" class="footnoteRef" id="fnref8"><sup>8</sup></a>:</p>
+<p>The <code>anova</code> function in <code>R</code> takes a model as an input and returns the following <em>sequential</em> ANOVA table<a href="#fn8" class="footnote-ref" id="fnref8"><sup>8</sup></a>:</p>
 <table>
 <colgroup>
 <col width="19%" />
 <col width="16%" />
 <col width="11%" />
 <col width="12%" />
-<col width="21%" />
-<col width="17%" />
+<col width="22%" />
+<col width="18%" />
 </colgroup>
 <thead>
 <tr class="header">
@@ -542,13 +571,15 @@ The “ANOVA table” is a broad concept in statistics, with different variants.
 </tr>
 </tbody>
 </table>
-Here the ESS<span class="math inline">\(_j\)</span> represents the explained sum of squares (same as regression sum of squares) associated to the inclusion of <span class="math inline">\(X_j\)</span> in the model with predictors <span class="math inline">\(X_1,\ldots,X_{j-1}\)</span>, this is: <span class="math display">\[
+<p>Here the ESS<span class="math inline">\(_j\)</span> represents the explained sum of squares (same as regression sum of squares) associated to the inclusion of <span class="math inline">\(X_j\)</span> in the model with predictors <span class="math inline">\(X_1,\ldots,X_{j-1}\)</span>, this is:
+<span class="math display">\[
 \text{ESS}_j=\text{ESS}(X_1,\ldots,X_j)-\text{ESS}(X_1,\ldots,X_{j-1}).
-\]</span> The <span class="math inline">\(p\)</span>-values <span class="math inline">\(p_1,\ldots,p_p\)</span> correspond to the testing of the hypotheses
+\]</span>
+The <span class="math inline">\(p\)</span>-values <span class="math inline">\(p_1,\ldots,p_p\)</span> correspond to the testing of the hypotheses
 <span class="math display">\[\begin{align*}
 H_0:\beta_j=0\quad\text{vs.}\quad H_1:\beta_j\neq 0,
 \end{align*}\]</span>
-<p>carried out <em>inside the linear model</em> <span class="math inline">\(Y=\beta_0+\beta_1X_1+\ldots+\beta_jX_j+\varepsilon\)</span>. This is like the <span class="math inline">\(t\)</span>-test for <span class="math inline">\(\beta_j\)</span> for the model with predictors <span class="math inline">\(X_1,\ldots,X_j\)</span>. Recall that there is no <span class="math inline">\(F\)</span>-test in this version of the ANOVA table.</p>
+carried out <em>inside the linear model</em> <span class="math inline">\(Y=\beta_0+\beta_1X_1+\ldots+\beta_jX_j+\varepsilon\)</span>. This is like the <span class="math inline">\(t\)</span>-test for <span class="math inline">\(\beta_j\)</span> for the model with predictors <span class="math inline">\(X_1,\ldots,X_j\)</span>. Recall that there is no <span class="math inline">\(F\)</span>-test in this version of the ANOVA table.</p>
 <p><strong>p-values</strong></p>
 <p>The p-values provide information about whether each individual predictor is related to the response, after adjusting for the other predictors. Let’s look at the following table we obtain in general using a statistical software for example</p>
 <table>
@@ -662,7 +693,7 @@ There are more systematic criteria for choosing an “optimal” member in the p
 <div id="use-the-adjusted-r_adj2-for-univariate-models" class="section level3 unnumbered">
 <h3>Use the Adjusted <span class="math inline">\(R_{adj}^2\)</span> for univariate models</h3>
 <p>If you only use one input variable, the adjusted <span class="math inline">\(R_{adj}^2\)</span> value gives you a good indication of how well your model performs. It illustrates how much variation is explained by your model.</p>
-<p>In contrast to the simple <span class="math inline">\(R^2\)</span><a href="#fn9" class="footnoteRef" id="fnref9"><sup>9</sup></a>, the adjusted adjusted <span class="math inline">\(R_{adj}^2\)</span><a href="#fn10" class="footnoteRef" id="fnref10"><sup>10</sup></a> takes the number of input factors into account. It penalizes too many input factors and favors parsimonious models.</p>
+<p>In contrast to the simple <span class="math inline">\(R^2\)</span><a href="#fn9" class="footnote-ref" id="fnref9"><sup>9</sup></a>, the adjusted adjusted <span class="math inline">\(R_{adj}^2\)</span><a href="#fn10" class="footnote-ref" id="fnref10"><sup>10</sup></a> takes the number of input factors into account. It penalizes too many input factors and favors parsimonious models.</p>
 <p>The adjusted <span class="math inline">\(R_{adj}^2\)</span> is sensitive to the amount of noise in the data. As such, only compare this indicator of models for the same dataset than comparing it across different datasets.</p>
 
 <div class="figure" style="text-align: center"><span id="fig:R2"></span>
@@ -694,7 +725,8 @@ Figure 2.1: Comparison of <span class="math inline">\(R^2\)</span> and <span cla
 <h3>Histogram of residuals</h3>
 <p>Finally, the histogram summarizes the magnitude of your error terms. It provides information about the bandwidth of errors and indicates how often which errors occurred.</p>
 <center>
-<img src="img/residuals_hist.png" /> <img src="img/residuals_hist2.png" />
+<img src="img/residuals_hist.png" />
+<img src="img/residuals_hist2.png" />
 </center>
 <p>The above screenshots show two models for the same dataset. In the first histogram, errors occur within a range of -338 and 520. In the second histogram, errors occur within -293 and 401. So the outliers are much lower. Furthermore, most errors in the model of the second histogram are closer to zero. So we would favor the second model.</p>
 <p align="right">
@@ -707,11 +739,11 @@ Figure 2.1: Comparison of <span class="math inline">\(R^2\)</span> and <span cla
 <div class="footnotes">
 <hr />
 <ol start="6">
-<li id="fn6"><p>Important to be sure that <span class="math inline">\(\hat{\beta}\)</span> is minimising RSS.<a href="multiple-linear-regression.html#fnref6">↩</a></p></li>
-<li id="fn7"><p>Recal that ESS is the explained sum of squares, ESS = TSS - RSS.<a href="multiple-linear-regression.html#fnref7">↩</a></p></li>
-<li id="fn8"><p>More complex – included here just for clarification of the <code>anova</code>’s output.<a href="multiple-linear-regression.html#fnref8">↩</a></p></li>
-<li id="fn9"><p>Recall that <span class="math inline">\(R^2 = 1- \frac{\text{RSS}}{\text{TSS}}\)</span><a href="multiple-linear-regression.html#fnref9">↩</a></p></li>
-<li id="fn10"><p>It is defined as <span class="math inline">\(R_{adj}^2 = 1- \frac{\text{RSS}/(n-p-1)}{\text{TSS}/(n-1)} = 1- \frac{\text{RSS}}{\text{TSS}}\times\frac{n-1}{n-p-1}\)</span><a href="multiple-linear-regression.html#fnref10">↩</a></p></li>
+<li id="fn6"><p>Important to be sure that <span class="math inline">\(\hat{\beta}\)</span> is minimising RSS.<a href="multiple-linear-regression.html#fnref6" class="footnote-back">↩</a></p></li>
+<li id="fn7"><p>Recal that ESS is the explained sum of squares, ESS = TSS - RSS.<a href="multiple-linear-regression.html#fnref7" class="footnote-back">↩</a></p></li>
+<li id="fn8"><p>More complex – included here just for clarification of the <code>anova</code>’s output.<a href="multiple-linear-regression.html#fnref8" class="footnote-back">↩</a></p></li>
+<li id="fn9"><p>Recall that <span class="math inline">\(R^2 = 1- \frac{\text{RSS}}{\text{TSS}}\)</span><a href="multiple-linear-regression.html#fnref9" class="footnote-back">↩</a></p></li>
+<li id="fn10"><p>It is defined as <span class="math inline">\(R_{adj}^2 = 1- \frac{\text{RSS}/(n-p-1)}{\text{TSS}/(n-1)} = 1- \frac{\text{RSS}}{\text{TSS}}\times\frac{n-1}{n-p-1}\)</span><a href="multiple-linear-regression.html#fnref10" class="footnote-back">↩</a></p></li>
 </ol>
 </div>
             </section>
@@ -743,6 +775,10 @@ gitbook.start({
 "link": null,
 "text": null
 },
+"history": {
+"link": null,
+"text": null
+},
 "download": ["Machine-Learning.pdf"],
 "toc": {
 "collapse": "section",
@@ -761,8 +797,8 @@ gitbook.start({
   (function () {
     var script = document.createElement("script");
     script.type = "text/javascript";
-    var src = "";
-    if (src === "" || src === "true") src = "https://cdn.bootcss.com/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
     if (location.protocol !== "file:" && /^https?:/.test(src))
       src = src.replace(/^https?:/, '');
     script.src = src;

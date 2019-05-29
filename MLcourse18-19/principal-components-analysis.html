@@ -1,41 +1,41 @@
 <!DOCTYPE html>
-<html >
-
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
 <head>
 
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>Machine Learning</title>
-  <meta name="description" content="Machine Learning course">
-  <meta name="generator" content="bookdown 0.7 and GitBook 2.6.7">
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>6 Principal Components Analysis | Machine Learning</title>
+  <meta name="description" content="6 Principal Components Analysis | Machine Learning course" />
+  <meta name="generator" content="bookdown 0.10 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Machine Learning" />
+  <meta property="og:title" content="6 Principal Components Analysis | Machine Learning" />
   <meta property="og:type" content="book" />
   
   
-  <meta property="og:description" content="Machine Learning course" />
+  <meta property="og:description" content="6 Principal Components Analysis | Machine Learning course" />
   
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Machine Learning" />
+  <meta name="twitter:title" content="6 Principal Components Analysis | Machine Learning" />
   
-  <meta name="twitter:description" content="Machine Learning course" />
+  <meta name="twitter:description" content="6 Principal Components Analysis | Machine Learning course" />
   
 
-<meta name="author" content="Mohamad Ghassany">
+<meta name="author" content="Mohamad Ghassany" />
 
 
-<meta name="date" content="2018-12-21">
+<meta name="date" content="2019-05-29" />
 
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="apple-mobile-web-app-capable" content="yes">
-  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
 <link rel="prev" href="special-session.html">
 <link rel="next" href="pw-6.html">
 <script src="book_assets/jquery-2.2.3/jquery.min.js"></script>
 <link href="book_assets/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="book_assets/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
 <link href="book_assets/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
 <link href="book_assets/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
 <link href="book_assets/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
@@ -59,41 +59,67 @@
 
 
 <style type="text/css">
-div.sourceCode { overflow-x: auto; }
-table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
-  margin: 0; padding: 0; vertical-align: baseline; border: none; }
-table.sourceCode { width: 100%; line-height: 100%; }
-td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
-td.sourceCode { padding-left: 5px; }
-code > span.kw { color: #007020; font-weight: bold; } /* Keyword */
-code > span.dt { color: #902000; } /* DataType */
-code > span.dv { color: #40a070; } /* DecVal */
-code > span.bn { color: #40a070; } /* BaseN */
-code > span.fl { color: #40a070; } /* Float */
-code > span.ch { color: #4070a0; } /* Char */
-code > span.st { color: #4070a0; } /* String */
-code > span.co { color: #60a0b0; font-style: italic; } /* Comment */
-code > span.ot { color: #007020; } /* Other */
-code > span.al { color: #ff0000; font-weight: bold; } /* Alert */
-code > span.fu { color: #06287e; } /* Function */
-code > span.er { color: #ff0000; font-weight: bold; } /* Error */
-code > span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
-code > span.cn { color: #880000; } /* Constant */
-code > span.sc { color: #4070a0; } /* SpecialChar */
-code > span.vs { color: #4070a0; } /* VerbatimString */
-code > span.ss { color: #bb6688; } /* SpecialString */
-code > span.im { } /* Import */
-code > span.va { color: #19177c; } /* Variable */
-code > span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
-code > span.op { color: #666666; } /* Operator */
-code > span.bu { } /* BuiltIn */
-code > span.ex { } /* Extension */
-code > span.pp { color: #bc7a00; } /* Preprocessor */
-code > span.at { color: #7d9029; } /* Attribute */
-code > span.do { color: #ba2121; font-style: italic; } /* Documentation */
-code > span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
-code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
-code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource a.sourceLine
+  { position: relative; left: -4em; }
+pre.numberSource a.sourceLine::before
+  { content: attr(title);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  }
+@media screen {
+a.sourceLine::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
 </style>
 
 <link rel="stylesheet" href="css\style.css" type="text/css" />
@@ -398,7 +424,9 @@ The trace of <span class="math inline"><span class="math inline">\(\Sigma\)</spa
 <p>subject to the constraint that the sums of squared coefficients add up to one, along with the additional constraint that this new component will be uncorrelated with all the previously defined components:</p>
 <p><span class="math display">\[ \sum_{j=1}^{p}a^2_{ij} \mathbf{a}^T_i\mathbf{a}_i = \mathbf{a}^T_i\mathbf{a}_i = 1\]</span></p>
 <p><span class="math display">\[ \text{cov}(Y_1, Y_i) = \sum_{k=1}^{p}\sum_{l=1}^{p}a_{1k}a_{il}\sigma_{kl} = \mathbf{a}^T_1\Sigma\mathbf{a}_i = 0 \]</span></p>
-<p><span class="math display">\[\text{cov}(Y_2, Y_i) = \sum_{k=1}^{p}\sum_{l=1}^{p}a_{2k}a_{il}\sigma_{kl} = \mathbf{a}^T_2\Sigma\mathbf{a}_i = 0\]</span> <span class="math display">\[\vdots\]</span> <span class="math display">\[\text{cov}(Y_{i-1}, Y_i) = \sum_{k=1}^{p}\sum_{l=1}^{p}a_{i-1,k}a_{il}\sigma_{kl} = \mathbf{a}^T_{i-1}\Sigma\mathbf{a}_i = 0\]</span></p>
+<p><span class="math display">\[\text{cov}(Y_2, Y_i) = \sum_{k=1}^{p}\sum_{l=1}^{p}a_{2k}a_{il}\sigma_{kl} = \mathbf{a}^T_2\Sigma\mathbf{a}_i = 0\]</span>
+<span class="math display">\[\vdots\]</span>
+<span class="math display">\[\text{cov}(Y_{i-1}, Y_i) = \sum_{k=1}^{p}\sum_{l=1}^{p}a_{i-1,k}a_{il}\sigma_{kl} = \mathbf{a}^T_{i-1}\Sigma\mathbf{a}_i = 0\]</span></p>
 <p>Therefore all principal components are uncorrelated with one another.</p>
 </div>
 </div>
@@ -510,7 +538,8 @@ The variance-covariance matrix of the standardized data is equal to the correlat
 <h3>Visualization</h3>
 <p>Once we have computed the principal components, we can plot them against each other in order to produce low-dimensional views of the data.</p>
 <p>We can plot the score vector <span class="math inline">\(Y_1\)</span> against <span class="math inline">\(Y_2\)</span>, <span class="math inline">\(Y_1\)</span> against <span class="math inline">\(Y_3\)</span>, <span class="math inline">\(Y_2\)</span> against <span class="math inline">\(Y_3\)</span>, and so forth. Geometrically, this amounts to projecting the original data down onto the subspace spanned by <span class="math inline">\(\mathbf{a}_1\)</span>, <span class="math inline">\(\mathbf{a}_2\)</span>, and <span class="math inline">\(\mathbf{a}_3\)</span>, and plotting the projected points.</p>
-<p>To interpret the results obtained by PCA, we plot on the same figure both the principal component scores and the loading vectors. This figure is called a <strong><em>biplot</em></strong>. An example is given later in this chapter.</p>
+<p>To interpret the results obtained by PCA, we plot on the same figure both the principal component scores and the
+loading vectors. This figure is called a <strong><em>biplot</em></strong>. An example is given later in this chapter.</p>
 </div>
 <div id="extra" class="section level3 unnumbered">
 <h3>Extra</h3>
@@ -880,10 +909,10 @@ You can watch these videos for a nice explanation of PCA <a target="_blank"  hre
 </tbody>
 </table>
 <p><strong>Note</strong>: To set the case names as <code>Country</code>, we do</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">row.names</span>(eurojob) &lt;-<span class="st"> </span>eurojob<span class="op">$</span>Country
-eurojob<span class="op">$</span>Country &lt;-<span class="st"> </span><span class="ot">NULL</span></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">row.names</span>(eurojob) &lt;-<span class="st"> </span>eurojob<span class="op">$</span>Country
+eurojob<span class="op">$</span>Country &lt;-<span class="st"> </span><span class="ot">NULL</span></code></pre>
 <p>So far, we know how to compute summaries for <em>each variable</em>, and how to quantify and visualize relations between variables with the correlation matrix and the scatterplot matrix. But even for a moderate number of variables like this, their results are hard to process.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Summary of the data - marginal</span>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Summary of the data - marginal</span>
 <span class="kw">summary</span>(eurojob)
 <span class="co">#ans&gt;       Agr            Min             Man            Pow       </span>
 <span class="co">#ans&gt;  Min.   : 2.7   Min.   :0.100   Min.   : 7.9   Min.   :0.100  </span>
@@ -924,8 +953,9 @@ eurojob<span class="op">$</span>Country &lt;-<span class="st"> </span><span clas
 <span class="kw">require</span>(car)
 <span class="kw">scatterplotMatrix</span>(eurojob, <span class="dt">regLine =</span> <span class="kw">list</span>(<span class="dt">method=</span>lm, <span class="dt">lty=</span><span class="dv">1</span>, <span class="dt">lwd=</span><span class="dv">2</span>, <span class="dt">col=</span><span class="st">&quot;green&quot;</span>), <span class="dt">smooth =</span> <span class="ot">FALSE</span>,
                   <span class="dt">ellipse =</span> <span class="ot">FALSE</span>, <span class="dt">plot.points =</span> T, <span class="dt">col=</span><span class="st">&quot;black&quot;</span>,
-                  <span class="dt">diagonal =</span> <span class="ot">TRUE</span>)</code></pre></div>
-<p><img src="Machine-Learning_files/figure-html/unnamed-chunk-120-1.png" width="70%" style="display: block; margin: auto;" /> We definitely need a way of visualizing and quantifying the relations between variables for a moderate to large amount of variables. PCA will be a handy way. Recall what PCA does:</p>
+                  <span class="dt">diagonal =</span> <span class="ot">TRUE</span>)</code></pre>
+<p><img src="Machine-Learning_files/figure-html/unnamed-chunk-120-1.png" width="70%" style="display: block; margin: auto;" />
+We definitely need a way of visualizing and quantifying the relations between variables for a moderate to large amount of variables. PCA will be a handy way. Recall what PCA does:</p>
 <ol style="list-style-type: decimal">
 <li>Takes the data for the variables <span class="math inline">\(X_1,\ldots,X_p\)</span>.</li>
 <li>Using this data, looks for new variables <span class="math inline">\(\text{PC}_1,\ldots \text{PC}_p\)</span> such that:
@@ -944,7 +974,7 @@ eurojob<span class="op">$</span>Country &lt;-<span class="st"> </span><span clas
 </ol>
 <p>Hence, PCA rearranges our variables in an information-equivalent, but more convenient, layout where the variables are <strong>sorted according to the ammount of information they are able to explain</strong>. From this position, the next step is clear: <strong>stick only with a limited number of PCs such that they explain most of the information</strong> (e.g., 70% of the total variance) and do <em>dimension reduction</em>. The effectiveness of PCA in practice varies from the structure present in the dataset. For example, in the case of highly dependent data, it could explain more than the 90% of variability of a dataset with tens of variables with just two PCs.</p>
 <p>Let’s see how to compute a full PCA in <code>R</code>.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># The main function - use cor = TRUE to avoid scale distortions</span>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># The main function - use cor = TRUE to avoid scale distortions</span>
 pca &lt;-<span class="st"> </span><span class="kw">princomp</span>(eurojob, <span class="dt">cor =</span> <span class="ot">TRUE</span>)
 
 <span class="co"># What is inside?</span>
@@ -1028,7 +1058,7 @@ pca<span class="op">$</span>loadings
 <span class="co"># Scatterplot matrix of the scores - See how they are uncorrelated!</span>
 <span class="kw">scatterplotMatrix</span>(pca<span class="op">$</span>scores, <span class="dt">regLine =</span> <span class="kw">list</span>(<span class="dt">method=</span>lm, <span class="dt">lty=</span><span class="dv">1</span>, <span class="dt">lwd=</span><span class="dv">2</span>, <span class="dt">col=</span><span class="st">&quot;green&quot;</span>), <span class="dt">smooth =</span> <span class="ot">FALSE</span>,
                   <span class="dt">ellipse =</span> <span class="ot">FALSE</span>, <span class="dt">plot.points =</span> T, <span class="dt">col=</span><span class="st">&quot;black&quot;</span>,
-                  <span class="dt">diagonal =</span> <span class="ot">TRUE</span>)</code></pre></div>
+                  <span class="dt">diagonal =</span> <span class="ot">TRUE</span>)</code></pre>
 <p><img src="Machine-Learning_files/figure-html/unnamed-chunk-121-1.png" width="70%" style="display: block; margin: auto;" /></p>
 <div class="rmdinsight">
 <p>
@@ -1043,7 +1073,7 @@ An uncorrelated or independent variable in <span class="math inline"><span class
 </li>
 </ul>
 </div>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">
+<pre class="sourceCode r"><code class="sourceCode r">
 <span class="co"># Means of the variables - before PCA the variables are centered</span>
 pca<span class="op">$</span>center
 <span class="co">#ans&gt;    Agr    Min    Man    Pow    Con    Ser    Fin    Soc    Tra </span>
@@ -1069,13 +1099,13 @@ pca<span class="op">$</span>scale
 <span class="co">#ans&gt; Cumulative Proportion  1.0000 1.00e+00</span>
 
 <span class="co"># Scree plot - the variance of each component</span>
-<span class="kw">plot</span>(pca)</code></pre></div>
+<span class="kw">plot</span>(pca)</code></pre>
 <p><img src="Machine-Learning_files/figure-html/unnamed-chunk-123-1.png" width="70%" style="display: block; margin: auto;" /></p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">
+<pre class="sourceCode r"><code class="sourceCode r">
 <span class="co"># With connected lines - useful for looking for the &quot;elbow&quot;</span>
-<span class="kw">plot</span>(pca, <span class="dt">type =</span> <span class="st">&quot;l&quot;</span>)</code></pre></div>
+<span class="kw">plot</span>(pca, <span class="dt">type =</span> <span class="st">&quot;l&quot;</span>)</code></pre>
 <p><img src="Machine-Learning_files/figure-html/unnamed-chunk-123-2.png" width="70%" style="display: block; margin: auto;" /></p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">
+<pre class="sourceCode r"><code class="sourceCode r">
 <span class="co"># PC1 and PC2 -- These are the weights of the variables on the first two Principal Components</span>
 pca<span class="op">$</span>loadings[, <span class="dv">1</span><span class="op">:</span><span class="dv">2</span>]
 <span class="co">#ans&gt;       Comp.1  Comp.2</span>
@@ -1087,7 +1117,7 @@ pca<span class="op">$</span>loadings[, <span class="dv">1</span><span class="op"
 <span class="co">#ans&gt; Ser -0.37892 -0.3502</span>
 <span class="co">#ans&gt; Fin -0.07437 -0.4537</span>
 <span class="co">#ans&gt; Soc -0.38741 -0.2215</span>
-<span class="co">#ans&gt; Tra -0.36682  0.2026</span></code></pre></div>
+<span class="co">#ans&gt; Tra -0.36682  0.2026</span></code></pre>
 <p>Based on the weights of the variables on the PCs shown above, we can extract the following interpretation:</p>
 <ul>
 <li>PC1 is roughly a linear combination of <code>Agr</code>, with <em>negative</em> weight, and (<code>Man</code>, <code>Pow</code>, <code>Con</code>, <code>Ser</code>, <code>Soc</code>, <code>Tra</code>), with <em>positive</em> weights. So it can be interpreted as an <em>indicator</em> of the kind of economy of the country: agricultural (negative values) or industrial (positive values).</li>
@@ -1099,13 +1129,13 @@ The interpretation of the PCs involves inspecting the weights and interpreting t
 </p>
 </div>
 <p>To conclude, let’s see how we can represent our original data into a plot called <em>biplot</em> that summarizes all the analysis for two PCs.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Biplot - plot together the scores for PC1 and PC2 and the</span>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Biplot - plot together the scores for PC1 and PC2 and the</span>
 <span class="co"># variables expressed in terms of PC1 and PC2</span>
-<span class="kw">biplot</span>(pca)</code></pre></div>
+<span class="kw">biplot</span>(pca)</code></pre>
 <p><img src="Machine-Learning_files/figure-html/unnamed-chunk-125-1.png" width="90%" style="display: block; margin: auto;" /></p>
 <p>This biplot confirms the above interpretation.</p>
 <p>Recall that the biplot is a superposition of two figures: the first one is the scatterplot of the principal component scores (the projections of the observations on the new low dimensional space - also know as graph of individuals) and the second one is the figure of loading vectors (also known as graph of variables). In fact, the graph of variables is a correlation circle, the variables whose unit vectors are close to each other are said to be positively correlated, meaning that their influence on the positioning of individuals is similar (again, these proximities are reflected in the projections of variables on the graph of individuals). However, variables far away from each other will be defined as being negatively correlated. Variables that have perpendicular unit vector are uncorrelated. To see both graphs we can use the <code>factoextra</code> package like follows:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># loading factoextra library</span>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># loading factoextra library</span>
 <span class="kw">require</span>(factoextra)
 <span class="co"># Calculating pca using prcomp(), which is a built-in function in R </span>
 res.pca &lt;-<span class="st"> </span><span class="kw">prcomp</span>(eurojob, <span class="dt">scale =</span> <span class="ot">TRUE</span>)
@@ -1115,20 +1145,20 @@ res.pca &lt;-<span class="st"> </span><span class="kw">prcomp</span>(eurojob, <s
              <span class="dt">col.ind =</span> <span class="st">&quot;contrib&quot;</span>, <span class="co"># Color by their contribution to axes</span>
              <span class="dt">gradient.cols =</span> <span class="kw">c</span>(<span class="st">&quot;#00AFBB&quot;</span>, <span class="st">&quot;#E7B800&quot;</span>, <span class="st">&quot;#FC4E07&quot;</span>),
              <span class="dt">repel =</span> <span class="ot">TRUE</span>     
-             )</code></pre></div>
+             )</code></pre>
 <p><img src="Machine-Learning_files/figure-html/unnamed-chunk-126-1.png" width="90%" style="display: block; margin: auto;" /></p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Graph of variables</span>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Graph of variables</span>
 <span class="kw">fviz_pca_var</span>(res.pca,
              <span class="dt">col.var =</span> <span class="st">&quot;contrib&quot;</span>, 
              <span class="dt">gradient.cols =</span> <span class="kw">c</span>(<span class="st">&quot;#00AFBB&quot;</span>, <span class="st">&quot;#E7B800&quot;</span>, <span class="st">&quot;#FC4E07&quot;</span>),
              <span class="dt">repel =</span> <span class="ot">TRUE</span>     
-             )</code></pre></div>
+             )</code></pre>
 <p><img src="Machine-Learning_files/figure-html/unnamed-chunk-126-2.png" width="90%" style="display: block; margin: auto;" /></p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Biplot of individuals and variables</span>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Biplot of individuals and variables</span>
 <span class="kw">fviz_pca_biplot</span>(res.pca, <span class="dt">repel =</span> <span class="ot">TRUE</span>,
                 <span class="dt">col.var =</span> <span class="st">&quot;#2E9FDF&quot;</span>, 
                 <span class="dt">col.ind =</span> <span class="st">&quot;#696969&quot;</span>  
-                )</code></pre></div>
+                )</code></pre>
 <p><img src="Machine-Learning_files/figure-html/unnamed-chunk-126-3.png" width="90%" style="display: block; margin: auto;" /></p>
 <p align="right">
 ◼
@@ -1166,6 +1196,10 @@ gitbook.start({
 "link": null,
 "text": null
 },
+"history": {
+"link": null,
+"text": null
+},
 "download": ["Machine-Learning.pdf"],
 "toc": {
 "collapse": "section",
@@ -1184,8 +1218,8 @@ gitbook.start({
   (function () {
     var script = document.createElement("script");
     script.type = "text/javascript";
-    var src = "";
-    if (src === "" || src === "true") src = "https://cdn.bootcss.com/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
     if (location.protocol !== "file:" && /^https?:/.test(src))
       src = src.replace(/^https?:/, '');
     script.src = src;

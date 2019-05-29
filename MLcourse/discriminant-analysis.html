@@ -1,41 +1,41 @@
 <!DOCTYPE html>
-<html >
-
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
 <head>
 
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>Machine Learning</title>
-  <meta name="description" content="Machine Learning course">
-  <meta name="generator" content="bookdown 0.7 and GitBook 2.6.7">
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>4 Discriminant Analysis | Machine Learning</title>
+  <meta name="description" content="4 Discriminant Analysis | Machine Learning course" />
+  <meta name="generator" content="bookdown 0.10 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Machine Learning" />
+  <meta property="og:title" content="4 Discriminant Analysis | Machine Learning" />
   <meta property="og:type" content="book" />
   
   
-  <meta property="og:description" content="Machine Learning course" />
+  <meta property="og:description" content="4 Discriminant Analysis | Machine Learning course" />
   
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Machine Learning" />
+  <meta name="twitter:title" content="4 Discriminant Analysis | Machine Learning" />
   
-  <meta name="twitter:description" content="Machine Learning course" />
+  <meta name="twitter:description" content="4 Discriminant Analysis | Machine Learning course" />
   
 
-<meta name="author" content="Mohamad Ghassany">
+<meta name="author" content="Mohamad Ghassany" />
 
 
-<meta name="date" content="2018-12-21">
+<meta name="date" content="2019-05-29" />
 
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="apple-mobile-web-app-capable" content="yes">
-  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
 <link rel="prev" href="pw-3.html">
 <link rel="next" href="pw-4.html">
 <script src="book_assets/jquery-2.2.3/jquery.min.js"></script>
 <link href="book_assets/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="book_assets/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
 <link href="book_assets/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
 <link href="book_assets/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
 <link href="book_assets/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
@@ -59,41 +59,67 @@
 
 
 <style type="text/css">
-div.sourceCode { overflow-x: auto; }
-table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
-  margin: 0; padding: 0; vertical-align: baseline; border: none; }
-table.sourceCode { width: 100%; line-height: 100%; }
-td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
-td.sourceCode { padding-left: 5px; }
-code > span.kw { color: #007020; font-weight: bold; } /* Keyword */
-code > span.dt { color: #902000; } /* DataType */
-code > span.dv { color: #40a070; } /* DecVal */
-code > span.bn { color: #40a070; } /* BaseN */
-code > span.fl { color: #40a070; } /* Float */
-code > span.ch { color: #4070a0; } /* Char */
-code > span.st { color: #4070a0; } /* String */
-code > span.co { color: #60a0b0; font-style: italic; } /* Comment */
-code > span.ot { color: #007020; } /* Other */
-code > span.al { color: #ff0000; font-weight: bold; } /* Alert */
-code > span.fu { color: #06287e; } /* Function */
-code > span.er { color: #ff0000; font-weight: bold; } /* Error */
-code > span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
-code > span.cn { color: #880000; } /* Constant */
-code > span.sc { color: #4070a0; } /* SpecialChar */
-code > span.vs { color: #4070a0; } /* VerbatimString */
-code > span.ss { color: #bb6688; } /* SpecialString */
-code > span.im { } /* Import */
-code > span.va { color: #19177c; } /* Variable */
-code > span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
-code > span.op { color: #666666; } /* Operator */
-code > span.bu { } /* BuiltIn */
-code > span.ex { } /* Extension */
-code > span.pp { color: #bc7a00; } /* Preprocessor */
-code > span.at { color: #7d9029; } /* Attribute */
-code > span.do { color: #ba2121; font-style: italic; } /* Documentation */
-code > span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
-code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
-code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource a.sourceLine
+  { position: relative; left: -4em; }
+pre.numberSource a.sourceLine::before
+  { content: attr(title);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  }
+@media screen {
+a.sourceLine::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
 </style>
 
 <link rel="stylesheet" href="css\style.css" type="text/css" />
@@ -337,7 +363,8 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <div id="introduction-2" class="section level2">
 <h2><span class="header-section-number">4.1</span> Introduction</h2>
 <p>As we saw in the previous chapter, Logistic regression involves directly modeling <span class="math inline">\(\mathbb{P} (Y = k|X = x)\)</span> using the <em>logistic function</em>, for the case of two response classes. In logistic regression, we model the conditional distribution of the response <span class="math inline">\(Y\)</span>, given the predictor(s) <span class="math inline">\(X\)</span>. We now consider an alternative and less direct approach to estimating these probabilities. In this alternative approach, <strong><em>we model the distribution</em></strong> of the predictors <span class="math inline">\(X\)</span> <strong><em>separately</em></strong> in each of the response classes (i.e. given <span class="math inline">\(Y\)</span>), and then use <strong>Bayes’ theorem</strong> to flip these around into estimates for <span class="math inline">\(\mathbb{P} (Y = k|X = x)\)</span>. When these distributions are assumed to be <em>Normal</em>, it turns out that the model is very similar in form to logistic regression.</p>
-<p><strong>Why not logistic regression?</strong> Why do we need another method, when we have logistic regression? There are several reasons:</p>
+<p><strong>Why not logistic regression?</strong>
+Why do we need another method, when we have logistic regression? There are several reasons:</p>
 <ul>
 <li>When the classes are well-separated, the parameter estimates for the logistic regression model are surprisingly unstable. Linear discriminant analysis does not suﬀer from this problem.</li>
 <li>If <span class="math inline">\(n\)</span> is small and the distribution of the predictors <span class="math inline">\(X\)</span> is approximately normal in each of the classes, the linear discriminant model is again more stable than the logistic regression model.</li>
@@ -374,10 +401,10 @@ Posterior probability <span class="math inline"><span class="math inline">\(\pro
 <p>Suppose that we wish to classify an observation into one of <span class="math inline">\(K\)</span> classes, where <span class="math inline">\(K \geq 2\)</span>. In other words, the qualitative response variable <span class="math inline">\(Y\)</span> can take on <span class="math inline">\(K\)</span> possible distinct and unordered values.</p>
 <p>Let <span class="math inline">\(\pi_k\)</span> represent the overall or <em>prior</em> probability that a randomly chosen observation comes from the <span class="math inline">\(k\)</span>-th class; this is the probability that a given observation is associated with the <span class="math inline">\(k\)</span>-th category of the response variable <span class="math inline">\(Y\)</span>.</p>
 <p>Let <span class="math inline">\(f_k(X) \equiv P(X = x|Y = k)\)</span> denote the <em>density function</em> of <span class="math inline">\(X\)</span> for an observation that comes from the <span class="math inline">\(k\)</span>-th class. In other words, <span class="math inline">\(f_k(x)\)</span> is relatively large if there is a high probability that an observation in the <span class="math inline">\(k\)</span>-th class has <span class="math inline">\(X \approx x\)</span>, and <span class="math inline">\(f_k(x)\)</span> is small if it is very unlikely that an observation in the <span class="math inline">\(k\)</span>-th class has <span class="math inline">\(X \approx x\)</span>. Then <em>Bayes’ theorem</em> states that</p>
-<span class="math display" id="eq:bayes">\[\begin{equation}
+<p><span class="math display" id="eq:bayes">\[\begin{equation}
 P(Y=k|X=x) = \frac{ \pi_k f_k(x)}{\sum_{c=1}^K \pi_c f_c(x)}
 \tag{4.1}
-\end{equation}\]</span>
+\end{equation}\]</span></p>
 <p>As we did in the last chapter, we will use the abbreviation <span class="math inline">\(p_k(X) =P(Y = k|X)\)</span>.</p>
 <p>The equation above stated by <em>Bayes’ theorem</em> suggests that instead of directly computing <span class="math inline">\(p_k(X)\)</span> as we did in the logistic regression, we can simply plug in estimates of <span class="math inline">\(\pi_k\)</span> and <span class="math inline">\(f_k(X)\)</span> into the equation. In general, estimating <span class="math inline">\(\pi_k\)</span> is easy (the fraction of the training observations that belong to the <span class="math inline">\(k\)</span>-th class). But estimating <span class="math inline">\(f_k(X)\)</span> tends to be more challenging.</p>
 <blockquote>
@@ -396,25 +423,25 @@ P(Y=k|X=x) = \frac{ \pi_k f_k(x)}{\sum_{c=1}^K \pi_c f_c(x)}
 <p>Assume that <span class="math inline">\(p=1\)</span>, which mean we have only one predictor. We would like to obtain an estimate for <span class="math inline">\(f_k(x)\)</span> that we can plug into the Equation <a href="discriminant-analysis.html#eq:bayes">(4.1)</a> in order to estimate <span class="math inline">\(p_k(x)\)</span>. <strong>We will then classify an observation to the class for which <span class="math inline">\(p_k(x)\)</span> is greatest</strong>.</p>
 <p>In order to estimate <span class="math inline">\(f_k(x)\)</span>, we will first make some assumptions about its form.</p>
 <p>Suppose we assume that <span class="math inline">\(f_k(x)\)</span> is <em>normal</em> (<em>Gaussian</em>). In the one-dimensional setting, the normal density take the form</p>
-<span class="math display" id="eq:normal01">\[\begin{equation}
+<p><span class="math display" id="eq:normal01">\[\begin{equation}
 f_k(x)= \frac{1}{\sigma_k\sqrt{2\pi}} \exp \big( - \frac{1}{2\sigma_k^2 } (x-\mu_k)^2\big)
 \tag{4.2}
-\end{equation}\]</span>
+\end{equation}\]</span></p>
 <p>where <span class="math inline">\(\mu_k\)</span> and <span class="math inline">\(\sigma_k^2\)</span> are the mean and variance parameters for <span class="math inline">\(k\)</span>-th class. Let us assume that <span class="math inline">\(\sigma_1^2 = \ldots = \sigma_K^2 = \sigma\)</span> (which means there is a shared variance term across all <span class="math inline">\(K\)</span> classes). Plugging Eq. <a href="discriminant-analysis.html#eq:normal01">(4.2)</a> into the Bayes formula in Eq. <a href="discriminant-analysis.html#eq:bayes">(4.1)</a> we get,</p>
-<span class="math display" id="eq:pkx">\[\begin{equation}
+<p><span class="math display" id="eq:pkx">\[\begin{equation}
 p_k(x) = \frac{  \pi_k \frac{1}{\sigma \sqrt{2\pi}} e^{-\frac{1}{2} \big(\frac{x-\mu_k}{\sigma}\big)^2 } }{  \sum_{c=1}^K  \pi_c \frac{1}{\sigma \sqrt{2\pi}} e^{-\frac{1}{2} \big(\frac{x-\mu_c}{\sigma}\big)^2 } }
 \tag{4.3}
-\end{equation}\]</span>
+\end{equation}\]</span></p>
 <div class="rmdcaution">
 <p>
 Note that <span class="math inline"><span class="math inline">\(\pi_k\)</span></span> and <span class="math inline"><span class="math inline">\(\pi_c\)</span></span> denote the prior probabilities. And <span class="math inline"><span class="math inline">\(\pi\)</span></span> is the mathematical constant <span class="math inline"><span class="math inline">\(\pi \approx 3.14159\)</span></span>.
 </p>
 </div>
 <p>To classify at the value <span class="math inline">\(X = x\)</span>, we need to see which of the <span class="math inline">\(p_k(x)\)</span> is largest. Taking logs, and discarding terms that do not depend on <span class="math inline">\(k\)</span>, we see that this is equivalent to assigning <span class="math inline">\(x\)</span> to the class with the largest <strong><em>discriminant score</em></strong>:</p>
-<span class="math display" id="eq:discscore">\[\begin{equation}
+<p><span class="math display" id="eq:discscore">\[\begin{equation}
 \delta_k(x) = x.\frac{\mu_k}{\sigma^2} - \frac{\mu_k^2}{2\sigma^2} + \log (\pi_k)
 \tag{4.4}
-\end{equation}\]</span>
+\end{equation}\]</span></p>
 <p>Note that <span class="math inline">\(\delta_k(x)\)</span> is a <em>linear</em> function of <span class="math inline">\(x\)</span>.</p>
 <div class="rmdinsight">
 <ul>
@@ -452,18 +479,18 @@ As we classify a new point according to which density is highest, when the prior
 <h2><span class="header-section-number">4.4</span> Estimating the parameters</h2>
 <p>Typically we don’t know these parameters; we just have the training data. In that case we simply estimate the parameters and plug them into the rule.</p>
 <p>Let <span class="math inline">\(n\)</span> the total number of training observations, and <span class="math inline">\(n_k\)</span> the number of training observations in the <span class="math inline">\(k\)</span>-th class. The following estimates are used:</p>
-<span class="math display">\[\begin{align*}
+<p><span class="math display">\[\begin{align*}
 \hat{\pi}_k &amp;= \frac{n_k}{n} \\
 \hat{\mu}_k &amp;= \frac{1}{n_k} \sum_{i: y_i=k} x_i \\
 \hat{\sigma}^2 &amp;= \frac{1}{n - K} \sum_{k=1}^K \sum_{i: y_i=k} (x_i-\hat{\mu}_k)^2 \\
  &amp;= \sum_{k=1}^K \frac{n_k-1}{n - K} . \hat{\sigma}_k^2
-\end{align*}\]</span>
+\end{align*}\]</span></p>
 <p>where <span class="math inline">\(\hat{\sigma}_k^2 = \frac{1}{n_k-1}\sum_{i: y_i=k}(x_i-\hat{\mu}_k)^2\)</span> is the usual formula for the estimated variance in the -<span class="math inline">\(k\)</span>-th class.</p>
 <p>The linear discriminant analysis (LDA) classifier plugs these estimates in Eq. <a href="discriminant-analysis.html#eq:discscore">(4.4)</a> and assigns an observation <span class="math inline">\(X=x\)</span> to the class for which</p>
-<span class="math display" id="eq:discscoreest">\[\begin{equation}
+<p><span class="math display" id="eq:discscoreest">\[\begin{equation}
 \hat{\delta}_k(x) = x.\frac{\hat{\mu}_k}{\hat{\sigma}^2} - \frac{\hat{\mu}_k^2}{2\hat{\sigma}^2} + \log (\hat{\pi}_k)
 \tag{4.5}
-\end{equation}\]</span>
+\end{equation}\]</span></p>
 <p>is largest.</p>
 <p>The <em>discriminant functions</em> in Eq. <a href="discriminant-analysis.html#eq:discscoreest">(4.5)</a> are linear functions of <span class="math inline">\(x\)</span>.</p>
 <blockquote>
@@ -484,7 +511,8 @@ As we classify a new point according to which density is highest, when the prior
     \vdots \\
     \mu_p
 \end{pmatrix} \]</span></p>
-<p>and, <span class="math display">\[ \Sigma = Cov(X) = \begin{pmatrix}
+<p>and,
+<span class="math display">\[ \Sigma = Cov(X) = \begin{pmatrix}
     \sigma_1^2 &amp; Cov[X_1, X_2]  &amp; \dots  &amp; Cov[X_1, X_p] \\
     Cov[X_2, X_1] &amp; \sigma_2^2  &amp; \dots  &amp; Cov[X_2, X_p] \\
     \vdots &amp; \vdots &amp;  \ddots &amp; \vdots \\
@@ -497,10 +525,10 @@ As we classify a new point according to which density is highest, when the prior
 <p><span class="math display">\[f(x) = \frac{1}{(2\pi)^{p/2} |\Sigma|^{1/2}} \exp \bigg( - \frac{1}{2} (x-\mu)^T \Sigma^{-1} (x-\mu) \bigg)
 \]</span></p>
 <p>Plugging the density function for the <span class="math inline">\(k\)</span>-th class, <span class="math inline">\(f_k(X=x)\)</span>, into Eq. <a href="discriminant-analysis.html#eq:bayes">(4.1)</a> reveals that the Bayes classifier assigns an observation <span class="math inline">\(X=x\)</span> to the class for which</p>
-<span class="math display" id="eq:discscorematrix">\[\begin{equation}
+<p><span class="math display" id="eq:discscorematrix">\[\begin{equation}
 \delta_k(x) = x^T \Sigma^{-1} \mu_k - \frac{1}{2} \mu_k^T \Sigma^{-1}  \mu_k + \log \pi_k
 \tag{4.6}
-\end{equation}\]</span>
+\end{equation}\]</span></p>
 <p>is largest. This is the vector/matrix version of <a href="discriminant-analysis.html#eq:discscore">(4.4)</a>.</p>
 <p>An example is shown in the following figure. Three equally-sized Gaussian classes are shown with class-specific mean vectors and a common covariance matrix (<span class="math inline">\(\pi_1=\pi_2=\pi_3=1/3\)</span>). The three ellipses represent regions that contain <span class="math inline">\(95\%\)</span> of the probability for each of the three classes. The dashed lines are the Bayes decision boundaries.</p>
 <center>
@@ -526,17 +554,17 @@ As we classify a new point according to which density is highest, when the prior
 <p>By altering the forms for <span class="math inline">\(f_k(x)\)</span>, we get different classifiers.</p>
 <ul>
 <li>With Gaussians but different <span class="math inline">\(\Sigma_k\)</span> in each class, we get <em>Quadratic Discriminant Analysis (QDA)</em>.</li>
-<li>With <span class="math inline">\(f_k(x) = \prod_{j=1}^p f_{jk}(x_j)\)</span> (conditional independence model) in each class we get <em>Naive Bayes</em>. (For Gaussian, this mean the <span class="math inline">\(\Sigma_k\)</span> are diagonal, e.g. <span class="math inline">\(Cov(X_i,X_j)=0 \,\, \forall \, \, 1\leq i,j \leq p\)</span>).</li>
+<li>With <span class="math inline">\(f_k(x) = \prod_{j=1}^p f_{jk}(x_j)\)</span> (conditional independence model) in each class we get <em>Naive Bayes</em>. (For Gaussian, this mean the <span class="math inline">\(\Sigma_k\)</span> are diagonal, e.g. <span class="math inline">\(Cov(X_i,X_j)=0 \,\, \forall \, \, 1\leq i,j \leq p\)</span>).</li>
 <li>Many other forms by proposing specific density models for <span class="math inline">\(f_k(x)\)</span>, including <em>nonparametric approaches</em>.</li>
 </ul>
 <div id="quadratic-discriminant-analysis-qda" class="section level3">
 <h3><span class="header-section-number">4.7.1</span> Quadratic Discriminant Analysis (QDA)</h3>
 <p>Like LDA, the QDA classiﬁer results from assuming that the observations from each class are drawn from a Gaussian distribution, and plugging estimates for the parameters into Bayes’ theorem in order to perform prediction.</p>
 <p>However, unlike LDA, QDA assumes that each class has its own covariance matrix. Under this assumption, the Bayes classiﬁer assigns an observation <span class="math inline">\(X = x\)</span> to the class for which</p>
-<span class="math display">\[\begin{align*}
+<p><span class="math display">\[\begin{align*}
 \delta_k(x) &amp;= - \frac{1}{2} (x-\mu)^T \Sigma_k^{-1} (x-\mu) - \frac{1}{2} \log |\Sigma_k| + \log \pi_k \\
             &amp;= - \frac{1}{2} x^T \Sigma_k^{-1} x + \frac{1}{2} x^T \Sigma_k^{-1} \mu_k - \frac{1}{2} \mu_k^T \Sigma_k^{-1} \mu_k - \frac{1}{2} \log |\Sigma_k| + \log \pi_k
-\end{align*}\]</span>
+\end{align*}\]</span></p>
 <p>is largest.</p>
 <p>Unlike in LDA, the quantity <span class="math inline">\(x\)</span> appears as a quadratic function in QDA. This is where QDA gets its name.</p>
 <div class="rmdcaution">
@@ -549,10 +577,10 @@ The decision boundary in QDA is non-linear. It is quadratic (a curve).
 <h3><span class="header-section-number">4.7.2</span> Naive Bayes</h3>
 <p>We use Naive Bayes classifier if the features are independant in each class. It is useful when <span class="math inline">\(p\)</span> is large (unklike LDA and QDA).</p>
 <p>Naive Bayes assumes that each <span class="math inline">\(\Sigma_k\)</span> is diagonal, so</p>
-<span class="math display">\[\begin{align*}
+<p><span class="math display">\[\begin{align*}
 \delta_k(x) &amp;\propto \log \bigg[\pi_k \prod_{j=1}^p f_{kj}(x_j) \bigg] \\
             &amp;= -\frac{1}{2} \sum_{j=1}^p \frac{(x_j-\mu_{kj})^2}{\sigma_{kj}^2} + \log \pi_k
-\end{align*}\]</span>
+\end{align*}\]</span></p>
 <p>It can used for mixed feature vectors (qualitative and quantitative). If <span class="math inline">\(X_j\)</span> is qualitative, we replace <span class="math inline">\(f_{kj}(x_j)\)</span> by probability mass function (histogram) over discrete categories.</p>
 </div>
 </div>
@@ -618,6 +646,10 @@ gitbook.start({
 "link": null,
 "text": null
 },
+"history": {
+"link": null,
+"text": null
+},
 "download": ["Machine-Learning.pdf"],
 "toc": {
 "collapse": "section",
@@ -636,8 +668,8 @@ gitbook.start({
   (function () {
     var script = document.createElement("script");
     script.type = "text/javascript";
-    var src = "";
-    if (src === "" || src === "true") src = "https://cdn.bootcss.com/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
     if (location.protocol !== "file:" && /^https?:/.test(src))
       src = src.replace(/^https?:/, '');
     script.src = src;

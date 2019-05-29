@@ -1,41 +1,41 @@
 <!DOCTYPE html>
-<html >
-
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
 <head>
 
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>Machine Learning</title>
-  <meta name="description" content="Machine Learning course">
-  <meta name="generator" content="bookdown 0.7 and GitBook 2.6.7">
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>8 Gaussian Mixture Models &amp; EM | Machine Learning</title>
+  <meta name="description" content="8 Gaussian Mixture Models &amp; EM | Machine Learning course" />
+  <meta name="generator" content="bookdown 0.10 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Machine Learning" />
+  <meta property="og:title" content="8 Gaussian Mixture Models &amp; EM | Machine Learning" />
   <meta property="og:type" content="book" />
   
   
-  <meta property="og:description" content="Machine Learning course" />
+  <meta property="og:description" content="8 Gaussian Mixture Models &amp; EM | Machine Learning course" />
   
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Machine Learning" />
+  <meta name="twitter:title" content="8 Gaussian Mixture Models &amp; EM | Machine Learning" />
   
-  <meta name="twitter:description" content="Machine Learning course" />
+  <meta name="twitter:description" content="8 Gaussian Mixture Models &amp; EM | Machine Learning course" />
   
 
-<meta name="author" content="Mohamad Ghassany">
+<meta name="author" content="Mohamad Ghassany" />
 
 
-<meta name="date" content="2018-12-21">
+<meta name="date" content="2019-05-29" />
 
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="apple-mobile-web-app-capable" content="yes">
-  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
 <link rel="prev" href="pw-7.html">
 <link rel="next" href="pw-8.html">
 <script src="book_assets/jquery-2.2.3/jquery.min.js"></script>
 <link href="book_assets/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="book_assets/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
 <link href="book_assets/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
 <link href="book_assets/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
 <link href="book_assets/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
@@ -59,41 +59,67 @@
 
 
 <style type="text/css">
-div.sourceCode { overflow-x: auto; }
-table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
-  margin: 0; padding: 0; vertical-align: baseline; border: none; }
-table.sourceCode { width: 100%; line-height: 100%; }
-td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
-td.sourceCode { padding-left: 5px; }
-code > span.kw { color: #007020; font-weight: bold; } /* Keyword */
-code > span.dt { color: #902000; } /* DataType */
-code > span.dv { color: #40a070; } /* DecVal */
-code > span.bn { color: #40a070; } /* BaseN */
-code > span.fl { color: #40a070; } /* Float */
-code > span.ch { color: #4070a0; } /* Char */
-code > span.st { color: #4070a0; } /* String */
-code > span.co { color: #60a0b0; font-style: italic; } /* Comment */
-code > span.ot { color: #007020; } /* Other */
-code > span.al { color: #ff0000; font-weight: bold; } /* Alert */
-code > span.fu { color: #06287e; } /* Function */
-code > span.er { color: #ff0000; font-weight: bold; } /* Error */
-code > span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
-code > span.cn { color: #880000; } /* Constant */
-code > span.sc { color: #4070a0; } /* SpecialChar */
-code > span.vs { color: #4070a0; } /* VerbatimString */
-code > span.ss { color: #bb6688; } /* SpecialString */
-code > span.im { } /* Import */
-code > span.va { color: #19177c; } /* Variable */
-code > span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
-code > span.op { color: #666666; } /* Operator */
-code > span.bu { } /* BuiltIn */
-code > span.ex { } /* Extension */
-code > span.pp { color: #bc7a00; } /* Preprocessor */
-code > span.at { color: #7d9029; } /* Attribute */
-code > span.do { color: #ba2121; font-style: italic; } /* Documentation */
-code > span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
-code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
-code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource a.sourceLine
+  { position: relative; left: -4em; }
+pre.numberSource a.sourceLine::before
+  { content: attr(title);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  }
+@media screen {
+a.sourceLine::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
 </style>
 
 <link rel="stylesheet" href="css\style.css" type="text/css" />
@@ -344,18 +370,23 @@ Figure 8.1: Comparison of <span class="math inline">\(k\)</span>-means and EM on
 <p>We start this chapter by reminding what is a Gaussian distribution, then introduce the Mixture of Gaussians and finish by explaining the Expectation-Maximization algorithm.</p>
 <div id="the-gaussian-distribution" class="section level2">
 <h2><span class="header-section-number">8.1</span> The Gaussian distribution</h2>
-<p>The Gaussian, also known as the normal distribution, is a widely used model for the distribution of continuous variables. In the case of a single variable <span class="math inline">\(x\)</span>, the Gaussian distribution can be written in the form</p>
-<span class="math display" id="eq:normaldist1">\[\begin{equation}
+<p>The Gaussian, also known as the normal distribution, is a widely used
+model for the distribution of continuous variables. In the case of a
+single variable <span class="math inline">\(x\)</span>, the Gaussian distribution can be written in the
+form</p>
+<p><span class="math display" id="eq:normaldist1">\[\begin{equation}
 \mathcal{N}(x|m,\sigma^2)=\frac{1}{(2 \pi \sigma^2 )^{1/2}} \exp \left\lbrace - \frac{1}{2 \sigma^2} (x-m)^2\right\rbrace
 \tag{8.1}
-\end{equation}\]</span>
+\end{equation}\]</span></p>
 <p>where <span class="math inline">\(m\)</span> is the mean and <span class="math inline">\(\sigma^2\)</span> is the variance.</p>
-<p>For a <span class="math inline">\(D\)</span>-dimensional vector <span class="math inline">\(X\)</span>, the multivariate Gaussian distribution take the form</p>
-<span class="math display" id="eq:normaldist2">\[\begin{equation}
+<p>For a <span class="math inline">\(D\)</span>-dimensional vector <span class="math inline">\(X\)</span>, the multivariate Gaussian distribution
+take the form</p>
+<p><span class="math display" id="eq:normaldist2">\[\begin{equation}
 \mathcal{N}(X|\mu,\Sigma)=\frac{1}{(2 \pi)^{D/2}} \frac{1}{|\Sigma|^{1/2}} \exp \left\lbrace - \frac{1}{2} (X-\mu)^T \Sigma^{-1} (X-\mu) \right\rbrace
 \tag{8.2}
-\end{equation}\]</span>
-<p>where <span class="math inline">\(\mu\)</span> is a <span class="math inline">\(D\)</span>-dimensional mean vector, <span class="math inline">\(\Sigma\)</span> is a <span class="math inline">\(D\times D\)</span> covariance matrix, and <span class="math inline">\(|\Sigma|\)</span> denotes the determinant of <span class="math inline">\(\Sigma\)</span>.</p>
+\end{equation}\]</span></p>
+<p>where <span class="math inline">\(\mu\)</span> is a <span class="math inline">\(D\)</span>-dimensional mean vector, <span class="math inline">\(\Sigma\)</span> is a <span class="math inline">\(D\times D\)</span>
+covariance matrix, and <span class="math inline">\(|\Sigma|\)</span> denotes the determinant of <span class="math inline">\(\Sigma\)</span>.</p>
 <!-- ```{r} -->
 <!-- #          Normal Distribution PDF -->
 <!-- #range -->
@@ -374,7 +405,13 @@ Figure 8.1: Comparison of <span class="math inline">\(k\)</span>-means and EM on
 </div>
 <div id="mixture-of-gaussians" class="section level2">
 <h2><span class="header-section-number">8.2</span> Mixture of Gaussians</h2>
-<p>While the Gaussian distribution has some important analytical properties, it suffers from significant limitations when it comes to modeling real data sets. Consider the example shown in Figure <a href="gaussian-mixture-models-em.html#fig:gaussianfaithful">8.2</a> applied on the ’Old Faithful’ data set, this data set comprises 272 measurements of the eruption of the <a href="https://en.wikipedia.org/wiki/Old_Faithful">Old Faithful geyser</a> at Yellowstone National Park in the USA. Each measurement comprises the duration of the eruption in minutes (horizontal axis) and the time in minutes to the next eruption (vertical axis). We see that the data set forms two dominant clumps, and that a simple Gaussian distribution is unable to capture this structure, whereas a linear superposition of two Gaussians gives a better characterization of the data set. Such superpositions, formed by taking linear combinations of more basic distributions such as Gaussians, can be formulated as probabilistic models known as <em>mixture distributions</em>.</p>
+<p>While the Gaussian distribution has some important analytical properties, it suffers from
+significant limitations when it comes to modeling real data sets.
+Consider the example shown in Figure <a href="gaussian-mixture-models-em.html#fig:gaussianfaithful">8.2</a> applied on the
+’Old Faithful’ data set, this data set comprises 272 measurements of the eruption of the <a href="https://en.wikipedia.org/wiki/Old_Faithful">Old Faithful geyser</a> at Yellowstone National Park in the USA. Each measurement comprises the duration of the eruption in minutes (horizontal axis) and the time in minutes to the next eruption (vertical axis). We see that the data set forms two dominant clumps, and that a simple Gaussian distribution is unable to capture this structure, whereas a linear superposition of two Gaussians gives a better characterization of the
+data set. Such superpositions, formed by taking linear combinations of
+more basic distributions such as Gaussians, can be formulated as
+probabilistic models known as <em>mixture distributions</em>.</p>
 <div class="figure" style="text-align: center"><span id="fig:gaussianfaithful"></span>
 <img src="img/gaussian_faithful.png" alt="Plots of the ’old faithful’ data in which the blue curves show contours of constant probability density. On the left is a single Gaussian ditribution which has been fitted to the data using maximum likelihood. On the right the distribution is given by a linear combination of two Gaussians which has been fitted to the data by maximum likelihood using the EM technique, and which gives a better representation of the data" width="80%" />
 <p class="caption">
@@ -388,12 +425,25 @@ Figure 8.2: Plots of the ’old faithful’ data in which the blue curves show c
 Figure 8.3: Example of a Gaussian mixture distribution in one dimension showing three Gaussians (each scaled by a coefficient) in blue and their sum in red.
 </p>
 </div>
-<p>We therefore consider a superposition of <span class="math inline">\(K\)</span> Gaussian densities of the form</p>
+<p>We therefore consider a superposition of <span class="math inline">\(K\)</span> Gaussian densities of the
+form</p>
 <p><span class="math display">\[\label{eq:gaussian}
 p(x)= \sum_{k=1}^{K} \pi_k \mathcal{N}(x| \mu_k, \Sigma_k)\]</span></p>
-<p>which is called a <em>mixture of Gaussians</em>. Each Gaussian density <span class="math inline">\(\mathcal{N}(x| \mu_k, \Sigma_k)\)</span> is called a <em>component</em> of the mixture and has its own mean <span class="math inline">\(\mu_k\)</span> and covariance <span class="math inline">\(\Sigma_k\)</span>.</p>
-<p>The parameters <span class="math inline">\(\pi_k\)</span> are called <em>mixing coefficients</em>. They verify the conditions <span class="math display">\[\sum_{k=1}^{K} \pi_k = 1 \quad \text{and} \quad 0 \leq \pi_k \leq 1\]</span></p>
-<p>In order to find an equivalent formulation of the Gaussian mixture involving an explicit <strong>latent</strong> variable, we introduce a <span class="math inline">\(K\)</span>-dimensional binary random variable <span class="math inline">\(z\)</span> having a 1-of-<span class="math inline">\(K\)</span> representation in which a particular element <span class="math inline">\(z_k\)</span> is equal to 1 and all other elements are equal to 0. The values of <span class="math inline">\(z_k\)</span> therefore satisfy <span class="math inline">\(z_k \in \{0,1\}\)</span> and <span class="math inline">\(\sum_k z_k =1\)</span>, and we see that there are <span class="math inline">\(K\)</span> possible states for the vector <span class="math inline">\(z\)</span> according to which element is nonzero. The marginal distribution over <span class="math inline">\(z\)</span> is specified in terms of the mixing coefficients <span class="math inline">\(\pi_k\)</span> , such that <span class="math display">\[p(z_k=1)=\pi_k\]</span></p>
+<p>which is called a <em>mixture of Gaussians</em>. Each Gaussian density
+<span class="math inline">\(\mathcal{N}(x| \mu_k, \Sigma_k)\)</span> is called a <em>component</em> of the mixture
+and has its own mean <span class="math inline">\(\mu_k\)</span> and covariance <span class="math inline">\(\Sigma_k\)</span>.</p>
+<p>The parameters <span class="math inline">\(\pi_k\)</span> are called <em>mixing coefficients</em>. They verify the
+conditions
+<span class="math display">\[\sum_{k=1}^{K} \pi_k = 1 \quad \text{and} \quad 0 \leq \pi_k \leq 1\]</span></p>
+<p>In order to find an equivalent formulation of the Gaussian mixture
+involving an explicit <strong>latent</strong> variable, we introduce a
+<span class="math inline">\(K\)</span>-dimensional binary random variable <span class="math inline">\(z\)</span> having a 1-of-<span class="math inline">\(K\)</span>
+representation in which a particular element <span class="math inline">\(z_k\)</span> is equal to 1 and all
+other elements are equal to 0. The values of <span class="math inline">\(z_k\)</span> therefore satisfy
+<span class="math inline">\(z_k \in \{0,1\}\)</span> and <span class="math inline">\(\sum_k z_k =1\)</span>, and we see that there are <span class="math inline">\(K\)</span>
+possible states for the vector <span class="math inline">\(z\)</span> according to which element is
+nonzero. The marginal distribution over <span class="math inline">\(z\)</span> is specified in terms of the
+mixing coefficients <span class="math inline">\(\pi_k\)</span> , such that <span class="math display">\[p(z_k=1)=\pi_k\]</span></p>
 <div class="rmdinsight">
 <p>
 A <a href="https://en.wikipedia.org/wiki/Latent_variable">latent variable</a> is a variable that is not directly measurable, but its value can be inferred by taking other measurements.
@@ -402,18 +452,30 @@ A <a href="https://en.wikipedia.org/wiki/Latent_variable">latent variable</a> is
 This happens a lot in machine learning, robotics, statistics and other fields. For example, you may not be able to directly quantify intelligence (it’s not a countable thing like the number of brain cells you have), but we think it exists and we can run experiments that may tell us about intelligence. So your intelligence is a latent variable that affects your performance on multiple tasks even though it can not be directly measured (<a href="https://www.quora.com/What-is-a-latent-variable">link</a>).
 </p>
 </div>
-<p>The conditional distribution of <span class="math inline">\(x\)</span> given a particular value for <span class="math inline">\(z\)</span> is a Gaussian</p>
+<p>The conditional distribution of <span class="math inline">\(x\)</span> given a particular value for <span class="math inline">\(z\)</span> is
+a Gaussian</p>
 <p><span class="math display">\[p(x|z_k=1)= \mathcal{N}(x| \mu_k, \Sigma_k)\]</span></p>
-<p>The joint distribution is given by <span class="math inline">\(p(z)p(x|z)\)</span>, and the marginal distribution of <span class="math inline">\(x\)</span> is then obtained by summing the joint distribution over all possible states of <span class="math inline">\(z\)</span> to give</p>
+<p>The joint distribution is given by <span class="math inline">\(p(z)p(x|z)\)</span>, and the marginal
+distribution of <span class="math inline">\(x\)</span> is then obtained by summing the joint distribution
+over all possible states of <span class="math inline">\(z\)</span> to give</p>
 <p><span class="math display">\[p(x)= \sum_z p(z)p(x|z) = \sum_{k=1}^{K} \pi_k \mathcal{N}(x| \mu_k, \Sigma_k)\]</span></p>
-<p>Now, we are able to work with the joint distribution <span class="math inline">\(p(x|z)\)</span> instead of the marginal distribution <span class="math inline">\(p(x)\)</span>. This leads to significant simplification, most notably through the introduction of the Expectation-Maximization (EM) algorithm.</p>
-<p>Another quantity that play an important role is the conditional probability of <span class="math inline">\(z\)</span> given <span class="math inline">\(x\)</span>. We shall use <span class="math inline">\(r(z_k)\)</span> to denote <span class="math inline">\(p(z_k = 1|x)\)</span>, whose value can be found using Bayes’ theorem</p>
-<span class="math display" id="eq:responsibilities">\[\begin{align}
+<p>Now, we are able to work with the joint distribution <span class="math inline">\(p(x|z)\)</span> instead of
+the marginal distribution <span class="math inline">\(p(x)\)</span>. This leads to significant
+simplification, most notably through the introduction of the
+Expectation-Maximization (EM) algorithm.</p>
+<p>Another quantity that play an important role is the conditional
+probability of <span class="math inline">\(z\)</span> given <span class="math inline">\(x\)</span>. We shall use <span class="math inline">\(r(z_k)\)</span> to denote
+<span class="math inline">\(p(z_k = 1|x)\)</span>, whose value can be found using Bayes’ theorem</p>
+<p><span class="math display" id="eq:responsibilities">\[\begin{align}
 r(z_k)= p(z_k = 1|x) &amp;= \frac{ p(z_k = 1) p(x|(z_k=1)}{\displaystyle \sum_{j=1}^{K} p(z_j = 1) p(x|(z_j=1)} \nonumber \\
 &amp;= \frac{\pi_k \mathcal{N}(x| \mu_k, \Sigma_k)}{\displaystyle \sum_{j=1}^{K} \pi_j \mathcal{N}(x| \mu_j, \Sigma_j)} 
 \tag{8.3}
-\end{align}\]</span>
-<p>We shall view <span class="math inline">\(\pi_k\)</span> as the prior probability of <span class="math inline">\(z_k = 1\)</span>, and the quantity <span class="math inline">\(r(z_k)\)</span> as the corresponding posterior probability once we have observed <span class="math inline">\(x\)</span>. As we shall see in next section, <span class="math inline">\(r(z_k)\)</span> can also be viewed as the <em>responsibility</em> that component <span class="math inline">\(k\)</span> takes for ’explaining’ the observation <span class="math inline">\(x\)</span>.</p>
+\end{align}\]</span></p>
+<p>We shall view <span class="math inline">\(\pi_k\)</span> as the prior probability of <span class="math inline">\(z_k = 1\)</span>, and the
+quantity <span class="math inline">\(r(z_k)\)</span> as the corresponding posterior probability once we
+have observed <span class="math inline">\(x\)</span>. As we shall see in next section, <span class="math inline">\(r(z_k)\)</span> can also be
+viewed as the <em>responsibility</em> that component <span class="math inline">\(k\)</span> takes for ’explaining’
+the observation <span class="math inline">\(x\)</span>.</p>
 <div class="rmdtip">
 <p>
 Doesn’t this reminds you of the Equation <a href="discriminant-analysis.html#eq:bayes">4.1</a> when we used Bayes’ theorm for Classification? where <span class="math inline"><span class="math inline">\(p_k(x)\)</span></span> was the <em>posterior</em> probability that an observation <span class="math inline"><span class="math inline">\(X=x\)</span></span> belongs to <span class="math inline"><span class="math inline">\(k\)</span></span>-th class. The difference is that here the data is unlabled (we have no class), so we create a <strong>latent</strong> (hidden, unobserved) variable <span class="math inline"><span class="math inline">\(z\)</span></span> that will play a similar role.
@@ -427,42 +489,69 @@ Figure 8.4: Example of 500 points drawn from a mixture of 3 Gaussians. (a) Sampl
 </p>
 </div>
 <p>So the form of the Gaussian mixture distribution is governed by the parameters <span class="math inline">\(\pi\)</span>, <span class="math inline">\(\mu\)</span> and <span class="math inline">\(\Sigma\)</span>, where we have used the notation <span class="math inline">\(\pi=\{\pi_1,\ldots,\pi_K\}\)</span>, <span class="math inline">\(\mu=\{\mu_1,\ldots,\mu_K\}\)</span> and <span class="math inline">\(\Sigma=\{\Sigma_1,\ldots,\Sigma_K\}\)</span>. One way to set the values of these parameters is to use maximum likelihood. The log of the likelihood function is given by</p>
-<p><span class="math display">\[\ln p(X|\pi,\mu,\Sigma)=\sum_{n=1}^{N} \ln \left\lbrace \sum_{k=1}^{K} \pi_k \mathcal{N}(x_n | \mu_k, \Sigma_k) \right\rbrace\]</span> We immediately see that the situation is now much more complex than with a single Gaussian, due to the presence of the summation over <span class="math inline">\(k\)</span> inside the logarithm. As a result, the maximum likelihood solution for the parameters no longer has a closed-form analytical solution. One approach to maximizing the likelihood function is to use iterative numerical optimization techniques. Alternatively we can employ a powerful framework called <strong>E</strong>xpectation <strong>M</strong>aximization, which will be discussed in this chapter.</p>
+<p><span class="math display">\[\ln p(X|\pi,\mu,\Sigma)=\sum_{n=1}^{N} \ln \left\lbrace \sum_{k=1}^{K} \pi_k \mathcal{N}(x_n | \mu_k, \Sigma_k) \right\rbrace\]</span>
+We immediately see that the situation is now much more complex than with a single Gaussian, due to the presence of the summation over <span class="math inline">\(k\)</span> inside the logarithm. As a result, the maximum likelihood solution for the
+parameters no longer has a closed-form analytical solution. One approach to maximizing the likelihood function is to use iterative numerical optimization techniques. Alternatively we can employ a powerful framework called <strong>E</strong>xpectation <strong>M</strong>aximization, which
+will be discussed in this chapter.</p>
 </div>
 <div id="em-for-gaussian-mixtures" class="section level2">
 <h2><span class="header-section-number">8.3</span> EM for Gaussian Mixtures</h2>
-<p>Suppose we have a data set of observations <span class="math inline">\(\{x_1, \ldots, x_N\}\)</span>, which gives a data set <span class="math inline">\(X\)</span> of size <span class="math inline">\(N \times D\)</span>, and we wish to model this data using a mixture of Gaussians. Similarly, the corresponding latent variable are denoted by a <span class="math inline">\(N \times K\)</span> matrix <span class="math inline">\(Z\)</span> with rows <span class="math inline">\(z_n^K\)</span>.</p>
+<p>Suppose we have a data set of observations <span class="math inline">\(\{x_1, \ldots, x_N\}\)</span>, which
+gives a data set <span class="math inline">\(X\)</span> of size <span class="math inline">\(N \times D\)</span>, and we wish to model this data using a mixture of
+Gaussians. Similarly, the corresponding latent variable are denoted by
+a <span class="math inline">\(N \times K\)</span> matrix <span class="math inline">\(Z\)</span> with rows <span class="math inline">\(z_n^K\)</span>.</p>
 <div class="rmdinsight">
 <p>
 Recall that the objective is to estimate the parameters <span class="math inline"><span class="math inline">\(\pi\)</span></span>, <span class="math inline"><span class="math inline">\(\mu\)</span></span> and <span class="math inline"><span class="math inline">\(\Sigma\)</span></span> in order to estimate the posterior probabilities (named also <em>responsibilities</em>, called <span class="math inline"><span class="math inline">\(\, r(z_k)\)</span></span> in this chapter). To do so, we find the estimators that maximize the log of the likelihood function.
 </p>
 </div>
-<p>If we assume that the data points are i.i.d. (independent and identically distributed), then we can calculate the log of the likelihood function, which is given by</p>
-<span class="math display" id="eq:gaussianlikelihood">\[\begin{equation}
+<p>If we assume that the data points are i.i.d. (independent and
+identically distributed), then we can calculate the log of the
+likelihood function, which is given by</p>
+<p><span class="math display" id="eq:gaussianlikelihood">\[\begin{equation}
 \tag{8.4}
 \ln p(X|\pi,\mu,\Sigma)=\sum_{n=1}^{N} \ln \left\lbrace \sum_{k=1}^{K} \pi_k \mathcal{N}(x_n | \mu_k, \Sigma_k) \right\rbrace
-\end{equation}\]</span>
-<p>An elegant and powerful method for finding maximum likelihood solutions for this models with latent variables is called the <strong>E</strong>xpectation <strong>M</strong>aximization algorithm, or EM algorithm.</p>
-<p>Setting the derivatives of <span class="math inline">\(\ln p(X|\pi,\mu,\Sigma)\)</span> in <a href="gaussian-mixture-models-em.html#eq:gaussianlikelihood">(8.4)</a> respectively with respect to the <span class="math inline">\(\mu_k,\Sigma_k\)</span> and <span class="math inline">\(\pi_k\)</span> to zero, we obtain</p>
-<span class="math display" id="eq:means">\[\begin{equation}
+\end{equation}\]</span></p>
+<p>An elegant and powerful method for finding maximum likelihood solutions
+for this models with latent variables is called the
+<strong>E</strong>xpectation <strong>M</strong>aximization algorithm, or EM algorithm.</p>
+<p>Setting the derivatives of <span class="math inline">\(\ln p(X|\pi,\mu,\Sigma)\)</span> in
+<a href="gaussian-mixture-models-em.html#eq:gaussianlikelihood">(8.4)</a> respectively with respect to the
+<span class="math inline">\(\mu_k,\Sigma_k\)</span> and <span class="math inline">\(\pi_k\)</span> to zero, we obtain</p>
+<p><span class="math display" id="eq:means">\[\begin{equation}
 \tag{8.5}
 \mu_k = \frac{1}{N_k} \sum_{n=1}^{N} r(z_{nk}) x_n
-\end{equation}\]</span>
+\end{equation}\]</span></p>
 <p>where we define <span class="math display">\[N_k= \sum_{n=1}^{N}r(z_{nk})\]</span></p>
-<p>We can interpret <span class="math inline">\(N_k\)</span> as the effective number of points assigned to cluster <span class="math inline">\(k\)</span>. Note carefully the form of this solution. We see that the mean <span class="math inline">\(\mu_k\)</span> for the <span class="math inline">\(k\)</span>-th Gaussian component is obtained by taking a weighted mean of all of the points in the data set, in which the weighting factor for data point <span class="math inline">\(x_n\)</span> is given by the posterior probability <span class="math inline">\(r(z_{nk})\)</span> that component <span class="math inline">\(k\)</span> was responsible for generating <span class="math inline">\(x_n\)</span>.</p>
+<p>We can interpret <span class="math inline">\(N_k\)</span> as the effective number of points assigned to cluster <span class="math inline">\(k\)</span>. Note
+carefully the form of this solution. We see that the mean <span class="math inline">\(\mu_k\)</span> for the <span class="math inline">\(k\)</span>-th Gaussian
+component is obtained by taking a weighted mean of all of the points in the data set,
+in which the weighting factor for data point <span class="math inline">\(x_n\)</span> is given by the posterior probability
+<span class="math inline">\(r(z_{nk})\)</span> that component <span class="math inline">\(k\)</span> was responsible for generating <span class="math inline">\(x_n\)</span>.</p>
 <p>As for <span class="math inline">\(\sigma_k\)</span> we obtain</p>
-<span class="math display" id="eq:sigma">\[\begin{equation}
+<p><span class="math display" id="eq:sigma">\[\begin{equation}
 \tag{8.6}
 \Sigma_k= \frac{1}{N_k} \sum_{n=1}^{N} r(z_{nk}) (x_n - \mu_k)(x_n - \mu_k)^T
-\end{equation}\]</span>
-<p>which has the same form as the corresponding result for a single Gaussian fitted to the data set, but again with each data point weighted by the corresponding posterior probability and with the denominator given by the effective number of points associated with the corresponding component.</p>
+\end{equation}\]</span></p>
+<p>which has the same form as the corresponding result for a single Gaussian fitted to
+the data set, but again with each data point weighted by the corresponding posterior probability and with the denominator given by the effective number of points
+associated with the corresponding component.</p>
 <p>Finally, for the mixing coefficients <span class="math inline">\(\pi_k\)</span> we obtain</p>
-<span class="math display" id="eq:pi">\[\begin{equation}
+<p><span class="math display" id="eq:pi">\[\begin{equation}
 \tag{8.7}
 \pi_k=\frac{N_k}{N}
-\end{equation}\]</span>
+\end{equation}\]</span></p>
 <p>so that the mixing coefficient for the <span class="math inline">\(k\)</span>-th component is given by the average responsibility which that component takes for explaining the data points.</p>
-<p>We first choose some initial values for the means, covariances, and mixing coefficients. Then we alternate between the following two updates that we shall call the <strong>E</strong> step and the <strong>M</strong> step. In the <em>expectation</em> step, or E step, we use the current values for the parameters to evaluate the posterior probabilities, or responsibilities, given by Eq. <a href="gaussian-mixture-models-em.html#eq:responsibilities">(8.3)</a>. We then use these probabilities in the <em>maximization</em> step, or M step, to re-estimate the means, covariances, and mixing coefficients using the results in Equations <a href="gaussian-mixture-models-em.html#eq:means">(8.5)</a>, <a href="gaussian-mixture-models-em.html#eq:sigma">(8.6)</a> and <a href="gaussian-mixture-models-em.html#eq:pi">(8.7)</a>. The algorithm of EM for mixtures of Gaussians is shown in the following Algorithm:</p>
+<p>We first choose some initial values for the means, covariances, and
+mixing coefficients. Then we alternate between the following two updates
+that we shall call the <strong>E</strong> step and the <strong>M</strong> step. In the <em>expectation</em> step,
+or E step, we use the current values for the parameters to evaluate the
+posterior probabilities, or responsibilities, given by Eq.
+<a href="gaussian-mixture-models-em.html#eq:responsibilities">(8.3)</a>. We then use these probabilities in the
+<em>maximization</em> step, or M step, to re-estimate the means, covariances,
+and mixing coefficients using the results in Equations <a href="gaussian-mixture-models-em.html#eq:means">(8.5)</a>,
+<a href="gaussian-mixture-models-em.html#eq:sigma">(8.6)</a> and <a href="gaussian-mixture-models-em.html#eq:pi">(8.7)</a>. The algorithm of EM for mixtures of
+Gaussians is shown in the following Algorithm:</p>
 <table>
 <colgroup>
 <col width="37%" />
@@ -476,15 +565,16 @@ Recall that the objective is to estimate the parameters <span class="math inline
 </thead>
 <tbody>
 <tr class="odd">
-<td><p><strong>Data</strong>:</p></td>
-<td><p><span class="math inline">\(\mathbf{X}= \{x_{kd}, \,\,\,\, k=1,\ldots,N, d=1,\ldots,D\}\)</span> where <span class="math inline">\(D\)</span> is the dimension of the feature space. <span class="math inline">\(Z\)</span> the latent variables matrix.</p></td>
+<td><strong>Data</strong>:</td>
+<td><span class="math inline">\(\mathbf{X}= \{x_{kd}, \,\,\,\, k=1,\ldots,N, d=1,\ldots,D\}\)</span>
+where <span class="math inline">\(D\)</span> is the dimension of the feature space. <span class="math inline">\(Z\)</span> the latent variables matrix.</td>
 </tr>
 <tr class="even">
-<td><p><strong>Result</strong>:</p></td>
-<td><p>Posterior probabilities <span class="math inline">\(r(z_{nk})\)</span> and the model parameters <span class="math inline">\(\mu,\Sigma\)</span> and <span class="math inline">\(\pi\)</span>.</p></td>
+<td><strong>Result</strong>:</td>
+<td>Posterior probabilities <span class="math inline">\(r(z_{nk})\)</span> and the model parameters <span class="math inline">\(\mu,\Sigma\)</span> and <span class="math inline">\(\pi\)</span>.</td>
 </tr>
 <tr class="odd">
-<td><p><strong>Initialization</strong>:</p></td>
+<td><strong>Initialization</strong>:</td>
 <td><ul>
 <li>Choose a value for <span class="math inline">\(K\)</span>, <span class="math inline">\(1 &lt; K &lt; N\)</span>.</li>
 <li>Initialize the means <span class="math inline">\(\mu_k\)</span>, the covariances <span class="math inline">\(\Sigma_k\)</span> and mixing coefficients <span class="math inline">\(\pi_k\)</span> randomly.</li>
@@ -492,20 +582,34 @@ Recall that the objective is to estimate the parameters <span class="math inline
 </ul></td>
 </tr>
 <tr class="even">
-<td><p><strong>Learning</strong>: <strong>repeat</strong></p></td>
+<td><strong>Learning</strong>: <strong>repeat</strong></td>
 <td><p><strong>E step</strong>:</p>
 <ul>
-<li>Evaluate the responsibilities using the current parameter values: <span class="math display">\[r(z_{nk})= \frac{\pi_k \mathcal{N}(x| \mu_k, \Sigma_k)}{\displaystyle \sum_{j=1}^{K} \pi_j \mathcal{N}(x| \mu_j, \Sigma_j)}\]</span></li>
+<li>Evaluate the responsibilities using the current parameter values:
+<span class="math display">\[r(z_{nk})= \frac{\pi_k \mathcal{N}(x| \mu_k, \Sigma_k)}{\displaystyle \sum_{j=1}^{K} \pi_j \mathcal{N}(x| \mu_j, \Sigma_j)}\]</span></li>
 </ul>
 <p><strong>M step</strong>:</p>
 <ul>
-<li><p>Re-estimate the parameters using the current responsibilities: <span class="math display">\[\mu_k = \frac{1}{N_k} \sum_{n=1}^{N} r(z_{nk}) x_n\]</span> <span class="math display">\[\Sigma_k= \frac{1}{N_k} \sum_{n=1}^{N} r(z_{nk}) (x_n - \mu_k)(x_n - \mu_k)^T\]</span> <span class="math display">\[\pi_k=\frac{N_k}{N}\]</span> <span class="math display">\[\text{where} \quad N_k= \sum_{n=1}^{N}r(z_{nk})\]</span></p></li>
-<li><p>Evaluate the log likelihood: <span class="math display">\[\ln p(X|\pi,\mu,\Sigma)=\sum_{n=1}^{N} \ln \left\lbrace \sum_{k=1}^{K} \pi_k \mathcal{N}(x_n | \mu_k, \Sigma_k) \right\rbrace\]</span> Until convergence of either the parameters or the log likelihood. If the convergence criterion is not satisfied return to E step.</p></li>
+<li><p>Re-estimate the parameters using the current responsibilities:
+<span class="math display">\[\mu_k = \frac{1}{N_k} \sum_{n=1}^{N} r(z_{nk}) x_n\]</span>
+<span class="math display">\[\Sigma_k= \frac{1}{N_k} \sum_{n=1}^{N} r(z_{nk}) (x_n - \mu_k)(x_n - \mu_k)^T\]</span>
+<span class="math display">\[\pi_k=\frac{N_k}{N}\]</span>
+<span class="math display">\[\text{where} \quad N_k= \sum_{n=1}^{N}r(z_{nk})\]</span></p></li>
+<li><p>Evaluate the log likelihood:
+<span class="math display">\[\ln p(X|\pi,\mu,\Sigma)=\sum_{n=1}^{N} \ln \left\lbrace \sum_{k=1}^{K} \pi_k \mathcal{N}(x_n | \mu_k, \Sigma_k) \right\rbrace\]</span>
+Until convergence of either the parameters or the log likelihood. If the convergence criterion is not satisfied return to E step.</p></li>
 </ul></td>
 </tr>
 </tbody>
 </table>
-<p>The EM algorithm for a mixture of two Gaussians applied to the rescaled Old Faithful data set is illustrated in Figure <a href="gaussian-mixture-models-em.html#fig:emfaithful">8.5</a>. In plot (a) we see the initial configuration, the Gaussian component are shown as blue and red circles. Plot (b) shows the result of the initial E step where we update the responsibilities. Plot (c) shows the M step where we update the parameters. Plots (d), (e), and (f) show the results after 2, 5, and 20 complete cycles of EM, respectively. In plot (f) the algorithm is close to convergence.</p>
+<p>The EM algorithm for a mixture of two Gaussians applied to the rescaled
+Old Faithful data set is illustrated in Figure <a href="gaussian-mixture-models-em.html#fig:emfaithful">8.5</a>. In
+plot (a) we see the initial configuration, the Gaussian component are
+shown as blue and red circles. Plot (b) shows the result of the initial
+E step where we update the responsibilities. Plot (c) shows the M step
+where we update the parameters. Plots (d), (e), and (f) show the results
+after 2, 5, and 20 complete cycles of EM, respectively. In plot (f) the
+algorithm is close to convergence.</p>
 <div class="figure" style="text-align: center"><span id="fig:emfaithful"></span>
 <img src="img/em_faithful.png" alt="Illustration of the EM algorithm using the Old Faithful dataset. A mixture of two Gaussians is used." width="80%" />
 <p class="caption">
@@ -653,6 +757,10 @@ gitbook.start({
 "link": null,
 "text": null
 },
+"history": {
+"link": null,
+"text": null
+},
 "download": ["Machine-Learning.pdf"],
 "toc": {
 "collapse": "section",
@@ -671,8 +779,8 @@ gitbook.start({
   (function () {
     var script = document.createElement("script");
     script.type = "text/javascript";
-    var src = "";
-    if (src === "" || src === "true") src = "https://cdn.bootcss.com/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
     if (location.protocol !== "file:" && /^https?:/.test(src))
       src = src.replace(/^https?:/, '');
     script.src = src;

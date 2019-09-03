@@ -1,0 +1,999 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Practical Work 1 | Machine Learning</title>
+  <meta name="description" content="Practical Work 1 | Machine Learning course" />
+  <meta name="generator" content="bookdown 0.10 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Practical Work 1 | Machine Learning" />
+  <meta property="og:type" content="book" />
+  
+  
+  <meta property="og:description" content="Practical Work 1 | Machine Learning course" />
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Practical Work 1 | Machine Learning" />
+  
+  <meta name="twitter:description" content="Practical Work 1 | Machine Learning course" />
+  
+
+<meta name="author" content="Mohamad Ghassany" />
+
+
+<meta name="date" content="2019-09-03" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="linear-regression.html">
+
+<script src="book_assets/jquery-2.2.3/jquery.min.js"></script>
+<link href="book_assets/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="book_assets/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="book_assets/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="book_assets/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="book_assets/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="book_assets/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+
+
+
+
+
+
+
+<link href="book_assets/font-awesome-5.3.1/css/fontawesome-all.min.css" rel="stylesheet" />
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-88489172-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-88489172-1');
+</script>
+
+
+<style type="text/css">
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource a.sourceLine
+  { position: relative; left: -4em; }
+pre.numberSource a.sourceLine::before
+  { content: attr(title);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  }
+@media screen {
+a.sourceLine::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<link rel="stylesheet" href="css\style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li class='beforeimg'>            
+   <a href="https://www.esilv.fr/">
+       <img src="img/Logo_ESILV_tout_blanc.png" style="width:75%; padding:0px 0; display:block; margin: 0 auto;" alt="ESILV logo">
+    </a>
+</li>
+<li class='before'><a href="./">Machine Learning</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Welcome</a><ul>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#course-overview"><i class="fa fa-check"></i>Course Overview</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="introduction.html"><a href="introduction.html"><i class="fa fa-check"></i>Introduction</a><ul>
+<li class="chapter" data-level="" data-path="introduction.html"><a href="introduction.html#what-is-machine-learning"><i class="fa fa-check"></i>What is Machine Learning ?</a></li>
+<li class="chapter" data-level="" data-path="introduction.html"><a href="introduction.html#supervised-learning"><i class="fa fa-check"></i>Supervised Learning</a></li>
+<li class="chapter" data-level="" data-path="introduction.html"><a href="introduction.html#unsupervised-learning"><i class="fa fa-check"></i>Unsupervised Learning</a></li>
+</ul></li>
+<li class="part"><span><b>I Supervised Learning</b></span></li>
+<li class="part"><span><b>Regression</b></span></li>
+<li class="chapter" data-level="1" data-path="linear-regression.html"><a href="linear-regression.html"><i class="fa fa-check"></i><b>1</b> Linear Regression</a><ul>
+<li class="chapter" data-level="1.1" data-path="linear-regression.html"><a href="linear-regression.html#notation"><i class="fa fa-check"></i><b>1.1</b> Notation</a></li>
+<li class="chapter" data-level="1.2" data-path="linear-regression.html"><a href="linear-regression.html#model-representation"><i class="fa fa-check"></i><b>1.2</b> Model Representation</a></li>
+<li class="chapter" data-level="1.3" data-path="linear-regression.html"><a href="linear-regression.html#why-estimate-f"><i class="fa fa-check"></i><b>1.3</b> Why Estimate <span class="math inline">\(f\)</span> ?</a><ul>
+<li class="chapter" data-level="" data-path="linear-regression.html"><a href="linear-regression.html#prediction"><i class="fa fa-check"></i>Prediction</a></li>
+<li class="chapter" data-level="" data-path="linear-regression.html"><a href="linear-regression.html#inference"><i class="fa fa-check"></i>Inference</a></li>
+</ul></li>
+<li class="chapter" data-level="1.4" data-path="linear-regression.html"><a href="linear-regression.html#simple-linear-regression-model"><i class="fa fa-check"></i><b>1.4</b> Simple Linear Regression Model</a></li>
+<li class="chapter" data-level="1.5" data-path="linear-regression.html"><a href="linear-regression.html#estimating-the-coefficients"><i class="fa fa-check"></i><b>1.5</b> Estimating the Coefficients</a></li>
+<li class="chapter" data-level="1.6" data-path="linear-regression.html"><a href="linear-regression.html#assessing-the-accuracy-of-the-coefficient-estimates"><i class="fa fa-check"></i><b>1.6</b> Assessing the Accuracy of the Coefficient Estimates</a><ul>
+<li class="chapter" data-level="" data-path="linear-regression.html"><a href="linear-regression.html#hypothesis-testing"><i class="fa fa-check"></i>Hypothesis testing</a></li>
+</ul></li>
+<li class="chapter" data-level="1.7" data-path="linear-regression.html"><a href="linear-regression.html#anova-and-model-fit"><i class="fa fa-check"></i><b>1.7</b> ANOVA and model fit</a><ul>
+<li class="chapter" data-level="1.7.1" data-path="linear-regression.html"><a href="linear-regression.html#anova"><i class="fa fa-check"></i><b>1.7.1</b> ANOVA</a></li>
+<li class="chapter" data-level="1.7.2" data-path="linear-regression.html"><a href="linear-regression.html#the-r2-statistic"><i class="fa fa-check"></i><b>1.7.2</b> The <span class="math inline">\(R^2\)</span> Statistic</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="practical-work-1.html"><a href="practical-work-1.html"><i class="fa fa-check"></i>Practical Work 1</a><ul>
+<li class="chapter" data-level="1.8" data-path="practical-work-1.html"><a href="practical-work-1.html#some-basics"><i class="fa fa-check"></i><b>1.8</b> Some <svg style="height:0.8em;top:.04em;position:relative;fill:steelblue;" viewBox="0 0 581 512"><path d="M581 226.6C581 119.1 450.9 32 290.5 32S0 119.1 0 226.6C0 322.4 103.3 402 239.4 418.1V480h99.1v-61.5c24.3-2.7 47.6-7.4 69.4-13.9L448 480h112l-67.4-113.7c54.5-35.4 88.4-84.9 88.4-139.7zm-466.8 14.5c0-73.5 98.9-133 220.8-133s211.9 40.7 211.9 133c0 50.1-26.5 85-70.3 106.4-2.4-1.6-4.7-2.9-6.4-3.7-10.2-5.2-27.8-10.5-27.8-10.5s86.6-6.4 86.6-92.7-90.6-87.9-90.6-87.9h-199V361c-74.1-21.5-125.2-67.1-125.2-119.9zm225.1 38.3v-55.6c57.8 0 87.8-6.8 87.8 27.3 0 36.5-38.2 28.3-87.8 28.3zm-.9 72.5H365c10.8 0 18.9 11.7 24 19.2-16.1 1.9-33 2.8-50.6 2.9v-22.1z"/></svg> basics</a><ul>
+<li class="chapter" data-level="1.8.1" data-path="practical-work-1.html"><a href="practical-work-1.html#basic-commands"><i class="fa fa-check"></i><b>1.8.1</b> Basic Commands</a></li>
+<li class="chapter" data-level="1.8.2" data-path="practical-work-1.html"><a href="practical-work-1.html#vectors"><i class="fa fa-check"></i><b>1.8.2</b> Vectors</a></li>
+<li class="chapter" data-level="1.8.3" data-path="practical-work-1.html"><a href="practical-work-1.html#matrices-data-frames-and-lists"><i class="fa fa-check"></i><b>1.8.3</b> Matrices, data frames and lists</a></li>
+<li class="chapter" data-level="1.8.4" data-path="practical-work-1.html"><a href="practical-work-1.html#graphics"><i class="fa fa-check"></i><b>1.8.4</b> Graphics</a></li>
+<li class="chapter" data-level="1.8.5" data-path="practical-work-1.html"><a href="practical-work-1.html#distributions"><i class="fa fa-check"></i><b>1.8.5</b> Distributions</a></li>
+<li class="chapter" data-level="1.8.6" data-path="practical-work-1.html"><a href="practical-work-1.html#working-directory"><i class="fa fa-check"></i><b>1.8.6</b> Working directory</a></li>
+<li class="chapter" data-level="1.8.7" data-path="practical-work-1.html"><a href="practical-work-1.html#loading-data"><i class="fa fa-check"></i><b>1.8.7</b> Loading Data</a></li>
+</ul></li>
+<li class="chapter" data-level="1.9" data-path="practical-work-1.html"><a href="practical-work-1.html#regression"><i class="fa fa-check"></i><b>1.9</b> Regression</a><ul>
+<li class="chapter" data-level="1.9.1" data-path="practical-work-1.html"><a href="practical-work-1.html#the-lm-function"><i class="fa fa-check"></i><b>1.9.1</b> The <code>lm</code> function</a></li>
+<li class="chapter" data-level="1.9.2" data-path="practical-work-1.html"><a href="practical-work-1.html#boston"><i class="fa fa-check"></i><b>1.9.2</b> Predicting House Value: Boston dataset</a></li>
+</ul></li>
+</ul></li>
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Machine Learning</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="practical-work-1" class="section level1 unnumbered">
+<h1>Practical Work 1</h1>
+<div id="some-basics" class="section level2">
+<h2><span class="header-section-number">1.8</span> Some <svg style="height:0.8em;top:.04em;position:relative;fill:steelblue;" viewBox="0 0 581 512"><path d="M581 226.6C581 119.1 450.9 32 290.5 32S0 119.1 0 226.6C0 322.4 103.3 402 239.4 418.1V480h99.1v-61.5c24.3-2.7 47.6-7.4 69.4-13.9L448 480h112l-67.4-113.7c54.5-35.4 88.4-84.9 88.4-139.7zm-466.8 14.5c0-73.5 98.9-133 220.8-133s211.9 40.7 211.9 133c0 50.1-26.5 85-70.3 106.4-2.4-1.6-4.7-2.9-6.4-3.7-10.2-5.2-27.8-10.5-27.8-10.5s86.6-6.4 86.6-92.7-90.6-87.9-90.6-87.9h-199V361c-74.1-21.5-125.2-67.1-125.2-119.9zm225.1 38.3v-55.6c57.8 0 87.8-6.8 87.8 27.3 0 36.5-38.2 28.3-87.8 28.3zm-.9 72.5H365c10.8 0 18.9 11.7 24 19.2-16.1 1.9-33 2.8-50.6 2.9v-22.1z"/></svg> basics</h2>
+<div id="basic-commands" class="section level3">
+<h3><span class="header-section-number">1.8.1</span> Basic Commands</h3>
+<p><i class="fab  fa-r-project " style="color:steelblue;"></i> uses functions to perform operations. To run a function called <code>funcname</code>,we type <code>funcname(input1, input2)</code> , where the inputs (or arguments) <code>input1</code> and <code>input2</code> tell <i class="fab  fa-r-project " style="color:steelblue;"></i> how to run the function. A function can have any number of inputs. For example, to create a vector of numbers, we use the function <code>c()</code> (for <em>concatenate</em>).</p>
+<pre class="sourceCode r"><code class="sourceCode r">x &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">3</span>,<span class="dv">2</span>,<span class="dv">5</span>)
+x
+<span class="co">#ans&gt; [1] 1 3 2 5</span></code></pre>
+<p>Note that the <code>&gt;</code> is not part of the command; rather, it is printed by <i class="fab  fa-r-project " style="color:steelblue;"></i> to indicate that it is ready for another command to be entered. We can also save things using <code>=</code> rather than <code>&lt;-</code>. Note that the answer in the code above is followed by <code>#ans&gt;</code> while in the <i class="fab  fa-r-project " style="color:steelblue;"></i> console it is not.</p>
+<pre class="sourceCode r"><code class="sourceCode r">x =<span class="st"> </span><span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">6</span>,<span class="dv">2</span>)
+x
+<span class="co">#ans&gt; [1] 1 6 2</span>
+y =<span class="st"> </span><span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">4</span>,<span class="dv">3</span>)
+<span class="kw">length</span>(x)
+<span class="co">#ans&gt; [1] 3</span>
+<span class="kw">length</span>(y)
+<span class="co">#ans&gt; [1] 3</span>
+x<span class="op">+</span>y
+<span class="co">#ans&gt; [1]  2 10  5</span></code></pre>
+<p>Hitting the <em>up arrow</em> multiple times will display the previous commands, which can then be edited. This is useful since one often wishes to repeat a similar command.</p>
+<p>The <code>ls()</code> function allows us to look at a list of all of the objects, such <code>ls()</code> as data and functions, that we have saved so far. The <code>rm()</code> function can be used to delete any object that we don’t want.</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ls</span>()
+<span class="co">#ans&gt; [1] &quot;x&quot; &quot;y&quot;</span>
+<span class="kw">rm</span>(x)
+<span class="kw">ls</span>()
+<span class="co">#ans&gt; [1] &quot;y&quot;</span></code></pre>
+</div>
+<div id="vectors" class="section level3">
+<h3><span class="header-section-number">1.8.2</span> Vectors</h3>
+<pre class="sourceCode r"><code class="sourceCode r">
+<span class="co"># A handy way of creating sequences is the operator :</span>
+<span class="co"># Sequence from 1 to 5</span>
+<span class="dv">1</span><span class="op">:</span><span class="dv">5</span>
+<span class="co">#ans&gt; [1] 1 2 3 4 5</span>
+
+<span class="co"># Storing some vectors</span>
+vec &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="op">-</span><span class="fl">4.12</span>, <span class="dv">0</span>, <span class="fl">1.1</span>, <span class="dv">1</span>, <span class="dv">3</span>, <span class="dv">4</span>)
+vec
+<span class="co">#ans&gt; [1] -4.12  0.00  1.10  1.00  3.00  4.00</span>
+
+<span class="co"># Entry-wise operations</span>
+vec <span class="op">+</span><span class="st"> </span><span class="dv">1</span>
+<span class="co">#ans&gt; [1] -3.12  1.00  2.10  2.00  4.00  5.00</span>
+vec<span class="op">^</span><span class="dv">2</span>
+<span class="co">#ans&gt; [1] 16.97  0.00  1.21  1.00  9.00 16.00</span>
+
+<span class="co"># If you want to access a position of a vector, use [position]</span>
+vec[<span class="dv">6</span>]
+<span class="co">#ans&gt; [1] 4</span>
+
+<span class="co"># You also can change elements</span>
+vec[<span class="dv">2</span>] &lt;-<span class="st"> </span><span class="dv">-1</span>
+vec
+<span class="co">#ans&gt; [1] -4.12 -1.00  1.10  1.00  3.00  4.00</span>
+
+<span class="co"># If you want to access all the elements except a position, use [-position]</span>
+vec[<span class="op">-</span><span class="dv">2</span>]
+<span class="co">#ans&gt; [1] -4.12  1.10  1.00  3.00  4.00</span>
+
+<span class="co"># Also with vectors as indexes</span>
+vec[<span class="dv">1</span><span class="op">:</span><span class="dv">2</span>]
+<span class="co">#ans&gt; [1] -4.12 -1.00</span>
+
+<span class="co"># And also</span>
+vec[<span class="op">-</span><span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">2</span>)]
+<span class="co">#ans&gt; [1] 1.1 1.0 3.0 4.0</span></code></pre>
+<div class="rmdexercise">
+<p>
+Do the following:
+</p>
+<ul>
+<li>
+Create the vector <span class="math inline"><span class="math inline">\(x=(1, 7, 3, 4)\)</span></span>.
+</li>
+<li>
+Create the vector <span class="math inline"><span class="math inline">\(y=(100, 99, 98, ..., 2, 1)\)</span></span>.
+</li>
+<li>
+Compute <span class="math inline"><span class="math inline">\(x_3+y_4\)</span></span> and <span class="math inline"><span class="math inline">\(\cos(x_3) + \sin(x_2) e^{-y_2}\)</span></span>. (Answers: <code>100</code>, <code>-0.9899925</code>)
+</li>
+<li>
+Set <span class="math inline"><span class="math inline">\(x_{3}=0\)</span></span> and <span class="math inline"><span class="math inline">\(y_{2}=-1\)</span></span>. Recompute the previous expressions. (Answers: <code>97</code>, <code>2.785875</code>)
+</li>
+<li>
+Index <span class="math inline"><span class="math inline">\(y\)</span></span> by <span class="math inline"><span class="math inline">\(x+1\)</span></span> and store it as <code>z</code>. What is the output? (Answer: <code>z</code> is <code>c(-1, 93, 100, 96)</code>)
+</li>
+</ul>
+</div>
+</div>
+<div id="matrices-data-frames-and-lists" class="section level3">
+<h3><span class="header-section-number">1.8.3</span> Matrices, data frames and lists</h3>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># A matrix is an array of vectors</span>
+A &lt;-<span class="st"> </span><span class="kw">matrix</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">4</span>, <span class="dt">nrow =</span> <span class="dv">2</span>, <span class="dt">ncol =</span> <span class="dv">2</span>)
+A
+<span class="co">#ans&gt;      [,1] [,2]</span>
+<span class="co">#ans&gt; [1,]    1    3</span>
+<span class="co">#ans&gt; [2,]    2    4</span>
+
+<span class="co"># Another matrix</span>
+B &lt;-<span class="st"> </span><span class="kw">matrix</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">4</span>, <span class="dt">nrow =</span> <span class="dv">2</span>, <span class="dt">ncol =</span> <span class="dv">2</span>, <span class="dt">byrow =</span> <span class="ot">TRUE</span>)
+B
+<span class="co">#ans&gt;      [,1] [,2]</span>
+<span class="co">#ans&gt; [1,]    1    2</span>
+<span class="co">#ans&gt; [2,]    3    4</span>
+
+<span class="co"># Binding by rows or columns</span>
+<span class="kw">rbind</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">3</span>, <span class="dv">4</span><span class="op">:</span><span class="dv">6</span>)
+<span class="co">#ans&gt;      [,1] [,2] [,3]</span>
+<span class="co">#ans&gt; [1,]    1    2    3</span>
+<span class="co">#ans&gt; [2,]    4    5    6</span>
+<span class="kw">cbind</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">3</span>, <span class="dv">4</span><span class="op">:</span><span class="dv">6</span>)
+<span class="co">#ans&gt;      [,1] [,2]</span>
+<span class="co">#ans&gt; [1,]    1    4</span>
+<span class="co">#ans&gt; [2,]    2    5</span>
+<span class="co">#ans&gt; [3,]    3    6</span>
+
+<span class="co"># Entry-wise operations</span>
+A <span class="op">+</span><span class="st"> </span><span class="dv">1</span>
+<span class="co">#ans&gt;      [,1] [,2]</span>
+<span class="co">#ans&gt; [1,]    2    4</span>
+<span class="co">#ans&gt; [2,]    3    5</span>
+A <span class="op">*</span><span class="st"> </span>B
+<span class="co">#ans&gt;      [,1] [,2]</span>
+<span class="co">#ans&gt; [1,]    1    6</span>
+<span class="co">#ans&gt; [2,]    6   16</span>
+
+<span class="co"># Accessing elements</span>
+A[<span class="dv">2</span>, <span class="dv">1</span>] <span class="co"># Element (2, 1)</span>
+<span class="co">#ans&gt; [1] 2</span>
+A[<span class="dv">1</span>, ] <span class="co"># First row</span>
+<span class="co">#ans&gt; [1] 1 3</span>
+A[, <span class="dv">2</span>] <span class="co"># Second column</span>
+<span class="co">#ans&gt; [1] 3 4</span>
+
+<span class="co"># A data frame is a matrix with column names</span>
+<span class="co"># Useful when you have multiple variables</span>
+myDf &lt;-<span class="st"> </span><span class="kw">data.frame</span>(<span class="dt">var1 =</span> <span class="dv">1</span><span class="op">:</span><span class="dv">2</span>, <span class="dt">var2 =</span> <span class="dv">3</span><span class="op">:</span><span class="dv">4</span>)
+myDf
+<span class="co">#ans&gt;   var1 var2</span>
+<span class="co">#ans&gt; 1    1    3</span>
+<span class="co">#ans&gt; 2    2    4</span>
+
+<span class="co"># You can change names</span>
+<span class="kw">names</span>(myDf) &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;newname1&quot;</span>, <span class="st">&quot;newname2&quot;</span>)
+myDf
+<span class="co">#ans&gt;   newname1 newname2</span>
+<span class="co">#ans&gt; 1        1        3</span>
+<span class="co">#ans&gt; 2        2        4</span>
+
+<span class="co"># The nice thing is that you can access variables by its name with the $ operator</span>
+myDf<span class="op">$</span>newname1
+<span class="co">#ans&gt; [1] 1 2</span>
+
+<span class="co"># And create new variables also (it has to be of the same</span>
+<span class="co"># length as the rest of variables)</span>
+myDf<span class="op">$</span>myNewVariable &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">1</span>)
+myDf
+<span class="co">#ans&gt;   newname1 newname2 myNewVariable</span>
+<span class="co">#ans&gt; 1        1        3             0</span>
+<span class="co">#ans&gt; 2        2        4             1</span>
+
+<span class="co"># A list is a collection of arbitrary variables</span>
+myList &lt;-<span class="st"> </span><span class="kw">list</span>(<span class="dt">vec =</span> vec, <span class="dt">A =</span> A, <span class="dt">myDf =</span> myDf)
+
+<span class="co"># Access elements by names</span>
+myList<span class="op">$</span>vec
+<span class="co">#ans&gt; [1] -4.12 -1.00  1.10  1.00  3.00  4.00</span>
+myList<span class="op">$</span>A
+<span class="co">#ans&gt;      [,1] [,2]</span>
+<span class="co">#ans&gt; [1,]    1    3</span>
+<span class="co">#ans&gt; [2,]    2    4</span>
+myList<span class="op">$</span>myDf
+<span class="co">#ans&gt;   newname1 newname2 myNewVariable</span>
+<span class="co">#ans&gt; 1        1        3             0</span>
+<span class="co">#ans&gt; 2        2        4             1</span>
+
+<span class="co"># Reveal the structure of an object</span>
+<span class="kw">str</span>(myList)
+<span class="co">#ans&gt; List of 3</span>
+<span class="co">#ans&gt;  $ vec : num [1:6] -4.12 -1 1.1 1 3 4</span>
+<span class="co">#ans&gt;  $ A   : int [1:2, 1:2] 1 2 3 4</span>
+<span class="co">#ans&gt;  $ myDf:&#39;data.frame&#39;: 2 obs. of  3 variables:</span>
+<span class="co">#ans&gt;   ..$ newname1     : int [1:2] 1 2</span>
+<span class="co">#ans&gt;   ..$ newname2     : int [1:2] 3 4</span>
+<span class="co">#ans&gt;   ..$ myNewVariable: num [1:2] 0 1</span>
+<span class="kw">str</span>(myDf)
+<span class="co">#ans&gt; &#39;data.frame&#39;: 2 obs. of  3 variables:</span>
+<span class="co">#ans&gt;  $ newname1     : int  1 2</span>
+<span class="co">#ans&gt;  $ newname2     : int  3 4</span>
+<span class="co">#ans&gt;  $ myNewVariable: num  0 1</span>
+
+<span class="co"># A less lengthy output</span>
+<span class="kw">names</span>(myList)
+<span class="co">#ans&gt; [1] &quot;vec&quot;  &quot;A&quot;    &quot;myDf&quot;</span></code></pre>
+</div>
+<div id="graphics" class="section level3">
+<h3><span class="header-section-number">1.8.4</span> Graphics</h3>
+<p>The <code>plot()</code> function is the primary way to plot data in <i class="fab  fa-r-project " style="color:steelblue;"></i> . For instance, <code>plot(x,y)</code> produces a scatterplot of the numbers in <code>x</code> versus the numbers in <code>y</code>. There are many additional options that can be passed in to the <code>plot()</code> function. For example, passing in the argument <code>xlab</code> will result in a label on the <code>x-axis</code>. To find out more information about the <code>plot()</code> function, type <code>?plot</code>.</p>
+<pre class="sourceCode r"><code class="sourceCode r">x=<span class="kw">rnorm</span>(<span class="dv">100</span>)
+<span class="co"># The rnorm() function generates a vector of random normal variables,</span>
+<span class="co"># rnorm() with first argument n the sample size. Each time we call this</span>
+<span class="co"># function, we will get a different answer.</span>
+y=<span class="kw">rnorm</span>(<span class="dv">100</span>)
+<span class="kw">plot</span>(x,y)</code></pre>
+<p><img src="Machine-Learning_files/figure-html/unnamed-chunk-15-1.png" width="70%" style="display: block; margin: auto;" /></p>
+<pre class="sourceCode r"><code class="sourceCode r">
+<span class="co"># with titles</span>
+<span class="kw">plot</span>(x,y,<span class="dt">xlab=</span><span class="st">&quot;this is the x-axis&quot;</span>,<span class="dt">ylab=</span><span class="st">&quot;this is the y-axis&quot;</span>,
+<span class="dt">main=</span><span class="st">&quot;Plot of X vs Y&quot;</span>)</code></pre>
+<p><img src="Machine-Learning_files/figure-html/unnamed-chunk-15-2.png" width="70%" style="display: block; margin: auto;" /></p>
+</div>
+<div id="distributions" class="section level3">
+<h3><span class="header-section-number">1.8.5</span> Distributions</h3>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># R allows to sample [r], compute density/probability mass [d],</span>
+<span class="co"># compute distribution function [p] and compute quantiles [q] for several</span>
+<span class="co"># continuous and discrete distributions. The format employed is [rdpq]name,</span>
+<span class="co"># where name stands for:</span>
+<span class="co"># - norm -&gt; Normal</span>
+<span class="co"># - unif -&gt; Uniform</span>
+<span class="co"># - exp -&gt; Exponential</span>
+<span class="co"># - t -&gt; Student&#39;s t</span>
+<span class="co"># - f -&gt; Snedecor&#39;s F (Fisher)</span>
+<span class="co"># - chisq -&gt; Chi squared</span>
+<span class="co"># - pois -&gt; Poisson</span>
+<span class="co"># - binom -&gt; Binomial</span>
+<span class="co"># More distributions: ?Distributions</span>
+
+
+<span class="co"># Sampling from a Normal - 100 random points from a N(0, 1)</span>
+<span class="kw">rnorm</span>(<span class="dt">n =</span> <span class="dv">10</span>, <span class="dt">mean =</span> <span class="dv">0</span>, <span class="dt">sd =</span> <span class="dv">1</span>)
+<span class="co">#ans&gt;  [1]  0.593  0.789 -0.598  0.992  0.342 -1.260  0.320  0.115  0.375  0.276</span>
+
+<span class="co"># If you want to have always the same result, set the seed of the random number</span>
+<span class="co"># generator</span>
+<span class="kw">set.seed</span>(<span class="dv">45678</span>)
+<span class="kw">rnorm</span>(<span class="dt">n =</span> <span class="dv">10</span>, <span class="dt">mean =</span> <span class="dv">0</span>, <span class="dt">sd =</span> <span class="dv">1</span>)
+<span class="co">#ans&gt;  [1]  1.440 -0.720  0.671 -0.422  0.378 -1.667 -0.508  0.443 -1.799 -0.618</span>
+
+<span class="co"># Plotting the density of a N(0, 1) - the Gauss bell</span>
+x &lt;-<span class="st"> </span><span class="kw">seq</span>(<span class="op">-</span><span class="dv">4</span>, <span class="dv">4</span>, <span class="dt">l =</span> <span class="dv">100</span>)
+y &lt;-<span class="st"> </span><span class="kw">dnorm</span>(<span class="dt">x =</span> x, <span class="dt">mean =</span> <span class="dv">0</span>, <span class="dt">sd =</span> <span class="dv">1</span>)
+<span class="kw">plot</span>(x, y, <span class="dt">type =</span> <span class="st">&quot;l&quot;</span>)</code></pre>
+<p><img src="Machine-Learning_files/figure-html/unnamed-chunk-16-1.png" width="70%" style="display: block; margin: auto;" /></p>
+<pre class="sourceCode r"><code class="sourceCode r">
+<span class="co"># Plotting the distribution function of a N(0, 1)</span>
+x &lt;-<span class="st"> </span><span class="kw">seq</span>(<span class="op">-</span><span class="dv">4</span>, <span class="dv">4</span>, <span class="dt">l =</span> <span class="dv">100</span>)
+y &lt;-<span class="st"> </span><span class="kw">pnorm</span>(<span class="dt">q =</span> x, <span class="dt">mean =</span> <span class="dv">0</span>, <span class="dt">sd =</span> <span class="dv">1</span>)
+<span class="kw">plot</span>(x, y, <span class="dt">type =</span> <span class="st">&quot;l&quot;</span>, <span class="dt">lwd =</span> <span class="dv">3</span>, <span class="dt">main=</span><span class="st">&quot;The distribution function of a N(0, 1)&quot;</span>)</code></pre>
+<p><img src="Machine-Learning_files/figure-html/unnamed-chunk-16-2.png" width="70%" style="display: block; margin: auto;" /></p>
+<pre class="sourceCode r"><code class="sourceCode r">
+<span class="co"># Computing the 95% quantile for a N(0, 1)</span>
+<span class="kw">qnorm</span>(<span class="dt">p =</span> <span class="fl">0.95</span>, <span class="dt">mean =</span> <span class="dv">0</span>, <span class="dt">sd =</span> <span class="dv">1</span>)
+<span class="co">#ans&gt; [1] 1.64</span>
+
+<span class="co"># All distributions have the same syntax: rname(n,...), dname(x,...), dname(p,...)  </span>
+<span class="co"># and qname(p,...), but the parameters in ... change. Look them in ?Distributions</span>
+<span class="co"># For example, here is que same for the uniform distribution</span>
+
+<span class="co"># Sampling from a U(0, 1)</span>
+<span class="kw">set.seed</span>(<span class="dv">45678</span>)
+<span class="kw">runif</span>(<span class="dt">n =</span> <span class="dv">10</span>, <span class="dt">min =</span> <span class="dv">0</span>, <span class="dt">max =</span> <span class="dv">1</span>)
+<span class="co">#ans&gt;  [1] 0.9251 0.3340 0.2359 0.3366 0.7489 0.9327 0.3365 0.2246 0.6474 0.0808</span>
+
+<span class="co"># Plotting the density of a U(0, 1)</span>
+x &lt;-<span class="st"> </span><span class="kw">seq</span>(<span class="op">-</span><span class="dv">2</span>, <span class="dv">2</span>, <span class="dt">l =</span> <span class="dv">100</span>)
+y &lt;-<span class="st"> </span><span class="kw">dunif</span>(<span class="dt">x =</span> x, <span class="dt">min =</span> <span class="dv">0</span>, <span class="dt">max =</span> <span class="dv">1</span>)
+<span class="kw">plot</span>(x, y, <span class="dt">type =</span> <span class="st">&quot;l&quot;</span>)</code></pre>
+<p><img src="Machine-Learning_files/figure-html/unnamed-chunk-16-3.png" width="70%" style="display: block; margin: auto;" /></p>
+<pre class="sourceCode r"><code class="sourceCode r">
+<span class="co"># Computing the 95% quantile for a U(0, 1)</span>
+<span class="kw">qunif</span>(<span class="dt">p =</span> <span class="fl">0.95</span>, <span class="dt">min =</span> <span class="dv">0</span>, <span class="dt">max =</span> <span class="dv">1</span>)
+<span class="co">#ans&gt; [1] 0.95</span></code></pre>
+<div class="rmdexercise">
+<p>
+Do the following:
+</p>
+<ul>
+<li>
+Compute the 90%, 95% and 99% quantiles of a <span class="math inline"><span class="math inline">\(F\)</span></span> distribution with <code>df1 = 1</code> and <code>df2 = 5</code>. (Answer: <code>c(4.060420, 6.607891, 16.258177)</code>)
+</li>
+<li>
+Sample 100 points from a Poisson with <code>lambda = 5</code>.
+</li>
+<li>
+Plot the density of a <span class="math inline"><span class="math inline">\(t\)</span></span> distribution with <code>df = 1</code> (use a sequence spanning from <code>-4</code> to <code>4</code>). Add lines of different colors with the densities for <code>df = 5</code>, <code>df = 10</code>, <code>df = 50</code> and <code>df = 100</code>.
+</li>
+</ul>
+</div>
+</div>
+<div id="working-directory" class="section level3">
+<h3><span class="header-section-number">1.8.6</span> Working directory</h3>
+<p>Your <em>working directory</em> is the folder on your computer in which you are currently working. When you ask R to open a certain file, it will look in the working directory for this file, and when you tell R to save a data file or figure, it will save it in the working directory.</p>
+<p>To set your working directory within RStudio you can go to <code>Tools / Set working directory</code>, or use the command <code>setwd()</code>, we put the complete path of the directory between the brackets, do not forget to put the path into quotation marks <code>""</code>.</p>
+<p>To know the actual working directory we use <code>getwd()</code>.</p>
+</div>
+<div id="loading-data" class="section level3">
+<h3><span class="header-section-number">1.8.7</span> Loading Data</h3>
+<p>The <code>read.table()</code> function is one of the primary ways to import a data set into <i class="fab  fa-r-project " style="color:steelblue;"></i>. The help file <code>?read.table()</code> contains details about how to use this function. We can use the function <code>write.table()</code> to export data.</p>
+<p>Next we will show how to load the data set <code>Auto.data</code> (Download it from  <a target="_blank" href="datasets/Auto.data"> here <i class="fa fa-table" aria-hidden="true"></i></a>).</p>
+<pre class="sourceCode r"><code class="sourceCode r">Auto=<span class="kw">read.table</span>(<span class="st">&quot;Auto.data&quot;</span>,<span class="dt">header=</span>T,<span class="dt">na.strings =</span><span class="st">&quot;?&quot;</span>)
+<span class="co"># For this file we needed to tell R that the first row is the</span>
+<span class="co"># names of the variables.</span>
+<span class="co"># na.strings tells R that any time it sees a particular character</span>
+<span class="co"># or set of characters (such as a question mark), it should be</span>
+<span class="co"># treated as a missing element of the data matrix. </span></code></pre>
+<div class="rmdinsight">
+<ul>
+<li>
+If the file is of csv format, we use <code>read.csv</code>.
+</li>
+<li>
+Always try to look to the file before importing it to <code>r <a href="icon::fa" class="uri">icon::fa</a>(“r-project”, color=“steelblue”)</code> (Open it in a text editor. See for example if the first row containes the variables names, if the columns are separated by <code>,</code> or <code>;</code> or ..
+</li>
+<li>
+For text editors, I suggest <a href="https://www.sublimetext.com/"><code>Sublime Text</code></a> or <a href="https://atom.io/"><code>Atom</code></a>.
+</li>
+</ul>
+</div>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">dim</span>(Auto) <span class="co"># To see the dimensions of the data set</span>
+<span class="co">#ans&gt; [1] 397   9</span>
+<span class="kw">nrow</span>(Auto) <span class="co"># To see the number of rows</span>
+<span class="co">#ans&gt; [1] 397</span>
+<span class="kw">ncol</span>(Auto) <span class="co"># To see the number of columns</span>
+<span class="co">#ans&gt; [1] 9</span>
+Auto[<span class="dv">1</span><span class="op">:</span><span class="dv">4</span>,] <span class="co"># The first 4 rows of the data set</span>
+<span class="co">#ans&gt;   mpg cylinders displacement horsepower weight acceleration year origin</span>
+<span class="co">#ans&gt; 1  18         8          307        130   3504         12.0   70      1</span>
+<span class="co">#ans&gt; 2  15         8          350        165   3693         11.5   70      1</span>
+<span class="co">#ans&gt; 3  18         8          318        150   3436         11.0   70      1</span>
+<span class="co">#ans&gt; 4  16         8          304        150   3433         12.0   70      1</span>
+<span class="co">#ans&gt;                        name</span>
+<span class="co">#ans&gt; 1 chevrolet chevelle malibu</span>
+<span class="co">#ans&gt; 2         buick skylark 320</span>
+<span class="co">#ans&gt; 3        plymouth satellite</span>
+<span class="co">#ans&gt; 4             amc rebel sst</span></code></pre>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Once the data are loaded correctly, we can use names()</span>
+<span class="co"># to check the variable names.</span>
+<span class="kw">names</span>(Auto)
+<span class="co">#ans&gt; [1] &quot;mpg&quot;          &quot;cylinders&quot;    &quot;displacement&quot; &quot;horsepower&quot;  </span>
+<span class="co">#ans&gt; [5] &quot;weight&quot;       &quot;acceleration&quot; &quot;year&quot;         &quot;origin&quot;      </span>
+<span class="co">#ans&gt; [9] &quot;name&quot;</span></code></pre>
+<div class="rmdinsight">
+<p>
+Take a look at this <a href="https://cran.r-project.org/doc/contrib/Torfs+Brauer-Short-R-Intro.pdf">(very) short introduction to R</a>. It can be useful.
+</p>
+</div>
+</div>
+</div>
+<div id="regression" class="section level2">
+<h2><span class="header-section-number">1.9</span> Regression</h2>
+<div id="the-lm-function" class="section level3">
+<h3><span class="header-section-number">1.9.1</span> The <code>lm</code> function</h3>
+<p>We are going to employ the <code>EU</code> dataset. The <code>EU</code> dataset contains 28 rows with the member states of the European Union (Country), the number of seats assigned under different years (Seats2011, Seats2014), the Cambridge Compromise apportionment (CamCom2011), and the countries population (Population2010,Population2013). Click  <a target="_blank" href="datasets/EU.RData"> here <i class="fa fa-table" aria-hidden="true"></i></a> to download the <code>EU</code> dataset.</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Load the dataset, when we load an .RData using load()</span>
+<span class="co"># function we do not attribute it to a name like we did</span>
+<span class="co"># when we used read.table() or when we use read.csv()</span>
+
+<span class="kw">load</span>(<span class="st">&quot;EU.RData&quot;</span>)</code></pre>
+<div class="rmdinsight">
+<p>
+There is two ways to tell <span style="color: Steelblue;"><i class="fab fa-r-project" aria-hidden="true"></i> </span> where is the file you want to load/use/import or where to save a file when you write/export/save :
+</p>
+<ol style="list-style-type: decimal">
+<li>
+write the complete path of the files.
+</li>
+<li>
+set a working directory and put the files in it.
+</li>
+</ol>
+</div>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># lm (for linear model) has the syntax: </span>
+<span class="co"># lm(formula = response ~ predictor, data = data)</span>
+<span class="co"># The response is the y in the model. The predictor is x.</span>
+<span class="co"># For example (after loading the EU dataset)</span>
+mod &lt;-<span class="st"> </span><span class="kw">lm</span>(<span class="dt">formula =</span> Seats2011 <span class="op">~</span><span class="st"> </span>Population2010, <span class="dt">data =</span> EU)
+
+<span class="co"># We have saved the linear model into mod, which now contains all the output of lm</span>
+<span class="co"># You can see it by typing</span>
+mod
+<span class="co">#ans&gt; </span>
+<span class="co">#ans&gt; Call:</span>
+<span class="co">#ans&gt; lm(formula = Seats2011 ~ Population2010, data = EU)</span>
+<span class="co">#ans&gt; </span>
+<span class="co">#ans&gt; Coefficients:</span>
+<span class="co">#ans&gt;    (Intercept)  Population2010  </span>
+<span class="co">#ans&gt;       7.91e+00        1.08e-06</span>
+
+<span class="co"># mod is indeed a list of objects whose names are</span>
+<span class="kw">names</span>(mod)
+<span class="co">#ans&gt;  [1] &quot;coefficients&quot;  &quot;residuals&quot;     &quot;effects&quot;       &quot;rank&quot;         </span>
+<span class="co">#ans&gt;  [5] &quot;fitted.values&quot; &quot;assign&quot;        &quot;qr&quot;            &quot;df.residual&quot;  </span>
+<span class="co">#ans&gt;  [9] &quot;na.action&quot;     &quot;xlevels&quot;       &quot;call&quot;          &quot;terms&quot;        </span>
+<span class="co">#ans&gt; [13] &quot;model&quot;</span>
+
+<span class="co"># We can access these elements by $</span>
+<span class="co"># For example</span>
+mod<span class="op">$</span>coefficients
+<span class="co">#ans&gt;    (Intercept) Population2010 </span>
+<span class="co">#ans&gt;       7.91e+00       1.08e-06</span>
+
+<span class="co"># The residuals</span>
+mod<span class="op">$</span>residuals
+<span class="co">#ans&gt;        Germany         France United Kingdom          Italy          Spain </span>
+<span class="co">#ans&gt;         2.8675        -3.7031        -1.7847         0.0139        -3.5084 </span>
+<span class="co">#ans&gt;         Poland        Romania    Netherlands         Greece        Belgium </span>
+<span class="co">#ans&gt;         1.9272         1.9434         0.2142         1.8977         2.3994 </span>
+<span class="co">#ans&gt;       Portugal Czech Republic        Hungary         Sweden        Austria </span>
+<span class="co">#ans&gt;         2.6175         2.7587         3.2898         2.0163         2.0575 </span>
+<span class="co">#ans&gt;       Bulgaria        Denmark       Slovakia        Finland        Ireland </span>
+<span class="co">#ans&gt;         1.9328        -0.8790        -0.7606        -0.6813        -0.7284 </span>
+<span class="co">#ans&gt;      Lithuania         Latvia       Slovenia        Estonia         Cyprus </span>
+<span class="co">#ans&gt;         0.4998        -1.3347        -2.1175        -3.3552        -2.7761 </span>
+<span class="co">#ans&gt;     Luxembourg          Malta </span>
+<span class="co">#ans&gt;        -2.4514        -2.3553</span>
+
+<span class="co"># The fitted values</span>
+mod<span class="op">$</span>fitted.values
+<span class="co">#ans&gt;        Germany         France United Kingdom          Italy          Spain </span>
+<span class="co">#ans&gt;          96.13          77.70          74.78          72.99          57.51 </span>
+<span class="co">#ans&gt;         Poland        Romania    Netherlands         Greece        Belgium </span>
+<span class="co">#ans&gt;          49.07          31.06          25.79          20.10          19.60 </span>
+<span class="co">#ans&gt;       Portugal Czech Republic        Hungary         Sweden        Austria </span>
+<span class="co">#ans&gt;          19.38          19.24          18.71          17.98          16.94 </span>
+<span class="co">#ans&gt;       Bulgaria        Denmark       Slovakia        Finland        Ireland </span>
+<span class="co">#ans&gt;          16.07          13.88          13.76          13.68          12.73 </span>
+<span class="co">#ans&gt;      Lithuania         Latvia       Slovenia        Estonia         Cyprus </span>
+<span class="co">#ans&gt;          11.50          10.33          10.12           9.36           8.78 </span>
+<span class="co">#ans&gt;     Luxembourg          Malta </span>
+<span class="co">#ans&gt;           8.45           8.36</span>
+
+<span class="co"># Summary of the model</span>
+sumMod &lt;-<span class="st"> </span><span class="kw">summary</span>(mod)
+sumMod
+<span class="co">#ans&gt; </span>
+<span class="co">#ans&gt; Call:</span>
+<span class="co">#ans&gt; lm(formula = Seats2011 ~ Population2010, data = EU)</span>
+<span class="co">#ans&gt; </span>
+<span class="co">#ans&gt; Residuals:</span>
+<span class="co">#ans&gt;    Min     1Q Median     3Q    Max </span>
+<span class="co">#ans&gt; -3.703 -1.951  0.014  1.980  3.290 </span>
+<span class="co">#ans&gt; </span>
+<span class="co">#ans&gt; Coefficients:</span>
+<span class="co">#ans&gt;                Estimate Std. Error t value Pr(&gt;|t|)    </span>
+<span class="co">#ans&gt; (Intercept)    7.91e+00   5.66e-01    14.0  2.6e-13 ***</span>
+<span class="co">#ans&gt; Population2010 1.08e-06   1.92e-08    56.3  &lt; 2e-16 ***</span>
+<span class="co">#ans&gt; ---</span>
+<span class="co">#ans&gt; Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</span>
+<span class="co">#ans&gt; </span>
+<span class="co">#ans&gt; Residual standard error: 2.29 on 25 degrees of freedom</span>
+<span class="co">#ans&gt;   (1 observation deleted due to missingness)</span>
+<span class="co">#ans&gt; Multiple R-squared:  0.992,   Adjusted R-squared:  0.992 </span>
+<span class="co">#ans&gt; F-statistic: 3.17e+03 on 1 and 25 DF,  p-value: &lt;2e-16</span></code></pre>
+<p>The following table contains a handy cheat sheet of equivalences between <i class="fab  fa-r-project " style="color:steelblue;"></i> code and some of the statistical concepts associated to linear regression.</p>
+<table>
+<colgroup>
+<col width="51%" />
+<col width="48%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th align="left"><i class="fab  fa-r-project " style="color:steelblue;"></i></th>
+<th align="left">Statistical concept</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left"><code>x</code></td>
+<td align="left">Predictor <span class="math inline">\(X_1,\ldots,X_n\)</span></td>
+</tr>
+<tr class="even">
+<td align="left"><code>y</code></td>
+<td align="left">Response <span class="math inline">\(Y_1,\ldots,Y_n\)</span></td>
+</tr>
+<tr class="odd">
+<td align="left"><code>data &lt;- data.frame(x = x, y = y)</code></td>
+<td align="left">Sample <span class="math inline">\((X_1,Y_1),\ldots,(X_n,Y_n)\)</span></td>
+</tr>
+<tr class="even">
+<td align="left"><code>model &lt;- lm(y ~ x, data = data)</code></td>
+<td align="left">Fitted linear model</td>
+</tr>
+<tr class="odd">
+<td align="left"><code>model$coefficients</code></td>
+<td align="left">Fitted coefficients <span class="math inline">\(\hat\beta_0,\hat\beta_1\)</span></td>
+</tr>
+<tr class="even">
+<td align="left"><code>model$residuals</code></td>
+<td align="left">Fitted residuals <span class="math inline">\(\hat\varepsilon_1,\ldots,\hat\varepsilon_n\)</span></td>
+</tr>
+<tr class="odd">
+<td align="left"><code>model$fitted.values</code></td>
+<td align="left">Fitted values <span class="math inline">\(\hat Y_1,\ldots,\hat Y_n\)</span></td>
+</tr>
+<tr class="even">
+<td align="left"><code>model$df.residual</code></td>
+<td align="left">Degrees of freedom <span class="math inline">\(n-2\)</span></td>
+</tr>
+<tr class="odd">
+<td align="left"><code>summaryModel &lt;- summary(model)</code></td>
+<td align="left">Summary of the fitted linear model</td>
+</tr>
+<tr class="even">
+<td align="left"><code>summaryModel$sigma</code></td>
+<td align="left">Fitted residual standard deviation <span class="math inline">\(\hat\sigma\)</span></td>
+</tr>
+<tr class="odd">
+<td align="left"><code>summaryModel$r.squared</code></td>
+<td align="left">Coefficient of determination <span class="math inline">\(R^2\)</span></td>
+</tr>
+<tr class="even">
+<td align="left"><code>summaryModel$fstatistic</code></td>
+<td align="left"><span class="math inline">\(F\)</span>-test</td>
+</tr>
+<tr class="odd">
+<td align="left"><code>anova(model)</code></td>
+<td align="left">ANOVA table</td>
+</tr>
+</tbody>
+</table>
+<div class="rmdexercise">
+<p>
+Do the following:
+</p>
+<ul>
+<li>
+Download The ‘EU’ dataset from <a target="_blank" href="datasets/EU.RData"> here <i class="fa fa-table" aria-hidden="true"></i></a> as an <code>.RData</code> file and load it using the function <code>load</code>.
+</li>
+<li>
+Compute the regression of <code>CamCom2011</code> into <code>Population2010</code>. Save that model as the variable <code>myModel</code>.
+</li>
+<li>
+Access the objects <code>residuals</code> and <code>coefficients</code> of <code>myModel</code>.
+</li>
+<li>
+Compute the summary of <code>myModel</code> and store it as the variable <code>summaryMyModel</code>.
+</li>
+<li>
+Access the object <code>sigma</code> of <code>myModel</code>.
+</li>
+</ul>
+</div>
+</div>
+<div id="boston" class="section level3">
+<h3><span class="header-section-number">1.9.2</span> Predicting House Value: Boston dataset</h3>
+<p>We are going to use a dataset called Boston which is part of the <code>MASS</code> package. It recordes the median value of houses for 506 neighborhoods around Boston. Our task is to predict the median house value (<code>medv</code>) using only one predictor (<code>lstat</code>: percent of households with low socioeconomic status).</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># First, install the MASS package using the command: install.packages(&quot;MASS&quot;)</span>
+
+<span class="co"># load MASS package</span>
+<span class="kw">library</span>(MASS)
+
+<span class="co"># Check the dimensions of the Boston dataset</span>
+<span class="kw">dim</span>(Boston)
+<span class="co">#ans&gt; [1] 506  14</span></code></pre>
+<p><strong>STEP 1: Split the dataset</strong></p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Split the data by using the first 400 observations as the training</span>
+<span class="co"># data and the remaining as the testing data</span>
+train =<span class="st"> </span><span class="dv">1</span><span class="op">:</span><span class="dv">400</span>
+test =<span class="st"> </span><span class="op">-</span>train
+
+<span class="co"># Speficy that we are going to use only two variables (lstat and medv)</span>
+variables =<span class="st"> </span><span class="kw">which</span>(<span class="kw">names</span>(Boston) <span class="op">==</span><span class="kw">c</span>(<span class="st">&quot;lstat&quot;</span>, <span class="st">&quot;medv&quot;</span>))
+training_data =<span class="st"> </span>Boston[train, variables]
+testing_data =<span class="st"> </span>Boston[test, variables]
+
+<span class="co"># Check the dimensions of the new dataset</span>
+<span class="kw">dim</span>(training_data)
+<span class="co">#ans&gt; [1] 400   2</span></code></pre>
+<p><strong>STEP 2: Check for Linearity</strong></p>
+<p>In order to perfom linear regression in <i class="fab  fa-r-project " style="color:steelblue;"></i>, we will use the function <code>lm()</code>to fit a simple linear regression with <code>medv</code> as the response (dependent variable) and <code>lstat</code> as the predictor or independent variable, and then save it in <code>model</code>.</p>
+<p>But before we run our model, let’s visually check if the relationship between x and y is linear.</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Scatterplot of lstat vs. medv</span>
+<span class="kw">plot</span>(training_data<span class="op">$</span>lstat, training_data<span class="op">$</span>medv)</code></pre>
+<p><img src="Machine-Learning_files/figure-html/unnamed-chunk-31-1.png" width="70%" style="display: block; margin: auto;" /></p>
+<div class="rmdexercise">
+<p>
+On the figure above, modify the following:
+</p>
+<ul>
+<li>
+Figure title.
+</li>
+<li>
+Axis titles.
+</li>
+<li>
+Shape of observations and their colors.
+</li>
+<li>
+Sizes of the chosen shape.
+</li>
+</ul>
+</div>
+<p>According to the plot, we see that the relationship is not linear. Let’s try a transformation of our explanatory variable <code>lstat</code>.</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Scatterplot of log(lstat) vs. medv</span>
+<span class="kw">plot</span>(<span class="kw">log</span>(training_data<span class="op">$</span>lstat), training_data<span class="op">$</span>medv)</code></pre>
+<p><img src="Machine-Learning_files/figure-html/unnamed-chunk-33-1.png" width="70%" style="display: block; margin: auto;" /></p>
+<p>Look at the plot, it is more linear, so we can proceed and perform <code>lm()</code>:</p>
+<p><strong>STEP 3: Run the linear regression model</strong></p>
+<pre class="sourceCode r"><code class="sourceCode r">model =<span class="st"> </span><span class="kw">lm</span>(medv <span class="op">~</span><span class="st"> </span><span class="kw">log</span>(lstat), <span class="dt">data =</span> training_data)
+model
+<span class="co">#ans&gt; </span>
+<span class="co">#ans&gt; Call:</span>
+<span class="co">#ans&gt; lm(formula = medv ~ log(lstat), data = training_data)</span>
+<span class="co">#ans&gt; </span>
+<span class="co">#ans&gt; Coefficients:</span>
+<span class="co">#ans&gt; (Intercept)   log(lstat)  </span>
+<span class="co">#ans&gt;        51.8        -12.2</span></code></pre>
+<p>Notice that basic information when we print <code>model</code>. This only give us the slope <span class="math inline">\((-12.2)\)</span> and the intercept <span class="math inline">\((51.8)\)</span> of the linear model. Note that here we are looking at <code>log(lstat)</code> and not <code>lstat</code> anymore. So for every one unit increase in <code>lstat</code>, the median value of the house will decrease by <span class="math inline">\(e^{12.2}\)</span>.
+For more detailed information, we can use the <code>summary()</code> function:</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">summary</span>(model)
+<span class="co">#ans&gt; </span>
+<span class="co">#ans&gt; Call:</span>
+<span class="co">#ans&gt; lm(formula = medv ~ log(lstat), data = training_data)</span>
+<span class="co">#ans&gt; </span>
+<span class="co">#ans&gt; Residuals:</span>
+<span class="co">#ans&gt;     Min      1Q  Median      3Q     Max </span>
+<span class="co">#ans&gt; -11.385  -3.908  -0.779   2.245  25.728 </span>
+<span class="co">#ans&gt; </span>
+<span class="co">#ans&gt; Coefficients:</span>
+<span class="co">#ans&gt;             Estimate Std. Error t value Pr(&gt;|t|)    </span>
+<span class="co">#ans&gt; (Intercept)   51.783      1.097    47.2   &lt;2e-16 ***</span>
+<span class="co">#ans&gt; log(lstat)   -12.203      0.472   -25.9   &lt;2e-16 ***</span>
+<span class="co">#ans&gt; ---</span>
+<span class="co">#ans&gt; Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</span>
+<span class="co">#ans&gt; </span>
+<span class="co">#ans&gt; Residual standard error: 5.6 on 398 degrees of freedom</span>
+<span class="co">#ans&gt; Multiple R-squared:  0.627,   Adjusted R-squared:  0.626 </span>
+<span class="co">#ans&gt; F-statistic:  669 on 1 and 398 DF,  p-value: &lt;2e-16</span></code></pre>
+<p>Now, we have access to p-values and standard errors for the coefficients, as well as the <span class="math inline">\(R^2\)</span>.</p>
+<ul>
+<li>The output states that the slope is statistically significant and different from <span class="math inline">\(0\)</span> and with a t-value= <span class="math inline">\(-25.9\)</span> (p-value <span class="math inline">\(&lt; 0.05\)</span>), which means that there is a significant relationship between the percentage of households with low socioeconomic income and the median house value.</li>
+<li>This relationship is negative. That is as the percantage of household with low socioeconomic income increases, the median house value decreases.</li>
+<li>Looking at <span class="math inline">\(R^2\)</span>, we can deduce that <span class="math inline">\(62.7\%\)</span> of the model variation is being explained by the predictor <code>log(lstat)</code>. This is probably low, but indeed it would increase if we had more independent (explanatory) variables. We can use the <code>names()</code> function to see what other pieces of information are stored in our linear model (<code>model</code>).</li>
+</ul>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">names</span>(model)
+<span class="co">#ans&gt;  [1] &quot;coefficients&quot;  &quot;residuals&quot;     &quot;effects&quot;       &quot;rank&quot;         </span>
+<span class="co">#ans&gt;  [5] &quot;fitted.values&quot; &quot;assign&quot;        &quot;qr&quot;            &quot;df.residual&quot;  </span>
+<span class="co">#ans&gt;  [9] &quot;xlevels&quot;       &quot;call&quot;          &quot;terms&quot;         &quot;model&quot;</span></code></pre>
+<pre class="sourceCode r"><code class="sourceCode r">model<span class="op">$</span>coefficients
+<span class="co">#ans&gt; (Intercept)  log(lstat) </span>
+<span class="co">#ans&gt;        51.8       -12.2</span></code></pre>
+<p>To obtain the confidence intervel for the linear model (<code>model</code>), we can use the <code>confint()</code> function:</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">confint</span>(model, <span class="dt">level =</span> <span class="fl">0.95</span>)
+<span class="co">#ans&gt;             2.5 % 97.5 %</span>
+<span class="co">#ans&gt; (Intercept)  49.6   53.9</span>
+<span class="co">#ans&gt; log(lstat)  -13.1  -11.3</span></code></pre>
+<p>So, a <span class="math inline">\(95\%\)</span> confidence interval for the slope of <code>log(lstat)</code> is <span class="math inline">\((-13.13, -11.28)\)</span>. Notice that this confidence interval gives us the same result as the hypothesis test performed earlier, by stating that we are <span class="math inline">\(95\%\)</span> confident that the slope of <code>lstat</code> is not zero (in fact it is less than zero, which means that the relationship is negative.)</p>
+<p><strong>STEP 4: Plot the regression model</strong></p>
+<p>Now, let’s plot our regression line on top of our data.</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Scatterplot of lstat vs. medv</span>
+<span class="kw">plot</span>(<span class="kw">log</span>(training_data<span class="op">$</span>lstat), training_data<span class="op">$</span>medv)
+
+<span class="co"># Add the regression line to the existing scatterplot</span>
+<span class="kw">abline</span>(model)</code></pre>
+<p><img src="Machine-Learning_files/figure-html/unnamed-chunk-39-1.png" width="70%" style="display: block; margin: auto;" /></p>
+<p>Let’s play with the look of the plot, and makes it perttier!</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Scatterplot of lstat vs. medv</span>
+<span class="kw">plot</span>(<span class="kw">log</span>(training_data<span class="op">$</span>lstat), training_data<span class="op">$</span>medv,
+<span class="dt">xlab =</span> <span class="st">&quot;Log Transform of % of Houshold with Low Socioeconomic Income&quot;</span>,
+<span class="dt">ylab =</span> <span class="st">&quot;Median House Value&quot;</span>,
+<span class="dt">col =</span> <span class="st">&quot;red&quot;</span>,
+<span class="dt">pch =</span> <span class="dv">20</span>)
+
+<span class="co"># Make the line color blue, and the line&#39;s width =3 (play with the width!)</span>
+<span class="kw">abline</span>(model, <span class="dt">col =</span> <span class="st">&quot;blue&quot;</span>, <span class="dt">lwd =</span><span class="dv">3</span>)</code></pre>
+<p><img src="Machine-Learning_files/figure-html/unnamed-chunk-40-1.png" width="70%" style="display: block; margin: auto;" /></p>
+<p><strong>STEP 5: Assess the model</strong></p>
+<p>Final thing we will do is to predict using our fitted model. We can use
+the <code>predict()</code> function for this purpose:</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Predict what is the median value of the house with lstat= 5%</span>
+<span class="kw">predict</span>(model, <span class="kw">data.frame</span>(<span class="dt">lstat =</span> <span class="kw">c</span>(<span class="dv">5</span>)))
+<span class="co">#ans&gt;    1 </span>
+<span class="co">#ans&gt; 32.1</span></code></pre>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Predict what is the median values of houses with lstat= 5%, 10%, and 15%</span>
+<span class="kw">predict</span>(model, <span class="kw">data.frame</span>(<span class="dt">lstat =</span> <span class="kw">c</span>(<span class="dv">5</span>,<span class="dv">10</span>,<span class="dv">15</span>), <span class="dt">interval =</span> <span class="st">&quot;prediction&quot;</span>))
+<span class="co">#ans&gt;    1    2    3 </span>
+<span class="co">#ans&gt; 32.1 23.7 18.7</span></code></pre>
+<p>Now let’s assess our model, by computing th mean squared error (MSE). To assess the model we created, then we will be using the test data!</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Save the testing median values for houses (testing y) in y</span>
+y =<span class="st"> </span>testing_data<span class="op">$</span>medv
+
+<span class="co"># Compute the predicted value for this y (y hat)</span>
+y_hat =<span class="st"> </span><span class="kw">predict</span>(model, <span class="kw">data.frame</span>(<span class="dt">lstat =</span> testing_data<span class="op">$</span>lstat))
+
+<span class="co"># Now we have both y and y_hat for our testing data. </span>
+<span class="co"># let&#39;s find the mean square error</span>
+error =<span class="st"> </span>y<span class="op">-</span>y_hat
+error_squared =<span class="st"> </span>error<span class="op">^</span><span class="dv">2</span>
+MSE =<span class="st"> </span><span class="kw">mean</span>(error_squared)
+MSE
+<span class="co">#ans&gt; [1] 17.7</span></code></pre>
+<p class="text-right">
+◼
+</p>
+
+</div>
+</div>
+</div>
+
+
+
+
+
+
+
+
+
+
+<h1>Discussion</h1>
+<div id="disqus_thread"></div>
+<script>
+
+/**
+*  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+*  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables*/
+/*
+var disqus_config = function () {
+this.page.url = PAGE_URL;  // Replace PAGE_URL with your page's canonical URL variable
+this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+};
+*/
+(function() { // DON'T EDIT BELOW THIS LINE
+var d = document, s = d.createElement('script');
+s.src = 'https://mlcourse.disqus.com/embed.js';
+s.setAttribute('data-timestamp', +new Date());
+(d.head || d.body).appendChild(s);
+})();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="linear-regression.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+
+    </div>
+  </div>
+<script src="book_assets/gitbook-2.6.7/js/app.min.js"></script>
+<script src="book_assets/gitbook-2.6.7/js/lunr.js"></script>
+<script src="book_assets/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="book_assets/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="book_assets/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="book_assets/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="book_assets/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": false,
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"history": {
+"link": null,
+"text": null
+},
+"download": null,
+"toc": {
+"collapse": "section",
+"scroll_highlight": true
+},
+"toolbar": {
+"position": "fixed"
+},
+"search": true
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:" && /^https?:/.test(src))
+      src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>

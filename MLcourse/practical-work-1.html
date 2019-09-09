@@ -24,7 +24,7 @@
 <meta name="author" content="Mohamad Ghassany" />
 
 
-<meta name="date" content="2019-09-03" />
+<meta name="date" content="2019-09-09" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -32,7 +32,7 @@
   
   
 <link rel="prev" href="linear-regression.html">
-
+<link rel="next" href="multiple-linear-regression.html">
 <script src="book_assets/jquery-2.2.3/jquery.min.js"></script>
 <link href="book_assets/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="book_assets/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -186,6 +186,22 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="1.9.2" data-path="practical-work-1.html"><a href="practical-work-1.html#boston"><i class="fa fa-check"></i><b>1.9.2</b> Predicting House Value: Boston dataset</a></li>
 </ul></li>
 </ul></li>
+<li class="chapter" data-level="2" data-path="multiple-linear-regression.html"><a href="multiple-linear-regression.html"><i class="fa fa-check"></i><b>2</b> Multiple Linear Regression</a><ul>
+<li class="chapter" data-level="2.1" data-path="multiple-linear-regression.html"><a href="multiple-linear-regression.html#the-model"><i class="fa fa-check"></i><b>2.1</b> The Model</a></li>
+<li class="chapter" data-level="2.2" data-path="multiple-linear-regression.html"><a href="multiple-linear-regression.html#estimating-the-regression-coefficients"><i class="fa fa-check"></i><b>2.2</b> Estimating the Regression Coefficients</a></li>
+<li class="chapter" data-level="2.3" data-path="multiple-linear-regression.html"><a href="multiple-linear-regression.html#some-important-questions"><i class="fa fa-check"></i><b>2.3</b> Some important questions</a><ul>
+<li class="chapter" data-level="2.3.1" data-path="multiple-linear-regression.html"><a href="multiple-linear-regression.html#other-consid"><i class="fa fa-check"></i><b>2.3.1</b> Other Considerations in Regression Model</a></li>
+</ul></li>
+<li class="chapter" data-level="2.4" data-path="multiple-linear-regression.html"><a href="multiple-linear-regression.html#how-to-select-the-best-performing-model"><i class="fa fa-check"></i><b>2.4</b> How to select the best performing model</a><ul>
+<li><a href="multiple-linear-regression.html#use-the-adjusted-r_adj2-for-univariate-models">Use the Adjusted <span class="math inline">\(R_{adj}^2\)</span> for univariate models</a></li>
+<li class="chapter" data-level="" data-path="multiple-linear-regression.html"><a href="multiple-linear-regression.html#have-a-look-at-the-residuals-or-error-terms"><i class="fa fa-check"></i>Have a look at the residuals or error terms</a></li>
+<li class="chapter" data-level="" data-path="multiple-linear-regression.html"><a href="multiple-linear-regression.html#histogram-of-residuals"><i class="fa fa-check"></i>Histogram of residuals</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="pw-2.html"><a href="pw-2.html"><i class="fa fa-check"></i>PW 2</a><ul>
+<li class="chapter" data-level="" data-path="pw-2.html"><a href="pw-2.html#multiple-linear-regression-1"><i class="fa fa-check"></i>Multiple Linear Regression</a></li>
+<li class="chapter" data-level="" data-path="pw-2.html"><a href="pw-2.html#reporting"><i class="fa fa-check"></i>Reporting</a></li>
+</ul></li>
 </ul>
 
       </nav>
@@ -271,28 +287,18 @@ vec[<span class="dv">1</span><span class="op">:</span><span class="dv">2</span>]
 <span class="co"># And also</span>
 vec[<span class="op">-</span><span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">2</span>)]
 <span class="co">#ans&gt; [1] 1.1 1.0 3.0 4.0</span></code></pre>
+
 <div class="rmdexercise">
-<p>
-Do the following:
-</p>
+<p>Do the following:</p>
 <ul>
-<li>
-Create the vector <span class="math inline"><span class="math inline">\(x=(1, 7, 3, 4)\)</span></span>.
-</li>
-<li>
-Create the vector <span class="math inline"><span class="math inline">\(y=(100, 99, 98, ..., 2, 1)\)</span></span>.
-</li>
-<li>
-Compute <span class="math inline"><span class="math inline">\(x_3+y_4\)</span></span> and <span class="math inline"><span class="math inline">\(\cos(x_3) + \sin(x_2) e^{-y_2}\)</span></span>. (Answers: <code>100</code>, <code>-0.9899925</code>)
-</li>
-<li>
-Set <span class="math inline"><span class="math inline">\(x_{3}=0\)</span></span> and <span class="math inline"><span class="math inline">\(y_{2}=-1\)</span></span>. Recompute the previous expressions. (Answers: <code>97</code>, <code>2.785875</code>)
-</li>
-<li>
-Index <span class="math inline"><span class="math inline">\(y\)</span></span> by <span class="math inline"><span class="math inline">\(x+1\)</span></span> and store it as <code>z</code>. What is the output? (Answer: <code>z</code> is <code>c(-1, 93, 100, 96)</code>)
-</li>
+<li>Create the vector <span class="math inline">\(x=(1, 7, 3, 4)\)</span>.</li>
+<li>Create the vector <span class="math inline">\(y=(100, 99, 98, ..., 2, 1)\)</span>.</li>
+<li>Compute <span class="math inline">\(x_3+y_4\)</span> and <span class="math inline">\(\cos(x_3) + \sin(x_2) e^{-y_2}\)</span>. (Answers: <code>100</code>, <code>-0.9899925</code>)</li>
+<li>Set <span class="math inline">\(x_{3}=0\)</span> and <span class="math inline">\(y_{2}=-1\)</span>. Recompute the previous expressions. (Answers: <code>97</code>, <code>2.785875</code>)</li>
+<li>Index <span class="math inline">\(y\)</span> by <span class="math inline">\(x+1\)</span> and store it as <code>z</code>. What is the output? (Answer: <code>z</code> is <code>c(-1, 93, 100, 96)</code>)</li>
 </ul>
 </div>
+
 </div>
 <div id="matrices-data-frames-and-lists" class="section level3">
 <h3><span class="header-section-number">1.8.3</span> Matrices, data frames and lists</h3>
@@ -477,22 +483,15 @@ y &lt;-<span class="st"> </span><span class="kw">dunif</span>(<span class="dt">x
 <span class="co"># Computing the 95% quantile for a U(0, 1)</span>
 <span class="kw">qunif</span>(<span class="dt">p =</span> <span class="fl">0.95</span>, <span class="dt">min =</span> <span class="dv">0</span>, <span class="dt">max =</span> <span class="dv">1</span>)
 <span class="co">#ans&gt; [1] 0.95</span></code></pre>
+
 <div class="rmdexercise">
-<p>
-Do the following:
-</p>
+<p>Do the following:</p>
 <ul>
-<li>
-Compute the 90%, 95% and 99% quantiles of a <span class="math inline"><span class="math inline">\(F\)</span></span> distribution with <code>df1 = 1</code> and <code>df2 = 5</code>. (Answer: <code>c(4.060420, 6.607891, 16.258177)</code>)
-</li>
-<li>
-Sample 100 points from a Poisson with <code>lambda = 5</code>.
-</li>
-<li>
-Plot the density of a <span class="math inline"><span class="math inline">\(t\)</span></span> distribution with <code>df = 1</code> (use a sequence spanning from <code>-4</code> to <code>4</code>). Add lines of different colors with the densities for <code>df = 5</code>, <code>df = 10</code>, <code>df = 50</code> and <code>df = 100</code>.
-</li>
+<li>Compute the 90%, 95% and 99% quantiles of a <span class="math inline">\(F\)</span> distribution with <code>df1 = 1</code> and <code>df2 = 5</code>. (Answer: <code>c(4.060420, 6.607891, 16.258177)</code>)</li>
+<li>Sample 100 points from a Poisson with <code>lambda = 5</code>.</li>
+<li>Plot the density of a <span class="math inline">\(t\)</span> distribution with <code>df = 1</code> (use a sequence spanning from <code>-4</code> to <code>4</code>). Add lines of different colors with the densities for <code>df = 5</code>, <code>df = 10</code>, <code>df = 50</code> and <code>df = 100</code>.
+</div></li>
 </ul>
-</div>
 </div>
 <div id="working-directory" class="section level3">
 <h3><span class="header-section-number">1.8.6</span> Working directory</h3>
@@ -510,19 +509,14 @@ Plot the density of a <span class="math inline"><span class="math inline">\(t\)<
 <span class="co"># na.strings tells R that any time it sees a particular character</span>
 <span class="co"># or set of characters (such as a question mark), it should be</span>
 <span class="co"># treated as a missing element of the data matrix. </span></code></pre>
+
 <div class="rmdinsight">
 <ul>
-<li>
-If the file is of csv format, we use <code>read.csv</code>.
-</li>
-<li>
-Always try to look to the file before importing it to <code>r <a href="icon::fa" class="uri">icon::fa</a>(“r-project”, color=“steelblue”)</code> (Open it in a text editor. See for example if the first row containes the variables names, if the columns are separated by <code>,</code> or <code>;</code> or ..
-</li>
-<li>
-For text editors, I suggest <a href="https://www.sublimetext.com/"><code>Sublime Text</code></a> or <a href="https://atom.io/"><code>Atom</code></a>.
-</li>
+<li>If the file is of csv format, we use <code>read.csv</code>.</li>
+<li>Always try to look to the file before importing it to <code>r icon::fa("r-project", color="steelblue")</code> (Open it in a text editor. See for example if the first row containes the variables names, if the columns are separated by <code>,</code> or <code>;</code> or ..</li>
+<li>For text editors, I suggest <a href="https://www.sublimetext.com/"><code>Sublime Text</code></a> or <a href="https://atom.io/"><code>Atom</code></a>.
+</div></li>
 </ul>
-</div>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">dim</span>(Auto) <span class="co"># To see the dimensions of the data set</span>
 <span class="co">#ans&gt; [1] 397   9</span>
 <span class="kw">nrow</span>(Auto) <span class="co"># To see the number of rows</span>
@@ -546,11 +540,11 @@ Auto[<span class="dv">1</span><span class="op">:</span><span class="dv">4</span>
 <span class="co">#ans&gt; [1] &quot;mpg&quot;          &quot;cylinders&quot;    &quot;displacement&quot; &quot;horsepower&quot;  </span>
 <span class="co">#ans&gt; [5] &quot;weight&quot;       &quot;acceleration&quot; &quot;year&quot;         &quot;origin&quot;      </span>
 <span class="co">#ans&gt; [9] &quot;name&quot;</span></code></pre>
+
 <div class="rmdinsight">
-<p>
 Take a look at this <a href="https://cran.r-project.org/doc/contrib/Torfs+Brauer-Short-R-Intro.pdf">(very) short introduction to R</a>. It can be useful.
-</p>
 </div>
+
 </div>
 </div>
 <div id="regression" class="section level2">
@@ -563,19 +557,19 @@ Take a look at this <a href="https://cran.r-project.org/doc/contrib/Torfs+Brauer
 <span class="co"># when we used read.table() or when we use read.csv()</span>
 
 <span class="kw">load</span>(<span class="st">&quot;EU.RData&quot;</span>)</code></pre>
+
 <div class="rmdinsight">
-<p>
-There is two ways to tell <span style="color: Steelblue;"><i class="fab fa-r-project" aria-hidden="true"></i> </span> where is the file you want to load/use/import or where to save a file when you write/export/save :
-</p>
+<p>There is two ways to tell <span style="color: Steelblue;"><i class="fab fa-r-project" aria-hidden="true"></i>
+</span> where is the file you want to load/use/import or where to save a file when you write/export/save :</p>
 <ol style="list-style-type: decimal">
-<li>
-write the complete path of the files.
-</li>
-<li>
-set a working directory and put the files in it.
-</li>
+<li>write the complete path of the files.</li>
+<li>set a working directory and put the files in it.</li>
 </ol>
+<p><span class="math display">\[\begin{align*}
+F=\frac{\text{SSR}/1}{\text{SSE}/(n-2)}\stackrel{H_0}{\sim} F_{1,n-2},
+\end{align*}\]</span></p>
 </div>
+
 <pre class="sourceCode r"><code class="sourceCode r"><span class="co"># lm (for linear model) has the syntax: </span>
 <span class="co"># lm(formula = response ~ predictor, data = data)</span>
 <span class="co"># The response is the y in the model. The predictor is x.</span>
@@ -725,28 +719,17 @@ sumMod
 </tr>
 </tbody>
 </table>
+
 <div class="rmdexercise">
-<p>
-Do the following:
-</p>
+<p>Do the following:</p>
 <ul>
-<li>
-Download The ‘EU’ dataset from <a target="_blank" href="datasets/EU.RData"> here <i class="fa fa-table" aria-hidden="true"></i></a> as an <code>.RData</code> file and load it using the function <code>load</code>.
-</li>
-<li>
-Compute the regression of <code>CamCom2011</code> into <code>Population2010</code>. Save that model as the variable <code>myModel</code>.
-</li>
-<li>
-Access the objects <code>residuals</code> and <code>coefficients</code> of <code>myModel</code>.
-</li>
-<li>
-Compute the summary of <code>myModel</code> and store it as the variable <code>summaryMyModel</code>.
-</li>
-<li>
-Access the object <code>sigma</code> of <code>myModel</code>.
-</li>
+<li>Download The ‘EU’ dataset from  <a target="_blank" href="datasets/EU.RData"> here <i class="fa fa-table" aria-hidden="true"></i></a> as an <code>.RData</code> file and load it using the function <code>load</code>.</li>
+<li>Compute the regression of <code>CamCom2011</code> into <code>Population2010</code>. Save that model as the variable <code>myModel</code>.</li>
+<li>Access the objects <code>residuals</code> and <code>coefficients</code> of <code>myModel</code>.</li>
+<li>Compute the summary of <code>myModel</code> and store it as the variable <code>summaryMyModel</code>.</li>
+<li>Access the object <code>sigma</code> of <code>myModel</code>.
+</div></li>
 </ul>
-</div>
 </div>
 <div id="boston" class="section level3">
 <h3><span class="header-section-number">1.9.2</span> Predicting House Value: Boston dataset</h3>
@@ -779,25 +762,16 @@ testing_data =<span class="st"> </span>Boston[test, variables]
 <pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Scatterplot of lstat vs. medv</span>
 <span class="kw">plot</span>(training_data<span class="op">$</span>lstat, training_data<span class="op">$</span>medv)</code></pre>
 <p><img src="Machine-Learning_files/figure-html/unnamed-chunk-31-1.png" width="70%" style="display: block; margin: auto;" /></p>
+
 <div class="rmdexercise">
-<p>
-On the figure above, modify the following:
-</p>
+<p>On the figure above, modify the following:</p>
 <ul>
-<li>
-Figure title.
-</li>
-<li>
-Axis titles.
-</li>
-<li>
-Shape of observations and their colors.
-</li>
-<li>
-Sizes of the chosen shape.
-</li>
+<li>Figure title.</li>
+<li>Axis titles.</li>
+<li>Shape of observations and their colors.</li>
+<li>Sizes of the chosen shape.
+</div></li>
 </ul>
-</div>
 <p>According to the plot, we see that the relationship is not linear. Let’s try a transformation of our explanatory variable <code>lstat</code>.</p>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Scatterplot of log(lstat) vs. medv</span>
 <span class="kw">plot</span>(<span class="kw">log</span>(training_data<span class="op">$</span>lstat), training_data<span class="op">$</span>medv)</code></pre>
@@ -904,16 +878,6 @@ MSE
 </div>
 </div>
 </div>
-
-
-
-
-
-
-
-
-
-
 <h1>Discussion</h1>
 <div id="disqus_thread"></div>
 <script>
@@ -940,8 +904,8 @@ s.setAttribute('data-timestamp', +new Date());
           </div>
         </div>
       </div>
-<a href="linear-regression.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-
+<a href="linear-regression.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="multiple-linear-regression.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="book_assets/gitbook-2.6.7/js/app.min.js"></script>

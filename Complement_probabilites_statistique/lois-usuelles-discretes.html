@@ -24,7 +24,7 @@
 <meta name="author" content="Mohamad Ghassany" />
 
 
-<meta name="date" content="2019-09-10" />
+<meta name="date" content="2019-09-11" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -103,6 +103,9 @@
 <li><a href="lois-usuelles-discretes.html#loi-de-poisson-mathcalplambda">Loi de Poisson <span class="math inline">\(\mathcal{P}(\lambda)\)</span></a></li>
 <li class="chapter" data-level="" data-path="lois-usuelles-discretes.html"><a href="lois-usuelles-discretes.html#approximation-dune-loi-binomiale"><i class="fa fa-check"></i>Approximation d’une loi binomiale</a></li>
 <li><a href="lois-usuelles-discretes.html#loi-geometrique-ou-de-pascal-mathcalgp">Loi Géométrique ou de Pascal <span class="math inline">\(\mathcal{G}(p)\)</span></a></li>
+<li><a href="lois-usuelles-discretes.html#loi-binomiale-negative-mathcalbnrp">Loi Binomiale Négative <span class="math inline">\(\mathcal{BN}(r,p)\)</span></a><ul>
+<li><a href="lois-usuelles-discretes.html#mathcalgpmathcalbn1p"><span class="math inline">\(\mathcal{G}(p)=\mathcal{BN}(1,p)\)</span></a></li>
+</ul></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="feuille-dexercices-1.html"><a href="feuille-dexercices-1.html"><i class="fa fa-check"></i>Feuille d’exercices 1</a><ul>
 <li class="chapter" data-level="" data-path="feuille-dexercices-1.html"><a href="feuille-dexercices-1.html#combinatoire"><i class="fa fa-check"></i>Combinatoire</a></li>
@@ -521,7 +524,51 @@ observées jusqu’à l’obtention d’une fille” avec p = 1/2 (même
 probabilité de naissance d’une fille ou d’un garçon), alors X suit une
 loi géométrique et on a pour tout <span class="math inline">\(k\in \mathbb{N^*}\)</span>:
 <span class="math display">\[P(X=k)=(1-1/2)^{k-1}(1/2)=1/2^k\]</span> avec <span class="math inline">\(E(X)=2\)</span> et <span class="math inline">\(V(X)=2.\)</span></p>
+</div>
+<div id="loi-binomiale-negative-mathcalbnrp" class="section level2 unnumbered">
+<h2>Loi Binomiale Négative <span class="math inline">\(\mathcal{BN}(r,p)\)</span></h2>
+<ul>
+<li><p><span class="math inline">\(\varepsilon\)</span>: “On répéte l’épreuve de Bernoulli jusqu’à obtenir
+un total de <span class="math inline">\(r\)</span> succès”.</p></li>
+<li><p>Exemple avec :
+<span class="math display">\[\bar{A} \quad  {A} \quad  \bar{A} \quad  \bar{A} \quad  \bar{A} \quad  {A} \quad \bar{A} \quad  \bar{A} \quad  {A}\]</span>
+<span class="math display">\[{E} \quad  {S} \quad  {E} \quad  {E} \quad  {E} \quad  {S} \quad {E} \quad  {E} \quad  {S}\]</span></p></li>
+<li><p>Mais on peut obtenir d’autres façons:
+<span class="math display">\[{S} \quad  {E} \quad  {E} \quad  {E} \quad  {E} \quad  {E} \quad {S} \quad  {E} \quad  {S}\]</span>
+<span class="math display">\[{E} \quad  {E} \quad  {E} \quad  {E} \quad  {S} \quad  {E} \quad {S} \quad  {E} \quad  {S}\]</span></p></li>
+<li><p>Chaque épreuve a <span class="math inline">\({p}\)</span> pour probabilité de
+succès et <span class="math inline">\({1-p}\)</span> pour probabilité d’échec.</p></li>
+<li><p>Désignons <span class="math inline">\(X=\)</span>“le nombre d’épreuves nécessaires pour attendre ce”.
+<span class="math display">\[\underbrace{\overbrace{{E} \quad  {S} \quad  {E} \quad  {E} \quad  {E} \quad  {S} \quad {E} \quad  {E}}^{ {r-1 \, succès}\, et \, {k-r \, échecs}} \quad  {S}}_{X=k}\]</span></p></li>
+<li><p><span class="math inline">\(X(\Omega)=\{r,r+1,r+2,\ldots\}\)</span>. On dit <span class="math inline">\(X \sim \mathcal{BN}(r,p)\)</span>.</p></li>
+<li><p><span class="math inline">\(\forall \, k \in X(\Omega),\)</span>
+<span class="math display">\[P(X=k) = \binom{{k-1}}{{r-1}} {p^r} {(1-p)^{k-r}}\]</span></p></li>
+</ul>
+<div id="mathcalgpmathcalbn1p" class="section level3 unnumbered">
+<h3><span class="math inline">\(\mathcal{G}(p)=\mathcal{BN}(1,p)\)</span></h3>
+<ul>
+<li><p><span class="math inline">\(\varepsilon\)</span>: “On répéte l’épreuve de Bernoulli jusqu’à obtenir
+un total de <span class="math inline">\(r\)</span> succès”.</p></li>
+<li><p>Soit,
+<span class="math display">\[{E} \quad \ldots \quad {E} \quad {S} \quad  {E} \quad  \ldots \quad  {E} \quad  {S} \ldots \quad {E} \ldots \quad  {E} \quad  {S}\]</span></p></li>
+<li><p>Soit, <span class="math inline">\(Y_1\)</span> le nombre d’épreuves nécessaires jusqu’au premier
+succès, <span class="math inline">\(Y_2\)</span> le nombre d’épreuves supplémentaires nécessaires pour
+obtenir un deuxième succès, <span class="math inline">\(Y_3\)</span> celui menant au 3ème et ainsi de
+suite.</p></li>
+<li><p>Càd,
+<span class="math display">\[\underbrace{{E} \quad \ldots \quad {E} \quad {S}}_{Y_1} \quad  \underbrace{{E} \quad  \ldots \quad  {E} \quad  {S}}_{Y_2} \quad \underbrace{\ldots}_{\ldots} \quad \underbrace{{E} \quad \ldots \quad  {E} \quad  {S}}_{Y_r}\]</span></p></li>
+<li><p>Les tirages étants indépendantes et ayant toujours la même
+probabilité de succès, chacune des variables <span class="math inline">\(Y_1,Y_2,\ldots,Y_r\)</span>
+est géométrique <span class="math inline">\(\mathcal{G}(p)\)</span>.</p></li>
+<li><p><span class="math inline">\(X=\)</span>“le nombre d’épreuves nécessaires à l’obtention de <span class="math inline">\(r\)</span>
+succès”<span class="math inline">\(=Y_1 + Y_2 + \ldots + Y_r\)</span>.</p></li>
+<li><p>Donc,
+<span class="math display">\[E(X)= E(Y_1) + E(Y_2) + \ldots + E(Y_r) = \sum_{i=1}^r \frac{1}{p} = \frac{r}{p}\]</span>
+et <span class="math display">\[V(X)= \sum_{i=1}^r V(Y_i) = \frac{r(1-p)}{p^2}\]</span> car les <span class="math inline">\(Y_i\)</span>
+sont indépendantes.</p></li>
+</ul>
 
+</div>
 </div>
 </div>
             </section>

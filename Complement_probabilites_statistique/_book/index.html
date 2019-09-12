@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>6 Couple de variables aléatoires continues | Complément de formation en Probabilités et Statistique</title>
+  <title>Complément de formation en Probabilités et Statistique</title>
   <meta name="description" content="Cours de Probabilités et Statistique A3 ESILV" />
   <meta name="generator" content="bookdown 0.10 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="6 Couple de variables aléatoires continues | Complément de formation en Probabilités et Statistique" />
+  <meta property="og:title" content="Complément de formation en Probabilités et Statistique" />
   <meta property="og:type" content="book" />
   
   
@@ -16,7 +16,7 @@
   
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="6 Couple de variables aléatoires continues | Complément de formation en Probabilités et Statistique" />
+  <meta name="twitter:title" content="Complément de formation en Probabilités et Statistique" />
   
   <meta name="twitter:description" content="Cours de Probabilités et Statistique A3 ESILV" />
   
@@ -24,15 +24,15 @@
 <meta name="author" content="Mohamad Ghassany" />
 
 
-<meta name="date" content="2019-09-11" />
+<meta name="date" content="2019-09-12" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   <link rel="shortcut icon" href="img/favicon.ico" type="image/x-icon" />
-<link rel="prev" href="lois-usuelles-de-v-a-c.html">
-<link rel="next" href="feuille-dexercices-2.html">
+
+<link rel="next" href="variables-aleatoires-discretes.html">
 <script src="book_assets/jquery-2.2.3/jquery.min.js"></script>
 <link href="book_assets/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="book_assets/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -171,107 +171,37 @@
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="couple-de-variables-aleatoires-continues" class="section level1">
-<h1><span class="header-section-number">6</span> Couple de variables aléatoires continues</h1>
-<div id="densite-conjointe" class="section level2 unnumbered">
-<h2>Densité conjointe</h2>
-
-<div class="definition">
-<p><span id="def:unnamed-chunk-71" class="definition"><strong>Définition 6.1  </strong></span>On dit que <span class="math inline">\((X,Y)\)</span> est un couple aléatoire continu s’il existe une
-fonction <span class="math inline">\(f: \mathbb{R}^2 \rightarrow \mathbb{R}\)</span> telle que pour tout
-<span class="math inline">\(D \subseteq \mathbb{R}\)</span> on a</p>
-<span class="math display">\[P\{(X,Y) \in D\} = \iint\limits_{(x,y) \in D} f(x,y) dx dy\]</span>
+<div id="header">
+<h1 class="title">Complément de formation en Probabilités et Statistique</h1>
+<p class="author"><em>Mohamad Ghassany</em></p>
+<p class="date"><em>2019-09-12</em></p>
 </div>
+<div id="introduction" class="section level1 unnumbered">
+<h1>Introduction</h1>
+<p>Ce cours a pour objectifs:</p>
+<ul>
+<li>Mise à niveau en probabilités et statistiques.</li>
+<li>Maîtrise des outils probabilistes indispensables pour aborder la statistique inférentielle.</li>
+</ul>
+<p>Les documents <!-- <i class="far fa-file-pdf-o" aria-hidden="true" style="color:#00B4A1"></i> <i class="fas  fa-file-pdf " style="color:#00b4a1;"></i> --> correspendants à ce cours sont téléchargeables ci dessous:</p>
+<ul>
+<li>Variables aléatoires discrètes: <a target="_blank" href="https://www.mghassany.com/documents/Slides_VAdiscrètes_CompStat_A3_ESILV.pdf"><i class="far fa-file-pdf-o" aria-hidden="true" style="color:#00B4A1"></i></a>.</li>
+<li>Variables aléatoires continues: <a target="_blank" href="https://www.mghassany.com/documents/Slides_VAcontinues_CompStat_A3_ESILV.pdf"><i class="far fa-file-pdf-o" aria-hidden="true" style="color:#00B4A1"></i></a>.</li>
+<li>Feuille d’exercices: <a target="_blank" href="https://www.mghassany.com/documents/TD_CompStat_A3_ESILV.pdf"><i class="far fa-file-pdf-o" aria-hidden="true" style="color:#00B4A1"></i></a>.</li>
+<li>Table de la loi Normale: <a target="_blank" href="https://www.mghassany.com/documents/table_loi_normale.pdf"><i class="far fa-file-pdf-o" aria-hidden="true" style="color:#00B4A1"></i></a>.</li>
+</ul>
 
-<p><strong>Remarque:</strong> On a la condition de normalité
-<span class="math inline">\(\iint\limits_{\mathbb{R}^2} f(x,y)dxdy=1\)</span></p>
-<p>La fonction <span class="math inline">\(f\)</span> s’appelle <strong>densité conjointe</strong> de <span class="math inline">\(X\)</span> et <span class="math inline">\(Y\)</span>. Notons
-par <span class="math inline">\(A\)</span> et <span class="math inline">\(B\)</span> deux ensembles de nombres réels. En définissant
-<span class="math inline">\(D=\{(x,y) : x \in A, y \in B\}\)</span>, on obtient</p>
-<p><span class="math display">\[P(X\in A, Y \in B) = \int_A \int_B f(x,y) dxdy\]</span></p>
-<p>La fonction de répartition du <span class="math inline">\((X,Y)\)</span> est définie par</p>
-<p><span class="math display">\[F(a,b)=P(X \le a, Y \le b) = \int_{- \infty}^b \int_{- \infty}^a  f(x,y) dx dy\]</span></p>
-<p><span class="math inline">\(f\)</span> est le dérivé de <span class="math inline">\(F\)</span>:
-<span class="math inline">\(f(a,b)= \frac{\partial^2}{\partial a \partial b} F(a,b)\)</span></p>
-
-<div class="rmdexercise">
-Soit <span class="math inline">\((X,Y)\)</span> un couple
-aléatoire continu de densité <span class="math display">\[f(x,y)= \left\lbrace
-      \begin{array}{ll}
-      a x y^2   &amp; \mbox{si} \quad 0 \le x \le y \le 1 \\
-      0 &amp; \mbox{sinon}
-      \end{array}
-  \right.\]</span> Trouver la constante <span class="math inline">\(a\)</span>.
 </div>
 
 
-<div class="rmdexercise">
-<p>Soit <span class="math inline">\((X,Y)\)</span> un couple
-aléatoire continu de densité</p>
-<p><span class="math display">\[f(x,y)= \left\lbrace
-      \begin{array}{ll}
-      2 e^{-x} e^{-2y}   &amp; \mbox{si} \quad x &gt; 0, \,\, y &gt; 0\\
-      0 &amp; \mbox{sinon}
-      \end{array}
-  \right.\]</span> Montrer que:</p>
-<ol style="list-style-type: decimal">
-<li><p><span class="math inline">\(P(X &gt; 1, Y &lt; 1)=e^{-1}(1-e^{-2})\)</span></p></li>
-<li><p><span class="math inline">\(P(X &lt; a) = 1-e^{-a}\)</span></p></li>
-<li><p><span class="math inline">\(P(X &lt; Y ) = 1/3\)</span></p></li>
-</ol>
-</div>
 
-</div>
-<div id="densites-marginales" class="section level2 unnumbered">
-<h2>Densités marginales</h2>
-<p>Si on dispose de la densité du couple, on peut retrouver les densités de
-<span class="math inline">\(X\)</span> et de <span class="math inline">\(Y\)</span>, appelées les densités marginales:</p>
-<p><strong>Densité marginale de X:</strong> <span class="math display">\[f(x,.)=f_X(x)=\int_{\mathbb{R}} f(x,y)dy\]</span></p>
-<p><strong>Densité marginale de Y:</strong> <span class="math display">\[f(.,y)=f_Y(y)=\int_{\mathbb{R}} f(x,y)dx\]</span></p>
-</div>
-<div id="esperance-dune-fonction-du-couple" class="section level2 unnumbered">
-<h2>Espérance d’une fonction du couple</h2>
-<p>Si <span class="math inline">\((X,Y)\)</span> est un couple continu de densité <span class="math inline">\(f(x,y)\)</span> et
-<span class="math inline">\(g: \mathbb{R}^2 \rightarrow \mathbb{R}\)</span> on a</p>
-<p><span class="math display">\[E[ g(X,Y)] =  \iint\limits_{\mathbb{R}^2} g(x,y) f(x,y)dxdy\]</span></p>
-</div>
-<div id="independance" class="section level2 unnumbered">
-<h2>Indépendance</h2>
-<p>Les v.a. <span class="math inline">\(X\)</span> et <span class="math inline">\(Y\)</span> sont indépendantes ssi
-<span class="math inline">\(\forall \, (x,y) \in \mathbb{R}^2\)</span> on a</p>
-<p><span class="math display">\[f(x,y)=f_X(x) f_Y(y)\]</span></p>
-</div>
-<div id="distribution-conditionnelle" class="section level2 unnumbered">
-<h2>Distribution conditionnelle</h2>
-<p>Si <span class="math inline">\((X,Y)\)</span> est un couple continu de densité <span class="math inline">\(f(x,y)\)</span>, on définit
-<strong>densité conditionnelle de <span class="math inline">\(X\)</span></strong>, sous la condition <span class="math inline">\(Y=y\)</span> et lorsque
-<span class="math inline">\(f_Y(y) &gt; 0\)</span> par la relation</p>
-<p><span class="math display">\[f_{X|Y} (x|y) = \frac{f(x,y)}{f_Y(y)}\]</span></p>
-
-<div class="rmdexercise">
-<p>Supposons que <span class="math inline">\(X\)</span> et <span class="math inline">\(Y\)</span> aient pour densité conjointe
-<span class="math display">\[f(x,y)= \left\lbrace
-      \begin{array}{ll}
-      \frac{1}{y} e^{- x/y}e^{-y}   &amp; \mbox{si} \quad x &gt; 0, \,\, y &gt; 0\\
-      0 &amp; \mbox{sinon}
-      \end{array}
-  \right.\]</span></p>
-<ol style="list-style-type: decimal">
-<li><p>Déterminer la densité conditionnelle de <span class="math inline">\(X\)</span> lorsque <span class="math inline">\(Y=y\)</span>.</p></li>
-<li><p>Calculer <span class="math inline">\(P(X&gt;1 | Y = y)\)</span></p></li>
-</ol>
-</div>
-
-
-</div>
-</div>
             </section>
 
           </div>
         </div>
       </div>
-<a href="lois-usuelles-de-v-a-c.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="feuille-dexercices-2.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+
+<a href="variables-aleatoires-discretes.html" class="navigation navigation-next navigation-unique" aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="book_assets/gitbook-2.6.7/js/app.min.js"></script>

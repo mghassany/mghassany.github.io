@@ -32,7 +32,7 @@
   
   
 <link rel="prev" href="app-ht.html">
-
+<link rel="next" href="model-selection.html">
 <script src="book_assets/jquery-2.2.3/jquery.min.js"></script>
 <link href="book_assets/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="book_assets/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -219,6 +219,20 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="A" data-path="app-introRStudio.html"><a href="app-introRStudio.html"><i class="fa fa-check"></i><b>A</b> Introduction to <code>RStudio</code></a></li>
 <li class="chapter" data-level="B" data-path="app-ht.html"><a href="app-ht.html"><i class="fa fa-check"></i><b>B</b> Review on hypothesis testing</a></li>
 <li class="chapter" data-level="C" data-path="use-qual.html"><a href="use-qual.html"><i class="fa fa-check"></i><b>C</b> Use of qualitative predictors</a></li>
+<li class="chapter" data-level="D" data-path="model-selection.html"><a href="model-selection.html"><i class="fa fa-check"></i><b>D</b> Model Selection</a><ul>
+<li class="chapter" data-level="" data-path="model-selection.html"><a href="model-selection.html#linear-model-selection-and-best-subset-selection"><i class="fa fa-check"></i>Linear Model Selection and Best Subset Selection</a></li>
+<li class="chapter" data-level="" data-path="model-selection.html"><a href="model-selection.html#forward-stepwise-selection"><i class="fa fa-check"></i>Forward Stepwise Selection</a></li>
+<li class="chapter" data-level="" data-path="model-selection.html"><a href="model-selection.html#backward-stepwise-selection"><i class="fa fa-check"></i>Backward Stepwise Selection</a></li>
+<li class="chapter" data-level="" data-path="model-selection.html"><a href="model-selection.html#estimating-test-error-using-mallows-cp-aic-bic-adjusted-r-squared"><i class="fa fa-check"></i>Estimating Test Error Using Mallow’s Cp, AIC, BIC, Adjusted R-squared</a></li>
+<li class="chapter" data-level="" data-path="model-selection.html"><a href="model-selection.html#estimating-test-error-using-cross-validation"><i class="fa fa-check"></i>Estimating Test Error Using Cross-Validation</a></li>
+<li class="chapter" data-level="" data-path="model-selection.html"><a href="model-selection.html#examples"><i class="fa fa-check"></i>Examples</a><ul>
+<li class="chapter" data-level="" data-path="model-selection.html"><a href="model-selection.html#best-subset-selection"><i class="fa fa-check"></i>Best Subset Selection</a></li>
+<li class="chapter" data-level="" data-path="model-selection.html"><a href="model-selection.html#forward-stepwise-selection-and-model-selection-using-validation-set"><i class="fa fa-check"></i>Forward Stepwise Selection and Model Selection Using Validation Set</a></li>
+<li class="chapter" data-level="" data-path="model-selection.html"><a href="model-selection.html#model-selection-using-cross-validation"><i class="fa fa-check"></i>Model Selection Using Cross-Validation</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="E" data-path="references-and-credits.html"><a href="references-and-credits.html"><i class="fa fa-check"></i><b>E</b> References and Credits</a></li>
+<li class="chapter" data-level="F" data-path="other-references.html"><a href="other-references.html"><i class="fa fa-check"></i><b>F</b> Other References</a></li>
 </ul>
 
       </nav>
@@ -286,67 +300,7 @@ The codification is completely arbitrary – why not considering <code>1</code>,
 The right way of dealing with categorical variables in regression is to set the variable as a factor and let <span style="color: Steelblue;"><i class="fab fa-r-project" aria-hidden="true"></i> </span> do internally the dummification.
 </p>
 </div>
-<!-- # Model Selection -->
-<!-- ### Linear Model Selection and Best Subset Selection {-} -->
-<!-- <iframe width="560" height="349" src="https://www.youtube.com/embed/91si52nk3LA" frameborder="0" allowfullscreen></iframe> -->
-<!-- ### Forward Stepwise Selection {-} -->
-<!-- <iframe width="560" height="349" src="https://www.youtube.com/embed/nLpJd_iKmrE" frameborder="0" allowfullscreen></iframe> -->
-<!-- ### Backward Stepwise Selection {-} -->
-<!-- <iframe width="560" height="349" src="https://www.youtube.com/embed/NJhMSpI2Uj8" frameborder="0" allowfullscreen></iframe> -->
-<!-- ### Estimating Test Error Using Mallow's Cp, AIC, BIC, Adjusted R-squared  {-} -->
-<!-- <iframe width="560" height="349" src="https://www.youtube.com/embed/LkifE44myLc" frameborder="0" allowfullscreen></iframe> -->
-<!-- ### Estimating Test Error Using Cross-Validation  {-} -->
-<!-- <iframe width="560" height="349" src="https://www.youtube.com/embed/3p9JNaJCOb4" frameborder="0" allowfullscreen></iframe> -->
-<!-- ## Examples {-} -->
-<!-- ### Best Subset Selection {-} -->
-<!-- <iframe width="560" height="349" src="https://www.youtube.com/embed/3kwdDGnV8MM" frameborder="0" allowfullscreen></iframe> -->
-<!-- ### Forward Stepwise Selection and Model Selection Using Validation Set {-} -->
-<!-- <iframe width="560" height="349" src="https://www.youtube.com/embed/mv-vdysZIb4" frameborder="0" allowfullscreen></iframe> -->
-<!-- ### Model Selection Using Cross-Validation {-} -->
-<!-- <iframe width="560" height="349" src="https://www.youtube.com/embed/F8MMHCCoALU" frameborder="0" allowfullscreen></iframe> -->
-<!-- # PW5 - Annexe -->
-<!-- Concernant la séance 5: J'ai remarqué que la majorité n'a pas compris ce qu'il fallait faire! Le but de la séance est d'exploiter et analyser un jeu de données. La première chose à faire est la phase descriptive où on décrit les données, les variables, quelques figures descriptives, etc.. Ensuite il faut regarder la variable cible, qu'on souhaite modéliser et prédire. Selon le type de cette variable on décide la direction de l'analyse: -->
-<!-- 1- Variable cible **quantitative**: On fait la **regression**. Donc ce qui est important dans ce cas est d'étudier les corrélations entre les variables (prédicteurs) et en particulier entre les corrélations entre les prédicteurs et la variable cible. Ensuite sur le training set construire le modèle de régression. Pour cette tâche, vous pouvez commencer par un modèle qui prend tous les prédicteurs, et ensuite commencer à enlever les prédicteurs non significatives (comme on a fait en tp, c'est en fait la méthode backward). Vous pouvez tout de même pour la régression appliquer les méthodes décrites dans les vidéos du chapitre 5 pour faciliter la recherche du meilleur modèle. Une fois le modèle est trouvé, reste à faire la prédiction (sur le test set) et la performance du modèle. -->
-<!-- 2- Variable cible **qualitative**: Alors on fait la **classification**. Comme la variable cible est qualitative vous pouvez étudier la relation entre les prédicteurs et cette variable (boxplots, mosaicplots, etc..).  -->
-<!-- Si la variable cible a 2 classes, vous pouvez construire des modèles de classifications vus en cours, prédire, ensuite comparer la performance de vos modèles (matrices de confusion, accuracy, courbes roc, etc..). Attention, on peut suivre les méthodes expliquées dans les vidéos du chapitre 5, mais pas avec les mêmes codes! la démarche expliquée dans les vidéos est commune, mais pour la classification il faut utiliser une autre librairie que "leaps", par exemple "bestglm". -->
-<!-- Si la variable cible a plus que 2 classes, pas besoin d'appliquer la régression logistique (raison expliquée dans le cours!), il suffit d'appliquer les méthodes discriminantes du chapitre 4. Attention, la courbe roc n'est pas applicable dans ce cas, on compare la performance en utilisant la matrice de confusion (au moins l'accuracy!). Mais d'autre part, vous pouvez quand même transformer le problème en deux classes, il s'agit de l'approche one-vs-all: c'est à dire considérer la classe 0 contre tous les autres classes à la fois. -->
-<!-- Ps, il ne vous faut pas la correction des tps pour pouvoir faire tout ce qui est décrit ci dessus. Vous avez suffisamment des exemples dans le cours, et dans l'énoncé du tp4, vous avez un exemple détaillé avec des commentaires aussi. -->
-<!-- Voilà.  -->
-<!-- # References and Credits -->
-<!-- Here are the references I used the most for this course: -->
-<!-- + The Elements of Statistical Learning for Trevor Hastie, Robert Tibshirani and Jerome H. Friedman, <a target="_blank" href="https://web.stanford.edu/~hastie/Papers/ESLII.pdf">link <i class="fa fa-file-pdf-o" aria-hidden="true"></i></a>. -->
-<!-- + Pattern Recognition and Machine Learning for Christopher Bishop, <a target="_blank" href="https://www.microsoft.com/en-us/research/uploads/prod/2006/01/Bishop-Pattern-Recognition-and-Machine-Learning-2006.pdf">link <i class="fa fa-file-pdf-o" aria-hidden="true"></i></a>. -->
-<!-- + Andrew Ng's Machine Learning Mooc, <a target="_blank" href="https://www.coursera.org/learn/machine-learning/">link <i class="fa fa-graduation-cap" aria-hidden="true"></i></a>. -->
-<!-- + Lab notes for Statistics for Social Sciences II: Multivariate Techniques, <a target="_blank" href="https://bookdown.org/egarpor/SSS2-UC3M/">link <i class="fa fa-graduation-cap" aria-hidden="true"></i></a>. -->
-<!-- Credits: -->
-<!-- + This website was written in Rmarkdown and compiled using [bookdown](https://bookdown.org/). -->
-<!-- # Other References -->
-
-<div id="refs" class="references">
-<div>
-<p>Dalal, Siddhartha R., Edward B. Fowlkes, and Bruce Hoadley. 1989. “Risk Analysis of the Space Shuttle: Pre-Challenger Prediction of Failure.” <em>Journal of the American Statistical Association</em> 84 (408): 945–57. <a href="https://doi.org/10.1080/01621459.1989.10478858">https://doi.org/10.1080/01621459.1989.10478858</a>.</p>
 </div>
-<div>
-<p>Presidential Commission on the Space Shuttle Challenger Accident. 1986. <em>Report of the Presidential Commission on the Space Shuttle Challenger Accident (Vols. 1 &amp; 2)</em>. Washington, DC. <a href="http://history.nasa.gov/rogersrep/genindex.htm">http://history.nasa.gov/rogersrep/genindex.htm</a>.</p>
-</div>
-</div>
-</div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 <h1>Discussion</h1>
 <div id="disqus_thread"></div>
 <script>
@@ -373,8 +327,8 @@ s.setAttribute('data-timestamp', +new Date());
           </div>
         </div>
       </div>
-<a href="app-ht.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-
+<a href="app-ht.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="model-selection.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="book_assets/gitbook-2.6.7/js/app.min.js"></script>

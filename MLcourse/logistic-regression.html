@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>3 Logistic Regression | Machine Learning</title>
   <meta name="description" content="3 Logistic Regression | Machine Learning course" />
-  <meta name="generator" content="bookdown 0.10 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.13 and GitBook 2.6.7" />
 
   <meta property="og:title" content="3 Logistic Regression | Machine Learning" />
   <meta property="og:type" content="book" />
@@ -24,15 +24,15 @@
 <meta name="author" content="Mohamad Ghassany" />
 
 
-<meta name="date" content="2019-09-13" />
+<meta name="date" content="2019-09-24" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="pw-2.html">
-<link rel="next" href="app-introRStudio.html">
+<link rel="prev" href="pw-2.html"/>
+<link rel="next" href="pw-3.html"/>
 <script src="book_assets/jquery-2.2.3/jquery.min.js"></script>
 <link href="book_assets/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="book_assets/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -65,7 +65,6 @@ a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
 a.sourceLine:empty { height: 1.2em; }
 .sourceCode { overflow: visible; }
 code.sourceCode { white-space: pre; position: relative; }
-div.sourceCode { margin: 1em 0; }
 pre.sourceCode { margin: 0; }
 @media screen {
 div.sourceCode { overflow: auto; }
@@ -215,6 +214,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="3.4.1" data-path="logistic-regression.html"><a href="logistic-regression.html#logreg-examps-challenger"><i class="fa fa-check"></i><b>3.4.1</b> Case study: <em>The Challenger disaster</em></a></li>
 </ul></li>
 </ul></li>
+<li class="chapter" data-level="" data-path="pw-3.html"><a href="pw-3.html"><i class="fa fa-check"></i>PW 3</a><ul>
+<li class="chapter" data-level="" data-path="pw-3.html"><a href="pw-3.html#social-networks-ads"><i class="fa fa-check"></i>Social Networks Ads</a></li>
+</ul></li>
 <li class="appendix"><span><b>Appendix</b></span></li>
 <li class="chapter" data-level="A" data-path="app-introRStudio.html"><a href="app-introRStudio.html"><i class="fa fa-check"></i><b>A</b> Introduction to <code>RStudio</code></a></li>
 <li class="chapter" data-level="B" data-path="app-ht.html"><a href="app-ht.html"><i class="fa fa-check"></i><b>B</b> Review on hypothesis testing</a></li>
@@ -356,8 +358,8 @@ The left-hand side is called the <em>log-odds</em> or <em>logit</em>. We see tha
 In the linear regression setting, the least squares approach is a special case of maximum likelihood.
 </p>
 </div>
-<p>We will not give mathematical details about the maximum likelihood and how to estimate the parameters. We will use R to fit the logistic regression models (using <code>glm</code> function).</p>
-<p>Use the following application (also available <a href="https://ec2-35-177-34-200.eu-west-2.compute.amazonaws.com/log-maximum-likelihood/" target="_blank">here</a>) to see how the log-likelihood changes with respect to the values for <span class="math inline">\((\beta_0,\beta_1)\)</span> in three data patterns.
+<p>We will not give mathematical details about the maximum likelihood and how to estimate the parameters. We will use <i class="fab  fa-r-project " style="color:steelblue;"></i> to fit the logistic regression models (using <code>glm</code> function).</p>
+<p>Use the following application (also available <a href="https://ec2-35-177-34-200.eu-west-2.compute.amazonaws.com/log-maximum-likelihood/" target="_blank">here <i class="fas  fa-external-link-alt "></i></a>) to see how the log-likelihood changes with respect to the values for <span class="math inline">\((\beta_0,\beta_1)\)</span> in three data patterns.
 The logistic regression fit and its dependence on <span class="math inline">\(\beta_0\)</span> (horizontal displacement) and <span class="math inline">\(\beta_1\)</span> (steepness of the curve). Recall the effect of the sign of <span class="math inline">\(\beta_1\)</span> in the curve: if positive, the logistic curve has an <span class="math inline">\(s\)</span> form; if negative, the form is a reflected <span class="math inline">\(s\)</span>.</p>
 <iframe src="https://ec2-35-177-34-200.eu-west-2.compute.amazonaws.com/log-maximum-likelihood/?showcase=0" width="90%" height="900px">
 </iframe>
@@ -634,18 +636,18 @@ Figure 3.2: Number of incidents in the O-rings (filed joints) versus temperature
 </tbody>
 </table>
 <p>Let’s begin the analysis by replicating Figures <a href="logistic-regression.html#fig:rogerts">3.2</a>a and <a href="logistic-regression.html#fig:rogerts">3.2</a>b and checking that linear regression is not the right tool for answering Q1–Q3. For that, we make two scatterplots of <code>nfails.field</code> (number of total incidents in the field joints) in function of <code>temp</code>, the first one excluding the launches without incidents (<code>subset = nfails.field &gt; 0</code>) and the second one for all the data.</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">require</span>(car)
-<span class="kw">scatterplot</span>(nfails.field <span class="op">~</span><span class="st"> </span>temp, <span class="dt">reg.line =</span> lm, <span class="dt">smooth =</span> <span class="ot">FALSE</span>, <span class="dt">spread =</span> <span class="ot">FALSE</span>,
-            <span class="dt">boxplots =</span> <span class="ot">FALSE</span>, <span class="dt">data =</span> challenger, <span class="dt">subset =</span> nfails.field <span class="op">&gt;</span><span class="st"> </span><span class="dv">0</span>)</code></pre>
+<div class="sourceCode" id="cb31"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb31-1" title="1"><span class="kw">require</span>(car)</a>
+<a class="sourceLine" id="cb31-2" title="2"><span class="kw">scatterplot</span>(nfails.field <span class="op">~</span><span class="st"> </span>temp, <span class="dt">reg.line =</span> lm, <span class="dt">smooth =</span> <span class="ot">FALSE</span>, <span class="dt">spread =</span> <span class="ot">FALSE</span>,</a>
+<a class="sourceLine" id="cb31-3" title="3">            <span class="dt">boxplots =</span> <span class="ot">FALSE</span>, <span class="dt">data =</span> challenger, <span class="dt">subset =</span> nfails.field <span class="op">&gt;</span><span class="st"> </span><span class="dv">0</span>)</a></code></pre></div>
 <p><img src="Machine-Learning_files/figure-html/unnamed-chunk-59-1.png" width="70%" style="display: block; margin: auto;" /></p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">scatterplot</span>(nfails.field <span class="op">~</span><span class="st"> </span>temp, <span class="dt">reg.line =</span> lm, <span class="dt">smooth =</span> <span class="ot">FALSE</span>, <span class="dt">spread =</span> <span class="ot">FALSE</span>,
-            <span class="dt">boxplots =</span> <span class="ot">FALSE</span>, <span class="dt">data =</span> challenger)</code></pre>
+<div class="sourceCode" id="cb32"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb32-1" title="1"><span class="kw">scatterplot</span>(nfails.field <span class="op">~</span><span class="st"> </span>temp, <span class="dt">reg.line =</span> lm, <span class="dt">smooth =</span> <span class="ot">FALSE</span>, <span class="dt">spread =</span> <span class="ot">FALSE</span>,</a>
+<a class="sourceLine" id="cb32-2" title="2">            <span class="dt">boxplots =</span> <span class="ot">FALSE</span>, <span class="dt">data =</span> challenger)</a></code></pre></div>
 <p><img src="Machine-Learning_files/figure-html/unnamed-chunk-59-2.png" width="70%" style="display: block; margin: auto;" /></p>
 <p>There is a fundamental problem in using linear regression for this data: <strong>the response is not continuous</strong>. As a consequence, there is no linearity and the errors around the mean are not normal (indeed, they are strongly non normal). We can check this with the corresponding diagnostic plots:</p>
-<pre class="sourceCode r"><code class="sourceCode r">mod &lt;-<span class="st"> </span><span class="kw">lm</span>(nfails.field <span class="op">~</span><span class="st"> </span>temp, <span class="dt">data =</span> challenger)
-<span class="kw">par</span>(<span class="dt">mfrow =</span> <span class="dv">1</span><span class="op">:</span><span class="dv">2</span>)
-<span class="kw">plot</span>(mod, <span class="dv">1</span>)
-<span class="kw">plot</span>(mod, <span class="dv">2</span>)</code></pre>
+<div class="sourceCode" id="cb33"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb33-1" title="1">mod &lt;-<span class="st"> </span><span class="kw">lm</span>(nfails.field <span class="op">~</span><span class="st"> </span>temp, <span class="dt">data =</span> challenger)</a>
+<a class="sourceLine" id="cb33-2" title="2"><span class="kw">par</span>(<span class="dt">mfrow =</span> <span class="dv">1</span><span class="op">:</span><span class="dv">2</span>)</a>
+<a class="sourceLine" id="cb33-3" title="3"><span class="kw">plot</span>(mod, <span class="dv">1</span>)</a>
+<a class="sourceLine" id="cb33-4" title="4"><span class="kw">plot</span>(mod, <span class="dv">2</span>)</a></code></pre></div>
 <p><img src="Machine-Learning_files/figure-html/unnamed-chunk-60-1.png" width="70%" style="display: block; margin: auto;" /></p>
 <p>Although linear regression is not the adequate tool for this data, it is able to detect the obvious difference between the two plots:</p>
 <ol style="list-style-type: decimal">
@@ -663,63 +665,63 @@ The logistic model in this case is
 \]</span>
 with <span class="math inline">\(\beta_0\)</span> and <span class="math inline">\(\beta_1\)</span> unknown.</p>
 <p>Let’s fit the model to the data by estimating <span class="math inline">\(\beta_0\)</span> and <span class="math inline">\(\beta_1\)</span>.</p>
-<pre class="sourceCode r"><code class="sourceCode r">nasa &lt;-<span class="st"> </span><span class="kw">glm</span>(fail.field <span class="op">~</span><span class="st"> </span>temp, <span class="dt">family =</span> <span class="st">&quot;binomial&quot;</span>, <span class="dt">data =</span> challenger)
-<span class="kw">summary</span>(nasa)
-<span class="co">#ans&gt; </span>
-<span class="co">#ans&gt; Call:</span>
-<span class="co">#ans&gt; glm(formula = fail.field ~ temp, family = &quot;binomial&quot;, data = challenger)</span>
-<span class="co">#ans&gt; </span>
-<span class="co">#ans&gt; Deviance Residuals: </span>
-<span class="co">#ans&gt;    Min      1Q  Median      3Q     Max  </span>
-<span class="co">#ans&gt; -1.057  -0.757  -0.382   0.457   2.220  </span>
-<span class="co">#ans&gt; </span>
-<span class="co">#ans&gt; Coefficients:</span>
-<span class="co">#ans&gt;             Estimate Std. Error z value Pr(&gt;|z|)  </span>
-<span class="co">#ans&gt; (Intercept)    7.584      3.915    1.94    0.053 .</span>
-<span class="co">#ans&gt; temp          -0.417      0.194   -2.15    0.032 *</span>
-<span class="co">#ans&gt; ---</span>
-<span class="co">#ans&gt; Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</span>
-<span class="co">#ans&gt; </span>
-<span class="co">#ans&gt; (Dispersion parameter for binomial family taken to be 1)</span>
-<span class="co">#ans&gt; </span>
-<span class="co">#ans&gt;     Null deviance: 28.267  on 22  degrees of freedom</span>
-<span class="co">#ans&gt; Residual deviance: 20.335  on 21  degrees of freedom</span>
-<span class="co">#ans&gt; AIC: 24.33</span>
-<span class="co">#ans&gt; </span>
-<span class="co">#ans&gt; Number of Fisher Scoring iterations: 5</span>
-<span class="kw">exp</span>(<span class="kw">coef</span>(nasa)) <span class="co"># Exponentiated coefficients (&quot;odds ratios&quot;)</span>
-<span class="co">#ans&gt; (Intercept)        temp </span>
-<span class="co">#ans&gt;    1965.974       0.659</span></code></pre>
+<div class="sourceCode" id="cb34"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb34-1" title="1">nasa &lt;-<span class="st"> </span><span class="kw">glm</span>(fail.field <span class="op">~</span><span class="st"> </span>temp, <span class="dt">family =</span> <span class="st">&quot;binomial&quot;</span>, <span class="dt">data =</span> challenger)</a>
+<a class="sourceLine" id="cb34-2" title="2"><span class="kw">summary</span>(nasa)</a>
+<a class="sourceLine" id="cb34-3" title="3"><span class="co">#ans&gt; </span></a>
+<a class="sourceLine" id="cb34-4" title="4"><span class="co">#ans&gt; Call:</span></a>
+<a class="sourceLine" id="cb34-5" title="5"><span class="co">#ans&gt; glm(formula = fail.field ~ temp, family = &quot;binomial&quot;, data = challenger)</span></a>
+<a class="sourceLine" id="cb34-6" title="6"><span class="co">#ans&gt; </span></a>
+<a class="sourceLine" id="cb34-7" title="7"><span class="co">#ans&gt; Deviance Residuals: </span></a>
+<a class="sourceLine" id="cb34-8" title="8"><span class="co">#ans&gt;    Min      1Q  Median      3Q     Max  </span></a>
+<a class="sourceLine" id="cb34-9" title="9"><span class="co">#ans&gt; -1.057  -0.757  -0.382   0.457   2.220  </span></a>
+<a class="sourceLine" id="cb34-10" title="10"><span class="co">#ans&gt; </span></a>
+<a class="sourceLine" id="cb34-11" title="11"><span class="co">#ans&gt; Coefficients:</span></a>
+<a class="sourceLine" id="cb34-12" title="12"><span class="co">#ans&gt;             Estimate Std. Error z value Pr(&gt;|z|)  </span></a>
+<a class="sourceLine" id="cb34-13" title="13"><span class="co">#ans&gt; (Intercept)    7.584      3.915    1.94    0.053 .</span></a>
+<a class="sourceLine" id="cb34-14" title="14"><span class="co">#ans&gt; temp          -0.417      0.194   -2.15    0.032 *</span></a>
+<a class="sourceLine" id="cb34-15" title="15"><span class="co">#ans&gt; ---</span></a>
+<a class="sourceLine" id="cb34-16" title="16"><span class="co">#ans&gt; Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</span></a>
+<a class="sourceLine" id="cb34-17" title="17"><span class="co">#ans&gt; </span></a>
+<a class="sourceLine" id="cb34-18" title="18"><span class="co">#ans&gt; (Dispersion parameter for binomial family taken to be 1)</span></a>
+<a class="sourceLine" id="cb34-19" title="19"><span class="co">#ans&gt; </span></a>
+<a class="sourceLine" id="cb34-20" title="20"><span class="co">#ans&gt;     Null deviance: 28.267  on 22  degrees of freedom</span></a>
+<a class="sourceLine" id="cb34-21" title="21"><span class="co">#ans&gt; Residual deviance: 20.335  on 21  degrees of freedom</span></a>
+<a class="sourceLine" id="cb34-22" title="22"><span class="co">#ans&gt; AIC: 24.33</span></a>
+<a class="sourceLine" id="cb34-23" title="23"><span class="co">#ans&gt; </span></a>
+<a class="sourceLine" id="cb34-24" title="24"><span class="co">#ans&gt; Number of Fisher Scoring iterations: 5</span></a>
+<a class="sourceLine" id="cb34-25" title="25"><span class="kw">exp</span>(<span class="kw">coef</span>(nasa)) <span class="co"># Exponentiated coefficients (&quot;odds ratios&quot;)</span></a>
+<a class="sourceLine" id="cb34-26" title="26"><span class="co">#ans&gt; (Intercept)        temp </span></a>
+<a class="sourceLine" id="cb34-27" title="27"><span class="co">#ans&gt;    1965.974       0.659</span></a></code></pre></div>
 <div class="rmdtip">
 <p>
-The <code>glm()</code> function fits <strong>g</strong>eneralized <strong>l</strong>inear <strong>m</strong>odels, a class of models that includes logistic regression. The syntax of the <code>glm()</code> function is similar to that of <code>lm()</code>, except that we must pass in the argument <code>family=binomial</code> in order to tell <code>R</code> to run a logistic regression rather than some other type of generalized linear model.
+The <code>glm()</code> function fits <strong>g</strong>eneralized <strong>l</strong>inear <strong>m</strong>odels, a class of models that includes logistic regression. The syntax of the <code>glm()</code> function is similar to that of <code>lm()</code>, except that we must pass in the argument <code>family=binomial</code> in order to tell <span style="color: Steelblue;"><i class="fab fa-r-project" aria-hidden="true"></i> </span> to run a logistic regression rather than some other type of generalized linear model.
 </p>
 </div>
 <p>The summary of the logistic model is notably different from the linear regression, as the methodology behind is quite different. Nevertheless, we have tests for the significance of each coefficient. Here we obtain that <code>temp</code> is significantly different from zero, at least at a level <span class="math inline">\(\alpha=0.05\)</span>. Therefore we can conclude that <strong>the temperature is indeed affecting the probability of an incident with the O-rings</strong> (answers Q1).</p>
 <p>The coefficient of <code>temp</code>, <span class="math inline">\(\hat\beta_1\)</span>, can be regarded the “correlation between the temperature and the probability of having at least one incident”. This correlation, as evidenced by the sign of <span class="math inline">\(\hat\beta_1\)</span>, is negative. Let’s plot the fitted logistic curve to see that indeed the probability of incident and temperature are negatively correlated:</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Plot data</span>
-<span class="kw">plot</span>(challenger<span class="op">$</span>temp, challenger<span class="op">$</span>fail.field, <span class="dt">xlim =</span> <span class="kw">c</span>(<span class="op">-</span><span class="dv">1</span>, <span class="dv">30</span>), <span class="dt">xlab =</span> <span class="st">&quot;Temperature&quot;</span>,
-     <span class="dt">ylab =</span> <span class="st">&quot;Incident probability&quot;</span>)
-
-<span class="co"># Draw the fitted logistic curve</span>
-x &lt;-<span class="st"> </span><span class="kw">seq</span>(<span class="op">-</span><span class="dv">1</span>, <span class="dv">30</span>, <span class="dt">l =</span> <span class="dv">200</span>)
-y &lt;-<span class="st"> </span><span class="kw">exp</span>(<span class="op">-</span>(nasa<span class="op">$</span>coefficients[<span class="dv">1</span>] <span class="op">+</span><span class="st"> </span>nasa<span class="op">$</span>coefficients[<span class="dv">2</span>] <span class="op">*</span><span class="st"> </span>x))
-y &lt;-<span class="st"> </span><span class="dv">1</span> <span class="op">/</span><span class="st"> </span>(<span class="dv">1</span> <span class="op">+</span><span class="st"> </span>y)
-<span class="kw">lines</span>(x, y, <span class="dt">col =</span> <span class="dv">2</span>, <span class="dt">lwd =</span> <span class="dv">2</span>)
-
-<span class="co"># The Challenger</span>
-<span class="kw">points</span>(<span class="op">-</span><span class="fl">0.6</span>, <span class="dv">1</span>, <span class="dt">pch =</span> <span class="dv">16</span>)
-<span class="kw">text</span>(<span class="op">-</span><span class="fl">0.6</span>, <span class="dv">1</span>, <span class="dt">labels =</span> <span class="st">&quot;Challenger&quot;</span>, <span class="dt">pos =</span> <span class="dv">4</span>)</code></pre>
+<div class="sourceCode" id="cb35"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb35-1" title="1"><span class="co"># Plot data</span></a>
+<a class="sourceLine" id="cb35-2" title="2"><span class="kw">plot</span>(challenger<span class="op">$</span>temp, challenger<span class="op">$</span>fail.field, <span class="dt">xlim =</span> <span class="kw">c</span>(<span class="op">-</span><span class="dv">1</span>, <span class="dv">30</span>), <span class="dt">xlab =</span> <span class="st">&quot;Temperature&quot;</span>,</a>
+<a class="sourceLine" id="cb35-3" title="3">     <span class="dt">ylab =</span> <span class="st">&quot;Incident probability&quot;</span>)</a>
+<a class="sourceLine" id="cb35-4" title="4"></a>
+<a class="sourceLine" id="cb35-5" title="5"><span class="co"># Draw the fitted logistic curve</span></a>
+<a class="sourceLine" id="cb35-6" title="6">x &lt;-<span class="st"> </span><span class="kw">seq</span>(<span class="op">-</span><span class="dv">1</span>, <span class="dv">30</span>, <span class="dt">l =</span> <span class="dv">200</span>)</a>
+<a class="sourceLine" id="cb35-7" title="7">y &lt;-<span class="st"> </span><span class="kw">exp</span>(<span class="op">-</span>(nasa<span class="op">$</span>coefficients[<span class="dv">1</span>] <span class="op">+</span><span class="st"> </span>nasa<span class="op">$</span>coefficients[<span class="dv">2</span>] <span class="op">*</span><span class="st"> </span>x))</a>
+<a class="sourceLine" id="cb35-8" title="8">y &lt;-<span class="st"> </span><span class="dv">1</span> <span class="op">/</span><span class="st"> </span>(<span class="dv">1</span> <span class="op">+</span><span class="st"> </span>y)</a>
+<a class="sourceLine" id="cb35-9" title="9"><span class="kw">lines</span>(x, y, <span class="dt">col =</span> <span class="dv">2</span>, <span class="dt">lwd =</span> <span class="dv">2</span>)</a>
+<a class="sourceLine" id="cb35-10" title="10"></a>
+<a class="sourceLine" id="cb35-11" title="11"><span class="co"># The Challenger</span></a>
+<a class="sourceLine" id="cb35-12" title="12"><span class="kw">points</span>(<span class="op">-</span><span class="fl">0.6</span>, <span class="dv">1</span>, <span class="dt">pch =</span> <span class="dv">16</span>)</a>
+<a class="sourceLine" id="cb35-13" title="13"><span class="kw">text</span>(<span class="op">-</span><span class="fl">0.6</span>, <span class="dv">1</span>, <span class="dt">labels =</span> <span class="st">&quot;Challenger&quot;</span>, <span class="dt">pos =</span> <span class="dv">4</span>)</a></code></pre></div>
 <p><img src="Machine-Learning_files/figure-html/unnamed-chunk-63-1.png" width="70%" style="display: block; margin: auto;" />
 At the sight of this curve and the summary of the model we can conclude that <strong>the temperature was increasing the probability of an O-ring incident</strong> (Q2). Indeed, the confidence intervals for the coefficients show a significative negative correlation at level <span class="math inline">\(\alpha=0.05\)</span>:</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">confint</span>(nasa, <span class="dt">level =</span> <span class="fl">0.95</span>)
-<span class="co">#ans&gt;              2.5 % 97.5 %</span>
-<span class="co">#ans&gt; (Intercept)  1.336 17.783</span>
-<span class="co">#ans&gt; temp        -0.924 -0.109</span></code></pre>
+<div class="sourceCode" id="cb36"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb36-1" title="1"><span class="kw">confint</span>(nasa, <span class="dt">level =</span> <span class="fl">0.95</span>)</a>
+<a class="sourceLine" id="cb36-2" title="2"><span class="co">#ans&gt;              2.5 % 97.5 %</span></a>
+<a class="sourceLine" id="cb36-3" title="3"><span class="co">#ans&gt; (Intercept)  1.336 17.783</span></a>
+<a class="sourceLine" id="cb36-4" title="4"><span class="co">#ans&gt; temp        -0.924 -0.109</span></a></code></pre></div>
 <p>Finally, <strong>the probability of having at least one incident with the O-rings in the launch day was <span class="math inline">\(0.9996\)</span> according to the fitted logistic model</strong> (Q3). This is easily obtained:</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">predict</span>(nasa, <span class="dt">newdata =</span> <span class="kw">data.frame</span>(<span class="dt">temp =</span> <span class="fl">-0.6</span>), <span class="dt">type =</span> <span class="st">&quot;response&quot;</span>)
-<span class="co">#ans&gt; 1 </span>
-<span class="co">#ans&gt; 1</span></code></pre>
+<div class="sourceCode" id="cb37"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb37-1" title="1"><span class="kw">predict</span>(nasa, <span class="dt">newdata =</span> <span class="kw">data.frame</span>(<span class="dt">temp =</span> <span class="fl">-0.6</span>), <span class="dt">type =</span> <span class="st">&quot;response&quot;</span>)</a>
+<a class="sourceLine" id="cb37-2" title="2"><span class="co">#ans&gt; 1 </span></a>
+<a class="sourceLine" id="cb37-3" title="3"><span class="co">#ans&gt; 1</span></a></code></pre></div>
 <p>Be aware that <code>type = "response"</code> has a different meaning in logistic regression. In linear models it returns a CI for the prediction. But, <code>type = "response"</code> means that the <em>probability</em> should be returned, instead of the value of the link function, which is returned with <code>type = "link"</code> (the default).</p>
 <p>Recall that there is a serious problem of <strong>extrapolation</strong> in the prediction, which makes it less precise (or more variable). But this extrapolation, together with the evidences raised by a simple analysis like we did, should have been strong arguments for postponing the launch.</p>
 <p align="right">
@@ -729,9 +731,6 @@ At the sight of this curve and the summary of the model we can conclude that <st
 </div>
 </div>
 </div>
-
-
-
 <h3><span class="header-section-number">F</span> Other References</h3>
 <div id="refs" class="references">
 <div id="ref-Dalal1989">
@@ -774,7 +773,7 @@ s.setAttribute('data-timestamp', +new Date());
         </div>
       </div>
 <a href="pw-2.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="app-introRStudio.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="pw-3.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="book_assets/gitbook-2.6.7/js/app.min.js"></script>
@@ -821,8 +820,9 @@ gitbook.start({
     script.type = "text/javascript";
     var src = "true";
     if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
-    if (location.protocol !== "file:" && /^https?:/.test(src))
-      src = src.replace(/^https?:/, '');
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
     script.src = src;
     document.getElementsByTagName("head")[0].appendChild(script);
   })();

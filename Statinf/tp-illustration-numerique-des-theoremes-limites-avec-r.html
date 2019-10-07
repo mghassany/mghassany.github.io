@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Exercices | Statistique Inférentielle</title>
+  <title>TP illustration numérique des théorèmes limites avec R | Statistique Inférentielle</title>
   <meta name="description" content="Cours de Statistique Inférentielle A3 ESILV" />
   <meta name="generator" content="bookdown 0.13.2 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Exercices | Statistique Inférentielle" />
+  <meta property="og:title" content="TP illustration numérique des théorèmes limites avec R | Statistique Inférentielle" />
   <meta property="og:type" content="book" />
   
   
@@ -16,7 +16,7 @@
   
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Exercices | Statistique Inférentielle" />
+  <meta name="twitter:title" content="TP illustration numérique des théorèmes limites avec R | Statistique Inférentielle" />
   
   <meta name="twitter:description" content="Cours de Statistique Inférentielle A3 ESILV" />
   
@@ -31,8 +31,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   <link rel="shortcut icon" href="img/favicon.ico" type="image/x-icon" />
-<link rel="prev" href="statistique-descriptive.html"/>
-<link rel="next" href="tp-statistique-descriptive-avec-r.html"/>
+<link rel="prev" href="exercices-1.html"/>
+<link rel="next" href="estimation-ponctuelle.html"/>
 <script src="book_assets/jquery-2.2.3/jquery.min.js"></script>
 <link href="book_assets/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="book_assets/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -325,248 +325,80 @@ code span.wa { color: #bf0303; } /* Warning */
 <div class = rmdreview>
 Vous êtes invités à annoter le contenu de ce cours. Les annotations peuvent être des corrections typographiques, des propositions ou des questions. Pour ajouter des annotations, <span style="background-color: #3297FD; color: white">choisissez le text</span> que vous voulez commenter et cliquez sur <i class="h-icon-annotate"></i>. Pour accéder aux annotations crées par d'autres personnes, cliquez <i class="h-icon-chevron-left"></i> sur le coin supérieur de la page <i class="fa fa-arrow-circle-right  fa-rotate-315" aria-hidden="true"></i>.
 </div>
-<div id="exercices" class="section level1 unnumbered">
-<h1>Exercices</h1>
-
-<div class="exercise">
-<p><span id="exr:unnamed-chunk-24" class="exercise"><strong>Exercice 1.1  (Nature des variables et graphique correspondant)  </strong></span>Lors d’une enquête, on interroge 1000 individus sur leur âge, leur sexe, leur couleur préférée, leur nombre de frères et soeurs et leur département de naissance.</p>
-<ol style="list-style-type: decimal">
-<li>Quelle est la nature de chacune de ces variables?</li>
-<li>Par quel outil graphique visualiseriez-vous la distribution de chacune des variables élémentaires?
-</div></li>
-</ol>
-
-<div class="exercise">
-<p><span id="exr:unnamed-chunk-25" class="exercise"><strong>Exercice 1.2  (Petite série d’effectifs)  </strong></span>On réalise un sondage auprès de 1000 personnes pour évaluer le nombre d’individus par ménage. On obtient la série statistique suivante:</p>
-<table style="width:100%;">
-<colgroup>
-<col width="36%" />
-<col width="7%" />
-<col width="7%" />
-<col width="7%" />
-<col width="7%" />
-<col width="7%" />
-<col width="15%" />
-<col width="10%" />
-</colgroup>
-<tbody>
-<tr class="odd">
-<td align="left">Nb de personnes par ménage</td>
-<td align="center">1</td>
-<td align="center">2</td>
-<td align="center">3</td>
-<td align="center">4</td>
-<td align="center">5</td>
-<td align="left">6 et plus</td>
-<td align="left">Total</td>
-</tr>
-<tr class="even">
-<td align="left">effectif</td>
-<td align="center">107</td>
-<td align="center">137</td>
-<td align="center">197</td>
-<td align="center">302</td>
-<td align="center">180</td>
-<td align="left">77</td>
-<td align="left">1000</td>
-</tr>
-</tbody>
-</table>
-<ol style="list-style-type: decimal">
-<li>Représenter cette série statistique à l’aide d’un graphique.</li>
-<li>Calculer la moyenne, la variance, l’écart-type et la médiane de cette distribution.</li>
-</ol>
+<div id="tp-illustration-numerique-des-theoremes-limites-avec-r" class="section level1 unnumbered">
+<h1>TP illustration numérique des théorèmes limites avec R</h1>
+<div id="realisations-de-variables-aleatoires" class="section level3 unnumbered">
+<h3>Réalisations de variables aléatoires</h3>
+<p>Pour générer (simuler) des réalisations de variables aléatoires on utilise la fonction qui commence par la lettre <code>r</code> (pour <em>random</em>) succédée par le nom de la loi que l’on souhaite simuler. Par exemple <code>rnorm</code> pour simuler des réalisations de la variable alétoire de loi normale. Tapez <code>?rnorm</code> pour voir la liste des paramètres (arguments) de cette fonction.</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb5-1" title="1"><span class="kw">rnorm</span>(<span class="dv">10</span>) <span class="co"># génére 10 réalistions alétoires de la loi normale centrée réduite.</span></a>
+<a class="sourceLine" id="cb5-2" title="2"><span class="co">##  [1] -0.6463  1.8136 -0.7205 -0.8355  1.7081  0.7018 -0.7010 -0.0442</span></a>
+<a class="sourceLine" id="cb5-3" title="3"><span class="co">##  [9]  0.5782  0.2260</span></a>
+<a class="sourceLine" id="cb5-4" title="4"><span class="kw">rnorm</span>(<span class="dv">10</span>, <span class="dt">mean =</span> <span class="dv">1</span>, <span class="dt">sd =</span> <span class="dv">3</span>) <span class="co"># génére 10 réalisations alétoires de la loi normale d&#39;espérance 1 et écart-type 3</span></a>
+<a class="sourceLine" id="cb5-5" title="5"><span class="co">##  [1]  0.0974  1.1349 -5.6920 -0.6019  5.3413  3.1537  2.4588  4.7607</span></a>
+<a class="sourceLine" id="cb5-6" title="6"><span class="co">##  [9]  1.6397  7.3848</span></a></code></pre></div>
+<p><strong>1.</strong> Simuler un vecteur de réalisations indépendantes de loi uniforme sur l’intervalle <span class="math inline">\([0,1]\)</span>. Simuler ensuite 1000 réalisations de la loi exponentielle de paramètre 2.</p>
+</div>
+<div id="fonction-de-densite" class="section level3 unnumbered">
+<h3>Fonction de densité</h3>
+<p>Pour calculer la densité d’une certaine loi, il suffit d’utiliser comme fonction le nom de la loi dans <svg style="height:0.8em;top:.04em;position:relative;fill:steelblue;" viewBox="0 0 581 512"><path d="M581 226.6C581 119.1 450.9 32 290.5 32S0 119.1 0 226.6C0 322.4 103.3 402 239.4 418.1V480h99.1v-61.5c24.3-2.7 47.6-7.4 69.4-13.9L448 480h112l-67.4-113.7c54.5-35.4 88.4-84.9 88.4-139.7zm-466.8 14.5c0-73.5 98.9-133 220.8-133s211.9 40.7 211.9 133c0 50.1-26.5 85-70.3 106.4-2.4-1.6-4.7-2.9-6.4-3.7-10.2-5.2-27.8-10.5-27.8-10.5s86.6-6.4 86.6-92.7-90.6-87.9-90.6-87.9h-199V361c-74.1-21.5-125.2-67.1-125.2-119.9zm225.1 38.3v-55.6c57.8 0 87.8-6.8 87.8 27.3 0 36.5-38.2 28.3-87.8 28.3zm-.9 72.5H365c10.8 0 18.9 11.7 24 19.2-16.1 1.9-33 2.8-50.6 2.9v-22.1z"/></svg> avec le préfixe <code>d</code> pour une densité. Taper <code>?dnorm</code> pour comprendre le fonctionnement de cette commande.</p>
+<p><strong>2.</strong> Que vaut la densité de la loi normale centrée réduite en 0? Essayer la même chose pour la loi binomiale de paramètres <span class="math inline">\(n=10\)</span> et <span class="math inline">\(p=0.5\)</span>.</p>
+<p><strong>3.</strong> Que se passe-t-il si l’on demande la fonction de densité de la loi binomiale en 0.3? Pourquoi?</p>
+<div class="rmdinsight">
+<p>Cette commande permet de tracer facilement des fonctions de densité.</p>
+</div>
+<p><strong>4.</strong> Tracer la fonction de densité de la loi normale centrée réduite. Commencer par créer un vecteur d’abscisses à l’aide de la fonction <code>seq()</code>. Tracer ensuite la fonction de densité en ces points.</p>
+<div class="rmdinsight">
+<p>Il existe plusieurs paramètres réglables pour avoir des courbes de différents design.</p>
+</div>
+<p><strong>5.</strong> Tracer un histogramme d’un vecteur de 10000 réalisations indépendantes d’une loi normale
+centrée réduite. Superposer l’histogramme avec la densité réelle de cette loi.</p>
+</div>
+<div id="fonction-de-repartition" class="section level3 unnumbered">
+<h3>Fonction de répartition</h3>
+<p>Pour calculer la fonction de répartition d’une certaine loi on utilise le nom de la loi dans <svg style="height:0.8em;top:.04em;position:relative;fill:steelblue;" viewBox="0 0 581 512"><path d="M581 226.6C581 119.1 450.9 32 290.5 32S0 119.1 0 226.6C0 322.4 103.3 402 239.4 418.1V480h99.1v-61.5c24.3-2.7 47.6-7.4 69.4-13.9L448 480h112l-67.4-113.7c54.5-35.4 88.4-84.9 88.4-139.7zm-466.8 14.5c0-73.5 98.9-133 220.8-133s211.9 40.7 211.9 133c0 50.1-26.5 85-70.3 106.4-2.4-1.6-4.7-2.9-6.4-3.7-10.2-5.2-27.8-10.5-27.8-10.5s86.6-6.4 86.6-92.7-90.6-87.9-90.6-87.9h-199V361c-74.1-21.5-125.2-67.1-125.2-119.9zm225.1 38.3v-55.6c57.8 0 87.8-6.8 87.8 27.3 0 36.5-38.2 28.3-87.8 28.3zm-.9 72.5H365c10.8 0 18.9 11.7 24 19.2-16.1 1.9-33 2.8-50.6 2.9v-22.1z"/></svg> avec le préfixe <code>p</code>.</p>
+<p><strong>6.</strong> Que vaut la fonction de répartition de la loi normale centrée réduite en 0?</p>
+<p><strong>7.</strong> Tracer la fonction de répartition de la loi normale centrée réduite.</p>
+<p>On peut également tracer des fonctions de répartitions empiriques (calculées sur un échantillon).</p>
+<p><strong>8.</strong> Créer un vecteur de 100 réalisations indépendates de la loi de votre choix. Utiliser la fonction <code>ecdf()</code> pour construire la fonction de répartition empirique de votre vecteur. Puis superposer avec la fonction de répartition théorique.</p>
+</div>
+<div id="illustrations-de-theoremes-limites" class="section level2 unnumbered">
+<h2>Illustrations de théorèmes limites</h2>
+<div id="loi-forte-de-grands-nombres" class="section level3 unnumbered">
+<h3>Loi forte de grands nombres</h3>
+<p>On considère une variable <span class="math inline">\(X\)</span> à valeurs dans <span class="math inline">\(\{0,1,3\}\)</span>, distribuée comme suit: <span class="math inline">\(P(X=0)=0.5, P(X=1)=0.25, P(X=3)=0.25\)</span>.</p>
+<p><strong>9.</strong> Proposer une façon de simuler <span class="math inline">\(X\)</span>. (Suggestion: utiliser la fonction <code>sample()</code>).</p>
+<p><strong>10.</strong> On considère <span class="math inline">\(X_1,X_2,\ldots\)</span> une suite infinie de variables indépendantes de même loi que <span class="math inline">\(X\)</span>. Soit <span class="math inline">\(\overline{X}_n\)</span> la moyenne empirique des <span class="math inline">\(X_i\)</span> pour <span class="math inline">\(i \in \{1,\ldots,n\}\)</span>.</p>
+<p><strong>10.1</strong> Simuler la suite des <span class="math inline">\(X_i\)</span> pour <span class="math inline">\(i \in \{1,\ldots,10000\}\)</span>.</p>
+<p><strong>10.2</strong> Produire un graphique représentant l’évolution de <span class="math inline">\(\overline{X}_n\)</span> pour <span class="math inline">\(n\)</span> variant de 1 à 10000. (<strong>Indication</strong>: penser à utiliser la fonction <code>cumsum()</code>).</p>
+<p><strong>10.3</strong> Que constate-on? Pouvait-on s’y attendre?</p>
+</div>
+<div id="theoreme-central-limite-1" class="section level3 unnumbered">
+<h3>Théorème central limite</h3>
+<p>On désire maintenant approfondir comment <span class="math inline">\(\overline{X}_{500}\)</span> varie autour de sa valeur moyenne.</p>
+<p><strong>11.</strong> Proposer une transormation affine de <span class="math inline">\(\overline{X}_{500}\)</span>, de la forme <span class="math inline">\(Y=a \times (\overline{X}_{500} + b)\)</span>, qui suive approximativement la loi <span class="math inline">\(\mathcal{N}(0,1)\)</span>.</p>
+<p><strong>11.1</strong> Simuler avec 10000 réalisations indépendantes de la variable <span class="math inline">\(Y\)</span>. Nous les noterons <span class="math inline">\(Y_1, \ldots, Y_{10000}\)</span>.</p>
+<p><strong>11.2</strong> Confirmer l’approximation gaussienne en réalisant un histogramme des valeurs prises par les <span class="math inline">\(Y_j\)</span> pour <span class="math inline">\(j \in \{1,\ldots,10000\}\)</span>, sans oublier de tracer la densité gaussienne correctement renormalisée.
+Commenter l’écart entre l’histogramme et la densité gaussienne.</p>
+</div>
+</div>
+<div id="bonus" class="section level2 unnumbered">
+<h2>Bonus</h2>
+<div class="rmdexercise">
+<p><strong>Illustration du théorème de Moivre Laplace</strong></p>
+<p>Pour <span class="math inline">\((n=10, p=0.5),\)</span> puis <span class="math inline">\((n=50, p=0.9),\)</span> puis <span class="math inline">\((n=100, p=0.1)\)</span>
+Simuler un échantillon <span class="math inline">\(X\)</span> de la loi binomiale de paramètres <span class="math inline">\(n\)</span> et <span class="math inline">\(p .\)</span> Calculer l’échantillon centré-réduit <span class="math inline">\(Xcr=\frac{x-n p}{\sqrt{n p(1-p)}}\)</span>. Représenter un histogramme des valeurs de <span class="math inline">\(X c r .\)</span> Superposer sur le même graphique la densité de la loi normale <span class="math inline">\(\mathcal{N}(0,1) .\)</span> Représenter la fonction de répartition empirique de <span class="math inline">\(X c r .\)</span> Superposer
+sur le même graphique la fonction de répartition de la loi normale <span class="math inline">\(N(0,1)\)</span>.</p>
 </div>
 
-
-<div class="exercise">
-<p><span id="exr:unnamed-chunk-27" class="exercise"><strong>Exercice 1.3  (Robustesse de la médiane aux données extrêmes)  </strong></span>On a repertorié le temps mis par 20 étudiants pour décrocher un premier emploi (en mois):</p>
-<table>
-<tbody>
-<tr class="odd">
-<td align="center">0</td>
-<td align="center">0</td>
-<td align="center">0</td>
-<td align="center">0</td>
-<td align="center">0</td>
-<td align="center">1</td>
-<td align="center">1</td>
-<td align="center">1</td>
-<td align="center">2</td>
-<td align="center">2</td>
-<td align="center">2</td>
-<td align="center">3</td>
-<td align="center">3</td>
-<td align="center">3</td>
-<td align="center">4</td>
-<td align="center">4</td>
-<td align="center">6</td>
-<td align="center">6</td>
-<td align="center">8</td>
-<td align="center">20</td>
-</tr>
-</tbody>
-</table>
-<ol style="list-style-type: decimal">
-<li>Calculer la moyenne puis la médiane des observations.</li>
-</ol>
-<p>L’étudiant qui a mis 20 mois à trouver du travail a réalisé un tour du monde avant de chercher un emploi. On considère donc qu’il ne fait pas partie de la population qui nous intéresse et on décide de supprimer cette valeur de l’échantillon.</p>
-<ol start="2" style="list-style-type: decimal">
-<li>Même question que la question 1 sans la dernière valeur (20).</li>
-<li>Comparer la stabilité des deux indicateurs de position vis-à-vis de l’élimination de valeurs extrêmes.
-</div></li>
-</ol>
-
-<div class="exercise">
-<p><span id="exr:unnamed-chunk-29" class="exercise"><strong>Exercice 1.4  (Corrélation)  </strong></span>Les données suivantes représentent la taille (en cm) et le salaire annuel brut (en k€) de 12 avocats ayant fait la même formation et obtenu presque les même notes.</p>
-<table class="kable_wrapper">
-<tbody>
-<tr>
-<td>
-<table>
-<thead>
-<tr>
-<th style="text-align:right;">
-Taille
-</th>
-<th style="text-align:right;">
-Salaire
-</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:right;">
-162.6
-</td>
-<td style="text-align:right;">
-61
-</td>
-</tr>
-<tr>
-<td style="text-align:right;">
-165.1
-</td>
-<td style="text-align:right;">
-64
-</td>
-</tr>
-<tr>
-<td style="text-align:right;">
-167.6
-</td>
-<td style="text-align:right;">
-58
-</td>
-</tr>
-<tr>
-<td style="text-align:right;">
-170.2
-</td>
-<td style="text-align:right;">
-73
-</td>
-</tr>
-<tr>
-<td style="text-align:right;">
-175.3
-</td>
-<td style="text-align:right;">
-47
-</td>
-</tr>
-<tr>
-<td style="text-align:right;">
-177.8
-</td>
-<td style="text-align:right;">
-66
-</td>
-</tr>
-</tbody>
-</table>
-</td>
-<td>
-<table>
-<thead>
-<tr>
-<th style="text-align:right;">
-Taille
-</th>
-<th style="text-align:right;">
-Salaire
-</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:right;">
-182.9
-</td>
-<td style="text-align:right;">
-75
-</td>
-</tr>
-<tr>
-<td style="text-align:right;">
-182.9
-</td>
-<td style="text-align:right;">
-58
-</td>
-</tr>
-<tr>
-<td style="text-align:right;">
-188.0
-</td>
-<td style="text-align:right;">
-92
-</td>
-</tr>
-<tr>
-<td style="text-align:right;">
-188.0
-</td>
-<td style="text-align:right;">
-72
-</td>
-</tr>
-<tr>
-<td style="text-align:right;">
-190.5
-</td>
-<td style="text-align:right;">
-60
-</td>
-</tr>
-<tr>
-<td style="text-align:right;">
-193.0
-</td>
-<td style="text-align:right;">
-84
-</td>
-</tr>
-</tbody>
-</table>
-</td>
-</tr>
-</tbody>
-</table>
-<ol style="list-style-type: decimal">
-<li>Représenter les données sur un nuage de points.</li>
-<li>Calculer le coefficient de corrélation et inerpréter.
-</div></li>
-</ol>
-
+</div>
 </div>
             </section>
 
           </div>
         </div>
       </div>
-<a href="statistique-descriptive.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="tp-statistique-descriptive-avec-r.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="exercices-1.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="estimation-ponctuelle.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="book_assets/gitbook-2.6.7/js/app.min.js"></script>

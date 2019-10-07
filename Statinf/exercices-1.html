@@ -31,8 +31,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   <link rel="shortcut icon" href="img/favicon.ico" type="image/x-icon" />
-<link rel="prev" href="statistique-descriptive.html"/>
-<link rel="next" href="tp-statistique-descriptive-avec-r.html"/>
+<link rel="prev" href="echantillonnage-et-theoremes-limites.html"/>
+<link rel="next" href="tp-illustration-numerique-des-theoremes-limites-avec-r.html"/>
 <script src="book_assets/jquery-2.2.3/jquery.min.js"></script>
 <link href="book_assets/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="book_assets/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -325,237 +325,109 @@ code span.wa { color: #bf0303; } /* Warning */
 <div class = rmdreview>
 Vous êtes invités à annoter le contenu de ce cours. Les annotations peuvent être des corrections typographiques, des propositions ou des questions. Pour ajouter des annotations, <span style="background-color: #3297FD; color: white">choisissez le text</span> que vous voulez commenter et cliquez sur <i class="h-icon-annotate"></i>. Pour accéder aux annotations crées par d'autres personnes, cliquez <i class="h-icon-chevron-left"></i> sur le coin supérieur de la page <i class="fa fa-arrow-circle-right  fa-rotate-315" aria-hidden="true"></i>.
 </div>
-<div id="exercices" class="section level1 unnumbered">
+<div id="exercices-1" class="section level1 unnumbered">
 <h1>Exercices</h1>
+<!-- 5.1 from Maitriser l'aléatoire -->
 
 <div class="exercise">
-<p><span id="exr:unnamed-chunk-24" class="exercise"><strong>Exercice 1.1  (Nature des variables et graphique correspondant)  </strong></span>Lors d’une enquête, on interroge 1000 individus sur leur âge, leur sexe, leur couleur préférée, leur nombre de frères et soeurs et leur département de naissance.</p>
+<p><span id="exr:unnamed-chunk-59" class="exercise"><strong>Exercice 2.1  (Théorème Central Limite)  </strong></span>Devant l’augmentation des problèmes de poids dans la population européenne, une nouvelle étude est mandatée pour mesurer la relation entre celui-ci et la quantité de calories ingérées par habitant. Des études antérieures montrent qu’un Européen consomme en moyenne <span class="math inline">\(2700\)</span> calories par jour avec un écart-type de <span class="math inline">\(800\)</span>. On dispose dans cette étude d’un échantillon de <span class="math inline">\(500\)</span> Européens.</p>
 <ol style="list-style-type: decimal">
-<li>Quelle est la nature de chacune de ces variables?</li>
-<li>Par quel outil graphique visualiseriez-vous la distribution de chacune des variables élémentaires?
+<li>Formaliser le problème en définissant les variables aléatoires appropriées
+avec leur distribution.</li>
+<li>Calculer la probabilité que la moyenne des calories consommées par jour
+par les Européens dans l’échantillon soit supérieure à <span class="math inline">\(2750\)</span>.
+</div></li>
+</ol>
+<!-- 5.6 from Maitriser l'aléatoire -->
+
+<div class="exercise">
+<p><span id="exr:unnamed-chunk-60" class="exercise"><strong>Exercice 2.2  (Théorème Central Limite)  </strong></span>Rémy et ses 9 amis voudraient jouer au bowling. Ils décident de rassembler
+leur argent de poche et espèrent obtenir la somme totale nécessaire.
+On peut supposer que l’argent de poche de chacun est une variable aléatoire <span class="math inline">\(X_i\)</span> qui suit la loi exponentielle de paramètre <span class="math inline">\(\lambda=0.06\)</span>. Sa densité est donc
+<span class="math display">\[
+f(x)=0.06 e^{-0.06 x} \times 1_{\mathbb{R}^+}(x)
+\]</span></p>
+<p>De plus, on admet que les <span class="math inline">\(X_i\)</span> sont indépendantes.</p>
+<ol style="list-style-type: decimal">
+<li>Démontrer que la loi exponentielle <span class="math inline">\(\mathcal{E}(\lambda)\)</span> est un cas exceptionnelle de la loi Gamma en donnant les paramètres de celle-ci. (un rappel de la définition de la loi Gamma est donnée ci dessous).</li>
+<li>Soit <span class="math inline">\(S_{10}=\sum_{i=1}^{10} X_{i}\)</span> Quelle est la loi de <span class="math inline">\(S_{10}\)</span>?</li>
+<li>Sachant qu’une partie du bowling coûte <span class="math inline">\(15 €\)</span>, quelle est la probabilité que
+Rémy et ses amis puissent jouer une partie?</li>
+<li>Comment faut-il choisir <span class="math inline">\(z&gt;0\)</span> pour que la probabilité que la somme totale d’argent du groupe soit supérieure à <span class="math inline">\(z\)</span> soit égale à <span class="math inline">\(5 \%\)</span>?
+</div></li>
+</ol>
+<div class="rmdinsight">
+<p><strong>Loi Gamma <span class="math inline">\(\Gamma(a,\lambda)\)</span></strong></p>
+<p>On dit que la variable aléatoire <span class="math inline">\(X\)</span> suit une loi Gamme de paramètres <span class="math inline">\(a&gt;0\)</span> et <span class="math inline">\(\lambda&gt;0\)</span>, <span class="math inline">\(X \thicksim \Gamma(a,\lambda)\)</span> si <span class="math inline">\(X\)</span> a la densité:
+<span class="math display">\[\forall \, x \in \mathbb{R}, \quad  f_{a,\lambda} (x)= \frac{\lambda^a}{\Gamma(a)} x^{a-1} e^{-\lambda x} \times {1}_{\mathbb{R}_{+}}(x)\]</span></p>
+<ul>
+<li>La fonction Gamma est définie sur <span class="math inline">\(\mathbb{R}_{+}^*\)</span> par: <span class="math inline">\(\Gamma(x) = \int_0^{+\infty} t^{x-1}e^{-t} dt\)</span>.</li>
+<li>Propriétés de la fonction Gamma:
+<ul>
+<li><span class="math inline">\(\Gamma(x+1)=x\Gamma(x) \quad \forall \, x &gt;0\)</span></li>
+<li><span class="math inline">\(\Gamma(n+1) = n! \quad \forall n \in \mathbb{N}\)</span></li>
+<li><span class="math inline">\(\Gamma(1) = 1\)</span> et <span class="math inline">\(\Gamma(\frac{1}{2})=\sqrt{\pi}\)</span></li>
+</ul></li>
+<li>Propriétés de la loi Gamma:
+<ul>
+<li><span class="math inline">\(E(X)= \frac{a}{\lambda}\)</span> et <span class="math inline">\(V(X)= \frac{a}{\lambda^2}\)</span>.</li>
+<li>Si <span class="math inline">\((X_n)_{n \in \mathbb{N}}\)</span> est une suite de variables aléatoires indépendantes de lois <span class="math inline">\(\Gamma(a_n,\lambda)\)</span> alors la variable aléatoire somme <span class="math inline">\(\sum_{n=1}^N X_n\)</span> suit également une loi gamma <span class="math inline">\(\Gamma(\sum_{n=1}^N a_n, \lambda)\)</span>.</li>
+</ul></li>
+</ul>
+</div>
+
+<div class="exercise">
+<p><span id="exr:unnamed-chunk-61" class="exercise"><strong>Exercice 2.3  </strong></span>Est ce qu’il s’agit d’une variable alétoire?</p>
+<ol style="list-style-type: decimal">
+<li>Moyenne de la population.</li>
+<li>Taille de la population.</li>
+<li>Taille de l’échantillon.</li>
+<li>Moyenne de l’échantillon.</li>
+<li>Variance de la moyenne de l’échantillon.</li>
+<li>Plus grande valeur de l’échantillon.</li>
+<li>Variance de la population.</li>
+<li>Variance estimée de la moyenne de l’échantillon.
 </div></li>
 </ol>
 
 <div class="exercise">
-<p><span id="exr:unnamed-chunk-25" class="exercise"><strong>Exercice 1.2  (Petite série d’effectifs)  </strong></span>On réalise un sondage auprès de 1000 personnes pour évaluer le nombre d’individus par ménage. On obtient la série statistique suivante:</p>
-<table style="width:100%;">
-<colgroup>
-<col width="36%" />
-<col width="7%" />
-<col width="7%" />
-<col width="7%" />
-<col width="7%" />
-<col width="7%" />
-<col width="15%" />
-<col width="10%" />
-</colgroup>
-<tbody>
-<tr class="odd">
-<td align="left">Nb de personnes par ménage</td>
-<td align="center">1</td>
-<td align="center">2</td>
-<td align="center">3</td>
-<td align="center">4</td>
-<td align="center">5</td>
-<td align="left">6 et plus</td>
-<td align="left">Total</td>
-</tr>
-<tr class="even">
-<td align="left">effectif</td>
-<td align="center">107</td>
-<td align="center">137</td>
-<td align="center">197</td>
-<td align="center">302</td>
-<td align="center">180</td>
-<td align="left">77</td>
-<td align="left">1000</td>
-</tr>
-</tbody>
-</table>
-<ol style="list-style-type: decimal">
-<li>Représenter cette série statistique à l’aide d’un graphique.</li>
-<li>Calculer la moyenne, la variance, l’écart-type et la médiane de cette distribution.</li>
-</ol>
+<p><span id="exr:unnamed-chunk-62" class="exercise"><strong>Exercice 2.4  </strong></span>Afin d’estimer leur espérance respective, on échantillonne 2 populations.
+On utilise un échantillon de taille <span class="math inline">\(n_{1}\)</span> pour la population 1, qui présente un
+écart-type égal à <span class="math inline">\(\sigma_{1}\)</span>. Pour la population 2, dont l’écart-type vaut <span class="math inline">\(\sigma_{2}=2\sigma_{1}\)</span>, on prend un échantillon de taille <span class="math inline">\(n_{2}=2 n_{1}\)</span>.</p>
+Pour lequel des 2 échantillons est-ce que l’estimation de la moyenne de la population est la plus précise?
 </div>
 
 
 <div class="exercise">
-<p><span id="exr:unnamed-chunk-27" class="exercise"><strong>Exercice 1.3  (Robustesse de la médiane aux données extrêmes)  </strong></span>On a repertorié le temps mis par 20 étudiants pour décrocher un premier emploi (en mois):</p>
-<table>
-<tbody>
-<tr class="odd">
-<td align="center">0</td>
-<td align="center">0</td>
-<td align="center">0</td>
-<td align="center">0</td>
-<td align="center">0</td>
-<td align="center">1</td>
-<td align="center">1</td>
-<td align="center">1</td>
-<td align="center">2</td>
-<td align="center">2</td>
-<td align="center">2</td>
-<td align="center">3</td>
-<td align="center">3</td>
-<td align="center">3</td>
-<td align="center">4</td>
-<td align="center">4</td>
-<td align="center">6</td>
-<td align="center">6</td>
-<td align="center">8</td>
-<td align="center">20</td>
-</tr>
-</tbody>
-</table>
-<ol style="list-style-type: decimal">
-<li>Calculer la moyenne puis la médiane des observations.</li>
-</ol>
-<p>L’étudiant qui a mis 20 mois à trouver du travail a réalisé un tour du monde avant de chercher un emploi. On considère donc qu’il ne fait pas partie de la population qui nous intéresse et on décide de supprimer cette valeur de l’échantillon.</p>
-<ol start="2" style="list-style-type: decimal">
-<li>Même question que la question 1 sans la dernière valeur (20).</li>
-<li>Comparer la stabilité des deux indicateurs de position vis-à-vis de l’élimination de valeurs extrêmes.
+<span id="exr:unnamed-chunk-63" class="exercise"><strong>Exercice 2.5  </strong></span>Dans une certaine commune française, on veut estimer la proportion de familles vivant en dessous du seuil de pauvreté. Si cette proportion est environ <span class="math inline">\(0.15\)</span>, quelle
+est la taille de l’échantillon nécessaire pour que l’écart-type de l’estimateur soit
+égal à <span class="math inline">\(0.02\)</span>?
+</div>
+
+
+<div class="exercise">
+<p><span id="exr:unnamed-chunk-64" class="exercise"><strong>Exercice 2.6  (Loi de <span class="math inline">\(\overline{X}_n\)</span>)  </strong></span>Une population est composée de 3 salariés A, B et C âgés respectivement de 23, 37 et 45 ans.</p>
+<p>On choisit au hasard un salarié.</p>
+<p>1.Définir l’expérience aléatoire <span class="math inline">\(\varepsilon\)</span>, la population <span class="math inline">\(\Omega\)</span>, la probabilité <span class="math inline">\(P\)</span> et la variable aléatoire <span class="math inline">\(X\)</span> étudiée.
+2. Calculer <span class="math inline">\(E(X)=m\)</span> et <span class="math inline">\(V(X)=\sigma^2\)</span>. Que représentent <span class="math inline">\(E(X)\)</span> et <span class="math inline">\(V(X)\)</span>?</p>
+<p>On choisit maintenant au hasard un échantillon de 2 salariés.</p>
+<ol start="3" style="list-style-type: decimal">
+<li>Définir la nouvelle expérience aléatoire <span class="math inline">\(\varepsilon_n\)</span>, l’ensemble des échantillons <span class="math inline">\(E_n\)</span> et les variables alétoires <span class="math inline">\(X_i, i=1,\ldots,n\)</span>.</li>
+<li>Définir la variable alétoire <span class="math inline">\(\overline{X}_n\)</span> et déterminer sa loi.</li>
+<li>Calculer <span class="math inline">\(E(\overline{X}_n)\)</span> et <span class="math inline">\(V(\overline{X}_n)\)</span>. Retrouver les formules du cours.
 </div></li>
 </ol>
 
 <div class="exercise">
-<p><span id="exr:unnamed-chunk-29" class="exercise"><strong>Exercice 1.4  (Corrélation)  </strong></span>Les données suivantes représentent la taille (en cm) et le salaire annuel brut (en k€) de 12 avocats ayant fait la même formation et obtenu presque les même notes.</p>
-<table class="kable_wrapper">
-<tbody>
-<tr>
-<td>
-<table>
-<thead>
-<tr>
-<th style="text-align:right;">
-Taille
-</th>
-<th style="text-align:right;">
-Salaire
-</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:right;">
-162.6
-</td>
-<td style="text-align:right;">
-61
-</td>
-</tr>
-<tr>
-<td style="text-align:right;">
-165.1
-</td>
-<td style="text-align:right;">
-64
-</td>
-</tr>
-<tr>
-<td style="text-align:right;">
-167.6
-</td>
-<td style="text-align:right;">
-58
-</td>
-</tr>
-<tr>
-<td style="text-align:right;">
-170.2
-</td>
-<td style="text-align:right;">
-73
-</td>
-</tr>
-<tr>
-<td style="text-align:right;">
-175.3
-</td>
-<td style="text-align:right;">
-47
-</td>
-</tr>
-<tr>
-<td style="text-align:right;">
-177.8
-</td>
-<td style="text-align:right;">
-66
-</td>
-</tr>
-</tbody>
-</table>
-</td>
-<td>
-<table>
-<thead>
-<tr>
-<th style="text-align:right;">
-Taille
-</th>
-<th style="text-align:right;">
-Salaire
-</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:right;">
-182.9
-</td>
-<td style="text-align:right;">
-75
-</td>
-</tr>
-<tr>
-<td style="text-align:right;">
-182.9
-</td>
-<td style="text-align:right;">
-58
-</td>
-</tr>
-<tr>
-<td style="text-align:right;">
-188.0
-</td>
-<td style="text-align:right;">
-92
-</td>
-</tr>
-<tr>
-<td style="text-align:right;">
-188.0
-</td>
-<td style="text-align:right;">
-72
-</td>
-</tr>
-<tr>
-<td style="text-align:right;">
-190.5
-</td>
-<td style="text-align:right;">
-60
-</td>
-</tr>
-<tr>
-<td style="text-align:right;">
-193.0
-</td>
-<td style="text-align:right;">
-84
-</td>
-</tr>
-</tbody>
-</table>
-</td>
-</tr>
-</tbody>
-</table>
-<ol style="list-style-type: decimal">
-<li>Représenter les données sur un nuage de points.</li>
-<li>Calculer le coefficient de corrélation et inerpréter.
+<p><span id="exr:unnamed-chunk-65" class="exercise"><strong>Exercice 2.7  (Loi de <span class="math inline">\(P_n\)</span>)  </strong></span>Une population est composée de 3 individus A, B et C dont les résultats de vote pour un certain candidat sont respectivement les suivants: Non, Non et Oui.</p>
+<p>On choisit au hasard un individu.</p>
+<p>1.Définir l’expérience aléatoire <span class="math inline">\(\varepsilon\)</span>, la population <span class="math inline">\(\Omega\)</span>, la probabilité <span class="math inline">\(P\)</span> et la variable aléatoire <span class="math inline">\(X\)</span> étudiée.
+2. Calculer <span class="math inline">\(E(X)\)</span> et <span class="math inline">\(V(X)\)</span>. Que représente <span class="math inline">\(E(X)\)</span>?</p>
+<p>On choisit maintenant au hasard un échantillon de 2 individus.</p>
+<ol start="3" style="list-style-type: decimal">
+<li>Définir la nouvelle expérience aléatoire <span class="math inline">\(\varepsilon_n\)</span>, l’ensemble des échantillons <span class="math inline">\(E_n\)</span> et les variables alétoires <span class="math inline">\(X_i, i=1,\ldots,n\)</span>.</li>
+<li>Définir la variable alétoire <span class="math inline">\(P_n\)</span> et déterminer sa loi.</li>
+<li>Calculer <span class="math inline">\(E(P_n)\)</span> et <span class="math inline">\(V(P_n)\)</span>. Retrouver les formules du cours.
 </div></li>
 </ol>
 
@@ -565,8 +437,8 @@ Salaire
           </div>
         </div>
       </div>
-<a href="statistique-descriptive.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="tp-statistique-descriptive-avec-r.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="echantillonnage-et-theoremes-limites.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="tp-illustration-numerique-des-theoremes-limites-avec-r.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="book_assets/gitbook-2.6.7/js/app.min.js"></script>

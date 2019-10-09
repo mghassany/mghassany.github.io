@@ -143,7 +143,9 @@ code span.wa { color: #bf0303; } /* Warning */
 <li class='before'><a href="./">Statistique Inférentielle</a></li>
 
 <li class="divider"></li>
-<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Overview</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Overview</a><ul>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#plan-du-cours"><i class="fa fa-check"></i>Plan du cours</a></li>
+</ul></li>
 <li class="chapter" data-level="" data-path="introduction.html"><a href="introduction.html"><i class="fa fa-check"></i>Introduction</a><ul>
 <li class="chapter" data-level="" data-path="introduction.html"><a href="introduction.html#la-demarche-statistique"><i class="fa fa-check"></i>La démarche statistique</a></li>
 <li class="chapter" data-level="" data-path="introduction.html"><a href="introduction.html#objectifs-et-plan-du-cours"><i class="fa fa-check"></i>Objectifs et plan du cours</a></li>
@@ -193,6 +195,7 @@ code span.wa { color: #bf0303; } /* Warning */
 <li class="chapter" data-level="2.3" data-path="echantillonnage-et-theoremes-limites.html"><a href="echantillonnage-et-theoremes-limites.html#theoremes-limites"><i class="fa fa-check"></i><b>2.3</b> Théorèmes limites</a><ul>
 <li class="chapter" data-level="2.3.1" data-path="echantillonnage-et-theoremes-limites.html"><a href="echantillonnage-et-theoremes-limites.html#loi-faible-des-grands-nombres"><i class="fa fa-check"></i><b>2.3.1</b> Loi faible des grands nombres</a></li>
 <li class="chapter" data-level="2.3.2" data-path="echantillonnage-et-theoremes-limites.html"><a href="echantillonnage-et-theoremes-limites.html#loi-forte-des-grands-nombres"><i class="fa fa-check"></i><b>2.3.2</b> Loi forte des grands nombres</a></li>
+<li class="chapter" data-level="" data-path="echantillonnage-et-theoremes-limites.html"><a href="echantillonnage-et-theoremes-limites.html#illustration-de-la-loi-des-grands-nombres"><i class="fa fa-check"></i>Illustration de la loi des grands nombres</a></li>
 <li class="chapter" data-level="2.3.3" data-path="echantillonnage-et-theoremes-limites.html"><a href="echantillonnage-et-theoremes-limites.html#theoreme-central-limite"><i class="fa fa-check"></i><b>2.3.3</b> Théorème central limite</a></li>
 </ul></li>
 <li class="chapter" data-level="2.4" data-path="echantillonnage-et-theoremes-limites.html"><a href="echantillonnage-et-theoremes-limites.html#loi-dun-pourcentage"><i class="fa fa-check"></i><b>2.4</b> Loi d’un pourcentage</a></li>
@@ -346,7 +349,7 @@ estimateur.</p>
 <p>Pour estimer <span class="math inline">\(\theta\)</span> on ne dispose que des données <span class="math inline">\(x_1,\ldots,x_n\)</span>, donc une estimation de <span class="math inline">\(\theta\)</span> sera une fonction de ces observations.</p>
 
 <div class="definition">
-<p><span id="def:unnamed-chunk-70" class="definition"><strong>Définition 3.1  (Définition d’une statistique)  </strong></span>Une <strong>statistique</strong> <span class="math inline">\(t\)</span> est une fonction des observations <span class="math inline">\(x_1,\ldots,x_n\)</span> :</p>
+<p><span id="def:unnamed-chunk-73" class="definition"><strong>Définition 3.1  (Définition d’une statistique)  </strong></span>Une <strong>statistique</strong> <span class="math inline">\(t\)</span> est une fonction des observations <span class="math inline">\(x_1,\ldots,x_n\)</span> :</p>
 <span class="math display">\[\begin{align}
 t: \, &amp; \mathbb{R}^n \rightarrow \mathbb{R}^m  \\
       &amp; (x_1,\ldots,x_n) \rightarrow t(x_1,\ldots,x_n)
@@ -359,7 +362,7 @@ t: \, &amp; \mathbb{R}^n \rightarrow \mathbb{R}^m  \\
 <p>Par abus, on donne le même nom de statistique aux deux quantités, mais dans une perspective d’estimation, on va nommer différemment <span class="math inline">\(t_n\)</span> et <span class="math inline">\(T_n\)</span>.</p>
 
 <div class="definition">
-<span id="def:unnamed-chunk-71" class="definition"><strong>Définition 3.2  (Définition d’un estimateur)  </strong></span>Un estimateur d’une grandeur <span class="math inline">\(\theta\)</span> est une statistique <span class="math inline">\(T_n\)</span> à valeurs dans
+<span id="def:unnamed-chunk-74" class="definition"><strong>Définition 3.2  (Définition d’un estimateur)  </strong></span>Un estimateur d’une grandeur <span class="math inline">\(\theta\)</span> est une statistique <span class="math inline">\(T_n\)</span> à valeurs dans
 l’ensemble des valeurs possibles de <span class="math inline">\(\theta\)</span>. Une estimation de <span class="math inline">\(\theta\)</span> est une réalisation <span class="math inline">\(t_n\)</span> de l’estimateur <span class="math inline">\(T_n\)</span>.
 </div>
 
@@ -411,7 +414,7 @@ probabilité par une proportion.</p>
 <h3><span class="header-section-number">3.4.1</span> La fonction de vraisemblance</h3>
 
 <div class="definition">
-<p><span id="def:unnamed-chunk-72" class="definition"><strong>Définition 3.3  </strong></span>Quand les observations sont toutes discrètes ou toutes continues, on appelle fonction de vraisemblance (ou plus simplement vraisemblance) pour l’échantillon <span class="math inline">\(x_1,\ldots,x_n\)</span>, la fonction du paramètre <span class="math inline">\(\theta\)</span> :</p>
+<p><span id="def:unnamed-chunk-75" class="definition"><strong>Définition 3.3  </strong></span>Quand les observations sont toutes discrètes ou toutes continues, on appelle fonction de vraisemblance (ou plus simplement vraisemblance) pour l’échantillon <span class="math inline">\(x_1,\ldots,x_n\)</span>, la fonction du paramètre <span class="math inline">\(\theta\)</span> :</p>
 <span class="math display">\[\begin{equation*}
 \mathcal{L}(\theta; x_1,\ldots,x_n) = \left\lbrace
       \begin{array}{ll}
@@ -543,7 +546,7 @@ la valeur la plus vraisemblable de <span class="math inline">\(\theta\)</span> e
 plus probable qui s’était produite au cours de l’expérience.</p>
 
 <div class="definition">
-<span id="def:unnamed-chunk-75" class="definition"><strong>Définition 3.4  </strong></span>L’estimation de maximum de vraisemblance de <span class="math inline">\(\theta\)</span> est la valeur <span class="math inline">\(\hat{\theta}_n\)</span> de <span class="math inline">\(\theta\)</span> qui rend maximale la fonction de vraisemblance <span class="math inline">\(\mathcal{L}(\theta;x_1 ,\ldots,x_n)\)</span>. L’estimateur de
+<span id="def:unnamed-chunk-78" class="definition"><strong>Définition 3.4  </strong></span>L’estimation de maximum de vraisemblance de <span class="math inline">\(\theta\)</span> est la valeur <span class="math inline">\(\hat{\theta}_n\)</span> de <span class="math inline">\(\theta\)</span> qui rend maximale la fonction de vraisemblance <span class="math inline">\(\mathcal{L}(\theta;x_1 ,\ldots,x_n)\)</span>. L’estimateur de
 maximum de vraisemblance (EMV) de <span class="math inline">\(\theta\)</span> est la variable aléatoire correspondante.
 </div>
 
@@ -613,7 +616,7 @@ les deux méthodes fournissent des estimateurs différents. C’est le cas de la
 <p>Par exemple, les risques <span class="math inline">\(T_n - \theta, |T_n - \theta|, (T_n - \theta)^2\)</span> expriment bien un écart entre <span class="math inline">\(T_n\)</span> et <span class="math inline">\(\theta\)</span>. Mais comme il est plus facile d’utiliser des quantités déterministes que des quantités aléatoires, on s’intéresse en priorité aux espérances des quantités précédentes. En particulier:</p>
 
 <div class="definition">
-<p><span id="def:unnamed-chunk-78" class="definition"><strong>Définition 3.5  </strong></span>Le <strong>biais</strong> de <span class="math inline">\(T_n\)</span> est <span class="math inline">\(E(T_n)-\theta\)</span>.</p>
+<p><span id="def:unnamed-chunk-81" class="definition"><strong>Définition 3.5  </strong></span>Le <strong>biais</strong> de <span class="math inline">\(T_n\)</span> est <span class="math inline">\(E(T_n)-\theta\)</span>.</p>
 Le <strong>risque quadratique</strong> ou <strong>erreur quadratique moyenne</strong> est:
 <span class="math display">\[ EQM(T_n)=E[(T_n-\theta)^2]\]</span>
 </div>
@@ -621,7 +624,7 @@ Le <strong>risque quadratique</strong> ou <strong>erreur quadratique moyenne</st
 <p>Dans le cas du biais, le rique peut être nul:</p>
 
 <div class="definition">
-<span id="def:unnamed-chunk-79" class="definition"><strong>Définition 3.6  </strong></span>Un <strong>estimateur</strong> <span class="math inline">\(T_n\)</span> de <span class="math inline">\(\theta\)</span> est <strong><em>sans biais</em></strong> si et seulement si <span class="math inline">\(E(T_n) = \theta\)</span>. Il est <strong><em>biaisé</em></strong> si et seulement si <span class="math inline">\(E(T_n) \neq \theta\)</span>.
+<span id="def:unnamed-chunk-82" class="definition"><strong>Définition 3.6  </strong></span>Un <strong>estimateur</strong> <span class="math inline">\(T_n\)</span> de <span class="math inline">\(\theta\)</span> est <strong><em>sans biais</em></strong> si et seulement si <span class="math inline">\(E(T_n) = \theta\)</span>. Il est <strong><em>biaisé</em></strong> si et seulement si <span class="math inline">\(E(T_n) \neq \theta\)</span>.
 </div>
 
 <p>Le biais mesure une erreur systématique d’estimation de <span class="math inline">\(\theta\)</span> par <span class="math inline">\(T_n\)</span>. Par exemple, si <span class="math inline">\(E(T_n)-\theta &lt; 0\)</span>, cela signifie que <span class="math inline">\(T_n\)</span> aura tendance à <em>sous-estimer</em> <span class="math inline">\(\theta\)</span>.</p>
@@ -654,7 +657,7 @@ mais on s’intéresse en général à la convergence en moyenne quadratique (ou
 dans <span class="math inline">\(L^2\)</span>).</p>
 
 <div class="definition">
-<p><span id="def:unnamed-chunk-80" class="definition"><strong>Définition 3.7  </strong></span>L’estimateur <span class="math inline">\(T_n\)</span> <strong>converge en moyenne quadratique</strong> vers <span class="math inline">\(\theta\)</span> si et seulement si son erreur quadratique moyenne tend vers 0 quand <span class="math inline">\(n\)</span> tend vers l’infini:</p>
+<p><span id="def:unnamed-chunk-83" class="definition"><strong>Définition 3.7  </strong></span>L’estimateur <span class="math inline">\(T_n\)</span> <strong>converge en moyenne quadratique</strong> vers <span class="math inline">\(\theta\)</span> si et seulement si son erreur quadratique moyenne tend vers 0 quand <span class="math inline">\(n\)</span> tend vers l’infini:</p>
 <span class="math display">\[T_{n} \stackrel{M Q}{\longrightarrow} \theta \Leftrightarrow \lim _{n \rightarrow \infty} E\left[\left(T_{n}-\theta\right)^{2}\right]=0\]</span>
 </div>
 

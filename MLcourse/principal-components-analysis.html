@@ -1,0 +1,1766 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>6 Principal Components Analysis | Machine Learning</title>
+  <meta name="description" content="6 Principal Components Analysis | Machine Learning course" />
+  <meta name="generator" content="bookdown 0.13.2 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="6 Principal Components Analysis | Machine Learning" />
+  <meta property="og:type" content="book" />
+  
+  
+  <meta property="og:description" content="6 Principal Components Analysis | Machine Learning course" />
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="6 Principal Components Analysis | Machine Learning" />
+  
+  <meta name="twitter:description" content="6 Principal Components Analysis | Machine Learning course" />
+  
+
+<meta name="author" content="Mohamad Ghassany" />
+
+
+<meta name="date" content="2019-10-14" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="session-5.html"/>
+<link rel="next" href="clustering.html"/>
+<script src="book_assets/jquery-2.2.3/jquery.min.js"></script>
+<link href="book_assets/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="book_assets/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="book_assets/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="book_assets/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="book_assets/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="book_assets/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="book_assets/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+<link href="book_assets/font-awesome-5.3.1/css/fontawesome-all.min.css" rel="stylesheet" />
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-88489172-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-88489172-1');
+</script>
+
+
+<style type="text/css">
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource a.sourceLine
+  { position: relative; left: -4em; }
+pre.numberSource a.sourceLine::before
+  { content: attr(title);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    background-color: #ffffff;
+    color: #a0a0a0;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #a0a0a0;  padding-left: 4px; }
+div.sourceCode
+  { color: #1f1c1b; background-color: #ffffff; }
+@media screen {
+a.sourceLine::before { text-decoration: underline; }
+}
+code span. { color: #1f1c1b; } /* Normal */
+code span.al { color: #bf0303; background-color: #f7e6e6; font-weight: bold; } /* Alert */
+code span.an { color: #ca60ca; } /* Annotation */
+code span.at { color: #0057ae; } /* Attribute */
+code span.bn { color: #b08000; } /* BaseN */
+code span.bu { color: #644a9b; font-weight: bold; } /* BuiltIn */
+code span.cf { color: #1f1c1b; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #924c9d; } /* Char */
+code span.cn { color: #aa5500; } /* Constant */
+code span.co { color: #898887; } /* Comment */
+code span.cv { color: #0095ff; } /* CommentVar */
+code span.do { color: #607880; } /* Documentation */
+code span.dt { color: #0057ae; } /* DataType */
+code span.dv { color: #b08000; } /* DecVal */
+code span.er { color: #bf0303; text-decoration: underline; } /* Error */
+code span.ex { color: #0095ff; font-weight: bold; } /* Extension */
+code span.fl { color: #b08000; } /* Float */
+code span.fu { color: #644a9b; } /* Function */
+code span.im { color: #ff5500; } /* Import */
+code span.in { color: #b08000; } /* Information */
+code span.kw { color: #1f1c1b; font-weight: bold; } /* Keyword */
+code span.op { color: #1f1c1b; } /* Operator */
+code span.ot { color: #006e28; } /* Other */
+code span.pp { color: #006e28; } /* Preprocessor */
+code span.re { color: #0057ae; background-color: #e0e9f8; } /* RegionMarker */
+code span.sc { color: #3daee9; } /* SpecialChar */
+code span.ss { color: #ff5500; } /* SpecialString */
+code span.st { color: #bf0303; } /* String */
+code span.va { color: #0057ae; } /* Variable */
+code span.vs { color: #bf0303; } /* VerbatimString */
+code span.wa { color: #bf0303; } /* Warning */
+</style>
+
+<link rel="stylesheet" href="css\style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li class='beforeimg'>            
+   <a href="https://www.esilv.fr/">
+       <img src="img/Logo_ESILV_tout_blanc.png" style="width:75%; padding:0px 0; display:block; margin: 0 auto;" alt="ESILV logo">
+    </a>
+</li>
+<li class='before'><a href="./">Machine Learning</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Welcome</a><ul>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#course-overview"><i class="fa fa-check"></i>Course Overview</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="introduction.html"><a href="introduction.html"><i class="fa fa-check"></i>Introduction</a><ul>
+<li class="chapter" data-level="" data-path="introduction.html"><a href="introduction.html#what-is-machine-learning"><i class="fa fa-check"></i>What is Machine Learning ?</a></li>
+<li class="chapter" data-level="" data-path="introduction.html"><a href="introduction.html#supervised-learning"><i class="fa fa-check"></i>Supervised Learning</a></li>
+<li class="chapter" data-level="" data-path="introduction.html"><a href="introduction.html#unsupervised-learning"><i class="fa fa-check"></i>Unsupervised Learning</a></li>
+</ul></li>
+<li class="part"><span><b>I Supervised Learning</b></span></li>
+<li class="part"><span><b>Regression</b></span></li>
+<li class="chapter" data-level="1" data-path="linear-regression.html"><a href="linear-regression.html"><i class="fa fa-check"></i><b>1</b> Linear Regression</a><ul>
+<li class="chapter" data-level="1.1" data-path="linear-regression.html"><a href="linear-regression.html#notation"><i class="fa fa-check"></i><b>1.1</b> Notation</a></li>
+<li class="chapter" data-level="1.2" data-path="linear-regression.html"><a href="linear-regression.html#model-representation"><i class="fa fa-check"></i><b>1.2</b> Model Representation</a></li>
+<li class="chapter" data-level="1.3" data-path="linear-regression.html"><a href="linear-regression.html#why-estimate-f"><i class="fa fa-check"></i><b>1.3</b> Why Estimate <span class="math inline">\(f\)</span> ?</a><ul>
+<li class="chapter" data-level="" data-path="linear-regression.html"><a href="linear-regression.html#prediction"><i class="fa fa-check"></i>Prediction</a></li>
+<li class="chapter" data-level="" data-path="linear-regression.html"><a href="linear-regression.html#inference"><i class="fa fa-check"></i>Inference</a></li>
+</ul></li>
+<li class="chapter" data-level="1.4" data-path="linear-regression.html"><a href="linear-regression.html#simple-linear-regression-model"><i class="fa fa-check"></i><b>1.4</b> Simple Linear Regression Model</a></li>
+<li class="chapter" data-level="1.5" data-path="linear-regression.html"><a href="linear-regression.html#estimating-the-coefficients"><i class="fa fa-check"></i><b>1.5</b> Estimating the Coefficients</a></li>
+<li class="chapter" data-level="1.6" data-path="linear-regression.html"><a href="linear-regression.html#assessing-the-accuracy-of-the-coefficient-estimates"><i class="fa fa-check"></i><b>1.6</b> Assessing the Accuracy of the Coefficient Estimates</a><ul>
+<li class="chapter" data-level="" data-path="linear-regression.html"><a href="linear-regression.html#hypothesis-testing"><i class="fa fa-check"></i>Hypothesis testing</a></li>
+</ul></li>
+<li class="chapter" data-level="1.7" data-path="linear-regression.html"><a href="linear-regression.html#anova-and-model-fit"><i class="fa fa-check"></i><b>1.7</b> ANOVA and model fit</a><ul>
+<li class="chapter" data-level="1.7.1" data-path="linear-regression.html"><a href="linear-regression.html#anova"><i class="fa fa-check"></i><b>1.7.1</b> ANOVA</a></li>
+<li class="chapter" data-level="1.7.2" data-path="linear-regression.html"><a href="linear-regression.html#the-r2-statistic"><i class="fa fa-check"></i><b>1.7.2</b> The <span class="math inline">\(R^2\)</span> Statistic</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="practical-work-1.html"><a href="practical-work-1.html"><i class="fa fa-check"></i>Practical Work 1</a><ul>
+<li class="chapter" data-level="1.8" data-path="practical-work-1.html"><a href="practical-work-1.html#some-basics"><i class="fa fa-check"></i><b>1.8</b> Some <svg style="height:0.8em;top:.04em;position:relative;fill:steelblue;" viewBox="0 0 581 512"><path d="M581 226.6C581 119.1 450.9 32 290.5 32S0 119.1 0 226.6C0 322.4 103.3 402 239.4 418.1V480h99.1v-61.5c24.3-2.7 47.6-7.4 69.4-13.9L448 480h112l-67.4-113.7c54.5-35.4 88.4-84.9 88.4-139.7zm-466.8 14.5c0-73.5 98.9-133 220.8-133s211.9 40.7 211.9 133c0 50.1-26.5 85-70.3 106.4-2.4-1.6-4.7-2.9-6.4-3.7-10.2-5.2-27.8-10.5-27.8-10.5s86.6-6.4 86.6-92.7-90.6-87.9-90.6-87.9h-199V361c-74.1-21.5-125.2-67.1-125.2-119.9zm225.1 38.3v-55.6c57.8 0 87.8-6.8 87.8 27.3 0 36.5-38.2 28.3-87.8 28.3zm-.9 72.5H365c10.8 0 18.9 11.7 24 19.2-16.1 1.9-33 2.8-50.6 2.9v-22.1z"/></svg> basics</a><ul>
+<li class="chapter" data-level="1.8.1" data-path="practical-work-1.html"><a href="practical-work-1.html#basic-commands"><i class="fa fa-check"></i><b>1.8.1</b> Basic Commands</a></li>
+<li class="chapter" data-level="1.8.2" data-path="practical-work-1.html"><a href="practical-work-1.html#vectors"><i class="fa fa-check"></i><b>1.8.2</b> Vectors</a></li>
+<li class="chapter" data-level="1.8.3" data-path="practical-work-1.html"><a href="practical-work-1.html#matrices-data-frames-and-lists"><i class="fa fa-check"></i><b>1.8.3</b> Matrices, data frames and lists</a></li>
+<li class="chapter" data-level="1.8.4" data-path="practical-work-1.html"><a href="practical-work-1.html#graphics"><i class="fa fa-check"></i><b>1.8.4</b> Graphics</a></li>
+<li class="chapter" data-level="1.8.5" data-path="practical-work-1.html"><a href="practical-work-1.html#distributions"><i class="fa fa-check"></i><b>1.8.5</b> Distributions</a></li>
+<li class="chapter" data-level="1.8.6" data-path="practical-work-1.html"><a href="practical-work-1.html#working-directory"><i class="fa fa-check"></i><b>1.8.6</b> Working directory</a></li>
+<li class="chapter" data-level="1.8.7" data-path="practical-work-1.html"><a href="practical-work-1.html#loading-data"><i class="fa fa-check"></i><b>1.8.7</b> Loading Data</a></li>
+</ul></li>
+<li class="chapter" data-level="1.9" data-path="practical-work-1.html"><a href="practical-work-1.html#regression"><i class="fa fa-check"></i><b>1.9</b> Regression</a><ul>
+<li class="chapter" data-level="1.9.1" data-path="practical-work-1.html"><a href="practical-work-1.html#the-lm-function"><i class="fa fa-check"></i><b>1.9.1</b> The <code>lm</code> function</a></li>
+<li class="chapter" data-level="1.9.2" data-path="practical-work-1.html"><a href="practical-work-1.html#boston"><i class="fa fa-check"></i><b>1.9.2</b> Predicting House Value: Boston dataset</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="multiple-linear-regression.html"><a href="multiple-linear-regression.html"><i class="fa fa-check"></i><b>2</b> Multiple Linear Regression</a><ul>
+<li class="chapter" data-level="2.1" data-path="multiple-linear-regression.html"><a href="multiple-linear-regression.html#the-model"><i class="fa fa-check"></i><b>2.1</b> The Model</a></li>
+<li class="chapter" data-level="2.2" data-path="multiple-linear-regression.html"><a href="multiple-linear-regression.html#estimating-the-regression-coefficients"><i class="fa fa-check"></i><b>2.2</b> Estimating the Regression Coefficients</a></li>
+<li class="chapter" data-level="2.3" data-path="multiple-linear-regression.html"><a href="multiple-linear-regression.html#some-important-questions"><i class="fa fa-check"></i><b>2.3</b> Some important questions</a><ul>
+<li class="chapter" data-level="2.3.1" data-path="multiple-linear-regression.html"><a href="multiple-linear-regression.html#other-consid"><i class="fa fa-check"></i><b>2.3.1</b> Other Considerations in Regression Model</a></li>
+</ul></li>
+<li class="chapter" data-level="2.4" data-path="multiple-linear-regression.html"><a href="multiple-linear-regression.html#how-to-select-the-best-performing-model"><i class="fa fa-check"></i><b>2.4</b> How to select the best performing model</a><ul>
+<li><a href="multiple-linear-regression.html#use-the-adjusted-r_adj2-for-univariate-models">Use the Adjusted <span class="math inline">\(R_{adj}^2\)</span> for univariate models</a></li>
+<li class="chapter" data-level="" data-path="multiple-linear-regression.html"><a href="multiple-linear-regression.html#have-a-look-at-the-residuals-or-error-terms"><i class="fa fa-check"></i>Have a look at the residuals or error terms</a></li>
+<li class="chapter" data-level="" data-path="multiple-linear-regression.html"><a href="multiple-linear-regression.html#histogram-of-residuals"><i class="fa fa-check"></i>Histogram of residuals</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="pw-2.html"><a href="pw-2.html"><i class="fa fa-check"></i>PW 2</a><ul>
+<li class="chapter" data-level="" data-path="pw-2.html"><a href="pw-2.html#multiple-linear-regression-1"><i class="fa fa-check"></i>Multiple Linear Regression</a></li>
+<li class="chapter" data-level="" data-path="pw-2.html"><a href="pw-2.html#reporting"><i class="fa fa-check"></i>Reporting</a></li>
+</ul></li>
+<li class="part"><span><b>Classification</b></span></li>
+<li class="chapter" data-level="3" data-path="logistic-regression.html"><a href="logistic-regression.html"><i class="fa fa-check"></i><b>3</b> Logistic Regression</a><ul>
+<li class="chapter" data-level="3.1" data-path="logistic-regression.html"><a href="logistic-regression.html#introduction-1"><i class="fa fa-check"></i><b>3.1</b> Introduction</a></li>
+<li class="chapter" data-level="3.2" data-path="logistic-regression.html"><a href="logistic-regression.html#logistic-regression-1"><i class="fa fa-check"></i><b>3.2</b> Logistic Regression</a><ul>
+<li class="chapter" data-level="3.2.1" data-path="logistic-regression.html"><a href="logistic-regression.html#the-logistic-model"><i class="fa fa-check"></i><b>3.2.1</b> The Logistic Model</a></li>
+<li class="chapter" data-level="3.2.2" data-path="logistic-regression.html"><a href="logistic-regression.html#estimating-the-regression-coefficients-1"><i class="fa fa-check"></i><b>3.2.2</b> Estimating the Regression Coefficients</a></li>
+<li class="chapter" data-level="3.2.3" data-path="logistic-regression.html"><a href="logistic-regression.html#prediction-1"><i class="fa fa-check"></i><b>3.2.3</b> Prediction</a></li>
+</ul></li>
+<li class="chapter" data-level="3.3" data-path="logistic-regression.html"><a href="logistic-regression.html#multiple-logistic-regression"><i class="fa fa-check"></i><b>3.3</b> Multiple Logistic Regression</a></li>
+<li class="chapter" data-level="3.4" data-path="logistic-regression.html"><a href="logistic-regression.html#logreg-examps"><i class="fa fa-check"></i><b>3.4</b> Example</a><ul>
+<li class="chapter" data-level="3.4.1" data-path="logistic-regression.html"><a href="logistic-regression.html#logreg-examps-challenger"><i class="fa fa-check"></i><b>3.4.1</b> Case study: <em>The Challenger disaster</em></a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="pw-3.html"><a href="pw-3.html"><i class="fa fa-check"></i>PW 3</a><ul>
+<li class="chapter" data-level="" data-path="pw-3.html"><a href="pw-3.html#social-networks-ads"><i class="fa fa-check"></i>Social Networks Ads</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="discriminant-analysis.html"><a href="discriminant-analysis.html"><i class="fa fa-check"></i><b>4</b> Discriminant Analysis</a><ul>
+<li class="chapter" data-level="4.1" data-path="discriminant-analysis.html"><a href="discriminant-analysis.html#introduction-2"><i class="fa fa-check"></i><b>4.1</b> Introduction</a></li>
+<li class="chapter" data-level="4.2" data-path="discriminant-analysis.html"><a href="discriminant-analysis.html#bayes-theorem"><i class="fa fa-check"></i><b>4.2</b> Bayes’ Theorem</a></li>
+<li class="chapter" data-level="4.3" data-path="discriminant-analysis.html"><a href="discriminant-analysis.html#lda-for-p1"><i class="fa fa-check"></i><b>4.3</b> LDA for <span class="math inline">\(p=1\)</span></a></li>
+<li class="chapter" data-level="4.4" data-path="discriminant-analysis.html"><a href="discriminant-analysis.html#estimating-the-parameters"><i class="fa fa-check"></i><b>4.4</b> Estimating the parameters</a></li>
+<li class="chapter" data-level="4.5" data-path="discriminant-analysis.html"><a href="discriminant-analysis.html#lda-for-p-1"><i class="fa fa-check"></i><b>4.5</b> LDA for <span class="math inline">\(p &gt; 1\)</span></a></li>
+<li class="chapter" data-level="4.6" data-path="discriminant-analysis.html"><a href="discriminant-analysis.html#making-predictions"><i class="fa fa-check"></i><b>4.6</b> Making predictions</a></li>
+<li class="chapter" data-level="4.7" data-path="discriminant-analysis.html"><a href="discriminant-analysis.html#other-forms-of-discriminant-analysis"><i class="fa fa-check"></i><b>4.7</b> Other forms of Discriminant Analysis</a><ul>
+<li class="chapter" data-level="4.7.1" data-path="discriminant-analysis.html"><a href="discriminant-analysis.html#quadratic-discriminant-analysis-qda"><i class="fa fa-check"></i><b>4.7.1</b> Quadratic Discriminant Analysis (QDA)</a></li>
+<li class="chapter" data-level="4.7.2" data-path="discriminant-analysis.html"><a href="discriminant-analysis.html#naive-bayes"><i class="fa fa-check"></i><b>4.7.2</b> Naive Bayes</a></li>
+</ul></li>
+<li class="chapter" data-level="4.8" data-path="discriminant-analysis.html"><a href="discriminant-analysis.html#lda-vs-logistic-regression"><i class="fa fa-check"></i><b>4.8</b> LDA vs Logistic Regression</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="pw-4.html"><a href="pw-4.html"><i class="fa fa-check"></i>PW 4</a><ul>
+<li class="chapter" data-level="" data-path="pw-4.html"><a href="pw-4.html#logistic-regression-2"><i class="fa fa-check"></i>Logistic Regression</a></li>
+<li class="chapter" data-level="" data-path="pw-4.html"><a href="pw-4.html#decision-boundary-of-logistic-regression"><i class="fa fa-check"></i>Decision Boundary of Logistic Regression</a></li>
+<li class="chapter" data-level="" data-path="pw-4.html"><a href="pw-4.html#linear-discriminant-analysis-lda"><i class="fa fa-check"></i>Linear Discriminant Analysis (LDA)</a></li>
+<li class="chapter" data-level="" data-path="pw-4.html"><a href="pw-4.html#lda-from-scratch"><i class="fa fa-check"></i>LDA from scratch</a></li>
+<li class="chapter" data-level="" data-path="pw-4.html"><a href="pw-4.html#quadratic-discriminant-analysis-qda-1"><i class="fa fa-check"></i>Quadratic Discriminant Analysis (QDA)</a></li>
+<li class="chapter" data-level="" data-path="pw-4.html"><a href="pw-4.html#comparison"><i class="fa fa-check"></i>Comparison</a></li>
+</ul></li>
+<li class="part"><span><b>Special Session</b></span></li>
+<li class="chapter" data-level="5" data-path="session-5.html"><a href="session-5.html"><i class="fa fa-check"></i><b>5</b> Session 5</a></li>
+<li class="part"><span><b>II Dimensionality Reduction</b></span></li>
+<li class="chapter" data-level="6" data-path="principal-components-analysis.html"><a href="principal-components-analysis.html"><i class="fa fa-check"></i><b>6</b> Principal Components Analysis</a><ul>
+<li class="chapter" data-level="6.1" data-path="principal-components-analysis.html"><a href="principal-components-analysis.html#introduction-3"><i class="fa fa-check"></i><b>6.1</b> Introduction</a></li>
+<li class="chapter" data-level="6.2" data-path="principal-components-analysis.html"><a href="principal-components-analysis.html#principal-components"><i class="fa fa-check"></i><b>6.2</b> Principal Components</a><ul>
+<li class="chapter" data-level="" data-path="principal-components-analysis.html"><a href="principal-components-analysis.html#notations-and-procedure"><i class="fa fa-check"></i>Notations and Procedure</a></li>
+<li><a href="principal-components-analysis.html#first-principal-component-textpc_1-y_1">First Principal Component (<span class="math inline">\(\text{PC}_1\)</span>): <span class="math inline">\(Y_1\)</span></a></li>
+<li><a href="principal-components-analysis.html#second-principal-component-textpc_2-y_2">Second Principal Component (<span class="math inline">\(\text{PC}_2\)</span>): <span class="math inline">\(Y_2\)</span></a></li>
+<li><a href="principal-components-analysis.html#ith-principal-component-textpc_i-y_i"><span class="math inline">\(i^{th}\)</span> Principal Component (<span class="math inline">\(\text{PC}_i\)</span>): <span class="math inline">\(Y_i\)</span></a></li>
+</ul></li>
+<li class="chapter" data-level="6.3" data-path="principal-components-analysis.html"><a href="principal-components-analysis.html#how-do-we-find-the-coefficients"><i class="fa fa-check"></i><b>6.3</b> How do we find the coefficients?</a><ul>
+<li class="chapter" data-level="" data-path="principal-components-analysis.html"><a href="principal-components-analysis.html#why-it-may-be-possible-to-reduce-dimensions"><i class="fa fa-check"></i>Why It May Be Possible to Reduce Dimensions</a></li>
+<li class="chapter" data-level="" data-path="principal-components-analysis.html"><a href="principal-components-analysis.html#procedure"><i class="fa fa-check"></i>Procedure</a></li>
+</ul></li>
+<li class="chapter" data-level="6.4" data-path="principal-components-analysis.html"><a href="principal-components-analysis.html#standardization-of-the-features"><i class="fa fa-check"></i><b>6.4</b> Standardization of the features</a></li>
+<li class="chapter" data-level="6.5" data-path="principal-components-analysis.html"><a href="principal-components-analysis.html#projection-of-the-data"><i class="fa fa-check"></i><b>6.5</b> Projection of the data</a><ul>
+<li class="chapter" data-level="" data-path="principal-components-analysis.html"><a href="principal-components-analysis.html#scores"><i class="fa fa-check"></i>Scores</a></li>
+<li class="chapter" data-level="" data-path="principal-components-analysis.html"><a href="principal-components-analysis.html#visualization"><i class="fa fa-check"></i>Visualization</a></li>
+<li class="chapter" data-level="" data-path="principal-components-analysis.html"><a href="principal-components-analysis.html#extra"><i class="fa fa-check"></i>Extra</a></li>
+</ul></li>
+<li class="chapter" data-level="6.6" data-path="principal-components-analysis.html"><a href="principal-components-analysis.html#case-study"><i class="fa fa-check"></i><b>6.6</b> Case study</a><ul>
+<li class="chapter" data-level="" data-path="principal-components-analysis.html"><a href="principal-components-analysis.html#employement-in-european-countries-in-the-late-70s"><i class="fa fa-check"></i>Employement in European countries in the late 70s</a></li>
+</ul></li>
+</ul></li>
+<li class="part"><span><b>III Unsupervised Learning</b></span></li>
+<li class="chapter" data-level="7" data-path="clustering.html"><a href="clustering.html"><i class="fa fa-check"></i><b>7</b> Clustering</a><ul>
+<li class="chapter" data-level="7.1" data-path="clustering.html"><a href="clustering.html#unsupervised-learning-1"><i class="fa fa-check"></i><b>7.1</b> Unsupervised Learning</a></li>
+<li class="chapter" data-level="7.2" data-path="clustering.html"><a href="clustering.html#clustering-1"><i class="fa fa-check"></i><b>7.2</b> Clustering</a></li>
+<li class="chapter" data-level="7.3" data-path="clustering.html"><a href="clustering.html#introduction-4"><i class="fa fa-check"></i><b>7.3</b> Introduction</a><ul>
+<li class="chapter" data-level="" data-path="clustering.html"><a href="clustering.html#hard-clustering"><i class="fa fa-check"></i>Hard clustering</a></li>
+<li class="chapter" data-level="" data-path="clustering.html"><a href="clustering.html#fuzzy-clustering"><i class="fa fa-check"></i>Fuzzy clustering</a></li>
+</ul></li>
+<li class="chapter" data-level="7.4" data-path="clustering.html"><a href="clustering.html#k-means"><i class="fa fa-check"></i><b>7.4</b> <span class="math inline">\(k\)</span>-Means</a></li>
+<li class="chapter" data-level="7.5" data-path="clustering.html"><a href="clustering.html#k-means-in"><i class="fa fa-check"></i><b>7.5</b> <span class="math inline">\(k\)</span>-means in <svg style="height:0.8em;top:.04em;position:relative;fill:steelblue;" viewBox="0 0 581 512"><path d="M581 226.6C581 119.1 450.9 32 290.5 32S0 119.1 0 226.6C0 322.4 103.3 402 239.4 418.1V480h99.1v-61.5c24.3-2.7 47.6-7.4 69.4-13.9L448 480h112l-67.4-113.7c54.5-35.4 88.4-84.9 88.4-139.7zm-466.8 14.5c0-73.5 98.9-133 220.8-133s211.9 40.7 211.9 133c0 50.1-26.5 85-70.3 106.4-2.4-1.6-4.7-2.9-6.4-3.7-10.2-5.2-27.8-10.5-27.8-10.5s86.6-6.4 86.6-92.7-90.6-87.9-90.6-87.9h-199V361c-74.1-21.5-125.2-67.1-125.2-119.9zm225.1 38.3v-55.6c57.8 0 87.8-6.8 87.8 27.3 0 36.5-38.2 28.3-87.8 28.3zm-.9 72.5H365c10.8 0 18.9 11.7 24 19.2-16.1 1.9-33 2.8-50.6 2.9v-22.1z"/></svg></a><ul>
+<li class="chapter" data-level="7.5.1" data-path="clustering.html"><a href="clustering.html#cluster-validity-choosing-the-number-of-clusters"><i class="fa fa-check"></i><b>7.5.1</b> Cluster Validity, Choosing the Number of Clusters</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="8" data-path="gaussian-mixture-models-em.html"><a href="gaussian-mixture-models-em.html"><i class="fa fa-check"></i><b>8</b> Gaussian Mixture Models &amp; EM</a><ul>
+<li class="chapter" data-level="8.1" data-path="gaussian-mixture-models-em.html"><a href="gaussian-mixture-models-em.html#the-gaussian-distribution"><i class="fa fa-check"></i><b>8.1</b> The Gaussian distribution</a></li>
+<li class="chapter" data-level="8.2" data-path="gaussian-mixture-models-em.html"><a href="gaussian-mixture-models-em.html#mixture-of-gaussians"><i class="fa fa-check"></i><b>8.2</b> Mixture of Gaussians</a></li>
+<li class="chapter" data-level="8.3" data-path="gaussian-mixture-models-em.html"><a href="gaussian-mixture-models-em.html#em-for-gaussian-mixtures"><i class="fa fa-check"></i><b>8.3</b> EM for Gaussian Mixtures</a></li>
+</ul></li>
+<li class="chapter" data-level="9" data-path="hierarchical-clustering.html"><a href="hierarchical-clustering.html"><i class="fa fa-check"></i><b>9</b> Hierarchical Clustering</a><ul>
+<li class="chapter" data-level="9.1" data-path="hierarchical-clustering.html"><a href="hierarchical-clustering.html#dendrogram"><i class="fa fa-check"></i><b>9.1</b> Dendrogram</a></li>
+<li class="chapter" data-level="9.2" data-path="hierarchical-clustering.html"><a href="hierarchical-clustering.html#the-hierarchical-clustering-algorithm"><i class="fa fa-check"></i><b>9.2</b> The Hierarchical Clustering Algorithm</a></li>
+<li class="chapter" data-level="9.3" data-path="hierarchical-clustering.html"><a href="hierarchical-clustering.html#hierarchical-clustering-in-r"><i class="fa fa-check"></i><b>9.3</b> Hierarchical clustering in <code>R</code></a></li>
+</ul></li>
+<li class="appendix"><span><b>Appendix</b></span></li>
+<li class="chapter" data-level="A" data-path="app-introRStudio.html"><a href="app-introRStudio.html"><i class="fa fa-check"></i><b>A</b> Introduction to <code>RStudio</code></a></li>
+<li class="chapter" data-level="B" data-path="app-ht.html"><a href="app-ht.html"><i class="fa fa-check"></i><b>B</b> Review on hypothesis testing</a></li>
+<li class="chapter" data-level="C" data-path="use-qual.html"><a href="use-qual.html"><i class="fa fa-check"></i><b>C</b> Use of qualitative predictors</a></li>
+<li class="chapter" data-level="D" data-path="model-selection.html"><a href="model-selection.html"><i class="fa fa-check"></i><b>D</b> Model Selection</a><ul>
+<li class="chapter" data-level="" data-path="model-selection.html"><a href="model-selection.html#linear-model-selection-and-best-subset-selection"><i class="fa fa-check"></i>Linear Model Selection and Best Subset Selection</a></li>
+<li class="chapter" data-level="" data-path="model-selection.html"><a href="model-selection.html#forward-stepwise-selection"><i class="fa fa-check"></i>Forward Stepwise Selection</a></li>
+<li class="chapter" data-level="" data-path="model-selection.html"><a href="model-selection.html#backward-stepwise-selection"><i class="fa fa-check"></i>Backward Stepwise Selection</a></li>
+<li class="chapter" data-level="" data-path="model-selection.html"><a href="model-selection.html#estimating-test-error-using-mallows-cp-aic-bic-adjusted-r-squared"><i class="fa fa-check"></i>Estimating Test Error Using Mallow’s Cp, AIC, BIC, Adjusted R-squared</a></li>
+<li class="chapter" data-level="" data-path="model-selection.html"><a href="model-selection.html#estimating-test-error-using-cross-validation"><i class="fa fa-check"></i>Estimating Test Error Using Cross-Validation</a></li>
+<li class="chapter" data-level="" data-path="model-selection.html"><a href="model-selection.html#examples"><i class="fa fa-check"></i>Examples</a><ul>
+<li class="chapter" data-level="" data-path="model-selection.html"><a href="model-selection.html#best-subset-selection"><i class="fa fa-check"></i>Best Subset Selection</a></li>
+<li class="chapter" data-level="" data-path="model-selection.html"><a href="model-selection.html#forward-stepwise-selection-and-model-selection-using-validation-set"><i class="fa fa-check"></i>Forward Stepwise Selection and Model Selection Using Validation Set</a></li>
+<li class="chapter" data-level="" data-path="model-selection.html"><a href="model-selection.html#model-selection-using-cross-validation"><i class="fa fa-check"></i>Model Selection Using Cross-Validation</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="E" data-path="references-and-credits.html"><a href="references-and-credits.html"><i class="fa fa-check"></i><b>E</b> References and Credits</a></li>
+<li class="chapter" data-level="F" data-path="other-references.html"><a href="other-references.html"><i class="fa fa-check"></i><b>F</b> Other References</a></li>
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Machine Learning</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="principal-components-analysis" class="section level1">
+<h1><span class="header-section-number">6</span> Principal Components Analysis</h1>
+<div id="introduction-3" class="section level2">
+<h2><span class="header-section-number">6.1</span> Introduction</h2>
+<p>The central idea of principal component analysis (PCA) is to reduce the dimensionality of a data set consisting of a large number of interrelated variables, while retaining as much as possible of the <strong><em>variation</em></strong> present in the data set. This is achieved by <em>transforming</em> to a new set of variables, the principal components (PCs), which are uncorrelated, and which are ordered so that the first few retain most of the variation present in all of the original variables.</p>
+<p>Suppose that we wish to visualize <span class="math inline">\(n\)</span> observations with measurements on a set of <span class="math inline">\(p\)</span> features, <span class="math inline">\(X_1,X_2,\ldots,X_p\)</span>, as part of an exploratory data analysis. We could do this by examining two-dimensional scatterplots of the data, each of which contains the <span class="math inline">\(n\)</span> observations’ measurements on two of the features. However, there are <span class="math inline">\(C_p^2 = p(p−1)/2\)</span> such scatterplots. For example, with <span class="math inline">\(p =10\)</span> there are 45 plots! If <span class="math inline">\(p\)</span> is large, then it will certainly not be possible to look at all of them; moreover, most likely none of them will be informative since they each contain just a small fraction of the total information present in the data set. Clearly, a better method is required to visualize the <span class="math inline">\(n\)</span> observations when <span class="math inline">\(p\)</span> is large. In particular, we would like to find a low-dimensional representation of the data that captures as much of the information as possible. PCA provides a tool to do just this.</p>
+<p>PCA finds a low-dimensional representation of a data set that contains as much as possible of the variation. The idea is that each of the <span class="math inline">\(n\)</span> observations lives in <span class="math inline">\(p\)</span>-dimensional space, but not all of these dimensions are equally interesting. PCA seeks a small number of dimensions that are as interesting as possible, where the concept of interesting is measured by the amount that the observations vary along each dimension. Each of the dimensions found by PCA is a <strong>linear combination of the <span class="math inline">\(p\)</span> features</strong>. We now explain the manner in which these dimensions, or principal components, are found.</p>
+</div>
+<div id="principal-components" class="section level2">
+<h2><span class="header-section-number">6.2</span> Principal Components</h2>
+<div id="notations-and-procedure" class="section level3 unnumbered">
+<h3>Notations and Procedure</h3>
+<p>Suppose that we have a random vector of the features <span class="math inline">\(X\)</span>.</p>
+<p><span class="math display">\[ \textbf{X} = \left(\begin{array}{c} X_1\\ X_2\\ \vdots \\X_p\end{array}\right) \]</span></p>
+<p>with population variance-covariance matrix</p>
+<p><span class="math display">\[ \text{var}(\textbf{X}) = \Sigma = \left(\begin{array}{cccc}\sigma^2_1 &amp; \sigma_{12} &amp; \dots &amp;\sigma_{1p}\\ \sigma_{21} &amp; \sigma^2_2 &amp; \dots &amp;\sigma_{2p}\\  \vdots &amp; \vdots &amp; \ddots &amp; \vdots \\ \sigma_{p1} &amp; \sigma_{p2} &amp; \dots &amp; \sigma^2_p\end{array}\right) \]</span></p>
+<p>Consider the linear combinations</p>
+<p><span class="math display">\[ \begin{array}{lll} Y_1 &amp; = &amp; a_{11}X_1 + a_{12}X_2 + \dots + a_{1p}X_p \\ Y_2 &amp; = &amp; a_{21}X_1 + a_{22}X_2 + \dots + a_{2p}X_p \\ &amp; &amp; \vdots \\ Y_p &amp; = &amp; a_{p1}X_1 + a_{p2}X_2 + \dots +a_{pp}X_p \end{array} \]</span></p>
+<p>Note that <span class="math inline">\(Y_i\)</span> is a function of our random data, and so is also random. Therefore it has a population variance</p>
+<p><span class="math display">\[ \text{var}(Y_i) = \sum_{k=1}^{p} \sum_{l=1}^{p} a_{ik} a_{il} \sigma_{kl} = \mathbf{a}^T_i \Sigma \mathbf{a}_i \]</span></p>
+<p>Moreover, <span class="math inline">\(Y_i\)</span> and <span class="math inline">\(Y_j\)</span> will have a population covariance</p>
+<p><span class="math display">\[ \text{cov}(Y_i, Y_j) = \sum_{k=1}^{p} \sum_{l=1}^{p} a_{ik}a_{jl}\sigma_{kl} = \mathbf{a}^T_i\Sigma\mathbf{a}_j \]</span></p>
+<p>and a correlation</p>
+<p><span class="math display">\[ \text{cor}(Y_i, Y_j) = \frac{\text{cov}(Y_i, Y_j)}{\sigma^2_i \sigma^2_j}\]</span></p>
+<p>Here the coefficients <span class="math inline">\(a_{ij}\)</span> are collected into the vector</p>
+<p><span class="math display">\[ \mathbf{a}_i = \left(\begin{array}{c} a_{i1}\\ a_{i2}\\ \vdots \\ a_{ip}\end{array}\right) \]</span></p>
+<p>The coefficients <span class="math inline">\(a_{ij}\)</span> are also called <em>loadings</em> of the principal component <span class="math inline">\(i\)</span> and <span class="math inline">\(\mathbf{a}_i\)</span> is a principal component loading vector.</p>
+<div class="rmdtip">
+<ul>
+<li>
+The total variation of <span class="math inline"><span class="math inline">\(X\)</span></span> is the <em>trace</em> of the variance-covariance matrix <span class="math inline"><span class="math inline">\(\Sigma\)</span></span>.
+</li>
+<li>
+The trace of <span class="math inline"><span class="math inline">\(\Sigma\)</span></span> is the sum of the variances of the individual variables.
+</li>
+<li>
+<span class="math inline"><span class="math inline">\(trace(\Sigma) \, = \, \sigma^2_1 + \sigma^2_2 + \dots +\sigma^2_p\)</span></span>
+</li>
+</ul>
+</div>
+</div>
+<div id="first-principal-component-textpc_1-y_1" class="section level3 unnumbered">
+<h3>First Principal Component (<span class="math inline">\(\text{PC}_1\)</span>): <span class="math inline">\(Y_1\)</span></h3>
+<p>The <em>first principal component</em> is the <em>normalized</em> linear combination of the features <span class="math inline">\(X_1,X_2,\ldots,X_p\)</span> that has maximum variance (among all linear combinations), so it accounts for as much variation in the data as possible.</p>
+<p>Specifically we will define coefficients <span class="math inline">\(a_{11},a_{12},\ldots,a_{1p}\)</span> for that component in such a way that its variance is maximized, subject to the constraint that the sum of the squared coefficients is equal to one (that is what we mean by <em>normalized</em>). This constraint is required so that a unique answer may be obtained.</p>
+<p>More formally, select <span class="math inline">\(a_{11},a_{12},\ldots,a_{1p}\)</span> that maximizes</p>
+<p><span class="math display">\[ \text{var}(Y_1) = \mathbf{a}^T_1\Sigma\mathbf{a}_1  = \sum_{k=1}^{p}\sum_{l=1}^{p}a_{1k}a_{1l}\sigma_{kl} \]</span></p>
+<p>subject to the constraint that</p>
+<p><span class="math display">\[ \sum_{j=1}^{p}a^2_{1j} = \mathbf{a}^T_1\mathbf{a}_1   = 1 \]</span></p>
+</div>
+<div id="second-principal-component-textpc_2-y_2" class="section level3 unnumbered">
+<h3>Second Principal Component (<span class="math inline">\(\text{PC}_2\)</span>): <span class="math inline">\(Y_2\)</span></h3>
+<p>The <em>second principal component</em> is the linear combination of the features <span class="math inline">\(X_1,X_2,\ldots,X_p\)</span> that accounts for as much of the remaining variation as possible, with the constraint that the correlation between the first and second component is 0. So the second principal component has maximal variance out of all linear combinations that are uncorrelated with <span class="math inline">\(Y_1\)</span>.</p>
+<p>To compute the coefficients of the second principal component, we select <span class="math inline">\(a_{21},a_{22},\ldots,a_{2p}\)</span> that maximizes the variance of this new component</p>
+<p><span class="math display">\[\text{var}(Y_2) = \sum_{k=1}^{p}\sum_{l=1}^{p}a_{2k}a_{2l}\sigma_{kl} = \mathbf{a}^T_2\Sigma\mathbf{a}_2 \]</span></p>
+<p>subject to:</p>
+<ul>
+<li><p>The constraint that the sums of squared coefficients add up to one, <span class="math inline">\(\sum_{j=1}^{p}a^2_{2j} = \mathbf{a}^T_2\mathbf{a}_2 = 1\)</span>.</p></li>
+<li><p>Along with the additional constraint that these two components will be uncorrelated with one another:</p></li>
+</ul>
+<p><span class="math display">\[ \text{cov}(Y_1, Y_2) = \mathbf{a}^T_1\Sigma\mathbf{a}_2  = \sum_{k=1}^{p}\sum_{l=1}^{p}a_{1k}a_{2l}\sigma_{kl} = 0 \]</span></p>
+<p>All subsequent principal components have this same property: they are linear combinations that account for as much of the remaining variation as possible and they are not correlated with the other principal components.</p>
+<p>We will do this in the same way with each additional component. For instance:</p>
+</div>
+<div id="ith-principal-component-textpc_i-y_i" class="section level3 unnumbered">
+<h3><span class="math inline">\(i^{th}\)</span> Principal Component (<span class="math inline">\(\text{PC}_i\)</span>): <span class="math inline">\(Y_i\)</span></h3>
+<p>We select <span class="math inline">\(a_{i1},a_{i2},\ldots,a_{ip}\)</span> that maximizes</p>
+<p><span class="math display">\[ \text{var}(Y_i) = \sum_{k=1}^{p}\sum_{l=1}^{p}a_{ik}a_{il}\sigma_{kl} = \mathbf{a}^T_i\Sigma\mathbf{a}_i \]</span></p>
+<p>subject to the constraint that the sums of squared coefficients add up to one, along with the additional constraint that this new component will be uncorrelated with all the previously defined components:</p>
+<p><span class="math display">\[ \sum_{j=1}^{p}a^2_{ij} \mathbf{a}^T_i\mathbf{a}_i = \mathbf{a}^T_i\mathbf{a}_i = 1\]</span></p>
+<p><span class="math display">\[ \text{cov}(Y_1, Y_i) = \sum_{k=1}^{p}\sum_{l=1}^{p}a_{1k}a_{il}\sigma_{kl} = \mathbf{a}^T_1\Sigma\mathbf{a}_i = 0 \]</span></p>
+<p><span class="math display">\[\text{cov}(Y_2, Y_i) = \sum_{k=1}^{p}\sum_{l=1}^{p}a_{2k}a_{il}\sigma_{kl} = \mathbf{a}^T_2\Sigma\mathbf{a}_i = 0\]</span>
+<span class="math display">\[\vdots\]</span>
+<span class="math display">\[\text{cov}(Y_{i-1}, Y_i) = \sum_{k=1}^{p}\sum_{l=1}^{p}a_{i-1,k}a_{il}\sigma_{kl} = \mathbf{a}^T_{i-1}\Sigma\mathbf{a}_i = 0\]</span></p>
+<p>Therefore all principal components are uncorrelated with one another.</p>
+</div>
+</div>
+<div id="how-do-we-find-the-coefficients" class="section level2">
+<h2><span class="header-section-number">6.3</span> How do we find the coefficients?</h2>
+<p>How do we find the coefficients <span class="math inline">\(a_{ij}\)</span> for a principal component? The solution involves the <strong>eigenvalues</strong> and <strong>eigenvectors</strong> of the variance-covariance matrix <span class="math inline">\(\Sigma\)</span>.</p>
+<p>Let <span class="math inline">\(\lambda_1,\ldots,\lambda_p\)</span> denote the eigenvalues of the variance-covariance matrix <span class="math inline">\(\Sigma\)</span>. These are ordered so that <span class="math inline">\(\lambda_1\)</span> has the largest eigenvalue and <span class="math inline">\(\lambda_p\)</span> is the smallest.</p>
+<p><span class="math display">\[ \lambda_1 \ge \lambda_2 \ge \dots \ge \lambda_p \]</span></p>
+<p>We are also going to let the vectors <span class="math inline">\(\mathbf{a}_1, \ldots,\mathbf{a}_p\)</span> denote the corresponding eigenvectors.</p>
+<p>It turns out that the elements for these eigenvectors will be the coefficients of the principal components.</p>
+<div class="rmdinsight">
+<p>
+The elements for the eigenvectors of <span class="math inline"><span class="math inline">\(\Sigma\)</span></span> are the coefficients of the principal components.
+</p>
+</div>
+<p>The variance for the <span class="math inline">\(i\)</span>th principal component is equal to the <span class="math inline">\(i\)</span>th eigenvalue.</p>
+<p><span class="math display">\[ \textbf{var}(Y_i) = \text{var}(a_{i1}X_1 + a_{i2}X_2 + \dots a_{ip}X_p) = \lambda_i \]</span></p>
+<p>Moreover, the principal components are uncorrelated with one another.</p>
+<p><span class="math display">\[\text{cov}(Y_i, Y_j) = 0\]</span></p>
+<p>The variance-covariance matrix may be written as a function of the eigenvalues and their corresponding eigenvectors. In fact, the variance-covariance matrix can be written as the sum over the <span class="math inline">\(p\)</span> eigenvalues, multiplied by the product of the corresponding eigenvector times its transpose as shown in the following expression</p>
+<p><span class="math display">\[ \Sigma  =  \sum_{i=1}^{p}\lambda_i \mathbf{a}_i \mathbf{a}_i^T \]</span></p>
+<p>If <span class="math inline">\(\lambda_{k+1}, \lambda_{k+2}, \dots , \lambda_{p}\)</span> are small, we might approximate <span class="math inline">\(\Sigma\)</span> by</p>
+<p><span class="math display">\[ \Sigma  \cong  \sum_{i=1}^{k}\lambda_i \mathbf{a}_i\mathbf{a}_i^T \]</span></p>
+<p>Earlier in the chapter we defined the total variation of <span class="math inline">\(X\)</span> as the trace of the variance-covariance matrix. This is also equal to the sum of the eigenvalues as shown below:</p>
+<p><span class="math display">\[ \begin{array}{lll}trace(\Sigma) &amp; = &amp; \sigma^2_1 + \sigma^2_2 + \dots +\sigma^2_p \\ &amp; = &amp; \lambda_1 + \lambda_2 + \dots + \lambda_p\end{array} \]</span></p>
+<p>This will give us an interpretation of the components in terms of the amount of the full variation explained by each component. The proportion of variation explained by the <span class="math inline">\(i\)</span>th principal component is then going to be defined to be the eigenvalue for that component divided by the sum of the eigenvalues. In other words, the <span class="math inline">\(i\)</span>th principal component explains the following proportion of the total variation:</p>
+<p><span class="math display">\[ \frac{\lambda_i}{\lambda_1 + \lambda_2 + \dots + \lambda_p} \]</span></p>
+<p>A related quantity is the proportion of variation explained by the first <span class="math inline">\(k\)</span> principal component. This would be the sum of the first <span class="math inline">\(k\)</span> eigenvalues divided by its total variation.</p>
+<p><span class="math display">\[ \frac{\lambda_1 + \lambda_2 + \dots + \lambda_k}{\lambda_1 + \lambda_2 + \dots + \lambda_p} \]</span></p>
+<p>In practice, these proportions are often expressed as percentages.</p>
+<p>Naturally, if the proportion of variation explained by the first <span class="math inline">\(k\)</span> principal components is large, then not much information is lost by considering only the first <span class="math inline">\(k\)</span> principal components.</p>
+<div id="why-it-may-be-possible-to-reduce-dimensions" class="section level3 unnumbered">
+<h3>Why It May Be Possible to Reduce Dimensions</h3>
+<p>When we have correlations (multicollinarity) between the features, the data may more or less fall on a line or plane in a lower number of dimensions. For instance, imagine a plot of two features that have a nearly perfect correlation. The data points will fall close to a straight line. That line could be used as a new (one-dimensional) axis to represent the variation among data points.</p>
+<div class="rmdcaution">
+<p>
+All of this is defined in terms of the population variance-covariance matrix <span class="math inline"><span class="math inline">\(\Sigma\)</span></span> which is <em>unknown</em>. However, we may estimate <span class="math inline"><span class="math inline">\(\Sigma\)</span></span> by the sample variance-covariance matrix which is given in the standard formula here:
+</p>
+<p>
+<span class="math display"><span class="math display">\[ \textbf{S} = \frac{1}{n-1} \sum_{i=1}^{n}(\mathbf{X}_i-\bar{\textbf{x}})(\mathbf{X}_i-\bar{\textbf{x}})^T \]</span></span>
+</p>
+</div>
+</div>
+<div id="procedure" class="section level3 unnumbered">
+<h3>Procedure</h3>
+<p>Compute the eigenvalues <span class="math inline">\(\hat{\lambda}_1, \hat{\lambda}_2, \dots, \hat{\lambda}_p\)</span> of the sample variance-covariance matrix <span class="math inline">\(\textbf{S}\)</span>, and the corresponding eigenvectors <span class="math inline">\(\hat{\mathbf{a}}_1, \hat{\mathbf{a}}_2, \dots, \hat{\mathbf{a}}_p\)</span>.</p>
+<p>Then we will define our estimated principal components using the eigenvectors as our coefficients:</p>
+<p><span class="math display">\[ \begin{array}{lll} \hat{Y}_1 &amp; = &amp; \hat{a}_{11}X_1 + \hat{a}_{12}X_2 + \dots + \hat{a}_{1p}X_p \\ \hat{Y}_2 &amp; = &amp; \hat{a}_{21}X_1 + \hat{a}_{22}X_2 + \dots + \hat{a}_{2p}X_p \\&amp;&amp;\vdots\\ \hat{Y}_p &amp; = &amp; \hat{a}_{p1}X_1 + \hat{a}_{p2}X_2 + \dots + \hat{a}_{pp}X_p \\ \end{array} \]</span></p>
+<p>Generally, we only retain the first <span class="math inline">\(k\)</span> principal component. There are a number of criteria that may be used to decide how many components should be retained:</p>
+<ol style="list-style-type: decimal">
+<li><p>To obtain the simplest possible interpretation, we want <span class="math inline">\(k\)</span> to be as small as possible. If we can explain most of the variation just by <strong>two</strong> principal components then this would give us a much simpler description of the data.</p></li>
+<li><p>Retain the first <span class="math inline">\(k\)</span> components which explain a “large” proportion of the total variation, say <span class="math inline">\(70-80\%\)</span>.</p></li>
+<li><p>Examine a scree plot. This is a plot of the eigenvalues versus the component number. The idea is to look for the “elbow” which corresponds to the point after which the eigenvalues decrease more slowly. Adding components after this point explains relatively little more of the variance. See the next figure for an example of a scree plot.</p></li>
+</ol>
+<center>
+<figure>
+<img src="img/screeplot.png" alt="Scree plot showing eigenvalue by number of principal component." style="width: 400px;"/>
+<figcaption>
+Scree plot showing eigenvalue by number of principal component.
+</figcaption>
+</figure>
+</center>
+</div>
+</div>
+<div id="standardization-of-the-features" class="section level2">
+<h2><span class="header-section-number">6.4</span> Standardization of the features</h2>
+<p>If we use the raw data, the principal component analysis will tend to give more emphasis to the variables that have higher variances than to those variables that have very low variances.</p>
+<p>In effect the results of the analysis will depend on what units of measurement are used to measure each variable. That would imply that a principal component analysis should only be used with the raw data if all variables have the same units of measure. And even in this case, only if you wish to give those variables which have higher variances more weight in the analysis.</p>
+<div class="rmdcaution">
+<ul>
+<li>
+The results of principal component analysis depend on the scales at which the variables are measured.
+</li>
+<li>
+Variables with the highest sample variances will tend to be emphasized in the first few principal components.
+</li>
+<li>
+Principal component analysis using the covariance function should only be considered if all of the variables have the same units of measurement.
+</li>
+</ul>
+</div>
+<p>If the variables either have different units of measurement, or if we wish each variable to receive equal weight in the analysis, then the variables should be <strong>standardized</strong> (<em>scaled</em>) before a principal components analysis is carried out. Standardize the variables by subtracting its mean from that variable and dividing it by its standard deviation:</p>
+<p><span class="math display">\[Z_{ij} = \frac{X_{ij}-\bar{x}_j}{\sigma_j}\]</span></p>
+<p>where</p>
+<ul>
+<li><span class="math inline">\(X_{ij}\)</span> = Data for variable <span class="math inline">\(j\)</span> in sample unit <span class="math inline">\(i\)</span></li>
+<li><span class="math inline">\(\bar{x}_j\)</span> = Sample mean for variable <span class="math inline">\(j\)</span></li>
+<li><span class="math inline">\(\sigma_j\)</span> = Sample standard deviation for variable <span class="math inline">\(j\)</span></li>
+</ul>
+<p><strong>Note</strong>: <span class="math inline">\(Z_j\)</span> has mean = 0 and variance = 1.</p>
+<div class="rmdinsight">
+<p>
+The variance-covariance matrix of the standardized data is equal to the correlation matrix for the unstandardized data. Therefore, principal component analysis using the standardized data is equivalent to principal component analysis using the correlation matrix. <strong>Remark</strong>: You are going to prove it in the practical work session.
+</p>
+</div>
+</div>
+<div id="projection-of-the-data" class="section level2">
+<h2><span class="header-section-number">6.5</span> Projection of the data</h2>
+<div id="scores" class="section level3 unnumbered">
+<h3>Scores</h3>
+<p>Using the coefficients (loadings) of every principal component, we can project the observations on the axis of the principal component, those projections are called <em>scores</em>. For example, the scores of the first principal component are</p>
+<p><span class="math display">\[  \forall 1 \le i \le n \quad \hat{Y}_1^i  =  \hat{a}_{11}X_1^i + \hat{a}_{12}X_2^i + \dots + \hat{a}_{1p}X_p^i \]</span></p>
+<p>(<span class="math inline">\(X_1^i\)</span> is the value of feature <span class="math inline">\(1\)</span> for the observation <span class="math inline">\(i\)</span>)</p>
+<p>This can be written for all observations and all the principal components using the matrix formulation</p>
+<p><span class="math display">\[ \mathbf{\hat{Y}} = \mathbf{\hat{A}} X\]</span></p>
+<p>where <span class="math inline">\(\mathbf{\hat{A}}\)</span> is the matrix of the coefficients <span class="math inline">\(\hat{a}_{ij}\)</span>.</p>
+</div>
+<div id="visualization" class="section level3 unnumbered">
+<h3>Visualization</h3>
+<p>Once we have computed the principal components, we can plot them against each other in order to produce low-dimensional views of the data.</p>
+<p>We can plot the score vector <span class="math inline">\(Y_1\)</span> against <span class="math inline">\(Y_2\)</span>, <span class="math inline">\(Y_1\)</span> against <span class="math inline">\(Y_3\)</span>, <span class="math inline">\(Y_2\)</span> against <span class="math inline">\(Y_3\)</span>, and so forth. Geometrically, this amounts to projecting the original data down onto the subspace spanned by <span class="math inline">\(\mathbf{a}_1\)</span>, <span class="math inline">\(\mathbf{a}_2\)</span>, and <span class="math inline">\(\mathbf{a}_3\)</span>, and plotting the projected points.</p>
+<p>To interpret the results obtained by PCA, we plot on the same figure both the principal component scores and the
+loading vectors. This figure is called a <strong><em>biplot</em></strong>. An example is given later in this chapter.</p>
+</div>
+<div id="extra" class="section level3 unnumbered">
+<h3>Extra</h3>
+<div class="rmdinsight">
+<ul>
+<li><p>You can read this  <a target="_blank" href="files/PrincipalComponents.pdf">tutorial <i class="fa fa-file-pdf-o" aria-hidden="true"></i></a>. In the document, there is an introduction about the mathemtical concepts used in PCA. Plus a detailed example of PCA.</p></li>
+<li><p>You can watch these videos for a nice explanation of PCA  <a target="_blank"  href="https://fr.coursera.org/learn/machine-learning/lecture/GBFTt/principal-component-analysis-problem-formulation"><i class="fa fa-video-camera" aria-hidden="true"></i> 1</a>  <a target="_blank" href="https://fr.coursera.org/learn/machine-learning/lecture/ZYIPa/principal-component-analysis-algorithm"><i class="fa fa-video-camera" aria-hidden="true"></i> 2</a>.</p></li>
+</ul>
+</div>
+</div>
+</div>
+<div id="case-study" class="section level2">
+<h2><span class="header-section-number">6.6</span> Case study</h2>
+<div id="employement-in-european-countries-in-the-late-70s" class="section level3 unnumbered">
+<h3>Employement in European countries in the late 70s</h3>
+<p>The purpose of this case study is to reveal the structure of the job market and economy in different developed countries. The final aim is to have a meaningful and rigorous plot that is able to show the most important features of the countries in a concise form.</p>
+<p>The dataset <a target="_blank" href="datasets/eurojob.txt"><code>eurojob</code> <i class="fa fa-table" aria-hidden="true"></i></a> contains the data employed in this case study. It contains the percentage of workforce employed in 1979 in 9 industries for 26 European countries. The industries measured are:</p>
+<ul>
+<li>Agriculture (<code>Agr</code>)</li>
+<li>Mining (<code>Min</code>)</li>
+<li>Manufacturing (<code>Man</code>)</li>
+<li>Power supply industries <code>(Pow</code>)</li>
+<li>Construction (<code>Con</code>)</li>
+<li>Service industries (<code>Ser</code>)</li>
+<li>Finance (<code>Fin</code>)</li>
+<li>Social and personal services (<code>Soc</code>)</li>
+<li>Transport and communications (<code>Tra</code>)</li>
+</ul>
+<p>If the dataset is imported into <svg style="height:0.8em;top:.04em;position:relative;fill:steelblue;" viewBox="0 0 581 512"><path d="M581 226.6C581 119.1 450.9 32 290.5 32S0 119.1 0 226.6C0 322.4 103.3 402 239.4 418.1V480h99.1v-61.5c24.3-2.7 47.6-7.4 69.4-13.9L448 480h112l-67.4-113.7c54.5-35.4 88.4-84.9 88.4-139.7zm-466.8 14.5c0-73.5 98.9-133 220.8-133s211.9 40.7 211.9 133c0 50.1-26.5 85-70.3 106.4-2.4-1.6-4.7-2.9-6.4-3.7-10.2-5.2-27.8-10.5-27.8-10.5s86.6-6.4 86.6-92.7-90.6-87.9-90.6-87.9h-199V361c-74.1-21.5-125.2-67.1-125.2-119.9zm225.1 38.3v-55.6c57.8 0 87.8-6.8 87.8 27.3 0 36.5-38.2 28.3-87.8 28.3zm-.9 72.5H365c10.8 0 18.9 11.7 24 19.2-16.1 1.9-33 2.8-50.6 2.9v-22.1z"/></svg> and the case names are set as <code>Country</code> (important in order to have only numerical variables), then the data should look like this:</p>
+<table>
+<caption>
+<span id="tab:eurotable">Table 6.1: </span>The <code>eurojob</code> dataset.
+</caption>
+<thead>
+<tr>
+<th style="text-align:left;">
+Country
+</th>
+<th style="text-align:right;">
+Agr
+</th>
+<th style="text-align:right;">
+Min
+</th>
+<th style="text-align:right;">
+Man
+</th>
+<th style="text-align:right;">
+Pow
+</th>
+<th style="text-align:right;">
+Con
+</th>
+<th style="text-align:right;">
+Ser
+</th>
+<th style="text-align:right;">
+Fin
+</th>
+<th style="text-align:right;">
+Soc
+</th>
+<th style="text-align:right;">
+Tra
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+Belgium
+</td>
+<td style="text-align:right;">
+3.3
+</td>
+<td style="text-align:right;">
+0.9
+</td>
+<td style="text-align:right;">
+27.6
+</td>
+<td style="text-align:right;">
+0.9
+</td>
+<td style="text-align:right;">
+8.2
+</td>
+<td style="text-align:right;">
+19.1
+</td>
+<td style="text-align:right;">
+6.2
+</td>
+<td style="text-align:right;">
+26.6
+</td>
+<td style="text-align:right;">
+7.2
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Denmark
+</td>
+<td style="text-align:right;">
+9.2
+</td>
+<td style="text-align:right;">
+0.1
+</td>
+<td style="text-align:right;">
+21.8
+</td>
+<td style="text-align:right;">
+0.6
+</td>
+<td style="text-align:right;">
+8.3
+</td>
+<td style="text-align:right;">
+14.6
+</td>
+<td style="text-align:right;">
+6.5
+</td>
+<td style="text-align:right;">
+32.2
+</td>
+<td style="text-align:right;">
+7.1
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+France
+</td>
+<td style="text-align:right;">
+10.8
+</td>
+<td style="text-align:right;">
+0.8
+</td>
+<td style="text-align:right;">
+27.5
+</td>
+<td style="text-align:right;">
+0.9
+</td>
+<td style="text-align:right;">
+8.9
+</td>
+<td style="text-align:right;">
+16.8
+</td>
+<td style="text-align:right;">
+6.0
+</td>
+<td style="text-align:right;">
+22.6
+</td>
+<td style="text-align:right;">
+5.7
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+WGerm
+</td>
+<td style="text-align:right;">
+6.7
+</td>
+<td style="text-align:right;">
+1.3
+</td>
+<td style="text-align:right;">
+35.8
+</td>
+<td style="text-align:right;">
+0.9
+</td>
+<td style="text-align:right;">
+7.3
+</td>
+<td style="text-align:right;">
+14.4
+</td>
+<td style="text-align:right;">
+5.0
+</td>
+<td style="text-align:right;">
+22.3
+</td>
+<td style="text-align:right;">
+6.1
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Ireland
+</td>
+<td style="text-align:right;">
+23.2
+</td>
+<td style="text-align:right;">
+1.0
+</td>
+<td style="text-align:right;">
+20.7
+</td>
+<td style="text-align:right;">
+1.3
+</td>
+<td style="text-align:right;">
+7.5
+</td>
+<td style="text-align:right;">
+16.8
+</td>
+<td style="text-align:right;">
+2.8
+</td>
+<td style="text-align:right;">
+20.8
+</td>
+<td style="text-align:right;">
+6.1
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Italy
+</td>
+<td style="text-align:right;">
+15.9
+</td>
+<td style="text-align:right;">
+0.6
+</td>
+<td style="text-align:right;">
+27.6
+</td>
+<td style="text-align:right;">
+0.5
+</td>
+<td style="text-align:right;">
+10.0
+</td>
+<td style="text-align:right;">
+18.1
+</td>
+<td style="text-align:right;">
+1.6
+</td>
+<td style="text-align:right;">
+20.1
+</td>
+<td style="text-align:right;">
+5.7
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Luxem
+</td>
+<td style="text-align:right;">
+7.7
+</td>
+<td style="text-align:right;">
+3.1
+</td>
+<td style="text-align:right;">
+30.8
+</td>
+<td style="text-align:right;">
+0.8
+</td>
+<td style="text-align:right;">
+9.2
+</td>
+<td style="text-align:right;">
+18.5
+</td>
+<td style="text-align:right;">
+4.6
+</td>
+<td style="text-align:right;">
+19.2
+</td>
+<td style="text-align:right;">
+6.2
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Nether
+</td>
+<td style="text-align:right;">
+6.3
+</td>
+<td style="text-align:right;">
+0.1
+</td>
+<td style="text-align:right;">
+22.5
+</td>
+<td style="text-align:right;">
+1.0
+</td>
+<td style="text-align:right;">
+9.9
+</td>
+<td style="text-align:right;">
+18.0
+</td>
+<td style="text-align:right;">
+6.8
+</td>
+<td style="text-align:right;">
+28.5
+</td>
+<td style="text-align:right;">
+6.8
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+UK
+</td>
+<td style="text-align:right;">
+2.7
+</td>
+<td style="text-align:right;">
+1.4
+</td>
+<td style="text-align:right;">
+30.2
+</td>
+<td style="text-align:right;">
+1.4
+</td>
+<td style="text-align:right;">
+6.9
+</td>
+<td style="text-align:right;">
+16.9
+</td>
+<td style="text-align:right;">
+5.7
+</td>
+<td style="text-align:right;">
+28.3
+</td>
+<td style="text-align:right;">
+6.4
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Austria
+</td>
+<td style="text-align:right;">
+12.7
+</td>
+<td style="text-align:right;">
+1.1
+</td>
+<td style="text-align:right;">
+30.2
+</td>
+<td style="text-align:right;">
+1.4
+</td>
+<td style="text-align:right;">
+9.0
+</td>
+<td style="text-align:right;">
+16.8
+</td>
+<td style="text-align:right;">
+4.9
+</td>
+<td style="text-align:right;">
+16.8
+</td>
+<td style="text-align:right;">
+7.0
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Finland
+</td>
+<td style="text-align:right;">
+13.0
+</td>
+<td style="text-align:right;">
+0.4
+</td>
+<td style="text-align:right;">
+25.9
+</td>
+<td style="text-align:right;">
+1.3
+</td>
+<td style="text-align:right;">
+7.4
+</td>
+<td style="text-align:right;">
+14.7
+</td>
+<td style="text-align:right;">
+5.5
+</td>
+<td style="text-align:right;">
+24.3
+</td>
+<td style="text-align:right;">
+7.6
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Greece
+</td>
+<td style="text-align:right;">
+41.4
+</td>
+<td style="text-align:right;">
+0.6
+</td>
+<td style="text-align:right;">
+17.6
+</td>
+<td style="text-align:right;">
+0.6
+</td>
+<td style="text-align:right;">
+8.1
+</td>
+<td style="text-align:right;">
+11.5
+</td>
+<td style="text-align:right;">
+2.4
+</td>
+<td style="text-align:right;">
+11.0
+</td>
+<td style="text-align:right;">
+6.7
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Norway
+</td>
+<td style="text-align:right;">
+9.0
+</td>
+<td style="text-align:right;">
+0.5
+</td>
+<td style="text-align:right;">
+22.4
+</td>
+<td style="text-align:right;">
+0.8
+</td>
+<td style="text-align:right;">
+8.6
+</td>
+<td style="text-align:right;">
+16.9
+</td>
+<td style="text-align:right;">
+4.7
+</td>
+<td style="text-align:right;">
+27.6
+</td>
+<td style="text-align:right;">
+9.4
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Portugal
+</td>
+<td style="text-align:right;">
+27.8
+</td>
+<td style="text-align:right;">
+0.3
+</td>
+<td style="text-align:right;">
+24.5
+</td>
+<td style="text-align:right;">
+0.6
+</td>
+<td style="text-align:right;">
+8.4
+</td>
+<td style="text-align:right;">
+13.3
+</td>
+<td style="text-align:right;">
+2.7
+</td>
+<td style="text-align:right;">
+16.7
+</td>
+<td style="text-align:right;">
+5.7
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Spain
+</td>
+<td style="text-align:right;">
+22.9
+</td>
+<td style="text-align:right;">
+0.8
+</td>
+<td style="text-align:right;">
+28.5
+</td>
+<td style="text-align:right;">
+0.7
+</td>
+<td style="text-align:right;">
+11.5
+</td>
+<td style="text-align:right;">
+9.7
+</td>
+<td style="text-align:right;">
+8.5
+</td>
+<td style="text-align:right;">
+11.8
+</td>
+<td style="text-align:right;">
+5.5
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Sweden
+</td>
+<td style="text-align:right;">
+6.1
+</td>
+<td style="text-align:right;">
+0.4
+</td>
+<td style="text-align:right;">
+25.9
+</td>
+<td style="text-align:right;">
+0.8
+</td>
+<td style="text-align:right;">
+7.2
+</td>
+<td style="text-align:right;">
+14.4
+</td>
+<td style="text-align:right;">
+6.0
+</td>
+<td style="text-align:right;">
+32.4
+</td>
+<td style="text-align:right;">
+6.8
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Switz
+</td>
+<td style="text-align:right;">
+7.7
+</td>
+<td style="text-align:right;">
+0.2
+</td>
+<td style="text-align:right;">
+37.8
+</td>
+<td style="text-align:right;">
+0.8
+</td>
+<td style="text-align:right;">
+9.5
+</td>
+<td style="text-align:right;">
+17.5
+</td>
+<td style="text-align:right;">
+5.3
+</td>
+<td style="text-align:right;">
+15.4
+</td>
+<td style="text-align:right;">
+5.7
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Turkey
+</td>
+<td style="text-align:right;">
+66.8
+</td>
+<td style="text-align:right;">
+0.7
+</td>
+<td style="text-align:right;">
+7.9
+</td>
+<td style="text-align:right;">
+0.1
+</td>
+<td style="text-align:right;">
+2.8
+</td>
+<td style="text-align:right;">
+5.2
+</td>
+<td style="text-align:right;">
+1.1
+</td>
+<td style="text-align:right;">
+11.9
+</td>
+<td style="text-align:right;">
+3.2
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Bulgaria
+</td>
+<td style="text-align:right;">
+23.6
+</td>
+<td style="text-align:right;">
+1.9
+</td>
+<td style="text-align:right;">
+32.3
+</td>
+<td style="text-align:right;">
+0.6
+</td>
+<td style="text-align:right;">
+7.9
+</td>
+<td style="text-align:right;">
+8.0
+</td>
+<td style="text-align:right;">
+0.7
+</td>
+<td style="text-align:right;">
+18.2
+</td>
+<td style="text-align:right;">
+6.7
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Czech
+</td>
+<td style="text-align:right;">
+16.5
+</td>
+<td style="text-align:right;">
+2.9
+</td>
+<td style="text-align:right;">
+35.5
+</td>
+<td style="text-align:right;">
+1.2
+</td>
+<td style="text-align:right;">
+8.7
+</td>
+<td style="text-align:right;">
+9.2
+</td>
+<td style="text-align:right;">
+0.9
+</td>
+<td style="text-align:right;">
+17.9
+</td>
+<td style="text-align:right;">
+7.0
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+EGerm
+</td>
+<td style="text-align:right;">
+4.2
+</td>
+<td style="text-align:right;">
+2.9
+</td>
+<td style="text-align:right;">
+41.2
+</td>
+<td style="text-align:right;">
+1.3
+</td>
+<td style="text-align:right;">
+7.6
+</td>
+<td style="text-align:right;">
+11.2
+</td>
+<td style="text-align:right;">
+1.2
+</td>
+<td style="text-align:right;">
+22.1
+</td>
+<td style="text-align:right;">
+8.4
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Hungary
+</td>
+<td style="text-align:right;">
+21.7
+</td>
+<td style="text-align:right;">
+3.1
+</td>
+<td style="text-align:right;">
+29.6
+</td>
+<td style="text-align:right;">
+1.9
+</td>
+<td style="text-align:right;">
+8.2
+</td>
+<td style="text-align:right;">
+9.4
+</td>
+<td style="text-align:right;">
+0.9
+</td>
+<td style="text-align:right;">
+17.2
+</td>
+<td style="text-align:right;">
+8.0
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Poland
+</td>
+<td style="text-align:right;">
+31.1
+</td>
+<td style="text-align:right;">
+2.5
+</td>
+<td style="text-align:right;">
+25.7
+</td>
+<td style="text-align:right;">
+0.9
+</td>
+<td style="text-align:right;">
+8.4
+</td>
+<td style="text-align:right;">
+7.5
+</td>
+<td style="text-align:right;">
+0.9
+</td>
+<td style="text-align:right;">
+16.1
+</td>
+<td style="text-align:right;">
+6.9
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Romania
+</td>
+<td style="text-align:right;">
+34.7
+</td>
+<td style="text-align:right;">
+2.1
+</td>
+<td style="text-align:right;">
+30.1
+</td>
+<td style="text-align:right;">
+0.6
+</td>
+<td style="text-align:right;">
+8.7
+</td>
+<td style="text-align:right;">
+5.9
+</td>
+<td style="text-align:right;">
+1.3
+</td>
+<td style="text-align:right;">
+11.7
+</td>
+<td style="text-align:right;">
+5.0
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+USSR
+</td>
+<td style="text-align:right;">
+23.7
+</td>
+<td style="text-align:right;">
+1.4
+</td>
+<td style="text-align:right;">
+25.8
+</td>
+<td style="text-align:right;">
+0.6
+</td>
+<td style="text-align:right;">
+9.2
+</td>
+<td style="text-align:right;">
+6.1
+</td>
+<td style="text-align:right;">
+0.5
+</td>
+<td style="text-align:right;">
+23.6
+</td>
+<td style="text-align:right;">
+9.3
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Yugoslavia
+</td>
+<td style="text-align:right;">
+48.7
+</td>
+<td style="text-align:right;">
+1.5
+</td>
+<td style="text-align:right;">
+16.8
+</td>
+<td style="text-align:right;">
+1.1
+</td>
+<td style="text-align:right;">
+4.9
+</td>
+<td style="text-align:right;">
+6.4
+</td>
+<td style="text-align:right;">
+11.3
+</td>
+<td style="text-align:right;">
+5.3
+</td>
+<td style="text-align:right;">
+4.0
+</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Note</strong>: To set the case names as <code>Country</code>, we do</p>
+<div class="sourceCode" id="cb45"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb45-1" title="1"><span class="kw">row.names</span>(eurojob) &lt;-<span class="st"> </span>eurojob<span class="op">$</span>Country</a>
+<a class="sourceLine" id="cb45-2" title="2">eurojob<span class="op">$</span>Country &lt;-<span class="st"> </span><span class="ot">NULL</span></a></code></pre></div>
+<p>So far, we know how to compute summaries for <em>each variable</em>, and how to quantify and visualize relations between variables with the correlation matrix and the scatterplot matrix. But even for a moderate number of variables like this, their results are hard to process.</p>
+<div class="sourceCode" id="cb46"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb46-1" title="1"><span class="co"># Summary of the data - marginal</span></a>
+<a class="sourceLine" id="cb46-2" title="2"><span class="kw">summary</span>(eurojob)</a>
+<a class="sourceLine" id="cb46-3" title="3"><span class="co">#ans&gt;       Agr            Min             Man            Pow       </span></a>
+<a class="sourceLine" id="cb46-4" title="4"><span class="co">#ans&gt;  Min.   : 2.7   Min.   :0.100   Min.   : 7.9   Min.   :0.100  </span></a>
+<a class="sourceLine" id="cb46-5" title="5"><span class="co">#ans&gt;  1st Qu.: 7.7   1st Qu.:0.525   1st Qu.:23.0   1st Qu.:0.600  </span></a>
+<a class="sourceLine" id="cb46-6" title="6"><span class="co">#ans&gt;  Median :14.4   Median :0.950   Median :27.6   Median :0.850  </span></a>
+<a class="sourceLine" id="cb46-7" title="7"><span class="co">#ans&gt;  Mean   :19.1   Mean   :1.254   Mean   :27.0   Mean   :0.908  </span></a>
+<a class="sourceLine" id="cb46-8" title="8"><span class="co">#ans&gt;  3rd Qu.:23.7   3rd Qu.:1.800   3rd Qu.:30.2   3rd Qu.:1.175  </span></a>
+<a class="sourceLine" id="cb46-9" title="9"><span class="co">#ans&gt;  Max.   :66.8   Max.   :3.100   Max.   :41.2   Max.   :1.900  </span></a>
+<a class="sourceLine" id="cb46-10" title="10"><span class="co">#ans&gt;       Con             Ser             Fin             Soc      </span></a>
+<a class="sourceLine" id="cb46-11" title="11"><span class="co">#ans&gt;  Min.   : 2.80   Min.   : 5.20   Min.   : 0.50   Min.   : 5.3  </span></a>
+<a class="sourceLine" id="cb46-12" title="12"><span class="co">#ans&gt;  1st Qu.: 7.53   1st Qu.: 9.25   1st Qu.: 1.23   1st Qu.:16.2  </span></a>
+<a class="sourceLine" id="cb46-13" title="13"><span class="co">#ans&gt;  Median : 8.35   Median :14.40   Median : 4.65   Median :19.6  </span></a>
+<a class="sourceLine" id="cb46-14" title="14"><span class="co">#ans&gt;  Mean   : 8.17   Mean   :12.96   Mean   : 4.00   Mean   :20.0  </span></a>
+<a class="sourceLine" id="cb46-15" title="15"><span class="co">#ans&gt;  3rd Qu.: 8.97   3rd Qu.:16.88   3rd Qu.: 5.92   3rd Qu.:24.1  </span></a>
+<a class="sourceLine" id="cb46-16" title="16"><span class="co">#ans&gt;  Max.   :11.50   Max.   :19.10   Max.   :11.30   Max.   :32.4  </span></a>
+<a class="sourceLine" id="cb46-17" title="17"><span class="co">#ans&gt;       Tra      </span></a>
+<a class="sourceLine" id="cb46-18" title="18"><span class="co">#ans&gt;  Min.   :3.20  </span></a>
+<a class="sourceLine" id="cb46-19" title="19"><span class="co">#ans&gt;  1st Qu.:5.70  </span></a>
+<a class="sourceLine" id="cb46-20" title="20"><span class="co">#ans&gt;  Median :6.70  </span></a>
+<a class="sourceLine" id="cb46-21" title="21"><span class="co">#ans&gt;  Mean   :6.55  </span></a>
+<a class="sourceLine" id="cb46-22" title="22"><span class="co">#ans&gt;  3rd Qu.:7.08  </span></a>
+<a class="sourceLine" id="cb46-23" title="23"><span class="co">#ans&gt;  Max.   :9.40</span></a>
+<a class="sourceLine" id="cb46-24" title="24"></a>
+<a class="sourceLine" id="cb46-25" title="25"><span class="co"># Correlation matrix</span></a>
+<a class="sourceLine" id="cb46-26" title="26"><span class="kw">cor</span>(eurojob)</a>
+<a class="sourceLine" id="cb46-27" title="27"><span class="co">#ans&gt;         Agr     Min    Man     Pow     Con    Ser     Fin    Soc    Tra</span></a>
+<a class="sourceLine" id="cb46-28" title="28"><span class="co">#ans&gt; Agr  1.0000  0.0358 -0.671 -0.4001 -0.5383 -0.737 -0.2198 -0.747 -0.565</span></a>
+<a class="sourceLine" id="cb46-29" title="29"><span class="co">#ans&gt; Min  0.0358  1.0000  0.445  0.4055 -0.0256 -0.397 -0.4427 -0.281  0.157</span></a>
+<a class="sourceLine" id="cb46-30" title="30"><span class="co">#ans&gt; Man -0.6711  0.4452  1.000  0.3853  0.4945  0.204 -0.1558  0.154  0.351</span></a>
+<a class="sourceLine" id="cb46-31" title="31"><span class="co">#ans&gt; Pow -0.4001  0.4055  0.385  1.0000  0.0599  0.202  0.1099  0.132  0.375</span></a>
+<a class="sourceLine" id="cb46-32" title="32"><span class="co">#ans&gt; Con -0.5383 -0.0256  0.494  0.0599  1.0000  0.356  0.0163  0.158  0.388</span></a>
+<a class="sourceLine" id="cb46-33" title="33"><span class="co">#ans&gt; Ser -0.7370 -0.3966  0.204  0.2019  0.3560  1.000  0.3656  0.572  0.188</span></a>
+<a class="sourceLine" id="cb46-34" title="34"><span class="co">#ans&gt; Fin -0.2198 -0.4427 -0.156  0.1099  0.0163  0.366  1.0000  0.108 -0.246</span></a>
+<a class="sourceLine" id="cb46-35" title="35"><span class="co">#ans&gt; Soc -0.7468 -0.2810  0.154  0.1324  0.1582  0.572  0.1076  1.000  0.568</span></a>
+<a class="sourceLine" id="cb46-36" title="36"><span class="co">#ans&gt; Tra -0.5649  0.1566  0.351  0.3752  0.3877  0.188 -0.2459  0.568  1.000</span></a>
+<a class="sourceLine" id="cb46-37" title="37"></a>
+<a class="sourceLine" id="cb46-38" title="38"><span class="co"># Scatterplot matrix</span></a>
+<a class="sourceLine" id="cb46-39" title="39"><span class="kw">require</span>(car)</a>
+<a class="sourceLine" id="cb46-40" title="40"><span class="kw">scatterplotMatrix</span>(eurojob, <span class="dt">regLine =</span> <span class="kw">list</span>(<span class="dt">method=</span>lm, <span class="dt">lty=</span><span class="dv">1</span>, <span class="dt">lwd=</span><span class="dv">2</span>, <span class="dt">col=</span><span class="st">&quot;green&quot;</span>), <span class="dt">smooth =</span> <span class="ot">FALSE</span>,</a>
+<a class="sourceLine" id="cb46-41" title="41">                  <span class="dt">ellipse =</span> <span class="ot">FALSE</span>, <span class="dt">plot.points =</span> T, <span class="dt">col=</span><span class="st">&quot;black&quot;</span>,</a>
+<a class="sourceLine" id="cb46-42" title="42">                  <span class="dt">diagonal =</span> <span class="ot">TRUE</span>)</a></code></pre></div>
+<p><img src="Machine-Learning_files/figure-html/unnamed-chunk-113-1.png" width="70%" style="display: block; margin: auto;" />
+We definitely need a way of visualizing and quantifying the relations between variables for a moderate to large amount of variables. PCA will be a handy way. Recall what PCA does:</p>
+<ol style="list-style-type: decimal">
+<li>Takes the data for the variables <span class="math inline">\(X_1,\ldots,X_p\)</span>.</li>
+<li>Using this data, looks for new variables <span class="math inline">\(\text{PC}_1,\ldots \text{PC}_p\)</span> such that:
+<ul>
+<li><span class="math inline">\(\text{PC}_j\)</span> is a <strong>linear combination</strong> of <span class="math inline">\(X_1,\ldots,X_k\)</span>, <span class="math inline">\(1\leq j\leq p\)</span>. This is, <span class="math inline">\(\text{PC}_j=a_{1j}X_1+a_{2j}X_2+\ldots+a_{pj}X_p\)</span>.</li>
+<li><span class="math inline">\(\text{PC}_1,\ldots \text{PC}_p\)</span> are <strong>sorted decreasingly in terms of variance</strong>. Hence <span class="math inline">\(\text{PC}_j\)</span> has more variance than <span class="math inline">\(\text{PC}_{j+1}\)</span>, <span class="math inline">\(1\leq j\leq p-1\)</span>,</li>
+<li><span class="math inline">\(\text{PC}_{j_1}\)</span> and <span class="math inline">\(\text{PC}_{j_2}\)</span> are <strong>uncorrelated</strong>, for <span class="math inline">\(j_1\neq j_2\)</span>.</li>
+<li><span class="math inline">\(\text{PC}_1,\ldots \text{PC}_p\)</span> have the <strong>same information</strong>, measured in terms of <strong>total variance</strong>, as <span class="math inline">\(X_1,\ldots,X_p\)</span>.</li>
+</ul></li>
+<li>Produces three key objects:
+<ul>
+<li><strong>Variances of the PCs</strong>. They are sorted decreasingly and give an idea of which PCs are contain most of the information of the data (the ones with more variance).</li>
+<li><strong>Weights of the variables in the PCs</strong>. They give the interpretation of the PCs in terms of the original variables, as they are the coefficients of the linear combination. The weights of the variables <span class="math inline">\(X_1,\ldots,X_p\)</span> on the PC<span class="math inline">\(_j\)</span>, <span class="math inline">\(a_{1j},\ldots,a_{pj}\)</span>, are normalized: <span class="math inline">\(a_{1j}^2+\ldots+a_{pj}^2=1\)</span>, <span class="math inline">\(j=1,\ldots,p\)</span>. In <svg style="height:0.8em;top:.04em;position:relative;fill:steelblue;" viewBox="0 0 581 512"><path d="M581 226.6C581 119.1 450.9 32 290.5 32S0 119.1 0 226.6C0 322.4 103.3 402 239.4 418.1V480h99.1v-61.5c24.3-2.7 47.6-7.4 69.4-13.9L448 480h112l-67.4-113.7c54.5-35.4 88.4-84.9 88.4-139.7zm-466.8 14.5c0-73.5 98.9-133 220.8-133s211.9 40.7 211.9 133c0 50.1-26.5 85-70.3 106.4-2.4-1.6-4.7-2.9-6.4-3.7-10.2-5.2-27.8-10.5-27.8-10.5s86.6-6.4 86.6-92.7-90.6-87.9-90.6-87.9h-199V361c-74.1-21.5-125.2-67.1-125.2-119.9zm225.1 38.3v-55.6c57.8 0 87.8-6.8 87.8 27.3 0 36.5-38.2 28.3-87.8 28.3zm-.9 72.5H365c10.8 0 18.9 11.7 24 19.2-16.1 1.9-33 2.8-50.6 2.9v-22.1z"/></svg>, they are called <code>loadings</code>.</li>
+<li><strong>Scores of the data in the PCs</strong>: this is the data with <span class="math inline">\(\text{PC}_1,\ldots \text{PC}_p\)</span> variables instead of <span class="math inline">\(X_1,\ldots,X_p\)</span>. The <strong>scores are uncorrelated</strong>. Useful for knowing which PCs have more effect on a certain observation.</li>
+</ul></li>
+</ol>
+<p>Hence, PCA rearranges our variables in an information-equivalent, but more convenient, layout where the variables are <strong>sorted according to the ammount of information they are able to explain</strong>. From this position, the next step is clear: <strong>stick only with a limited number of PCs such that they explain most of the information</strong> (e.g., 70% of the total variance) and do <em>dimension reduction</em>. The effectiveness of PCA in practice varies from the structure present in the dataset. For example, in the case of highly dependent data, it could explain more than the 90% of variability of a dataset with tens of variables with just two PCs.</p>
+<p>Let’s see how to compute a full PCA in <svg style="height:0.8em;top:.04em;position:relative;fill:steelblue;" viewBox="0 0 581 512"><path d="M581 226.6C581 119.1 450.9 32 290.5 32S0 119.1 0 226.6C0 322.4 103.3 402 239.4 418.1V480h99.1v-61.5c24.3-2.7 47.6-7.4 69.4-13.9L448 480h112l-67.4-113.7c54.5-35.4 88.4-84.9 88.4-139.7zm-466.8 14.5c0-73.5 98.9-133 220.8-133s211.9 40.7 211.9 133c0 50.1-26.5 85-70.3 106.4-2.4-1.6-4.7-2.9-6.4-3.7-10.2-5.2-27.8-10.5-27.8-10.5s86.6-6.4 86.6-92.7-90.6-87.9-90.6-87.9h-199V361c-74.1-21.5-125.2-67.1-125.2-119.9zm225.1 38.3v-55.6c57.8 0 87.8-6.8 87.8 27.3 0 36.5-38.2 28.3-87.8 28.3zm-.9 72.5H365c10.8 0 18.9 11.7 24 19.2-16.1 1.9-33 2.8-50.6 2.9v-22.1z"/></svg>.</p>
+<div class="sourceCode" id="cb47"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb47-1" title="1"><span class="co"># The main function - use cor = TRUE to avoid scale distortions</span></a>
+<a class="sourceLine" id="cb47-2" title="2">pca &lt;-<span class="st"> </span><span class="kw">princomp</span>(eurojob, <span class="dt">cor =</span> <span class="ot">TRUE</span>)</a>
+<a class="sourceLine" id="cb47-3" title="3"></a>
+<a class="sourceLine" id="cb47-4" title="4"><span class="co"># What is inside?</span></a>
+<a class="sourceLine" id="cb47-5" title="5"><span class="kw">str</span>(pca)</a>
+<a class="sourceLine" id="cb47-6" title="6"><span class="co">#ans&gt; List of 7</span></a>
+<a class="sourceLine" id="cb47-7" title="7"><span class="co">#ans&gt;  $ sdev    : Named num [1:9] 1.867 1.46 1.048 0.997 0.737 ...</span></a>
+<a class="sourceLine" id="cb47-8" title="8"><span class="co">#ans&gt;   ..- attr(*, &quot;names&quot;)= chr [1:9] &quot;Comp.1&quot; &quot;Comp.2&quot; &quot;Comp.3&quot; &quot;Comp.4&quot; ...</span></a>
+<a class="sourceLine" id="cb47-9" title="9"><span class="co">#ans&gt;  $ loadings: &#39;loadings&#39; num [1:9, 1:9] 0.52379 0.00132 -0.3475 -0.25572 -0.32518 ...</span></a>
+<a class="sourceLine" id="cb47-10" title="10"><span class="co">#ans&gt;   ..- attr(*, &quot;dimnames&quot;)=List of 2</span></a>
+<a class="sourceLine" id="cb47-11" title="11"><span class="co">#ans&gt;   .. ..$ : chr [1:9] &quot;Agr&quot; &quot;Min&quot; &quot;Man&quot; &quot;Pow&quot; ...</span></a>
+<a class="sourceLine" id="cb47-12" title="12"><span class="co">#ans&gt;   .. ..$ : chr [1:9] &quot;Comp.1&quot; &quot;Comp.2&quot; &quot;Comp.3&quot; &quot;Comp.4&quot; ...</span></a>
+<a class="sourceLine" id="cb47-13" title="13"><span class="co">#ans&gt;  $ center  : Named num [1:9] 19.131 1.254 27.008 0.908 8.165 ...</span></a>
+<a class="sourceLine" id="cb47-14" title="14"><span class="co">#ans&gt;   ..- attr(*, &quot;names&quot;)= chr [1:9] &quot;Agr&quot; &quot;Min&quot; &quot;Man&quot; &quot;Pow&quot; ...</span></a>
+<a class="sourceLine" id="cb47-15" title="15"><span class="co">#ans&gt;  $ scale   : Named num [1:9] 15.245 0.951 6.872 0.369 1.614 ...</span></a>
+<a class="sourceLine" id="cb47-16" title="16"><span class="co">#ans&gt;   ..- attr(*, &quot;names&quot;)= chr [1:9] &quot;Agr&quot; &quot;Min&quot; &quot;Man&quot; &quot;Pow&quot; ...</span></a>
+<a class="sourceLine" id="cb47-17" title="17"><span class="co">#ans&gt;  $ n.obs   : int 26</span></a>
+<a class="sourceLine" id="cb47-18" title="18"><span class="co">#ans&gt;  $ scores  : num [1:26, 1:9] -1.71 -0.953 -0.755 -0.853 0.104 ...</span></a>
+<a class="sourceLine" id="cb47-19" title="19"><span class="co">#ans&gt;   ..- attr(*, &quot;dimnames&quot;)=List of 2</span></a>
+<a class="sourceLine" id="cb47-20" title="20"><span class="co">#ans&gt;   .. ..$ : chr [1:26] &quot;Belgium&quot; &quot;Denmark&quot; &quot;France&quot; &quot;WGerm&quot; ...</span></a>
+<a class="sourceLine" id="cb47-21" title="21"><span class="co">#ans&gt;   .. ..$ : chr [1:9] &quot;Comp.1&quot; &quot;Comp.2&quot; &quot;Comp.3&quot; &quot;Comp.4&quot; ...</span></a>
+<a class="sourceLine" id="cb47-22" title="22"><span class="co">#ans&gt;  $ call    : language princomp(x = eurojob, cor = TRUE)</span></a>
+<a class="sourceLine" id="cb47-23" title="23"><span class="co">#ans&gt;  - attr(*, &quot;class&quot;)= chr &quot;princomp&quot;</span></a>
+<a class="sourceLine" id="cb47-24" title="24"></a>
+<a class="sourceLine" id="cb47-25" title="25"><span class="co"># The standard deviation of each PC</span></a>
+<a class="sourceLine" id="cb47-26" title="26">pca<span class="op">$</span>sdev</a>
+<a class="sourceLine" id="cb47-27" title="27"><span class="co">#ans&gt;  Comp.1  Comp.2  Comp.3  Comp.4  Comp.5  Comp.6  Comp.7  Comp.8  Comp.9 </span></a>
+<a class="sourceLine" id="cb47-28" title="28"><span class="co">#ans&gt; 1.86739 1.45951 1.04831 0.99724 0.73703 0.61922 0.47514 0.36985 0.00675</span></a>
+<a class="sourceLine" id="cb47-29" title="29"></a>
+<a class="sourceLine" id="cb47-30" title="30"><span class="co"># Weights: the expression of the original variables in the PCs</span></a>
+<a class="sourceLine" id="cb47-31" title="31"><span class="co"># E.g. Agr = -0.524 * PC1 + 0.213 * PC5 - 0.152 * PC6 + 0.806 * PC9</span></a>
+<a class="sourceLine" id="cb47-32" title="32"><span class="co"># And also: PC1 = -0.524 * Agr + 0.347 * Man + 0256 * Pow + 0.325 * Con + ...</span></a>
+<a class="sourceLine" id="cb47-33" title="33"><span class="co"># (Because the matrix is orthogonal, so the transpose is the inverse)</span></a>
+<a class="sourceLine" id="cb47-34" title="34">pca<span class="op">$</span>loadings</a>
+<a class="sourceLine" id="cb47-35" title="35"><span class="co">#ans&gt; </span></a>
+<a class="sourceLine" id="cb47-36" title="36"><span class="co">#ans&gt; Loadings:</span></a>
+<a class="sourceLine" id="cb47-37" title="37"><span class="co">#ans&gt;     Comp.1 Comp.2 Comp.3 Comp.4 Comp.5 Comp.6 Comp.7 Comp.8 Comp.9</span></a>
+<a class="sourceLine" id="cb47-38" title="38"><span class="co">#ans&gt; Agr  0.524                       0.213  0.153                0.806</span></a>
+<a class="sourceLine" id="cb47-39" title="39"><span class="co">#ans&gt; Min         0.618 -0.201        -0.164 -0.101 -0.726              </span></a>
+<a class="sourceLine" id="cb47-40" title="40"><span class="co">#ans&gt; Man -0.347  0.355 -0.150 -0.346 -0.385 -0.288  0.479  0.126  0.366</span></a>
+<a class="sourceLine" id="cb47-41" title="41"><span class="co">#ans&gt; Pow -0.256  0.261 -0.561  0.393  0.295  0.357  0.256 -0.341       </span></a>
+<a class="sourceLine" id="cb47-42" title="42"><span class="co">#ans&gt; Con -0.325         0.153 -0.668  0.472  0.130 -0.221 -0.356       </span></a>
+<a class="sourceLine" id="cb47-43" title="43"><span class="co">#ans&gt; Ser -0.379 -0.350 -0.115        -0.284  0.615 -0.229  0.388  0.238</span></a>
+<a class="sourceLine" id="cb47-44" title="44"><span class="co">#ans&gt; Fin        -0.454 -0.587         0.280 -0.526 -0.187  0.174  0.145</span></a>
+<a class="sourceLine" id="cb47-45" title="45"><span class="co">#ans&gt; Soc -0.387 -0.222  0.312  0.412 -0.220 -0.263 -0.191 -0.506  0.351</span></a>
+<a class="sourceLine" id="cb47-46" title="46"><span class="co">#ans&gt; Tra -0.367  0.203  0.375  0.314  0.513 -0.124         0.545       </span></a>
+<a class="sourceLine" id="cb47-47" title="47"><span class="co">#ans&gt; </span></a>
+<a class="sourceLine" id="cb47-48" title="48"><span class="co">#ans&gt;                Comp.1 Comp.2 Comp.3 Comp.4 Comp.5 Comp.6 Comp.7 Comp.8</span></a>
+<a class="sourceLine" id="cb47-49" title="49"><span class="co">#ans&gt; SS loadings     1.000  1.000  1.000  1.000  1.000  1.000  1.000  1.000</span></a>
+<a class="sourceLine" id="cb47-50" title="50"><span class="co">#ans&gt; Proportion Var  0.111  0.111  0.111  0.111  0.111  0.111  0.111  0.111</span></a>
+<a class="sourceLine" id="cb47-51" title="51"><span class="co">#ans&gt; Cumulative Var  0.111  0.222  0.333  0.444  0.556  0.667  0.778  0.889</span></a>
+<a class="sourceLine" id="cb47-52" title="52"><span class="co">#ans&gt;                Comp.9</span></a>
+<a class="sourceLine" id="cb47-53" title="53"><span class="co">#ans&gt; SS loadings     1.000</span></a>
+<a class="sourceLine" id="cb47-54" title="54"><span class="co">#ans&gt; Proportion Var  0.111</span></a>
+<a class="sourceLine" id="cb47-55" title="55"><span class="co">#ans&gt; Cumulative Var  1.000</span></a>
+<a class="sourceLine" id="cb47-56" title="56"></a>
+<a class="sourceLine" id="cb47-57" title="57"><span class="co"># Scores of the data on the PCs: how is the data reexpressed into PCs</span></a>
+<a class="sourceLine" id="cb47-58" title="58"><span class="kw">head</span>(pca<span class="op">$</span>scores, <span class="dv">10</span>)</a>
+<a class="sourceLine" id="cb47-59" title="59"><span class="co">#ans&gt;         Comp.1  Comp.2  Comp.3  Comp.4  Comp.5  Comp.6  Comp.7 Comp.8</span></a>
+<a class="sourceLine" id="cb47-60" title="60"><span class="co">#ans&gt; Belgium -1.710 -1.2218 -0.1148  0.3395 -0.3245 -0.0473 -0.3401  0.403</span></a>
+<a class="sourceLine" id="cb47-61" title="61"><span class="co">#ans&gt; Denmark -0.953 -2.1278  0.9507  0.5939  0.1027 -0.8273 -0.3029 -0.352</span></a>
+<a class="sourceLine" id="cb47-62" title="62"><span class="co">#ans&gt; France  -0.755 -1.1212 -0.4980 -0.5003 -0.2997  0.1158 -0.1855 -0.266</span></a>
+<a class="sourceLine" id="cb47-63" title="63"><span class="co">#ans&gt; WGerm   -0.853 -0.0114 -0.5795 -0.1105 -1.1652 -0.6181  0.4446  0.194</span></a>
+<a class="sourceLine" id="cb47-64" title="64"><span class="co">#ans&gt; Ireland  0.104 -0.4140 -0.3840  0.9267  0.0152  1.4242 -0.0370 -0.334</span></a>
+<a class="sourceLine" id="cb47-65" title="65"><span class="co">#ans&gt; Italy   -0.375 -0.7695  1.0606 -1.4772 -0.6452  1.0021 -0.1418 -0.130</span></a>
+<a class="sourceLine" id="cb47-66" title="66"><span class="co">#ans&gt; Luxem   -1.059  0.7558 -0.6515 -0.8352 -0.8659  0.2188 -1.6942  0.547</span></a>
+<a class="sourceLine" id="cb47-67" title="67"><span class="co">#ans&gt; Nether  -1.688 -2.0048  0.0637 -0.0235  0.6352  0.2120 -0.3034 -0.591</span></a>
+<a class="sourceLine" id="cb47-68" title="68"><span class="co">#ans&gt; UK      -1.630 -0.3731 -1.1409  1.2669 -0.8129 -0.0361  0.0413 -0.349</span></a>
+<a class="sourceLine" id="cb47-69" title="69"><span class="co">#ans&gt; Austria -1.176  0.1431 -1.0434 -0.1577  0.5210  0.8019  0.4150  0.215</span></a>
+<a class="sourceLine" id="cb47-70" title="70"><span class="co">#ans&gt;            Comp.9</span></a>
+<a class="sourceLine" id="cb47-71" title="71"><span class="co">#ans&gt; Belgium -0.001090</span></a>
+<a class="sourceLine" id="cb47-72" title="72"><span class="co">#ans&gt; Denmark  0.015619</span></a>
+<a class="sourceLine" id="cb47-73" title="73"><span class="co">#ans&gt; France  -0.000507</span></a>
+<a class="sourceLine" id="cb47-74" title="74"><span class="co">#ans&gt; WGerm   -0.006539</span></a>
+<a class="sourceLine" id="cb47-75" title="75"><span class="co">#ans&gt; Ireland  0.010879</span></a>
+<a class="sourceLine" id="cb47-76" title="76"><span class="co">#ans&gt; Italy    0.005602</span></a>
+<a class="sourceLine" id="cb47-77" title="77"><span class="co">#ans&gt; Luxem    0.003453</span></a>
+<a class="sourceLine" id="cb47-78" title="78"><span class="co">#ans&gt; Nether  -0.010931</span></a>
+<a class="sourceLine" id="cb47-79" title="79"><span class="co">#ans&gt; UK      -0.005478</span></a>
+<a class="sourceLine" id="cb47-80" title="80"><span class="co">#ans&gt; Austria -0.002816</span></a>
+<a class="sourceLine" id="cb47-81" title="81"></a>
+<a class="sourceLine" id="cb47-82" title="82"><span class="co"># Scatterplot matrix of the scores - See how they are uncorrelated!</span></a>
+<a class="sourceLine" id="cb47-83" title="83"><span class="kw">scatterplotMatrix</span>(pca<span class="op">$</span>scores, <span class="dt">regLine =</span> <span class="kw">list</span>(<span class="dt">method=</span>lm, <span class="dt">lty=</span><span class="dv">1</span>, <span class="dt">lwd=</span><span class="dv">2</span>, <span class="dt">col=</span><span class="st">&quot;green&quot;</span>), <span class="dt">smooth =</span> <span class="ot">FALSE</span>,</a>
+<a class="sourceLine" id="cb47-84" title="84">                  <span class="dt">ellipse =</span> <span class="ot">FALSE</span>, <span class="dt">plot.points =</span> T, <span class="dt">col=</span><span class="st">&quot;black&quot;</span>,</a>
+<a class="sourceLine" id="cb47-85" title="85">                  <span class="dt">diagonal =</span> <span class="ot">TRUE</span>)</a></code></pre></div>
+<p><img src="Machine-Learning_files/figure-html/unnamed-chunk-114-1.png" width="70%" style="display: block; margin: auto;" /></p>
+<div class="rmdinsight">
+<p>
+PCA produces <strong>uncorrelated</strong> variables from the original set <span class="math inline"><span class="math inline">\(X_1,\ldots,X_p\)</span></span>. This implies that:
+</p>
+<ul>
+<li>
+The PCs are uncorrelated, <strong>but not independent</strong> (uncorrelated does not imply independent).
+</li>
+<li>
+An uncorrelated or independent variable in <span class="math inline"><span class="math inline">\(X_1,\ldots,X_p\)</span></span> will get a PC only associated to it. In the extreme case where all the <span class="math inline"><span class="math inline">\(X_1,\ldots,X_p\)</span></span> are uncorrelated, these coincide with the PCs (up to sign flips).
+</li>
+</ul>
+</div>
+<div class="sourceCode" id="cb48"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb48-1" title="1"></a>
+<a class="sourceLine" id="cb48-2" title="2"><span class="co"># Means of the variables - before PCA the variables are centered</span></a>
+<a class="sourceLine" id="cb48-3" title="3">pca<span class="op">$</span>center</a>
+<a class="sourceLine" id="cb48-4" title="4"><span class="co">#ans&gt;    Agr    Min    Man    Pow    Con    Ser    Fin    Soc    Tra </span></a>
+<a class="sourceLine" id="cb48-5" title="5"><span class="co">#ans&gt; 19.131  1.254 27.008  0.908  8.165 12.958  4.000 20.023  6.546</span></a>
+<a class="sourceLine" id="cb48-6" title="6"></a>
+<a class="sourceLine" id="cb48-7" title="7"><span class="co"># Rescalation done to each variable</span></a>
+<a class="sourceLine" id="cb48-8" title="8"><span class="co"># - if cor = FALSE (default), a vector of ones</span></a>
+<a class="sourceLine" id="cb48-9" title="9"><span class="co"># - if cor = TRUE, a vector with the standard deviations of the variables</span></a>
+<a class="sourceLine" id="cb48-10" title="10">pca<span class="op">$</span>scale</a>
+<a class="sourceLine" id="cb48-11" title="11"><span class="co">#ans&gt;    Agr    Min    Man    Pow    Con    Ser    Fin    Soc    Tra </span></a>
+<a class="sourceLine" id="cb48-12" title="12"><span class="co">#ans&gt; 15.245  0.951  6.872  0.369  1.614  4.486  2.752  6.697  1.364</span></a>
+<a class="sourceLine" id="cb48-13" title="13"></a>
+<a class="sourceLine" id="cb48-14" title="14"><span class="co"># Summary of the importance of components - the third row is key</span></a>
+<a class="sourceLine" id="cb48-15" title="15"><span class="kw">summary</span>(pca)</a>
+<a class="sourceLine" id="cb48-16" title="16"><span class="co">#ans&gt; Importance of components:</span></a>
+<a class="sourceLine" id="cb48-17" title="17"><span class="co">#ans&gt;                        Comp.1 Comp.2 Comp.3 Comp.4 Comp.5 Comp.6 Comp.7</span></a>
+<a class="sourceLine" id="cb48-18" title="18"><span class="co">#ans&gt; Standard deviation      1.867  1.460  1.048  0.997 0.7370 0.6192 0.4751</span></a>
+<a class="sourceLine" id="cb48-19" title="19"><span class="co">#ans&gt; Proportion of Variance  0.387  0.237  0.122  0.110 0.0604 0.0426 0.0251</span></a>
+<a class="sourceLine" id="cb48-20" title="20"><span class="co">#ans&gt; Cumulative Proportion   0.387  0.624  0.746  0.857 0.9171 0.9597 0.9848</span></a>
+<a class="sourceLine" id="cb48-21" title="21"><span class="co">#ans&gt;                        Comp.8   Comp.9</span></a>
+<a class="sourceLine" id="cb48-22" title="22"><span class="co">#ans&gt; Standard deviation     0.3699 6.75e-03</span></a>
+<a class="sourceLine" id="cb48-23" title="23"><span class="co">#ans&gt; Proportion of Variance 0.0152 5.07e-06</span></a>
+<a class="sourceLine" id="cb48-24" title="24"><span class="co">#ans&gt; Cumulative Proportion  1.0000 1.00e+00</span></a>
+<a class="sourceLine" id="cb48-25" title="25"></a>
+<a class="sourceLine" id="cb48-26" title="26"><span class="co"># Scree plot - the variance of each component</span></a>
+<a class="sourceLine" id="cb48-27" title="27"><span class="kw">plot</span>(pca)</a></code></pre></div>
+<p><img src="Machine-Learning_files/figure-html/unnamed-chunk-116-1.png" width="70%" style="display: block; margin: auto;" /></p>
+<div class="sourceCode" id="cb49"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb49-1" title="1"></a>
+<a class="sourceLine" id="cb49-2" title="2"><span class="co"># With connected lines - useful for looking for the &quot;elbow&quot;</span></a>
+<a class="sourceLine" id="cb49-3" title="3"><span class="kw">plot</span>(pca, <span class="dt">type =</span> <span class="st">&quot;l&quot;</span>)</a></code></pre></div>
+<p><img src="Machine-Learning_files/figure-html/unnamed-chunk-116-2.png" width="70%" style="display: block; margin: auto;" /></p>
+<div class="sourceCode" id="cb50"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb50-1" title="1"></a>
+<a class="sourceLine" id="cb50-2" title="2"><span class="co"># PC1 and PC2 -- These are the weights of the variables on the first two Principal Components</span></a>
+<a class="sourceLine" id="cb50-3" title="3">pca<span class="op">$</span>loadings[, <span class="dv">1</span><span class="op">:</span><span class="dv">2</span>]</a>
+<a class="sourceLine" id="cb50-4" title="4"><span class="co">#ans&gt;       Comp.1  Comp.2</span></a>
+<a class="sourceLine" id="cb50-5" title="5"><span class="co">#ans&gt; Agr  0.52379  0.0536</span></a>
+<a class="sourceLine" id="cb50-6" title="6"><span class="co">#ans&gt; Min  0.00132  0.6178</span></a>
+<a class="sourceLine" id="cb50-7" title="7"><span class="co">#ans&gt; Man -0.34750  0.3551</span></a>
+<a class="sourceLine" id="cb50-8" title="8"><span class="co">#ans&gt; Pow -0.25572  0.2611</span></a>
+<a class="sourceLine" id="cb50-9" title="9"><span class="co">#ans&gt; Con -0.32518  0.0513</span></a>
+<a class="sourceLine" id="cb50-10" title="10"><span class="co">#ans&gt; Ser -0.37892 -0.3502</span></a>
+<a class="sourceLine" id="cb50-11" title="11"><span class="co">#ans&gt; Fin -0.07437 -0.4537</span></a>
+<a class="sourceLine" id="cb50-12" title="12"><span class="co">#ans&gt; Soc -0.38741 -0.2215</span></a>
+<a class="sourceLine" id="cb50-13" title="13"><span class="co">#ans&gt; Tra -0.36682  0.2026</span></a></code></pre></div>
+<p>Based on the weights of the variables on the PCs shown above, we can extract the following interpretation:</p>
+<ul>
+<li>PC1 is roughly a linear combination of <code>Agr</code>, with <em>negative</em> weight, and (<code>Man</code>, <code>Pow</code>, <code>Con</code>, <code>Ser</code>, <code>Soc</code>, <code>Tra</code>), with <em>positive</em> weights. So it can be interpreted as an <em>indicator</em> of the kind of economy of the country: agricultural (negative values) or industrial (positive values).</li>
+<li>PC2 has <em>negative</em> weights on (<code>Min</code>, <code>Man</code>, <code>Pow</code>, <code>Tra</code>) and <em>positive</em> weights in (<code>Ser</code>, <code>Fin</code>, <code>Soc</code>). It can be interpreted as the contrast between relatively large or small service sectors. So it tends to be negative in communist countries and positive in capitalist countries.</li>
+</ul>
+<div class="rmdtip">
+<p>
+The interpretation of the PCs involves inspecting the weights and interpreting the linear combination of the original variables, which might be separating between two clear characteristics of the data
+</p>
+</div>
+<p>To conclude, let’s see how we can represent our original data into a plot called <em>biplot</em> that summarizes all the analysis for two PCs.</p>
+<div class="sourceCode" id="cb51"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb51-1" title="1"><span class="co"># Biplot - plot together the scores for PC1 and PC2 and the</span></a>
+<a class="sourceLine" id="cb51-2" title="2"><span class="co"># variables expressed in terms of PC1 and PC2</span></a>
+<a class="sourceLine" id="cb51-3" title="3"><span class="kw">biplot</span>(pca)</a></code></pre></div>
+<p><img src="Machine-Learning_files/figure-html/unnamed-chunk-118-1.png" width="90%" style="display: block; margin: auto;" /></p>
+<p>This biplot confirms the above interpretation.</p>
+<p>Recall that the biplot is a superposition of two figures: the first one is the scatterplot of the principal component scores (the projections of the observations on the new low dimensional space - also know as graph of individuals) and the second one is the figure of loading vectors (also known as graph of variables). In fact, the graph of variables is a correlation circle, the variables whose unit vectors are close to each other are said to be positively correlated, meaning that their influence on the positioning of individuals is similar (again, these proximities are reflected in the projections of variables on the graph of individuals). However, variables far away from each other will be defined as being negatively correlated. Variables that have perpendicular unit vector are uncorrelated. To see both graphs we can use the <code>factoextra</code> package like follows:</p>
+<div class="sourceCode" id="cb52"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb52-1" title="1"><span class="co"># loading factoextra library</span></a>
+<a class="sourceLine" id="cb52-2" title="2"><span class="kw">require</span>(factoextra)</a>
+<a class="sourceLine" id="cb52-3" title="3"><span class="co"># Calculating pca using prcomp(), which is a built-in function in R </span></a>
+<a class="sourceLine" id="cb52-4" title="4">res.pca &lt;-<span class="st"> </span><span class="kw">prcomp</span>(eurojob, <span class="dt">scale =</span> <span class="ot">TRUE</span>)</a>
+<a class="sourceLine" id="cb52-5" title="5"></a>
+<a class="sourceLine" id="cb52-6" title="6"><span class="co"># Graph of individuals</span></a>
+<a class="sourceLine" id="cb52-7" title="7"><span class="kw">fviz_pca_ind</span>(res.pca,</a>
+<a class="sourceLine" id="cb52-8" title="8">             <span class="dt">col.ind =</span> <span class="st">&quot;contrib&quot;</span>, <span class="co"># Color by their contribution to axes</span></a>
+<a class="sourceLine" id="cb52-9" title="9">             <span class="dt">gradient.cols =</span> <span class="kw">c</span>(<span class="st">&quot;#00AFBB&quot;</span>, <span class="st">&quot;#E7B800&quot;</span>, <span class="st">&quot;#FC4E07&quot;</span>),</a>
+<a class="sourceLine" id="cb52-10" title="10">             <span class="dt">repel =</span> <span class="ot">TRUE</span>     </a>
+<a class="sourceLine" id="cb52-11" title="11">             )</a></code></pre></div>
+<p><img src="Machine-Learning_files/figure-html/unnamed-chunk-119-1.png" width="90%" style="display: block; margin: auto;" /></p>
+<div class="sourceCode" id="cb53"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb53-1" title="1"><span class="co"># Graph of variables</span></a>
+<a class="sourceLine" id="cb53-2" title="2"><span class="kw">fviz_pca_var</span>(res.pca,</a>
+<a class="sourceLine" id="cb53-3" title="3">             <span class="dt">col.var =</span> <span class="st">&quot;contrib&quot;</span>, </a>
+<a class="sourceLine" id="cb53-4" title="4">             <span class="dt">gradient.cols =</span> <span class="kw">c</span>(<span class="st">&quot;#00AFBB&quot;</span>, <span class="st">&quot;#E7B800&quot;</span>, <span class="st">&quot;#FC4E07&quot;</span>),</a>
+<a class="sourceLine" id="cb53-5" title="5">             <span class="dt">repel =</span> <span class="ot">TRUE</span>     </a>
+<a class="sourceLine" id="cb53-6" title="6">             )</a></code></pre></div>
+<p><img src="Machine-Learning_files/figure-html/unnamed-chunk-119-2.png" width="90%" style="display: block; margin: auto;" /></p>
+<div class="sourceCode" id="cb54"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb54-1" title="1"><span class="co"># Biplot of individuals and variables</span></a>
+<a class="sourceLine" id="cb54-2" title="2"><span class="kw">fviz_pca_biplot</span>(res.pca, <span class="dt">repel =</span> <span class="ot">TRUE</span>,</a>
+<a class="sourceLine" id="cb54-3" title="3">                <span class="dt">col.var =</span> <span class="st">&quot;#2E9FDF&quot;</span>, </a>
+<a class="sourceLine" id="cb54-4" title="4">                <span class="dt">col.ind =</span> <span class="st">&quot;#696969&quot;</span>  </a>
+<a class="sourceLine" id="cb54-5" title="5">                )</a></code></pre></div>
+<p><img src="Machine-Learning_files/figure-html/unnamed-chunk-119-3.png" width="90%" style="display: block; margin: auto;" /></p>
+<p align="right">
+◼
+</p>
+
+</div>
+</div>
+</div>
+
+
+
+<h1>Discussion</h1>
+<div id="disqus_thread"></div>
+<script>
+
+/**
+*  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+*  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables*/
+/*
+var disqus_config = function () {
+this.page.url = PAGE_URL;  // Replace PAGE_URL with your page's canonical URL variable
+this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+};
+*/
+(function() { // DON'T EDIT BELOW THIS LINE
+var d = document, s = d.createElement('script');
+s.src = 'https://mlcourse.disqus.com/embed.js';
+s.setAttribute('data-timestamp', +new Date());
+(d.head || d.body).appendChild(s);
+})();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="session-5.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="clustering.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="book_assets/gitbook-2.6.7/js/app.min.js"></script>
+<script src="book_assets/gitbook-2.6.7/js/lunr.js"></script>
+<script src="book_assets/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="book_assets/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="book_assets/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="book_assets/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="book_assets/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="book_assets/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="book_assets/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": false,
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"history": {
+"link": null,
+"text": null
+},
+"download": null,
+"toc": {
+"collapse": "section",
+"scroll_highlight": true
+},
+"toolbar": {
+"position": "fixed"
+},
+"search": true
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>

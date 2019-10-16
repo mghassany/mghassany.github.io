@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Chapitre 4 Intervalle de confiance | Statistique Inférentielle</title>
+  <title>TP illustration numérique des méthodes d’estimation avec R | Statistique Inférentielle</title>
   <meta name="description" content="Cours de Statistique Inférentielle A3 ESILV" />
   <meta name="generator" content="bookdown 0.13.2 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Chapitre 4 Intervalle de confiance | Statistique Inférentielle" />
+  <meta property="og:title" content="TP illustration numérique des méthodes d’estimation avec R | Statistique Inférentielle" />
   <meta property="og:type" content="book" />
   
   
@@ -16,7 +16,7 @@
   
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Chapitre 4 Intervalle de confiance | Statistique Inférentielle" />
+  <meta name="twitter:title" content="TP illustration numérique des méthodes d’estimation avec R | Statistique Inférentielle" />
   
   <meta name="twitter:description" content="Cours de Statistique Inférentielle A3 ESILV" />
   
@@ -31,8 +31,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   <link rel="shortcut icon" href="img/favicon.ico" type="image/x-icon" />
-<link rel="prev" href="tp-illustration-numerique-des-methodes-destimation-avec-r.html"/>
-<link rel="next" href="tests-dhpotheses.html"/>
+<link rel="prev" href="exercices-2.html"/>
+<link rel="next" href="intervalle-de-confiance.html"/>
 <script src="book_assets/jquery-2.2.3/jquery.min.js"></script>
 <link href="book_assets/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="book_assets/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -334,60 +334,13 @@ code span.wa { color: #bf0303; } /* Warning */
 <div class = rmdreview>
 Vous êtes invités à annoter le contenu de ce cours. Les annotations peuvent être des corrections typographiques, des propositions ou des questions. Pour ajouter des annotations, <span style="background-color: #3297FD; color: white">choisissez le text</span> que vous voulez commenter et cliquez sur <i class="h-icon-annotate"></i>. Pour accéder aux annotations crées par d'autres personnes, cliquez <i class="h-icon-chevron-left"></i> sur le coin supérieur de la page <i class="fa fa-arrow-circle-right  fa-rotate-315" aria-hidden="true"></i>.
 </div>
-<div id="intervalle-de-confiance" class="section level1">
-<h1><span class="header-section-number">Chapitre 4</span> Intervalle de confiance</h1>
-<!-- Dans ce chapitre, on suppose que les données x 1 ,...,x n sont n réalisations indépendan- -->
-<!-- tes d'une même variable aléatoire sous-jacente X. Il est équivalent de supposer que -->
-<!-- x 1 ,...,x n sont les réalisations de variables aléatoires X 1 ,...,X n indépendantes et de -->
-<!-- même loi. Nous adopterons ici la seconde formulation, qui est plus pratique à manipuler. -->
-<!-- Les techniques de statistique descriptive, comme l'histogramme ou le graphe de pro- -->
-<!-- babilités, permettent de faire des hypothèses sur la nature de la loi de probabilité des -->
-<!-- X i . Des techniques statistiques plus sophistiquées, les tests d'adéquation, permettent de -->
-<!-- valider ou pas ces hypothèses. -->
-<!-- On supposera ici que ces techniques ont permis d'adopter une famille de lois de proba- -->
-<!-- bilité bien précise (par exemple, loi normale, loi de Poisson, etc.) pour la loi des X i , mais -->
-<!-- que la valeur du ou des paramètres de cette loi est inconnue. -->
-<!-- On notera θ le paramètre inconnu. Le problème traité dans ce chapitre est celui de -->
-<!-- l'estimation du paramètre θ. Comme on l'a déjà dit, il s'agit de donner, au vu des ob- -->
-<!-- servations x 1 ,...,x n , une approximation ou une évaluation de θ que l'on espère la plus -->
-<!-- proche possible de la vraie valeur inconnue. On pourra proposer une unique valeur vrai- -->
-<!-- semblable pour θ (estimation ponctuelle, dans ce chapitre) ou un ensemble de valeurs -->
-<!-- vraisemblables (estimation ensembliste ou région de confiance, dans le chapitre -->
-<!-- suivant). -->
-<!-- Il y a donc intervention du hasard et des probabilités. L'objectif essentiel de la -->
-<!-- statistique est de maˆıtriser au mieux cette incertitude pour extraire des informations -->
-<!-- utiles des données, par l'intermédiaire de l'analyse des variations dans les observations. -->
-<!-- Nous ne nous intéresserons pas à la collecte des données, qui est une tâche importante -->
-<!-- et difficile, mais qui ne relève pas des mathématiques. Si on omet la collecte des données, -->
-<!-- les méthodes statistiques se répartissent en deux classes : -->
-<!-- • La statistique descriptive, statistique exploratoire ou analyse des données, -->
-<!-- a pour but de résumer l'information contenue dans les données de fa¸ con synthéti- -->
-<!-- que et efficace. Elle utilise pour cela des représentations de données sous forme -->
-<!-- de graphiques, de tableaux et d'indicateurs numériques (par exemple des moyennes). -->
-<!-- Elle permet de dégager les caractéristiques essentielles du phénomène étudié et de -->
-<!-- suggérer des hypothèses pour une étude ultérieure plus sophistiquée. Les probabilités -->
-<!-- n'ont ici qu'un rôle mineur. -->
-<!-- • La statistique inférentielle va au delà de la simple description des données. Elle -->
-<!-- a pour but de faire des prévisions et de prendre des décisions au vu des ob- -->
-<!-- servations. En général, il faut pour cela proposer des modèles probabilistes du -->
-<!-- phénomène aléatoire étudié et savoir gérer les risques d'erreurs. Les probabilités -->
-<!-- jouent ici un rôle fondamental. -->
-<!-- Pour le grand public, les statistiques désignent les résumés de données fournis par la -->
-<!-- statistique descriptive. Par exemple, on parle des “statistiques du chômage” ou des “statis- -->
-<!-- tiques de l'économie américaine”. Mais on oublie en général les aspects les plus importants -->
-<!-- liés aux prévisions et à l'aide à la décision apportés par la statistique inférentielle. -->
-<!-- L'informatique et la statistique sont deux éléments du traitement de l'information : -->
-<!-- l'informatique acquiert et traite l'information tandis que la statistique l'analyse. Les deux -->
-<!-- disciplines sont donc étroitement liées. En particulier, l'augmentation considérable de -->
-<!-- la puissance des ordinateurs et la facilité de transmission des données par internet ont -->
-<!-- rendu possible l'analyse de très grandes masses de données, ce qui nécessite l'utilisation de -->
-<!-- méthodes de plus en plus sophistiquées, connues sous le nom de data mining ou fouille -->
-<!-- de données. Enfin, l'informatique décisionnelle ou business intelligence regroupe -->
-<!-- les outils d'aide à la décision devenus essentiels dans la gestion des entreprises. Ces -->
-<!-- outils nécessitent un recours important aux méthodes statistiques. -->
-<!-- Plus généralement, tout ingénieur est amené à prendre des décisions au vu de certaines -->
-<!-- informations, dans des contextes où de nombreuses incertitudes demeurent. Il importe -->
-<!-- donc qu'un ingénieur soit formé aux techniques de gestion du risque et de traitement de -->
+<div id="tp-illustration-numerique-des-methodes-destimation-avec-r" class="section level1 unnumbered">
+<h1>TP illustration numérique des méthodes d’estimation avec R</h1>
+<!-- Comparaison estimateurs: http://ljk.imag.fr/membres/Laurent.Zwald/TP10L3IUPMAI/TP10.pdf -->
+<!-- comparaison et ic from -->
+<!-- http://certis.enpc.fr/~dalalyan/Download/TP_ENPC_3.pdf -->
+<!-- EMV -->
+<!-- http://dridk.me/maximum-de-vraissemblance.html -->
 
 </div>
             </section>
@@ -395,8 +348,8 @@ Vous êtes invités à annoter le contenu de ce cours. Les annotations peuvent �
           </div>
         </div>
       </div>
-<a href="tp-illustration-numerique-des-methodes-destimation-avec-r.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="tests-dhpotheses.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="exercices-2.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="intervalle-de-confiance.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="book_assets/gitbook-2.6.7/js/app.min.js"></script>

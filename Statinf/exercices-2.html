@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Chapitre 4 Intervalle de confiance | Statistique Inférentielle</title>
+  <title>Exercices | Statistique Inférentielle</title>
   <meta name="description" content="Cours de Statistique Inférentielle A3 ESILV" />
   <meta name="generator" content="bookdown 0.13.2 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Chapitre 4 Intervalle de confiance | Statistique Inférentielle" />
+  <meta property="og:title" content="Exercices | Statistique Inférentielle" />
   <meta property="og:type" content="book" />
   
   
@@ -16,7 +16,7 @@
   
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Chapitre 4 Intervalle de confiance | Statistique Inférentielle" />
+  <meta name="twitter:title" content="Exercices | Statistique Inférentielle" />
   
   <meta name="twitter:description" content="Cours de Statistique Inférentielle A3 ESILV" />
   
@@ -31,8 +31,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   <link rel="shortcut icon" href="img/favicon.ico" type="image/x-icon" />
-<link rel="prev" href="tp-illustration-numerique-des-methodes-destimation-avec-r.html"/>
-<link rel="next" href="tests-dhpotheses.html"/>
+<link rel="prev" href="estimation-ponctuelle.html"/>
+<link rel="next" href="tp-illustration-numerique-des-methodes-destimation-avec-r.html"/>
 <script src="book_assets/jquery-2.2.3/jquery.min.js"></script>
 <link href="book_assets/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="book_assets/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -334,60 +334,145 @@ code span.wa { color: #bf0303; } /* Warning */
 <div class = rmdreview>
 Vous êtes invités à annoter le contenu de ce cours. Les annotations peuvent être des corrections typographiques, des propositions ou des questions. Pour ajouter des annotations, <span style="background-color: #3297FD; color: white">choisissez le text</span> que vous voulez commenter et cliquez sur <i class="h-icon-annotate"></i>. Pour accéder aux annotations crées par d'autres personnes, cliquez <i class="h-icon-chevron-left"></i> sur le coin supérieur de la page <i class="fa fa-arrow-circle-right  fa-rotate-315" aria-hidden="true"></i>.
 </div>
-<div id="intervalle-de-confiance" class="section level1">
-<h1><span class="header-section-number">Chapitre 4</span> Intervalle de confiance</h1>
-<!-- Dans ce chapitre, on suppose que les données x 1 ,...,x n sont n réalisations indépendan- -->
-<!-- tes d'une même variable aléatoire sous-jacente X. Il est équivalent de supposer que -->
-<!-- x 1 ,...,x n sont les réalisations de variables aléatoires X 1 ,...,X n indépendantes et de -->
-<!-- même loi. Nous adopterons ici la seconde formulation, qui est plus pratique à manipuler. -->
-<!-- Les techniques de statistique descriptive, comme l'histogramme ou le graphe de pro- -->
-<!-- babilités, permettent de faire des hypothèses sur la nature de la loi de probabilité des -->
-<!-- X i . Des techniques statistiques plus sophistiquées, les tests d'adéquation, permettent de -->
-<!-- valider ou pas ces hypothèses. -->
-<!-- On supposera ici que ces techniques ont permis d'adopter une famille de lois de proba- -->
-<!-- bilité bien précise (par exemple, loi normale, loi de Poisson, etc.) pour la loi des X i , mais -->
-<!-- que la valeur du ou des paramètres de cette loi est inconnue. -->
-<!-- On notera θ le paramètre inconnu. Le problème traité dans ce chapitre est celui de -->
-<!-- l'estimation du paramètre θ. Comme on l'a déjà dit, il s'agit de donner, au vu des ob- -->
-<!-- servations x 1 ,...,x n , une approximation ou une évaluation de θ que l'on espère la plus -->
-<!-- proche possible de la vraie valeur inconnue. On pourra proposer une unique valeur vrai- -->
-<!-- semblable pour θ (estimation ponctuelle, dans ce chapitre) ou un ensemble de valeurs -->
-<!-- vraisemblables (estimation ensembliste ou région de confiance, dans le chapitre -->
-<!-- suivant). -->
-<!-- Il y a donc intervention du hasard et des probabilités. L'objectif essentiel de la -->
-<!-- statistique est de maˆıtriser au mieux cette incertitude pour extraire des informations -->
-<!-- utiles des données, par l'intermédiaire de l'analyse des variations dans les observations. -->
-<!-- Nous ne nous intéresserons pas à la collecte des données, qui est une tâche importante -->
-<!-- et difficile, mais qui ne relève pas des mathématiques. Si on omet la collecte des données, -->
-<!-- les méthodes statistiques se répartissent en deux classes : -->
-<!-- • La statistique descriptive, statistique exploratoire ou analyse des données, -->
-<!-- a pour but de résumer l'information contenue dans les données de fa¸ con synthéti- -->
-<!-- que et efficace. Elle utilise pour cela des représentations de données sous forme -->
-<!-- de graphiques, de tableaux et d'indicateurs numériques (par exemple des moyennes). -->
-<!-- Elle permet de dégager les caractéristiques essentielles du phénomène étudié et de -->
-<!-- suggérer des hypothèses pour une étude ultérieure plus sophistiquée. Les probabilités -->
-<!-- n'ont ici qu'un rôle mineur. -->
-<!-- • La statistique inférentielle va au delà de la simple description des données. Elle -->
-<!-- a pour but de faire des prévisions et de prendre des décisions au vu des ob- -->
-<!-- servations. En général, il faut pour cela proposer des modèles probabilistes du -->
-<!-- phénomène aléatoire étudié et savoir gérer les risques d'erreurs. Les probabilités -->
-<!-- jouent ici un rôle fondamental. -->
-<!-- Pour le grand public, les statistiques désignent les résumés de données fournis par la -->
-<!-- statistique descriptive. Par exemple, on parle des “statistiques du chômage” ou des “statis- -->
-<!-- tiques de l'économie américaine”. Mais on oublie en général les aspects les plus importants -->
-<!-- liés aux prévisions et à l'aide à la décision apportés par la statistique inférentielle. -->
-<!-- L'informatique et la statistique sont deux éléments du traitement de l'information : -->
-<!-- l'informatique acquiert et traite l'information tandis que la statistique l'analyse. Les deux -->
-<!-- disciplines sont donc étroitement liées. En particulier, l'augmentation considérable de -->
-<!-- la puissance des ordinateurs et la facilité de transmission des données par internet ont -->
-<!-- rendu possible l'analyse de très grandes masses de données, ce qui nécessite l'utilisation de -->
-<!-- méthodes de plus en plus sophistiquées, connues sous le nom de data mining ou fouille -->
-<!-- de données. Enfin, l'informatique décisionnelle ou business intelligence regroupe -->
-<!-- les outils d'aide à la décision devenus essentiels dans la gestion des entreprises. Ces -->
-<!-- outils nécessitent un recours important aux méthodes statistiques. -->
-<!-- Plus généralement, tout ingénieur est amené à prendre des décisions au vu de certaines -->
-<!-- informations, dans des contextes où de nombreuses incertitudes demeurent. Il importe -->
-<!-- donc qu'un ingénieur soit formé aux techniques de gestion du risque et de traitement de -->
+<div id="exercices-2" class="section level1 unnumbered">
+<h1>Exercices</h1>
+<!-- from td14 dans teaching ressources td  avec correction-->
+
+<div class="exercise">
+<p><span id="exr:unnamed-chunk-85" class="exercise"><strong>Exercice 3.1  (La variance corrigée)  </strong></span>Soit <span class="math inline">\(X\)</span> une variable aléatoire ayant une espérance <span class="math inline">\(m\)</span> et une variance <span class="math inline">\(\sigma^2\)</span>, sa variance empirique est <span class="math inline">\(s_{n}^2=\frac{1}{n} \sum X_{i}^{2}-\overline{X}_{n}^{2}\)</span> avec
+<span class="math inline">\(\overline{X}_{n}\)</span> la moyenne empirique de <span class="math inline">\(X\)</span> et <span class="math inline">\(\frac{1}{n} \sum X_{i}^{2}\)</span> la moyenne empirique de <span class="math inline">\(X^{2}\)</span>.</p>
+<ol style="list-style-type: decimal">
+<li>Calculer <span class="math inline">\(E\left(X_{n}\right)\)</span> et <span class="math inline">\(V\left(X_{n}\right)\)</span> et en déduire <span class="math inline">\(E(\overline{X}_{n}^{2})\)</span>.</li>
+<li>Montrer enfin que <span class="math inline">\(E\left(s_{n}^2\right)=\frac{n-1}{n} V(X)\)</span> et en déduire un estimateur sans biais de la variance (on nomme cet estimateur <span class="math inline">\(s_{n}^{*^2}\)</span>).
+</div></li>
+</ol>
+<!-- from exos_STA230 ex 2.1.1 et 2.1.2 et 2.1.3 (3 pour examen ?) -->
+
+<div class="exercise">
+<p><span id="exr:unnamed-chunk-86" class="exercise"><strong>Exercice 3.2  (EMM)  </strong></span>On considère l’échantillon statistique</p>
+<p><span class="math display">\[1,0,2,1,1,0,1,0,0\]</span></p>
+<ol style="list-style-type: decimal">
+<li>Cacluler sa moyenne et sa variance empirique.</li>
+<li>En supposant que les données de cet échantillon sont des réalisations d’une variable de loi inconnue, donner une estimation non biaisée de l’espérance et de la variance de cette loi.</li>
+<li>On choisit de modéliser les valeurs de cet échantillon par une loi binomiale <span class="math inline">\(\mathcal{B}(2, p)\)</span>. Utiliser la moyenne empirique pour proposer une estimation ponctuelle pour <span class="math inline">\(p\)</span>.</li>
+<li>Avec le même modèle, utiliser la variance empirique pour proposer une autre estimation de <span class="math inline">\(p\)</span>.</li>
+<li>On choisit de modéliser les valeurs de cet échantillon par une loi de Poisson <span class="math inline">\(\mathcal{P}(\lambda)\)</span>, qui a pour espérance <span class="math inline">\(\lambda\)</span>. Quelle estimation ponctuelle proposez-vous pour <span class="math inline">\(\lambda\)</span>?
+</div></li>
+</ol>
+<!-- exo 2 from td14 dans teaching ressources td  avec correction -->
+
+<div class="exercise">
+<p><span id="exr:unnamed-chunk-87" class="exercise"><strong>Exercice 3.3  (Comparaison d’estimateurs)  </strong></span>Soit <span class="math inline">\(X\)</span> une VAR de loi uniforme sur un intervalle <span class="math inline">\([0, a]\)</span> où <span class="math inline">\(a\)</span> est un paramètre inconnu, et on dispose de <span class="math inline">\(\left(X_{1}, \ldots, X_{n}\right)\)</span> un <span class="math inline">\(n\)</span> -echantillon de <span class="math inline">\(X\)</span>. On note <span class="math inline">\(\overline{X}_{n}\)</span> la moyenne empirique de <span class="math inline">\(X\)</span>.</p>
+<ol style="list-style-type: decimal">
+<li>Soit <span class="math inline">\(T_{n}=2 \overline{X}_{n}\)</span>. Montrer que <span class="math inline">\(T_{n}\)</span> est un estimateur sans biais de <span class="math inline">\(a\)</span> et calculer son risque quadratique.</li>
+<li>Soit <span class="math inline">\(T_{n}^{\prime}=\max \left(X_{1}, \ldots, X_{n}\right)\)</span>. Donner la fonction de répartition de <span class="math inline">\(T_{n}^{\prime}\)</span>. En déduire une densité de <span class="math inline">\(T_{n}^{\prime}\)</span>, puis son biais et son risque quadratique.</li>
+<li>Soit <span class="math inline">\(T_{n}^{\prime \prime}=\frac{n+1}{n} T_{n}^{\prime}\)</span>. Déterminer son biais et son risque quadratique.</li>
+<li>Pour de grandes valeurs de <span class="math inline">\(n\)</span>, quelle est le meilleur estimateur de <span class="math inline">\(a\)</span>?
+</div></li>
+</ol>
+<!-- from ali, estimation, exo 36 -->
+<!-- exo37 -->
+<!-- exo39 ?  -->
+<!-- cours stat inf master .pdf dans dossier teaching ressources chap 4 estimation ex3 ok (emv pour loi normal, bonne correction) -->
+
+<div class="exercise">
+<p><span id="exr:unnamed-chunk-88" class="exercise"><strong>Exercice 3.4  (EMV loi normale)  </strong></span>Considérons un échantillon aléatoire <span class="math inline">\((X_1,\ldots,X_n)\)</span> (les <span class="math inline">\(X_i\)</span> sont <strong>iid</strong>) et issu d’une variable alétoire parente <span class="math inline">\(X \thicksim \mathcal{N}(\mu,\sigma^2)\)</span>.</p>
+<ol style="list-style-type: decimal">
+<li>Calculer les estimateurs de maximum de vraisemblance (EMV) de <span class="math inline">\(\mu\)</span> et <span class="math inline">\(\sigma^2\)</span>.</li>
+<li>Ces estimateurs sont-ils sont biais?
+</div></li>
+</ol>
+<!-- Corinne ex 19 -->
+
+<div class="exercise">
+<p><span id="exr:unnamed-chunk-89" class="exercise"><strong>Exercice 3.5  (EMV loi géométrique)  </strong></span>Les oiseaux d’un certain type prennent leur envol après avoir effectué quelques sauts sur le sol. On suppose que ce nombre <span class="math inline">\(X\)</span> de sauts peut être modélisé par une distribution géométrique sur <span class="math inline">\(\mathbb{N}^*\)</span>:</p>
+<p><span class="math display">\[P(X=k)= p(1-p)^{k-1} \quad k \geq 1\]</span></p>
+<p>Pour <span class="math inline">\(n=130\)</span> oiseaux de ce type, on a relevé les données suivantes:</p>
+<table style="width:100%;">
+<colgroup>
+<col width="32%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="4%" />
+<col width="4%" />
+<col width="4%" />
+<col width="4%" />
+<col width="4%" />
+<col width="4%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+</colgroup>
+<tbody>
+<tr class="odd">
+<td align="center"><strong>Nombre de sauts <span class="math inline">\(k\)</span></strong></td>
+<td align="center">1</td>
+<td align="center">2</td>
+<td align="center">3</td>
+<td align="center">4</td>
+<td align="center">5</td>
+<td align="center">6</td>
+<td align="center">7</td>
+<td align="center">8</td>
+<td align="center">9</td>
+<td align="center">10</td>
+<td align="center">11</td>
+<td align="center">12</td>
+</tr>
+<tr class="even">
+<td align="center"><strong>Effectifs</strong></td>
+<td align="center">48</td>
+<td align="center">31</td>
+<td align="center">20</td>
+<td align="center">9</td>
+<td align="center">6</td>
+<td align="center">5</td>
+<td align="center">4</td>
+<td align="center">2</td>
+<td align="center">1</td>
+<td align="center">1</td>
+<td align="center">2</td>
+<td align="center">1</td>
+</tr>
+</tbody>
+</table>
+<ol style="list-style-type: decimal">
+<li>Quel est l’estimateur du maximum de vraisemblance de <span class="math inline">\(p\)</span>?</li>
+<li>Calculer la valeur de cet estimateur avec les données de l’échantillon.
+</div></li>
+</ol>
+<!-- exo 1 from DS-stat https://www.math.u-bordeaux.fr/~mibonnef/cpp-stat/DS-stat.pdf -->
+<p><strong>Extra</strong></p>
+
+<div class="exercise">
+<p><span id="exr:unnamed-chunk-91" class="exercise"><strong>Exercice 3.6  </strong></span>On considère une variable aléatoire <span class="math inline">\(X\)</span> de densité <span class="math inline">\(f_{\theta}\)</span> avec
+<span class="math inline">\(-\frac{1}{2} \leq \theta \leq \frac{1}{2}\)</span> et</p>
+<p><span class="math display">\[
+f_{\theta}(x)=\left\{\begin{array}{cl}{\frac{1}{2}-\theta} &amp; {\text { si } x \in[-1,0]} \\ {\frac{1}{2}+\theta} &amp; {\text { si } x \in[0,1]} \\ {0} &amp; {\text { sinon }}\end{array}\right.
+\]</span></p>
+<ol style="list-style-type: decimal">
+<li>Représenter <span class="math inline">\(f_{\theta}\)</span> et justifier que <span class="math inline">\(f_{\theta}\)</span> est bien une densité de probabilité pour <span class="math inline">\(-\frac{1}{2} \leq \theta \leq \frac{1}{2}\)</span>.</li>
+<li>Calculer l’espérance et la variance de <span class="math inline">\(X\)</span>.</li>
+</ol>
+<p>On considère maintenant <span class="math inline">\(X_{1}, \ldots X_{n}\)</span> des variables aléatoires indépendantes et de même loi. On suppose que la loi commune est de densité <span class="math inline">\(f_{\theta}\)</span> avec <span class="math inline">\(-\frac{1}{2} \leq \theta \leq \frac{1}{2}\)</span> inconnu. On va chercher à estimer <span class="math inline">\(\theta\)</span>.</p>
+<ol start="3" style="list-style-type: decimal">
+<li>Proposer un esitmateur <span class="math inline">\(\hat{\theta}\)</span> de <span class="math inline">\(\theta\)</span> basé sur la méthode des moments. On prend <span class="math inline">\(\hat{\theta}_{n}=\frac{1}{n} \sum X_{i}\)</span>.</li>
+<li>Calculer son biais et son risque quadratique.</li>
+</ol>
+<p>On va maintenant s’intéresser à l’estimateur du maximum de vraisemblance
+de <span class="math inline">\(\theta\)</span>.</p>
+<ol start="5" style="list-style-type: decimal">
+<li><p>On note <span class="math inline">\(N_{1}=\sum_{i=1}^{n} \mathbf{1}_{\left\{X_{i} \geq 0\right\}}\)</span> et <span class="math inline">\(N_{2}=\sum_{i=1}^{n} \mathbf{1}_{\left\{X_{i}&lt;0\right\}}\)</span>. Soient <span class="math inline">\(x_{1}, \ldots, x_{n} \in [-1,1]\)</span> et <span class="math inline">\(-\frac{1}{2} \leq \theta \leq \frac{1}{2}\)</span> écrire la vraisemblance du modèle au point <span class="math inline">\(\left(x_{1}, \ldots, x_{n} ; \theta\right)\)</span> en fonction de <span class="math inline">\(N_{1}, N_{2}\)</span> et <span class="math inline">\(\theta\)</span>.</p></li>
+<li><p>Montrer que l’estimateur du maximum devraisemblance existe et vaut:
+<span class="math display">\[
+\hat{\theta}_{M V}=\frac{N_{1}-N_{2}}{2\left(N_{1}+N_{2}\right)}=\frac{N_{1}}{n}-\frac{1}{2}
+\]</span></p></li>
+<li><p>On pose <span class="math inline">\(1_{\left\{X_{i} \geq 0\right\}}\)</span>, pour <span class="math inline">\(1 \leq i \leq n\)</span>. Calculer l’espérance et la variance des variables aléatoires <span class="math inline">\(Y_{i}\)</span>. En déduire l’espérance et le risque quadratique de <span class="math inline">\(\hat{\theta}_{M V}\)</span>.</p></li>
+<li><p>Quel estimateur vaut-il mieux utiliser entre <span class="math inline">\(\hat{\theta}\)</span> et <span class="math inline">\(\hat{\theta}_{M V}\)</span>? Justifier.</p>
+</div>
+<!-- + chap 5 qualité estimateur ex 1 (1) et ex 3 (seems interesting) --></li>
+</ol>
 
 </div>
             </section>
@@ -395,8 +480,8 @@ Vous êtes invités à annoter le contenu de ce cours. Les annotations peuvent �
           </div>
         </div>
       </div>
-<a href="tp-illustration-numerique-des-methodes-destimation-avec-r.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="tests-dhpotheses.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="estimation-ponctuelle.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="tp-illustration-numerique-des-methodes-destimation-avec-r.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="book_assets/gitbook-2.6.7/js/app.min.js"></script>

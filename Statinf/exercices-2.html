@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>Exercices | Statistique Inférentielle</title>
   <meta name="description" content="Cours de Statistique Inférentielle A3 ESILV" />
-  <meta name="generator" content="bookdown 0.13.2 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.14 and GitBook 2.6.7" />
 
   <meta property="og:title" content="Exercices | Statistique Inférentielle" />
   <meta property="og:type" content="book" />
@@ -24,7 +24,7 @@
 <meta name="author" content="Mohamad Ghassany" />
 
 
-<meta name="date" content="2019-10-16" />
+<meta name="date" content="2019-10-21" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -234,9 +234,13 @@ code span.wa { color: #bf0303; } /* Warning */
 <li class="chapter" data-level="3.7" data-path="estimation-ponctuelle.html"><a href="estimation-ponctuelle.html#proprietes-des-estimateurs-de-maximum-de-vraisemblance-emv"><i class="fa fa-check"></i><b>3.7</b> Propriétés des estimateurs de maximum de vraisemblance (EMV)</a></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="exercices-2.html"><a href="exercices-2.html"><i class="fa fa-check"></i>Exercices</a></li>
-<li class="chapter" data-level="" data-path="tp-illustration-numerique-des-methodes-destimation-avec-r.html"><a href="tp-illustration-numerique-des-methodes-destimation-avec-r.html"><i class="fa fa-check"></i>TP illustration numérique des méthodes d’estimation avec R</a></li>
-<li class="chapter" data-level="4" data-path="intervalle-de-confiance.html"><a href="intervalle-de-confiance.html"><i class="fa fa-check"></i><b>4</b> Intervalle de confiance</a></li>
-<li class="chapter" data-level="5" data-path="tests-dhpotheses.html"><a href="tests-dhpotheses.html"><i class="fa fa-check"></i><b>5</b> Tests d’hpothèses</a></li>
+<li class="chapter" data-level="4" data-path="tp-illustration-numerique-des-methodes-destimation-avec-r.html"><a href="tp-illustration-numerique-des-methodes-destimation-avec-r.html"><i class="fa fa-check"></i><b>4</b> TP illustration numérique des méthodes d’estimation avec R</a><ul>
+<li class="chapter" data-level="4.1" data-path="tp-illustration-numerique-des-methodes-destimation-avec-r.html"><a href="tp-illustration-numerique-des-methodes-destimation-avec-r.html#comparaison-destimateurs"><i class="fa fa-check"></i><b>4.1</b> Comparaison d’estimateurs</a></li>
+<li class="chapter" data-level="4.2" data-path="tp-illustration-numerique-des-methodes-destimation-avec-r.html"><a href="tp-illustration-numerique-des-methodes-destimation-avec-r.html#le-maximum-de-vraisemblance"><i class="fa fa-check"></i><b>4.2</b> Le maximum de vraisemblance</a></li>
+<li class="chapter" data-level="4.3" data-path="tp-illustration-numerique-des-methodes-destimation-avec-r.html"><a href="tp-illustration-numerique-des-methodes-destimation-avec-r.html#loi-de-weibull"><i class="fa fa-check"></i><b>4.3</b> Loi de Weibull</a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="intervalle-de-confiance.html"><a href="intervalle-de-confiance.html"><i class="fa fa-check"></i><b>5</b> Intervalle de confiance</a></li>
+<li class="chapter" data-level="6" data-path="tests-dhpotheses.html"><a href="tests-dhpotheses.html"><i class="fa fa-check"></i><b>6</b> Tests d’hpothèses</a></li>
 <li class="part"><span><b>Rappel Probabilités</b></span></li>
 <li class="chapter" data-level="" data-path="variables-aleatoires-discretes.html"><a href="variables-aleatoires-discretes.html"><i class="fa fa-check"></i>Variables Aléatoires Discrètes</a><ul>
 <li class="chapter" data-level="" data-path="variables-aleatoires-discretes.html"><a href="variables-aleatoires-discretes.html#notions-de-probabilites"><i class="fa fa-check"></i>Notions de Probabilités</a><ul>
@@ -364,10 +368,11 @@ Vous êtes invités à annoter le contenu de ce cours. Les annotations peuvent �
 <div class="exercise">
 <p><span id="exr:unnamed-chunk-87" class="exercise"><strong>Exercice 3.3  (Comparaison d’estimateurs)  </strong></span>Soit <span class="math inline">\(X\)</span> une VAR de loi uniforme sur un intervalle <span class="math inline">\([0, a]\)</span> où <span class="math inline">\(a\)</span> est un paramètre inconnu, et on dispose de <span class="math inline">\(\left(X_{1}, \ldots, X_{n}\right)\)</span> un <span class="math inline">\(n\)</span> -echantillon de <span class="math inline">\(X\)</span>. On note <span class="math inline">\(\overline{X}_{n}\)</span> la moyenne empirique de <span class="math inline">\(X\)</span>.</p>
 <ol style="list-style-type: decimal">
-<li>Soit <span class="math inline">\(T_{n}=2 \overline{X}_{n}\)</span>. Montrer que <span class="math inline">\(T_{n}\)</span> est un estimateur sans biais de <span class="math inline">\(a\)</span> et calculer son risque quadratique.</li>
-<li>Soit <span class="math inline">\(T_{n}^{\prime}=\max \left(X_{1}, \ldots, X_{n}\right)\)</span>. Donner la fonction de répartition de <span class="math inline">\(T_{n}^{\prime}\)</span>. En déduire une densité de <span class="math inline">\(T_{n}^{\prime}\)</span>, puis son biais et son risque quadratique.</li>
+<li>Soit <span class="math inline">\(T_{n}=2 \overline{X}_{n}\)</span>, l’estimateur par la méthode de moments de <span class="math inline">\(a\)</span>. Montrer que <span class="math inline">\(T_{n}\)</span> est un estimateur sans biais de <span class="math inline">\(a\)</span> et calculer son risque quadratique.</li>
+<li>Soit <span class="math inline">\(T_{n}^{\prime}=\max \left(X_{1}, \ldots, X_{n}\right)\)</span>. Montrer que <span class="math inline">\(T_n^{\prime}\)</span> est l’estimateur par maximum de vraisemblance de <span class="math inline">\(a\)</span>.</li>
+<li>Donner la fonction de répartition de <span class="math inline">\(T_{n}^{\prime}\)</span>. En déduire une densité de <span class="math inline">\(T_{n}^{\prime}\)</span>, puis son biais et son risque quadratique.</li>
 <li>Soit <span class="math inline">\(T_{n}^{\prime \prime}=\frac{n+1}{n} T_{n}^{\prime}\)</span>. Déterminer son biais et son risque quadratique.</li>
-<li>Pour de grandes valeurs de <span class="math inline">\(n\)</span>, quelle est le meilleur estimateur de <span class="math inline">\(a\)</span>?
+<li>Pour de grandes valeurs de <span class="math inline">\(n\)</span>, quel est le meilleur estimateur de <span class="math inline">\(a\)</span>?
 </div></li>
 </ol>
 <!-- from ali, estimation, exo 36 -->
@@ -386,7 +391,7 @@ Vous êtes invités à annoter le contenu de ce cours. Les annotations peuvent �
 
 <div class="exercise">
 <p><span id="exr:unnamed-chunk-89" class="exercise"><strong>Exercice 3.5  (EMV loi géométrique)  </strong></span>Les oiseaux d’un certain type prennent leur envol après avoir effectué quelques sauts sur le sol. On suppose que ce nombre <span class="math inline">\(X\)</span> de sauts peut être modélisé par une distribution géométrique sur <span class="math inline">\(\mathbb{N}^*\)</span>:</p>
-<p><span class="math display">\[P(X=k)= p(1-p)^{k-1} \quad k \geq 1\]</span></p>
+<p><span class="math display">\[P(X=x)= p(1-p)^{x-1} \quad x \geq 1\]</span></p>
 <p>Pour <span class="math inline">\(n=130\)</span> oiseaux de ce type, on a relevé les données suivantes:</p>
 <table style="width:100%;">
 <colgroup>
@@ -406,7 +411,7 @@ Vous êtes invités à annoter le contenu de ce cours. Les annotations peuvent �
 </colgroup>
 <tbody>
 <tr class="odd">
-<td align="center"><strong>Nombre de sauts <span class="math inline">\(k\)</span></strong></td>
+<td align="center"><strong>Nombre de sauts <span class="math inline">\(x\)</span></strong></td>
 <td align="center">1</td>
 <td align="center">2</td>
 <td align="center">3</td>

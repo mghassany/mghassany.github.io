@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>Chapitre 1 Statistique descriptive | Statistique Inférentielle</title>
   <meta name="description" content="Cours de Statistique Inférentielle A3 ESILV" />
-  <meta name="generator" content="bookdown 0.13.2 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.14 and GitBook 2.6.7" />
 
   <meta property="og:title" content="Chapitre 1 Statistique descriptive | Statistique Inférentielle" />
   <meta property="og:type" content="book" />
@@ -24,7 +24,7 @@
 <meta name="author" content="Mohamad Ghassany" />
 
 
-<meta name="date" content="2019-10-16" />
+<meta name="date" content="2019-10-21" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -234,9 +234,13 @@ code span.wa { color: #bf0303; } /* Warning */
 <li class="chapter" data-level="3.7" data-path="estimation-ponctuelle.html"><a href="estimation-ponctuelle.html#proprietes-des-estimateurs-de-maximum-de-vraisemblance-emv"><i class="fa fa-check"></i><b>3.7</b> Propriétés des estimateurs de maximum de vraisemblance (EMV)</a></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="exercices-2.html"><a href="exercices-2.html"><i class="fa fa-check"></i>Exercices</a></li>
-<li class="chapter" data-level="" data-path="tp-illustration-numerique-des-methodes-destimation-avec-r.html"><a href="tp-illustration-numerique-des-methodes-destimation-avec-r.html"><i class="fa fa-check"></i>TP illustration numérique des méthodes d’estimation avec R</a></li>
-<li class="chapter" data-level="4" data-path="intervalle-de-confiance.html"><a href="intervalle-de-confiance.html"><i class="fa fa-check"></i><b>4</b> Intervalle de confiance</a></li>
-<li class="chapter" data-level="5" data-path="tests-dhpotheses.html"><a href="tests-dhpotheses.html"><i class="fa fa-check"></i><b>5</b> Tests d’hpothèses</a></li>
+<li class="chapter" data-level="4" data-path="tp-illustration-numerique-des-methodes-destimation-avec-r.html"><a href="tp-illustration-numerique-des-methodes-destimation-avec-r.html"><i class="fa fa-check"></i><b>4</b> TP illustration numérique des méthodes d’estimation avec R</a><ul>
+<li class="chapter" data-level="4.1" data-path="tp-illustration-numerique-des-methodes-destimation-avec-r.html"><a href="tp-illustration-numerique-des-methodes-destimation-avec-r.html#comparaison-destimateurs"><i class="fa fa-check"></i><b>4.1</b> Comparaison d’estimateurs</a></li>
+<li class="chapter" data-level="4.2" data-path="tp-illustration-numerique-des-methodes-destimation-avec-r.html"><a href="tp-illustration-numerique-des-methodes-destimation-avec-r.html#le-maximum-de-vraisemblance"><i class="fa fa-check"></i><b>4.2</b> Le maximum de vraisemblance</a></li>
+<li class="chapter" data-level="4.3" data-path="tp-illustration-numerique-des-methodes-destimation-avec-r.html"><a href="tp-illustration-numerique-des-methodes-destimation-avec-r.html#loi-de-weibull"><i class="fa fa-check"></i><b>4.3</b> Loi de Weibull</a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="intervalle-de-confiance.html"><a href="intervalle-de-confiance.html"><i class="fa fa-check"></i><b>5</b> Intervalle de confiance</a></li>
+<li class="chapter" data-level="6" data-path="tests-dhpotheses.html"><a href="tests-dhpotheses.html"><i class="fa fa-check"></i><b>6</b> Tests d’hpothèses</a></li>
 <li class="part"><span><b>Rappel Probabilités</b></span></li>
 <li class="chapter" data-level="" data-path="variables-aleatoires-discretes.html"><a href="variables-aleatoires-discretes.html"><i class="fa fa-check"></i>Variables Aléatoires Discrètes</a><ul>
 <li class="chapter" data-level="" data-path="variables-aleatoires-discretes.html"><a href="variables-aleatoires-discretes.html#notions-de-probabilites"><i class="fa fa-check"></i>Notions de Probabilités</a><ul>
@@ -343,7 +347,7 @@ ensemble de données chiffrées sur un sujet précis.</p>
 </div>
 <div id="terminologie" class="section level2">
 <h2><span class="header-section-number">1.1</span> Terminologie</h2>
-<p>Les premières statistiques correctement élaborées ont été celles des recensements <strong>démographiques</strong>. Ainsi le vocabulaire statistique est essentiellement celui de la démographie. Les ensembles étudiés sont appelés <strong>population</strong>. Les éléments de la population sont appelés <strong>individus</strong> ou unités statistiques. La population est étudiée selon un ou plusieurs <strong>variables</strong> (ou <strong>caractères</strong>). L’ensemble des individus constitue l’<strong><em>échantillon</em></strong> étudié.</p>
+<p>Les premières statistiques correctement élaborées ont été celles des recensements <strong>démographiques</strong>. Ainsi le vocabulaire statistique est essentiellement celui de la démographie. Les ensembles étudiés sont appelés <strong>population</strong>. Les éléments de la population sont appelés <strong>individus</strong> ou unités statistiques. La population est étudiée selon une ou plusieurs <strong>variables</strong> (ou <strong>caractères</strong>). L’ensemble des individus constitue l’<strong><em>échantillon</em></strong> étudié.</p>
 <p><em>Exemple</em>: si l’échantillon est un groupe de TD à l’ESILV,</p>
 <ul>
 <li>Un individu est un étudiant.</li>
@@ -694,7 +698,7 @@ Figure 1.2: Diagramme circulaire de la variable “couleur des yeux”
 </tr>
 </tbody>
 </table>
-<p>On peut resprésenter la série avec un diagramme en bâtons (vertical ou horizontal).</p>
+<p>On peut représenter la série avec un diagramme en bâtons (vertical ou horizontal).</p>
 <div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-11"></span>
 <img src="Statistique_infentielle_files/figure-html/unnamed-chunk-11-1.png" alt="Le nombre de personnes par ménage" width="45%" /><img src="Statistique_infentielle_files/figure-html/unnamed-chunk-11-2.png" alt="Le nombre de personnes par ménage" width="45%" />
 <p class="caption">

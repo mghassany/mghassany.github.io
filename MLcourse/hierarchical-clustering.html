@@ -24,15 +24,15 @@
 <meta name="author" content="Mohamad Ghassany" />
 
 
-<meta name="date" content="2019-11-07" />
+<meta name="date" content="2019-11-20" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="gaussian-mixture-models-em.html"/>
-<link rel="next" href="app-introRStudio.html"/>
+<link rel="prev" href="pw-8.html"/>
+<link rel="next" href="pw-9.html"/>
 <script src="book_assets/jquery-2.2.3/jquery.min.js"></script>
 <link href="book_assets/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="book_assets/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -308,10 +308,23 @@ code span.wa { color: #bf0303; } /* Warning */
 <li class="chapter" data-level="8.2" data-path="gaussian-mixture-models-em.html"><a href="gaussian-mixture-models-em.html#mixture-of-gaussians"><i class="fa fa-check"></i><b>8.2</b> Mixture of Gaussians</a></li>
 <li class="chapter" data-level="8.3" data-path="gaussian-mixture-models-em.html"><a href="gaussian-mixture-models-em.html#em-for-gaussian-mixtures"><i class="fa fa-check"></i><b>8.3</b> EM for Gaussian Mixtures</a></li>
 </ul></li>
+<li class="chapter" data-level="" data-path="pw-8.html"><a href="pw-8.html"><i class="fa fa-check"></i>PW 8</a><ul>
+<li class="chapter" data-level="" data-path="pw-8.html"><a href="pw-8.html#report-template"><i class="fa fa-check"></i>Report template</a></li>
+<li class="chapter" data-level="8.4" data-path="pw-8.html"><a href="pw-8.html#em-using-mclust"><i class="fa fa-check"></i><b>8.4</b> EM using <code>mclust</code></a><ul>
+<li><a href="pw-8.html#gmm-vs-k-means">GMM vs <span class="math inline">\(k\)</span>-means</a></li>
+<li class="chapter" data-level="" data-path="pw-8.html"><a href="pw-8.html#em-on-1d"><i class="fa fa-check"></i>EM on 1D</a></li>
+</ul></li>
+<li class="chapter" data-level="8.5" data-path="pw-8.html"><a href="pw-8.html#em-from-scratch"><i class="fa fa-check"></i><b>8.5</b> EM from scratch</a></li>
+</ul></li>
 <li class="chapter" data-level="9" data-path="hierarchical-clustering.html"><a href="hierarchical-clustering.html"><i class="fa fa-check"></i><b>9</b> Hierarchical Clustering</a><ul>
 <li class="chapter" data-level="9.1" data-path="hierarchical-clustering.html"><a href="hierarchical-clustering.html#dendrogram"><i class="fa fa-check"></i><b>9.1</b> Dendrogram</a></li>
 <li class="chapter" data-level="9.2" data-path="hierarchical-clustering.html"><a href="hierarchical-clustering.html#the-hierarchical-clustering-algorithm"><i class="fa fa-check"></i><b>9.2</b> The Hierarchical Clustering Algorithm</a></li>
 <li class="chapter" data-level="9.3" data-path="hierarchical-clustering.html"><a href="hierarchical-clustering.html#hierarchical-clustering-in-r"><i class="fa fa-check"></i><b>9.3</b> Hierarchical clustering in <code>R</code></a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="pw-9.html"><a href="pw-9.html"><i class="fa fa-check"></i>PW 9</a><ul>
+<li><a href="pw-9.html#distances-dist">Distances <code>dist()</code></a></li>
+<li><a href="pw-9.html#dendrogram-hclust">Dendrogram <code>hclust()</code></a></li>
+<li class="chapter" data-level="" data-path="pw-9.html"><a href="pw-9.html#hierarchical-clustering-on-iris-dataset"><i class="fa fa-check"></i>Hierarchical clustering on Iris dataset</a></li>
 </ul></li>
 <li class="appendix"><span><b>Appendix</b></span></li>
 <li class="chapter" data-level="A" data-path="app-introRStudio.html"><a href="app-introRStudio.html"><i class="fa fa-check"></i><b>A</b> Introduction to <code>RStudio</code></a></li>
@@ -331,6 +344,7 @@ code span.wa { color: #bf0303; } /* Warning */
 </ul></li>
 <li class="chapter" data-level="E" data-path="references-and-credits.html"><a href="references-and-credits.html"><i class="fa fa-check"></i><b>E</b> References and Credits</a></li>
 <li class="chapter" data-level="F" data-path="other-references.html"><a href="other-references.html"><i class="fa fa-check"></i><b>F</b> Other References</a></li>
+<li class="chapter" data-level="" data-path="main-references-credits.html"><a href="main-references-credits.html"><i class="fa fa-check"></i>Main References &amp; Credits</a></li>
 </ul>
 
       </nav>
@@ -444,70 +458,67 @@ Figure 9.7: Average, complete, and single linkage applied to an example data set
 <div id="hierarchical-clustering-in-r" class="section level2">
 <h2><span class="header-section-number">9.3</span> Hierarchical clustering in <code>R</code></h2>
 <p>Let’s illustrate how to perform hierarchical clustering on dataset  <a target="_blank" href="datasets/ligue1_17_18.csv"> Ligue1 2017-2018 <i class="fa fa-table" aria-hidden="true"></i></a>.</p>
-<div class="sourceCode" id="cb67"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb67-1" title="1"><span class="co"># Load the dataset</span></a>
-<a class="sourceLine" id="cb67-2" title="2">ligue1 &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&quot;datasets/ligue1_17_18.csv&quot;</span>, <span class="dt">row.names=</span><span class="dv">1</span>,<span class="dt">sep=</span><span class="st">&quot;;&quot;</span>)</a>
-<a class="sourceLine" id="cb67-3" title="3"></a>
-<a class="sourceLine" id="cb67-4" title="4"><span class="co"># Work with standardized data</span></a>
-<a class="sourceLine" id="cb67-5" title="5">ligue1_scaled &lt;-<span class="st"> </span><span class="kw">data.frame</span>(<span class="kw">scale</span>(ligue1))</a>
-<a class="sourceLine" id="cb67-6" title="6"></a>
-<a class="sourceLine" id="cb67-7" title="7"><span class="co"># Compute dissimilary matrix - in this case Euclidean distance</span></a>
-<a class="sourceLine" id="cb67-8" title="8">d &lt;-<span class="st"> </span><span class="kw">dist</span>(ligue1_scaled)</a>
-<a class="sourceLine" id="cb67-9" title="9"></a>
-<a class="sourceLine" id="cb67-10" title="10"><span class="co"># Hierarchical clustering with complete linkage</span></a>
-<a class="sourceLine" id="cb67-11" title="11">treeComp &lt;-<span class="st"> </span><span class="kw">hclust</span>(d, <span class="dt">method =</span> <span class="st">&quot;complete&quot;</span>)</a>
-<a class="sourceLine" id="cb67-12" title="12"><span class="kw">plot</span>(treeComp)</a></code></pre></div>
-<p><img src="Machine-Learning_files/figure-html/unnamed-chunk-190-1.png" width="70%" style="display: block; margin: auto;" /></p>
-<div class="sourceCode" id="cb68"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb68-1" title="1"></a>
-<a class="sourceLine" id="cb68-2" title="2"><span class="co"># With average linkage</span></a>
-<a class="sourceLine" id="cb68-3" title="3">treeAve &lt;-<span class="st"> </span><span class="kw">hclust</span>(d, <span class="dt">method =</span> <span class="st">&quot;average&quot;</span>)</a>
-<a class="sourceLine" id="cb68-4" title="4"><span class="kw">plot</span>(treeAve)</a></code></pre></div>
-<p><img src="Machine-Learning_files/figure-html/unnamed-chunk-190-2.png" width="70%" style="display: block; margin: auto;" /></p>
-<div class="sourceCode" id="cb69"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb69-1" title="1"></a>
-<a class="sourceLine" id="cb69-2" title="2"><span class="co"># With single linkage</span></a>
-<a class="sourceLine" id="cb69-3" title="3">treeSingle &lt;-<span class="st"> </span><span class="kw">hclust</span>(d, <span class="dt">method =</span> <span class="st">&quot;single&quot;</span>)</a>
-<a class="sourceLine" id="cb69-4" title="4"><span class="kw">plot</span>(treeSingle) <span class="co"># Chaining</span></a></code></pre></div>
-<p><img src="Machine-Learning_files/figure-html/unnamed-chunk-190-3.png" width="70%" style="display: block; margin: auto;" /></p>
-<div class="sourceCode" id="cb70"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb70-1" title="1"></a>
-<a class="sourceLine" id="cb70-2" title="2"><span class="co"># Set the number of clusters after inspecting visually</span></a>
-<a class="sourceLine" id="cb70-3" title="3"><span class="co"># the dendogram for &quot;long&quot; groups of hanging leaves</span></a>
-<a class="sourceLine" id="cb70-4" title="4"><span class="co"># These are the cluster assignments</span></a>
-<a class="sourceLine" id="cb70-5" title="5"><span class="kw">cutree</span>(treeComp, <span class="dt">k =</span> <span class="dv">2</span>) <span class="co"># (Barcelona, Real Madrid) and (rest)</span></a>
-<a class="sourceLine" id="cb70-6" title="6"><span class="co">#ans&gt;      Paris-SG        Monaco          Lyon     Marseille        Rennes </span></a>
-<a class="sourceLine" id="cb70-7" title="7"><span class="co">#ans&gt;             1             1             1             1             2 </span></a>
-<a class="sourceLine" id="cb70-8" title="8"><span class="co">#ans&gt;      Bordeaux Saint-Etienne          Nice        Nantes   Montpellier </span></a>
-<a class="sourceLine" id="cb70-9" title="9"><span class="co">#ans&gt;             2             2             2             2             2 </span></a>
-<a class="sourceLine" id="cb70-10" title="10"><span class="co">#ans&gt;         Dijon      Guingamp        Amiens        Angers    Strasbourg </span></a>
-<a class="sourceLine" id="cb70-11" title="11"><span class="co">#ans&gt;             2             2             2             2             2 </span></a>
-<a class="sourceLine" id="cb70-12" title="12"><span class="co">#ans&gt;          Caen         Lille      Toulouse        Troyes          Metz </span></a>
-<a class="sourceLine" id="cb70-13" title="13"><span class="co">#ans&gt;             2             2             2             2             2</span></a>
-<a class="sourceLine" id="cb70-14" title="14"><span class="kw">cutree</span>(treeComp, <span class="dt">k =</span> <span class="dv">3</span>) <span class="co"># (Barcelona, Real Madrid), (Atlético Madrid) and (rest)</span></a>
-<a class="sourceLine" id="cb70-15" title="15"><span class="co">#ans&gt;      Paris-SG        Monaco          Lyon     Marseille        Rennes </span></a>
-<a class="sourceLine" id="cb70-16" title="16"><span class="co">#ans&gt;             1             1             1             1             2 </span></a>
-<a class="sourceLine" id="cb70-17" title="17"><span class="co">#ans&gt;      Bordeaux Saint-Etienne          Nice        Nantes   Montpellier </span></a>
-<a class="sourceLine" id="cb70-18" title="18"><span class="co">#ans&gt;             2             2             2             2             2 </span></a>
-<a class="sourceLine" id="cb70-19" title="19"><span class="co">#ans&gt;         Dijon      Guingamp        Amiens        Angers    Strasbourg </span></a>
-<a class="sourceLine" id="cb70-20" title="20"><span class="co">#ans&gt;             3             3             3             3             3 </span></a>
-<a class="sourceLine" id="cb70-21" title="21"><span class="co">#ans&gt;          Caen         Lille      Toulouse        Troyes          Metz </span></a>
-<a class="sourceLine" id="cb70-22" title="22"><span class="co">#ans&gt;             3             3             3             3             3</span></a>
-<a class="sourceLine" id="cb70-23" title="23"><span class="co"># Compare differences - treeComp makes more sense than treeAve</span></a>
-<a class="sourceLine" id="cb70-24" title="24"><span class="kw">cutree</span>(treeComp, <span class="dt">k =</span> <span class="dv">4</span>) </a>
-<a class="sourceLine" id="cb70-25" title="25"><span class="co">#ans&gt;      Paris-SG        Monaco          Lyon     Marseille        Rennes </span></a>
-<a class="sourceLine" id="cb70-26" title="26"><span class="co">#ans&gt;             1             2             2             2             3 </span></a>
-<a class="sourceLine" id="cb70-27" title="27"><span class="co">#ans&gt;      Bordeaux Saint-Etienne          Nice        Nantes   Montpellier </span></a>
-<a class="sourceLine" id="cb70-28" title="28"><span class="co">#ans&gt;             3             3             3             3             3 </span></a>
-<a class="sourceLine" id="cb70-29" title="29"><span class="co">#ans&gt;         Dijon      Guingamp        Amiens        Angers    Strasbourg </span></a>
-<a class="sourceLine" id="cb70-30" title="30"><span class="co">#ans&gt;             4             4             4             4             4 </span></a>
-<a class="sourceLine" id="cb70-31" title="31"><span class="co">#ans&gt;          Caen         Lille      Toulouse        Troyes          Metz </span></a>
-<a class="sourceLine" id="cb70-32" title="32"><span class="co">#ans&gt;             4             4             4             4             4</span></a></code></pre></div>
+<div class="sourceCode" id="cb70"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb70-1" title="1"><span class="co"># Load the dataset</span></a>
+<a class="sourceLine" id="cb70-2" title="2">ligue1 &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&quot;datasets/ligue1_17_18.csv&quot;</span>, <span class="dt">row.names=</span><span class="dv">1</span>,<span class="dt">sep=</span><span class="st">&quot;;&quot;</span>)</a>
+<a class="sourceLine" id="cb70-3" title="3"></a>
+<a class="sourceLine" id="cb70-4" title="4"><span class="co"># Work with standardized data</span></a>
+<a class="sourceLine" id="cb70-5" title="5">ligue1_scaled &lt;-<span class="st"> </span><span class="kw">data.frame</span>(<span class="kw">scale</span>(ligue1))</a>
+<a class="sourceLine" id="cb70-6" title="6"></a>
+<a class="sourceLine" id="cb70-7" title="7"><span class="co"># Compute dissimilary matrix - in this case Euclidean distance</span></a>
+<a class="sourceLine" id="cb70-8" title="8">d &lt;-<span class="st"> </span><span class="kw">dist</span>(ligue1_scaled)</a>
+<a class="sourceLine" id="cb70-9" title="9"></a>
+<a class="sourceLine" id="cb70-10" title="10"><span class="co"># Hierarchical clustering with complete linkage</span></a>
+<a class="sourceLine" id="cb70-11" title="11">treeComp &lt;-<span class="st"> </span><span class="kw">hclust</span>(d, <span class="dt">method =</span> <span class="st">&quot;complete&quot;</span>)</a>
+<a class="sourceLine" id="cb70-12" title="12"><span class="kw">plot</span>(treeComp)</a></code></pre></div>
+<p><img src="Machine-Learning_files/figure-html/unnamed-chunk-204-1.png" width="70%" style="display: block; margin: auto;" /></p>
+<div class="sourceCode" id="cb71"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb71-1" title="1"></a>
+<a class="sourceLine" id="cb71-2" title="2"><span class="co"># With average linkage</span></a>
+<a class="sourceLine" id="cb71-3" title="3">treeAve &lt;-<span class="st"> </span><span class="kw">hclust</span>(d, <span class="dt">method =</span> <span class="st">&quot;average&quot;</span>)</a>
+<a class="sourceLine" id="cb71-4" title="4"><span class="kw">plot</span>(treeAve)</a></code></pre></div>
+<p><img src="Machine-Learning_files/figure-html/unnamed-chunk-204-2.png" width="70%" style="display: block; margin: auto;" /></p>
+<div class="sourceCode" id="cb72"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb72-1" title="1"></a>
+<a class="sourceLine" id="cb72-2" title="2"><span class="co"># With single linkage</span></a>
+<a class="sourceLine" id="cb72-3" title="3">treeSingle &lt;-<span class="st"> </span><span class="kw">hclust</span>(d, <span class="dt">method =</span> <span class="st">&quot;single&quot;</span>)</a>
+<a class="sourceLine" id="cb72-4" title="4"><span class="kw">plot</span>(treeSingle) <span class="co"># Chaining</span></a></code></pre></div>
+<p><img src="Machine-Learning_files/figure-html/unnamed-chunk-204-3.png" width="70%" style="display: block; margin: auto;" /></p>
+<div class="sourceCode" id="cb73"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb73-1" title="1"></a>
+<a class="sourceLine" id="cb73-2" title="2"><span class="co"># Set the number of clusters after inspecting visually</span></a>
+<a class="sourceLine" id="cb73-3" title="3"><span class="co"># the dendogram for &quot;long&quot; groups of hanging leaves</span></a>
+<a class="sourceLine" id="cb73-4" title="4"><span class="co"># These are the cluster assignments</span></a>
+<a class="sourceLine" id="cb73-5" title="5"><span class="kw">cutree</span>(treeComp, <span class="dt">k =</span> <span class="dv">2</span>) <span class="co"># (Barcelona, Real Madrid) and (rest)</span></a>
+<a class="sourceLine" id="cb73-6" title="6"><span class="co">#ans&gt;      Paris-SG        Monaco          Lyon     Marseille        Rennes </span></a>
+<a class="sourceLine" id="cb73-7" title="7"><span class="co">#ans&gt;             1             1             1             1             2 </span></a>
+<a class="sourceLine" id="cb73-8" title="8"><span class="co">#ans&gt;      Bordeaux Saint-Etienne          Nice        Nantes   Montpellier </span></a>
+<a class="sourceLine" id="cb73-9" title="9"><span class="co">#ans&gt;             2             2             2             2             2 </span></a>
+<a class="sourceLine" id="cb73-10" title="10"><span class="co">#ans&gt;         Dijon      Guingamp        Amiens        Angers    Strasbourg </span></a>
+<a class="sourceLine" id="cb73-11" title="11"><span class="co">#ans&gt;             2             2             2             2             2 </span></a>
+<a class="sourceLine" id="cb73-12" title="12"><span class="co">#ans&gt;          Caen         Lille      Toulouse        Troyes          Metz </span></a>
+<a class="sourceLine" id="cb73-13" title="13"><span class="co">#ans&gt;             2             2             2             2             2</span></a>
+<a class="sourceLine" id="cb73-14" title="14"><span class="kw">cutree</span>(treeComp, <span class="dt">k =</span> <span class="dv">3</span>) <span class="co"># (Barcelona, Real Madrid), (Atlético Madrid) and (rest)</span></a>
+<a class="sourceLine" id="cb73-15" title="15"><span class="co">#ans&gt;      Paris-SG        Monaco          Lyon     Marseille        Rennes </span></a>
+<a class="sourceLine" id="cb73-16" title="16"><span class="co">#ans&gt;             1             1             1             1             2 </span></a>
+<a class="sourceLine" id="cb73-17" title="17"><span class="co">#ans&gt;      Bordeaux Saint-Etienne          Nice        Nantes   Montpellier </span></a>
+<a class="sourceLine" id="cb73-18" title="18"><span class="co">#ans&gt;             2             2             2             2             2 </span></a>
+<a class="sourceLine" id="cb73-19" title="19"><span class="co">#ans&gt;         Dijon      Guingamp        Amiens        Angers    Strasbourg </span></a>
+<a class="sourceLine" id="cb73-20" title="20"><span class="co">#ans&gt;             3             3             3             3             3 </span></a>
+<a class="sourceLine" id="cb73-21" title="21"><span class="co">#ans&gt;          Caen         Lille      Toulouse        Troyes          Metz </span></a>
+<a class="sourceLine" id="cb73-22" title="22"><span class="co">#ans&gt;             3             3             3             3             3</span></a>
+<a class="sourceLine" id="cb73-23" title="23"><span class="co"># Compare differences - treeComp makes more sense than treeAve</span></a>
+<a class="sourceLine" id="cb73-24" title="24"><span class="kw">cutree</span>(treeComp, <span class="dt">k =</span> <span class="dv">4</span>) </a>
+<a class="sourceLine" id="cb73-25" title="25"><span class="co">#ans&gt;      Paris-SG        Monaco          Lyon     Marseille        Rennes </span></a>
+<a class="sourceLine" id="cb73-26" title="26"><span class="co">#ans&gt;             1             2             2             2             3 </span></a>
+<a class="sourceLine" id="cb73-27" title="27"><span class="co">#ans&gt;      Bordeaux Saint-Etienne          Nice        Nantes   Montpellier </span></a>
+<a class="sourceLine" id="cb73-28" title="28"><span class="co">#ans&gt;             3             3             3             3             3 </span></a>
+<a class="sourceLine" id="cb73-29" title="29"><span class="co">#ans&gt;         Dijon      Guingamp        Amiens        Angers    Strasbourg </span></a>
+<a class="sourceLine" id="cb73-30" title="30"><span class="co">#ans&gt;             4             4             4             4             4 </span></a>
+<a class="sourceLine" id="cb73-31" title="31"><span class="co">#ans&gt;          Caen         Lille      Toulouse        Troyes          Metz </span></a>
+<a class="sourceLine" id="cb73-32" title="32"><span class="co">#ans&gt;             4             4             4             4             4</span></a></code></pre></div>
 <p align="right">
 ◼
 </p>
 
 </div>
 </div>
-
-
-
 <h1>Discussion</h1>
 <div id="disqus_thread"></div>
 <script>
@@ -534,8 +545,8 @@ s.setAttribute('data-timestamp', +new Date());
           </div>
         </div>
       </div>
-<a href="gaussian-mixture-models-em.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="app-introRStudio.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="pw-8.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="pw-9.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="book_assets/gitbook-2.6.7/js/app.min.js"></script>

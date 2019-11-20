@@ -4,21 +4,21 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>C Use of qualitative predictors | Machine Learning</title>
-  <meta name="description" content="C Use of qualitative predictors | Machine Learning course" />
+  <title>Main References &amp; Credits | Machine Learning</title>
+  <meta name="description" content="Main References &amp; Credits | Machine Learning course" />
   <meta name="generator" content="bookdown 0.14 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="C Use of qualitative predictors | Machine Learning" />
+  <meta property="og:title" content="Main References &amp; Credits | Machine Learning" />
   <meta property="og:type" content="book" />
   
   
-  <meta property="og:description" content="C Use of qualitative predictors | Machine Learning course" />
+  <meta property="og:description" content="Main References &amp; Credits | Machine Learning course" />
   
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="C Use of qualitative predictors | Machine Learning" />
+  <meta name="twitter:title" content="Main References &amp; Credits | Machine Learning" />
   
-  <meta name="twitter:description" content="C Use of qualitative predictors | Machine Learning course" />
+  <meta name="twitter:description" content="Main References &amp; Credits | Machine Learning course" />
   
 
 <meta name="author" content="Mohamad Ghassany" />
@@ -31,8 +31,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="app-ht.html"/>
-<link rel="next" href="model-selection.html"/>
+<link rel="prev" href="other-references.html"/>
+
 <script src="book_assets/jquery-2.2.3/jquery.min.js"></script>
 <link href="book_assets/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="book_assets/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -362,57 +362,56 @@ code span.wa { color: #bf0303; } /* Warning */
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="use-qual" class="section level1">
-<h1><span class="header-section-number">C</span> Use of qualitative predictors</h1>
-<p>An important situation is how to deal with <em>qualitative</em>, and not <em>quantitative</em>, predictors when we fit a regression model. Qualitative predictors, also known as <em>categorical</em> variables or, in <i class="fab  fa-r-project " style="color:steelblue;"></i>’s terminology, <em>factors</em>, are very common, for example in social sciences. Dealing with them requires some care and proper understanding of how these variables are represented.</p>
-<p>The simplest case is the situation with <strong>two levels</strong>. A binary variable <span class="math inline">\(C\)</span> with two levels (for example, <em>a</em> and <em>b</em>) can be represented as
-<span class="math display">\[
-D=\left\{\begin{array}{ll}
-1,&amp;\text{if }C=b,\\
-0,&amp;\text{if }C=a.
-\end{array}\right.
-\]</span>
-<span class="math inline">\(D\)</span> now is a <em>dummy variable</em>: it codifies with zeros and ones the two possible levels of the categorical variable. An example of <span class="math inline">\(C\)</span> could be <em>gender</em>, which has levels <em>male</em> and <em>female</em>. The dummy variable associated is <span class="math inline">\(D=0\)</span> if the gender is male and <span class="math inline">\(D=1\)</span> if the gender is female.</p>
-<p>The advantage of this <em>dummification</em> is its interpretability in regression models. Since level <em>a</em> corresponds to <span class="math inline">\(0\)</span>, it can be seen as the <em>reference level</em> to which level <em>b</em> is compared. This is the key point in dummification: <strong>set one level as the reference and codify the rest as departures from it</strong> with ones.</p>
-<p><i class="fab  fa-r-project " style="color:steelblue;"></i> does the dummification automatically (translates a categorical variable <span class="math inline">\(C\)</span> into its dummy version <span class="math inline">\(D\)</span>) if it detects that a factor variable is present in the regression model.</p>
-<p>Let’s see now the case with <strong>more than two levels</strong>, for example, a categorical variable <span class="math inline">\(C\)</span> with levels <em>a</em>, <em>b</em>, and <em>c</em>. If we take <em>a</em> as the reference level, this variable can be represented by <em>two</em> dummy variables:
-<span class="math display">\[
-D_1=\left\{\begin{array}{ll}1,&amp;\text{if }C=b,\\0,&amp; \text{if }C\neq b\end{array}\right.
-\]</span>
-and
-<span class="math display">\[
-D_2=\left\{\begin{array}{ll}1,&amp;\text{if }C=c,\\0,&amp; \text{if }C\neq c.\end{array}\right.
-\]</span>
-Then <span class="math inline">\(C=a\)</span> is represented by <span class="math inline">\(D_1=D_2=0\)</span>, <span class="math inline">\(C=b\)</span> is represented by <span class="math inline">\(D_1=1,D_2=0\)</span> and <span class="math inline">\(C=c\)</span> is represented by <span class="math inline">\(D_1=0,D_2=1\)</span>.</p>
-<p>In general, if we have a categorical variable with <span class="math inline">\(J\)</span> levels, then the number of dummy variables required is <span class="math inline">\(J-1\)</span>. Again, <i class="fab  fa-r-project " style="color:steelblue;"></i> does the dummification automatically for you if it detects that a factor variable is present in the regression model.</p>
-<div class="rmdinsight">
-<p>
-It may happen that one dummy variable, say <span class="math inline"><span class="math inline">\(D_1\)</span></span> is not significant, while other dummy variables, say <span class="math inline"><span class="math inline">\(D_2\)</span></span>, are significant.
-</p>
-</div>
-<div class="rmdcaution">
-<p>
-<strong>Do not codify a categorical variable as a discrete variable</strong>. This constitutes a major methodological fail that will flaw the subsequent statistical analysis.
-</p>
-<p>
-For example if you have a categorical variable <code>party</code> with levels <code>partyA</code>, <code>partyB</code>, and <code>partyC</code>, do not encode it as a discrete variable taking the values <code>1</code>, <code>2</code>, and <code>3</code>, respectively. If you do so:
-</p>
+<div id="main-references-credits" class="section level1 unnumbered">
+<h1>Main References &amp; Credits</h1>
+<p>Readings:</p>
 <ul>
-<li>
-You assume implicitly an order in the levels of <code>party</code>, since <code>partyA</code> is closer to <code>partyB</code> than to <code>partyC</code>.
-</li>
-<li>
-You assume implicitly that <code>partyC</code> is three times larger than <code>partyA</code>.
-</li>
-<li>
-The codification is completely arbitrary – why not considering <code>1</code>, <code>1.5</code>, and <code>1.75</code> instead of?
-</li>
+<li>Tibshirani</li>
+<li>Andrew Ng coursera</li>
+<li><a href="http://egarpor.github.io/index.html" class="uri">http://egarpor.github.io/index.html</a></li>
+<li><a href="https://onlinecourses.science.psu.edu/stat505/node/49" class="uri">https://onlinecourses.science.psu.edu/stat505/node/49</a></li>
+<li></li>
+<li>Bishop</li>
+<li>Site using Rstudio, Rmarkdown, bookdown. Pdf compiled using latex.</li>
+<li>The icons used in the notes were designed by madebyoliver, freepik and roundicons from Flaticon.</li>
 </ul>
-<p>
-The right way of dealing with categorical variables in regression is to set the variable as a factor and let <span style="color: Steelblue;"><i class="fab fa-r-project" aria-hidden="true"></i> </span> do internally the dummification.
-</p>
+
+<div id="refs" class="references">
+<div>
+<p>Dalal, Siddhartha R., Edward B. Fowlkes, and Bruce Hoadley. 1989. “Risk Analysis of the Space Shuttle: Pre-Challenger Prediction of Failure.” <em>Journal of the American Statistical Association</em> 84 (408): 945–57. <a href="https://doi.org/10.1080/01621459.1989.10478858">https://doi.org/10.1080/01621459.1989.10478858</a>.</p>
+</div>
+<div>
+<p>FISHER, R. A. 1936. “THE Use of Multiple Measurements in Taxonomic Problems.” <em>Annals of Eugenics</em> 7 (2): 179–88. <a href="https://doi.org/10.1111/j.1469-1809.1936.tb02137.x">https://doi.org/10.1111/j.1469-1809.1936.tb02137.x</a>.</p>
+</div>
+<div>
+<p>Presidential Commission on the Space Shuttle Challenger Accident. 1986. <em>Report of the Presidential Commission on the Space Shuttle Challenger Accident (Vols. 1 &amp; 2)</em>. Washington, DC. <a href="http://history.nasa.gov/rogersrep/genindex.htm">http://history.nasa.gov/rogersrep/genindex.htm</a>.</p>
 </div>
 </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 <h1>Discussion</h1>
 <div id="disqus_thread"></div>
 <script>
@@ -439,8 +438,8 @@ s.setAttribute('data-timestamp', +new Date());
           </div>
         </div>
       </div>
-<a href="app-ht.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="model-selection.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="other-references.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+
     </div>
   </div>
 <script src="book_assets/gitbook-2.6.7/js/app.min.js"></script>

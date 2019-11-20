@@ -24,7 +24,7 @@
 <meta name="author" content="Mohamad Ghassany" />
 
 
-<meta name="date" content="2019-11-07" />
+<meta name="date" content="2019-11-20" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -308,10 +308,23 @@ code span.wa { color: #bf0303; } /* Warning */
 <li class="chapter" data-level="8.2" data-path="gaussian-mixture-models-em.html"><a href="gaussian-mixture-models-em.html#mixture-of-gaussians"><i class="fa fa-check"></i><b>8.2</b> Mixture of Gaussians</a></li>
 <li class="chapter" data-level="8.3" data-path="gaussian-mixture-models-em.html"><a href="gaussian-mixture-models-em.html#em-for-gaussian-mixtures"><i class="fa fa-check"></i><b>8.3</b> EM for Gaussian Mixtures</a></li>
 </ul></li>
+<li class="chapter" data-level="" data-path="pw-8.html"><a href="pw-8.html"><i class="fa fa-check"></i>PW 8</a><ul>
+<li class="chapter" data-level="" data-path="pw-8.html"><a href="pw-8.html#report-template"><i class="fa fa-check"></i>Report template</a></li>
+<li class="chapter" data-level="8.4" data-path="pw-8.html"><a href="pw-8.html#em-using-mclust"><i class="fa fa-check"></i><b>8.4</b> EM using <code>mclust</code></a><ul>
+<li><a href="pw-8.html#gmm-vs-k-means">GMM vs <span class="math inline">\(k\)</span>-means</a></li>
+<li class="chapter" data-level="" data-path="pw-8.html"><a href="pw-8.html#em-on-1d"><i class="fa fa-check"></i>EM on 1D</a></li>
+</ul></li>
+<li class="chapter" data-level="8.5" data-path="pw-8.html"><a href="pw-8.html#em-from-scratch"><i class="fa fa-check"></i><b>8.5</b> EM from scratch</a></li>
+</ul></li>
 <li class="chapter" data-level="9" data-path="hierarchical-clustering.html"><a href="hierarchical-clustering.html"><i class="fa fa-check"></i><b>9</b> Hierarchical Clustering</a><ul>
 <li class="chapter" data-level="9.1" data-path="hierarchical-clustering.html"><a href="hierarchical-clustering.html#dendrogram"><i class="fa fa-check"></i><b>9.1</b> Dendrogram</a></li>
 <li class="chapter" data-level="9.2" data-path="hierarchical-clustering.html"><a href="hierarchical-clustering.html#the-hierarchical-clustering-algorithm"><i class="fa fa-check"></i><b>9.2</b> The Hierarchical Clustering Algorithm</a></li>
 <li class="chapter" data-level="9.3" data-path="hierarchical-clustering.html"><a href="hierarchical-clustering.html#hierarchical-clustering-in-r"><i class="fa fa-check"></i><b>9.3</b> Hierarchical clustering in <code>R</code></a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="pw-9.html"><a href="pw-9.html"><i class="fa fa-check"></i>PW 9</a><ul>
+<li><a href="pw-9.html#distances-dist">Distances <code>dist()</code></a></li>
+<li><a href="pw-9.html#dendrogram-hclust">Dendrogram <code>hclust()</code></a></li>
+<li class="chapter" data-level="" data-path="pw-9.html"><a href="pw-9.html#hierarchical-clustering-on-iris-dataset"><i class="fa fa-check"></i>Hierarchical clustering on Iris dataset</a></li>
 </ul></li>
 <li class="appendix"><span><b>Appendix</b></span></li>
 <li class="chapter" data-level="A" data-path="app-introRStudio.html"><a href="app-introRStudio.html"><i class="fa fa-check"></i><b>A</b> Introduction to <code>RStudio</code></a></li>
@@ -331,6 +344,7 @@ code span.wa { color: #bf0303; } /* Warning */
 </ul></li>
 <li class="chapter" data-level="E" data-path="references-and-credits.html"><a href="references-and-credits.html"><i class="fa fa-check"></i><b>E</b> References and Credits</a></li>
 <li class="chapter" data-level="F" data-path="other-references.html"><a href="other-references.html"><i class="fa fa-check"></i><b>F</b> Other References</a></li>
+<li class="chapter" data-level="" data-path="main-references-credits.html"><a href="main-references-credits.html"><i class="fa fa-check"></i>Main References &amp; Credits</a></li>
 </ul>
 
       </nav>
@@ -557,419 +571,177 @@ Figure 3.2: Number of incidents in the O-rings (filed joints) versus temperature
 </ul>
 
 <table>
-<caption>
-<span id="tab:unnamed-chunk-58">Table 3.1: </span>The <code>challenger</code> dataset.
-</caption>
+<caption><span id="tab:unnamed-chunk-58">Table 3.1: </span>The <code>challenger</code> dataset.</caption>
 <thead>
-<tr>
-<th style="text-align:left;">
-flight
-</th>
-<th style="text-align:left;">
-date
-</th>
-<th style="text-align:right;">
-fail.field
-</th>
-<th style="text-align:right;">
-fail.nozzle
-</th>
-<th style="text-align:right;">
-temp
-</th>
+<tr class="header">
+<th align="left">flight</th>
+<th align="left">date</th>
+<th align="right">fail.field</th>
+<th align="right">fail.nozzle</th>
+<th align="right">temp</th>
 </tr>
 </thead>
 <tbody>
-<tr>
-<td style="text-align:left;">
-1
-</td>
-<td style="text-align:left;">
-12/04/81
-</td>
-<td style="text-align:right;">
-0
-</td>
-<td style="text-align:right;">
-0
-</td>
-<td style="text-align:right;">
-18.9
-</td>
+<tr class="odd">
+<td align="left">1</td>
+<td align="left">12/04/81</td>
+<td align="right">0</td>
+<td align="right">0</td>
+<td align="right">18.9</td>
 </tr>
-<tr>
-<td style="text-align:left;">
-2
-</td>
-<td style="text-align:left;">
-12/11/81
-</td>
-<td style="text-align:right;">
-1
-</td>
-<td style="text-align:right;">
-0
-</td>
-<td style="text-align:right;">
-21.1
-</td>
+<tr class="even">
+<td align="left">2</td>
+<td align="left">12/11/81</td>
+<td align="right">1</td>
+<td align="right">0</td>
+<td align="right">21.1</td>
 </tr>
-<tr>
-<td style="text-align:left;">
-3
-</td>
-<td style="text-align:left;">
-22/03/82
-</td>
-<td style="text-align:right;">
-0
-</td>
-<td style="text-align:right;">
-0
-</td>
-<td style="text-align:right;">
-20.6
-</td>
+<tr class="odd">
+<td align="left">3</td>
+<td align="left">22/03/82</td>
+<td align="right">0</td>
+<td align="right">0</td>
+<td align="right">20.6</td>
 </tr>
-<tr>
-<td style="text-align:left;">
-5
-</td>
-<td style="text-align:left;">
-11/11/82
-</td>
-<td style="text-align:right;">
-0
-</td>
-<td style="text-align:right;">
-0
-</td>
-<td style="text-align:right;">
-20.0
-</td>
+<tr class="even">
+<td align="left">5</td>
+<td align="left">11/11/82</td>
+<td align="right">0</td>
+<td align="right">0</td>
+<td align="right">20.0</td>
 </tr>
-<tr>
-<td style="text-align:left;">
-6
-</td>
-<td style="text-align:left;">
-04/04/83
-</td>
-<td style="text-align:right;">
-0
-</td>
-<td style="text-align:right;">
-1
-</td>
-<td style="text-align:right;">
-19.4
-</td>
+<tr class="odd">
+<td align="left">6</td>
+<td align="left">04/04/83</td>
+<td align="right">0</td>
+<td align="right">1</td>
+<td align="right">19.4</td>
 </tr>
-<tr>
-<td style="text-align:left;">
-7
-</td>
-<td style="text-align:left;">
-18/06/83
-</td>
-<td style="text-align:right;">
-0
-</td>
-<td style="text-align:right;">
-0
-</td>
-<td style="text-align:right;">
-22.2
-</td>
+<tr class="even">
+<td align="left">7</td>
+<td align="left">18/06/83</td>
+<td align="right">0</td>
+<td align="right">0</td>
+<td align="right">22.2</td>
 </tr>
-<tr>
-<td style="text-align:left;">
-8
-</td>
-<td style="text-align:left;">
-30/08/83
-</td>
-<td style="text-align:right;">
-0
-</td>
-<td style="text-align:right;">
-0
-</td>
-<td style="text-align:right;">
-22.8
-</td>
+<tr class="odd">
+<td align="left">8</td>
+<td align="left">30/08/83</td>
+<td align="right">0</td>
+<td align="right">0</td>
+<td align="right">22.8</td>
 </tr>
-<tr>
-<td style="text-align:left;">
-9
-</td>
-<td style="text-align:left;">
-28/11/83
-</td>
-<td style="text-align:right;">
-0
-</td>
-<td style="text-align:right;">
-0
-</td>
-<td style="text-align:right;">
-21.1
-</td>
+<tr class="even">
+<td align="left">9</td>
+<td align="left">28/11/83</td>
+<td align="right">0</td>
+<td align="right">0</td>
+<td align="right">21.1</td>
 </tr>
-<tr>
-<td style="text-align:left;">
-41-B
-</td>
-<td style="text-align:left;">
-03/02/84
-</td>
-<td style="text-align:right;">
-1
-</td>
-<td style="text-align:right;">
-1
-</td>
-<td style="text-align:right;">
-13.9
-</td>
+<tr class="odd">
+<td align="left">41-B</td>
+<td align="left">03/02/84</td>
+<td align="right">1</td>
+<td align="right">1</td>
+<td align="right">13.9</td>
 </tr>
-<tr>
-<td style="text-align:left;">
-41-C
-</td>
-<td style="text-align:left;">
-06/04/84
-</td>
-<td style="text-align:right;">
-1
-</td>
-<td style="text-align:right;">
-1
-</td>
-<td style="text-align:right;">
-17.2
-</td>
+<tr class="even">
+<td align="left">41-C</td>
+<td align="left">06/04/84</td>
+<td align="right">1</td>
+<td align="right">1</td>
+<td align="right">17.2</td>
 </tr>
-<tr>
-<td style="text-align:left;">
-41-D
-</td>
-<td style="text-align:left;">
-30/08/84
-</td>
-<td style="text-align:right;">
-1
-</td>
-<td style="text-align:right;">
-1
-</td>
-<td style="text-align:right;">
-21.1
-</td>
+<tr class="odd">
+<td align="left">41-D</td>
+<td align="left">30/08/84</td>
+<td align="right">1</td>
+<td align="right">1</td>
+<td align="right">21.1</td>
 </tr>
-<tr>
-<td style="text-align:left;">
-41-G
-</td>
-<td style="text-align:left;">
-05/10/84
-</td>
-<td style="text-align:right;">
-0
-</td>
-<td style="text-align:right;">
-0
-</td>
-<td style="text-align:right;">
-25.6
-</td>
+<tr class="even">
+<td align="left">41-G</td>
+<td align="left">05/10/84</td>
+<td align="right">0</td>
+<td align="right">0</td>
+<td align="right">25.6</td>
 </tr>
-<tr>
-<td style="text-align:left;">
-51-A
-</td>
-<td style="text-align:left;">
-08/11/84
-</td>
-<td style="text-align:right;">
-0
-</td>
-<td style="text-align:right;">
-0
-</td>
-<td style="text-align:right;">
-19.4
-</td>
+<tr class="odd">
+<td align="left">51-A</td>
+<td align="left">08/11/84</td>
+<td align="right">0</td>
+<td align="right">0</td>
+<td align="right">19.4</td>
 </tr>
-<tr>
-<td style="text-align:left;">
-51-C
-</td>
-<td style="text-align:left;">
-24/01/85
-</td>
-<td style="text-align:right;">
-1
-</td>
-<td style="text-align:right;">
-1
-</td>
-<td style="text-align:right;">
-11.7
-</td>
+<tr class="even">
+<td align="left">51-C</td>
+<td align="left">24/01/85</td>
+<td align="right">1</td>
+<td align="right">1</td>
+<td align="right">11.7</td>
 </tr>
-<tr>
-<td style="text-align:left;">
-51-D
-</td>
-<td style="text-align:left;">
-12/04/85
-</td>
-<td style="text-align:right;">
-0
-</td>
-<td style="text-align:right;">
-1
-</td>
-<td style="text-align:right;">
-19.4
-</td>
+<tr class="odd">
+<td align="left">51-D</td>
+<td align="left">12/04/85</td>
+<td align="right">0</td>
+<td align="right">1</td>
+<td align="right">19.4</td>
 </tr>
-<tr>
-<td style="text-align:left;">
-51-B
-</td>
-<td style="text-align:left;">
-29/04/85
-</td>
-<td style="text-align:right;">
-0
-</td>
-<td style="text-align:right;">
-1
-</td>
-<td style="text-align:right;">
-23.9
-</td>
+<tr class="even">
+<td align="left">51-B</td>
+<td align="left">29/04/85</td>
+<td align="right">0</td>
+<td align="right">1</td>
+<td align="right">23.9</td>
 </tr>
-<tr>
-<td style="text-align:left;">
-51-G
-</td>
-<td style="text-align:left;">
-17/06/85
-</td>
-<td style="text-align:right;">
-0
-</td>
-<td style="text-align:right;">
-1
-</td>
-<td style="text-align:right;">
-21.1
-</td>
+<tr class="odd">
+<td align="left">51-G</td>
+<td align="left">17/06/85</td>
+<td align="right">0</td>
+<td align="right">1</td>
+<td align="right">21.1</td>
 </tr>
-<tr>
-<td style="text-align:left;">
-51-F
-</td>
-<td style="text-align:left;">
-29/07/85
-</td>
-<td style="text-align:right;">
-0
-</td>
-<td style="text-align:right;">
-0
-</td>
-<td style="text-align:right;">
-27.2
-</td>
+<tr class="even">
+<td align="left">51-F</td>
+<td align="left">29/07/85</td>
+<td align="right">0</td>
+<td align="right">0</td>
+<td align="right">27.2</td>
 </tr>
-<tr>
-<td style="text-align:left;">
-51-I
-</td>
-<td style="text-align:left;">
-27/08/85
-</td>
-<td style="text-align:right;">
-0
-</td>
-<td style="text-align:right;">
-0
-</td>
-<td style="text-align:right;">
-24.4
-</td>
+<tr class="odd">
+<td align="left">51-I</td>
+<td align="left">27/08/85</td>
+<td align="right">0</td>
+<td align="right">0</td>
+<td align="right">24.4</td>
 </tr>
-<tr>
-<td style="text-align:left;">
-51-J
-</td>
-<td style="text-align:left;">
-03/10/85
-</td>
-<td style="text-align:right;">
-0
-</td>
-<td style="text-align:right;">
-0
-</td>
-<td style="text-align:right;">
-26.1
-</td>
+<tr class="even">
+<td align="left">51-J</td>
+<td align="left">03/10/85</td>
+<td align="right">0</td>
+<td align="right">0</td>
+<td align="right">26.1</td>
 </tr>
-<tr>
-<td style="text-align:left;">
-61-A
-</td>
-<td style="text-align:left;">
-30/10/85
-</td>
-<td style="text-align:right;">
-1
-</td>
-<td style="text-align:right;">
-0
-</td>
-<td style="text-align:right;">
-23.9
-</td>
+<tr class="odd">
+<td align="left">61-A</td>
+<td align="left">30/10/85</td>
+<td align="right">1</td>
+<td align="right">0</td>
+<td align="right">23.9</td>
 </tr>
-<tr>
-<td style="text-align:left;">
-61-B
-</td>
-<td style="text-align:left;">
-26/11/85
-</td>
-<td style="text-align:right;">
-0
-</td>
-<td style="text-align:right;">
-1
-</td>
-<td style="text-align:right;">
-24.4
-</td>
+<tr class="even">
+<td align="left">61-B</td>
+<td align="left">26/11/85</td>
+<td align="right">0</td>
+<td align="right">1</td>
+<td align="right">24.4</td>
 </tr>
-<tr>
-<td style="text-align:left;">
-61-C
-</td>
-<td style="text-align:left;">
-12/01/86
-</td>
-<td style="text-align:right;">
-1
-</td>
-<td style="text-align:right;">
-1
-</td>
-<td style="text-align:right;">
-14.4
-</td>
+<tr class="odd">
+<td align="left">61-C</td>
+<td align="left">12/01/86</td>
+<td align="right">1</td>
+<td align="right">1</td>
+<td align="right">14.4</td>
 </tr>
 </tbody>
 </table>
@@ -1069,7 +841,7 @@ At the sight of this curve and the summary of the model we can conclude that <st
 </div>
 </div>
 </div>
-<h3><span class="header-section-number">F</span> Other References</h3>
+<h3>References</h3>
 <div id="refs" class="references">
 <div id="ref-Dalal1989">
 <p>Dalal, Siddhartha R., Edward B. Fowlkes, and Bruce Hoadley. 1989. “Risk Analysis of the Space Shuttle: Pre-Challenger Prediction of Failure.” <em>Journal of the American Statistical Association</em> 84 (408): 945–57. <a href="https://doi.org/10.1080/01621459.1989.10478858">https://doi.org/10.1080/01621459.1989.10478858</a>.</p>

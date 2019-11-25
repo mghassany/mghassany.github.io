@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Exercices | Statistique Inférentielle</title>
+  <title>Séance 5 Estimation par Intervalle de confiance | Statistique Inférentielle</title>
   <meta name="description" content="Cours de Statistique Inférentielle A3 ESILV" />
   <meta name="generator" content="bookdown 0.14 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Exercices | Statistique Inférentielle" />
+  <meta property="og:title" content="Séance 5 Estimation par Intervalle de confiance | Statistique Inférentielle" />
   <meta property="og:type" content="book" />
   
   
@@ -16,7 +16,7 @@
   
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Exercices | Statistique Inférentielle" />
+  <meta name="twitter:title" content="Séance 5 Estimation par Intervalle de confiance | Statistique Inférentielle" />
   
   <meta name="twitter:description" content="Cours de Statistique Inférentielle A3 ESILV" />
   
@@ -31,8 +31,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   <link rel="shortcut icon" href="img/favicon.ico" type="image/x-icon" />
-<link rel="prev" href="statistique-descriptive.html"/>
-<link rel="next" href="tp-statistique-descriptive-avec-r.html"/>
+<link rel="prev" href="tp-illustration-numerique-des-methodes-destimation-avec-r.html"/>
+<link rel="next" href="tests-dhypotheses.html"/>
 <script src="book_assets/jquery-2.2.3/jquery.min.js"></script>
 <link href="book_assets/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="book_assets/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -348,248 +348,221 @@ code span.wa { color: #bf0303; } /* Warning */
 <div class = rmdreview>
 Vous êtes invités à annoter le contenu de ce cours. Les annotations peuvent être des corrections typographiques, des propositions ou des questions. Pour ajouter des annotations, <span style="background-color: #3297FD; color: white">choisissez le text</span> que vous voulez commenter et cliquez sur <i class="h-icon-annotate"></i>. Pour accéder aux annotations crées par d'autres personnes, cliquez <i class="h-icon-chevron-left"></i> sur le coin supérieur de la page <i class="fa fa-arrow-circle-right  fa-rotate-315" aria-hidden="true"></i>.
 </div>
-<div id="exercices" class="section level1 unnumbered">
-<h1>Exercices</h1>
+<div id="estimation-par-intervalle-de-confiance" class="section level1">
+<h1><span class="header-section-number">Séance 5</span> Estimation par Intervalle de confiance</h1>
+<!-- Chapter from Gaudoin & Julien Jacques -->
+<!-- Regarde : http://irma.math.unistra.fr/~fbertran/index.html -->
+<!-- Et : http://nobelis.eu/photis/index.html -->
+<p>Jusqu’à présent, on a estimé un paramètre <span class="math inline">\(\theta\)</span> par une unique valeur <span class="math inline">\(\hat{\theta}_{n}\)</span> (estimation ponctuelle). Si l’estimateur <span class="math inline">\(\hat{\theta}_{n}\)</span> possède de bonnes propriétés (sans biais, variance minimale), on peut s’attendre à ce que <span class="math inline">\(\hat{\theta}_{n}\)</span> soit proche de la vraie valeur de <span class="math inline">\(\theta\)</span>. Cependant, il est très peu probable que <span class="math inline">\(\hat{\theta}_{n}\)</span> soit exactement égal à <span class="math inline">\(\theta\)</span>. En particulier, si la loi de <span class="math inline">\(\hat{\theta}_{n}\)</span> est continue, on est certains que <span class="math inline">\(P\left(\hat{\theta}_{n}=\theta\right)=0\)</span></p>
+<p>Par conséquent, plutôt que d’estimer <span class="math inline">\(\theta\)</span> par la seule valeur <span class="math inline">\(\hat{\theta}_{n}\)</span>, il semble raisonnable
+de proposer un ensemble de valeurs vraisemblables pour <span class="math inline">\(\theta,\)</span> qu’il est logique de prendre proches de <span class="math inline">\(\hat{\theta}_{n}\)</span>. Cet ensemble de valeurs est appelé <strong>région de confiance</strong>. Dire que toutes les valeurs de cet ensemble sont vraisemblables pour <span class="math inline">\(\theta\)</span>, c’est dire qu’il y a une forte probabilité que <span class="math inline">\(\theta\)</span> appartienne à cet ensemble.</p>
+<p>On supposera dans ce chapitre que <span class="math inline">\(\theta \in \mathbb{R}\)</span>, donc la région de confiance sera un intervalle.</p>
 
-<div class="exercise">
-<p><span id="exr:unnamed-chunk-25" class="exercise"><strong>Exercice 1.1  (Nature des variables et graphique correspondant)  </strong></span>Lors d’une enquête, on interroge 1000 individus sur leur âge, leur sexe, leur couleur préférée, leur nombre de frères et soeurs et leur département de naissance.</p>
-<ol style="list-style-type: decimal">
-<li>Quelle est la nature de chacune de ces variables?</li>
-<li>Par quel outil graphique visualiseriez-vous la distribution de chacune des variables élémentaires?
-</div></li>
-</ol>
-
-<div class="exercise">
-<p><span id="exr:unnamed-chunk-26" class="exercise"><strong>Exercice 1.2  (Petite série d’effectifs)  </strong></span>On réalise un sondage auprès de 1000 personnes pour évaluer le nombre d’individus par ménage. On obtient la série statistique suivante:</p>
-<table style="width:100%;">
-<colgroup>
-<col width="36%" />
-<col width="7%" />
-<col width="7%" />
-<col width="7%" />
-<col width="7%" />
-<col width="7%" />
-<col width="15%" />
-<col width="10%" />
-</colgroup>
-<tbody>
-<tr class="odd">
-<td align="left">Nb de personnes par ménage</td>
-<td align="center">1</td>
-<td align="center">2</td>
-<td align="center">3</td>
-<td align="center">4</td>
-<td align="center">5</td>
-<td align="center">6</td>
-<td align="center">Total</td>
-</tr>
-<tr class="even">
-<td align="left">effectif</td>
-<td align="center">107</td>
-<td align="center">137</td>
-<td align="center">197</td>
-<td align="center">302</td>
-<td align="center">180</td>
-<td align="center">77</td>
-<td align="center">1000</td>
-</tr>
-</tbody>
-</table>
-<ol style="list-style-type: decimal">
-<li>Représenter cette série statistique à l’aide d’un graphique.</li>
-<li>Calculer la moyenne, la variance, l’écart-type et la médiane de cette distribution.</li>
-</ol>
+<div class="definition">
+<span id="def:unnamed-chunk-100" class="definition"><strong>Définition 5.1  </strong></span>Un <strong>intervalle de confiance</strong> de <strong>seuil</strong> (ou <strong>niveau de signification</strong>) <span class="math inline">\(\alpha \in [0,1]\)</span> pour un paramètre <span class="math inline">\(\theta\)</span>, est un intervalle aléatoire <span class="math inline">\(I\)</span> tel que <span class="math inline">\(P(\theta \in I)=1-\alpha\)</span>.
 </div>
 
+<p><span class="math inline">\(\alpha\)</span> est la probabilité que le paramètre <span class="math inline">\(\theta\)</span> n’appartienne pas à l’intervalle <span class="math inline">\(I\)</span>, c’est à dire la
+probabilité que l’on se trompe en affirmant que <span class="math inline">\(\theta \in I\)</span>. C’est donc une probabilité d’erreur,
+qui doit être assez petite. Les valeurs usuelles de <span class="math inline">\(\alpha\)</span> sont <span class="math inline">\(10 \%, 5 \%, 1 \%,\)</span> etc.</p>
+<div class="rmdcaution">
+<p><strong>Remarque fondamentale</strong>: Les intervalles de confiance suscitent souvent des erreurs d’interprétation et des abus de langage. La raison essentielle de ce problème est expliquée ci dessous.</p>
+</div>
+<p>Dans l’écriture <span class="math inline">\(P(\theta \in I)\)</span>, <span class="math inline">\(\theta\)</span> est une grandeur inconnue mais non aléatoire. Ce sont les bornes de l’intervalle <span class="math inline">\(I\)</span> qui sont aléatoires. Posons <span class="math inline">\(I=[Z_1,Z_2]\)</span>. <span class="math inline">\(Z_1\)</span> et <span class="math inline">\(Z_2\)</span> sont des variables aléatoires. Soient <span class="math inline">\(z_1\)</span> et <span class="math inline">\(z_2\)</span> les réalisations de <span class="math inline">\(Z_1\)</span> et <span class="math inline">\(Z_2\)</span> pour une expérience donnée. Il est correct de dire une phrase du type : “<span class="math inline">\(\theta\)</span> a <span class="math inline">\(95 \%\)</span> de chances d’être compris entre <span class="math inline">\(Z_1\)</span> et <span class="math inline">\(Z_2\)</span>”, mais il est incorrect de dire: “<span class="math inline">\(\theta\)</span> a <span class="math inline">\(95 \%\)</span> de chances d’être compris entre <span class="math inline">\(z_1\)</span> et <span class="math inline">\(z_2\)</span>”. En fait, si on recommence 100 fois l’expérience, on aura 100 réalisations du couple <span class="math inline">\(\left(Z_{1}, Z_{2}\right)\)</span>, et donc 100 intervalles de confiance différents. En moyenne, <span class="math inline">\(\theta\)</span> sera dans 95 de ces intervalles.</p>
+<p>Par conséquent, il vaut mieux dire : “on a une confiance de <span class="math inline">\(95 \%\)</span> dans le fait que <span class="math inline">\(\theta\)</span> soit
+compris entre <span class="math inline">\(z_1\)</span> et <span class="math inline">\(z_2\)</span>”.</p>
+<p>Le problème à régler est de trouver un procédé pour déterminer un intervalle de
+confiance pour un paramètre <span class="math inline">\(\theta\)</span>. Il semble logique de proposer un intervalle de confiance
+centré sur un estimateur performant <span class="math inline">\(\hat{\theta}_{n},\)</span> c’est-à-dire de la forme <span class="math inline">\(I=\left[\hat{\theta}_{n}-\varepsilon, \hat{\theta}_{n}+\varepsilon\right]\)</span> . Il
+reste alors à déterminer <span class="math inline">\(\varepsilon\)</span> de sorte que :</p>
+<p><span class="math display">\[
+P(\theta \in I)=P\left(\hat{\theta}_{n}-\varepsilon \leq \theta \leq \hat{\theta}_{n}+\varepsilon\right)=P\left(\left|\hat{\theta}_{n}-\theta\right| \leq \varepsilon\right)=1-\alpha
+\]</span></p>
+<p>Si cet intervalle de confiance est petit, l’ensemble des valeurs vraisemblables pour <span class="math inline">\(\theta\)</span>
+est resserré autour de <span class="math inline">\(\hat{\theta}_{n}\)</span>. Si l’ntervalle de confiance est grand, des valeurs vraisemblables
+pour <span class="math inline">\(\theta\)</span> peuvent être éloignées de <span class="math inline">\(\hat{\theta}_{n}\)</span>. Donc un intervalle de confiance construit à partir
+d’un estimateur permet de mesurer la précision de cet estimateur.</p>
+<p>Soit <span class="math inline">\(a\)</span> et <span class="math inline">\(b\)</span> les bornes d’un intervalle de confiance <span class="math inline">\(I C_{1-\alpha}(\theta)\)</span> de niveau de confiance <span class="math inline">\(1-\alpha\)</span> pour le paramètre <span class="math inline">\(\theta\)</span>.
+On a:</p>
+<p><span class="math display">\[
+p(a \leq \theta \leq b)=1-\alpha \text { et donc } p(\theta&lt;a)+p(\theta&gt;b)=\alpha
+\]</span>
+En posant <span class="math inline">\(\alpha=\alpha_{1}+\alpha_{2}\)</span>, il existe une infinité de choix possibles pour <span class="math inline">\(\alpha_{1}\)</span> et <span class="math inline">\(\alpha_{2}\)</span>, et donc de choix pour <span class="math inline">\(a\)</span> et <span class="math inline">\(b\)</span>. Nous ne
+considérons que le cas d’un intervalle <strong>bilatéral</strong> à risques symétriques, pour lesquels le risque est partagé en deux parts égales <span class="math inline">\(\alpha_{1}=\alpha_{2}=\frac{\alpha}{2}\)</span>. Néanmoins il arrive en pratique que l’on s’intéresse à des risques unilatéraux, mais nous en parlerons plus en détail dans les chapitres suivants sur les tests statistiques.</p>
+<p>Pour trouver un intervalle de confiance, il existe plusieurs méthodes. La plus efficace
+consiste à chercher une fonction pivotale, c’est à dire une variable aléatoire fonction à la
+fois du paramètre <span class="math inline">\(\theta\)</span> et des observations <span class="math inline">\(X_{1}, \ldots, X_{n}\)</span>, dont la loi de probabilité ne dépende
+pas de <span class="math inline">\(\theta\)</span>. Dans la suite de ce chapitre, nous allons illustrer cette méthodologie par des
+exemples, en déterminant des intervalles de confiance pour:</p>
+<ul>
+<li>La moyenne et la variance dans un échantillon de loi normale.</li>
+<li>Une proportion, c’est-à-dire le paramètre d’un échantillon de loi de Bernoulli.</li>
+</ul>
+<div class="rmdinsight">
+<p>Remarques:</p>
+<ul>
+<li>L’intervalle de confiance est fonction de l’estimation <span class="math inline">\(\hat{\theta}_{n}\)</span> de <span class="math inline">\(\theta\)</span>.</li>
+<li>L’intervalle de confiance est également fonction de <span class="math inline">\(\alpha\)</span>. Plus <span class="math inline">\(\alpha\)</span> est petit, plus le niveau de confiance est grand, et donc plus l’intervalle s’élargit.</li>
+<li>Lorsque la taille de l’échantillon grandit, l’estimateur <span class="math inline">\(\hat{\theta}_{n}\)</span> étant convergeant la varianve <span class="math inline">\(V(\hat{\theta}_{n})\)</span> diminue, et l’intervalle se rétrécit.</li>
+</ul>
+</div>
+<div class="rmdtip">
+<p>Il est recommandé avant de poursuivre la lecture de se rappeler des lois déduites de la loi normale: <a href="variables-aleatoires-continues.html#loi-de-chi2-de-pearson">loi de <span class="math inline">\(\chi^{2}\)</span></a>, <a href="variables-aleatoires-continues.html#loi-de-student-stn">loi de Student <span class="math inline">\(St(n)\)</span></a> et <a href="variables-aleatoires-continues.html#loi-de-fisher-snedecor-mathcalfnm">loi de Fisher-Snedecor <span class="math inline">\(\mathcal{F}(n,m)\)</span></a>.</p>
+</div>
+<p>Suite à la définition de ces lois, nous introduisons le théorème de Fisher:</p>
 
-<div class="exercise">
-<p><span id="exr:unnamed-chunk-28" class="exercise"><strong>Exercice 1.3  (Robustesse de la médiane aux données extrêmes)  </strong></span>On a repertorié le temps mis par 20 étudiants pour décrocher un premier emploi (en mois):</p>
-<table>
-<tbody>
-<tr class="odd">
-<td align="center">0</td>
-<td align="center">0</td>
-<td align="center">0</td>
-<td align="center">0</td>
-<td align="center">0</td>
-<td align="center">1</td>
-<td align="center">1</td>
-<td align="center">1</td>
-<td align="center">2</td>
-<td align="center">2</td>
-<td align="center">2</td>
-<td align="center">3</td>
-<td align="center">3</td>
-<td align="center">3</td>
-<td align="center">4</td>
-<td align="center">4</td>
-<td align="center">6</td>
-<td align="center">6</td>
-<td align="center">8</td>
-<td align="center">20</td>
-</tr>
-</tbody>
-</table>
-<ol style="list-style-type: decimal">
-<li>Calculer la moyenne puis la médiane des observations.</li>
-</ol>
-<p>L’étudiant qui a mis 20 mois à trouver du travail a réalisé un tour du monde avant de chercher un emploi. On considère donc qu’il ne fait pas partie de la population qui nous intéresse et on décide de supprimer cette valeur de l’échantillon.</p>
-<ol start="2" style="list-style-type: decimal">
-<li>Même question que la question 1 sans la dernière valeur (20).</li>
-<li>Comparer la stabilité des deux indicateurs de position vis-à-vis de l’élimination de valeurs extrêmes.
+<div class="theorem">
+<p><span id="thm:unnamed-chunk-101" class="theorem"><strong>Théorème 5.1  (Théorème de Fisher)  </strong></span>Si <span class="math inline">\(X_{1}, \ldots, X_{n}\)</span> sont indépendantes et de même loi <span class="math inline">\(\mathcal{N}\left(m, \sigma^{2}\right)\)</span>,
+alors, en posant <span class="math inline">\(\overline{X}_{n}=\frac{1}{n} \sum_{i=1}^{n} X_{i}\)</span> et <span class="math inline">\(S_{n}^{2}=\frac{1}{n} \sum_{i=1}^{n}\left(X_{i}-\overline{X}_{n}\right)^{2}\)</span>, on a:</p>
+<ul>
+<li><span class="math inline">\(\sum_{i=1}^{n} X_{i}\)</span> est de loi <span class="math inline">\(\mathcal{N}\left(n m, n \sigma^{2}\right)\)</span>.</li>
+<li><span class="math inline">\(\overline{X}_{n}\)</span> est de loi <span class="math inline">\(\mathcal{N} \left(m, \frac{\sigma^{2}}{n}\right)\)</span>.</li>
+<li><span class="math inline">\(\frac{1}{\sigma^{2}} \sum_{i=1}^{n}\left(X_{i}-m\right)^{2}\)</span> est de loi <span class="math inline">\(\chi_{n}^{2}\)</span>.</li>
+<li><span class="math inline">\(\frac{1}{\sigma^{2}} \sum_{i=1}^{n}\left(X_{i}-\overline{X}_{n}\right)^{2}=\frac{n S_{n}^{2}}{\sigma^{2}}\)</span> est de loi <span class="math inline">\(\chi_{n-1}^{2}\)</span>.</li>
+<li><span class="math inline">\(\overline{X}_{n}\)</span> et <span class="math inline">\(S_{n}^{2}\)</span> sont indépendantes.</li>
+<li><span class="math inline">\(\sqrt{n-1} \frac{\overline{X}_{n}-m}{S_{n}}\)</span> est de loi de <em>Student</em> <span class="math inline">\(S t(n-1)\)</span>.
 </div></li>
-</ol>
+</ul>
+<div id="intervalles-de-confiance-pour-pour-les-parametres-de-la-loi-normale" class="section level2">
+<h2><span class="header-section-number">5.1</span> Intervalles de confiance pour pour les paramètres de la loi normale</h2>
+<div id="intervalle-de-confiance-pour-lesperance-dune-loi-normale-avec-variance-connue" class="section level3">
+<h3><span class="header-section-number">5.1.1</span> Intervalle de confiance pour l’espérance d’une loi normale avec variance connue</h3>
+<p>Soit <span class="math inline">\(X \sim \mathcal{N}\left(\mu, \sigma^{2}\right)\)</span> avec <span class="math inline">\(\sigma\)</span> connu. Le meilleur estimateur de <span class="math inline">\(\mu\)</span> est <span class="math inline">\(\overline{X}\)</span>. Comme <span class="math inline">\(X\)</span> est de loi normale on a</p>
+<p><span class="math display">\[
+Z=\frac{\overline{X}-\mu}{\frac{\sigma}{\sqrt{n}}} \sim \mathcal{N}(0,1)
+\]</span>
+En prenant des risques symétriques, on peut lire dans les tables les quantiles <span class="math inline">\(z_\frac{\alpha}{2}\)</span> et <span class="math inline">\(z_{1-\frac{\alpha}{2}}\)</span> de la loi normale centrée réduite d’ordres respectifs <span class="math inline">\(\frac{\alpha}{2}\)</span> et <span class="math inline">\(1-\frac{\alpha}{2}\)</span>, tels que :</p>
+<p><span class="math display">\[
+P\left(z_{\frac{\alpha}{2}} \leq Z \leq z_{1-\frac{\alpha}{2}}\right)=1-\alpha
+\]</span>
+ou encore
+<span class="math display">\[
+P\left(Z \leq z_{\frac{\alpha}{2}}\right)=p\left(Z \geq z_{1-\frac{\alpha}{2}}\right)=\frac{\alpha}{2}
+\]</span>
+<strong>Les quantiles</strong></p>
+<p>La notion du quantile est définie de la façon suivante:</p>
 
-<div class="exercise">
-<p><span id="exr:unnamed-chunk-30" class="exercise"><strong>Exercice 1.4  (Corrélation)  </strong></span>Les données suivantes représentent la taille (en cm) et le salaire annuel brut (en k€) de 12 avocats ayant fait la même formation et obtenu presque les même notes.</p>
-<table class="kable_wrapper">
-<tbody>
-<tr>
-<td>
-<table>
-<thead>
-<tr>
-<th style="text-align:right;">
-Taille
-</th>
-<th style="text-align:right;">
-Salaire
-</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:right;">
-162.6
-</td>
-<td style="text-align:right;">
-61
-</td>
-</tr>
-<tr>
-<td style="text-align:right;">
-165.1
-</td>
-<td style="text-align:right;">
-64
-</td>
-</tr>
-<tr>
-<td style="text-align:right;">
-167.6
-</td>
-<td style="text-align:right;">
-58
-</td>
-</tr>
-<tr>
-<td style="text-align:right;">
-170.2
-</td>
-<td style="text-align:right;">
-73
-</td>
-</tr>
-<tr>
-<td style="text-align:right;">
-175.3
-</td>
-<td style="text-align:right;">
-47
-</td>
-</tr>
-<tr>
-<td style="text-align:right;">
-177.8
-</td>
-<td style="text-align:right;">
-66
-</td>
-</tr>
-</tbody>
-</table>
-</td>
-<td>
-<table>
-<thead>
-<tr>
-<th style="text-align:right;">
-Taille
-</th>
-<th style="text-align:right;">
-Salaire
-</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:right;">
-182.9
-</td>
-<td style="text-align:right;">
-75
-</td>
-</tr>
-<tr>
-<td style="text-align:right;">
-182.9
-</td>
-<td style="text-align:right;">
-58
-</td>
-</tr>
-<tr>
-<td style="text-align:right;">
-188.0
-</td>
-<td style="text-align:right;">
-92
-</td>
-</tr>
-<tr>
-<td style="text-align:right;">
-188.0
-</td>
-<td style="text-align:right;">
-72
-</td>
-</tr>
-<tr>
-<td style="text-align:right;">
-190.5
-</td>
-<td style="text-align:right;">
-60
-</td>
-</tr>
-<tr>
-<td style="text-align:right;">
-193.0
-</td>
-<td style="text-align:right;">
-84
-</td>
-</tr>
-</tbody>
-</table>
-</td>
-</tr>
-</tbody>
-</table>
-<ol style="list-style-type: decimal">
-<li>Représenter les données sur un nuage de points.</li>
-<li>Calculer le coefficient de corrélation et interpréter.
-</div></li>
-</ol>
+<div class="definition">
+<span id="def:unnamed-chunk-102" class="definition"><strong>Définition 5.2  </strong></span>Pour une variable aléatoire continue <span class="math inline">\(X\)</span>, le nombre <span class="math inline">\(q_{\alpha}\)</span> tel que <span class="math inline">\(P(X \leq q_{\alpha}) = \alpha\)</span>, est le quantile d’ordre <span class="math inline">\(\alpha\)</span> de la loi de <span class="math inline">\(X\)</span>.
+</div>
 
+<p>Ces quantiles sont notés de différentes façons: <span class="math inline">\(z_{\alpha}\)</span> pour la loi normale, <span class="math inline">\(t_{n,\alpha}\)</span> pour la loi de Student à <span class="math inline">\(n\)</span> degrés de liberté, <span class="math inline">\(z_{n,\alpha}\)</span> pour la loi de <span class="math inline">\(\chi_{n}^{2}\)</span>, etc.</p>
+<p>La figure <a href="estimation-par-intervalle-de-confiance.html#fig:quantiles">5.1</a> suivante illustre la définition de ces quantiles:</p>
+<div class="figure" style="text-align: center"><span id="fig:quantiles"></span>
+<img src="Statistique_infentielle_files/figure-html/quantiles-1.png" alt="Quantiles $z_{\frac{\alpha}{2}}$ et $z_{1-\frac{\alpha}{2}}$ de la loi normale centrée réduite" width="90%" />
+<p class="caption">
+Figure 5.1: Quantiles <span class="math inline">\(z_{\frac{\alpha}{2}}\)</span> et <span class="math inline">\(z_{1-\frac{\alpha}{2}}\)</span> de la loi normale centrée réduite
+</p>
+</div>
+<p>Comme la loi normale est symétrique, on a la propriété suivante:</p>
+<p><span class="math display">\[z_{1-\frac{\alpha}{2}} = - z_{\frac{\alpha}{2}}\]</span>
+Ces quantiles sont donnés par les tables statistiques. Par exemple, pour <span class="math inline">\(\alpha=0.05=5\%\)</span>, on obtient <span class="math inline">\(z_{\frac{\alpha}{2}}=-1.96\)</span>.</p>
+<div class="rmdinsight">
+<p>Pour <span class="math inline">\(\alpha=0.05=5\%\)</span>, on obtient selon la table de la loi normale centrée réduite <span class="math inline">\(z_{\frac{\alpha}{2}}=-1.96\)</span> et <span class="math inline">\(z_{1-\frac{\alpha}{2}} = 1.96\)</span>.</p>
+</div>
+<p>Revenons à la détermination d’IC pour l’espérance d’une loi normale avec variance connue, on a</p>
+<p><span class="math display">\[P(z_{\frac{\alpha}{2}} \leq Z \leq z_{1-\frac{\alpha}{2}}) = 1- \alpha\]</span></p>
+<p>qui peut s’écrire</p>
+<p><span class="math display">\[P(z_{\frac{\alpha}{2}} \leq Z \leq -z_{\frac{\alpha}{2}}) = 1- \alpha\]</span>
+d’où on tire</p>
+<p><span class="math display">\[P(\overline{X} + z_{\frac{\alpha}{2}} \frac{\sigma}{\sqrt{n}} \leq \mu \leq \overline{X} - z_{\frac{\alpha}{2}} \frac{\sigma}{\sqrt{n}}) = 1- \alpha\]</span></p>
+<p>D’où l’intervalle de confiance:</p>
+<p><span class="math display">\[I C_{1-\alpha}(\mu)= [\overline{X} + z_{\frac{\alpha}{2}} \frac{\sigma}{\sqrt{n}},\overline{X} - z_{\frac{\alpha}{2}} \frac{\sigma}{\sqrt{n}}]\]</span></p>
+<p>Pour une réalisation numérique <span class="math inline">\(x_1,\ldots,x_n\)</span> d’un échantillon <span class="math inline">\(X_1,\ldots,X_n\)</span> de taille <span class="math inline">\(n\)</span>, on obtient l’intervalle de confiame sur <span class="math inline">\(\hat{\mu}\)</span> au niveau de confiance <span class="math inline">\(1-\alpha\)</span>:</p>
+<p><span class="math display">\[I C_{1-\alpha}(\mu)= [\overline{x} + z_{\frac{\alpha}{2}} \frac{\sigma}{\sqrt{n}},\overline{x} - z_{\frac{\alpha}{2}} \frac{\sigma}{\sqrt{n}}]\]</span>
+qui donne pour <span class="math inline">\(\alpha=0.05\)</span>:</p>
+<p><span class="math display">\[[\overline{x} - 1.96 \frac{\sigma}{\sqrt{n}},\overline{x} +1.96 \frac{\sigma}{\sqrt{n}}]\]</span></p>
+<div class="rmdtip">
+<p>La table de la loi normale centrée réduite et une application interactive permettant de calculer les quantiles de loi normale se trouvent dans l’annexe <a href="tab-normale1.html#tab:normale1">B</a>. Une deuxième table qui donne directement le quantile <span class="math inline">\(z_{1-\frac{\alpha}{2}}\)</span> par rapport à <span class="math inline">\(\alpha\)</span> est présentée dans l’annexe <a href="tab-normale2.html#tab:normale2">C</a>.</p>
+</div>
+<p>Le problème est que cet intervalle n’est utilisable que si on connaît la valeur de <span class="math inline">\(\sigma\)</span>. Or, dans la pratique, on ne connaît jamais les vraies valeurs des paramètres. Une idée naturelle est alors de remplacer <span class="math inline">\(\sigma\)</span> par un estimateur.</p>
+</div>
+<div id="intervalle-de-confiance-pour-lesperance-dune-loi-normale-avec-variance-inconnue" class="section level3">
+<h3><span class="header-section-number">5.1.2</span> Intervalle de confiance pour l’espérance d’une loi normale avec variance inconnue</h3>
+<p>Si la variance <span class="math inline">\(\sigma^2\)</span> est inconnue, on utilisa à sa place son meilleur estimateur <span class="math inline">\(S_n^{*2}\)</span>. Selon le théorème de Fisher, on sait que <span class="math inline">\(\frac{n }{\sigma^{2}}S_{n}^{2}\)</span> est de loi <span class="math inline">\(\chi_{n-1}^{2}\)</span>, et que <span class="math inline">\(\frac{n-1}{\sigma^{2}} S_{n}^{*2}\)</span> est de loi <span class="math inline">\(\chi_{n-1}^{2}\)</span> aussi.</p>
+<p>La statistique que l’on utilise est donc</p>
+<p><span class="math display">\[T_{n-1} = \frac{\overline{X}-\mu}{S_n^*/\sqrt{n}}\]</span></p>
+<p>En remarquant qu’elle s’écrit</p>
+<p><span class="math display">\[T_{n-1} = \frac{\frac{\overline{X}-\mu}{\sigma/\sqrt{n}}}{\sqrt{\frac{\frac{n-1}{\sigma^2}S^{*2}}{n-1}}}\]</span>
+on trouve qu’elle suite une loi de <em>Student</em> à <span class="math inline">\(n-1\)</span> degrés de liberté, comme rapport d’une loi normale centrée réduite sur la racine d’un <span class="math inline">\(\chi^2\)</span> divisé par son degré de liberté.</p>
+<p>Comme précédemment, on obtient l’intervalle de confiance:</p>
+<p><span class="math display">\[I C_{1-\alpha}(\mu)= [\overline{x} + t_{n-1,\frac{\alpha}{2}} \frac{S^*}{\sqrt{n}},\overline{x} - t_{n-1,\frac{\alpha}{2}} \frac{S^*}{\sqrt{n}}]\]</span>
+où <span class="math inline">\(t_{n-1,\frac{\alpha}{2}}\)</span> est le quantile d’ordre <span class="math inline">\(\frac{\alpha}{2}\)</span> de la loi de Student à <span class="math inline">\(n-1\)</span> degrés de liberté.</p>
+<div class="rmdtip">
+<p>Une table de la loi de Student se trouve dans l’annexe <a href="tab-student.html#tab:student">D</a>.</p>
+</div>
+<div class="rmdinsight">
+<p>Remarque: La variable alétoire <span class="math inline">\(\frac{\overline{X}-\mu}{S^*/\sqrt{n}}\)</span> est une fonction des observations <span class="math inline">\(X_1,\ldots,X_n\)</span> et du paramètre <span class="math inline">\(\mu\)</span> pour lequel on recherche un intervalle de confiance, dont la loi de probabilité ne dépend pas des paramètre du modèle <span class="math inline">\(\mu\)</span> et <span class="math inline">\(\sigma^2\)</span>. C’est ce qu’on a appelé une <strong>fonction pivotale</strong> et c’est ce que nous utiliserons pour construire des intervalles de confiance.</p>
+</div>
+<div class="rmdinsight">
+<p><strong>Si la loi de <span class="math inline">\(X\)</span> n’est pas une loi normale</strong>: Dans ce cas, lorsque la taille de l’échantillon <span class="math inline">\(n\)</span> est supérieure ou égale à 30, le théorème central limite nous permet d’utiliser le fait que <span class="math inline">\(\overline{X}_n\)</span> suit une loi normale, et donc les résultats précédents sont applicables.</p>
+</div>
+</div>
+<div id="intervalle-de-confiance-pour-la-variance-dune-loi-normale" class="section level3">
+<h3><span class="header-section-number">5.1.3</span> Intervalle de confiance pour la variance d’une loi normale</h3>
+<p>Conformément à ce qui précède, on recherche une fonction pivotale, c’est à dire une
+fonction des observations <span class="math inline">\(X_{1}, \ldots, X_{n}\)</span> et de <span class="math inline">\(\sigma^{2}\)</span>, dont la loi de probabilité ne dépend ni de <span class="math inline">\(\mu\)</span> ni de <span class="math inline">\(\sigma^{2}\)</span>. Une telle fonction est donnée par le théorème de Fisher: <span class="math inline">\(\frac{n S_{n}^{2}}{\sigma^{2}}\)</span> est de loi <span class="math inline">\(\chi_{n-1}^{2}\)</span>.</p>
+<p>On a donc, quels que soient les réels <span class="math inline">\(a\)</span> et <span class="math inline">\(b\)</span>, <span class="math inline">\(0&lt;a&lt;b\)</span> :</p>
+<p><span class="math display">\[\begin{aligned} P\left(a \leq \frac{n S_{n}^{2}}{\sigma^{2}} \leq b\right) &amp;=P\left(\frac{n S_{n}^{2}}{b} \leq \sigma^{2} \leq \frac{n S_{n}^{2}}{a}\right) \quad \text { d&#39;une part } \\ &amp;=F_{\chi_{n-1}^{2}}(b)-F_{\chi_{n-1}^{2}}(a) \quad \text { d&#39;autre part. } \end{aligned}\]</span></p>
+<p>Il y a une infinité de façons possibles de choisir <span class="math inline">\(a\)</span> et <span class="math inline">\(b\)</span> de sorte que cette probabilité soit
+égale à <span class="math inline">\(1-\alpha\)</span>. La façon la plus usuelle de procéder est d’<strong>équilibrer les risques</strong>, c’est-à-dire de prendre <span class="math inline">\(a\)</span> et <span class="math inline">\(b\)</span> tels que <span class="math inline">\(F_{\chi_{n-1}^{2}}(b)=1-\frac{\alpha}{2}\)</span> et <span class="math inline">\(F_{\chi_{n-1}^{2}}(a)=\frac{\alpha}{2}\)</span>.</p>
+<p>La table de la loi du <span class="math inline">\(\chi^{2}\)</span> donne la valeur <span class="math inline">\(z_{n, \alpha}\)</span> telle que, quand <span class="math inline">\(Z\)</span> est une variable aléatoire de loi <span class="math inline">\(\chi_{n}^{2}\)</span>, alors <span class="math inline">\(P\left(Z&gt;z_{n, \alpha}\right)=1-F_{\chi_{n}^{2}}\left(z_{n, \alpha}\right)=\alpha\)</span>.</p>
+<p>Alors, pour <span class="math inline">\(b=z_{n-1, 1-\alpha / 2}\)</span> et <span class="math inline">\(a=z_{n-1,\alpha / 2}\)</span>, on a bien</p>
+<p><span class="math display">\[P\left(\frac{n S_{n}^{2}}{b} \leq \sigma^{2} \leq \frac{n S_{n}^{2}}{a}\right)=1-\alpha\]</span></p>
+<p>D’où le résultat :</p>
+<p>Un intervalle de confiance de seuil <span class="math inline">\(\alpha\)</span> pour le paramètre <span class="math inline">\(\sigma^2\)</span> de la loi <span class="math inline">\(\mathcal{N}(\mu,\sigma^2)\)</span> est:</p>
+<p><span class="math display">\[\left[\frac{n S_{n}^{2}}{z_{n-1, 1-\alpha / 2}}, \frac{n S_{n}^{2}}{z_{n-1,\alpha / 2}}\right]=\left[\frac{(n-1) S_{n}^{* 2}}{z_{n-1, 1-\alpha / 2}}, \frac{(n-1) S_{n}^{* 2}}{z_{n-1,\alpha / 2}}\right]\]</span></p>
+<p><strong>Remarque 1</strong>: <span class="math inline">\(P\left(a \leq \sigma^{2} \leq b\right)=P(\sqrt{a} \leq \sigma \leq \sqrt{b}),\)</span> donc un intervalle de confiance de
+seuil <span class="math inline">\(\alpha\)</span> pour l’écart-type <span class="math inline">\(\sigma\)</span> est:
+<span class="math display">\[
+\left[\sqrt{\frac{n}{z_{n-1, 1-\alpha / 2}}} S_{n}, \sqrt{\frac{n}{z_{n-1,\alpha / 2}}} S_{n}\right]
+\]</span>
+Remarque 2: L’intervalle de confiance est de la forme <span class="math inline">\(\left[\varepsilon_{1} S_{n}^{2}, \varepsilon_{2} S_{n}^{2}\right]\)</span> avec <span class="math inline">\(\varepsilon_{1}&lt;1\)</span> et <span class="math inline">\(\varepsilon_{2}&gt;1\)</span>
+et non pas de la forme <span class="math inline">\(\left[S_{n}^{2}-\varepsilon, S_{n}^{2}+\varepsilon\right] .\)</span> En fait, si on cherche un intervalle de confiance
+pour <span class="math inline">\(\sigma^{2}\)</span> de la forme <span class="math inline">\(\left[S_{n}^{2}-\varepsilon, S_{n}^{2}+\varepsilon\right],\)</span> la démarche ne va pas aboutir, et on ne peut pas
+le savoir à l’avance. C’est l’intérêt des fonctions pivotales, qui imposent d’elles-mêmes la
+forme de l’intervalle de confiance.</p>
+<div class="rmdtip">
+<p>Une table de la loi de <span class="math inline">\(\chi^2\)</span> se trouve dans l’annexe <a href="tab-khideux.html#tab:khideux">E</a>.</p>
+</div>
+</div>
+</div>
+<div id="intervalle-de-confiance-pour-une-proportion" class="section level2">
+<h2><span class="header-section-number">5.2</span> Intervalle de confiance pour une proportion</h2>
+<p>Le probleme connu sous le nom d’intervalle de confiance pour une proportion est en
+fait le problème de la détermination d’un intervalle de confiance pour le paramètre <span class="math inline">\(p\)</span> de la
+loi de <em>Bernoulli</em>, au vu d’un échantillon <span class="math inline">\(X_{1}, \ldots, X_{n}\)</span> de cette loi. On a montré dans le chapitre précédent que le meilleur estimateur de <span class="math inline">\(p\)</span> est <span class="math inline">\(\hat{P}_{n}=\bar{X}_{n}\)</span>.</p>
+<p>Supposant que la proportion <span class="math inline">\(p\)</span> d’individus présentent un certain caractère <span class="math inline">\(C\)</span> (par exemple, les individus ayant voté à un certain candidat) au sein d’une population est inconnue. Le meilleur estimateur de <span class="math inline">\(p\)</span> est <span class="math inline">\(\hat{P}_{n}=\overline{X}_{n} = \frac{1}{n}\sum_{i=1}^n X_i\)</span> où <span class="math inline">\(X_i\)</span> est une v.a. de Bernoulli de paramètre <span class="math inline">\(p\)</span>, définie par:</p>
+<p><span class="math display">\[X_{i}=\left\{\begin{array}{ll}{1} &amp; {\text { si l&#39;individu } i \text{ possède la caractère } C} \\ {0} &amp; {\text { sinon }}\end{array}\right.\]</span></p>
+<p>Comme <span class="math inline">\(X\)</span> suit une loi de Bernoulli <span class="math inline">\(\mathcal{B}(p)\)</span>, <span class="math inline">\(n \hat{p} = \frac{1}{n}\sum_{i=1}^n X_i\)</span> suit une loi Binomiale <span class="math inline">\(\mathcal{B}(n,p)\)</span>.</p>
+<p>Si <span class="math inline">\(n\)</span> est faible, on utilisera les tables de la loi binomiale.</p>
+<p>Si <span class="math inline">\(n\)</span> est suffisamment grand<a href="#fn5" class="footnote-ref" id="fnref5"><sup>5</sup></a>, on peut considérer (d’après le TCL<a href="#fn6" class="footnote-ref" id="fnref6"><sup>6</sup></a>) que <span class="math inline">\(\sum_{i=1}^n X_i\)</span> suit une loi normale <span class="math inline">\(\mathcal{N}(np, np(1-p))\)</span>, d’où <span class="math inline">\(\hat{p}_n\)</span> suit une loi normale <span class="math inline">\(\mathcal{N}(p, \frac{p(1-p)}{n})\)</span>, et donc <span class="math inline">\(Z = \frac{\hat{p}_n - p}{\sqrt{\frac{p(1-p)}{n}}}\)</span> suit une loi <span class="math inline">\(\mathcal{N}(0,1)\)</span>.</p>
+<div class="rmdcaution">
+<p>Le résultat précédent n’est applicable que si <span class="math inline">\(n\)</span> est suffisamment grand.</p>
+</div>
+<p>On obtient alors, en fonction des quantiles <span class="math inline">\(P(z_{\alpha/2} \leq Z \leq - z_{\alpha/2})=1-\alpha\)</span>, l’intervalle de confiance pour <span class="math inline">\(p\)</span>:</p>
+<p><span class="math display">\[IC_{1-\alpha}(p)= \Big[\hat{p}_n + z_{\alpha/2} \sqrt{\frac{p(1-p)}{n}}, \hat{p}_n - z_{\alpha/2} \sqrt{\frac{p(1-p)}{n}}\Big]\]</span></p>
+<p>Cet intervalle recouvre <span class="math inline">\(p\)</span> avec la probabilité <span class="math inline">\(1-\alpha\)</span>, mais il est toutefois inopérant puisque ses bornes dépendent de
+<span class="math inline">\(p\)</span>. En pratique, il existe trois façons d’obtenir l’intervalle de confiance. Nous retiendrons celle qui remplace <span class="math inline">\(p\)</span> par son estimateur <span class="math inline">\(\hat{P}_n\)</span>.
+Ainsi, on obtient l’intervalle de confiance sur la proportion <span class="math inline">\(p\)</span> en fonction de la valeur <span class="math inline">\(\hat{p}_n\)</span> de <span class="math inline">\(\hat{P}_n\)</span> sur notre échantillon:</p>
+<p><span class="math display">\[IC_{1-\alpha}(p)= \Big[\hat{p}_n + z_{\alpha/2} \sqrt{\frac{\hat{p}_n(1-\hat{p}_n)}{n}}, \hat{p}_n - z_{\alpha/2} \sqrt{\frac{\hat{p}_n(1-\hat{p}_n)}{n}}\Big]\]</span></p>
+
+</div>
+</div>
+<div class="footnotes">
+<hr />
+<ol start="5">
+<li id="fn5"><p>de sorte que <span class="math inline">\(np&gt;5\)</span> et <span class="math inline">\(n(1-p)&gt;5\)</span>.<a href="estimation-par-intervalle-de-confiance.html#fnref5" class="footnote-back">↩</a></p></li>
+<li id="fn6"><p>Théorème centrale limite<a href="estimation-par-intervalle-de-confiance.html#fnref6" class="footnote-back">↩</a></p></li>
+</ol>
 </div>
             </section>
 
           </div>
         </div>
       </div>
-<a href="statistique-descriptive.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="tp-statistique-descriptive-avec-r.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="tp-illustration-numerique-des-methodes-destimation-avec-r.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="tests-dhypotheses.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="book_assets/gitbook-2.6.7/js/app.min.js"></script>

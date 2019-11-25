@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>TP Statistique descriptive avec R | Statistique Inférentielle</title>
+  <title>TP illustration numérique des théorèmes limites avec R (Avec corrections) | Statistique Inférentielle</title>
   <meta name="description" content="Cours de Statistique Inférentielle A3 ESILV" />
   <meta name="generator" content="bookdown 0.14 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="TP Statistique descriptive avec R | Statistique Inférentielle" />
+  <meta property="og:title" content="TP illustration numérique des théorèmes limites avec R (Avec corrections) | Statistique Inférentielle" />
   <meta property="og:type" content="book" />
   
   
@@ -16,7 +16,7 @@
   
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="TP Statistique descriptive avec R | Statistique Inférentielle" />
+  <meta name="twitter:title" content="TP illustration numérique des théorèmes limites avec R (Avec corrections) | Statistique Inférentielle" />
   
   <meta name="twitter:description" content="Cours de Statistique Inférentielle A3 ESILV" />
   
@@ -31,8 +31,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   <link rel="shortcut icon" href="img/favicon.ico" type="image/x-icon" />
-<link rel="prev" href="exercices.html"/>
-<link rel="next" href="tp-statistique-descriptive-avec-r-avec-corrections.html"/>
+<link rel="prev" href="tp-illustration-numerique-des-theoremes-limites-avec-r.html"/>
+<link rel="next" href="estimation-ponctuelle.html"/>
 <script src="book_assets/jquery-2.2.3/jquery.min.js"></script>
 <link href="book_assets/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="book_assets/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -375,175 +375,121 @@ code span.wa { color: #bf0303; } /* Warning */
 <div class = rmdreview>
 Vous êtes invités à annoter le contenu de ce cours. Les annotations peuvent être des corrections typographiques, des propositions ou des questions. Pour ajouter des annotations, <span style="background-color: #3297FD; color: white">choisissez le text</span> que vous voulez commenter et cliquez sur <i class="h-icon-annotate"></i>. Pour accéder aux annotations crées par d'autres personnes, cliquez <i class="h-icon-chevron-left"></i> sur le coin supérieur de la page <i class="fa fa-arrow-circle-right  fa-rotate-315" aria-hidden="true"></i>.
 </div>
-<div id="tp-statistique-descriptive-avec-r" class="section level1 unnumbered">
-<h1>TP Statistique descriptive avec R</h1>
-<div id="quest-ce-que-cest-que" class="section level2 unnumbered">
-<h2>Qu’est-ce que c’est que <svg style="height:0.8em;top:.04em;position:relative;fill:steelblue;" viewBox="0 0 581 512"><path d="M581 226.6C581 119.1 450.9 32 290.5 32S0 119.1 0 226.6C0 322.4 103.3 402 239.4 418.1V480h99.1v-61.5c24.3-2.7 47.6-7.4 69.4-13.9L448 480h112l-67.4-113.7c54.5-35.4 88.4-84.9 88.4-139.7zm-466.8 14.5c0-73.5 98.9-133 220.8-133s211.9 40.7 211.9 133c0 50.1-26.5 85-70.3 106.4-2.4-1.6-4.7-2.9-6.4-3.7-10.2-5.2-27.8-10.5-27.8-10.5s86.6-6.4 86.6-92.7-90.6-87.9-90.6-87.9h-199V361c-74.1-21.5-125.2-67.1-125.2-119.9zm225.1 38.3v-55.6c57.8 0 87.8-6.8 87.8 27.3 0 36.5-38.2 28.3-87.8 28.3zm-.9 72.5H365c10.8 0 18.9 11.7 24 19.2-16.1 1.9-33 2.8-50.6 2.9v-22.1z"/></svg>?</h2>
-<p>C’est un langage de programmation et un logiciel gratuit et libre.
-Il est surtout utilisé pour le développement de programmes statistiques et des analyses de données.
-Il gagne en popularité depuis quelques années avec l’émergence de la <em>data science</em> et du fait qu’il est gratuit et ouvert (<em>open-source</em>).
-<svg style="height:0.8em;top:.04em;position:relative;fill:steelblue;" viewBox="0 0 581 512"><path d="M581 226.6C581 119.1 450.9 32 290.5 32S0 119.1 0 226.6C0 322.4 103.3 402 239.4 418.1V480h99.1v-61.5c24.3-2.7 47.6-7.4 69.4-13.9L448 480h112l-67.4-113.7c54.5-35.4 88.4-84.9 88.4-139.7zm-466.8 14.5c0-73.5 98.9-133 220.8-133s211.9 40.7 211.9 133c0 50.1-26.5 85-70.3 106.4-2.4-1.6-4.7-2.9-6.4-3.7-10.2-5.2-27.8-10.5-27.8-10.5s86.6-6.4 86.6-92.7-90.6-87.9-90.6-87.9h-199V361c-74.1-21.5-125.2-67.1-125.2-119.9zm225.1 38.3v-55.6c57.8 0 87.8-6.8 87.8 27.3 0 36.5-38.2 28.3-87.8 28.3zm-.9 72.5H365c10.8 0 18.9 11.7 24 19.2-16.1 1.9-33 2.8-50.6 2.9v-22.1z"/></svg> est née d’un projet de recherche mené par deux chercheurs, Ross Ihaka et Robert Gentleman à l’université d’Auckland (Nouvelle-Zélande) en 1993.
-En 1997 est mis en place le <em>Comprehension R Archive Network (CRAN)</em> qui centralise les contributions au projet.</p>
-<p>Depuis le projet connaît une croissance soutenue, grâce à des contributions de la part de milliers de personnes à travers le monde.</p>
-<div id="rstudio" class="section level3 unnumbered">
-<h3>RStudio</h3>
-<ul>
-<li><p>C’est une IDE (<em>Integrated Development Environment</em>) ou Environnement Intégré de Développement.</p></li>
-<li><p>Il sert d’interface entre <svg style="height:0.8em;top:.04em;position:relative;fill:steelblue;" viewBox="0 0 581 512"><path d="M581 226.6C581 119.1 450.9 32 290.5 32S0 119.1 0 226.6C0 322.4 103.3 402 239.4 418.1V480h99.1v-61.5c24.3-2.7 47.6-7.4 69.4-13.9L448 480h112l-67.4-113.7c54.5-35.4 88.4-84.9 88.4-139.7zm-466.8 14.5c0-73.5 98.9-133 220.8-133s211.9 40.7 211.9 133c0 50.1-26.5 85-70.3 106.4-2.4-1.6-4.7-2.9-6.4-3.7-10.2-5.2-27.8-10.5-27.8-10.5s86.6-6.4 86.6-92.7-90.6-87.9-90.6-87.9h-199V361c-74.1-21.5-125.2-67.1-125.2-119.9zm225.1 38.3v-55.6c57.8 0 87.8-6.8 87.8 27.3 0 36.5-38.2 28.3-87.8 28.3zm-.9 72.5H365c10.8 0 18.9 11.7 24 19.2-16.1 1.9-33 2.8-50.6 2.9v-22.1z"/></svg> et l’utilisateur, offre à celui diverses commodités d’utilisation</p></li>
-</ul>
-<div class="rmdtip">
-<ul>
-<li>Une introduction au RStudio est présentée dans l’annexe <a href="app-introRStudio.html#app-introRStudio">A</a>.</li>
-<li>Vous trouverez une bonne introduction à <svg style="height:0.8em;top:.04em;position:relative;fill:steelblue;" viewBox="0 0 581 512"><path d="M581 226.6C581 119.1 450.9 32 290.5 32S0 119.1 0 226.6C0 322.4 103.3 402 239.4 418.1V480h99.1v-61.5c24.3-2.7 47.6-7.4 69.4-13.9L448 480h112l-67.4-113.7c54.5-35.4 88.4-84.9 88.4-139.7zm-466.8 14.5c0-73.5 98.9-133 220.8-133s211.9 40.7 211.9 133c0 50.1-26.5 85-70.3 106.4-2.4-1.6-4.7-2.9-6.4-3.7-10.2-5.2-27.8-10.5-27.8-10.5s86.6-6.4 86.6-92.7-90.6-87.9-90.6-87.9h-199V361c-74.1-21.5-125.2-67.1-125.2-119.9zm225.1 38.3v-55.6c57.8 0 87.8-6.8 87.8 27.3 0 36.5-38.2 28.3-87.8 28.3zm-.9 72.5H365c10.8 0 18.9 11.7 24 19.2-16.1 1.9-33 2.8-50.6 2.9v-22.1z"/></svg> sur ce <a href="https://cran.r-project.org/doc/contrib/Torfs+Brauer-Short-R-Intro.pdf" target="_blank">lien <i class="fas  fa-external-link-alt "></i></a>.</li>
-</ul>
+<div id="tp-illustration-numerique-des-theoremes-limites-avec-r-avec-corrections" class="section level1 unnumbered">
+<h1>TP illustration numérique des théorèmes limites avec R (Avec corrections)</h1>
+<div id="realisations-de-variables-aleatoires-1" class="section level3 unnumbered">
+<h3>Réalisations de variables aléatoires</h3>
+<p>Pour générer (simuler) des réalisations de variables aléatoires on utilise la fonction qui commence par la lettre <code>r</code> (pour <em>random</em>) succédée par le nom de la loi que l’on souhaite simuler. Par exemple <code>rnorm</code> pour simuler des réalisations de la variable alétoire de loi normale. Tapez <code>?rnorm</code> pour voir la liste des paramètres (arguments) de cette fonction.</p>
+<div class="sourceCode" id="cb46"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb46-1" title="1"><span class="kw">rnorm</span>(<span class="dv">10</span>) <span class="co"># génére 10 réalistions alétoires de la loi normale centrée réduite.</span></a>
+<a class="sourceLine" id="cb46-2" title="2"><span class="co">#ans&gt;  [1] -1.26e-01 -1.10e+00 -1.06e+00  3.22e-01  3.58e-01 -6.71e-05 -1.07e+00</span></a>
+<a class="sourceLine" id="cb46-3" title="3"><span class="co">#ans&gt;  [8]  1.14e+00  2.65e-01  8.07e-01</span></a>
+<a class="sourceLine" id="cb46-4" title="4"><span class="kw">rnorm</span>(<span class="dv">10</span>, <span class="dt">mean =</span> <span class="dv">1</span>, <span class="dt">sd =</span> <span class="dv">3</span>) <span class="co"># génére 10 réalisations alétoires de la loi normale d&#39;espérance 1 et écart-type 3</span></a>
+<a class="sourceLine" id="cb46-5" title="5"><span class="co">#ans&gt;  [1]  1.2251 -0.3493  0.8204 -2.7993 -1.5955 -0.3777 -3.7275  1.3010</span></a>
+<a class="sourceLine" id="cb46-6" title="6"><span class="co">#ans&gt;  [9]  0.0191 -1.5619</span></a></code></pre></div>
+<p><strong>1.</strong> Simuler un vecteur de 1000 réalisations indépendantes de loi uniforme sur l’intervalle <span class="math inline">\([0,1]\)</span>. Simuler ensuite 1000 réalisations de la loi exponentielle de paramètre 2.</p>
+<div class="sourceCode" id="cb47"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb47-1" title="1">u =<span class="st"> </span><span class="kw">runif</span>(<span class="dv">1000</span>,<span class="dv">0</span>,<span class="dv">1</span>)</a>
+<a class="sourceLine" id="cb47-2" title="2">e =<span class="st"> </span><span class="kw">rexp</span>(<span class="dv">1000</span>,<span class="dv">2</span>)</a></code></pre></div>
+<p><strong>Extra</strong>: Afin de vérifier les simulations on peut afficher l’histogramme des réalisations et superposer avec la densité de la loi correspondante.</p>
+<div class="sourceCode" id="cb48"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb48-1" title="1"><span class="kw">set.seed</span>(<span class="dv">1812</span>)</a>
+<a class="sourceLine" id="cb48-2" title="2">u =<span class="st"> </span><span class="kw">runif</span>(<span class="dv">1000</span>,<span class="dv">0</span>,<span class="dv">1</span>)</a>
+<a class="sourceLine" id="cb48-3" title="3">e =<span class="st"> </span><span class="kw">rexp</span>(<span class="dv">1000</span>,<span class="dv">2</span>)</a>
+<a class="sourceLine" id="cb48-4" title="4"><span class="kw">par</span>(<span class="dt">mfrow=</span><span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">2</span>))</a>
+<a class="sourceLine" id="cb48-5" title="5"><span class="kw">hist</span>(u,<span class="dt">col=</span>mycolor, <span class="dt">prob=</span>T, <span class="dt">xlab=</span><span class="st">&quot;&quot;</span>,<span class="dt">main=</span> <span class="st">&quot;1000 réalisations de la loi U(0,1)&quot;</span>, <span class="dt">cex.main=</span><span class="dv">1</span>)</a>
+<a class="sourceLine" id="cb48-6" title="6"><span class="kw">curve</span>(<span class="kw">dunif</span>(x,<span class="dv">0</span>,<span class="dv">1</span>),<span class="dt">xlim=</span><span class="kw">c</span>(<span class="dv">0</span>,<span class="dv">1</span>),<span class="dt">add=</span>T, <span class="dt">col=</span><span class="st">&quot;red&quot;</span>,<span class="dt">lwd=</span><span class="dv">3</span>) <span class="co"># d&#39;autres moyens sont possibles</span></a>
+<a class="sourceLine" id="cb48-7" title="7"><span class="kw">hist</span>(e,<span class="dt">col=</span>mycolor, <span class="dt">prob=</span>T, <span class="dt">xlab=</span><span class="st">&quot;&quot;</span>,<span class="dt">main=</span> <span class="st">&quot;1000 réalisations de la loi Exp(2)&quot;</span>, <span class="dt">cex.main=</span><span class="dv">1</span>)</a>
+<a class="sourceLine" id="cb48-8" title="8"><span class="kw">curve</span>(<span class="kw">dexp</span>(x,<span class="dv">2</span>),<span class="dt">add=</span>T, <span class="dt">col=</span><span class="st">&quot;red&quot;</span>,<span class="dt">lwd=</span><span class="dv">3</span>) <span class="co"># d&#39;autres moyens sont possibles</span></a></code></pre></div>
+<p><img src="Statistique_infentielle_files/figure-html/unnamed-chunk-118-1.png" width="80%" style="display: block; margin: auto;" /></p>
 </div>
-</div>
-</div>
-<div id="ere-partie-donnees-quantitatives-discretes" class="section level2 unnumbered">
-<h2>1ère partie: Données quantitatives discrètes</h2>
-<p>Le nombre d’arbres plantés sur les parcelles d’un lotissement a été compté. Les données obtenues sont les suivantes:</p>
-<p><span class="math display">\[1,2,4,1,6,3,2,1,2,0,1,2,2,1,3,0,3,2,1,2,2,3,2,3.\]</span></p>
-<p><strong>1.</strong> Quelle est la nature de variable étudiée?</p>
-<p><strong>2.</strong> Rentrer ces données sous la forme d’un vecteur nommé <code>arbres</code> et affichez ce vecteur.</p>
-<p><strong>3.</strong> Trier les valeurs de ce vecteur par ordre croissant.</p>
-<p><strong>4.</strong> Donner la taille de l’échantillon (c’est-à-dire le nombre de composantes de ce vecteur) en la notant <code>n</code> et affichez sa valeur.</p>
-<div id="effectifs-et-frequence" class="section level3 unnumbered">
-<h3>Effectifs et fréquence</h3>
-<p><strong>5.</strong> Montrer la séquence des modalités et la séquence des effectifs correspondants.</p>
-<p><strong>6.</strong> Montrer le tableau de fréquences et de pourcentages.</p>
-<p><strong>7.</strong> Calculer et afficher les effectifs cumulés et les fréquences cumulées.</p>
-</div>
-<div id="mesures-de-tendance-centrale" class="section level3 unnumbered">
-<h3>Mesures de tendance centrale</h3>
-<p><strong>8.</strong> Calculer le nombre moyen d’arbres par parcelle.</p>
-<p><strong>9.</strong> Calculer le nombre maximum et le nombre minimum d’arbres sur une parcelle.</p>
-<p><strong>10.</strong> Calculer le nombre médian d’arbres par parcelle.</p>
-<p><strong>11.</strong> Utiliser la fonction <code>summary()</code> pour obtenir un tableau récapitulatif des indicateurs.</p>
-</div>
-<div id="indicateurs-de-dispersion" class="section level3 unnumbered">
-<h3>Indicateurs de dispersion</h3>
-<p><strong>12.</strong> Calculer la variance du nombre d’arbres plantés sur les parcelles.</p>
-<p><strong>13.</strong> Calculer maintenant l’écart-type et vérifier que l’écart-type est la racine carrée de la variance.</p>
-<p><strong>14.</strong> Calculer la variance vous-même. La variance obtenue est elle la même que la précédente?</p>
+<div id="fonction-de-densite-1" class="section level3 unnumbered">
+<h3>Fonction de densité</h3>
+<p>Pour calculer la densité d’une certaine loi, il suffit d’utiliser comme fonction le nom de la loi dans <svg style="height:0.8em;top:.04em;position:relative;fill:steelblue;" viewBox="0 0 581 512"><path d="M581 226.6C581 119.1 450.9 32 290.5 32S0 119.1 0 226.6C0 322.4 103.3 402 239.4 418.1V480h99.1v-61.5c24.3-2.7 47.6-7.4 69.4-13.9L448 480h112l-67.4-113.7c54.5-35.4 88.4-84.9 88.4-139.7zm-466.8 14.5c0-73.5 98.9-133 220.8-133s211.9 40.7 211.9 133c0 50.1-26.5 85-70.3 106.4-2.4-1.6-4.7-2.9-6.4-3.7-10.2-5.2-27.8-10.5-27.8-10.5s86.6-6.4 86.6-92.7-90.6-87.9-90.6-87.9h-199V361c-74.1-21.5-125.2-67.1-125.2-119.9zm225.1 38.3v-55.6c57.8 0 87.8-6.8 87.8 27.3 0 36.5-38.2 28.3-87.8 28.3zm-.9 72.5H365c10.8 0 18.9 11.7 24 19.2-16.1 1.9-33 2.8-50.6 2.9v-22.1z"/></svg> avec le préfixe <code>d</code> pour une densité. Taper <code>?dnorm</code> pour comprendre le fonctionnement de cette commande.</p>
+<p><strong>2.</strong> Que vaut la densité de la loi normale centrée réduite en 0? Essayer la même chose pour la loi binomiale de paramètres <span class="math inline">\(n=10\)</span> et <span class="math inline">\(p=0.5\)</span>.</p>
+<div class="sourceCode" id="cb49"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb49-1" title="1"><span class="kw">dnorm</span>(<span class="dv">0</span>) <span class="co"># 1/sqrt(2*pi)</span></a>
+<a class="sourceLine" id="cb49-2" title="2"><span class="co">#ans&gt; [1] 0.399</span></a>
+<a class="sourceLine" id="cb49-3" title="3"><span class="kw">dbinom</span>(<span class="dv">0</span>,<span class="dv">10</span>,<span class="fl">0.5</span>) <span class="co"># faire calcul manuel au tableau</span></a>
+<a class="sourceLine" id="cb49-4" title="4"><span class="co">#ans&gt; [1] 0.000977</span></a></code></pre></div>
 <div class="rmdinsight">
-<p>Le logiciel <svg style="height:0.8em;top:.04em;position:relative;fill:steelblue;" viewBox="0 0 581 512"><path d="M581 226.6C581 119.1 450.9 32 290.5 32S0 119.1 0 226.6C0 322.4 103.3 402 239.4 418.1V480h99.1v-61.5c24.3-2.7 47.6-7.4 69.4-13.9L448 480h112l-67.4-113.7c54.5-35.4 88.4-84.9 88.4-139.7zm-466.8 14.5c0-73.5 98.9-133 220.8-133s211.9 40.7 211.9 133c0 50.1-26.5 85-70.3 106.4-2.4-1.6-4.7-2.9-6.4-3.7-10.2-5.2-27.8-10.5-27.8-10.5s86.6-6.4 86.6-92.7-90.6-87.9-90.6-87.9h-199V361c-74.1-21.5-125.2-67.1-125.2-119.9zm225.1 38.3v-55.6c57.8 0 87.8-6.8 87.8 27.3 0 36.5-38.2 28.3-87.8 28.3zm-.9 72.5H365c10.8 0 18.9 11.7 24 19.2-16.1 1.9-33 2.8-50.6 2.9v-22.1z"/></svg> utilise <span class="math inline">\(n-1\)</span> pour le dénomiateur dans la définition de la variance, c’est-à-dire <span class="math inline">\(\frac{1}{n-1} \sum_{i=1}^n (x_i - \bar{x})^2\)</span> (d’écart-type noté <span class="math inline">\(\sigma_{n-1}\)</span> ou <span class="math inline">\(s\)</span>. Cette quantité est souvent préférée dans les applications numériques pour des questions d’estimation).</p>
+<p>Cette commande permet de tracer facilement des fonctions de densité.</p>
 </div>
-</div>
-<div id="representations-graphiques-1" class="section level3 unnumbered">
-<h3>Représentations graphiques</h3>
-<p><strong>15.</strong> La fontion <code>plot()</code> affiche par défaut un nuage de points avec en abscisse le numéro de l’observation (ici de 1 à 24) et en ordonnée le nombre d’arbres. Tester cette fonction. Modifier le titre de la figure, les noms des axes, la couleur et la forme des points affichés.</p>
-<p><strong>16.</strong> Afficher la courbe des fréquence cumulées. (<strong>Indication</strong>: Utiliser la fonction <code>ecdf()</code>).</p>
-<p><strong>17.</strong> Tracer un diagramme en bâtons par la fonction <code>barplot()</code> à partir du tableau des effectifs ou des fréquences.</p>
-</div>
-</div>
-<div id="eme-partie-analyse-descriptive" class="section level2 unnumbered">
-<h2>2ème partie : Analyse descriptive</h2>
-<div id="donnees-utilisees" class="section level3 unnumbered">
-<h3>Données utilisées</h3>
-<p>Une enquête a été réalisée sur 237 étudiants. Les données sont les suivantes:</p>
-<ul>
-<li><strong>Sex</strong>: The sex of the student. (Factor with levels “Male” and “Female”.)</li>
-<li><strong>Wr.Hnd</strong>: span (distance from tip of thumb to tip of little finger of spread hand) of writing hand, in centimetres.</li>
-<li><strong>NW.Hnd</strong>: span of non-writing hand.</li>
-<li><strong>W.Hnd</strong>: writing hand of student. (Factor, with levels “Left” and “Right”.)</li>
-<li><strong>Fold</strong>: “Fold your arms! Which is on top” (Factor, with levels “R on L”, “L on R”, “Neither”.)</li>
-<li><strong>Pulse</strong>: pulse rate of student (beats per minute).</li>
-<li><strong>Clap</strong>: ‘Clap your hands! Which hand is on top?’ (Factor, with levels “Right”, “Left”, “Neither”.)</li>
-<li><strong>Exer</strong>: how often the student exercises. (Factor, with levels “Freq” (frequently), “Some”, “None”.)</li>
-<li><strong>Smoke</strong>: how much the student smokes. (Factor, levels “Heavy”, “Regul” (regularly), “Occas” (occasionally), “Never”.)</li>
-<li><strong>Height</strong>: height of the student in centimetres.</li>
-<li><strong>M.I</strong>: whether the student expressed height in imperial (feet/inches) or metric (centimetres/metres) units. (Factor, levels “Metric”, “Imperial”.)</li>
-<li><strong>Age</strong>: age of the student in years.</li>
-</ul>
-</div>
-<div id="definition-du-repertoire-de-travail" class="section level3 unnumbered">
-<h3>Définition du répertoire de travail</h3>
-<p>Vous avez la possibilité de définir un <em>Répertoire de travail</em> dans lequel vous allez stocker votre script R, vos données etc… Ceci est réalisé par la fonction <code>setwd("..Chemin/de/votre/repertoire")</code>. Cette fonction considère comme seul paramètre le chemin d’accès au répertoire que vous avez choisi. A tout moment, vous pouvez vérifier le répertoire de travail courant en executant l’instruction suivante:</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" title="1"><span class="kw">getwd</span>()</a></code></pre></div>
-<p><strong>1.</strong> Définisser votre répertoire de travail.</p>
-</div>
-<div id="chargement-des-donnees" class="section level3 unnumbered">
-<h3>Chargement des données</h3>
-<p>Il existe une multitude de fonctions qui permettent de charger un fichier de données. Télécharger le fichier de données en cliquant <a target="_blank" href="datasets/enquete.csv">ici <i class="fa fa-table" aria-hidden="true"></i></a> et enregistrer le dans votre répertoire. Ensuite utiliser la fonction <code>read.csv()</code> pour charger les données dans <svg style="height:0.8em;top:.04em;position:relative;fill:steelblue;" viewBox="0 0 581 512"><path d="M581 226.6C581 119.1 450.9 32 290.5 32S0 119.1 0 226.6C0 322.4 103.3 402 239.4 418.1V480h99.1v-61.5c24.3-2.7 47.6-7.4 69.4-13.9L448 480h112l-67.4-113.7c54.5-35.4 88.4-84.9 88.4-139.7zm-466.8 14.5c0-73.5 98.9-133 220.8-133s211.9 40.7 211.9 133c0 50.1-26.5 85-70.3 106.4-2.4-1.6-4.7-2.9-6.4-3.7-10.2-5.2-27.8-10.5-27.8-10.5s86.6-6.4 86.6-92.7-90.6-87.9-90.6-87.9h-199V361c-74.1-21.5-125.2-67.1-125.2-119.9zm225.1 38.3v-55.6c57.8 0 87.8-6.8 87.8 27.3 0 36.5-38.2 28.3-87.8 28.3zm-.9 72.5H365c10.8 0 18.9 11.7 24 19.2-16.1 1.9-33 2.8-50.6 2.9v-22.1z"/></svg>. Cette fonction prend comme principaux paramètres d’entrée le fichier à charger <code>(file="data.txt")</code>, le séparateur de colonnes dans le fichier initial <code>(sep=)</code> et la présence (ou non) des noms de colonnes dans le fichier <code>(header=)</code>.</p>
-<div class="rmdcaution">
-<p>Ouvrez toujours le fichier de données dans un éditeur de texte pour connaitre le séparateur de colonnes et voir si les noms de colonnes sont présents.</p>
-</div>
-<p><strong>2.</strong> Charger le fichier des données dans l’enquête dans un tableau nommé <code>data</code>. L’instruction de chargement du fichier est la suivante:</p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2-1" title="1">donnees =<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&quot;enquete.csv&quot;</span>, <span class="dt">header =</span> T , <span class="dt">sep=</span><span class="st">&quot;,&quot;</span>)</a></code></pre></div>
-<p>Le fichier de données est chargé dans l’environnement <svg style="height:0.8em;top:.04em;position:relative;fill:steelblue;" viewBox="0 0 581 512"><path d="M581 226.6C581 119.1 450.9 32 290.5 32S0 119.1 0 226.6C0 322.4 103.3 402 239.4 418.1V480h99.1v-61.5c24.3-2.7 47.6-7.4 69.4-13.9L448 480h112l-67.4-113.7c54.5-35.4 88.4-84.9 88.4-139.7zm-466.8 14.5c0-73.5 98.9-133 220.8-133s211.9 40.7 211.9 133c0 50.1-26.5 85-70.3 106.4-2.4-1.6-4.7-2.9-6.4-3.7-10.2-5.2-27.8-10.5-27.8-10.5s86.6-6.4 86.6-92.7-90.6-87.9-90.6-87.9h-199V361c-74.1-21.5-125.2-67.1-125.2-119.9zm225.1 38.3v-55.6c57.8 0 87.8-6.8 87.8 27.3 0 36.5-38.2 28.3-87.8 28.3zm-.9 72.5H365c10.8 0 18.9 11.7 24 19.2-16.1 1.9-33 2.8-50.6 2.9v-22.1z"/></svg> et est affecté à l’objet <code>donnees</code>. C’est cet objet, de type <em>dataframe</em> qui va faire l’objet de manipulations par la suite.</p>
-<p><strong>3.</strong> Afficher le nombre de d’observations (lignes) et le nombre de variables (colonnes).</p>
-<p><strong>4.</strong> Utiliser la fonction <code>head()</code> pour afficher les premières lignes (6 par défaut) de données chargées.</p>
-<p><strong>5.</strong> L’accès à une colonne d’un dataframe se fait par la notation <code>$</code>: <code>nom_du_dataframe$nom_variable</code>. Afficher les valeurs de la variable <code>Age</code> de vos données.</p>
-</div>
-<div id="analyse-descriptive-univariee" class="section level3 unnumbered">
-<h3>Analyse descriptive univariée</h3>
-<p><strong>Indicateurs statistiques pour variables quantitatives</strong></p>
-<p><strong>6.</strong> Calculer et afficher la moyenne et l’écart-type d’age des élèves qui ont participé à l’enquête.</p>
-<p><strong>7.</strong> Appliquer la fonction <code>summary()</code> sur la variable <code>Age</code>. Qu’est ce que cette fonction calcule et affiche?</p>
-<p><strong>Représentations graphiques pour variables quantitatives</strong></p>
-<p><strong>8.</strong> Tracer l’histogramme de la variable <code>Age</code>. Ecrire un titre correspondante à votre figure, modifier les noms des axes et les couleurs des bâtons.</p>
-<p><strong>9.</strong> Afficher une la boîte à moustache correspondante à la variable <code>Age</code>. Commenter ce qu’on observe sur cette figure.</p>
-<p><strong>Indicateurs statistiques et représentations graphiques pour variables qualitatives</strong></p>
-<p><strong>10.</strong> Choisir une variable qualitative parmi les variables de cette enquête. Justifier votre choix. Calculer et afficher les effectifs et les fréquences de cette variable.</p>
+<p><strong>3.</strong> Que se passe-t-il si l’on demande la fonction de densité de la loi binomiale en 0.3? Pourquoi?</p>
+<div class="sourceCode" id="cb50"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb50-1" title="1"><span class="kw">dbinom</span>(<span class="fl">0.3</span>, <span class="dv">10</span>,<span class="fl">0.5</span>) <span class="co"># erreur car 0.3 n&#39;est pas une possibilité</span></a>
+<a class="sourceLine" id="cb50-2" title="2"><span class="co">#ans&gt; Warning in dbinom(0.3, 10, 0.5): non-integer x = 0.300000</span></a>
+<a class="sourceLine" id="cb50-3" title="3"><span class="co">#ans&gt; [1] 0</span></a></code></pre></div>
+<p><strong>4.</strong> Tracer la fonction de densité de la loi normale centrée réduite. Commencer par créer un vecteur d’abscisses à l’aide de la fonction <code>seq()</code>. Tracer ensuite la fonction de densité en ces points.</p>
+<div class="sourceCode" id="cb51"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb51-1" title="1">x =<span class="st"> </span><span class="kw">seq</span>(<span class="op">-</span><span class="dv">5</span>,<span class="dv">5</span>,<span class="fl">0.01</span>)</a>
+<a class="sourceLine" id="cb51-2" title="2"><span class="kw">plot</span>(x,<span class="kw">dnorm</span>(x), <span class="dt">type=</span><span class="st">&quot;l&quot;</span>,<span class="dt">col=</span><span class="st">&quot;red&quot;</span>, <span class="dt">lwd=</span><span class="dv">2</span>, <span class="dt">main=</span><span class="st">&quot;densité de N(0,1)&quot;</span>)</a></code></pre></div>
+<p><img src="Statistique_infentielle_files/figure-html/unnamed-chunk-121-1.png" width="70%" style="display: block; margin: auto;" /></p>
+<div class="sourceCode" id="cb52"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb52-1" title="1"><span class="co"># curve(dnorm(x), -5,5) # perso je préfère la fonction curve</span></a></code></pre></div>
 <div class="rmdinsight">
-<p>Pour voir les variables dans votre dataframe, vous pouvez utiliser la fonction <code>names()</code> pour afficher les noms des variables, ou <code>str()</code> (structure) pour voir toutes les colonnes, leur types, les quelques premières valeurs, etc.. Ou simplement dans Rstudio on peut voir la structure du dataframe dans la fenêtre “Environment”.</p>
+<p>Il existe plusieurs paramètres réglables pour avoir des courbes de différents design.</p>
 </div>
-<p><strong>11.</strong> Afficher un diagramme circulaire (en utilisant la fonction <code>pie()</code>) pour la variable qualitative choisie.</p>
+<p><strong>5.</strong> Tracer un histogramme d’un vecteur de 10000 réalisations indépendantes d’une loi normale
+centrée réduite. Superposer l’histogramme avec la densité réelle de cette loi.</p>
+<div class="sourceCode" id="cb53"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb53-1" title="1"><span class="kw">hist</span>(<span class="kw">rnorm</span>(<span class="dv">10000</span>),<span class="dt">col=</span>mycolor, <span class="dt">prob=</span>T, <span class="dt">xlab=</span><span class="st">&quot;&quot;</span>,<span class="dt">main=</span> <span class="st">&quot;1000 réalisations de la loi N(0,1)&quot;</span>)</a>
+<a class="sourceLine" id="cb53-2" title="2"><span class="kw">curve</span>(<span class="kw">dnorm</span>(x),<span class="dt">xlim=</span><span class="kw">c</span>(<span class="op">-</span><span class="dv">5</span>,<span class="dv">5</span>),<span class="dt">add=</span>T, <span class="dt">col=</span><span class="st">&quot;red&quot;</span>,<span class="dt">lwd=</span><span class="dv">3</span>) <span class="co"># ou plot comme la question précédente</span></a></code></pre></div>
+<p><img src="Statistique_infentielle_files/figure-html/unnamed-chunk-122-1.png" width="70%" style="display: block; margin: auto;" /></p>
 </div>
-<div id="analyse-descriptive-bivariee" class="section level3 unnumbered">
-<h3>Analyse descriptive bivariée</h3>
-<!-- :::rmdcaution -->
-<!-- C'est une partie que nous n'avons pas encore abordé en cours. Mais on va quand même faire une petite analyse sur <svg style="height:0.8em;top:.04em;position:relative;fill:steelblue;" viewBox="0 0 581 512"><path d="M581 226.6C581 119.1 450.9 32 290.5 32S0 119.1 0 226.6C0 322.4 103.3 402 239.4 418.1V480h99.1v-61.5c24.3-2.7 47.6-7.4 69.4-13.9L448 480h112l-67.4-113.7c54.5-35.4 88.4-84.9 88.4-139.7zm-466.8 14.5c0-73.5 98.9-133 220.8-133s211.9 40.7 211.9 133c0 50.1-26.5 85-70.3 106.4-2.4-1.6-4.7-2.9-6.4-3.7-10.2-5.2-27.8-10.5-27.8-10.5s86.6-6.4 86.6-92.7-90.6-87.9-90.6-87.9h-199V361c-74.1-21.5-125.2-67.1-125.2-119.9zm225.1 38.3v-55.6c57.8 0 87.8-6.8 87.8 27.3 0 36.5-38.2 28.3-87.8 28.3zm-.9 72.5H365c10.8 0 18.9 11.7 24 19.2-16.1 1.9-33 2.8-50.6 2.9v-22.1z"/></svg>. -->
-<!-- ::: -->
-<p><strong>Indicateurs pour le croisement de deux variables qualitatives</strong></p>
-<p>Le tableau de contingence est un moyen particulier de représenter simultanément deux caractères observés sur une même population, s’ils sont discrets ou bien continus et regroupés en classes.
-<!-- 
-([lien <i class="fas  fa-external-link-alt "></i>](https://mistis.inrialpes.fr/software/SMEL/cours/sd/node16.html){target="_blank"})
+<div id="fonction-de-repartition-1" class="section level3 unnumbered">
+<h3>Fonction de répartition</h3>
+<p>Pour calculer la fonction de répartition d’une certaine loi on utilise le nom de la loi dans <svg style="height:0.8em;top:.04em;position:relative;fill:steelblue;" viewBox="0 0 581 512"><path d="M581 226.6C581 119.1 450.9 32 290.5 32S0 119.1 0 226.6C0 322.4 103.3 402 239.4 418.1V480h99.1v-61.5c24.3-2.7 47.6-7.4 69.4-13.9L448 480h112l-67.4-113.7c54.5-35.4 88.4-84.9 88.4-139.7zm-466.8 14.5c0-73.5 98.9-133 220.8-133s211.9 40.7 211.9 133c0 50.1-26.5 85-70.3 106.4-2.4-1.6-4.7-2.9-6.4-3.7-10.2-5.2-27.8-10.5-27.8-10.5s86.6-6.4 86.6-92.7-90.6-87.9-90.6-87.9h-199V361c-74.1-21.5-125.2-67.1-125.2-119.9zm225.1 38.3v-55.6c57.8 0 87.8-6.8 87.8 27.3 0 36.5-38.2 28.3-87.8 28.3zm-.9 72.5H365c10.8 0 18.9 11.7 24 19.2-16.1 1.9-33 2.8-50.6 2.9v-22.1z"/></svg> avec le préfixe <code>p</code>.</p>
+<p><strong>6.</strong> Que vaut la fonction de répartition de la loi normale centrée réduite en 0?</p>
+<div class="sourceCode" id="cb54"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb54-1" title="1"><span class="kw">pnorm</span>(<span class="dv">0</span>)</a>
+<a class="sourceLine" id="cb54-2" title="2"><span class="co">#ans&gt; [1] 0.5</span></a></code></pre></div>
+<p><strong>7.</strong> Tracer la fonction de répartition de la loi normale centrée réduite.</p>
+<div class="sourceCode" id="cb55"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb55-1" title="1">x =<span class="st"> </span><span class="kw">seq</span>(<span class="op">-</span><span class="dv">5</span>,<span class="dv">5</span>,<span class="fl">0.01</span>)</a>
+<a class="sourceLine" id="cb55-2" title="2"><span class="kw">plot</span>(x,<span class="kw">pnorm</span>(x), <span class="dt">type=</span><span class="st">&quot;l&quot;</span>,<span class="dt">col=</span><span class="st">&quot;red&quot;</span>, <span class="dt">lwd=</span><span class="dv">2</span>, <span class="dt">main=</span><span class="st">&quot;Fonction de répartition de N(0,1)&quot;</span>)</a></code></pre></div>
+<p><img src="Statistique_infentielle_files/figure-html/unnamed-chunk-124-1.png" width="70%" style="display: block; margin: auto;" /></p>
+<div class="sourceCode" id="cb56"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb56-1" title="1"><span class="co"># curve(pnorm(x), -5,5)</span></a></code></pre></div>
+<p>On peut également tracer des fonctions de répartitions empiriques (calculées sur un échantillon).</p>
+<p><strong>8.</strong> Créer un vecteur de 100 réalisations indépendates de la loi de votre choix. Utiliser la fonction <code>ecdf()</code> pour construire la fonction de répartition empirique de votre vecteur. Puis superposer avec la fonction de répartition théorique.</p>
+</div>
+<div id="illustrations-de-theoremes-limites-1" class="section level2 unnumbered">
+<h2>Illustrations de théorèmes limites</h2>
+<div id="loi-forte-de-grands-nombres-1" class="section level3 unnumbered">
+<h3>Loi forte de grands nombres</h3>
+<p>On considère une variable <span class="math inline">\(X\)</span> à valeurs dans <span class="math inline">\(\{0,1,3\}\)</span>, distribuée comme suit: <span class="math inline">\(P(X=0)=0.5, P(X=1)=0.25, P(X=3)=0.25\)</span>.</p>
+<p><strong>9.</strong> Proposer une façon de simuler <span class="math inline">\(X\)</span>. (Suggestion: utiliser la fonction <code>sample()</code>).</p>
+<div class="sourceCode" id="cb57"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb57-1" title="1"><span class="co"># réaliser un tirage de cette loi</span></a>
+<a class="sourceLine" id="cb57-2" title="2"><span class="kw">sample</span>(<span class="kw">c</span>(<span class="dv">0</span>,<span class="dv">1</span>,<span class="dv">3</span>), <span class="dt">size=</span><span class="dv">1</span> , <span class="dt">prob=</span><span class="kw">c</span>(<span class="fl">0.5</span>,<span class="fl">0.25</span>,<span class="fl">0.25</span>))</a>
+<a class="sourceLine" id="cb57-3" title="3"><span class="co">#ans&gt; [1] 3</span></a></code></pre></div>
+<p><strong>10.</strong> On considère <span class="math inline">\(X_1,X_2,\ldots\)</span> une suite infinie de variables indépendantes de même loi que <span class="math inline">\(X\)</span>. Soit <span class="math inline">\(\overline{X}_n\)</span> la moyenne empirique des <span class="math inline">\(X_i\)</span> pour <span class="math inline">\(i \in \{1,\ldots,n\}\)</span>.</p>
+<p><strong>10.1</strong> Simuler la suite des <span class="math inline">\(X_i\)</span> pour <span class="math inline">\(i \in \{1,\ldots,10000\}\)</span>.</p>
+<div class="sourceCode" id="cb58"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb58-1" title="1"><span class="co"># simulations</span></a>
+<a class="sourceLine" id="cb58-2" title="2">simulations =<span class="st"> </span><span class="kw">sample</span>(<span class="kw">c</span>(<span class="dv">0</span>,<span class="dv">1</span>,<span class="dv">3</span>), <span class="dt">size=</span><span class="dv">10000</span> , <span class="dt">replace=</span>T, <span class="dt">prob=</span><span class="kw">c</span>(<span class="fl">0.5</span>,<span class="fl">0.25</span>,<span class="fl">0.25</span>))</a></code></pre></div>
+<p><strong>10.2</strong> Produire un graphique représentant l’évolution de <span class="math inline">\(\overline{X}_n\)</span> pour <span class="math inline">\(n\)</span> variant de 1 à 10000. (<strong>Indication</strong>: penser à utiliser la fonction <code>cumsum()</code>).</p>
+<div class="sourceCode" id="cb59"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb59-1" title="1">x_n_cum=<span class="st"> </span><span class="kw">cumsum</span>(simulations)<span class="op">/</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">10000</span>)</a>
+<a class="sourceLine" id="cb59-2" title="2"><span class="kw">plot</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">10000</span>, x_n_cum, <span class="dt">ylim=</span><span class="kw">c</span>(<span class="dv">0</span>,<span class="dv">3</span>),<span class="dt">type=</span><span class="st">&quot;l&quot;</span>, <span class="dt">lwd=</span><span class="fl">1.5</span>, <span class="dt">col=</span>mycolor, <span class="dt">ylab=</span><span class="kw">expression</span>(<span class="kw">bar</span>(X)[n]), <span class="dt">main=</span><span class="kw">expression</span>(<span class="kw">paste</span>(<span class="st">&quot;Evolution de &quot;</span>,<span class="kw">bar</span>(X)[n])))</a></code></pre></div>
+<p><img src="Statistique_infentielle_files/figure-html/unnamed-chunk-127-1.png" width="70%" style="display: block; margin: auto;" /></p>
+<p><strong>10.3</strong> Que constate-on? Pouvait-on s’y attendre?</p>
+<div class="sourceCode" id="cb60"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb60-1" title="1"><span class="co"># Convergence vers la moyenne théorique qui est 1. Illustration de loi de Grands Nombres</span></a></code></pre></div>
+</div>
+<div id="theoreme-central-limite-2" class="section level3 unnumbered">
+<h3>Théorème central limite</h3>
+<p>On désire maintenant approfondir comment <span class="math inline">\(\overline{X}_{500}\)</span> varie autour de sa valeur moyenne.</p>
+<p><strong>11.</strong> Proposer une transformation affine de <span class="math inline">\(\overline{X}_{500}\)</span>, de la forme <span class="math inline">\(Y=a \times (\overline{X}_{500} + b)\)</span>, qui suive approximativement la loi <span class="math inline">\(\mathcal{N}(0,1)\)</span>.</p>
+<p><strong>Correction:</strong> <span class="math inline">\(\overline{X}_{500} \thicksim \mathcal{N}(m, \frac{\sigma^2}{n}) = \mathcal{N}(1, \frac{1.5}{500})\)</span> Donc <span class="math inline">\(Y = \sqrt{\frac{500}{1.5}}(\overline{X}_{500} -1) \thicksim \mathcal{N}(0,1)\)</span></p>
+<p><strong>11.1</strong> Simuler avec <span class="math inline">\(10000\)</span> réalisations indépendantes de la variable <span class="math inline">\(Y\)</span>. Nous les noterons <span class="math inline">\(Y_1, \ldots, Y_{10000}\)</span>.</p>
+<div class="sourceCode" id="cb61"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb61-1" title="1">y=<span class="kw">rep</span>(<span class="dv">0</span>,<span class="dv">10000</span>)</a>
+<a class="sourceLine" id="cb61-2" title="2"><span class="cf">for</span>(i <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span><span class="dv">10000</span>){</a>
+<a class="sourceLine" id="cb61-3" title="3">x =<span class="st"> </span><span class="kw">sample</span>(<span class="kw">c</span>(<span class="dv">0</span>,<span class="dv">1</span>,<span class="dv">3</span>), <span class="dt">size=</span> <span class="dv">500</span>, <span class="dt">prob=</span><span class="kw">c</span>(<span class="fl">0.5</span>,<span class="fl">0.25</span>,<span class="fl">0.25</span>), <span class="dt">replace =</span> T)</a>
+<a class="sourceLine" id="cb61-4" title="4">y[i] =<span class="st"> </span><span class="kw">sqrt</span>(<span class="dv">500</span><span class="op">/</span><span class="fl">1.5</span>) <span class="op">*</span><span class="st"> </span>( <span class="kw">mean</span>(x) <span class="op">-</span><span class="st"> </span><span class="dv">1</span> ) </a>
+<a class="sourceLine" id="cb61-5" title="5">}</a></code></pre></div>
+<p><strong>11.2</strong> Confirmer l’approximation gaussienne en réalisant un histogramme des valeurs prises par les <span class="math inline">\(Y_j\)</span> pour <span class="math inline">\(j \in \{1,\ldots,10000\}\)</span>, sans oublier de tracer la densité gaussienne correctement renormalisée.
+Commenter l’écart entre l’histogramme et la densité gaussienne.</p>
+<div class="sourceCode" id="cb62"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb62-1" title="1"><span class="kw">hist</span>(y, <span class="dt">col=</span>mycolor, <span class="dt">prob=</span>T)</a>
+<a class="sourceLine" id="cb62-2" title="2"><span class="kw">curve</span>(<span class="kw">dnorm</span>(x),<span class="dt">xlim=</span><span class="kw">c</span>(<span class="op">-</span><span class="dv">5</span>,<span class="dv">5</span>),<span class="dt">add=</span>T, <span class="dt">col=</span><span class="st">&quot;red&quot;</span>,<span class="dt">lwd=</span><span class="dv">3</span>)</a></code></pre></div>
+<p><img src="Statistique_infentielle_files/figure-html/unnamed-chunk-130-1.png" width="70%" style="display: block; margin: auto;" /></p>
+</div>
+</div>
+<div id="bonus-1" class="section level2 unnumbered">
+<h2>Bonus</h2>
+<div class="rmdexercise">
+<p><strong>Illustration du théorème de Moivre Laplace</strong></p>
+<p>Pour <span class="math inline">\((n=10, p=0.5),\)</span> puis <span class="math inline">\((n=50, p=0.9),\)</span> puis <span class="math inline">\((n=100, p=0.1)\)</span>
+Simuler un échantillon <span class="math inline">\(X\)</span> de la loi binomiale de paramètres <span class="math inline">\(n\)</span> et <span class="math inline">\(p .\)</span> Calculer l’échantillon centré-réduit <span class="math inline">\(Xcr=\frac{x-n p}{\sqrt{n p(1-p)}}\)</span>. Représenter un histogramme des valeurs de <span class="math inline">\(X c r .\)</span> Superposer sur le même graphique la densité de la loi normale <span class="math inline">\(\mathcal{N}(0,1) .\)</span> Représenter la fonction de répartition empirique de <span class="math inline">\(X c r .\)</span> Superposer
+sur le même graphique la fonction de répartition de la loi normale <span class="math inline">\(N(0,1)\)</span>.</p>
+</div>
 
- -->
-<strong>12.</strong> Un tableau de contingence des effectifs joints croisant deux variables qualitatives est réalisé par la fonction <code>table()</code>. Effectuer et afficher le croisement de deux variables (<code>Sex</code>) et (<code>Smoke</code>).</p>
-<p><strong>13.</strong> Utiliser la fonction <code>addmargins()</code> pour ajouter au tableau les effectifs marginaux.
-<!-- 
- (Lire ce [lien <i class="fas  fa-external-link-alt "></i>](http://www.modalisa.com/support/lexique/effectifs-marginaux.php){target="_blank"} à propos des effectifs marginaux). 
-
- --></p>
-<p><strong>Représentations graphiques pour le croisement de deux variables qualitatives</strong></p>
-<p>On peut représenter le croisement de deux variables qualitatives avec un diagramme en bâtons. Dans le cas de deux variables qualitatives, la fonction <code>barplot()</code> prend comme premier paramètre le tableau de contingence.</p>
-<p><strong>14.</strong> Afficher un diagramme en bâtons représentant la distribution du tabagisme (variable <code>Smoke</code>) en fontion du sexe des étudiants. La figure souhaitée est la suivante:</p>
-<p><img src="Statistique_infentielle_files/figure-html/unnamed-chunk-52-1.png" width="70%" style="display: block; margin: auto;" /></p>
-<div class="rmdinsight">
-<p>On remarque qu’il y a plus d’hommes que des femmes qui fument régulièrement. (selon l’enquête réalisée)</p>
-</div>
-<div class="rmdtip">
-<p>Il est plus convenable dans ce cas de représenter le croisement de ces deux variables qualitatives à l’aide d’un mosaicplot.</p>
-</div>
-<p><img src="Statistique_infentielle_files/figure-html/unnamed-chunk-53-1.png" width="70%" style="display: block; margin: auto;" /></p>
-<p><strong>Indicateurs pour le croisement d’une variable qualitative et d’une variable quantitative</strong></p>
-<p>Disons qu’on souhaite calculer la moyenne de fréquence cardiaque chez les hommes ayant répondu au questionnaire de l’enquête. On a besoin de filtrer le dataframe de la façon suivante:</p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb3-1" title="1"><span class="co"># On utilise la fontion subset pour créer un sous ensemble de nos données</span></a>
-<a class="sourceLine" id="cb3-2" title="2"><span class="co"># Remarquer qu&#39;on utilise == pour comparer</span></a>
-<a class="sourceLine" id="cb3-3" title="3">pulse_hommes =<span class="st"> </span><span class="kw">subset</span>(donnees, donnees<span class="op">$</span>Sex<span class="op">==</span><span class="st">&quot;Male&quot;</span>)</a></code></pre></div>
-<p><strong>15.</strong> Vérifier que le sous ensemble créé <code>pulse_homme</code> ne contient que des hommes.</p>
-<p><strong>16.</strong> Ensuite calculer les indicateurs statistiques de la fréquence cardiaque chez les hommes (vous pouvez utiliser la fonction <code>summary()</code>).</p>
-<p><strong>17.</strong> Faire la même chose mais pour les femmes.</p>
-<p><strong>Représentation graphique pour le croisement d’une variable qualitative et d’une variable quantitative</strong></p>
-<p>On peut réaliser une boîte à moustache des valeurs de la variable quantitative en fonction des modalités de la variables qualitative, pour cela on peut utliser la fonction <code>boxplot()</code>. Plus précisémeent, on utilise le paramètre <code>formula</code> qui permet de spécifier que nous voulons une boîte à moustache de la variable
-quantitative en fonction (caractère <code>~</code> ) de la variable quantitative.</p>
-<p><strong>18.</strong> Afficher sur la même figure la fréquence cardiaque en fontion du sexe. Interpréter la figure.</p>
-<p>La figure souhaitée est la suivante:</p>
-<p><img src="Statistique_infentielle_files/figure-html/unnamed-chunk-55-1.png" width="70%" style="display: block; margin: auto;" /></p>
-<p><strong>19.</strong> Afficher sur la même figure la taille (variable <code>Height</code>) en fontion du sexe. Interpréter la figure.</p>
-<!-- **Indicateurs pour le croisement de deux variables quantitatives** -->
-<!-- Le calcul du coefficient de corrélation de Pearson est réalisé au moyen de la fonction `cor()`. Ce coefficient mesure l’intensité du *lien linéaire* entre deux variables quantitatives. -->
-<p><strong>Représentation graphique pour le croisement de deux variables quantitatives</strong></p>
-<p>Un nuage de points entre les deux variables quantitatives est réalisé par la fonction <code>plot()</code>. Le premier
-paramètre correspond à la variable en abscisse et le deuxième à la variable en ordonnées.</p>
-<p><strong>20.</strong> Afficher la fréquence cardiaque en fonction de l’age. Modifier les paramètres de la figure (titre, noms des axes, couleurs des points, tailles, formes, etc..)</p>
-<p align="right">
-◼
-</p>
-
-</div>
 </div>
 </div>
             </section>
@@ -551,8 +497,8 @@ paramètre correspond à la variable en abscisse et le deuxième à la variable 
           </div>
         </div>
       </div>
-<a href="exercices.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="tp-statistique-descriptive-avec-r-avec-corrections.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="tp-illustration-numerique-des-theoremes-limites-avec-r.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="estimation-ponctuelle.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="book_assets/gitbook-2.6.7/js/app.min.js"></script>

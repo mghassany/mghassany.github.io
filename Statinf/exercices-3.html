@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>TP illustration numérique des théorèmes limites avec R | Statistique Inférentielle</title>
+  <title>Exercices | Statistique Inférentielle</title>
   <meta name="description" content="Cours de Statistique Inférentielle A3 ESILV" />
   <meta name="generator" content="bookdown 0.14 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="TP illustration numérique des théorèmes limites avec R | Statistique Inférentielle" />
+  <meta property="og:title" content="Exercices | Statistique Inférentielle" />
   <meta property="og:type" content="book" />
   
   
@@ -16,7 +16,7 @@
   
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="TP illustration numérique des théorèmes limites avec R | Statistique Inférentielle" />
+  <meta name="twitter:title" content="Exercices | Statistique Inférentielle" />
   
   <meta name="twitter:description" content="Cours de Statistique Inférentielle A3 ESILV" />
   
@@ -31,8 +31,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   <link rel="shortcut icon" href="img/favicon.ico" type="image/x-icon" />
-<link rel="prev" href="exercices-1.html"/>
-<link rel="next" href="tp-illustration-numerique-des-theoremes-limites-avec-r-avec-corrections.html"/>
+<link rel="prev" href="estimation-par-intervalle-de-confiance.html"/>
+<link rel="next" href="tests-dhypotheses.html"/>
 <script src="book_assets/jquery-2.2.3/jquery.min.js"></script>
 <link href="book_assets/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="book_assets/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -377,81 +377,142 @@ code span.wa { color: #bf0303; } /* Warning */
 <div class = rmdreview>
 Vous êtes invités à annoter le contenu de ce cours. Les annotations peuvent être des corrections typographiques, des propositions ou des questions. Pour ajouter des annotations, <span style="background-color: #3297FD; color: white">choisissez le text</span> que vous voulez commenter et cliquez sur <i class="h-icon-annotate"></i>. Pour accéder aux annotations crées par d'autres personnes, cliquez <i class="h-icon-chevron-left"></i> sur le coin supérieur de la page <i class="fa fa-arrow-circle-right  fa-rotate-315" aria-hidden="true"></i>.
 </div>
-<div id="tp-illustration-numerique-des-theoremes-limites-avec-r" class="section level1 unnumbered">
-<h1>TP illustration numérique des théorèmes limites avec R</h1>
-<div id="realisations-de-variables-aleatoires" class="section level3 unnumbered">
-<h3>Réalisations de variables aléatoires</h3>
-<p>Pour générer (simuler) des réalisations de variables aléatoires on utilise la fonction qui commence par la lettre <code>r</code> (pour <em>random</em>) succédée par le nom de la loi que l’on souhaite simuler. Par exemple <code>rnorm</code> pour simuler des réalisations de la variable alétoire de loi normale. Tapez <code>?rnorm</code> pour voir la liste des paramètres (arguments) de cette fonction.</p>
-<div class="sourceCode" id="cb45"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb45-1" title="1"><span class="kw">rnorm</span>(<span class="dv">10</span>) <span class="co"># génére 10 réalisations alétoires de la loi normale centrée réduite.</span></a>
-<a class="sourceLine" id="cb45-2" title="2"><span class="co">#ans&gt;  [1] 1.7111 0.1184 0.2113 0.8255 0.4184 1.8033 0.3251 0.3784 0.0252 0.0345</span></a>
-<a class="sourceLine" id="cb45-3" title="3"><span class="kw">rnorm</span>(<span class="dv">10</span>, <span class="dt">mean =</span> <span class="dv">1</span>, <span class="dt">sd =</span> <span class="dv">3</span>) <span class="co"># génére 10 réalisations alétoires de la loi normale d&#39;espérance 1 et écart-type 3</span></a>
-<a class="sourceLine" id="cb45-4" title="4"><span class="co">#ans&gt;  [1]  4.7308  5.9451 -3.1275  0.5337 -3.8268  3.9036  1.9544  0.0549</span></a>
-<a class="sourceLine" id="cb45-5" title="5"><span class="co">#ans&gt;  [9] -0.6323  4.6497</span></a></code></pre></div>
-<p><strong>1.</strong> Simuler un vecteur de 1000 réalisations indépendantes de loi uniforme sur l’intervalle <span class="math inline">\([0,1]\)</span>. Simuler ensuite 1000 réalisations de la loi exponentielle de paramètre 2.</p>
-<p><strong>Extra</strong>: Afin de vérifier les simulations on peut afficher l’histogramme des réalisations et superposer avec la densité de la loi correspondante.</p>
-<p><img src="Statistique_infentielle_files/figure-html/unnamed-chunk-113-1.png" width="80%" style="display: block; margin: auto;" /></p>
-</div>
-<div id="fonction-de-densite" class="section level3 unnumbered">
-<h3>Fonction de densité</h3>
-<p>Pour calculer la densité d’une certaine loi, il suffit d’utiliser comme fonction le nom de la loi dans <svg style="height:0.8em;top:.04em;position:relative;fill:steelblue;" viewBox="0 0 581 512"><path d="M581 226.6C581 119.1 450.9 32 290.5 32S0 119.1 0 226.6C0 322.4 103.3 402 239.4 418.1V480h99.1v-61.5c24.3-2.7 47.6-7.4 69.4-13.9L448 480h112l-67.4-113.7c54.5-35.4 88.4-84.9 88.4-139.7zm-466.8 14.5c0-73.5 98.9-133 220.8-133s211.9 40.7 211.9 133c0 50.1-26.5 85-70.3 106.4-2.4-1.6-4.7-2.9-6.4-3.7-10.2-5.2-27.8-10.5-27.8-10.5s86.6-6.4 86.6-92.7-90.6-87.9-90.6-87.9h-199V361c-74.1-21.5-125.2-67.1-125.2-119.9zm225.1 38.3v-55.6c57.8 0 87.8-6.8 87.8 27.3 0 36.5-38.2 28.3-87.8 28.3zm-.9 72.5H365c10.8 0 18.9 11.7 24 19.2-16.1 1.9-33 2.8-50.6 2.9v-22.1z"/></svg> avec le préfixe <code>d</code> pour une densité. Taper <code>?dnorm</code> pour comprendre le fonctionnement de cette commande.</p>
-<p><strong>2.</strong> Que vaut la densité de la loi normale centrée réduite en 0? Essayer la même chose pour la loi binomiale de paramètres <span class="math inline">\(n=10\)</span> et <span class="math inline">\(p=0.5\)</span>.</p>
-<div class="rmdinsight">
-<p>Cette commande permet de tracer facilement des fonctions de densité.</p>
-</div>
-<p><strong>3.</strong> Que se passe-t-il si l’on demande la fonction de densité de la loi binomiale en 0.3? Pourquoi?</p>
-<p><strong>4.</strong> Tracer la fonction de densité de la loi normale centrée réduite. Commencer par créer un vecteur d’abscisses à l’aide de la fonction <code>seq()</code>. Tracer ensuite la fonction de densité en ces points.</p>
-<div class="rmdinsight">
-<p>Il existe plusieurs paramètres réglables pour avoir des courbes de différents design.</p>
-</div>
-<p><strong>5.</strong> Tracer un histogramme d’un vecteur de 10000 réalisations indépendantes d’une loi normale
-centrée réduite. Superposer l’histogramme avec la densité réelle de cette loi.</p>
-</div>
-<div id="fonction-de-repartition" class="section level3 unnumbered">
-<h3>Fonction de répartition</h3>
-<p>Pour calculer la fonction de répartition d’une certaine loi on utilise le nom de la loi dans <svg style="height:0.8em;top:.04em;position:relative;fill:steelblue;" viewBox="0 0 581 512"><path d="M581 226.6C581 119.1 450.9 32 290.5 32S0 119.1 0 226.6C0 322.4 103.3 402 239.4 418.1V480h99.1v-61.5c24.3-2.7 47.6-7.4 69.4-13.9L448 480h112l-67.4-113.7c54.5-35.4 88.4-84.9 88.4-139.7zm-466.8 14.5c0-73.5 98.9-133 220.8-133s211.9 40.7 211.9 133c0 50.1-26.5 85-70.3 106.4-2.4-1.6-4.7-2.9-6.4-3.7-10.2-5.2-27.8-10.5-27.8-10.5s86.6-6.4 86.6-92.7-90.6-87.9-90.6-87.9h-199V361c-74.1-21.5-125.2-67.1-125.2-119.9zm225.1 38.3v-55.6c57.8 0 87.8-6.8 87.8 27.3 0 36.5-38.2 28.3-87.8 28.3zm-.9 72.5H365c10.8 0 18.9 11.7 24 19.2-16.1 1.9-33 2.8-50.6 2.9v-22.1z"/></svg> avec le préfixe <code>p</code>.</p>
-<p><strong>6.</strong> Que vaut la fonction de répartition de la loi normale centrée réduite en 0?</p>
-<p><strong>7.</strong> Tracer la fonction de répartition de la loi normale centrée réduite.</p>
-<p>On peut également tracer des fonctions de répartitions empiriques (calculées sur un échantillon).</p>
-<p><strong>8.</strong> Créer un vecteur de 100 réalisations indépendantes de la loi de votre choix. Utiliser la fonction <code>ecdf()</code> pour construire la fonction de répartition empirique de votre vecteur. Puis superposer avec la fonction de répartition théorique.</p>
-</div>
-<div id="illustrations-de-theoremes-limites" class="section level2 unnumbered">
-<h2>Illustrations de théorèmes limites</h2>
-<div id="loi-forte-de-grands-nombres" class="section level3 unnumbered">
-<h3>Loi forte de grands nombres</h3>
-<p>On considère une variable <span class="math inline">\(X\)</span> à valeurs dans <span class="math inline">\(\{0,1,3\}\)</span>, distribuée comme suit: <span class="math inline">\(P(X=0)=0.5, P(X=1)=0.25, P(X=3)=0.25\)</span>.</p>
-<p><strong>9.</strong> Proposer une façon de simuler <span class="math inline">\(X\)</span>. (Suggestion: utiliser la fonction <code>sample()</code>).</p>
-<p><strong>10.</strong> On considère <span class="math inline">\(X_1,X_2,\ldots\)</span> une suite infinie de variables indépendantes de même loi que <span class="math inline">\(X\)</span>. Soit <span class="math inline">\(\overline{X}_n\)</span> la moyenne empirique des <span class="math inline">\(X_i\)</span> pour <span class="math inline">\(i \in \{1,\ldots,n\}\)</span>.</p>
-<p><strong>10.1</strong> Simuler la suite des <span class="math inline">\(X_i\)</span> pour <span class="math inline">\(i \in \{1,\ldots,10000\}\)</span>.</p>
-<p><strong>10.2</strong> Produire un graphique représentant l’évolution de <span class="math inline">\(\overline{X}_n\)</span> pour <span class="math inline">\(n\)</span> variant de 1 à 10000. (<strong>Indication</strong>: penser à utiliser la fonction <code>cumsum()</code>).</p>
-<p><strong>10.3</strong> Que constate-on? Pouvait-on s’y attendre?</p>
-</div>
-<div id="theoreme-central-limite-1" class="section level3 unnumbered">
-<h3>Théorème central limite</h3>
-<p>On désire maintenant approfondir comment <span class="math inline">\(\overline{X}_{500}\)</span> varie autour de sa valeur moyenne.</p>
-<p><strong>11.</strong> Proposer une transformation affine de <span class="math inline">\(\overline{X}_{500}\)</span>, de la forme <span class="math inline">\(Y=a \times (\overline{X}_{500} + b)\)</span>, qui suive approximativement la loi <span class="math inline">\(\mathcal{N}(0,1)\)</span>.</p>
-<p><strong>11.1</strong> Simuler avec <span class="math inline">\(10000\)</span> réalisations indépendantes de la variable <span class="math inline">\(Y\)</span>. Nous les noterons <span class="math inline">\(Y_1, \ldots, Y_{10000}\)</span>.</p>
-<p><strong>11.2</strong> Confirmer l’approximation gaussienne en réalisant un histogramme des valeurs prises par les <span class="math inline">\(Y_j\)</span> pour <span class="math inline">\(j \in \{1,\ldots,10000\}\)</span>, sans oublier de tracer la densité gaussienne correctement renormalisée.
-Commenter l’écart entre l’histogramme et la densité gaussienne.</p>
-</div>
-</div>
-<div id="bonus" class="section level2 unnumbered">
-<h2>Bonus</h2>
-<div class="rmdexercise">
-<p><strong>Illustration du théorème de Moivre Laplace</strong></p>
-<p>Pour <span class="math inline">\((n=10, p=0.5),\)</span> puis <span class="math inline">\((n=50, p=0.9),\)</span> puis <span class="math inline">\((n=100, p=0.1)\)</span>
-Simuler un échantillon <span class="math inline">\(X\)</span> de la loi binomiale de paramètres <span class="math inline">\(n\)</span> et <span class="math inline">\(p .\)</span> Calculer l’échantillon centré-réduit <span class="math inline">\(Xcr=\frac{x-n p}{\sqrt{n p(1-p)}}\)</span>. Représenter un histogramme des valeurs de <span class="math inline">\(X c r .\)</span> Superposer sur le même graphique la densité de la loi normale <span class="math inline">\(\mathcal{N}(0,1) .\)</span> Représenter la fonction de répartition empirique de <span class="math inline">\(X c r .\)</span> Superposer
-sur le même graphique la fonction de répartition de la loi normale <span class="math inline">\(N(0,1)\)</span>.</p>
+<div id="exercices-3" class="section level1 unnumbered">
+<h1>Exercices</h1>
+<!-- 8-1 applied -->
+
+<div class="exercise">
+<p><span id="exr:unnamed-chunk-162" class="exercise"><strong>Exercice 5.1  </strong></span>Pour une population de loi normale de variance <span class="math inline">\(\sigma^2\)</span> connue, répondre aux questions suivantes:</p>
+<ol style="list-style-type: decimal">
+<li>Quel est le niveau de confiance pour l’intervalle <span class="math inline">\(\overline{x} - 2.14 \sigma/\sqrt{n} \leq \mu \leq \overline{x} + 2.14 \sigma/\sqrt{n}\)</span> ?</li>
+<li>Quel est le niveau de confiance pour l’intervalle <span class="math inline">\(\overline{x} - 1.85 \sigma/\sqrt{n} \leq \mu \leq \overline{x} + 1.85 \sigma/\sqrt{n}\)</span> ?</li>
+<li>Quel est le niveau de confiance pour l’intervalle <span class="math inline">\(\mu \leq \overline{x} + 1.96 \sigma/\sqrt{n}\)</span> ?
+</div></li>
+</ol>
+<!-- CC1 L -->
+
+<div class="exercise">
+<p><span id="exr:unnamed-chunk-163" class="exercise"><strong>Exercice 5.2  </strong></span>Nous souhaitons estimer un intervalle de confiance du gain d’un circuit électronique<a href="#fn7" class="footnote-ref" id="fnref7"><sup>7</sup></a>.
+On admet que le gain est distribué selon une loi normale d’espérance inconnue <span class="math inline">\(m\)</span> et d’écart type <span class="math inline">\(\sigma = 20\)</span>.</p>
+<ol style="list-style-type: decimal">
+<li><p>Décrire l’expérience aléatoire, l’univers et la variable aléatoire <span class="math inline">\(X\)</span>.</p></li>
+<li><p>Soit <span class="math inline">\(n\)</span> la taille de l’échantillon et <span class="math inline">\(\alpha\)</span> l’erreur. Donner l’expression de l’intervalle de confiance de <span class="math inline">\(m\)</span> en fonction de <span class="math inline">\(n\)</span>, <span class="math inline">\(\sigma\)</span> et <span class="math inline">\(\alpha\)</span>.</p></li>
+<li><p>Comment doit varier la longueur de l’intervalle de confiance en fonction de la taille d’échantillon et le niveau de confiance?</p></li>
+<li><p>Confirmer votre réponse en donnant l’intervalle de confiance de <span class="math inline">\(m\)</span> selon les cas suivants:</p>
+<ul>
+<li>IC à 95% où <span class="math inline">\(n=10\)</span> et <span class="math inline">\(\hat{m} = 1000\)</span>.</li>
+<li>IC à 95% où <span class="math inline">\(n=25\)</span> et <span class="math inline">\(\hat{m} = 1000\)</span>.</li>
+<li>IC à 99% où <span class="math inline">\(n=10\)</span> et <span class="math inline">\(\hat{m} = 1000\)</span>.</li>
+<li>IC à 99% où <span class="math inline">\(n=25\)</span> et <span class="math inline">\(\hat{m} = 1000\)</span>.</li>
+</ul></li>
+<li><p>Combien doit être la taille de l’échantillon <span class="math inline">\(n\)</span> pour que la longueur de l’intervalle de confiance à <span class="math inline">\(95\%\)</span> est 4?</p>
+</div></li>
+</ol>
+<!-- cor 3 -->
+
+<div class="exercise">
+<p><span id="exr:unnamed-chunk-164" class="exercise"><strong>Exercice 5.3  </strong></span>Le poids de paquets de poudre de lessive, à l’issue de l’empaquetage, est
+supposé suivre une loi normale <span class="math inline">\(\mathcal{N}(\mu, \sigma^2 )\)</span> dont l’écart-type <span class="math inline">\(\sigma\)</span> est supposé connu et égal à <span class="math inline">\(5 g\)</span>. <span class="math inline">\(\sigma\)</span> représente la variabilité du poids due à l’imprécision de la machine. Le poids marqué sur les paquets est de <span class="math inline">\(710 g\)</span>.
+Toutes les heures, <span class="math inline">\(10\)</span> paquets sont prélevés au hasard et pesés.
+On obtient pour une heure donnée, pour un échantillon de <span class="math inline">\(10\)</span> paquets un poids moyen de <span class="math inline">\(707g\)</span>.</p>
+<ol style="list-style-type: decimal">
+<li>Donner un estimateur puis une estimation du poids moyen des paquets de lessive.</li>
+<li>Donner un intervalle de confiance à <span class="math inline">\(90\%\)</span>, puis à <span class="math inline">\(95\%\)</span> pour le poids moyen des
+paquets de lessive</li>
+<li>Déterminer <span class="math inline">\(\alpha\)</span> (à l’unité près) pour qu’au seuil de risque <span class="math inline">\(\alpha \%\)</span> un intervalle de confiance du poids moyen des paquets de lessive soit <span class="math inline">\([705g;709g]\)</span>.
+</div></li>
+</ol>
+<!-- cor 5 -->
+
+<div class="exercise">
+<span id="exr:unnamed-chunk-165" class="exercise"><strong>Exercice 5.4  </strong></span>Dans la population française, le pourcentage d’individus dont le sang est de
+rhésus négatif est de <span class="math inline">\(15\%\)</span>. Dans un échantillon représentatif de <span class="math inline">\(200\)</span> Basques français on
+observe que <span class="math inline">\(44\)</span> personnes sont de rhésus négatif.
+Donner un intervalle de confiance à <span class="math inline">\(99\%\)</span> de la proportion de Basques français ayant un rhésus
+négatif.
 </div>
 
+<!-- 8.35 -->
+
+<div class="exercise">
+<p><span id="exr:unnamed-chunk-166" class="exercise"><strong>Exercice 5.5  </strong></span>Le Bureau de météorologie du gouvernement australien a fourni les précipitations annuelles moyennes (en millimètres) en Australie entre 1983 et 2002 comme suit<a href="#fn8" class="footnote-ref" id="fnref8"><sup>8</sup></a></p>
+<table style="width:100%;">
+<colgroup>
+<col width="10%" />
+<col width="10%" />
+<col width="10%" />
+<col width="10%" />
+<col width="10%" />
+<col width="10%" />
+<col width="10%" />
+<col width="10%" />
+<col width="10%" />
+<col width="10%" />
+</colgroup>
+<tbody>
+<tr class="odd">
+<td align="center">499.2</td>
+<td align="center">555.2</td>
+<td align="center">398.8</td>
+<td align="center">391.9</td>
+<td align="center">453.4</td>
+<td align="center">459.8</td>
+<td align="center">483.7</td>
+<td align="center">417.6</td>
+<td align="center">469.2</td>
+<td align="center">452.4</td>
+</tr>
+<tr class="even">
+<td align="center">499.3</td>
+<td align="center">340.6</td>
+<td align="center">522.8</td>
+<td align="center">469.9</td>
+<td align="center">527.2</td>
+<td align="center">565.5</td>
+<td align="center">584.1</td>
+<td align="center">727.3</td>
+<td align="center">558.6</td>
+<td align="center">338.6</td>
+</tr>
+</tbody>
+</table>
+<p>Supposant que les précipitations annuelles moyennes suivent une loi normale de paramètres inconnus<a href="#fn9" class="footnote-ref" id="fnref9"><sup>9</sup></a>. Construire un intervalle de confiance <span class="math inline">\(95\%\)</span> pour la moyenne annuelle de précipitations.</p>
 </div>
+
+<!-- 8-51 applied -->
+
+<div class="exercise">
+<span id="exr:unnamed-chunk-168" class="exercise"><strong>Exercice 5.6  </strong></span>Le pourcentage de titane dans un alliage utilisé en aéronautique est mesuré sur 51 pièces sélectionnées de manière aléatoire. L’écart type (corrigé) de l’échantillon est <span class="math inline">\(s = 0.37\)</span>. Construire un intervalle de confiance bilatéral à <span class="math inline">\(95\%\)</span> pour <span class="math inline">\(\sigma\)</span>.
+</div>
+
+<!-- https://d2nchlq0f2u6vy.cloudfront.net/16/11/14/73f7e5b387fe9577ea41945983bd7287/1536d92b0a01a208f81375ac18e6e1d9/image_scan.jpg?tcb=1574787727 -->
+<!-- cor 7 -->
+
+<div class="exercise">
+<p><span id="exr:unnamed-chunk-169" class="exercise"><strong>Exercice 5.7  </strong></span>Les ampoules électriques d’un fabricant A ont une durée de vie moyenne <span class="math inline">\(\mu_1\)</span> avec un écart-type <span class="math inline">\(\sigma_1 = 200h\)</span> et celles d’un fabricant B ont une durée de vie moyenne <span class="math inline">\(\mu_2\)</span> avec un écart-type <span class="math inline">\(\sigma_2 = 100h\)</span>.</p>
+Un échantillon de <span class="math inline">\(150\)</span> ampoules de A a donné une durée de vie moyenne de <span class="math inline">\(1400h\)</span>. Un
+échantillon de <span class="math inline">\(100\)</span> ampoules B a donné une durée de vie moyenne de <span class="math inline">\(1200h\)</span>.
+Déterminer un intervalle de confiance à <span class="math inline">\(95\%\)</span> puis à <span class="math inline">\(99 \%\)</span> de la différence des durées de vie
+moyenne des variétés A et B.
+</div>
+
+
+</div>
+<div class="footnotes">
+<hr />
+<ol start="7">
+<li id="fn7"><p>En électronique, le gain désigne la capacité d’un circuit électronique à augmenter la puissance ou l’amplitude d’un signal. (source: Wikipedia).<a href="exercices-3.html#fnref7" class="footnote-back">↩</a></p></li>
+<li id="fn8"><p><a href="http://www.bom.gov.au/climate/change/rain03.txt" target="_blank">Lien</a><a href="exercices-3.html#fnref8" class="footnote-back">↩</a></p></li>
+<li id="fn9"><p>On peut vérifier cette assomption, càd la normalité de données avec la figure connue sous le nom <a href="https://fr.wikipedia.org/wiki/Droite_de_Henry">Droite de Henry</a> ou QQ-plot. On pourra la tracer dans R avec la fonction <a href="http://www.duclert.org/r-tests-statistiques/Q-Q-Plot-R.php">qqnorm()</a><a href="exercices-3.html#fnref9" class="footnote-back">↩</a></p></li>
+</ol>
 </div>
             </section>
 
           </div>
         </div>
       </div>
-<a href="exercices-1.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="tp-illustration-numerique-des-theoremes-limites-avec-r-avec-corrections.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="estimation-par-intervalle-de-confiance.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="tests-dhypotheses.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="book_assets/gitbook-2.6.7/js/app.min.js"></script>

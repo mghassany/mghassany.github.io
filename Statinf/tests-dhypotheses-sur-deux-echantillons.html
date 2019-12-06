@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>TP Statistique descriptive avec R (Avec corrections) | Statistique Inférentielle</title>
+  <title>Chapitre 6 Tests d’hypothèses sur deux échantillons | Statistique Inférentielle</title>
   <meta name="description" content="Cours de Statistique Inférentielle A3 ESILV" />
   <meta name="generator" content="bookdown 0.14 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="TP Statistique descriptive avec R (Avec corrections) | Statistique Inférentielle" />
+  <meta property="og:title" content="Chapitre 6 Tests d’hypothèses sur deux échantillons | Statistique Inférentielle" />
   <meta property="og:type" content="book" />
   
   
@@ -16,7 +16,7 @@
   
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="TP Statistique descriptive avec R (Avec corrections) | Statistique Inférentielle" />
+  <meta name="twitter:title" content="Chapitre 6 Tests d’hypothèses sur deux échantillons | Statistique Inférentielle" />
   
   <meta name="twitter:description" content="Cours de Statistique Inférentielle A3 ESILV" />
   
@@ -31,8 +31,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   <link rel="shortcut icon" href="img/favicon.ico" type="image/x-icon" />
-<link rel="prev" href="tp-statistique-descriptive-avec-r.html"/>
-<link rel="next" href="echantillonnage-et-theoremes-limites.html"/>
+<link rel="prev" href="tests-dhypotheses.html"/>
+<link rel="next" href="variables-aleatoires-discretes.html"/>
 <script src="book_assets/jquery-2.2.3/jquery.min.js"></script>
 <link href="book_assets/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="book_assets/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -404,357 +404,10 @@ code span.wa { color: #bf0303; } /* Warning */
 <div class = rmdreview>
 Vous êtes invités à annoter le contenu de ce cours. Les annotations peuvent être des corrections typographiques, des propositions ou des questions. Pour ajouter des annotations, <span style="background-color: #3297FD; color: white">choisissez le text</span> que vous voulez commenter et cliquez sur <i class="h-icon-annotate"></i>. Pour accéder aux annotations crées par d'autres personnes, cliquez <i class="h-icon-chevron-left"></i> sur le coin supérieur de la page <i class="fa fa-arrow-circle-right  fa-rotate-315" aria-hidden="true"></i>.
 </div>
-<div id="tp-statistique-descriptive-avec-r-avec-corrections" class="section level1 unnumbered">
-<h1>TP Statistique descriptive avec R (Avec corrections)</h1>
-<div id="quest-ce-que-cest-que-1" class="section level2 unnumbered">
-<h2>Qu’est-ce que c’est que <svg style="height:0.8em;top:.04em;position:relative;fill:steelblue;" viewBox="0 0 581 512"><path d="M581 226.6C581 119.1 450.9 32 290.5 32S0 119.1 0 226.6C0 322.4 103.3 402 239.4 418.1V480h99.1v-61.5c24.3-2.7 47.6-7.4 69.4-13.9L448 480h112l-67.4-113.7c54.5-35.4 88.4-84.9 88.4-139.7zm-466.8 14.5c0-73.5 98.9-133 220.8-133s211.9 40.7 211.9 133c0 50.1-26.5 85-70.3 106.4-2.4-1.6-4.7-2.9-6.4-3.7-10.2-5.2-27.8-10.5-27.8-10.5s86.6-6.4 86.6-92.7-90.6-87.9-90.6-87.9h-199V361c-74.1-21.5-125.2-67.1-125.2-119.9zm225.1 38.3v-55.6c57.8 0 87.8-6.8 87.8 27.3 0 36.5-38.2 28.3-87.8 28.3zm-.9 72.5H365c10.8 0 18.9 11.7 24 19.2-16.1 1.9-33 2.8-50.6 2.9v-22.1z"/></svg>?</h2>
-<p>C’est un langage de programmation et un logiciel gratuit et libre.
-Il est surtout utilisé pour le développement de programmes statistiques et des analyses de données.
-Il gagne en popularité depuis quelques années avec l’émergence de la <em>data science</em> et du fait qu’il est gratuit et ouvert (<em>open-source</em>).
-<svg style="height:0.8em;top:.04em;position:relative;fill:steelblue;" viewBox="0 0 581 512"><path d="M581 226.6C581 119.1 450.9 32 290.5 32S0 119.1 0 226.6C0 322.4 103.3 402 239.4 418.1V480h99.1v-61.5c24.3-2.7 47.6-7.4 69.4-13.9L448 480h112l-67.4-113.7c54.5-35.4 88.4-84.9 88.4-139.7zm-466.8 14.5c0-73.5 98.9-133 220.8-133s211.9 40.7 211.9 133c0 50.1-26.5 85-70.3 106.4-2.4-1.6-4.7-2.9-6.4-3.7-10.2-5.2-27.8-10.5-27.8-10.5s86.6-6.4 86.6-92.7-90.6-87.9-90.6-87.9h-199V361c-74.1-21.5-125.2-67.1-125.2-119.9zm225.1 38.3v-55.6c57.8 0 87.8-6.8 87.8 27.3 0 36.5-38.2 28.3-87.8 28.3zm-.9 72.5H365c10.8 0 18.9 11.7 24 19.2-16.1 1.9-33 2.8-50.6 2.9v-22.1z"/></svg> est née d’un projet de recherche mené par deux chercheurs, Ross Ihaka et Robert Gentleman à l’université d’Auckland (Nouvelle-Zélande) en 1993.
-En 1997 est mis en place le <em>Comprehension R Archive Network (CRAN)</em> qui centralise les contributions au projet.</p>
-<p>Depuis le projet connaît une croissance soutenue, grâce à des contributions de la part de milliers de personnes à travers le monde.</p>
-<div id="rstudio-1" class="section level3 unnumbered">
-<h3>RStudio</h3>
-<ul>
-<li><p>C’est une IDE (<em>Integrated Development Environment</em>) ou Environnement Intégré de Développement.</p></li>
-<li><p>Il sert d’interface entre <svg style="height:0.8em;top:.04em;position:relative;fill:steelblue;" viewBox="0 0 581 512"><path d="M581 226.6C581 119.1 450.9 32 290.5 32S0 119.1 0 226.6C0 322.4 103.3 402 239.4 418.1V480h99.1v-61.5c24.3-2.7 47.6-7.4 69.4-13.9L448 480h112l-67.4-113.7c54.5-35.4 88.4-84.9 88.4-139.7zm-466.8 14.5c0-73.5 98.9-133 220.8-133s211.9 40.7 211.9 133c0 50.1-26.5 85-70.3 106.4-2.4-1.6-4.7-2.9-6.4-3.7-10.2-5.2-27.8-10.5-27.8-10.5s86.6-6.4 86.6-92.7-90.6-87.9-90.6-87.9h-199V361c-74.1-21.5-125.2-67.1-125.2-119.9zm225.1 38.3v-55.6c57.8 0 87.8-6.8 87.8 27.3 0 36.5-38.2 28.3-87.8 28.3zm-.9 72.5H365c10.8 0 18.9 11.7 24 19.2-16.1 1.9-33 2.8-50.6 2.9v-22.1z"/></svg> et l’utilisateur, offre à celui diverses commodités d’utilisation</p></li>
-</ul>
-<div class="rmdtip">
-<ul>
-<li>Une introduction au RStudio est présentée dans l’annexe <a href="app-introRStudio.html#app-introRStudio">A</a>.</li>
-<li>Vous trouverez une bonne introduction à <svg style="height:0.8em;top:.04em;position:relative;fill:steelblue;" viewBox="0 0 581 512"><path d="M581 226.6C581 119.1 450.9 32 290.5 32S0 119.1 0 226.6C0 322.4 103.3 402 239.4 418.1V480h99.1v-61.5c24.3-2.7 47.6-7.4 69.4-13.9L448 480h112l-67.4-113.7c54.5-35.4 88.4-84.9 88.4-139.7zm-466.8 14.5c0-73.5 98.9-133 220.8-133s211.9 40.7 211.9 133c0 50.1-26.5 85-70.3 106.4-2.4-1.6-4.7-2.9-6.4-3.7-10.2-5.2-27.8-10.5-27.8-10.5s86.6-6.4 86.6-92.7-90.6-87.9-90.6-87.9h-199V361c-74.1-21.5-125.2-67.1-125.2-119.9zm225.1 38.3v-55.6c57.8 0 87.8-6.8 87.8 27.3 0 36.5-38.2 28.3-87.8 28.3zm-.9 72.5H365c10.8 0 18.9 11.7 24 19.2-16.1 1.9-33 2.8-50.6 2.9v-22.1z"/></svg> sur ce <a href="https://cran.r-project.org/doc/contrib/Torfs+Brauer-Short-R-Intro.pdf" target="_blank">lien <i class="fas  fa-external-link-alt "></i></a>.</li>
-</ul>
-</div>
-</div>
-</div>
-<div id="ere-partie-donnees-quantitatives-discretes-1" class="section level2 unnumbered">
-<h2>1ère partie: Données quantitatives discrètes</h2>
-<p>Le nombre d’arbres plantés sur les parcelles d’un lotissement a été compté. Les données obtenues sont les suivantes:</p>
-<p><span class="math display">\[1,2,4,1,6,3,2,1,2,0,1,2,2,1,3,0,3,2,1,2,2,3,2,3.\]</span></p>
-<p><strong>1.</strong> Quelle est la nature de variable étudiée?</p>
-<p><strong>2.</strong> Rentrer ces données sous la forme d’un vecteur nommé <code>arbres</code> et affichez ce vecteur.</p>
-<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb4-1" title="1">arbres =<span class="st"> </span><span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">4</span>,<span class="dv">1</span>,<span class="dv">6</span>,<span class="dv">3</span>,<span class="dv">2</span>,<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">0</span>,<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">2</span>,<span class="dv">1</span>,<span class="dv">3</span>,<span class="dv">0</span>,<span class="dv">3</span>,<span class="dv">2</span>,<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">2</span>,<span class="dv">3</span>,<span class="dv">2</span>,<span class="dv">3</span>)</a>
-<a class="sourceLine" id="cb4-2" title="2">arbres</a>
-<a class="sourceLine" id="cb4-3" title="3"><span class="co">#ans&gt;  [1] 1 2 4 1 6 3 2 1 2 0 1 2 2 1 3 0 3 2 1 2 2 3 2 3</span></a></code></pre></div>
-<p><strong>3.</strong> Trier les valeurs de ce vecteur par ordre croissant.</p>
-<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb5-1" title="1"><span class="kw">sort</span>(arbres) <span class="co"># en ordre croissant</span></a>
-<a class="sourceLine" id="cb5-2" title="2"><span class="co">#ans&gt;  [1] 0 0 1 1 1 1 1 1 2 2 2 2 2 2 2 2 2 3 3 3 3 3 4 6</span></a>
-<a class="sourceLine" id="cb5-3" title="3"><span class="kw">sort</span>(arbres,<span class="dt">decreasing =</span> T) <span class="co"># en ordre décroissant</span></a>
-<a class="sourceLine" id="cb5-4" title="4"><span class="co">#ans&gt;  [1] 6 4 3 3 3 3 3 2 2 2 2 2 2 2 2 2 1 1 1 1 1 1 0 0</span></a></code></pre></div>
-<p><strong>4.</strong> Donner la taille de l’échantillon (c’est-à-dire le nombre de composantes de ce vecteur) en la notant <code>n</code> et affichez sa valeur.</p>
-<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb6-1" title="1">n =<span class="st"> </span><span class="kw">length</span>(arbres)</a>
-<a class="sourceLine" id="cb6-2" title="2">n</a>
-<a class="sourceLine" id="cb6-3" title="3"><span class="co">#ans&gt; [1] 24</span></a></code></pre></div>
-<div id="effectifs-et-frequence-1" class="section level3 unnumbered">
-<h3>Effectifs et fréquence</h3>
-<p><strong>5.</strong> Montrer la séquence des modalités et la séquence des effectifs correspondants.</p>
-<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb7-1" title="1"><span class="kw">sort</span>(<span class="kw">unique</span>(arbres)) <span class="co"># les modalités</span></a>
-<a class="sourceLine" id="cb7-2" title="2"><span class="co">#ans&gt; [1] 0 1 2 3 4 6</span></a>
-<a class="sourceLine" id="cb7-3" title="3"></a>
-<a class="sourceLine" id="cb7-4" title="4">effectifs =<span class="st"> </span><span class="kw">table</span>(arbres) <span class="co"># pour calculer les effectifs</span></a>
-<a class="sourceLine" id="cb7-5" title="5">effectifs</a>
-<a class="sourceLine" id="cb7-6" title="6"><span class="co">#ans&gt; arbres</span></a>
-<a class="sourceLine" id="cb7-7" title="7"><span class="co">#ans&gt; 0 1 2 3 4 6 </span></a>
-<a class="sourceLine" id="cb7-8" title="8"><span class="co">#ans&gt; 2 6 9 5 1 1</span></a></code></pre></div>
-<p><strong>6.</strong> Montrer le tableau de fréquences et de pourcentages.</p>
-<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb8-1" title="1">frequences =<span class="st"> </span>effectifs<span class="op">/</span>n</a>
-<a class="sourceLine" id="cb8-2" title="2">frequences</a>
-<a class="sourceLine" id="cb8-3" title="3"><span class="co">#ans&gt; arbres</span></a>
-<a class="sourceLine" id="cb8-4" title="4"><span class="co">#ans&gt;      0      1      2      3      4      6 </span></a>
-<a class="sourceLine" id="cb8-5" title="5"><span class="co">#ans&gt; 0.0833 0.2500 0.3750 0.2083 0.0417 0.0417</span></a>
-<a class="sourceLine" id="cb8-6" title="6">pourcentages =<span class="st"> </span>frequences <span class="op">*</span><span class="st"> </span><span class="dv">100</span> <span class="co"># ou (effectifs*100)/n</span></a>
-<a class="sourceLine" id="cb8-7" title="7">pourcentages</a>
-<a class="sourceLine" id="cb8-8" title="8"><span class="co">#ans&gt; arbres</span></a>
-<a class="sourceLine" id="cb8-9" title="9"><span class="co">#ans&gt;     0     1     2     3     4     6 </span></a>
-<a class="sourceLine" id="cb8-10" title="10"><span class="co">#ans&gt;  8.33 25.00 37.50 20.83  4.17  4.17</span></a></code></pre></div>
-<p><strong>7.</strong> Calculer et afficher les effectifs cumulés et les fréquences cumulées.</p>
-<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb9-1" title="1">effectifs_cumules =<span class="st"> </span><span class="kw">cumsum</span>(effectifs)</a>
-<a class="sourceLine" id="cb9-2" title="2">effectifs_cumules</a>
-<a class="sourceLine" id="cb9-3" title="3"><span class="co">#ans&gt;  0  1  2  3  4  6 </span></a>
-<a class="sourceLine" id="cb9-4" title="4"><span class="co">#ans&gt;  2  8 17 22 23 24</span></a>
-<a class="sourceLine" id="cb9-5" title="5">frequences_cumulees =<span class="st"> </span><span class="kw">cumsum</span>(frequences)</a>
-<a class="sourceLine" id="cb9-6" title="6">frequences_cumulees</a>
-<a class="sourceLine" id="cb9-7" title="7"><span class="co">#ans&gt;      0      1      2      3      4      6 </span></a>
-<a class="sourceLine" id="cb9-8" title="8"><span class="co">#ans&gt; 0.0833 0.3333 0.7083 0.9167 0.9583 1.0000</span></a></code></pre></div>
-</div>
-<div id="mesures-de-tendance-centrale-1" class="section level3 unnumbered">
-<h3>Mesures de tendance centrale</h3>
-<p><strong>8.</strong> Calculer le nombre moyen d’arbres par parcelle.</p>
-<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb10-1" title="1">moyenne =<span class="st"> </span><span class="kw">mean</span>(arbres)</a>
-<a class="sourceLine" id="cb10-2" title="2">moyenne</a>
-<a class="sourceLine" id="cb10-3" title="3"><span class="co">#ans&gt; [1] 2.04</span></a></code></pre></div>
-<p><strong>9.</strong> Calculer le nombre maximum et le nombre minimum d’arbres sur une parcelle.</p>
-<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb11-1" title="1"><span class="kw">max</span>(arbres)</a>
-<a class="sourceLine" id="cb11-2" title="2"><span class="co">#ans&gt; [1] 6</span></a>
-<a class="sourceLine" id="cb11-3" title="3"><span class="kw">min</span>(arbres)</a>
-<a class="sourceLine" id="cb11-4" title="4"><span class="co">#ans&gt; [1] 0</span></a></code></pre></div>
-<p><strong>10.</strong> Calculer le nombre médian d’arbres par parcelle.</p>
-<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb12-1" title="1">mediane =<span class="st"> </span><span class="kw">median</span>(arbres)</a>
-<a class="sourceLine" id="cb12-2" title="2">mediane</a>
-<a class="sourceLine" id="cb12-3" title="3"><span class="co">#ans&gt; [1] 2</span></a></code></pre></div>
-<p><strong>11.</strong> Utiliser la fonction <code>summary()</code> pour obtenir un tableau récapitulatif des indicateurs.</p>
-<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb13-1" title="1"><span class="kw">summary</span>(arbres)</a>
-<a class="sourceLine" id="cb13-2" title="2"><span class="co">#ans&gt;    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. </span></a>
-<a class="sourceLine" id="cb13-3" title="3"><span class="co">#ans&gt;    0.00    1.00    2.00    2.04    3.00    6.00</span></a></code></pre></div>
-</div>
-<div id="indicateurs-de-dispersion-1" class="section level3 unnumbered">
-<h3>Indicateurs de dispersion</h3>
-<p><strong>12.</strong> Calculer la variance du nombre d’arbres plantés sur les parcelles.</p>
-<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb14-1" title="1"><span class="kw">var</span>(arbres)</a>
-<a class="sourceLine" id="cb14-2" title="2"><span class="co">#ans&gt; [1] 1.69</span></a></code></pre></div>
-<p><strong>13.</strong> Calculer maintenant l’écart-type et vérifier que l’écart-type est la racine carrée de la variance.</p>
-<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb15-1" title="1">ecart_type =<span class="st"> </span><span class="kw">sd</span>(arbres)</a>
-<a class="sourceLine" id="cb15-2" title="2">ecart_type</a>
-<a class="sourceLine" id="cb15-3" title="3"><span class="co">#ans&gt; [1] 1.3</span></a>
-<a class="sourceLine" id="cb15-4" title="4">ecart_type<span class="op">^</span><span class="dv">2</span></a>
-<a class="sourceLine" id="cb15-5" title="5"><span class="co">#ans&gt; [1] 1.69</span></a></code></pre></div>
-<p><strong>14.</strong> Calculer la variance vous-même. La variance obtenue est elle la même que la précédente?</p>
-<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb16-1" title="1"><span class="co"># la fonction var() calcule la variance corrigée</span></a>
-<a class="sourceLine" id="cb16-2" title="2">variance =<span class="st">  </span><span class="kw">sum</span>((arbres<span class="op">-</span><span class="kw">mean</span>(arbres))<span class="op">^</span><span class="dv">2</span>)<span class="op">/</span><span class="kw">length</span>(arbres)</a>
-<a class="sourceLine" id="cb16-3" title="3">variance</a>
-<a class="sourceLine" id="cb16-4" title="4"><span class="co">#ans&gt; [1] 1.62</span></a></code></pre></div>
-<div class="rmdinsight">
-<p>Le logiciel <svg style="height:0.8em;top:.04em;position:relative;fill:steelblue;" viewBox="0 0 581 512"><path d="M581 226.6C581 119.1 450.9 32 290.5 32S0 119.1 0 226.6C0 322.4 103.3 402 239.4 418.1V480h99.1v-61.5c24.3-2.7 47.6-7.4 69.4-13.9L448 480h112l-67.4-113.7c54.5-35.4 88.4-84.9 88.4-139.7zm-466.8 14.5c0-73.5 98.9-133 220.8-133s211.9 40.7 211.9 133c0 50.1-26.5 85-70.3 106.4-2.4-1.6-4.7-2.9-6.4-3.7-10.2-5.2-27.8-10.5-27.8-10.5s86.6-6.4 86.6-92.7-90.6-87.9-90.6-87.9h-199V361c-74.1-21.5-125.2-67.1-125.2-119.9zm225.1 38.3v-55.6c57.8 0 87.8-6.8 87.8 27.3 0 36.5-38.2 28.3-87.8 28.3zm-.9 72.5H365c10.8 0 18.9 11.7 24 19.2-16.1 1.9-33 2.8-50.6 2.9v-22.1z"/></svg> utilise <span class="math inline">\(n-1\)</span> pour le dénomiateur dans la définition de la variance, c’est-à-dire <span class="math inline">\(\frac{1}{n-1} \sum_{i=1}^n (x_i - \bar{x})^2\)</span> (d’écart-type noté <span class="math inline">\(\sigma_{n-1}\)</span> ou <span class="math inline">\(s\)</span>. Cette quantité est souvent préférée dans les applications numériques pour des questions d’estimation).</p>
-</div>
-</div>
-<div id="representations-graphiques-2" class="section level3 unnumbered">
-<h3>Représentations graphiques</h3>
-<p><strong>15.</strong> La fontion <code>plot()</code> affiche par défaut un nuage de points avec en abscisse le numéro de l’observation (ici de 1 à 24) et en ordonnée le nombre d’arbres. Tester cette fonction. Modifier le titre de la figure, les noms des axes, la couleur et la forme des points affichés.</p>
-<div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb17-1" title="1"><span class="kw">plot</span>(arbres)</a></code></pre></div>
-<p><img src="Statistique_infentielle_files/figure-html/unnamed-chunk-70-1.png" width="70%" style="display: block; margin: auto;" /></p>
-<p><strong>16.</strong> Afficher la courbe des fréquence cumulées. (<strong>Indication</strong>: Utiliser la fonction <code>ecdf()</code>).</p>
-<div class="sourceCode" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb18-1" title="1"><span class="kw">plot</span>(<span class="kw">ecdf</span>(arbres))</a></code></pre></div>
-<p><img src="Statistique_infentielle_files/figure-html/unnamed-chunk-71-1.png" width="70%" style="display: block; margin: auto;" /></p>
-<p><strong>17.</strong> Tracer un diagramme en bâtons par la fonction <code>barplot()</code> à partir du tableau des effectifs ou des fréquences.</p>
-<div class="sourceCode" id="cb19"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb19-1" title="1"><span class="kw">barplot</span>(effectifs, <span class="dt">xlab=</span><span class="st">&quot;nombre d&#39;arbres&quot;</span>, <span class="dt">ylab=</span><span class="st">&quot;effectifs&quot;</span>)</a></code></pre></div>
-<p><img src="Statistique_infentielle_files/figure-html/unnamed-chunk-72-1.png" width="45%" style="display: block; margin: auto;" /></p>
-<div class="sourceCode" id="cb20"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb20-1" title="1"><span class="kw">barplot</span>(frequences, <span class="dt">xlab=</span><span class="st">&quot;nombre d&#39;arbres&quot;</span>, <span class="dt">ylab=</span><span class="st">&quot;fréquence&quot;</span>)</a></code></pre></div>
-<p><img src="Statistique_infentielle_files/figure-html/unnamed-chunk-72-2.png" width="45%" style="display: block; margin: auto;" /></p>
-</div>
-</div>
-<div id="eme-partie-analyse-descriptive-1" class="section level2 unnumbered">
-<h2>2ème partie : Analyse descriptive</h2>
-<div id="donnees-utilisees-1" class="section level3 unnumbered">
-<h3>Données utilisées</h3>
-<p>Une enquête a été réalisée sur 237 étudiants. Les données sont les suivantes:</p>
-<ul>
-<li><strong>Sex</strong>: The sex of the student. (Factor with levels “Male” and “Female”.)</li>
-<li><strong>Wr.Hnd</strong>: span (distance from tip of thumb to tip of little finger of spread hand) of writing hand, in centimetres.</li>
-<li><strong>NW.Hnd</strong>: span of non-writing hand.</li>
-<li><strong>W.Hnd</strong>: writing hand of student. (Factor, with levels “Left” and “Right”.)</li>
-<li><strong>Fold</strong>: “Fold your arms! Which is on top” (Factor, with levels “R on L”, “L on R”, “Neither”.)</li>
-<li><strong>Pulse</strong>: pulse rate of student (beats per minute).</li>
-<li><strong>Clap</strong>: ‘Clap your hands! Which hand is on top?’ (Factor, with levels “Right”, “Left”, “Neither”.)</li>
-<li><strong>Exer</strong>: how often the student exercises. (Factor, with levels “Freq” (frequently), “Some”, “None”.)</li>
-<li><strong>Smoke</strong>: how much the student smokes. (Factor, levels “Heavy”, “Regul” (regularly), “Occas” (occasionally), “Never”.)</li>
-<li><strong>Height</strong>: height of the student in centimetres.</li>
-<li><strong>M.I</strong>: whether the student expressed height in imperial (feet/inches) or metric (centimetres/metres) units. (Factor, levels “Metric”, “Imperial”.)</li>
-<li><strong>Age</strong>: age of the student in years.</li>
-</ul>
-</div>
-<div id="definition-du-repertoire-de-travail-1" class="section level3 unnumbered">
-<h3>Définition du répertoire de travail</h3>
-<p>Vous avez la possibilité de définir un <em>Répertoire de travail</em> dans lequel vous allez stocker votre script R, vos données etc… Ceci est réalisé par la fonction <code>setwd("..Chemin/de/votre/repertoire")</code>. Cette fonction considère comme seul paramètre le chemin d’accès au répertoire que vous avez choisi. A tout moment, vous pouvez vérifier le répertoire de travail courant en executant l’instruction suivante:</p>
-<div class="sourceCode" id="cb21"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb21-1" title="1"><span class="kw">getwd</span>()</a></code></pre></div>
-<p><strong>1.</strong> Définisser votre répertoire de travail.</p>
-<div class="sourceCode" id="cb22"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb22-1" title="1"><span class="co"># avec un setwd() ou bien depuis la fenetre des fichiers</span></a></code></pre></div>
-</div>
-<div id="chargement-des-donnees-1" class="section level3 unnumbered">
-<h3>Chargement des données</h3>
-<p>Il existe une multitude de fonctions qui permettent de charger un fichier de données. Télécharger le fichier de données en cliquant <a target="_blank" href="datasets/enquete.csv">ici <i class="fa fa-table" aria-hidden="true"></i></a> et enregistrer le dans votre répertoire. Ensuite utiliser la fonction <code>read.csv()</code> pour charger les données dans <svg style="height:0.8em;top:.04em;position:relative;fill:steelblue;" viewBox="0 0 581 512"><path d="M581 226.6C581 119.1 450.9 32 290.5 32S0 119.1 0 226.6C0 322.4 103.3 402 239.4 418.1V480h99.1v-61.5c24.3-2.7 47.6-7.4 69.4-13.9L448 480h112l-67.4-113.7c54.5-35.4 88.4-84.9 88.4-139.7zm-466.8 14.5c0-73.5 98.9-133 220.8-133s211.9 40.7 211.9 133c0 50.1-26.5 85-70.3 106.4-2.4-1.6-4.7-2.9-6.4-3.7-10.2-5.2-27.8-10.5-27.8-10.5s86.6-6.4 86.6-92.7-90.6-87.9-90.6-87.9h-199V361c-74.1-21.5-125.2-67.1-125.2-119.9zm225.1 38.3v-55.6c57.8 0 87.8-6.8 87.8 27.3 0 36.5-38.2 28.3-87.8 28.3zm-.9 72.5H365c10.8 0 18.9 11.7 24 19.2-16.1 1.9-33 2.8-50.6 2.9v-22.1z"/></svg>. Cette fonction prend comme principaux paramètres d’entrée le fichier à charger <code>(file="data.txt")</code>, le séparateur de colonnes dans le fichier initial <code>(sep=)</code> et la présence (ou non) des noms de colonnes dans le fichier <code>(header=)</code>.</p>
-<div class="rmdcaution">
-<p>Ouvrez toujours le fichier de données dans un éditeur de texte pour connaitre le séparateur de colonnes et voir si les noms de colonnes sont présents.</p>
-</div>
-<p><strong>2.</strong> Charger le fichier des données dans l’enquête dans un tableau nommé <code>data</code>. L’instruction de chargement du fichier est la suivante:</p>
-<div class="sourceCode" id="cb23"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb23-1" title="1">donnees =<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&quot;enquete.csv&quot;</span>, <span class="dt">header =</span> T , <span class="dt">sep=</span><span class="st">&quot;,&quot;</span>)</a></code></pre></div>
-<p>Le fichier de données est chargé dans l’environnement <svg style="height:0.8em;top:.04em;position:relative;fill:steelblue;" viewBox="0 0 581 512"><path d="M581 226.6C581 119.1 450.9 32 290.5 32S0 119.1 0 226.6C0 322.4 103.3 402 239.4 418.1V480h99.1v-61.5c24.3-2.7 47.6-7.4 69.4-13.9L448 480h112l-67.4-113.7c54.5-35.4 88.4-84.9 88.4-139.7zm-466.8 14.5c0-73.5 98.9-133 220.8-133s211.9 40.7 211.9 133c0 50.1-26.5 85-70.3 106.4-2.4-1.6-4.7-2.9-6.4-3.7-10.2-5.2-27.8-10.5-27.8-10.5s86.6-6.4 86.6-92.7-90.6-87.9-90.6-87.9h-199V361c-74.1-21.5-125.2-67.1-125.2-119.9zm225.1 38.3v-55.6c57.8 0 87.8-6.8 87.8 27.3 0 36.5-38.2 28.3-87.8 28.3zm-.9 72.5H365c10.8 0 18.9 11.7 24 19.2-16.1 1.9-33 2.8-50.6 2.9v-22.1z"/></svg> et est affecté à l’objet <code>donnees</code>. C’est cet objet, de type <em>dataframe</em> qui va faire l’objet de manipulations par la suite.</p>
-<p><strong>3.</strong> Afficher le nombre de d’observations (lignes) et le nombre de variables (colonnes).</p>
-<div class="sourceCode" id="cb24"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb24-1" title="1"><span class="kw">dim</span>(donnees) <span class="co"># pour afficher les deux</span></a>
-<a class="sourceLine" id="cb24-2" title="2"><span class="co">#ans&gt; [1] 168  12</span></a>
-<a class="sourceLine" id="cb24-3" title="3"><span class="kw">nrow</span>(donnees) <span class="co"># nb de lignes</span></a>
-<a class="sourceLine" id="cb24-4" title="4"><span class="co">#ans&gt; [1] 168</span></a>
-<a class="sourceLine" id="cb24-5" title="5"><span class="kw">ncol</span>(donnees) <span class="co"># nb de colonnes</span></a>
-<a class="sourceLine" id="cb24-6" title="6"><span class="co">#ans&gt; [1] 12</span></a></code></pre></div>
-<p><strong>4.</strong> Utiliser la fonction <code>head()</code> pour afficher les premières lignes (6 par défaut) de données chargées.</p>
-<div class="sourceCode" id="cb25"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb25-1" title="1"><span class="kw">head</span>(donnees)</a>
-<a class="sourceLine" id="cb25-2" title="2"><span class="co">#ans&gt;      Sex Wr.Hnd NW.Hnd W.Hnd    Fold Pulse  Clap Exer Smoke Height</span></a>
-<a class="sourceLine" id="cb25-3" title="3"><span class="co">#ans&gt; 1 Female   18.5   18.0 Right  R on L    92  Left Some Never    173</span></a>
-<a class="sourceLine" id="cb25-4" title="4"><span class="co">#ans&gt; 2   Male   19.5   20.5  Left  R on L   104  Left None Regul    178</span></a>
-<a class="sourceLine" id="cb25-5" title="5"><span class="co">#ans&gt; 3   Male   20.0   20.0 Right Neither    35 Right Some Never    165</span></a>
-<a class="sourceLine" id="cb25-6" title="6"><span class="co">#ans&gt; 4 Female   18.0   17.7 Right  L on R    64 Right Some Never    173</span></a>
-<a class="sourceLine" id="cb25-7" title="7"><span class="co">#ans&gt; 5   Male   17.7   17.7 Right  L on R    83 Right Freq Never    183</span></a>
-<a class="sourceLine" id="cb25-8" title="8"><span class="co">#ans&gt; 6 Female   17.0   17.3 Right  R on L    74 Right Freq Never    157</span></a>
-<a class="sourceLine" id="cb25-9" title="9"><span class="co">#ans&gt;        M.I  Age</span></a>
-<a class="sourceLine" id="cb25-10" title="10"><span class="co">#ans&gt; 1   Metric 18.2</span></a>
-<a class="sourceLine" id="cb25-11" title="11"><span class="co">#ans&gt; 2 Imperial 17.6</span></a>
-<a class="sourceLine" id="cb25-12" title="12"><span class="co">#ans&gt; 3   Metric 23.7</span></a>
-<a class="sourceLine" id="cb25-13" title="13"><span class="co">#ans&gt; 4 Imperial 21.0</span></a>
-<a class="sourceLine" id="cb25-14" title="14"><span class="co">#ans&gt; 5 Imperial 18.8</span></a>
-<a class="sourceLine" id="cb25-15" title="15"><span class="co">#ans&gt; 6   Metric 35.8</span></a></code></pre></div>
-<p><strong>5.</strong> L’accès à une colonne d’un dataframe se fait par la notation <code>$</code>: <code>nom_du_dataframe$nom_variable</code>. Afficher les valeurs de la variable <code>Age</code> de vos données.</p>
-<div class="sourceCode" id="cb26"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb26-1" title="1">donnees<span class="op">$</span>Age</a>
-<a class="sourceLine" id="cb26-2" title="2"><span class="co">#ans&gt;   [1] 18.2 17.6 23.7 21.0 18.8 35.8 19.0 22.3 28.5 17.5 19.3 18.3 17.9 17.9</span></a>
-<a class="sourceLine" id="cb26-3" title="3"><span class="co">#ans&gt;  [15] 18.2 17.8 18.2 17.5 18.1 19.2 17.5 39.8 17.2 18.0 17.9 35.5 17.1 17.5</span></a>
-<a class="sourceLine" id="cb26-4" title="4"><span class="co">#ans&gt;  [29] 18.9 19.4 18.4 30.8 18.5 17.5 18.3 17.4 20.0 17.2 17.7 20.3 17.3 17.5</span></a>
-<a class="sourceLine" id="cb26-5" title="5"><span class="co">#ans&gt;  [43] 18.6 17.6 17.7 17.4 17.8 20.7 23.6 17.1 20.2 17.2 17.2 18.0 18.8 21.6</span></a>
-<a class="sourceLine" id="cb26-6" title="6"><span class="co">#ans&gt;  [57] 19.7 19.7 22.8 19.4 23.2 19.1 17.8 20.2 17.7 18.2 18.6 17.8 24.2 18.2</span></a>
-<a class="sourceLine" id="cb26-7" title="7"><span class="co">#ans&gt;  [71] 21.2 17.9 17.4 20.5 22.9 18.9 18.9 20.1 18.2 17.5 17.4 21.0 17.7 18.1</span></a>
-<a class="sourceLine" id="cb26-8" title="8"><span class="co">#ans&gt;  [85] 18.0 18.3 20.0 18.8 18.5 18.4 19.2 19.3 18.7 17.5 17.2 19.0 19.2 19.0</span></a>
-<a class="sourceLine" id="cb26-9" title="9"><span class="co">#ans&gt;  [99] 23.0 32.7 20.0 20.2 25.5 18.2 23.5 70.4 43.8 23.6 44.2 17.9 18.4 17.5</span></a>
-<a class="sourceLine" id="cb26-10" title="10"><span class="co">#ans&gt; [113] 29.1 18.5 18.2 32.8 17.3 18.7 18.7 17.8 17.2 36.6 23.1 17.2 23.4 17.1</span></a>
-<a class="sourceLine" id="cb26-11" title="11"><span class="co">#ans&gt; [127] 17.2 23.8 18.8 21.2 24.7 18.5 20.3 20.1 18.9 27.3 18.9 17.2 26.5 17.0</span></a>
-<a class="sourceLine" id="cb26-12" title="12"><span class="co">#ans&gt; [141] 17.2 19.2 17.5 19.2 21.3 20.2 18.7 17.1 17.4 18.6 19.5 17.2 17.2 20.4</span></a>
-<a class="sourceLine" id="cb26-13" title="13"><span class="co">#ans&gt; [155] 17.1 19.3 18.9 17.3 18.2 18.4 17.4 20.3 19.3 18.2 17.7 16.9 17.2 17.8</span></a></code></pre></div>
-</div>
-<div id="analyse-descriptive-univariee-1" class="section level3 unnumbered">
-<h3>Analyse descriptive univariée</h3>
-<p><strong>Indicateurs statistiques pour variables quantitatives</strong></p>
-<p><strong>6.</strong> Calculer et afficher la moyenne et l’écart-type d’age des élèves qui ont participé à l’enquête.</p>
-<div class="sourceCode" id="cb27"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb27-1" title="1">moyenne_age =<span class="st"> </span><span class="kw">mean</span>(donnees<span class="op">$</span>Age)</a>
-<a class="sourceLine" id="cb27-2" title="2">moyenne_age</a>
-<a class="sourceLine" id="cb27-3" title="3"><span class="co">#ans&gt; [1] 20.4</span></a>
-<a class="sourceLine" id="cb27-4" title="4">ecarttype_age=<span class="st"> </span><span class="kw">sd</span>(donnees<span class="op">$</span>Age)</a>
-<a class="sourceLine" id="cb27-5" title="5">ecarttype_age</a>
-<a class="sourceLine" id="cb27-6" title="6"><span class="co">#ans&gt; [1] 6.1</span></a></code></pre></div>
-<p><strong>7.</strong> Appliquer la fonction <code>summary()</code> sur la variable <code>Age</code>. Qu’est ce que cette fonction calcule et affiche?</p>
-<div class="sourceCode" id="cb28"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb28-1" title="1"><span class="kw">summary</span>(donnees<span class="op">$</span>Age)</a>
-<a class="sourceLine" id="cb28-2" title="2"><span class="co">#ans&gt;    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. </span></a>
-<a class="sourceLine" id="cb28-3" title="3"><span class="co">#ans&gt;    16.9    17.7    18.6    20.4    20.2    70.4</span></a></code></pre></div>
-<p><strong>Représentations graphiques pour variables quantitatives</strong></p>
-<p><strong>8.</strong> Tracer l’histogramme de la variable <code>Age</code>. Ecrire un titre correspondante à votre figure, modifier les noms des axes et les couleurs des bâtons.</p>
-<div class="sourceCode" id="cb29"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb29-1" title="1"><span class="kw">hist</span>(donnees<span class="op">$</span>Age, <span class="dt">main=</span><span class="st">&quot;histogrammes des ages&quot;</span>,</a>
-<a class="sourceLine" id="cb29-2" title="2">     <span class="dt">xlab=</span><span class="st">&quot;Age&quot;</span>,</a>
-<a class="sourceLine" id="cb29-3" title="3">     <span class="dt">ylab=</span><span class="st">&quot;effectifs&quot;</span>,</a>
-<a class="sourceLine" id="cb29-4" title="4">     <span class="dt">col =</span> <span class="st">&quot;steelblue&quot;</span>)</a></code></pre></div>
-<p><img src="Statistique_infentielle_files/figure-html/unnamed-chunk-82-1.png" width="70%" style="display: block; margin: auto;" /></p>
-<p><strong>9.</strong> Afficher une la boîte à moustache correspondante à la variable <code>Age</code>. Commenter ce qu’on observe sur cette figure.</p>
-<div class="sourceCode" id="cb30"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb30-1" title="1"><span class="kw">boxplot</span>(donnees<span class="op">$</span>Age)</a></code></pre></div>
-<p><img src="Statistique_infentielle_files/figure-html/unnamed-chunk-83-1.png" width="70%" style="display: block; margin: auto;" /></p>
-<div class="sourceCode" id="cb31"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb31-1" title="1"><span class="kw">boxplot</span>(donnees<span class="op">$</span>Age, <span class="dt">horizontal =</span> T) <span class="co"># plus lisible</span></a></code></pre></div>
-<p><img src="Statistique_infentielle_files/figure-html/unnamed-chunk-83-2.png" width="70%" style="display: block; margin: auto;" /></p>
-<p><strong>Indicateurs statistiques et représentations graphiques pour variables qualitatives</strong></p>
-<p><strong>10.</strong> Choisir une variable qualitative parmi les variables de cette enquête. Justifier votre choix. Calculer et afficher les effectifs et les fréquences de cette variable.</p>
-<div class="rmdinsight">
-<p>Pour voir les variables dans votre dataframe, vous pouvez utiliser la fonction <code>names()</code> pour afficher les noms des variables, ou <code>str()</code> (structure) pour voir toutes les colonnes, leur types, les quelques premières valeurs, etc.. Ou simplement dans Rstudio on peut voir la structure du dataframe dans la fenêtre “Environment”.</p>
-</div>
-<div class="sourceCode" id="cb32"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb32-1" title="1"><span class="kw">str</span>(donnees) <span class="co"># str pour structure</span></a>
-<a class="sourceLine" id="cb32-2" title="2"><span class="co">#ans&gt; &#39;data.frame&#39;: 168 obs. of  12 variables:</span></a>
-<a class="sourceLine" id="cb32-3" title="3"><span class="co">#ans&gt;  $ Sex   : Factor w/ 2 levels &quot;Female&quot;,&quot;Male&quot;: 1 2 2 1 2 1 2 2 1 1 ...</span></a>
-<a class="sourceLine" id="cb32-4" title="4"><span class="co">#ans&gt;  $ Wr.Hnd: num  18.5 19.5 20 18 17.7 17 20 18.5 17 19.5 ...</span></a>
-<a class="sourceLine" id="cb32-5" title="5"><span class="co">#ans&gt;  $ NW.Hnd: num  18 20.5 20 17.7 17.7 17.3 19.5 18.5 17.2 20.2 ...</span></a>
-<a class="sourceLine" id="cb32-6" title="6"><span class="co">#ans&gt;  $ W.Hnd : Factor w/ 2 levels &quot;Left&quot;,&quot;Right&quot;: 2 1 2 2 2 2 2 2 2 2 ...</span></a>
-<a class="sourceLine" id="cb32-7" title="7"><span class="co">#ans&gt;  $ Fold  : Factor w/ 3 levels &quot;L on R&quot;,&quot;Neither&quot;,..: 3 3 2 1 1 3 3 3 1 1 ...</span></a>
-<a class="sourceLine" id="cb32-8" title="8"><span class="co">#ans&gt;  $ Pulse : int  92 104 35 64 83 74 72 90 80 66 ...</span></a>
-<a class="sourceLine" id="cb32-9" title="9"><span class="co">#ans&gt;  $ Clap  : Factor w/ 3 levels &quot;Left&quot;,&quot;Neither&quot;,..: 1 1 3 3 3 3 3 3 3 2 ...</span></a>
-<a class="sourceLine" id="cb32-10" title="10"><span class="co">#ans&gt;  $ Exer  : Factor w/ 3 levels &quot;Freq&quot;,&quot;None&quot;,..: 3 2 3 3 1 1 3 3 1 3 ...</span></a>
-<a class="sourceLine" id="cb32-11" title="11"><span class="co">#ans&gt;  $ Smoke : Factor w/ 4 levels &quot;Heavy&quot;,&quot;Never&quot;,..: 2 4 2 2 2 2 2 2 2 2 ...</span></a>
-<a class="sourceLine" id="cb32-12" title="12"><span class="co">#ans&gt;  $ Height: num  173 178 165 173 183 ...</span></a>
-<a class="sourceLine" id="cb32-13" title="13"><span class="co">#ans&gt;  $ M.I   : Factor w/ 2 levels &quot;Imperial&quot;,&quot;Metric&quot;: 2 1 2 1 1 2 2 2 1 2 ...</span></a>
-<a class="sourceLine" id="cb32-14" title="14"><span class="co">#ans&gt;  $ Age   : num  18.2 17.6 23.7 21 18.8 ...</span></a>
-<a class="sourceLine" id="cb32-15" title="15"><span class="co"># prenant Smoke ou Sex</span></a>
-<a class="sourceLine" id="cb32-16" title="16"><span class="kw">table</span>(donnees<span class="op">$</span>Smoke)</a>
-<a class="sourceLine" id="cb32-17" title="17"><span class="co">#ans&gt; </span></a>
-<a class="sourceLine" id="cb32-18" title="18"><span class="co">#ans&gt; Heavy Never Occas Regul </span></a>
-<a class="sourceLine" id="cb32-19" title="19"><span class="co">#ans&gt;     7   134    13    14</span></a></code></pre></div>
-<p><strong>11.</strong> Afficher un diagramme circulaire (en utilisant la fonction <code>pie()</code>) pour la variable qualitative choisie.</p>
-<div class="sourceCode" id="cb33"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb33-1" title="1"><span class="kw">pie</span>(<span class="kw">table</span>(donnees<span class="op">$</span>Smoke))</a></code></pre></div>
-<p><img src="Statistique_infentielle_files/figure-html/unnamed-chunk-85-1.png" width="70%" style="display: block; margin: auto;" />
-### Analyse descriptive bivariée {-}</p>
-<!-- :::rmdcaution -->
-<!-- C'est une partie que nous n'avons pas encore abordé en cours. Mais on va quand même faire une petite analyse sur <svg style="height:0.8em;top:.04em;position:relative;fill:steelblue;" viewBox="0 0 581 512"><path d="M581 226.6C581 119.1 450.9 32 290.5 32S0 119.1 0 226.6C0 322.4 103.3 402 239.4 418.1V480h99.1v-61.5c24.3-2.7 47.6-7.4 69.4-13.9L448 480h112l-67.4-113.7c54.5-35.4 88.4-84.9 88.4-139.7zm-466.8 14.5c0-73.5 98.9-133 220.8-133s211.9 40.7 211.9 133c0 50.1-26.5 85-70.3 106.4-2.4-1.6-4.7-2.9-6.4-3.7-10.2-5.2-27.8-10.5-27.8-10.5s86.6-6.4 86.6-92.7-90.6-87.9-90.6-87.9h-199V361c-74.1-21.5-125.2-67.1-125.2-119.9zm225.1 38.3v-55.6c57.8 0 87.8-6.8 87.8 27.3 0 36.5-38.2 28.3-87.8 28.3zm-.9 72.5H365c10.8 0 18.9 11.7 24 19.2-16.1 1.9-33 2.8-50.6 2.9v-22.1z"/></svg>. -->
-<!-- ::: -->
-<p><strong>Indicateurs pour le croisement de deux variables qualitatives</strong></p>
-<p>Le tableau de contingence est un moyen particulier de représenter simultanément deux caractères observés sur une même population, s’ils sont discrets ou bien continus et regroupés en classes.
-<!-- 
-([lien <i class="fas  fa-external-link-alt "></i>](https://mistis.inrialpes.fr/software/SMEL/cours/sd/node16.html){target="_blank"})
-
- -->
-<strong>12.</strong> Un tableau de contingence des effectifs joints croisant deux variables qualitatives est réalisé par la fonction <code>table()</code>. Effectuer et afficher le croisement de deux variables (<code>Sex</code>) et (<code>Smoke</code>).</p>
-<div class="sourceCode" id="cb34"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb34-1" title="1"><span class="kw">table</span>(donnees<span class="op">$</span>Sex,donnees<span class="op">$</span>Smoke)</a>
-<a class="sourceLine" id="cb34-2" title="2"><span class="co">#ans&gt;         </span></a>
-<a class="sourceLine" id="cb34-3" title="3"><span class="co">#ans&gt;          Heavy Never Occas Regul</span></a>
-<a class="sourceLine" id="cb34-4" title="4"><span class="co">#ans&gt;   Female     4    70     7     3</span></a>
-<a class="sourceLine" id="cb34-5" title="5"><span class="co">#ans&gt;   Male       3    64     6    11</span></a></code></pre></div>
-<p><strong>13.</strong> Utiliser la fonction <code>addmargins()</code> pour ajouter au tableau les effectifs marginaux.
-<!-- 
- (Lire ce [lien <i class="fas  fa-external-link-alt "></i>](http://www.modalisa.com/support/lexique/effectifs-marginaux.php){target="_blank"} à propos des effectifs marginaux). 
-
- --></p>
-<div class="sourceCode" id="cb35"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb35-1" title="1"><span class="kw">addmargins</span>(<span class="kw">table</span>(donnees<span class="op">$</span>Sex,donnees<span class="op">$</span>Smoke))</a>
-<a class="sourceLine" id="cb35-2" title="2"><span class="co">#ans&gt;         </span></a>
-<a class="sourceLine" id="cb35-3" title="3"><span class="co">#ans&gt;          Heavy Never Occas Regul Sum</span></a>
-<a class="sourceLine" id="cb35-4" title="4"><span class="co">#ans&gt;   Female     4    70     7     3  84</span></a>
-<a class="sourceLine" id="cb35-5" title="5"><span class="co">#ans&gt;   Male       3    64     6    11  84</span></a>
-<a class="sourceLine" id="cb35-6" title="6"><span class="co">#ans&gt;   Sum        7   134    13    14 168</span></a></code></pre></div>
-<p><strong>Représentations graphiques pour le croisement de deux variables qualitatives</strong></p>
-<p>On peut représenter le croisement de deux variables qualitatives avec un diagramme en bâtons. Dans le cas de deux variables qualitatives, la fonction <code>barplot()</code> prend comme premier paramètre le tableau de contingence.</p>
-<div class="sourceCode" id="cb36"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb36-1" title="1">colors&lt;-<span class="kw">c</span>(<span class="st">&quot;darkred&quot;</span>,<span class="st">&quot;darkblue&quot;</span>)</a>
-<a class="sourceLine" id="cb36-2" title="2"><span class="kw">barplot</span>(<span class="kw">table</span>(donnees<span class="op">$</span>Sex,donnees<span class="op">$</span>Smoke),<span class="dt">col=</span>colors, <span class="dt">main=</span><span class="st">&quot;Distribution du tabagisme en fonction du sexe&quot;</span>,</a>
-<a class="sourceLine" id="cb36-3" title="3"><span class="dt">xlab=</span><span class="st">&quot;&quot;</span>,<span class="dt">ylab=</span><span class="st">&quot;Effectifs&quot;</span>)</a>
-<a class="sourceLine" id="cb36-4" title="4"><span class="kw">legend</span>(<span class="st">&quot;topright&quot;</span>, <span class="dt">xpd =</span> <span class="ot">TRUE</span>, <span class="dt">legend =</span> <span class="kw">c</span>(<span class="st">&quot;Femme&quot;</span>,<span class="st">&quot;Homme&quot;</span>),<span class="dt">fill=</span>colors)</a></code></pre></div>
-<p><img src="Statistique_infentielle_files/figure-html/unnamed-chunk-88-1.png" width="70%" style="display: block; margin: auto;" /></p>
-<div class="rmdinsight">
-<p>On remarque qu’il y a plus d’hommes que des femmes qui fument régulièrement. (selon l’enquête réalisée)</p>
-</div>
-<div class="rmdtip">
-<p>Il est plus convenable dans ce cas de représenter le croisement de ces deux variables qualitatives à l’aide d’un mosaicplot.</p>
-</div>
-<div class="sourceCode" id="cb37"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb37-1" title="1"><span class="kw">mosaicplot</span>(Smoke<span class="op">~</span>Sex, <span class="dt">data=</span>donnees, <span class="dt">color=</span>colors, <span class="dt">main =</span> <span class="st">&quot;Distribution du tabagisme en fonction du sexe&quot;</span>)</a></code></pre></div>
-<p><img src="Statistique_infentielle_files/figure-html/unnamed-chunk-89-1.png" width="70%" style="display: block; margin: auto;" /></p>
-<p><strong>Indicateurs pour le croisement d’une variable qualitative et d’une variable quantitative</strong></p>
-<p>Disons qu’on souhaite calculer la moyenne de fréquence cardiaque chez les hommes ayant répondu au questionnaire de l’enquête. On a besoin de filtrer le dataframe de la façon suivante:</p>
-<div class="sourceCode" id="cb38"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb38-1" title="1"><span class="co"># On utilise la fontion subset pour créer un sous ensemble de nos données</span></a>
-<a class="sourceLine" id="cb38-2" title="2"><span class="co"># Remarquer qu&#39;on utilise == pour comparer</span></a>
-<a class="sourceLine" id="cb38-3" title="3">pulse_hommes =<span class="st"> </span><span class="kw">subset</span>(donnees, donnees<span class="op">$</span>Sex<span class="op">==</span><span class="st">&quot;Male&quot;</span>)</a></code></pre></div>
-<p><strong>15.</strong> Vérifier que le sous ensemble créé <code>pulse_homme</code> ne contient que des hommes.</p>
-<div class="sourceCode" id="cb39"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb39-1" title="1"><span class="kw">table</span>(pulse_hommes<span class="op">$</span>Sex) <span class="co"># ou summary(pulse_hommes$Sex)</span></a>
-<a class="sourceLine" id="cb39-2" title="2"><span class="co">#ans&gt; Error in table(pulse_hommes$Sex): objet &#39;pulse_hommes&#39; introuvable</span></a></code></pre></div>
-<p><strong>16.</strong> Ensuite calculer les indicateurs statistiques de la fréquence cardiaque chez les hommes (vous pouvez utiliser la fonction <code>summary()</code>).</p>
-<div class="sourceCode" id="cb40"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb40-1" title="1"><span class="kw">summary</span>(pulse_hommes<span class="op">$</span>Pulse)</a>
-<a class="sourceLine" id="cb40-2" title="2"><span class="co">#ans&gt; Error in summary(pulse_hommes$Pulse): objet &#39;pulse_hommes&#39; introuvable</span></a></code></pre></div>
-<p><strong>17.</strong> Faire la même chose mais pour les femmes.</p>
-<div class="sourceCode" id="cb41"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb41-1" title="1">pulse_femmes =<span class="st"> </span><span class="kw">subset</span>(donnees, donnees<span class="op">$</span>Sex<span class="op">==</span><span class="st">&quot;Female&quot;</span>)</a>
-<a class="sourceLine" id="cb41-2" title="2"></a>
-<a class="sourceLine" id="cb41-3" title="3"><span class="kw">summary</span>(pulse_femmes<span class="op">$</span>Pulse)</a>
-<a class="sourceLine" id="cb41-4" title="4"><span class="co">#ans&gt;    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. </span></a>
-<a class="sourceLine" id="cb41-5" title="5"><span class="co">#ans&gt;    40.0    68.0    74.0    74.8    80.0   104.0</span></a></code></pre></div>
-<p><strong>Représentation graphique pour le croisement d’une variable qualitative et d’une variable quantitative</strong></p>
-<p>On peut réaliser une boîte à moustache des valeurs de la variable quantitative en fonction des modalités de la variables qualitative, pour cela on peut utliser la fonction <code>boxplot()</code>. Plus précisémeent, on utilise le paramètre <code>formula</code> qui permet de spécifier que nous voulons une boîte à moustache de la variable
-quantitative en fonction (caractère <code>~</code> ) de la variable quantitative.</p>
-<p><strong>18.</strong> Afficher sur la même figure la fréquence cardiaque en fontion du sexe. Interpréter la figure.</p>
-<p>La figure souhaitée est la suivante:</p>
-<div class="sourceCode" id="cb42"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb42-1" title="1"><span class="kw">boxplot</span>(<span class="dt">formula=</span>donnees<span class="op">$</span>Pulse<span class="op">~</span>donnees<span class="op">$</span>Sex,<span class="dt">col=</span><span class="st">&quot;darkred&quot;</span>,</a>
-<a class="sourceLine" id="cb42-2" title="2"><span class="dt">main=</span><span class="st">&quot;Fréquence cardiaque en fonction du sexe&quot;</span>,</a>
-<a class="sourceLine" id="cb42-3" title="3"><span class="dt">xlab=</span><span class="st">&quot;Sexe&quot;</span>,<span class="dt">ylab=</span><span class="st">&quot;Fréquence cardiaque&quot;</span>)</a></code></pre></div>
-<p><img src="Statistique_infentielle_files/figure-html/unnamed-chunk-94-1.png" width="70%" style="display: block; margin: auto;" /></p>
-<p><strong>19.</strong> Afficher sur la même figure la taille (variable <code>Height</code>) en fontion du sexe. Interpréter la figure.</p>
-<!-- **Indicateurs pour le croisement de deux variables quantitatives** -->
-<!-- Le calcul du coefficient de corrélation de Pearson est réalisé au moyen de la fonction `cor()`. Ce coefficient mesure l’intensité du *lien linéaire* entre deux variables quantitatives. -->
-<div class="sourceCode" id="cb43"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb43-1" title="1"><span class="kw">boxplot</span>(<span class="dt">formula=</span>donnees<span class="op">$</span>Height<span class="op">~</span>donnees<span class="op">$</span>Sex,<span class="dt">col=</span><span class="st">&quot;darkred&quot;</span>,</a>
-<a class="sourceLine" id="cb43-2" title="2"><span class="dt">main=</span><span class="st">&quot;Taille en fonction du sexe&quot;</span>,</a>
-<a class="sourceLine" id="cb43-3" title="3"><span class="dt">xlab=</span><span class="st">&quot;Sexe&quot;</span>,<span class="dt">ylab=</span><span class="st">&quot;Taille&quot;</span>)</a></code></pre></div>
-<p><img src="Statistique_infentielle_files/figure-html/unnamed-chunk-95-1.png" width="70%" style="display: block; margin: auto;" /></p>
-<p><strong>Représentation graphique pour le croisement de deux variables quantitatives</strong></p>
-<p>Un nuage de points entre les deux variables quantitatives est réalisé par la fonction <code>plot()</code>. Le premier
-paramètre correspond à la variable en abscisse et le deuxième à la variable en ordonnées.</p>
-<p><strong>20.</strong> Afficher la fréquence cardiaque en fonction de l’age. Modifier les paramètres de la figure (titre, noms des axes, couleurs des points, tailles, formes, etc..)</p>
-<div class="sourceCode" id="cb44"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb44-1" title="1"><span class="kw">plot</span>(donnees<span class="op">$</span>Age, donnees<span class="op">$</span>Pulse,</a>
-<a class="sourceLine" id="cb44-2" title="2">     <span class="dt">pch=</span><span class="dv">21</span>,</a>
-<a class="sourceLine" id="cb44-3" title="3">     <span class="dt">bg=</span><span class="st">&quot;darkred&quot;</span>,</a>
-<a class="sourceLine" id="cb44-4" title="4"><span class="dt">main=</span><span class="st">&quot;Fréquence cardiaque en fonction de l&#39;age&quot;</span>,</a>
-<a class="sourceLine" id="cb44-5" title="5"><span class="dt">xlab=</span><span class="st">&quot;Age&quot;</span>,<span class="dt">ylab=</span><span class="st">&quot;Fréquence cardiaque&quot;</span>)</a></code></pre></div>
-<p><img src="Statistique_infentielle_files/figure-html/unnamed-chunk-96-1.png" width="70%" style="display: block; margin: auto;" /></p>
-<p align="right">
-◼
-</p>
+<div id="tests-dhypotheses-sur-deux-echantillons" class="section level1">
+<h1><span class="header-section-number">Chapitre 6</span> Tests d’hypothèses sur deux échantillons</h1>
 
 </div>
-</div>
-</div>
-
-
-
 
 
 
@@ -763,8 +416,8 @@ paramètre correspond à la variable en abscisse et le deuxième à la variable 
           </div>
         </div>
       </div>
-<a href="tp-statistique-descriptive-avec-r.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="echantillonnage-et-theoremes-limites.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="tests-dhypotheses.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="variables-aleatoires-discretes.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="book_assets/gitbook-2.6.7/js/app.min.js"></script>

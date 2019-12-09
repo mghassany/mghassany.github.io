@@ -24,7 +24,7 @@
 <meta name="author" content="Mohamad Ghassany" />
 
 
-<meta name="date" content="2019-12-06" />
+<meta name="date" content="2019-12-09" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -661,7 +661,7 @@ v_1 = \mu_0 + z_{\alpha/2} \, \sigma/\sqrt{n} \quad \text{ et } \quad v_2 = \mu_
 \]</span></p>
 
 <div class="example">
-<p><span id="exm:unnamed-chunk-176" class="example"><strong>Exemple 5.2  </strong></span>On étudie la vitesse de combustion du carburant d’une fusée. Le cahier des charges exige que la vitesse moyenne de combustion soit de <span class="math inline">\(40\, cm/{s}\)</span>. Supposons que l’écart-type de la vitesse de combustion est d’environ <span class="math inline">\(2 \, cm/s\)</span> et que cette variable suit une distribution normale.</p>
+<p><span id="exm:fusee" class="example"><strong>Exemple 5.2  </strong></span>On étudie la vitesse de combustion du carburant d’une fusée. Le cahier des charges exige que la vitesse moyenne de combustion soit de <span class="math inline">\(40\, cm/{s}\)</span>. Supposons que l’écart-type de la vitesse de combustion est d’environ <span class="math inline">\(2 \, cm/s\)</span> et que cette variable suit une distribution normale.</p>
 <ol style="list-style-type: decimal">
 <li><p><strong>Hypothèses et seuil</strong>: L’expérimentateur décide de spécifier une probabilité d’erreur de première espèce <span class="math inline">\(\alpha=0.05\)</span> et base le test sur un échantillon aléatoire de taille <span class="math inline">\(n=25\)</span>. Il veut tester les hypothèses <span class="math inline">\({H}_{0}: \mu=40\, cm/s\)</span> contre <span class="math inline">\({H}_{1}: \mu \neq 40\, cm/s\)</span>.</p></li>
 <li><p><strong>Règle de rejet de <span class="math inline">\({H}_{0}\)</span></strong>: Puisque le test est bilatéral, on rejettera <span class="math inline">\(H_{0}\)</span> si <span class="math inline">\(\overline{x}\)</span> est trop grand ou trop petit par rapport à <span class="math inline">\(40\, cm/s\)</span>. On devra comparer la valeur observée <span class="math inline">\(z_{0}\)</span> de la statistique du test <span class="math inline">\(Z_{0}\)</span> avec les valeurs critiques
@@ -676,10 +676,6 @@ z_{0}=\frac{\bar{x}-\mu_{0}}{\sigma / \sqrt{n}}=\frac{41.25-40}{2 / \sqrt{25}}=3
 <li><p><strong>Conclusion</strong>: La vitesse moyenne de combustion excède <span class="math inline">\(40\, cm/s\)</span> de façon significative au seuil de <span class="math inline">\(5 \%\)</span>.</p>
 </div></li>
 </ol>
-<div class="rmdexercise">
-<p>Montrer la puissance du test de l’exemple précédent est égale à <span class="math inline">\(80.5\%\)</span>.</p>
-<p><strong>Indication</strong>: Commencer par calculer <span class="math inline">\(\beta = P(\text{Ne pas rejeter } H_0 | H_1 \text{ est vraie})\)</span>.</p>
-</div>
 </div>
 <div id="la-procedure-pour-les-tests-unilateraux" class="section level4">
 <h4><span class="header-section-number">5.2.1.2</span> La procédure pour les tests unilatéraux</h4>
@@ -693,6 +689,53 @@ H_{0}: \mu=\mu_{0} \text { contre } H_{1}: \mu &gt; \mu_{0}
 H_{0}: \mu=\mu_{0} \text { contre } H_{1}: \mu &lt; \mu_{0}
 \]</span>
 on doit calculer la statistique <span class="math inline">\(Z_0\)</span> et rejeter <span class="math inline">\(H_0\)</span> pour les trop petites valeurs de <span class="math inline">\(z_0\)</span>. Autrement dit, la région critique est dans l’aile inférieure de la distribution <span class="math inline">\(\mathcal{N}(0,1)\)</span>, et on rejette <span class="math inline">\(H_0\)</span> si <span class="math inline">\(z_0 &lt; z_{\alpha}\)</span></p>
+</div>
+<div id="le-calcul-du-risque-de-deuxieme-espece-et-la-puissance-du-test" class="section level4">
+<h4><span class="header-section-number">5.2.1.3</span> Le calcul du risque de deuxième espèce et la puissance du test</h4>
+<p>Lorsque l’analyste teste des hypothèses, il choisit directement la probabilité de l’erreur de première espèce <span class="math inline">\(\alpha\)</span>. Cependant, la probabilité de l’erreur de deuxième espèce <span class="math inline">\(\beta\)</span> doit aussi être prise en compte.</p>
+<p>Considérons par exemple l’hypothèse unilatérale:</p>
+<p><span class="math display">\[
+H_{0}: \mu=\mu_{0} \text { contre } H_{1}: \mu &gt; \mu_{0}
+\]</span>
+Supposans que l’hypothèse nulle est fausse et que la valeur réelle de la moyenne est <span class="math inline">\(\mu_1\)</span>, une valeur plus grande que <span class="math inline">\(\mu_0\)</span>. Puisque <span class="math inline">\(H_1\)</span> est vraie, la moyenne échantillonnale <span class="math inline">\(\overline{X}\)</span> suit la loi <span class="math inline">\(\mathcal{N}(\mu_1,\sigma^2/n)\)</span>. La figure <a href="tests-dhypotheses.html#fig:beta1">5.3</a> représente la distribution de <span class="math inline">\(\overline{X}\)</span> sous l’hypothèse nulle <span class="math inline">\(H_0\)</span> et sous l’hypothèse alternative <span class="math inline">\(H_1\)</span>. On rejette <span class="math inline">\(H_0\)</span> si <span class="math inline">\(\overline{x}\)</span> est supérieure à la valeur critique <span class="math inline">\(v\)</span>, qui vaut <span class="math inline">\(\mu_0 + z_{1-\alpha} \sigma/\sqrt{n}\)</span>. Rappelons qu’une erreur de deuxième espèce est commise si <span class="math inline">\(H_0\)</span> n’est pas rejetée alors qu’elle est fausse. L’examen de cette figure révèle que si <span class="math inline">\(H_1\)</span> est vraie, une erreur de deuxième espèce ne sera commise que si <span class="math inline">\(\overline{x} &lt; v\)</span>. Autrement dit, la probabilité de l’erreur de deuxième espèce <span class="math inline">\(\beta\)</span> correspond à la région verte de la figure <a href="tests-dhypotheses.html#fig:beta1">5.3</a>.</p>
+<div class="figure" style="text-align: center"><span id="fig:beta1"></span>
+<img src="Statistique_infentielle_files/figure-html/beta1-1.png" alt="La distribution de $\overline{X}$ sous $H_0$ et sous $H_1$" width="90%" />
+<p class="caption">
+Figure 5.3: La distribution de <span class="math inline">\(\overline{X}\)</span> sous <span class="math inline">\(H_0\)</span> et sous <span class="math inline">\(H_1\)</span>
+</p>
+</div>
+<div class="figure" style="text-align: center"><span id="fig:beta12"></span>
+<img src="Statistique_infentielle_files/figure-html/beta12-1.png" alt="La distribution de $Z_0$ sous $H_0$ et sous $H_1$" width="90%" />
+<p class="caption">
+Figure 5.4: La distribution de <span class="math inline">\(Z_0\)</span> sous <span class="math inline">\(H_0\)</span> et sous <span class="math inline">\(H_1\)</span>
+</p>
+</div>
+<div class="rmdinsight">
+<p>Les facteurs qui influencent le risque de deuxième espèce <span class="math inline">\(\beta\)</span> du test sur une moyenne:</p>
+<ol style="list-style-type: decimal">
+<li><span class="math inline">\(\beta\)</span> diminue lorsque <span class="math inline">\(\mu_1\)</span> s’éloigne de <span class="math inline">\(\mu_0\)</span>.</li>
+<li><span class="math inline">\(\beta\)</span> diminue lorsque <span class="math inline">\(n\)</span> augmente.</li>
+<li><span class="math inline">\(\beta\)</span> diminue lorsque <span class="math inline">\(\alpha\)</span> augmente.</li>
+</ol>
+<p>Concernant la puissance du test, qui vaut <span class="math inline">\(1 - \beta\)</span>:</p>
+<ol style="list-style-type: decimal">
+<li>La puissance d’un test est fonction de la nature de <span class="math inline">\(H_1\)</span>, un test unilatéral est plus puissant qu’un test bilatéral.</li>
+<li>La puissance d’un test augmente lorsque <span class="math inline">\(n\)</span> augmente.</li>
+<li>La puissance d’un test diminue lorsque <span class="math inline">\(\alpha\)</span> diminue.</li>
+</ol>
+</div>
+<div class="rmdexercise">
+<p>Considérons le problème du combustible de fusée de l’exemple <a href="tests-dhypotheses.html#exm:fusee">5.2</a> et tenons pour acquis qu’on réalise un test unilatérale à droite:
+<span class="math display">\[
+H_{0}: \mu=40\, cm/{s}  \text { contre } H_{1}: \mu &gt; \, cm/{s}
+\]</span>
+Supposons que l’analyste veut rejeter <span class="math inline">\(H_0\)</span> avec une forte probabilité si la véritable vitesse moyenne de combustion est <span class="math inline">\(\mu=41\, cm/{s}\)</span>. En d’autres termes, il veut une faible probabilité d’erreur de deuxième espèce si <span class="math inline">\(\mu=41\, cm/{s}\)</span>. Montrer que la puissance du test est égale à <span class="math inline">\(80.5\%\)</span>.</p>
+<p><strong>Indication</strong>: Commencer par calculer:
+<span class="math display">\[\beta = P(\text{Ne pas rejeter } H_0 | H_1 \text{ est vraie})\]</span></p>
+</div>
+<div class="rmdtip">
+<p>Puisque la puissance du test est affectée par la taille de l’échantillon, il est courant de fixer <span class="math inline">\(1-\beta\)</span> et de trouver la valeur de <span class="math inline">\(n\)</span> qui nous permet de l’atteindre.</p>
+</div>
 </div>
 </div>
 <div id="le-tests-sur-la-moyenne-dune-distribution-normale-de-variance-inconnue" class="section level3">
@@ -758,7 +801,7 @@ U_0 = \frac{(n-1) {S_n^{*}}^2}{\sigma_{0}^2}
 <div class="figure" style="text-align: center"><span id="fig:quantileskhideuxbilateral"></span>
 <img src="Statistique_infentielle_files/figure-html/quantileskhideuxbilateral-1.png" alt="La distribution de $U_0$ lorsque $H_0 : \sigma^2 = \sigma^2_0$ est vraie" width="90%" />
 <p class="caption">
-Figure 5.3: La distribution de <span class="math inline">\(U_0\)</span> lorsque <span class="math inline">\(H_0 : \sigma^2 = \sigma^2_0\)</span> est vraie
+Figure 5.5: La distribution de <span class="math inline">\(U_0\)</span> lorsque <span class="math inline">\(H_0 : \sigma^2 = \sigma^2_0\)</span> est vraie
 </p>
 </div>
 <div class="rmdcaution">

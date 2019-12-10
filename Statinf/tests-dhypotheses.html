@@ -24,7 +24,7 @@
 <meta name="author" content="Mohamad Ghassany" />
 
 
-<meta name="date" content="2019-12-09" />
+<meta name="date" content="2019-12-10" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -32,7 +32,7 @@
   
   <link rel="shortcut icon" href="img/favicon.ico" type="image/x-icon" />
 <link rel="prev" href="tp-intervalle-de-confiance.html"/>
-<link rel="next" href="tests-dhypotheses-sur-deux-echantillons.html"/>
+<link rel="next" href="exercices-4.html"/>
 <script src="book_assets/jquery-2.2.3/jquery.min.js"></script>
 <link href="book_assets/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="book_assets/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -302,6 +302,7 @@ code span.wa { color: #bf0303; } /* Warning */
 <li class="chapter" data-level="5.2.4" data-path="tests-dhypotheses.html"><a href="tests-dhypotheses.html#les-tests-sur-une-proportion"><i class="fa fa-check"></i><b>5.2.4</b> Les tests sur une proportion</a></li>
 </ul></li>
 </ul></li>
+<li class="chapter" data-level="" data-path="exercices-4.html"><a href="exercices-4.html"><i class="fa fa-check"></i>Exercices</a></li>
 <li class="part"><span><b>Séance 8</b></span></li>
 <li class="chapter" data-level="6" data-path="tests-dhypotheses-sur-deux-echantillons.html"><a href="tests-dhypotheses-sur-deux-echantillons.html"><i class="fa fa-check"></i><b>6</b> Tests d’hypothèses sur deux échantillons</a></li>
 <li class="part"><span><b>Rappel Probabilités</b></span></li>
@@ -689,6 +690,18 @@ H_{0}: \mu=\mu_{0} \text { contre } H_{1}: \mu &gt; \mu_{0}
 H_{0}: \mu=\mu_{0} \text { contre } H_{1}: \mu &lt; \mu_{0}
 \]</span>
 on doit calculer la statistique <span class="math inline">\(Z_0\)</span> et rejeter <span class="math inline">\(H_0\)</span> pour les trop petites valeurs de <span class="math inline">\(z_0\)</span>. Autrement dit, la région critique est dans l’aile inférieure de la distribution <span class="math inline">\(\mathcal{N}(0,1)\)</span>, et on rejette <span class="math inline">\(H_0\)</span> si <span class="math inline">\(z_0 &lt; z_{\alpha}\)</span></p>
+<div class="figure" style="text-align: center"><span id="fig:h0normal01droite"></span>
+<img src="Statistique_infentielle_files/figure-html/h0normal01droite-1.png" alt="La distribution de $Z_0$ lorsque $H_0 : \mu = \mu_0$ est vraie contre $H_1: \mu &gt; \mu_0$ (**Upper-tailed test**)" width="90%" />
+<p class="caption">
+Figure 5.3: La distribution de <span class="math inline">\(Z_0\)</span> lorsque <span class="math inline">\(H_0 : \mu = \mu_0\)</span> est vraie contre <span class="math inline">\(H_1: \mu &gt; \mu_0\)</span> (<strong>Upper-tailed test</strong>)
+</p>
+</div>
+<div class="figure" style="text-align: center"><span id="fig:h0normal01gauche"></span>
+<img src="Statistique_infentielle_files/figure-html/h0normal01gauche-1.png" alt="La distribution de $Z_0$ lorsque $H_0 : \mu = \mu_0$ est vraie contre $H_1: \mu &lt; \mu_0$ (**Lower-tailed test**)" width="90%" />
+<p class="caption">
+Figure 5.4: La distribution de <span class="math inline">\(Z_0\)</span> lorsque <span class="math inline">\(H_0 : \mu = \mu_0\)</span> est vraie contre <span class="math inline">\(H_1: \mu &lt; \mu_0\)</span> (<strong>Lower-tailed test</strong>)
+</p>
+</div>
 </div>
 <div id="le-calcul-du-risque-de-deuxieme-espece-et-la-puissance-du-test" class="section level4">
 <h4><span class="header-section-number">5.2.1.3</span> Le calcul du risque de deuxième espèce et la puissance du test</h4>
@@ -697,17 +710,17 @@ on doit calculer la statistique <span class="math inline">\(Z_0\)</span> et reje
 <p><span class="math display">\[
 H_{0}: \mu=\mu_{0} \text { contre } H_{1}: \mu &gt; \mu_{0}
 \]</span>
-Supposans que l’hypothèse nulle est fausse et que la valeur réelle de la moyenne est <span class="math inline">\(\mu_1\)</span>, une valeur plus grande que <span class="math inline">\(\mu_0\)</span>. Puisque <span class="math inline">\(H_1\)</span> est vraie, la moyenne échantillonnale <span class="math inline">\(\overline{X}\)</span> suit la loi <span class="math inline">\(\mathcal{N}(\mu_1,\sigma^2/n)\)</span>. La figure <a href="tests-dhypotheses.html#fig:beta1">5.3</a> représente la distribution de <span class="math inline">\(\overline{X}\)</span> sous l’hypothèse nulle <span class="math inline">\(H_0\)</span> et sous l’hypothèse alternative <span class="math inline">\(H_1\)</span>. On rejette <span class="math inline">\(H_0\)</span> si <span class="math inline">\(\overline{x}\)</span> est supérieure à la valeur critique <span class="math inline">\(v\)</span>, qui vaut <span class="math inline">\(\mu_0 + z_{1-\alpha} \sigma/\sqrt{n}\)</span>. Rappelons qu’une erreur de deuxième espèce est commise si <span class="math inline">\(H_0\)</span> n’est pas rejetée alors qu’elle est fausse. L’examen de cette figure révèle que si <span class="math inline">\(H_1\)</span> est vraie, une erreur de deuxième espèce ne sera commise que si <span class="math inline">\(\overline{x} &lt; v\)</span>. Autrement dit, la probabilité de l’erreur de deuxième espèce <span class="math inline">\(\beta\)</span> correspond à la région verte de la figure <a href="tests-dhypotheses.html#fig:beta1">5.3</a>.</p>
+Supposans que l’hypothèse nulle est fausse et que la valeur réelle de la moyenne est <span class="math inline">\(\mu_1\)</span>, une valeur plus grande que <span class="math inline">\(\mu_0\)</span>. Puisque <span class="math inline">\(H_1\)</span> est vraie, la moyenne échantillonnale <span class="math inline">\(\overline{X}\)</span> suit la loi <span class="math inline">\(\mathcal{N}(\mu_1,\sigma^2/n)\)</span>. La figure <a href="tests-dhypotheses.html#fig:beta1">5.5</a> représente la distribution de <span class="math inline">\(\overline{X}\)</span> sous l’hypothèse nulle <span class="math inline">\(H_0\)</span> et sous l’hypothèse alternative <span class="math inline">\(H_1\)</span>. On rejette <span class="math inline">\(H_0\)</span> si <span class="math inline">\(\overline{x}\)</span> est supérieure à la valeur critique <span class="math inline">\(v\)</span>, qui vaut <span class="math inline">\(\mu_0 + z_{1-\alpha} \sigma/\sqrt{n}\)</span>. Rappelons qu’une erreur de deuxième espèce est commise si <span class="math inline">\(H_0\)</span> n’est pas rejetée alors qu’elle est fausse. L’examen de cette figure révèle que si <span class="math inline">\(H_1\)</span> est vraie, une erreur de deuxième espèce ne sera commise que si <span class="math inline">\(\overline{x} &lt; v\)</span>. Autrement dit, la probabilité de l’erreur de deuxième espèce <span class="math inline">\(\beta\)</span> correspond à la région verte de la figure <a href="tests-dhypotheses.html#fig:beta1">5.5</a>.</p>
 <div class="figure" style="text-align: center"><span id="fig:beta1"></span>
 <img src="Statistique_infentielle_files/figure-html/beta1-1.png" alt="La distribution de $\overline{X}$ sous $H_0$ et sous $H_1$" width="90%" />
 <p class="caption">
-Figure 5.3: La distribution de <span class="math inline">\(\overline{X}\)</span> sous <span class="math inline">\(H_0\)</span> et sous <span class="math inline">\(H_1\)</span>
+Figure 5.5: La distribution de <span class="math inline">\(\overline{X}\)</span> sous <span class="math inline">\(H_0\)</span> et sous <span class="math inline">\(H_1\)</span>
 </p>
 </div>
 <div class="figure" style="text-align: center"><span id="fig:beta12"></span>
 <img src="Statistique_infentielle_files/figure-html/beta12-1.png" alt="La distribution de $Z_0$ sous $H_0$ et sous $H_1$" width="90%" />
 <p class="caption">
-Figure 5.4: La distribution de <span class="math inline">\(Z_0\)</span> sous <span class="math inline">\(H_0\)</span> et sous <span class="math inline">\(H_1\)</span>
+Figure 5.6: La distribution de <span class="math inline">\(Z_0\)</span> sous <span class="math inline">\(H_0\)</span> et sous <span class="math inline">\(H_1\)</span>
 </p>
 </div>
 <div class="rmdinsight">
@@ -801,7 +814,7 @@ U_0 = \frac{(n-1) {S_n^{*}}^2}{\sigma_{0}^2}
 <div class="figure" style="text-align: center"><span id="fig:quantileskhideuxbilateral"></span>
 <img src="Statistique_infentielle_files/figure-html/quantileskhideuxbilateral-1.png" alt="La distribution de $U_0$ lorsque $H_0 : \sigma^2 = \sigma^2_0$ est vraie" width="90%" />
 <p class="caption">
-Figure 5.5: La distribution de <span class="math inline">\(U_0\)</span> lorsque <span class="math inline">\(H_0 : \sigma^2 = \sigma^2_0\)</span> est vraie
+Figure 5.7: La distribution de <span class="math inline">\(U_0\)</span> lorsque <span class="math inline">\(H_0 : \sigma^2 = \sigma^2_0\)</span> est vraie
 </p>
 </div>
 <div class="rmdcaution">
@@ -846,9 +859,6 @@ où <span class="math inline">\(z_{1-\alpha/2}\)</span> est le quantile d’ordr
 </div>
 </div>
 </div>
-
-
-
 <div class="footnotes">
 <hr />
 <ol start="10">
@@ -864,7 +874,7 @@ où <span class="math inline">\(z_{1-\alpha/2}\)</span> est le quantile d’ordr
         </div>
       </div>
 <a href="tp-intervalle-de-confiance.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="tests-dhypotheses-sur-deux-echantillons.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="exercices-4.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="book_assets/gitbook-2.6.7/js/app.min.js"></script>

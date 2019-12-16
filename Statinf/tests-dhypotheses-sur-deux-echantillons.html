@@ -24,7 +24,7 @@
 <meta name="author" content="Mohamad Ghassany" />
 
 
-<meta name="date" content="2019-12-13" />
+<meta name="date" content="2019-12-15" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -304,7 +304,12 @@ code span.wa { color: #bf0303; } /* Warning */
 </ul></li>
 <li class="chapter" data-level="" data-path="exercices-4.html"><a href="exercices-4.html"><i class="fa fa-check"></i>Exercices</a></li>
 <li class="part"><span><b>Séance 8</b></span></li>
-<li class="chapter" data-level="6" data-path="tests-dhypotheses-sur-deux-echantillons.html"><a href="tests-dhypotheses-sur-deux-echantillons.html"><i class="fa fa-check"></i><b>6</b> Tests d’hypothèses sur deux échantillons</a></li>
+<li class="chapter" data-level="6" data-path="tests-dhypotheses-sur-deux-echantillons.html"><a href="tests-dhypotheses-sur-deux-echantillons.html"><i class="fa fa-check"></i><b>6</b> Tests d’hypothèses sur deux échantillons</a><ul>
+<li class="chapter" data-level="6.1" data-path="tests-dhypotheses-sur-deux-echantillons.html"><a href="tests-dhypotheses-sur-deux-echantillons.html#comparaison-de-deux-echantillons-gaussiens-independants"><i class="fa fa-check"></i><b>6.1</b> Comparaison de deux échantillons gaussiens indépendants</a><ul>
+<li class="chapter" data-level="6.1.1" data-path="tests-dhypotheses-sur-deux-echantillons.html"><a href="tests-dhypotheses-sur-deux-echantillons.html#test-de-fisher-de-comparaison-des-variances"><i class="fa fa-check"></i><b>6.1.1</b> Test de Fisher de comparaison des variances</a></li>
+<li class="chapter" data-level="6.1.2" data-path="tests-dhypotheses-sur-deux-echantillons.html"><a href="tests-dhypotheses-sur-deux-echantillons.html#tests-de-comparaison-de-moyennes"><i class="fa fa-check"></i><b>6.1.2</b> Tests de comparaison de moyennes</a></li>
+</ul></li>
+</ul></li>
 <li class="part"><span><b>Rappel Probabilités</b></span></li>
 <li class="chapter" data-level="" data-path="variables-aleatoires-discretes.html"><a href="variables-aleatoires-discretes.html"><i class="fa fa-check"></i>Variables Aléatoires Discrètes</a><ul>
 <li class="chapter" data-level="" data-path="variables-aleatoires-discretes.html"><a href="variables-aleatoires-discretes.html#notions-de-probabilites"><i class="fa fa-check"></i>Notions de Probabilités</a><ul>
@@ -385,6 +390,12 @@ code span.wa { color: #bf0303; } /* Warning */
 <li class="chapter" data-level="C" data-path="tab-normale2.html"><a href="tab-normale2.html"><i class="fa fa-check"></i><b>C</b> Table 2 de la loi Normale centrée réduite</a></li>
 <li class="chapter" data-level="D" data-path="tab-student.html"><a href="tab-student.html"><i class="fa fa-check"></i><b>D</b> Table de la loi de Student</a></li>
 <li class="chapter" data-level="E" data-path="tab-khideux.html"><a href="tab-khideux.html"><i class="fa fa-check"></i><b>E</b> Table de la loi de Khi-deux <span class="math inline">\(\chi^2\)</span></a></li>
+<li class="chapter" data-level="F" data-path="tab-fisher.html"><a href="tab-fisher.html"><i class="fa fa-check"></i><b>F</b> Table de la loi de Fisher <span class="math inline">\(F\)</span></a><ul>
+<li class="chapter" data-level="F.1" data-path="tab-fisher.html"><a href="tab-fisher.html#pour-alpha-5"><i class="fa fa-check"></i><b>F.1</b> Pour <span class="math inline">\(\alpha = 5\%\)</span></a></li>
+<li class="chapter" data-level="F.2" data-path="tab-fisher.html"><a href="tab-fisher.html#pour-alpha-2.5"><i class="fa fa-check"></i><b>F.2</b> Pour <span class="math inline">\(\alpha = 2.5\%\)</span></a></li>
+<li class="chapter" data-level="F.3" data-path="tab-fisher.html"><a href="tab-fisher.html#pour-alpha-1"><i class="fa fa-check"></i><b>F.3</b> Pour <span class="math inline">\(\alpha = 1\%\)</span></a></li>
+<li class="chapter" data-level="F.4" data-path="tab-fisher.html"><a href="tab-fisher.html#pour-alpha-0.05"><i class="fa fa-check"></i><b>F.4</b> Pour <span class="math inline">\(\alpha = 0.05\%\)</span></a></li>
+</ul></li>
 </ul>
 
       </nav>
@@ -407,11 +418,205 @@ Vous êtes invités à annoter le contenu de ce cours. Les annotations peuvent �
 </div>
 <div id="tests-dhypotheses-sur-deux-echantillons" class="section level1">
 <h1><span class="header-section-number">Chapitre 6</span> Tests d’hypothèses sur deux échantillons</h1>
+<p>Il est très fréquent que l’on ait à comparer deux populations selon un critère quantitatif particulier. Par exemple:</p>
+<ul>
+<li>Comparer deux traitements médicaux au vu de leurs effets sur les patients.</li>
+<li>Comparer différents groupes d’étudiants au vu de leurs résultats scolaires.</li>
+<li>Comparer les fréquences d’occurrences de maladies chez les fumeurs et les non fumeurs.</li>
+</ul>
+<p>Statistiquement, cela signifie que l’on dispose d’observations de variables aléatoires <span class="math inline">\(X_{11},X_{12},\ldots,X_{1n_1}\)</span> <strong>i.i.d.</strong> constituant le premier échantillon, et de variables aléatoires <span class="math inline">\(X_{21},X_{22},\ldots,X_{2n_2}\)</span> <strong>i.i.d.</strong> constituant le deuxième échantillon.</p>
+<p>Comparer les deux échantillons revient à comparer les paramètres des lois de probabilité des <span class="math inline">\(X_{1}\)</span> et des <span class="math inline">\(X_{2}\)</span>. Un <strong>test de comparaison de deux échantillons gaussiens indépendants</strong> consiste à supposer que les deux échantillons sont indépendants et de lois normales, et à comparer les moyennes et les variances de ces lois. Un <strong>test de comparaison de deux proportions</strong> consiste à supposer que les deux échantillons sont indépendants et
+de lois de Bernoulli, et à comparer les paramètres de ces lois. <strong>Un test de comparaison de deux échantillons gaussiens appariés</strong> consiste à supposer que les échantillons sont
+de lois normales, mais pas indépendants (en un certain sens) et à comparer les moyennes
+de ces lois. Il faut dans ce cas que les échantillons soient de même taille (ce dernier test n’est pas abordé dans ce cours).</p>
+<div id="comparaison-de-deux-echantillons-gaussiens-independants" class="section level2">
+<h2><span class="header-section-number">6.1</span> Comparaison de deux échantillons gaussiens indépendants</h2>
+<p>Dans cette section, on supposera que les deux échantillons sont indépendants et de lois normales et comparera leurs moyennes et leurs variances. <span class="math inline">\(X_{11},X_{12},\ldots,X_{1n_1}\)</span> sont supposées indépendantes et de même loi <span class="math inline">\(\mathcal{N}(m_1,\sigma_1^2)\)</span> et <span class="math inline">\(X_{21},X_{22},\ldots,X_{2n_2}\)</span> indépendantes et de même loi <span class="math inline">\(\mathcal{N}(m_2,\sigma_2^2)\)</span>. Les <span class="math inline">\(X_{1}\)</span> et <span class="math inline">\(X_{2}\)</span> sont indépendantes. Les moyennes empiriques et variances estimées de deux échantillons sont notées respectivement <span class="math inline">\(\overline{X}_{1}, S_1^2, {S_1^*}^2, \overline{X}_{2}, S_2^2\)</span> et <span class="math inline">\({S_2^*}^2\)</span>.</p>
 
+<div class="example">
+<p><span id="exm:notes" class="example"><strong>Exemple 6.1  </strong></span>Deux groupes d’étudiants de tailles respectives <span class="math inline">\(n_1 = 25\)</span> et <span class="math inline">\(n_2 = 31\)</span> ont suivi le même cours de statistique et passé le même examen. Les moyennes et écarts-types
+empiriques des notes obtenues dans les deux groupes sont respectivement:</p>
+<p><span class="math display">\[
+\begin{array}{ll}{\text { Premier groupe: }} &amp; {\overline{x}_{{1}}=12.8, \quad s_{1}^{*}=3.4} \\ {\text { Deuxième groupe : }} &amp; {\overline{x}_{{2}}=11.3, \quad s_{2}^{*}=2.9}\end{array}
+\]</span></p>
+On suppose que les notes sont réparties dans les deux groupes selon des lois normales
+et qu’elles sont toutes indépendantes. Peut-on considérer que le premier groupe est meilleur que le deuxième, c’est-à-dire qu’un point et demi d’écart entre les moyennes est significatif d’une différence de niveau? La procédure à suivre consiste à tester d’abord l’égalité des variances, puis l’égalité des moyennes.
+</div>
+
+<div id="test-de-fisher-de-comparaison-des-variances" class="section level3">
+<h3><span class="header-section-number">6.1.1</span> Test de Fisher de comparaison des variances</h3>
+<p>Comparer les variances des deux échantillons, c’est tester</p>
+<p><span class="math display">\[
+H_{0}: \sigma_1^2=\sigma_2^2 \text { contre } H_{1}: \sigma_1^2\neq\sigma_2^2
+\]</span>
+Pour tester cette hypothèse on utilise la statistique</p>
+<p><span class="math display">\[
+F_0 = \frac{{S_1^*}^2}{{S_2^*}^2}
+\]</span></p>
+<p>Cette statistique suit la loi <span class="math inline">\(F\)</span> de Fisher, avec <span class="math inline">\(n_1-1\)</span> et <span class="math inline">\(n_2-1\)</span> degrés de liberté si l’hypothèse <span class="math inline">\(H_0\)</span> est vraie. (<a href="img/preuve_test_fisher.png" target="_blank">preuve <i class="fas  fa-external-link-alt "></i></a>)</p>
+<div class="rmdinsight">
+<p><strong>Rappel de la définition de la loi de Fisher</strong>: Soit <span class="math inline">\(U\)</span> et <span class="math inline">\(V\)</span> deux variables aléatoires indépendantes suivant une loi
+de <span class="math inline">\(\chi^2\)</span> respectivement à <span class="math inline">\(n\)</span> et <span class="math inline">\(m\)</span> degrés de liberté. On dit que <span class="math inline">\(F= \frac{U/n}{V/m}\)</span> suit une loi de Fisher-Snedecor à
+<span class="math inline">\((n,m)\)</span> degrés de liberté. <span class="math inline">\(F \thicksim \mathcal{F}(n,m)\)</span></p>
+</div>
+<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-185"></span>
+<img src="Statistique_infentielle_files/figure-html/unnamed-chunk-185-1.png" alt="Densités de la loi de Fisher $F(n,m)$" width="80%" />
+<p class="caption">
+Figure 6.1: Densités de la loi de Fisher <span class="math inline">\(F(n,m)\)</span>
+</p>
+</div>
+<p><strong>La procédure pour le test bilatéral</strong></p>
+<p>Pour tester</p>
+<p><span class="math display">\[
+H_{0}: \sigma_1^2=\sigma_2^2 \text { contre } H_{1}: \sigma_1^2\neq\sigma_2^2
+\]</span>
+On calcule</p>
+<p><span class="math display">\[
+f_0 = \frac{{S_1^*}^2}{{S_2^*}^2}
+\]</span></p>
+<div class="rmdinsight">
+<p><strong>Critère de rejet de <span class="math inline">\(H_{0}: \sigma_1^2=\sigma_2^2\)</span></strong></p>
+<p>On rejette <span class="math inline">\(H_{0}: \sigma_1^2=\sigma_2^2\)</span> si</p>
+<p><span class="math display">\[f_0 &gt; f_{1-\alpha/2; \, n_1-1,n_2-1} \quad \text{ ou } \quad f_0 &lt; f_{\alpha/2; \, n_1-1,n_2-1}\]</span></p>
+<p>où <span class="math inline">\(f_{\alpha/2; \, n_1-1,n_2-1}\)</span> et <span class="math inline">\(f_{1-\alpha/2; \, n_1-1,n_2-1}\)</span> sont les quantiles d’ordre <span class="math inline">\(\alpha/2\)</span> et <span class="math inline">\(1-\alpha/2\)</span> de la loi de Fisher <span class="math inline">\(F\)</span> avec <span class="math inline">\(n_1-1\)</span> et <span class="math inline">\(n_2-1\)</span> degrés de liberté.</p>
+</div>
+<div class="rmdtip">
+<p>Plusieurs tables de la loi de Fisher (selon la valeur de <span class="math inline">\(\alpha\)</span>) se trouvent dans l’annexe <a href="tab-fisher.html#tab:fisher">F</a>.</p>
+<p><strong>Remarque</strong>: Ces tables ne donnent que les quantiles de l’aile supérieure de la loi <span class="math inline">\(F\)</span>, de sorte que pour trouver <span class="math inline">\(f_{\alpha/2; \, n_1-1,n_2-1}\)</span> on doit utiliser l’égalité</p>
+<p><span class="math display">\[
+f_{\alpha/2; \, n_1-1,n_2-1} = \frac{1}{f_{1-\alpha/2; \, n_2-1,n_1-1}}
+\]</span></p>
+</div>
+<p>Dans l’exemple <a href="tests-dhypotheses-sur-deux-echantillons.html#exm:notes">6.1</a>, <span class="math inline">\({s_{1}^{*}}^2 &gt; {s_{2}^{*}}^2\)</span> et <span class="math inline">\(\frac{{s_{1}^{*}}^2}{{s_{2}^{*}}^2} = 1.37\)</span>. Selon la table de la loi de Fisher dans l’annexe <a href="tab-fisher.html#tab:fisher">F</a>, au seuil <span class="math inline">\(\alpha=5\%\)</span>, <span class="math inline">\(f_{1-0.025; \, 24,30}=2.14\)</span>. On trouve que <span class="math inline">\(f_0 = \frac{{s_{1}^{*}}^2}{{s_{2}^{*}}^2}=1.37 &lt; f_{1-0.025; \, 24,30}=2.14\)</span> donc on n’est pas dans la région de rejet de <span class="math inline">\(H_0\)</span>. On ne peut pas donc conclure que les variances des deux échantillons sont différentes.</p>
+<div class="rmdinsight">
+<p>Des deux rapports <span class="math inline">\(\frac{{s_1^*}^2}{{s_2^*}^2}\)</span> et <span class="math inline">\(\frac{{s_2^*}^2}{{s_1^*}^2}\)</span>, un seul est plus grand que <span class="math inline">\(1\)</span>. Or on peut montrer que pour <span class="math inline">\(\alpha &lt; 1/2\)</span>, <span class="math inline">\(f_{1-\alpha; \, n,m} &gt; 1\)</span>. Donc, pour la règle de décision du rejet de <span class="math inline">\(H_0\)</span>, il suffit de retenir celui des deux rapports qui est supérieur à <span class="math inline">\(1\)</span>.</p>
+</div>
+<p><strong>La procédure pour les tests unilatéraux</strong></p>
+<p>On peut utiliser la même statistique pour tester les hypothèses alternatives unilatérales. Comme la notation <span class="math inline">\(X\)</span> et <span class="math inline">\(Y\)</span> est arbitraire, on suppose que la population <span class="math inline">\(X\)</span> a la plus grande variance. Donc les hypothèses du test unilatéral sont</p>
+<p><span class="math display">\[
+H_{0}: \sigma_1^2=\sigma_2^2 \text { contre } H_{1}: \sigma_1^2 &gt; \sigma_2^2
+\]</span>
+On rejette donc <span class="math inline">\(H_0:\sigma_1^2=\sigma_2^2\)</span> si</p>
+<p><span class="math display">\[
+f_0 &gt; f_{1-\alpha; \, n_1-1,n_2-1}
+\]</span></p>
+</div>
+<div id="tests-de-comparaison-de-moyennes" class="section level3">
+<h3><span class="header-section-number">6.1.2</span> Tests de comparaison de moyennes</h3>
+<p>Dans cette section, nous introduisons les testes sur les moyennes de deux distributions normales avec variances connues et inconnues.</p>
+<div id="cas-de-variances-connues" class="section level4">
+<h4><span class="header-section-number">6.1.2.1</span> Cas de variances connues</h4>
+<p>Supposons que <span class="math inline">\(X_1\)</span> et <span class="math inline">\(X_2\)</span> sont normalement distribuées ou, si elle ne le sont pas, que les conditions du théorème central limite s’appliquent.</p>
+<p>Comparer les moyennes de deux échantillons, c’est tester</p>
+<p><span class="math display">\[
+H_{0}: m_1 = m_2 \text { contre } H_{1}: m_1 \neq m_2
+\]</span></p>
+<p>La procédure de ce test repose sur la distribution de la différence des moyennes des échantillons, <span class="math inline">\(\overline{X}_1 - \overline{X}_2\)</span>. On peut résumer la situation ainsi:</p>
+<table class="table table-striped table-condensed" style="width: auto !important; margin-left: auto; margin-right: auto;">
+<tbody>
+<tr>
+<td style="text-align:left;">
+<strong>Populations</strong>
+</td>
+<td style="text-align:left;">
+<span class="math inline">\(X_1 \thicksim \mathcal{N}(m_1,\sigma_1^2)\)</span>
+</td>
+<td style="text-align:left;">
+<span class="math inline">\(X_2 \thicksim \mathcal{N}(m_2,\sigma_2^2)\)</span>
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+<strong>Echantillons</strong>
+</td>
+<td style="text-align:left;">
+<span class="math inline">\(X_{11},X_{12},\ldots,X_{1n_1}\)</span>
+</td>
+<td style="text-align:left;">
+<span class="math inline">\(X_{21},X_{22},\ldots,X_{2n_2}\)</span>
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+<strong>Loi des moyennes empiriques</strong>
+</td>
+<td style="text-align:left;">
+<span class="math inline">\(\overline{X}_1 \thicksim \mathcal{N}(m_1,\sigma_1^2/n_1)\)</span>
+</td>
+<td style="text-align:left;">
+<span class="math inline">\(\overline{X}_2 \thicksim \mathcal{N}(m_2,\sigma_2^2/n_2)\)</span>
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+<strong>Loi de la différence des moyennes empiriques</strong>
+</td>
+<td style="text-align:left;">
+<span class="math inline">\(\overline{X}_1 - \overline{X}_2 \thicksim \mathcal{N}\big(m_1-m_2,\frac{\sigma_1^2}{n_1} + \frac{\sigma_2^2}{n_2}\big)\)</span>
+</td>
+<td style="text-align:left;">
+</td>
+</tr>
+</tbody>
+</table>
+<p>Donc, si l’hypothèse nulle <span class="math inline">\(H_0: m_1=m_2\)</span> est vraie, la statistique du test</p>
+<p><span class="math display" id="eq:comparaisonmoyennesvariancesconnues">\[\begin{equation}
+Z_0 = \frac{\overline{X}_1 -\overline{X}_2}{\sqrt{\frac{\sigma_1^2}{n_1} + \frac{\sigma_2^2}{n_2}}}
+\tag{6.1}
+\end{equation}\]</span></p>
+<p>suit la loi <span class="math inline">\(\mathcal{N}(0,1)\)</span>.</p>
+<div class="rmdinsight">
+<p><strong>Critère de rejet de $H_{0}:</strong></p>
+<ul>
+<li>Test de <span class="math inline">\(H_0: m_1 = m_2\)</span> contre <span class="math inline">\(m_1 \neq m_2\)</span>: On rejette <span class="math inline">\(H_0\)</span> si <span class="math inline">\(|z_0| &gt; z_{1-\alpha/2}\)</span>.</li>
+<li>Test de <span class="math inline">\(H_0: m_1 \leq m_2\)</span> contre <span class="math inline">\(m_1 &gt; m_2\)</span>: On rejette <span class="math inline">\(H_0\)</span> si <span class="math inline">\(z_0 &gt; z_{1-\alpha}\)</span>.</li>
+<li>Test de <span class="math inline">\(H_0: m_1 \geq m_2\)</span> contre <span class="math inline">\(m_1 &lt; m_2\)</span>: On rejette <span class="math inline">\(H_0\)</span> si <span class="math inline">\(z_0 &lt; z_{\alpha}\)</span>.</li>
+</ul>
+</div>
+</div>
+<div id="cas-de-variances-inconnues-mais-egales-sigma_12sigma_22sigma2-test-de-student" class="section level4">
+<h4><span class="header-section-number">6.1.2.2</span> Cas de variances inconnues mais égales <span class="math inline">\(\sigma_1^2=\sigma_2^2=\sigma^2\)</span> (<em>test de Student</em>)</h4>
+<p>Les variances <span class="math inline">\(\sigma_1^2\)</span> et <span class="math inline">\(\sigma_2^2\)</span> étant inconnues, on ne peut pas utiliser directement la statistique de l’équation <a href="tests-dhypotheses-sur-deux-echantillons.html#eq:comparaisonmoyennesvariancesconnues">(6.1)</a> pour construire le test. Comme dans ce cas, <span class="math inline">\({S_1^*}^2\)</span> et <span class="math inline">\({S_2^*}^2\)</span> estiment tous les deux la variance commune <span class="math inline">\(\sigma^2\)</span>, on peut les combiner pour obtenir une seule estimation de <span class="math inline">\(\sigma^2\)</span>, soit</p>
+<p><span class="math inline">\(S_p^2 = \frac{(n_1-1){S_1^*}^2 + (n_2-1){S_2^*}^2}{n_1+n_2-2}\)</span></p>
+<p>Pour tester <span class="math inline">\(H_0:m_1=m_2\)</span>, on calcule la statistique du test</p>
+<p><span class="math display">\[
+T_0 =  \frac{\overline{X}_1 -\overline{X}_2}{S_p \sqrt{\frac{1}{n_1} + \frac{1}{n_2}}}
+\]</span></p>
+<p>Cette statistique, sous <span class="math inline">\(H_0\)</span> suit la loi de Student avec <span class="math inline">\(n_1+n_2-2\)</span> degrés de libertés <span class="math inline">\(St(n_1+n_2-2)\)</span>.</p>
+<div class="rmdinsight">
+<p><strong>Critère de rejet de $H_{0}:</strong></p>
+<ul>
+<li>Test de <span class="math inline">\(H_0: m_1 = m_2\)</span> contre <span class="math inline">\(m_1 \neq m_2\)</span>: On rejette <span class="math inline">\(H_0\)</span> si <span class="math inline">\(|t_0| &gt; t_{1-\alpha/2; \, n_1+n_2-2}\)</span>.</li>
+<li>Test de <span class="math inline">\(H_0: m_1 \leq m_2\)</span> contre <span class="math inline">\(m_1 &gt; m_2\)</span>: On rejette <span class="math inline">\(H_0\)</span> si <span class="math inline">\(t_0 &gt; t_{1-\alpha; \, n_1+n_2-2}\)</span>.</li>
+<li>Test de <span class="math inline">\(H_0: m_1 \geq m_2\)</span> contre <span class="math inline">\(m_1 &lt; m_2\)</span>: On rejette <span class="math inline">\(H_0\)</span> si <span class="math inline">\(t_0 &lt; t_{\alpha; \, n_1+n_2-2}\)</span>.</li>
+</ul>
+</div>
+</div>
+<div id="cas-de-variances-inconnues-mais-inegales" class="section level4">
+<h4><span class="header-section-number">6.1.2.3</span> Cas de variances inconnues mais inégales</h4>
+<p>A priori, si le test de Fisher rejette l’égalité des variances, on ne peut
+pas appliquer le test sur les moyennes. En fait, le théorème central limite permet de
+montrer que, si <span class="math inline">\(n_1\)</span> et <span class="math inline">\(n_2\)</span> sont suffisamment grands (supérieurs à 30), alors la loi de <span class="math inline">\(T_0\)</span> est approximativement la loi <span class="math inline">\(\mathcal{N}(0,1)\)</span> même si les deux variances sont différentes et en fait même si les deux échantillons ne sont pas de loi normale.</p>
+<p>Par conséquent, si on a beaucoup d’observations, le test de Student permet de comparer
+les moyennes d’échantillons issus de n’importe quelle loi de probabilité. En revanche, si on a peu d’observations, ce test ne fonctionne pas. On utilise alors d’autres tests<a href="#fn16" class="footnote-ref" id="fnref16"><sup>16</sup></a>.</p>
+<div class="rmdtip">
+<p>La généralisation de ce problème à la comparaison des moyennes de <span class="math inline">\(k\)</span> échantillons gaussiens indépendants fait l’objet d’un domaine important de la statistique
+appelé l’<strong>analyse de variance (Anova)</strong>.</p>
+</div>
+
+</div>
+</div>
+</div>
 </div>
 
 
 
+<div class="footnotes">
+<hr />
+<ol start="16">
+<li id="fn16"><p>comme le test de Smith-Satterthwaite ou le test d’Aspin-Welch<a href="tests-dhypotheses-sur-deux-echantillons.html#fnref16" class="footnote-back">↩</a></p></li>
+</ol>
+</div>
             </section>
 
           </div>

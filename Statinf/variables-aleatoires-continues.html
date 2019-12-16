@@ -24,7 +24,7 @@
 <meta name="author" content="Mohamad Ghassany" />
 
 
-<meta name="date" content="2019-12-13" />
+<meta name="date" content="2019-12-15" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -304,7 +304,12 @@ code span.wa { color: #bf0303; } /* Warning */
 </ul></li>
 <li class="chapter" data-level="" data-path="exercices-4.html"><a href="exercices-4.html"><i class="fa fa-check"></i>Exercices</a></li>
 <li class="part"><span><b>Séance 8</b></span></li>
-<li class="chapter" data-level="6" data-path="tests-dhypotheses-sur-deux-echantillons.html"><a href="tests-dhypotheses-sur-deux-echantillons.html"><i class="fa fa-check"></i><b>6</b> Tests d’hypothèses sur deux échantillons</a></li>
+<li class="chapter" data-level="6" data-path="tests-dhypotheses-sur-deux-echantillons.html"><a href="tests-dhypotheses-sur-deux-echantillons.html"><i class="fa fa-check"></i><b>6</b> Tests d’hypothèses sur deux échantillons</a><ul>
+<li class="chapter" data-level="6.1" data-path="tests-dhypotheses-sur-deux-echantillons.html"><a href="tests-dhypotheses-sur-deux-echantillons.html#comparaison-de-deux-echantillons-gaussiens-independants"><i class="fa fa-check"></i><b>6.1</b> Comparaison de deux échantillons gaussiens indépendants</a><ul>
+<li class="chapter" data-level="6.1.1" data-path="tests-dhypotheses-sur-deux-echantillons.html"><a href="tests-dhypotheses-sur-deux-echantillons.html#test-de-fisher-de-comparaison-des-variances"><i class="fa fa-check"></i><b>6.1.1</b> Test de Fisher de comparaison des variances</a></li>
+<li class="chapter" data-level="6.1.2" data-path="tests-dhypotheses-sur-deux-echantillons.html"><a href="tests-dhypotheses-sur-deux-echantillons.html#tests-de-comparaison-de-moyennes"><i class="fa fa-check"></i><b>6.1.2</b> Tests de comparaison de moyennes</a></li>
+</ul></li>
+</ul></li>
 <li class="part"><span><b>Rappel Probabilités</b></span></li>
 <li class="chapter" data-level="" data-path="variables-aleatoires-discretes.html"><a href="variables-aleatoires-discretes.html"><i class="fa fa-check"></i>Variables Aléatoires Discrètes</a><ul>
 <li class="chapter" data-level="" data-path="variables-aleatoires-discretes.html"><a href="variables-aleatoires-discretes.html#notions-de-probabilites"><i class="fa fa-check"></i>Notions de Probabilités</a><ul>
@@ -385,6 +390,12 @@ code span.wa { color: #bf0303; } /* Warning */
 <li class="chapter" data-level="C" data-path="tab-normale2.html"><a href="tab-normale2.html"><i class="fa fa-check"></i><b>C</b> Table 2 de la loi Normale centrée réduite</a></li>
 <li class="chapter" data-level="D" data-path="tab-student.html"><a href="tab-student.html"><i class="fa fa-check"></i><b>D</b> Table de la loi de Student</a></li>
 <li class="chapter" data-level="E" data-path="tab-khideux.html"><a href="tab-khideux.html"><i class="fa fa-check"></i><b>E</b> Table de la loi de Khi-deux <span class="math inline">\(\chi^2\)</span></a></li>
+<li class="chapter" data-level="F" data-path="tab-fisher.html"><a href="tab-fisher.html"><i class="fa fa-check"></i><b>F</b> Table de la loi de Fisher <span class="math inline">\(F\)</span></a><ul>
+<li class="chapter" data-level="F.1" data-path="tab-fisher.html"><a href="tab-fisher.html#pour-alpha-5"><i class="fa fa-check"></i><b>F.1</b> Pour <span class="math inline">\(\alpha = 5\%\)</span></a></li>
+<li class="chapter" data-level="F.2" data-path="tab-fisher.html"><a href="tab-fisher.html#pour-alpha-2.5"><i class="fa fa-check"></i><b>F.2</b> Pour <span class="math inline">\(\alpha = 2.5\%\)</span></a></li>
+<li class="chapter" data-level="F.3" data-path="tab-fisher.html"><a href="tab-fisher.html#pour-alpha-1"><i class="fa fa-check"></i><b>F.3</b> Pour <span class="math inline">\(\alpha = 1\%\)</span></a></li>
+<li class="chapter" data-level="F.4" data-path="tab-fisher.html"><a href="tab-fisher.html#pour-alpha-0.05"><i class="fa fa-check"></i><b>F.4</b> Pour <span class="math inline">\(\alpha = 0.05\%\)</span></a></li>
+</ul></li>
 </ul>
 
       </nav>
@@ -417,12 +428,12 @@ non dénombrable. On peut citer par exemple, l’heure d’arrivée d’un train
 par <span class="math inline">\(X\)</span> une telle variable.</p>
 
 <div class="definition">
-<p><span id="def:unnamed-chunk-219" class="definition"><strong>Définition 6.10  </strong></span><span class="math inline">\(X\)</span> est une <strong>variable aléatoire continue</strong> s’il existe une fonction <span class="math inline">\(f\)</span>
+<p><span id="def:unnamed-chunk-221" class="definition"><strong>Définition 6.10  </strong></span><span class="math inline">\(X\)</span> est une <strong>variable aléatoire continue</strong> s’il existe une fonction <span class="math inline">\(f\)</span>
 non négative définie pour tout <span class="math inline">\(x \in \mathbb{R}\)</span> et vérifiant pour tout
 ensemble <span class="math inline">\(B\)</span> de nombres réels la propriété</p>
 <p><span class="math display" id="eq:def">\[\begin{equation}
 P(X \in B) = \int_B f(x)dx
-\tag{6.4}
+\tag{6.5}
 \end{equation}\]</span></p>
 La fonction <span class="math inline">\(f\)</span> est appelée <strong>densité
 de probabilité</strong> de la variable aléatoire <span class="math inline">\(X\)</span>.
@@ -430,33 +441,33 @@ de probabilité</strong> de la variable aléatoire <span class="math inline">\(X
 
 <p>Tous les problèmes de probabilité relatifs à <span class="math inline">\(X\)</span> peuvent être traités
 grâce à <span class="math inline">\(f\)</span>. Par exemple pour <span class="math inline">\(B=[a,b]\)</span>, on obtient grâce à l’équation
-<a href="variables-aleatoires-continues.html#eq:def">(6.4)</a></p>
+<a href="variables-aleatoires-continues.html#eq:def">(6.5)</a></p>
 <p><span class="math display" id="eq:probab">\[\begin{equation}
 P(a\le X \le b) = \int_a^bf(x)dx
-\tag{6.5}
+\tag{6.6}
 \end{equation}\]</span></p>
 <p>Graphiquement, <span class="math inline">\(P(a\le X \le b)\)</span> est l’aire de la surface entre l’axe de
 <span class="math inline">\(x\)</span>, la courbe correspondante à <span class="math inline">\(f(x)\)</span> et les droites <span class="math inline">\(x=a\)</span> et <span class="math inline">\(x=b\)</span>.
-Voire Figure <a href="variables-aleatoires-continues.html#fig:paxb">6.1</a> et Figure <a href="variables-aleatoires-continues.html#fig:p2">6.2</a>.</p>
+Voire Figure <a href="variables-aleatoires-continues.html#fig:paxb">6.2</a> et Figure <a href="variables-aleatoires-continues.html#fig:p2">6.3</a>.</p>
 <div class="figure" style="text-align: center"><span id="fig:paxb"></span>
 <img src="img/paxb.png" alt="$P(a \leq X \leq B)=$ surface grisée" width="70%" />
 <p class="caption">
-Figure 6.1: <span class="math inline">\(P(a \leq X \leq B)=\)</span> surface grisée
+Figure 6.2: <span class="math inline">\(P(a \leq X \leq B)=\)</span> surface grisée
 </p>
 </div>
 <div class="figure" style="text-align: center"><span id="fig:p2"></span>
 <img src="img/p2.png" alt="L'aire hachurée correspond à des probabilités. $f(x)$ étant une fonction densité de probabilité" width="70%" />
 <p class="caption">
-Figure 6.2: L’aire hachurée correspond à des probabilités. <span class="math inline">\(f(x)\)</span> étant une fonction densité de probabilité
+Figure 6.3: L’aire hachurée correspond à des probabilités. <span class="math inline">\(f(x)\)</span> étant une fonction densité de probabilité
 </p>
 </div>
 
 <div class="definition">
-<p><span id="def:unnamed-chunk-220" class="definition"><strong>Définition 6.11  </strong></span>Pour toute variable aléatoire continue <span class="math inline">\(X\)</span> de densité <span class="math inline">\(f\)</span>:</p>
+<p><span id="def:unnamed-chunk-222" class="definition"><strong>Définition 6.11  </strong></span>Pour toute variable aléatoire continue <span class="math inline">\(X\)</span> de densité <span class="math inline">\(f\)</span>:</p>
 <ul>
 <li><p><span class="math inline">\(f(x) \ge 0 \quad \forall \, x \in \mathbb{R}\)</span></p></li>
 <li><p><span class="math inline">\(\int_{-\infty}^{+\infty}f(x)dx = 1\)</span></p></li>
-<li><p>Si l’on pose <span class="math inline">\(a=b\)</span> dans <a href="variables-aleatoires-continues.html#eq:probab">(6.5)</a>, il résulte <span class="math display">\[P(X=a)=\int_a^a f(x)dx = 0\]</span></p></li>
+<li><p>Si l’on pose <span class="math inline">\(a=b\)</span> dans <a href="variables-aleatoires-continues.html#eq:probab">(6.6)</a>, il résulte <span class="math display">\[P(X=a)=\int_a^a f(x)dx = 0\]</span></p></li>
 <li><p>Ceci siginifie que la probabilité qu’une variable aléatoire continue prenne une valeur isolée fixe est toujours nulle. Aussi on peut écrire</p>
 <p><span class="math display">\[P(X &lt; a) = P( X \le a)  = \int_{-\infty}^a f(x)dx\]</span></p></li>
 </ul>
@@ -497,7 +508,7 @@ probabilité <span class="math display">\[f(x)= \left\lbrace
 <h2>Fonction de répartition d’une v.a.c</h2>
 
 <div class="definition">
-<p><span id="def:unnamed-chunk-223" class="definition"><strong>Définition 6.12  </strong></span>Si comme pour les variables aléatoires discrètes, on définit la fonction
+<p><span id="def:unnamed-chunk-225" class="definition"><strong>Définition 6.12  </strong></span>Si comme pour les variables aléatoires discrètes, on définit la fonction
 de répartition de <span class="math inline">\(X\)</span> par:</p>
 <p><span class="math display">\[\begin{aligned}
     F_X \colon  \mathbb{R} &amp;\longrightarrow \mathbb{R} \\
@@ -523,11 +534,11 @@ probabilités associées à la variable aléatoire <span class="math inline">\(X
 </ul>
 <p>La fonction de répartition correspond aux probabilités cumulées
 associées à la variable aléatoire continue sur l’intervalle d’étude
-(Figure <a href="variables-aleatoires-continues.html#fig:rep">6.3</a>).</p>
+(Figure <a href="variables-aleatoires-continues.html#fig:rep">6.4</a>).</p>
 <div class="figure" style="text-align: center"><span id="fig:rep"></span>
 <img src="img/rep.png" alt="L'aire hachurée en vert sous la courbe de la fonction densité de probabilité correspond à la probabilité $P ( X &lt; a ) = F_X ( a )$ et vaut 0.5 car ceci correspond exactement à la moitié de l'aire totale sous la courbe" width="70%" />
 <p class="caption">
-Figure 6.3: L’aire hachurée en vert sous la courbe de la fonction densité de probabilité correspond à la probabilité <span class="math inline">\(P ( X &lt; a ) = F_X ( a )\)</span> et vaut 0.5 car ceci correspond exactement à la moitié de l’aire totale sous la courbe
+Figure 6.4: L’aire hachurée en vert sous la courbe de la fonction densité de probabilité correspond à la probabilité <span class="math inline">\(P ( X &lt; a ) = F_X ( a )\)</span> et vaut 0.5 car ceci correspond exactement à la moitié de l’aire totale sous la courbe
 </p>
 </div>
 <p><strong>Propriétés:</strong> Les propriétés associées à la fonction de répartition sont les suivantes:</p>
@@ -604,7 +615,7 @@ Déterminer la densité de: <span class="math inline">\(Y=3X+1\)</span>, <span c
 <h3>Espérance d’une v.a.c</h3>
 
 <div class="definition">
-<p><span id="def:unnamed-chunk-225" class="definition"><strong>Définition 6.13  </strong></span>Si <span class="math inline">\(X\)</span> est une variable aléatoire absolument continue de densité <span class="math inline">\(f\)</span>, on
+<p><span id="def:unnamed-chunk-227" class="definition"><strong>Définition 6.13  </strong></span>Si <span class="math inline">\(X\)</span> est une variable aléatoire absolument continue de densité <span class="math inline">\(f\)</span>, on
 appelle espérance de X, le réel <span class="math inline">\(E(X)\)</span>, défini par:</p>
 <span class="math display">\[E(X)= \int_{-\infty}^{+\infty}x f(x) dx\]</span> si cette intégrale est
 convergente.
@@ -648,7 +659,7 @@ dispersion qui correspond au moment centré d’ordre 2 de la variable
 aléatoire <span class="math inline">\(X\)</span>.</p>
 
 <div class="definition">
-<p><span id="def:unnamed-chunk-227" class="definition"><strong>Définition 6.14  </strong></span>Si <span class="math inline">\(X\)</span> est une variable aléatoire ayant une espérance <span class="math inline">\(E(X)\)</span>, on appelle
+<p><span id="def:unnamed-chunk-229" class="definition"><strong>Définition 6.14  </strong></span>Si <span class="math inline">\(X\)</span> est une variable aléatoire ayant une espérance <span class="math inline">\(E(X)\)</span>, on appelle
 variance de <span class="math inline">\(X\)</span> le réel</p>
 <p><span class="math display">\[V(X)=E\big([X-E(X)]^2\big) = E(X^2) - [E(X)]^2\]</span> Si <span class="math inline">\(X\)</span> est une
 variable aléatoire continue, on calcule <span class="math inline">\(E(X^2)\)</span> en utilisant le
@@ -666,7 +677,7 @@ théorème <a href="variables-aleatoires-continues.html#thm:transfert">6.7</a>,<
 </ul>
 
 <div class="definition">
-<p><span id="def:unnamed-chunk-228" class="definition"><strong>Définition 6.15  (Ecart-type)  </strong></span>Si <span class="math inline">\(X\)</span> est une variable aléatoire ayant une variance <span class="math inline">\(V(X)\)</span>, on appelle
+<p><span id="def:unnamed-chunk-230" class="definition"><strong>Définition 6.15  (Ecart-type)  </strong></span>Si <span class="math inline">\(X\)</span> est une variable aléatoire ayant une variance <span class="math inline">\(V(X)\)</span>, on appelle
 écart-type de <span class="math inline">\(X\)</span>, le réel:</p>
 <span class="math display">\[\sigma_X = \sqrt{V(X)}\]</span>
 </div>
@@ -681,7 +692,7 @@ théorème <a href="variables-aleatoires-continues.html#thm:transfert">6.7</a>,<
 répartis sur un intervalle.</p>
 
 <div class="definition">
-<span id="def:unnamed-chunk-229" class="definition"><strong>Définition 6.16  </strong></span>La variable aléatoire <span class="math inline">\(X\)</span> suit une loi uniforme sur le segment <span class="math inline">\([a,b]\)</span>
+<span id="def:unnamed-chunk-231" class="definition"><strong>Définition 6.16  </strong></span>La variable aléatoire <span class="math inline">\(X\)</span> suit une loi uniforme sur le segment <span class="math inline">\([a,b]\)</span>
 avec <span class="math inline">\(a &lt; b\)</span> si sa densité de probabilité est donnée par
 <span class="math display">\[f(x)= \left\lbrace
       \begin{array}{ll}
@@ -694,12 +705,12 @@ avec <span class="math inline">\(a &lt; b\)</span> si sa densité de probabilit�
 <div class="figure" style="text-align: center"><span id="fig:unif"></span>
 <img src="img/unif.png" alt="Fonction de densité de $U([a,b]$)" width="70%" />
 <p class="caption">
-Figure 6.4: Fonction de densité de <span class="math inline">\(U([a,b]\)</span>)
+Figure 6.5: Fonction de densité de <span class="math inline">\(U([a,b]\)</span>)
 </p>
 </div>
 <p><em>Quelques commentaires:</em></p>
 <ol style="list-style-type: decimal">
-<li><p>La loi uniforme continue étant une loi de probabilité, l’aire hachurée en bleu sur la Figure <a href="variables-aleatoires-continues.html#fig:unif">6.4</a> vaut <span class="math inline">\(1\)</span>.</p></li>
+<li><p>La loi uniforme continue étant une loi de probabilité, l’aire hachurée en bleu sur la Figure <a href="variables-aleatoires-continues.html#fig:unif">6.5</a> vaut <span class="math inline">\(1\)</span>.</p></li>
 <li><p>La fonction de répartition associée à la loi uniforme continue est
 <span class="math display">\[F_X(x)= \left\lbrace
        \begin{array}{ll}
@@ -729,7 +740,7 @@ Figure 6.4: Fonction de densité de <span class="math inline">\(U([a,b]\)</span>
 <h3>Loi exponentielle <span class="math inline">\(\mathcal{E}(\lambda)\)</span></h3>
 
 <div class="definition">
-<p><span id="def:unnamed-chunk-231" class="definition"><strong>Définition 6.17  </strong></span>On dit qu’une variable aléatoire <span class="math inline">\(X\)</span> est <strong>exponentielle</strong> (ou suit la
+<p><span id="def:unnamed-chunk-233" class="definition"><strong>Définition 6.17  </strong></span>On dit qu’une variable aléatoire <span class="math inline">\(X\)</span> est <strong>exponentielle</strong> (ou suit la
 loi exponentielle) de paramètre <span class="math inline">\(\lambda\)</span> si sa densité est donnée par</p>
 <p><span class="math display">\[f(x)= \left\lbrace
       \begin{array}{ll}
@@ -771,7 +782,7 @@ rapprocher de distributions exponentielles.
 <h3>Loi Normale ou de Laplace-Gauss <span class="math inline">\(\mathcal{N}(\mu,\sigma^2)\)</span></h3>
 
 <div class="definition">
-<p><span id="def:unnamed-chunk-233" class="definition"><strong>Définition 6.18  </strong></span>Une variable aléatoire <span class="math inline">\(X\)</span> est dite <strong>normale</strong> avec paramètres <span class="math inline">\(\mu\)</span> et
+<p><span id="def:unnamed-chunk-235" class="definition"><strong>Définition 6.18  </strong></span>Une variable aléatoire <span class="math inline">\(X\)</span> est dite <strong>normale</strong> avec paramètres <span class="math inline">\(\mu\)</span> et
 <span class="math inline">\(\sigma^2\)</span> si la densité de <span class="math inline">\(X\)</span> est donnée par</p>
 <p><span class="math display">\[f(x) = \frac{1}{\sigma \sqrt{2\pi}} e^{-(x - \mu)^2/2\sigma^2} \quad \quad \forall \,\, x \in \mathbb{R}\]</span></p>
 Avec <span class="math inline">\(\mu \in \mathbb{R}\)</span> et <span class="math inline">\(\sigma \in \mathbb{R}^{+}\)</span>. On dit que
@@ -791,7 +802,7 @@ pour <span class="math inline">\(x &gt; \mu\)</span></p></li>
 <div class="figure" style="text-align: center"><span id="fig:norm"></span>
 <img src="img/norm.png" alt="Représentation graphique de la densité d’une loi normale. Remarque: Le paramètre $\mu$ représente l’axe de symétrie et s le degré d’aplatissement de la courbe de la loi normale dont la forme est celle d’une courbe en cloche" width="70%" />
 <p class="caption">
-Figure 6.5: Représentation graphique de la densité d’une loi normale. Remarque: Le paramètre <span class="math inline">\(\mu\)</span> représente l’axe de symétrie et s le degré d’aplatissement de la courbe de la loi normale dont la forme est celle d’une courbe en cloche
+Figure 6.6: Représentation graphique de la densité d’une loi normale. Remarque: Le paramètre <span class="math inline">\(\mu\)</span> représente l’axe de symétrie et s le degré d’aplatissement de la courbe de la loi normale dont la forme est celle d’une courbe en cloche
 </p>
 </div>
 <p><strong>Propriétés:</strong> Soit <span class="math inline">\(X \thicksim \mathcal{N}(\mu,\sigma^2)\)</span>, on a:</p>
@@ -801,7 +812,7 @@ Figure 6.5: Représentation graphique de la densité d’une loi normale. Remarq
 </ul>
 
 <div class="theorem">
-<span id="thm:unnamed-chunk-234" class="theorem"><strong>Théorème 6.8  (Stabilité de la loi normale)  </strong></span>Soit <span class="math inline">\(X_1\)</span> et <span class="math inline">\(X_2\)</span> deux variables
+<span id="thm:unnamed-chunk-236" class="theorem"><strong>Théorème 6.8  (Stabilité de la loi normale)  </strong></span>Soit <span class="math inline">\(X_1\)</span> et <span class="math inline">\(X_2\)</span> deux variables
 aléatoires normales et indépendantes de paramètres respectifs
 <span class="math inline">\((\mu_1,\sigma_1^2)\)</span> et <span class="math inline">\((\mu_2,\sigma_2^2)\)</span>, alors leur somme <span class="math inline">\(X_1+X_2\)</span>
 est une variable aléatoire normale de paramètres
@@ -813,7 +824,7 @@ est une variable aléatoire normale de paramètres
 <h3>Loi Normale centrée réduite <span class="math inline">\(\mathcal{N}(0,1)\)</span></h3>
 
 <div class="definition">
-<p><span id="def:unnamed-chunk-235" class="definition"><strong>Définition 6.19  </strong></span>Une variable aléatoire continue <span class="math inline">\(X\)</span> suit une <strong>loi normale centrée
+<p><span id="def:unnamed-chunk-237" class="definition"><strong>Définition 6.19  </strong></span>Une variable aléatoire continue <span class="math inline">\(X\)</span> suit une <strong>loi normale centrée
 réduite</strong> si sa densité de probabilité est donnée par</p>
 <p><span class="math display">\[\begin{equation}
 f(x) =  \frac{1}{{\sqrt {2\pi } }}e^{- \frac{1}{2} x^2} \quad \quad \forall \,\, x \in \mathbb{R}
@@ -825,7 +836,7 @@ On dit <span class="math inline">\(X \thicksim \mathcal{N}(0,1)\)</span>.
 <div class="figure" style="text-align: center"><span id="fig:normal"></span>
 <img src="img/normcr.png" alt="(gauche): Densité d'une loi normale centrée réduite $\mathcal{N}(0,1)$. (droite): Fonction de répartition de $\mathcal{N}(0,1)$." width="50%" /><img src="img/phi.png" alt="(gauche): Densité d'une loi normale centrée réduite $\mathcal{N}(0,1)$. (droite): Fonction de répartition de $\mathcal{N}(0,1)$." width="50%" />
 <p class="caption">
-Figure 6.6: (gauche): Densité d’une loi normale centrée réduite <span class="math inline">\(\mathcal{N}(0,1)\)</span>. (droite): Fonction de répartition de <span class="math inline">\(\mathcal{N}(0,1)\)</span>.
+Figure 6.7: (gauche): Densité d’une loi normale centrée réduite <span class="math inline">\(\mathcal{N}(0,1)\)</span>. (droite): Fonction de répartition de <span class="math inline">\(\mathcal{N}(0,1)\)</span>.
 </p>
 </div>
 </div>
@@ -833,7 +844,7 @@ Figure 6.6: (gauche): Densité d’une loi normale centrée réduite <span class
 <h3>Relation entre loi normale et loi normale centrée réduite</h3>
 
 <div class="theorem">
-<span id="thm:unnamed-chunk-236" class="theorem"><strong>Théorème 6.9  (Relation avec la loi normale)  </strong></span>Si <span class="math inline">\(X\)</span> suit une loi normale
+<span id="thm:unnamed-chunk-238" class="theorem"><strong>Théorème 6.9  (Relation avec la loi normale)  </strong></span>Si <span class="math inline">\(X\)</span> suit une loi normale
 <span class="math inline">\(\mathcal{N}(\mu,\sigma^2)\)</span>, alors <span class="math inline">\(Z= \frac{X-\mu}{\sigma}\)</span> est une
 variable centrée réduite qui suit la loi normale centrée réduite
 <span class="math inline">\(\mathcal{N}(0,1)\)</span>.
@@ -848,7 +859,7 @@ les probabilités associées à toutes variables aléatoires normales
 réduite.</p>
 
 <div class="definition">
-<p><span id="def:unnamed-chunk-237" class="definition"><strong>Définition 6.20  </strong></span>On appelle fonction <span class="math inline">\(\Phi\)</span>, la fonction de répartition de la loi normale
+<p><span id="def:unnamed-chunk-239" class="definition"><strong>Définition 6.20  </strong></span>On appelle fonction <span class="math inline">\(\Phi\)</span>, la fonction de répartition de la loi normale
 centrée réduite <span class="math inline">\(\mathcal{N}(0,1)\)</span>, telle que</p>
 <span class="math display">\[\forall \,\, x \in \mathbb{R} \quad \Phi(x) = P(X \le x) =  \frac{1}{{\sqrt {2\pi}}} \int_{-\infty}^x f(t)dt\]</span>
 </div>
@@ -903,7 +914,7 @@ lorsque <span class="math inline">\(np(1-p)\)</span> est grand (dès que <span c
 <div class="figure" style="text-align: center"><span id="fig:binomnorm"></span>
 <img src="img/binomnorm.png" alt="La loi de probabilité d’une variable aléatoire $B( n,p )$ devient de plus en plus **normale** à mesure que $n$ augmente." width="70%" />
 <p class="caption">
-Figure 6.7: La loi de probabilité d’une variable aléatoire <span class="math inline">\(B( n,p )\)</span> devient de plus en plus <strong>normale</strong> à mesure que <span class="math inline">\(n\)</span> augmente.
+Figure 6.8: La loi de probabilité d’une variable aléatoire <span class="math inline">\(B( n,p )\)</span> devient de plus en plus <strong>normale</strong> à mesure que <span class="math inline">\(n\)</span> augmente.
 </p>
 </div>
 </div>
@@ -911,7 +922,7 @@ Figure 6.7: La loi de probabilité d’une variable aléatoire <span class="math
 <h3>Loi de <span class="math inline">\(\chi^{2}\)</span> de Pearson</h3>
 
 <div class="definition">
-<p><span id="def:unnamed-chunk-239" class="definition"><strong>Définition 6.21  </strong></span>Soit <span class="math inline">\(X_1,X_2,\ldots,X_n\)</span>, <span class="math inline">\(n\)</span> variables <strong>normales centrées réduites</strong>,
+<p><span id="def:unnamed-chunk-241" class="definition"><strong>Définition 6.21  </strong></span>Soit <span class="math inline">\(X_1,X_2,\ldots,X_n\)</span>, <span class="math inline">\(n\)</span> variables <strong>normales centrées réduites</strong>,
 et <span class="math inline">\(Y\)</span> la variable aléatoire définie par</p>
 <span class="math display">\[Y = X_1^2 + X_2^2 + \ldots + X_i^2 + \ldots + X_n^2 = \sum_{i=1}^n X_i^2\]</span>
 On dit que <span class="math inline">\(Y\)</span> suit la loi de <span class="math inline">\(\chi^2\)</span> (ou loi de Pearson) à <span class="math inline">\(n\)</span> degrés
@@ -932,14 +943,14 @@ caractères qualitatifs. Ce sont les <em>tests du khi-deux</em>.
 <li><p><span class="math inline">\(E(Y)= n\)</span></p></li>
 <li><p><span class="math inline">\(V(Y) = 2n\)</span></p></li>
 </ul>
-<p><img src="Statistique_infentielle_files/figure-html/unnamed-chunk-241-1.png" width="80%" style="display: block; margin: auto;" /></p>
+<p><img src="Statistique_infentielle_files/figure-html/unnamed-chunk-243-1.png" width="80%" style="display: block; margin: auto;" /></p>
 <p>L’augmentation de degré de liberté (<span class="math inline">\(n\)</span>) déplace la distribution vers la droite (le mode devient plus grand) et augmente la dispersion (la variance de la distribution augmente).</p>
 </div>
 <div id="loi-de-student-stn" class="section level3 unnumbered">
 <h3>Loi de Student <span class="math inline">\(St(n)\)</span></h3>
 
 <div class="definition">
-<span id="def:unnamed-chunk-242" class="definition"><strong>Définition 6.22  </strong></span>Soit <span class="math inline">\(U\)</span> une variable aléatoire suivant une loi <strong>normale centrée
+<span id="def:unnamed-chunk-244" class="definition"><strong>Définition 6.22  </strong></span>Soit <span class="math inline">\(U\)</span> une variable aléatoire suivant une loi <strong>normale centrée
 réduite</strong> <span class="math inline">\(\mathcal{N}(0,1)\)</span> et <span class="math inline">\(V\)</span> une variable aléatoire suivant une
 loi de <span class="math inline">\(\chi^2(n)\)</span>, <span class="math inline">\(U\)</span> et <span class="math inline">\(V\)</span> étant indépendantes, on dit alors que
 <span class="math inline">\(T_n = \frac{U}{\sqrt{\frac{V}{n}}}\)</span> suit une <strong>loi de Student</strong> à <span class="math inline">\(n\)</span>
@@ -953,14 +964,14 @@ paramètres comme la moyenne et dans l’estimation de paramètres de la
 population à partir de données sur un échantillon (Test de Student).
 </div>
 
-<p><img src="Statistique_infentielle_files/figure-html/unnamed-chunk-244-1.png" width="80%" style="display: block; margin: auto;" /></p>
+<p><img src="Statistique_infentielle_files/figure-html/unnamed-chunk-246-1.png" width="80%" style="display: block; margin: auto;" /></p>
 <p>Le graphique de plusieurs densités de la loi de Student illustre le suivant: à mesure que les degrés de liberté augmentent, la forme de la densité de Student se rapproche de celle d’une courbe de la loi normale centrée réduite. Déjà pour <span class="math inline">\(n = 25\)</span>, nous trouvons peu de différence avec la densité normale standard. Si <span class="math inline">\(n\)</span> est petit, nous trouvons que la distribution a des queues plus lourdes qu’une normale, c’est-à-dire qu’elle a la forme d’une cloche plus grosse.</p>
 </div>
 <div id="loi-de-fisher-snedecor-mathcalfnm" class="section level3 unnumbered">
 <h3>Loi de Fisher-Snedecor <span class="math inline">\(\mathcal{F}(n,m)\)</span></h3>
 
 <div class="definition">
-<p><span id="def:unnamed-chunk-245" class="definition"><strong>Définition 6.23  </strong></span>Soit <span class="math inline">\(U\)</span> et <span class="math inline">\(V\)</span> deux variables aléatoires indépendantes suivant une loi
+<p><span id="def:unnamed-chunk-247" class="definition"><strong>Définition 6.23  </strong></span>Soit <span class="math inline">\(U\)</span> et <span class="math inline">\(V\)</span> deux variables aléatoires indépendantes suivant une loi
 de <span class="math inline">\(\chi^2\)</span> respectivement à <span class="math inline">\(n\)</span> et <span class="math inline">\(m\)</span> degrés de liberté.</p>
 On dit que <span class="math inline">\(F= \frac{U/n}{V/m}\)</span> suit une loi de Fisher-Snedecor à
 <span class="math inline">\((n,m)\)</span> degrés de liberté. <span class="math inline">\(F \thicksim \mathcal{F}(n,m)\)</span>
@@ -973,6 +984,7 @@ observées et sert surtout dans les très nombreux tests d’analyse de
 variance et de covariance.
 </div>
 
+<p><img src="Statistique_infentielle_files/figure-html/unnamed-chunk-249-1.png" width="80%" style="display: block; margin: auto;" /></p>
 </div>
 </div>
 <div id="couple-de-variables-aleatoires-continues" class="section level2 unnumbered">
@@ -981,7 +993,7 @@ variance et de covariance.
 <h3>Densité conjointe</h3>
 
 <div class="definition">
-<p><span id="def:unnamed-chunk-247" class="definition"><strong>Définition 6.24  </strong></span>On dit que <span class="math inline">\((X,Y)\)</span> est un couple aléatoire continu s’il existe une
+<p><span id="def:unnamed-chunk-250" class="definition"><strong>Définition 6.24  </strong></span>On dit que <span class="math inline">\((X,Y)\)</span> est un couple aléatoire continu s’il existe une
 fonction <span class="math inline">\(f: \mathbb{R}^2 \rightarrow \mathbb{R}\)</span> telle que pour tout
 <span class="math inline">\(D \subseteq \mathbb{R}\)</span> on a</p>
 <span class="math display">\[P\{(X,Y) \in D\} = \iint\limits_{(x,y) \in D} f(x,y) dx dy\]</span>

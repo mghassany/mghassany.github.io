@@ -24,7 +24,7 @@
 <meta name="author" content="Mohamad Ghassany" />
 
 
-<meta name="date" content="2019-12-13" />
+<meta name="date" content="2019-12-15" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -304,7 +304,12 @@ code span.wa { color: #bf0303; } /* Warning */
 </ul></li>
 <li class="chapter" data-level="" data-path="exercices-4.html"><a href="exercices-4.html"><i class="fa fa-check"></i>Exercices</a></li>
 <li class="part"><span><b>Séance 8</b></span></li>
-<li class="chapter" data-level="6" data-path="tests-dhypotheses-sur-deux-echantillons.html"><a href="tests-dhypotheses-sur-deux-echantillons.html"><i class="fa fa-check"></i><b>6</b> Tests d’hypothèses sur deux échantillons</a></li>
+<li class="chapter" data-level="6" data-path="tests-dhypotheses-sur-deux-echantillons.html"><a href="tests-dhypotheses-sur-deux-echantillons.html"><i class="fa fa-check"></i><b>6</b> Tests d’hypothèses sur deux échantillons</a><ul>
+<li class="chapter" data-level="6.1" data-path="tests-dhypotheses-sur-deux-echantillons.html"><a href="tests-dhypotheses-sur-deux-echantillons.html#comparaison-de-deux-echantillons-gaussiens-independants"><i class="fa fa-check"></i><b>6.1</b> Comparaison de deux échantillons gaussiens indépendants</a><ul>
+<li class="chapter" data-level="6.1.1" data-path="tests-dhypotheses-sur-deux-echantillons.html"><a href="tests-dhypotheses-sur-deux-echantillons.html#test-de-fisher-de-comparaison-des-variances"><i class="fa fa-check"></i><b>6.1.1</b> Test de Fisher de comparaison des variances</a></li>
+<li class="chapter" data-level="6.1.2" data-path="tests-dhypotheses-sur-deux-echantillons.html"><a href="tests-dhypotheses-sur-deux-echantillons.html#tests-de-comparaison-de-moyennes"><i class="fa fa-check"></i><b>6.1.2</b> Tests de comparaison de moyennes</a></li>
+</ul></li>
+</ul></li>
 <li class="part"><span><b>Rappel Probabilités</b></span></li>
 <li class="chapter" data-level="" data-path="variables-aleatoires-discretes.html"><a href="variables-aleatoires-discretes.html"><i class="fa fa-check"></i>Variables Aléatoires Discrètes</a><ul>
 <li class="chapter" data-level="" data-path="variables-aleatoires-discretes.html"><a href="variables-aleatoires-discretes.html#notions-de-probabilites"><i class="fa fa-check"></i>Notions de Probabilités</a><ul>
@@ -385,6 +390,12 @@ code span.wa { color: #bf0303; } /* Warning */
 <li class="chapter" data-level="C" data-path="tab-normale2.html"><a href="tab-normale2.html"><i class="fa fa-check"></i><b>C</b> Table 2 de la loi Normale centrée réduite</a></li>
 <li class="chapter" data-level="D" data-path="tab-student.html"><a href="tab-student.html"><i class="fa fa-check"></i><b>D</b> Table de la loi de Student</a></li>
 <li class="chapter" data-level="E" data-path="tab-khideux.html"><a href="tab-khideux.html"><i class="fa fa-check"></i><b>E</b> Table de la loi de Khi-deux <span class="math inline">\(\chi^2\)</span></a></li>
+<li class="chapter" data-level="F" data-path="tab-fisher.html"><a href="tab-fisher.html"><i class="fa fa-check"></i><b>F</b> Table de la loi de Fisher <span class="math inline">\(F\)</span></a><ul>
+<li class="chapter" data-level="F.1" data-path="tab-fisher.html"><a href="tab-fisher.html#pour-alpha-5"><i class="fa fa-check"></i><b>F.1</b> Pour <span class="math inline">\(\alpha = 5\%\)</span></a></li>
+<li class="chapter" data-level="F.2" data-path="tab-fisher.html"><a href="tab-fisher.html#pour-alpha-2.5"><i class="fa fa-check"></i><b>F.2</b> Pour <span class="math inline">\(\alpha = 2.5\%\)</span></a></li>
+<li class="chapter" data-level="F.3" data-path="tab-fisher.html"><a href="tab-fisher.html#pour-alpha-1"><i class="fa fa-check"></i><b>F.3</b> Pour <span class="math inline">\(\alpha = 1\%\)</span></a></li>
+<li class="chapter" data-level="F.4" data-path="tab-fisher.html"><a href="tab-fisher.html#pour-alpha-0.05"><i class="fa fa-check"></i><b>F.4</b> Pour <span class="math inline">\(\alpha = 0.05\%\)</span></a></li>
+</ul></li>
 </ul>
 
       </nav>
@@ -666,7 +677,7 @@ aussi les couples de variables aléatoires.</p>
 <h3>Définition, loi de probabilité</h3>
 
 <div class="definition">
-<p><span id="def:unnamed-chunk-187" class="definition"><strong>Définition 6.1  </strong></span>On dit qu’une variable aléatoire réelle (v.a.r.) <span class="math inline">\(X\)</span> est <strong><em>discrète</em></strong>
+<p><span id="def:unnamed-chunk-189" class="definition"><strong>Définition 6.1  </strong></span>On dit qu’une variable aléatoire réelle (v.a.r.) <span class="math inline">\(X\)</span> est <strong><em>discrète</em></strong>
 (v.a.r.d.) si l’ensemble des valeurs que prend <span class="math inline">\(X\)</span> est fini ou infini
 dénombrable.</p>
 <p>Si on suppose <span class="math inline">\(X(\Omega)\)</span> l’ensemble des valeurs de <span class="math inline">\(X\)</span> qui admet un
@@ -697,7 +708,7 @@ généralement présentée dans un tableau.</p></li>
 <h3>Fonction de répartition d’une variable aléatoire discrète</h3>
 
 <div class="definition">
-<p><span id="def:unnamed-chunk-188" class="definition"><strong>Définition 6.2  </strong></span>On appelle <em>fonction de répartition</em> de la v.a. <span class="math inline">\(X\)</span>, qu’on note <span class="math inline">\(F(a)\)</span>
+<p><span id="def:unnamed-chunk-190" class="definition"><strong>Définition 6.2  </strong></span>On appelle <em>fonction de répartition</em> de la v.a. <span class="math inline">\(X\)</span>, qu’on note <span class="math inline">\(F(a)\)</span>
 de la v.a.r.d. <span class="math inline">\(X\)</span>, ou <span class="math inline">\(F_X(a)\)</span>, la fonction définie pour tout réel <span class="math inline">\(a\)</span>,
 <span class="math inline">\(-\infty &lt; a &lt; \infty\)</span>, par</p>
 <span class="math display">\[F(a)=P(X \leq a)=\sum_{i / x_{i}\leq a} P(X=x_{i})\]</span>
@@ -792,7 +803,7 @@ la probabilité d’avoir exactement une pile.
      1 &amp; \quad \text{si $x \geq 3$}\\
 \end{array} \right.\]</span></p>
 <p>Le graphe de cette dernière est représentée dans la figure suivante:</p>
-<p><img src="Statistique_infentielle_files/figure-html/unnamed-chunk-191-1.png" width="70%" style="display: block; margin: auto;" /></p>
+<p><img src="Statistique_infentielle_files/figure-html/unnamed-chunk-193-1.png" width="70%" style="display: block; margin: auto;" /></p>
 <p><strong>Exemple:</strong> Soit <span class="math inline">\(A\)</span> un événement quelconque. On appelle variable aléatoire <em>indicatrice</em> de cet événement <span class="math inline">\(A\)</span>, la variable aléatoire définie par: <span class="math display">\[X(\omega) = \left\{ 
 \begin{array}{l l}
  1 &amp; \quad \text{si $\omega \in A$}\\
@@ -853,7 +864,7 @@ de <span class="math inline">\(A\)</span>. La loi de probabilité de <span class
 <h3>Espérance mathématique</h3>
 
 <div class="definition">
-<p><span id="def:unnamed-chunk-193" class="definition"><strong>Définition 6.3  </strong></span>Pour une variable aléatoire discrète <span class="math inline">\(X\)</span> de loi de probabilité <span class="math inline">\(p(.)\)</span>,
+<p><span id="def:unnamed-chunk-195" class="definition"><strong>Définition 6.3  </strong></span>Pour une variable aléatoire discrète <span class="math inline">\(X\)</span> de loi de probabilité <span class="math inline">\(p(.)\)</span>,
 on définit l’<em>espérance</em> de <span class="math inline">\(X\)</span>, notée <span class="math inline">\(E(X)\)</span>, par l’expression</p>
 <p><span class="math display">\[E(X)=\sum_{i \in \mathbb{N}} x_{i} p(x_i)\]</span></p>
 En termes concrets, l’espérance de <span class="math inline">\(X\)</span> est la moyenne pondérée des
@@ -876,7 +887,7 @@ possibles de <span class="math inline">\(X\)</span>.</p>
 <h3>Espérance d’une fonction d’une variable aléatoire</h3>
 
 <div class="theorem">
-<p><span id="thm:unnamed-chunk-194" class="theorem"><strong>Théorème 6.1  (Théorème du transfert)  </strong></span>Si X est une variable aléatoire discrète pouvant prendre ses valeurs
+<p><span id="thm:unnamed-chunk-196" class="theorem"><strong>Théorème 6.1  (Théorème du transfert)  </strong></span>Si X est une variable aléatoire discrète pouvant prendre ses valeurs
 parmi les valeurs <span class="math inline">\(x_i\)</span>, <span class="math inline">\(i \geq 1\)</span>, avec des probabilités respectives
 <span class="math inline">\(p(x_i)\)</span>, alors pour toute fonction réelle <span class="math inline">\(g\)</span> on a</p>
 <span class="math display">\[E(g(X)) = \sum_i g(x_i)p(x_i)\]</span>
@@ -884,7 +895,7 @@ parmi les valeurs <span class="math inline">\(x_i\)</span>, <span class="math in
 
 
 <div class="example">
-<p><span id="exm:unnamed-chunk-195" class="example"><strong>Exemple 6.1  </strong></span>Soit <span class="math inline">\(X\)</span> une variable aléatoire qui prend une des trois valeurs
+<p><span id="exm:unnamed-chunk-197" class="example"><strong>Exemple 6.2  </strong></span>Soit <span class="math inline">\(X\)</span> une variable aléatoire qui prend une des trois valeurs
 <span class="math inline">\(\{-1,0,1\}\)</span> avec les probabilités respectives</p>
 <p><span class="math display">\[P(X=-1) = 0.2 \quad \quad P(X=0)=0.5 \quad \quad P(X=1) = 0.3\]</span></p>
 Calculer <span class="math inline">\(E(X^2)\)</span>.
@@ -924,7 +935,7 @@ mathématique est linéaire:
 <h3>Variance</h3>
 
 <div class="definition">
-<p><span id="def:unnamed-chunk-197" class="definition"><strong>Définition 6.4  </strong></span>La variance est un indicateur mesurant la dispersion des valeurs <span class="math inline">\(x_{i}\)</span>
+<p><span id="def:unnamed-chunk-199" class="definition"><strong>Définition 6.4  </strong></span>La variance est un indicateur mesurant la dispersion des valeurs <span class="math inline">\(x_{i}\)</span>
 que peut prendre la v.a. <span class="math inline">\(X\)</span> et son espérance <span class="math inline">\(E(X)\)</span>. On appelle
 <strong>variance</strong> de X, que l’on note <span class="math inline">\(V(X)\)</span>, la quantité</p>
 <span class="math display">\[V(X)=E\big[ (X-E(X))^2 \big]\]</span> lorsque cette quantité existe.<br />
@@ -971,7 +982,7 @@ en effet: <span class="math display">\[\begin{aligned}
 <h3>Ecart-type</h3>
 
 <div class="definition">
-<p><span id="def:unnamed-chunk-198" class="definition"><strong>Définition 6.5  </strong></span>La racine carrée de <span class="math inline">\(V(X)\)</span> est appelée l’<strong><em>écart-type</em></strong> de <span class="math inline">\(X\)</span>, qui se
+<p><span id="def:unnamed-chunk-200" class="definition"><strong>Définition 6.5  </strong></span>La racine carrée de <span class="math inline">\(V(X)\)</span> est appelée l’<strong><em>écart-type</em></strong> de <span class="math inline">\(X\)</span>, qui se
 note <span class="math inline">\(\sigma_{X}\)</span>. On a</p>
 <p><span class="math display">\[\sigma_{X} = \sqrt{V(X)}\]</span></p>
 <span class="math inline">\(\sigma_{X}\)</span> s’exprime dans les mêmes unités de mesure que la variable
@@ -992,7 +1003,7 @@ Bienaymé-Tchebychev</em>.</p></li>
 <h4>Inégalité de Bienaymé-Tchebychev</h4>
 
 <div class="theorem">
-<p><span id="thm:unnamed-chunk-199" class="theorem"><strong>Théorème 6.2  </strong></span>Soit <span class="math inline">\(X\)</span> une variable aléatoire d’espérance <span class="math inline">\(\mu\)</span> et de variance
+<p><span id="thm:unnamed-chunk-201" class="theorem"><strong>Théorème 6.2  </strong></span>Soit <span class="math inline">\(X\)</span> une variable aléatoire d’espérance <span class="math inline">\(\mu\)</span> et de variance
 <span class="math inline">\(\sigma^2\)</span>. Pour tout <span class="math inline">\(\varepsilon &gt; 0\)</span>, on a l’inégalité suivante:
 <span class="math display">\[P\left(|X-E(X)| \geq \varepsilon \right) \leq \frac{\sigma^2}{\varepsilon^2}\]</span></p>
 On peut l’écrire autrement. Soit <span class="math inline">\(k=\varepsilon/\sigma\)</span>.
@@ -1006,7 +1017,7 @@ On peut l’écrire autrement. Soit <span class="math inline">\(k=\varepsilon/\s
 </div>
 
 <div class="theorem">
-<span id="thm:unnamed-chunk-201" class="theorem"><strong>Théorème 6.3  (Inégalité de Markov)  </strong></span>Soit <span class="math inline">\(X\)</span> une variable aléatoire à valeur non
+<span id="thm:unnamed-chunk-203" class="theorem"><strong>Théorème 6.3  (Inégalité de Markov)  </strong></span>Soit <span class="math inline">\(X\)</span> une variable aléatoire à valeur non
 négatives. Pour tout réel <span class="math inline">\(a &gt; 0\)</span> <span class="math display">\[P(X&gt;a) \leq \frac{E(X)}{a}\]</span>
 </div>
 
@@ -1419,7 +1430,7 @@ peut définir la loi conditionnelle de <span class="math inline">\(X\)</span> sa
 <h3>Indépendance de variables aléatoires</h3>
 
 <div class="theorem">
-<p><span id="thm:unnamed-chunk-205" class="theorem"><strong>Théorème 6.4  </strong></span>On dit que deux v.a.r.d sont indépendantes si et seulement si</p>
+<p><span id="thm:unnamed-chunk-207" class="theorem"><strong>Théorème 6.4  </strong></span>On dit que deux v.a.r.d sont indépendantes si et seulement si</p>
 <span class="math display">\[P(X=x_i;Y=y_j) = P(X=x_i) P(Y=y_j) \quad \quad \forall \, i = 1,2,\ldots,l \text{ et }  j = 1,2,\ldots,k\]</span>
 </div>
 
@@ -1484,7 +1495,7 @@ corrélées.</p></li>
 <h3>Loi uniforme discrète <span class="math inline">\(\mathcal{U}(n)\)</span></h3>
 
 <div class="definition">
-<p><span id="def:unnamed-chunk-206" class="definition"><strong>Définition 6.6  </strong></span>Une distribution de probabilité suit une loi uniforme lorsque toutes les
+<p><span id="def:unnamed-chunk-208" class="definition"><strong>Définition 6.6  </strong></span>Une distribution de probabilité suit une loi uniforme lorsque toutes les
 valeurs prises par la variable aléatoire sont équiprobables. Si <span class="math inline">\(n\)</span> est
 le nombre de valeurs différentes prises par la variable aléatoire alors
 on a:</p>
@@ -1561,18 +1572,18 @@ calculer directement les moments de <span class="math inline">\(X\)</span>: <spa
 <h3>Loi de Bernoulli <span class="math inline">\(\mathcal{B}(p)\)</span></h3>
 
 <div class="definition">
-<p><span id="def:unnamed-chunk-208" class="definition"><strong>Définition 6.7  </strong></span>On réalise une expérience dont le résultat sera interprété soit comme un
+<p><span id="def:unnamed-chunk-210" class="definition"><strong>Définition 6.7  </strong></span>On réalise une expérience dont le résultat sera interprété soit comme un
 succès soit comme un échec. On définit alors la variable aléatoire <span class="math inline">\(X\)</span>
 en lui donnant la valeur 1 lors d’un succès et 0 lors d’un échec
 (variable indicatrice). La loi de probabilité de <span class="math inline">\(X\)</span> est alors</p>
 <p><span class="math display" id="eq:bern">\[\begin{align}
-    &amp;p(1)=P(X=1)=p \tag{6.1} \\ 
+    &amp;p(1)=P(X=1)=p \tag{6.2} \\ 
     &amp;p(0)=P(X=0)= 1-p=q \notag
 \end{align}\]</span></p>
 <p>où <span class="math inline">\(p\)</span> est la probabilité d’un succès, <span class="math inline">\(0 \leq p \leq 1\)</span>.</p>
 Une variable aléatoire <span class="math inline">\(X\)</span> est dite de <strong>Bernoulli</strong>
 <span class="math inline">\(X \sim \mathcal{B} \left({p}\right)\)</span> s’il existe un nombre
-<span class="math inline">\(p \, \in \, ]0,1[\)</span> tel que la loi de probabilité de <span class="math inline">\(X\)</span> soit donnée par <a href="variables-aleatoires-discretes.html#eq:bern">(6.1)</a>.
+<span class="math inline">\(p \, \in \, ]0,1[\)</span> tel que la loi de probabilité de <span class="math inline">\(X\)</span> soit donnée par <a href="variables-aleatoires-discretes.html#eq:bern">(6.2)</a>.
 </div>
 
 <p>La fonction de répartition est définie par: <span class="math display">\[F(x) = 
@@ -1608,19 +1619,19 @@ Une variable de Bernoulli n’est donc qu’une variable binomiale de paramètre
 
 
 <div class="definition">
-<p><span id="def:unnamed-chunk-211" class="definition"><strong>Définition 6.8  </strong></span>Si on effectue <span class="math inline">\(n\)</span> épreuves successives indépendantes où on note à
+<p><span id="def:unnamed-chunk-213" class="definition"><strong>Définition 6.8  </strong></span>Si on effectue <span class="math inline">\(n\)</span> épreuves successives indépendantes où on note à
 chaque fois la réalisation ou non d’un certain événement <span class="math inline">\(A\)</span>, on obtient une suite de la forme <span class="math inline">\(AA\bar{A}A\bar{A}\ldots \bar{A}AA\)</span>. Soit <span class="math inline">\(X\)</span> le nombre de réalisations de <span class="math inline">\(A\)</span>. On définit ainsi une v.a. <span class="math inline">\(X\)</span> qui suit une loi binomiale de paramètres <span class="math inline">\(n\)</span> et <span class="math inline">\(p=P(A)\)</span>, caractérisée par
 <span class="math inline">\(X(\Omega)=\{0, 1,\ldots, n\}\)</span> :</p>
 <p><span class="math display" id="eq:binom">\[\begin{equation}
     P(X=k)=\binom{n}{k}p^k (1-p)^{n-k} \qquad 0\leq k \leq n
-    \tag{6.2}
+    \tag{6.3}
 \end{equation}\]</span></p>
 On écrit <span class="math inline">\(X \sim \mathcal{B} \left({n, p}\right)\)</span>. Donc la loi binomiale modélise le nombre de réalisations de <span class="math inline">\(A\)</span> (succès) obtenues lors de la répétition indépendante et identique de <span class="math inline">\(n\)</span> épreuves de Bernoulli.
 </div>
 
 
 <div class="rmdinsight">
-Pour établir <a href="variables-aleatoires-discretes.html#eq:binom">(6.2)</a> il faut remarquer que <span class="math inline">\(\binom{n}{k}\)</span> est le nombre d’échantillons de taille <span class="math inline">\(n\)</span> comportant exactement <span class="math inline">\(k\)</span> événements <span class="math inline">\(A\)</span>, de probabilité <span class="math inline">\(p^k\)</span>, indépendamment de l’ordre, et donc <span class="math inline">\(n-k\)</span> événements <span class="math inline">\(\bar{A}\)</span>, de probabilité <span class="math inline">\((1-p)^{n-k}\)</span>.
+Pour établir <a href="variables-aleatoires-discretes.html#eq:binom">(6.3)</a> il faut remarquer que <span class="math inline">\(\binom{n}{k}\)</span> est le nombre d’échantillons de taille <span class="math inline">\(n\)</span> comportant exactement <span class="math inline">\(k\)</span> événements <span class="math inline">\(A\)</span>, de probabilité <span class="math inline">\(p^k\)</span>, indépendamment de l’ordre, et donc <span class="math inline">\(n-k\)</span> événements <span class="math inline">\(\bar{A}\)</span>, de probabilité <span class="math inline">\((1-p)^{n-k}\)</span>.
 </div>
 
 <p><strong>Remarque:</strong> Il est possible d’obtenir aisément les valeurs des combinaisons de la loi binomiale en utilisant le triangle de Pascal.</p>
@@ -1673,7 +1684,7 @@ suit une loi binomiale <span class="math inline">\(\mathcal{B} \left({n, 1/3}\ri
 avec <span class="math inline">\(E(X)=n/3\)</span> et <span class="math inline">\(V(X)=2n/9\)</span>.</p>
 
 <div class="theorem">
-<span id="thm:unnamed-chunk-213" class="theorem"><strong>Théorème 6.5  </strong></span>Si <span class="math inline">\(X_1 \sim \mathcal{B} \left({n_1, p}\right)\)</span> et
+<span id="thm:unnamed-chunk-215" class="theorem"><strong>Théorème 6.5  </strong></span>Si <span class="math inline">\(X_1 \sim \mathcal{B} \left({n_1, p}\right)\)</span> et
 <span class="math inline">\(X_2 \sim \mathcal{B} \left({n_2, p}\right)\)</span>, les v.a. <span class="math inline">\(X_1\)</span> et <span class="math inline">\(X_2\)</span>
 étant indépendantes, alors
 <span class="math inline">\(X_1+X_2 \sim \mathcal{B} \left({n_1+n_2, p}\right)\)</span>. Ceci résulte de la
@@ -1697,7 +1708,7 @@ moyen.
 
 
 <div class="definition">
-<span id="def:unnamed-chunk-215" class="definition"><strong>Définition 6.9  </strong></span>Une v.a. <span class="math inline">\(X\)</span> suit une loi de Poisson de paramètre <span class="math inline">\(\lambda&gt;0\)</span> si c’est
+<span id="def:unnamed-chunk-217" class="definition"><strong>Définition 6.9  </strong></span>Une v.a. <span class="math inline">\(X\)</span> suit une loi de Poisson de paramètre <span class="math inline">\(\lambda&gt;0\)</span> si c’est
 une variable à valeurs entières, <span class="math inline">\(X(\Omega)=\mathbb{N}\)</span>, donc avec une
 infinité de valeurs possibles, de probabilité: <span class="math display">\[\label{eq:poisson}
     P(X=k)=e^{-\lambda} \frac{\lambda^k}{k!}, \quad k \in \mathbb{N}\]</span>
@@ -1727,7 +1738,7 @@ On en déduit: <span class="math display">\[\begin{aligned}
         &amp;=\lambda^2+\lambda-\lambda^2=\lambda.\end{aligned}\]</span></p>
 
 <div class="theorem">
-<span id="thm:unnamed-chunk-216" class="theorem"><strong>Théorème 6.6  </strong></span>Si <span class="math inline">\(X\)</span> et <span class="math inline">\(Y\)</span> sont deux variables <strong>indépendantes</strong> suivant des lois de
+<span id="thm:unnamed-chunk-218" class="theorem"><strong>Théorème 6.6  </strong></span>Si <span class="math inline">\(X\)</span> et <span class="math inline">\(Y\)</span> sont deux variables <strong>indépendantes</strong> suivant des lois de
 Poisson
 <span class="math display">\[X \sim \mathcal{P}(\lambda) \quad \text{et} \quad Y \sim \mathcal{P}(\mu)\]</span>
 alors leur somme suit aussi une loi de Poisson:
@@ -1860,7 +1871,7 @@ suite de <span class="math inline">\(k-1\)</span> événements <span class="math
 <span class="math display">\[\underbrace{\bar{A}\bar{A}\ldots \bar{A}}_{k-1}A\]</span> D’où:</p>
 <p><span class="math display" id="eq:geom">\[\begin{equation}
     P(X=k)=(1-p)^{k-1}p \quad \forall \, k \in \mathbb{N^*}
-    \tag{6.3}
+    \tag{6.4}
 \end{equation}\]</span>
 Cette loi peut servir à modéliser des temps de vie, ou des temps
 d’attente, lorsque le temps est mesuré de manière discrète (nombre de
@@ -1873,7 +1884,7 @@ on vérifie bien que c’est une loi de probabilité:</p>
 &amp;= p \frac{1}{1-(1-p)}=1\end{aligned}\]</span></p>
 <p><strong>Moments de loi Géométrique</strong></p>
 <p>En dérivant la série entière
-<a href="variables-aleatoires-discretes.html#eq:geom">(6.3)</a> ci-dessus, on obtient
+<a href="variables-aleatoires-discretes.html#eq:geom">(6.4)</a> ci-dessus, on obtient
 <span class="math inline">\(\sum_{k=1}^\infty k x^{k-1}=1/(1-x)^2\)</span>. Ceci permet d’obtenir
 l’espérance:
 <span class="math display">\[E(X)=\sum_{k=1}^\infty kp(1-p)^{k-1}=\frac{p}{[1-(1-p)]^2}=\frac{1}{p}\]</span></p>
@@ -1886,7 +1897,7 @@ est égal à <span class="math inline">\(1/p\)</span>. Par exemple, le nombre es
 </ul>
 <p>Le calcul de la variance se fait à partir du moment factoriel et en
 utilisant la dérivée seconde de la série entière
-<a href="variables-aleatoires-discretes.html#eq:geom">(6.3)</a>:
+<a href="variables-aleatoires-discretes.html#eq:geom">(6.4)</a>:
 <span class="math inline">\(\sum_{k=2}^\infty k(k-1) x^{k-2} = 2/(1-x)^3\)</span>, Donc</p>
 <p><span class="math display">\[\begin{aligned}
 E[X(X-1)]&amp;=\sum_{k=2}^\infty k(k-1)p(1-p)^{k-1} \\ &amp;= p(1-p)\sum_{k=2}^\infty k(k-1)(1-p)^{k-2} \\

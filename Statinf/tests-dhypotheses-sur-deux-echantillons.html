@@ -24,7 +24,7 @@
 <meta name="author" content="Mohamad Ghassany" />
 
 
-<meta name="date" content="2019-12-15" />
+<meta name="date" content="2019-12-16" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -32,7 +32,7 @@
   
   <link rel="shortcut icon" href="img/favicon.ico" type="image/x-icon" />
 <link rel="prev" href="exercices-4.html"/>
-<link rel="next" href="variables-aleatoires-discretes.html"/>
+<link rel="next" href="tests-de-khi-deux-chi2.html"/>
 <script src="book_assets/jquery-2.2.3/jquery.min.js"></script>
 <link href="book_assets/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="book_assets/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -309,6 +309,12 @@ code span.wa { color: #bf0303; } /* Warning */
 <li class="chapter" data-level="6.1.1" data-path="tests-dhypotheses-sur-deux-echantillons.html"><a href="tests-dhypotheses-sur-deux-echantillons.html#test-de-fisher-de-comparaison-des-variances"><i class="fa fa-check"></i><b>6.1.1</b> Test de Fisher de comparaison des variances</a></li>
 <li class="chapter" data-level="6.1.2" data-path="tests-dhypotheses-sur-deux-echantillons.html"><a href="tests-dhypotheses-sur-deux-echantillons.html#tests-de-comparaison-de-moyennes"><i class="fa fa-check"></i><b>6.1.2</b> Tests de comparaison de moyennes</a></li>
 </ul></li>
+<li class="chapter" data-level="6.2" data-path="tests-dhypotheses-sur-deux-echantillons.html"><a href="tests-dhypotheses-sur-deux-echantillons.html#comparaison-de-deux-proportions"><i class="fa fa-check"></i><b>6.2</b> Comparaison de deux proportions</a></li>
+</ul></li>
+<li class="part"><span><b>Séance 9</b></span></li>
+<li class="chapter" data-level="7" data-path="tests-de-khi-deux-chi2.html"><a href="tests-de-khi-deux-chi2.html"><i class="fa fa-check"></i><b>7</b> Tests de Khi-deux <span class="math inline">\(\chi^2\)</span></a><ul>
+<li class="chapter" data-level="7.1" data-path="tests-de-khi-deux-chi2.html"><a href="tests-de-khi-deux-chi2.html#test-dajustement-de-chi2"><i class="fa fa-check"></i><b>7.1</b> Test d’ajustement de <span class="math inline">\(\chi^2\)</span></a></li>
+<li class="chapter" data-level="7.2" data-path="tests-de-khi-deux-chi2.html"><a href="tests-de-khi-deux-chi2.html#test-dindependance-de-chi2"><i class="fa fa-check"></i><b>7.2</b> Test d’indépendance de <span class="math inline">\(\chi^2\)</span></a></li>
 </ul></li>
 <li class="part"><span><b>Rappel Probabilités</b></span></li>
 <li class="chapter" data-level="" data-path="variables-aleatoires-discretes.html"><a href="variables-aleatoires-discretes.html"><i class="fa fa-check"></i>Variables Aléatoires Discrètes</a><ul>
@@ -566,30 +572,34 @@ Z_0 = \frac{\overline{X}_1 -\overline{X}_2}{\sqrt{\frac{\sigma_1^2}{n_1} + \frac
 \end{equation}\]</span></p>
 <p>suit la loi <span class="math inline">\(\mathcal{N}(0,1)\)</span>.</p>
 <div class="rmdinsight">
-<p><strong>Critère de rejet de $H_{0}:</strong></p>
+<p><strong>Critère de rejet de <span class="math inline">\(H_{0}\)</span>:</strong></p>
 <ul>
 <li>Test de <span class="math inline">\(H_0: m_1 = m_2\)</span> contre <span class="math inline">\(m_1 \neq m_2\)</span>: On rejette <span class="math inline">\(H_0\)</span> si <span class="math inline">\(|z_0| &gt; z_{1-\alpha/2}\)</span>.</li>
 <li>Test de <span class="math inline">\(H_0: m_1 \leq m_2\)</span> contre <span class="math inline">\(m_1 &gt; m_2\)</span>: On rejette <span class="math inline">\(H_0\)</span> si <span class="math inline">\(z_0 &gt; z_{1-\alpha}\)</span>.</li>
 <li>Test de <span class="math inline">\(H_0: m_1 \geq m_2\)</span> contre <span class="math inline">\(m_1 &lt; m_2\)</span>: On rejette <span class="math inline">\(H_0\)</span> si <span class="math inline">\(z_0 &lt; z_{\alpha}\)</span>.</li>
 </ul>
+<p>où <span class="math inline">\(z_{\alpha}\)</span> est le quantile d’order <span class="math inline">\(\alpha\)</span> de la loi <span class="math inline">\(\mathcal{N}(0,1)\)</span>.</p>
 </div>
 </div>
 <div id="cas-de-variances-inconnues-mais-egales-sigma_12sigma_22sigma2-test-de-student" class="section level4">
 <h4><span class="header-section-number">6.1.2.2</span> Cas de variances inconnues mais égales <span class="math inline">\(\sigma_1^2=\sigma_2^2=\sigma^2\)</span> (<em>test de Student</em>)</h4>
 <p>Les variances <span class="math inline">\(\sigma_1^2\)</span> et <span class="math inline">\(\sigma_2^2\)</span> étant inconnues, on ne peut pas utiliser directement la statistique de l’équation <a href="tests-dhypotheses-sur-deux-echantillons.html#eq:comparaisonmoyennesvariancesconnues">(6.1)</a> pour construire le test. Comme dans ce cas, <span class="math inline">\({S_1^*}^2\)</span> et <span class="math inline">\({S_2^*}^2\)</span> estiment tous les deux la variance commune <span class="math inline">\(\sigma^2\)</span>, on peut les combiner pour obtenir une seule estimation de <span class="math inline">\(\sigma^2\)</span>, soit</p>
-<p><span class="math inline">\(S_p^2 = \frac{(n_1-1){S_1^*}^2 + (n_2-1){S_2^*}^2}{n_1+n_2-2}\)</span></p>
+<p><span class="math display">\[
+S_p^2 = \frac{(n_1-1){S_1^*}^2 + (n_2-1){S_2^*}^2}{n_1+n_2-2}
+\]</span></p>
 <p>Pour tester <span class="math inline">\(H_0:m_1=m_2\)</span>, on calcule la statistique du test</p>
 <p><span class="math display">\[
 T_0 =  \frac{\overline{X}_1 -\overline{X}_2}{S_p \sqrt{\frac{1}{n_1} + \frac{1}{n_2}}}
 \]</span></p>
 <p>Cette statistique, sous <span class="math inline">\(H_0\)</span> suit la loi de Student avec <span class="math inline">\(n_1+n_2-2\)</span> degrés de libertés <span class="math inline">\(St(n_1+n_2-2)\)</span>.</p>
 <div class="rmdinsight">
-<p><strong>Critère de rejet de $H_{0}:</strong></p>
+<p><strong>Critère de rejet de <span class="math inline">\(H_{0}\)</span>:</strong></p>
 <ul>
 <li>Test de <span class="math inline">\(H_0: m_1 = m_2\)</span> contre <span class="math inline">\(m_1 \neq m_2\)</span>: On rejette <span class="math inline">\(H_0\)</span> si <span class="math inline">\(|t_0| &gt; t_{1-\alpha/2; \, n_1+n_2-2}\)</span>.</li>
 <li>Test de <span class="math inline">\(H_0: m_1 \leq m_2\)</span> contre <span class="math inline">\(m_1 &gt; m_2\)</span>: On rejette <span class="math inline">\(H_0\)</span> si <span class="math inline">\(t_0 &gt; t_{1-\alpha; \, n_1+n_2-2}\)</span>.</li>
 <li>Test de <span class="math inline">\(H_0: m_1 \geq m_2\)</span> contre <span class="math inline">\(m_1 &lt; m_2\)</span>: On rejette <span class="math inline">\(H_0\)</span> si <span class="math inline">\(t_0 &lt; t_{\alpha; \, n_1+n_2-2}\)</span>.</li>
 </ul>
+<p>où <span class="math inline">\(t_{\alpha; \, n}\)</span> est le quantile d’order <span class="math inline">\(\alpha\)</span> de la loi <span class="math inline">\(St(n)\)</span>.</p>
 </div>
 </div>
 <div id="cas-de-variances-inconnues-mais-inegales" class="section level4">
@@ -603,9 +613,42 @@ les moyennes d’échantillons issus de n’importe quelle loi de probabilité. 
 <p>La généralisation de ce problème à la comparaison des moyennes de <span class="math inline">\(k\)</span> échantillons gaussiens indépendants fait l’objet d’un domaine important de la statistique
 appelé l’<strong>analyse de variance (Anova)</strong>.</p>
 </div>
+</div>
+</div>
+</div>
+<div id="comparaison-de-deux-proportions" class="section level2">
+<h2><span class="header-section-number">6.2</span> Comparaison de deux proportions</h2>
+<p>Dans cette section, on supposera que les deux échantillons sont indépendants et de
+loi de Bernoulli et on comparera leurs paramètres. <span class="math inline">\(X_{11},X_{12} \ldots, X_{1n_{1}}\)</span> sont indépendantes et de même loi <span class="math inline">\(\mathcal{B}\left(p_{1}\right)\)</span> et <span class="math inline">\(X_{21},X_{22} \ldots, X_{2n_{2}}\)</span> indépendantes et de même loi <span class="math inline">\(\mathcal{B}\left(p_{2}\right) .\)</span> Les <span class="math inline">\(X_{1}\)</span> et les <span class="math inline">\(X_{2}\)</span> sont indépendantes. On souhaite comparer <span class="math inline">\(p_{1}\)</span> et <span class="math inline">\(p_{2}\)</span>, c’est-à-dire effectuer des tests du type <span class="math inline">\(p_{1} \leq p_{2}\)</span> contre <span class="math inline">\(p_{1}&gt;p_{2}\)</span> ou <span class="math inline">\(p_{1}=p_{2}\)</span> contre <span class="math inline">\(p_{1} \neq p_2\)</span>.</p>
+<div class="rmdcaution">
+<p>Comme pour les tests sur une propotion vus dans le chapitre précédent, ce test est valable lorsque <span class="math inline">\(n_1\)</span> et <span class="math inline">\(n_2\)</span> sont suffisamment grands.</p>
+</div>
+<p>Suuposons que l’approximation normale de la loi binomiale s’applique à chaque population, de sorte que les estimations des proportions <span class="math inline">\(\hat{p}_1=\sum_{i=1}^{n_1}X_{1i}/ {n_1}\)</span> et <span class="math inline">\(\hat{p}_2=\sum_{i=1}^{n_2}X_{2i}/ {n_2}\)</span> suivent approximativement les lois normales:</p>
+<p><span class="math display">\[
+\hat{p}_1 \thicksim \mathcal{N}\big(p_1, \frac{p_1(1-p_1)}{n_1}\big) \quad \text{ et } \quad \hat{p}_2 \thicksim \mathcal{N}\big(p_2, \frac{p_2(1-p_2)}{n_2}\big)
+\]</span></p>
+<p>Donc, si l’hypothèse nulle <span class="math inline">\(H_0\)</span> est vraie, en utilisant le fait que <span class="math inline">\(p_1=p_2=p\)</span>, la variable aléatoire <span class="math inline">\(\hat{p}_1-\hat{p}_2\)</span> suit approximativement la loi normale:</p>
+<p><span class="math display">\[
+\hat{p}_1-\hat{p}_2 \thicksim \mathcal{N}\big(0, p(1-p) \big[ \frac{1}{n_1} + \frac{1}{n_2} \big] \big)
+\]</span></p>
+<p>Un estimiateur du paramètre commun <span class="math inline">\(p\)</span> (qu’on pourrait appeler la “proportion du succès global”) est:</p>
+<p><span class="math display">\[
+\hat{p} = \frac{X_1 + X_2}{n_1+n_2}
+\]</span></p>
+<p>La statistique du test pour <span class="math inline">\(H_0: p_1=p_2\)</span>, qui suit une loi <span class="math inline">\(\mathcal{N}(0,1)\)</span> lorsque <span class="math inline">\(H_0\)</span> est vraie, est alors</p>
+<p><span class="math display">\[
+Z_0 = \sqrt{ \frac{\hat{p}_1-\hat{p}_2}{\hat{p}(1-\hat{p}) \big[ \frac{1}{n_1} + \frac{1}{n_2} \big]}  }
+\]</span></p>
+<div class="rmdinsight">
+<p><strong>Critère de rejet de <span class="math inline">\(H_{0}\)</span>:</strong></p>
+<ul>
+<li>Test de <span class="math inline">\(H_0: p_1 = p_2\)</span> contre <span class="math inline">\(p_1 \neq p_2\)</span>: On rejette <span class="math inline">\(H_0\)</span> si <span class="math inline">\(|z_0| &gt; z_{1-\alpha/2}\)</span>.</li>
+<li>Test de <span class="math inline">\(H_0: p_1 \leq p_2\)</span> contre <span class="math inline">\(p_1 &gt; p_2\)</span>: On rejette <span class="math inline">\(H_0\)</span> si <span class="math inline">\(z_0 &gt; z_{1-\alpha}\)</span>.</li>
+<li>Test de <span class="math inline">\(H_0: p_1 \geq p_2\)</span> contre <span class="math inline">\(p_1 &lt; p_2\)</span>: On rejette <span class="math inline">\(H_0\)</span> si <span class="math inline">\(z_0 &lt; z_{\alpha}\)</span>.</li>
+</ul>
+<p>où <span class="math inline">\(z_{\alpha}\)</span> est le quantile d’order <span class="math inline">\(\alpha\)</span> de la loi <span class="math inline">\(\mathcal{N}(0,1)\)</span>.</p>
+</div>
 
-</div>
-</div>
 </div>
 </div>
 
@@ -623,7 +666,7 @@ appelé l’<strong>analyse de variance (Anova)</strong>.</p>
         </div>
       </div>
 <a href="exercices-4.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="variables-aleatoires-discretes.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="tests-de-khi-deux-chi2.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="book_assets/gitbook-2.6.7/js/app.min.js"></script>

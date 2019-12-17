@@ -24,7 +24,7 @@
 <meta name="author" content="Mohamad Ghassany" />
 
 
-<meta name="date" content="2019-12-16" />
+<meta name="date" content="2019-12-17" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -430,6 +430,7 @@ Vous êtes invités à annoter le contenu de ce cours. Les annotations peuvent �
 <p>On se propose d’étudier le poids des poulpes femelles. On va construire des intervalles de confiances pour la moyenne et la variance de cette variable, à l’aide du fichier de données <a href="datasets/poulpe.csv">poulpe.csv <i class="fas  fa-table "></i></a>.</p>
 <ol style="list-style-type: decimal">
 <li>Récupérer le fichier <a href="datasets/poulpe.csv">poulpe.csv <i class="fas  fa-table "></i></a> et charger le dans votre session <svg style="height:0.8em;top:.04em;position:relative;fill:steelblue;" viewBox="0 0 581 512"><path d="M581 226.6C581 119.1 450.9 32 290.5 32S0 119.1 0 226.6C0 322.4 103.3 402 239.4 418.1V480h99.1v-61.5c24.3-2.7 47.6-7.4 69.4-13.9L448 480h112l-67.4-113.7c54.5-35.4 88.4-84.9 88.4-139.7zm-466.8 14.5c0-73.5 98.9-133 220.8-133s211.9 40.7 211.9 133c0 50.1-26.5 85-70.3 106.4-2.4-1.6-4.7-2.9-6.4-3.7-10.2-5.2-27.8-10.5-27.8-10.5s86.6-6.4 86.6-92.7-90.6-87.9-90.6-87.9h-199V361c-74.1-21.5-125.2-67.1-125.2-119.9zm225.1 38.3v-55.6c57.8 0 87.8-6.8 87.8 27.3 0 36.5-38.2 28.3-87.8 28.3zm-.9 72.5H365c10.8 0 18.9 11.7 24 19.2-16.1 1.9-33 2.8-50.6 2.9v-22.1z"/></svg>.</li>
+<li>Sélectionner les poulpes femelles.</li>
 <li>Calculer les estimateurs de la moyenne et de la variance. Représenter les données sur un histogramme.</li>
 <li>Déterminer un intervalle de confiance à <span class="math inline">\(95\%\)</span> pour la moyenne, en calculant les bornes de l’intervalle avec la fonction <code>qt()</code>.</li>
 <li>Retrouver cet intervalle à l’aide de la fonction <code>t.test()</code>.</li>
@@ -452,7 +453,7 @@ Vous êtes invités à annoter le contenu de ce cours. Les annotations peuvent �
 </div>
 <div id="ic-pour-le-parametre-lambda-dune-loi-exponentielle" class="section level2 unnumbered">
 <h2>IC pour le paramètre <span class="math inline">\(\lambda\)</span> d’une loi exponentielle</h2>
-<p>Soit <span class="math inline">\(X_1,\ldots,X_n\)</span> un échantillon de la loi exponentielle de paramètre <span class="math inline">\(\lambda\)</span>. L’emv de <span class="math inline">\(\lambda\)</span> est <span class="math inline">\(T = n/(X_1+\ldots+X_n)\)</span>. La variable aléatoire <span class="math inline">\(Y=2\lambda X\)</span> suit une loi exponentielle de paramètre <span class="math inline">\(1/2\)</span>, qui est aussi une loi <span class="math inline">\(\chi^2(2)\)</span> (<a href="http://www.math.wm.edu/~leemis/chart/UDR/PDFs/ChisquareExponential.pdf" target="_blank">preuve <i class="fas  fa-external-link-alt "></i></a>). Soit donc <span class="math inline">\(Y_i = 2\lambda X_i\)</span> un échantillon iid de loi <span class="math inline">\(\chi^2(2)\)</span>.</p>
+<p>Soit <span class="math inline">\(X_1,\ldots,X_n\)</span> un échantillon de la loi exponentielle de paramètre <span class="math inline">\(\lambda\)</span>. L’emv de <span class="math inline">\(\lambda\)</span> est <span class="math inline">\(\hat{\lambda} = n/(X_1+\ldots+X_n)\)</span>. La variable aléatoire <span class="math inline">\(Y=2\lambda X\)</span> suit une loi exponentielle de paramètre <span class="math inline">\(1/2\)</span>, qui est aussi une loi <span class="math inline">\(\chi^2(2)\)</span> (<a href="http://www.math.wm.edu/~leemis/chart/UDR/PDFs/ChisquareExponential.pdf" target="_blank">preuve <i class="fas  fa-external-link-alt "></i></a>). Soit donc <span class="math inline">\(Y_i = 2\lambda X_i\)</span> un échantillon iid de loi <span class="math inline">\(\chi^2(2)\)</span>.</p>
 <p>Soit <span class="math inline">\(T=2\lambda \sum_{i=1}^n X_i = \sum_{i=1}^n Y_i\)</span>. Donc <span class="math inline">\(T\)</span> suit la loi <span class="math inline">\(\chi^2(2n)\)</span>.</p>
 <ol style="list-style-type: decimal">
 <li>Construire un IC pour <span class="math inline">\(\lambda\)</span> (sur papier).</li>
@@ -494,7 +495,7 @@ Vous êtes invités à annoter le contenu de ce cours. Les annotations peuvent �
 </tr>
 </tbody>
 </table>
-<p>Calculer l’IC de <span class="math inline">\(\lambda\)</span> selon cet échantillon et l’IC de la moyenne de durées des appels selon cet échantillon.</p>
+<p>Calculer l’IC de <span class="math inline">\(\lambda\)</span> à niveau de confiance <span class="math inline">\(95\%\)</span> selon cet échantillon.</p>
 <p><strong>Simulation</strong></p>
 <ol start="3" style="list-style-type: decimal">
 <li>Choisir maintenant une valeur de <span class="math inline">\(\lambda\)</span>. Tirer <span class="math inline">\(100\)</span> échantillons de taille <span class="math inline">\(10\)</span> de la loi exponentielle de paramètre <span class="math inline">\(\lambda\)</span>.</li>

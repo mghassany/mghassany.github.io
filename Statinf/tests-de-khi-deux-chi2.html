@@ -24,7 +24,7 @@
 <meta name="author" content="Mohamad Ghassany" />
 
 
-<meta name="date" content="2019-12-22" />
+<meta name="date" content="2019-12-24" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -426,11 +426,182 @@ Vous êtes invités à annoter le contenu de ce cours. Les annotations peuvent �
 </div>
 <div id="tests-de-khi-deux-chi2" class="section level1">
 <h1><span class="header-section-number">Chapitre 7</span> Tests de Khi-deux <span class="math inline">\(\chi^2\)</span></h1>
+<p>Nous terminons ce module par une présentation du plus célèbre des tests d’hypothèses, le test du <span class="math inline">\(\chi^2\)</span>. Il y a en fait plusieurs variantes de ce test.</p>
 <div id="test-dajustement-de-chi2" class="section level2">
 <h2><span class="header-section-number">7.1</span> Test d’ajustement de <span class="math inline">\(\chi^2\)</span></h2>
+<p>Les procédures de tests d’hypothèses discutées dans les chapitres précédentes conviennent pour les
+problèmes dont on connaît la forme de la fonction de densité de la variable aléatoire, et dont
+les hypothèses portent sur les paramètres de la distribution. Par contre, il peut arriver qu’on ne
+connaisse pas la distribution de probabilité de la variable aléatoire étudiée, disons <span class="math inline">\(X\)</span>, et qu’on
+désire tester l’hypothèse que <span class="math inline">\(X\)</span> suit une loi de probabilité particulière. On veut, par exemple,
+tester l’hypothèse que <span class="math inline">\(X\)</span> suit la loi normale. Un graphique quantile-quantile (<strong>qqplot</strong>) peut nous donner une première idée de la réponse à cette question. Dans cette section, on décrira une procédure formelle de test d’ajustement basée sur la loi du <span class="math inline">\(\chi^2\)</span>.</p>
+<p><strong>La procédure du test</strong></p>
+<p>La procédure de test requiert un échantillon aléatoire de taille <span class="math inline">\(n\)</span> de la variable aléatoire
+<span class="math inline">\(X\)</span>, dont la fonction de densité de probabilité est inconnue. Ces <span class="math inline">\(n\)</span> observations sont disposées dans un tableau de fréquences ayant <span class="math inline">\(k\)</span> classes. Soit <span class="math inline">\(O_{i}\)</span> la fréquence observée dans la
+<span class="math inline">\(i\)</span>-ième classe. A l’aide de la distribution hypothétique de probabilité, on calcule la fréquence
+espérée dans la <span class="math inline">\(i\)</span>-ième classe <span class="math inline">\(E_{i}\)</span>. (Notons que les fréquences espérées ne sont pas
+nécessairement des nombres entiers, et qu’elles n’ont pas à être arrondies puisqu’il s’agit
+d’espérances.)</p>
+<p>Pour tester les hypothèses
+<span class="math display">\[
+\begin{aligned} 
+{H}_{0} &amp;: \text { La loi proposée est un bon modèle pour cette variable; } \\ 
+{H}_{1} &amp;: \text { La loi proposée n&#39;est pas un bon modèle pour cette variable,}
+\end{aligned}
+\]</span></p>
+<p>La statistique du test est</p>
+<p><span class="math display">\[
+U_{0}=\sum_{i=1}^{k} \frac{\left(O_{i}-E_{i}\right)^{2}}{E_{i}}
+\]</span>
+Cette statistique peut être considérée comme une distance entre le modèle proposé et les
+quantités observées. On peut démontrer que <span class="math inline">\(U_{0}\)</span> suit approximativement la loi du <span class="math inline">\(\chi^2\)</span>
+avec <span class="math inline">\(k-p-1\)</span> degrés de liberté, où <span class="math inline">\(p\)</span> représente le nombre de paramètres de la distribution hypothétique estimés à partir de l’échantillon. Cette approximation s’améliore lorsque <span class="math inline">\(n\)</span> augmente.</p>
+<div class="rmdinsight">
+<p><strong>Critère de rejet de <span class="math inline">\(H_0\)</span> du test d’ajustement du <span class="math inline">\(\chi^2\)</span></strong></p>
+<p>On rejette l’hypothèse que <span class="math inline">\(X\)</span> suite la distribution hypothétique si <span class="math inline">\(u_0 &gt; \chi^2_{1-\alpha,k-p-1}\)</span></p>
+</div>
 </div>
 <div id="test-dindependance-de-chi2" class="section level2">
 <h2><span class="header-section-number">7.2</span> Test d’indépendance de <span class="math inline">\(\chi^2\)</span></h2>
+<p>Les tests d’hypothèses permettent également de vérifier, avec une certaine probabilité d’erreur,
+bien sûr, s’il existe une interaction entre deux variables catégoriques (e.g. <em>discrètes</em>, <em>qualitatives</em>), ou si plusieurs populations présentent les mêmes proportions dans les diverses catégories d’une variable. Nous discutons dans cette section le <strong>test d’indépendance de deux variables qualitatives</strong>.</p>
+<p><strong>La procédure du test</strong></p>
+<p>On peut souvent classer les <span class="math inline">\(n\)</span> éléments d’un échantillon suivant deux critères différents, c’est-à-dire selon les valeurs de deux variables aléatoires discrètes ou qualitatives. Il est alors intéressant de savoir si les deux variables sont statistiquement indépendantes. On peut, par exemple,
+considérer la population des ingénieurs du pays et vouloir déterminer si le salaire de départ est
+indépendant de la discipline étudiée. Supposons que la première variable <span class="math inline">\(X\)</span> possède <span class="math inline">\(r\)</span> catégories
+et que la deuxième <span class="math inline">\(Y\)</span> en a <span class="math inline">\(c\)</span>. Appelons <span class="math inline">\(O_{i j}\)</span> la fréquence observée pour la catégorie <span class="math inline">\(i\)</span> de <span class="math inline">\(X\)</span> et pour la catégorie <span class="math inline">\(j\)</span> de <span class="math inline">\(Y\)</span>. En règle générale, les données apparaîtront comme dans le tableau suivant. Un tel tableau est appelé “tableau de contingences” ou “tableau de fréquences” (<span class="math inline">\(r\)</span> lignes et <span class="math inline">\(c\)</span> colonnes).</p>
+<table class="table table-striped" style="width: auto !important; margin-left: auto; margin-right: auto;">
+<tbody>
+<tr>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+<span class="math inline">\(y_1\)</span>
+</td>
+<td style="text-align:left;">
+<span class="math inline">\(\ldots\)</span>
+</td>
+<td style="text-align:left;">
+<span class="math inline">\(y_j\)</span>
+</td>
+<td style="text-align:left;">
+<span class="math inline">\(\ldots\)</span>
+</td>
+<td style="text-align:left;">
+<span class="math inline">\(y_c\)</span>
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+<span class="math inline">\(x_1\)</span>
+</td>
+<td style="text-align:left;">
+<span class="math inline">\(O_{11}\)</span>
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+<span class="math inline">\(O_{1j}\)</span>
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+<span class="math inline">\(O_{1c}\)</span>
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+<span class="math inline">\(\vdots\)</span>
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+<span class="math inline">\(x_{i}\)</span>
+</td>
+<td style="text-align:left;">
+<span class="math inline">\(O_{i 1}\)</span>
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+<span class="math inline">\(O_{i j}\)</span>
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+<span class="math inline">\(O_{i c}\)</span>
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+<span class="math inline">\(\vdots\)</span>
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+<span class="math inline">\(x_r\)</span>
+</td>
+<td style="text-align:left;">
+<span class="math inline">\(O_{r 1}\)</span>
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+<span class="math inline">\(O_{r j}\)</span>
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+<span class="math inline">\(O_{rc}\)</span>
+</td>
+</tr>
+</tbody>
+</table>
+<p>On désire tester l’hypothèse que les variable <span class="math inline">\(X\)</span> et <span class="math inline">\(Y\)</span> sont indépendantes:</p>
+<p><span class="math display">\[
+\begin{aligned}
+H_{0}&amp;: X \text { et } Y \text { sont indépendantes; } \\
+H_{1}&amp;: X \text { et } Y \text { sont dépendantes. }
+\end{aligned}
+\]</span>
+Si l’on rejette cette hypothèse nulle, on conclut qu’il existe une certaine interaction entre les deux critères de classement. Les procédure de test exactes sont difficiles à obtenir, mais on présente ici une statistique de test approximative qui est valide pour les grandes tailles d’échantillon.</p>
+<p>Supposons que <span class="math inline">\(p_{ij}\)</span> est la probabilité qu’un élément choisi au hasard soit dans la <span class="math inline">\(ij\)</span>-ième cellule, c’est-à-dire que les variables prennent les valeurs <span class="math inline">\(X=i\)</span> et <span class="math inline">\(Y=j\)</span>. Dans la mesure où les deux classements sont indépendants, alors, <span class="math inline">\(p_{ij}=P(X=i,Y=j)=P(X=i)P(Y=j)\)</span>. Les estimateurs du maximum de vraisemblance de <span class="math inline">\(P(X=i)\)</span> et de <span class="math inline">\(P(Y=j)\)</span> sont respectivement</p>
+<p><span class="math display">\[
+\hat{P}(X=i)= \frac{1}{n}\sum_{j=1}^c O_{ij} \quad \text{ et } \quad \hat{P}(Y=j)= \frac{1}{n}\sum_{i=1}^r O_{ij}
+\]</span></p>
+<p>Donc, si on suppose l’indépendance, l’estimateur du nombre espéré d’éléments dans chaque classe est</p>
+<p><span class="math display">\[
+\hat{E}_{ij}= n \hat{P}(X=i) \hat{P}(Y=j) = \frac{1}{n} \sum_{m=1}^c O_{im} \sum_{k=1}^r O_{kj}
+\]</span></p>
+<p>Ainsi, pour les grandes tailles <span class="math inline">\(n\)</span> (ou plutôt pour des fréquences espérées pas trop petites), on a la distribution approximative suivantes sous <span class="math inline">\(H_0\)</span>:</p>
+<p><span class="math display">\[
+U_0 = \frac{1}{n}\sum_{i=1}^r\sum_{j=1}^c \frac{(O_{ij} - \hat{E}_{ij})^2}{\hat{E}_{ij}} \thicksim \chi^2_{(r-1)(c-1)}  
+\]</span></p>
+<p>Comme dans le cas du test d’ajustement du <span class="math inline">\(\chi^2\)</span> , on peut interpréter la statistique <span class="math inline">\(U_0\)</span> comme une “distance” entre le modèle d’indépendance hypothétique et les fréquences observées. Si cette distance est trop grande, il faut rejeter le modèle.</p>
+<div class="rmdinsight">
+<p><strong>Critère de rejet de <span class="math inline">\(H_0\)</span> de l’indépendance de deux variables qualitatives</strong></p>
+<p>On rejette l’hypothèse d’indépendance si <span class="math inline">\(u_0 &gt; \chi^2_{1-\alpha,(r-1)(c-1)}\)</span></p>
+</div>
 
 </div>
 </div>

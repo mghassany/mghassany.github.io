@@ -24,7 +24,7 @@
 <meta name="author" content="Mohamad Ghassany" />
 
 
-<meta name="date" content="2019-12-25" />
+<meta name="date" content="2019-12-26" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -283,9 +283,9 @@ code span.wa { color: #bf0303; } /* Warning */
 <li class="chapter" data-level="" data-path="exercices-3.html"><a href="exercices-3.html"><i class="fa fa-check"></i>Exercices</a></li>
 <li class="part"><span><b>Séance 6</b></span></li>
 <li class="chapter" data-level="" data-path="tp-intervalle-de-confiance.html"><a href="tp-intervalle-de-confiance.html"><i class="fa fa-check"></i>TP Intervalle de confiance</a><ul>
-<li class="chapter" data-level="" data-path="tp-intervalle-de-confiance.html"><a href="tp-intervalle-de-confiance.html#ic-pour-la-moyenne-et-la-variance-de-la-loi-normale"><i class="fa fa-check"></i>IC pour la moyenne et la variance de la loi normale</a></li>
-<li class="chapter" data-level="" data-path="tp-intervalle-de-confiance.html"><a href="tp-intervalle-de-confiance.html#ic-pour-une-proportion-et-effet-de-la-confiance"><i class="fa fa-check"></i>IC pour une proportion et effet de la confiance</a></li>
-<li><a href="tp-intervalle-de-confiance.html#ic-pour-le-parametre-lambda-dune-loi-exponentielle">IC pour le paramètre <span class="math inline">\(\lambda\)</span> d’une loi exponentielle</a></li>
+<li class="chapter" data-level="4.4" data-path="tp-intervalle-de-confiance.html"><a href="tp-intervalle-de-confiance.html#poulpes"><i class="fa fa-check"></i><b>4.4</b> IC pour la moyenne et la variance de la loi normale</a></li>
+<li class="chapter" data-level="4.5" data-path="tp-intervalle-de-confiance.html"><a href="tp-intervalle-de-confiance.html#ic-pour-une-proportion-et-effet-de-la-confiance"><i class="fa fa-check"></i><b>4.5</b> IC pour une proportion et effet de la confiance</a></li>
+<li class="chapter" data-level="4.6" data-path="tp-intervalle-de-confiance.html"><a href="tp-intervalle-de-confiance.html#ic-pour-le-parametre-lambda-dune-loi-exponentielle"><i class="fa fa-check"></i><b>4.6</b> IC pour le paramètre <span class="math inline">\(\lambda\)</span> d’une loi exponentielle</a></li>
 </ul></li>
 <li class="part"><span><b>Séance 7</b></span></li>
 <li class="chapter" data-level="5" data-path="tests-dhypotheses.html"><a href="tests-dhypotheses.html"><i class="fa fa-check"></i><b>5</b> Tests d’hypothèses</a><ul>
@@ -311,11 +311,13 @@ code span.wa { color: #bf0303; } /* Warning */
 </ul></li>
 <li class="chapter" data-level="6.2" data-path="tests-dhypotheses-sur-deux-echantillons.html"><a href="tests-dhypotheses-sur-deux-echantillons.html#comparaison-de-deux-proportions"><i class="fa fa-check"></i><b>6.2</b> Comparaison de deux proportions</a></li>
 </ul></li>
+<li class="chapter" data-level="" data-path="exercices-5.html"><a href="exercices-5.html"><i class="fa fa-check"></i>Exercices</a></li>
 <li class="part"><span><b>Séance 9</b></span></li>
 <li class="chapter" data-level="7" data-path="tests-de-khi-deux-chi2.html"><a href="tests-de-khi-deux-chi2.html"><i class="fa fa-check"></i><b>7</b> Tests de Khi-deux <span class="math inline">\(\chi^2\)</span></a><ul>
 <li class="chapter" data-level="7.1" data-path="tests-de-khi-deux-chi2.html"><a href="tests-de-khi-deux-chi2.html#test-dajustement-de-chi2"><i class="fa fa-check"></i><b>7.1</b> Test d’ajustement de <span class="math inline">\(\chi^2\)</span></a></li>
 <li class="chapter" data-level="7.2" data-path="tests-de-khi-deux-chi2.html"><a href="tests-de-khi-deux-chi2.html#test-dindependance-de-chi2"><i class="fa fa-check"></i><b>7.2</b> Test d’indépendance de <span class="math inline">\(\chi^2\)</span></a></li>
 </ul></li>
+<li class="chapter" data-level="" data-path="exercices-6.html"><a href="exercices-6.html"><i class="fa fa-check"></i>Exercices</a></li>
 <li class="part"><span><b>Rappel Probabilités</b></span></li>
 <li class="chapter" data-level="" data-path="variables-aleatoires-discretes.html"><a href="variables-aleatoires-discretes.html"><i class="fa fa-check"></i>Variables Aléatoires Discrètes</a><ul>
 <li class="chapter" data-level="" data-path="variables-aleatoires-discretes.html"><a href="variables-aleatoires-discretes.html#notions-de-probabilites"><i class="fa fa-check"></i>Notions de Probabilités</a><ul>
@@ -427,21 +429,111 @@ Vous êtes invités à annoter le contenu de ce cours. Les annotations peuvent �
 <div id="tp-intervalle-de-confiance" class="section level1 unnumbered">
 <h1>TP Intervalle de confiance</h1>
 <!-- from https://www.math.univ-angers.fr/~loustau/td0.pdf -->
-<div id="ic-pour-la-moyenne-et-la-variance-de-la-loi-normale" class="section level2 unnumbered">
-<h2>IC pour la moyenne et la variance de la loi normale</h2>
+<div id="poulpes" class="section level2">
+<h2><span class="header-section-number">4.4</span> IC pour la moyenne et la variance de la loi normale</h2>
 <p>On se propose d’étudier le poids des poulpes femelles. On va construire des intervalles de confiances pour la moyenne et la variance de cette variable, à l’aide du fichier de données <a href="datasets/poulpe.csv">poulpe.csv <i class="fas  fa-table "></i></a>.</p>
 <ol style="list-style-type: decimal">
 <li>Récupérer le fichier <a href="datasets/poulpe.csv">poulpe.csv <i class="fas  fa-table "></i></a> et charger le dans votre session <svg style="height:0.8em;top:.04em;position:relative;fill:steelblue;" viewBox="0 0 581 512"><path d="M581 226.6C581 119.1 450.9 32 290.5 32S0 119.1 0 226.6C0 322.4 103.3 402 239.4 418.1V480h99.1v-61.5c24.3-2.7 47.6-7.4 69.4-13.9L448 480h112l-67.4-113.7c54.5-35.4 88.4-84.9 88.4-139.7zm-466.8 14.5c0-73.5 98.9-133 220.8-133s211.9 40.7 211.9 133c0 50.1-26.5 85-70.3 106.4-2.4-1.6-4.7-2.9-6.4-3.7-10.2-5.2-27.8-10.5-27.8-10.5s86.6-6.4 86.6-92.7-90.6-87.9-90.6-87.9h-199V361c-74.1-21.5-125.2-67.1-125.2-119.9zm225.1 38.3v-55.6c57.8 0 87.8-6.8 87.8 27.3 0 36.5-38.2 28.3-87.8 28.3zm-.9 72.5H365c10.8 0 18.9 11.7 24 19.2-16.1 1.9-33 2.8-50.6 2.9v-22.1z"/></svg>.</li>
+</ol>
+<div class="sourceCode" id="cb66"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb66-1" title="1"><span class="co"># On peut charger les données en mettant directement l&#39;adresse url</span></a>
+<a class="sourceLine" id="cb66-2" title="2"><span class="co"># Attention au séparateur de colonnes dans le fichier brut</span></a>
+<a class="sourceLine" id="cb66-3" title="3">poulpes =<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&quot;https://www.mghassany.com/Statinf/datasets/poulpe.csv&quot;</span>, <span class="dt">sep=</span> <span class="st">&quot;;&quot;</span>)</a></code></pre></div>
+<ol start="2" style="list-style-type: decimal">
 <li>Sélectionner les poulpes femelles.</li>
+</ol>
+<div class="sourceCode" id="cb67"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb67-1" title="1"><span class="co"># Facultatif:</span></a>
+<a class="sourceLine" id="cb67-2" title="2"><span class="co"># J&#39;affiche la structure de mes données (pour vérifier les types de colonnes par exemple)</span></a>
+<a class="sourceLine" id="cb67-3" title="3"><span class="kw">str</span>(poulpes)</a>
+<a class="sourceLine" id="cb67-4" title="4"><span class="co">#ans&gt; &#39;data.frame&#39;: 28 obs. of  2 variables:</span></a>
+<a class="sourceLine" id="cb67-5" title="5"><span class="co">#ans&gt;  $ Poids: int  300 700 850 900 1000 1420 1500 1500 1800 1800 ...</span></a>
+<a class="sourceLine" id="cb67-6" title="6"><span class="co">#ans&gt;  $ Sexe : Factor w/ 2 levels &quot;Femelle&quot;,&quot;Mâle&quot;: 1 1 1 1 1 1 1 1 1 1 ...</span></a>
+<a class="sourceLine" id="cb67-7" title="7"><span class="co"># J&#39;affiche quelques statistiques</span></a>
+<a class="sourceLine" id="cb67-8" title="8"><span class="kw">summary</span>(poulpes)</a>
+<a class="sourceLine" id="cb67-9" title="9"><span class="co">#ans&gt;      Poids           Sexe   </span></a>
+<a class="sourceLine" id="cb67-10" title="10"><span class="co">#ans&gt;  Min.   : 300   Femelle:13  </span></a>
+<a class="sourceLine" id="cb67-11" title="11"><span class="co">#ans&gt;  1st Qu.:1480   Mâle   :15  </span></a>
+<a class="sourceLine" id="cb67-12" title="12"><span class="co">#ans&gt;  Median :1800               </span></a>
+<a class="sourceLine" id="cb67-13" title="13"><span class="co">#ans&gt;  Mean   :2099               </span></a>
+<a class="sourceLine" id="cb67-14" title="14"><span class="co">#ans&gt;  3rd Qu.:2750               </span></a>
+<a class="sourceLine" id="cb67-15" title="15"><span class="co">#ans&gt;  Max.   :5400</span></a>
+<a class="sourceLine" id="cb67-16" title="16"></a>
+<a class="sourceLine" id="cb67-17" title="17"><span class="co"># Plusieurs solutions possibles pour sélectionner les poulpes femelles</span></a>
+<a class="sourceLine" id="cb67-18" title="18">poulpesF =<span class="st"> </span><span class="kw">subset</span>(poulpes, Sexe <span class="op">==</span><span class="st"> &quot;Femelle&quot;</span>)</a>
+<a class="sourceLine" id="cb67-19" title="19"><span class="co"># ou </span></a>
+<a class="sourceLine" id="cb67-20" title="20">poulpesF =<span class="st"> </span>poulpes[poulpes<span class="op">$</span>Sexe<span class="op">==</span><span class="st">&quot;Femelle&quot;</span>,]</a>
+<a class="sourceLine" id="cb67-21" title="21"><span class="co"># ou autres .. </span></a></code></pre></div>
+<ol start="3" style="list-style-type: decimal">
 <li>Calculer les estimateurs de la moyenne et de la variance. Représenter les données sur un histogramme.</li>
+</ol>
+<div class="sourceCode" id="cb68"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb68-1" title="1">moyenneF =<span class="st"> </span><span class="kw">mean</span>(poulpesF<span class="op">$</span>Poids)</a>
+<a class="sourceLine" id="cb68-2" title="2">moyenneF</a>
+<a class="sourceLine" id="cb68-3" title="3"><span class="co">#ans&gt; [1] 1405</span></a>
+<a class="sourceLine" id="cb68-4" title="4">varF =<span class="st"> </span><span class="kw">var</span>(poulpesF<span class="op">$</span>Poids)</a>
+<a class="sourceLine" id="cb68-5" title="5">varF</a>
+<a class="sourceLine" id="cb68-6" title="6"><span class="co">#ans&gt; [1] 386877</span></a>
+<a class="sourceLine" id="cb68-7" title="7"></a>
+<a class="sourceLine" id="cb68-8" title="8"><span class="kw">hist</span>(poulpesF<span class="op">$</span>Poids,</a>
+<a class="sourceLine" id="cb68-9" title="9">     <span class="dt">main =</span> <span class="st">&quot;Histogramme de poids des poulpes femelles&quot;</span>,</a>
+<a class="sourceLine" id="cb68-10" title="10">     <span class="dt">xlab =</span> <span class="st">&quot;Poids&quot;</span>,</a>
+<a class="sourceLine" id="cb68-11" title="11">     <span class="dt">probability =</span> T,</a>
+<a class="sourceLine" id="cb68-12" title="12">     <span class="dt">col =</span> <span class="st">&quot;steelblue&quot;</span>)</a></code></pre></div>
+<p><img src="Statistique_infentielle_files/figure-html/unnamed-chunk-173-1.png" width="70%" style="display: block; margin: auto;" /></p>
+<ol start="4" style="list-style-type: decimal">
 <li>Déterminer un intervalle de confiance à <span class="math inline">\(95\%\)</span> pour la moyenne, en calculant les bornes de l’intervalle avec la fonction <code>qt()</code>.</li>
+</ol>
+<div class="sourceCode" id="cb69"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb69-1" title="1"><span class="co"># fixons alpha</span></a>
+<a class="sourceLine" id="cb69-2" title="2">alpha =<span class="st"> </span><span class="fl">0.05</span></a>
+<a class="sourceLine" id="cb69-3" title="3"><span class="co"># calculons le nombre de poulpes femelles (plusieurs solutions possibles)</span></a>
+<a class="sourceLine" id="cb69-4" title="4">n =<span class="st"> </span><span class="kw">length</span>(poulpesF<span class="op">$</span>Poids)</a>
+<a class="sourceLine" id="cb69-5" title="5">borne_inf_moy =<span class="st"> </span>moyenneF <span class="op">+</span><span class="st"> </span><span class="kw">qt</span>(alpha<span class="op">/</span><span class="dv">2</span>, n<span class="dv">-1</span>)<span class="op">*</span><span class="st"> </span><span class="kw">sqrt</span>(varF<span class="op">/</span>(n))</a>
+<a class="sourceLine" id="cb69-6" title="6">borne_sup_moy =<span class="st"> </span>moyenneF <span class="op">+</span><span class="st"> </span><span class="kw">qt</span>(<span class="dv">1</span><span class="op">-</span>alpha<span class="op">/</span><span class="dv">2</span>, n<span class="dv">-1</span>)<span class="op">*</span><span class="st"> </span><span class="kw">sqrt</span>(varF<span class="op">/</span>(n))</a>
+<a class="sourceLine" id="cb69-7" title="7">IC_moy =<span class="st"> </span><span class="kw">c</span>(borne_inf_moy, borne_sup_moy)</a>
+<a class="sourceLine" id="cb69-8" title="8">IC_moy</a>
+<a class="sourceLine" id="cb69-9" title="9"><span class="co">#ans&gt; [1] 1030 1781</span></a></code></pre></div>
+<ol start="5" style="list-style-type: decimal">
 <li>Retrouver cet intervalle à l’aide de la fonction <code>t.test()</code>.</li>
+</ol>
+<div class="sourceCode" id="cb70"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb70-1" title="1"><span class="kw">t.test</span>(poulpesF<span class="op">$</span>Poids)</a>
+<a class="sourceLine" id="cb70-2" title="2"><span class="co">#ans&gt; </span></a>
+<a class="sourceLine" id="cb70-3" title="3"><span class="co">#ans&gt;   One Sample t-test</span></a>
+<a class="sourceLine" id="cb70-4" title="4"><span class="co">#ans&gt; </span></a>
+<a class="sourceLine" id="cb70-5" title="5"><span class="co">#ans&gt; data:  poulpesF$Poids</span></a>
+<a class="sourceLine" id="cb70-6" title="6"><span class="co">#ans&gt; t = 8, df = 12, p-value = 3e-06</span></a>
+<a class="sourceLine" id="cb70-7" title="7"><span class="co">#ans&gt; alternative hypothesis: true mean is not equal to 0</span></a>
+<a class="sourceLine" id="cb70-8" title="8"><span class="co">#ans&gt; 95 percent confidence interval:</span></a>
+<a class="sourceLine" id="cb70-9" title="9"><span class="co">#ans&gt;  1030 1781</span></a>
+<a class="sourceLine" id="cb70-10" title="10"><span class="co">#ans&gt; sample estimates:</span></a>
+<a class="sourceLine" id="cb70-11" title="11"><span class="co">#ans&gt; mean of x </span></a>
+<a class="sourceLine" id="cb70-12" title="12"><span class="co">#ans&gt;      1405</span></a>
+<a class="sourceLine" id="cb70-13" title="13"></a>
+<a class="sourceLine" id="cb70-14" title="14"><span class="co"># on peut extraire l&#39;IC</span></a>
+<a class="sourceLine" id="cb70-15" title="15">IC_moyy =<span class="st"> </span><span class="kw">t.test</span>(poulpesF<span class="op">$</span>Poids)<span class="op">$</span>conf.int</a>
+<a class="sourceLine" id="cb70-16" title="16">IC_moyy</a>
+<a class="sourceLine" id="cb70-17" title="17"><span class="co">#ans&gt; [1] 1030 1781</span></a>
+<a class="sourceLine" id="cb70-18" title="18"><span class="co">#ans&gt; attr(,&quot;conf.level&quot;)</span></a>
+<a class="sourceLine" id="cb70-19" title="19"><span class="co">#ans&gt; [1] 0.95</span></a></code></pre></div>
+<ol start="6" style="list-style-type: decimal">
 <li>Déterminer un intervalle de confiance à <span class="math inline">\(95\%\)</span> pour la variance.</li>
+</ol>
+<div class="sourceCode" id="cb71"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb71-1" title="1">borne_inf_var =<span class="st"> </span>((n<span class="dv">-1</span>) <span class="op">*</span><span class="st"> </span>varF) <span class="op">/</span><span class="st"> </span><span class="kw">qchisq</span>(<span class="dv">1</span><span class="op">-</span>alpha<span class="op">/</span><span class="dv">2</span>, n<span class="dv">-1</span> ) </a>
+<a class="sourceLine" id="cb71-2" title="2">borne_sup_var =<span class="st"> </span>((n<span class="dv">-1</span>) <span class="op">*</span><span class="st"> </span>varF) <span class="op">/</span><span class="st"> </span><span class="kw">qchisq</span>(alpha<span class="op">/</span><span class="dv">2</span>, n<span class="dv">-1</span> ) </a>
+<a class="sourceLine" id="cb71-3" title="3">ICvar =<span class="st"> </span><span class="kw">c</span>(borne_inf_var,borne_sup_var)</a>
+<a class="sourceLine" id="cb71-4" title="4">ICvar</a>
+<a class="sourceLine" id="cb71-5" title="5"><span class="co">#ans&gt; [1]  198937 1054211</span></a></code></pre></div>
+<ol start="7" style="list-style-type: decimal">
 <li>Créer une fonction <code>ICvar()</code> ayant comme arguement un vecteur d’observations, et un risque <span class="math inline">\(\alpha\)</span>, et qui sort l’intervalle de confiance pour la variance de l’échantillon.</li>
 </ol>
+<div class="sourceCode" id="cb72"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb72-1" title="1">ICvar =<span class="st"> </span><span class="cf">function</span>(x, alpha){</a>
+<a class="sourceLine" id="cb72-2" title="2">  n =<span class="st"> </span><span class="kw">length</span>(x)</a>
+<a class="sourceLine" id="cb72-3" title="3">  borne_inf_var =<span class="st"> </span>((n<span class="dv">-1</span>) <span class="op">*</span><span class="st"> </span><span class="kw">var</span>(x)) <span class="op">/</span><span class="st"> </span><span class="kw">qchisq</span>(<span class="dv">1</span><span class="op">-</span>alpha<span class="op">/</span><span class="dv">2</span>, n<span class="dv">-1</span> )</a>
+<a class="sourceLine" id="cb72-4" title="4">  borne_sup_var =<span class="st"> </span>((n<span class="dv">-1</span>) <span class="op">*</span><span class="st"> </span><span class="kw">var</span>(x)) <span class="op">/</span><span class="st"> </span><span class="kw">qchisq</span>(alpha<span class="op">/</span><span class="dv">2</span>, n<span class="dv">-1</span> )</a>
+<a class="sourceLine" id="cb72-5" title="5">  <span class="kw">c</span>(borne_inf_var,borne_sup_var)</a>
+<a class="sourceLine" id="cb72-6" title="6">}</a>
+<a class="sourceLine" id="cb72-7" title="7"><span class="kw">ICvar</span>(poulpesF<span class="op">$</span>Poids, <span class="fl">0.05</span>)</a>
+<a class="sourceLine" id="cb72-8" title="8"><span class="co">#ans&gt; [1]  198937 1054211</span></a></code></pre></div>
 </div>
-<div id="ic-pour-une-proportion-et-effet-de-la-confiance" class="section level2 unnumbered">
-<h2>IC pour une proportion et effet de la confiance</h2>
+<div id="ic-pour-une-proportion-et-effet-de-la-confiance" class="section level2">
+<h2><span class="header-section-number">4.5</span> IC pour une proportion et effet de la confiance</h2>
 <p>Soit <span class="math inline">\(X_1,\ldots,X_n\)</span> un échantillon de la loi de Bernoulli de paramètre <span class="math inline">\(p\)</span>. L’emm et l’emv de <span class="math inline">\(p\)</span> est <span class="math inline">\(\hat{p}_n = \overline{X}_n=\frac{1}{n} \sum_{i=1}^n X_i\)</span>. L’intervalle de confiance approximativement de niveau <span class="math inline">\(1-\alpha\)</span> pour <span class="math inline">\(p\)</span> si <span class="math inline">\(np &gt; 5\)</span> et <span class="math inline">\(n(1-p)&gt;5\)</span> est</p>
 <p><span class="math display">\[IC_{1-\alpha}(p)= \Big[\hat{p}_n + z_{\alpha/2} \sqrt{\frac{\hat{p}_n(1-\hat{p}_n)}{n}}, \hat{p}_n - z_{\alpha/2} \sqrt{\frac{\hat{p}_n(1-\hat{p}_n)}{n}}\Big]\]</span></p>
 <p>où <span class="math inline">\(z_{\alpha/2}\)</span> désigne le quantile d’ordre <span class="math inline">\(\alpha/2\)</span> d’une loi normale centrée réduite.</p>
@@ -453,8 +545,8 @@ Vous êtes invités à annoter le contenu de ce cours. Les annotations peuvent �
 <li>Refaire la simulation précédante en tirant <span class="math inline">\(100\)</span> échantillons de taille <span class="math inline">\(20\)</span> au lieu de <span class="math inline">\(100\)</span> et en choisissant <span class="math inline">\(p\)</span> entre <span class="math inline">\(0\)</span> et <span class="math inline">\(0.2\)</span>. Pour <span class="math inline">\(\alpha=0.05\)</span>, calculer le nombre d’intervalles qui ne contiennent pas la valeur de <span class="math inline">\(p\)</span>. Interpréter.</li>
 </ol>
 </div>
-<div id="ic-pour-le-parametre-lambda-dune-loi-exponentielle" class="section level2 unnumbered">
-<h2>IC pour le paramètre <span class="math inline">\(\lambda\)</span> d’une loi exponentielle</h2>
+<div id="ic-pour-le-parametre-lambda-dune-loi-exponentielle" class="section level2">
+<h2><span class="header-section-number">4.6</span> IC pour le paramètre <span class="math inline">\(\lambda\)</span> d’une loi exponentielle</h2>
 <p>Soit <span class="math inline">\(X_1,\ldots,X_n\)</span> un échantillon de la loi exponentielle de paramètre <span class="math inline">\(\lambda\)</span>. L’emv de <span class="math inline">\(\lambda\)</span> est <span class="math inline">\(\hat{\lambda} = n/(X_1+\ldots+X_n)\)</span>. La variable aléatoire <span class="math inline">\(Y=2\lambda X\)</span> suit une loi exponentielle de paramètre <span class="math inline">\(1/2\)</span>, qui est aussi une loi <span class="math inline">\(\chi^2(2)\)</span> (<a href="http://www.math.wm.edu/~leemis/chart/UDR/PDFs/ChisquareExponential.pdf" target="_blank">preuve <i class="fas  fa-external-link-alt "></i></a>). Soit donc <span class="math inline">\(Y_i = 2\lambda X_i\)</span> un échantillon iid de loi <span class="math inline">\(\chi^2(2)\)</span>.</p>
 <p>Soit <span class="math inline">\(T=2\lambda \sum_{i=1}^n X_i = \sum_{i=1}^n Y_i\)</span>. Donc <span class="math inline">\(T\)</span> suit la loi <span class="math inline">\(\chi^2(2n)\)</span>.</p>
 <ol style="list-style-type: decimal">

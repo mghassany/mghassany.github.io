@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>TP Statistique descriptive avec R | Statistique Inférentielle</title>
+  <title>Exercices | Statistique Inférentielle</title>
   <meta name="description" content="Cours de Statistique Inférentielle A3 ESILV" />
   <meta name="generator" content="bookdown 0.14 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="TP Statistique descriptive avec R | Statistique Inférentielle" />
+  <meta property="og:title" content="Exercices | Statistique Inférentielle" />
   <meta property="og:type" content="book" />
   
   
@@ -16,7 +16,7 @@
   
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="TP Statistique descriptive avec R | Statistique Inférentielle" />
+  <meta name="twitter:title" content="Exercices | Statistique Inférentielle" />
   
   <meta name="twitter:description" content="Cours de Statistique Inférentielle A3 ESILV" />
   
@@ -31,8 +31,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   <link rel="shortcut icon" href="img/favicon.ico" type="image/x-icon" />
-<link rel="prev" href="exercices.html"/>
-<link rel="next" href="tp-statistique-descriptive-avec-r-avec-corrections.html"/>
+<link rel="prev" href="exercices-6.html"/>
+<link rel="next" href="variables-aleatoires-discretes.html"/>
 <script src="book_assets/jquery-2.2.3/jquery.min.js"></script>
 <link href="book_assets/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="book_assets/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -319,7 +319,7 @@ code span.wa { color: #bf0303; } /* Warning */
 <li class="chapter" data-level="7.2" data-path="tests-de-khi-deux-chi2.html"><a href="tests-de-khi-deux-chi2.html#test-dindependance-de-chi2"><i class="fa fa-check"></i><b>7.2</b> Test d’indépendance de <span class="math inline">\(\chi^2\)</span></a></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="exercices-6.html"><a href="exercices-6.html"><i class="fa fa-check"></i>Exercices</a></li>
-<li class="chapter" data-level="" data-path="tp-1.html"><a href="tp-1.html"><i class="fa fa-check"></i>TP</a></li>
+<li class="chapter" data-level="" data-path="exercices-7.html"><a href="exercices-7.html"><i class="fa fa-check"></i>Exercices</a></li>
 <li class="part"><span><b>Rappel Probabilités</b></span></li>
 <li class="chapter" data-level="" data-path="variables-aleatoires-discretes.html"><a href="variables-aleatoires-discretes.html"><i class="fa fa-check"></i>Variables Aléatoires Discrètes</a><ul>
 <li class="chapter" data-level="" data-path="variables-aleatoires-discretes.html"><a href="variables-aleatoires-discretes.html#notions-de-probabilites"><i class="fa fa-check"></i>Notions de Probabilités</a><ul>
@@ -428,184 +428,251 @@ code span.wa { color: #bf0303; } /* Warning */
 <div class = rmdreview>
 Vous êtes invités à annoter le contenu de ce cours. Les annotations peuvent être des corrections typographiques, des propositions ou des questions. Pour ajouter des annotations, <span style="background-color: #3297FD; color: white">choisissez le text</span> que vous voulez commenter et cliquez sur <i class="h-icon-annotate"></i>. Pour accéder aux annotations crées par d'autres personnes, cliquez <i class="h-icon-chevron-left"></i> sur le coin supérieur de la page <i class="fa fa-arrow-circle-right  fa-rotate-315" aria-hidden="true"></i>.
 </div>
-<div id="tp-statistique-descriptive-avec-r" class="section level1 unnumbered">
-<h1>TP Statistique descriptive avec R</h1>
-<div id="quest-ce-que-cest-que" class="section level2 unnumbered">
-<h2>Qu’est-ce que c’est que <svg style="height:0.8em;top:.04em;position:relative;fill:steelblue;" viewBox="0 0 581 512"><path d="M581 226.6C581 119.1 450.9 32 290.5 32S0 119.1 0 226.6C0 322.4 103.3 402 239.4 418.1V480h99.1v-61.5c24.3-2.7 47.6-7.4 69.4-13.9L448 480h112l-67.4-113.7c54.5-35.4 88.4-84.9 88.4-139.7zm-466.8 14.5c0-73.5 98.9-133 220.8-133s211.9 40.7 211.9 133c0 50.1-26.5 85-70.3 106.4-2.4-1.6-4.7-2.9-6.4-3.7-10.2-5.2-27.8-10.5-27.8-10.5s86.6-6.4 86.6-92.7-90.6-87.9-90.6-87.9h-199V361c-74.1-21.5-125.2-67.1-125.2-119.9zm225.1 38.3v-55.6c57.8 0 87.8-6.8 87.8 27.3 0 36.5-38.2 28.3-87.8 28.3zm-.9 72.5H365c10.8 0 18.9 11.7 24 19.2-16.1 1.9-33 2.8-50.6 2.9v-22.1z"/></svg>?</h2>
-<p>C’est un langage de programmation et un logiciel gratuit et libre.
-Il est surtout utilisé pour le développement de programmes statistiques et des analyses de données.
-Il gagne en popularité depuis quelques années avec l’émergence de la <em>data science</em> et du fait qu’il est gratuit et ouvert (<em>open-source</em>).
-<svg style="height:0.8em;top:.04em;position:relative;fill:steelblue;" viewBox="0 0 581 512"><path d="M581 226.6C581 119.1 450.9 32 290.5 32S0 119.1 0 226.6C0 322.4 103.3 402 239.4 418.1V480h99.1v-61.5c24.3-2.7 47.6-7.4 69.4-13.9L448 480h112l-67.4-113.7c54.5-35.4 88.4-84.9 88.4-139.7zm-466.8 14.5c0-73.5 98.9-133 220.8-133s211.9 40.7 211.9 133c0 50.1-26.5 85-70.3 106.4-2.4-1.6-4.7-2.9-6.4-3.7-10.2-5.2-27.8-10.5-27.8-10.5s86.6-6.4 86.6-92.7-90.6-87.9-90.6-87.9h-199V361c-74.1-21.5-125.2-67.1-125.2-119.9zm225.1 38.3v-55.6c57.8 0 87.8-6.8 87.8 27.3 0 36.5-38.2 28.3-87.8 28.3zm-.9 72.5H365c10.8 0 18.9 11.7 24 19.2-16.1 1.9-33 2.8-50.6 2.9v-22.1z"/></svg> est née d’un projet de recherche mené par deux chercheurs, Ross Ihaka et Robert Gentleman à l’université d’Auckland (Nouvelle-Zélande) en 1993.
-En 1997 est mis en place le <em>Comprehension R Archive Network (CRAN)</em> qui centralise les contributions au projet.</p>
-<p>Depuis le projet connaît une croissance soutenue, grâce à des contributions de la part de milliers de personnes à travers le monde.</p>
-<div id="rstudio" class="section level3 unnumbered">
-<h3>RStudio</h3>
-<ul>
-<li><p>C’est une IDE (<em>Integrated Development Environment</em>) ou Environnement Intégré de Développement.</p></li>
-<li><p>Il sert d’interface entre <svg style="height:0.8em;top:.04em;position:relative;fill:steelblue;" viewBox="0 0 581 512"><path d="M581 226.6C581 119.1 450.9 32 290.5 32S0 119.1 0 226.6C0 322.4 103.3 402 239.4 418.1V480h99.1v-61.5c24.3-2.7 47.6-7.4 69.4-13.9L448 480h112l-67.4-113.7c54.5-35.4 88.4-84.9 88.4-139.7zm-466.8 14.5c0-73.5 98.9-133 220.8-133s211.9 40.7 211.9 133c0 50.1-26.5 85-70.3 106.4-2.4-1.6-4.7-2.9-6.4-3.7-10.2-5.2-27.8-10.5-27.8-10.5s86.6-6.4 86.6-92.7-90.6-87.9-90.6-87.9h-199V361c-74.1-21.5-125.2-67.1-125.2-119.9zm225.1 38.3v-55.6c57.8 0 87.8-6.8 87.8 27.3 0 36.5-38.2 28.3-87.8 28.3zm-.9 72.5H365c10.8 0 18.9 11.7 24 19.2-16.1 1.9-33 2.8-50.6 2.9v-22.1z"/></svg> et l’utilisateur, offre à celui diverses commodités d’utilisation</p></li>
-</ul>
-<div class="rmdtip">
-<ul>
-<li>Une introduction au RStudio est présentée dans l’annexe <a href="app-introRStudio.html#app-introRStudio">A</a>.</li>
-<li>Vous trouverez une bonne introduction à <svg style="height:0.8em;top:.04em;position:relative;fill:steelblue;" viewBox="0 0 581 512"><path d="M581 226.6C581 119.1 450.9 32 290.5 32S0 119.1 0 226.6C0 322.4 103.3 402 239.4 418.1V480h99.1v-61.5c24.3-2.7 47.6-7.4 69.4-13.9L448 480h112l-67.4-113.7c54.5-35.4 88.4-84.9 88.4-139.7zm-466.8 14.5c0-73.5 98.9-133 220.8-133s211.9 40.7 211.9 133c0 50.1-26.5 85-70.3 106.4-2.4-1.6-4.7-2.9-6.4-3.7-10.2-5.2-27.8-10.5-27.8-10.5s86.6-6.4 86.6-92.7-90.6-87.9-90.6-87.9h-199V361c-74.1-21.5-125.2-67.1-125.2-119.9zm225.1 38.3v-55.6c57.8 0 87.8-6.8 87.8 27.3 0 36.5-38.2 28.3-87.8 28.3zm-.9 72.5H365c10.8 0 18.9 11.7 24 19.2-16.1 1.9-33 2.8-50.6 2.9v-22.1z"/></svg> sur ce <a href="https://cran.r-project.org/doc/contrib/Torfs+Brauer-Short-R-Intro.pdf" target="_blank">lien <i class="fas  fa-external-link-alt "></i></a>.</li>
-</ul>
-</div>
-</div>
-</div>
-<div id="ere-partie-donnees-quantitatives-discretes" class="section level2 unnumbered">
-<h2>1ère partie: Données quantitatives discrètes</h2>
-<p>Le nombre d’arbres plantés sur les parcelles d’un lotissement a été compté. Les données obtenues sont les suivantes:</p>
-<p><span class="math display">\[1,2,4,1,6,3,2,1,2,0,1,2,2,1,3,0,3,2,1,2,2,3,2,3.\]</span></p>
-<p><strong>1.</strong> Quelle est la nature de variable étudiée?</p>
-<p><strong>2.</strong> Rentrer ces données sous la forme d’un vecteur nommé <code>arbres</code> et affichez ce vecteur.</p>
-<p><strong>3.</strong> Trier les valeurs de ce vecteur par ordre croissant.</p>
-<p><strong>4.</strong> Donner la taille de l’échantillon (c’est-à-dire le nombre de composantes de ce vecteur) en la notant <code>n</code> et affichez sa valeur.</p>
-<div id="effectifs-et-frequence" class="section level3 unnumbered">
-<h3>Effectifs et fréquence</h3>
-<p><strong>5.</strong> Montrer la séquence des modalités et la séquence des effectifs correspondants.</p>
-<p><strong>6.</strong> Montrer le tableau de fréquences et de pourcentages.</p>
-<p><strong>7.</strong> Calculer et afficher les effectifs cumulés et les fréquences cumulées.</p>
-</div>
-<div id="mesures-de-tendance-centrale" class="section level3 unnumbered">
-<h3>Mesures de tendance centrale</h3>
-<p><strong>8.</strong> Calculer le nombre moyen d’arbres par parcelle.</p>
-<p><strong>9.</strong> Calculer le nombre maximum et le nombre minimum d’arbres sur une parcelle.</p>
-<p><strong>10.</strong> Calculer le nombre médian d’arbres par parcelle.</p>
-<p><strong>11.</strong> Utiliser la fonction <code>summary()</code> pour obtenir un tableau récapitulatif des indicateurs.</p>
-</div>
-<div id="indicateurs-de-dispersion" class="section level3 unnumbered">
-<h3>Indicateurs de dispersion</h3>
-<p><strong>12.</strong> Calculer la variance du nombre d’arbres plantés sur les parcelles.</p>
-<p><strong>13.</strong> Calculer maintenant l’écart-type et vérifier que l’écart-type est la racine carrée de la variance.</p>
-<p><strong>14.</strong> Calculer la variance vous-même. La variance obtenue est elle la même que la précédente?</p>
-<div class="rmdinsight">
-<p>Le logiciel <svg style="height:0.8em;top:.04em;position:relative;fill:steelblue;" viewBox="0 0 581 512"><path d="M581 226.6C581 119.1 450.9 32 290.5 32S0 119.1 0 226.6C0 322.4 103.3 402 239.4 418.1V480h99.1v-61.5c24.3-2.7 47.6-7.4 69.4-13.9L448 480h112l-67.4-113.7c54.5-35.4 88.4-84.9 88.4-139.7zm-466.8 14.5c0-73.5 98.9-133 220.8-133s211.9 40.7 211.9 133c0 50.1-26.5 85-70.3 106.4-2.4-1.6-4.7-2.9-6.4-3.7-10.2-5.2-27.8-10.5-27.8-10.5s86.6-6.4 86.6-92.7-90.6-87.9-90.6-87.9h-199V361c-74.1-21.5-125.2-67.1-125.2-119.9zm225.1 38.3v-55.6c57.8 0 87.8-6.8 87.8 27.3 0 36.5-38.2 28.3-87.8 28.3zm-.9 72.5H365c10.8 0 18.9 11.7 24 19.2-16.1 1.9-33 2.8-50.6 2.9v-22.1z"/></svg> utilise <span class="math inline">\(n-1\)</span> pour le dénomiateur dans la définition de la variance, c’est-à-dire <span class="math inline">\(\frac{1}{n-1} \sum_{i=1}^n (x_i - \bar{x})^2\)</span> (d’écart-type noté <span class="math inline">\(\sigma_{n-1}\)</span> ou <span class="math inline">\(s\)</span>. Cette quantité est souvent préférée dans les applications numériques pour des questions d’estimation).</p>
-</div>
-</div>
-<div id="representations-graphiques-1" class="section level3 unnumbered">
-<h3>Représentations graphiques</h3>
-<p><strong>15.</strong> La fontion <code>plot()</code> affiche par défaut un nuage de points avec en abscisse le numéro de l’observation (ici de 1 à 24) et en ordonnée le nombre d’arbres. Tester cette fonction. Modifier le titre de la figure, les noms des axes, la couleur et la forme des points affichés.</p>
-<p><strong>16.</strong> Afficher la courbe des fréquence cumulées. (<strong>Indication</strong>: Utiliser la fonction <code>ecdf()</code>).</p>
-<p><strong>17.</strong> Tracer un diagramme en bâtons par la fonction <code>barplot()</code> à partir du tableau des effectifs ou des fréquences.</p>
-</div>
-</div>
-<div id="eme-partie-analyse-descriptive" class="section level2 unnumbered">
-<h2>2ème partie : Analyse descriptive</h2>
-<div id="donnees-utilisees" class="section level3 unnumbered">
-<h3>Données utilisées</h3>
-<p>Une enquête a été réalisée sur 237 étudiants. Les données sont les suivantes:</p>
-<ul>
-<li><strong>Sex</strong>: The sex of the student. (Factor with levels “Male” and “Female”.)</li>
-<li><strong>Wr.Hnd</strong>: span (distance from tip of thumb to tip of little finger of spread hand) of writing hand, in centimetres.</li>
-<li><strong>NW.Hnd</strong>: span of non-writing hand.</li>
-<li><strong>W.Hnd</strong>: writing hand of student. (Factor, with levels “Left” and “Right”.)</li>
-<li><strong>Fold</strong>: “Fold your arms! Which is on top” (Factor, with levels “R on L”, “L on R”, “Neither”.)</li>
-<li><strong>Pulse</strong>: pulse rate of student (beats per minute).</li>
-<li><strong>Clap</strong>: ‘Clap your hands! Which hand is on top?’ (Factor, with levels “Right”, “Left”, “Neither”.)</li>
-<li><strong>Exer</strong>: how often the student exercises. (Factor, with levels “Freq” (frequently), “Some”, “None”.)</li>
-<li><strong>Smoke</strong>: how much the student smokes. (Factor, levels “Heavy”, “Regul” (regularly), “Occas” (occasionally), “Never”.)</li>
-<li><strong>Height</strong>: height of the student in centimetres.</li>
-<li><strong>M.I</strong>: whether the student expressed height in imperial (feet/inches) or metric (centimetres/metres) units. (Factor, levels “Metric”, “Imperial”.)</li>
-<li><strong>Age</strong>: age of the student in years.</li>
-</ul>
-</div>
-<div id="definition-du-repertoire-de-travail" class="section level3 unnumbered">
-<h3>Définition du répertoire de travail</h3>
-<p>Vous avez la possibilité de définir un <em>Répertoire de travail</em> dans lequel vous allez stocker votre script R, vos données etc… Ceci est réalisé par la fonction <code>setwd("..Chemin/de/votre/repertoire")</code>. Cette fonction considère comme seul paramètre le chemin d’accès au répertoire que vous avez choisi. A tout moment, vous pouvez vérifier le répertoire de travail courant en executant l’instruction suivante:</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" title="1"><span class="kw">getwd</span>()</a></code></pre></div>
-<p><strong>1.</strong> Définisser votre répertoire de travail.</p>
-</div>
-<div id="chargement-des-donnees" class="section level3 unnumbered">
-<h3>Chargement des données</h3>
-<p>Il existe une multitude de fonctions qui permettent de charger un fichier de données. Télécharger le fichier de données en cliquant <a target="_blank" href="datasets/enquete.csv">ici <i class="fa fa-table" aria-hidden="true"></i></a> et enregistrer le dans votre répertoire. Ensuite utiliser la fonction <code>read.csv()</code> pour charger les données dans <svg style="height:0.8em;top:.04em;position:relative;fill:steelblue;" viewBox="0 0 581 512"><path d="M581 226.6C581 119.1 450.9 32 290.5 32S0 119.1 0 226.6C0 322.4 103.3 402 239.4 418.1V480h99.1v-61.5c24.3-2.7 47.6-7.4 69.4-13.9L448 480h112l-67.4-113.7c54.5-35.4 88.4-84.9 88.4-139.7zm-466.8 14.5c0-73.5 98.9-133 220.8-133s211.9 40.7 211.9 133c0 50.1-26.5 85-70.3 106.4-2.4-1.6-4.7-2.9-6.4-3.7-10.2-5.2-27.8-10.5-27.8-10.5s86.6-6.4 86.6-92.7-90.6-87.9-90.6-87.9h-199V361c-74.1-21.5-125.2-67.1-125.2-119.9zm225.1 38.3v-55.6c57.8 0 87.8-6.8 87.8 27.3 0 36.5-38.2 28.3-87.8 28.3zm-.9 72.5H365c10.8 0 18.9 11.7 24 19.2-16.1 1.9-33 2.8-50.6 2.9v-22.1z"/></svg>. Cette fonction prend comme principaux paramètres d’entrée le fichier à charger <code>(file="data.txt")</code>, le séparateur de colonnes dans le fichier initial <code>(sep=)</code> et la présence (ou non) des noms de colonnes dans le fichier <code>(header=)</code>.</p>
-<div class="rmdcaution">
-<p>Ouvrez toujours le fichier de données dans un éditeur de texte pour connaitre le séparateur de colonnes et voir si les noms de colonnes sont présents.</p>
-</div>
-<p><strong>2.</strong> Charger le fichier des données dans l’enquête dans un tableau nommé <code>data</code>. L’instruction de chargement du fichier est la suivante:</p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2-1" title="1">donnees =<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&quot;enquete.csv&quot;</span>, <span class="dt">header =</span> T , <span class="dt">sep=</span><span class="st">&quot;,&quot;</span>)</a></code></pre></div>
-<p>Le fichier de données est chargé dans l’environnement <svg style="height:0.8em;top:.04em;position:relative;fill:steelblue;" viewBox="0 0 581 512"><path d="M581 226.6C581 119.1 450.9 32 290.5 32S0 119.1 0 226.6C0 322.4 103.3 402 239.4 418.1V480h99.1v-61.5c24.3-2.7 47.6-7.4 69.4-13.9L448 480h112l-67.4-113.7c54.5-35.4 88.4-84.9 88.4-139.7zm-466.8 14.5c0-73.5 98.9-133 220.8-133s211.9 40.7 211.9 133c0 50.1-26.5 85-70.3 106.4-2.4-1.6-4.7-2.9-6.4-3.7-10.2-5.2-27.8-10.5-27.8-10.5s86.6-6.4 86.6-92.7-90.6-87.9-90.6-87.9h-199V361c-74.1-21.5-125.2-67.1-125.2-119.9zm225.1 38.3v-55.6c57.8 0 87.8-6.8 87.8 27.3 0 36.5-38.2 28.3-87.8 28.3zm-.9 72.5H365c10.8 0 18.9 11.7 24 19.2-16.1 1.9-33 2.8-50.6 2.9v-22.1z"/></svg> et est affecté à l’objet <code>donnees</code>. C’est cet objet, de type <em>dataframe</em> qui va faire l’objet de manipulations par la suite.</p>
-<p><strong>3.</strong> Afficher le nombre de d’observations (lignes) et le nombre de variables (colonnes).</p>
-<p><strong>4.</strong> Utiliser la fonction <code>head()</code> pour afficher les premières lignes (6 par défaut) de données chargées.</p>
-<p><strong>5.</strong> L’accès à une colonne d’un dataframe se fait par la notation <code>$</code>: <code>nom_du_dataframe$nom_variable</code>. Afficher les valeurs de la variable <code>Age</code> de vos données.</p>
-</div>
-<div id="analyse-descriptive-univariee" class="section level3 unnumbered">
-<h3>Analyse descriptive univariée</h3>
-<p><strong>Indicateurs statistiques pour variables quantitatives</strong></p>
-<p><strong>6.</strong> Calculer et afficher la moyenne et l’écart-type d’age des élèves qui ont participé à l’enquête.</p>
-<p><strong>7.</strong> Appliquer la fonction <code>summary()</code> sur la variable <code>Age</code>. Qu’est ce que cette fonction calcule et affiche?</p>
-<p><strong>Représentations graphiques pour variables quantitatives</strong></p>
-<p><strong>8.</strong> Tracer l’histogramme de la variable <code>Age</code>. Ecrire un titre correspondante à votre figure, modifier les noms des axes et les couleurs des bâtons.</p>
-<p><strong>9.</strong> Afficher une la boîte à moustache correspondante à la variable <code>Age</code>. Commenter ce qu’on observe sur cette figure.</p>
-<p><strong>Indicateurs statistiques et représentations graphiques pour variables qualitatives</strong></p>
-<p><strong>10.</strong> Choisir une variable qualitative parmi les variables de cette enquête. Justifier votre choix. Calculer et afficher les effectifs et les fréquences de cette variable.</p>
-<div class="rmdinsight">
-<p>Pour voir les variables dans votre dataframe, vous pouvez utiliser la fonction <code>names()</code> pour afficher les noms des variables, ou <code>str()</code> (structure) pour voir toutes les colonnes, leur types, les quelques premières valeurs, etc.. Ou simplement dans Rstudio on peut voir la structure du dataframe dans la fenêtre “Environment”.</p>
-</div>
-<p><strong>11.</strong> Afficher un diagramme circulaire (en utilisant la fonction <code>pie()</code>) pour la variable qualitative choisie.</p>
-</div>
-<div id="analyse-descriptive-bivariee" class="section level3 unnumbered">
-<h3>Analyse descriptive bivariée</h3>
-<!-- :::rmdcaution -->
-<!-- C'est une partie que nous n'avons pas encore abordé en cours. Mais on va quand même faire une petite analyse sur <svg style="height:0.8em;top:.04em;position:relative;fill:steelblue;" viewBox="0 0 581 512"><path d="M581 226.6C581 119.1 450.9 32 290.5 32S0 119.1 0 226.6C0 322.4 103.3 402 239.4 418.1V480h99.1v-61.5c24.3-2.7 47.6-7.4 69.4-13.9L448 480h112l-67.4-113.7c54.5-35.4 88.4-84.9 88.4-139.7zm-466.8 14.5c0-73.5 98.9-133 220.8-133s211.9 40.7 211.9 133c0 50.1-26.5 85-70.3 106.4-2.4-1.6-4.7-2.9-6.4-3.7-10.2-5.2-27.8-10.5-27.8-10.5s86.6-6.4 86.6-92.7-90.6-87.9-90.6-87.9h-199V361c-74.1-21.5-125.2-67.1-125.2-119.9zm225.1 38.3v-55.6c57.8 0 87.8-6.8 87.8 27.3 0 36.5-38.2 28.3-87.8 28.3zm-.9 72.5H365c10.8 0 18.9 11.7 24 19.2-16.1 1.9-33 2.8-50.6 2.9v-22.1z"/></svg>. -->
-<!-- ::: -->
-<p><strong>Indicateurs pour le croisement de deux variables qualitatives</strong></p>
-<p>Le tableau de contingence est un moyen particulier de représenter simultanément deux caractères observés sur une même population, s’ils sont discrets ou bien continus et regroupés en classes.
-<!-- 
-([lien <i class="fas  fa-external-link-alt "></i>](https://mistis.inrialpes.fr/software/SMEL/cours/sd/node16.html){target="_blank"})
+<div id="exercices-7" class="section level1 unnumbered">
+<h1>Exercices</h1>
+<!-- 325 appliquées -->
 
- -->
-<strong>12.</strong> Un tableau de contingence des effectifs joints croisant deux variables qualitatives est réalisé par la fonction <code>table()</code>. Effectuer et afficher le croisement de deux variables (<code>Sex</code>) et (<code>Smoke</code>).</p>
-<p><strong>13.</strong> Utiliser la fonction <code>addmargins()</code> pour ajouter au tableau les effectifs marginaux.
-<!-- 
- (Lire ce [lien <i class="fas  fa-external-link-alt "></i>](http://www.modalisa.com/support/lexique/effectifs-marginaux.php){target="_blank"} à propos des effectifs marginaux). 
+<div class="exercise">
+<p><span id="exr:unnamed-chunk-210" class="exercise"><strong>Exercice 7.4  </strong></span>Un informaticien a développé un algorithme pour générer des nombres entiers pseudo-aléatoires de manière uniforme sur l’intervalle <span class="math inline">\([0,9]\)</span>. Il code l’algorithme et génère <span class="math inline">\(1000\)</span> nombres pseudo-aléatoires. Les données sur la fréquence d’apparition de chacun des chiffres de <span class="math inline">\(0\)</span> à <span class="math inline">\(9\)</span> sont indiquées dans le tableau suivant.</p>
+<table class="table table-striped table-bordered" style="width: auto !important; margin-left: auto; margin-right: auto;">
+<thead>
+<tr>
+<th style="border-bottom:hidden" colspan="1">
+</th>
+<th style="border-bottom:hidden; padding-bottom:0; padding-left:3px;padding-right:3px;text-align: center; " colspan="10">
+<div style="border-bottom: 1px solid #ddd; padding-bottom: 5px; ">
+Chiffre généré
+</div>
+</th>
+<th style="border-bottom:hidden; padding-bottom:0; padding-left:3px;padding-right:3px;text-align: center; " colspan="1">
+<div style="border-bottom: 1px solid #ddd; padding-bottom: 5px; ">
+Total
+</div>
+</th>
+</tr>
+<tr>
+<th style="text-align:left;">
+</th>
+<th style="text-align:right;">
+0
+</th>
+<th style="text-align:right;">
+1
+</th>
+<th style="text-align:right;">
+2
+</th>
+<th style="text-align:right;">
+3
+</th>
+<th style="text-align:right;">
+4
+</th>
+<th style="text-align:right;">
+5
+</th>
+<th style="text-align:right;">
+6
+</th>
+<th style="text-align:right;">
+7
+</th>
+<th style="text-align:right;">
+8
+</th>
+<th style="text-align:right;">
+9
+</th>
+<th style="text-align:right;">
+<span class="math inline">\(n\)</span>
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+Fréquence observée, <span class="math inline">\(O_i\)</span>
+</td>
+<td style="text-align:right;">
+94
+</td>
+<td style="text-align:right;">
+93
+</td>
+<td style="text-align:right;">
+112
+</td>
+<td style="text-align:right;">
+101
+</td>
+<td style="text-align:right;">
+104
+</td>
+<td style="text-align:right;">
+95
+</td>
+<td style="text-align:right;">
+100
+</td>
+<td style="text-align:right;">
+99
+</td>
+<td style="text-align:right;">
+108
+</td>
+<td style="text-align:right;">
+94
+</td>
+<td style="text-align:right;">
+1000
+</td>
+</tr>
+</tbody>
+</table>
+La génération de nombres aléatoires fonctionne-t-il correctement au seuil de <span class="math inline">\(5\%\)</span>?
+</div>
 
- --></p>
-<p><strong>Représentations graphiques pour le croisement de deux variables qualitatives</strong></p>
-<p>On peut représenter le croisement de deux variables qualitatives avec un diagramme en bâtons. Dans le cas de deux variables qualitatives, la fonction <code>barplot()</code> prend comme premier paramètre le tableau de contingence.</p>
-<p><strong>14.</strong> Afficher un diagramme en bâtons représentant la distribution du tabagisme (variable <code>Smoke</code>) en fontion du sexe des étudiants. La figure souhaitée est la suivante:</p>
-<p><img src="Statistique_infentielle_files/figure-html/unnamed-chunk-52-1.png" width="70%" style="display: block; margin: auto;" /></p>
-<div class="rmdinsight">
-<p>On remarque qu’il y a plus d’hommes que des femmes qui fument régulièrement. (selon l’enquête réalisée)</p>
+
+<div class="exercise">
+<p><span id="exr:unnamed-chunk-212" class="exercise"><strong>Exercice 7.5  </strong></span>On souhaite tester l’hypothèse selon laquelle le nombre de défauts sur des cartes de circuit imprimé suit une loi de Poisson. On collecte un échantillon aléatoire de <span class="math inline">\(n=60\)</span> cartes de circuit imprimé et on observe le nombre de défauts. On obtient les données suivantes:</p>
+<center>
+<table style="width:57%;">
+<colgroup>
+<col width="27%" />
+<col width="29%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th align="center">Nombre de défauts</th>
+<th align="center">Fréquence observée</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="center">0</td>
+<td align="center">32</td>
+</tr>
+<tr class="even">
+<td align="center">1</td>
+<td align="center">15</td>
+</tr>
+<tr class="odd">
+<td align="center">2</td>
+<td align="center">9</td>
+</tr>
+<tr class="even">
+<td align="center">3</td>
+<td align="center">4</td>
+</tr>
+</tbody>
+</table>
+</center>
+Peut-on dire que le nombre de défauts suit une loi de Poisson? (<strong>Remarque</strong>: le paramètre <span class="math inline">\(\lambda\)</span> de la loi de Poisson est à estimer)
 </div>
-<div class="rmdtip">
-<p>Il est plus convenable dans ce cas de représenter le croisement de ces deux variables qualitatives à l’aide d’un mosaicplot.</p>
+
+
+<div class="exercise">
+<p><span id="exr:unnamed-chunk-214" class="exercise"><strong>Exercice 7.6  </strong></span>Une entreprise doit choisir un régime de pension parmi trois. La direction désire savoir si la préférence pour un régime est indépendante de la catégorie d’emploi au seuil de <span class="math inline">\(5\%\)</span>. Le tableau suivant donne les opinions d’un échantillon de <span class="math inline">\(500\)</span> employés.</p>
+<table class="table table-striped table-bordered" style="margin-left: auto; margin-right: auto;">
+<thead>
+<tr>
+<th style="border-bottom:hidden" colspan="1">
+</th>
+<th style="border-bottom:hidden; padding-bottom:0; padding-left:3px;padding-right:3px;text-align: center; " colspan="3">
+<div style="border-bottom: 1px solid #ddd; padding-bottom: 5px; ">
+<span class="math inline">\(X_2 =\)</span> Régime de pension
 </div>
-<p><img src="Statistique_infentielle_files/figure-html/unnamed-chunk-53-1.png" width="70%" style="display: block; margin: auto;" /></p>
-<p><strong>Indicateurs pour le croisement d’une variable qualitative et d’une variable quantitative</strong></p>
-<p>Disons qu’on souhaite calculer la moyenne de fréquence cardiaque chez les hommes ayant répondu au questionnaire de l’enquête. On a besoin de filtrer le dataframe de la façon suivante:</p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb3-1" title="1"><span class="co"># On utilise la fontion subset pour créer un sous ensemble de nos données</span></a>
-<a class="sourceLine" id="cb3-2" title="2"><span class="co"># Remarquer qu&#39;on utilise == pour comparer</span></a>
-<a class="sourceLine" id="cb3-3" title="3">pulse_hommes =<span class="st"> </span><span class="kw">subset</span>(donnees, donnees<span class="op">$</span>Sex<span class="op">==</span><span class="st">&quot;Male&quot;</span>)</a></code></pre></div>
-<p><strong>15.</strong> Vérifier que le sous ensemble créé <code>pulse_homme</code> ne contient que des hommes.</p>
-<p><strong>16.</strong> Ensuite calculer les indicateurs statistiques de la fréquence cardiaque chez les hommes (vous pouvez utiliser la fonction <code>summary()</code>).</p>
-<p><strong>17.</strong> Faire la même chose mais pour les femmes.</p>
-<p><strong>Représentation graphique pour le croisement d’une variable qualitative et d’une variable quantitative</strong></p>
-<p>On peut réaliser une boîte à moustache des valeurs de la variable quantitative en fonction des modalités de la variables qualitative, pour cela on peut utliser la fonction <code>boxplot()</code>. Plus précisémeent, on utilise le paramètre <code>formula</code> qui permet de spécifier que nous voulons une boîte à moustache de la variable
-quantitative en fonction (caractère <code>~</code> ) de la variable quantitative.</p>
-<p><strong>18.</strong> Afficher sur la même figure la fréquence cardiaque en fontion du sexe. Interpréter la figure.</p>
-<p>La figure souhaitée est la suivante:</p>
-<p><img src="Statistique_infentielle_files/figure-html/unnamed-chunk-55-1.png" width="70%" style="display: block; margin: auto;" /></p>
-<p><strong>19.</strong> Afficher sur la même figure la taille (variable <code>Height</code>) en fontion du sexe. Interpréter la figure.</p>
-<!-- **Indicateurs pour le croisement de deux variables quantitatives** -->
-<!-- Le calcul du coefficient de corrélation de Pearson est réalisé au moyen de la fonction `cor()`. Ce coefficient mesure l’intensité du *lien linéaire* entre deux variables quantitatives. -->
-<p><strong>Représentation graphique pour le croisement de deux variables quantitatives</strong></p>
-<p>Un nuage de points entre les deux variables quantitatives est réalisé par la fonction <code>plot()</code>. Le premier
-paramètre correspond à la variable en abscisse et le deuxième à la variable en ordonnées.</p>
-<p><strong>20.</strong> Afficher la fréquence cardiaque en fonction de l’age. Modifier les paramètres de la figure (titre, noms des axes, couleurs des points, tailles, formes, etc..)</p>
-<p align="right">
-◼
-</p>
+</th>
+<th style="border-bottom:hidden" colspan="1">
+</th>
+</tr>
+<tr>
+<th style="text-align:left;">
+<span class="math inline">\(X_1 =\)</span> Catégories d'emploi
+</th>
+<th style="text-align:left;">
+1
+</th>
+<th style="text-align:left;">
+2
+</th>
+<th style="text-align:left;">
+3
+</th>
+<th style="text-align:left;">
+Total
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+1: Cadres
+</td>
+<td style="text-align:left;">
+160
+</td>
+<td style="text-align:left;">
+140
+</td>
+<td style="text-align:left;">
+40
+</td>
+<td style="text-align:left;">
+340
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+2: Employés payés à l'heure
+</td>
+<td style="text-align:left;">
+40
+</td>
+<td style="text-align:left;">
+60
+</td>
+<td style="text-align:left;">
+60
+</td>
+<td style="text-align:left;">
+160
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Total
+</td>
+<td style="text-align:left;">
+200
+</td>
+<td style="text-align:left;">
+200
+</td>
+<td style="text-align:left;">
+100
+</td>
+<td style="text-align:left;">
+500
+</td>
+</tr>
+</tbody>
+</table>
+Tester l’indépendance entre la catégorie d’emploi et la préférence pour un régime.
+</div>
+
 
 </div>
-</div>
-</div>
+
+
+
             </section>
 
           </div>
         </div>
       </div>
-<a href="exercices.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="tp-statistique-descriptive-avec-r-avec-corrections.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="exercices-6.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="variables-aleatoires-discretes.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="book_assets/gitbook-2.6.7/js/app.min.js"></script>

@@ -24,7 +24,7 @@
 <meta name="author" content="Mohamad Ghassany" />
 
 
-<meta name="date" content="2020-01-02" />
+<meta name="date" content="2020-01-03" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -448,13 +448,13 @@ lecteur de conclure à l’acceptation de <span class="math inline">\(H_0\)</spa
 </div>
 <ol start="6" style="list-style-type: decimal">
 <li><p>Que concluez vous?</p></li>
-<li><p>Avez vous remarqué que c’est écrit <code>Welch Two Sample t-test</code> dans les résultats du test effectué? C’est parce que pour comparer les moyennes des deux sous-populations il y a deux types de tests, l’un quand les variances inconnues sont différentes et l’autre quand elle sont égales. Tester l’égalité des variances en utilisant la fonction <code>var.test()</code>.</p></li>
+<li><p>Avez vous remarqué que c’est écrit <code>Welch Two Sample t-test</code> dans les résultats du test effectué? C’est parce que pour comparer les moyennes des deux sous-populations il y a deux types de tests, l’un quand les variances inconnues sont différentes et l’autre quand elles sont égales. Tester l’égalité des deux variances en utilisant la fonction <code>var.test()</code>.</p></li>
 </ol>
 <div class="rmdinsight">
 <p>Quand on utilise la fonction <code>t.test()</code> pour comparer les moyennes de deux sous-populations, un test d’égalité de variances est effectué. Si les variances sont différentes, c’est le test de Welch qui est appliqué. On peut préciser si les variances sont égales ou différentes avec l’argument <code>var.equal</code>. Nous pourrons aussi changer l’hypothèse alternative avec l’argument <code>alternative</code>. Ou aussi modifier le niveau de confiance du test.</p>
 </div>
 <ol start="8" style="list-style-type: decimal">
-<li>Pour construire le test de comparaison de moyennes, nous faisons l’hypothèse que l’estimateur de la moyenne, dans chaque sous-population, suit une loi normale. Ceci est vrai si la distribution des données suit une loi normale ou si la taille de l’échantillon est suffisamment frande (en pratique <span class="math inline">\(n &gt; 30\)</span>) grâce au théorème central limite. Ici les effectifs sont inférieurs à <span class="math inline">\(30\)</span>: il faut tester la normalité des données pour chaque sous-population. On pourra utiliser le test de Shapiro-Wilk avec la fonction <code>shapiro.test()</code>. Tester la normalité de chaque sous-population avec le test de Shapiro-Wilk.</li>
+<li>Pour construire le test de comparaison de moyennes, nous faisons l’hypothèse que l’estimateur de la moyenne, dans chaque sous-population, suit une loi normale. Ceci est vrai si la distribution des données suit une loi normale ou si la taille de l’échantillon est suffisamment grande (en pratique <span class="math inline">\(n &gt; 30\)</span>) grâce au théorème central limite. Ici les effectifs sont inférieurs à <span class="math inline">\(30\)</span>: il faut tester la normalité des données pour chaque sous-population. On pourra utiliser le test de Shapiro-Wilk avec la fonction <code>shapiro.test()</code>. Tester la normalité de chaque sous-population avec le test de Shapiro-Wilk.</li>
 </ol>
 <div class="rmdinsight">
 <p>Quand l’hypothèse de normalité est rejetée, le test d’égalité des moyennes peut être effectué à l’aide de tests non-paramétriques tels que celui de Wilcoxon (<code>wilcox.test()</code>) ou celui de Kruskal-Wallis (<code>kruskal.test()</code>).</p>

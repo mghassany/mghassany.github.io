@@ -24,7 +24,7 @@
 <meta name="author" content="Mohamad Ghassany" />
 
 
-<meta name="date" content="2019-11-20" />
+<meta name="date" content="2020-01-08" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -51,6 +51,13 @@
 
 
 <link href="book_assets/font-awesome-5.3.1/css/fontawesome-all.min.css" rel="stylesheet" />
+<script src="book_assets/htmlwidgets-1.5.1/htmlwidgets.js"></script>
+<script src="book_assets/plotly-binding-4.9.0/plotly.js"></script>
+<script src="book_assets/typedarray-0.1/typedarray.min.js"></script>
+<link href="book_assets/crosstalk-1.0.0/css/crosstalk.css" rel="stylesheet" />
+<script src="book_assets/crosstalk-1.0.0/js/crosstalk.min.js"></script>
+<link href="book_assets/plotly-htmlwidgets-css-1.46.1/plotly-htmlwidgets.css" rel="stylesheet" />
+<script src="book_assets/plotly-main-1.46.1/plotly-latest.min.js"></script>
 <!-- Global site tag (gtag.js) - Google Analytics -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=UA-88489172-1"></script>
 <script>
@@ -342,8 +349,9 @@ code span.wa { color: #bf0303; } /* Warning */
 <li class="chapter" data-level="" data-path="model-selection.html"><a href="model-selection.html#model-selection-using-cross-validation"><i class="fa fa-check"></i>Model Selection Using Cross-Validation</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="E" data-path="references-and-credits.html"><a href="references-and-credits.html"><i class="fa fa-check"></i><b>E</b> References and Credits</a></li>
-<li class="chapter" data-level="F" data-path="other-references.html"><a href="other-references.html"><i class="fa fa-check"></i><b>F</b> Other References</a></li>
+<li class="chapter" data-level="E" data-path="final-grades.html"><a href="final-grades.html"><i class="fa fa-check"></i><b>E</b> Final Grades</a></li>
+<li class="chapter" data-level="F" data-path="references-and-credits.html"><a href="references-and-credits.html"><i class="fa fa-check"></i><b>F</b> References and Credits</a></li>
+<li class="chapter" data-level="G" data-path="other-references.html"><a href="other-references.html"><i class="fa fa-check"></i><b>G</b> Other References</a></li>
 <li class="chapter" data-level="" data-path="main-references-credits.html"><a href="main-references-credits.html"><i class="fa fa-check"></i>Main References &amp; Credits</a></li>
 </ul>
 
@@ -584,18 +592,19 @@ code span.wa { color: #bf0303; } /* Warning */
 <a class="sourceLine" id="cb8-15" title="15"></a>
 <a class="sourceLine" id="cb8-16" title="16"><span class="co"># Sampling from a Normal - 100 random points from a N(0, 1)</span></a>
 <a class="sourceLine" id="cb8-17" title="17"><span class="kw">rnorm</span>(<span class="dt">n =</span> <span class="dv">10</span>, <span class="dt">mean =</span> <span class="dv">0</span>, <span class="dt">sd =</span> <span class="dv">1</span>)</a>
-<a class="sourceLine" id="cb8-18" title="18"><span class="co">#ans&gt;  [1]  0.806 -0.391  0.495 -0.068  2.299  0.618 -0.605  0.814 -0.575  0.752</span></a>
-<a class="sourceLine" id="cb8-19" title="19"></a>
-<a class="sourceLine" id="cb8-20" title="20"><span class="co"># If you want to have always the same result, set the seed of the random number</span></a>
-<a class="sourceLine" id="cb8-21" title="21"><span class="co"># generator</span></a>
-<a class="sourceLine" id="cb8-22" title="22"><span class="kw">set.seed</span>(<span class="dv">45678</span>)</a>
-<a class="sourceLine" id="cb8-23" title="23"><span class="kw">rnorm</span>(<span class="dt">n =</span> <span class="dv">10</span>, <span class="dt">mean =</span> <span class="dv">0</span>, <span class="dt">sd =</span> <span class="dv">1</span>)</a>
-<a class="sourceLine" id="cb8-24" title="24"><span class="co">#ans&gt;  [1]  1.440 -0.720  0.671 -0.422  0.378 -1.667 -0.508  0.443 -1.799 -0.618</span></a>
-<a class="sourceLine" id="cb8-25" title="25"></a>
-<a class="sourceLine" id="cb8-26" title="26"><span class="co"># Plotting the density of a N(0, 1) - the Gauss bell</span></a>
-<a class="sourceLine" id="cb8-27" title="27">x &lt;-<span class="st"> </span><span class="kw">seq</span>(<span class="op">-</span><span class="dv">4</span>, <span class="dv">4</span>, <span class="dt">l =</span> <span class="dv">100</span>)</a>
-<a class="sourceLine" id="cb8-28" title="28">y &lt;-<span class="st"> </span><span class="kw">dnorm</span>(<span class="dt">x =</span> x, <span class="dt">mean =</span> <span class="dv">0</span>, <span class="dt">sd =</span> <span class="dv">1</span>)</a>
-<a class="sourceLine" id="cb8-29" title="29"><span class="kw">plot</span>(x, y, <span class="dt">type =</span> <span class="st">&quot;l&quot;</span>)</a></code></pre></div>
+<a class="sourceLine" id="cb8-18" title="18"><span class="co">#ans&gt;  [1]  0.0773 -0.2969 -1.1832  0.0113  0.9916  1.5940 -1.3727 -0.2496</span></a>
+<a class="sourceLine" id="cb8-19" title="19"><span class="co">#ans&gt;  [9]  1.1594 -1.1142</span></a>
+<a class="sourceLine" id="cb8-20" title="20"></a>
+<a class="sourceLine" id="cb8-21" title="21"><span class="co"># If you want to have always the same result, set the seed of the random number</span></a>
+<a class="sourceLine" id="cb8-22" title="22"><span class="co"># generator</span></a>
+<a class="sourceLine" id="cb8-23" title="23"><span class="kw">set.seed</span>(<span class="dv">45678</span>)</a>
+<a class="sourceLine" id="cb8-24" title="24"><span class="kw">rnorm</span>(<span class="dt">n =</span> <span class="dv">10</span>, <span class="dt">mean =</span> <span class="dv">0</span>, <span class="dt">sd =</span> <span class="dv">1</span>)</a>
+<a class="sourceLine" id="cb8-25" title="25"><span class="co">#ans&gt;  [1]  1.440 -0.720  0.671 -0.422  0.378 -1.667 -0.508  0.443 -1.799 -0.618</span></a>
+<a class="sourceLine" id="cb8-26" title="26"></a>
+<a class="sourceLine" id="cb8-27" title="27"><span class="co"># Plotting the density of a N(0, 1) - the Gauss bell</span></a>
+<a class="sourceLine" id="cb8-28" title="28">x &lt;-<span class="st"> </span><span class="kw">seq</span>(<span class="op">-</span><span class="dv">4</span>, <span class="dv">4</span>, <span class="dt">l =</span> <span class="dv">100</span>)</a>
+<a class="sourceLine" id="cb8-29" title="29">y &lt;-<span class="st"> </span><span class="kw">dnorm</span>(<span class="dt">x =</span> x, <span class="dt">mean =</span> <span class="dv">0</span>, <span class="dt">sd =</span> <span class="dv">1</span>)</a>
+<a class="sourceLine" id="cb8-30" title="30"><span class="kw">plot</span>(x, y, <span class="dt">type =</span> <span class="st">&quot;l&quot;</span>)</a></code></pre></div>
 <p><img src="Machine-Learning_files/figure-html/unnamed-chunk-16-1.png" width="70%" style="display: block; margin: auto;" /></p>
 <div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb9-1" title="1"></a>
 <a class="sourceLine" id="cb9-2" title="2"><span class="co"># Plotting the distribution function of a N(0, 1)</span></a>
@@ -1021,27 +1030,6 @@ the <code>predict()</code> function for this purpose:</p>
 </div>
 </div>
 </div>
-<h1>Discussion</h1>
-<div id="disqus_thread"></div>
-<script>
-
-/**
-*  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
-*  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables*/
-/*
-var disqus_config = function () {
-this.page.url = PAGE_URL;  // Replace PAGE_URL with your page's canonical URL variable
-this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
-};
-*/
-(function() { // DON'T EDIT BELOW THIS LINE
-var d = document, s = d.createElement('script');
-s.src = 'https://mlcourse.disqus.com/embed.js';
-s.setAttribute('data-timestamp', +new Date());
-(d.head || d.body).appendChild(s);
-})();
-</script>
-<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
             </section>
 
           </div>

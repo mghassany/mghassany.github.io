@@ -24,7 +24,7 @@
 <meta name="author" content="Mohamad Ghassany" />
 
 
-<meta name="date" content="2019-11-20" />
+<meta name="date" content="2020-01-08" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -51,6 +51,13 @@
 
 
 <link href="book_assets/font-awesome-5.3.1/css/fontawesome-all.min.css" rel="stylesheet" />
+<script src="book_assets/htmlwidgets-1.5.1/htmlwidgets.js"></script>
+<script src="book_assets/plotly-binding-4.9.0/plotly.js"></script>
+<script src="book_assets/typedarray-0.1/typedarray.min.js"></script>
+<link href="book_assets/crosstalk-1.0.0/css/crosstalk.css" rel="stylesheet" />
+<script src="book_assets/crosstalk-1.0.0/js/crosstalk.min.js"></script>
+<link href="book_assets/plotly-htmlwidgets-css-1.46.1/plotly-htmlwidgets.css" rel="stylesheet" />
+<script src="book_assets/plotly-main-1.46.1/plotly-latest.min.js"></script>
 <!-- Global site tag (gtag.js) - Google Analytics -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=UA-88489172-1"></script>
 <script>
@@ -342,8 +349,9 @@ code span.wa { color: #bf0303; } /* Warning */
 <li class="chapter" data-level="" data-path="model-selection.html"><a href="model-selection.html#model-selection-using-cross-validation"><i class="fa fa-check"></i>Model Selection Using Cross-Validation</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="E" data-path="references-and-credits.html"><a href="references-and-credits.html"><i class="fa fa-check"></i><b>E</b> References and Credits</a></li>
-<li class="chapter" data-level="F" data-path="other-references.html"><a href="other-references.html"><i class="fa fa-check"></i><b>F</b> Other References</a></li>
+<li class="chapter" data-level="E" data-path="final-grades.html"><a href="final-grades.html"><i class="fa fa-check"></i><b>E</b> Final Grades</a></li>
+<li class="chapter" data-level="F" data-path="references-and-credits.html"><a href="references-and-credits.html"><i class="fa fa-check"></i><b>F</b> References and Credits</a></li>
+<li class="chapter" data-level="G" data-path="other-references.html"><a href="other-references.html"><i class="fa fa-check"></i><b>G</b> Other References</a></li>
 <li class="chapter" data-level="" data-path="main-references-credits.html"><a href="main-references-credits.html"><i class="fa fa-check"></i>Main References &amp; Credits</a></li>
 </ul>
 
@@ -1138,21 +1146,15 @@ The interpretation of the PCs involves inspecting the weights and interpreting t
 <p>Recall that the biplot is a superposition of two figures: the first one is the scatterplot of the principal component scores (the projections of the observations on the new low dimensional space - also know as graph of individuals) and the second one is the figure of loading vectors (also known as graph of variables). In fact, the graph of variables is a correlation circle, the variables whose unit vectors are close to each other are said to be positively correlated, meaning that their influence on the positioning of individuals is similar (again, these proximities are reflected in the projections of variables on the graph of individuals). However, variables far away from each other will be defined as being negatively correlated. Variables that have perpendicular unit vector are uncorrelated. To see both graphs we can use the <code>factoextra</code> package like follows:</p>
 <div class="sourceCode" id="cb52"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb52-1" title="1"><span class="co"># loading factoextra library</span></a>
 <a class="sourceLine" id="cb52-2" title="2"><span class="kw">require</span>(factoextra)</a>
-<a class="sourceLine" id="cb52-3" title="3"><span class="co">#ans&gt; Le chargement a nécessité le package : factoextra</span></a>
-<a class="sourceLine" id="cb52-4" title="4"><span class="co">#ans&gt; Le chargement a nécessité le package : ggplot2</span></a>
-<a class="sourceLine" id="cb52-5" title="5"><span class="co">#ans&gt; Warning: le package &#39;ggplot2&#39; a été compilé avec la version R 3.6.1</span></a>
-<a class="sourceLine" id="cb52-6" title="6"><span class="co">#ans&gt; Find out what&#39;s changed in ggplot2 at</span></a>
-<a class="sourceLine" id="cb52-7" title="7"><span class="co">#ans&gt; https://github.com/tidyverse/ggplot2/releases.</span></a>
-<a class="sourceLine" id="cb52-8" title="8"><span class="co">#ans&gt; Welcome! Related Books: `Practical Guide To Cluster Analysis in R` at https://goo.gl/13EFCZ</span></a>
-<a class="sourceLine" id="cb52-9" title="9"><span class="co"># Calculating pca using prcomp(), which is a built-in function in R </span></a>
-<a class="sourceLine" id="cb52-10" title="10">res.pca &lt;-<span class="st"> </span><span class="kw">prcomp</span>(eurojob, <span class="dt">scale =</span> <span class="ot">TRUE</span>)</a>
-<a class="sourceLine" id="cb52-11" title="11"></a>
-<a class="sourceLine" id="cb52-12" title="12"><span class="co"># Graph of individuals</span></a>
-<a class="sourceLine" id="cb52-13" title="13"><span class="kw">fviz_pca_ind</span>(res.pca,</a>
-<a class="sourceLine" id="cb52-14" title="14">             <span class="dt">col.ind =</span> <span class="st">&quot;contrib&quot;</span>, <span class="co"># Color by their contribution to axes</span></a>
-<a class="sourceLine" id="cb52-15" title="15">             <span class="dt">gradient.cols =</span> <span class="kw">c</span>(<span class="st">&quot;#00AFBB&quot;</span>, <span class="st">&quot;#E7B800&quot;</span>, <span class="st">&quot;#FC4E07&quot;</span>),</a>
-<a class="sourceLine" id="cb52-16" title="16">             <span class="dt">repel =</span> <span class="ot">TRUE</span>     </a>
-<a class="sourceLine" id="cb52-17" title="17">             )</a></code></pre></div>
+<a class="sourceLine" id="cb52-3" title="3"><span class="co"># Calculating pca using prcomp(), which is a built-in function in R </span></a>
+<a class="sourceLine" id="cb52-4" title="4">res.pca &lt;-<span class="st"> </span><span class="kw">prcomp</span>(eurojob, <span class="dt">scale =</span> <span class="ot">TRUE</span>)</a>
+<a class="sourceLine" id="cb52-5" title="5"></a>
+<a class="sourceLine" id="cb52-6" title="6"><span class="co"># Graph of individuals</span></a>
+<a class="sourceLine" id="cb52-7" title="7"><span class="kw">fviz_pca_ind</span>(res.pca,</a>
+<a class="sourceLine" id="cb52-8" title="8">             <span class="dt">col.ind =</span> <span class="st">&quot;contrib&quot;</span>, <span class="co"># Color by their contribution to axes</span></a>
+<a class="sourceLine" id="cb52-9" title="9">             <span class="dt">gradient.cols =</span> <span class="kw">c</span>(<span class="st">&quot;#00AFBB&quot;</span>, <span class="st">&quot;#E7B800&quot;</span>, <span class="st">&quot;#FC4E07&quot;</span>),</a>
+<a class="sourceLine" id="cb52-10" title="10">             <span class="dt">repel =</span> <span class="ot">TRUE</span>     </a>
+<a class="sourceLine" id="cb52-11" title="11">             )</a></code></pre></div>
 <p><img src="Machine-Learning_files/figure-html/unnamed-chunk-119-1.png" width="90%" style="display: block; margin: auto;" /></p>
 <div class="sourceCode" id="cb53"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb53-1" title="1"><span class="co"># Graph of variables</span></a>
 <a class="sourceLine" id="cb53-2" title="2"><span class="kw">fviz_pca_var</span>(res.pca,</a>
@@ -1174,27 +1176,6 @@ The interpretation of the PCs involves inspecting the weights and interpreting t
 </div>
 </div>
 </div>
-<h1>Discussion</h1>
-<div id="disqus_thread"></div>
-<script>
-
-/**
-*  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
-*  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables*/
-/*
-var disqus_config = function () {
-this.page.url = PAGE_URL;  // Replace PAGE_URL with your page's canonical URL variable
-this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
-};
-*/
-(function() { // DON'T EDIT BELOW THIS LINE
-var d = document, s = d.createElement('script');
-s.src = 'https://mlcourse.disqus.com/embed.js';
-s.setAttribute('data-timestamp', +new Date());
-(d.head || d.body).appendChild(s);
-})();
-</script>
-<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
             </section>
 
           </div>

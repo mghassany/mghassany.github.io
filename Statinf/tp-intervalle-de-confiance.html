@@ -448,102 +448,65 @@ Vous êtes invités à annoter le contenu de ce cours. Les annotations peuvent �
 <ol style="list-style-type: decimal">
 <li>Récupérer le fichier <a href="datasets/poulpe.csv">poulpe.csv <i class="fas  fa-table "></i></a> et charger le dans votre session <svg style="height:0.8em;top:.04em;position:relative;fill:steelblue;" viewBox="0 0 581 512"><path d="M581 226.6C581 119.1 450.9 32 290.5 32S0 119.1 0 226.6C0 322.4 103.3 402 239.4 418.1V480h99.1v-61.5c24.3-2.7 47.6-7.4 69.4-13.9L448 480h112l-67.4-113.7c54.5-35.4 88.4-84.9 88.4-139.7zm-466.8 14.5c0-73.5 98.9-133 220.8-133s211.9 40.7 211.9 133c0 50.1-26.5 85-70.3 106.4-2.4-1.6-4.7-2.9-6.4-3.7-10.2-5.2-27.8-10.5-27.8-10.5s86.6-6.4 86.6-92.7-90.6-87.9-90.6-87.9h-199V361c-74.1-21.5-125.2-67.1-125.2-119.9zm225.1 38.3v-55.6c57.8 0 87.8-6.8 87.8 27.3 0 36.5-38.2 28.3-87.8 28.3zm-.9 72.5H365c10.8 0 18.9 11.7 24 19.2-16.1 1.9-33 2.8-50.6 2.9v-22.1z"/></svg>.</li>
 </ol>
-<div class="sourceCode" id="cb66"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb66-1" title="1"><span class="co"># On peut charger les données en mettant directement l&#39;adresse url</span></a>
-<a class="sourceLine" id="cb66-2" title="2"><span class="co"># Attention au séparateur de colonnes dans le fichier brut</span></a>
-<a class="sourceLine" id="cb66-3" title="3">poulpes =<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&quot;https://www.mghassany.com/Statinf/datasets/poulpe.csv&quot;</span>, <span class="dt">sep=</span> <span class="st">&quot;;&quot;</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb71"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb71-1" title="1"><span class="co"># On peut charger les données en mettant directement l&#39;adresse url</span></a>
+<a class="sourceLine" id="cb71-2" title="2"><span class="co"># Attention au séparateur de colonnes dans le fichier brut</span></a>
+<a class="sourceLine" id="cb71-3" title="3">poulpes =<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&quot;https://www.mghassany.com/Statinf/datasets/poulpe.csv&quot;</span>, <span class="dt">sep=</span> <span class="st">&quot;;&quot;</span>)</a></code></pre></div>
 <ol start="2" style="list-style-type: decimal">
 <li>Sélectionner les poulpes femelles.</li>
 </ol>
-<div class="sourceCode" id="cb67"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb67-1" title="1"><span class="co"># Facultatif:</span></a>
-<a class="sourceLine" id="cb67-2" title="2"><span class="co"># J&#39;affiche la structure de mes données (pour vérifier les types de colonnes par exemple)</span></a>
-<a class="sourceLine" id="cb67-3" title="3"><span class="kw">str</span>(poulpes)</a>
-<a class="sourceLine" id="cb67-4" title="4"><span class="co">#ans&gt; &#39;data.frame&#39;: 28 obs. of  2 variables:</span></a>
-<a class="sourceLine" id="cb67-5" title="5"><span class="co">#ans&gt;  $ Poids: int  300 700 850 900 1000 1420 1500 1500 1800 1800 ...</span></a>
-<a class="sourceLine" id="cb67-6" title="6"><span class="co">#ans&gt;  $ Sexe : Factor w/ 2 levels &quot;Femelle&quot;,&quot;Mâle&quot;: 1 1 1 1 1 1 1 1 1 1 ...</span></a>
-<a class="sourceLine" id="cb67-7" title="7"><span class="co"># J&#39;affiche quelques statistiques</span></a>
-<a class="sourceLine" id="cb67-8" title="8"><span class="kw">summary</span>(poulpes)</a>
-<a class="sourceLine" id="cb67-9" title="9"><span class="co">#ans&gt;      Poids           Sexe   </span></a>
-<a class="sourceLine" id="cb67-10" title="10"><span class="co">#ans&gt;  Min.   : 300   Femelle:13  </span></a>
-<a class="sourceLine" id="cb67-11" title="11"><span class="co">#ans&gt;  1st Qu.:1480   Mâle   :15  </span></a>
-<a class="sourceLine" id="cb67-12" title="12"><span class="co">#ans&gt;  Median :1800               </span></a>
-<a class="sourceLine" id="cb67-13" title="13"><span class="co">#ans&gt;  Mean   :2099               </span></a>
-<a class="sourceLine" id="cb67-14" title="14"><span class="co">#ans&gt;  3rd Qu.:2750               </span></a>
-<a class="sourceLine" id="cb67-15" title="15"><span class="co">#ans&gt;  Max.   :5400</span></a>
-<a class="sourceLine" id="cb67-16" title="16"></a>
-<a class="sourceLine" id="cb67-17" title="17"><span class="co"># Plusieurs solutions possibles pour sélectionner les poulpes femelles</span></a>
-<a class="sourceLine" id="cb67-18" title="18">poulpesF =<span class="st"> </span><span class="kw">subset</span>(poulpes, Sexe <span class="op">==</span><span class="st"> &quot;Femelle&quot;</span>)</a>
-<a class="sourceLine" id="cb67-19" title="19"><span class="co"># ou </span></a>
-<a class="sourceLine" id="cb67-20" title="20">poulpesF =<span class="st"> </span>poulpes[poulpes<span class="op">$</span>Sexe<span class="op">==</span><span class="st">&quot;Femelle&quot;</span>,]</a>
-<a class="sourceLine" id="cb67-21" title="21"><span class="co"># ou autres .. </span></a></code></pre></div>
+<div class="sourceCode" id="cb72"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb72-1" title="1"><span class="co"># Facultatif:</span></a>
+<a class="sourceLine" id="cb72-2" title="2"><span class="co"># J&#39;affiche la structure de mes données (pour vérifier les types de colonnes par exemple)</span></a>
+<a class="sourceLine" id="cb72-3" title="3"><span class="kw">str</span>(poulpes)</a>
+<a class="sourceLine" id="cb72-4" title="4"><span class="co">#ans&gt; &#39;data.frame&#39;: 28 obs. of  2 variables:</span></a>
+<a class="sourceLine" id="cb72-5" title="5"><span class="co">#ans&gt;  $ Poids: int  300 700 850 900 1000 1420 1500 1500 1800 1800 ...</span></a>
+<a class="sourceLine" id="cb72-6" title="6"><span class="co">#ans&gt;  $ Sexe : Factor w/ 2 levels &quot;Femelle&quot;,&quot;Mâle&quot;: 1 1 1 1 1 1 1 1 1 1 ...</span></a></code></pre></div>
 <ol start="3" style="list-style-type: decimal">
 <li>Calculer les estimateurs de la moyenne et de la variance. Représenter les données sur un histogramme.</li>
 </ol>
-<div class="sourceCode" id="cb68"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb68-1" title="1">moyenneF =<span class="st"> </span><span class="kw">mean</span>(poulpesF<span class="op">$</span>Poids)</a>
-<a class="sourceLine" id="cb68-2" title="2">moyenneF</a>
-<a class="sourceLine" id="cb68-3" title="3"><span class="co">#ans&gt; [1] 1405</span></a>
-<a class="sourceLine" id="cb68-4" title="4">varF =<span class="st"> </span><span class="kw">var</span>(poulpesF<span class="op">$</span>Poids)</a>
-<a class="sourceLine" id="cb68-5" title="5">varF</a>
-<a class="sourceLine" id="cb68-6" title="6"><span class="co">#ans&gt; [1] 386877</span></a>
-<a class="sourceLine" id="cb68-7" title="7"></a>
-<a class="sourceLine" id="cb68-8" title="8"><span class="kw">hist</span>(poulpesF<span class="op">$</span>Poids,</a>
-<a class="sourceLine" id="cb68-9" title="9">     <span class="dt">main =</span> <span class="st">&quot;Histogramme de poids des poulpes femelles&quot;</span>,</a>
-<a class="sourceLine" id="cb68-10" title="10">     <span class="dt">xlab =</span> <span class="st">&quot;Poids&quot;</span>,</a>
-<a class="sourceLine" id="cb68-11" title="11">     <span class="dt">probability =</span> T,</a>
-<a class="sourceLine" id="cb68-12" title="12">     <span class="dt">col =</span> <span class="st">&quot;steelblue&quot;</span>)</a></code></pre></div>
-<p><img src="Statistique_inferentielle_files/figure-html/unnamed-chunk-173-1.png" width="70%" style="display: block; margin: auto;" /></p>
+<div class="sourceCode" id="cb73"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb73-1" title="1">moyenneF =<span class="st"> </span><span class="kw">mean</span>(poulpesF<span class="op">$</span>Poids)</a>
+<a class="sourceLine" id="cb73-2" title="2">moyenneF</a>
+<a class="sourceLine" id="cb73-3" title="3"><span class="co">#ans&gt; [1] 1405</span></a>
+<a class="sourceLine" id="cb73-4" title="4">varF =<span class="st"> </span><span class="kw">var</span>(poulpesF<span class="op">$</span>Poids)</a></code></pre></div>
 <ol start="4" style="list-style-type: decimal">
 <li>Déterminer un intervalle de confiance à <span class="math inline">\(95\%\)</span> pour la moyenne, en calculant les bornes de l’intervalle avec la fonction <code>qt()</code>.</li>
 </ol>
-<div class="sourceCode" id="cb69"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb69-1" title="1"><span class="co"># fixons alpha</span></a>
-<a class="sourceLine" id="cb69-2" title="2">alpha =<span class="st"> </span><span class="fl">0.05</span></a>
-<a class="sourceLine" id="cb69-3" title="3"><span class="co"># calculons le nombre de poulpes femelles (plusieurs solutions possibles)</span></a>
-<a class="sourceLine" id="cb69-4" title="4">n =<span class="st"> </span><span class="kw">length</span>(poulpesF<span class="op">$</span>Poids)</a>
-<a class="sourceLine" id="cb69-5" title="5">borne_inf_moy =<span class="st"> </span>moyenneF <span class="op">+</span><span class="st"> </span><span class="kw">qt</span>(alpha<span class="op">/</span><span class="dv">2</span>, n<span class="dv">-1</span>)<span class="op">*</span><span class="st"> </span><span class="kw">sqrt</span>(varF<span class="op">/</span>(n))</a>
-<a class="sourceLine" id="cb69-6" title="6">borne_sup_moy =<span class="st"> </span>moyenneF <span class="op">+</span><span class="st"> </span><span class="kw">qt</span>(<span class="dv">1</span><span class="op">-</span>alpha<span class="op">/</span><span class="dv">2</span>, n<span class="dv">-1</span>)<span class="op">*</span><span class="st"> </span><span class="kw">sqrt</span>(varF<span class="op">/</span>(n))</a>
-<a class="sourceLine" id="cb69-7" title="7">IC_moy =<span class="st"> </span><span class="kw">c</span>(borne_inf_moy, borne_sup_moy)</a>
-<a class="sourceLine" id="cb69-8" title="8">IC_moy</a>
-<a class="sourceLine" id="cb69-9" title="9"><span class="co">#ans&gt; [1] 1030 1781</span></a></code></pre></div>
+<div class="sourceCode" id="cb74"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb74-1" title="1"><span class="co"># fixons alpha</span></a>
+<a class="sourceLine" id="cb74-2" title="2">alpha =<span class="st"> </span><span class="fl">0.05</span></a>
+<a class="sourceLine" id="cb74-3" title="3"><span class="co"># calculons le nombre de poulpes femelles (plusieurs solutions possibles)</span></a></code></pre></div>
 <ol start="5" style="list-style-type: decimal">
 <li>Retrouver cet intervalle à l’aide de la fonction <code>t.test()</code>.</li>
 </ol>
-<div class="sourceCode" id="cb70"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb70-1" title="1"><span class="kw">t.test</span>(poulpesF<span class="op">$</span>Poids)</a>
-<a class="sourceLine" id="cb70-2" title="2"><span class="co">#ans&gt; </span></a>
-<a class="sourceLine" id="cb70-3" title="3"><span class="co">#ans&gt;   One Sample t-test</span></a>
-<a class="sourceLine" id="cb70-4" title="4"><span class="co">#ans&gt; </span></a>
-<a class="sourceLine" id="cb70-5" title="5"><span class="co">#ans&gt; data:  poulpesF$Poids</span></a>
-<a class="sourceLine" id="cb70-6" title="6"><span class="co">#ans&gt; t = 8, df = 12, p-value = 3e-06</span></a>
-<a class="sourceLine" id="cb70-7" title="7"><span class="co">#ans&gt; alternative hypothesis: true mean is not equal to 0</span></a>
-<a class="sourceLine" id="cb70-8" title="8"><span class="co">#ans&gt; 95 percent confidence interval:</span></a>
-<a class="sourceLine" id="cb70-9" title="9"><span class="co">#ans&gt;  1030 1781</span></a>
-<a class="sourceLine" id="cb70-10" title="10"><span class="co">#ans&gt; sample estimates:</span></a>
-<a class="sourceLine" id="cb70-11" title="11"><span class="co">#ans&gt; mean of x </span></a>
-<a class="sourceLine" id="cb70-12" title="12"><span class="co">#ans&gt;      1405</span></a>
-<a class="sourceLine" id="cb70-13" title="13"></a>
-<a class="sourceLine" id="cb70-14" title="14"><span class="co"># on peut extraire l&#39;IC</span></a>
-<a class="sourceLine" id="cb70-15" title="15">IC_moyy =<span class="st"> </span><span class="kw">t.test</span>(poulpesF<span class="op">$</span>Poids)<span class="op">$</span>conf.int</a>
-<a class="sourceLine" id="cb70-16" title="16">IC_moyy</a>
-<a class="sourceLine" id="cb70-17" title="17"><span class="co">#ans&gt; [1] 1030 1781</span></a>
-<a class="sourceLine" id="cb70-18" title="18"><span class="co">#ans&gt; attr(,&quot;conf.level&quot;)</span></a>
-<a class="sourceLine" id="cb70-19" title="19"><span class="co">#ans&gt; [1] 0.95</span></a></code></pre></div>
+<div class="sourceCode" id="cb75"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb75-1" title="1"><span class="kw">t.test</span>(poulpesF<span class="op">$</span>Poids)</a>
+<a class="sourceLine" id="cb75-2" title="2"><span class="co">#ans&gt; </span></a>
+<a class="sourceLine" id="cb75-3" title="3"><span class="co">#ans&gt;   One Sample t-test</span></a>
+<a class="sourceLine" id="cb75-4" title="4"><span class="co">#ans&gt; </span></a>
+<a class="sourceLine" id="cb75-5" title="5"><span class="co">#ans&gt; data:  poulpesF$Poids</span></a>
+<a class="sourceLine" id="cb75-6" title="6"><span class="co">#ans&gt; t = 8, df = 12, p-value = 3e-06</span></a>
+<a class="sourceLine" id="cb75-7" title="7"><span class="co">#ans&gt; alternative hypothesis: true mean is not equal to 0</span></a>
+<a class="sourceLine" id="cb75-8" title="8"><span class="co">#ans&gt; 95 percent confidence interval:</span></a>
+<a class="sourceLine" id="cb75-9" title="9"><span class="co">#ans&gt;  1030 1781</span></a>
+<a class="sourceLine" id="cb75-10" title="10"><span class="co">#ans&gt; sample estimates:</span></a>
+<a class="sourceLine" id="cb75-11" title="11"><span class="co">#ans&gt; mean of x </span></a>
+<a class="sourceLine" id="cb75-12" title="12"><span class="co">#ans&gt;      1405</span></a>
+<a class="sourceLine" id="cb75-13" title="13"></a>
+<a class="sourceLine" id="cb75-14" title="14"><span class="co"># on peut extraire l&#39;IC</span></a></code></pre></div>
 <ol start="6" style="list-style-type: decimal">
 <li>Déterminer un intervalle de confiance à <span class="math inline">\(95\%\)</span> pour la variance.</li>
 </ol>
-<div class="sourceCode" id="cb71"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb71-1" title="1">borne_inf_var =<span class="st"> </span>((n<span class="dv">-1</span>) <span class="op">*</span><span class="st"> </span>varF) <span class="op">/</span><span class="st"> </span><span class="kw">qchisq</span>(<span class="dv">1</span><span class="op">-</span>alpha<span class="op">/</span><span class="dv">2</span>, n<span class="dv">-1</span> ) </a>
-<a class="sourceLine" id="cb71-2" title="2">borne_sup_var =<span class="st"> </span>((n<span class="dv">-1</span>) <span class="op">*</span><span class="st"> </span>varF) <span class="op">/</span><span class="st"> </span><span class="kw">qchisq</span>(alpha<span class="op">/</span><span class="dv">2</span>, n<span class="dv">-1</span> ) </a>
-<a class="sourceLine" id="cb71-3" title="3">ICvar =<span class="st"> </span><span class="kw">c</span>(borne_inf_var,borne_sup_var)</a>
-<a class="sourceLine" id="cb71-4" title="4">ICvar</a>
-<a class="sourceLine" id="cb71-5" title="5"><span class="co">#ans&gt; [1]  198937 1054211</span></a></code></pre></div>
+<div class="sourceCode" id="cb76"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb76-1" title="1">borne_inf_var =<span class="st"> </span>((n<span class="dv">-1</span>) <span class="op">*</span><span class="st"> </span>varF) <span class="op">/</span><span class="st"> </span><span class="kw">qchisq</span>(<span class="dv">1</span><span class="op">-</span>alpha<span class="op">/</span><span class="dv">2</span>, n<span class="dv">-1</span> )</a>
+<a class="sourceLine" id="cb76-2" title="2">borne_sup_var =<span class="st"> </span>((n<span class="dv">-1</span>) <span class="op">*</span><span class="st"> </span>varF) <span class="op">/</span><span class="st"> </span><span class="kw">qchisq</span>(alpha<span class="op">/</span><span class="dv">2</span>, n<span class="dv">-1</span> )</a>
+<a class="sourceLine" id="cb76-3" title="3">ICvar =<span class="st"> </span><span class="kw">c</span>(borne_inf_var,borne_sup_var)</a></code></pre></div>
 <ol start="7" style="list-style-type: decimal">
 <li>Créer une fonction <code>ICvar()</code> ayant comme arguement un vecteur d’observations, et un risque <span class="math inline">\(\alpha\)</span>, et qui sort l’intervalle de confiance pour la variance de l’échantillon.</li>
 </ol>
-<div class="sourceCode" id="cb72"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb72-1" title="1">ICvar =<span class="st"> </span><span class="cf">function</span>(x, alpha){</a>
-<a class="sourceLine" id="cb72-2" title="2">  n =<span class="st"> </span><span class="kw">length</span>(x)</a>
-<a class="sourceLine" id="cb72-3" title="3">  borne_inf_var =<span class="st"> </span>((n<span class="dv">-1</span>) <span class="op">*</span><span class="st"> </span><span class="kw">var</span>(x)) <span class="op">/</span><span class="st"> </span><span class="kw">qchisq</span>(<span class="dv">1</span><span class="op">-</span>alpha<span class="op">/</span><span class="dv">2</span>, n<span class="dv">-1</span> )</a>
-<a class="sourceLine" id="cb72-4" title="4">  borne_sup_var =<span class="st"> </span>((n<span class="dv">-1</span>) <span class="op">*</span><span class="st"> </span><span class="kw">var</span>(x)) <span class="op">/</span><span class="st"> </span><span class="kw">qchisq</span>(alpha<span class="op">/</span><span class="dv">2</span>, n<span class="dv">-1</span> )</a>
-<a class="sourceLine" id="cb72-5" title="5">  <span class="kw">c</span>(borne_inf_var,borne_sup_var)</a>
-<a class="sourceLine" id="cb72-6" title="6">}</a>
-<a class="sourceLine" id="cb72-7" title="7"><span class="kw">ICvar</span>(poulpesF<span class="op">$</span>Poids, <span class="fl">0.05</span>)</a>
-<a class="sourceLine" id="cb72-8" title="8"><span class="co">#ans&gt; [1]  198937 1054211</span></a></code></pre></div>
+<div class="sourceCode" id="cb77"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb77-1" title="1">ICvar =<span class="st"> </span><span class="cf">function</span>(x, alpha){</a>
+<a class="sourceLine" id="cb77-2" title="2">  n =<span class="st"> </span><span class="kw">length</span>(x)</a>
+<a class="sourceLine" id="cb77-3" title="3">  borne_inf_var =<span class="st"> </span>((n<span class="dv">-1</span>) <span class="op">*</span><span class="st"> </span><span class="kw">var</span>(x)) <span class="op">/</span><span class="st"> </span><span class="kw">qchisq</span>(<span class="dv">1</span><span class="op">-</span>alpha<span class="op">/</span><span class="dv">2</span>, n<span class="dv">-1</span> )</a>
+<a class="sourceLine" id="cb77-4" title="4">  borne_sup_var =<span class="st"> </span>((n<span class="dv">-1</span>) <span class="op">*</span><span class="st"> </span><span class="kw">var</span>(x)) <span class="op">/</span><span class="st"> </span><span class="kw">qchisq</span>(alpha<span class="op">/</span><span class="dv">2</span>, n<span class="dv">-1</span> )</a>
+<a class="sourceLine" id="cb77-5" title="5">  <span class="kw">c</span>(borne_inf_var,borne_sup_var)</a>
+<a class="sourceLine" id="cb77-6" title="6">}</a>
+<a class="sourceLine" id="cb77-7" title="7"><span class="kw">ICvar</span>(poulpesF<span class="op">$</span>Poids, <span class="fl">0.05</span>)</a>
+<a class="sourceLine" id="cb77-8" title="8"><span class="co">#ans&gt; [1]  198937 1054211</span></a></code></pre></div>
 </div>
 <div id="ic-pour-une-proportion-et-effet-de-la-confiance" class="section level2">
 <h2><span class="header-section-number">4.5</span> IC pour une proportion et effet de la confiance</h2>
@@ -614,53 +577,34 @@ Vous êtes invités à annoter le contenu de ce cours. Les annotations peuvent �
 <p><strong>Correction</strong></p>
 <p><img src="img/corrections/ic_tp_3.1.png" /></p>
 <p><img src="img/corrections/ic_tp_3.2.jpg" /></p>
-<div class="sourceCode" id="cb73"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb73-1" title="1">x =<span class="st"> </span><span class="kw">c</span>(<span class="fl">2.84</span>,<span class="fl">2.37</span>,<span class="fl">7.52</span>,<span class="fl">2.76</span>,<span class="fl">3.83</span>,<span class="fl">1.32</span>,<span class="fl">8.43</span>,<span class="fl">2.25</span>,<span class="fl">1.63</span>,<span class="fl">0.27</span>)</a></code></pre></div>
-<div class="sourceCode" id="cb74"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb74-1" title="1">alpha=<span class="fl">0.05</span></a>
-<a class="sourceLine" id="cb74-2" title="2"></a>
-<a class="sourceLine" id="cb74-3" title="3">borne_inf =<span class="st"> </span><span class="kw">qchisq</span>(alpha<span class="op">/</span><span class="dv">2</span>, <span class="dv">2</span><span class="op">*</span><span class="kw">length</span>(x))<span class="op">/</span>(<span class="dv">2</span><span class="op">*</span><span class="kw">sum</span>(x))</a>
-<a class="sourceLine" id="cb74-4" title="4">borne_inf</a>
-<a class="sourceLine" id="cb74-5" title="5"><span class="co">#ans&gt; [1] 0.144</span></a>
-<a class="sourceLine" id="cb74-6" title="6">borne_sup =<span class="st"> </span><span class="kw">qchisq</span>(<span class="dv">1</span><span class="op">-</span>alpha<span class="op">/</span><span class="dv">2</span>, <span class="dv">2</span><span class="op">*</span><span class="kw">length</span>(x))<span class="op">/</span>(<span class="dv">2</span><span class="op">*</span><span class="kw">sum</span>(x))</a>
-<a class="sourceLine" id="cb74-7" title="7">borne_sup</a>
-<a class="sourceLine" id="cb74-8" title="8"><span class="co">#ans&gt; [1] 0.514</span></a></code></pre></div>
-<div class="sourceCode" id="cb75"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb75-1" title="1">lambda =<span class="st"> </span><span class="fl">1.5</span></a>
-<a class="sourceLine" id="cb75-2" title="2">n =<span class="st"> </span><span class="dv">10</span></a>
-<a class="sourceLine" id="cb75-3" title="3">N =<span class="st"> </span><span class="dv">100</span></a>
-<a class="sourceLine" id="cb75-4" title="4"></a>
-<a class="sourceLine" id="cb75-5" title="5"><span class="kw">set.seed</span>(<span class="dv">123</span>) <span class="co"># pour avoir les mêmes simulations</span></a>
-<a class="sourceLine" id="cb75-6" title="6"></a>
-<a class="sourceLine" id="cb75-7" title="7">u =<span class="st"> </span><span class="kw">rexp</span>(n<span class="op">*</span>N,lambda)</a>
-<a class="sourceLine" id="cb75-8" title="8"></a>
-<a class="sourceLine" id="cb75-9" title="9">sim =<span class="st"> </span><span class="kw">matrix</span>(u,N,n )</a>
-<a class="sourceLine" id="cb75-10" title="10"></a>
-<a class="sourceLine" id="cb75-11" title="11"><span class="kw">dim</span>(sim)</a>
-<a class="sourceLine" id="cb75-12" title="12"><span class="co">#ans&gt; [1] 100  10</span></a></code></pre></div>
-<div class="sourceCode" id="cb76"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb76-1" title="1">T =<span class="st"> </span><span class="kw">apply</span>(sim,<span class="dv">1</span>, <span class="cf">function</span>(x){<span class="kw">length</span>(x)<span class="op">/</span><span class="kw">sum</span>(x)})</a>
-<a class="sourceLine" id="cb76-2" title="2"></a>
-<a class="sourceLine" id="cb76-3" title="3">b1 =<span class="st"> </span><span class="cf">function</span>(x){</a>
-<a class="sourceLine" id="cb76-4" title="4">  alpha=<span class="fl">0.05</span></a>
-<a class="sourceLine" id="cb76-5" title="5">  <span class="kw">qchisq</span>(alpha<span class="op">/</span><span class="dv">2</span>, <span class="dv">2</span><span class="op">*</span><span class="kw">length</span>(x))<span class="op">/</span>(<span class="dv">2</span><span class="op">*</span><span class="kw">sum</span>(x))</a>
-<a class="sourceLine" id="cb76-6" title="6">}</a>
-<a class="sourceLine" id="cb76-7" title="7"></a>
-<a class="sourceLine" id="cb76-8" title="8">b2 =<span class="st"> </span><span class="cf">function</span>(x){</a>
-<a class="sourceLine" id="cb76-9" title="9">  alpha=<span class="fl">0.05</span></a>
-<a class="sourceLine" id="cb76-10" title="10">  <span class="kw">qchisq</span>(<span class="dv">1</span><span class="op">-</span>alpha<span class="op">/</span><span class="dv">2</span>, <span class="dv">2</span><span class="op">*</span><span class="kw">length</span>(x))<span class="op">/</span>(<span class="dv">2</span><span class="op">*</span><span class="kw">sum</span>(x))</a>
-<a class="sourceLine" id="cb76-11" title="11">}</a>
-<a class="sourceLine" id="cb76-12" title="12"></a>
-<a class="sourceLine" id="cb76-13" title="13">IC99_b1 =<span class="st"> </span><span class="kw">apply</span>(sim,<span class="dv">1</span>,b1)</a>
-<a class="sourceLine" id="cb76-14" title="14">IC99_b2 =<span class="st"> </span><span class="kw">apply</span>(sim,<span class="dv">1</span>,b2)</a></code></pre></div>
-<div class="sourceCode" id="cb77"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb77-1" title="1">erreur_inf =<span class="st"> </span>IC99_b1 <span class="op">&gt;</span><span class="st"> </span>lambda</a>
-<a class="sourceLine" id="cb77-2" title="2">erreur_sup =<span class="st"> </span>IC99_b2 <span class="op">&lt;</span><span class="st"> </span>lambda</a>
-<a class="sourceLine" id="cb77-3" title="3"><span class="kw">sum</span>(erreur_inf<span class="op">+</span>erreur_sup) <span class="co">#nb d&#39;IC faux</span></a>
-<a class="sourceLine" id="cb77-4" title="4"><span class="co">#ans&gt; [1] 4</span></a></code></pre></div>
-<div class="sourceCode" id="cb78"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb78-1" title="1"><span class="kw">matplot</span>(<span class="kw">rbind</span>(IC99_b1,IC99_b2),<span class="kw">rbind</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">100</span>,<span class="dv">1</span><span class="op">:</span><span class="dv">100</span>),</a>
-<a class="sourceLine" id="cb78-2" title="2">    <span class="dt">type=</span><span class="st">&quot;l&quot;</span>,</a>
-<a class="sourceLine" id="cb78-3" title="3">    <span class="dt">lty=</span><span class="dv">1</span>,</a>
-<a class="sourceLine" id="cb78-4" title="4">    <span class="dt">col=</span><span class="kw">ifelse</span>(erreur_inf <span class="op">|</span><span class="st"> </span>erreur_sup, <span class="st">&quot;red&quot;</span>,<span class="st">&quot;blue&quot;</span>),</a>
-<a class="sourceLine" id="cb78-5" title="5">    <span class="dt">xlab=</span><span class="st">&quot;&quot;</span>,</a>
-<a class="sourceLine" id="cb78-6" title="6">    <span class="dt">ylab=</span><span class="st">&quot;&quot;</span>)</a>
-<a class="sourceLine" id="cb78-7" title="7"><span class="kw">matpoints</span>(T,<span class="dv">1</span><span class="op">:</span><span class="dv">100</span>, <span class="dt">pch=</span><span class="dv">19</span>,<span class="dt">cex=</span><span class="fl">0.5</span>)</a>
-<a class="sourceLine" id="cb78-8" title="8"><span class="kw">abline</span>(<span class="dt">v=</span>lambda,<span class="dt">col=</span><span class="st">&quot;red&quot;</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb78"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb78-1" title="1">x =<span class="st"> </span><span class="kw">c</span>(<span class="fl">2.84</span>,<span class="fl">2.37</span>,<span class="fl">7.52</span>,<span class="fl">2.76</span>,<span class="fl">3.83</span>,<span class="fl">1.32</span>,<span class="fl">8.43</span>,<span class="fl">2.25</span>,<span class="fl">1.63</span>,<span class="fl">0.27</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb79"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb79-1" title="1">alpha=<span class="fl">0.05</span></a>
+<a class="sourceLine" id="cb79-2" title="2"></a>
+<a class="sourceLine" id="cb79-3" title="3">borne_inf =<span class="st"> </span><span class="kw">qchisq</span>(alpha<span class="op">/</span><span class="dv">2</span>, <span class="dv">2</span><span class="op">*</span><span class="kw">length</span>(x))<span class="op">/</span>(<span class="dv">2</span><span class="op">*</span><span class="kw">sum</span>(x))</a>
+<a class="sourceLine" id="cb79-4" title="4"><span class="co">#ans&gt; [1] 0.144</span></a>
+<a class="sourceLine" id="cb79-5" title="5"><span class="co">#ans&gt; [1] 0.514</span></a></code></pre></div>
+<div class="sourceCode" id="cb80"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb80-1" title="1">lambda =<span class="st"> </span><span class="fl">1.5</span></a>
+<a class="sourceLine" id="cb80-2" title="2">n =<span class="st"> </span><span class="dv">10</span></a>
+<a class="sourceLine" id="cb80-3" title="3">N =<span class="st"> </span><span class="dv">100</span></a>
+<a class="sourceLine" id="cb80-4" title="4"><span class="co">#ans&gt; [1] 100  10</span></a></code></pre></div>
+<div class="sourceCode" id="cb81"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb81-1" title="1">T =<span class="st"> </span><span class="kw">apply</span>(sim,<span class="dv">1</span>, <span class="cf">function</span>(x){<span class="kw">length</span>(x)<span class="op">/</span><span class="kw">sum</span>(x)})</a>
+<a class="sourceLine" id="cb81-2" title="2"></a>
+<a class="sourceLine" id="cb81-3" title="3">b1 =<span class="st"> </span><span class="cf">function</span>(x){</a>
+<a class="sourceLine" id="cb81-4" title="4">  alpha=<span class="fl">0.05</span></a>
+<a class="sourceLine" id="cb81-5" title="5">  <span class="kw">qchisq</span>(alpha<span class="op">/</span><span class="dv">2</span>, <span class="dv">2</span><span class="op">*</span><span class="kw">length</span>(x))<span class="op">/</span>(<span class="dv">2</span><span class="op">*</span><span class="kw">sum</span>(x))</a>
+<a class="sourceLine" id="cb81-6" title="6">}</a></code></pre></div>
+<div class="sourceCode" id="cb82"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb82-1" title="1">erreur_inf =<span class="st"> </span>IC99_b1 <span class="op">&gt;</span><span class="st"> </span>lambda</a>
+<a class="sourceLine" id="cb82-2" title="2">erreur_sup =<span class="st"> </span>IC99_b2 <span class="op">&lt;</span><span class="st"> </span>lambda</a>
+<a class="sourceLine" id="cb82-3" title="3"><span class="kw">sum</span>(erreur_inf<span class="op">+</span>erreur_sup) <span class="co">#nb d&#39;IC faux</span></a>
+<a class="sourceLine" id="cb82-4" title="4"><span class="co">#ans&gt; [1] 4</span></a></code></pre></div>
+<div class="sourceCode" id="cb83"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb83-1" title="1"><span class="kw">matplot</span>(<span class="kw">rbind</span>(IC99_b1,IC99_b2),<span class="kw">rbind</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">100</span>,<span class="dv">1</span><span class="op">:</span><span class="dv">100</span>),</a>
+<a class="sourceLine" id="cb83-2" title="2">    <span class="dt">type=</span><span class="st">&quot;l&quot;</span>,</a>
+<a class="sourceLine" id="cb83-3" title="3">    <span class="dt">lty=</span><span class="dv">1</span>,</a>
+<a class="sourceLine" id="cb83-4" title="4">    <span class="dt">col=</span><span class="kw">ifelse</span>(erreur_inf <span class="op">|</span><span class="st"> </span>erreur_sup, <span class="st">&quot;red&quot;</span>,<span class="st">&quot;blue&quot;</span>),</a>
+<a class="sourceLine" id="cb83-5" title="5">    <span class="dt">xlab=</span><span class="st">&quot;&quot;</span>,</a>
+<a class="sourceLine" id="cb83-6" title="6">    <span class="dt">ylab=</span><span class="st">&quot;&quot;</span>)</a>
+<a class="sourceLine" id="cb83-7" title="7"><span class="kw">matpoints</span>(T,<span class="dv">1</span><span class="op">:</span><span class="dv">100</span>, <span class="dt">pch=</span><span class="dv">19</span>,<span class="dt">cex=</span><span class="fl">0.5</span>)</a>
+<a class="sourceLine" id="cb83-8" title="8"><span class="kw">abline</span>(<span class="dt">v=</span>lambda,<span class="dt">col=</span><span class="st">&quot;red&quot;</span>)</a></code></pre></div>
 <p><img src="Statistique_inferentielle_files/figure-html/unnamed-chunk-184-1.png" width="70%" style="display: block; margin: auto;" /></p>
 
 </div>

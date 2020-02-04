@@ -24,7 +24,7 @@
 <meta name="author" content="Mohamad Ghassany" />
 
 
-<meta name="date" content="2020-01-15" />
+<meta name="date" content="2020-02-04" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -53,6 +53,13 @@
 <link href="book_assets/font-awesome-5.3.1/css/fontawesome-all.min.css" rel="stylesheet" />
 <script src="book_assets/kePrint-0.0.1/kePrint.js"></script>
 <link href="book_assets/bsTable-3.3.7/bootstrapTable.min.css" rel="stylesheet" />
+<script src="book_assets/htmlwidgets-1.5.1/htmlwidgets.js"></script>
+<script src="book_assets/plotly-binding-4.9.1/plotly.js"></script>
+<script src="book_assets/typedarray-0.1/typedarray.min.js"></script>
+<link href="book_assets/crosstalk-1.0.0/css/crosstalk.css" rel="stylesheet" />
+<script src="book_assets/crosstalk-1.0.0/js/crosstalk.min.js"></script>
+<link href="book_assets/plotly-htmlwidgets-css-1.49.4/plotly-htmlwidgets.css" rel="stylesheet" />
+<script src="book_assets/plotly-main-1.49.4/plotly-latest.min.js"></script>
 <script async defer src="https://hypothes.is/embed.js"></script>
 
 
@@ -406,7 +413,11 @@ code span.wa { color: #bf0303; } /* Warning */
 <li class="chapter" data-level="F.3" data-path="tab-fisher.html"><a href="tab-fisher.html#pour-alpha-1"><i class="fa fa-check"></i><b>F.3</b> Pour <span class="math inline">\(\alpha = 1\%\)</span></a></li>
 <li class="chapter" data-level="F.4" data-path="tab-fisher.html"><a href="tab-fisher.html#pour-alpha-0.05"><i class="fa fa-check"></i><b>F.4</b> Pour <span class="math inline">\(\alpha = 0.05\%\)</span></a></li>
 </ul></li>
-<li class="chapter" data-level="G" data-path="contôle-continu.html"><a href="contôle-continu.html"><i class="fa fa-check"></i><b>G</b> Contôle Continu</a></li>
+<li class="chapter" data-level="G" data-path="notes.html"><a href="notes.html"><i class="fa fa-check"></i><b>G</b> Notes</a><ul>
+<li class="chapter" data-level="" data-path="notes.html"><a href="notes.html#sujets-corrections"><i class="fa fa-check"></i>Sujets &amp; Corrections</a></li>
+<li class="chapter" data-level="" data-path="notes.html"><a href="notes.html#notes-1"><i class="fa fa-check"></i>Notes</a></li>
+<li class="chapter" data-level="" data-path="notes.html"><a href="notes.html#analyse-notes"><i class="fa fa-check"></i>Analyse Notes</a></li>
+</ul></li>
 <li class="chapter" data-level="" data-path="références-et-crédits.html"><a href="références-et-crédits.html"><i class="fa fa-check"></i>Références et Crédits</a></li>
 </ul>
 
@@ -739,15 +750,15 @@ Figure 5.4: La distribution de <span class="math inline">\(Z_0\)</span> lorsque 
 <p><span class="math display">\[
 H_{0}: \mu=\mu_{0} \text { contre } H_{1}: \mu &gt; \mu_{0}
 \]</span>
-Supposans que l’hypothèse nulle est fausse et que la valeur réelle de la moyenne est <span class="math inline">\(\mu_1\)</span>, une valeur plus grande que <span class="math inline">\(\mu_0\)</span>. Puisque <span class="math inline">\(H_1\)</span> est vraie, la moyenne échantillonnale <span class="math inline">\(\overline{X}\)</span> suit la loi <span class="math inline">\(\mathcal{N}(\mu_1,\sigma^2/n)\)</span>. La figure <a href="tests-dhypothèses.html#fig:beta1">5.5</a> représente la distribution de <span class="math inline">\(\overline{X}\)</span> sous l’hypothèse nulle <span class="math inline">\(H_0\)</span> et sous l’hypothèse alternative <span class="math inline">\(H_1\)</span>. On rejette <span class="math inline">\(H_0\)</span> si <span class="math inline">\(\overline{x}\)</span> est supérieure à la valeur critique <span class="math inline">\(v\)</span>, qui vaut <span class="math inline">\(\mu_0 + z_{1-\alpha} \sigma/\sqrt{n}\)</span>. Rappelons qu’une erreur de deuxième espèce est commise si <span class="math inline">\(H_0\)</span> n’est pas rejetée alors qu’elle est fausse. L’examen de cette figure révèle que si <span class="math inline">\(H_1\)</span> est vraie, une erreur de deuxième espèce ne sera commise que si <span class="math inline">\(\overline{x} &lt; v\)</span>. Autrement dit, la probabilité de l’erreur de deuxième espèce <span class="math inline">\(\beta\)</span> correspond à la région verte de la figure <a href="tests-dhypothèses.html#fig:beta1">5.5</a>.</p>
+Supposons que l’hypothèse nulle est fausse et que la valeur réelle de la moyenne est <span class="math inline">\(\mu_1\)</span>, une valeur plus grande que <span class="math inline">\(\mu_0\)</span>. Puisque <span class="math inline">\(H_1\)</span> est vraie, la moyenne échantillonnale <span class="math inline">\(\overline{X}\)</span> suit la loi <span class="math inline">\(\mathcal{N}(\mu_1,\sigma^2/n)\)</span>. La figure <a href="tests-dhypothèses.html#fig:beta1">5.5</a> représente la distribution de <span class="math inline">\(\overline{X}\)</span> sous l’hypothèse nulle <span class="math inline">\(H_0\)</span> et sous l’hypothèse alternative <span class="math inline">\(H_1\)</span>. On rejette <span class="math inline">\(H_0\)</span> si <span class="math inline">\(\overline{x}\)</span> est supérieure à la valeur critique <span class="math inline">\(v\)</span>, qui vaut <span class="math inline">\(\mu_0 + z_{1-\alpha} \sigma/\sqrt{n}\)</span>. Rappelons qu’une erreur de deuxième espèce est commise si <span class="math inline">\(H_0\)</span> n’est pas rejetée alors qu’elle est fausse. L’examen de cette figure révèle que si <span class="math inline">\(H_1\)</span> est vraie, une erreur de deuxième espèce ne sera commise que si <span class="math inline">\(\overline{x} &lt; v\)</span>. Autrement dit, la probabilité de l’erreur de deuxième espèce <span class="math inline">\(\beta\)</span> correspond à la région verte de la figure <a href="tests-dhypothèses.html#fig:beta1">5.5</a>.</p>
 <div class="figure" style="text-align: center"><span id="fig:beta1"></span>
-<img src="Statistique_inferentielle_files/figure-html/beta1-1.png" alt="La distribution de $\overline{X}$ sous $H_0$ et sous $H_1$" width="90%" /><img src="Statistique_inferentielle_files/figure-html/beta1-2.png" alt="La distribution de $\overline{X}$ sous $H_0$ et sous $H_1$" width="90%" />
+<img src="Statistique_inferentielle_files/figure-html/beta1-1.png" alt="La distribution de $\overline{X}$ sous $H_0$ et sous $H_1$" width="90%" />
 <p class="caption">
 Figure 5.5: La distribution de <span class="math inline">\(\overline{X}\)</span> sous <span class="math inline">\(H_0\)</span> et sous <span class="math inline">\(H_1\)</span>
 </p>
 </div>
 <div class="figure" style="text-align: center"><span id="fig:beta12"></span>
-<img src="Statistique_inferentielle_files/figure-html/beta12-1.png" alt="La distribution de $Z_0$ sous $H_0$ et sous $H_1$" width="90%" /><img src="Statistique_inferentielle_files/figure-html/beta12-2.png" alt="La distribution de $Z_0$ sous $H_0$ et sous $H_1$" width="90%" />
+<img src="Statistique_inferentielle_files/figure-html/beta12-1.png" alt="La distribution de $Z_0$ sous $H_0$ et sous $H_1$" width="90%" />
 <p class="caption">
 Figure 5.6: La distribution de <span class="math inline">\(Z_0\)</span> sous <span class="math inline">\(H_0\)</span> et sous <span class="math inline">\(H_1\)</span>
 </p>

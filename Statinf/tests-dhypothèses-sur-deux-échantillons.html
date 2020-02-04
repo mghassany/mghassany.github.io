@@ -24,7 +24,7 @@
 <meta name="author" content="Mohamad Ghassany" />
 
 
-<meta name="date" content="2020-01-15" />
+<meta name="date" content="2020-02-04" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -53,6 +53,13 @@
 <link href="book_assets/font-awesome-5.3.1/css/fontawesome-all.min.css" rel="stylesheet" />
 <script src="book_assets/kePrint-0.0.1/kePrint.js"></script>
 <link href="book_assets/bsTable-3.3.7/bootstrapTable.min.css" rel="stylesheet" />
+<script src="book_assets/htmlwidgets-1.5.1/htmlwidgets.js"></script>
+<script src="book_assets/plotly-binding-4.9.1/plotly.js"></script>
+<script src="book_assets/typedarray-0.1/typedarray.min.js"></script>
+<link href="book_assets/crosstalk-1.0.0/css/crosstalk.css" rel="stylesheet" />
+<script src="book_assets/crosstalk-1.0.0/js/crosstalk.min.js"></script>
+<link href="book_assets/plotly-htmlwidgets-css-1.49.4/plotly-htmlwidgets.css" rel="stylesheet" />
+<script src="book_assets/plotly-main-1.49.4/plotly-latest.min.js"></script>
 <script async defer src="https://hypothes.is/embed.js"></script>
 
 
@@ -406,7 +413,11 @@ code span.wa { color: #bf0303; } /* Warning */
 <li class="chapter" data-level="F.3" data-path="tab-fisher.html"><a href="tab-fisher.html#pour-alpha-1"><i class="fa fa-check"></i><b>F.3</b> Pour <span class="math inline">\(\alpha = 1\%\)</span></a></li>
 <li class="chapter" data-level="F.4" data-path="tab-fisher.html"><a href="tab-fisher.html#pour-alpha-0.05"><i class="fa fa-check"></i><b>F.4</b> Pour <span class="math inline">\(\alpha = 0.05\%\)</span></a></li>
 </ul></li>
-<li class="chapter" data-level="G" data-path="contôle-continu.html"><a href="contôle-continu.html"><i class="fa fa-check"></i><b>G</b> Contôle Continu</a></li>
+<li class="chapter" data-level="G" data-path="notes.html"><a href="notes.html"><i class="fa fa-check"></i><b>G</b> Notes</a><ul>
+<li class="chapter" data-level="" data-path="notes.html"><a href="notes.html#sujets-corrections"><i class="fa fa-check"></i>Sujets &amp; Corrections</a></li>
+<li class="chapter" data-level="" data-path="notes.html"><a href="notes.html#notes-1"><i class="fa fa-check"></i>Notes</a></li>
+<li class="chapter" data-level="" data-path="notes.html"><a href="notes.html#analyse-notes"><i class="fa fa-check"></i>Analyse Notes</a></li>
+</ul></li>
 <li class="chapter" data-level="" data-path="références-et-crédits.html"><a href="références-et-crédits.html"><i class="fa fa-check"></i>Références et Crédits</a></li>
 </ul>
 
@@ -471,34 +482,10 @@ F_0 = \frac{{S_1^*}^2}{{S_2^*}^2}
 de <span class="math inline">\(\chi^2\)</span> respectivement à <span class="math inline">\(n\)</span> et <span class="math inline">\(m\)</span> degrés de liberté. On dit que <span class="math inline">\(F= \frac{U/n}{V/m}\)</span> suit une loi de Fisher-Snedecor à
 <span class="math inline">\((n,m)\)</span> degrés de liberté. <span class="math inline">\(F \thicksim \mathcal{F}(n,m)\)</span></p>
 </div>
-<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-1981"></span>
+<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-198"></span>
 <img src="Statistique_inferentielle_files/figure-html/unnamed-chunk-198-1.png" alt="Densités de la loi de Fisher $F(n,m)$" width="80%" />
 <p class="caption">
 Figure 6.1: Densités de la loi de Fisher <span class="math inline">\(F(n,m)\)</span>
-</p>
-</div>
-<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-1982"></span>
-<img src="Statistique_inferentielle_files/figure-html/unnamed-chunk-198-2.png" alt="Densités de la loi de Fisher $F(n,m)$" width="80%" />
-<p class="caption">
-Figure 6.2: Densités de la loi de Fisher <span class="math inline">\(F(n,m)\)</span>
-</p>
-</div>
-<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-1983"></span>
-<img src="Statistique_inferentielle_files/figure-html/unnamed-chunk-198-3.png" alt="Densités de la loi de Fisher $F(n,m)$" width="80%" />
-<p class="caption">
-Figure 6.3: Densités de la loi de Fisher <span class="math inline">\(F(n,m)\)</span>
-</p>
-</div>
-<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-1984"></span>
-<img src="Statistique_inferentielle_files/figure-html/unnamed-chunk-198-4.png" alt="Densités de la loi de Fisher $F(n,m)$" width="80%" />
-<p class="caption">
-Figure 6.4: Densités de la loi de Fisher <span class="math inline">\(F(n,m)\)</span>
-</p>
-</div>
-<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-1985"></span>
-<img src="Statistique_inferentielle_files/figure-html/unnamed-chunk-198-5.png" alt="Densités de la loi de Fisher $F(n,m)$" width="80%" />
-<p class="caption">
-Figure 6.5: Densités de la loi de Fisher <span class="math inline">\(F(n,m)\)</span>
 </p>
 </div>
 <p><strong>La procédure pour le test bilatéral</strong></p>
@@ -548,8 +535,8 @@ f_0 &gt; f_{1-\alpha; \, n_1-1,n_2-1}
 H_{0}: m_1 = m_2 \text { contre } H_{1}: m_1 \neq m_2
 \]</span></p>
 <p>La procédure de ce test repose sur la distribution de la différence des moyennes des échantillons, <span class="math inline">\(\overline{X}_1 - \overline{X}_2\)</span>. On peut résumer la situation ainsi:</p>
-<pre><code>#ans&gt; Warning in if (bs) {: la condition a une longueur &gt; 1 et seul le premier élément
-#ans&gt; est utilisé</code></pre>
+<pre><code>#ans&gt; Warning in if (bs) {: the condition has length &gt; 1 and only the first
+#ans&gt; element will be used</code></pre>
 <table class="table table-striped table-condensed" style="width: auto !important; margin-left: auto; margin-right: auto;">
 <tbody>
 <tr>

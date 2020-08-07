@@ -24,7 +24,7 @@
 <meta name="author" content="Mohamad Ghassany" />
 
 
-<meta name="date" content="2020-06-19" />
+<meta name="date" content="2020-08-07" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -151,7 +151,7 @@ code span.wa { color: #bf0303; } /* Warning */
 
 <li class="divider"></li>
 <li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Overview</a><ul>
-<li class="chapter" data-level="" data-path="index.html"><a href="index.html#plan-du-cours"><i class="fa fa-check"></i>Plan du cours</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#plan-et-déroulement-du-cours"><i class="fa fa-check"></i>Plan et déroulement du cours</a></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="introduction.html"><a href="introduction.html"><i class="fa fa-check"></i>Introduction</a><ul>
 <li class="chapter" data-level="" data-path="introduction.html"><a href="introduction.html#la-démarche-statistique"><i class="fa fa-check"></i>La démarche statistique</a></li>
@@ -443,7 +443,7 @@ T_{8}=&amp; \frac{n+1}{n} \max \left\{X_{1}, \ldots, X_{n}\right\} \end{aligned}
 </div>
 <p><strong>1.</strong> Choisir une valeur de <span class="math inline">\(\theta\)</span> et simuler <strong>1000</strong> échantillons de taille <strong>100</strong> de la loi uniforme sur <span class="math inline">\([0, \theta]\)</span>. Calculer pour chacun de ces échantillons la valeur prise par les 8 estimateurs.</p>
 <p>On pourra ensuite créer une matrice ayant 1000 lignes et 8 colonnes dont la <em>j</em>ème colonne contient les 1000 réalisations de l’estimateur <span class="math inline">\(T_{j}\)</span>:</p>
-<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb6-1" title="1">T &lt;-<span class="st"> </span><span class="kw">cbind</span>(T1,T2,T3,T4,T5,T6,T7,T8)</a></code></pre></div>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb5-1" title="1">T &lt;-<span class="st"> </span><span class="kw">cbind</span>(T1,T2,T3,T4,T5,T6,T7,T8)</a></code></pre></div>
 <p><strong>2.</strong> Calculer la moyenne empirique et la variance empirique des 8 échantillons de taille 1000 ainsi obtenus. En déduire une estimation du biais et de l’erreur quadratique de chacun des 8 estimateurs.</p>
 <div class="rmdinsight">
 <p>On rappelle que pour un estimateur <span class="math inline">\(T\)</span>, le biais est <span class="math inline">\(E[T]-\theta\)</span> et l’erreur quadratique est <span class="math inline">\(E\left[(T-\theta)^{2}\right]\)</span>.</p>
@@ -451,16 +451,16 @@ T_{8}=&amp; \frac{n+1}{n} \max \left\{X_{1}, \ldots, X_{n}\right\} \end{aligned}
 <p><strong>3.</strong> Quels estimateus sont les moins biaisés? Et les estimateurs de risque quadratique minimale?</p>
 <p><strong>4.</strong> Représenter sur un même graphique les boites à moustaches (boxplots) des 8 estimateurs. Superposer sur le même graphique la vraie valeur du paramètre, en rouge. Commenter la pertinence de chacun des estimateurs: lequel préfereriez-vous utiliser?</p>
 <p>On pourra utiliser</p>
-<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb7-1" title="1"><span class="kw">boxplot</span>(<span class="kw">data.frame</span>(T))</a>
-<a class="sourceLine" id="cb7-2" title="2"><span class="kw">abline</span>(<span class="dt">h=</span>theta,<span class="dt">col=</span><span class="st">&quot;red&quot;</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb6-1" title="1"><span class="kw">boxplot</span>(<span class="kw">data.frame</span>(T))</a>
+<a class="sourceLine" id="cb6-2" title="2"><span class="kw">abline</span>(<span class="dt">h=</span>theta,<span class="dt">col=</span><span class="st">&quot;red&quot;</span>)</a></code></pre></div>
 </div>
 <div id="le-maximum-de-vraisemblance" class="section level2">
 <h2><span class="header-section-number">3.9</span> Le maximum de vraisemblance</h2>
 <p>Pour cette partie, imaginons qu’on a une série de valeurs, ça peut par exemple être l’âge de 1000 étudiants pris au hasard dans une ville. Nous avons tracé l’histogramme de l’échantillon et obtenu le suivant:</p>
-<p><img src="Statistique_inferentielle_files/figure-html/unnamed-chunk-97-1.png" width="70%" style="display: block; margin: auto;" /></p>
+<p><img src="Statistique_inferentielle_files/figure-html/unnamed-chunk-98-1.png" width="70%" style="display: block; margin: auto;" /></p>
 <p>On peut voir ici que la distribution des valeurs suit approximativement une loi normale avec une moyenne aux alentours de 22 et un écart-type difficile à évaluer au premier coup d’oeil.</p>
 <p>En effet, pour obtenir les données de cet échantillon, j’ai généré un échantillon suivant la loi normale de moyenne 22 et d’écart-type <strong>mystère</strong> que vous devez découvrir en utilisant la méthode du maximum de vraisemblance. Les données ont été générée avec la commande suivante:</p>
-<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb8-1" title="1">data =<span class="st"> </span><span class="kw">rnorm</span>(<span class="dv">1000</span>, <span class="dt">mean =</span> <span class="dv">22</span>, <span class="dt">sd =</span> mystere) <span class="co"># où j&#39;ai caché ici la valeur mystère de l&#39;écart-type utilisé.</span></a></code></pre></div>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb7-1" title="1">data =<span class="st"> </span><span class="kw">rnorm</span>(<span class="dv">1000</span>, <span class="dt">mean =</span> <span class="dv">22</span>, <span class="dt">sd =</span> mystere) <span class="co"># où j&#39;ai caché ici la valeur mystère de l&#39;écart-type utilisé.</span></a></code></pre></div>
 <p>Les données de l’échantillon obtenu se trouvent dans le fichier <a href="datasets/mystere.txt" target="_blank">mystere.txt</a>.</p>
 <div class="rmdtip">
 <p>Pour lire les données de l’échantillon du fichier mystere.txt, vous pouvez les copier et les saisir dans un vecteur en utilisant la fonction <code>c()</code> ou bien utiliser la fonction <code>scan()</code>.</p>

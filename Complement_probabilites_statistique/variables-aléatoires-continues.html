@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Feuille d’exercices 2 | Complément de formation en Probabilités et Statistique</title>
+  <title>4 Variables Aléatoires Continues | Complément de formation en Probabilités et Statistique</title>
   <meta name="description" content="Cours de Probabilités et Statistique A3 ESILV" />
   <meta name="generator" content="bookdown 0.19 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Feuille d’exercices 2 | Complément de formation en Probabilités et Statistique" />
+  <meta property="og:title" content="4 Variables Aléatoires Continues | Complément de formation en Probabilités et Statistique" />
   <meta property="og:type" content="book" />
   
   
@@ -16,7 +16,7 @@
   
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Feuille d’exercices 2 | Complément de formation en Probabilités et Statistique" />
+  <meta name="twitter:title" content="4 Variables Aléatoires Continues | Complément de formation en Probabilités et Statistique" />
   
   <meta name="twitter:description" content="Cours de Probabilités et Statistique A3 ESILV" />
   
@@ -31,8 +31,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   <link rel="shortcut icon" href="img/favicon.ico" type="image/x-icon" />
-<link rel="prev" href="couple-de-variables-aléatoires-continues.html"/>
-<link rel="next" href="tab-normale.html"/>
+<link rel="prev" href="feuille-dexercices-1.html"/>
+<link rel="next" href="lois-usuelles-de-v-a-c.html"/>
 <script src="book_assets/jquery-2.2.3/jquery.min.js"></script>
 <link href="book_assets/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="book_assets/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -174,241 +174,282 @@
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="feuille-dexercices-2" class="section level1 unnumbered">
-<h1>Feuille d’exercices 2</h1>
-<div id="variables-alétoires-continues" class="section level2 unnumbered">
-<h2>Variables alétoires continues</h2>
+<div id="variables-aléatoires-continues" class="section level1">
+<h1><span class="header-section-number">4</span> Variables Aléatoires Continues</h1>
+<div id="densité-dune-variable-aléatoire-continue" class="section level2 unnumbered">
+<h2>Densité d’une variable aléatoire continue</h2>
+<p>Dans les chapitres précédents nous avons traité des variables aléatoires
+discrètes, c’est-à-dire de variables dont l’univers est fini ou infini
+dénombrable. Il existe cependant des variables dont l’univers est infini
+non dénombrable. On peut citer par exemple, l’heure d’arrivée d’un train
+à une gare donnée ou encore la durée de vie d’un transistor. Désignons
+par <span class="math inline">\(X\)</span> une telle variable.</p>
 
-<div class="exercise">
-<p><span id="exr:unnamed-chunk-76" class="exercise"><strong>Exercice 6.1  </strong></span>Soit <span class="math inline">\(X\)</span> une v.a.c. de densité <span class="math inline">\(f\)</span> définie par:
-<span class="math inline">\(f(x) = k x \times {1}_{]0,2[} (x)\)</span>.</p>
-<ol style="list-style-type: decimal">
-<li><p>Déterminer la constante <span class="math inline">\(k\)</span>.</p></li>
-<li><p>Calculer <span class="math inline">\(E(X)\)</span> et <span class="math inline">\(E(X^2)\)</span>.</p></li>
-<li><p>On pose <span class="math inline">\(Z=X^2\)</span>. Déterminer la densité de <span class="math inline">\(Z\)</span>. Calculer <span class="math inline">\(E(Z)\)</span>.</p></li>
-</ol>
+<div class="definition">
+<p><span id="def:unnamed-chunk-45" class="definition"><strong>Définition 4.1  </strong></span><span class="math inline">\(X\)</span> est une <strong>variable aléatoire continue</strong> s’il existe une fonction <span class="math inline">\(f\)</span>
+non négative définie pour tout <span class="math inline">\(x \in \mathbb{R}\)</span> et vérifiant pour tout
+ensemble <span class="math inline">\(B\)</span> de nombres réels la propriété</p>
+<p><span class="math display" id="eq:def">\[\begin{equation}
+P(X \in B) = \int_B f(x)dx
+\tag{4.1}
+\end{equation}\]</span></p>
+La fonction <span class="math inline">\(f\)</span> est appelée <strong>densité
+de probabilité</strong> de la variable aléatoire <span class="math inline">\(X\)</span>.
+</div>
+
+<p>Tous les problèmes de probabilité relatifs à <span class="math inline">\(X\)</span> peuvent être traités
+grâce à <span class="math inline">\(f\)</span>. Par exemple pour <span class="math inline">\(B=[a,b]\)</span>, on obtient grâce à l’équation
+<a href="variables-aléatoires-continues.html#eq:def">(4.1)</a></p>
+<p><span class="math display" id="eq:probab">\[\begin{equation}
+P(a\le X \le b) = \int_a^bf(x)dx
+\tag{4.2}
+\end{equation}\]</span></p>
+<p>Graphiquement, <span class="math inline">\(P(a\le X \le b)\)</span> est l’aire de la surface entre l’axe de
+<span class="math inline">\(x\)</span>, la courbe correspondante à <span class="math inline">\(f(x)\)</span> et les droites <span class="math inline">\(x=a\)</span> et <span class="math inline">\(x=b\)</span>.
+Voire Figure <a href="variables-aléatoires-continues.html#fig:paxb">4.1</a> et Figure <a href="variables-aléatoires-continues.html#fig:p2">4.2</a>.</p>
+<div class="figure" style="text-align: center"><span id="fig:paxb"></span>
+<img src="img/paxb.png" alt="$P(a \leq X \leq B)=$ surface grisée" width="70%" />
+<p class="caption">
+Figure 4.1: <span class="math inline">\(P(a \leq X \leq B)=\)</span> surface grisée
+</p>
+</div>
+<div class="figure" style="text-align: center"><span id="fig:p2"></span>
+<img src="img/p2.png" alt="L'aire hachurée correspond à des probabilités. $f(x)$ étant une fonction densité de probabilité" width="70%" />
+<p class="caption">
+Figure 4.2: L’aire hachurée correspond à des probabilités. <span class="math inline">\(f(x)\)</span> étant une fonction densité de probabilité
+</p>
+</div>
+
+<div class="definition">
+<p><span id="def:unnamed-chunk-46" class="definition"><strong>Définition 4.2  </strong></span>Pour toute variable aléatoire continue <span class="math inline">\(X\)</span> de densité <span class="math inline">\(f\)</span>:</p>
+<ul>
+<li><p><span class="math inline">\(f(x) \ge 0 \quad \forall \, x \in \mathbb{R}\)</span></p></li>
+<li><p><span class="math inline">\(\int_{-\infty}^{+\infty}f(x)dx = 1\)</span></p></li>
+<li><p>Si l’on pose <span class="math inline">\(a=b\)</span> dans <a href="variables-aléatoires-continues.html#eq:probab">(4.2)</a>, il résulte <span class="math display">\[P(X=a)=\int_a^a f(x)dx = 0\]</span></p></li>
+<li><p>Ceci siginifie que la probabilité qu’une variable aléatoire continue prenne une valeur isolée fixe est toujours nulle. Aussi on peut écrire</p>
+<p><span class="math display">\[P(X &lt; a) = P( X \le a)  = \int_{-\infty}^a f(x)dx\]</span></p></li>
+</ul>
 </div>
 
 
-<div class="exercise">
-<p><span id="exr:unnamed-chunk-77" class="exercise"><strong>Exercice 6.2  </strong></span>Soit <span class="math inline">\(X\)</span> une variable aléatoire continue dont la fonction de densité est
-donnée par:</p>
+<div class="rmdexercise">
+<p>Soit <span class="math inline">\(X\)</span> la variable aléatoire réelle de densité de probabilité</p>
 <p><span class="math display">\[f(x)= \left\lbrace
       \begin{array}{ll}
-      c(1-x^2)  &amp; \mbox{si} \quad -1&lt;x&lt;1\\
-      0 &amp; \mbox{sinon} 
-      \end{array}
-  \right.\]</span></p>
-<ol style="list-style-type: decimal">
-<li><p>Quelle est la valeur de <span class="math inline">\(c\)</span>?</p></li>
-<li><p>Quelle est la fonction de répartition de <span class="math inline">\(X\)</span>?</p></li>
-</ol>
-</div>
-
-
-<div class="exercise">
-<p><span id="exr:unnamed-chunk-78" class="exercise"><strong>Exercice 6.3  </strong></span>Soit <span class="math inline">\(X\)</span> une variable aléatoire continue dont la fonction de densité est
-donnée par: <span class="math display">\[f(x)= \left\lbrace
-      \begin{array}{ll}
-      0  &amp; \mbox{si} \quad |x| &gt; k &gt; 0\\
-      x+1 &amp; \mbox{si} \quad |x| \le k
-      \end{array}
-  \right.\]</span></p>
-<ol style="list-style-type: decimal">
-<li><p>Déterminer <span class="math inline">\(k\)</span>.</p></li>
-<li><p>Calculer <span class="math inline">\(E(X)\)</span> et <span class="math inline">\(E(X^2)\)</span>.</p></li>
-<li><p>Déterminer la fonction de répartition de <span class="math inline">\(X\)</span>.</p></li>
-<li><p>Soit <span class="math inline">\(Y=X^2\)</span>. Déterminer la fonction de répartition ainsi que la
-fonction de densité de <span class="math inline">\(Y\)</span>.</p></li>
-<li><p>Calculer <span class="math inline">\(E(Y)\)</span>.</p></li>
-</ol>
-</div>
-
-
-<div class="exercise">
-<p><span id="exr:unnamed-chunk-79" class="exercise"><strong>Exercice 6.4  (Variable aléatoire de densité paire)  </strong></span>Soit <span class="math inline">\(X\)</span> une variable aléatoire réelle admettant une fonction <strong>paire</strong>
-<span class="math inline">\(f\)</span> pour densité.</p>
-<ol style="list-style-type: decimal">
-<li><p>Calculer <span class="math inline">\(P(X \le 0)\)</span> et <span class="math inline">\(P(X\ge 0)\)</span>.</p></li>
-<li><p>Montrer que la fonction de répartition <span class="math inline">\(F\)</span> de <span class="math inline">\(X\)</span> vérifie:
-<span class="math inline">\(\forall \, x \in \mathbb{R}, F(x)=1-F(-x)\)</span>.</p></li>
-<li><p>On admet que <span class="math inline">\(X\)</span> admet une espérance, calculer <span class="math inline">\(E(X)\)</span>.</p></li>
-<li><p>Donner un exemple de densité paire.</p></li>
-</ol>
-</div>
-
-<div id="table-de-la-loi-normale-centrée-réduite" class="section level4 unnumbered">
-<h4>Table de la loi Normale Centrée Réduite</h4>
-
-<div class="exercise">
-<p><span id="exr:unnamed-chunk-80" class="exercise"><strong>Exercice 6.5  </strong></span>On note <span class="math inline">\(\Phi\)</span> la fonction de répartition de la loi normale centrée
-réduite.</p>
-<ol style="list-style-type: decimal">
-<li><p>Soit <span class="math inline">\(X\)</span> une v.a. qui suit une loi normale centrée réduite, i.e.
-<span class="math inline">\(X \thicksim \mathcal{N}(0,1)\)</span>. A l’aide de la table de la loi
-normale, calculer: <span class="math inline">\(P(X&gt;2), P(-1&lt;X&lt;1.5)\)</span> et <span class="math inline">\(P(X&lt;0.5)\)</span>.</p></li>
-<li><p>Soit <span class="math inline">\(Y\)</span> une v.a. qui suite une loi normale:
-<span class="math inline">\(Y \thicksim \mathcal{N}(\mu,\sigma^2)=\mathcal{N}(4,16)\)</span>.
-Calculer: <span class="math inline">\(P(Y&gt;2), P(-1&lt;Y&lt;1.5)\)</span> et <span class="math inline">\(P(Y&lt;0.5)\)</span>.</p></li>
-<li><p>Soit <span class="math inline">\(U \thicksim \mathcal{N}(6,4)\)</span>. Calculer: <span class="math inline">\(P(|U-4|&lt;3)\)</span> et
-<span class="math inline">\(P( U&gt;6 | U &gt; 3)\)</span>.</p></li>
-</ol>
-</div>
-
-
-<div class="exercise">
-<span id="exr:unnamed-chunk-81" class="exercise"><strong>Exercice 6.6  </strong></span>Une machine produit des pièces dont le diamètre <span class="math inline">\(X\)</span> (en cm) est une
-variable aléatoire qui suit une loi normale d’espérance <span class="math inline">\(\mu\)</span> et de
-variance <span class="math inline">\(\sigma^2 = (0.01)^2\)</span>. Quelle devrait être la valeur de <span class="math inline">\(\mu\)</span>
-de sorte que la probabilité qu’une pièce prise au hasard ait un diamètre
-supérieur à 3 cm, soit inférieure à 0.01?
-</div>
-
-
-<div class="exercise">
-<span id="exr:unnamed-chunk-82" class="exercise"><strong>Exercice 6.7  </strong></span>On envisage de construire à l’entrée d’une caserne une guérite dans
-laquelle pourra s’abriter la sentinelle en cas d’intempéries. Les
-sentinelles sont des appelés dont la taille est approximativement
-distribuée selon une loi normale d’espérance 175cm et d’écart-type 7cm.
-A quelle hauteur minimale doit se trouver le toit de la guérite, pour
-qu’un sentinelle pris au hasard ait une probabilité supérieure à 0.95 de
-s’y tenir debout?
-</div>
-
-
-<div class="exercise">
-<p><span id="exr:unnamed-chunk-83" class="exercise"><strong>Exercice 6.8  (Loi uniforme et loi exponentielle)  </strong></span>Soit <span class="math inline">\(U\)</span> une v.a.c de loi unifrorme sur <span class="math inline">\([0,1]\)</span>. Montrer que la v.a.
-<span class="math inline">\(X= - \ln U\)</span> suit une loi exponentielle.</p>
-</div>
-
-
-<div class="exercise">
-<p><span id="exr:unnamed-chunk-84" class="exercise"><strong>Exercice 6.9  (La loi exponentielle est sans mémoire)  </strong></span>On suppose que la durée de vie <span class="math inline">\(D\)</span>, en jours, d’une ampoule, est une
-variable aléatoire de loi exponentielle de paramètre <span class="math inline">\(\frac{1}{100}\)</span>.</p>
-<ol style="list-style-type: decimal">
-<li><p>Quelle est la durée de vie moyenne d’une ampoule?</p></li>
-<li><p>Calculer la fonction de répartition de <span class="math inline">\(D\)</span>. En déduire l’expression
-de <span class="math inline">\(P(D &gt; x)\)</span>.</p></li>
-<li><p>On dit qu’une variable aléatoire est <em>sans mémoire</em> si
-<span class="math inline">\(\forall \, l &gt; 0 \quad P(X \ge n+l|X \ge n)=P(X \ge l)\)</span>. Montrer
-que <span class="math inline">\(D\)</span> est sans mémoire.</p></li>
-<li><p>Quelle est la probabilité qu’une ampoule dure encore au moins 10
-jours, sachant qu’à son <span class="math inline">\(n^\text{e}\)</span> jour, elle marche encore?</p></li>
-</ol>
-</div>
-
-
-<div class="exercise">
-<p><span id="exr:unnamed-chunk-85" class="exercise"><strong>Exercice 6.10  (Lois des v.a.r. <code>min(X,Y)</code> et <code>max(X,Y)</code>)  </strong></span>Soit <span class="math inline">\(X\)</span> et <span class="math inline">\(Y\)</span> deux v.a.c de densités respectives <span class="math inline">\(f_X\)</span> et <span class="math inline">\(f_Y\)</span> et de
-fonctions de répartition respectives <span class="math inline">\(F_X\)</span> et <span class="math inline">\(F_Y\)</span>. On suppose que <span class="math inline">\(X\)</span>
-et <span class="math inline">\(Y\)</span> sont indépendantes. On pose:</p>
-<p><span class="math display">\[Z = max(X,Y) \quad \quad \text{et} \quad \quad  T=min(X,Y)\]</span></p>
-<ol style="list-style-type: decimal">
-<li><p>Exprimer les fonctions de répartition de <span class="math inline">\(Z\)</span> et <span class="math inline">\(T\)</span> à l’aide des
-fonctions de répartition <span class="math inline">\(F_X\)</span> et <span class="math inline">\(F_Y\)</span>.</p></li>
-<li><p>Exprimer une densité de <span class="math inline">\(Z\)</span> et une densité de <span class="math inline">\(T\)</span> à l’aide de
-<span class="math inline">\(f_X, f_Y, F_X\)</span> et <span class="math inline">\(F_Y\)</span>.</p></li>
-</ol>
-</div>
-
-
-<div class="exercise">
-<p><span id="exr:unnamed-chunk-86" class="exercise"><strong>Exercice 6.11  (Minimum et Maximum de deux lois exponentielles)  </strong></span>Soit <span class="math inline">\(X_1\)</span> et <span class="math inline">\(X_2\)</span> deux variables aléatoires indépendantes suivant une
-loi exponentielle de paramètres <span class="math inline">\(\lambda_1\)</span> et <span class="math inline">\(\lambda_2\)</span>. On pose
-<span class="math inline">\(X = min(X_1,X_2)\)</span>.</p>
-<ol style="list-style-type: decimal">
-<li><p>Montrer que <span class="math inline">\(X\)</span> suit une loi exponentielle de paramètre
-<span class="math inline">\(\lambda_1 + \lambda_2\)</span>.</p></li>
-<li><p>Deux guichets sont ouverts à une banque. Le temps de service au
-premier guichet (resp. au deuxième) suit une loi exponentielle de
-moyenne 20 min (resp. 30 min). Deux client rentrent simultanément,
-l’un choisit le guicher 1 et l’autre le guichet 2.</p>
-<ol style="list-style-type: decimal">
-<li><p>En moyenne, après combien de temps sort le premier?</p></li>
-<li><p>En moyenne, après combien de temps sort le dernier?</p></li>
-</ol></li>
-</ol>
-<strong>Indication:</strong> On pourra utiliser la relation <span class="math inline">\(X_1 + X_2 = min(X_1,X_2) + max(X_1,X_2)\)</span>. La somme de deux nombres réels est égale à la somme de leur minimum et de leur maximum.
-</div>
-
-
-<div class="exercise">
-<p><span id="exr:unnamed-chunk-87" class="exercise"><strong>Exercice 6.12  (Fonction Gamma (Euler))  </strong></span>La fonction Gamma est définie sur <span class="math inline">\(\mathbb{R}_{+}^*\)</span> par:</p>
-<p><span class="math display">\[\Gamma(x) = \int_0^{+\infty} t^{x-1}e^{-t} dt\]</span></p>
-<ol style="list-style-type: decimal">
-<li><p>Montrer que <span class="math inline">\(\Gamma(x+1)=x\Gamma(x)\)</span>, <span class="math inline">\(\forall \, x &gt;0\)</span>.</p></li>
-<li><p>Exprimer <span class="math inline">\(\Gamma(x+n)\)</span> en fonction de <span class="math inline">\(\Gamma(x)\)</span> pour
-<span class="math inline">\(n\in \mathbb{N}\)</span>.</p></li>
-<li><p>Calculer <span class="math inline">\(\Gamma(1)\)</span>. En déduire <span class="math inline">\(\Gamma(n+1)\)</span> pour
-<span class="math inline">\(n\in \mathbb{N}\)</span>.</p></li>
-<li><p>En utilisant le changement de variable <span class="math inline">\(t=u^2\)</span>, montrer qu’on a:
-<span class="math display">\[\Gamma(x)=2 \int_0^{+\infty} u^{2x-1}e^{-u^2} du\]</span></p></li>
-<li><p>On suppose que:
-<span class="math display">\[\int_0^{+\infty} e^{-x^2} dx = \frac{\sqrt{\pi}}{2}\]</span> Calculer
-alor <span class="math inline">\(\Gamma(\frac{1}{2})\)</span>.</p></li>
-<li><p>Montrer que
-<span class="math inline">\(\Gamma(n+\frac{1}{2})=(n-\frac{1}{2})(n-\frac{3}{2})\ldots (\frac{1}{2})\Gamma(\frac{1}{2})\)</span></p></li>
-<li><p>En déduire la valeur de <span class="math inline">\(\Gamma(n+\frac{1}{2})\)</span>.</p></li>
-</ol>
-</div>
-
-
-<div class="exercise">
-<p><span id="exr:unnamed-chunk-88" class="exercise"><strong>Exercice 6.13  (Loi Gamma)  </strong></span>Pour <span class="math inline">\(a&gt;0\)</span> et <span class="math inline">\(\lambda&gt;0\)</span>, deux constantes réelles, on définit la
-fonction <span class="math inline">\(f_{a,\lambda}\)</span> sur <span class="math inline">\(\mathbb{R}\)</span> par:
-<span class="math display">\[\forall \, x \in \mathbb{R}, \quad  f_{a,\lambda} (x)= \frac{\lambda^a}{\Gamma(a)} x^{a-1} e^{-\lambda x} \times {1}_{\mathbb{R}_{+}}(x)\]</span></p>
-<ol style="list-style-type: decimal">
-<li><p>Montrer que <span class="math inline">\(f_{a,\lambda}\)</span> est bien une densité d’une v.a. <span class="math inline">\(X\)</span>.</p></li>
-<li><p>Calculer <span class="math inline">\(E(X)\)</span>.</p></li>
-</ol>
-</div>
-
-</div>
-</div>
-<div id="couple-de-variables-aléatoires-continues-1" class="section level2 unnumbered">
-<h2>Couple de variables aléatoires continues</h2>
-
-<div class="exercise">
-<p><span id="exr:unnamed-chunk-89" class="exercise"><strong>Exercice 6.14  </strong></span>Soit <span class="math inline">\((X,Y)\)</span> un couple de variables aléatoires dont la densité jointe
-est définie par: <span class="math display">\[f(x,y)= \left\lbrace
-      \begin{array}{ll}
-      \alpha x e^{-y}  &amp; \mbox{si} \quad x \in [0,1], y \in \mathbb{R}_{+} \\
+      kx  &amp; \mbox{si} \quad 0\le x \le 5\\
       0 &amp; \mbox{sinon}
       \end{array}
   \right.\]</span></p>
 <ol style="list-style-type: decimal">
-<li><p>Déterminer <span class="math inline">\(\alpha\)</span> pour que <span class="math inline">\(f(x,y)\)</span> soit une fonction de densité.</p></li>
-<li><p>Déterminer les densités marginales de <span class="math inline">\(X\)</span> et <span class="math inline">\(Y\)</span>.</p></li>
-<li><p><span class="math inline">\(X\)</span> et <span class="math inline">\(Y\)</span> sont elles indépendantes?</p></li>
+<li>Calculer <span class="math inline">\(k\)</span>.</li>
+<li>Calculer: <span class="math inline">\(P(1 \le X \le 3), P(2 \le X \le 4)\)</span> et <span class="math inline">\(P(X &lt; 3)\)</span>.</li>
 </ol>
 </div>
 
 
-<div class="exercise">
-<p><span id="exr:unnamed-chunk-90" class="exercise"><strong>Exercice 6.15  </strong></span>Soit <span class="math inline">\((X,Y)\)</span> un vecteur aléatoire uniformément distribué dans l’ensemble
-<span class="math display">\[D= \{ (x,y) \in \mathbb{R}^2, x\in [0,2] \, \text{et} \, y \in [0,4]\}\]</span></p>
+<div class="rmdexercise">
+<p>Soit <span class="math inline">\(X\)</span> une variable aléatoire réelle continue ayant pour densité de
+probabilité <span class="math display">\[f(x)= \left\lbrace
+      \begin{array}{ll}
+      \frac{1}{6} x + k  &amp; \mbox{si} \quad 0\le x \le 3\\
+      0 &amp; \mbox{sinon}
+      \end{array}
+  \right.\]</span></p>
 <ol style="list-style-type: decimal">
-<li><p>Déterminer la densité jointe du couple de variables aléatoires
-<span class="math inline">\((X,Y)\)</span>.</p></li>
-<li><p>Calculer <span class="math inline">\(P(X \le 1, Y\le 2)\)</span>.</p></li>
-<li><p>Déterminer les densités marginales de <span class="math inline">\(X\)</span> et <span class="math inline">\(Y\)</span>. Les v.a. <span class="math inline">\(X\)</span> et
-<span class="math inline">\(Y\)</span> sont elles indépendantes?</p></li>
+<li>Calculer <span class="math inline">\(k\)</span>.</li>
+<li>Calculer <span class="math inline">\(P(1 \le X \le 2)\)</span></li>
 </ol>
 </div>
 
+</div>
+<div id="fonction-de-répartition-dune-v.a.c" class="section level2 unnumbered">
+<h2>Fonction de répartition d’une v.a.c</h2>
+
+<div class="definition">
+<p><span id="def:unnamed-chunk-49" class="definition"><strong>Définition 4.3  </strong></span>Si comme pour les variables aléatoires discrètes, on définit la fonction
+de répartition de <span class="math inline">\(X\)</span> par:</p>
+<p><span class="math display">\[\begin{aligned}
+    F_X \colon  \mathbb{R} &amp;\longrightarrow \mathbb{R} \\
+                x &amp;\longmapsto F_X(a) = P(X \le a)\end{aligned}\]</span></p>
+<p>alors la relation entre la fonction de répartition <span class="math inline">\(F_X\)</span> et la fonction
+densité de probabilité <span class="math inline">\(f(x)\)</span> est la suivante:</p>
+<p><span class="math display">\[\forall \quad a \in \mathbb{R} \quad F_X(a)= P(X \le a) = \int_{-\infty}^a f(x)dx\]</span></p>
+</div>
+
+<p>La fonction de répartition <span class="math inline">\(F_X(a)\)</span> est la <strong>primitive</strong> de la fonction
+densité de probabilité <span class="math inline">\(f(x)\)</span> (donc la densité d’une v.a.c est la
+dérivée de la fonction de répartition), et permet d’obtenir les
+probabilités associées à la variable aléatoire <span class="math inline">\(X\)</span>, en effet:</p>
+<p><strong>Propriétés:</strong> Pour une variable aléatoire continue X:</p>
+<ul>
+<li><p><span class="math inline">\(F&#39;_X(x) = \frac{\text{d}}{\text{d} x} F_X(x) = f(x)\)</span>.</p></li>
+<li><p>Pour tous réels <span class="math inline">\(a \le b\)</span>, <span class="math display">\[\begin{aligned}
+      P(a &lt; X &lt; b)      &amp; = P(a &lt; X \le b) \\
+                        &amp; = P(a \le X &lt; b) \\
+                        &amp; = P( a \le X \le b) \\
+                        &amp; = F_X(b) - F_X(a) = \int_a^bf(x)dx
+    \end{aligned}\]</span></p></li>
+</ul>
+<p>La fonction de répartition correspond aux probabilités cumulées
+associées à la variable aléatoire continue sur l’intervalle d’étude
+(Figure <a href="variables-aléatoires-continues.html#fig:rep">4.3</a>).</p>
+<div class="figure" style="text-align: center"><span id="fig:rep"></span>
+<img src="img/rep.png" alt="L'aire hachurée en vert sous la courbe de la fonction densité de probabilité correspond à la probabilité $P ( X &lt; a ) = F_X ( a )$ et vaut 0.5 car ceci correspond exactement à la moitié de l'aire totale sous la courbe" width="70%" />
+<p class="caption">
+Figure 4.3: L’aire hachurée en vert sous la courbe de la fonction densité de probabilité correspond à la probabilité <span class="math inline">\(P ( X &lt; a ) = F_X ( a )\)</span> et vaut 0.5 car ceci correspond exactement à la moitié de l’aire totale sous la courbe
+</p>
+</div>
+<p><strong>Propriétés:</strong> Les propriétés associées à la fonction de répartition sont les suivantes:</p>
+<ol style="list-style-type: decimal">
+<li><p><span class="math inline">\(F_X\)</span> est continue sur <span class="math inline">\(\mathbb{R}\)</span>, dérivable en tout point où <span class="math inline">\(f\)</span>
+est continue.</p></li>
+<li><p><span class="math inline">\(F_X\)</span> est croissante sur <span class="math inline">\(\mathbb{R}\)</span>.</p></li>
+<li><p><span class="math inline">\(F_X\)</span> est à valeurs dans <span class="math inline">\([0,1]\)</span>.</p></li>
+<li><p><span class="math inline">\(\lim\limits_{x\to - \infty} F_X(x) = 0\)</span> et
+<span class="math inline">\(\lim\limits_{x\to +\infty} F_X(x) = 1\)</span>.</p></li>
+</ol>
+</div>
+<div id="fonction-dune-variable-aléatoire-continue" class="section level2 unnumbered">
+<h2>Fonction d’une variable aléatoire continue</h2>
+<p>Soit <span class="math inline">\(X\)</span> une variable aléatoire continue de densité <span class="math inline">\(f_X\)</span> et de fonction
+de répartition <span class="math inline">\(F_X\)</span>. Soit <span class="math inline">\(h\)</span> une fonction continue définie sur
+<span class="math inline">\(X(\Omega)\)</span>, alors <span class="math inline">\(Y=h(X)\)</span> est une variable aléatoire.</p>
+<p>Pour déterminer la densité de <span class="math inline">\(Y\)</span>, notée <span class="math inline">\(f_Y\)</span>, on commence par calculer
+la fonction de répartition de <span class="math inline">\(Y\)</span>, notée <span class="math inline">\(F_Y\)</span>, ensuite nous dérivons
+pour déterminer <span class="math inline">\(f_Y\)</span>.</p>
+<div id="calcul-de-densités-pour-hxaxb" class="section level3 unnumbered">
+<h3>Calcul de densités pour <span class="math inline">\(h(X)=aX+b\)</span></h3>
+<p><span class="math inline">\(\forall \quad y \in \mathbb{R}\)</span>,</p>
+<p><span class="math display">\[F_Y(y) = P(Y\leq y)=P(h(X) \le y) = P(aX+b \le y)\]</span> si <span class="math inline">\(a&gt;0\)</span>,
+<span class="math display">\[F_Y(y) = P(aX+b \le y) = P(X\leq \frac{y-b}{a})=F_X(\frac{y-b}{a})\]</span>
+si <span class="math inline">\(a&lt;0\)</span>,
+<span class="math display">\[F_Y(y) = P(aX+b \le y) =P(X\geq \frac{y-b}{a})=1-F_X(\frac{y-b}{a})\]</span></p>
+<p>En dérivant on obtient la densité de <span class="math inline">\(Y\)</span>
+<span class="math display">\[f_Y(y)=\frac{1}{|a|}f_X(\frac{y-b}{a}).\]</span></p>
+</div>
+<div id="calcul-de-densités-pour-hxx2" class="section level3 unnumbered">
+<h3>Calcul de densités pour <span class="math inline">\(h(X)=X^2\)</span></h3>
+<p>si <span class="math inline">\(y&lt;0\)</span>, <span class="math inline">\(F_Y(y) =P(Y\leq y)=0\)</span>.<br />
+si <span class="math inline">\(y&gt;0\)</span>,</p>
+<p><span class="math display">\[F_Y(y) =P(Y\leq y)=P(X^2 \le y)=P(-\sqrt{y}\leq X \leq \sqrt{y})=F_X(\sqrt{y})-F_X(-\sqrt{y})\]</span></p>
+<p>En dérivant on obtient la densité de <span class="math inline">\(Y\)</span>,</p>
+<p><span class="math display">\[f_Y(y)= \left\lbrace
+      \begin{array}{ll}
+      \frac{1}{2\sqrt{y}}\big[f_X(\sqrt{y})+f_X(-\sqrt{y})\big]  &amp; \mbox{si} \quad y \ge 0\\
+      0 &amp; \mbox{sinon}
+      \end{array}
+  \right.\]</span></p>
+</div>
+<div id="calcul-de-densités-pour-hxex" class="section level3 unnumbered">
+<h3>Calcul de densités pour <span class="math inline">\(h(X)=e^X\)</span></h3>
+<p>si <span class="math inline">\(y&lt;0\)</span>, <span class="math inline">\(F_Y(y) = P(Y\leq y)=0\)</span>.<br />
+si <span class="math inline">\(y&gt;0\)</span>,
+<span class="math inline">\(F_Y(y) = P(Y\leq y)=P(e^X \le y)=P( X \leq \ln (y))=F_X(\ln(y))\)</span>.</p>
+<p>En dérivant on obtient la densité de <span class="math inline">\(Y\)</span></p>
+<p><span class="math display">\[f_Y(y)= \left\lbrace
+      \begin{array}{ll}
+      \frac{1}{y} f\big(\ln (y)\big)  &amp; \mbox{si} \quad y \ge 0\\
+      0 &amp; \mbox{sinon}
+      \end{array}
+  \right.\]</span></p>
+
+<div class="rmdexercise">
+<p>Soit la v.a.c <span class="math inline">\(X\)</span> ayant la
+fonction de densité</p>
+<p><span class="math display">\[f_X(x)= \left\lbrace
+      \begin{array}{ll}
+      2 x   &amp; \mbox{si} \quad 0 \le x \le 1\\
+      0 &amp; \mbox{sinon}
+      \end{array}
+  \right.\]</span></p>
+Déterminer la densité de: <span class="math inline">\(Y=3X+1\)</span>, <span class="math inline">\(Z=X^2\)</span> et <span class="math inline">\(T=e^X\)</span>.
+</div>
 
 </div>
 </div>
+<div id="espérance-et-variance-de-variables-aléatoires-continues" class="section level2 unnumbered">
+<h2>Espérance et variance de variables aléatoires continues</h2>
+<div id="espérance-dune-v.a.c" class="section level3 unnumbered">
+<h3>Espérance d’une v.a.c</h3>
+
+<div class="definition">
+<p><span id="def:unnamed-chunk-51" class="definition"><strong>Définition 4.4  </strong></span>Si <span class="math inline">\(X\)</span> est une variable aléatoire absolument continue de densité <span class="math inline">\(f\)</span>, on
+appelle espérance de X, le réel <span class="math inline">\(E(X)\)</span>, défini par:</p>
+<span class="math display">\[E(X)= \int_{-\infty}^{+\infty}x f(x) dx\]</span> si cette intégrale est
+convergente.
+</div>
+
+<p>Les propriétés de l’espérance d’une variable aléatoire continue sont les
+mêmes que pour une variable aléatoire discrète.</p>
+<p><strong>Propriétés:</strong> Soit <span class="math inline">\(X\)</span> une variable aléatoire continue,</p>
+<ul>
+<li><p><span class="math inline">\(E(aX+b)=aE(X)+b \quad \quad a \ge 0 \,\, \text{et} \,\, b \in \mathbb{R}\)</span>.</p></li>
+<li><p>Si <span class="math inline">\(X \ge 0\)</span> alors <span class="math inline">\(E(X) \ge 0\)</span>.</p></li>
+<li><p>Si <span class="math inline">\(X\)</span> et <span class="math inline">\(Y\)</span> sont deux variables aléatoires définies sur un même
+univers <span class="math inline">\(\Omega\)</span> alors <span class="math display">\[E(X+Y)=E(X)+E(Y)\]</span></p></li>
+</ul>
+
+<div class="theorem">
+<p><span id="thm:transfert" class="theorem"><strong>Théorème 4.1  (Théorème de transfert)  </strong></span>Si <span class="math inline">\(X\)</span> est une variable aléatoire de densité <span class="math inline">\(f(x)\)</span>, alors
+pour toute fonction réelle <span class="math inline">\(g\)</span> on aura</p>
+<span class="math display">\[E[g(X)] = \int_{-\infty}^{+\infty}g(x) f(x) dx\]</span>
+</div>
 
 
+<div class="rmdexercise">
+<p>Soit la v.a.c <span class="math inline">\(X\)</span> ayant la fonction de densité</p>
+<p><span class="math display">\[f_X(x)= \left\lbrace
+      \begin{array}{ll}
+      2 x   &amp; \mbox{si} \quad 0 \le x \le 1\\
+      0 &amp; \mbox{sinon}
+      \end{array}
+  \right.\]</span></p>
+Calculer l’espérance des variables aléatoires <span class="math inline">\(Y=3X+1\)</span>,
+<span class="math inline">\(Z=X^2\)</span> et <span class="math inline">\(T=e^X\)</span>.
+</div>
 
+</div>
+<div id="variance-dune-v.a.c" class="section level3 unnumbered">
+<h3>Variance d’une v.a.c</h3>
+<p>La variance d’une variable aléatoire <span class="math inline">\(V(X)\)</span> est l’espérance mathématique
+du carré de l’écart à l’espérance mathématique. C’est un paramètre de
+dispersion qui correspond au moment centré d’ordre 2 de la variable
+aléatoire <span class="math inline">\(X\)</span>.</p>
+
+<div class="definition">
+<p><span id="def:unnamed-chunk-53" class="definition"><strong>Définition 4.5  </strong></span>Si <span class="math inline">\(X\)</span> est une variable aléatoire ayant une espérance <span class="math inline">\(E(X)\)</span>, on appelle
+variance de <span class="math inline">\(X\)</span> le réel</p>
+<p><span class="math display">\[V(X)=E\big([X-E(X)]^2\big) = E(X^2) - [E(X)]^2\]</span> Si <span class="math inline">\(X\)</span> est une
+variable aléatoire continue, on calcule <span class="math inline">\(E(X^2)\)</span> en utilisant le
+théorème <a href="variables-aléatoires-continues.html#thm:transfert">4.1</a>,</p>
+<span class="math display">\[E(X^2) = \int_{-\infty}^{+\infty}x^2 f(x)dx\]</span>
+</div>
+
+<p><strong>Propriétés:</strong> Si <span class="math inline">\(X\)</span> est une variable aléatoire admettant une variance alors:</p>
+<ul>
+<li><p><span class="math inline">\(V(X) \ge 0\)</span>, si elle existe.</p></li>
+<li><p><span class="math inline">\(\forall \quad a \in \mathbb{R}, V(aX) = a^2 V(X)\)</span></p></li>
+<li><p><span class="math inline">\(\forall \quad (a,b) \in \mathbb{R}, V(aX+b) = a^2 V(X)\)</span></p></li>
+<li><p>Si <span class="math inline">\(X\)</span> et <span class="math inline">\(Y\)</span> sont deux variables aléatoires indépendantes,
+<span class="math inline">\(V(X+Y)=V(X)+V(Y)\)</span></p></li>
+</ul>
+
+<div class="definition">
+<p><span id="def:unnamed-chunk-54" class="definition"><strong>Définition 4.6  (Ecart-type)  </strong></span>Si <span class="math inline">\(X\)</span> est une variable aléatoire ayant une variance <span class="math inline">\(V(X)\)</span>, on appelle
+écart-type de <span class="math inline">\(X\)</span>, le réel:</p>
+<span class="math display">\[\sigma_X = \sqrt{V(X)}\]</span>
+</div>
+
+</div>
+</div>
+</div>
             </section>
 
           </div>
         </div>
       </div>
-<a href="couple-de-variables-aléatoires-continues.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="tab-normale.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="feuille-dexercices-1.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="lois-usuelles-de-v-a-c.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="book_assets/gitbook-2.6.7/js/app.min.js"></script>

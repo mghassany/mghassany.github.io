@@ -24,7 +24,7 @@
 <meta name="author" content="Mohamad Ghassany" />
 
 
-<meta name="date" content="2020-09-11" />
+<meta name="date" content="2020-09-15" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -612,8 +612,8 @@ Figure 7.2: Illustration of the <span class="math inline">\(k\)</span>-means alg
 <span id="cb59-3"><a href="kmeans-hierarchical-clustering.html#cb59-3"></a>y &lt;-<span class="st"> </span><span class="kw">rnorm</span>(<span class="dv">12</span>,<span class="dt">mean=</span><span class="kw">rep</span>(<span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">1</span>),<span class="dt">each=</span><span class="dv">4</span>),<span class="dt">sd=</span><span class="fl">0.2</span>)</span>
 <span id="cb59-4"><a href="kmeans-hierarchical-clustering.html#cb59-4"></a><span class="kw">plot</span>(x,y,<span class="dt">col=</span><span class="st">&quot;blue&quot;</span>,<span class="dt">pch=</span><span class="dv">19</span>,<span class="dt">cex=</span><span class="dv">2</span>)</span>
 <span id="cb59-5"><a href="kmeans-hierarchical-clustering.html#cb59-5"></a><span class="kw">text</span>(x<span class="fl">+0.05</span>,y<span class="fl">+0.05</span>,<span class="dt">labels=</span><span class="kw">as.character</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">12</span>))</span></code></pre></div>
-<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-152"></span>
-<img src="Machine-Learning_files/figure-html/unnamed-chunk-152-1.png" alt="Simulated dataset" width="70%" />
+<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-174"></span>
+<img src="Machine-Learning_files/figure-html/unnamed-chunk-174-1.png" alt="Simulated dataset" width="70%" />
 <p class="caption">
 Figure 7.3: Simulated dataset
 </p>
@@ -622,16 +622,17 @@ Figure 7.3: Simulated dataset
 <div class="sourceCode" id="cb60"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb60-1"><a href="kmeans-hierarchical-clustering.html#cb60-1"></a>dataFrame &lt;-<span class="st"> </span><span class="kw">data.frame</span>(x,y)</span>
 <span id="cb60-2"><a href="kmeans-hierarchical-clustering.html#cb60-2"></a>kmeansObj &lt;-<span class="st"> </span><span class="kw">kmeans</span>(dataFrame,<span class="dt">centers=</span><span class="dv">3</span>)</span>
 <span id="cb60-3"><a href="kmeans-hierarchical-clustering.html#cb60-3"></a><span class="kw">names</span>(kmeansObj)</span>
-<span id="cb60-4"><a href="kmeans-hierarchical-clustering.html#cb60-4"></a><span class="co">#ans&gt; [1] &quot;cluster&quot;      &quot;centers&quot;      &quot;totss&quot;        &quot;withinss&quot;     &quot;tot.withinss&quot;</span></span>
-<span id="cb60-5"><a href="kmeans-hierarchical-clustering.html#cb60-5"></a><span class="co">#ans&gt; [6] &quot;betweenss&quot;    &quot;size&quot;         &quot;iter&quot;         &quot;ifault&quot;</span></span></code></pre></div>
+<span id="cb60-4"><a href="kmeans-hierarchical-clustering.html#cb60-4"></a><span class="co">#ans&gt; [1] &quot;cluster&quot;      &quot;centers&quot;      &quot;totss&quot;       </span></span>
+<span id="cb60-5"><a href="kmeans-hierarchical-clustering.html#cb60-5"></a><span class="co">#ans&gt; [4] &quot;withinss&quot;     &quot;tot.withinss&quot; &quot;betweenss&quot;   </span></span>
+<span id="cb60-6"><a href="kmeans-hierarchical-clustering.html#cb60-6"></a><span class="co">#ans&gt; [7] &quot;size&quot;         &quot;iter&quot;         &quot;ifault&quot;</span></span></code></pre></div>
 <p>You can see which cluster each data point got assigned to by looking at the <code>cluster</code> element of the list returned by the <code>kmeans()</code> function.</p>
 <div class="sourceCode" id="cb61"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb61-1"><a href="kmeans-hierarchical-clustering.html#cb61-1"></a>kmeansObj<span class="op">$</span>cluster</span>
 <span id="cb61-2"><a href="kmeans-hierarchical-clustering.html#cb61-2"></a><span class="co">#ans&gt;  [1] 3 1 1 3 2 2 2 2 2 2 2 2</span></span></code></pre></div>
 <p>Here is a plot of the <span class="math inline">\(k\)</span>-means clustering solution.</p>
 <div class="sourceCode" id="cb62"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb62-1"><a href="kmeans-hierarchical-clustering.html#cb62-1"></a><span class="kw">plot</span>(x,y,<span class="dt">col=</span>kmeansObj<span class="op">$</span>cluster,<span class="dt">pch=</span><span class="dv">19</span>,<span class="dt">cex=</span><span class="dv">2</span>)</span>
 <span id="cb62-2"><a href="kmeans-hierarchical-clustering.html#cb62-2"></a><span class="kw">points</span>(kmeansObj<span class="op">$</span>centers,<span class="dt">col=</span><span class="dv">1</span><span class="op">:</span><span class="dv">3</span>,<span class="dt">pch=</span><span class="dv">3</span>,<span class="dt">cex=</span><span class="dv">3</span>,<span class="dt">lwd=</span><span class="dv">3</span>)</span></code></pre></div>
-<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-155"></span>
-<img src="Machine-Learning_files/figure-html/unnamed-chunk-155-1.png" alt="$k$-means clustering solution" width="70%" />
+<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-177"></span>
+<img src="Machine-Learning_files/figure-html/unnamed-chunk-177-1.png" alt="$k$-means clustering solution" width="70%" />
 <p class="caption">
 Figure 7.4: <span class="math inline">\(k\)</span>-means clustering solution
 </p>
@@ -783,17 +784,17 @@ Figure 7.11: Average, complete, and single linkage applied to an example data se
 <span id="cb63-10"><a href="kmeans-hierarchical-clustering.html#cb63-10"></a><span class="co"># Hierarchical clustering with complete linkage</span></span>
 <span id="cb63-11"><a href="kmeans-hierarchical-clustering.html#cb63-11"></a>treeComp &lt;-<span class="st"> </span><span class="kw">hclust</span>(d, <span class="dt">method =</span> <span class="st">&quot;complete&quot;</span>)</span>
 <span id="cb63-12"><a href="kmeans-hierarchical-clustering.html#cb63-12"></a><span class="kw">plot</span>(treeComp)</span></code></pre></div>
-<p><img src="Machine-Learning_files/figure-html/unnamed-chunk-156-1.png" width="70%" style="display: block; margin: auto;" /></p>
+<p><img src="Machine-Learning_files/figure-html/unnamed-chunk-178-1.png" width="70%" style="display: block; margin: auto;" /></p>
 <div class="sourceCode" id="cb64"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb64-1"><a href="kmeans-hierarchical-clustering.html#cb64-1"></a></span>
 <span id="cb64-2"><a href="kmeans-hierarchical-clustering.html#cb64-2"></a><span class="co"># With average linkage</span></span>
 <span id="cb64-3"><a href="kmeans-hierarchical-clustering.html#cb64-3"></a>treeAve &lt;-<span class="st"> </span><span class="kw">hclust</span>(d, <span class="dt">method =</span> <span class="st">&quot;average&quot;</span>)</span>
 <span id="cb64-4"><a href="kmeans-hierarchical-clustering.html#cb64-4"></a><span class="kw">plot</span>(treeAve)</span></code></pre></div>
-<p><img src="Machine-Learning_files/figure-html/unnamed-chunk-156-2.png" width="70%" style="display: block; margin: auto;" /></p>
+<p><img src="Machine-Learning_files/figure-html/unnamed-chunk-178-2.png" width="70%" style="display: block; margin: auto;" /></p>
 <div class="sourceCode" id="cb65"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb65-1"><a href="kmeans-hierarchical-clustering.html#cb65-1"></a></span>
 <span id="cb65-2"><a href="kmeans-hierarchical-clustering.html#cb65-2"></a><span class="co"># With single linkage</span></span>
 <span id="cb65-3"><a href="kmeans-hierarchical-clustering.html#cb65-3"></a>treeSingle &lt;-<span class="st"> </span><span class="kw">hclust</span>(d, <span class="dt">method =</span> <span class="st">&quot;single&quot;</span>)</span>
 <span id="cb65-4"><a href="kmeans-hierarchical-clustering.html#cb65-4"></a><span class="kw">plot</span>(treeSingle) <span class="co"># Chaining</span></span></code></pre></div>
-<p><img src="Machine-Learning_files/figure-html/unnamed-chunk-156-3.png" width="70%" style="display: block; margin: auto;" /></p>
+<p><img src="Machine-Learning_files/figure-html/unnamed-chunk-178-3.png" width="70%" style="display: block; margin: auto;" /></p>
 <div class="sourceCode" id="cb66"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb66-1"><a href="kmeans-hierarchical-clustering.html#cb66-1"></a></span>
 <span id="cb66-2"><a href="kmeans-hierarchical-clustering.html#cb66-2"></a><span class="co"># Set the number of clusters after inspecting visually</span></span>
 <span id="cb66-3"><a href="kmeans-hierarchical-clustering.html#cb66-3"></a><span class="co"># the dendogram for &quot;long&quot; groups of hanging leaves</span></span>

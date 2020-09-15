@@ -24,7 +24,7 @@
 <meta name="author" content="Mohamad Ghassany" />
 
 
-<meta name="date" content="2020-09-11" />
+<meta name="date" content="2020-09-15" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -1477,40 +1477,57 @@ Yugoslavia
 <p>So far, we know how to compute summaries for <em>each variable</em>, and how to quantify and visualize relations between variables with the correlation matrix and the scatterplot matrix. But even for a moderate number of variables like this, their results are hard to process.</p>
 <div class="sourceCode" id="cb46"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb46-1"><a href="principal-components-analysis.html#cb46-1"></a><span class="co"># Summary of the data - marginal</span></span>
 <span id="cb46-2"><a href="principal-components-analysis.html#cb46-2"></a><span class="kw">summary</span>(eurojob)</span>
-<span id="cb46-3"><a href="principal-components-analysis.html#cb46-3"></a><span class="co">#ans&gt;       Agr            Min             Man            Pow             Con       </span></span>
-<span id="cb46-4"><a href="principal-components-analysis.html#cb46-4"></a><span class="co">#ans&gt;  Min.   : 2.7   Min.   :0.100   Min.   : 7.9   Min.   :0.100   Min.   : 2.80  </span></span>
-<span id="cb46-5"><a href="principal-components-analysis.html#cb46-5"></a><span class="co">#ans&gt;  1st Qu.: 7.7   1st Qu.:0.525   1st Qu.:23.0   1st Qu.:0.600   1st Qu.: 7.53  </span></span>
-<span id="cb46-6"><a href="principal-components-analysis.html#cb46-6"></a><span class="co">#ans&gt;  Median :14.4   Median :0.950   Median :27.6   Median :0.850   Median : 8.35  </span></span>
-<span id="cb46-7"><a href="principal-components-analysis.html#cb46-7"></a><span class="co">#ans&gt;  Mean   :19.1   Mean   :1.254   Mean   :27.0   Mean   :0.908   Mean   : 8.17  </span></span>
-<span id="cb46-8"><a href="principal-components-analysis.html#cb46-8"></a><span class="co">#ans&gt;  3rd Qu.:23.7   3rd Qu.:1.800   3rd Qu.:30.2   3rd Qu.:1.175   3rd Qu.: 8.97  </span></span>
-<span id="cb46-9"><a href="principal-components-analysis.html#cb46-9"></a><span class="co">#ans&gt;  Max.   :66.8   Max.   :3.100   Max.   :41.2   Max.   :1.900   Max.   :11.50  </span></span>
-<span id="cb46-10"><a href="principal-components-analysis.html#cb46-10"></a><span class="co">#ans&gt;       Ser             Fin             Soc            Tra      </span></span>
-<span id="cb46-11"><a href="principal-components-analysis.html#cb46-11"></a><span class="co">#ans&gt;  Min.   : 5.20   Min.   : 0.50   Min.   : 5.3   Min.   :3.20  </span></span>
-<span id="cb46-12"><a href="principal-components-analysis.html#cb46-12"></a><span class="co">#ans&gt;  1st Qu.: 9.25   1st Qu.: 1.23   1st Qu.:16.2   1st Qu.:5.70  </span></span>
-<span id="cb46-13"><a href="principal-components-analysis.html#cb46-13"></a><span class="co">#ans&gt;  Median :14.40   Median : 4.65   Median :19.6   Median :6.70  </span></span>
-<span id="cb46-14"><a href="principal-components-analysis.html#cb46-14"></a><span class="co">#ans&gt;  Mean   :12.96   Mean   : 4.00   Mean   :20.0   Mean   :6.55  </span></span>
-<span id="cb46-15"><a href="principal-components-analysis.html#cb46-15"></a><span class="co">#ans&gt;  3rd Qu.:16.88   3rd Qu.: 5.92   3rd Qu.:24.1   3rd Qu.:7.08  </span></span>
-<span id="cb46-16"><a href="principal-components-analysis.html#cb46-16"></a><span class="co">#ans&gt;  Max.   :19.10   Max.   :11.30   Max.   :32.4   Max.   :9.40</span></span>
-<span id="cb46-17"><a href="principal-components-analysis.html#cb46-17"></a></span>
-<span id="cb46-18"><a href="principal-components-analysis.html#cb46-18"></a><span class="co"># Correlation matrix</span></span>
-<span id="cb46-19"><a href="principal-components-analysis.html#cb46-19"></a><span class="kw">cor</span>(eurojob)</span>
-<span id="cb46-20"><a href="principal-components-analysis.html#cb46-20"></a><span class="co">#ans&gt;         Agr     Min    Man     Pow     Con    Ser     Fin    Soc    Tra</span></span>
-<span id="cb46-21"><a href="principal-components-analysis.html#cb46-21"></a><span class="co">#ans&gt; Agr  1.0000  0.0358 -0.671 -0.4001 -0.5383 -0.737 -0.2198 -0.747 -0.565</span></span>
-<span id="cb46-22"><a href="principal-components-analysis.html#cb46-22"></a><span class="co">#ans&gt; Min  0.0358  1.0000  0.445  0.4055 -0.0256 -0.397 -0.4427 -0.281  0.157</span></span>
-<span id="cb46-23"><a href="principal-components-analysis.html#cb46-23"></a><span class="co">#ans&gt; Man -0.6711  0.4452  1.000  0.3853  0.4945  0.204 -0.1558  0.154  0.351</span></span>
-<span id="cb46-24"><a href="principal-components-analysis.html#cb46-24"></a><span class="co">#ans&gt; Pow -0.4001  0.4055  0.385  1.0000  0.0599  0.202  0.1099  0.132  0.375</span></span>
-<span id="cb46-25"><a href="principal-components-analysis.html#cb46-25"></a><span class="co">#ans&gt; Con -0.5383 -0.0256  0.494  0.0599  1.0000  0.356  0.0163  0.158  0.388</span></span>
-<span id="cb46-26"><a href="principal-components-analysis.html#cb46-26"></a><span class="co">#ans&gt; Ser -0.7370 -0.3966  0.204  0.2019  0.3560  1.000  0.3656  0.572  0.188</span></span>
-<span id="cb46-27"><a href="principal-components-analysis.html#cb46-27"></a><span class="co">#ans&gt; Fin -0.2198 -0.4427 -0.156  0.1099  0.0163  0.366  1.0000  0.108 -0.246</span></span>
-<span id="cb46-28"><a href="principal-components-analysis.html#cb46-28"></a><span class="co">#ans&gt; Soc -0.7468 -0.2810  0.154  0.1324  0.1582  0.572  0.1076  1.000  0.568</span></span>
-<span id="cb46-29"><a href="principal-components-analysis.html#cb46-29"></a><span class="co">#ans&gt; Tra -0.5649  0.1566  0.351  0.3752  0.3877  0.188 -0.2459  0.568  1.000</span></span>
-<span id="cb46-30"><a href="principal-components-analysis.html#cb46-30"></a></span>
-<span id="cb46-31"><a href="principal-components-analysis.html#cb46-31"></a><span class="co"># Scatterplot matrix</span></span>
-<span id="cb46-32"><a href="principal-components-analysis.html#cb46-32"></a><span class="kw">require</span>(car)</span>
-<span id="cb46-33"><a href="principal-components-analysis.html#cb46-33"></a><span class="kw">scatterplotMatrix</span>(eurojob, <span class="dt">regLine =</span> <span class="kw">list</span>(<span class="dt">method=</span>lm, <span class="dt">lty=</span><span class="dv">1</span>, <span class="dt">lwd=</span><span class="dv">2</span>, <span class="dt">col=</span><span class="st">&quot;green&quot;</span>), <span class="dt">smooth =</span> <span class="ot">FALSE</span>,</span>
-<span id="cb46-34"><a href="principal-components-analysis.html#cb46-34"></a>                  <span class="dt">ellipse =</span> <span class="ot">FALSE</span>, <span class="dt">plot.points =</span> T, <span class="dt">col=</span><span class="st">&quot;black&quot;</span>,</span>
-<span id="cb46-35"><a href="principal-components-analysis.html#cb46-35"></a>                  <span class="dt">diagonal =</span> <span class="ot">TRUE</span>)</span></code></pre></div>
-<p><img src="Machine-Learning_files/figure-html/unnamed-chunk-112-1.png" width="70%" style="display: block; margin: auto;" />
+<span id="cb46-3"><a href="principal-components-analysis.html#cb46-3"></a><span class="co">#ans&gt;       Agr            Min             Man      </span></span>
+<span id="cb46-4"><a href="principal-components-analysis.html#cb46-4"></a><span class="co">#ans&gt;  Min.   : 2.7   Min.   :0.100   Min.   : 7.9  </span></span>
+<span id="cb46-5"><a href="principal-components-analysis.html#cb46-5"></a><span class="co">#ans&gt;  1st Qu.: 7.7   1st Qu.:0.525   1st Qu.:23.0  </span></span>
+<span id="cb46-6"><a href="principal-components-analysis.html#cb46-6"></a><span class="co">#ans&gt;  Median :14.4   Median :0.950   Median :27.6  </span></span>
+<span id="cb46-7"><a href="principal-components-analysis.html#cb46-7"></a><span class="co">#ans&gt;  Mean   :19.1   Mean   :1.254   Mean   :27.0  </span></span>
+<span id="cb46-8"><a href="principal-components-analysis.html#cb46-8"></a><span class="co">#ans&gt;  3rd Qu.:23.7   3rd Qu.:1.800   3rd Qu.:30.2  </span></span>
+<span id="cb46-9"><a href="principal-components-analysis.html#cb46-9"></a><span class="co">#ans&gt;  Max.   :66.8   Max.   :3.100   Max.   :41.2  </span></span>
+<span id="cb46-10"><a href="principal-components-analysis.html#cb46-10"></a><span class="co">#ans&gt;       Pow             Con             Ser       </span></span>
+<span id="cb46-11"><a href="principal-components-analysis.html#cb46-11"></a><span class="co">#ans&gt;  Min.   :0.100   Min.   : 2.80   Min.   : 5.20  </span></span>
+<span id="cb46-12"><a href="principal-components-analysis.html#cb46-12"></a><span class="co">#ans&gt;  1st Qu.:0.600   1st Qu.: 7.53   1st Qu.: 9.25  </span></span>
+<span id="cb46-13"><a href="principal-components-analysis.html#cb46-13"></a><span class="co">#ans&gt;  Median :0.850   Median : 8.35   Median :14.40  </span></span>
+<span id="cb46-14"><a href="principal-components-analysis.html#cb46-14"></a><span class="co">#ans&gt;  Mean   :0.908   Mean   : 8.17   Mean   :12.96  </span></span>
+<span id="cb46-15"><a href="principal-components-analysis.html#cb46-15"></a><span class="co">#ans&gt;  3rd Qu.:1.175   3rd Qu.: 8.97   3rd Qu.:16.88  </span></span>
+<span id="cb46-16"><a href="principal-components-analysis.html#cb46-16"></a><span class="co">#ans&gt;  Max.   :1.900   Max.   :11.50   Max.   :19.10  </span></span>
+<span id="cb46-17"><a href="principal-components-analysis.html#cb46-17"></a><span class="co">#ans&gt;       Fin             Soc            Tra      </span></span>
+<span id="cb46-18"><a href="principal-components-analysis.html#cb46-18"></a><span class="co">#ans&gt;  Min.   : 0.50   Min.   : 5.3   Min.   :3.20  </span></span>
+<span id="cb46-19"><a href="principal-components-analysis.html#cb46-19"></a><span class="co">#ans&gt;  1st Qu.: 1.23   1st Qu.:16.2   1st Qu.:5.70  </span></span>
+<span id="cb46-20"><a href="principal-components-analysis.html#cb46-20"></a><span class="co">#ans&gt;  Median : 4.65   Median :19.6   Median :6.70  </span></span>
+<span id="cb46-21"><a href="principal-components-analysis.html#cb46-21"></a><span class="co">#ans&gt;  Mean   : 4.00   Mean   :20.0   Mean   :6.55  </span></span>
+<span id="cb46-22"><a href="principal-components-analysis.html#cb46-22"></a><span class="co">#ans&gt;  3rd Qu.: 5.92   3rd Qu.:24.1   3rd Qu.:7.08  </span></span>
+<span id="cb46-23"><a href="principal-components-analysis.html#cb46-23"></a><span class="co">#ans&gt;  Max.   :11.30   Max.   :32.4   Max.   :9.40</span></span>
+<span id="cb46-24"><a href="principal-components-analysis.html#cb46-24"></a></span>
+<span id="cb46-25"><a href="principal-components-analysis.html#cb46-25"></a><span class="co"># Correlation matrix</span></span>
+<span id="cb46-26"><a href="principal-components-analysis.html#cb46-26"></a><span class="kw">cor</span>(eurojob)</span>
+<span id="cb46-27"><a href="principal-components-analysis.html#cb46-27"></a><span class="co">#ans&gt;         Agr     Min    Man     Pow     Con    Ser</span></span>
+<span id="cb46-28"><a href="principal-components-analysis.html#cb46-28"></a><span class="co">#ans&gt; Agr  1.0000  0.0358 -0.671 -0.4001 -0.5383 -0.737</span></span>
+<span id="cb46-29"><a href="principal-components-analysis.html#cb46-29"></a><span class="co">#ans&gt; Min  0.0358  1.0000  0.445  0.4055 -0.0256 -0.397</span></span>
+<span id="cb46-30"><a href="principal-components-analysis.html#cb46-30"></a><span class="co">#ans&gt; Man -0.6711  0.4452  1.000  0.3853  0.4945  0.204</span></span>
+<span id="cb46-31"><a href="principal-components-analysis.html#cb46-31"></a><span class="co">#ans&gt; Pow -0.4001  0.4055  0.385  1.0000  0.0599  0.202</span></span>
+<span id="cb46-32"><a href="principal-components-analysis.html#cb46-32"></a><span class="co">#ans&gt; Con -0.5383 -0.0256  0.494  0.0599  1.0000  0.356</span></span>
+<span id="cb46-33"><a href="principal-components-analysis.html#cb46-33"></a><span class="co">#ans&gt; Ser -0.7370 -0.3966  0.204  0.2019  0.3560  1.000</span></span>
+<span id="cb46-34"><a href="principal-components-analysis.html#cb46-34"></a><span class="co">#ans&gt; Fin -0.2198 -0.4427 -0.156  0.1099  0.0163  0.366</span></span>
+<span id="cb46-35"><a href="principal-components-analysis.html#cb46-35"></a><span class="co">#ans&gt; Soc -0.7468 -0.2810  0.154  0.1324  0.1582  0.572</span></span>
+<span id="cb46-36"><a href="principal-components-analysis.html#cb46-36"></a><span class="co">#ans&gt; Tra -0.5649  0.1566  0.351  0.3752  0.3877  0.188</span></span>
+<span id="cb46-37"><a href="principal-components-analysis.html#cb46-37"></a><span class="co">#ans&gt;         Fin    Soc    Tra</span></span>
+<span id="cb46-38"><a href="principal-components-analysis.html#cb46-38"></a><span class="co">#ans&gt; Agr -0.2198 -0.747 -0.565</span></span>
+<span id="cb46-39"><a href="principal-components-analysis.html#cb46-39"></a><span class="co">#ans&gt; Min -0.4427 -0.281  0.157</span></span>
+<span id="cb46-40"><a href="principal-components-analysis.html#cb46-40"></a><span class="co">#ans&gt; Man -0.1558  0.154  0.351</span></span>
+<span id="cb46-41"><a href="principal-components-analysis.html#cb46-41"></a><span class="co">#ans&gt; Pow  0.1099  0.132  0.375</span></span>
+<span id="cb46-42"><a href="principal-components-analysis.html#cb46-42"></a><span class="co">#ans&gt; Con  0.0163  0.158  0.388</span></span>
+<span id="cb46-43"><a href="principal-components-analysis.html#cb46-43"></a><span class="co">#ans&gt; Ser  0.3656  0.572  0.188</span></span>
+<span id="cb46-44"><a href="principal-components-analysis.html#cb46-44"></a><span class="co">#ans&gt; Fin  1.0000  0.108 -0.246</span></span>
+<span id="cb46-45"><a href="principal-components-analysis.html#cb46-45"></a><span class="co">#ans&gt; Soc  0.1076  1.000  0.568</span></span>
+<span id="cb46-46"><a href="principal-components-analysis.html#cb46-46"></a><span class="co">#ans&gt; Tra -0.2459  0.568  1.000</span></span>
+<span id="cb46-47"><a href="principal-components-analysis.html#cb46-47"></a></span>
+<span id="cb46-48"><a href="principal-components-analysis.html#cb46-48"></a><span class="co"># Scatterplot matrix</span></span>
+<span id="cb46-49"><a href="principal-components-analysis.html#cb46-49"></a><span class="kw">require</span>(car)</span>
+<span id="cb46-50"><a href="principal-components-analysis.html#cb46-50"></a><span class="kw">scatterplotMatrix</span>(eurojob, <span class="dt">regLine =</span> <span class="kw">list</span>(<span class="dt">method=</span>lm, <span class="dt">lty=</span><span class="dv">1</span>, <span class="dt">lwd=</span><span class="dv">2</span>, <span class="dt">col=</span><span class="st">&quot;green&quot;</span>), <span class="dt">smooth =</span> <span class="ot">FALSE</span>,</span>
+<span id="cb46-51"><a href="principal-components-analysis.html#cb46-51"></a>                  <span class="dt">ellipse =</span> <span class="ot">FALSE</span>, <span class="dt">plot.points =</span> T, <span class="dt">col=</span><span class="st">&quot;black&quot;</span>,</span>
+<span id="cb46-52"><a href="principal-components-analysis.html#cb46-52"></a>                  <span class="dt">diagonal =</span> <span class="ot">TRUE</span>)</span></code></pre></div>
+<p><img src="Machine-Learning_files/figure-html/unnamed-chunk-134-1.png" width="70%" style="display: block; margin: auto;" />
 We definitely need a way of visualizing and quantifying the relations between variables for a moderate to large amount of variables. PCA will be a handy way. Recall what PCA does:</p>
 <ol style="list-style-type: decimal">
 <li>Takes the data for the variables <span class="math inline">\(X_1,\ldots,X_p\)</span>.</li>
@@ -1556,51 +1573,78 @@ We definitely need a way of visualizing and quantifying the relations between va
 <span id="cb47-24"><a href="principal-components-analysis.html#cb47-24"></a></span>
 <span id="cb47-25"><a href="principal-components-analysis.html#cb47-25"></a><span class="co"># The standard deviation of each PC</span></span>
 <span id="cb47-26"><a href="principal-components-analysis.html#cb47-26"></a>pca<span class="op">$</span>sdev</span>
-<span id="cb47-27"><a href="principal-components-analysis.html#cb47-27"></a><span class="co">#ans&gt;  Comp.1  Comp.2  Comp.3  Comp.4  Comp.5  Comp.6  Comp.7  Comp.8  Comp.9 </span></span>
-<span id="cb47-28"><a href="principal-components-analysis.html#cb47-28"></a><span class="co">#ans&gt; 1.86739 1.45951 1.04831 0.99724 0.73703 0.61922 0.47514 0.36985 0.00675</span></span>
-<span id="cb47-29"><a href="principal-components-analysis.html#cb47-29"></a></span>
-<span id="cb47-30"><a href="principal-components-analysis.html#cb47-30"></a><span class="co"># Weights: the expression of the original variables in the PCs</span></span>
-<span id="cb47-31"><a href="principal-components-analysis.html#cb47-31"></a><span class="co"># E.g. Agr = -0.524 * PC1 + 0.213 * PC5 - 0.152 * PC6 + 0.806 * PC9</span></span>
-<span id="cb47-32"><a href="principal-components-analysis.html#cb47-32"></a><span class="co"># And also: PC1 = -0.524 * Agr + 0.347 * Man + 0256 * Pow + 0.325 * Con + ...</span></span>
-<span id="cb47-33"><a href="principal-components-analysis.html#cb47-33"></a><span class="co"># (Because the matrix is orthogonal, so the transpose is the inverse)</span></span>
-<span id="cb47-34"><a href="principal-components-analysis.html#cb47-34"></a>pca<span class="op">$</span>loadings</span>
-<span id="cb47-35"><a href="principal-components-analysis.html#cb47-35"></a><span class="co">#ans&gt; </span></span>
-<span id="cb47-36"><a href="principal-components-analysis.html#cb47-36"></a><span class="co">#ans&gt; Loadings:</span></span>
-<span id="cb47-37"><a href="principal-components-analysis.html#cb47-37"></a><span class="co">#ans&gt;     Comp.1 Comp.2 Comp.3 Comp.4 Comp.5 Comp.6 Comp.7 Comp.8 Comp.9</span></span>
-<span id="cb47-38"><a href="principal-components-analysis.html#cb47-38"></a><span class="co">#ans&gt; Agr  0.524                       0.213  0.153                0.806</span></span>
-<span id="cb47-39"><a href="principal-components-analysis.html#cb47-39"></a><span class="co">#ans&gt; Min         0.618 -0.201        -0.164 -0.101 -0.726              </span></span>
-<span id="cb47-40"><a href="principal-components-analysis.html#cb47-40"></a><span class="co">#ans&gt; Man -0.347  0.355 -0.150 -0.346 -0.385 -0.288  0.479  0.126  0.366</span></span>
-<span id="cb47-41"><a href="principal-components-analysis.html#cb47-41"></a><span class="co">#ans&gt; Pow -0.256  0.261 -0.561  0.393  0.295  0.357  0.256 -0.341       </span></span>
-<span id="cb47-42"><a href="principal-components-analysis.html#cb47-42"></a><span class="co">#ans&gt; Con -0.325         0.153 -0.668  0.472  0.130 -0.221 -0.356       </span></span>
-<span id="cb47-43"><a href="principal-components-analysis.html#cb47-43"></a><span class="co">#ans&gt; Ser -0.379 -0.350 -0.115        -0.284  0.615 -0.229  0.388  0.238</span></span>
-<span id="cb47-44"><a href="principal-components-analysis.html#cb47-44"></a><span class="co">#ans&gt; Fin        -0.454 -0.587         0.280 -0.526 -0.187  0.174  0.145</span></span>
-<span id="cb47-45"><a href="principal-components-analysis.html#cb47-45"></a><span class="co">#ans&gt; Soc -0.387 -0.222  0.312  0.412 -0.220 -0.263 -0.191 -0.506  0.351</span></span>
-<span id="cb47-46"><a href="principal-components-analysis.html#cb47-46"></a><span class="co">#ans&gt; Tra -0.367  0.203  0.375  0.314  0.513 -0.124         0.545       </span></span>
-<span id="cb47-47"><a href="principal-components-analysis.html#cb47-47"></a><span class="co">#ans&gt; </span></span>
-<span id="cb47-48"><a href="principal-components-analysis.html#cb47-48"></a><span class="co">#ans&gt;                Comp.1 Comp.2 Comp.3 Comp.4 Comp.5 Comp.6 Comp.7 Comp.8 Comp.9</span></span>
-<span id="cb47-49"><a href="principal-components-analysis.html#cb47-49"></a><span class="co">#ans&gt; SS loadings     1.000  1.000  1.000  1.000  1.000  1.000  1.000  1.000  1.000</span></span>
-<span id="cb47-50"><a href="principal-components-analysis.html#cb47-50"></a><span class="co">#ans&gt; Proportion Var  0.111  0.111  0.111  0.111  0.111  0.111  0.111  0.111  0.111</span></span>
-<span id="cb47-51"><a href="principal-components-analysis.html#cb47-51"></a><span class="co">#ans&gt; Cumulative Var  0.111  0.222  0.333  0.444  0.556  0.667  0.778  0.889  1.000</span></span>
-<span id="cb47-52"><a href="principal-components-analysis.html#cb47-52"></a></span>
-<span id="cb47-53"><a href="principal-components-analysis.html#cb47-53"></a><span class="co"># Scores of the data on the PCs: how is the data reexpressed into PCs</span></span>
-<span id="cb47-54"><a href="principal-components-analysis.html#cb47-54"></a><span class="kw">head</span>(pca<span class="op">$</span>scores, <span class="dv">10</span>)</span>
-<span id="cb47-55"><a href="principal-components-analysis.html#cb47-55"></a><span class="co">#ans&gt;         Comp.1  Comp.2  Comp.3  Comp.4  Comp.5  Comp.6  Comp.7 Comp.8    Comp.9</span></span>
-<span id="cb47-56"><a href="principal-components-analysis.html#cb47-56"></a><span class="co">#ans&gt; Belgium -1.710 -1.2218 -0.1148  0.3395 -0.3245 -0.0473 -0.3401  0.403 -0.001090</span></span>
-<span id="cb47-57"><a href="principal-components-analysis.html#cb47-57"></a><span class="co">#ans&gt; Denmark -0.953 -2.1278  0.9507  0.5939  0.1027 -0.8273 -0.3029 -0.352  0.015619</span></span>
-<span id="cb47-58"><a href="principal-components-analysis.html#cb47-58"></a><span class="co">#ans&gt; France  -0.755 -1.1212 -0.4980 -0.5003 -0.2997  0.1158 -0.1855 -0.266 -0.000507</span></span>
-<span id="cb47-59"><a href="principal-components-analysis.html#cb47-59"></a><span class="co">#ans&gt; WGerm   -0.853 -0.0114 -0.5795 -0.1105 -1.1652 -0.6181  0.4446  0.194 -0.006539</span></span>
-<span id="cb47-60"><a href="principal-components-analysis.html#cb47-60"></a><span class="co">#ans&gt; Ireland  0.104 -0.4140 -0.3840  0.9267  0.0152  1.4242 -0.0370 -0.334  0.010879</span></span>
-<span id="cb47-61"><a href="principal-components-analysis.html#cb47-61"></a><span class="co">#ans&gt; Italy   -0.375 -0.7695  1.0606 -1.4772 -0.6452  1.0021 -0.1418 -0.130  0.005602</span></span>
-<span id="cb47-62"><a href="principal-components-analysis.html#cb47-62"></a><span class="co">#ans&gt; Luxem   -1.059  0.7558 -0.6515 -0.8352 -0.8659  0.2188 -1.6942  0.547  0.003453</span></span>
-<span id="cb47-63"><a href="principal-components-analysis.html#cb47-63"></a><span class="co">#ans&gt; Nether  -1.688 -2.0048  0.0637 -0.0235  0.6352  0.2120 -0.3034 -0.591 -0.010931</span></span>
-<span id="cb47-64"><a href="principal-components-analysis.html#cb47-64"></a><span class="co">#ans&gt; UK      -1.630 -0.3731 -1.1409  1.2669 -0.8129 -0.0361  0.0413 -0.349 -0.005478</span></span>
-<span id="cb47-65"><a href="principal-components-analysis.html#cb47-65"></a><span class="co">#ans&gt; Austria -1.176  0.1431 -1.0434 -0.1577  0.5210  0.8019  0.4150  0.215 -0.002816</span></span>
-<span id="cb47-66"><a href="principal-components-analysis.html#cb47-66"></a></span>
-<span id="cb47-67"><a href="principal-components-analysis.html#cb47-67"></a><span class="co"># Scatterplot matrix of the scores - See how they are uncorrelated!</span></span>
-<span id="cb47-68"><a href="principal-components-analysis.html#cb47-68"></a><span class="kw">scatterplotMatrix</span>(pca<span class="op">$</span>scores, <span class="dt">regLine =</span> <span class="kw">list</span>(<span class="dt">method=</span>lm, <span class="dt">lty=</span><span class="dv">1</span>, <span class="dt">lwd=</span><span class="dv">2</span>, <span class="dt">col=</span><span class="st">&quot;green&quot;</span>), <span class="dt">smooth =</span> <span class="ot">FALSE</span>,</span>
-<span id="cb47-69"><a href="principal-components-analysis.html#cb47-69"></a>                  <span class="dt">ellipse =</span> <span class="ot">FALSE</span>, <span class="dt">plot.points =</span> T, <span class="dt">col=</span><span class="st">&quot;black&quot;</span>,</span>
-<span id="cb47-70"><a href="principal-components-analysis.html#cb47-70"></a>                  <span class="dt">diagonal =</span> <span class="ot">TRUE</span>)</span></code></pre></div>
-<p><img src="Machine-Learning_files/figure-html/unnamed-chunk-113-1.png" width="70%" style="display: block; margin: auto;" /></p>
+<span id="cb47-27"><a href="principal-components-analysis.html#cb47-27"></a><span class="co">#ans&gt;  Comp.1  Comp.2  Comp.3  Comp.4  Comp.5  Comp.6 </span></span>
+<span id="cb47-28"><a href="principal-components-analysis.html#cb47-28"></a><span class="co">#ans&gt; 1.86739 1.45951 1.04831 0.99724 0.73703 0.61922 </span></span>
+<span id="cb47-29"><a href="principal-components-analysis.html#cb47-29"></a><span class="co">#ans&gt;  Comp.7  Comp.8  Comp.9 </span></span>
+<span id="cb47-30"><a href="principal-components-analysis.html#cb47-30"></a><span class="co">#ans&gt; 0.47514 0.36985 0.00675</span></span>
+<span id="cb47-31"><a href="principal-components-analysis.html#cb47-31"></a></span>
+<span id="cb47-32"><a href="principal-components-analysis.html#cb47-32"></a><span class="co"># Weights: the expression of the original variables in the PCs</span></span>
+<span id="cb47-33"><a href="principal-components-analysis.html#cb47-33"></a><span class="co"># E.g. Agr = -0.524 * PC1 + 0.213 * PC5 - 0.152 * PC6 + 0.806 * PC9</span></span>
+<span id="cb47-34"><a href="principal-components-analysis.html#cb47-34"></a><span class="co"># And also: PC1 = -0.524 * Agr + 0.347 * Man + 0256 * Pow + 0.325 * Con + ...</span></span>
+<span id="cb47-35"><a href="principal-components-analysis.html#cb47-35"></a><span class="co"># (Because the matrix is orthogonal, so the transpose is the inverse)</span></span>
+<span id="cb47-36"><a href="principal-components-analysis.html#cb47-36"></a>pca<span class="op">$</span>loadings</span>
+<span id="cb47-37"><a href="principal-components-analysis.html#cb47-37"></a><span class="co">#ans&gt; </span></span>
+<span id="cb47-38"><a href="principal-components-analysis.html#cb47-38"></a><span class="co">#ans&gt; Loadings:</span></span>
+<span id="cb47-39"><a href="principal-components-analysis.html#cb47-39"></a><span class="co">#ans&gt;     Comp.1 Comp.2 Comp.3 Comp.4 Comp.5 Comp.6 Comp.7</span></span>
+<span id="cb47-40"><a href="principal-components-analysis.html#cb47-40"></a><span class="co">#ans&gt; Agr  0.524                       0.213  0.153       </span></span>
+<span id="cb47-41"><a href="principal-components-analysis.html#cb47-41"></a><span class="co">#ans&gt; Min         0.618 -0.201        -0.164 -0.101 -0.726</span></span>
+<span id="cb47-42"><a href="principal-components-analysis.html#cb47-42"></a><span class="co">#ans&gt; Man -0.347  0.355 -0.150 -0.346 -0.385 -0.288  0.479</span></span>
+<span id="cb47-43"><a href="principal-components-analysis.html#cb47-43"></a><span class="co">#ans&gt; Pow -0.256  0.261 -0.561  0.393  0.295  0.357  0.256</span></span>
+<span id="cb47-44"><a href="principal-components-analysis.html#cb47-44"></a><span class="co">#ans&gt; Con -0.325         0.153 -0.668  0.472  0.130 -0.221</span></span>
+<span id="cb47-45"><a href="principal-components-analysis.html#cb47-45"></a><span class="co">#ans&gt; Ser -0.379 -0.350 -0.115        -0.284  0.615 -0.229</span></span>
+<span id="cb47-46"><a href="principal-components-analysis.html#cb47-46"></a><span class="co">#ans&gt; Fin        -0.454 -0.587         0.280 -0.526 -0.187</span></span>
+<span id="cb47-47"><a href="principal-components-analysis.html#cb47-47"></a><span class="co">#ans&gt; Soc -0.387 -0.222  0.312  0.412 -0.220 -0.263 -0.191</span></span>
+<span id="cb47-48"><a href="principal-components-analysis.html#cb47-48"></a><span class="co">#ans&gt; Tra -0.367  0.203  0.375  0.314  0.513 -0.124       </span></span>
+<span id="cb47-49"><a href="principal-components-analysis.html#cb47-49"></a><span class="co">#ans&gt;     Comp.8 Comp.9</span></span>
+<span id="cb47-50"><a href="principal-components-analysis.html#cb47-50"></a><span class="co">#ans&gt; Agr         0.806</span></span>
+<span id="cb47-51"><a href="principal-components-analysis.html#cb47-51"></a><span class="co">#ans&gt; Min              </span></span>
+<span id="cb47-52"><a href="principal-components-analysis.html#cb47-52"></a><span class="co">#ans&gt; Man  0.126  0.366</span></span>
+<span id="cb47-53"><a href="principal-components-analysis.html#cb47-53"></a><span class="co">#ans&gt; Pow -0.341       </span></span>
+<span id="cb47-54"><a href="principal-components-analysis.html#cb47-54"></a><span class="co">#ans&gt; Con -0.356       </span></span>
+<span id="cb47-55"><a href="principal-components-analysis.html#cb47-55"></a><span class="co">#ans&gt; Ser  0.388  0.238</span></span>
+<span id="cb47-56"><a href="principal-components-analysis.html#cb47-56"></a><span class="co">#ans&gt; Fin  0.174  0.145</span></span>
+<span id="cb47-57"><a href="principal-components-analysis.html#cb47-57"></a><span class="co">#ans&gt; Soc -0.506  0.351</span></span>
+<span id="cb47-58"><a href="principal-components-analysis.html#cb47-58"></a><span class="co">#ans&gt; Tra  0.545       </span></span>
+<span id="cb47-59"><a href="principal-components-analysis.html#cb47-59"></a><span class="co">#ans&gt; </span></span>
+<span id="cb47-60"><a href="principal-components-analysis.html#cb47-60"></a><span class="co">#ans&gt;                Comp.1 Comp.2 Comp.3 Comp.4 Comp.5</span></span>
+<span id="cb47-61"><a href="principal-components-analysis.html#cb47-61"></a><span class="co">#ans&gt; SS loadings     1.000  1.000  1.000  1.000  1.000</span></span>
+<span id="cb47-62"><a href="principal-components-analysis.html#cb47-62"></a><span class="co">#ans&gt; Proportion Var  0.111  0.111  0.111  0.111  0.111</span></span>
+<span id="cb47-63"><a href="principal-components-analysis.html#cb47-63"></a><span class="co">#ans&gt; Cumulative Var  0.111  0.222  0.333  0.444  0.556</span></span>
+<span id="cb47-64"><a href="principal-components-analysis.html#cb47-64"></a><span class="co">#ans&gt;                Comp.6 Comp.7 Comp.8 Comp.9</span></span>
+<span id="cb47-65"><a href="principal-components-analysis.html#cb47-65"></a><span class="co">#ans&gt; SS loadings     1.000  1.000  1.000  1.000</span></span>
+<span id="cb47-66"><a href="principal-components-analysis.html#cb47-66"></a><span class="co">#ans&gt; Proportion Var  0.111  0.111  0.111  0.111</span></span>
+<span id="cb47-67"><a href="principal-components-analysis.html#cb47-67"></a><span class="co">#ans&gt; Cumulative Var  0.667  0.778  0.889  1.000</span></span>
+<span id="cb47-68"><a href="principal-components-analysis.html#cb47-68"></a></span>
+<span id="cb47-69"><a href="principal-components-analysis.html#cb47-69"></a><span class="co"># Scores of the data on the PCs: how is the data reexpressed into PCs</span></span>
+<span id="cb47-70"><a href="principal-components-analysis.html#cb47-70"></a><span class="kw">head</span>(pca<span class="op">$</span>scores, <span class="dv">10</span>)</span>
+<span id="cb47-71"><a href="principal-components-analysis.html#cb47-71"></a><span class="co">#ans&gt;         Comp.1  Comp.2  Comp.3  Comp.4  Comp.5</span></span>
+<span id="cb47-72"><a href="principal-components-analysis.html#cb47-72"></a><span class="co">#ans&gt; Belgium -1.710 -1.2218 -0.1148  0.3395 -0.3245</span></span>
+<span id="cb47-73"><a href="principal-components-analysis.html#cb47-73"></a><span class="co">#ans&gt; Denmark -0.953 -2.1278  0.9507  0.5939  0.1027</span></span>
+<span id="cb47-74"><a href="principal-components-analysis.html#cb47-74"></a><span class="co">#ans&gt; France  -0.755 -1.1212 -0.4980 -0.5003 -0.2997</span></span>
+<span id="cb47-75"><a href="principal-components-analysis.html#cb47-75"></a><span class="co">#ans&gt; WGerm   -0.853 -0.0114 -0.5795 -0.1105 -1.1652</span></span>
+<span id="cb47-76"><a href="principal-components-analysis.html#cb47-76"></a><span class="co">#ans&gt; Ireland  0.104 -0.4140 -0.3840  0.9267  0.0152</span></span>
+<span id="cb47-77"><a href="principal-components-analysis.html#cb47-77"></a><span class="co">#ans&gt; Italy   -0.375 -0.7695  1.0606 -1.4772 -0.6452</span></span>
+<span id="cb47-78"><a href="principal-components-analysis.html#cb47-78"></a><span class="co">#ans&gt; Luxem   -1.059  0.7558 -0.6515 -0.8352 -0.8659</span></span>
+<span id="cb47-79"><a href="principal-components-analysis.html#cb47-79"></a><span class="co">#ans&gt; Nether  -1.688 -2.0048  0.0637 -0.0235  0.6352</span></span>
+<span id="cb47-80"><a href="principal-components-analysis.html#cb47-80"></a><span class="co">#ans&gt; UK      -1.630 -0.3731 -1.1409  1.2669 -0.8129</span></span>
+<span id="cb47-81"><a href="principal-components-analysis.html#cb47-81"></a><span class="co">#ans&gt; Austria -1.176  0.1431 -1.0434 -0.1577  0.5210</span></span>
+<span id="cb47-82"><a href="principal-components-analysis.html#cb47-82"></a><span class="co">#ans&gt;          Comp.6  Comp.7 Comp.8    Comp.9</span></span>
+<span id="cb47-83"><a href="principal-components-analysis.html#cb47-83"></a><span class="co">#ans&gt; Belgium -0.0473 -0.3401  0.403 -0.001090</span></span>
+<span id="cb47-84"><a href="principal-components-analysis.html#cb47-84"></a><span class="co">#ans&gt; Denmark -0.8273 -0.3029 -0.352  0.015619</span></span>
+<span id="cb47-85"><a href="principal-components-analysis.html#cb47-85"></a><span class="co">#ans&gt; France   0.1158 -0.1855 -0.266 -0.000507</span></span>
+<span id="cb47-86"><a href="principal-components-analysis.html#cb47-86"></a><span class="co">#ans&gt; WGerm   -0.6181  0.4446  0.194 -0.006539</span></span>
+<span id="cb47-87"><a href="principal-components-analysis.html#cb47-87"></a><span class="co">#ans&gt; Ireland  1.4242 -0.0370 -0.334  0.010879</span></span>
+<span id="cb47-88"><a href="principal-components-analysis.html#cb47-88"></a><span class="co">#ans&gt; Italy    1.0021 -0.1418 -0.130  0.005602</span></span>
+<span id="cb47-89"><a href="principal-components-analysis.html#cb47-89"></a><span class="co">#ans&gt; Luxem    0.2188 -1.6942  0.547  0.003453</span></span>
+<span id="cb47-90"><a href="principal-components-analysis.html#cb47-90"></a><span class="co">#ans&gt; Nether   0.2120 -0.3034 -0.591 -0.010931</span></span>
+<span id="cb47-91"><a href="principal-components-analysis.html#cb47-91"></a><span class="co">#ans&gt; UK      -0.0361  0.0413 -0.349 -0.005478</span></span>
+<span id="cb47-92"><a href="principal-components-analysis.html#cb47-92"></a><span class="co">#ans&gt; Austria  0.8019  0.4150  0.215 -0.002816</span></span>
+<span id="cb47-93"><a href="principal-components-analysis.html#cb47-93"></a></span>
+<span id="cb47-94"><a href="principal-components-analysis.html#cb47-94"></a><span class="co"># Scatterplot matrix of the scores - See how they are uncorrelated!</span></span>
+<span id="cb47-95"><a href="principal-components-analysis.html#cb47-95"></a><span class="kw">scatterplotMatrix</span>(pca<span class="op">$</span>scores, <span class="dt">regLine =</span> <span class="kw">list</span>(<span class="dt">method=</span>lm, <span class="dt">lty=</span><span class="dv">1</span>, <span class="dt">lwd=</span><span class="dv">2</span>, <span class="dt">col=</span><span class="st">&quot;green&quot;</span>), <span class="dt">smooth =</span> <span class="ot">FALSE</span>,</span>
+<span id="cb47-96"><a href="principal-components-analysis.html#cb47-96"></a>                  <span class="dt">ellipse =</span> <span class="ot">FALSE</span>, <span class="dt">plot.points =</span> T, <span class="dt">col=</span><span class="st">&quot;black&quot;</span>,</span>
+<span id="cb47-97"><a href="principal-components-analysis.html#cb47-97"></a>                  <span class="dt">diagonal =</span> <span class="ot">TRUE</span>)</span></code></pre></div>
+<p><img src="Machine-Learning_files/figure-html/unnamed-chunk-135-1.png" width="70%" style="display: block; margin: auto;" /></p>
 <div class="rmdinsight">
 <p>
 PCA produces <strong>uncorrelated</strong> variables from the original set <span class="math inline"><span class="math inline">\(X_1,\ldots,X_p\)</span></span>. This implies that:
@@ -1617,35 +1661,43 @@ An uncorrelated or independent variable in <span class="math inline"><span class
 <div class="sourceCode" id="cb48"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb48-1"><a href="principal-components-analysis.html#cb48-1"></a></span>
 <span id="cb48-2"><a href="principal-components-analysis.html#cb48-2"></a><span class="co"># Means of the variables - before PCA the variables are centered</span></span>
 <span id="cb48-3"><a href="principal-components-analysis.html#cb48-3"></a>pca<span class="op">$</span>center</span>
-<span id="cb48-4"><a href="principal-components-analysis.html#cb48-4"></a><span class="co">#ans&gt;    Agr    Min    Man    Pow    Con    Ser    Fin    Soc    Tra </span></span>
-<span id="cb48-5"><a href="principal-components-analysis.html#cb48-5"></a><span class="co">#ans&gt; 19.131  1.254 27.008  0.908  8.165 12.958  4.000 20.023  6.546</span></span>
-<span id="cb48-6"><a href="principal-components-analysis.html#cb48-6"></a></span>
-<span id="cb48-7"><a href="principal-components-analysis.html#cb48-7"></a><span class="co"># Rescalation done to each variable</span></span>
-<span id="cb48-8"><a href="principal-components-analysis.html#cb48-8"></a><span class="co"># - if cor = FALSE (default), a vector of ones</span></span>
-<span id="cb48-9"><a href="principal-components-analysis.html#cb48-9"></a><span class="co"># - if cor = TRUE, a vector with the standard deviations of the variables</span></span>
-<span id="cb48-10"><a href="principal-components-analysis.html#cb48-10"></a>pca<span class="op">$</span>scale</span>
-<span id="cb48-11"><a href="principal-components-analysis.html#cb48-11"></a><span class="co">#ans&gt;    Agr    Min    Man    Pow    Con    Ser    Fin    Soc    Tra </span></span>
-<span id="cb48-12"><a href="principal-components-analysis.html#cb48-12"></a><span class="co">#ans&gt; 15.245  0.951  6.872  0.369  1.614  4.486  2.752  6.697  1.364</span></span>
-<span id="cb48-13"><a href="principal-components-analysis.html#cb48-13"></a></span>
-<span id="cb48-14"><a href="principal-components-analysis.html#cb48-14"></a><span class="co"># Summary of the importance of components - the third row is key</span></span>
-<span id="cb48-15"><a href="principal-components-analysis.html#cb48-15"></a><span class="kw">summary</span>(pca)</span>
-<span id="cb48-16"><a href="principal-components-analysis.html#cb48-16"></a><span class="co">#ans&gt; Importance of components:</span></span>
-<span id="cb48-17"><a href="principal-components-analysis.html#cb48-17"></a><span class="co">#ans&gt;                        Comp.1 Comp.2 Comp.3 Comp.4 Comp.5 Comp.6 Comp.7 Comp.8</span></span>
-<span id="cb48-18"><a href="principal-components-analysis.html#cb48-18"></a><span class="co">#ans&gt; Standard deviation      1.867  1.460  1.048  0.997 0.7370 0.6192 0.4751 0.3699</span></span>
-<span id="cb48-19"><a href="principal-components-analysis.html#cb48-19"></a><span class="co">#ans&gt; Proportion of Variance  0.387  0.237  0.122  0.110 0.0604 0.0426 0.0251 0.0152</span></span>
-<span id="cb48-20"><a href="principal-components-analysis.html#cb48-20"></a><span class="co">#ans&gt; Cumulative Proportion   0.387  0.624  0.746  0.857 0.9171 0.9597 0.9848 1.0000</span></span>
-<span id="cb48-21"><a href="principal-components-analysis.html#cb48-21"></a><span class="co">#ans&gt;                          Comp.9</span></span>
-<span id="cb48-22"><a href="principal-components-analysis.html#cb48-22"></a><span class="co">#ans&gt; Standard deviation     6.75e-03</span></span>
-<span id="cb48-23"><a href="principal-components-analysis.html#cb48-23"></a><span class="co">#ans&gt; Proportion of Variance 5.07e-06</span></span>
-<span id="cb48-24"><a href="principal-components-analysis.html#cb48-24"></a><span class="co">#ans&gt; Cumulative Proportion  1.00e+00</span></span>
-<span id="cb48-25"><a href="principal-components-analysis.html#cb48-25"></a></span>
-<span id="cb48-26"><a href="principal-components-analysis.html#cb48-26"></a><span class="co"># Scree plot - the variance of each component</span></span>
-<span id="cb48-27"><a href="principal-components-analysis.html#cb48-27"></a><span class="kw">plot</span>(pca)</span></code></pre></div>
-<p><img src="Machine-Learning_files/figure-html/unnamed-chunk-115-1.png" width="70%" style="display: block; margin: auto;" /></p>
+<span id="cb48-4"><a href="principal-components-analysis.html#cb48-4"></a><span class="co">#ans&gt;    Agr    Min    Man    Pow    Con    Ser    Fin </span></span>
+<span id="cb48-5"><a href="principal-components-analysis.html#cb48-5"></a><span class="co">#ans&gt; 19.131  1.254 27.008  0.908  8.165 12.958  4.000 </span></span>
+<span id="cb48-6"><a href="principal-components-analysis.html#cb48-6"></a><span class="co">#ans&gt;    Soc    Tra </span></span>
+<span id="cb48-7"><a href="principal-components-analysis.html#cb48-7"></a><span class="co">#ans&gt; 20.023  6.546</span></span>
+<span id="cb48-8"><a href="principal-components-analysis.html#cb48-8"></a></span>
+<span id="cb48-9"><a href="principal-components-analysis.html#cb48-9"></a><span class="co"># Rescalation done to each variable</span></span>
+<span id="cb48-10"><a href="principal-components-analysis.html#cb48-10"></a><span class="co"># - if cor = FALSE (default), a vector of ones</span></span>
+<span id="cb48-11"><a href="principal-components-analysis.html#cb48-11"></a><span class="co"># - if cor = TRUE, a vector with the standard deviations of the variables</span></span>
+<span id="cb48-12"><a href="principal-components-analysis.html#cb48-12"></a>pca<span class="op">$</span>scale</span>
+<span id="cb48-13"><a href="principal-components-analysis.html#cb48-13"></a><span class="co">#ans&gt;    Agr    Min    Man    Pow    Con    Ser    Fin </span></span>
+<span id="cb48-14"><a href="principal-components-analysis.html#cb48-14"></a><span class="co">#ans&gt; 15.245  0.951  6.872  0.369  1.614  4.486  2.752 </span></span>
+<span id="cb48-15"><a href="principal-components-analysis.html#cb48-15"></a><span class="co">#ans&gt;    Soc    Tra </span></span>
+<span id="cb48-16"><a href="principal-components-analysis.html#cb48-16"></a><span class="co">#ans&gt;  6.697  1.364</span></span>
+<span id="cb48-17"><a href="principal-components-analysis.html#cb48-17"></a></span>
+<span id="cb48-18"><a href="principal-components-analysis.html#cb48-18"></a><span class="co"># Summary of the importance of components - the third row is key</span></span>
+<span id="cb48-19"><a href="principal-components-analysis.html#cb48-19"></a><span class="kw">summary</span>(pca)</span>
+<span id="cb48-20"><a href="principal-components-analysis.html#cb48-20"></a><span class="co">#ans&gt; Importance of components:</span></span>
+<span id="cb48-21"><a href="principal-components-analysis.html#cb48-21"></a><span class="co">#ans&gt;                        Comp.1 Comp.2 Comp.3 Comp.4</span></span>
+<span id="cb48-22"><a href="principal-components-analysis.html#cb48-22"></a><span class="co">#ans&gt; Standard deviation      1.867  1.460  1.048  0.997</span></span>
+<span id="cb48-23"><a href="principal-components-analysis.html#cb48-23"></a><span class="co">#ans&gt; Proportion of Variance  0.387  0.237  0.122  0.110</span></span>
+<span id="cb48-24"><a href="principal-components-analysis.html#cb48-24"></a><span class="co">#ans&gt; Cumulative Proportion   0.387  0.624  0.746  0.857</span></span>
+<span id="cb48-25"><a href="principal-components-analysis.html#cb48-25"></a><span class="co">#ans&gt;                        Comp.5 Comp.6 Comp.7 Comp.8</span></span>
+<span id="cb48-26"><a href="principal-components-analysis.html#cb48-26"></a><span class="co">#ans&gt; Standard deviation     0.7370 0.6192 0.4751 0.3699</span></span>
+<span id="cb48-27"><a href="principal-components-analysis.html#cb48-27"></a><span class="co">#ans&gt; Proportion of Variance 0.0604 0.0426 0.0251 0.0152</span></span>
+<span id="cb48-28"><a href="principal-components-analysis.html#cb48-28"></a><span class="co">#ans&gt; Cumulative Proportion  0.9171 0.9597 0.9848 1.0000</span></span>
+<span id="cb48-29"><a href="principal-components-analysis.html#cb48-29"></a><span class="co">#ans&gt;                          Comp.9</span></span>
+<span id="cb48-30"><a href="principal-components-analysis.html#cb48-30"></a><span class="co">#ans&gt; Standard deviation     6.75e-03</span></span>
+<span id="cb48-31"><a href="principal-components-analysis.html#cb48-31"></a><span class="co">#ans&gt; Proportion of Variance 5.07e-06</span></span>
+<span id="cb48-32"><a href="principal-components-analysis.html#cb48-32"></a><span class="co">#ans&gt; Cumulative Proportion  1.00e+00</span></span>
+<span id="cb48-33"><a href="principal-components-analysis.html#cb48-33"></a></span>
+<span id="cb48-34"><a href="principal-components-analysis.html#cb48-34"></a><span class="co"># Scree plot - the variance of each component</span></span>
+<span id="cb48-35"><a href="principal-components-analysis.html#cb48-35"></a><span class="kw">plot</span>(pca)</span></code></pre></div>
+<p><img src="Machine-Learning_files/figure-html/unnamed-chunk-137-1.png" width="70%" style="display: block; margin: auto;" /></p>
 <div class="sourceCode" id="cb49"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb49-1"><a href="principal-components-analysis.html#cb49-1"></a></span>
 <span id="cb49-2"><a href="principal-components-analysis.html#cb49-2"></a><span class="co"># With connected lines - useful for looking for the &quot;elbow&quot;</span></span>
 <span id="cb49-3"><a href="principal-components-analysis.html#cb49-3"></a><span class="kw">plot</span>(pca, <span class="dt">type =</span> <span class="st">&quot;l&quot;</span>)</span></code></pre></div>
-<p><img src="Machine-Learning_files/figure-html/unnamed-chunk-115-2.png" width="70%" style="display: block; margin: auto;" /></p>
+<p><img src="Machine-Learning_files/figure-html/unnamed-chunk-137-2.png" width="70%" style="display: block; margin: auto;" /></p>
 <div class="sourceCode" id="cb50"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb50-1"><a href="principal-components-analysis.html#cb50-1"></a></span>
 <span id="cb50-2"><a href="principal-components-analysis.html#cb50-2"></a><span class="co"># PC1 and PC2 -- These are the weights of the variables on the first two Principal Components</span></span>
 <span id="cb50-3"><a href="principal-components-analysis.html#cb50-3"></a>pca<span class="op">$</span>loadings[, <span class="dv">1</span><span class="op">:</span><span class="dv">2</span>]</span>
@@ -1673,7 +1725,7 @@ The interpretation of the PCs involves inspecting the weights and interpreting t
 <div class="sourceCode" id="cb51"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb51-1"><a href="principal-components-analysis.html#cb51-1"></a><span class="co"># Biplot - plot together the scores for PC1 and PC2 and the</span></span>
 <span id="cb51-2"><a href="principal-components-analysis.html#cb51-2"></a><span class="co"># variables expressed in terms of PC1 and PC2</span></span>
 <span id="cb51-3"><a href="principal-components-analysis.html#cb51-3"></a><span class="kw">biplot</span>(pca)</span></code></pre></div>
-<p><img src="Machine-Learning_files/figure-html/unnamed-chunk-117-1.png" width="90%" style="display: block; margin: auto;" /></p>
+<p><img src="Machine-Learning_files/figure-html/unnamed-chunk-139-1.png" width="90%" style="display: block; margin: auto;" /></p>
 <p>This biplot confirms the above interpretation.</p>
 <p>Recall that the biplot is a superposition of two figures: the first one is the scatterplot of the principal component scores (the projections of the observations on the new low dimensional space - also know as graph of individuals) and the second one is the figure of loading vectors (also known as graph of variables). In fact, the graph of variables is a correlation circle, the variables whose unit vectors are close to each other are said to be positively correlated, meaning that their influence on the positioning of individuals is similar (again, these proximities are reflected in the projections of variables on the graph of individuals). However, variables far away from each other will be defined as being negatively correlated. Variables that have perpendicular unit vector are uncorrelated. To see both graphs we can use the <code>factoextra</code> package like follows:</p>
 <div class="sourceCode" id="cb52"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb52-1"><a href="principal-components-analysis.html#cb52-1"></a><span class="co"># loading factoextra library</span></span>
@@ -1687,20 +1739,20 @@ The interpretation of the PCs involves inspecting the weights and interpreting t
 <span id="cb52-9"><a href="principal-components-analysis.html#cb52-9"></a>             <span class="dt">gradient.cols =</span> <span class="kw">c</span>(<span class="st">&quot;#00AFBB&quot;</span>, <span class="st">&quot;#E7B800&quot;</span>, <span class="st">&quot;#FC4E07&quot;</span>),</span>
 <span id="cb52-10"><a href="principal-components-analysis.html#cb52-10"></a>             <span class="dt">repel =</span> <span class="ot">TRUE</span>     </span>
 <span id="cb52-11"><a href="principal-components-analysis.html#cb52-11"></a>             )</span></code></pre></div>
-<p><img src="Machine-Learning_files/figure-html/unnamed-chunk-118-1.png" width="90%" style="display: block; margin: auto;" /></p>
+<p><img src="Machine-Learning_files/figure-html/unnamed-chunk-140-1.png" width="90%" style="display: block; margin: auto;" /></p>
 <div class="sourceCode" id="cb53"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb53-1"><a href="principal-components-analysis.html#cb53-1"></a><span class="co"># Graph of variables</span></span>
 <span id="cb53-2"><a href="principal-components-analysis.html#cb53-2"></a><span class="kw">fviz_pca_var</span>(res.pca,</span>
 <span id="cb53-3"><a href="principal-components-analysis.html#cb53-3"></a>             <span class="dt">col.var =</span> <span class="st">&quot;contrib&quot;</span>, </span>
 <span id="cb53-4"><a href="principal-components-analysis.html#cb53-4"></a>             <span class="dt">gradient.cols =</span> <span class="kw">c</span>(<span class="st">&quot;#00AFBB&quot;</span>, <span class="st">&quot;#E7B800&quot;</span>, <span class="st">&quot;#FC4E07&quot;</span>),</span>
 <span id="cb53-5"><a href="principal-components-analysis.html#cb53-5"></a>             <span class="dt">repel =</span> <span class="ot">TRUE</span>     </span>
 <span id="cb53-6"><a href="principal-components-analysis.html#cb53-6"></a>             )</span></code></pre></div>
-<p><img src="Machine-Learning_files/figure-html/unnamed-chunk-118-2.png" width="90%" style="display: block; margin: auto;" /></p>
+<p><img src="Machine-Learning_files/figure-html/unnamed-chunk-140-2.png" width="90%" style="display: block; margin: auto;" /></p>
 <div class="sourceCode" id="cb54"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb54-1"><a href="principal-components-analysis.html#cb54-1"></a><span class="co"># Biplot of individuals and variables</span></span>
 <span id="cb54-2"><a href="principal-components-analysis.html#cb54-2"></a><span class="kw">fviz_pca_biplot</span>(res.pca, <span class="dt">repel =</span> <span class="ot">TRUE</span>,</span>
 <span id="cb54-3"><a href="principal-components-analysis.html#cb54-3"></a>                <span class="dt">col.var =</span> <span class="st">&quot;#2E9FDF&quot;</span>, </span>
 <span id="cb54-4"><a href="principal-components-analysis.html#cb54-4"></a>                <span class="dt">col.ind =</span> <span class="st">&quot;#696969&quot;</span>  </span>
 <span id="cb54-5"><a href="principal-components-analysis.html#cb54-5"></a>                )</span></code></pre></div>
-<p><img src="Machine-Learning_files/figure-html/unnamed-chunk-118-3.png" width="90%" style="display: block; margin: auto;" /></p>
+<p><img src="Machine-Learning_files/figure-html/unnamed-chunk-140-3.png" width="90%" style="display: block; margin: auto;" /></p>
 <p align="right">
 ◼
 </p>

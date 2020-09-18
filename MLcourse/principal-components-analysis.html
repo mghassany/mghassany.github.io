@@ -24,7 +24,7 @@
 <meta name="author" content="Mohamad Ghassany" />
 
 
-<meta name="date" content="2020-09-15" />
+<meta name="date" content="2020-09-18" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -203,7 +203,7 @@ code span.wa { color: #bf0303; } /* Warning */
 <li class="chapter" data-level="2.3.1" data-path="multiple-linear-regression.html"><a href="multiple-linear-regression.html#other-consid"><i class="fa fa-check"></i><b>2.3.1</b> Other Considerations in Regression Model</a></li>
 </ul></li>
 <li class="chapter" data-level="2.4" data-path="multiple-linear-regression.html"><a href="multiple-linear-regression.html#how-to-select-the-best-performing-model"><i class="fa fa-check"></i><b>2.4</b> How to select the best performing model</a><ul>
-<li><a href="multiple-linear-regression.html#use-the-adjusted-r_adj2-for-univariate-models">Use the Adjusted <span class="math inline">\(R_{adj}^2\)</span> for univariate models</a></li>
+<li><a href="multiple-linear-regression.html#use-the-adjusted-r_adj2-for-multivariate-models">Use the Adjusted <span class="math inline">\(R_{adj}^2\)</span> for multivariate models</a></li>
 <li class="chapter" data-level="" data-path="multiple-linear-regression.html"><a href="multiple-linear-regression.html#have-a-look-at-the-residuals-or-error-terms"><i class="fa fa-check"></i>Have a look at the residuals or error terms</a></li>
 <li class="chapter" data-level="" data-path="multiple-linear-regression.html"><a href="multiple-linear-regression.html#histogram-of-residuals"><i class="fa fa-check"></i>Histogram of residuals</a></li>
 </ul></li>
@@ -1730,15 +1730,24 @@ The interpretation of the PCs involves inspecting the weights and interpreting t
 <p>Recall that the biplot is a superposition of two figures: the first one is the scatterplot of the principal component scores (the projections of the observations on the new low dimensional space - also know as graph of individuals) and the second one is the figure of loading vectors (also known as graph of variables). In fact, the graph of variables is a correlation circle, the variables whose unit vectors are close to each other are said to be positively correlated, meaning that their influence on the positioning of individuals is similar (again, these proximities are reflected in the projections of variables on the graph of individuals). However, variables far away from each other will be defined as being negatively correlated. Variables that have perpendicular unit vector are uncorrelated. To see both graphs we can use the <code>factoextra</code> package like follows:</p>
 <div class="sourceCode" id="cb52"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb52-1"><a href="principal-components-analysis.html#cb52-1"></a><span class="co"># loading factoextra library</span></span>
 <span id="cb52-2"><a href="principal-components-analysis.html#cb52-2"></a><span class="kw">require</span>(factoextra)</span>
-<span id="cb52-3"><a href="principal-components-analysis.html#cb52-3"></a><span class="co"># Calculating pca using prcomp(), which is a built-in function in R </span></span>
-<span id="cb52-4"><a href="principal-components-analysis.html#cb52-4"></a>res.pca &lt;-<span class="st"> </span><span class="kw">prcomp</span>(eurojob, <span class="dt">scale =</span> <span class="ot">TRUE</span>)</span>
-<span id="cb52-5"><a href="principal-components-analysis.html#cb52-5"></a></span>
-<span id="cb52-6"><a href="principal-components-analysis.html#cb52-6"></a><span class="co"># Graph of individuals</span></span>
-<span id="cb52-7"><a href="principal-components-analysis.html#cb52-7"></a><span class="kw">fviz_pca_ind</span>(res.pca,</span>
-<span id="cb52-8"><a href="principal-components-analysis.html#cb52-8"></a>             <span class="dt">col.ind =</span> <span class="st">&quot;contrib&quot;</span>, <span class="co"># Color by their contribution to axes</span></span>
-<span id="cb52-9"><a href="principal-components-analysis.html#cb52-9"></a>             <span class="dt">gradient.cols =</span> <span class="kw">c</span>(<span class="st">&quot;#00AFBB&quot;</span>, <span class="st">&quot;#E7B800&quot;</span>, <span class="st">&quot;#FC4E07&quot;</span>),</span>
-<span id="cb52-10"><a href="principal-components-analysis.html#cb52-10"></a>             <span class="dt">repel =</span> <span class="ot">TRUE</span>     </span>
-<span id="cb52-11"><a href="principal-components-analysis.html#cb52-11"></a>             )</span></code></pre></div>
+<span id="cb52-3"><a href="principal-components-analysis.html#cb52-3"></a><span class="co">#ans&gt; Le chargement a nécessité le package : factoextra</span></span>
+<span id="cb52-4"><a href="principal-components-analysis.html#cb52-4"></a><span class="co">#ans&gt; Warning: le package &#39;factoextra&#39; a été compilé avec</span></span>
+<span id="cb52-5"><a href="principal-components-analysis.html#cb52-5"></a><span class="co">#ans&gt; la version R 3.6.3</span></span>
+<span id="cb52-6"><a href="principal-components-analysis.html#cb52-6"></a><span class="co">#ans&gt; Le chargement a nécessité le package : ggplot2</span></span>
+<span id="cb52-7"><a href="principal-components-analysis.html#cb52-7"></a><span class="co">#ans&gt; Warning: le package &#39;ggplot2&#39; a été compilé avec la</span></span>
+<span id="cb52-8"><a href="principal-components-analysis.html#cb52-8"></a><span class="co">#ans&gt; version R 3.6.3</span></span>
+<span id="cb52-9"><a href="principal-components-analysis.html#cb52-9"></a><span class="co">#ans&gt; Learn more about the underlying theory at</span></span>
+<span id="cb52-10"><a href="principal-components-analysis.html#cb52-10"></a><span class="co">#ans&gt; https://ggplot2-book.org/</span></span>
+<span id="cb52-11"><a href="principal-components-analysis.html#cb52-11"></a><span class="co">#ans&gt; Welcome! Want to learn more? See two factoextra-related books at https://goo.gl/ve3WBa</span></span>
+<span id="cb52-12"><a href="principal-components-analysis.html#cb52-12"></a><span class="co"># Calculating pca using prcomp(), which is a built-in function in R </span></span>
+<span id="cb52-13"><a href="principal-components-analysis.html#cb52-13"></a>res.pca &lt;-<span class="st"> </span><span class="kw">prcomp</span>(eurojob, <span class="dt">scale =</span> <span class="ot">TRUE</span>)</span>
+<span id="cb52-14"><a href="principal-components-analysis.html#cb52-14"></a></span>
+<span id="cb52-15"><a href="principal-components-analysis.html#cb52-15"></a><span class="co"># Graph of individuals</span></span>
+<span id="cb52-16"><a href="principal-components-analysis.html#cb52-16"></a><span class="kw">fviz_pca_ind</span>(res.pca,</span>
+<span id="cb52-17"><a href="principal-components-analysis.html#cb52-17"></a>             <span class="dt">col.ind =</span> <span class="st">&quot;contrib&quot;</span>, <span class="co"># Color by their contribution to axes</span></span>
+<span id="cb52-18"><a href="principal-components-analysis.html#cb52-18"></a>             <span class="dt">gradient.cols =</span> <span class="kw">c</span>(<span class="st">&quot;#00AFBB&quot;</span>, <span class="st">&quot;#E7B800&quot;</span>, <span class="st">&quot;#FC4E07&quot;</span>),</span>
+<span id="cb52-19"><a href="principal-components-analysis.html#cb52-19"></a>             <span class="dt">repel =</span> <span class="ot">TRUE</span>     </span>
+<span id="cb52-20"><a href="principal-components-analysis.html#cb52-20"></a>             )</span></code></pre></div>
 <p><img src="Machine-Learning_files/figure-html/unnamed-chunk-140-1.png" width="90%" style="display: block; margin: auto;" /></p>
 <div class="sourceCode" id="cb53"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb53-1"><a href="principal-components-analysis.html#cb53-1"></a><span class="co"># Graph of variables</span></span>
 <span id="cb53-2"><a href="principal-components-analysis.html#cb53-2"></a><span class="kw">fviz_pca_var</span>(res.pca,</span>

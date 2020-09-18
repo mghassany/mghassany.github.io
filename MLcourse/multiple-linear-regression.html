@@ -24,7 +24,7 @@
 <meta name="author" content="Mohamad Ghassany" />
 
 
-<meta name="date" content="2020-09-15" />
+<meta name="date" content="2020-09-18" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -203,7 +203,7 @@ code span.wa { color: #bf0303; } /* Warning */
 <li class="chapter" data-level="2.3.1" data-path="multiple-linear-regression.html"><a href="multiple-linear-regression.html#other-consid"><i class="fa fa-check"></i><b>2.3.1</b> Other Considerations in Regression Model</a></li>
 </ul></li>
 <li class="chapter" data-level="2.4" data-path="multiple-linear-regression.html"><a href="multiple-linear-regression.html#how-to-select-the-best-performing-model"><i class="fa fa-check"></i><b>2.4</b> How to select the best performing model</a><ul>
-<li><a href="multiple-linear-regression.html#use-the-adjusted-r_adj2-for-univariate-models">Use the Adjusted <span class="math inline">\(R_{adj}^2\)</span> for univariate models</a></li>
+<li><a href="multiple-linear-regression.html#use-the-adjusted-r_adj2-for-multivariate-models">Use the Adjusted <span class="math inline">\(R_{adj}^2\)</span> for multivariate models</a></li>
 <li class="chapter" data-level="" data-path="multiple-linear-regression.html"><a href="multiple-linear-regression.html#have-a-look-at-the-residuals-or-error-terms"><i class="fa fa-check"></i>Have a look at the residuals or error terms</a></li>
 <li class="chapter" data-level="" data-path="multiple-linear-regression.html"><a href="multiple-linear-regression.html#histogram-of-residuals"><i class="fa fa-check"></i>Histogram of residuals</a></li>
 </ul></li>
@@ -435,7 +435,7 @@ In the previous chapter, we took for example the prediction of housing prices co
 <p>We choose <span class="math inline">\(\beta_{0}, \beta_{1}, \ldots, \beta_{p}\)</span> to minimize the residual sum of squares</p>
 <p><span class="math display">\[ \begin{aligned}
 RSS &amp;= \sum_{i=1}^{n} (y_i - \hat{y}_i)^2 \\
-    &amp;= \sum_{i=1}^{n} (y_1 - \hat{\beta_0} - \hat{\beta_1} \hat{x}_{i1}  - \hat{\beta_2} \hat{x}_{i2} - \ldots  -  \hat{\beta_p} \hat{x}_{ip})^2 \\
+    &amp;= \sum_{i=1}^{n} (y_1 - \hat{\beta_0} - \hat{\beta_1} {x}_{i1}  - \hat{\beta_2} {x}_{i2} - \ldots  -  \hat{\beta_p} {x}_{ip})^2 \\
 \end{aligned}
 \]</span></p>
 <p>The values <span class="math inline">\(\hat{\beta_{0}}, \hat{\beta_{1}}, \ldots, \hat{\beta_{p}}\)</span> that minimize the RSS are the multiple least squares regression coefficient estimates, they are calculated using this formula (in matrix terms):</p>
@@ -526,10 +526,10 @@ to obtain the unique solution</p>
 <p>The ANOVA table has many pieces of information. What we care about is the <span class="math inline">\(F\)</span> Ratio and the corresponding p-value. We compare the <span class="math inline">\(F\)</span> Ratio with <span class="math inline">\(F_{(p,n-p-1)}\)</span> and a corresponding <span class="math inline">\(\alpha\)</span> value (error).</p>
 <div class="rmdcaution">
 <p>
-The “ANOVA table” is a broad concept in statistics, with different variants. Here we are only covering the basic ANOVA table from the relation <span class="math inline"><span class="math inline">\(\text{SST} = \text{SSR} + \text{SSE}\)</span></span>. However, further sophistications are possible when <span class="math inline"><span class="math inline">\(\text{SSR}\)</span></span> is decomposed into the variations contributed by <em>each</em> predictor. In particular, for multiple linear regression <code>R</code>’s <code>anova</code> implements a <em>sequential (type I) ANOVA table</em>, which is <strong>not</strong> the previous table!
+The “ANOVA table” is a broad concept in statistics, with different variants. Here we are only covering the basic ANOVA table from the relation <span class="math inline"><span class="math inline">\(\text{SST} = \text{SSR} + \text{SSE}\)</span></span>. However, further sophistications are possible when <span class="math inline"><span class="math inline">\(\text{SSR}\)</span></span> is decomposed into the variations contributed by <em>each</em> predictor. In particular, for multiple linear regression <code>r <a href="icon::fa" class="uri">icon::fa</a>(“r-project”, color=“steelblue”)</code>’s <code>anova</code> implements a <em>sequential (type I) ANOVA table</em>, which is <strong>not</strong> the previous table!
 </p>
 </div>
-<p>The <code>anova</code> function in <code>R</code> takes a model as an input and returns the following <em>sequential</em> ANOVA table<a href="#fn9" class="footnote-ref" id="fnref9"><sup>9</sup></a>:</p>
+<p>The <code>anova</code> function in <i class="fab  fa-r-project " style="color:steelblue;"></i> takes a model as an input and returns the following <em>sequential</em> ANOVA table<a href="#fn9" class="footnote-ref" id="fnref9"><sup>9</sup></a>:</p>
 <table>
 <colgroup>
 <col width="19%" />
@@ -709,8 +709,8 @@ carried out <em>inside the linear model</em> <span class="math inline">\(Y=\beta
 <p>Use the following <strong>interactive application</strong> and play around with different datasets and models. Notice how parameters change and become more confident with assessing simple linear models.</p>
 <iframe src="https://bjoernhartmann.shinyapps.io/linear_model_selection/?showcase=0" width="100%" height="900px">
 </iframe>
-<div id="use-the-adjusted-r_adj2-for-univariate-models" class="section level3 unnumbered">
-<h3>Use the Adjusted <span class="math inline">\(R_{adj}^2\)</span> for univariate models</h3>
+<div id="use-the-adjusted-r_adj2-for-multivariate-models" class="section level3 unnumbered">
+<h3>Use the Adjusted <span class="math inline">\(R_{adj}^2\)</span> for multivariate models</h3>
 <p>If you only use one input variable, the adjusted <span class="math inline">\(R_{adj}^2\)</span> value gives you a good indication of how well your model performs. It illustrates how much variation is explained by your model.</p>
 <p>In contrast to the simple <span class="math inline">\(R^2\)</span><a href="#fn10" class="footnote-ref" id="fnref10"><sup>10</sup></a>, the adjusted adjusted <span class="math inline">\(R_{adj}^2\)</span><a href="#fn11" class="footnote-ref" id="fnref11"><sup>11</sup></a> takes the number of input factors into account. It penalizes too many input factors and favors parsimonious models.</p>
 <p>The adjusted <span class="math inline">\(R_{adj}^2\)</span> is sensitive to the amount of noise in the data. As such, only compare this indicator of models for the same dataset than comparing it across different datasets.</p>

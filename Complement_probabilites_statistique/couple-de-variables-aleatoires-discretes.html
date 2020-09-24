@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Feuille d’exercices 2 | Complément de formation en Probabilités et Statistique</title>
+  <title>2 Couple de variables aléatoires discrètes | Complément de formation en Probabilités et Statistique</title>
   <meta name="description" content="Cours de Probabilités et Statistique A3 ESILV" />
   <meta name="generator" content="bookdown 0.16 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Feuille d’exercices 2 | Complément de formation en Probabilités et Statistique" />
+  <meta property="og:title" content="2 Couple de variables aléatoires discrètes | Complément de formation en Probabilités et Statistique" />
   <meta property="og:type" content="book" />
   
   
@@ -16,7 +16,7 @@
   
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Feuille d’exercices 2 | Complément de formation en Probabilités et Statistique" />
+  <meta name="twitter:title" content="2 Couple de variables aléatoires discrètes | Complément de formation en Probabilités et Statistique" />
   
   <meta name="twitter:description" content="Cours de Probabilités et Statistique A3 ESILV" />
   
@@ -31,8 +31,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   <link rel="shortcut icon" href="img/favicon.ico" type="image/x-icon" />
-<link rel="prev" href="couple-de-variables-aleatoires-continues.html"/>
-<link rel="next" href="tab-normale.html"/>
+<link rel="prev" href="variables-aleatoires-discretes.html"/>
+<link rel="next" href="lois-usuelles-discretes.html"/>
 <script src="book_assets/jquery-2.2.3/jquery.min.js"></script>
 <link href="book_assets/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="book_assets/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -175,241 +175,293 @@
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="feuille-dexercices-2" class="section level1 unnumbered">
-<h1>Feuille d’exercices 2</h1>
-<div id="variables-aletoires-continues" class="section level2 unnumbered">
-<h2>Variables alétoires continues</h2>
+<div id="couple-de-variables-aleatoires-discretes" class="section level1">
+<h1><span class="header-section-number">2</span> Couple de variables aléatoires discrètes</h1>
+<p>Considérons deux variables aléatoires discrètes <span class="math inline">\(X\)</span> et <span class="math inline">\(Y\)</span>. Il nous faut
+pour modéliser le problème une fonction qui nous donne la probabilité
+que <span class="math inline">\((X = x_i )\)</span> en même temps que <span class="math inline">\((Y = y_j )\)</span>. C’est la loi de
+probabilité conjointe.</p>
+<p>Soit <span class="math inline">\(X\)</span> et <span class="math inline">\(Y\)</span> deux variables aléatoires réelles discrètes, définies
+sur un espace probabilisé <span class="math inline">\((\Omega,\mathcal{A},P)\)</span> et que</p>
+<p><span class="math display">\[\begin{aligned}
+  X(\Omega) &amp;= \{x_1,x_2,\ldots,x_l\} \\
+  Y(\Omega) &amp;= \{y_1,y_2,\ldots,y_k\} \\
+            &amp; \quad (l \text{ et } k \in \mathbb{N})\end{aligned}\]</span></p>
+<p>La <strong><em>loi du couple <span class="math inline">\((X,Y)\)</span></em></strong>, dite <strong>loi de probabilité conjointe ou
+simultanée</strong>, est entièrement définie par les probabilités:</p>
+<p><span class="math display">\[p_{ij} = P(X=x_i;Y=y_j) = P(\{X=x_i\}\cap\{Y=y_j\})\]</span></p>
+<p>On a</p>
+<p><span class="math display">\[p_{ij} \geq 0 \quad \text{et} \quad \sum_{i=1}^{l} \sum_{j=1}^{k} p_{ij} = 1\]</span></p>
+<p>Le couple <span class="math inline">\((X,Y)\)</span> s’appelle variable aléatoire à deux dimensions et peut
+prendre <span class="math inline">\(l\times k\)</span> valeurs.</p>
+<div id="table-de-probabilite-conjointe" class="section level2 unnumbered">
+<h2>Table de probabilité conjointe</h2>
+<p>Les probabilités <span class="math inline">\(p_{ij}\)</span> peuvent être présentées dans un tableau à deux
+dimensions qu’on appelle table de probabilité conjointe:</p>
+<table>
+<caption>Table de probabilité conjointe</caption>
+<thead>
+<tr class="header">
+<th align="center"><span class="math inline">\(X\)</span>\<span class="math inline">\(Y\)</span></th>
+<th align="center"><span class="math inline">\(y_1\)</span></th>
+<th align="center"><span class="math inline">\(y_2\)</span></th>
+<th align="center"><span class="math inline">\(\ldots\)</span></th>
+<th align="center"><span class="math inline">\(y_j\)</span></th>
+<th align="center"><span class="math inline">\(\ldots\)</span></th>
+<th align="center"><span class="math inline">\(y_k\)</span></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="center"><span class="math inline">\(x_1\)</span></td>
+<td align="center"><span class="math inline">\(p_{11}\)</span></td>
+<td align="center"><span class="math inline">\(p_{12}\)</span></td>
+<td align="center"></td>
+<td align="center"><span class="math inline">\(p_{1j}\)</span></td>
+<td align="center"></td>
+<td align="center"><span class="math inline">\(p_{1k}\)</span></td>
+</tr>
+<tr class="even">
+<td align="center"><span class="math inline">\(x_2\)</span></td>
+<td align="center"><span class="math inline">\(p_{21}\)</span></td>
+<td align="center"><span class="math inline">\(p_{22}\)</span></td>
+<td align="center"></td>
+<td align="center"><span class="math inline">\(p_{2j}\)</span></td>
+<td align="center"></td>
+<td align="center"><span class="math inline">\(p_{2k}\)</span></td>
+</tr>
+<tr class="odd">
+<td align="center"><span class="math inline">\(\vdots\)</span></td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"></td>
+</tr>
+<tr class="even">
+<td align="center"><span class="math inline">\(x_i\)</span></td>
+<td align="center"><span class="math inline">\(p_{i1}\)</span></td>
+<td align="center"><span class="math inline">\(p_{i2}\)</span></td>
+<td align="center"></td>
+<td align="center"><span class="math inline">\(p_{ij}\)</span></td>
+<td align="center"></td>
+<td align="center"><span class="math inline">\(p_{ik}\)</span></td>
+</tr>
+<tr class="odd">
+<td align="center"><span class="math inline">\(\vdots\)</span></td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"></td>
+</tr>
+<tr class="even">
+<td align="center"><span class="math inline">\(x_l\)</span></td>
+<td align="center"><span class="math inline">\(p_{l1}\)</span></td>
+<td align="center"><span class="math inline">\(p_{l2}\)</span></td>
+<td align="center"></td>
+<td align="center"><span class="math inline">\(p_{lj}\)</span></td>
+<td align="center"></td>
+<td align="center"><span class="math inline">\(p_{lk}\)</span></td>
+</tr>
+</tbody>
+</table>
+<p>A la première ligne figure l’ensemble des valeurs de <span class="math inline">\(Y\)</span> et à la
+première colonne figure l’ensemble des valeurs de <span class="math inline">\(X\)</span>. La probabilité
+<span class="math inline">\(p_{ij} = P(X=x_i;Y=y_j)\)</span> est à l’intersection de la <span class="math inline">\(i^{e}\)</span> et de la
+<span class="math inline">\(j^{e}\)</span> colonne.</p>
+</div>
+<div id="lois-marginales" class="section level2 unnumbered">
+<h2>Lois marginales</h2>
+<p>Lorsqu’on connaît la loi conjointe des variables aléatoires <span class="math inline">\(X\)</span> et <span class="math inline">\(Y\)</span>,
+on peut aussi s’intéresser à la loi de probabilité de <span class="math inline">\(X\)</span> seule et de
+<span class="math inline">\(Y\)</span> seule. Ce sont les lois de probabilité marginales.</p>
+<ul>
+<li><p>Loi marginale de <span class="math inline">\(X\)</span>:
+<span class="math display">\[p_{i.} = P(X=x_i) = P[\{X=x_i\}\cap \Omega] = \sum_{j=1}^k p_{ij} \quad \quad \forall \, i=1,2,\ldots,l\]</span></p></li>
+<li><p>Loi marginale de <span class="math inline">\(Y\)</span>:
+<span class="math display">\[p_{.j} = P(Y=y_j) = P[ \Omega \cap \{Y=y_j\}] = \sum_{i=1}^l p_{ij} \quad \quad \forall \, j=1,2,\ldots,k\]</span></p></li>
+</ul>
+<p>On peut calculer les lois marginales directement depuis la table de la
+loi conjointe. La loi marginale de <span class="math inline">\(X\)</span> est
+calculée en faisant les totaux par ligne, tandis que celle de <span class="math inline">\(Y\)</span> l’est
+en faisant les totaux par colonne.</p>
+<p>C’est le fait que les lois de <span class="math inline">\(X\)</span> et <span class="math inline">\(Y\)</span> individuellement puissent être
+lues dans les marges du tableau qui leur vaut leur nom de lois
+marginales.</p>
+<table>
+<caption>Table de probabilité conjointe avec les lois marginales</caption>
+<thead>
+<tr class="header">
+<th align="center"><span class="math inline">\(X\)</span>\<span class="math inline">\(Y\)</span></th>
+<th align="center"><span class="math inline">\(y_1\)</span></th>
+<th align="center"><span class="math inline">\(y_2\)</span></th>
+<th align="center"><span class="math inline">\(\ldots\)</span></th>
+<th align="center"><span class="math inline">\(y_j\)</span></th>
+<th align="center"><span class="math inline">\(\ldots\)</span></th>
+<th align="center"><span class="math inline">\(y_k\)</span></th>
+<th align="center">Marginale de <span class="math inline">\(X\)</span></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="center"><span class="math inline">\(x_1\)</span></td>
+<td align="center"><span class="math inline">\(p_{11}\)</span></td>
+<td align="center"><span class="math inline">\(p_{12}\)</span></td>
+<td align="center"></td>
+<td align="center"><span class="math inline">\(p_{1j}\)</span></td>
+<td align="center"></td>
+<td align="center"><span class="math inline">\(p_{1k}\)</span></td>
+<td align="center"><span class="math inline">\(p_{1.}\)</span></td>
+</tr>
+<tr class="even">
+<td align="center"><span class="math inline">\(x_2\)</span></td>
+<td align="center"><span class="math inline">\(p_{21}\)</span></td>
+<td align="center"><span class="math inline">\(p_{22}\)</span></td>
+<td align="center"></td>
+<td align="center"><span class="math inline">\(p_{2j}\)</span></td>
+<td align="center"></td>
+<td align="center"><span class="math inline">\(p_{2k}\)</span></td>
+<td align="center"><span class="math inline">\(p_{2.}\)</span></td>
+</tr>
+<tr class="odd">
+<td align="center"><span class="math inline">\(\vdots\)</span></td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"></td>
+</tr>
+<tr class="even">
+<td align="center"><span class="math inline">\(x_i\)</span></td>
+<td align="center"><span class="math inline">\(p_{i1}\)</span></td>
+<td align="center"><span class="math inline">\(p_{i2}\)</span></td>
+<td align="center"></td>
+<td align="center"><span class="math inline">\(p_{ij}\)</span></td>
+<td align="center"></td>
+<td align="center"><span class="math inline">\(p_{ik}\)</span></td>
+<td align="center"><span class="math inline">\(p_{i.}\)</span></td>
+</tr>
+<tr class="odd">
+<td align="center"><span class="math inline">\(\vdots\)</span></td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"></td>
+</tr>
+<tr class="even">
+<td align="center"><span class="math inline">\(x_l\)</span></td>
+<td align="center"><span class="math inline">\(p_{l1}\)</span></td>
+<td align="center"><span class="math inline">\(p_{l2}\)</span></td>
+<td align="center"></td>
+<td align="center"><span class="math inline">\(p_{lj}\)</span></td>
+<td align="center"></td>
+<td align="center"><span class="math inline">\(p_{lk}\)</span></td>
+<td align="center"><span class="math inline">\(p_{l.}\)</span></td>
+</tr>
+<tr class="odd">
+<td align="center">Marginale de <span class="math inline">\(Y\)</span></td>
+<td align="center"><span class="math inline">\(p_{.1}\)</span></td>
+<td align="center"><span class="math inline">\(p_{.2}\)</span></td>
+<td align="center"></td>
+<td align="center"><span class="math inline">\(p_{.l}\)</span></td>
+<td align="center"></td>
+<td align="center"><span class="math inline">\(p_{.k}\)</span></td>
+<td align="center">1</td>
+</tr>
+</tbody>
+</table>
+<div class="rmdexercise">
+<p>
+On tire au hasard 3 boules d’une urne contenant 3 boules rouges, 4 blanches et 5 noires. <span class="math inline"><span class="math inline">\(X\)</span></span> et <span class="math inline"><span class="math inline">\(Y\)</span></span> désignent respectivement le nombre de boules rouges et celui de boules blanches tirées. Déterminer la loi de probabilité conjointe du couple <span class="math inline"><span class="math inline">\((X,Y)\)</span></span> ainsi que les lois marginales de <span class="math inline"><span class="math inline">\(X\)</span></span> et de <span class="math inline"><span class="math inline">\(Y\)</span></span>.
+</p>
+</div>
+</div>
+<div id="lois-conditionnelles" class="section level2 unnumbered">
+<h2>Lois conditionnelles</h2>
+<p>Pour chaque valeur <span class="math inline">\(y_j\)</span> de <span class="math inline">\(Y\)</span> telle que <span class="math inline">\(p_{.j} = P(Y=y_j) \neq 0\)</span> on
+peut définir la loi conditionnelle de <span class="math inline">\(X\)</span> sachant <span class="math inline">\(Y=y_j\)</span> par</p>
+<p><span class="math display">\[p_{i/j} = P(X=x_i / Y=y_j) = \frac{P(X=x_i;Y=y_j)}{P(Y=y_j)} = \frac{p_{ij}}{p_{.j}} \quad \quad \forall i = 1,2,\ldots,l\]</span></p>
+<p>De même on définit la loi de <span class="math inline">\(Y\)</span> sachant <span class="math inline">\(X=x_i\)</span> par</p>
+<p><span class="math display">\[p_{j/i} = P(Y=y_j / X=x_i) = \frac{P(X=x_i;Y=y_j)}{P(X=x_i)} = \frac{p_{ij}}{p_{i.}} \quad \quad \forall j = 1,2,\ldots,k\]</span></p>
+</div>
+<div id="independance-de-variables-aleatoires" class="section level2 unnumbered">
+<h2>Indépendance de variables aléatoires</h2>
 
-<div class="exercise">
-<p><span id="exr:unnamed-chunk-79" class="exercise"><strong>Exercice 6.1  </strong></span>Soit <span class="math inline">\(X\)</span> une v.a.c. de densité <span class="math inline">\(f\)</span> définie par:
-<span class="math inline">\(f(x) = k x \times {1}_{]0,2[} (x)\)</span>.</p>
+<div class="theorem">
+<p><span id="thm:unnamed-chunk-17" class="theorem"><strong>Théorème 2.1  </strong></span>On dit que deux v.a.r.d sont indépendantes si et seulement si</p>
+<span class="math display">\[P(X=x_i;Y=y_j) = P(X=x_i) P(Y=y_j) \quad \quad \forall \, i = 1,2,\ldots,l \text{ et }  j = 1,2,\ldots,k\]</span>
+</div>
+
+<p>On montre que</p>
+<p><span class="math display">\[P(\{X\in A\} \cap \{Y \in B\}) = P(\{X\in A\}) P(\{Y \in B\}) \quad \quad \forall \,\, A \text{ et } B \in \mathcal{A}\]</span></p>
+<p><strong>Propriétés</strong></p>
+<p>Soit deux v.a.r.d. <span class="math inline">\(X\)</span> et <span class="math inline">\(Y\)</span>,</p>
 <ol style="list-style-type: decimal">
-<li><p>Déterminer la constante <span class="math inline">\(k\)</span>.</p></li>
-<li><p>Calculer <span class="math inline">\(E(X)\)</span> et <span class="math inline">\(E(X^2)\)</span>.</p></li>
-<li>On pose <span class="math inline">\(Z=X^2\)</span>. Déterminer la densité de <span class="math inline">\(Z\)</span>. Calculer <span class="math inline">\(E(Z)\)</span>.</li>
+<li><p><span class="math inline">\(E(X+Y)=E(X)+E(Y)\)</span></p></li>
+<li><p>Si <span class="math inline">\(X\)</span> et <span class="math inline">\(Y\)</span> sont indépendantes alors <span class="math inline">\(E(XY)=E(X)E(Y)\)</span>. Mais la
+réciproque n’est pas toujours vraie.</p></li>
 </ol>
 </div>
-
-
-<div class="exercise">
-<p><span id="exr:unnamed-chunk-80" class="exercise"><strong>Exercice 6.2  </strong></span>Soit <span class="math inline">\(X\)</span> une variable aléatoire continue dont la fonction de densité est
-donnée par:</p>
-<p><span class="math display">\[f(x)= \left\lbrace
-      \begin{array}{ll}
-      c(1-x^2)  &amp; \mbox{si} \quad -1&lt;x&lt;1\\
-      0 &amp; \mbox{sinon} 
-      \end{array}
-  \right.\]</span></p>
-<ol style="list-style-type: decimal">
-<li><p>Quelle est la valeur de <span class="math inline">\(c\)</span>?</p></li>
-<li>Quelle est la fonction de répartition de <span class="math inline">\(X\)</span>?</li>
-</ol>
+<div id="covariance" class="section level2 unnumbered">
+<h2>Covariance</h2>
+<p>Soit <span class="math inline">\(X\)</span> et <span class="math inline">\(Y\)</span> deux v.a.r.d. On appelle <strong><em>covariance</em></strong> de <span class="math inline">\(X\)</span> et de
+<span class="math inline">\(Y\)</span> la valeur si elle existe de</p>
+<p><span class="math display">\[Cov(X,Y) = E[(X-E(X))(Y-E(Y))] = \sum_i \sum_j (x_i-E(X))(y_j-E(Y)) p_{ij}\]</span></p>
+<p>qu’on peut calculer en utilisant la formule suivante</p>
+<p><span class="math display">\[Cov(X,Y) = E(XY) - E(X)E(Y)\]</span></p>
+<p><strong>Propriétés</strong></p>
+<ul>
+<li><p><span class="math inline">\(Cov(X,Y)=Cov(Y,X)\)</span></p></li>
+<li><p><span class="math inline">\(Cov(aX_1+bX_2,Y) = a Cov(X_1,Y) + b Cov(X_2,Y)\)</span></p></li>
+<li><p><span class="math inline">\(V(X+Y)= V(X) + V(Y) + 2 Cov(X,Y)\)</span></p></li>
+<li><p>Si <span class="math inline">\(X\)</span> et <span class="math inline">\(Y\)</span> sont indépendantes alors</p>
+<ul>
+<li><p><span class="math inline">\(Cov(X,Y) = 0\)</span> (la réciproque n’est pas vraie)</p></li>
+<li><p><span class="math inline">\(V(X+Y) = V(X) + V(Y)\)</span> (la réciproque n’est pas vraie)</p></li>
+</ul></li>
+</ul>
 </div>
-
-
-<div class="exercise">
-<p><span id="exr:unnamed-chunk-81" class="exercise"><strong>Exercice 6.3  </strong></span>Soit <span class="math inline">\(X\)</span> une variable aléatoire continue dont la fonction de densité est
-donnée par: <span class="math display">\[f(x)= \left\lbrace
-      \begin{array}{ll}
-      0  &amp; \mbox{si} \quad |x| &gt; k &gt; 0\\
-      x+1 &amp; \mbox{si} \quad |x| \le k
-      \end{array}
-  \right.\]</span></p>
-<ol style="list-style-type: decimal">
-<li><p>Déterminer <span class="math inline">\(k\)</span>.</p></li>
-<li><p>Calculer <span class="math inline">\(E(X)\)</span> et <span class="math inline">\(E(X^2)\)</span>.</p></li>
-<li><p>Déterminer la fonction de répartition de <span class="math inline">\(X\)</span>.</p></li>
-<li><p>Soit <span class="math inline">\(Y=X^2\)</span>. Déterminer la fonction de répartition ainsi que la
-fonction de densité de <span class="math inline">\(Y\)</span>.</p></li>
-<li>Calculer <span class="math inline">\(E(Y)\)</span>.</li>
-</ol>
-</div>
-
-
-<div class="exercise">
-<p><span id="exr:unnamed-chunk-82" class="exercise"><strong>Exercice 6.4  (Variable aléatoire de densité paire)  </strong></span>Soit <span class="math inline">\(X\)</span> une variable aléatoire réelle admettant une fonction <strong>paire</strong>
-<span class="math inline">\(f\)</span> pour densité.</p>
-<ol style="list-style-type: decimal">
-<li><p>Calculer <span class="math inline">\(P(X \le 0)\)</span> et <span class="math inline">\(P(X\ge 0)\)</span>.</p></li>
-<li><p>Montrer que la fonction de répartition <span class="math inline">\(F\)</span> de <span class="math inline">\(X\)</span> vérifie:
-<span class="math inline">\(\forall \, x \in \mathbb{R}, F(x)=1-F(-x)\)</span>.</p></li>
-<li><p>On admet que <span class="math inline">\(X\)</span> admet une espérance, calculer <span class="math inline">\(E(X)\)</span>.</p></li>
-<li>Donner un exemple de densité paire.</li>
-</ol>
-</div>
-
-<div id="table-de-la-loi-normale-centree-reduite" class="section level4 unnumbered">
-<h4>Table de la loi Normale Centrée Réduite</h4>
-
-<div class="exercise">
-<p><span id="exr:unnamed-chunk-83" class="exercise"><strong>Exercice 6.5  </strong></span>On note <span class="math inline">\(\Phi\)</span> la fonction de répartition de la loi normale centrée
-réduite.</p>
-<ol style="list-style-type: decimal">
-<li><p>Soit <span class="math inline">\(X\)</span> une v.a. qui suit une loi normale centrée réduite, i.e.
-<span class="math inline">\(X \thicksim \mathcal{N}(0,1)\)</span>. A l’aide de la table de la loi
-normale, calculer: <span class="math inline">\(P(X&gt;2), P(-1&lt;X&lt;1.5)\)</span> et <span class="math inline">\(P(X&lt;0.5)\)</span>.</p></li>
-<li><p>Soit <span class="math inline">\(Y\)</span> une v.a. qui suite une loi normale:
-<span class="math inline">\(Y \thicksim \mathcal{N}(\mu,\sigma^2)=\mathcal{N}(4,16)\)</span>.
-Calculer: <span class="math inline">\(P(Y&gt;2), P(-1&lt;Y&lt;1.5)\)</span> et <span class="math inline">\(P(Y&lt;0.5)\)</span>.</p></li>
-<li>Soit <span class="math inline">\(U \thicksim \mathcal{N}(6,4)\)</span>. Calculer: <span class="math inline">\(P(|U-4|&lt;3)\)</span> et
-<span class="math inline">\(P( U&gt;6 | U &gt; 3)\)</span>.</li>
-</ol>
-</div>
-
-
-<div class="exercise">
-<span id="exr:unnamed-chunk-84" class="exercise"><strong>Exercice 6.6  </strong></span>Une machine produit des pièces dont le diamètre <span class="math inline">\(X\)</span> (en cm) est une
-variable aléatoire qui suit une loi normale d’espérance <span class="math inline">\(\mu\)</span> et de
-variance <span class="math inline">\(\sigma^2 = (0.01)^2\)</span>. Quelle devrait être la valeur de <span class="math inline">\(\mu\)</span>
-de sorte que la probabilité qu’une pièce prise au hasard ait un diamètre
-supérieur à 3 cm, soit inférieure à 0.01?
-</div>
-
-
-<div class="exercise">
-<span id="exr:unnamed-chunk-85" class="exercise"><strong>Exercice 6.7  </strong></span>On envisage de construire à l’entrée d’une caserne une guérite dans
-laquelle pourra s’abriter la sentinelle en cas d’intempéries. Les
-sentinelles sont des appelés dont la taille est approximativement
-distribuée selon une loi normale d’espérance 175cm et d’écart-type 7cm.
-A quelle hauteur minimale doit se trouver le toit de la guérite, pour
-qu’un sentinelle pris au hasard ait une probabilité supérieure à 0.95 de
-s’y tenir debout?
-</div>
-
-
-<div class="exercise">
-<p><span id="exr:unnamed-chunk-86" class="exercise"><strong>Exercice 6.8  (Loi uniforme et loi exponentielle)  </strong></span>Soit <span class="math inline">\(U\)</span> une v.a.c de loi unifrorme sur <span class="math inline">\([0,1]\)</span>. Montrer que la v.a.
-<span class="math inline">\(X= - \ln U\)</span> suit une loi exponentielle.</p>
-</div>
-
-
-<div class="exercise">
-<p><span id="exr:unnamed-chunk-87" class="exercise"><strong>Exercice 6.9  (La loi exponentielle est sans mémoire)  </strong></span>On suppose que la durée de vie <span class="math inline">\(D\)</span>, en jours, d’une ampoule, est une
-variable aléatoire de loi exponentielle de paramètre <span class="math inline">\(\frac{1}{100}\)</span>.</p>
-<ol style="list-style-type: decimal">
-<li><p>Quelle est la durée de vie moyenne d’une ampoule?</p></li>
-<li><p>Calculer la fonction de répartition de <span class="math inline">\(D\)</span>. En déduire l’expression
-de <span class="math inline">\(P(D &gt; x)\)</span>.</p></li>
-<li><p>On dit qu’une variable aléatoire est <em>sans mémoire</em> si
-<span class="math inline">\(\forall \, l &gt; 0 \quad P(X \ge n+l|X \ge n)=P(X \ge l)\)</span>. Montrer
-que <span class="math inline">\(D\)</span> est sans mémoire.</p></li>
-<li>Quelle est la probabilité qu’une ampoule dure encore au moins 10
-jours, sachant qu’à son <span class="math inline">\(n^\text{e}\)</span> jour, elle marche encore?</li>
-</ol>
-</div>
-
-
-<div class="exercise">
-<p><span id="exr:unnamed-chunk-88" class="exercise"><strong>Exercice 6.10  (Lois des v.a.r. <code>min(X,Y)</code> et <code>max(X,Y)</code>)  </strong></span>Soit <span class="math inline">\(X\)</span> et <span class="math inline">\(Y\)</span> deux v.a.c de densités respectives <span class="math inline">\(f_X\)</span> et <span class="math inline">\(f_Y\)</span> et de
-fonctions de répartition respectives <span class="math inline">\(F_X\)</span> et <span class="math inline">\(F_Y\)</span>. On suppose que <span class="math inline">\(X\)</span>
-et <span class="math inline">\(Y\)</span> sont indépendantes. On pose:</p>
-<p><span class="math display">\[Z = max(X,Y) \quad \quad \text{et} \quad \quad  T=min(X,Y)\]</span></p>
-<ol style="list-style-type: decimal">
-<li><p>Exprimer les fonctions de répartition de <span class="math inline">\(Z\)</span> et <span class="math inline">\(T\)</span> à l’aide des
-fonctions de répartition <span class="math inline">\(F_X\)</span> et <span class="math inline">\(F_Y\)</span>.</p></li>
-<li>Exprimer une densité de <span class="math inline">\(Z\)</span> et une densité de <span class="math inline">\(T\)</span> à l’aide de
-<span class="math inline">\(f_X, f_Y, F_X\)</span> et <span class="math inline">\(F_Y\)</span>.</li>
-</ol>
-</div>
-
-
-<div class="exercise">
-<p><span id="exr:unnamed-chunk-89" class="exercise"><strong>Exercice 6.11  (Minimum et Maximum de deux lois exponentielles)  </strong></span>Soit <span class="math inline">\(X_1\)</span> et <span class="math inline">\(X_2\)</span> deux variables aléatoires indépendantes suivant une
-loi exponentielle de paramètres <span class="math inline">\(\lambda_1\)</span> et <span class="math inline">\(\lambda_2\)</span>. On pose
-<span class="math inline">\(X = min(X_1,X_2)\)</span>.</p>
-<ol style="list-style-type: decimal">
-<li><p>Montrer que <span class="math inline">\(X\)</span> suit une loi exponentielle de paramètre
-<span class="math inline">\(\lambda_1 + \lambda_2\)</span>.</p></li>
-<li><p>Deux guichets sont ouverts à une banque. Le temps de service au
-premier guichet (resp. au deuxième) suit une loi exponentielle de
-moyenne 20 min (resp. 30 min). Deux client rentrent simultanément,
-l’un choisit le guicher 1 et l’autre le guichet 2.</p>
-<ol style="list-style-type: decimal">
-<li><p>En moyenne, après combien de temps sort le premier?</p></li>
-<li><p>En moyenne, après combien de temps sort le dernier?</p></li>
-</ol></li>
-</ol>
-<strong>Indication:</strong> On pourra utiliser la relation <span class="math inline">\(X_1 + X_2 = min(X_1,X_2) + max(X_1,X_2)\)</span>. La somme de deux nombres réels est égale à la somme de leur minimum et de leur maximum.
-</div>
-
-
-<div class="exercise">
-<p><span id="exr:unnamed-chunk-90" class="exercise"><strong>Exercice 6.12  (Fonction Gamma (Euler))  </strong></span>La fonction Gamma est définie sur <span class="math inline">\(\mathbb{R}_{+}^*\)</span> par:</p>
-<p><span class="math display">\[\Gamma(x) = \int_0^{+\infty} t^{x-1}e^{-t} dt\]</span></p>
-<ol style="list-style-type: decimal">
-<li><p>Montrer que <span class="math inline">\(\Gamma(x+1)=x\Gamma(x)\)</span>, <span class="math inline">\(\forall \, x &gt;0\)</span>.</p></li>
-<li><p>Exprimer <span class="math inline">\(\Gamma(x+n)\)</span> en fonction de <span class="math inline">\(\Gamma(x)\)</span> pour
-<span class="math inline">\(n\in \mathbb{N}\)</span>.</p></li>
-<li><p>Calculer <span class="math inline">\(\Gamma(1)\)</span>. En déduire <span class="math inline">\(\Gamma(n+1)\)</span> pour
-<span class="math inline">\(n\in \mathbb{N}\)</span>.</p></li>
-<li><p>En utilisant le changement de variable <span class="math inline">\(t=u^2\)</span>, montrer qu’on a:
-<span class="math display">\[\Gamma(x)=2 \int_0^{+\infty} u^{2x-1}e^{-u^2} du\]</span></p></li>
-<li><p>On suppose que:
-<span class="math display">\[\int_0^{+\infty} e^{-x^2} dx = \frac{\sqrt{\pi}}{2}\]</span> Calculer
-alor <span class="math inline">\(\Gamma(\frac{1}{2})\)</span>.</p></li>
-<li><p>Montrer que
-<span class="math inline">\(\Gamma(n+\frac{1}{2})=(n-\frac{1}{2})(n-\frac{3}{2})\ldots (\frac{1}{2})\Gamma(\frac{1}{2})\)</span></p></li>
-<li>En déduire la valeur de <span class="math inline">\(\Gamma(n+\frac{1}{2})\)</span>.</li>
-</ol>
-</div>
-
-
-<div class="exercise">
-<p><span id="exr:unnamed-chunk-91" class="exercise"><strong>Exercice 6.13  (Loi Gamma)  </strong></span>Pour <span class="math inline">\(a&gt;0\)</span> et <span class="math inline">\(\lambda&gt;0\)</span>, deux constantes réelles, on définit la
-fonction <span class="math inline">\(f_{a,\lambda}\)</span> sur <span class="math inline">\(\mathbb{R}\)</span> par:
-<span class="math display">\[\forall \, x \in \mathbb{R}, \quad  f_{a,\lambda} (x)= \frac{\lambda^a}{\Gamma(a)} x^{a-1} e^{-\lambda x} \times {1}_{\mathbb{R}_{+}}(x)\]</span></p>
-<ol style="list-style-type: decimal">
-<li><p>Montrer que <span class="math inline">\(f_{a,\lambda}\)</span> est bien une densité d’une v.a. <span class="math inline">\(X\)</span>.</p></li>
-<li>Calculer <span class="math inline">\(E(X)\)</span>.</li>
-</ol>
-</div>
-
+<div id="coefficient-de-correlation-lineaire" class="section level2 unnumbered">
+<h2>Coefficient de corrélation linéaire</h2>
+<p>On appelle coefficient de corrélation linéaire de <span class="math inline">\(X\)</span> et de <span class="math inline">\(Y\)</span> la
+valeur définie par</p>
+<p><span class="math display">\[\rho = \rho(X,Y) = \frac{Cov(X,Y)}{\sqrt{V(X)V(Y)}} = \frac{Cov(X,Y)}{\sigma_X \sigma_Y}\]</span></p>
+<p>On peut montrer que <span class="math display">\[-1 \leq \rho(X,Y) \leq 1\]</span></p>
+<p>Pour le montrer on peut partir du fait que la variance est toujours
+positive ou nulle. Donc
+<span class="math inline">\(V(\frac{X}{\sigma_X} + \frac{Y}{\sigma_Y}) \geq 0\)</span> et
+<span class="math inline">\(V(\frac{X}{\sigma_X} - \frac{Y}{\sigma_Y}) \geq 0\)</span>.</p>
+<p><strong>Interprétation de <span class="math inline">\(\rho\)</span></strong></p>
+<ul>
+<li><p>Le coefficient de corrélation est une mesure du degré de linéarité
+entre <span class="math inline">\(X\)</span> et <span class="math inline">\(Y\)</span>.</p></li>
+<li><p>Les valeurs de <span class="math inline">\(\rho\)</span> proches de <span class="math inline">\(1\)</span> ou <span class="math inline">\(-1\)</span> indiquent une linéarité
+quasiment rigoureuse entre <span class="math inline">\(X\)</span> et <span class="math inline">\(Y\)</span>.</p></li>
+<li><p>Les valeurs de <span class="math inline">\(\rho\)</span> proche de 0 indiquent une absence de toute
+relation linéaire.</p></li>
+<li><p>Lorsque <span class="math inline">\(\rho(X,Y)\)</span> est positif, <span class="math inline">\(Y\)</span> a tendance à augmenter si <span class="math inline">\(X\)</span>
+en fait autant.</p></li>
+<li><p>Lorsque <span class="math inline">\(\rho(X,Y) &lt; 0\)</span>, <span class="math inline">\(Y\)</span> a tendance à diminuer si <span class="math inline">\(X\)</span> augmente.</p></li>
+<li><p>Si <span class="math inline">\(\rho(X,Y) =0\)</span>, on dit que ces deux statistiques sont non
+corrélées.</p></li>
+</ul>
 </div>
 </div>
-<div id="couple-de-variables-aleatoires-continues-1" class="section level2 unnumbered">
-<h2>Couple de variables aléatoires continues</h2>
-
-<div class="exercise">
-<p><span id="exr:unnamed-chunk-92" class="exercise"><strong>Exercice 6.14  </strong></span>Soit <span class="math inline">\((X,Y)\)</span> un couple de variables aléatoires dont la densité jointe
-est définie par: <span class="math display">\[f(x,y)= \left\lbrace
-      \begin{array}{ll}
-      \alpha x e^{-y}  &amp; \mbox{si} \quad x \in [0,1], y \in \mathbb{R}_{+} \\
-      0 &amp; \mbox{sinon}
-      \end{array}
-  \right.\]</span></p>
-<ol style="list-style-type: decimal">
-<li><p>Déterminer <span class="math inline">\(\alpha\)</span> pour que <span class="math inline">\(f(x,y)\)</span> soit une fonction de densité.</p></li>
-<li><p>Déterminer les densités marginales de <span class="math inline">\(X\)</span> et <span class="math inline">\(Y\)</span>.</p></li>
-<li><span class="math inline">\(X\)</span> et <span class="math inline">\(Y\)</span> sont elles indépendantes?</li>
-</ol>
-</div>
-
-
-<div class="exercise">
-<p><span id="exr:unnamed-chunk-93" class="exercise"><strong>Exercice 6.15  </strong></span>Soit <span class="math inline">\((X,Y)\)</span> un vecteur aléatoire uniformément distribué dans l’ensemble
-<span class="math display">\[D= \{ (x,y) \in \mathbb{R}^2, x\in [0,2] \, \text{et} \, y \in [0,4]\}\]</span></p>
-<ol style="list-style-type: decimal">
-<li><p>Déterminer la densité jointe du couple de variables aléatoires
-<span class="math inline">\((X,Y)\)</span>.</p></li>
-<li><p>Calculer <span class="math inline">\(P(X \le 1, Y\le 2)\)</span>.</p></li>
-<li>Déterminer les densités marginales de <span class="math inline">\(X\)</span> et <span class="math inline">\(Y\)</span>. Les v.a. <span class="math inline">\(X\)</span> et
-<span class="math inline">\(Y\)</span> sont elles indépendantes?</li>
-</ol>
-</div>
-
-
-</div>
-</div>
-
-
-
             </section>
 
           </div>
         </div>
       </div>
-<a href="couple-de-variables-aleatoires-continues.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="tab-normale.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="variables-aleatoires-discretes.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="lois-usuelles-discretes.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="book_assets/gitbook-2.6.7/js/app.min.js"></script>

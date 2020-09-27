@@ -24,7 +24,7 @@
 <meta name="author" content="Mohamad Ghassany" />
 
 
-<meta name="date" content="2020-09-18" />
+<meta name="date" content="2020-09-27" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -65,9 +65,9 @@
 
 
 <style type="text/css">
-code.sourceCode > span { display: inline-block; line-height: 1.25; }
-code.sourceCode > span { color: inherit; text-decoration: inherit; }
-code.sourceCode > span:empty { height: 1.2em; }
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; }
 .sourceCode { overflow: visible; }
 code.sourceCode { white-space: pre; position: relative; }
 pre.sourceCode { margin: 0; }
@@ -76,16 +76,14 @@ div.sourceCode { overflow: auto; }
 }
 @media print {
 code.sourceCode { white-space: pre-wrap; }
-code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
 }
-pre.numberSource code
-  { counter-reset: source-line 0; }
-pre.numberSource code > span
-  { position: relative; left: -4em; counter-increment: source-line; }
-pre.numberSource code > span > a:first-child::before
-  { content: counter(source-line);
+pre.numberSource a.sourceLine
+  { position: relative; left: -4em; }
+pre.numberSource a.sourceLine::before
+  { content: attr(title);
     position: relative; left: -1em; text-align: right; vertical-align: baseline;
-    border: none; display: inline-block;
+    border: none; pointer-events: all; display: inline-block;
     -webkit-touch-callout: none; -webkit-user-select: none;
     -khtml-user-select: none; -moz-user-select: none;
     -ms-user-select: none; user-select: none;
@@ -97,7 +95,7 @@ pre.numberSource { margin-left: 3em; border-left: 1px solid #a0a0a0;  padding-le
 div.sourceCode
   { color: #1f1c1b; background-color: #ffffff; }
 @media screen {
-code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+a.sourceLine::before { text-decoration: underline; }
 }
 code span. { color: #1f1c1b; } /* Normal */
 code span.al { color: #bf0303; background-color: #f7e6e6; font-weight: bold; } /* Alert */
@@ -691,12 +689,12 @@ A large <span class="math inline"><span class="math inline">\(R^2\)</span></span
 <div class="footnotes">
 <hr />
 <ol start="1">
-<li id="fn1"><p>Also known as <strong>SSE</strong>: Sum of Squared Errors.<a href="linear-regression.html#fnref1" class="footnote-back">↩︎</a></p></li>
-<li id="fn2"><p>They are unique and always exist. They can be obtained by solving <span class="math inline">\(\frac{\partial}{\partial \beta_0}\text{RSS}(\beta_0,\beta_1)=0\)</span> and <span class="math inline">\(\frac{\partial}{\partial \beta_1}\text{RSS}(\beta_0,\beta_1)=0\)</span>.<a href="linear-regression.html#fnref2" class="footnote-back">↩︎</a></p></li>
-<li id="fn3"><p>If <span class="math inline">\(\beta_1 = 0\)</span> this means <span class="math inline">\(COV(X,Y)=0\)</span>. Remember that if the covariance is null that doesn’t necessarily means that <span class="math inline">\(X\)</span> and <span class="math inline">\(Y\)</span> are independent, this means there is no linear relationship between them, they are <em>maybe</em> independents or they have other type of relationships.<a href="linear-regression.html#fnref3" class="footnote-back">↩︎</a></p></li>
-<li id="fn4"><p>Recall that SSR is different from RSS (Residual Sum of Squares)<a href="linear-regression.html#fnref4" class="footnote-back">↩︎</a></p></li>
-<li id="fn5"><p>Recall that SSE and RSS (for <span class="math inline">\((\hat \beta_0,\hat \beta_1)\)</span>) are just different names for referring to the same quantity: <span class="math inline">\(\text{SSE}=\sum_{i=1}^n\left(Y_i-\hat Y_i\right)^2=\sum_{i=1}^n\left(Y_i-\hat \beta_0-\hat \beta_1X_i\right)^2=\mathrm{RSS}\left(\hat \beta_0,\hat \beta_1\right)\)</span>.<a href="linear-regression.html#fnref5" class="footnote-back">↩︎</a></p></li>
-<li id="fn6"><p>The <span class="math inline">\(F_{n,m}\)</span> distribution arises as the quotient of two independent random variables <span class="math inline">\(\chi^2_n\)</span> and <span class="math inline">\(\chi^2_m\)</span>, <span class="math inline">\(\frac{\chi^2_n/n}{\chi^2_m/m}\)</span>.<a href="linear-regression.html#fnref6" class="footnote-back">↩︎</a></p></li>
+<li id="fn1"><p>Also known as <strong>SSE</strong>: Sum of Squared Errors.<a href="linear-regression.html#fnref1" class="footnote-back">↩</a></p></li>
+<li id="fn2"><p>They are unique and always exist. They can be obtained by solving <span class="math inline">\(\frac{\partial}{\partial \beta_0}\text{RSS}(\beta_0,\beta_1)=0\)</span> and <span class="math inline">\(\frac{\partial}{\partial \beta_1}\text{RSS}(\beta_0,\beta_1)=0\)</span>.<a href="linear-regression.html#fnref2" class="footnote-back">↩</a></p></li>
+<li id="fn3"><p>If <span class="math inline">\(\beta_1 = 0\)</span> this means <span class="math inline">\(COV(X,Y)=0\)</span>. Remember that if the covariance is null that doesn’t necessarily means that <span class="math inline">\(X\)</span> and <span class="math inline">\(Y\)</span> are independent, this means there is no linear relationship between them, they are <em>maybe</em> independents or they have other type of relationships.<a href="linear-regression.html#fnref3" class="footnote-back">↩</a></p></li>
+<li id="fn4"><p>Recall that SSR is different from RSS (Residual Sum of Squares)<a href="linear-regression.html#fnref4" class="footnote-back">↩</a></p></li>
+<li id="fn5"><p>Recall that SSE and RSS (for <span class="math inline">\((\hat \beta_0,\hat \beta_1)\)</span>) are just different names for referring to the same quantity: <span class="math inline">\(\text{SSE}=\sum_{i=1}^n\left(Y_i-\hat Y_i\right)^2=\sum_{i=1}^n\left(Y_i-\hat \beta_0-\hat \beta_1X_i\right)^2=\mathrm{RSS}\left(\hat \beta_0,\hat \beta_1\right)\)</span>.<a href="linear-regression.html#fnref5" class="footnote-back">↩</a></p></li>
+<li id="fn6"><p>The <span class="math inline">\(F_{n,m}\)</span> distribution arises as the quotient of two independent random variables <span class="math inline">\(\chi^2_n\)</span> and <span class="math inline">\(\chi^2_m\)</span>, <span class="math inline">\(\frac{\chi^2_n/n}{\chi^2_m/m}\)</span>.<a href="linear-regression.html#fnref6" class="footnote-back">↩</a></p></li>
 </ol>
 </div>
             </section>

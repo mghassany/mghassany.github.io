@@ -24,7 +24,7 @@
 <meta name="author" content="Mohamad Ghassany" />
 
 
-<meta name="date" content="2020-09-18" />
+<meta name="date" content="2020-09-27" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -65,9 +65,9 @@
 
 
 <style type="text/css">
-code.sourceCode > span { display: inline-block; line-height: 1.25; }
-code.sourceCode > span { color: inherit; text-decoration: inherit; }
-code.sourceCode > span:empty { height: 1.2em; }
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; }
 .sourceCode { overflow: visible; }
 code.sourceCode { white-space: pre; position: relative; }
 pre.sourceCode { margin: 0; }
@@ -76,16 +76,14 @@ div.sourceCode { overflow: auto; }
 }
 @media print {
 code.sourceCode { white-space: pre-wrap; }
-code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
 }
-pre.numberSource code
-  { counter-reset: source-line 0; }
-pre.numberSource code > span
-  { position: relative; left: -4em; counter-increment: source-line; }
-pre.numberSource code > span > a:first-child::before
-  { content: counter(source-line);
+pre.numberSource a.sourceLine
+  { position: relative; left: -4em; }
+pre.numberSource a.sourceLine::before
+  { content: attr(title);
     position: relative; left: -1em; text-align: right; vertical-align: baseline;
-    border: none; display: inline-block;
+    border: none; pointer-events: all; display: inline-block;
     -webkit-touch-callout: none; -webkit-user-select: none;
     -khtml-user-select: none; -moz-user-select: none;
     -ms-user-select: none; user-select: none;
@@ -97,7 +95,7 @@ pre.numberSource { margin-left: 3em; border-left: 1px solid #a0a0a0;  padding-le
 div.sourceCode
   { color: #1f1c1b; background-color: #ffffff; }
 @media screen {
-code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+a.sourceLine::before { text-decoration: underline; }
 }
 code span. { color: #1f1c1b; } /* Normal */
 code span.al { color: #bf0303; background-color: #f7e6e6; font-weight: bold; } /* Alert */
@@ -421,9 +419,9 @@ code span.wa { color: #bf0303; } /* Warning */
 <p>We are going to use the categorical variable <code>chas</code> which corresponds to Charles River (= 1 if a suburb bounds the river; 0 otherwise). Using the <code>str()</code> command you can notice that this variable is not codified as a factor, but it has values 0 or 1, so it is already dummyfied.</p>
 </div>
 <p><strong>21</strong>. Fit a new model where the predictors are the Charles River and the Crime Rate. Interpret the coefficients of this model and conclude if the presence of the river adds a valuable information for explaining the house price.</p>
-<p><strong>22</strong>. Is <code>chas</code> is significant as well in the presence of more predictors?</p>
+<p><strong>22</strong>. Is <code>chas</code> significant as well in the presence of more predictors?</p>
 <p><strong>Interaction terms</strong></p>
-<p>As you saw in section <a href="multiple-linear-regression.html#other-consid">2.3.1</a> we may sometimes try models with intercation terms. Let’s say we have two predictors <span class="math inline">\(X_1\)</span> and <span class="math inline">\(X_2\)</span>, the way of adding these interactions in <code>lm</code> is through <code>:</code> and <code>*</code>. The operator <code>:</code> only adds the term <span class="math inline">\(X_1X_2\)</span> and <code>*</code> adds <span class="math inline">\(X_1\)</span>, <span class="math inline">\(X_2\)</span>, and <span class="math inline">\(X_1X_2\)</span>.</p>
+<p>As you saw in section <a href="multiple-linear-regression.html#other-consid">2.3.1</a> we may sometimes try models with interaction terms. Let’s say we have two predictors <span class="math inline">\(X_1\)</span> and <span class="math inline">\(X_2\)</span>, the way of adding these interactions in <code>lm</code> is through <code>:</code> and <code>*</code>. The operator <code>:</code> only adds the term <span class="math inline">\(X_1X_2\)</span> and <code>*</code> adds <span class="math inline">\(X_1\)</span>, <span class="math inline">\(X_2\)</span>, and <span class="math inline">\(X_1X_2\)</span>.</p>
 <p><strong>23</strong>. Fit a model whith first order interaction term where predictors are <code>lstat</code> and <code>age</code>. Print its summary.</p>
 <p><strong>24</strong>. Fit a model with all the first order interaction terms.</p>
 </div>

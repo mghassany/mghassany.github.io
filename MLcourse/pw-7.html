@@ -24,7 +24,7 @@
 <meta name="author" content="Mohamad Ghassany" />
 
 
-<meta name="date" content="2020-09-18" />
+<meta name="date" content="2020-09-27" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -65,9 +65,9 @@
 
 
 <style type="text/css">
-code.sourceCode > span { display: inline-block; line-height: 1.25; }
-code.sourceCode > span { color: inherit; text-decoration: inherit; }
-code.sourceCode > span:empty { height: 1.2em; }
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; }
 .sourceCode { overflow: visible; }
 code.sourceCode { white-space: pre; position: relative; }
 pre.sourceCode { margin: 0; }
@@ -76,16 +76,14 @@ div.sourceCode { overflow: auto; }
 }
 @media print {
 code.sourceCode { white-space: pre-wrap; }
-code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
 }
-pre.numberSource code
-  { counter-reset: source-line 0; }
-pre.numberSource code > span
-  { position: relative; left: -4em; counter-increment: source-line; }
-pre.numberSource code > span > a:first-child::before
-  { content: counter(source-line);
+pre.numberSource a.sourceLine
+  { position: relative; left: -4em; }
+pre.numberSource a.sourceLine::before
+  { content: attr(title);
     position: relative; left: -1em; text-align: right; vertical-align: baseline;
-    border: none; display: inline-block;
+    border: none; pointer-events: all; display: inline-block;
     -webkit-touch-callout: none; -webkit-user-select: none;
     -khtml-user-select: none; -moz-user-select: none;
     -ms-user-select: none; user-select: none;
@@ -97,7 +95,7 @@ pre.numberSource { margin-left: 3em; border-left: 1px solid #a0a0a0;  padding-le
 div.sourceCode
   { color: #1f1c1b; background-color: #ffffff; }
 @media screen {
-code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+a.sourceLine::before { text-decoration: underline; }
 }
 code span. { color: #1f1c1b; } /* Normal */
 code span.al { color: #bf0303; background-color: #f7e6e6; font-weight: bold; } /* Alert */
@@ -512,8 +510,8 @@ output:
 <div id="k-means-clustering" class="section level2 unnumbered">
 <h2><span class="math inline">\(k\)</span>-means clustering</h2>
 <p><strong>1.</strong> Download the dataset:  <a target="_blank" href="datasets/ligue1_17_18.csv"> Ligue1 2017-2018 <i class="fa fa-table" aria-hidden="true"></i></a> and import it into <i class="fab  fa-r-project " style="color:steelblue;"></i>. Put the argument <code>row.names</code> to 1.</p>
-<div class="sourceCode" id="cb69"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb69-1"><a href="pw-7.html#cb69-1"></a><span class="co"># You can import directly from my website (instead of downloading it..)</span></span>
-<span id="cb69-2"><a href="pw-7.html#cb69-2"></a>ligue1 &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&quot;http://mghassany.com/MLcourse/datasets/ligue1_17_18.csv&quot;</span>, <span class="dt">row.names=</span><span class="dv">1</span>, <span class="dt">sep=</span><span class="st">&quot;;&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb69"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb69-1" title="1"><span class="co"># You can import directly from my website (instead of downloading it..)</span></a>
+<a class="sourceLine" id="cb69-2" title="2">ligue1 &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&quot;http://mghassany.com/MLcourse/datasets/ligue1_17_18.csv&quot;</span>, <span class="dt">row.names=</span><span class="dv">1</span>, <span class="dt">sep=</span><span class="st">&quot;;&quot;</span>)</a></code></pre></div>
 <p><strong>2.</strong> Print the first two rows of the dataset and the total number of features in this dataset.</p>
 <div class="rmdtip">
 <p>
@@ -549,12 +547,12 @@ You can create an awesome HTML table by using the function <code>kable</code> fr
 <p><strong>15.</strong> Apply PCA on <code>ligue1</code> dataset and store you results in <code>pcaligue1</code>. Do we need to apply PCA on the scaled dataset? Justify your answer.</p>
 <p><strong>16.</strong> Plot the observations and the variables on the first two principal components (biplot). Interpret the results.</p>
 <p><strong>17.</strong> Visualize the teams on the first two principal components and color them with respect to their cluster.</p>
-<div class="sourceCode" id="cb70"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb70-1"><a href="pw-7.html#cb70-1"></a><span class="co"># You can use the following code, based on `factoextra` library.</span></span>
-<span id="cb70-2"><a href="pw-7.html#cb70-2"></a><span class="kw">fviz_cluster</span>(km.ligue1, <span class="dt">data =</span> ligue1, <span class="co"># km.ligue1 is where you stored your kmeans results</span></span>
-<span id="cb70-3"><a href="pw-7.html#cb70-3"></a>              <span class="dt">palette =</span> <span class="kw">c</span>(<span class="st">&quot;red&quot;</span>, <span class="st">&quot;blue&quot;</span>, <span class="st">&quot;green&quot;</span>), <span class="co"># 3 colors since 3 clusters</span></span>
-<span id="cb70-4"><a href="pw-7.html#cb70-4"></a>              <span class="dt">ggtheme =</span> <span class="kw">theme_minimal</span>(),</span>
-<span id="cb70-5"><a href="pw-7.html#cb70-5"></a>              <span class="dt">main =</span> <span class="st">&quot;Clustering Plot&quot;</span></span>
-<span id="cb70-6"><a href="pw-7.html#cb70-6"></a>)</span></code></pre></div>
+<div class="sourceCode" id="cb70"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb70-1" title="1"><span class="co"># You can use the following code, based on `factoextra` library.</span></a>
+<a class="sourceLine" id="cb70-2" title="2"><span class="kw">fviz_cluster</span>(km.ligue1, <span class="dt">data =</span> ligue1, <span class="co"># km.ligue1 is where you stored your kmeans results</span></a>
+<a class="sourceLine" id="cb70-3" title="3">              <span class="dt">palette =</span> <span class="kw">c</span>(<span class="st">&quot;red&quot;</span>, <span class="st">&quot;blue&quot;</span>, <span class="st">&quot;green&quot;</span>), <span class="co"># 3 colors since 3 clusters</span></a>
+<a class="sourceLine" id="cb70-4" title="4">              <span class="dt">ggtheme =</span> <span class="kw">theme_minimal</span>(),</a>
+<a class="sourceLine" id="cb70-5" title="5">              <span class="dt">main =</span> <span class="st">&quot;Clustering Plot&quot;</span></a>
+<a class="sourceLine" id="cb70-6" title="6">)</a></code></pre></div>
 <p><strong>18.</strong> Recall that the figure of question <strong>17</strong> is a visualization with PC1 and PC2 of the clustering done with all the variables, not on PC1 and PC2. Now apply the <code>kmeans()</code> clustering taking only the first two PCs instead the variables of original dataset. Visualize the results and compare with the question <strong>17</strong>.</p>
 <div class="rmdinsight">
 <p>
@@ -629,40 +627,40 @@ cluster labels obtained.</p>
 <div id="distances-dist" class="section level3 unnumbered">
 <h3>Distances <code>dist()</code></h3>
 <p>To calculate the distance in <i class="fab  fa-r-project " style="color:steelblue;"></i> we use the <code>dist()</code> function. Here is a tutorial of how use it.</p>
-<div class="sourceCode" id="cb71"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb71-1"><a href="pw-7.html#cb71-1"></a><span class="co"># Generate a matrix M of values from 1 to 15 with 5 rows and 3 columns</span></span>
-<span id="cb71-2"><a href="pw-7.html#cb71-2"></a>M &lt;-<span class="st"> </span><span class="kw">matrix</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">15</span>,<span class="dv">5</span>,<span class="dv">3</span>)</span>
-<span id="cb71-3"><a href="pw-7.html#cb71-3"></a>M</span>
-<span id="cb71-4"><a href="pw-7.html#cb71-4"></a><span class="co">#ans&gt;      [,1] [,2] [,3]</span></span>
-<span id="cb71-5"><a href="pw-7.html#cb71-5"></a><span class="co">#ans&gt; [1,]    1    6   11</span></span>
-<span id="cb71-6"><a href="pw-7.html#cb71-6"></a><span class="co">#ans&gt; [2,]    2    7   12</span></span>
-<span id="cb71-7"><a href="pw-7.html#cb71-7"></a><span class="co">#ans&gt; [3,]    3    8   13</span></span>
-<span id="cb71-8"><a href="pw-7.html#cb71-8"></a><span class="co">#ans&gt; [4,]    4    9   14</span></span>
-<span id="cb71-9"><a href="pw-7.html#cb71-9"></a><span class="co">#ans&gt; [5,]    5   10   15</span></span></code></pre></div>
-<div class="sourceCode" id="cb72"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb72-1"><a href="pw-7.html#cb72-1"></a><span class="co"># - Compute the distance between rows of M.</span></span>
-<span id="cb72-2"><a href="pw-7.html#cb72-2"></a><span class="co"># - The default distance is the euclidian distance.</span></span>
-<span id="cb72-3"><a href="pw-7.html#cb72-3"></a><span class="co"># - Since there are 3 columns, it is the euclidian</span></span>
-<span id="cb72-4"><a href="pw-7.html#cb72-4"></a><span class="co">#        distance between tri-dimensional points.</span></span>
-<span id="cb72-5"><a href="pw-7.html#cb72-5"></a><span class="kw">dist</span>(M)</span>
-<span id="cb72-6"><a href="pw-7.html#cb72-6"></a><span class="co">#ans&gt;      1    2    3    4</span></span>
-<span id="cb72-7"><a href="pw-7.html#cb72-7"></a><span class="co">#ans&gt; 2 1.73               </span></span>
-<span id="cb72-8"><a href="pw-7.html#cb72-8"></a><span class="co">#ans&gt; 3 3.46 1.73          </span></span>
-<span id="cb72-9"><a href="pw-7.html#cb72-9"></a><span class="co">#ans&gt; 4 5.20 3.46 1.73     </span></span>
-<span id="cb72-10"><a href="pw-7.html#cb72-10"></a><span class="co">#ans&gt; 5 6.93 5.20 3.46 1.73</span></span></code></pre></div>
-<div class="sourceCode" id="cb73"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb73-1"><a href="pw-7.html#cb73-1"></a><span class="co"># To compute the Manhattan distance </span></span>
-<span id="cb73-2"><a href="pw-7.html#cb73-2"></a><span class="kw">dist</span>(M, <span class="dt">method=</span> <span class="st">&quot;manhattan&quot;</span>)</span>
-<span id="cb73-3"><a href="pw-7.html#cb73-3"></a><span class="co">#ans&gt;    1  2  3  4</span></span>
-<span id="cb73-4"><a href="pw-7.html#cb73-4"></a><span class="co">#ans&gt; 2  3         </span></span>
-<span id="cb73-5"><a href="pw-7.html#cb73-5"></a><span class="co">#ans&gt; 3  6  3      </span></span>
-<span id="cb73-6"><a href="pw-7.html#cb73-6"></a><span class="co">#ans&gt; 4  9  6  3   </span></span>
-<span id="cb73-7"><a href="pw-7.html#cb73-7"></a><span class="co">#ans&gt; 5 12  9  6  3</span></span></code></pre></div>
+<div class="sourceCode" id="cb71"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb71-1" title="1"><span class="co"># Generate a matrix M of values from 1 to 15 with 5 rows and 3 columns</span></a>
+<a class="sourceLine" id="cb71-2" title="2">M &lt;-<span class="st"> </span><span class="kw">matrix</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">15</span>,<span class="dv">5</span>,<span class="dv">3</span>)</a>
+<a class="sourceLine" id="cb71-3" title="3">M</a>
+<a class="sourceLine" id="cb71-4" title="4"><span class="co">#ans&gt;      [,1] [,2] [,3]</span></a>
+<a class="sourceLine" id="cb71-5" title="5"><span class="co">#ans&gt; [1,]    1    6   11</span></a>
+<a class="sourceLine" id="cb71-6" title="6"><span class="co">#ans&gt; [2,]    2    7   12</span></a>
+<a class="sourceLine" id="cb71-7" title="7"><span class="co">#ans&gt; [3,]    3    8   13</span></a>
+<a class="sourceLine" id="cb71-8" title="8"><span class="co">#ans&gt; [4,]    4    9   14</span></a>
+<a class="sourceLine" id="cb71-9" title="9"><span class="co">#ans&gt; [5,]    5   10   15</span></a></code></pre></div>
+<div class="sourceCode" id="cb72"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb72-1" title="1"><span class="co"># - Compute the distance between rows of M.</span></a>
+<a class="sourceLine" id="cb72-2" title="2"><span class="co"># - The default distance is the euclidian distance.</span></a>
+<a class="sourceLine" id="cb72-3" title="3"><span class="co"># - Since there are 3 columns, it is the euclidian</span></a>
+<a class="sourceLine" id="cb72-4" title="4"><span class="co">#        distance between tri-dimensional points.</span></a>
+<a class="sourceLine" id="cb72-5" title="5"><span class="kw">dist</span>(M)</a>
+<a class="sourceLine" id="cb72-6" title="6"><span class="co">#ans&gt;      1    2    3    4</span></a>
+<a class="sourceLine" id="cb72-7" title="7"><span class="co">#ans&gt; 2 1.73               </span></a>
+<a class="sourceLine" id="cb72-8" title="8"><span class="co">#ans&gt; 3 3.46 1.73          </span></a>
+<a class="sourceLine" id="cb72-9" title="9"><span class="co">#ans&gt; 4 5.20 3.46 1.73     </span></a>
+<a class="sourceLine" id="cb72-10" title="10"><span class="co">#ans&gt; 5 6.93 5.20 3.46 1.73</span></a></code></pre></div>
+<div class="sourceCode" id="cb73"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb73-1" title="1"><span class="co"># To compute the Manhattan distance </span></a>
+<a class="sourceLine" id="cb73-2" title="2"><span class="kw">dist</span>(M, <span class="dt">method=</span> <span class="st">&quot;manhattan&quot;</span>)</a>
+<a class="sourceLine" id="cb73-3" title="3"><span class="co">#ans&gt;    1  2  3  4</span></a>
+<a class="sourceLine" id="cb73-4" title="4"><span class="co">#ans&gt; 2  3         </span></a>
+<a class="sourceLine" id="cb73-5" title="5"><span class="co">#ans&gt; 3  6  3      </span></a>
+<a class="sourceLine" id="cb73-6" title="6"><span class="co">#ans&gt; 4  9  6  3   </span></a>
+<a class="sourceLine" id="cb73-7" title="7"><span class="co">#ans&gt; 5 12  9  6  3</span></a></code></pre></div>
 </div>
 <div id="dendrogram-hclust" class="section level3 unnumbered">
 <h3>Dendrogram <code>hclust()</code></h3>
-<div class="sourceCode" id="cb74"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb74-1"><a href="pw-7.html#cb74-1"></a><span class="co"># First we construct the dendrogram </span></span>
-<span id="cb74-2"><a href="pw-7.html#cb74-2"></a>dendro &lt;-<span class="st"> </span><span class="kw">hclust</span>(<span class="kw">dist</span>(M))</span>
-<span id="cb74-3"><a href="pw-7.html#cb74-3"></a></span>
-<span id="cb74-4"><a href="pw-7.html#cb74-4"></a><span class="co"># Then we plot it</span></span>
-<span id="cb74-5"><a href="pw-7.html#cb74-5"></a><span class="kw">plot</span>(dendro)</span></code></pre></div>
+<div class="sourceCode" id="cb74"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb74-1" title="1"><span class="co"># First we construct the dendrogram </span></a>
+<a class="sourceLine" id="cb74-2" title="2">dendro &lt;-<span class="st"> </span><span class="kw">hclust</span>(<span class="kw">dist</span>(M))</a>
+<a class="sourceLine" id="cb74-3" title="3"></a>
+<a class="sourceLine" id="cb74-4" title="4"><span class="co"># Then we plot it</span></a>
+<a class="sourceLine" id="cb74-5" title="5"><span class="kw">plot</span>(dendro)</a></code></pre></div>
 <p><img src="Machine-Learning_files/figure-html/unnamed-chunk-209-1.png" width="70%" style="display: block; margin: auto;" /></p>
 </div>
 <div id="hierarchical-clustering-on-iris-dataset" class="section level3 unnumbered">
@@ -674,7 +672,7 @@ cluster labels obtained.</p>
 <p><strong>4.</strong> Construct a dendrogram on the iris dataset using the method <em>average</em>. Store the result in <code>dendro.avg</code>.</p>
 <p><strong>5.</strong> Plot the dendrogram.</p>
 <p><strong>6.</strong> Plot again the dendrogram using the following command:</p>
-<div class="sourceCode" id="cb75"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb75-1"><a href="pw-7.html#cb75-1"></a><span class="kw">plot</span>(dendro.avg, <span class="dt">hang=</span><span class="op">-</span><span class="dv">1</span>, <span class="dt">label=</span>sampleiris<span class="op">$</span>class)</span></code></pre></div>
+<div class="sourceCode" id="cb75"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb75-1" title="1"><span class="kw">plot</span>(dendro.avg, <span class="dt">hang=</span><span class="op">-</span><span class="dv">1</span>, <span class="dt">label=</span>sampleiris<span class="op">$</span>class)</a></code></pre></div>
 <p><strong>7.</strong> To cut the dendrogram and obtain a clustering use the <code>cutree</code>. You can choose the number of clusters you wish to obtain, or you can cut by choosing the height from the dendrogram figure. Cut the dendrogram in order to obtain 3 clusters. Store the results into vector <code>groups.avg</code>.</p>
 <p><strong>8.</strong> Visualize the cut tree using the function <code>rect.hclust()</code>. You can choose the colors of the rectangles too!</p>
 <p><strong>9.</strong> Compare the obtained results obtained with Hierarchical clustering and the real class labels of the flowers (function <code>table()</code>). Interpret the results.</p>

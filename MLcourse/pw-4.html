@@ -24,7 +24,7 @@
 <meta name="author" content="Mohamad Ghassany" />
 
 
-<meta name="date" content="2020-09-18" />
+<meta name="date" content="2020-09-27" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -65,9 +65,9 @@
 
 
 <style type="text/css">
-code.sourceCode > span { display: inline-block; line-height: 1.25; }
-code.sourceCode > span { color: inherit; text-decoration: inherit; }
-code.sourceCode > span:empty { height: 1.2em; }
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; }
 .sourceCode { overflow: visible; }
 code.sourceCode { white-space: pre; position: relative; }
 pre.sourceCode { margin: 0; }
@@ -76,16 +76,14 @@ div.sourceCode { overflow: auto; }
 }
 @media print {
 code.sourceCode { white-space: pre-wrap; }
-code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
 }
-pre.numberSource code
-  { counter-reset: source-line 0; }
-pre.numberSource code > span
-  { position: relative; left: -4em; counter-increment: source-line; }
-pre.numberSource code > span > a:first-child::before
-  { content: counter(source-line);
+pre.numberSource a.sourceLine
+  { position: relative; left: -4em; }
+pre.numberSource a.sourceLine::before
+  { content: attr(title);
     position: relative; left: -1em; text-align: right; vertical-align: baseline;
-    border: none; display: inline-block;
+    border: none; pointer-events: all; display: inline-block;
     -webkit-touch-callout: none; -webkit-user-select: none;
     -khtml-user-select: none; -moz-user-select: none;
     -ms-user-select: none; user-select: none;
@@ -97,7 +95,7 @@ pre.numberSource { margin-left: 3em; border-left: 1px solid #a0a0a0;  padding-le
 div.sourceCode
   { color: #1f1c1b; background-color: #ffffff; }
 @media screen {
-code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+a.sourceLine::before { text-decoration: underline; }
 }
 code span. { color: #1f1c1b; } /* Normal */
 code span.al { color: #bf0303; background-color: #f7e6e6; font-weight: bold; } /* Alert */
@@ -406,121 +404,121 @@ code span.wa { color: #bf0303; } /* Warning */
 <h2>Logistic Regression</h2>
 <p><strong>1.</strong> First, let’s do the pre-processing steps you were asked to do during the last session and fit a <strong>logistic regression</strong> model. Please read and understand very well the following code (read the comments!). Then copy what is necessary for today’s session to your report (but remove my comments!).</p>
 <p>If you lost the dataset, you can download it from <a target="_blank" href="http://www.mghassany.com/MLcourse/datasets/Social_Network_Ads.csv">here <i class="fa fa-table" aria-hidden="true"></i></a>.</p>
-<div class="sourceCode" id="cb40"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb40-1"><a href="pw-4.html#cb40-1"></a></span>
-<span id="cb40-2"><a href="pw-4.html#cb40-2"></a><span class="co"># Loading the dataset.. I have putted it into a folder called &quot;datasets&quot;</span></span>
-<span id="cb40-3"><a href="pw-4.html#cb40-3"></a>dataset &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&#39;http://www.mghassany.com/MLcourse/datasets/Social_Network_Ads.csv&#39;</span>)</span>
-<span id="cb40-4"><a href="pw-4.html#cb40-4"></a></span>
-<span id="cb40-5"><a href="pw-4.html#cb40-5"></a><span class="co"># Describing and Exploring the dataset</span></span>
-<span id="cb40-6"><a href="pw-4.html#cb40-6"></a></span>
-<span id="cb40-7"><a href="pw-4.html#cb40-7"></a><span class="kw">str</span>(dataset) <span class="co"># to show the structure of the dataset. </span></span>
-<span id="cb40-8"><a href="pw-4.html#cb40-8"></a><span class="kw">summary</span>(dataset) <span class="co"># will show some statistics of every column. </span></span>
-<span id="cb40-9"><a href="pw-4.html#cb40-9"></a><span class="co"># Remark what it shows when the column is a numerical or categorical variable.</span></span>
-<span id="cb40-10"><a href="pw-4.html#cb40-10"></a><span class="co"># Remark that it has no sense for the variable User.ID</span></span>
-<span id="cb40-11"><a href="pw-4.html#cb40-11"></a></span>
-<span id="cb40-12"><a href="pw-4.html#cb40-12"></a><span class="kw">boxplot</span>(Age <span class="op">~</span><span class="st"> </span>Purchased, <span class="dt">data=</span>dataset, <span class="dt">col =</span> <span class="st">&quot;blue&quot;</span>, <span class="dt">main=</span><span class="st">&quot;Boxplot Age ~ Purchased&quot;</span>)</span>
-<span id="cb40-13"><a href="pw-4.html#cb40-13"></a><span class="co"># You know what is a boxplot right? I will let you interpret it.</span></span>
-<span id="cb40-14"><a href="pw-4.html#cb40-14"></a><span class="kw">boxplot</span>(EstimatedSalary <span class="op">~</span><span class="st"> </span>Purchased, <span class="dt">data=</span>dataset,<span class="dt">col =</span> <span class="st">&quot;red&quot;</span>,</span>
-<span id="cb40-15"><a href="pw-4.html#cb40-15"></a> <span class="dt">main=</span><span class="st">&quot;Boxplot EstimatedSalary ~ Purchased&quot;</span>)</span>
-<span id="cb40-16"><a href="pw-4.html#cb40-16"></a><span class="co"># Another boxplot</span></span>
-<span id="cb40-17"><a href="pw-4.html#cb40-17"></a></span>
-<span id="cb40-18"><a href="pw-4.html#cb40-18"></a><span class="kw">aov</span>(EstimatedSalary <span class="op">~</span>Purchased, <span class="dt">data=</span>dataset)</span>
-<span id="cb40-19"><a href="pw-4.html#cb40-19"></a><span class="co"># Anova test, but we need to show the summary of </span></span>
-<span id="cb40-20"><a href="pw-4.html#cb40-20"></a><span class="co"># it in order to see the p-value and to interpret.</span></span>
-<span id="cb40-21"><a href="pw-4.html#cb40-21"></a></span>
-<span id="cb40-22"><a href="pw-4.html#cb40-22"></a><span class="kw">summary</span>(<span class="kw">aov</span>(EstimatedSalary <span class="op">~</span>Purchased, <span class="dt">data=</span>dataset))</span>
-<span id="cb40-23"><a href="pw-4.html#cb40-23"></a><span class="co"># What do you conclude ?</span></span>
-<span id="cb40-24"><a href="pw-4.html#cb40-24"></a><span class="co"># Now another anova test for the variable Age</span></span>
-<span id="cb40-25"><a href="pw-4.html#cb40-25"></a><span class="kw">summary</span>(<span class="kw">aov</span>(Age <span class="op">~</span>Purchased, <span class="dt">data=</span>dataset))</span>
-<span id="cb40-26"><a href="pw-4.html#cb40-26"></a></span>
-<span id="cb40-27"><a href="pw-4.html#cb40-27"></a><span class="co"># There is a categorical variable in the dataset, which is Gender.</span></span>
-<span id="cb40-28"><a href="pw-4.html#cb40-28"></a><span class="co"># Of course we cannot show a boxplot of Gender and Purchased.</span></span>
-<span id="cb40-29"><a href="pw-4.html#cb40-29"></a><span class="co"># But we can show a table, or a mosaic plot, both tell the same thing.</span></span>
-<span id="cb40-30"><a href="pw-4.html#cb40-30"></a><span class="kw">table</span>(dataset<span class="op">$</span>Gender,dataset<span class="op">$</span>Purchased)</span>
-<span id="cb40-31"><a href="pw-4.html#cb40-31"></a><span class="co"># Remark for the function table(), that</span></span>
-<span id="cb40-32"><a href="pw-4.html#cb40-32"></a><span class="co"># in lines we have the first argument, and in columns we have the second argument.</span></span>
-<span id="cb40-33"><a href="pw-4.html#cb40-33"></a><span class="co"># Don&#39;t forget this when you use table() to show a confusion matrix!</span></span>
-<span id="cb40-34"><a href="pw-4.html#cb40-34"></a><span class="kw">mosaicplot</span>(<span class="op">~</span><span class="st"> </span>Purchased <span class="op">+</span><span class="st"> </span>Gender, <span class="dt">data=</span>dataset,</span>
-<span id="cb40-35"><a href="pw-4.html#cb40-35"></a>  <span class="dt">main =</span> <span class="st">&quot;MosaicPlot of two categorical variables: Puchased &amp; Gender&quot;</span>,</span>
-<span id="cb40-36"><a href="pw-4.html#cb40-36"></a>  <span class="dt">color =</span> <span class="dv">2</span><span class="op">:</span><span class="dv">3</span>, <span class="dt">las =</span> <span class="dv">1</span>)</span>
-<span id="cb40-37"><a href="pw-4.html#cb40-37"></a></span>
-<span id="cb40-38"><a href="pw-4.html#cb40-38"></a><span class="co"># since these 2 variables are categorical, we can apply</span></span>
-<span id="cb40-39"><a href="pw-4.html#cb40-39"></a><span class="co"># a Chi-square test. The null hypothesis is the independance between</span></span>
-<span id="cb40-40"><a href="pw-4.html#cb40-40"></a><span class="co"># these variables. You will notice that p-value = 0.4562 which is higher than 0.05 (5%)</span></span>
-<span id="cb40-41"><a href="pw-4.html#cb40-41"></a><span class="co"># so we cannot reject the null hypothesis. </span></span>
-<span id="cb40-42"><a href="pw-4.html#cb40-42"></a><span class="co"># conclusion: there is no dependance between Gender and Purchased (who</span></span>
-<span id="cb40-43"><a href="pw-4.html#cb40-43"></a><span class="co"># said that women buy more than men? hah!)</span></span>
-<span id="cb40-44"><a href="pw-4.html#cb40-44"></a></span>
-<span id="cb40-45"><a href="pw-4.html#cb40-45"></a><span class="kw">chisq.test</span>(dataset<span class="op">$</span>Purchased, dataset<span class="op">$</span>Gender)</span>
-<span id="cb40-46"><a href="pw-4.html#cb40-46"></a></span>
-<span id="cb40-47"><a href="pw-4.html#cb40-47"></a><span class="co"># Let&#39;s say we want to remove the first two columns as we are not going to use them.</span></span>
-<span id="cb40-48"><a href="pw-4.html#cb40-48"></a><span class="co"># But, we can in fact use a categorical variable as a predictor in logistic regression.</span></span>
-<span id="cb40-49"><a href="pw-4.html#cb40-49"></a><span class="co"># It will treat it the same way as in regression. Check Appendix C.</span></span>
-<span id="cb40-50"><a href="pw-4.html#cb40-50"></a><span class="co"># Try it by yourself if you would like to.</span></span>
-<span id="cb40-51"><a href="pw-4.html#cb40-51"></a>dataset =<span class="st"> </span>dataset[<span class="dv">3</span><span class="op">:</span><span class="dv">5</span>]</span>
-<span id="cb40-52"><a href="pw-4.html#cb40-52"></a><span class="kw">str</span>(dataset) <span class="co"># show the new structure of dataset</span></span>
-<span id="cb40-53"><a href="pw-4.html#cb40-53"></a></span>
-<span id="cb40-54"><a href="pw-4.html#cb40-54"></a></span>
-<span id="cb40-55"><a href="pw-4.html#cb40-55"></a><span class="co"># splitting the dataset into training and testing sets</span></span>
-<span id="cb40-56"><a href="pw-4.html#cb40-56"></a><span class="kw">library</span>(caTools)</span>
-<span id="cb40-57"><a href="pw-4.html#cb40-57"></a><span class="kw">set.seed</span>(<span class="dv">123</span>) <span class="co"># CHANGE THE VALUE OF SEED. PUT YOUR STUDENT&#39;S NUMBER INSTEAD OF 123.</span></span>
-<span id="cb40-58"><a href="pw-4.html#cb40-58"></a>split =<span class="st"> </span><span class="kw">sample.split</span>(dataset<span class="op">$</span>Purchased, <span class="dt">SplitRatio =</span> <span class="fl">0.75</span>)</span>
-<span id="cb40-59"><a href="pw-4.html#cb40-59"></a>training_set =<span class="st"> </span><span class="kw">subset</span>(dataset, split <span class="op">==</span><span class="st"> </span><span class="ot">TRUE</span>)</span>
-<span id="cb40-60"><a href="pw-4.html#cb40-60"></a>test_set =<span class="st"> </span><span class="kw">subset</span>(dataset, split <span class="op">==</span><span class="st"> </span><span class="ot">FALSE</span>)</span>
-<span id="cb40-61"><a href="pw-4.html#cb40-61"></a></span>
-<span id="cb40-62"><a href="pw-4.html#cb40-62"></a><span class="co"># scaling</span></span>
-<span id="cb40-63"><a href="pw-4.html#cb40-63"></a><span class="co"># So here, we have two continuous predictors, Age and EstimatedSalary.</span></span>
-<span id="cb40-64"><a href="pw-4.html#cb40-64"></a><span class="co"># There is a very big difference in their scales (units).</span></span>
-<span id="cb40-65"><a href="pw-4.html#cb40-65"></a><span class="co"># That&#39;s why we scale them. But it is not always necessary.</span></span>
-<span id="cb40-66"><a href="pw-4.html#cb40-66"></a></span>
-<span id="cb40-67"><a href="pw-4.html#cb40-67"></a>training_set[<span class="op">-</span><span class="dv">3</span>] &lt;-<span class="st"> </span><span class="kw">scale</span>(training_set[<span class="op">-</span><span class="dv">3</span>]) <span class="co">#only first two columns</span></span>
-<span id="cb40-68"><a href="pw-4.html#cb40-68"></a>test_set[<span class="op">-</span><span class="dv">3</span>] &lt;-<span class="st"> </span><span class="kw">scale</span>(test_set[<span class="op">-</span><span class="dv">3</span>])</span>
-<span id="cb40-69"><a href="pw-4.html#cb40-69"></a></span>
-<span id="cb40-70"><a href="pw-4.html#cb40-70"></a><span class="co"># Note that, we replace the columns of Age and EstimatedSalary in the training and</span></span>
-<span id="cb40-71"><a href="pw-4.html#cb40-71"></a><span class="co"># test sets but their scaled versions. I noticed in a lot of reports that you scaled</span></span>
-<span id="cb40-72"><a href="pw-4.html#cb40-72"></a><span class="co"># but you did not do the replacing.</span></span>
-<span id="cb40-73"><a href="pw-4.html#cb40-73"></a><span class="co"># Note too that if you do it column by column you will have a problem because </span></span>
-<span id="cb40-74"><a href="pw-4.html#cb40-74"></a><span class="co"># it will replace the column by a matrix, you need to retransform it to a vector then.</span></span>
-<span id="cb40-75"><a href="pw-4.html#cb40-75"></a><span class="co"># Last note, to call the columns Age and EstimatedSalary we can it like I did or </span></span>
-<span id="cb40-76"><a href="pw-4.html#cb40-76"></a><span class="co"># training_set[c(1,2)] or training_set[,c(1,2)] or training_set[,c(&quot;Age&quot;,&quot;EstimatedSalary&quot;)]</span></span>
-<span id="cb40-77"><a href="pw-4.html#cb40-77"></a></span>
-<span id="cb40-78"><a href="pw-4.html#cb40-78"></a></span>
-<span id="cb40-79"><a href="pw-4.html#cb40-79"></a><span class="co"># logistic regression</span></span>
-<span id="cb40-80"><a href="pw-4.html#cb40-80"></a></span>
-<span id="cb40-81"><a href="pw-4.html#cb40-81"></a>classifier.logreg &lt;-<span class="st"> </span><span class="kw">glm</span>(Purchased <span class="op">~</span><span class="st"> </span>Age <span class="op">+</span><span class="st"> </span>EstimatedSalary , <span class="dt">family =</span> binomial, <span class="dt">data=</span>training_set)</span>
-<span id="cb40-82"><a href="pw-4.html#cb40-82"></a>classifier.logreg</span>
-<span id="cb40-83"><a href="pw-4.html#cb40-83"></a><span class="kw">summary</span>(classifier.logreg)</span>
-<span id="cb40-84"><a href="pw-4.html#cb40-84"></a></span>
-<span id="cb40-85"><a href="pw-4.html#cb40-85"></a><span class="co"># prediction</span></span>
-<span id="cb40-86"><a href="pw-4.html#cb40-86"></a>pred.glm =<span class="st"> </span><span class="kw">predict</span>(classifier.logreg, <span class="dt">newdata =</span> test_set[,<span class="op">-</span><span class="dv">3</span>], <span class="dt">type=</span><span class="st">&quot;response&quot;</span>)</span>
-<span id="cb40-87"><a href="pw-4.html#cb40-87"></a><span class="co"># Do not forget to put type response. </span></span>
-<span id="cb40-88"><a href="pw-4.html#cb40-88"></a><span class="co"># By the way, you know what you get when you do not put it, right?</span></span>
-<span id="cb40-89"><a href="pw-4.html#cb40-89"></a></span>
-<span id="cb40-90"><a href="pw-4.html#cb40-90"></a><span class="co"># Now let&#39;s assign observations to classes with respect to the probabilities</span></span>
-<span id="cb40-91"><a href="pw-4.html#cb40-91"></a>pred.glm_<span class="dv">0</span>_<span class="dv">1</span> =<span class="st"> </span><span class="kw">ifelse</span>(pred.glm <span class="op">&gt;=</span><span class="st"> </span><span class="fl">0.5</span>, <span class="dv">1</span>,<span class="dv">0</span>)</span>
-<span id="cb40-92"><a href="pw-4.html#cb40-92"></a><span class="co"># I created a new vector, because we need the probabilities later for the ROC curve.</span></span>
-<span id="cb40-93"><a href="pw-4.html#cb40-93"></a></span>
-<span id="cb40-94"><a href="pw-4.html#cb40-94"></a><span class="co"># show some values of the vectors</span></span>
-<span id="cb40-95"><a href="pw-4.html#cb40-95"></a><span class="kw">head</span>(pred.glm)</span>
-<span id="cb40-96"><a href="pw-4.html#cb40-96"></a><span class="kw">head</span>(pred.glm_<span class="dv">0</span>_<span class="dv">1</span>)</span>
-<span id="cb40-97"><a href="pw-4.html#cb40-97"></a></span>
-<span id="cb40-98"><a href="pw-4.html#cb40-98"></a><span class="co"># confusion matrix</span></span>
-<span id="cb40-99"><a href="pw-4.html#cb40-99"></a>cm =<span class="st"> </span><span class="kw">table</span>(test_set[,<span class="dv">3</span>], pred.glm_<span class="dv">0</span>_<span class="dv">1</span>)</span>
-<span id="cb40-100"><a href="pw-4.html#cb40-100"></a>cm</span>
-<span id="cb40-101"><a href="pw-4.html#cb40-101"></a><span class="co"># First line to store it into cm, second line to show the matrix! </span></span>
-<span id="cb40-102"><a href="pw-4.html#cb40-102"></a></span>
-<span id="cb40-103"><a href="pw-4.html#cb40-103"></a><span class="co"># You remember my note about table() function and the order of the arguments?</span></span>
-<span id="cb40-104"><a href="pw-4.html#cb40-104"></a>cm =<span class="st"> </span><span class="kw">table</span>(pred.glm_<span class="dv">0</span>_<span class="dv">1</span>, test_set[,<span class="dv">3</span>])</span>
-<span id="cb40-105"><a href="pw-4.html#cb40-105"></a>cm</span>
-<span id="cb40-106"><a href="pw-4.html#cb40-106"></a></span>
-<span id="cb40-107"><a href="pw-4.html#cb40-107"></a><span class="co"># You can show the confusion matrix in a mosaic plot by the way</span></span>
-<span id="cb40-108"><a href="pw-4.html#cb40-108"></a><span class="kw">mosaicplot</span>(cm,<span class="dt">col=</span><span class="kw">sample</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">8</span>,<span class="dv">2</span>)) <span class="co"># colors are random between 8 colors.</span></span>
-<span id="cb40-109"><a href="pw-4.html#cb40-109"></a></span>
-<span id="cb40-110"><a href="pw-4.html#cb40-110"></a><span class="co"># ROC</span></span>
-<span id="cb40-111"><a href="pw-4.html#cb40-111"></a><span class="kw">require</span>(ROCR)</span>
-<span id="cb40-112"><a href="pw-4.html#cb40-112"></a>score &lt;-<span class="st"> </span><span class="kw">prediction</span>(pred.glm,test_set[,<span class="dv">3</span>]) <span class="co"># we use the predicted probabilities not the 0 or 1</span></span>
-<span id="cb40-113"><a href="pw-4.html#cb40-113"></a><span class="kw">performance</span>(score,<span class="st">&quot;auc&quot;</span>) <span class="co"># y.values</span></span>
-<span id="cb40-114"><a href="pw-4.html#cb40-114"></a><span class="kw">plot</span>(<span class="kw">performance</span>(score,<span class="st">&quot;tpr&quot;</span>,<span class="st">&quot;fpr&quot;</span>),<span class="dt">col=</span><span class="st">&quot;green&quot;</span>)</span>
-<span id="cb40-115"><a href="pw-4.html#cb40-115"></a><span class="kw">abline</span>(<span class="dv">0</span>,<span class="dv">1</span>,<span class="dt">lty=</span><span class="dv">8</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb40"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb40-1" title="1"></a>
+<a class="sourceLine" id="cb40-2" title="2"><span class="co"># Loading the dataset.. I have putted it into a folder called &quot;datasets&quot;</span></a>
+<a class="sourceLine" id="cb40-3" title="3">dataset &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&#39;http://www.mghassany.com/MLcourse/datasets/Social_Network_Ads.csv&#39;</span>)</a>
+<a class="sourceLine" id="cb40-4" title="4"></a>
+<a class="sourceLine" id="cb40-5" title="5"><span class="co"># Describing and Exploring the dataset</span></a>
+<a class="sourceLine" id="cb40-6" title="6"></a>
+<a class="sourceLine" id="cb40-7" title="7"><span class="kw">str</span>(dataset) <span class="co"># to show the structure of the dataset. </span></a>
+<a class="sourceLine" id="cb40-8" title="8"><span class="kw">summary</span>(dataset) <span class="co"># will show some statistics of every column. </span></a>
+<a class="sourceLine" id="cb40-9" title="9"><span class="co"># Remark what it shows when the column is a numerical or categorical variable.</span></a>
+<a class="sourceLine" id="cb40-10" title="10"><span class="co"># Remark that it has no sense for the variable User.ID</span></a>
+<a class="sourceLine" id="cb40-11" title="11"></a>
+<a class="sourceLine" id="cb40-12" title="12"><span class="kw">boxplot</span>(Age <span class="op">~</span><span class="st"> </span>Purchased, <span class="dt">data=</span>dataset, <span class="dt">col =</span> <span class="st">&quot;blue&quot;</span>, <span class="dt">main=</span><span class="st">&quot;Boxplot Age ~ Purchased&quot;</span>)</a>
+<a class="sourceLine" id="cb40-13" title="13"><span class="co"># You know what is a boxplot right? I will let you interpret it.</span></a>
+<a class="sourceLine" id="cb40-14" title="14"><span class="kw">boxplot</span>(EstimatedSalary <span class="op">~</span><span class="st"> </span>Purchased, <span class="dt">data=</span>dataset,<span class="dt">col =</span> <span class="st">&quot;red&quot;</span>,</a>
+<a class="sourceLine" id="cb40-15" title="15"> <span class="dt">main=</span><span class="st">&quot;Boxplot EstimatedSalary ~ Purchased&quot;</span>)</a>
+<a class="sourceLine" id="cb40-16" title="16"><span class="co"># Another boxplot</span></a>
+<a class="sourceLine" id="cb40-17" title="17"></a>
+<a class="sourceLine" id="cb40-18" title="18"><span class="kw">aov</span>(EstimatedSalary <span class="op">~</span>Purchased, <span class="dt">data=</span>dataset)</a>
+<a class="sourceLine" id="cb40-19" title="19"><span class="co"># Anova test, but we need to show the summary of </span></a>
+<a class="sourceLine" id="cb40-20" title="20"><span class="co"># it in order to see the p-value and to interpret.</span></a>
+<a class="sourceLine" id="cb40-21" title="21"></a>
+<a class="sourceLine" id="cb40-22" title="22"><span class="kw">summary</span>(<span class="kw">aov</span>(EstimatedSalary <span class="op">~</span>Purchased, <span class="dt">data=</span>dataset))</a>
+<a class="sourceLine" id="cb40-23" title="23"><span class="co"># What do you conclude ?</span></a>
+<a class="sourceLine" id="cb40-24" title="24"><span class="co"># Now another anova test for the variable Age</span></a>
+<a class="sourceLine" id="cb40-25" title="25"><span class="kw">summary</span>(<span class="kw">aov</span>(Age <span class="op">~</span>Purchased, <span class="dt">data=</span>dataset))</a>
+<a class="sourceLine" id="cb40-26" title="26"></a>
+<a class="sourceLine" id="cb40-27" title="27"><span class="co"># There is a categorical variable in the dataset, which is Gender.</span></a>
+<a class="sourceLine" id="cb40-28" title="28"><span class="co"># Of course we cannot show a boxplot of Gender and Purchased.</span></a>
+<a class="sourceLine" id="cb40-29" title="29"><span class="co"># But we can show a table, or a mosaic plot, both tell the same thing.</span></a>
+<a class="sourceLine" id="cb40-30" title="30"><span class="kw">table</span>(dataset<span class="op">$</span>Gender,dataset<span class="op">$</span>Purchased)</a>
+<a class="sourceLine" id="cb40-31" title="31"><span class="co"># Remark for the function table(), that</span></a>
+<a class="sourceLine" id="cb40-32" title="32"><span class="co"># in lines we have the first argument, and in columns we have the second argument.</span></a>
+<a class="sourceLine" id="cb40-33" title="33"><span class="co"># Don&#39;t forget this when you use table() to show a confusion matrix!</span></a>
+<a class="sourceLine" id="cb40-34" title="34"><span class="kw">mosaicplot</span>(<span class="op">~</span><span class="st"> </span>Purchased <span class="op">+</span><span class="st"> </span>Gender, <span class="dt">data=</span>dataset,</a>
+<a class="sourceLine" id="cb40-35" title="35">  <span class="dt">main =</span> <span class="st">&quot;MosaicPlot of two categorical variables: Puchased &amp; Gender&quot;</span>,</a>
+<a class="sourceLine" id="cb40-36" title="36">  <span class="dt">color =</span> <span class="dv">2</span><span class="op">:</span><span class="dv">3</span>, <span class="dt">las =</span> <span class="dv">1</span>)</a>
+<a class="sourceLine" id="cb40-37" title="37"></a>
+<a class="sourceLine" id="cb40-38" title="38"><span class="co"># since these 2 variables are categorical, we can apply</span></a>
+<a class="sourceLine" id="cb40-39" title="39"><span class="co"># a Chi-square test. The null hypothesis is the independance between</span></a>
+<a class="sourceLine" id="cb40-40" title="40"><span class="co"># these variables. You will notice that p-value = 0.4562 which is higher than 0.05 (5%)</span></a>
+<a class="sourceLine" id="cb40-41" title="41"><span class="co"># so we cannot reject the null hypothesis. </span></a>
+<a class="sourceLine" id="cb40-42" title="42"><span class="co"># conclusion: there is no dependance between Gender and Purchased (who</span></a>
+<a class="sourceLine" id="cb40-43" title="43"><span class="co"># said that women buy more than men? hah!)</span></a>
+<a class="sourceLine" id="cb40-44" title="44"></a>
+<a class="sourceLine" id="cb40-45" title="45"><span class="kw">chisq.test</span>(dataset<span class="op">$</span>Purchased, dataset<span class="op">$</span>Gender)</a>
+<a class="sourceLine" id="cb40-46" title="46"></a>
+<a class="sourceLine" id="cb40-47" title="47"><span class="co"># Let&#39;s say we want to remove the first two columns as we are not going to use them.</span></a>
+<a class="sourceLine" id="cb40-48" title="48"><span class="co"># But, we can in fact use a categorical variable as a predictor in logistic regression.</span></a>
+<a class="sourceLine" id="cb40-49" title="49"><span class="co"># It will treat it the same way as in regression. Check Appendix C.</span></a>
+<a class="sourceLine" id="cb40-50" title="50"><span class="co"># Try it by yourself if you would like to.</span></a>
+<a class="sourceLine" id="cb40-51" title="51">dataset =<span class="st"> </span>dataset[<span class="dv">3</span><span class="op">:</span><span class="dv">5</span>]</a>
+<a class="sourceLine" id="cb40-52" title="52"><span class="kw">str</span>(dataset) <span class="co"># show the new structure of dataset</span></a>
+<a class="sourceLine" id="cb40-53" title="53"></a>
+<a class="sourceLine" id="cb40-54" title="54"></a>
+<a class="sourceLine" id="cb40-55" title="55"><span class="co"># splitting the dataset into training and testing sets</span></a>
+<a class="sourceLine" id="cb40-56" title="56"><span class="kw">library</span>(caTools)</a>
+<a class="sourceLine" id="cb40-57" title="57"><span class="kw">set.seed</span>(<span class="dv">123</span>) <span class="co"># CHANGE THE VALUE OF SEED. PUT YOUR STUDENT&#39;S NUMBER INSTEAD OF 123.</span></a>
+<a class="sourceLine" id="cb40-58" title="58">split =<span class="st"> </span><span class="kw">sample.split</span>(dataset<span class="op">$</span>Purchased, <span class="dt">SplitRatio =</span> <span class="fl">0.75</span>)</a>
+<a class="sourceLine" id="cb40-59" title="59">training_set =<span class="st"> </span><span class="kw">subset</span>(dataset, split <span class="op">==</span><span class="st"> </span><span class="ot">TRUE</span>)</a>
+<a class="sourceLine" id="cb40-60" title="60">test_set =<span class="st"> </span><span class="kw">subset</span>(dataset, split <span class="op">==</span><span class="st"> </span><span class="ot">FALSE</span>)</a>
+<a class="sourceLine" id="cb40-61" title="61"></a>
+<a class="sourceLine" id="cb40-62" title="62"><span class="co"># scaling</span></a>
+<a class="sourceLine" id="cb40-63" title="63"><span class="co"># So here, we have two continuous predictors, Age and EstimatedSalary.</span></a>
+<a class="sourceLine" id="cb40-64" title="64"><span class="co"># There is a very big difference in their scales (units).</span></a>
+<a class="sourceLine" id="cb40-65" title="65"><span class="co"># That&#39;s why we scale them. But it is not always necessary.</span></a>
+<a class="sourceLine" id="cb40-66" title="66"></a>
+<a class="sourceLine" id="cb40-67" title="67">training_set[<span class="op">-</span><span class="dv">3</span>] &lt;-<span class="st"> </span><span class="kw">scale</span>(training_set[<span class="op">-</span><span class="dv">3</span>]) <span class="co">#only first two columns</span></a>
+<a class="sourceLine" id="cb40-68" title="68">test_set[<span class="op">-</span><span class="dv">3</span>] &lt;-<span class="st"> </span><span class="kw">scale</span>(test_set[<span class="op">-</span><span class="dv">3</span>])</a>
+<a class="sourceLine" id="cb40-69" title="69"></a>
+<a class="sourceLine" id="cb40-70" title="70"><span class="co"># Note that, we replace the columns of Age and EstimatedSalary in the training and</span></a>
+<a class="sourceLine" id="cb40-71" title="71"><span class="co"># test sets but their scaled versions. I noticed in a lot of reports that you scaled</span></a>
+<a class="sourceLine" id="cb40-72" title="72"><span class="co"># but you did not do the replacing.</span></a>
+<a class="sourceLine" id="cb40-73" title="73"><span class="co"># Note too that if you do it column by column you will have a problem because </span></a>
+<a class="sourceLine" id="cb40-74" title="74"><span class="co"># it will replace the column by a matrix, you need to retransform it to a vector then.</span></a>
+<a class="sourceLine" id="cb40-75" title="75"><span class="co"># Last note, to call the columns Age and EstimatedSalary we can it like I did or </span></a>
+<a class="sourceLine" id="cb40-76" title="76"><span class="co"># training_set[c(1,2)] or training_set[,c(1,2)] or training_set[,c(&quot;Age&quot;,&quot;EstimatedSalary&quot;)]</span></a>
+<a class="sourceLine" id="cb40-77" title="77"></a>
+<a class="sourceLine" id="cb40-78" title="78"></a>
+<a class="sourceLine" id="cb40-79" title="79"><span class="co"># logistic regression</span></a>
+<a class="sourceLine" id="cb40-80" title="80"></a>
+<a class="sourceLine" id="cb40-81" title="81">classifier.logreg &lt;-<span class="st"> </span><span class="kw">glm</span>(Purchased <span class="op">~</span><span class="st"> </span>Age <span class="op">+</span><span class="st"> </span>EstimatedSalary , <span class="dt">family =</span> binomial, <span class="dt">data=</span>training_set)</a>
+<a class="sourceLine" id="cb40-82" title="82">classifier.logreg</a>
+<a class="sourceLine" id="cb40-83" title="83"><span class="kw">summary</span>(classifier.logreg)</a>
+<a class="sourceLine" id="cb40-84" title="84"></a>
+<a class="sourceLine" id="cb40-85" title="85"><span class="co"># prediction</span></a>
+<a class="sourceLine" id="cb40-86" title="86">pred.glm =<span class="st"> </span><span class="kw">predict</span>(classifier.logreg, <span class="dt">newdata =</span> test_set[,<span class="op">-</span><span class="dv">3</span>], <span class="dt">type=</span><span class="st">&quot;response&quot;</span>)</a>
+<a class="sourceLine" id="cb40-87" title="87"><span class="co"># Do not forget to put type response. </span></a>
+<a class="sourceLine" id="cb40-88" title="88"><span class="co"># By the way, you know what you get when you do not put it, right?</span></a>
+<a class="sourceLine" id="cb40-89" title="89"></a>
+<a class="sourceLine" id="cb40-90" title="90"><span class="co"># Now let&#39;s assign observations to classes with respect to the probabilities</span></a>
+<a class="sourceLine" id="cb40-91" title="91">pred.glm_<span class="dv">0</span>_<span class="dv">1</span> =<span class="st"> </span><span class="kw">ifelse</span>(pred.glm <span class="op">&gt;=</span><span class="st"> </span><span class="fl">0.5</span>, <span class="dv">1</span>,<span class="dv">0</span>)</a>
+<a class="sourceLine" id="cb40-92" title="92"><span class="co"># I created a new vector, because we need the probabilities later for the ROC curve.</span></a>
+<a class="sourceLine" id="cb40-93" title="93"></a>
+<a class="sourceLine" id="cb40-94" title="94"><span class="co"># show some values of the vectors</span></a>
+<a class="sourceLine" id="cb40-95" title="95"><span class="kw">head</span>(pred.glm)</a>
+<a class="sourceLine" id="cb40-96" title="96"><span class="kw">head</span>(pred.glm_<span class="dv">0</span>_<span class="dv">1</span>)</a>
+<a class="sourceLine" id="cb40-97" title="97"></a>
+<a class="sourceLine" id="cb40-98" title="98"><span class="co"># confusion matrix</span></a>
+<a class="sourceLine" id="cb40-99" title="99">cm =<span class="st"> </span><span class="kw">table</span>(test_set[,<span class="dv">3</span>], pred.glm_<span class="dv">0</span>_<span class="dv">1</span>)</a>
+<a class="sourceLine" id="cb40-100" title="100">cm</a>
+<a class="sourceLine" id="cb40-101" title="101"><span class="co"># First line to store it into cm, second line to show the matrix! </span></a>
+<a class="sourceLine" id="cb40-102" title="102"></a>
+<a class="sourceLine" id="cb40-103" title="103"><span class="co"># You remember my note about table() function and the order of the arguments?</span></a>
+<a class="sourceLine" id="cb40-104" title="104">cm =<span class="st"> </span><span class="kw">table</span>(pred.glm_<span class="dv">0</span>_<span class="dv">1</span>, test_set[,<span class="dv">3</span>])</a>
+<a class="sourceLine" id="cb40-105" title="105">cm</a>
+<a class="sourceLine" id="cb40-106" title="106"></a>
+<a class="sourceLine" id="cb40-107" title="107"><span class="co"># You can show the confusion matrix in a mosaic plot by the way</span></a>
+<a class="sourceLine" id="cb40-108" title="108"><span class="kw">mosaicplot</span>(cm,<span class="dt">col=</span><span class="kw">sample</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">8</span>,<span class="dv">2</span>)) <span class="co"># colors are random between 8 colors.</span></a>
+<a class="sourceLine" id="cb40-109" title="109"></a>
+<a class="sourceLine" id="cb40-110" title="110"><span class="co"># ROC</span></a>
+<a class="sourceLine" id="cb40-111" title="111"><span class="kw">require</span>(ROCR)</a>
+<a class="sourceLine" id="cb40-112" title="112">score &lt;-<span class="st"> </span><span class="kw">prediction</span>(pred.glm,test_set[,<span class="dv">3</span>]) <span class="co"># we use the predicted probabilities not the 0 or 1</span></a>
+<a class="sourceLine" id="cb40-113" title="113"><span class="kw">performance</span>(score,<span class="st">&quot;auc&quot;</span>) <span class="co"># y.values</span></a>
+<a class="sourceLine" id="cb40-114" title="114"><span class="kw">plot</span>(<span class="kw">performance</span>(score,<span class="st">&quot;tpr&quot;</span>,<span class="st">&quot;fpr&quot;</span>),<span class="dt">col=</span><span class="st">&quot;green&quot;</span>)</a>
+<a class="sourceLine" id="cb40-115" title="115"><span class="kw">abline</span>(<span class="dv">0</span>,<span class="dv">1</span>,<span class="dt">lty=</span><span class="dv">8</span>)</a></code></pre></div>
 <p>So now we have a logistic regression model stored in <code>classifier.logreg</code>. It is a model of <code>Purchased</code> in function of <code>Age</code> and <code>EstimatedSalary</code>. We will use this model to show the <strong>decision boundary</strong> in the next part of this PW. Then we will compare this model to other models obtained by Discriminant Analysis approaches.</p>
 </div>
 <div id="decision-boundary-of-logistic-regression" class="section level2 unnumbered">
@@ -559,40 +557,40 @@ So we predict <span class="math inline"><span class="math inline">\(y=1\)</span>
 <h2>Linear Discriminant Analysis (LDA)</h2>
 <p>Let us apply linear discriminant analysis (LDA) now. First we will make use of the <code>lda()</code> function in the package <code>MASS</code>. Second, you are going to create the model and predict the classes by yourself without using the <code>lda()</code> function. And we will visualize the decision boundary of LDA.</p>
 <p><strong>5.</strong> Fit a LDA model of <code>Purchased</code> in function of <code>Age</code> and <code>EstimatedSalary</code>. Name the model <code>classifier.lda</code>.</p>
-<div class="sourceCode" id="cb41"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb41-1"><a href="pw-4.html#cb41-1"></a><span class="kw">library</span>(MASS)</span>
-<span id="cb41-2"><a href="pw-4.html#cb41-2"></a>classifier.lda &lt;-<span class="st"> </span><span class="kw">lda</span>(Purchased<span class="op">~</span>Age<span class="op">+</span>EstimatedSalary, <span class="dt">data=</span>training_set)</span></code></pre></div>
+<div class="sourceCode" id="cb41"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb41-1" title="1"><span class="kw">library</span>(MASS)</a>
+<a class="sourceLine" id="cb41-2" title="2">classifier.lda &lt;-<span class="st"> </span><span class="kw">lda</span>(Purchased<span class="op">~</span>Age<span class="op">+</span>EstimatedSalary, <span class="dt">data=</span>training_set)</a></code></pre></div>
 <p><strong>6.</strong> Call <code>classifier.lda</code> and understand what does it compute.</p>
 <p><strong>Plus:</strong> If you enter the following you will be returned with a list of summary information concerning the computation:</p>
-<div class="sourceCode" id="cb42"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb42-1"><a href="pw-4.html#cb42-1"></a>classifier.lda<span class="op">$</span>prior</span>
-<span id="cb42-2"><a href="pw-4.html#cb42-2"></a>classifier.lda<span class="op">$</span>means</span></code></pre></div>
+<div class="sourceCode" id="cb42"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb42-1" title="1">classifier.lda<span class="op">$</span>prior</a>
+<a class="sourceLine" id="cb42-2" title="2">classifier.lda<span class="op">$</span>means</a></code></pre></div>
 <p><strong>7.</strong> On the test set, predict the probability of purchasing the product by the users using the model <code>classifier.lda</code>. Remark that when we predict using LDA, we obtain a list instead of a matrix, do <code>str()</code> for your predictions to see what do you get.</p>
 <p><strong>Remark</strong>: we get the predicted class here, without being obligated to round the predictions as we did for logistic regression.</p>
 <p><strong>8.</strong> Compute the confusion matrix and compare the predictions results obtained by LDA to the ones obtained by logistic regression. What do you remark? (<strong>Hint</strong>: compare the accuracy)</p>
 <p><strong>9.</strong> Now let us plot the decision boundary obtained with LDA. You saw in the course that decision boundary for LDA represent the set of values <span class="math inline">\(x\)</span> where <span class="math inline">\(\delta_k(x) = \delta_c(x)\)</span>. Recall that
 <span class="math display">\[ \delta_k(X) = x^T \Sigma^{-1} \mu_k - \frac{1}{2} \mu_k^T \Sigma^{-1}  \mu_k + \log \pi_k \]</span></p>
 <p>Here in our case, we have 2 classes (<span class="math inline">\(K=2\)</span>) and 2 predictors (<span class="math inline">\(p=2\)</span>). So the decision boundary (which is linear in the case of LDA, and line in our case since <span class="math inline">\(p=2\)</span>) will verify the equation <span class="math inline">\(\delta_0(x) = \delta_1(x)\)</span> Since we have two classes “0” and “1”. In the case of LDA this leads to linear boundary and is easy to be plotted. But in more complicated cases it is difficult to manually simplify the equations and plot the decision boundary. Anyway, there is a smart method to plot (but a little bit costy) the decision boundary in <code>R</code> using the function <code>contour()</code>, the corresponding code is the following (you must adapt it and use it to plot your decision boundary):</p>
-<div class="sourceCode" id="cb43"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb43-1"><a href="pw-4.html#cb43-1"></a><span class="co"># create a grid corresponding to the scales of Age and EstimatedSalary</span></span>
-<span id="cb43-2"><a href="pw-4.html#cb43-2"></a><span class="co"># and fill this grid with lot of points</span></span>
-<span id="cb43-3"><a href="pw-4.html#cb43-3"></a>X1 =<span class="st"> </span><span class="kw">seq</span>(<span class="kw">min</span>(training_set[, <span class="dv">1</span>]) <span class="op">-</span><span class="st"> </span><span class="dv">1</span>, <span class="kw">max</span>(training_set[, <span class="dv">1</span>]) <span class="op">+</span><span class="st"> </span><span class="dv">1</span>, <span class="dt">by =</span> <span class="fl">0.01</span>)</span>
-<span id="cb43-4"><a href="pw-4.html#cb43-4"></a>X2 =<span class="st"> </span><span class="kw">seq</span>(<span class="kw">min</span>(training_set[, <span class="dv">2</span>]) <span class="op">-</span><span class="st"> </span><span class="dv">1</span>, <span class="kw">max</span>(training_set[, <span class="dv">2</span>]) <span class="op">+</span><span class="st"> </span><span class="dv">1</span>, <span class="dt">by =</span> <span class="fl">0.01</span>)</span>
-<span id="cb43-5"><a href="pw-4.html#cb43-5"></a>grid_set =<span class="st"> </span><span class="kw">expand.grid</span>(X1, X2)</span>
-<span id="cb43-6"><a href="pw-4.html#cb43-6"></a><span class="co"># Adapt the variable names</span></span>
-<span id="cb43-7"><a href="pw-4.html#cb43-7"></a><span class="kw">colnames</span>(grid_set) =<span class="st"> </span><span class="kw">c</span>(<span class="st">&#39;Age&#39;</span>, <span class="st">&#39;EstimatedSalary&#39;</span>)</span>
-<span id="cb43-8"><a href="pw-4.html#cb43-8"></a></span>
-<span id="cb43-9"><a href="pw-4.html#cb43-9"></a><span class="co"># plot &#39;Estimated Salary&#39; ~ &#39;Age&#39;</span></span>
-<span id="cb43-10"><a href="pw-4.html#cb43-10"></a><span class="kw">plot</span>(test_set[, <span class="dv">1</span><span class="op">:</span><span class="dv">2</span>],</span>
-<span id="cb43-11"><a href="pw-4.html#cb43-11"></a>     <span class="dt">main =</span> <span class="st">&#39;Decision Boundary LDA&#39;</span>,</span>
-<span id="cb43-12"><a href="pw-4.html#cb43-12"></a>     <span class="dt">xlab =</span> <span class="st">&#39;Age&#39;</span>, <span class="dt">ylab =</span> <span class="st">&#39;Estimated Salary&#39;</span>,</span>
-<span id="cb43-13"><a href="pw-4.html#cb43-13"></a>     <span class="dt">xlim =</span> <span class="kw">range</span>(X1), <span class="dt">ylim =</span> <span class="kw">range</span>(X2))</span>
-<span id="cb43-14"><a href="pw-4.html#cb43-14"></a></span>
-<span id="cb43-15"><a href="pw-4.html#cb43-15"></a><span class="co"># color the plotted points with their real label (class)</span></span>
-<span id="cb43-16"><a href="pw-4.html#cb43-16"></a><span class="kw">points</span>(test_set[<span class="dv">1</span><span class="op">:</span><span class="dv">2</span>], <span class="dt">pch =</span> <span class="dv">21</span>, <span class="dt">bg =</span> <span class="kw">ifelse</span>(test_set[, <span class="dv">3</span>] <span class="op">==</span><span class="st"> </span><span class="dv">1</span>, <span class="st">&#39;green4&#39;</span>, <span class="st">&#39;red3&#39;</span>))</span>
-<span id="cb43-17"><a href="pw-4.html#cb43-17"></a></span>
-<span id="cb43-18"><a href="pw-4.html#cb43-18"></a><span class="co"># Make predictions on the points of the grid, this will take some time</span></span>
-<span id="cb43-19"><a href="pw-4.html#cb43-19"></a>pred_grid =<span class="st"> </span><span class="kw">predict</span>(classifier.lda, <span class="dt">newdata =</span> grid_set)<span class="op">$</span>class</span>
-<span id="cb43-20"><a href="pw-4.html#cb43-20"></a></span>
-<span id="cb43-21"><a href="pw-4.html#cb43-21"></a><span class="co"># Separate the predictions by a contour</span></span>
-<span id="cb43-22"><a href="pw-4.html#cb43-22"></a><span class="kw">contour</span>(X1, X2, <span class="kw">matrix</span>(<span class="kw">as.numeric</span>(pred_grid), <span class="kw">length</span>(X1), <span class="kw">length</span>(X2)), <span class="dt">add =</span> <span class="ot">TRUE</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb43"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb43-1" title="1"><span class="co"># create a grid corresponding to the scales of Age and EstimatedSalary</span></a>
+<a class="sourceLine" id="cb43-2" title="2"><span class="co"># and fill this grid with lot of points</span></a>
+<a class="sourceLine" id="cb43-3" title="3">X1 =<span class="st"> </span><span class="kw">seq</span>(<span class="kw">min</span>(training_set[, <span class="dv">1</span>]) <span class="op">-</span><span class="st"> </span><span class="dv">1</span>, <span class="kw">max</span>(training_set[, <span class="dv">1</span>]) <span class="op">+</span><span class="st"> </span><span class="dv">1</span>, <span class="dt">by =</span> <span class="fl">0.01</span>)</a>
+<a class="sourceLine" id="cb43-4" title="4">X2 =<span class="st"> </span><span class="kw">seq</span>(<span class="kw">min</span>(training_set[, <span class="dv">2</span>]) <span class="op">-</span><span class="st"> </span><span class="dv">1</span>, <span class="kw">max</span>(training_set[, <span class="dv">2</span>]) <span class="op">+</span><span class="st"> </span><span class="dv">1</span>, <span class="dt">by =</span> <span class="fl">0.01</span>)</a>
+<a class="sourceLine" id="cb43-5" title="5">grid_set =<span class="st"> </span><span class="kw">expand.grid</span>(X1, X2)</a>
+<a class="sourceLine" id="cb43-6" title="6"><span class="co"># Adapt the variable names</span></a>
+<a class="sourceLine" id="cb43-7" title="7"><span class="kw">colnames</span>(grid_set) =<span class="st"> </span><span class="kw">c</span>(<span class="st">&#39;Age&#39;</span>, <span class="st">&#39;EstimatedSalary&#39;</span>)</a>
+<a class="sourceLine" id="cb43-8" title="8"></a>
+<a class="sourceLine" id="cb43-9" title="9"><span class="co"># plot &#39;Estimated Salary&#39; ~ &#39;Age&#39;</span></a>
+<a class="sourceLine" id="cb43-10" title="10"><span class="kw">plot</span>(test_set[, <span class="dv">1</span><span class="op">:</span><span class="dv">2</span>],</a>
+<a class="sourceLine" id="cb43-11" title="11">     <span class="dt">main =</span> <span class="st">&#39;Decision Boundary LDA&#39;</span>,</a>
+<a class="sourceLine" id="cb43-12" title="12">     <span class="dt">xlab =</span> <span class="st">&#39;Age&#39;</span>, <span class="dt">ylab =</span> <span class="st">&#39;Estimated Salary&#39;</span>,</a>
+<a class="sourceLine" id="cb43-13" title="13">     <span class="dt">xlim =</span> <span class="kw">range</span>(X1), <span class="dt">ylim =</span> <span class="kw">range</span>(X2))</a>
+<a class="sourceLine" id="cb43-14" title="14"></a>
+<a class="sourceLine" id="cb43-15" title="15"><span class="co"># color the plotted points with their real label (class)</span></a>
+<a class="sourceLine" id="cb43-16" title="16"><span class="kw">points</span>(test_set[<span class="dv">1</span><span class="op">:</span><span class="dv">2</span>], <span class="dt">pch =</span> <span class="dv">21</span>, <span class="dt">bg =</span> <span class="kw">ifelse</span>(test_set[, <span class="dv">3</span>] <span class="op">==</span><span class="st"> </span><span class="dv">1</span>, <span class="st">&#39;green4&#39;</span>, <span class="st">&#39;red3&#39;</span>))</a>
+<a class="sourceLine" id="cb43-17" title="17"></a>
+<a class="sourceLine" id="cb43-18" title="18"><span class="co"># Make predictions on the points of the grid, this will take some time</span></a>
+<a class="sourceLine" id="cb43-19" title="19">pred_grid =<span class="st"> </span><span class="kw">predict</span>(classifier.lda, <span class="dt">newdata =</span> grid_set)<span class="op">$</span>class</a>
+<a class="sourceLine" id="cb43-20" title="20"></a>
+<a class="sourceLine" id="cb43-21" title="21"><span class="co"># Separate the predictions by a contour</span></a>
+<a class="sourceLine" id="cb43-22" title="22"><span class="kw">contour</span>(X1, X2, <span class="kw">matrix</span>(<span class="kw">as.numeric</span>(pred_grid), <span class="kw">length</span>(X1), <span class="kw">length</span>(X2)), <span class="dt">add =</span> <span class="ot">TRUE</span>)</a></code></pre></div>
 </div>
 <div id="lda-from-scratch" class="section level2 unnumbered">
 <h2>LDA from scratch</h2>
@@ -638,8 +636,8 @@ Note that <span class="math display"><span class="math display">\[x=\begin{pmatr
 <h2>Quadratic Discriminant Analysis (QDA)</h2>
 <p>Training and assessing a QDA model in <code>R</code> is very similar in syntax to training and assessing a LDA model. The only difference is in the function name <code>qda()</code></p>
 <p><strong>11.</strong> Fit a QDA model of <code>Purchased</code> in function of <code>Age</code> and <code>EstimatedSalary</code>. Name the model <code>classifier.qda</code>.</p>
-<div class="sourceCode" id="cb44"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb44-1"><a href="pw-4.html#cb44-1"></a><span class="co"># qda() is a function of library(MASS)</span></span>
-<span id="cb44-2"><a href="pw-4.html#cb44-2"></a>classifier.qda &lt;-<span class="st"> </span><span class="kw">qda</span>(Purchased<span class="op">~</span>., <span class="dt">data =</span> training_set)</span></code></pre></div>
+<div class="sourceCode" id="cb44"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb44-1" title="1"><span class="co"># qda() is a function of library(MASS)</span></a>
+<a class="sourceLine" id="cb44-2" title="2">classifier.qda &lt;-<span class="st"> </span><span class="kw">qda</span>(Purchased<span class="op">~</span>., <span class="dt">data =</span> training_set)</a></code></pre></div>
 <p><strong>12.</strong> Make predictions on the <code>test_set</code> using the QDA model <code>classifier.qda</code>. Show the confusion matrix and compare the results with the predictions obtained using the LDA model <code>classifier.lda</code>.</p>
 <p><strong>13.</strong> Plot the decision boundary obtained with QDA. Color the points with the real labels.</p>
 <!-- ## Naive Bayes {-} -->

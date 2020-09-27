@@ -24,7 +24,7 @@
 <meta name="author" content="Mohamad Ghassany" />
 
 
-<meta name="date" content="2020-09-18" />
+<meta name="date" content="2020-09-27" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -65,9 +65,9 @@
 
 
 <style type="text/css">
-code.sourceCode > span { display: inline-block; line-height: 1.25; }
-code.sourceCode > span { color: inherit; text-decoration: inherit; }
-code.sourceCode > span:empty { height: 1.2em; }
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; }
 .sourceCode { overflow: visible; }
 code.sourceCode { white-space: pre; position: relative; }
 pre.sourceCode { margin: 0; }
@@ -76,16 +76,14 @@ div.sourceCode { overflow: auto; }
 }
 @media print {
 code.sourceCode { white-space: pre-wrap; }
-code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
 }
-pre.numberSource code
-  { counter-reset: source-line 0; }
-pre.numberSource code > span
-  { position: relative; left: -4em; counter-increment: source-line; }
-pre.numberSource code > span > a:first-child::before
-  { content: counter(source-line);
+pre.numberSource a.sourceLine
+  { position: relative; left: -4em; }
+pre.numberSource a.sourceLine::before
+  { content: attr(title);
     position: relative; left: -1em; text-align: right; vertical-align: baseline;
-    border: none; display: inline-block;
+    border: none; pointer-events: all; display: inline-block;
     -webkit-touch-callout: none; -webkit-user-select: none;
     -khtml-user-select: none; -moz-user-select: none;
     -ms-user-select: none; user-select: none;
@@ -97,7 +95,7 @@ pre.numberSource { margin-left: 3em; border-left: 1px solid #a0a0a0;  padding-le
 div.sourceCode
   { color: #1f1c1b; background-color: #ffffff; }
 @media screen {
-code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+a.sourceLine::before { text-decoration: underline; }
 }
 code span. { color: #1f1c1b; } /* Normal */
 code span.al { color: #bf0303; background-color: #f7e6e6; font-weight: bold; } /* Alert */
@@ -435,7 +433,7 @@ In the previous chapter, we took for example the prediction of housing prices co
 <p>We choose <span class="math inline">\(\beta_{0}, \beta_{1}, \ldots, \beta_{p}\)</span> to minimize the residual sum of squares</p>
 <p><span class="math display">\[ \begin{aligned}
 RSS &amp;= \sum_{i=1}^{n} (y_i - \hat{y}_i)^2 \\
-    &amp;= \sum_{i=1}^{n} (y_1 - \hat{\beta_0} - \hat{\beta_1} {x}_{i1}  - \hat{\beta_2} {x}_{i2} - \ldots  -  \hat{\beta_p} {x}_{ip})^2 \\
+    &amp;= \sum_{i=1}^{n} (y_i - \hat{\beta_0} - \hat{\beta_1} {x}_{i1}  - \hat{\beta_2} {x}_{i2} - \ldots  -  \hat{\beta_p} {x}_{ip})^2 \\
 \end{aligned}
 \]</span></p>
 <p>The values <span class="math inline">\(\hat{\beta_{0}}, \hat{\beta_{1}}, \ldots, \hat{\beta_{p}}\)</span> that minimize the RSS are the multiple least squares regression coefficient estimates, they are calculated using this formula (in matrix terms):</p>
@@ -758,11 +756,11 @@ Figure 2.1: Comparison of <span class="math inline">\(R^2\)</span> and <span cla
 <div class="footnotes">
 <hr />
 <ol start="7">
-<li id="fn7"><p>Important to be sure that <span class="math inline">\(\hat{\beta}\)</span> is minimising RSS.<a href="multiple-linear-regression.html#fnref7" class="footnote-back">↩︎</a></p></li>
-<li id="fn8"><p>Recal that ESS is the explained sum of squares, ESS = TSS - RSS.<a href="multiple-linear-regression.html#fnref8" class="footnote-back">↩︎</a></p></li>
-<li id="fn9"><p>More complex – included here just for clarification of the <code>anova</code>’s output.<a href="multiple-linear-regression.html#fnref9" class="footnote-back">↩︎</a></p></li>
-<li id="fn10"><p>Recall that <span class="math inline">\(R^2 = 1- \frac{\text{RSS}}{\text{TSS}}\)</span><a href="multiple-linear-regression.html#fnref10" class="footnote-back">↩︎</a></p></li>
-<li id="fn11"><p>It is defined as <span class="math inline">\(R_{adj}^2 = 1- \frac{\text{RSS}/(n-p-1)}{\text{TSS}/(n-1)} = 1- \frac{\text{RSS}}{\text{TSS}}\times\frac{n-1}{n-p-1}\)</span><a href="multiple-linear-regression.html#fnref11" class="footnote-back">↩︎</a></p></li>
+<li id="fn7"><p>Important to be sure that <span class="math inline">\(\hat{\beta}\)</span> is minimising RSS.<a href="multiple-linear-regression.html#fnref7" class="footnote-back">↩</a></p></li>
+<li id="fn8"><p>Recal that ESS is the explained sum of squares, ESS = TSS - RSS.<a href="multiple-linear-regression.html#fnref8" class="footnote-back">↩</a></p></li>
+<li id="fn9"><p>More complex – included here just for clarification of the <code>anova</code>’s output.<a href="multiple-linear-regression.html#fnref9" class="footnote-back">↩</a></p></li>
+<li id="fn10"><p>Recall that <span class="math inline">\(R^2 = 1- \frac{\text{RSS}}{\text{TSS}}\)</span><a href="multiple-linear-regression.html#fnref10" class="footnote-back">↩</a></p></li>
+<li id="fn11"><p>It is defined as <span class="math inline">\(R_{adj}^2 = 1- \frac{\text{RSS}/(n-p-1)}{\text{TSS}/(n-1)} = 1- \frac{\text{RSS}}{\text{TSS}}\times\frac{n-1}{n-p-1}\)</span><a href="multiple-linear-regression.html#fnref11" class="footnote-back">↩</a></p></li>
 </ol>
 </div>
             </section>

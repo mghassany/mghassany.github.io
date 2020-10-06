@@ -24,7 +24,7 @@
 <meta name="author" content="Mohamad Ghassany" />
 
 
-<meta name="date" content="2020-09-27" />
+<meta name="date" content="2020-10-06" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -384,8 +384,7 @@ code span.wa { color: #bf0303; } /* Warning */
 <h1><span class="header-section-number">3</span> Logistic Regression</h1>
 <div id="introduction-1" class="section level2">
 <h2><span class="header-section-number">3.1</span> Introduction</h2>
-<p>In the previous chapters we discussed the linear regression model, which assumes that the response variable <span class="math inline">\(Y\)</span> is quantitative. But in many situations, the response
-variable is instead qualitative (categorical). For example, eye color is qualitative, taking on values blue, brown, or green.</p>
+<p>In the previous chapters we discussed the linear regression model, which assumes that the response variable <span class="math inline">\(Y\)</span> is quantitative. But in many situations, the response variable is instead qualitative (categorical). For example, eye color is qualitative, taking on values blue, brown, or green.</p>
 <p>The process for predicting qualitative responses is known as <strong><em>classification</em></strong>.</p>
 <p>Given a feature vector <span class="math inline">\(X\)</span> and a qualitative response <span class="math inline">\(Y\)</span> taking values in the set <span class="math inline">\(\mathcal{C}\)</span>, the classification task is to build a function <span class="math inline">\(C(X)\)</span> that takes as input the feature vector <span class="math inline">\(X\)</span> and predicts its value for <span class="math inline">\(Y\)</span>; i.e. <span class="math inline">\(C(X) \in \mathcal{C}\)</span>. We are often more interested in estimating the probabilities that <span class="math inline">\(X\)</span> belongs to each category in <span class="math inline">\(\mathcal{C}\)</span>.</p>
 <blockquote>
@@ -404,15 +403,11 @@ variable is instead qualitative (categorical). For example, eye color is qualita
 <h3><span class="header-section-number">3.2.1</span> The Logistic Model</h3>
 <p>Let us suppose the response has two categories and we use the generic 0/1 coding for the response. How should we model the relationship between <span class="math inline">\(p(X) = \mathbb{P}(Y = 1|X)\)</span> and <span class="math inline">\(X\)</span>?</p>
 <p>The simplest situation is when <span class="math inline">\(Y\)</span> is <em>binary</em>: it can only take two values, codified for convenience as <span class="math inline">\(1\)</span> (success) and <span class="math inline">\(0\)</span> (failure).</p>
-<p>More formally, a binary variable is known as a <em>Bernoulli variable</em>, which is the simplest non-trivial random variable. We say that <span class="math inline">\(Y\sim\mathrm{Ber}(p)\)</span>, <span class="math inline">\(0\leq p\leq1\)</span>, if
-<span class="math display">\[
+<p>More formally, a binary variable is known as a <em>Bernoulli variable</em>, which is the simplest non-trivial random variable. We say that <span class="math inline">\(Y\sim\mathrm{Ber}(p)\)</span>, <span class="math inline">\(0\leq p\leq1\)</span>, if <span class="math display">\[
 Y=\left\{\begin{array}{ll}1,&amp;\text{with probability }p,\\0,&amp;\text{with probability }1-p,\end{array}\right.
-\]</span>
-or, equivalently, if <span class="math inline">\(\mathbb{P}[Y=1]=p\)</span> and <span class="math inline">\(\mathbb{P}[Y=0]=1-p\)</span>, which can be written compactly as
-<span class="math display">\[\begin{aligned}
+\]</span> or, equivalently, if <span class="math inline">\(\mathbb{P}[Y=1]=p\)</span> and <span class="math inline">\(\mathbb{P}[Y=0]=1-p\)</span>, which can be written compactly as <span class="math display">\[\begin{aligned}
 \mathbb{P}[Y=y]=p^y(1-p)^{1-y},\quad y=0,1.
-\end{aligned}\]</span>
-Recall that a <em>binomial variable with size <span class="math inline">\(n\)</span> and probability <span class="math inline">\(p\)</span></em>, <span class="math inline">\(\mathrm{Bi}(n,p)\)</span>, was obtained by adding <span class="math inline">\(n\)</span> independent <span class="math inline">\(\mathrm{Ber}(p)\)</span> (so <span class="math inline">\(\mathrm{Ber}(p)\)</span> is the same as <span class="math inline">\(\mathrm{Bi}(1,p)\)</span>).</p>
+\end{aligned}\]</span> Recall that a <em>binomial variable with size</em> <span class="math inline">\(n\)</span> and probability <span class="math inline">\(p\)</span>, <span class="math inline">\(\mathrm{Bi}(n,p)\)</span>, was obtained by adding <span class="math inline">\(n\)</span> independent <span class="math inline">\(\mathrm{Ber}(p)\)</span> (so <span class="math inline">\(\mathrm{Ber}(p)\)</span> is the same as <span class="math inline">\(\mathrm{Bi}(1,p)\)</span>).</p>
 <div class="rmdinsight">
 <p>
 A Bernoulli variable <span class="math inline"><span class="math inline">\(Y\)</span></span> is completely determined by <span class="math inline"><span class="math inline">\(p\)</span></span>. <strong>So its mean and variance</strong>:
@@ -429,16 +424,12 @@ A Bernoulli variable <span class="math inline"><span class="math inline">\(Y\)</
 In particular, recall that <span class="math inline"><span class="math inline">\(\mathbb{P}[Y=1]=\mathbb{E}[Y]=p\)</span></span>.
 </p>
 </div>
-<p>Assume then that <span class="math inline">\(Y\)</span> is a binary/Bernoulli variable and that <span class="math inline">\(X\)</span> are predictors associated to them (no particular assumptions on them). The purpose in <em>logistic regression</em> is to estimate
-<span class="math display">\[
+<p>Assume then that <span class="math inline">\(Y\)</span> is a binary/Bernoulli variable and that <span class="math inline">\(X\)</span> are predictors associated to them (no particular assumptions on them). The purpose in <em>logistic regression</em> is to estimate <span class="math display">\[
 p(x)=\mathbb{P}[Y=1|X=x]=\mathbb{E}[Y|X=x],
-\]</span>
-this is, how the probability of <span class="math inline">\(Y=1\)</span> is changing according to particular values, denoted by <span class="math inline">\(x\)</span>, of the random variables <span class="math inline">\(X\)</span>.</p>
-<p><em>Why not linear regression?</em> A tempting possibility is to consider the model
-<span class="math display">\[
+\]</span> this is, how the probability of <span class="math inline">\(Y=1\)</span> is changing according to particular values, denoted by <span class="math inline">\(x\)</span>, of the random variables <span class="math inline">\(X\)</span>.</p>
+<p><em>Why not linear regression?</em> A tempting possibility is to consider the model <span class="math display">\[
 p(x)=\beta_0+\beta_1 x.
-\]</span>
-However, such a model will run into problems inevitably: negative probabilities and probabilities larger than one (<span class="math inline">\(p(x) &lt; 0\)</span> for some values of <span class="math inline">\(X\)</span> and <span class="math inline">\(p(X) &gt; 1\)</span> for others). To avoid this problem, the solution is to consider a function to encapsulate the value of <span class="math inline">\(z=\beta_0+\beta_1 x\)</span>, in <span class="math inline">\(\mathbb{R}\)</span>, and map it to <span class="math inline">\([0,1]\)</span>. There are several alternatives to do so, based on distribution functions <span class="math inline">\(F:\mathbb{R}\longrightarrow[0,1]\)</span> that deliver <span class="math inline">\(y=F(z)\in[0,1]\)</span>. Many functions meet this description. In logistic regression, we use the <em>logistic function</em>,</p>
+\]</span> However, such a model will run into problems inevitably: negative probabilities and probabilities larger than one (<span class="math inline">\(p(x) &lt; 0\)</span> for some values of <span class="math inline">\(X\)</span> and <span class="math inline">\(p(X) &gt; 1\)</span> for others). To avoid this problem, the solution is to consider a function to encapsulate the value of <span class="math inline">\(z=\beta_0+\beta_1 x\)</span>, in <span class="math inline">\(\mathbb{R}\)</span>, and map it to <span class="math inline">\([0,1]\)</span>. There are several alternatives to do so, based on distribution functions <span class="math inline">\(F:\mathbb{R}\longrightarrow[0,1]\)</span> that deliver <span class="math inline">\(y=F(z)\in[0,1]\)</span>. Many functions meet this description. In logistic regression, we use the <em>logistic function</em>,</p>
 <p><span class="math display">\[ p(X) = \frac{e^{\beta_0 + \beta_1 X}}{1+e^{\beta_0 + \beta_1 X}} \]</span></p>
 <div class="rmdinsight">
 <ul>
@@ -460,7 +451,7 @@ The logistic <em>distribution</em> function is: <span class="math display"><span
 The quantity <span class="math inline"><span class="math inline">\(p(X)/[1−p(X)]\)</span></span> is called the <em>odds</em>, and can take on any value between <span class="math inline"><span class="math inline">\(0\)</span></span> and <span class="math inline"><span class="math inline">\(\infty\)</span></span>.
 </p>
 </div>
-<p>By taking the logarithm of both sides of the equation, we arrive at</p>
+<p>By taking the logarithm of both sides of the equation, we arrive at<a href="#fn12" class="footnote-ref" id="fnref12"><sup>12</sup></a></p>
 <p><span class="math display">\[ \log( \frac{p(X)}{1-p(X)} ) = \beta_0 + \beta_1 X \]</span></p>
 <div class="rmdinsight">
 <p>
@@ -478,7 +469,7 @@ The left-hand side is called the <em>log-odds</em> or <em>logit</em>. We see tha
 <p><span class="math display">\[ l(\beta_0,\beta_1) = \prod_{i=1}^n p(x_i)^{Y_i}(1-p(x_i))^{1-Y_i}. \]</span></p>
 <p>This likelihood is <strong>the probability of the data based on the model</strong>. It gives the probability of the observed zeros and ones in the data. The estimates <span class="math inline">\(\hat{\beta_0}\)</span> and <span class="math inline">\(\hat{\beta_1}\)</span> are chosen to <em>maximize</em> this likelihood function. The interpretation of the likelihood function is the following:</p>
 <ul>
-<li><span class="math inline">\(\prod_{i=1}^n\)</span> appears because the sample elements are assumed to be independent and we are computing the probability of observing the whole sample <span class="math inline">\((x_{1},y_1),\ldots,(x_{n},y_n)\)</span>. This probability is equal to the product of the <em>probabilities of observing each <span class="math inline">\((x_{i},y_i)\)</span></em>.</li>
+<li><span class="math inline">\(\prod_{i=1}^n\)</span> appears because the sample elements are assumed to be independent and we are computing the probability of observing the whole sample <span class="math inline">\((x_{1},y_1),\ldots,(x_{n},y_n)\)</span>. This probability is equal to the product of the <em>probabilities of observing each</em> <span class="math inline">\((x_{i},y_i)\)</span>.</li>
 <li><span class="math inline">\(p(x_i)^{Y_i}(1-p(x_i))^{1-Y_i}\)</span> is the probability of observing <span class="math inline">\((x_{i},Y_i)\)</span>.</li>
 </ul>
 <div class="rmdinsight">
@@ -487,8 +478,7 @@ In the linear regression setting, the least squares approach is a special case o
 </p>
 </div>
 <p>We will not give mathematical details about the maximum likelihood and how to estimate the parameters. We will use <i class="fab  fa-r-project " style="color:steelblue;"></i> to fit the logistic regression models (using <code>glm</code> function).</p>
-<p>Use the following application (also available <a href="https://ec2-35-177-34-200.eu-west-2.compute.amazonaws.com/log-maximum-likelihood/" target="_blank">here <i class="fas  fa-external-link-alt "></i></a>) to see how the log-likelihood changes with respect to the values for <span class="math inline">\((\beta_0,\beta_1)\)</span> in three data patterns.
-The logistic regression fit and its dependence on <span class="math inline">\(\beta_0\)</span> (horizontal displacement) and <span class="math inline">\(\beta_1\)</span> (steepness of the curve). Recall the effect of the sign of <span class="math inline">\(\beta_1\)</span> in the curve: if positive, the logistic curve has an <span class="math inline">\(s\)</span> form; if negative, the form is a reflected <span class="math inline">\(s\)</span>.</p>
+<p>Use the following application (also available <a href="https://ec2-35-177-34-200.eu-west-2.compute.amazonaws.com/log-maximum-likelihood/" target="_blank">here <i class="fas  fa-external-link-alt "></i></a>) to see how the log-likelihood changes with respect to the values for <span class="math inline">\((\beta_0,\beta_1)\)</span> in three data patterns. The logistic regression fit and its dependence on <span class="math inline">\(\beta_0\)</span> (horizontal displacement) and <span class="math inline">\(\beta_1\)</span> (steepness of the curve). Recall the effect of the sign of <span class="math inline">\(\beta_1\)</span> in the curve: if positive, the logistic curve has an <span class="math inline">\(s\)</span> form; if negative, the form is a reflected <span class="math inline">\(s\)</span>.</p>
 <iframe src="https://ec2-35-177-34-200.eu-west-2.compute.amazonaws.com/log-maximum-likelihood/?showcase=0" width="90%" height="900px">
 </iframe>
 <p>Note that the <strong>animation</strong> will not be displayed the first time it is browsed (The reason is because it is hosted at <code>https</code> websites with auto-signed SSL certificates). <strong>To see it</strong>, click on the link above. You will get a warning from your browser saying that <em>“Your connection is not private”</em>. Click in <em>“Advanced”</em> and <strong>allow an exception</strong> in your browser. The next time the animation will show up correctly.</p>
@@ -575,13 +565,13 @@ Figure 3.2: Number of incidents in the O-rings (filed joints) versus temperature
 <blockquote>
 <p><strong>“A careful analysis of the flight history of O-ring performance would have revealed the correlation of O-ring damage in low temperature”</strong>.</p>
 </blockquote>
-<p>The purpose of this case study, inspired by <span class="citation">Dalal, Fowlkes, and Hoadley (<a href="#ref-Dalal1989" role="doc-biblioref">1989</a>)</span>, is to quantify what was the influence of the temperature in the probability of having at least one incident related with the O-rings. Specifically, we want to address the following questions:</p>
+<p>The purpose of this case study, inspired by <span class="citation">(Dalal, Fowlkes, and Hoadley <a href="#ref-Dalal1989" role="doc-biblioref">1989</a>)</span>, is to quantify what was the influence of the temperature in the probability of having at least one incident related with the O-rings. Specifically, we want to address the following questions:</p>
 <ul>
 <li>Q1. <em>Is the temperature associated with O-ring incidents?</em></li>
 <li>Q2. <em>In which way was the temperature affecting the probability of O-ring incidents?</em></li>
 <li>Q3. <em>What was the predicted probability of an incidient in an O-ring for the temperature of the launch day?</em></li>
 </ul>
-<p>To try to answer these questions we have the <code>challenger</code> ( <a target="_blank" href="datasets/challenger.txt"> dataset <i class="fa fa-table" aria-hidden="true"></i></a>). The dataset contains (as shown in the table below) information regarding the state of the solid rocket boosters after launch<a href="#fn12" class="footnote-ref" id="fnref12"><sup>12</sup></a> for 23 flights. Each row has, among others, the following variables:</p>
+<p>To try to answer these questions we have the <code>challenger</code> ( <a target="_blank" href="datasets/challenger.txt"> dataset <i class="fa fa-table" aria-hidden="true"></i></a>). The dataset contains (as shown in the table below) information regarding the state of the solid rocket boosters after launch<a href="#fn13" class="footnote-ref" id="fnref13"><sup>13</sup></a> for 23 flights. Each row has, among others, the following variables:</p>
 <ul>
 <li><code>fail.field</code>, <code>fail.nozzle</code>: binary variables indicating whether there was an incident with the O-rings in the field joints or in the nozzles of the solid rocket boosters. <code>1</code> codifies an incident and <code>0</code> its absence. On the analysis, we focus on the O-rings of the field joint as being the most determinants for the accident.</li>
 <li><code>temp</code>: temperature in the day of launch. Measured in Celsius degrees.</li>
@@ -1024,16 +1014,11 @@ temp
 <li><strong>The trend for launches with incidents is flat, hence suggesting there is no dependence on the temperature</strong> (Figure <a href="logistic-regression.html#fig:rogerts">3.2</a>a). This was one of the arguments behind NASA’s decision of launching the rocket at a temperature of -0.6 degrees.</li>
 <li>However, <strong>the trend for <em>all</em> launches indicates a clear negative dependence between temperature and number of incidents!</strong> (Figure <a href="logistic-regression.html#fig:rogerts">3.2</a>b). Think about it in this way: the minimum temperature for a launch without incidents ever recorded was above 18 degrees, and the Challenger was launched at -0.6 without clearly knowing the effects of such low temperatures.</li>
 </ol>
-<p>Instead of trying to predict the number of incidents, we will concentrate on modeling the <em>probability of expecting at least one incident given the temperature</em>, a simpler but also revealing approach. In other words, we look to estimate the following curve:
-<span class="math display">\[
+<p>Instead of trying to predict the number of incidents, we will concentrate on modeling the <em>probability of expecting at least one incident given the temperature</em>, a simpler but also revealing approach. In other words, we look to estimate the following curve: <span class="math display">\[
 p(x)=\mathbb{P}(\text{incident}=1|\text{temperature}=x)
-\]</span>
-from <code>fail.field</code> and <code>temp</code>. This probability can not be properly modeled as a linear function like <span class="math inline">\(\beta_0+\beta_1x\)</span>, since inevitably will fall outside <span class="math inline">\([0,1]\)</span> for some value of <span class="math inline">\(x\)</span> (some will have negative probabilities or probabilities larger than one). The technique that solves this problem is the <strong>logistic regression</strong>.
-The logistic model in this case is
-<span class="math display">\[
+\]</span> from <code>fail.field</code> and <code>temp</code>. This probability can not be properly modeled as a linear function like <span class="math inline">\(\beta_0+\beta_1x\)</span>, since inevitably will fall outside <span class="math inline">\([0,1]\)</span> for some value of <span class="math inline">\(x\)</span> (some will have negative probabilities or probabilities larger than one). The technique that solves this problem is the <strong>logistic regression</strong>. The logistic model in this case is <span class="math display">\[
 \mathbb{P}(\text{incident}=1|\text{temperature}=x)=\text{logistic}\left(\beta_0+\beta_1x\right)=\frac{1}{1+e^{-(\beta_0+\beta_1x)}},
-\]</span>
-with <span class="math inline">\(\beta_0\)</span> and <span class="math inline">\(\beta_1\)</span> unknown.</p>
+\]</span> with <span class="math inline">\(\beta_0\)</span> and <span class="math inline">\(\beta_1\)</span> unknown.</p>
 <p>Let’s fit the model to the data by estimating <span class="math inline">\(\beta_0\)</span> and <span class="math inline">\(\beta_1\)</span>.</p>
 <div class="sourceCode" id="cb34"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb34-1" title="1">nasa &lt;-<span class="st"> </span><span class="kw">glm</span>(fail.field <span class="op">~</span><span class="st"> </span>temp, <span class="dt">family =</span> <span class="st">&quot;binomial&quot;</span>, <span class="dt">data =</span> challenger)</a>
 <a class="sourceLine" id="cb34-2" title="2"><span class="kw">summary</span>(nasa)</a>
@@ -1082,20 +1067,20 @@ The <code>glm()</code> function fits <strong>g</strong>eneralized <strong>l</str
 <a class="sourceLine" id="cb35-11" title="11"><span class="co"># The Challenger</span></a>
 <a class="sourceLine" id="cb35-12" title="12"><span class="kw">points</span>(<span class="op">-</span><span class="fl">0.6</span>, <span class="dv">1</span>, <span class="dt">pch =</span> <span class="dv">16</span>)</a>
 <a class="sourceLine" id="cb35-13" title="13"><span class="kw">text</span>(<span class="op">-</span><span class="fl">0.6</span>, <span class="dv">1</span>, <span class="dt">labels =</span> <span class="st">&quot;Challenger&quot;</span>, <span class="dt">pos =</span> <span class="dv">4</span>)</a></code></pre></div>
-<p><img src="Machine-Learning_files/figure-html/unnamed-chunk-83-1.png" width="70%" style="display: block; margin: auto;" />
-At the sight of this curve and the summary of the model we can conclude that <strong>the temperature was increasing the probability of an O-ring incident</strong> (Q2). Indeed, the confidence intervals for the coefficients show a significative negative correlation at level <span class="math inline">\(\alpha=0.05\)</span>:</p>
+<p><img src="Machine-Learning_files/figure-html/unnamed-chunk-83-1.png" width="70%" style="display: block; margin: auto;" /></p>
+<p>At the sight of this curve and the summary of the model we can conclude that <strong>the temperature was increasing the probability of an O-ring incident</strong> (Q2). Indeed, the confidence intervals for the coefficients show a significative negative correlation at level <span class="math inline">\(\alpha=0.05\)</span>:</p>
 <div class="sourceCode" id="cb36"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb36-1" title="1"><span class="kw">confint</span>(nasa, <span class="dt">level =</span> <span class="fl">0.95</span>)</a>
 <a class="sourceLine" id="cb36-2" title="2"><span class="co">#ans&gt;              2.5 % 97.5 %</span></a>
 <a class="sourceLine" id="cb36-3" title="3"><span class="co">#ans&gt; (Intercept)  1.336 17.783</span></a>
 <a class="sourceLine" id="cb36-4" title="4"><span class="co">#ans&gt; temp        -0.924 -0.109</span></a></code></pre></div>
-<p>Finally, <strong>the probability of having at least one incident with the O-rings in the launch day was <span class="math inline">\(0.9996\)</span> according to the fitted logistic model</strong> (Q3). This is easily obtained:</p>
+<p>Finally, <strong>the probability of having at least one incident with the O-rings in the launch day was</strong> <span class="math inline">\(0.9996\)</span> according to the fitted logistic model (Q3). This is easily obtained:</p>
 <div class="sourceCode" id="cb37"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb37-1" title="1"><span class="kw">predict</span>(nasa, <span class="dt">newdata =</span> <span class="kw">data.frame</span>(<span class="dt">temp =</span> <span class="fl">-0.6</span>), <span class="dt">type =</span> <span class="st">&quot;response&quot;</span>)</a>
 <a class="sourceLine" id="cb37-2" title="2"><span class="co">#ans&gt; 1 </span></a>
 <a class="sourceLine" id="cb37-3" title="3"><span class="co">#ans&gt; 1</span></a></code></pre></div>
 <p>Be aware that <code>type = "response"</code> has a different meaning in logistic regression. In linear models it returns a CI for the prediction. But, <code>type = "response"</code> means that the <em>probability</em> should be returned, instead of the value of the link function, which is returned with <code>type = "link"</code> (the default).</p>
 <p>Recall that there is a serious problem of <strong>extrapolation</strong> in the prediction, which makes it less precise (or more variable). But this extrapolation, together with the evidences raised by a simple analysis like we did, should have been strong arguments for postponing the launch.</p>
 <p align="right">
-◼
+<p>◼</p>
 </p>
 
 </div>
@@ -1113,7 +1098,14 @@ At the sight of this curve and the summary of the model we can conclude that <st
 <div class="footnotes">
 <hr />
 <ol start="12">
-<li id="fn12"><p>After the shuttle exits the atmosphere, the solid rocket boosters separate and descend to land using a parachute where they are carefully analyzed.<a href="logistic-regression.html#fnref12" class="footnote-back">↩</a></p></li>
+<li id="fn12"><p>in the formula, <span class="math inline">\(\log\)</span> is the natural logarithm <span class="math inline">\(\ln\)</span><a href="logistic-regression.html#fnref12" class="footnote-back">↩</a></p></li>
+<li id="fn13"><p>Old Faithful, is a
+hydrothermal geyser in Yellowstone National Park in the state of
+Wyoming, U.S.A., and is a popular tourist attraction. Its name stems
+from the supposed regularity of its eruptions. The data set comprises
+272 observations, each of which represents a single eruption and
+contains two variables corresponding to the duration in minutes of the
+eruption, and the time until the next eruption, also in minutes.<a href="logistic-regression.html#fnref13" class="footnote-back">↩</a></p></li>
 </ol>
 </div>
             </section>

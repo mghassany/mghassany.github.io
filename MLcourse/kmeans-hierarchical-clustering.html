@@ -24,7 +24,7 @@
 <meta name="author" content="Mohamad Ghassany" />
 
 
-<meta name="date" content="2020-10-06" />
+<meta name="date" content="2020-10-09" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -247,7 +247,13 @@ code span.wa { color: #bf0303; } /* Warning */
 <li class="chapter" data-level="" data-path="pw-4.html"><a href="pw-4.html#quadratic-discriminant-analysis-qda-1"><i class="fa fa-check"></i>Quadratic Discriminant Analysis (QDA)</a></li>
 <li class="chapter" data-level="" data-path="pw-4.html"><a href="pw-4.html#comparison"><i class="fa fa-check"></i>Comparison</a></li>
 </ul></li>
-<li class="chapter" data-level="5" data-path="decision-trees-random-forests.html"><a href="decision-trees-random-forests.html"><i class="fa fa-check"></i><b>5</b> Decision Trees &amp; Random Forests</a></li>
+<li class="chapter" data-level="5" data-path="decision-trees-random-forests.html"><a href="decision-trees-random-forests.html"><i class="fa fa-check"></i><b>5</b> Decision Trees &amp; Random Forests</a><ul>
+<li class="chapter" data-level="" data-path="decision-trees-random-forests.html"><a href="decision-trees-random-forests.html#the-basics-of-decision-trees"><i class="fa fa-check"></i>The Basics of Decision Trees</a></li>
+<li class="chapter" data-level="" data-path="decision-trees-random-forests.html"><a href="decision-trees-random-forests.html#classification-trees"><i class="fa fa-check"></i>Classification Trees</a></li>
+<li class="chapter" data-level="" data-path="decision-trees-random-forests.html"><a href="decision-trees-random-forests.html#bagging-random-forests"><i class="fa fa-check"></i>Bagging &amp; Random Forests</a></li>
+<li class="chapter" data-level="" data-path="decision-trees-random-forests.html"><a href="decision-trees-random-forests.html#boosting"><i class="fa fa-check"></i>Boosting</a></li>
+<li><a href="#trees-in-<i class="fab  fa-r-project " style="color:steelblue;"></i>">Trees in <i class="fab  fa-r-project " style="color:steelblue;"></i></a></li>
+</ul></li>
 <li class="chapter" data-level="" data-path="pw-5.html"><a href="pw-5.html"><i class="fa fa-check"></i>PW 5</a></li>
 <li class="part"><span><b>II Dimensionality Reduction</b></span></li>
 <li class="chapter" data-level="6" data-path="principal-components-analysis.html"><a href="principal-components-analysis.html"><i class="fa fa-check"></i><b>6</b> Principal Components Analysis</a><ul>
@@ -589,7 +595,7 @@ in the assignments (or until some maximum number of iterations is
 exceeded). Because each phase reduces the value of the objective
 function <span class="math inline">\(J\)</span>, convergence of the algorithm is assured. However, it may
 converge to a local rather than global minimum of <span class="math inline">\(J\)</span>.</p>
-<p>The <span class="math inline">\(k\)</span>-means algorithm is illustrated using the Old Faithful data set<a href="#fn14" class="footnote-ref" id="fnref14"><sup>14</sup></a>
+<p>The <span class="math inline">\(k\)</span>-means algorithm is illustrated using the Old Faithful data set<a href="#fn16" class="footnote-ref" id="fnref16"><sup>16</sup></a>
 in following figure.</p>
 <div class="figure" style="text-align: center"><span id="fig:oldfaithful"></span>
 <img src="img/kmeans.png" alt="Illustration of the $k$-means algorithm using the re-scaled Old Faithful data set, where $k=2$. We can see how the $k$-means algorithm works. (a) The first thing $k$-means has to do is assign an initial set of centroids. (b) The next stage in the algorithm assigns every point in the dataset to the closest centroid. (c) The next stage is the re-calculate the centroids based on the new cluster assignments of the data points. (d) Now we have completed one full cycle of the algorithm we can continue and re-assign points to their (new) closest cluster centroid. (e) And we can update the centroid positions one more time based on the re-assigned points. (g)(h)(f) The algorithm stops when we obtain the same results in consecutive iterations." width="90%" />
@@ -597,7 +603,7 @@ in following figure.</p>
 Figure 7.2: Illustration of the <span class="math inline">\(k\)</span>-means algorithm using the re-scaled Old Faithful data set, where <span class="math inline">\(k=2\)</span>. We can see how the <span class="math inline">\(k\)</span>-means algorithm works. (a) The first thing <span class="math inline">\(k\)</span>-means has to do is assign an initial set of centroids. (b) The next stage in the algorithm assigns every point in the dataset to the closest centroid. (c) The next stage is the re-calculate the centroids based on the new cluster assignments of the data points. (d) Now we have completed one full cycle of the algorithm we can continue and re-assign points to their (new) closest cluster centroid. (e) And we can update the centroid positions one more time based on the re-assigned points. (g)(h)(f) The algorithm stops when we obtain the same results in consecutive iterations.
 </p>
 </div>
-<p>The <span class="math inline">\(k\)</span>-means algorithm is illustrated using the Iris data set in following interactive figure<a href="#fn15" class="footnote-ref" id="fnref15"><sup>15</sup></a>. (Try to modify the X and Y variables and the numbers of chosen clusters and see the result)</p>
+<p>The <span class="math inline">\(k\)</span>-means algorithm is illustrated using the Iris data set in following interactive figure<a href="#fn17" class="footnote-ref" id="fnref17"><sup>17</sup></a>. (Try to modify the X and Y variables and the numbers of chosen clusters and see the result)</p>
 <center>
 <iframe src="https://jjallaire.shinyapps.io/shiny-kmeans/?showcase=0" width="90%" height="900px">
 </iframe>
@@ -833,15 +839,15 @@ Figure 7.11: Average, complete, and single linkage applied to an example data se
 </div>
 <div class="footnotes">
 <hr />
-<ol start="14">
-<li id="fn14"><p>Old Faithful, is a
+<ol start="16">
+<li id="fn16"><p>Old Faithful, is a
 hydrothermal geyser in Yellowstone National Park in the state of
 Wyoming, U.S.A., and is a popular tourist attraction. Its name stems
 from the supposed regularity of its eruptions. The data set comprises
 272 observations, each of which represents a single eruption and
 contains two variables corresponding to the duration in minutes of the
-eruption, and the time until the next eruption, also in minutes.<a href="kmeans-hierarchical-clustering.html#fnref14" class="footnote-back">↩</a></p></li>
-<li id="fn15"><p>Made by Joseph J. Allaire <a href="https://github.com/jjallaire" class="uri">https://github.com/jjallaire</a><a href="kmeans-hierarchical-clustering.html#fnref15" class="footnote-back">↩</a></p></li>
+eruption, and the time until the next eruption, also in minutes.<a href="kmeans-hierarchical-clustering.html#fnref16" class="footnote-back">↩</a></p></li>
+<li id="fn17"><p>Made by Joseph J. Allaire <a href="https://github.com/jjallaire" class="uri">https://github.com/jjallaire</a><a href="kmeans-hierarchical-clustering.html#fnref17" class="footnote-back">↩</a></p></li>
 </ol>
 </div>
             </section>

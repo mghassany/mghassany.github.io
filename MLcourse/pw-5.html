@@ -24,7 +24,7 @@
 <meta name="author" content="Mohamad Ghassany" />
 
 
-<meta name="date" content="2020-10-11" />
+<meta name="date" content="2020-10-14" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -281,7 +281,18 @@ code span.wa { color: #bf0303; } /* Warning */
 <li><a href="decision-trees-random-forests.html#trees-in-r">Trees in <code>R</code></a></li>
 <li class="chapter" data-level="" data-path="decision-trees-random-forests.html"><a href="decision-trees-random-forests.html#random-forests---the-first-choice-method-for-every-data-analysis"><i class="fa fa-check"></i>Random forests - the first-choice method for every data analysis?</a></li>
 </ul></li>
-<li class="chapter" data-level="" data-path="pw-5.html"><a href="pw-5.html"><i class="fa fa-check"></i>PW 5</a></li>
+<li class="chapter" data-level="" data-path="pw-5.html"><a href="pw-5.html"><i class="fa fa-check"></i>PW 5</a>
+<ul>
+<li class="chapter" data-level="" data-path="pw-5.html"><a href="pw-5.html#regression-trees"><i class="fa fa-check"></i>Regression Trees</a>
+<ul>
+<li class="chapter" data-level="" data-path="pw-5.html"><a href="pw-5.html#single-tree"><i class="fa fa-check"></i>Single tree</a></li>
+<li class="chapter" data-level="" data-path="pw-5.html"><a href="pw-5.html#bagging"><i class="fa fa-check"></i>Bagging</a></li>
+<li class="chapter" data-level="" data-path="pw-5.html"><a href="pw-5.html#random-forests"><i class="fa fa-check"></i>Random Forests</a></li>
+<li class="chapter" data-level="" data-path="decision-trees-random-forests.html"><a href="decision-trees-random-forests.html#boosting"><i class="fa fa-check"></i>Boosting</a></li>
+<li class="chapter" data-level="" data-path="pw-4.html"><a href="pw-4.html#comparison"><i class="fa fa-check"></i>Comparison</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="decision-trees-random-forests.html"><a href="decision-trees-random-forests.html#classification-trees"><i class="fa fa-check"></i>Classification Trees</a></li>
+</ul></li>
 <li class="part"><span><b>II Dimensionality Reduction</b></span></li>
 <li class="chapter" data-level="6" data-path="principal-components-analysis.html"><a href="principal-components-analysis.html"><i class="fa fa-check"></i><b>6</b> Principal Components Analysis</a>
 <ul>
@@ -434,16 +445,111 @@ code span.wa { color: #bf0303; } /* Warning */
 </div>
 <div id="pw-5" class="section level1 unnumbered" number="">
 <h1>PW 5</h1>
-<p>TREES
-Text</p>
+<p>In this practical work, we will build some decision trees for both <em>regression</em> and <em>classification</em> problems. Note that there are many packages to do this in <i class="fab  fa-r-project " style="color:steelblue;"></i> . The <code>tree</code> package is the basic package to do so, while the <code>rpart</code><a href="#fn17" class="footnote-ref" id="fnref17"><sup>17</sup></a> package seems more widely suggested and provides better plotting features. So we will use the <code>rpart</code> package.</p>
+<div id="regression-trees" class="section level2 unnumbered" number="">
+<h2>Regression Trees</h2>
+<div id="single-tree" class="section level3 unnumbered" number="">
+<h3>Single tree</h3>
+<p>To demonstrate regression trees, we will use the <code>Boston</code> dataset that we used during the first two practical works, from the <code>MASS</code> package. Recall that <code>medv</code> is the response.</p>
+<p><strong>1</strong>. Load the Boston dataset from <code>MASS</code> package. Split the dataset randomly in half.</p>
+<div class="sourceCode" id="cb45"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb45-1"><a href="pw-5.html#cb45-1"></a><span class="kw">library</span>(MASS)</span>
+<span id="cb45-2"><a href="pw-5.html#cb45-2"></a><span class="kw">library</span>(caTools)</span>
+<span id="cb45-3"><a href="pw-5.html#cb45-3"></a><span class="kw">set.seed</span>(<span class="dv">18</span>)</span>
+<span id="cb45-4"><a href="pw-5.html#cb45-4"></a>Boston_idx =<span class="st"> </span><span class="kw">sample</span>(<span class="dv">1</span><span class="op">:</span><span class="kw">nrow</span>(Boston), <span class="kw">nrow</span>(Boston) <span class="op">/</span><span class="st"> </span><span class="dv">2</span>) </span>
+<span id="cb45-5"><a href="pw-5.html#cb45-5"></a><span class="co"># You don&#39;t know what we just did?</span></span>
+<span id="cb45-6"><a href="pw-5.html#cb45-6"></a><span class="co"># open the documentation of the function sample by </span></span>
+<span id="cb45-7"><a href="pw-5.html#cb45-7"></a><span class="co"># writing ?sample in the R console.</span></span>
+<span id="cb45-8"><a href="pw-5.html#cb45-8"></a><span class="co"># Note that this is one of the ways to split it randomly and it is not necessary the best.</span></span>
+<span id="cb45-9"><a href="pw-5.html#cb45-9"></a>Boston_train =<span class="st"> </span>Boston[Boston_idx,]</span>
+<span id="cb45-10"><a href="pw-5.html#cb45-10"></a>Boston_test  =<span class="st"> </span>Boston[<span class="op">-</span>Boston_idx,]</span></code></pre></div>
+<p><strong>2</strong>. Fit a regression tree to the training data using the <code>rpart()</code> function from the <code>rpart</code> package. Name the tree <code>Boston_tree</code>.</p>
+<p><strong>3</strong>. Plot the obtained tree using the following code.</p>
+<div class="sourceCode" id="cb46"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb46-1"><a href="pw-5.html#cb46-1"></a><span class="kw">plot</span>(Boston_tree)</span>
+<span id="cb46-2"><a href="pw-5.html#cb46-2"></a><span class="kw">text</span>(Boston_tree, <span class="dt">pretty =</span> <span class="dv">0</span>)</span>
+<span id="cb46-3"><a href="pw-5.html#cb46-3"></a><span class="kw">title</span>(<span class="dt">main =</span> <span class="st">&quot;Regression Tree&quot;</span>)</span></code></pre></div>
+<p><img src="Machine-Learning_files/figure-html/unnamed-chunk-137-1.png" width="70%" style="display: block; margin: auto;" /></p>
+<p><strong>4</strong>. A better plot can be obtained using the <code>rpart.plot</code><a href="#fn18" class="footnote-ref" id="fnref18"><sup>18</sup></a> package. Re-plot the tree using it. You can use the <code>rpart.plot()</code> function which by default, when the output is continuous, each node shows: the predicted value, and the percentage of observations in the node. You can also use the <code>prp()</code> function.</p>
+<p><img src="Machine-Learning_files/figure-html/unnamed-chunk-138-1.png" width="50%" style="display: block; margin: auto;" /><img src="Machine-Learning_files/figure-html/unnamed-chunk-138-2.png" width="50%" style="display: block; margin: auto;" /></p>
+<p><strong>5</strong>. Print the obtained tree and print its summary. Between the things that you can see in the summary, the CP (complexity parameter) table and the importance of each variable in the model. Print the CP table using the <code>printcp()</code> function to see the cross validation results. Plot a comparison figure using the <code>plotcp()</code> function.</p>
+<p>You will notice the obtained tree is <strong>pruned</strong>. This is because <code>rpart</code> prunes the tree by default by performing 10-fold cross-validation.</p>
+<div class="rmdtip">
+<p><code>rpart</code> keeps track of something called the complexity of a tree. The complexity measure is a combination of the size of a tree and the ability of the tree to separate the classes of the target variable. If the next best split in growing a tree does not reduce the tree’s overall complexity by a certain amount, <code>rpart</code> will terminate the growing process. This amount is specified by the complexity parameter, <code>cp</code>, in the call to <code>rpart()</code>. Setting <code>cp</code> to a negative amount (like -1) ensures that the tree will be fully grown. You can try it and then plot the tree.</p>
+<p>Notice that the default <code>cp</code> value may over prune the tree. As a rule of thumb, it’s best to prune a decision tree using the <code>cp</code> of smallest tree that is within one standard deviation of the tree with the smallest <code>xerror</code>. In the example above, it’s maybe best to prune the tree with a <code>cp</code> slightly greater than <code>0.03</code>.</p>
+</div>
+<p>Next we will compare this regression tree to a linear model and will use RMSE as our metric. RMSE is the <strong>R</strong>oot <strong>M</strong>ean <strong>S</strong>quare <strong>E</strong>rror, which is the square root of the MSE.</p>
+<p><strong>5</strong>. Write a <i class="fab  fa-r-project " style="color:steelblue;"></i> function that returns the RMSE of two vectors.</p>
+<p><strong>6</strong>. Use the function <code>predict()</code> to predict the response on the test set. Then calculate the RMSE obtained with tree model.</p>
+<p><strong>7</strong>. Fit a linear regression model on the training set. Then predict the response on the test set using the linear model. Calculate the RMSE and compare the performance of the tree and the linear regression model.</p>
+<div class="rmdinsight">
+<p>Here the most obvious linear regression beats the tree! We’ll improve on this tree by considering ensembles of trees.</p>
+</div>
+<p>You can visually compare the performance of both models by plotting the Actual (reality) response values against the predicted values. The model with closer points are to the diagonal (<code>y=x</code>) line is the better one. You can try to reproduce the figure below.</p>
+<p><img src="Machine-Learning_files/figure-html/unnamed-chunk-144-1.png" width="50%" style="display: block; margin: auto;" /><img src="Machine-Learning_files/figure-html/unnamed-chunk-144-2.png" width="50%" style="display: block; margin: auto;" /></p>
+<p>By aggregating many decision trees, using methods like <em>bagging</em>,
+<em>random forests</em>, and <em>boosting</em>, the predictive performance of trees can be
+substantially improved. We will now use these concepts, called <em>ensemble methods</em>.</p>
+</div>
+<div id="bagging" class="section level3 unnumbered" number="">
+<h3>Bagging</h3>
+<p>Bagging, or <em>Bootstrap aggregation</em>, is a general-purpose procedure for reducing the variance of a statistical learning method, it is particularly useful and frequently used in the context of decision trees. The idea is to take many training sets from the population, build a separate prediction model using each training set, and average the resulting predictions. Generally we do not have access to multiple training sets. Instead, we can bootstrap, by taking repeated samples from the (single) training data set.</p>
+<p>To apply bagging to regression
+trees, we simply construct <span class="math inline">\(B\)</span> regression trees using B bootstrapped training
+sets, and average the resulting predictions. These trees are grown deep,
+and are not pruned. Hence each individual tree has high variance, but
+low bias. Averaging these <span class="math inline">\(B\)</span> trees reduces the variance.</p>
+<p><strong>8</strong>. Fit a bagged model, using the <code>randomForest()</code> function from the <code>randomForest</code> package.</p>
+<div class="rmdinsight">
+<p>Bagging is actually a special case of a random forest where <code>mtry</code> is equal to <span class="math inline">\(p\)</span>, the number of predictors.</p>
+</div>
+<p><strong>9</strong>. Predict the response on the test set using the bagging model. Calculate the RMSE. Is the performance of the model better than linear regression or a simple tree?</p>
+<p>Note that the “Mean of squared residuals” which is output by <code>randomForest()</code> is the <strong>Out of Bag</strong> estimate of the error. Here is its plot:</p>
+<p><img src="Machine-Learning_files/figure-html/unnamed-chunk-148-1.png" width="70%" style="display: block; margin: auto;" /></p>
+</div>
+<div id="random-forests" class="section level3 unnumbered" number="">
+<h3>Random Forests</h3>
+<p>Now try a random forest. For regression, on suggestion is to use <code>mtry</code> equal to <span class="math inline">\(p/3\)</span>.<a href="#fn19" class="footnote-ref" id="fnref19"><sup>19</sup></a></p>
+<p><strong>10</strong>. Fit a random forest on the training set and compare its performance with the previous models by calculating the predictions and the RMSE.</p>
+<p><strong>11</strong>. Use the function <code>importance()</code> from the <code>randomForest</code> package to see the most important predictors in the obtained random forest model. What are the three most important predictors? Did you find the same results when you selected the best predictors for the linear regression model during session 2?</p>
+<p><strong>12</strong>. Plot the importance of the predictors to the model using the <code>varImpPlot()</code> function.</p>
+</div>
+<div id="boosting" class="section level3 unnumbered" number="">
+<h3>Boosting</h3>
+<p>Last and not least, let us try a <em>boosted</em> model, which by default will produce a nice <strong>variable importance</strong> plot as well as plots of the marginal effects of the predictors. To do so, we will use the <code>gbm</code> package<a href="#fn20" class="footnote-ref" id="fnref20"><sup>20</sup></a>.</p>
+<p><strong>10</strong>. Using the <code>gbm()</code> function like following, fit a boosted model on the training set. Then compare its performance with the previous models by calculating the predictions and the RMSE.</p>
+<div class="sourceCode" id="cb47"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb47-1"><a href="pw-5.html#cb47-1"></a><span class="kw">library</span>(gbm)</span>
+<span id="cb47-2"><a href="pw-5.html#cb47-2"></a>Boston_boost =<span class="st"> </span><span class="kw">gbm</span>(medv <span class="op">~</span><span class="st"> </span>., <span class="dt">data =</span> Boston_train, <span class="dt">distribution =</span> <span class="st">&quot;gaussian&quot;</span>, </span>
+<span id="cb47-3"><a href="pw-5.html#cb47-3"></a>                    <span class="dt">n.trees =</span> <span class="dv">5000</span>, <span class="dt">interaction.depth =</span> <span class="dv">4</span>, <span class="dt">shrinkage =</span> <span class="fl">0.01</span>)</span></code></pre></div>
+<p><strong>11</strong>. Show the summary of the boosted model. A figure of the variable importance will be shown.</p>
+</div>
+<div id="comparison" class="section level3 unnumbered" number="">
+<h3>Comparison</h3>
+<p><strong>12</strong>. Reproduce the following comparison: A table in which we show the obtained RMSE with each tested model, you can create a <span class="math inline">\(5 \times 2\)</span> data.frame in which you put the names of the models and the corresponding RMSE. To visualize the data frame in the compiled html report you can use the <code>kable()</code> function from the <code>knitr</code> package. Or, compare the models by plotting the Actual (reality) response values against the predicted values.</p>
+<p><img src="Machine-Learning_files/figure-html/unnamed-chunk-157-1.png" width="90%" style="display: block; margin: auto;" /></p>
+</div>
+</div>
+<div id="classification-trees" class="section level2 unnumbered" number="">
+<h2>Classification Trees</h2>
+<!-- spam data set -->
+<!-- from: https://web.stanford.edu/~hastie/CASI_files/DATA/SPAM.html -->
+<!-- description in ISLR the book not R -->
 <p class="text-right">
 ◼
 </p>
 
 </div>
+</div>
 
 
 
+<div class="footnotes">
+<hr />
+<ol start="17">
+<li id="fn17"><p><a href="https://cran.r-project.org/web/packages/rpart/vignettes/longintro.pdf">An Introduction to Recursive Partitioning Using the <code>rpart</code> Routines</a> - Details of the <code>rpart</code> package.<a href="pw-5.html#fnref17" class="footnote-back">↩︎</a></p></li>
+<li id="fn18"><p><a href="http://www.milbo.org/doc/prp.pdf"><code>rpart.plot</code> Package</a> - Detailed manual on plotting with <code>rpart</code> using the <code>rpart.plot</code> package.<a href="pw-5.html#fnref18" class="footnote-back">↩︎</a></p></li>
+<li id="fn19"><p>For classification a suggestion is <code>mtry</code> = <span class="math inline">\(\sqrt{p}\)</span>.<a href="pw-5.html#fnref19" class="footnote-back">↩︎</a></p></li>
+<li id="fn20"><p><a href="https://www.rdocumentation.org/packages/gbm/versions/2.1.8"><strong>g</strong>eneralized <strong>b</strong>oosted <strong>m</strong>odels</a> <i class="fab  fa-r-project " style="color:steelblue;"></i> package<a href="pw-5.html#fnref20" class="footnote-back">↩︎</a></p></li>
+</ol>
+</div>
             </section>
 
           </div>

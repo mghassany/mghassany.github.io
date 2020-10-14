@@ -291,7 +291,11 @@ code span.wa { color: #bf0303; } /* Warning */
 <li class="chapter" data-level="" data-path="decision-trees-random-forests.html"><a href="decision-trees-random-forests.html#boosting"><i class="fa fa-check"></i>Boosting</a></li>
 <li class="chapter" data-level="" data-path="pw-4.html"><a href="pw-4.html#comparison"><i class="fa fa-check"></i>Comparison</a></li>
 </ul></li>
-<li class="chapter" data-level="" data-path="decision-trees-random-forests.html"><a href="decision-trees-random-forests.html#classification-trees"><i class="fa fa-check"></i>Classification Trees</a></li>
+<li class="chapter" data-level="" data-path="decision-trees-random-forests.html"><a href="decision-trees-random-forests.html#classification-trees"><i class="fa fa-check"></i>Classification Trees</a>
+<ul>
+<li class="chapter" data-level="" data-path="pw-5.html"><a href="pw-5.html#the-spam-dataset"><i class="fa fa-check"></i>The Spam dataset</a></li>
+<li class="chapter" data-level="" data-path="pw-5.html"><a href="pw-5.html#extra-tuning"><i class="fa fa-check"></i>Extra: Tuning</a></li>
+</ul></li>
 </ul></li>
 <li class="part"><span><b>II Dimensionality Reduction</b></span></li>
 <li class="chapter" data-level="6" data-path="principal-components-analysis.html"><a href="principal-components-analysis.html"><i class="fa fa-check"></i><b>6</b> Principal Components Analysis</a>
@@ -519,23 +523,72 @@ low bias. Averaging these <span class="math inline">\(B\)</span> trees reduces t
 <div class="sourceCode" id="cb47"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb47-1"><a href="pw-5.html#cb47-1"></a><span class="kw">library</span>(gbm)</span>
 <span id="cb47-2"><a href="pw-5.html#cb47-2"></a>Boston_boost =<span class="st"> </span><span class="kw">gbm</span>(medv <span class="op">~</span><span class="st"> </span>., <span class="dt">data =</span> Boston_train, <span class="dt">distribution =</span> <span class="st">&quot;gaussian&quot;</span>, </span>
 <span id="cb47-3"><a href="pw-5.html#cb47-3"></a>                    <span class="dt">n.trees =</span> <span class="dv">5000</span>, <span class="dt">interaction.depth =</span> <span class="dv">4</span>, <span class="dt">shrinkage =</span> <span class="fl">0.01</span>)</span></code></pre></div>
+<pre><code>#ans&gt; Using 5000 trees...</code></pre>
 <p><strong>11</strong>. Show the summary of the boosted model. A figure of the variable importance will be shown.</p>
 </div>
 <div id="comparison" class="section level3 unnumbered" number="">
 <h3>Comparison</h3>
 <p><strong>12</strong>. Reproduce the following comparison: A table in which we show the obtained RMSE with each tested model, you can create a <span class="math inline">\(5 \times 2\)</span> data.frame in which you put the names of the models and the corresponding RMSE. To visualize the data frame in the compiled html report you can use the <code>kable()</code> function from the <code>knitr</code> package. Or, compare the models by plotting the Actual (reality) response values against the predicted values.</p>
-<p><img src="Machine-Learning_files/figure-html/unnamed-chunk-157-1.png" width="90%" style="display: block; margin: auto;" /></p>
+<p><img src="Machine-Learning_files/figure-html/unnamed-chunk-158-1.png" width="90%" style="display: block; margin: auto;" /></p>
 </div>
 </div>
 <div id="classification-trees" class="section level2 unnumbered" number="">
 <h2>Classification Trees</h2>
-<!-- spam data set -->
-<!-- from: https://web.stanford.edu/~hastie/CASI_files/DATA/SPAM.html -->
-<!-- description in ISLR the book not R -->
+<p>A classification tree is very similar to a regression tree, except that the classification tree is used to predict a qualitative response rather than a quantitative one. Recall that for a regression tree, the predicted response for an observation is given by the mean response of the training observations that belong to the
+same terminal node. In contrast, for a classification tree, we predict that
+each observation belongs to the <strong><em>most commonly occurring class</em></strong> of training
+observations in the region to which it belongs.</p>
+<p>To construct classification trees, we will use the <strong>spam</strong><a href="#fn21" class="footnote-ref" id="fnref21"><sup>21</sup></a> dataset, available <a href="datasets/spam.csv" target="_blank">here <svg style="height:0.8em;top:.04em;position:relative;fill:#cd0050;" viewBox="0 0 512 512"><path d="M464 32H48C21.49 32 0 53.49 0 80v352c0 26.51 21.49 48 48 48h416c26.51 0 48-21.49 48-48V80c0-26.51-21.49-48-48-48zM224 416H64v-96h160v96zm0-160H64v-96h160v96zm224 160H288v-96h160v96zm0-160H288v-96h160v96z"/></svg></a>. A description of the dataset is given below.</p>
+<div class="rmdexercise">
+<p>For the rest of this PW, you must:</p>
+<ul>
+<li>Import the <code>spam</code> dataset and explore it. Be aware that it is preferable that the response column is of type factor.</li>
+<li>Split the dataset into training and test sets (choose your own seed when using <code>set.seed()</code>).</li>
+<li>Fit (using <code>rpart</code> and <code>gbm</code> packages):
+<ul>
+<li>A <strong>logistic</strong> regression model.</li>
+<li>A simple classification tree.</li>
+<li>Bagging, Random Forests<a href="#fn22" class="footnote-ref" id="fnref22"><sup>22</sup></a>, and Boosting models.</li>
+</ul></li>
+<li>For each model, predict the response on the test set and evaluate the performance of the model, using the <em>prediction accuracy</em> (create a function that returns the accuracy for two binary vectors).</li>
+</ul>
+</div>
+<div id="the-spam-dataset" class="section level3 unnumbered" number="">
+<h3>The Spam dataset</h3>
+<p>This dataset consists of information from 4601 email messages, in a study to try to predict whether the email was junk email, or
+“spam”. For all 4601 email messages, the true outcome, spam or not, is available,
+along with 57 predictors as described below:</p>
+<ul>
+<li>48 quantitative predictors: the <em>percentage</em> of words in the email that match a given word. Examples include <em>business</em>, <em>address</em>, <em>internet</em>; etc.</li>
+<li>6 quantitative predictors: the percentage of characters in the email that match a given character. The characters are <code>;</code> , <code>(</code> , <code>[</code> , <code>!</code> , <code>$</code> and <code>#</code>.</li>
+<li>The average length of uninterrupted sequences of capital letters: <code>crl.ave</code>.</li>
+<li>The length of the longest uninterrupted sequence of capital letters: <code>crl.long</code>.</li>
+<li>The sum of the length of uninterrupted sequences of capital letters: <code>crl.tot</code>.</li>
+</ul>
+<div class="rmdtip">
+<p>Note that the spam dataset given here is already treated and ready to be explored. To achieve this stage, some steps are required to treat the raw data, like Tokenization, Stemming, and Lemmatization. In this dataset the most important words are already selected and other variables are added.
+Curious students can read more about these steps. Two famous <i class="fab  fa-r-project " style="color:steelblue;"></i> packages for text mining are <a href="https://cran.r-project.org/web/packages/tm/vignettes/tm.pdf" target="_blank">tm</a> and <a href="https://www.tidytextmining.com/index.html" target="_blank">tidytext</a>.</p>
+</div>
+</div>
+<div id="extra-tuning" class="section level3 unnumbered" number="">
+<h3>Extra: Tuning</h3>
+<p>So far in this PW, we fit bagging, boosting and random forest models, but did not <strong>tune</strong> any of them, we simply used certain, somewhat arbitrary, parameters. Actually, to make these models better the parameters should be tuned. The parameters include:</p>
+<ul>
+<li>Bagging: Actually just a subset of Random Forest with <code>mtry</code> = <span class="math inline">\(p\)</span>.</li>
+<li>Random Forest: <code>mtry</code></li>
+<li>Boosting: <code>n.trees</code>, <code>interaction.depth</code>, <code>shrinkage</code>, <code>n.minobsinnode</code></li>
+</ul>
+<p>The <code>caret</code> package provides excellent functions to accomplish this. Note that with these tree-based ensemble methods there are two resampling solutions for tuning the model:</p>
+<ul>
+<li>Out of Bag</li>
+<li>Cross-Validation</li>
+</ul>
+<p>Using Out of Bag samples is advantageous with these methods as compared to Cross-Validation since it removes the need to refit the model and is thus much more computationally efficient. Unfortunately OOB methods cannot be used with <code>gbm</code> models. See the <code>caret</code> documentation: <a href="https://cran.r-project.org/web/packages/caret/vignettes/caret.html" target="_blank">Short intro</a>, <a href="https://topepo.github.io/caret/index.html" target="_blank">Long intro</a> for details.</p>
 <p class="text-right">
 ◼
 </p>
 
+</div>
 </div>
 </div>
 
@@ -547,7 +600,9 @@ low bias. Averaging these <span class="math inline">\(B\)</span> trees reduces t
 <li id="fn17"><p><a href="https://cran.r-project.org/web/packages/rpart/vignettes/longintro.pdf">An Introduction to Recursive Partitioning Using the <code>rpart</code> Routines</a> - Details of the <code>rpart</code> package.<a href="pw-5.html#fnref17" class="footnote-back">↩︎</a></p></li>
 <li id="fn18"><p><a href="http://www.milbo.org/doc/prp.pdf"><code>rpart.plot</code> Package</a> - Detailed manual on plotting with <code>rpart</code> using the <code>rpart.plot</code> package.<a href="pw-5.html#fnref18" class="footnote-back">↩︎</a></p></li>
 <li id="fn19"><p>For classification a suggestion is <code>mtry</code> = <span class="math inline">\(\sqrt{p}\)</span>.<a href="pw-5.html#fnref19" class="footnote-back">↩︎</a></p></li>
-<li id="fn20"><p><a href="https://www.rdocumentation.org/packages/gbm/versions/2.1.8"><strong>g</strong>eneralized <strong>b</strong>oosted <strong>m</strong>odels</a> <i class="fab  fa-r-project " style="color:steelblue;"></i> package<a href="pw-5.html#fnref20" class="footnote-back">↩︎</a></p></li>
+<li id="fn20"><p><a href="https://www.rdocumentation.org/packages/gbm/versions/2.1.8" target="_blank"><strong>g</strong>eneralized <strong>b</strong>oosted <strong>m</strong>odels</a> <i class="fab  fa-r-project " style="color:steelblue;"></i> package<a href="pw-5.html#fnref20" class="footnote-back">↩︎</a></p></li>
+<li id="fn21"><p><a href="https://archive.ics.uci.edu/ml/datasets/Spambase" target="_blank">Source</a><a href="pw-5.html#fnref21" class="footnote-back">↩︎</a></p></li>
+<li id="fn22"><p>For classification, the suggested <code>mtry</code> for a random forest is <span class="math inline">\(\sqrt{p}\)</span>.<a href="pw-5.html#fnref22" class="footnote-back">↩︎</a></p></li>
 </ol>
 </div>
             </section>

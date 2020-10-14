@@ -291,7 +291,11 @@ code span.wa { color: #bf0303; } /* Warning */
 <li class="chapter" data-level="" data-path="decision-trees-random-forests.html"><a href="decision-trees-random-forests.html#boosting"><i class="fa fa-check"></i>Boosting</a></li>
 <li class="chapter" data-level="" data-path="pw-4.html"><a href="pw-4.html#comparison"><i class="fa fa-check"></i>Comparison</a></li>
 </ul></li>
-<li class="chapter" data-level="" data-path="decision-trees-random-forests.html"><a href="decision-trees-random-forests.html#classification-trees"><i class="fa fa-check"></i>Classification Trees</a></li>
+<li class="chapter" data-level="" data-path="decision-trees-random-forests.html"><a href="decision-trees-random-forests.html#classification-trees"><i class="fa fa-check"></i>Classification Trees</a>
+<ul>
+<li class="chapter" data-level="" data-path="pw-5.html"><a href="pw-5.html#the-spam-dataset"><i class="fa fa-check"></i>The Spam dataset</a></li>
+<li class="chapter" data-level="" data-path="pw-5.html"><a href="pw-5.html#extra-tuning"><i class="fa fa-check"></i>Extra: Tuning</a></li>
+</ul></li>
 </ul></li>
 <li class="part"><span><b>II Dimensionality Reduction</b></span></li>
 <li class="chapter" data-level="6" data-path="principal-components-analysis.html"><a href="principal-components-analysis.html"><i class="fa fa-check"></i><b>6</b> Principal Components Analysis</a>
@@ -519,10 +523,10 @@ One way to think about the <span class="math inline"><span class="math inline">\
 </div>
 <p><strong>4.</strong> Show the summary of the GMM model you fitted on Data2. Explain what it shows.</p>
 <p><strong>5.</strong> <code>mclust</code> package offers some visualization. To plot your two-dimensional data, use the standard plot function applied on your model. Apply the following code, given that the model is named <code>gmm_model</code>, and interpret what it shows.</p>
-<div class="sourceCode" id="cb80"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb80-1"><a href="pw-8.html#cb80-1"></a><span class="kw">plot</span>(gmm_model, <span class="dt">what =</span> <span class="st">&quot;classification&quot;</span>)</span>
-<span id="cb80-2"><a href="pw-8.html#cb80-2"></a><span class="kw">plot</span>(gmm_model, <span class="dt">what =</span> <span class="st">&quot;uncertainty&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb81"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb81-1"><a href="pw-8.html#cb81-1"></a><span class="kw">plot</span>(gmm_model, <span class="dt">what =</span> <span class="st">&quot;classification&quot;</span>)</span>
+<span id="cb81-2"><a href="pw-8.html#cb81-2"></a><span class="kw">plot</span>(gmm_model, <span class="dt">what =</span> <span class="st">&quot;uncertainty&quot;</span>)</span></code></pre></div>
 <p><strong>6.</strong> <code>mclust</code> package uses the Bayesian Information Criterion (BIC) to choose the best number of mixtures. To see the values of BIC for different number of mixtures use the following code.</p>
-<div class="sourceCode" id="cb81"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb81-1"><a href="pw-8.html#cb81-1"></a><span class="kw">plot</span>(gmm_model, <span class="dt">what =</span> <span class="st">&quot;BIC&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb82"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb82-1"><a href="pw-8.html#cb82-1"></a><span class="kw">plot</span>(gmm_model, <span class="dt">what =</span> <span class="st">&quot;BIC&quot;</span>)</span></code></pre></div>
 <p>Information criteria are based on penalised forms of the log-likelihood. As the likelihood increases with the addition of more components, a penalty term for the number of estimated parameters is subtracted from the log-likelihood. The BIC is a popular choice in the context of GMMs, and takes the form</p>
 <p><span class="math display">\[ \text{BIC} \approx 2 \ell (X|\hat{\theta}) - \nu \log (n)\]</span></p>
 <p>where <span class="math inline">\(\theta\)</span> is the set of parameters (in GMM it is <span class="math inline">\(\theta=\{\mu,\Sigma,\pi\})\)</span>, and <span class="math inline">\(\ell (X|\hat{\theta})\)</span> is the log-likelihood at the Maximum Likelihood Estimators <span class="math inline">\(\hat{\theta}\)</span> for the model, <span class="math inline">\(n\)</span> is the sample size, and <span class="math inline">\(\nu\)</span> is the number of estimated parameters. We select the model that maximises BIC.</p>
@@ -600,7 +604,7 @@ An example of 9 generated values from three Gaussians is shown in the following 
 </table>
 </center>
 <p><strong>9.</strong> Show you generated data on one axe (this kind of figures are called stripchart), color them with respect to ground truth, you must obtain something like:</p>
-<p><img src="Machine-Learning_files/figure-html/unnamed-chunk-265-1.png" width="70%" style="display: block; margin: auto;" /></p>
+<p><img src="Machine-Learning_files/figure-html/unnamed-chunk-267-1.png" width="70%" style="display: block; margin: auto;" /></p>
 <p><strong>10.</strong> Plot the histogram corresponding to your generated data. Interpret it.</p>
 <p><strong>11.</strong> Fit a GMM model on your generated data. Print the summary and visualize your results. Explain your results.</p>
 <p><strong>12.</strong> Apply a density estimate on your generated data and visualize it. Interpret the obtained figure.</p>

@@ -291,7 +291,11 @@ code span.wa { color: #bf0303; } /* Warning */
 <li class="chapter" data-level="" data-path="decision-trees-random-forests.html"><a href="decision-trees-random-forests.html#boosting"><i class="fa fa-check"></i>Boosting</a></li>
 <li class="chapter" data-level="" data-path="pw-4.html"><a href="pw-4.html#comparison"><i class="fa fa-check"></i>Comparison</a></li>
 </ul></li>
-<li class="chapter" data-level="" data-path="decision-trees-random-forests.html"><a href="decision-trees-random-forests.html#classification-trees"><i class="fa fa-check"></i>Classification Trees</a></li>
+<li class="chapter" data-level="" data-path="decision-trees-random-forests.html"><a href="decision-trees-random-forests.html#classification-trees"><i class="fa fa-check"></i>Classification Trees</a>
+<ul>
+<li class="chapter" data-level="" data-path="pw-5.html"><a href="pw-5.html#the-spam-dataset"><i class="fa fa-check"></i>The Spam dataset</a></li>
+<li class="chapter" data-level="" data-path="pw-5.html"><a href="pw-5.html#extra-tuning"><i class="fa fa-check"></i>Extra: Tuning</a></li>
+</ul></li>
 </ul></li>
 <li class="part"><span><b>II Dimensionality Reduction</b></span></li>
 <li class="chapter" data-level="6" data-path="principal-components-analysis.html"><a href="principal-components-analysis.html"><i class="fa fa-check"></i><b>6</b> Principal Components Analysis</a>
@@ -1094,23 +1098,26 @@ p(x)=\mathbb{P}(\text{incident}=1|\text{temperature}=x)
 <span id="cb34-9"><a href="logistic-regression.html#cb34-9"></a><span class="co">#ans&gt; -1.057  -0.757  -0.382   0.457   2.220  </span></span>
 <span id="cb34-10"><a href="logistic-regression.html#cb34-10"></a><span class="co">#ans&gt; </span></span>
 <span id="cb34-11"><a href="logistic-regression.html#cb34-11"></a><span class="co">#ans&gt; Coefficients:</span></span>
-<span id="cb34-12"><a href="logistic-regression.html#cb34-12"></a><span class="co">#ans&gt;             Estimate Std. Error z value Pr(&gt;|z|)  </span></span>
-<span id="cb34-13"><a href="logistic-regression.html#cb34-13"></a><span class="co">#ans&gt; (Intercept)    7.584      3.915    1.94    0.053 .</span></span>
-<span id="cb34-14"><a href="logistic-regression.html#cb34-14"></a><span class="co">#ans&gt; temp          -0.417      0.194   -2.15    0.032 *</span></span>
-<span id="cb34-15"><a href="logistic-regression.html#cb34-15"></a><span class="co">#ans&gt; ---</span></span>
-<span id="cb34-16"><a href="logistic-regression.html#cb34-16"></a><span class="co">#ans&gt; Signif. codes:  </span></span>
-<span id="cb34-17"><a href="logistic-regression.html#cb34-17"></a><span class="co">#ans&gt; 0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</span></span>
-<span id="cb34-18"><a href="logistic-regression.html#cb34-18"></a><span class="co">#ans&gt; </span></span>
-<span id="cb34-19"><a href="logistic-regression.html#cb34-19"></a><span class="co">#ans&gt; (Dispersion parameter for binomial family taken to be 1)</span></span>
-<span id="cb34-20"><a href="logistic-regression.html#cb34-20"></a><span class="co">#ans&gt; </span></span>
-<span id="cb34-21"><a href="logistic-regression.html#cb34-21"></a><span class="co">#ans&gt;     Null deviance: 28.267  on 22  degrees of freedom</span></span>
-<span id="cb34-22"><a href="logistic-regression.html#cb34-22"></a><span class="co">#ans&gt; Residual deviance: 20.335  on 21  degrees of freedom</span></span>
-<span id="cb34-23"><a href="logistic-regression.html#cb34-23"></a><span class="co">#ans&gt; AIC: 24.33</span></span>
-<span id="cb34-24"><a href="logistic-regression.html#cb34-24"></a><span class="co">#ans&gt; </span></span>
-<span id="cb34-25"><a href="logistic-regression.html#cb34-25"></a><span class="co">#ans&gt; Number of Fisher Scoring iterations: 5</span></span>
-<span id="cb34-26"><a href="logistic-regression.html#cb34-26"></a><span class="kw">exp</span>(<span class="kw">coef</span>(nasa)) <span class="co"># Exponentiated coefficients (&quot;odds ratios&quot;)</span></span>
-<span id="cb34-27"><a href="logistic-regression.html#cb34-27"></a><span class="co">#ans&gt; (Intercept)        temp </span></span>
-<span id="cb34-28"><a href="logistic-regression.html#cb34-28"></a><span class="co">#ans&gt;    1965.974       0.659</span></span></code></pre></div>
+<span id="cb34-12"><a href="logistic-regression.html#cb34-12"></a><span class="co">#ans&gt;             Estimate Std. Error z value</span></span>
+<span id="cb34-13"><a href="logistic-regression.html#cb34-13"></a><span class="co">#ans&gt; (Intercept)    7.584      3.915    1.94</span></span>
+<span id="cb34-14"><a href="logistic-regression.html#cb34-14"></a><span class="co">#ans&gt; temp          -0.417      0.194   -2.15</span></span>
+<span id="cb34-15"><a href="logistic-regression.html#cb34-15"></a><span class="co">#ans&gt;             Pr(&gt;|z|)  </span></span>
+<span id="cb34-16"><a href="logistic-regression.html#cb34-16"></a><span class="co">#ans&gt; (Intercept)    0.053 .</span></span>
+<span id="cb34-17"><a href="logistic-regression.html#cb34-17"></a><span class="co">#ans&gt; temp           0.032 *</span></span>
+<span id="cb34-18"><a href="logistic-regression.html#cb34-18"></a><span class="co">#ans&gt; ---</span></span>
+<span id="cb34-19"><a href="logistic-regression.html#cb34-19"></a><span class="co">#ans&gt; Signif. codes:  </span></span>
+<span id="cb34-20"><a href="logistic-regression.html#cb34-20"></a><span class="co">#ans&gt; 0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</span></span>
+<span id="cb34-21"><a href="logistic-regression.html#cb34-21"></a><span class="co">#ans&gt; </span></span>
+<span id="cb34-22"><a href="logistic-regression.html#cb34-22"></a><span class="co">#ans&gt; (Dispersion parameter for binomial family taken to be 1)</span></span>
+<span id="cb34-23"><a href="logistic-regression.html#cb34-23"></a><span class="co">#ans&gt; </span></span>
+<span id="cb34-24"><a href="logistic-regression.html#cb34-24"></a><span class="co">#ans&gt;     Null deviance: 28.267  on 22  degrees of freedom</span></span>
+<span id="cb34-25"><a href="logistic-regression.html#cb34-25"></a><span class="co">#ans&gt; Residual deviance: 20.335  on 21  degrees of freedom</span></span>
+<span id="cb34-26"><a href="logistic-regression.html#cb34-26"></a><span class="co">#ans&gt; AIC: 24.33</span></span>
+<span id="cb34-27"><a href="logistic-regression.html#cb34-27"></a><span class="co">#ans&gt; </span></span>
+<span id="cb34-28"><a href="logistic-regression.html#cb34-28"></a><span class="co">#ans&gt; Number of Fisher Scoring iterations: 5</span></span>
+<span id="cb34-29"><a href="logistic-regression.html#cb34-29"></a><span class="kw">exp</span>(<span class="kw">coef</span>(nasa)) <span class="co"># Exponentiated coefficients (&quot;odds ratios&quot;)</span></span>
+<span id="cb34-30"><a href="logistic-regression.html#cb34-30"></a><span class="co">#ans&gt; (Intercept)        temp </span></span>
+<span id="cb34-31"><a href="logistic-regression.html#cb34-31"></a><span class="co">#ans&gt;    1965.974       0.659</span></span></code></pre></div>
 <div class="rmdtip">
 <p>
 The <code>glm()</code> function fits <strong>g</strong>eneralized <strong>l</strong>inear <strong>m</strong>odels, a class of models that includes logistic regression. The syntax of the <code>glm()</code> function is similar to that of <code>lm()</code>, except that we must pass in the argument <code>family=binomial</code> in order to tell <span style="color: Steelblue;"><i class="fab fa-r-project" aria-hidden="true"></i> </span> to run a logistic regression rather than some other type of generalized linear model.

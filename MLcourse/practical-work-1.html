@@ -291,7 +291,11 @@ code span.wa { color: #bf0303; } /* Warning */
 <li class="chapter" data-level="" data-path="decision-trees-random-forests.html"><a href="decision-trees-random-forests.html#boosting"><i class="fa fa-check"></i>Boosting</a></li>
 <li class="chapter" data-level="" data-path="pw-4.html"><a href="pw-4.html#comparison"><i class="fa fa-check"></i>Comparison</a></li>
 </ul></li>
-<li class="chapter" data-level="" data-path="decision-trees-random-forests.html"><a href="decision-trees-random-forests.html#classification-trees"><i class="fa fa-check"></i>Classification Trees</a></li>
+<li class="chapter" data-level="" data-path="decision-trees-random-forests.html"><a href="decision-trees-random-forests.html#classification-trees"><i class="fa fa-check"></i>Classification Trees</a>
+<ul>
+<li class="chapter" data-level="" data-path="pw-5.html"><a href="pw-5.html#the-spam-dataset"><i class="fa fa-check"></i>The Spam dataset</a></li>
+<li class="chapter" data-level="" data-path="pw-5.html"><a href="pw-5.html#extra-tuning"><i class="fa fa-check"></i>Extra: Tuning</a></li>
+</ul></li>
 </ul></li>
 <li class="part"><span><b>II Dimensionality Reduction</b></span></li>
 <li class="chapter" data-level="6" data-path="principal-components-analysis.html"><a href="principal-components-analysis.html"><i class="fa fa-check"></i><b>6</b> Principal Components Analysis</a>
@@ -467,147 +471,39 @@ code span.wa { color: #bf0303; } /* Warning */
 <p>Hitting the <em>up arrow</em> multiple times will display the previous commands, which can then be edited. This is useful since one often wishes to repeat a similar command.</p>
 <p>The <code>ls()</code> function allows us to look at a list of all of the objects, such <code>ls()</code> as data and functions, that we have saved so far. The <code>rm()</code> function can be used to delete any object that we don’t want.</p>
 <div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="practical-work-1.html#cb3-1"></a><span class="kw">ls</span>()</span>
-<span id="cb3-2"><a href="practical-work-1.html#cb3-2"></a><span class="co">#ans&gt;  [1] &quot;A&quot;                       </span></span>
-<span id="cb3-3"><a href="practical-work-1.html#cb3-3"></a><span class="co">#ans&gt;  [2] &quot;Auto&quot;                    </span></span>
-<span id="cb3-4"><a href="practical-work-1.html#cb3-4"></a><span class="co">#ans&gt;  [3] &quot;B&quot;                       </span></span>
-<span id="cb3-5"><a href="practical-work-1.html#cb3-5"></a><span class="co">#ans&gt;  [4] &quot;Boston_bagging&quot;          </span></span>
-<span id="cb3-6"><a href="practical-work-1.html#cb3-6"></a><span class="co">#ans&gt;  [5] &quot;Boston_bagging_pred&quot;     </span></span>
-<span id="cb3-7"><a href="practical-work-1.html#cb3-7"></a><span class="co">#ans&gt;  [6] &quot;Boston_boost&quot;            </span></span>
-<span id="cb3-8"><a href="practical-work-1.html#cb3-8"></a><span class="co">#ans&gt;  [7] &quot;Boston_boost_pred&quot;       </span></span>
-<span id="cb3-9"><a href="practical-work-1.html#cb3-9"></a><span class="co">#ans&gt;  [8] &quot;Boston_forest&quot;           </span></span>
-<span id="cb3-10"><a href="practical-work-1.html#cb3-10"></a><span class="co">#ans&gt;  [9] &quot;Boston_forest_pred&quot;      </span></span>
-<span id="cb3-11"><a href="practical-work-1.html#cb3-11"></a><span class="co">#ans&gt; [10] &quot;Boston_idx&quot;              </span></span>
-<span id="cb3-12"><a href="practical-work-1.html#cb3-12"></a><span class="co">#ans&gt; [11] &quot;Boston_lm&quot;               </span></span>
-<span id="cb3-13"><a href="practical-work-1.html#cb3-13"></a><span class="co">#ans&gt; [12] &quot;Boston_lm_pred&quot;          </span></span>
-<span id="cb3-14"><a href="practical-work-1.html#cb3-14"></a><span class="co">#ans&gt; [13] &quot;Boston_test&quot;             </span></span>
-<span id="cb3-15"><a href="practical-work-1.html#cb3-15"></a><span class="co">#ans&gt; [14] &quot;Boston_train&quot;            </span></span>
-<span id="cb3-16"><a href="practical-work-1.html#cb3-16"></a><span class="co">#ans&gt; [15] &quot;Boston_tree&quot;             </span></span>
-<span id="cb3-17"><a href="practical-work-1.html#cb3-17"></a><span class="co">#ans&gt; [16] &quot;Boston_tree_pred&quot;        </span></span>
-<span id="cb3-18"><a href="practical-work-1.html#cb3-18"></a><span class="co">#ans&gt; [17] &quot;challenger&quot;              </span></span>
-<span id="cb3-19"><a href="practical-work-1.html#cb3-19"></a><span class="co">#ans&gt; [18] &quot;d&quot;                       </span></span>
-<span id="cb3-20"><a href="practical-work-1.html#cb3-20"></a><span class="co">#ans&gt; [19] &quot;data1&quot;                   </span></span>
-<span id="cb3-21"><a href="practical-work-1.html#cb3-21"></a><span class="co">#ans&gt; [20] &quot;data2&quot;                   </span></span>
-<span id="cb3-22"><a href="practical-work-1.html#cb3-22"></a><span class="co">#ans&gt; [21] &quot;dataFrame&quot;               </span></span>
-<span id="cb3-23"><a href="practical-work-1.html#cb3-23"></a><span class="co">#ans&gt; [22] &quot;dendro&quot;                  </span></span>
-<span id="cb3-24"><a href="practical-work-1.html#cb3-24"></a><span class="co">#ans&gt; [23] &quot;error&quot;                   </span></span>
-<span id="cb3-25"><a href="practical-work-1.html#cb3-25"></a><span class="co">#ans&gt; [24] &quot;error_squared&quot;           </span></span>
-<span id="cb3-26"><a href="practical-work-1.html#cb3-26"></a><span class="co">#ans&gt; [25] &quot;EU&quot;                      </span></span>
-<span id="cb3-27"><a href="practical-work-1.html#cb3-27"></a><span class="co">#ans&gt; [26] &quot;eurojob&quot;                 </span></span>
-<span id="cb3-28"><a href="practical-work-1.html#cb3-28"></a><span class="co">#ans&gt; [27] &quot;iris&quot;                    </span></span>
-<span id="cb3-29"><a href="practical-work-1.html#cb3-29"></a><span class="co">#ans&gt; [28] &quot;kmeansObj&quot;               </span></span>
-<span id="cb3-30"><a href="practical-work-1.html#cb3-30"></a><span class="co">#ans&gt; [29] &quot;ligue1&quot;                  </span></span>
-<span id="cb3-31"><a href="practical-work-1.html#cb3-31"></a><span class="co">#ans&gt; [30] &quot;ligue1_scaled&quot;           </span></span>
-<span id="cb3-32"><a href="practical-work-1.html#cb3-32"></a><span class="co">#ans&gt; [31] &quot;M&quot;                       </span></span>
-<span id="cb3-33"><a href="practical-work-1.html#cb3-33"></a><span class="co">#ans&gt; [32] &quot;mod&quot;                     </span></span>
-<span id="cb3-34"><a href="practical-work-1.html#cb3-34"></a><span class="co">#ans&gt; [33] &quot;model&quot;                   </span></span>
-<span id="cb3-35"><a href="practical-work-1.html#cb3-35"></a><span class="co">#ans&gt; [34] &quot;MSE&quot;                     </span></span>
-<span id="cb3-36"><a href="practical-work-1.html#cb3-36"></a><span class="co">#ans&gt; [35] &quot;multiplot&quot;               </span></span>
-<span id="cb3-37"><a href="practical-work-1.html#cb3-37"></a><span class="co">#ans&gt; [36] &quot;myDf&quot;                    </span></span>
-<span id="cb3-38"><a href="practical-work-1.html#cb3-38"></a><span class="co">#ans&gt; [37] &quot;myList&quot;                  </span></span>
-<span id="cb3-39"><a href="practical-work-1.html#cb3-39"></a><span class="co">#ans&gt; [38] &quot;n&quot;                       </span></span>
-<span id="cb3-40"><a href="practical-work-1.html#cb3-40"></a><span class="co">#ans&gt; [39] &quot;names.available.packages&quot;</span></span>
-<span id="cb3-41"><a href="practical-work-1.html#cb3-41"></a><span class="co">#ans&gt; [40] &quot;nasa&quot;                    </span></span>
-<span id="cb3-42"><a href="practical-work-1.html#cb3-42"></a><span class="co">#ans&gt; [41] &quot;p1&quot;                      </span></span>
-<span id="cb3-43"><a href="practical-work-1.html#cb3-43"></a><span class="co">#ans&gt; [42] &quot;p2&quot;                      </span></span>
-<span id="cb3-44"><a href="practical-work-1.html#cb3-44"></a><span class="co">#ans&gt; [43] &quot;p3&quot;                      </span></span>
-<span id="cb3-45"><a href="practical-work-1.html#cb3-45"></a><span class="co">#ans&gt; [44] &quot;p4&quot;                      </span></span>
-<span id="cb3-46"><a href="practical-work-1.html#cb3-46"></a><span class="co">#ans&gt; [45] &quot;pca&quot;                     </span></span>
-<span id="cb3-47"><a href="practical-work-1.html#cb3-47"></a><span class="co">#ans&gt; [46] &quot;pcairis&quot;                 </span></span>
-<span id="cb3-48"><a href="practical-work-1.html#cb3-48"></a><span class="co">#ans&gt; [47] &quot;pdf2png&quot;                 </span></span>
-<span id="cb3-49"><a href="practical-work-1.html#cb3-49"></a><span class="co">#ans&gt; [48] &quot;Rcmdr.related.packages&quot;  </span></span>
-<span id="cb3-50"><a href="practical-work-1.html#cb3-50"></a><span class="co">#ans&gt; [49] &quot;res.pca&quot;                 </span></span>
-<span id="cb3-51"><a href="practical-work-1.html#cb3-51"></a><span class="co">#ans&gt; [50] &quot;rmse&quot;                    </span></span>
-<span id="cb3-52"><a href="practical-work-1.html#cb3-52"></a><span class="co">#ans&gt; [51] &quot;source&quot;                  </span></span>
-<span id="cb3-53"><a href="practical-work-1.html#cb3-53"></a><span class="co">#ans&gt; [52] &quot;sumMod&quot;                  </span></span>
-<span id="cb3-54"><a href="practical-work-1.html#cb3-54"></a><span class="co">#ans&gt; [53] &quot;test&quot;                    </span></span>
-<span id="cb3-55"><a href="practical-work-1.html#cb3-55"></a><span class="co">#ans&gt; [54] &quot;testing_data&quot;            </span></span>
-<span id="cb3-56"><a href="practical-work-1.html#cb3-56"></a><span class="co">#ans&gt; [55] &quot;train&quot;                   </span></span>
-<span id="cb3-57"><a href="practical-work-1.html#cb3-57"></a><span class="co">#ans&gt; [56] &quot;training_data&quot;           </span></span>
-<span id="cb3-58"><a href="practical-work-1.html#cb3-58"></a><span class="co">#ans&gt; [57] &quot;treeAve&quot;                 </span></span>
-<span id="cb3-59"><a href="practical-work-1.html#cb3-59"></a><span class="co">#ans&gt; [58] &quot;treeComp&quot;                </span></span>
-<span id="cb3-60"><a href="practical-work-1.html#cb3-60"></a><span class="co">#ans&gt; [59] &quot;treeSingle&quot;              </span></span>
-<span id="cb3-61"><a href="practical-work-1.html#cb3-61"></a><span class="co">#ans&gt; [60] &quot;variables&quot;               </span></span>
-<span id="cb3-62"><a href="practical-work-1.html#cb3-62"></a><span class="co">#ans&gt; [61] &quot;vec&quot;                     </span></span>
-<span id="cb3-63"><a href="practical-work-1.html#cb3-63"></a><span class="co">#ans&gt; [62] &quot;x&quot;                       </span></span>
-<span id="cb3-64"><a href="practical-work-1.html#cb3-64"></a><span class="co">#ans&gt; [63] &quot;X&quot;                       </span></span>
-<span id="cb3-65"><a href="practical-work-1.html#cb3-65"></a><span class="co">#ans&gt; [64] &quot;x1&quot;                      </span></span>
-<span id="cb3-66"><a href="practical-work-1.html#cb3-66"></a><span class="co">#ans&gt; [65] &quot;x2&quot;                      </span></span>
-<span id="cb3-67"><a href="practical-work-1.html#cb3-67"></a><span class="co">#ans&gt; [66] &quot;x3&quot;                      </span></span>
-<span id="cb3-68"><a href="practical-work-1.html#cb3-68"></a><span class="co">#ans&gt; [67] &quot;x4&quot;                      </span></span>
-<span id="cb3-69"><a href="practical-work-1.html#cb3-69"></a><span class="co">#ans&gt; [68] &quot;y&quot;                       </span></span>
-<span id="cb3-70"><a href="practical-work-1.html#cb3-70"></a><span class="co">#ans&gt; [69] &quot;y_hat&quot;                   </span></span>
-<span id="cb3-71"><a href="practical-work-1.html#cb3-71"></a><span class="co">#ans&gt; [70] &quot;yclass&quot;</span></span>
-<span id="cb3-72"><a href="practical-work-1.html#cb3-72"></a><span class="kw">rm</span>(x)</span>
-<span id="cb3-73"><a href="practical-work-1.html#cb3-73"></a><span class="kw">ls</span>()</span>
-<span id="cb3-74"><a href="practical-work-1.html#cb3-74"></a><span class="co">#ans&gt;  [1] &quot;A&quot;                       </span></span>
-<span id="cb3-75"><a href="practical-work-1.html#cb3-75"></a><span class="co">#ans&gt;  [2] &quot;Auto&quot;                    </span></span>
-<span id="cb3-76"><a href="practical-work-1.html#cb3-76"></a><span class="co">#ans&gt;  [3] &quot;B&quot;                       </span></span>
-<span id="cb3-77"><a href="practical-work-1.html#cb3-77"></a><span class="co">#ans&gt;  [4] &quot;Boston_bagging&quot;          </span></span>
-<span id="cb3-78"><a href="practical-work-1.html#cb3-78"></a><span class="co">#ans&gt;  [5] &quot;Boston_bagging_pred&quot;     </span></span>
-<span id="cb3-79"><a href="practical-work-1.html#cb3-79"></a><span class="co">#ans&gt;  [6] &quot;Boston_boost&quot;            </span></span>
-<span id="cb3-80"><a href="practical-work-1.html#cb3-80"></a><span class="co">#ans&gt;  [7] &quot;Boston_boost_pred&quot;       </span></span>
-<span id="cb3-81"><a href="practical-work-1.html#cb3-81"></a><span class="co">#ans&gt;  [8] &quot;Boston_forest&quot;           </span></span>
-<span id="cb3-82"><a href="practical-work-1.html#cb3-82"></a><span class="co">#ans&gt;  [9] &quot;Boston_forest_pred&quot;      </span></span>
-<span id="cb3-83"><a href="practical-work-1.html#cb3-83"></a><span class="co">#ans&gt; [10] &quot;Boston_idx&quot;              </span></span>
-<span id="cb3-84"><a href="practical-work-1.html#cb3-84"></a><span class="co">#ans&gt; [11] &quot;Boston_lm&quot;               </span></span>
-<span id="cb3-85"><a href="practical-work-1.html#cb3-85"></a><span class="co">#ans&gt; [12] &quot;Boston_lm_pred&quot;          </span></span>
-<span id="cb3-86"><a href="practical-work-1.html#cb3-86"></a><span class="co">#ans&gt; [13] &quot;Boston_test&quot;             </span></span>
-<span id="cb3-87"><a href="practical-work-1.html#cb3-87"></a><span class="co">#ans&gt; [14] &quot;Boston_train&quot;            </span></span>
-<span id="cb3-88"><a href="practical-work-1.html#cb3-88"></a><span class="co">#ans&gt; [15] &quot;Boston_tree&quot;             </span></span>
-<span id="cb3-89"><a href="practical-work-1.html#cb3-89"></a><span class="co">#ans&gt; [16] &quot;Boston_tree_pred&quot;        </span></span>
-<span id="cb3-90"><a href="practical-work-1.html#cb3-90"></a><span class="co">#ans&gt; [17] &quot;challenger&quot;              </span></span>
-<span id="cb3-91"><a href="practical-work-1.html#cb3-91"></a><span class="co">#ans&gt; [18] &quot;d&quot;                       </span></span>
-<span id="cb3-92"><a href="practical-work-1.html#cb3-92"></a><span class="co">#ans&gt; [19] &quot;data1&quot;                   </span></span>
-<span id="cb3-93"><a href="practical-work-1.html#cb3-93"></a><span class="co">#ans&gt; [20] &quot;data2&quot;                   </span></span>
-<span id="cb3-94"><a href="practical-work-1.html#cb3-94"></a><span class="co">#ans&gt; [21] &quot;dataFrame&quot;               </span></span>
-<span id="cb3-95"><a href="practical-work-1.html#cb3-95"></a><span class="co">#ans&gt; [22] &quot;dendro&quot;                  </span></span>
-<span id="cb3-96"><a href="practical-work-1.html#cb3-96"></a><span class="co">#ans&gt; [23] &quot;error&quot;                   </span></span>
-<span id="cb3-97"><a href="practical-work-1.html#cb3-97"></a><span class="co">#ans&gt; [24] &quot;error_squared&quot;           </span></span>
-<span id="cb3-98"><a href="practical-work-1.html#cb3-98"></a><span class="co">#ans&gt; [25] &quot;EU&quot;                      </span></span>
-<span id="cb3-99"><a href="practical-work-1.html#cb3-99"></a><span class="co">#ans&gt; [26] &quot;eurojob&quot;                 </span></span>
-<span id="cb3-100"><a href="practical-work-1.html#cb3-100"></a><span class="co">#ans&gt; [27] &quot;iris&quot;                    </span></span>
-<span id="cb3-101"><a href="practical-work-1.html#cb3-101"></a><span class="co">#ans&gt; [28] &quot;kmeansObj&quot;               </span></span>
-<span id="cb3-102"><a href="practical-work-1.html#cb3-102"></a><span class="co">#ans&gt; [29] &quot;ligue1&quot;                  </span></span>
-<span id="cb3-103"><a href="practical-work-1.html#cb3-103"></a><span class="co">#ans&gt; [30] &quot;ligue1_scaled&quot;           </span></span>
-<span id="cb3-104"><a href="practical-work-1.html#cb3-104"></a><span class="co">#ans&gt; [31] &quot;M&quot;                       </span></span>
-<span id="cb3-105"><a href="practical-work-1.html#cb3-105"></a><span class="co">#ans&gt; [32] &quot;mod&quot;                     </span></span>
-<span id="cb3-106"><a href="practical-work-1.html#cb3-106"></a><span class="co">#ans&gt; [33] &quot;model&quot;                   </span></span>
-<span id="cb3-107"><a href="practical-work-1.html#cb3-107"></a><span class="co">#ans&gt; [34] &quot;MSE&quot;                     </span></span>
-<span id="cb3-108"><a href="practical-work-1.html#cb3-108"></a><span class="co">#ans&gt; [35] &quot;multiplot&quot;               </span></span>
-<span id="cb3-109"><a href="practical-work-1.html#cb3-109"></a><span class="co">#ans&gt; [36] &quot;myDf&quot;                    </span></span>
-<span id="cb3-110"><a href="practical-work-1.html#cb3-110"></a><span class="co">#ans&gt; [37] &quot;myList&quot;                  </span></span>
-<span id="cb3-111"><a href="practical-work-1.html#cb3-111"></a><span class="co">#ans&gt; [38] &quot;n&quot;                       </span></span>
-<span id="cb3-112"><a href="practical-work-1.html#cb3-112"></a><span class="co">#ans&gt; [39] &quot;names.available.packages&quot;</span></span>
-<span id="cb3-113"><a href="practical-work-1.html#cb3-113"></a><span class="co">#ans&gt; [40] &quot;nasa&quot;                    </span></span>
-<span id="cb3-114"><a href="practical-work-1.html#cb3-114"></a><span class="co">#ans&gt; [41] &quot;p1&quot;                      </span></span>
-<span id="cb3-115"><a href="practical-work-1.html#cb3-115"></a><span class="co">#ans&gt; [42] &quot;p2&quot;                      </span></span>
-<span id="cb3-116"><a href="practical-work-1.html#cb3-116"></a><span class="co">#ans&gt; [43] &quot;p3&quot;                      </span></span>
-<span id="cb3-117"><a href="practical-work-1.html#cb3-117"></a><span class="co">#ans&gt; [44] &quot;p4&quot;                      </span></span>
-<span id="cb3-118"><a href="practical-work-1.html#cb3-118"></a><span class="co">#ans&gt; [45] &quot;pca&quot;                     </span></span>
-<span id="cb3-119"><a href="practical-work-1.html#cb3-119"></a><span class="co">#ans&gt; [46] &quot;pcairis&quot;                 </span></span>
-<span id="cb3-120"><a href="practical-work-1.html#cb3-120"></a><span class="co">#ans&gt; [47] &quot;pdf2png&quot;                 </span></span>
-<span id="cb3-121"><a href="practical-work-1.html#cb3-121"></a><span class="co">#ans&gt; [48] &quot;Rcmdr.related.packages&quot;  </span></span>
-<span id="cb3-122"><a href="practical-work-1.html#cb3-122"></a><span class="co">#ans&gt; [49] &quot;res.pca&quot;                 </span></span>
-<span id="cb3-123"><a href="practical-work-1.html#cb3-123"></a><span class="co">#ans&gt; [50] &quot;rmse&quot;                    </span></span>
-<span id="cb3-124"><a href="practical-work-1.html#cb3-124"></a><span class="co">#ans&gt; [51] &quot;source&quot;                  </span></span>
-<span id="cb3-125"><a href="practical-work-1.html#cb3-125"></a><span class="co">#ans&gt; [52] &quot;sumMod&quot;                  </span></span>
-<span id="cb3-126"><a href="practical-work-1.html#cb3-126"></a><span class="co">#ans&gt; [53] &quot;test&quot;                    </span></span>
-<span id="cb3-127"><a href="practical-work-1.html#cb3-127"></a><span class="co">#ans&gt; [54] &quot;testing_data&quot;            </span></span>
-<span id="cb3-128"><a href="practical-work-1.html#cb3-128"></a><span class="co">#ans&gt; [55] &quot;train&quot;                   </span></span>
-<span id="cb3-129"><a href="practical-work-1.html#cb3-129"></a><span class="co">#ans&gt; [56] &quot;training_data&quot;           </span></span>
-<span id="cb3-130"><a href="practical-work-1.html#cb3-130"></a><span class="co">#ans&gt; [57] &quot;treeAve&quot;                 </span></span>
-<span id="cb3-131"><a href="practical-work-1.html#cb3-131"></a><span class="co">#ans&gt; [58] &quot;treeComp&quot;                </span></span>
-<span id="cb3-132"><a href="practical-work-1.html#cb3-132"></a><span class="co">#ans&gt; [59] &quot;treeSingle&quot;              </span></span>
-<span id="cb3-133"><a href="practical-work-1.html#cb3-133"></a><span class="co">#ans&gt; [60] &quot;variables&quot;               </span></span>
-<span id="cb3-134"><a href="practical-work-1.html#cb3-134"></a><span class="co">#ans&gt; [61] &quot;vec&quot;                     </span></span>
-<span id="cb3-135"><a href="practical-work-1.html#cb3-135"></a><span class="co">#ans&gt; [62] &quot;X&quot;                       </span></span>
-<span id="cb3-136"><a href="practical-work-1.html#cb3-136"></a><span class="co">#ans&gt; [63] &quot;x1&quot;                      </span></span>
-<span id="cb3-137"><a href="practical-work-1.html#cb3-137"></a><span class="co">#ans&gt; [64] &quot;x2&quot;                      </span></span>
-<span id="cb3-138"><a href="practical-work-1.html#cb3-138"></a><span class="co">#ans&gt; [65] &quot;x3&quot;                      </span></span>
-<span id="cb3-139"><a href="practical-work-1.html#cb3-139"></a><span class="co">#ans&gt; [66] &quot;x4&quot;                      </span></span>
-<span id="cb3-140"><a href="practical-work-1.html#cb3-140"></a><span class="co">#ans&gt; [67] &quot;y&quot;                       </span></span>
-<span id="cb3-141"><a href="practical-work-1.html#cb3-141"></a><span class="co">#ans&gt; [68] &quot;y_hat&quot;                   </span></span>
-<span id="cb3-142"><a href="practical-work-1.html#cb3-142"></a><span class="co">#ans&gt; [69] &quot;yclass&quot;</span></span></code></pre></div>
+<span id="cb3-2"><a href="practical-work-1.html#cb3-2"></a><span class="co">#ans&gt;  [1] &quot;acc_bag&quot;           &quot;acc_boost&quot;        </span></span>
+<span id="cb3-3"><a href="practical-work-1.html#cb3-3"></a><span class="co">#ans&gt;  [3] &quot;acc_logreg&quot;        &quot;acc_rf&quot;           </span></span>
+<span id="cb3-4"><a href="practical-work-1.html#cb3-4"></a><span class="co">#ans&gt;  [5] &quot;acc_tree&quot;          &quot;calc_acc&quot;         </span></span>
+<span id="cb3-5"><a href="practical-work-1.html#cb3-5"></a><span class="co">#ans&gt;  [7] &quot;classifier.logreg&quot; &quot;dataset&quot;          </span></span>
+<span id="cb3-6"><a href="practical-work-1.html#cb3-6"></a><span class="co">#ans&gt;  [9] &quot;pdf2png&quot;           &quot;pred.glm&quot;         </span></span>
+<span id="cb3-7"><a href="practical-work-1.html#cb3-7"></a><span class="co">#ans&gt; [11] &quot;pred.glm_T_F&quot;      &quot;seat_acc&quot;         </span></span>
+<span id="cb3-8"><a href="practical-work-1.html#cb3-8"></a><span class="co">#ans&gt; [13] &quot;spam_acc&quot;          &quot;spam_bag&quot;         </span></span>
+<span id="cb3-9"><a href="practical-work-1.html#cb3-9"></a><span class="co">#ans&gt; [15] &quot;spam_bag_pred&quot;     &quot;spam_boost&quot;       </span></span>
+<span id="cb3-10"><a href="practical-work-1.html#cb3-10"></a><span class="co">#ans&gt; [17] &quot;spam_boost_pred&quot;   &quot;spam_boost_pred01&quot;</span></span>
+<span id="cb3-11"><a href="practical-work-1.html#cb3-11"></a><span class="co">#ans&gt; [19] &quot;spam_rf&quot;           &quot;spam_rf_pred&quot;     </span></span>
+<span id="cb3-12"><a href="practical-work-1.html#cb3-12"></a><span class="co">#ans&gt; [21] &quot;spam_tree&quot;         &quot;spam_tree_pred&quot;   </span></span>
+<span id="cb3-13"><a href="practical-work-1.html#cb3-13"></a><span class="co">#ans&gt; [23] &quot;split&quot;             &quot;test_set&quot;         </span></span>
+<span id="cb3-14"><a href="practical-work-1.html#cb3-14"></a><span class="co">#ans&gt; [25] &quot;training_set&quot;      &quot;x&quot;                </span></span>
+<span id="cb3-15"><a href="practical-work-1.html#cb3-15"></a><span class="co">#ans&gt; [27] &quot;x1&quot;                &quot;x2&quot;               </span></span>
+<span id="cb3-16"><a href="practical-work-1.html#cb3-16"></a><span class="co">#ans&gt; [29] &quot;x3&quot;                &quot;x4&quot;               </span></span>
+<span id="cb3-17"><a href="practical-work-1.html#cb3-17"></a><span class="co">#ans&gt; [31] &quot;y&quot;</span></span>
+<span id="cb3-18"><a href="practical-work-1.html#cb3-18"></a><span class="kw">rm</span>(x)</span>
+<span id="cb3-19"><a href="practical-work-1.html#cb3-19"></a><span class="kw">ls</span>()</span>
+<span id="cb3-20"><a href="practical-work-1.html#cb3-20"></a><span class="co">#ans&gt;  [1] &quot;acc_bag&quot;           &quot;acc_boost&quot;        </span></span>
+<span id="cb3-21"><a href="practical-work-1.html#cb3-21"></a><span class="co">#ans&gt;  [3] &quot;acc_logreg&quot;        &quot;acc_rf&quot;           </span></span>
+<span id="cb3-22"><a href="practical-work-1.html#cb3-22"></a><span class="co">#ans&gt;  [5] &quot;acc_tree&quot;          &quot;calc_acc&quot;         </span></span>
+<span id="cb3-23"><a href="practical-work-1.html#cb3-23"></a><span class="co">#ans&gt;  [7] &quot;classifier.logreg&quot; &quot;dataset&quot;          </span></span>
+<span id="cb3-24"><a href="practical-work-1.html#cb3-24"></a><span class="co">#ans&gt;  [9] &quot;pdf2png&quot;           &quot;pred.glm&quot;         </span></span>
+<span id="cb3-25"><a href="practical-work-1.html#cb3-25"></a><span class="co">#ans&gt; [11] &quot;pred.glm_T_F&quot;      &quot;seat_acc&quot;         </span></span>
+<span id="cb3-26"><a href="practical-work-1.html#cb3-26"></a><span class="co">#ans&gt; [13] &quot;spam_acc&quot;          &quot;spam_bag&quot;         </span></span>
+<span id="cb3-27"><a href="practical-work-1.html#cb3-27"></a><span class="co">#ans&gt; [15] &quot;spam_bag_pred&quot;     &quot;spam_boost&quot;       </span></span>
+<span id="cb3-28"><a href="practical-work-1.html#cb3-28"></a><span class="co">#ans&gt; [17] &quot;spam_boost_pred&quot;   &quot;spam_boost_pred01&quot;</span></span>
+<span id="cb3-29"><a href="practical-work-1.html#cb3-29"></a><span class="co">#ans&gt; [19] &quot;spam_rf&quot;           &quot;spam_rf_pred&quot;     </span></span>
+<span id="cb3-30"><a href="practical-work-1.html#cb3-30"></a><span class="co">#ans&gt; [21] &quot;spam_tree&quot;         &quot;spam_tree_pred&quot;   </span></span>
+<span id="cb3-31"><a href="practical-work-1.html#cb3-31"></a><span class="co">#ans&gt; [23] &quot;split&quot;             &quot;test_set&quot;         </span></span>
+<span id="cb3-32"><a href="practical-work-1.html#cb3-32"></a><span class="co">#ans&gt; [25] &quot;training_set&quot;      &quot;x1&quot;               </span></span>
+<span id="cb3-33"><a href="practical-work-1.html#cb3-33"></a><span class="co">#ans&gt; [27] &quot;x2&quot;                &quot;x3&quot;               </span></span>
+<span id="cb3-34"><a href="practical-work-1.html#cb3-34"></a><span class="co">#ans&gt; [29] &quot;x4&quot;                &quot;y&quot;</span></span></code></pre></div>
 </div>
 <div id="vectors" class="section level3" number="1.8.2">
 <h3><span class="header-section-number">1.8.2</span> Vectors</h3>
@@ -801,15 +697,15 @@ code span.wa { color: #bf0303; } /* Warning */
 <span id="cb8-15"><a href="practical-work-1.html#cb8-15"></a></span>
 <span id="cb8-16"><a href="practical-work-1.html#cb8-16"></a><span class="co"># Sampling from a Normal - 100 random points from a N(0, 1)</span></span>
 <span id="cb8-17"><a href="practical-work-1.html#cb8-17"></a><span class="kw">rnorm</span>(<span class="dt">n =</span> <span class="dv">10</span>, <span class="dt">mean =</span> <span class="dv">0</span>, <span class="dt">sd =</span> <span class="dv">1</span>)</span>
-<span id="cb8-18"><a href="practical-work-1.html#cb8-18"></a><span class="co">#ans&gt;  [1]  0.660 -0.614  0.733 -1.894 -0.746 -0.603 -0.146</span></span>
-<span id="cb8-19"><a href="practical-work-1.html#cb8-19"></a><span class="co">#ans&gt;  [8]  0.213  0.243 -1.562</span></span>
+<span id="cb8-18"><a href="practical-work-1.html#cb8-18"></a><span class="co">#ans&gt;  [1]  0.611  1.114  0.619  0.172  0.732 -0.820</span></span>
+<span id="cb8-19"><a href="practical-work-1.html#cb8-19"></a><span class="co">#ans&gt;  [7] -2.793  2.841 -0.478  0.445</span></span>
 <span id="cb8-20"><a href="practical-work-1.html#cb8-20"></a></span>
 <span id="cb8-21"><a href="practical-work-1.html#cb8-21"></a><span class="co"># If you want to have always the same result, set the seed of the random number</span></span>
 <span id="cb8-22"><a href="practical-work-1.html#cb8-22"></a><span class="co"># generator</span></span>
 <span id="cb8-23"><a href="practical-work-1.html#cb8-23"></a><span class="kw">set.seed</span>(<span class="dv">45678</span>)</span>
 <span id="cb8-24"><a href="practical-work-1.html#cb8-24"></a><span class="kw">rnorm</span>(<span class="dt">n =</span> <span class="dv">10</span>, <span class="dt">mean =</span> <span class="dv">0</span>, <span class="dt">sd =</span> <span class="dv">1</span>)</span>
-<span id="cb8-25"><a href="practical-work-1.html#cb8-25"></a><span class="co">#ans&gt;  [1]  1.440 -0.720  0.671 -0.422  0.378 -1.667 -0.508</span></span>
-<span id="cb8-26"><a href="practical-work-1.html#cb8-26"></a><span class="co">#ans&gt;  [8]  0.443 -1.799 -0.618</span></span>
+<span id="cb8-25"><a href="practical-work-1.html#cb8-25"></a><span class="co">#ans&gt;  [1]  1.440 -0.720  0.671 -0.422  0.378 -1.667</span></span>
+<span id="cb8-26"><a href="practical-work-1.html#cb8-26"></a><span class="co">#ans&gt;  [7] -0.508  0.443 -1.799 -0.618</span></span>
 <span id="cb8-27"><a href="practical-work-1.html#cb8-27"></a></span>
 <span id="cb8-28"><a href="practical-work-1.html#cb8-28"></a><span class="co"># Plotting the density of a N(0, 1) - the Gauss bell</span></span>
 <span id="cb8-29"><a href="practical-work-1.html#cb8-29"></a>x &lt;-<span class="st"> </span><span class="kw">seq</span>(<span class="op">-</span><span class="dv">4</span>, <span class="dv">4</span>, <span class="dt">l =</span> <span class="dv">100</span>)</span>
@@ -834,8 +730,8 @@ code span.wa { color: #bf0303; } /* Warning */
 <span id="cb10-10"><a href="practical-work-1.html#cb10-10"></a><span class="co"># Sampling from a U(0, 1)</span></span>
 <span id="cb10-11"><a href="practical-work-1.html#cb10-11"></a><span class="kw">set.seed</span>(<span class="dv">45678</span>)</span>
 <span id="cb10-12"><a href="practical-work-1.html#cb10-12"></a><span class="kw">runif</span>(<span class="dt">n =</span> <span class="dv">10</span>, <span class="dt">min =</span> <span class="dv">0</span>, <span class="dt">max =</span> <span class="dv">1</span>)</span>
-<span id="cb10-13"><a href="practical-work-1.html#cb10-13"></a><span class="co">#ans&gt;  [1] 0.9251 0.3340 0.2359 0.3366 0.7489 0.9327 0.3365</span></span>
-<span id="cb10-14"><a href="practical-work-1.html#cb10-14"></a><span class="co">#ans&gt;  [8] 0.2246 0.6474 0.0808</span></span>
+<span id="cb10-13"><a href="practical-work-1.html#cb10-13"></a><span class="co">#ans&gt;  [1] 0.9251 0.3340 0.2359 0.3366 0.7489 0.9327</span></span>
+<span id="cb10-14"><a href="practical-work-1.html#cb10-14"></a><span class="co">#ans&gt;  [7] 0.3365 0.2246 0.6474 0.0808</span></span>
 <span id="cb10-15"><a href="practical-work-1.html#cb10-15"></a></span>
 <span id="cb10-16"><a href="practical-work-1.html#cb10-16"></a><span class="co"># Plotting the density of a U(0, 1)</span></span>
 <span id="cb10-17"><a href="practical-work-1.html#cb10-17"></a>x &lt;-<span class="st"> </span><span class="kw">seq</span>(<span class="op">-</span><span class="dv">2</span>, <span class="dv">2</span>, <span class="dt">l =</span> <span class="dv">100</span>)</span>
@@ -888,22 +784,29 @@ code span.wa { color: #bf0303; } /* Warning */
 <span id="cb13-5"><a href="practical-work-1.html#cb13-5"></a><span class="kw">ncol</span>(Auto) <span class="co"># To see the number of columns</span></span>
 <span id="cb13-6"><a href="practical-work-1.html#cb13-6"></a><span class="co">#ans&gt; [1] 9</span></span>
 <span id="cb13-7"><a href="practical-work-1.html#cb13-7"></a>Auto[<span class="dv">1</span><span class="op">:</span><span class="dv">4</span>,] <span class="co"># The first 4 rows of the data set</span></span>
-<span id="cb13-8"><a href="practical-work-1.html#cb13-8"></a><span class="co">#ans&gt;   mpg cylinders displacement horsepower weight</span></span>
-<span id="cb13-9"><a href="practical-work-1.html#cb13-9"></a><span class="co">#ans&gt; 1  18         8          307        130   3504</span></span>
-<span id="cb13-10"><a href="practical-work-1.html#cb13-10"></a><span class="co">#ans&gt; 2  15         8          350        165   3693</span></span>
-<span id="cb13-11"><a href="practical-work-1.html#cb13-11"></a><span class="co">#ans&gt; 3  18         8          318        150   3436</span></span>
-<span id="cb13-12"><a href="practical-work-1.html#cb13-12"></a><span class="co">#ans&gt; 4  16         8          304        150   3433</span></span>
-<span id="cb13-13"><a href="practical-work-1.html#cb13-13"></a><span class="co">#ans&gt;   acceleration year origin                      name</span></span>
-<span id="cb13-14"><a href="practical-work-1.html#cb13-14"></a><span class="co">#ans&gt; 1         12.0   70      1 chevrolet chevelle malibu</span></span>
-<span id="cb13-15"><a href="practical-work-1.html#cb13-15"></a><span class="co">#ans&gt; 2         11.5   70      1         buick skylark 320</span></span>
-<span id="cb13-16"><a href="practical-work-1.html#cb13-16"></a><span class="co">#ans&gt; 3         11.0   70      1        plymouth satellite</span></span>
-<span id="cb13-17"><a href="practical-work-1.html#cb13-17"></a><span class="co">#ans&gt; 4         12.0   70      1             amc rebel sst</span></span></code></pre></div>
+<span id="cb13-8"><a href="practical-work-1.html#cb13-8"></a><span class="co">#ans&gt;   mpg cylinders displacement horsepower</span></span>
+<span id="cb13-9"><a href="practical-work-1.html#cb13-9"></a><span class="co">#ans&gt; 1  18         8          307        130</span></span>
+<span id="cb13-10"><a href="practical-work-1.html#cb13-10"></a><span class="co">#ans&gt; 2  15         8          350        165</span></span>
+<span id="cb13-11"><a href="practical-work-1.html#cb13-11"></a><span class="co">#ans&gt; 3  18         8          318        150</span></span>
+<span id="cb13-12"><a href="practical-work-1.html#cb13-12"></a><span class="co">#ans&gt; 4  16         8          304        150</span></span>
+<span id="cb13-13"><a href="practical-work-1.html#cb13-13"></a><span class="co">#ans&gt;   weight acceleration year origin</span></span>
+<span id="cb13-14"><a href="practical-work-1.html#cb13-14"></a><span class="co">#ans&gt; 1   3504         12.0   70      1</span></span>
+<span id="cb13-15"><a href="practical-work-1.html#cb13-15"></a><span class="co">#ans&gt; 2   3693         11.5   70      1</span></span>
+<span id="cb13-16"><a href="practical-work-1.html#cb13-16"></a><span class="co">#ans&gt; 3   3436         11.0   70      1</span></span>
+<span id="cb13-17"><a href="practical-work-1.html#cb13-17"></a><span class="co">#ans&gt; 4   3433         12.0   70      1</span></span>
+<span id="cb13-18"><a href="practical-work-1.html#cb13-18"></a><span class="co">#ans&gt;                        name</span></span>
+<span id="cb13-19"><a href="practical-work-1.html#cb13-19"></a><span class="co">#ans&gt; 1 chevrolet chevelle malibu</span></span>
+<span id="cb13-20"><a href="practical-work-1.html#cb13-20"></a><span class="co">#ans&gt; 2         buick skylark 320</span></span>
+<span id="cb13-21"><a href="practical-work-1.html#cb13-21"></a><span class="co">#ans&gt; 3        plymouth satellite</span></span>
+<span id="cb13-22"><a href="practical-work-1.html#cb13-22"></a><span class="co">#ans&gt; 4             amc rebel sst</span></span></code></pre></div>
 <div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb14-1"><a href="practical-work-1.html#cb14-1"></a><span class="co"># Once the data are loaded correctly, we can use names()</span></span>
 <span id="cb14-2"><a href="practical-work-1.html#cb14-2"></a><span class="co"># to check the variable names.</span></span>
 <span id="cb14-3"><a href="practical-work-1.html#cb14-3"></a><span class="kw">names</span>(Auto)</span>
-<span id="cb14-4"><a href="practical-work-1.html#cb14-4"></a><span class="co">#ans&gt; [1] &quot;mpg&quot;          &quot;cylinders&quot;    &quot;displacement&quot;</span></span>
-<span id="cb14-5"><a href="practical-work-1.html#cb14-5"></a><span class="co">#ans&gt; [4] &quot;horsepower&quot;   &quot;weight&quot;       &quot;acceleration&quot;</span></span>
-<span id="cb14-6"><a href="practical-work-1.html#cb14-6"></a><span class="co">#ans&gt; [7] &quot;year&quot;         &quot;origin&quot;       &quot;name&quot;</span></span></code></pre></div>
+<span id="cb14-4"><a href="practical-work-1.html#cb14-4"></a><span class="co">#ans&gt; [1] &quot;mpg&quot;          &quot;cylinders&quot;   </span></span>
+<span id="cb14-5"><a href="practical-work-1.html#cb14-5"></a><span class="co">#ans&gt; [3] &quot;displacement&quot; &quot;horsepower&quot;  </span></span>
+<span id="cb14-6"><a href="practical-work-1.html#cb14-6"></a><span class="co">#ans&gt; [5] &quot;weight&quot;       &quot;acceleration&quot;</span></span>
+<span id="cb14-7"><a href="practical-work-1.html#cb14-7"></a><span class="co">#ans&gt; [7] &quot;year&quot;         &quot;origin&quot;      </span></span>
+<span id="cb14-8"><a href="practical-work-1.html#cb14-8"></a><span class="co">#ans&gt; [9] &quot;name&quot;</span></span></code></pre></div>
 
 <div class="rmdinsight">
 Take a look at this <a href="https://cran.r-project.org/doc/contrib/Torfs+Brauer-Short-R-Intro.pdf">(very) short introduction to R</a>. It can be useful.
@@ -948,86 +851,88 @@ Take a look at this <a href="https://cran.r-project.org/doc/contrib/Torfs+Brauer
 <span id="cb16-17"><a href="practical-work-1.html#cb16-17"></a></span>
 <span id="cb16-18"><a href="practical-work-1.html#cb16-18"></a><span class="co"># mod is indeed a list of objects whose names are</span></span>
 <span id="cb16-19"><a href="practical-work-1.html#cb16-19"></a><span class="kw">names</span>(mod)</span>
-<span id="cb16-20"><a href="practical-work-1.html#cb16-20"></a><span class="co">#ans&gt;  [1] &quot;coefficients&quot;  &quot;residuals&quot;     &quot;effects&quot;      </span></span>
-<span id="cb16-21"><a href="practical-work-1.html#cb16-21"></a><span class="co">#ans&gt;  [4] &quot;rank&quot;          &quot;fitted.values&quot; &quot;assign&quot;       </span></span>
-<span id="cb16-22"><a href="practical-work-1.html#cb16-22"></a><span class="co">#ans&gt;  [7] &quot;qr&quot;            &quot;df.residual&quot;   &quot;na.action&quot;    </span></span>
-<span id="cb16-23"><a href="practical-work-1.html#cb16-23"></a><span class="co">#ans&gt; [10] &quot;xlevels&quot;       &quot;call&quot;          &quot;terms&quot;        </span></span>
-<span id="cb16-24"><a href="practical-work-1.html#cb16-24"></a><span class="co">#ans&gt; [13] &quot;model&quot;</span></span>
-<span id="cb16-25"><a href="practical-work-1.html#cb16-25"></a></span>
-<span id="cb16-26"><a href="practical-work-1.html#cb16-26"></a><span class="co"># We can access these elements by $</span></span>
-<span id="cb16-27"><a href="practical-work-1.html#cb16-27"></a><span class="co"># For example</span></span>
-<span id="cb16-28"><a href="practical-work-1.html#cb16-28"></a>mod<span class="op">$</span>coefficients</span>
-<span id="cb16-29"><a href="practical-work-1.html#cb16-29"></a><span class="co">#ans&gt;    (Intercept) Population2010 </span></span>
-<span id="cb16-30"><a href="practical-work-1.html#cb16-30"></a><span class="co">#ans&gt;       7.91e+00       1.08e-06</span></span>
-<span id="cb16-31"><a href="practical-work-1.html#cb16-31"></a></span>
-<span id="cb16-32"><a href="practical-work-1.html#cb16-32"></a><span class="co"># The residuals</span></span>
-<span id="cb16-33"><a href="practical-work-1.html#cb16-33"></a>mod<span class="op">$</span>residuals</span>
-<span id="cb16-34"><a href="practical-work-1.html#cb16-34"></a><span class="co">#ans&gt;        Germany         France United Kingdom </span></span>
-<span id="cb16-35"><a href="practical-work-1.html#cb16-35"></a><span class="co">#ans&gt;         2.8675        -3.7031        -1.7847 </span></span>
-<span id="cb16-36"><a href="practical-work-1.html#cb16-36"></a><span class="co">#ans&gt;          Italy          Spain         Poland </span></span>
-<span id="cb16-37"><a href="practical-work-1.html#cb16-37"></a><span class="co">#ans&gt;         0.0139        -3.5084         1.9272 </span></span>
-<span id="cb16-38"><a href="practical-work-1.html#cb16-38"></a><span class="co">#ans&gt;        Romania    Netherlands         Greece </span></span>
-<span id="cb16-39"><a href="practical-work-1.html#cb16-39"></a><span class="co">#ans&gt;         1.9434         0.2142         1.8977 </span></span>
-<span id="cb16-40"><a href="practical-work-1.html#cb16-40"></a><span class="co">#ans&gt;        Belgium       Portugal Czech Republic </span></span>
-<span id="cb16-41"><a href="practical-work-1.html#cb16-41"></a><span class="co">#ans&gt;         2.3994         2.6175         2.7587 </span></span>
-<span id="cb16-42"><a href="practical-work-1.html#cb16-42"></a><span class="co">#ans&gt;        Hungary         Sweden        Austria </span></span>
-<span id="cb16-43"><a href="practical-work-1.html#cb16-43"></a><span class="co">#ans&gt;         3.2898         2.0163         2.0575 </span></span>
-<span id="cb16-44"><a href="practical-work-1.html#cb16-44"></a><span class="co">#ans&gt;       Bulgaria        Denmark       Slovakia </span></span>
-<span id="cb16-45"><a href="practical-work-1.html#cb16-45"></a><span class="co">#ans&gt;         1.9328        -0.8790        -0.7606 </span></span>
-<span id="cb16-46"><a href="practical-work-1.html#cb16-46"></a><span class="co">#ans&gt;        Finland        Ireland      Lithuania </span></span>
-<span id="cb16-47"><a href="practical-work-1.html#cb16-47"></a><span class="co">#ans&gt;        -0.6813        -0.7284         0.4998 </span></span>
-<span id="cb16-48"><a href="practical-work-1.html#cb16-48"></a><span class="co">#ans&gt;         Latvia       Slovenia        Estonia </span></span>
-<span id="cb16-49"><a href="practical-work-1.html#cb16-49"></a><span class="co">#ans&gt;        -1.3347        -2.1175        -3.3552 </span></span>
-<span id="cb16-50"><a href="practical-work-1.html#cb16-50"></a><span class="co">#ans&gt;         Cyprus     Luxembourg          Malta </span></span>
-<span id="cb16-51"><a href="practical-work-1.html#cb16-51"></a><span class="co">#ans&gt;        -2.7761        -2.4514        -2.3553</span></span>
-<span id="cb16-52"><a href="practical-work-1.html#cb16-52"></a></span>
-<span id="cb16-53"><a href="practical-work-1.html#cb16-53"></a><span class="co"># The fitted values</span></span>
-<span id="cb16-54"><a href="practical-work-1.html#cb16-54"></a>mod<span class="op">$</span>fitted.values</span>
-<span id="cb16-55"><a href="practical-work-1.html#cb16-55"></a><span class="co">#ans&gt;        Germany         France United Kingdom </span></span>
-<span id="cb16-56"><a href="practical-work-1.html#cb16-56"></a><span class="co">#ans&gt;          96.13          77.70          74.78 </span></span>
-<span id="cb16-57"><a href="practical-work-1.html#cb16-57"></a><span class="co">#ans&gt;          Italy          Spain         Poland </span></span>
-<span id="cb16-58"><a href="practical-work-1.html#cb16-58"></a><span class="co">#ans&gt;          72.99          57.51          49.07 </span></span>
-<span id="cb16-59"><a href="practical-work-1.html#cb16-59"></a><span class="co">#ans&gt;        Romania    Netherlands         Greece </span></span>
-<span id="cb16-60"><a href="practical-work-1.html#cb16-60"></a><span class="co">#ans&gt;          31.06          25.79          20.10 </span></span>
-<span id="cb16-61"><a href="practical-work-1.html#cb16-61"></a><span class="co">#ans&gt;        Belgium       Portugal Czech Republic </span></span>
-<span id="cb16-62"><a href="practical-work-1.html#cb16-62"></a><span class="co">#ans&gt;          19.60          19.38          19.24 </span></span>
-<span id="cb16-63"><a href="practical-work-1.html#cb16-63"></a><span class="co">#ans&gt;        Hungary         Sweden        Austria </span></span>
-<span id="cb16-64"><a href="practical-work-1.html#cb16-64"></a><span class="co">#ans&gt;          18.71          17.98          16.94 </span></span>
-<span id="cb16-65"><a href="practical-work-1.html#cb16-65"></a><span class="co">#ans&gt;       Bulgaria        Denmark       Slovakia </span></span>
-<span id="cb16-66"><a href="practical-work-1.html#cb16-66"></a><span class="co">#ans&gt;          16.07          13.88          13.76 </span></span>
-<span id="cb16-67"><a href="practical-work-1.html#cb16-67"></a><span class="co">#ans&gt;        Finland        Ireland      Lithuania </span></span>
-<span id="cb16-68"><a href="practical-work-1.html#cb16-68"></a><span class="co">#ans&gt;          13.68          12.73          11.50 </span></span>
-<span id="cb16-69"><a href="practical-work-1.html#cb16-69"></a><span class="co">#ans&gt;         Latvia       Slovenia        Estonia </span></span>
-<span id="cb16-70"><a href="practical-work-1.html#cb16-70"></a><span class="co">#ans&gt;          10.33          10.12           9.36 </span></span>
-<span id="cb16-71"><a href="practical-work-1.html#cb16-71"></a><span class="co">#ans&gt;         Cyprus     Luxembourg          Malta </span></span>
-<span id="cb16-72"><a href="practical-work-1.html#cb16-72"></a><span class="co">#ans&gt;           8.78           8.45           8.36</span></span>
-<span id="cb16-73"><a href="practical-work-1.html#cb16-73"></a></span>
-<span id="cb16-74"><a href="practical-work-1.html#cb16-74"></a><span class="co"># Summary of the model</span></span>
-<span id="cb16-75"><a href="practical-work-1.html#cb16-75"></a>sumMod &lt;-<span class="st"> </span><span class="kw">summary</span>(mod)</span>
-<span id="cb16-76"><a href="practical-work-1.html#cb16-76"></a>sumMod</span>
-<span id="cb16-77"><a href="practical-work-1.html#cb16-77"></a><span class="co">#ans&gt; </span></span>
-<span id="cb16-78"><a href="practical-work-1.html#cb16-78"></a><span class="co">#ans&gt; Call:</span></span>
-<span id="cb16-79"><a href="practical-work-1.html#cb16-79"></a><span class="co">#ans&gt; lm(formula = Seats2011 ~ Population2010, data = EU)</span></span>
-<span id="cb16-80"><a href="practical-work-1.html#cb16-80"></a><span class="co">#ans&gt; </span></span>
-<span id="cb16-81"><a href="practical-work-1.html#cb16-81"></a><span class="co">#ans&gt; Residuals:</span></span>
-<span id="cb16-82"><a href="practical-work-1.html#cb16-82"></a><span class="co">#ans&gt;    Min     1Q Median     3Q    Max </span></span>
-<span id="cb16-83"><a href="practical-work-1.html#cb16-83"></a><span class="co">#ans&gt; -3.703 -1.951  0.014  1.980  3.290 </span></span>
-<span id="cb16-84"><a href="practical-work-1.html#cb16-84"></a><span class="co">#ans&gt; </span></span>
-<span id="cb16-85"><a href="practical-work-1.html#cb16-85"></a><span class="co">#ans&gt; Coefficients:</span></span>
-<span id="cb16-86"><a href="practical-work-1.html#cb16-86"></a><span class="co">#ans&gt;                Estimate Std. Error t value Pr(&gt;|t|)</span></span>
-<span id="cb16-87"><a href="practical-work-1.html#cb16-87"></a><span class="co">#ans&gt; (Intercept)    7.91e+00   5.66e-01    14.0  2.6e-13</span></span>
-<span id="cb16-88"><a href="practical-work-1.html#cb16-88"></a><span class="co">#ans&gt; Population2010 1.08e-06   1.92e-08    56.3  &lt; 2e-16</span></span>
-<span id="cb16-89"><a href="practical-work-1.html#cb16-89"></a><span class="co">#ans&gt;                   </span></span>
-<span id="cb16-90"><a href="practical-work-1.html#cb16-90"></a><span class="co">#ans&gt; (Intercept)    ***</span></span>
-<span id="cb16-91"><a href="practical-work-1.html#cb16-91"></a><span class="co">#ans&gt; Population2010 ***</span></span>
-<span id="cb16-92"><a href="practical-work-1.html#cb16-92"></a><span class="co">#ans&gt; ---</span></span>
-<span id="cb16-93"><a href="practical-work-1.html#cb16-93"></a><span class="co">#ans&gt; Signif. codes:  </span></span>
-<span id="cb16-94"><a href="practical-work-1.html#cb16-94"></a><span class="co">#ans&gt; 0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</span></span>
-<span id="cb16-95"><a href="practical-work-1.html#cb16-95"></a><span class="co">#ans&gt; </span></span>
-<span id="cb16-96"><a href="practical-work-1.html#cb16-96"></a><span class="co">#ans&gt; Residual standard error: 2.29 on 25 degrees of freedom</span></span>
-<span id="cb16-97"><a href="practical-work-1.html#cb16-97"></a><span class="co">#ans&gt;   (1 observation deleted due to missingness)</span></span>
-<span id="cb16-98"><a href="practical-work-1.html#cb16-98"></a><span class="co">#ans&gt; Multiple R-squared:  0.992,	Adjusted R-squared:  0.992 </span></span>
-<span id="cb16-99"><a href="practical-work-1.html#cb16-99"></a><span class="co">#ans&gt; F-statistic: 3.17e+03 on 1 and 25 DF,  p-value: &lt;2e-16</span></span></code></pre></div>
+<span id="cb16-20"><a href="practical-work-1.html#cb16-20"></a><span class="co">#ans&gt;  [1] &quot;coefficients&quot;  &quot;residuals&quot;    </span></span>
+<span id="cb16-21"><a href="practical-work-1.html#cb16-21"></a><span class="co">#ans&gt;  [3] &quot;effects&quot;       &quot;rank&quot;         </span></span>
+<span id="cb16-22"><a href="practical-work-1.html#cb16-22"></a><span class="co">#ans&gt;  [5] &quot;fitted.values&quot; &quot;assign&quot;       </span></span>
+<span id="cb16-23"><a href="practical-work-1.html#cb16-23"></a><span class="co">#ans&gt;  [7] &quot;qr&quot;            &quot;df.residual&quot;  </span></span>
+<span id="cb16-24"><a href="practical-work-1.html#cb16-24"></a><span class="co">#ans&gt;  [9] &quot;na.action&quot;     &quot;xlevels&quot;      </span></span>
+<span id="cb16-25"><a href="practical-work-1.html#cb16-25"></a><span class="co">#ans&gt; [11] &quot;call&quot;          &quot;terms&quot;        </span></span>
+<span id="cb16-26"><a href="practical-work-1.html#cb16-26"></a><span class="co">#ans&gt; [13] &quot;model&quot;</span></span>
+<span id="cb16-27"><a href="practical-work-1.html#cb16-27"></a></span>
+<span id="cb16-28"><a href="practical-work-1.html#cb16-28"></a><span class="co"># We can access these elements by $</span></span>
+<span id="cb16-29"><a href="practical-work-1.html#cb16-29"></a><span class="co"># For example</span></span>
+<span id="cb16-30"><a href="practical-work-1.html#cb16-30"></a>mod<span class="op">$</span>coefficients</span>
+<span id="cb16-31"><a href="practical-work-1.html#cb16-31"></a><span class="co">#ans&gt;    (Intercept) Population2010 </span></span>
+<span id="cb16-32"><a href="practical-work-1.html#cb16-32"></a><span class="co">#ans&gt;       7.91e+00       1.08e-06</span></span>
+<span id="cb16-33"><a href="practical-work-1.html#cb16-33"></a></span>
+<span id="cb16-34"><a href="practical-work-1.html#cb16-34"></a><span class="co"># The residuals</span></span>
+<span id="cb16-35"><a href="practical-work-1.html#cb16-35"></a>mod<span class="op">$</span>residuals</span>
+<span id="cb16-36"><a href="practical-work-1.html#cb16-36"></a><span class="co">#ans&gt;        Germany         France United Kingdom </span></span>
+<span id="cb16-37"><a href="practical-work-1.html#cb16-37"></a><span class="co">#ans&gt;         2.8675        -3.7031        -1.7847 </span></span>
+<span id="cb16-38"><a href="practical-work-1.html#cb16-38"></a><span class="co">#ans&gt;          Italy          Spain         Poland </span></span>
+<span id="cb16-39"><a href="practical-work-1.html#cb16-39"></a><span class="co">#ans&gt;         0.0139        -3.5084         1.9272 </span></span>
+<span id="cb16-40"><a href="practical-work-1.html#cb16-40"></a><span class="co">#ans&gt;        Romania    Netherlands         Greece </span></span>
+<span id="cb16-41"><a href="practical-work-1.html#cb16-41"></a><span class="co">#ans&gt;         1.9434         0.2142         1.8977 </span></span>
+<span id="cb16-42"><a href="practical-work-1.html#cb16-42"></a><span class="co">#ans&gt;        Belgium       Portugal Czech Republic </span></span>
+<span id="cb16-43"><a href="practical-work-1.html#cb16-43"></a><span class="co">#ans&gt;         2.3994         2.6175         2.7587 </span></span>
+<span id="cb16-44"><a href="practical-work-1.html#cb16-44"></a><span class="co">#ans&gt;        Hungary         Sweden        Austria </span></span>
+<span id="cb16-45"><a href="practical-work-1.html#cb16-45"></a><span class="co">#ans&gt;         3.2898         2.0163         2.0575 </span></span>
+<span id="cb16-46"><a href="practical-work-1.html#cb16-46"></a><span class="co">#ans&gt;       Bulgaria        Denmark       Slovakia </span></span>
+<span id="cb16-47"><a href="practical-work-1.html#cb16-47"></a><span class="co">#ans&gt;         1.9328        -0.8790        -0.7606 </span></span>
+<span id="cb16-48"><a href="practical-work-1.html#cb16-48"></a><span class="co">#ans&gt;        Finland        Ireland      Lithuania </span></span>
+<span id="cb16-49"><a href="practical-work-1.html#cb16-49"></a><span class="co">#ans&gt;        -0.6813        -0.7284         0.4998 </span></span>
+<span id="cb16-50"><a href="practical-work-1.html#cb16-50"></a><span class="co">#ans&gt;         Latvia       Slovenia        Estonia </span></span>
+<span id="cb16-51"><a href="practical-work-1.html#cb16-51"></a><span class="co">#ans&gt;        -1.3347        -2.1175        -3.3552 </span></span>
+<span id="cb16-52"><a href="practical-work-1.html#cb16-52"></a><span class="co">#ans&gt;         Cyprus     Luxembourg          Malta </span></span>
+<span id="cb16-53"><a href="practical-work-1.html#cb16-53"></a><span class="co">#ans&gt;        -2.7761        -2.4514        -2.3553</span></span>
+<span id="cb16-54"><a href="practical-work-1.html#cb16-54"></a></span>
+<span id="cb16-55"><a href="practical-work-1.html#cb16-55"></a><span class="co"># The fitted values</span></span>
+<span id="cb16-56"><a href="practical-work-1.html#cb16-56"></a>mod<span class="op">$</span>fitted.values</span>
+<span id="cb16-57"><a href="practical-work-1.html#cb16-57"></a><span class="co">#ans&gt;        Germany         France United Kingdom </span></span>
+<span id="cb16-58"><a href="practical-work-1.html#cb16-58"></a><span class="co">#ans&gt;          96.13          77.70          74.78 </span></span>
+<span id="cb16-59"><a href="practical-work-1.html#cb16-59"></a><span class="co">#ans&gt;          Italy          Spain         Poland </span></span>
+<span id="cb16-60"><a href="practical-work-1.html#cb16-60"></a><span class="co">#ans&gt;          72.99          57.51          49.07 </span></span>
+<span id="cb16-61"><a href="practical-work-1.html#cb16-61"></a><span class="co">#ans&gt;        Romania    Netherlands         Greece </span></span>
+<span id="cb16-62"><a href="practical-work-1.html#cb16-62"></a><span class="co">#ans&gt;          31.06          25.79          20.10 </span></span>
+<span id="cb16-63"><a href="practical-work-1.html#cb16-63"></a><span class="co">#ans&gt;        Belgium       Portugal Czech Republic </span></span>
+<span id="cb16-64"><a href="practical-work-1.html#cb16-64"></a><span class="co">#ans&gt;          19.60          19.38          19.24 </span></span>
+<span id="cb16-65"><a href="practical-work-1.html#cb16-65"></a><span class="co">#ans&gt;        Hungary         Sweden        Austria </span></span>
+<span id="cb16-66"><a href="practical-work-1.html#cb16-66"></a><span class="co">#ans&gt;          18.71          17.98          16.94 </span></span>
+<span id="cb16-67"><a href="practical-work-1.html#cb16-67"></a><span class="co">#ans&gt;       Bulgaria        Denmark       Slovakia </span></span>
+<span id="cb16-68"><a href="practical-work-1.html#cb16-68"></a><span class="co">#ans&gt;          16.07          13.88          13.76 </span></span>
+<span id="cb16-69"><a href="practical-work-1.html#cb16-69"></a><span class="co">#ans&gt;        Finland        Ireland      Lithuania </span></span>
+<span id="cb16-70"><a href="practical-work-1.html#cb16-70"></a><span class="co">#ans&gt;          13.68          12.73          11.50 </span></span>
+<span id="cb16-71"><a href="practical-work-1.html#cb16-71"></a><span class="co">#ans&gt;         Latvia       Slovenia        Estonia </span></span>
+<span id="cb16-72"><a href="practical-work-1.html#cb16-72"></a><span class="co">#ans&gt;          10.33          10.12           9.36 </span></span>
+<span id="cb16-73"><a href="practical-work-1.html#cb16-73"></a><span class="co">#ans&gt;         Cyprus     Luxembourg          Malta </span></span>
+<span id="cb16-74"><a href="practical-work-1.html#cb16-74"></a><span class="co">#ans&gt;           8.78           8.45           8.36</span></span>
+<span id="cb16-75"><a href="practical-work-1.html#cb16-75"></a></span>
+<span id="cb16-76"><a href="practical-work-1.html#cb16-76"></a><span class="co"># Summary of the model</span></span>
+<span id="cb16-77"><a href="practical-work-1.html#cb16-77"></a>sumMod &lt;-<span class="st"> </span><span class="kw">summary</span>(mod)</span>
+<span id="cb16-78"><a href="practical-work-1.html#cb16-78"></a>sumMod</span>
+<span id="cb16-79"><a href="practical-work-1.html#cb16-79"></a><span class="co">#ans&gt; </span></span>
+<span id="cb16-80"><a href="practical-work-1.html#cb16-80"></a><span class="co">#ans&gt; Call:</span></span>
+<span id="cb16-81"><a href="practical-work-1.html#cb16-81"></a><span class="co">#ans&gt; lm(formula = Seats2011 ~ Population2010, data = EU)</span></span>
+<span id="cb16-82"><a href="practical-work-1.html#cb16-82"></a><span class="co">#ans&gt; </span></span>
+<span id="cb16-83"><a href="practical-work-1.html#cb16-83"></a><span class="co">#ans&gt; Residuals:</span></span>
+<span id="cb16-84"><a href="practical-work-1.html#cb16-84"></a><span class="co">#ans&gt;    Min     1Q Median     3Q    Max </span></span>
+<span id="cb16-85"><a href="practical-work-1.html#cb16-85"></a><span class="co">#ans&gt; -3.703 -1.951  0.014  1.980  3.290 </span></span>
+<span id="cb16-86"><a href="practical-work-1.html#cb16-86"></a><span class="co">#ans&gt; </span></span>
+<span id="cb16-87"><a href="practical-work-1.html#cb16-87"></a><span class="co">#ans&gt; Coefficients:</span></span>
+<span id="cb16-88"><a href="practical-work-1.html#cb16-88"></a><span class="co">#ans&gt;                Estimate Std. Error t value</span></span>
+<span id="cb16-89"><a href="practical-work-1.html#cb16-89"></a><span class="co">#ans&gt; (Intercept)    7.91e+00   5.66e-01    14.0</span></span>
+<span id="cb16-90"><a href="practical-work-1.html#cb16-90"></a><span class="co">#ans&gt; Population2010 1.08e-06   1.92e-08    56.3</span></span>
+<span id="cb16-91"><a href="practical-work-1.html#cb16-91"></a><span class="co">#ans&gt;                Pr(&gt;|t|)    </span></span>
+<span id="cb16-92"><a href="practical-work-1.html#cb16-92"></a><span class="co">#ans&gt; (Intercept)     2.6e-13 ***</span></span>
+<span id="cb16-93"><a href="practical-work-1.html#cb16-93"></a><span class="co">#ans&gt; Population2010  &lt; 2e-16 ***</span></span>
+<span id="cb16-94"><a href="practical-work-1.html#cb16-94"></a><span class="co">#ans&gt; ---</span></span>
+<span id="cb16-95"><a href="practical-work-1.html#cb16-95"></a><span class="co">#ans&gt; Signif. codes:  </span></span>
+<span id="cb16-96"><a href="practical-work-1.html#cb16-96"></a><span class="co">#ans&gt; 0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</span></span>
+<span id="cb16-97"><a href="practical-work-1.html#cb16-97"></a><span class="co">#ans&gt; </span></span>
+<span id="cb16-98"><a href="practical-work-1.html#cb16-98"></a><span class="co">#ans&gt; Residual standard error: 2.29 on 25 degrees of freedom</span></span>
+<span id="cb16-99"><a href="practical-work-1.html#cb16-99"></a><span class="co">#ans&gt;   (1 observation deleted due to missingness)</span></span>
+<span id="cb16-100"><a href="practical-work-1.html#cb16-100"></a><span class="co">#ans&gt; Multiple R-squared:  0.992,	Adjusted R-squared:  0.992 </span></span>
+<span id="cb16-101"><a href="practical-work-1.html#cb16-101"></a><span class="co">#ans&gt; F-statistic: 3.17e+03 on 1 and 25 DF,  p-value: &lt;2e-16</span></span></code></pre></div>
 <p>The following table contains a handy cheat sheet of equivalences between <i class="fab  fa-r-project " style="color:steelblue;"></i> code and some of the statistical concepts associated to linear regression.</p>
 <table>
 <colgroup>
@@ -1175,16 +1080,19 @@ For more detailed information, we can use the <code>summary()</code> function:</
 <span id="cb22-8"><a href="practical-work-1.html#cb22-8"></a><span class="co">#ans&gt; -11.385  -3.908  -0.779   2.245  25.728 </span></span>
 <span id="cb22-9"><a href="practical-work-1.html#cb22-9"></a><span class="co">#ans&gt; </span></span>
 <span id="cb22-10"><a href="practical-work-1.html#cb22-10"></a><span class="co">#ans&gt; Coefficients:</span></span>
-<span id="cb22-11"><a href="practical-work-1.html#cb22-11"></a><span class="co">#ans&gt;             Estimate Std. Error t value Pr(&gt;|t|)    </span></span>
-<span id="cb22-12"><a href="practical-work-1.html#cb22-12"></a><span class="co">#ans&gt; (Intercept)   51.783      1.097    47.2   &lt;2e-16 ***</span></span>
-<span id="cb22-13"><a href="practical-work-1.html#cb22-13"></a><span class="co">#ans&gt; log(lstat)   -12.203      0.472   -25.9   &lt;2e-16 ***</span></span>
-<span id="cb22-14"><a href="practical-work-1.html#cb22-14"></a><span class="co">#ans&gt; ---</span></span>
-<span id="cb22-15"><a href="practical-work-1.html#cb22-15"></a><span class="co">#ans&gt; Signif. codes:  </span></span>
-<span id="cb22-16"><a href="practical-work-1.html#cb22-16"></a><span class="co">#ans&gt; 0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</span></span>
-<span id="cb22-17"><a href="practical-work-1.html#cb22-17"></a><span class="co">#ans&gt; </span></span>
-<span id="cb22-18"><a href="practical-work-1.html#cb22-18"></a><span class="co">#ans&gt; Residual standard error: 5.6 on 398 degrees of freedom</span></span>
-<span id="cb22-19"><a href="practical-work-1.html#cb22-19"></a><span class="co">#ans&gt; Multiple R-squared:  0.627,	Adjusted R-squared:  0.626 </span></span>
-<span id="cb22-20"><a href="practical-work-1.html#cb22-20"></a><span class="co">#ans&gt; F-statistic:  669 on 1 and 398 DF,  p-value: &lt;2e-16</span></span></code></pre></div>
+<span id="cb22-11"><a href="practical-work-1.html#cb22-11"></a><span class="co">#ans&gt;             Estimate Std. Error t value</span></span>
+<span id="cb22-12"><a href="practical-work-1.html#cb22-12"></a><span class="co">#ans&gt; (Intercept)   51.783      1.097    47.2</span></span>
+<span id="cb22-13"><a href="practical-work-1.html#cb22-13"></a><span class="co">#ans&gt; log(lstat)   -12.203      0.472   -25.9</span></span>
+<span id="cb22-14"><a href="practical-work-1.html#cb22-14"></a><span class="co">#ans&gt;             Pr(&gt;|t|)    </span></span>
+<span id="cb22-15"><a href="practical-work-1.html#cb22-15"></a><span class="co">#ans&gt; (Intercept)   &lt;2e-16 ***</span></span>
+<span id="cb22-16"><a href="practical-work-1.html#cb22-16"></a><span class="co">#ans&gt; log(lstat)    &lt;2e-16 ***</span></span>
+<span id="cb22-17"><a href="practical-work-1.html#cb22-17"></a><span class="co">#ans&gt; ---</span></span>
+<span id="cb22-18"><a href="practical-work-1.html#cb22-18"></a><span class="co">#ans&gt; Signif. codes:  </span></span>
+<span id="cb22-19"><a href="practical-work-1.html#cb22-19"></a><span class="co">#ans&gt; 0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</span></span>
+<span id="cb22-20"><a href="practical-work-1.html#cb22-20"></a><span class="co">#ans&gt; </span></span>
+<span id="cb22-21"><a href="practical-work-1.html#cb22-21"></a><span class="co">#ans&gt; Residual standard error: 5.6 on 398 degrees of freedom</span></span>
+<span id="cb22-22"><a href="practical-work-1.html#cb22-22"></a><span class="co">#ans&gt; Multiple R-squared:  0.627,	Adjusted R-squared:  0.626 </span></span>
+<span id="cb22-23"><a href="practical-work-1.html#cb22-23"></a><span class="co">#ans&gt; F-statistic:  669 on 1 and 398 DF,  p-value: &lt;2e-16</span></span></code></pre></div>
 <p>Now, we have access to p-values and standard errors for the coefficients, as well as the <span class="math inline">\(R^2\)</span>.</p>
 <ul>
 <li>The output states that the slope is statistically significant and different from <span class="math inline">\(0\)</span> and with a t-value= <span class="math inline">\(-25.9\)</span> (p-value <span class="math inline">\(&lt; 0.05\)</span>), which means that there is a significant relationship between the percentage of households with low socioeconomic income and the median house value.</li>
@@ -1192,10 +1100,12 @@ For more detailed information, we can use the <code>summary()</code> function:</
 <li>Looking at <span class="math inline">\(R^2\)</span>, we can deduce that <span class="math inline">\(62.7\%\)</span> of the model variation is being explained by the predictor <code>log(lstat)</code>. This is probably low, but indeed it would increase if we had more independent (explanatory) variables. We can use the <code>names()</code> function to see what other pieces of information are stored in our linear model (<code>model</code>).</li>
 </ul>
 <div class="sourceCode" id="cb23"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb23-1"><a href="practical-work-1.html#cb23-1"></a><span class="kw">names</span>(model)</span>
-<span id="cb23-2"><a href="practical-work-1.html#cb23-2"></a><span class="co">#ans&gt;  [1] &quot;coefficients&quot;  &quot;residuals&quot;     &quot;effects&quot;      </span></span>
-<span id="cb23-3"><a href="practical-work-1.html#cb23-3"></a><span class="co">#ans&gt;  [4] &quot;rank&quot;          &quot;fitted.values&quot; &quot;assign&quot;       </span></span>
-<span id="cb23-4"><a href="practical-work-1.html#cb23-4"></a><span class="co">#ans&gt;  [7] &quot;qr&quot;            &quot;df.residual&quot;   &quot;xlevels&quot;      </span></span>
-<span id="cb23-5"><a href="practical-work-1.html#cb23-5"></a><span class="co">#ans&gt; [10] &quot;call&quot;          &quot;terms&quot;         &quot;model&quot;</span></span></code></pre></div>
+<span id="cb23-2"><a href="practical-work-1.html#cb23-2"></a><span class="co">#ans&gt;  [1] &quot;coefficients&quot;  &quot;residuals&quot;    </span></span>
+<span id="cb23-3"><a href="practical-work-1.html#cb23-3"></a><span class="co">#ans&gt;  [3] &quot;effects&quot;       &quot;rank&quot;         </span></span>
+<span id="cb23-4"><a href="practical-work-1.html#cb23-4"></a><span class="co">#ans&gt;  [5] &quot;fitted.values&quot; &quot;assign&quot;       </span></span>
+<span id="cb23-5"><a href="practical-work-1.html#cb23-5"></a><span class="co">#ans&gt;  [7] &quot;qr&quot;            &quot;df.residual&quot;  </span></span>
+<span id="cb23-6"><a href="practical-work-1.html#cb23-6"></a><span class="co">#ans&gt;  [9] &quot;xlevels&quot;       &quot;call&quot;         </span></span>
+<span id="cb23-7"><a href="practical-work-1.html#cb23-7"></a><span class="co">#ans&gt; [11] &quot;terms&quot;         &quot;model&quot;</span></span></code></pre></div>
 <div class="sourceCode" id="cb24"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb24-1"><a href="practical-work-1.html#cb24-1"></a>model<span class="op">$</span>coefficients</span>
 <span id="cb24-2"><a href="practical-work-1.html#cb24-2"></a><span class="co">#ans&gt; (Intercept)  log(lstat) </span></span>
 <span id="cb24-3"><a href="practical-work-1.html#cb24-3"></a><span class="co">#ans&gt;        51.8       -12.2</span></span></code></pre></div>

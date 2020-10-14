@@ -291,7 +291,11 @@ code span.wa { color: #bf0303; } /* Warning */
 <li class="chapter" data-level="" data-path="decision-trees-random-forests.html"><a href="decision-trees-random-forests.html#boosting"><i class="fa fa-check"></i>Boosting</a></li>
 <li class="chapter" data-level="" data-path="pw-4.html"><a href="pw-4.html#comparison"><i class="fa fa-check"></i>Comparison</a></li>
 </ul></li>
-<li class="chapter" data-level="" data-path="decision-trees-random-forests.html"><a href="decision-trees-random-forests.html#classification-trees"><i class="fa fa-check"></i>Classification Trees</a></li>
+<li class="chapter" data-level="" data-path="decision-trees-random-forests.html"><a href="decision-trees-random-forests.html#classification-trees"><i class="fa fa-check"></i>Classification Trees</a>
+<ul>
+<li class="chapter" data-level="" data-path="pw-5.html"><a href="pw-5.html#the-spam-dataset"><i class="fa fa-check"></i>The Spam dataset</a></li>
+<li class="chapter" data-level="" data-path="pw-5.html"><a href="pw-5.html#extra-tuning"><i class="fa fa-check"></i>Extra: Tuning</a></li>
+</ul></li>
 </ul></li>
 <li class="part"><span><b>II Dimensionality Reduction</b></span></li>
 <li class="chapter" data-level="6" data-path="principal-components-analysis.html"><a href="principal-components-analysis.html"><i class="fa fa-check"></i><b>6</b> Principal Components Analysis</a>
@@ -480,26 +484,26 @@ code span.wa { color: #bf0303; } /* Warning */
 <div class="rmdtip">
 <p><strong>Hint</strong>: you can use <code>par(mfrow=c(2,2))</code> to show multiple plots on the same figure (<span class="math inline">\(2 \times 2\)</span> plots here). Like follows:</p>
 </div>
-<p><img src="Machine-Learning_files/figure-html/unnamed-chunk-176-1.png" width="70%" style="display: block; margin: auto;" /></p>
-<p><strong>3.</strong> To explore how the 3 different flower classes are distributed along the 4 different features, visualize them via histograms using the following code.</p>
-<div class="sourceCode" id="cb58"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb58-1"><a href="pw-6.html#cb58-1"></a><span class="co"># Let&#39;s use the ggplot2 library</span></span>
-<span id="cb58-2"><a href="pw-6.html#cb58-2"></a><span class="co"># ggplot2 is the most advanced package for data visualization</span></span>
-<span id="cb58-3"><a href="pw-6.html#cb58-3"></a><span class="co"># gg corresponds to The Grammar of Graphics.</span></span>
-<span id="cb58-4"><a href="pw-6.html#cb58-4"></a><span class="kw">library</span>(ggplot2) <span class="co">#of course you must install it first if you don&#39;t have it already</span></span>
-<span id="cb58-5"><a href="pw-6.html#cb58-5"></a></span>
-<span id="cb58-6"><a href="pw-6.html#cb58-6"></a><span class="co"># histogram of sepal_length</span></span>
-<span id="cb58-7"><a href="pw-6.html#cb58-7"></a><span class="kw">ggplot</span>(iris, <span class="kw">aes</span>(<span class="dt">x=</span>sepal_length, <span class="dt">fill=</span>class)) <span class="op">+</span></span>
-<span id="cb58-8"><a href="pw-6.html#cb58-8"></a><span class="st">  </span><span class="kw">geom_histogram</span>(<span class="dt">binwidth=</span>.<span class="dv">2</span>, <span class="dt">alpha=</span>.<span class="dv">5</span>)</span>
-<span id="cb58-9"><a href="pw-6.html#cb58-9"></a><span class="co"># histogram of sepal_width</span></span>
-<span id="cb58-10"><a href="pw-6.html#cb58-10"></a><span class="kw">ggplot</span>(iris, <span class="kw">aes</span>(<span class="dt">x=</span>sepal_width, <span class="dt">fill=</span>class)) <span class="op">+</span></span>
-<span id="cb58-11"><a href="pw-6.html#cb58-11"></a><span class="st">  </span><span class="kw">geom_histogram</span>(<span class="dt">binwidth=</span>.<span class="dv">2</span>, <span class="dt">alpha=</span>.<span class="dv">5</span>)</span>
-<span id="cb58-12"><a href="pw-6.html#cb58-12"></a><span class="co"># histogram of petal_length</span></span>
-<span id="cb58-13"><a href="pw-6.html#cb58-13"></a><span class="kw">ggplot</span>(iris, <span class="kw">aes</span>(<span class="dt">x=</span>petal_length, <span class="dt">fill=</span>class)) <span class="op">+</span></span>
-<span id="cb58-14"><a href="pw-6.html#cb58-14"></a><span class="st">  </span><span class="kw">geom_histogram</span>(<span class="dt">binwidth=</span>.<span class="dv">2</span>, <span class="dt">alpha=</span>.<span class="dv">5</span>)</span>
-<span id="cb58-15"><a href="pw-6.html#cb58-15"></a><span class="co"># histogram of petal_width</span></span>
-<span id="cb58-16"><a href="pw-6.html#cb58-16"></a><span class="kw">ggplot</span>(iris, <span class="kw">aes</span>(<span class="dt">x=</span>petal_width, <span class="dt">fill=</span>class)) <span class="op">+</span></span>
-<span id="cb58-17"><a href="pw-6.html#cb58-17"></a><span class="st">  </span><span class="kw">geom_histogram</span>(<span class="dt">binwidth=</span>.<span class="dv">2</span>, <span class="dt">alpha=</span>.<span class="dv">5</span>)</span></code></pre></div>
 <p><img src="Machine-Learning_files/figure-html/unnamed-chunk-178-1.png" width="70%" style="display: block; margin: auto;" /></p>
+<p><strong>3.</strong> To explore how the 3 different flower classes are distributed along the 4 different features, visualize them via histograms using the following code.</p>
+<div class="sourceCode" id="cb59"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb59-1"><a href="pw-6.html#cb59-1"></a><span class="co"># Let&#39;s use the ggplot2 library</span></span>
+<span id="cb59-2"><a href="pw-6.html#cb59-2"></a><span class="co"># ggplot2 is the most advanced package for data visualization</span></span>
+<span id="cb59-3"><a href="pw-6.html#cb59-3"></a><span class="co"># gg corresponds to The Grammar of Graphics.</span></span>
+<span id="cb59-4"><a href="pw-6.html#cb59-4"></a><span class="kw">library</span>(ggplot2) <span class="co">#of course you must install it first if you don&#39;t have it already</span></span>
+<span id="cb59-5"><a href="pw-6.html#cb59-5"></a></span>
+<span id="cb59-6"><a href="pw-6.html#cb59-6"></a><span class="co"># histogram of sepal_length</span></span>
+<span id="cb59-7"><a href="pw-6.html#cb59-7"></a><span class="kw">ggplot</span>(iris, <span class="kw">aes</span>(<span class="dt">x=</span>sepal_length, <span class="dt">fill=</span>class)) <span class="op">+</span></span>
+<span id="cb59-8"><a href="pw-6.html#cb59-8"></a><span class="st">  </span><span class="kw">geom_histogram</span>(<span class="dt">binwidth=</span>.<span class="dv">2</span>, <span class="dt">alpha=</span>.<span class="dv">5</span>)</span>
+<span id="cb59-9"><a href="pw-6.html#cb59-9"></a><span class="co"># histogram of sepal_width</span></span>
+<span id="cb59-10"><a href="pw-6.html#cb59-10"></a><span class="kw">ggplot</span>(iris, <span class="kw">aes</span>(<span class="dt">x=</span>sepal_width, <span class="dt">fill=</span>class)) <span class="op">+</span></span>
+<span id="cb59-11"><a href="pw-6.html#cb59-11"></a><span class="st">  </span><span class="kw">geom_histogram</span>(<span class="dt">binwidth=</span>.<span class="dv">2</span>, <span class="dt">alpha=</span>.<span class="dv">5</span>)</span>
+<span id="cb59-12"><a href="pw-6.html#cb59-12"></a><span class="co"># histogram of petal_length</span></span>
+<span id="cb59-13"><a href="pw-6.html#cb59-13"></a><span class="kw">ggplot</span>(iris, <span class="kw">aes</span>(<span class="dt">x=</span>petal_length, <span class="dt">fill=</span>class)) <span class="op">+</span></span>
+<span id="cb59-14"><a href="pw-6.html#cb59-14"></a><span class="st">  </span><span class="kw">geom_histogram</span>(<span class="dt">binwidth=</span>.<span class="dv">2</span>, <span class="dt">alpha=</span>.<span class="dv">5</span>)</span>
+<span id="cb59-15"><a href="pw-6.html#cb59-15"></a><span class="co"># histogram of petal_width</span></span>
+<span id="cb59-16"><a href="pw-6.html#cb59-16"></a><span class="kw">ggplot</span>(iris, <span class="kw">aes</span>(<span class="dt">x=</span>petal_width, <span class="dt">fill=</span>class)) <span class="op">+</span></span>
+<span id="cb59-17"><a href="pw-6.html#cb59-17"></a><span class="st">  </span><span class="kw">geom_histogram</span>(<span class="dt">binwidth=</span>.<span class="dv">2</span>, <span class="dt">alpha=</span>.<span class="dv">5</span>)</span></code></pre></div>
+<p><img src="Machine-Learning_files/figure-html/unnamed-chunk-180-1.png" width="70%" style="display: block; margin: auto;" /></p>
 </div>
 <div id="pca-using-princomp" class="section level3 unnumbered" number="">
 <h3>PCA using <code>princomp()</code></h3>
@@ -507,47 +511,51 @@ code span.wa { color: #bf0303; } /* Warning */
 <p>Both <code>princomp()</code> and <code>prcomp()</code> are built-in <i class="fab  fa-r-project " style="color:steelblue;"></i> functions. They both perform PCA.</p>
 </div>
 <p><strong>4.</strong> Apply a PCA on the Iris dataset using the <code>princomp()</code> function and interpret the results.</p>
-<div class="sourceCode" id="cb59"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb59-1"><a href="pw-6.html#cb59-1"></a>pcairis=<span class="kw">princomp</span>(iris[,<span class="op">-</span><span class="dv">5</span>], <span class="dt">cor=</span>T) </span>
-<span id="cb59-2"><a href="pw-6.html#cb59-2"></a><span class="co"># Note that we take only the numerical columns to apply PCA.</span></span>
-<span id="cb59-3"><a href="pw-6.html#cb59-3"></a><span class="co"># now pcairis is a R object of type princomp</span></span>
-<span id="cb59-4"><a href="pw-6.html#cb59-4"></a></span>
-<span id="cb59-5"><a href="pw-6.html#cb59-5"></a><span class="co"># To display the internal structure of pcairis</span></span>
-<span id="cb59-6"><a href="pw-6.html#cb59-6"></a><span class="kw">str</span>(pcairis)</span>
-<span id="cb59-7"><a href="pw-6.html#cb59-7"></a><span class="co">#ans&gt; List of 7</span></span>
-<span id="cb59-8"><a href="pw-6.html#cb59-8"></a><span class="co">#ans&gt;  $ sdev    : Named num [1:4] 1.706 0.96 0.384 0.144</span></span>
-<span id="cb59-9"><a href="pw-6.html#cb59-9"></a><span class="co">#ans&gt;   ..- attr(*, &quot;names&quot;)= chr [1:4] &quot;Comp.1&quot; &quot;Comp.2&quot; &quot;Comp.3&quot; &quot;Comp.4&quot;</span></span>
-<span id="cb59-10"><a href="pw-6.html#cb59-10"></a><span class="co">#ans&gt;  $ loadings: &#39;loadings&#39; num [1:4, 1:4] 0.522 -0.263 0.581 0.566 0.372 ...</span></span>
-<span id="cb59-11"><a href="pw-6.html#cb59-11"></a><span class="co">#ans&gt;   ..- attr(*, &quot;dimnames&quot;)=List of 2</span></span>
-<span id="cb59-12"><a href="pw-6.html#cb59-12"></a><span class="co">#ans&gt;   .. ..$ : chr [1:4] &quot;sepal_length&quot; &quot;sepal_width&quot; &quot;petal_length&quot; &quot;petal_width&quot;</span></span>
-<span id="cb59-13"><a href="pw-6.html#cb59-13"></a><span class="co">#ans&gt;   .. ..$ : chr [1:4] &quot;Comp.1&quot; &quot;Comp.2&quot; &quot;Comp.3&quot; &quot;Comp.4&quot;</span></span>
-<span id="cb59-14"><a href="pw-6.html#cb59-14"></a><span class="co">#ans&gt;  $ center  : Named num [1:4] 5.84 3.05 3.76 1.2</span></span>
-<span id="cb59-15"><a href="pw-6.html#cb59-15"></a><span class="co">#ans&gt;   ..- attr(*, &quot;names&quot;)= chr [1:4] &quot;sepal_length&quot; &quot;sepal_width&quot; &quot;petal_length&quot; &quot;petal_width&quot;</span></span>
-<span id="cb59-16"><a href="pw-6.html#cb59-16"></a><span class="co">#ans&gt;  $ scale   : Named num [1:4] 0.825 0.432 1.759 0.761</span></span>
-<span id="cb59-17"><a href="pw-6.html#cb59-17"></a><span class="co">#ans&gt;   ..- attr(*, &quot;names&quot;)= chr [1:4] &quot;sepal_length&quot; &quot;sepal_width&quot; &quot;petal_length&quot; &quot;petal_width&quot;</span></span>
-<span id="cb59-18"><a href="pw-6.html#cb59-18"></a><span class="co">#ans&gt;  $ n.obs   : int 150</span></span>
-<span id="cb59-19"><a href="pw-6.html#cb59-19"></a><span class="co">#ans&gt;  $ scores  : num [1:150, 1:4] -2.26 -2.09 -2.37 -2.3 -2.39 ...</span></span>
-<span id="cb59-20"><a href="pw-6.html#cb59-20"></a><span class="co">#ans&gt;   ..- attr(*, &quot;dimnames&quot;)=List of 2</span></span>
-<span id="cb59-21"><a href="pw-6.html#cb59-21"></a><span class="co">#ans&gt;   .. ..$ : NULL</span></span>
-<span id="cb59-22"><a href="pw-6.html#cb59-22"></a><span class="co">#ans&gt;   .. ..$ : chr [1:4] &quot;Comp.1&quot; &quot;Comp.2&quot; &quot;Comp.3&quot; &quot;Comp.4&quot;</span></span>
-<span id="cb59-23"><a href="pw-6.html#cb59-23"></a><span class="co">#ans&gt;  $ call    : language princomp(x = iris[, -5], cor = T)</span></span>
-<span id="cb59-24"><a href="pw-6.html#cb59-24"></a><span class="co">#ans&gt;  - attr(*, &quot;class&quot;)= chr &quot;princomp&quot;</span></span>
-<span id="cb59-25"><a href="pw-6.html#cb59-25"></a></span>
-<span id="cb59-26"><a href="pw-6.html#cb59-26"></a><span class="co"># To see the variance explained by the the pcs</span></span>
-<span id="cb59-27"><a href="pw-6.html#cb59-27"></a><span class="kw">summary</span>(pcairis) </span>
-<span id="cb59-28"><a href="pw-6.html#cb59-28"></a><span class="co">#ans&gt; Importance of components:</span></span>
-<span id="cb59-29"><a href="pw-6.html#cb59-29"></a><span class="co">#ans&gt;                        Comp.1 Comp.2 Comp.3  Comp.4</span></span>
-<span id="cb59-30"><a href="pw-6.html#cb59-30"></a><span class="co">#ans&gt; Standard deviation      1.706  0.960 0.3839 0.14355</span></span>
-<span id="cb59-31"><a href="pw-6.html#cb59-31"></a><span class="co">#ans&gt; Proportion of Variance  0.728  0.230 0.0368 0.00515</span></span>
-<span id="cb59-32"><a href="pw-6.html#cb59-32"></a><span class="co">#ans&gt; Cumulative Proportion   0.728  0.958 0.9948 1.00000</span></span>
-<span id="cb59-33"><a href="pw-6.html#cb59-33"></a></span>
-<span id="cb59-34"><a href="pw-6.html#cb59-34"></a><span class="co"># To plot the variance explained by each pc</span></span>
-<span id="cb59-35"><a href="pw-6.html#cb59-35"></a><span class="kw">plot</span>(pcairis) </span></code></pre></div>
-<p><img src="Machine-Learning_files/figure-html/unnamed-chunk-179-1.png" width="70%" style="display: block; margin: auto;" /></p>
-<div class="sourceCode" id="cb60"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb60-1"><a href="pw-6.html#cb60-1"></a></span>
-<span id="cb60-2"><a href="pw-6.html#cb60-2"></a><span class="co"># To plot together the scores for PC1 and PC2 and the </span></span>
-<span id="cb60-3"><a href="pw-6.html#cb60-3"></a><span class="co"># variables expressed in terms of PC1 and PC2.</span></span>
-<span id="cb60-4"><a href="pw-6.html#cb60-4"></a><span class="kw">biplot</span>(pcairis) </span></code></pre></div>
-<p><img src="Machine-Learning_files/figure-html/unnamed-chunk-179-2.png" width="70%" style="display: block; margin: auto;" /></p>
+<div class="sourceCode" id="cb60"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb60-1"><a href="pw-6.html#cb60-1"></a>pcairis=<span class="kw">princomp</span>(iris[,<span class="op">-</span><span class="dv">5</span>], <span class="dt">cor=</span>T) </span>
+<span id="cb60-2"><a href="pw-6.html#cb60-2"></a><span class="co"># Note that we take only the numerical columns to apply PCA.</span></span>
+<span id="cb60-3"><a href="pw-6.html#cb60-3"></a><span class="co"># now pcairis is a R object of type princomp</span></span>
+<span id="cb60-4"><a href="pw-6.html#cb60-4"></a></span>
+<span id="cb60-5"><a href="pw-6.html#cb60-5"></a><span class="co"># To display the internal structure of pcairis</span></span>
+<span id="cb60-6"><a href="pw-6.html#cb60-6"></a><span class="kw">str</span>(pcairis)</span>
+<span id="cb60-7"><a href="pw-6.html#cb60-7"></a><span class="co">#ans&gt; List of 7</span></span>
+<span id="cb60-8"><a href="pw-6.html#cb60-8"></a><span class="co">#ans&gt;  $ sdev    : Named num [1:4] 1.706 0.96 0.384 0.144</span></span>
+<span id="cb60-9"><a href="pw-6.html#cb60-9"></a><span class="co">#ans&gt;   ..- attr(*, &quot;names&quot;)= chr [1:4] &quot;Comp.1&quot; &quot;Comp.2&quot; &quot;Comp.3&quot; &quot;Comp.4&quot;</span></span>
+<span id="cb60-10"><a href="pw-6.html#cb60-10"></a><span class="co">#ans&gt;  $ loadings: &#39;loadings&#39; num [1:4, 1:4] 0.522 -0.263 0.581 0.566 0.372 ...</span></span>
+<span id="cb60-11"><a href="pw-6.html#cb60-11"></a><span class="co">#ans&gt;   ..- attr(*, &quot;dimnames&quot;)=List of 2</span></span>
+<span id="cb60-12"><a href="pw-6.html#cb60-12"></a><span class="co">#ans&gt;   .. ..$ : chr [1:4] &quot;sepal_length&quot; &quot;sepal_width&quot; &quot;petal_length&quot; &quot;petal_width&quot;</span></span>
+<span id="cb60-13"><a href="pw-6.html#cb60-13"></a><span class="co">#ans&gt;   .. ..$ : chr [1:4] &quot;Comp.1&quot; &quot;Comp.2&quot; &quot;Comp.3&quot; &quot;Comp.4&quot;</span></span>
+<span id="cb60-14"><a href="pw-6.html#cb60-14"></a><span class="co">#ans&gt;  $ center  : Named num [1:4] 5.84 3.05 3.76 1.2</span></span>
+<span id="cb60-15"><a href="pw-6.html#cb60-15"></a><span class="co">#ans&gt;   ..- attr(*, &quot;names&quot;)= chr [1:4] &quot;sepal_length&quot; &quot;sepal_width&quot; &quot;petal_length&quot; &quot;petal_width&quot;</span></span>
+<span id="cb60-16"><a href="pw-6.html#cb60-16"></a><span class="co">#ans&gt;  $ scale   : Named num [1:4] 0.825 0.432 1.759 0.761</span></span>
+<span id="cb60-17"><a href="pw-6.html#cb60-17"></a><span class="co">#ans&gt;   ..- attr(*, &quot;names&quot;)= chr [1:4] &quot;sepal_length&quot; &quot;sepal_width&quot; &quot;petal_length&quot; &quot;petal_width&quot;</span></span>
+<span id="cb60-18"><a href="pw-6.html#cb60-18"></a><span class="co">#ans&gt;  $ n.obs   : int 150</span></span>
+<span id="cb60-19"><a href="pw-6.html#cb60-19"></a><span class="co">#ans&gt;  $ scores  : num [1:150, 1:4] -2.26 -2.09 -2.37 -2.3 -2.39 ...</span></span>
+<span id="cb60-20"><a href="pw-6.html#cb60-20"></a><span class="co">#ans&gt;   ..- attr(*, &quot;dimnames&quot;)=List of 2</span></span>
+<span id="cb60-21"><a href="pw-6.html#cb60-21"></a><span class="co">#ans&gt;   .. ..$ : NULL</span></span>
+<span id="cb60-22"><a href="pw-6.html#cb60-22"></a><span class="co">#ans&gt;   .. ..$ : chr [1:4] &quot;Comp.1&quot; &quot;Comp.2&quot; &quot;Comp.3&quot; &quot;Comp.4&quot;</span></span>
+<span id="cb60-23"><a href="pw-6.html#cb60-23"></a><span class="co">#ans&gt;  $ call    : language princomp(x = iris[, -5], cor = T)</span></span>
+<span id="cb60-24"><a href="pw-6.html#cb60-24"></a><span class="co">#ans&gt;  - attr(*, &quot;class&quot;)= chr &quot;princomp&quot;</span></span>
+<span id="cb60-25"><a href="pw-6.html#cb60-25"></a></span>
+<span id="cb60-26"><a href="pw-6.html#cb60-26"></a><span class="co"># To see the variance explained by the the pcs</span></span>
+<span id="cb60-27"><a href="pw-6.html#cb60-27"></a><span class="kw">summary</span>(pcairis) </span>
+<span id="cb60-28"><a href="pw-6.html#cb60-28"></a><span class="co">#ans&gt; Importance of components:</span></span>
+<span id="cb60-29"><a href="pw-6.html#cb60-29"></a><span class="co">#ans&gt;                        Comp.1 Comp.2 Comp.3</span></span>
+<span id="cb60-30"><a href="pw-6.html#cb60-30"></a><span class="co">#ans&gt; Standard deviation      1.706  0.960 0.3839</span></span>
+<span id="cb60-31"><a href="pw-6.html#cb60-31"></a><span class="co">#ans&gt; Proportion of Variance  0.728  0.230 0.0368</span></span>
+<span id="cb60-32"><a href="pw-6.html#cb60-32"></a><span class="co">#ans&gt; Cumulative Proportion   0.728  0.958 0.9948</span></span>
+<span id="cb60-33"><a href="pw-6.html#cb60-33"></a><span class="co">#ans&gt;                         Comp.4</span></span>
+<span id="cb60-34"><a href="pw-6.html#cb60-34"></a><span class="co">#ans&gt; Standard deviation     0.14355</span></span>
+<span id="cb60-35"><a href="pw-6.html#cb60-35"></a><span class="co">#ans&gt; Proportion of Variance 0.00515</span></span>
+<span id="cb60-36"><a href="pw-6.html#cb60-36"></a><span class="co">#ans&gt; Cumulative Proportion  1.00000</span></span>
+<span id="cb60-37"><a href="pw-6.html#cb60-37"></a></span>
+<span id="cb60-38"><a href="pw-6.html#cb60-38"></a><span class="co"># To plot the variance explained by each pc</span></span>
+<span id="cb60-39"><a href="pw-6.html#cb60-39"></a><span class="kw">plot</span>(pcairis) </span></code></pre></div>
+<p><img src="Machine-Learning_files/figure-html/unnamed-chunk-181-1.png" width="70%" style="display: block; margin: auto;" /></p>
+<div class="sourceCode" id="cb61"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb61-1"><a href="pw-6.html#cb61-1"></a></span>
+<span id="cb61-2"><a href="pw-6.html#cb61-2"></a><span class="co"># To plot together the scores for PC1 and PC2 and the </span></span>
+<span id="cb61-3"><a href="pw-6.html#cb61-3"></a><span class="co"># variables expressed in terms of PC1 and PC2.</span></span>
+<span id="cb61-4"><a href="pw-6.html#cb61-4"></a><span class="kw">biplot</span>(pcairis) </span></code></pre></div>
+<p><img src="Machine-Learning_files/figure-html/unnamed-chunk-181-2.png" width="70%" style="display: block; margin: auto;" /></p>
 </div>
 <div id="deeper-pca-using-factoextra-package" class="section level3 unnumbered" number="">
 <h3>Deeper PCA using <code>factoextra</code> package</h3>
@@ -591,8 +599,8 @@ Transform the original dataset <span class="math inline"><span class="math inlin
 </ul>
 </div>
 <p><strong>6.</strong> First step, split the iris dataset into data <span class="math inline">\(X\)</span> and class labels <span class="math inline">\(y\)</span>.</p>
-<div class="sourceCode" id="cb61"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb61-1"><a href="pw-6.html#cb61-1"></a>X &lt;-<span class="st"> </span>iris[,<span class="op">-</span><span class="dv">5</span>]</span>
-<span id="cb61-2"><a href="pw-6.html#cb61-2"></a>y &lt;-<span class="st"> </span>iris[,<span class="dv">5</span>]</span></code></pre></div>
+<div class="sourceCode" id="cb62"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb62-1"><a href="pw-6.html#cb62-1"></a>X &lt;-<span class="st"> </span>iris[,<span class="op">-</span><span class="dv">5</span>]</span>
+<span id="cb62-2"><a href="pw-6.html#cb62-2"></a>y &lt;-<span class="st"> </span>iris[,<span class="dv">5</span>]</span></code></pre></div>
 <div class="rmdinsight">
 <p>
 The iris dataset is now stored in form of a <span class="math inline"><span class="math inline">\(150 \times 4\)</span></span> matrix where the columns are the different features, and every row represents a separate flower sample. Each sample row <span class="math inline"><span class="math inline">\(X^i\)</span></span> can be pictured as a 4-dimensional vector

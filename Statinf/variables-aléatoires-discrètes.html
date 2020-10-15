@@ -1,0 +1,2023 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Variables Aléatoires Discrètes | Statistique Inférentielle</title>
+  <meta name="description" content="Cours de Statistique Inférentielle A3 ESILV" />
+  <meta name="generator" content="bookdown 0.19 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Variables Aléatoires Discrètes | Statistique Inférentielle" />
+  <meta property="og:type" content="book" />
+  
+  
+  <meta property="og:description" content="Cours de Statistique Inférentielle A3 ESILV" />
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Variables Aléatoires Discrètes | Statistique Inférentielle" />
+  
+  <meta name="twitter:description" content="Cours de Statistique Inférentielle A3 ESILV" />
+  
+
+<meta name="author" content="Mohamad Ghassany" />
+
+
+<meta name="date" content="2020-08-07" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  <link rel="shortcut icon" href="img/favicon.ico" type="image/x-icon" />
+<link rel="prev" href="tp.html"/>
+<link rel="next" href="variables-aléatoires-continues.html"/>
+<script src="book_assets/jquery-2.2.3/jquery.min.js"></script>
+<link href="book_assets/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="book_assets/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="book_assets/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="book_assets/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="book_assets/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="book_assets/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="book_assets/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+<link href="book_assets/font-awesome-5.3.1/css/fontawesome-all.min.css" rel="stylesheet" />
+<script src="book_assets/kePrint-0.0.1/kePrint.js"></script>
+<link href="book_assets/bsTable-3.3.7/bootstrapTable.min.css" rel="stylesheet" />
+<script src="book_assets/htmlwidgets-1.5.1/htmlwidgets.js"></script>
+<script src="book_assets/plotly-binding-4.9.2.1/plotly.js"></script>
+<script src="book_assets/typedarray-0.1/typedarray.min.js"></script>
+<link href="book_assets/crosstalk-1.1.0.1/css/crosstalk.css" rel="stylesheet" />
+<script src="book_assets/crosstalk-1.1.0.1/js/crosstalk.min.js"></script>
+<link href="book_assets/plotly-htmlwidgets-css-1.52.2/plotly-htmlwidgets.css" rel="stylesheet" />
+<script src="book_assets/plotly-main-1.52.2/plotly-latest.min.js"></script>
+<script async defer src="https://hypothes.is/embed.js"></script>
+
+
+<style type="text/css">
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource a.sourceLine
+  { position: relative; left: -4em; }
+pre.numberSource a.sourceLine::before
+  { content: attr(title);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    background-color: #ffffff;
+    color: #a0a0a0;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #a0a0a0;  padding-left: 4px; }
+div.sourceCode
+  { color: #1f1c1b; background-color: #ffffff; }
+@media screen {
+a.sourceLine::before { text-decoration: underline; }
+}
+code span. { color: #1f1c1b; } /* Normal */
+code span.al { color: #bf0303; background-color: #f7e6e6; font-weight: bold; } /* Alert */
+code span.an { color: #ca60ca; } /* Annotation */
+code span.at { color: #0057ae; } /* Attribute */
+code span.bn { color: #b08000; } /* BaseN */
+code span.bu { color: #644a9b; font-weight: bold; } /* BuiltIn */
+code span.cf { color: #1f1c1b; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #924c9d; } /* Char */
+code span.cn { color: #aa5500; } /* Constant */
+code span.co { color: #898887; } /* Comment */
+code span.cv { color: #0095ff; } /* CommentVar */
+code span.do { color: #607880; } /* Documentation */
+code span.dt { color: #0057ae; } /* DataType */
+code span.dv { color: #b08000; } /* DecVal */
+code span.er { color: #bf0303; text-decoration: underline; } /* Error */
+code span.ex { color: #0095ff; font-weight: bold; } /* Extension */
+code span.fl { color: #b08000; } /* Float */
+code span.fu { color: #644a9b; } /* Function */
+code span.im { color: #ff5500; } /* Import */
+code span.in { color: #b08000; } /* Information */
+code span.kw { color: #1f1c1b; font-weight: bold; } /* Keyword */
+code span.op { color: #1f1c1b; } /* Operator */
+code span.ot { color: #006e28; } /* Other */
+code span.pp { color: #006e28; } /* Preprocessor */
+code span.re { color: #0057ae; background-color: #e0e9f8; } /* RegionMarker */
+code span.sc { color: #3daee9; } /* SpecialChar */
+code span.ss { color: #ff5500; } /* SpecialString */
+code span.st { color: #bf0303; } /* String */
+code span.va { color: #0057ae; } /* Variable */
+code span.vs { color: #bf0303; } /* VerbatimString */
+code span.wa { color: #bf0303; } /* Warning */
+</style>
+
+<link rel="stylesheet" href="css\style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li class='beforeimg'>            
+   <a href="https://www.esilv.fr/">
+       <img src="img/Logo_ESILV_tout_blanc.png" style="width:75%; padding:0px 0; display:block; margin: 0 auto;" alt="ESILV logo">
+    </a>
+</li>
+<li class='before'><a href="./">Statistique Inférentielle</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Overview</a><ul>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#plan-et-déroulement-du-cours"><i class="fa fa-check"></i>Plan et déroulement du cours</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="introduction.html"><a href="introduction.html"><i class="fa fa-check"></i>Introduction</a><ul>
+<li class="chapter" data-level="" data-path="introduction.html"><a href="introduction.html#la-démarche-statistique"><i class="fa fa-check"></i>La démarche statistique</a></li>
+<li class="chapter" data-level="" data-path="introduction.html"><a href="introduction.html#objectifs-et-plan-du-cours"><i class="fa fa-check"></i>Objectifs et plan du cours</a></li>
+</ul></li>
+<li class="part"><span><b>Statistique descriptive</b></span></li>
+<li class="part"><span><b>Séance 1</b></span></li>
+<li class="chapter" data-level="1" data-path="statistique-descriptive.html"><a href="statistique-descriptive.html"><i class="fa fa-check"></i><b>1</b> Statistique descriptive</a><ul>
+<li class="chapter" data-level="1.1" data-path="statistique-descriptive.html"><a href="statistique-descriptive.html#terminologie"><i class="fa fa-check"></i><b>1.1</b> Terminologie</a></li>
+<li class="chapter" data-level="1.2" data-path="statistique-descriptive.html"><a href="statistique-descriptive.html#statistique-et-probabilités"><i class="fa fa-check"></i><b>1.2</b> Statistique et Probabilités</a></li>
+<li class="chapter" data-level="1.3" data-path="statistique-descriptive.html"><a href="statistique-descriptive.html#description-dune-série-de-valeurs"><i class="fa fa-check"></i><b>1.3</b> Description d’une série de valeurs</a></li>
+<li class="chapter" data-level="1.4" data-path="statistique-descriptive.html"><a href="statistique-descriptive.html#représentations-graphiques"><i class="fa fa-check"></i><b>1.4</b> Représentations graphiques</a><ul>
+<li class="chapter" data-level="1.4.1" data-path="statistique-descriptive.html"><a href="statistique-descriptive.html#variable-qualitative"><i class="fa fa-check"></i><b>1.4.1</b> Variable qualitative</a></li>
+<li class="chapter" data-level="1.4.2" data-path="statistique-descriptive.html"><a href="statistique-descriptive.html#variable-quantitative"><i class="fa fa-check"></i><b>1.4.2</b> Variable quantitative</a></li>
+</ul></li>
+<li class="chapter" data-level="1.5" data-path="statistique-descriptive.html"><a href="statistique-descriptive.html#indicateurs-statistiques"><i class="fa fa-check"></i><b>1.5</b> Indicateurs statistiques</a><ul>
+<li class="chapter" data-level="1.5.1" data-path="statistique-descriptive.html"><a href="statistique-descriptive.html#tendance-centrale"><i class="fa fa-check"></i><b>1.5.1</b> Tendance centrale</a></li>
+<li class="chapter" data-level="1.5.2" data-path="statistique-descriptive.html"><a href="statistique-descriptive.html#dispersion-variabilité"><i class="fa fa-check"></i><b>1.5.2</b> Dispersion (variabilité)</a></li>
+</ul></li>
+<li class="chapter" data-level="1.6" data-path="statistique-descriptive.html"><a href="statistique-descriptive.html#statistique-descriptive-bidimensionnelle"><i class="fa fa-check"></i><b>1.6</b> Statistique descriptive bidimensionnelle</a><ul>
+<li class="chapter" data-level="" data-path="statistique-descriptive.html"><a href="statistique-descriptive.html#deux-variables-quantitatives"><i class="fa fa-check"></i>Deux variables quantitatives</a></li>
+<li class="chapter" data-level="" data-path="statistique-descriptive.html"><a href="statistique-descriptive.html#une-variable-quantitative-et-une-qualitative"><i class="fa fa-check"></i>Une variable quantitative et une qualitative</a></li>
+<li class="chapter" data-level="" data-path="statistique-descriptive.html"><a href="statistique-descriptive.html#deux-variables-qualitatives"><i class="fa fa-check"></i>Deux variables qualitatives</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="exercices.html"><a href="exercices.html"><i class="fa fa-check"></i>Exercices</a></li>
+<li class="chapter" data-level="" data-path="tp-statistique-descriptive-avec-r.html"><a href="tp-statistique-descriptive-avec-r.html"><i class="fa fa-check"></i>TP Statistique descriptive avec R</a><ul>
+<li><a href="tp-statistique-descriptive-avec-r.html#quest-ce-que-cest-que">Qu’est-ce que c’est que <svg style="height:0.8em;top:.04em;position:relative;fill:steelblue;" viewBox="0 0 581 512"><path d="M581 226.6C581 119.1 450.9 32 290.5 32S0 119.1 0 226.6C0 322.4 103.3 402 239.4 418.1V480h99.1v-61.5c24.3-2.7 47.6-7.4 69.4-13.9L448 480h112l-67.4-113.7c54.5-35.4 88.4-84.9 88.4-139.7zm-466.8 14.5c0-73.5 98.9-133 220.8-133s211.9 40.7 211.9 133c0 50.1-26.5 85-70.3 106.4-2.4-1.6-4.7-2.9-6.4-3.7-10.2-5.2-27.8-10.5-27.8-10.5s86.6-6.4 86.6-92.7-90.6-87.9-90.6-87.9h-199V361c-74.1-21.5-125.2-67.1-125.2-119.9zm225.1 38.3v-55.6c57.8 0 87.8-6.8 87.8 27.3 0 36.5-38.2 28.3-87.8 28.3zm-.9 72.5H365c10.8 0 18.9 11.7 24 19.2-16.1 1.9-33 2.8-50.6 2.9v-22.1z"/></svg>?</a><ul>
+<li class="chapter" data-level="" data-path="tp-statistique-descriptive-avec-r.html"><a href="tp-statistique-descriptive-avec-r.html#rstudio"><i class="fa fa-check"></i>RStudio</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="tp-statistique-descriptive-avec-r.html"><a href="tp-statistique-descriptive-avec-r.html#ère-partie-données-quantitatives-discrètes"><i class="fa fa-check"></i>1ère partie: Données quantitatives discrètes</a><ul>
+<li class="chapter" data-level="" data-path="tp-statistique-descriptive-avec-r.html"><a href="tp-statistique-descriptive-avec-r.html#effectifs-et-fréquence"><i class="fa fa-check"></i>Effectifs et fréquence</a></li>
+<li class="chapter" data-level="" data-path="tp-statistique-descriptive-avec-r.html"><a href="tp-statistique-descriptive-avec-r.html#mesures-de-tendance-centrale"><i class="fa fa-check"></i>Mesures de tendance centrale</a></li>
+<li class="chapter" data-level="" data-path="tp-statistique-descriptive-avec-r.html"><a href="tp-statistique-descriptive-avec-r.html#indicateurs-de-dispersion"><i class="fa fa-check"></i>Indicateurs de dispersion</a></li>
+<li class="chapter" data-level="" data-path="tp-statistique-descriptive-avec-r.html"><a href="tp-statistique-descriptive-avec-r.html#représentations-graphiques-1"><i class="fa fa-check"></i>Représentations graphiques</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="tp-statistique-descriptive-avec-r.html"><a href="tp-statistique-descriptive-avec-r.html#ème-partie-analyse-descriptive"><i class="fa fa-check"></i>2ème partie : Analyse descriptive</a><ul>
+<li class="chapter" data-level="" data-path="tp-statistique-descriptive-avec-r.html"><a href="tp-statistique-descriptive-avec-r.html#données-utilisées"><i class="fa fa-check"></i>Données utilisées</a></li>
+<li class="chapter" data-level="" data-path="tp-statistique-descriptive-avec-r.html"><a href="tp-statistique-descriptive-avec-r.html#définition-du-répertoire-de-travail"><i class="fa fa-check"></i>Définition du répertoire de travail</a></li>
+<li class="chapter" data-level="" data-path="tp-statistique-descriptive-avec-r.html"><a href="tp-statistique-descriptive-avec-r.html#chargement-des-données"><i class="fa fa-check"></i>Chargement des données</a></li>
+<li class="chapter" data-level="" data-path="tp-statistique-descriptive-avec-r.html"><a href="tp-statistique-descriptive-avec-r.html#analyse-descriptive-univariée"><i class="fa fa-check"></i>Analyse descriptive univariée</a></li>
+<li class="chapter" data-level="" data-path="tp-statistique-descriptive-avec-r.html"><a href="tp-statistique-descriptive-avec-r.html#analyse-descriptive-bivariée"><i class="fa fa-check"></i>Analyse descriptive bivariée</a></li>
+</ul></li>
+</ul></li>
+<li class="part"><span><b>Statistique Inférentielle</b></span></li>
+<li class="part"><span><b>Séance 2</b></span></li>
+<li class="chapter" data-level="2" data-path="échantillonnage-et-théorèmes-limites.html"><a href="échantillonnage-et-théorèmes-limites.html"><i class="fa fa-check"></i><b>2</b> Échantillonnage et Théorèmes limites</a><ul>
+<li class="chapter" data-level="2.1" data-path="échantillonnage-et-théorèmes-limites.html"><a href="échantillonnage-et-théorèmes-limites.html#échantillonnage"><i class="fa fa-check"></i><b>2.1</b> Échantillonnage</a></li>
+<li class="chapter" data-level="2.2" data-path="échantillonnage-et-théorèmes-limites.html"><a href="échantillonnage-et-théorèmes-limites.html#la-statistique-overlinex_n"><i class="fa fa-check"></i><b>2.2</b> La statistique <span class="math inline">\(\overline{X}_n\)</span></a></li>
+<li class="chapter" data-level="2.3" data-path="échantillonnage-et-théorèmes-limites.html"><a href="échantillonnage-et-théorèmes-limites.html#théorèmes-limites"><i class="fa fa-check"></i><b>2.3</b> Théorèmes limites</a><ul>
+<li class="chapter" data-level="2.3.1" data-path="échantillonnage-et-théorèmes-limites.html"><a href="échantillonnage-et-théorèmes-limites.html#loi-faible-des-grands-nombres"><i class="fa fa-check"></i><b>2.3.1</b> Loi faible des grands nombres</a></li>
+<li class="chapter" data-level="2.3.2" data-path="échantillonnage-et-théorèmes-limites.html"><a href="échantillonnage-et-théorèmes-limites.html#loi-forte-des-grands-nombres"><i class="fa fa-check"></i><b>2.3.2</b> Loi forte des grands nombres</a></li>
+<li class="chapter" data-level="" data-path="échantillonnage-et-théorèmes-limites.html"><a href="échantillonnage-et-théorèmes-limites.html#illustration-de-la-loi-des-grands-nombres"><i class="fa fa-check"></i>Illustration de la loi des grands nombres</a></li>
+<li class="chapter" data-level="2.3.3" data-path="échantillonnage-et-théorèmes-limites.html"><a href="échantillonnage-et-théorèmes-limites.html#théorème-central-limite"><i class="fa fa-check"></i><b>2.3.3</b> Théorème central limite</a></li>
+</ul></li>
+<li class="chapter" data-level="2.4" data-path="échantillonnage-et-théorèmes-limites.html"><a href="échantillonnage-et-théorèmes-limites.html#loi-pourcentage"><i class="fa fa-check"></i><b>2.4</b> Loi d’un pourcentage</a></li>
+<li class="chapter" data-level="2.5" data-path="échantillonnage-et-théorèmes-limites.html"><a href="échantillonnage-et-théorèmes-limites.html#etude-de-la-statistique-s2"><i class="fa fa-check"></i><b>2.5</b> Etude de la statistique <span class="math inline">\(S^2\)</span></a></li>
+<li class="chapter" data-level="2.6" data-path="échantillonnage-et-théorèmes-limites.html"><a href="échantillonnage-et-théorèmes-limites.html#intro-estimation"><i class="fa fa-check"></i><b>2.6</b> Introduction à l’estimation</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="exercices-1.html"><a href="exercices-1.html"><i class="fa fa-check"></i>Exercices</a></li>
+<li class="chapter" data-level="" data-path="tp-illustration-numérique-des-théorèmes-limites-avec-r.html"><a href="tp-illustration-numérique-des-théorèmes-limites-avec-r.html"><i class="fa fa-check"></i>TP illustration numérique des théorèmes limites avec R</a><ul>
+<li class="chapter" data-level="" data-path="tp-illustration-numérique-des-théorèmes-limites-avec-r.html"><a href="tp-illustration-numérique-des-théorèmes-limites-avec-r.html#réalisations-de-variables-aléatoires"><i class="fa fa-check"></i>Réalisations de variables aléatoires</a></li>
+<li class="chapter" data-level="" data-path="tp-illustration-numérique-des-théorèmes-limites-avec-r.html"><a href="tp-illustration-numérique-des-théorèmes-limites-avec-r.html#fonction-de-densité"><i class="fa fa-check"></i>Fonction de densité</a></li>
+<li class="chapter" data-level="" data-path="tp-illustration-numérique-des-théorèmes-limites-avec-r.html"><a href="tp-illustration-numérique-des-théorèmes-limites-avec-r.html#fonction-de-répartition"><i class="fa fa-check"></i>Fonction de répartition</a></li>
+<li class="chapter" data-level="" data-path="tp-illustration-numérique-des-théorèmes-limites-avec-r.html"><a href="tp-illustration-numérique-des-théorèmes-limites-avec-r.html#illustrations-de-théorèmes-limites"><i class="fa fa-check"></i>Illustrations de théorèmes limites</a><ul>
+<li class="chapter" data-level="" data-path="tp-illustration-numérique-des-théorèmes-limites-avec-r.html"><a href="tp-illustration-numérique-des-théorèmes-limites-avec-r.html#loi-forte-de-grands-nombres"><i class="fa fa-check"></i>Loi forte de grands nombres</a></li>
+<li class="chapter" data-level="" data-path="tp-illustration-numérique-des-théorèmes-limites-avec-r.html"><a href="tp-illustration-numérique-des-théorèmes-limites-avec-r.html#théorème-central-limite-1"><i class="fa fa-check"></i>Théorème central limite</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="tp-illustration-numérique-des-théorèmes-limites-avec-r.html"><a href="tp-illustration-numérique-des-théorèmes-limites-avec-r.html#bonus"><i class="fa fa-check"></i>Bonus</a></li>
+</ul></li>
+<li class="part"><span><b>Séance 3</b></span></li>
+<li class="chapter" data-level="3" data-path="estimation-ponctuelle.html"><a href="estimation-ponctuelle.html"><i class="fa fa-check"></i><b>3</b> Estimation ponctuelle</a><ul>
+<li class="chapter" data-level="3.1" data-path="estimation-ponctuelle.html"><a href="estimation-ponctuelle.html#introduction-1"><i class="fa fa-check"></i><b>3.1</b> Introduction</a></li>
+<li class="chapter" data-level="3.2" data-path="estimation-ponctuelle.html"><a href="estimation-ponctuelle.html#méthodes-destimation"><i class="fa fa-check"></i><b>3.2</b> Méthodes d’estimation</a></li>
+<li class="chapter" data-level="3.3" data-path="estimation-ponctuelle.html"><a href="estimation-ponctuelle.html#la-méthode-des-moments"><i class="fa fa-check"></i><b>3.3</b> La méthode des moments</a><ul>
+<li class="chapter" data-level="3.3.1" data-path="estimation-ponctuelle.html"><a href="estimation-ponctuelle.html#lestimateur-des-moments-emm"><i class="fa fa-check"></i><b>3.3.1</b> L’estimateur des moments (EMM)</a></li>
+<li class="chapter" data-level="3.3.2" data-path="estimation-ponctuelle.html"><a href="estimation-ponctuelle.html#exemples"><i class="fa fa-check"></i><b>3.3.2</b> Exemples</a></li>
+</ul></li>
+<li class="chapter" data-level="3.4" data-path="estimation-ponctuelle.html"><a href="estimation-ponctuelle.html#la-méthode-du-maximum-de-vraisemblance"><i class="fa fa-check"></i><b>3.4</b> La méthode du maximum de vraisemblance</a><ul>
+<li class="chapter" data-level="3.4.1" data-path="estimation-ponctuelle.html"><a href="estimation-ponctuelle.html#la-fonction-de-vraisemblance"><i class="fa fa-check"></i><b>3.4.1</b> La fonction de vraisemblance</a></li>
+<li class="chapter" data-level="3.4.2" data-path="estimation-ponctuelle.html"><a href="estimation-ponctuelle.html#lestimateur-de-maximum-de-vraisemblance-emv"><i class="fa fa-check"></i><b>3.4.2</b> L’estimateur de maximum de vraisemblance (EMV)</a></li>
+</ul></li>
+<li class="chapter" data-level="3.5" data-path="estimation-ponctuelle.html"><a href="estimation-ponctuelle.html#qualité-dun-estimateur"><i class="fa fa-check"></i><b>3.5</b> Qualité d’un estimateur</a><ul>
+<li class="chapter" data-level="3.5.1" data-path="estimation-ponctuelle.html"><a href="estimation-ponctuelle.html#estimateur-sans-biais-et-de-variance-minimale-esbvm"><i class="fa fa-check"></i><b>3.5.1</b> Estimateur sans biais et de variance minimale (ESBVM)</a></li>
+</ul></li>
+<li class="chapter" data-level="3.6" data-path="estimation-ponctuelle.html"><a href="estimation-ponctuelle.html#propriétés-des-estimateurs-des-moments-emm"><i class="fa fa-check"></i><b>3.6</b> Propriétés des estimateurs des moments (EMM)</a><ul>
+<li><a href="estimation-ponctuelle.html#propriétés-de-overlinex_n">Propriétés de <span class="math inline">\(\overline{X}_n\)</span></a></li>
+<li><a href="estimation-ponctuelle.html#propriétés-de-la-variance-empirique-s_n2">Propriétés de la variance empirique <span class="math inline">\(S_{n}^{2}\)</span></a></li>
+</ul></li>
+<li class="chapter" data-level="3.7" data-path="estimation-ponctuelle.html"><a href="estimation-ponctuelle.html#propriétés-des-estimateurs-de-maximum-de-vraisemblance-emv"><i class="fa fa-check"></i><b>3.7</b> Propriétés des estimateurs de maximum de vraisemblance (EMV)</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="exercices-2.html"><a href="exercices-2.html"><i class="fa fa-check"></i>Exercices</a></li>
+<li class="part"><span><b>Séance 4</b></span></li>
+<li class="chapter" data-level="" data-path="tp-estimation.html"><a href="tp-estimation.html"><i class="fa fa-check"></i>TP estimation</a><ul>
+<li class="chapter" data-level="3.8" data-path="tp-estimation.html"><a href="tp-estimation.html#comparaison-destimateurs"><i class="fa fa-check"></i><b>3.8</b> Comparaison d’estimateurs</a></li>
+<li class="chapter" data-level="3.9" data-path="tp-estimation.html"><a href="tp-estimation.html#le-maximum-de-vraisemblance"><i class="fa fa-check"></i><b>3.9</b> Le maximum de vraisemblance</a></li>
+<li class="chapter" data-level="3.10" data-path="tp-estimation.html"><a href="tp-estimation.html#loi-de-weibull"><i class="fa fa-check"></i><b>3.10</b> Loi de Weibull</a></li>
+</ul></li>
+<li class="part"><span><b>Séance 5</b></span></li>
+<li class="chapter" data-level="4" data-path="estimation-par-intervalle-de-confiance.html"><a href="estimation-par-intervalle-de-confiance.html"><i class="fa fa-check"></i><b>4</b> Estimation par Intervalle de confiance</a><ul>
+<li class="chapter" data-level="4.1" data-path="estimation-par-intervalle-de-confiance.html"><a href="estimation-par-intervalle-de-confiance.html#intervalles-de-confiance-pour-les-paramètres-de-la-loi-normale"><i class="fa fa-check"></i><b>4.1</b> Intervalles de confiance pour les paramètres de la loi normale</a><ul>
+<li class="chapter" data-level="4.1.1" data-path="estimation-par-intervalle-de-confiance.html"><a href="estimation-par-intervalle-de-confiance.html#ic-normale-variance-connue"><i class="fa fa-check"></i><b>4.1.1</b> Intervalle de confiance pour l’espérance d’une loi normale avec variance connue</a></li>
+<li class="chapter" data-level="4.1.2" data-path="estimation-par-intervalle-de-confiance.html"><a href="estimation-par-intervalle-de-confiance.html#ic-normale-variance-inconnue"><i class="fa fa-check"></i><b>4.1.2</b> Intervalle de confiance pour l’espérance d’une loi normale avec variance inconnue</a></li>
+<li class="chapter" data-level="4.1.3" data-path="estimation-par-intervalle-de-confiance.html"><a href="estimation-par-intervalle-de-confiance.html#ic-normale-variance"><i class="fa fa-check"></i><b>4.1.3</b> Intervalle de confiance pour la variance d’une loi normale</a></li>
+</ul></li>
+<li class="chapter" data-level="4.2" data-path="estimation-par-intervalle-de-confiance.html"><a href="estimation-par-intervalle-de-confiance.html#ic-proportion"><i class="fa fa-check"></i><b>4.2</b> Intervalle de confiance pour une proportion</a></li>
+<li class="chapter" data-level="4.3" data-path="estimation-par-intervalle-de-confiance.html"><a href="estimation-par-intervalle-de-confiance.html#récapitulatif-pour-la-construction-dintervalles-de-confiance"><i class="fa fa-check"></i><b>4.3</b> Récapitulatif pour la construction d’intervalles de confiance</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="exercices-3.html"><a href="exercices-3.html"><i class="fa fa-check"></i>Exercices</a></li>
+<li class="part"><span><b>Séance 6</b></span></li>
+<li class="chapter" data-level="" data-path="tp-intervalle-de-confiance.html"><a href="tp-intervalle-de-confiance.html"><i class="fa fa-check"></i>TP Intervalle de confiance</a><ul>
+<li class="chapter" data-level="4.4" data-path="tp-intervalle-de-confiance.html"><a href="tp-intervalle-de-confiance.html#poulpes"><i class="fa fa-check"></i><b>4.4</b> IC pour la moyenne et la variance de la loi normale</a></li>
+<li class="chapter" data-level="4.5" data-path="tp-intervalle-de-confiance.html"><a href="tp-intervalle-de-confiance.html#ic-pour-une-proportion-et-effet-de-la-confiance"><i class="fa fa-check"></i><b>4.5</b> IC pour une proportion et effet de la confiance</a></li>
+<li class="chapter" data-level="4.6" data-path="tp-intervalle-de-confiance.html"><a href="tp-intervalle-de-confiance.html#ic-pour-le-paramètre-lambda-dune-loi-exponentielle"><i class="fa fa-check"></i><b>4.6</b> IC pour le paramètre <span class="math inline">\(\lambda\)</span> d’une loi exponentielle</a></li>
+</ul></li>
+<li class="part"><span><b>Séance 7</b></span></li>
+<li class="chapter" data-level="5" data-path="tests-dhypothèses.html"><a href="tests-dhypothèses.html"><i class="fa fa-check"></i><b>5</b> Tests d’hypothèses</a><ul>
+<li class="chapter" data-level="5.1" data-path="tests-dhypothèses.html"><a href="tests-dhypothèses.html#introduction-le-problème-de-décision"><i class="fa fa-check"></i><b>5.1</b> Introduction: le problème de décision</a><ul>
+<li class="chapter" data-level="5.1.1" data-path="tests-dhypothèses.html"><a href="tests-dhypothèses.html#les-tests-unilatéraux-et-bilatéraux"><i class="fa fa-check"></i><b>5.1.1</b> Les tests unilatéraux et bilatéraux</a></li>
+<li class="chapter" data-level="5.1.2" data-path="tests-dhypothèses.html"><a href="tests-dhypothèses.html#relation-entre-tests-dhypothèses-bilatéraux-et-intervalles-de-confiance"><i class="fa fa-check"></i><b>5.1.2</b> Relation entre tests d’hypothèses bilatéraux et intervalles de confiance</a></li>
+<li class="chapter" data-level="5.1.3" data-path="tests-dhypothèses.html"><a href="tests-dhypothèses.html#la-démarche-générale-dun-test-dhypothèse"><i class="fa fa-check"></i><b>5.1.3</b> La démarche générale d’un test d’hypothèse</a></li>
+<li class="chapter" data-level="5.1.4" data-path="tests-dhypothèses.html"><a href="tests-dhypothèses.html#types-de-test-dhypothèses"><i class="fa fa-check"></i><b>5.1.4</b> Types de test d’hypothèses</a></li>
+</ul></li>
+<li class="chapter" data-level="5.2" data-path="tests-dhypothèses.html"><a href="tests-dhypothèses.html#les-tests-dhypothèses-à-partir-dun-seul-échantillon"><i class="fa fa-check"></i><b>5.2</b> Les tests d’hypothèses à partir d’un seul échantillon</a><ul>
+<li class="chapter" data-level="5.2.1" data-path="tests-dhypothèses.html"><a href="tests-dhypothèses.html#les-tests-sur-la-moyenne-dune-distribution-normale-de-variance-connue"><i class="fa fa-check"></i><b>5.2.1</b> Les tests sur la moyenne d’une distribution normale de variance connue</a></li>
+<li class="chapter" data-level="5.2.2" data-path="tests-dhypothèses.html"><a href="tests-dhypothèses.html#les-tests-sur-la-moyenne-dune-distribution-normale-de-variance-inconnue"><i class="fa fa-check"></i><b>5.2.2</b> Les tests sur la moyenne d’une distribution normale de variance inconnue</a></li>
+<li class="chapter" data-level="5.2.3" data-path="tests-dhypothèses.html"><a href="tests-dhypothèses.html#les-tests-sur-la-variance-dune-distribution-normale"><i class="fa fa-check"></i><b>5.2.3</b> Les tests sur la variance d’une distribution normale</a></li>
+<li class="chapter" data-level="5.2.4" data-path="tests-dhypothèses.html"><a href="tests-dhypothèses.html#les-tests-sur-une-proportion"><i class="fa fa-check"></i><b>5.2.4</b> Les tests sur une proportion</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="exercices-4.html"><a href="exercices-4.html"><i class="fa fa-check"></i>Exercices</a></li>
+<li class="part"><span><b>Séance 8</b></span></li>
+<li class="chapter" data-level="6" data-path="tests-dhypothèses-sur-deux-échantillons.html"><a href="tests-dhypothèses-sur-deux-échantillons.html"><i class="fa fa-check"></i><b>6</b> Tests d’hypothèses sur deux échantillons</a><ul>
+<li class="chapter" data-level="6.1" data-path="tests-dhypothèses-sur-deux-échantillons.html"><a href="tests-dhypothèses-sur-deux-échantillons.html#comparaison-de-deux-échantillons-gaussiens-indépendants"><i class="fa fa-check"></i><b>6.1</b> Comparaison de deux échantillons gaussiens indépendants</a><ul>
+<li class="chapter" data-level="6.1.1" data-path="tests-dhypothèses-sur-deux-échantillons.html"><a href="tests-dhypothèses-sur-deux-échantillons.html#test-de-fisher-de-comparaison-des-variances"><i class="fa fa-check"></i><b>6.1.1</b> Test de Fisher de comparaison des variances</a></li>
+<li class="chapter" data-level="6.1.2" data-path="tests-dhypothèses-sur-deux-échantillons.html"><a href="tests-dhypothèses-sur-deux-échantillons.html#tests-de-comparaison-de-moyennes"><i class="fa fa-check"></i><b>6.1.2</b> Tests de comparaison de moyennes</a></li>
+</ul></li>
+<li class="chapter" data-level="6.2" data-path="tests-dhypothèses-sur-deux-échantillons.html"><a href="tests-dhypothèses-sur-deux-échantillons.html#comparaison-de-deux-proportions"><i class="fa fa-check"></i><b>6.2</b> Comparaison de deux proportions</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="exercices-5.html"><a href="exercices-5.html"><i class="fa fa-check"></i>Exercices</a></li>
+<li class="part"><span><b>Séance 9</b></span></li>
+<li class="chapter" data-level="7" data-path="tests-de-khi-deux-chi2.html"><a href="tests-de-khi-deux-chi2.html"><i class="fa fa-check"></i><b>7</b> Tests de Khi-deux <span class="math inline">\(\chi^2\)</span></a><ul>
+<li class="chapter" data-level="7.1" data-path="tests-de-khi-deux-chi2.html"><a href="tests-de-khi-deux-chi2.html#test-dajustement-de-chi2"><i class="fa fa-check"></i><b>7.1</b> Test d’ajustement de <span class="math inline">\(\chi^2\)</span></a></li>
+<li class="chapter" data-level="7.2" data-path="tests-de-khi-deux-chi2.html"><a href="tests-de-khi-deux-chi2.html#test-dindépendance-de-chi2"><i class="fa fa-check"></i><b>7.2</b> Test d’indépendance de <span class="math inline">\(\chi^2\)</span></a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="exercices-6.html"><a href="exercices-6.html"><i class="fa fa-check"></i>Exercices</a></li>
+<li class="chapter" data-level="" data-path="tp.html"><a href="tp.html"><i class="fa fa-check"></i>TP</a></li>
+<li class="part"><span><b>Rappel Probabilités</b></span></li>
+<li class="chapter" data-level="" data-path="variables-aléatoires-discrètes.html"><a href="variables-aléatoires-discrètes.html"><i class="fa fa-check"></i>Variables Aléatoires Discrètes</a><ul>
+<li class="chapter" data-level="" data-path="variables-aléatoires-discrètes.html"><a href="variables-aléatoires-discrètes.html#notions-de-probabilités"><i class="fa fa-check"></i>Notions de Probabilités</a><ul>
+<li class="chapter" data-level="" data-path="variables-aléatoires-discrètes.html"><a href="variables-aléatoires-discrètes.html#espace-probabilisable"><i class="fa fa-check"></i>Espace Probabilisable</a></li>
+<li class="chapter" data-level="" data-path="variables-aléatoires-discrètes.html"><a href="variables-aléatoires-discrètes.html#notions-sur-les-evénements"><i class="fa fa-check"></i>Notions sur les Evénements</a></li>
+<li class="chapter" data-level="" data-path="variables-aléatoires-discrètes.html"><a href="variables-aléatoires-discrètes.html#espace-probabilisé"><i class="fa fa-check"></i>Espace Probabilisé</a></li>
+<li class="chapter" data-level="" data-path="variables-aléatoires-discrètes.html"><a href="variables-aléatoires-discrètes.html#probabilité-propriétés"><i class="fa fa-check"></i>Probabilité: Propriétés</a></li>
+<li><a href="variables-aléatoires-discrètes.html#probabilité-uniforme-sur-omega-fini"><span>Probabilité uniforme sur <span class="math inline">\(\Omega\)</span> fini</span></a></li>
+<li class="chapter" data-level="" data-path="variables-aléatoires-discrètes.html"><a href="variables-aléatoires-discrètes.html#probabilité-conditionnelle"><i class="fa fa-check"></i>Probabilité conditionnelle</a></li>
+<li class="chapter" data-level="" data-path="variables-aléatoires-discrètes.html"><a href="variables-aléatoires-discrètes.html#formule-de-bayes"><i class="fa fa-check"></i>Formule de Bayes</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="variables-aléatoires-discrètes.html"><a href="variables-aléatoires-discrètes.html#notion-de-variable-aléatoire-réelle-v.a.r."><i class="fa fa-check"></i>Notion de variable aléatoire réelle (v.a.r.)</a></li>
+<li class="chapter" data-level="" data-path="variables-aléatoires-discrètes.html"><a href="variables-aléatoires-discrètes.html#variables-aléatoires-discrètes-1"><i class="fa fa-check"></i>Variables aléatoires discrètes</a><ul>
+<li class="chapter" data-level="" data-path="variables-aléatoires-discrètes.html"><a href="variables-aléatoires-discrètes.html#définition-loi-de-probabilité"><i class="fa fa-check"></i>Définition, loi de probabilité</a></li>
+<li class="chapter" data-level="" data-path="variables-aléatoires-discrètes.html"><a href="variables-aléatoires-discrètes.html#fonction-de-répartition-dune-variable-aléatoire-discrète"><i class="fa fa-check"></i>Fonction de répartition d’une variable aléatoire discrète</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="variables-aléatoires-discrètes.html"><a href="variables-aléatoires-discrètes.html#moments-dune-variable-aléatoire-discrète"><i class="fa fa-check"></i>Moments d’une variable aléatoire discrète</a><ul>
+<li class="chapter" data-level="" data-path="variables-aléatoires-discrètes.html"><a href="variables-aléatoires-discrètes.html#espérance-mathématique"><i class="fa fa-check"></i>Espérance mathématique</a></li>
+<li class="chapter" data-level="" data-path="variables-aléatoires-discrètes.html"><a href="variables-aléatoires-discrètes.html#espérance-dune-fonction-dune-variable-aléatoire"><i class="fa fa-check"></i>Espérance d’une fonction d’une variable aléatoire</a></li>
+<li class="chapter" data-level="" data-path="variables-aléatoires-discrètes.html"><a href="variables-aléatoires-discrètes.html#variance"><i class="fa fa-check"></i>Variance</a></li>
+<li class="chapter" data-level="" data-path="variables-aléatoires-discrètes.html"><a href="variables-aléatoires-discrètes.html#ecart-type"><i class="fa fa-check"></i>Ecart-type</a></li>
+<li class="chapter" data-level="" data-path="variables-aléatoires-discrètes.html"><a href="variables-aléatoires-discrètes.html#moments-non-centrés-et-centrés"><i class="fa fa-check"></i>Moments non centrés et centrés</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="variables-aléatoires-discrètes.html"><a href="variables-aléatoires-discrètes.html#couple-de-variables-aléatoires-discrètes"><i class="fa fa-check"></i>Couple de variables aléatoires discrètes</a><ul>
+<li class="chapter" data-level="" data-path="variables-aléatoires-discrètes.html"><a href="variables-aléatoires-discrètes.html#table-de-probabilité-conjointe"><i class="fa fa-check"></i>Table de probabilité conjointe</a></li>
+<li class="chapter" data-level="" data-path="variables-aléatoires-discrètes.html"><a href="variables-aléatoires-discrètes.html#lois-marginales"><i class="fa fa-check"></i>Lois marginales</a></li>
+<li class="chapter" data-level="" data-path="variables-aléatoires-discrètes.html"><a href="variables-aléatoires-discrètes.html#lois-conditionnelles"><i class="fa fa-check"></i>Lois conditionnelles</a></li>
+<li class="chapter" data-level="" data-path="variables-aléatoires-discrètes.html"><a href="variables-aléatoires-discrètes.html#indépendance-de-variables-aléatoires"><i class="fa fa-check"></i>Indépendance de variables aléatoires</a></li>
+<li class="chapter" data-level="" data-path="variables-aléatoires-discrètes.html"><a href="variables-aléatoires-discrètes.html#covariance"><i class="fa fa-check"></i>Covariance</a></li>
+<li class="chapter" data-level="" data-path="variables-aléatoires-discrètes.html"><a href="variables-aléatoires-discrètes.html#coefficient-de-corrélation-linéaire-1"><i class="fa fa-check"></i>Coefficient de corrélation linéaire</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="variables-aléatoires-discrètes.html"><a href="variables-aléatoires-discrètes.html#lois-usuelles-discrètes"><i class="fa fa-check"></i>Lois usuelles discrètes</a><ul>
+<li><a href="variables-aléatoires-discrètes.html#loi-uniforme-discrète-mathcalun">Loi uniforme discrète <span class="math inline">\(\mathcal{U}(n)\)</span></a></li>
+<li><a href="variables-aléatoires-discrètes.html#loi-de-bernoulli-mathcalbp">Loi de Bernoulli <span class="math inline">\(\mathcal{B}(p)\)</span></a></li>
+<li><a href="variables-aléatoires-discrètes.html#loi-binomiale-mathcalbnp">Loi Binomiale <span class="math inline">\(\mathcal{B}(n,p)\)</span></a></li>
+<li><a href="variables-aléatoires-discrètes.html#loi-de-poisson-mathcalplambda">Loi de Poisson <span class="math inline">\(\mathcal{P}(\lambda)\)</span></a></li>
+<li class="chapter" data-level="" data-path="variables-aléatoires-discrètes.html"><a href="variables-aléatoires-discrètes.html#approximation-dune-loi-binomiale"><i class="fa fa-check"></i>Approximation d’une loi binomiale</a></li>
+<li><a href="variables-aléatoires-discrètes.html#loi-géométrique-ou-de-pascal-mathcalgp">Loi Géométrique ou de Pascal <span class="math inline">\(\mathcal{G}(p)\)</span></a></li>
+<li><a href="variables-aléatoires-discrètes.html#loi-binomiale-négative-mathcalbnrp">Loi Binomiale Négative <span class="math inline">\(\mathcal{BN}(r,p)\)</span></a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="variables-aléatoires-continues.html"><a href="variables-aléatoires-continues.html"><i class="fa fa-check"></i>Variables Aléatoires Continues</a><ul>
+<li class="chapter" data-level="" data-path="variables-aléatoires-continues.html"><a href="variables-aléatoires-continues.html#densité-dune-variable-aléatoire-continue"><i class="fa fa-check"></i>Densité d’une variable aléatoire continue</a></li>
+<li class="chapter" data-level="" data-path="variables-aléatoires-continues.html"><a href="variables-aléatoires-continues.html#fonction-de-répartition-dune-v.a.c"><i class="fa fa-check"></i>Fonction de répartition d’une v.a.c</a></li>
+<li class="chapter" data-level="" data-path="variables-aléatoires-continues.html"><a href="variables-aléatoires-continues.html#fonction-dune-variable-aléatoire-continue"><i class="fa fa-check"></i>Fonction d’une variable aléatoire continue</a><ul>
+<li><a href="variables-aléatoires-continues.html#calcul-de-densités-pour-hxaxb">Calcul de densités pour <span class="math inline">\(h(X)=aX+b\)</span></a></li>
+<li><a href="variables-aléatoires-continues.html#calcul-de-densités-pour-hxx2">Calcul de densités pour <span class="math inline">\(h(X)=X^2\)</span></a></li>
+<li><a href="variables-aléatoires-continues.html#calcul-de-densités-pour-hxex">Calcul de densités pour <span class="math inline">\(h(X)=e^X\)</span></a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="variables-aléatoires-continues.html"><a href="variables-aléatoires-continues.html#espérance-et-variance-de-variables-aléatoires-continues"><i class="fa fa-check"></i>Espérance et variance de variables aléatoires continues</a><ul>
+<li class="chapter" data-level="" data-path="variables-aléatoires-continues.html"><a href="variables-aléatoires-continues.html#espérance-dune-v.a.c"><i class="fa fa-check"></i>Espérance d’une v.a.c</a></li>
+<li class="chapter" data-level="" data-path="variables-aléatoires-continues.html"><a href="variables-aléatoires-continues.html#variance-dune-v.a.c"><i class="fa fa-check"></i>Variance d’une v.a.c</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="variables-aléatoires-continues.html"><a href="variables-aléatoires-continues.html#lois-usuelles-de-v.a.c"><i class="fa fa-check"></i>Lois usuelles de v.a.c</a><ul>
+<li><a href="variables-aléatoires-continues.html#loi-uniforme-uab">Loi uniforme <span class="math inline">\(U(a,b)\)</span></a></li>
+<li><a href="variables-aléatoires-continues.html#loi-exponentielle-mathcalelambda">Loi exponentielle <span class="math inline">\(\mathcal{E}(\lambda)\)</span></a></li>
+<li><a href="variables-aléatoires-continues.html#loi-normale-ou-de-laplace-gauss-mathcalnmusigma2">Loi Normale ou de Laplace-Gauss <span class="math inline">\(\mathcal{N}(\mu,\sigma^2)\)</span></a></li>
+<li class="chapter" data-level="" data-path="variables-aléatoires-continues.html"><a href="variables-aléatoires-continues.html#étude-de-la-densité-de-la-loi-normale"><i class="fa fa-check"></i>Étude de la densité de la loi Normale</a></li>
+<li><a href="variables-aléatoires-continues.html#loi-normale-centrée-réduite-mathcaln01">Loi Normale centrée réduite <span class="math inline">\(\mathcal{N}(0,1)\)</span></a></li>
+<li class="chapter" data-level="" data-path="variables-aléatoires-continues.html"><a href="variables-aléatoires-continues.html#relation-entre-loi-normale-et-loi-normale-centrée-réduite"><i class="fa fa-check"></i>Relation entre loi normale et loi normale centrée réduite</a></li>
+<li class="chapter" data-level="" data-path="variables-aléatoires-continues.html"><a href="variables-aléatoires-continues.html#calcul-des-probabilités-dune-loi-normale"><i class="fa fa-check"></i>Calcul des probabilités d’une loi normale</a></li>
+<li class="chapter" data-level="" data-path="variables-aléatoires-continues.html"><a href="variables-aléatoires-continues.html#approximation-normale-dune-répartition-binomiale"><i class="fa fa-check"></i>Approximation normale d’une répartition binomiale</a></li>
+<li><a href="variables-aléatoires-continues.html#loi-de-chi2-de-pearson">Loi de <span class="math inline">\(\chi^{2}\)</span> de Pearson</a></li>
+<li><a href="variables-aléatoires-continues.html#loi-de-student-stn">Loi de Student <span class="math inline">\(St(n)\)</span></a></li>
+<li><a href="variables-aléatoires-continues.html#loi-de-fisher-snedecor-mathcalfnm">Loi de Fisher-Snedecor <span class="math inline">\(\mathcal{F}(n,m)\)</span></a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="variables-aléatoires-continues.html"><a href="variables-aléatoires-continues.html#couple-de-variables-aléatoires-continues"><i class="fa fa-check"></i>Couple de variables aléatoires continues</a><ul>
+<li class="chapter" data-level="" data-path="variables-aléatoires-continues.html"><a href="variables-aléatoires-continues.html#densité-conjointe"><i class="fa fa-check"></i>Densité conjointe</a></li>
+<li class="chapter" data-level="" data-path="variables-aléatoires-continues.html"><a href="variables-aléatoires-continues.html#densités-marginales"><i class="fa fa-check"></i>Densités marginales</a></li>
+<li class="chapter" data-level="" data-path="variables-aléatoires-continues.html"><a href="variables-aléatoires-continues.html#espérance-dune-fonction-du-couple"><i class="fa fa-check"></i>Espérance d’une fonction du couple</a></li>
+<li class="chapter" data-level="" data-path="variables-aléatoires-continues.html"><a href="variables-aléatoires-continues.html#indépendance"><i class="fa fa-check"></i>Indépendance</a></li>
+<li class="chapter" data-level="" data-path="variables-aléatoires-continues.html"><a href="variables-aléatoires-continues.html#distribution-conditionnelle"><i class="fa fa-check"></i>Distribution conditionnelle</a></li>
+</ul></li>
+</ul></li>
+<li class="appendix"><span><b>Annexe</b></span></li>
+<li class="chapter" data-level="A" data-path="app-introRStudio.html"><a href="app-introRStudio.html"><i class="fa fa-check"></i><b>A</b> Introduction to <code>RStudio</code></a></li>
+<li class="chapter" data-level="B" data-path="tab-normale1.html"><a href="tab-normale1.html"><i class="fa fa-check"></i><b>B</b> Table 1 de la loi Normale centrée réduite</a></li>
+<li class="chapter" data-level="C" data-path="tab-normale2.html"><a href="tab-normale2.html"><i class="fa fa-check"></i><b>C</b> Table 2 de la loi Normale centrée réduite</a></li>
+<li class="chapter" data-level="D" data-path="tab-student.html"><a href="tab-student.html"><i class="fa fa-check"></i><b>D</b> Table de la loi de Student</a></li>
+<li class="chapter" data-level="E" data-path="tab-khideux.html"><a href="tab-khideux.html"><i class="fa fa-check"></i><b>E</b> Table de la loi de Khi-deux <span class="math inline">\(\chi^2\)</span></a></li>
+<li class="chapter" data-level="F" data-path="tab-fisher.html"><a href="tab-fisher.html"><i class="fa fa-check"></i><b>F</b> Tables de la loi de Fisher <span class="math inline">\(F\)</span></a><ul>
+<li class="chapter" data-level="F.1" data-path="tab-fisher.html"><a href="tab-fisher.html#pour-alpha-5"><i class="fa fa-check"></i><b>F.1</b> Pour <span class="math inline">\(\alpha = 5\%\)</span></a></li>
+<li class="chapter" data-level="F.2" data-path="tab-fisher.html"><a href="tab-fisher.html#pour-alpha-2.5"><i class="fa fa-check"></i><b>F.2</b> Pour <span class="math inline">\(\alpha = 2.5\%\)</span></a></li>
+<li class="chapter" data-level="F.3" data-path="tab-fisher.html"><a href="tab-fisher.html#pour-alpha-1"><i class="fa fa-check"></i><b>F.3</b> Pour <span class="math inline">\(\alpha = 1\%\)</span></a></li>
+<li class="chapter" data-level="F.4" data-path="tab-fisher.html"><a href="tab-fisher.html#pour-alpha-0.05"><i class="fa fa-check"></i><b>F.4</b> Pour <span class="math inline">\(\alpha = 0.05\%\)</span></a></li>
+</ul></li>
+<li class="chapter" data-level="G" data-path="notes-et-examens.html"><a href="notes-et-examens.html"><i class="fa fa-check"></i><b>G</b> Notes et examens</a><ul>
+<li class="chapter" data-level="" data-path="notes-et-examens.html"><a href="notes-et-examens.html#sujets-corrections"><i class="fa fa-check"></i>Sujets &amp; Corrections</a></li>
+<li class="chapter" data-level="" data-path="notes-et-examens.html"><a href="notes-et-examens.html#notes"><i class="fa fa-check"></i>Notes</a></li>
+<li class="chapter" data-level="" data-path="notes-et-examens.html"><a href="notes-et-examens.html#analyse-notes"><i class="fa fa-check"></i>Analyse Notes</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="références-et-crédits.html"><a href="références-et-crédits.html"><i class="fa fa-check"></i>Références et Crédits</a></li>
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Statistique Inférentielle</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div class = rmdreview>
+Vous êtes invités à annoter le contenu de ce cours. Les annotations peuvent être des corrections typographiques, des propositions ou des questions. Pour ajouter des annotations, <span style="background-color: #3297FD; color: white">choisissez le text</span> que vous voulez commenter et cliquez sur <i class="h-icon-annotate"></i>. Pour accéder aux annotations crées par d'autres personnes, cliquez <i class="h-icon-chevron-left"></i> sur le coin supérieur de la page <i class="fa fa-arrow-circle-right  fa-rotate-315" aria-hidden="true"></i>.
+</div>
+<div id="variables-aléatoires-discrètes" class="section level1 unnumbered">
+<h1>Variables Aléatoires Discrètes</h1>
+<div id="notions-de-probabilités" class="section level2 unnumbered">
+<h2>Notions de Probabilités</h2>
+<div id="espace-probabilisable" class="section level3 unnumbered">
+<h3>Espace Probabilisable</h3>
+<p><span><strong>Exemple fondamental</strong></span>: Considérons le jeu du lancé d’un dé.</p>
+<ul>
+<li><p><span>Expérience aléatoire</span> <span class="math inline">\(\varepsilon\)</span> : “lancer un dé équilibré”
+<span class="math inline">\(\longleftarrow\)</span> <span><code>Action</code></span>.</p></li>
+<li><p><span>Univers</span>: l’ensemble de tous les résultats possibles de cette
+expérience aléatoire <span class="math display">\[\Omega= \{1,2,3,4,5,6\}\]</span></p></li>
+<li><p><span>Evénements</span>: Dans cette expérience aléatoire, on peut
+s’intéresser à des événements plus complexes qu’un simple résultat
+élémentaire.</p></li>
+<li><p>L’<span>ensemble de parties de <span class="math inline">\(\Omega\)</span></span>, appelé
+<span><span class="math inline">\(\mathcal{P}({\Omega})\)</span></span>, est l’ensemble des sous-ensembles de
+<span class="math inline">\(\Omega\)</span>.</p></li>
+<li><p>Une <span>famille <span class="math inline">\(\mathcal{A}\)</span> de parties</span> (i.e. de sous ensembles) de
+<span class="math inline">\(\Omega\)</span>. Ces parties sont appelées des événements. On dit que
+l’événement <span class="math inline">\(A\)</span> s’est réalisé si et seulement si le résultat
+<span class="math inline">\(\Omega\)</span> de <span class="math inline">\(\Omega\)</span> qui s’est produit appartient à <span class="math inline">\(A\)</span>.</p></li>
+<li><p><span><strong>Tribu</strong></span>: On appelle <span>tribu</span> sur <span class="math inline">\(\Omega\)</span>, toute famille
+<span class="math inline">\(\mathcal{A}\)</span> de parties de <span class="math inline">\(\Omega\)</span> vérifiant:</p>
+<ol style="list-style-type: decimal">
+<li><p><span class="math inline">\(\Omega \in \mathcal{A}\)</span>.</p></li>
+<li><p>si <span class="math inline">\(A \in \mathcal{A}\)</span>, alors <span class="math inline">\(\bar{A} \in \mathcal{A}\)</span>.</p></li>
+<li><p>si <span class="math inline">\((A_n)_{n\in\mathbb{N}}\)</span> est une suite d’éléments de
+<span class="math inline">\(\mathcal{A}\)</span>, alors
+<span class="math inline">\(\bigcup\limits_{n\in\mathbb{N}} A_n \in \mathcal{A}\)</span>.</p></li>
+</ol></li>
+<li><p><span><span class="math inline">\(({\Omega},\mathcal{A})\)</span></span> est un <span>espace probibilisable</span>.</p></li>
+</ul>
+</div>
+<div id="notions-sur-les-evénements" class="section level3 unnumbered">
+<h3>Notions sur les Evénements</h3>
+<ul>
+<li><p>Soit <span class="math inline">\(({\Omega},\mathcal{A})\)</span> un espace probibilisable:</p>
+<ul>
+<li><p>L’ensemble <span class="math inline">\(\mathcal{A}\)</span> est appelé <span>tribu des événements</span>.
+Les éléments de <span class="math inline">\(\mathcal{A}\)</span> s’appellent les <span>événements</span>.</p></li>
+<li><p>L’événement <span class="math inline">\(\Omega\)</span> est appelé <span>événement certain</span>.
+L’événement <span class="math inline">\(\emptyset\)</span> est appelé <span>événement impossible</span>.</p></li>
+</ul></li>
+<li><p><span>Opérations sur les événements</span>. Soient <span class="math inline">\(A\)</span> et <span class="math inline">\(B\)</span> deux
+événements:</p>
+<ul>
+<li><p><span class="math inline">\(\bar{A}\)</span> est l’événement <span>contraire</span> de <span class="math inline">\(A\)</span> (on note aussi
+<span class="math inline">\(A^c\)</span>). <span class="math inline">\(\bar{A}={\Omega}\setminus A\)</span>.</p>
+<p><span class="math inline">\(\bar{A}\)</span> se réalise si et seulement si <span class="math inline">\(A\)</span> ne se réalise pas.</p></li>
+<li><p><span class="math inline">\(A\, {\cap} \,B\)</span> est l’événement &lt;&lt;<span class="math inline">\(A\)</span> <span>et</span> <span class="math inline">\(B\)</span>&gt;&gt;.</p>
+<p><span class="math inline">\(A\, {\cap} \,B\)</span> se réalise lorsque les deux événements se
+réalisent.</p></li>
+<li><p><span class="math inline">\(A {\cup} B\)</span> est l’événement &lt;&lt;<span class="math inline">\(A\)</span> <span>ou</span> <span class="math inline">\(B\)</span>&gt;&gt;.</p>
+<p><span class="math inline">\(A {\cup} B\)</span> se réalise lorsque au moins un des deux événements
+se réalise.</p></li>
+</ul></li>
+<li><p><span>Incompatibilité</span>: <span class="math inline">\(A\)</span> et <span class="math inline">\(B\)</span> sont incompatibles si leur
+réalisation simultanée est impossible: <span class="math inline">\(A \cap B = \emptyset\)</span>.</p></li>
+<li><p><span>Implication</span>: <span class="math inline">\(A\)</span> implique <span class="math inline">\(B\)</span> signifie que si <span class="math inline">\(A\)</span> se réalise,
+alors <span class="math inline">\(B\)</span> se réalise aussi: <span class="math inline">\(A \subset B\)</span>.</p></li>
+</ul>
+</div>
+<div id="espace-probabilisé" class="section level3 unnumbered">
+<h3>Espace Probabilisé</h3>
+<ul>
+<li><p>Soit <span class="math inline">\(({\Omega},\mathcal{A})\)</span> un espace probabilisable. On appelle
+<span>probabilité</span> sur <span class="math inline">\(({\Omega},\mathcal{A})\)</span>, toute application
+<span class="math display">\[P : \mathcal{A} \rightarrow \mathbb{R}\]</span> vérifiant:</p>
+<ol style="list-style-type: decimal">
+<li><p><span class="math inline">\(\forall A \in \mathcal{A}, P(A) \geq 0\)</span>.</p></li>
+<li><p><span class="math inline">\(P({\Omega})=1\)</span>.</p></li>
+<li><p><span class="math inline">\(\forall (A_n)_{n\in\mathbb{N}^*} \in \mathcal{A}^{\mathbb{N}^*}\)</span>,
+une suite d’éléments de <span class="math inline">\(\mathcal{A}\)</span> deux à deux incompatibles,
+on a:
+<span class="math display">\[P(\bigcup\limits_{n\in\mathbb{N}^*} A_n) = \sum_{n=1}^{+\infty} P(A_n)\]</span></p></li>
+</ol></li>
+<li><p>Le triplet <span><span class="math inline">\(({\Omega},\mathcal{A},P)\)</span></span> est appelé <span><strong>espace
+probabilisé</strong></span>.</p></li>
+</ul>
+</div>
+<div id="probabilité-propriétés" class="section level3 unnumbered">
+<h3>Probabilité: Propriétés</h3>
+<ol style="list-style-type: decimal">
+<li><p><span class="math inline">\(P(\emptyset) = 0\)</span>.</p></li>
+<li><p><span class="math inline">\(P(A_1 \cup A_2 ) = P(A_1 ) + P(A_2 )-P(A_1 \cap A_2 )\)</span>.</p></li>
+<li><p>Si <span class="math inline">\(A_1\)</span> et <span class="math inline">\(A_2\)</span> sont incompatibles, <span class="math inline">\(A_1 \cap A_2 = \emptyset\)</span>,
+<span class="math inline">\(P(A_1 \cup A_2 ) = P(A_1 ) + P(A_2 )\)</span>.</p></li>
+<li><p><span class="math inline">\(P(A_1 \cup A_2 \cup A_3 ) = P(A_1 ) + P(A_2 ) + P(A_3 ) - P(A_1 \cap A_2 ) - P(A_1 \cap A_3 ) - P(A_2 \cap A_3 )+P(A_1 \cap A_2 \cap A_3 )\)</span>.</p></li>
+<li><p><span class="math inline">\(P(\bar{A}) = 1-P(A)\)</span>.</p></li>
+<li><p><span class="math inline">\(P(B\setminus A)=P(B)-P(B\cap A)\)</span>.</p></li>
+<li><p><span class="math inline">\(A \subset B \Rightarrow P(A) \leq P(B)\)</span>.</p></li>
+</ol>
+</div>
+<div id="probabilité-uniforme-sur-omega-fini" class="section level3 unnumbered">
+<h3><span>Probabilité uniforme sur <span class="math inline">\(\Omega\)</span> fini</span></h3>
+<ul>
+<li><p>Soit <span class="math inline">\(\Omega\)</span> un univers fini. On dit que <span class="math inline">\(P\)</span> est la <strong>probabilité
+uniforme</strong> sur l’espace probabilisable <span class="math inline">\(({\Omega},P({\Omega}))\)</span> si:
+<span class="math display">\[\forall {\omega},{\omega}&#39; \in {\Omega}, \quad \quad P(\{{\omega}\})=P(\{{\omega}&#39;\})\]</span>
+On dit aussi qu’il y a <strong>équiprobabilité</strong> des événements
+élémentaires.</p></li>
+<li><p>Soit <span class="math inline">\(({\Omega}, \mathcal{P}({\Omega}), P)\)</span> un espace probabilisé
+fini. Si <span class="math inline">\(P\)</span> est la probabilité uniforme, alors
+<span class="math display">\[\forall A \in \mathcal{A}, \quad \quad P(A)=\frac{Card(A)}{Card({\Omega})}\]</span></p></li>
+</ul>
+</div>
+<div id="probabilité-conditionnelle" class="section level3 unnumbered">
+<h3>Probabilité conditionnelle</h3>
+<ul>
+<li><p>Soit <span class="math inline">\(({\Omega},\mathcal{A},P)\)</span> une espace probabilisé et
+<span class="math inline">\(B \in \mathcal{A}\)</span> tel que <span class="math inline">\(P(B) &gt; 0\)</span>. L’application <span class="math inline">\(P_B\)</span> définie
+sur <span class="math inline">\(\mathcal{A}\)</span> par:
+<span class="math display">\[P_B(A) = P(A|B) =\frac{P(A\cap B)}{P(B)}, \quad \quad \forall A \in \mathcal{A}\]</span>
+est une probabilité sur <span class="math inline">\(({\Omega}, \mathcal{A})\)</span>; elle est appelée
+la <span>probabilité conditionnelle</span> sachant <span class="math inline">\(B\)</span>. C’est la probabilité
+pour que l’événement <span class="math inline">\(A\)</span> se produise sachant que l’événement <span class="math inline">\(B\)</span>
+s’est produit.</p></li>
+<li><p><span>Remarque</span>: <span class="math inline">\((A|B)\)</span> n’est pas un événement! On utilise la notation
+<span class="math inline">\(P(A|B)\)</span> par simplicité, mais c’est <span class="math inline">\(P_B (A)\)</span> qui est correcte.</p></li>
+<li><p><span>Formule des probabilités composées</span>:
+<span class="math display">\[P(A\cap B) = P(A|B)P(B) = P(B|A)P(A)\]</span></p></li>
+<li><p><span>Formule des probabilités totales</span>:</p>
+<ul>
+<li><p><span class="math inline">\(\forall A \in \mathcal{A}, \quad P(A) = P(A \cap B) + P(A \cap \bar{B} )\)</span></p></li>
+<li><p>On appelle <span>système complet d’événements (<em>SCE</em>)</span>, toute
+partition dénombrable de <span class="math inline">\(\Omega\)</span> formée d’éléments de <span class="math inline">\(A\)</span>;
+c-à-d tout ensemble dénombrable d’événements, deux à deux
+incompatibles et dont l’union dénombrable est l’événement
+certain.</p></li>
+<li><p>Soit <span class="math inline">\((B_n)_{n\geq 0}\)</span> un <em>SCE</em> de <span class="math inline">\(\Omega\)</span>. On a:
+<span class="math display">\[\forall A \in \mathcal{A},\quad \quad P(A)=\sum_{n\geq 0} P(A \cap B_n)\]</span></p></li>
+</ul></li>
+<li><p><span>Indépendance</span>: Les événement <span class="math inline">\(A\)</span> et <span class="math inline">\(B\)</span> sont indépendants ssi
+<span class="math inline">\(P(A\cap B)=P(A)P(B)\)</span>.</p></li>
+</ul>
+</div>
+<div id="formule-de-bayes" class="section level3 unnumbered">
+<h3>Formule de Bayes</h3>
+<p><span>Première formule de Bayes</span> Soit <span class="math inline">\(({\Omega},\mathcal{A},P)\)</span> une espace
+probabilisé. Pour tous événements <span class="math inline">\(A\)</span> et <span class="math inline">\(B\)</span> tels que <span class="math inline">\(P(A) \neq 0\)</span> et
+<span class="math inline">\(P(B) \neq 0\)</span>, on a: <span class="math display">\[P(B|A) = \frac{P(A|B)P(B)}{P(A)}\]</span></p>
+<p><span>Deuxième formule de Bayes</span> Soit <span class="math inline">\(({\Omega},\mathcal{A},P)\)</span> une espace
+probabilisé et <span class="math inline">\((B_n)_{n\geq 0}\)</span> un <em>SCE</em> de <span class="math inline">\(\Omega\)</span> t.q. pour tout
+<span class="math inline">\(n\geq 0 \,\, P(B_n)\neq 0\)</span>. On a pour tout <span class="math inline">\(A \in \mathcal{A}\)</span> t.q.
+<span class="math inline">\(P(A)\neq 0\)</span>
+<span class="math display">\[P(B_i|A) = \frac{P(A|B_i) P(B_i)}{\sum_{n\geq 0} P(A|B_n) P(B_n)} \quad \quad \forall i \geq 0\]</span></p>
+</div>
+</div>
+<div id="notion-de-variable-aléatoire-réelle-v.a.r." class="section level2 unnumbered">
+<h2>Notion de variable aléatoire réelle (v.a.r.)</h2>
+<p>Après avoir réalisé une expérience aléatoire, il arrive bien souvent
+qu’on s’intéresse plus à une fonction du résultat qu’au résultat
+lui-même. Expliquons ceci au moyen des exemples suivants: lorsqu’on joue
+au dés, certains jeux accordent de l’importance à la somme obtenue sur
+deux dés, 7 par exemple, plutôt qu’à la question de savoir si c’est la
+paire (1,6) qui est apparue, ou (2,5), (3,4), (4,3), (5,2) ou plutôt
+(6,1). Dans le cas du jet d’une pièce, il peut être plus intéressant de
+connaître le nombre de fois où le côté pile est apparue plutôt que la
+séquence détaillée des jets pile et face. Ces grandeurs auxquelles on
+s’intéresse sont en fait des fonctions réelles définies sur l’ensemble
+fondamental et sont appelées <strong><em>variables aléatoires</em></strong>.</p>
+<p>Du fait que la valeur d’une variable aléatoire est déterminée par le
+résultat de l’expérience, il est possible d’attribuer une probabilité
+aux différentes valeurs que la variable aléatoire peut prendre.</p>
+<p>Soient <span class="math inline">\(\varepsilon\)</span> une expérience aléatoire et
+<span class="math inline">\((\Omega,\mathcal{A},P)\)</span> un espace probabilisé lié à cette expérience.
+Dans de nombreuses situations, on associe à chaque résultat
+<span class="math inline">\(\omega \in \Omega\)</span> un nombre réel noté <span class="math inline">\(X(\omega)\)</span>; on construit ainsi
+une application <span class="math inline">\(X : \Omega \rightarrow \mathbb{R}\)</span>. Historiquement,
+<span class="math inline">\(\varepsilon\)</span> était un jeu et <span class="math inline">\(X\)</span> représentait le gain du joueur.</p>
+<!-- ```{r} -->
+<!-- # https://haozhu233.github.io/kableExtra/awesome_table_in_pdf.pdf -->
+<!-- library(kableExtra) -->
+<!-- dt <- mtcars[1:5, 1:6] -->
+<!-- kable(dt, "latex", booktabs = T) %>% -->
+<!--   column_spec(1, bold = T) %>% -->
+<!--   kable_as_image() -->
+<!-- ``` -->
+<p><strong>Exemple:</strong> Un joueur lance un dé équilibré à 6 faces numérotées de 1 à 6, et on
+observe le numéro obtenu.</p>
+<ul>
+<li><p>Si le joueur obtient 1, 3 ou 5, il gagne 1 euro.</p></li>
+<li><p>S’il obtient 2 ou 4, il gagne 5 euros.</p></li>
+<li><p>S’il obtient 6, il perd 10 euros.</p></li>
+</ul>
+<p>Selon l’expérience aléatoire (lancer d’un dé équilibré) l’ensemble
+fondamental est <span class="math inline">\(\Omega = \{1,2,3,4,5,6\}\)</span>,
+<span class="math inline">\(\mathcal{A} = \mathcal{P}(\Omega)\)</span> et <span class="math inline">\(P\)</span> l’équiprobabilité sur
+<span class="math inline">\((\Omega,\mathcal{A})\)</span>. Soit <span class="math inline">\(X\)</span> l’application de <span class="math inline">\(\Omega\)</span> dans
+<span class="math inline">\(\mathbb{R}\)</span> qui à tout <span class="math inline">\(\omega \in \Omega\)</span> associe le gain
+correspondant. On a donc</p>
+<ul>
+<li><p><span class="math inline">\(X(1) = X(3) = X(5) = 1\)</span></p></li>
+<li><p><span class="math inline">\(X(2) = X(4) = 5\)</span></p></li>
+<li><p><span class="math inline">\(X(6) = -10\)</span></p></li>
+</ul>
+<p>On dit que <span class="math inline">\(X\)</span> est une <span style="color: blue"><strong>variable aléatoire</strong></span> sur
+<span class="math inline">\(\Omega\)</span>.</p>
+<p>On peut s’intéresser à la probabilité de gagner 1 euro, c’est-à-dire
+d’avoir <span class="math inline">\(X(\omega) = 1\)</span>, ce qui se réalise si et seulement si
+<span class="math inline">\(\omega \in \{1,3,5\}\)</span>. La probabilité cherchée est donc égale à
+<span class="math inline">\(P(\{1,3,5\}) = 1/2\)</span>. On écrira aussi <span class="math inline">\(P(X=1) = 1/2\)</span>.</p>
+<p>On pourra donc considérer l’événement :
+<span class="math display">\[\{X=1\} = \{\omega \in \Omega / X(\omega) = 1\} = \{\omega \in \Omega / X(\omega) \in \{1\}\}  = X^{-1} (\{1\}) = \{1,3,5\}.\]</span></p>
+<p>On aura du même <span class="math inline">\(P(X=5) = 1/3\)</span> et <span class="math inline">\(P(X=-10) = 1/6\)</span>. Ce que l’on peut
+présenter dans un tableau</p>
+<table class="table table-striped" style="width: auto !important; margin-left: auto; margin-right: auto;">
+<tbody>
+<tr>
+<td style="text-align:left;">
+<span class="math inline">\(x_i\)</span>
+</td>
+<td style="text-align:left;">
+<span class="math inline">\(-10\)</span>
+</td>
+<td style="text-align:left;">
+<span class="math inline">\(1\)</span>
+</td>
+<td style="text-align:left;">
+<span class="math inline">\(5\)</span>
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+<span class="math inline">\(p_i=P(X = x_i)\)</span>
+</td>
+<td style="text-align:left;">
+<span class="math inline">\(1/6\)</span>
+</td>
+<td style="text-align:left;">
+<span class="math inline">\(1/2\)</span>
+</td>
+<td style="text-align:left;">
+<span class="math inline">\(1/3\)</span>
+</td>
+</tr>
+</tbody>
+</table>
+<p>Cela revient à considérer un nouvel ensemble d’événements élémentaires:
+<span class="math display">\[\Omega_X = X(\Omega)= \{-10,1,5\}\]</span> et à munir cet ensemble de la
+probabilité <span class="math inline">\(P_X\)</span> définie par le tableau des <span class="math inline">\(P(X=x_i)\)</span> ci dessus. Cette
+nouvelle probabilité s’appelle <span style="color: blue"><strong>loi de la variable
+aléatoire</strong></span> X.</p>
+<p>Remarquer que
+<span class="math display">\[P(\bigcup_{x_i \in \Omega_X} \{X=x_i\}) = \sum_{x_i \in \Omega_X} P(X=x_i) = 1\]</span></p>
+<p>Dans ce chapitre, nous traitons le cas où <span class="math inline">\(X(\Omega)\)</span> est dénombrable.
+La variable aléatoire est alors dite <strong><em>discrète</em></strong>. Sa loi de
+probabilité, qui peut être toujours définie par sa fonction de
+répartition, le sera plutôt par les probabilités individuelles. Nous
+définirons les deux caractéristiques numériques principales d’une
+variable aléatoire discrète, l’espérance caractéristique de valeur
+centrale, et la variance, caractéristique de dispersion. Nous définirons
+aussi les couples de variables aléatoires.</p>
+</div>
+<div id="variables-aléatoires-discrètes-1" class="section level2 unnumbered">
+<h2>Variables aléatoires discrètes</h2>
+<div id="définition-loi-de-probabilité" class="section level3 unnumbered">
+<h3>Définition, loi de probabilité</h3>
+
+<div class="definition">
+<p><span id="def:unnamed-chunk-161" class="definition"><strong>Définition 7.1  </strong></span>On dit qu’une variable aléatoire réelle (v.a.r.) <span class="math inline">\(X\)</span> est <strong><em>discrète</em></strong>
+(v.a.r.d.) si l’ensemble des valeurs que prend <span class="math inline">\(X\)</span> est fini ou infini
+dénombrable.</p>
+<p>Si on suppose <span class="math inline">\(X(\Omega)\)</span> l’ensemble des valeurs de <span class="math inline">\(X\)</span> qui admet un
+plus petit élément <span class="math inline">\(x_1\)</span>. Alors la v.a.r.d. <span class="math inline">\(X\)</span> est entièrement définie
+par:</p>
+<ul>
+<li><p>L’ensemble <span class="math inline">\(X(\Omega)\)</span> des valeurs prises par <span class="math inline">\(X\)</span>, rangées par ordre
+croissant: <span class="math inline">\(X(\Omega) = \{x_1, x_2,\ldots,x_i,\ldots\}\)</span> avec
+<span class="math inline">\(x_1 \leq x_2 \leq \ldots \leq x_i \leq \ldots\)</span>.</p></li>
+<li><p>La <strong><em>loi de probabilité</em></strong> définie sur <span class="math inline">\(X(\Omega)\)</span> par
+<span class="math display">\[p_i = P(X=x_i) \,\,\,\,\, \forall \,\, i=1,2,\ldots\]</span></p></li>
+</ul>
+</div>
+
+<p><strong>Remarques</strong>:</p>
+<ul>
+<li><p>Soit <span class="math inline">\(B\)</span> un ensemble de <span class="math inline">\(\mathbb{R}\)</span>,
+<span class="math display">\[P(X \in B) = \sum_{i / x_i \in B} p(x_i)\]</span></p></li>
+<li><p>En particulier
+<span class="math display">\[P( a &lt; X \leq b) =  \sum_{i / a &lt; x_i \leq b} p(x_i)\]</span></p></li>
+<li><p>Bien sûr tous les <span class="math inline">\(p(x_i)\)</span> sont positives et
+<span class="math inline">\(\sum_{i=1}^{\infty} p(x_i) =1\)</span>.</p></li>
+<li><p>Si <span class="math inline">\(X\)</span> ne prend qu’un petit nombre de valeurs, cette loi est
+généralement présentée dans un tableau.</p></li>
+</ul>
+</div>
+<div id="fonction-de-répartition-dune-variable-aléatoire-discrète" class="section level3 unnumbered">
+<h3>Fonction de répartition d’une variable aléatoire discrète</h3>
+
+<div class="definition">
+<p><span id="def:unnamed-chunk-162" class="definition"><strong>Définition 7.2  </strong></span>On appelle <em>fonction de répartition</em> de la v.a. <span class="math inline">\(X\)</span>, qu’on note <span class="math inline">\(F(a)\)</span>
+de la v.a.r.d. <span class="math inline">\(X\)</span>, ou <span class="math inline">\(F_X(a)\)</span>, la fonction définie pour tout réel <span class="math inline">\(a\)</span>,
+<span class="math inline">\(-\infty &lt; a &lt; \infty\)</span>, par</p>
+<span class="math display">\[F(a)=P(X \leq a)=\sum_{i / x_{i}\leq a} P(X=x_{i})\]</span>
+</div>
+
+<p>Cette valeur représente la probabilité de toutes les réalisations
+inférieures ou égales au réel <span class="math inline">\(a\)</span>.</p>
+<p><strong>Propriétés</strong>: Voici quelques propriétés de cette fonction:</p>
+<ol style="list-style-type: decimal">
+<li><p>C’est une fonction en escalier (constante par morceaux).</p></li>
+<li><p><span class="math inline">\(F(a) \leq 1\)</span> car c’est une probabilité.</p></li>
+<li><p><span class="math inline">\(F(a)\)</span> est continue à droite.</p></li>
+<li><p><span class="math inline">\(\lim\limits_{a\to - \infty} F(a) = 0\)</span> et
+<span class="math inline">\(\lim\limits_{a\to\infty} F(a) = 1\)</span></p></li>
+</ol>
+<p>La fonction de répartition caractérise la loi de <span class="math inline">\(X\)</span>, autrement dit:
+<span class="math inline">\(F_{X} = F_{Y}\)</span> si et seulement si les variables aléatoires <span class="math inline">\(X\)</span> et <span class="math inline">\(Y\)</span>
+ont la même loi de probabilité.</p>
+<div id="fonction-de-répartition-et-probabilités-sur-x" class="section level4 unnumbered">
+<h4>Fonction de répartition et probabilités sur <span class="math inline">\(X\)</span></h4>
+<p>Tous les calculs de probabilité concernant <span class="math inline">\(X\)</span> peuvent être traités en
+termes de fonction de répartition. Par exemple,</p>
+<p><span class="math display">\[P(a &lt; X \leq b) = F(b) - F(a) \quad \quad \text{pour tout } a &lt; b\]</span></p>
+<p>On peut mieux s’en rendre compte en écrivant <span class="math inline">\(\{X \leq b\}\)</span> comme union
+des deux événements incompatibles <span class="math inline">\(\{X \leq a\}\)</span> et <span class="math inline">\(\{ a &lt; X \leq b\}\)</span>,
+soit</p>
+<p><span class="math display">\[\{X \leq b\} = \{X \leq a\} \cup   \{ a &lt; X \leq b\}\]</span></p>
+<p>et ainsi</p>
+<p><span class="math display">\[P(X \leq b) = P(X \leq a) + P(a &lt; X \leq b)\]</span> ce qui établit l’égalité
+ci dessus.</p>
+<div class="rmdinsight">
+<p>
+On peut déduire de <span class="math inline"><span class="math inline">\(F\)</span></span> les probabilités individuelles par:
+</p>
+<p>
+<span class="math display"><span class="math display">\[p_{i}=F(x_{i})-F(x_{i-1})\quad \quad \text{pour  } 1 \leq i \leq n\]</span></span>
+</p>
+</div>
+<p><strong>Exemple:</strong> On joue trois fois à pile ou face. Soit <span class="math inline">\(X\)</span> la variable aléatoire
+“nombre de pile obtenus”. Ici <span class="math inline">\(\Omega=\{P, F\}^3\)</span>, et donc
+<span class="math display">\[X(\Omega)=\{0, 1, 2, 3\}.\]</span></p>
+<p>On a <span class="math inline">\(card(\Omega)=2^3=8\)</span>. Calculons par exemple <span class="math inline">\(P(X=1)\)</span>, c’est à dire
+la probabilité d’avoir exactement une pile.
+<span class="math display">\[X^{-1}(1)=\{(P, F, F), (F, P, F), (F, F, P) \}\]</span> D’où
+<span class="math inline">\(P(X=1)=\frac{3}{8}\)</span>.</p>
+<p>En procédant de la même façon, on obtient la loi de probabilité de <span class="math inline">\(X\)</span>:</p>
+<table class="table table-striped" style="width: auto !important; margin-left: auto; margin-right: auto;">
+<tbody>
+<tr>
+<td style="text-align:left;">
+<span class="math inline">\(k\)</span>
+</td>
+<td style="text-align:left;">
+<span class="math inline">\(0\)</span>
+</td>
+<td style="text-align:left;">
+<span class="math inline">\(1\)</span>
+</td>
+<td style="text-align:left;">
+<span class="math inline">\(2\)</span>
+</td>
+<td style="text-align:left;">
+<span class="math inline">\(k\)</span>
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+<span class="math inline">\(P(X = k)\)</span>
+</td>
+<td style="text-align:left;">
+<span class="math inline">\(\frac{1}{8}\)</span>
+</td>
+<td style="text-align:left;">
+<span class="math inline">\(\frac{3}{8}\)</span>
+</td>
+<td style="text-align:left;">
+<span class="math inline">\(\frac{3}{8}\)</span>
+</td>
+<td style="text-align:left;">
+<span class="math inline">\(\frac{1}{8}\)</span>
+</td>
+</tr>
+</tbody>
+</table>
+<p>La fonction de répartition de <span class="math inline">\(X\)</span> est donc donnée par:</p>
+<p><span class="math display">\[F(x) = \left\{ 
+\begin{array}{l l}
+ 0 &amp; \quad \text{si $x&lt;0$}\\
+  1/8 &amp; \quad \text{si $0 \leq x &lt; 1$}\\ 
+   1/2 &amp; \quad \text{si $1 \leq x &lt; 2$}\\
+    7/8 &amp; \quad \text{si $2 \leq x &lt; 3$}\\
+     1 &amp; \quad \text{si $x \geq 3$}\\
+\end{array} \right.\]</span></p>
+<p>Le graphe de cette dernière est représentée dans la figure suivante:</p>
+<p><img src="Statistique_inferentielle_files/figure-html/unnamed-chunk-165-1.png" width="70%" style="display: block; margin: auto;" /></p>
+<p><strong>Exemple:</strong> Soit <span class="math inline">\(A\)</span> un événement quelconque. On appelle variable aléatoire <em>indicatrice</em> de cet événement <span class="math inline">\(A\)</span>, la variable aléatoire définie par: <span class="math display">\[X(\omega) = \left\{ 
+\begin{array}{l l}
+ 1 &amp; \quad \text{si $\omega \in A$}\\
+ 0 &amp; \quad \text{si $\omega \in \bar{A}$}\\   
+  \end{array} \right.\]</span></p>
+<p>et notée <span class="math inline">\(X=1_A\)</span>. Ainsi: <span class="math display">\[P(X=1)=P(A)=p\]</span>
+<span class="math display">\[P(X=0)=P(\bar{A})=1-p\]</span></p>
+<p>La fonction de répartition de <span class="math inline">\(X\)</span> est donc donnée par:</p>
+<p><span class="math display">\[F(x) = \left\{ 
+\begin{array}{l l}
+ 0 &amp; \quad \text{si $x&lt;0$}\\
+  1-p &amp; \quad \text{si $0 \leq x &lt; 1$}\\ 
+   1 &amp; \quad \text{si $x \geq 1$}\\
+\end{array} \right.\]</span></p>
+<p>On peut prendre par exemple le cas d’un tirage d’une boule dans une urne
+contenant 2 boules blanches et 3 boules noires. Soit
+<span class="math inline">\(A:\text{&quot;obtenir une boule blanche&quot;}\)</span> et <span class="math inline">\(X\)</span> la variable indicatrice
+de <span class="math inline">\(A\)</span>. La loi de probabilité de <span class="math inline">\(X\)</span> est alors</p>
+<table class="table table-striped" style="width: auto !important; margin-left: auto; margin-right: auto;">
+<tbody>
+<tr>
+<td style="text-align:left;">
+<span class="math inline">\(k\)</span>
+</td>
+<td style="text-align:left;">
+<span class="math inline">\(0\)</span>
+</td>
+<td style="text-align:left;">
+<span class="math inline">\(1\)</span>
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+<span class="math inline">\(P(X = k)\)</span>
+</td>
+<td style="text-align:left;">
+<span class="math inline">\(\frac{3}{5}\)</span>
+</td>
+<td style="text-align:left;">
+<span class="math inline">\(\frac{2}{5}\)</span>
+</td>
+</tr>
+</tbody>
+</table>
+<p>et sa fonction de répartition est:</p>
+<p><span class="math display">\[F(x) = \left\{ 
+\begin{array}{l l}
+ 0 &amp; \quad \text{si $x&lt;0$}\\
+  3/5 &amp; \quad \text{si $0 \leq x &lt; 1$}\\ 
+   1 &amp; \quad \text{si $x \geq 1$}\\
+\end{array} \right.\]</span></p>
+</div>
+</div>
+</div>
+<div id="moments-dune-variable-aléatoire-discrète" class="section level2 unnumbered">
+<h2>Moments d’une variable aléatoire discrète</h2>
+<div id="espérance-mathématique" class="section level3 unnumbered">
+<h3>Espérance mathématique</h3>
+
+<div class="definition">
+<p><span id="def:unnamed-chunk-167" class="definition"><strong>Définition 7.3  </strong></span>Pour une variable aléatoire discrète <span class="math inline">\(X\)</span> de loi de probabilité <span class="math inline">\(p(.)\)</span>,
+on définit l’<em>espérance</em> de <span class="math inline">\(X\)</span>, notée <span class="math inline">\(E(X)\)</span>, par l’expression</p>
+<p><span class="math display">\[E(X)=\sum_{i \in \mathbb{N}} x_{i} p(x_i)\]</span></p>
+En termes concrets, l’espérance de <span class="math inline">\(X\)</span> est la moyenne pondérée des
+valeurs que <span class="math inline">\(X\)</span> peut prendre, les poids étant les probabilités que ces
+valeurs soient prises.
+</div>
+
+<p>Reprenons l’exemple où on joue 3 fois à pile ou face. L’espérance
+de <span class="math inline">\(X=\)</span>“nombre de pile obtenus” est égal à:
+<span class="math display">\[E(X)=0 \times \frac{1}{8}+1 \times \frac{3}{8}+2 \times \frac{3}{8}+3 \times \frac{1}{8}=1.5\]</span></p>
+<p>Dans le cas de la loi uniforme sur <span class="math inline">\(X(\Omega)=\{x_{1},\ldots, x_{k}\}\)</span>,
+c’est à dire avec équiprobabilité de toutes les valeurs <span class="math inline">\(p_{i}=1/k\)</span>, on
+obtient: <span class="math display">\[E(X)=\frac{1}{k} \sum_{i=1}^k x_{i}\]</span> et dans ce cas <span class="math inline">\(E(X)\)</span>
+se confond avec la moyenne arithmétique simple <span class="math inline">\(\bar{x}\)</span> des valeurs
+possibles de <span class="math inline">\(X\)</span>.</p>
+<p>Pour le jet d’un dé équilibré par exemple:
+<span class="math display">\[E(X)=\frac{1}{6} \sum_{i=1}^6 i=\frac{7}{2}=3.5\]</span></p>
+</div>
+<div id="espérance-dune-fonction-dune-variable-aléatoire" class="section level3 unnumbered">
+<h3>Espérance d’une fonction d’une variable aléatoire</h3>
+
+<div class="theorem">
+<p><span id="thm:unnamed-chunk-168" class="theorem"><strong>Théorème 7.1  (Théorème du transfert)  </strong></span>Si X est une variable aléatoire discrète pouvant prendre ses valeurs
+parmi les valeurs <span class="math inline">\(x_i\)</span>, <span class="math inline">\(i \geq 1\)</span>, avec des probabilités respectives
+<span class="math inline">\(p(x_i)\)</span>, alors pour toute fonction réelle <span class="math inline">\(g\)</span> on a</p>
+<span class="math display">\[E(g(X)) = \sum_i g(x_i)p(x_i)\]</span>
+</div>
+
+
+<div class="example">
+<p><span id="exm:unnamed-chunk-169" class="example"><strong>Exemple 7.1  </strong></span>Soit <span class="math inline">\(X\)</span> une variable aléatoire qui prend une des trois valeurs
+<span class="math inline">\(\{-1,0,1\}\)</span> avec les probabilités respectives</p>
+<p><span class="math display">\[P(X=-1) = 0.2 \quad \quad P(X=0)=0.5 \quad \quad P(X=1) = 0.3\]</span></p>
+Calculer <span class="math inline">\(E(X^2)\)</span>.
+</div>
+
+
+<div class="solution">
+<p> <span class="solution"><em>Solution: </em></span> <em>Première approche</em>: Soit <span class="math inline">\(Y=X^2\)</span>. La distribution de <span class="math inline">\(Y\)</span> est donnée par
+<span class="math display">\[\begin{aligned}
+    P(Y=1) &amp;= P(X=-1) + P(X=1) = 0.5 \\
+    P(Y=0) &amp;= P(X=0) = 0.5
+  \end{aligned}\]</span> Donc <span class="math display">\[E(X^2)=E(Y) = 1(0.5) + 0(0.5) = 0.5\]</span></p>
+<p><em>Deuxième approche</em>: En utilisant le théorème</p>
+<p><span class="math display">\[\begin{aligned}
+  E(X^2) &amp;= (-1)^2(0.2) + 0^2(0.5) + 1^2 (0.3) \\
+         &amp;= 1(0.2+0.3)+0(0.5)=0.5
+  \end{aligned}\]</span></p>
+Remarquer que <span class="math display">\[0.5=E(X^2) \neq (E(X))^2 = 0.01\]</span>
+</div>
+
+<div id="linéarité-de-lespérance-propriétés-de-lespérance" class="section level4 unnumbered">
+<h4>Linéarité de l’espérance Propriétés de l’espérance</h4>
+<ol style="list-style-type: decimal">
+<li><p><span class="math inline">\(E(X+a)=E(X)+a, \quad a \in \mathbb{R}\)</span><br />
+résultat qui se déduit de:
+<span class="math display">\[\sum_{i}p_{i}(x_{i}+a)= \sum_{i}p_{i}x_{i}+\sum_{i}ap_{i}=\sum_{i}p_{i}x_{i}+a \sum_{i}p_{i}=\sum_{i}p_{i}x_{i}+a\]</span></p></li>
+<li><p><span class="math inline">\(E(aX)=aE(X), \quad a\in \mathbb{R}\)</span><br />
+il suffit d’écrire: <span class="math display">\[\sum_{i}p_{i}a x_{i}=a\sum_{i}p_{i}x_{i}\]</span></p></li>
+<li><p><span class="math inline">\(E(X+Y)=E(X)+E(Y)\)</span>, <span class="math inline">\(X\)</span> et <span class="math inline">\(Y\)</span> étant deux variables aléatoire.</p></li>
+</ol>
+<p>On peut résumer ces trois propriétés en disant que l’espérance
+mathématique est linéaire:
+<span class="math display">\[E(\lambda X + \mu Y)= \lambda E(X)+\mu E(Y), \quad \forall \lambda \in \mathbb{R}, \, \forall \mu \in \mathbb{R}.\]</span></p>
+</div>
+</div>
+<div id="variance" class="section level3 unnumbered">
+<h3>Variance</h3>
+
+<div class="definition">
+<p><span id="def:unnamed-chunk-171" class="definition"><strong>Définition 7.4  </strong></span>La variance est un indicateur mesurant la dispersion des valeurs <span class="math inline">\(x_{i}\)</span>
+que peut prendre la v.a. <span class="math inline">\(X\)</span> et son espérance <span class="math inline">\(E(X)\)</span>. On appelle
+<strong>variance</strong> de X, que l’on note <span class="math inline">\(V(X)\)</span>, la quantité</p>
+<span class="math display">\[V(X)=E\big[ (X-E(X))^2 \big]\]</span> lorsque cette quantité existe.<br />
+C’est l’espérance mathématique du carré de la v.a. centrée <span class="math inline">\(X-E(X)\)</span>.
+</div>
+
+<p>On peut établir une autre formule pour le calcul de <span class="math inline">\(V(X)\)</span>:</p>
+<p><span class="math display">\[V(X)=E(X^2)-E^2(X)\]</span></p>
+<p>Or: <span class="math display">\[\begin{aligned}
+      V(X)&amp;= E\left[X^2-2XE(X)+E^2(X)\right] \\
+           &amp;=E(X^2)-E[2XE(X)]+ E[E^2(X)]\\
+           &amp;=E(X^2)-2E^2(X)+E^2(X) \\ 
+           &amp;=E(X^2)-E^2(X)
+    \end{aligned}\]</span></p>
+<p>On cherche <span class="math inline">\(V(X)\)</span> où <span class="math inline">\(X\)</span> est le nombre obtenu lors du jet d’un dé
+équilibré. On a vu dans l’exemple
+que <span class="math inline">\(E(X) = \frac{7}{2}\)</span>. De plus,</p>
+<p><span class="math display">\[\begin{aligned}
+  E(X^2) &amp;= 1^2 \bigg(\frac{1}{6}\bigg) + 2^2 \bigg(\frac{1}{6}\bigg) + 3^2 \bigg(\frac{1}{6}\bigg) + 4^2 \bigg(\frac{1}{6}\bigg) + 5^2 \bigg(\frac{1}{6}\bigg) + 6^2 \bigg(\frac{1}{6}\bigg) \\
+        &amp;=\bigg(\frac{1}{6}\bigg) (91) = \frac{91}{6}.\end{aligned}\]</span> Et
+donc</p>
+<p><span class="math display">\[V(X) = \frac{91}{6} - \bigg(\frac{7}{2}\bigg)^2 = \frac{35}{12}\]</span></p>
+<p><strong>Propriétés de la variance</strong></p>
+<ol style="list-style-type: decimal">
+<li><p><span class="math inline">\(V(X) \geq 0\)</span></p></li>
+<li><p><span class="math inline">\(V(X+a)=V(X)\)</span><br />
+en effet: <span class="math display">\[\begin{aligned}
+   V(X+a)   &amp;= E\big[\left[X+a-E(X+a)\right]^2\big] \\ 
+        &amp;=E\big[\left[X+a-E(X)-a\right]^2\big] \\ 
+        &amp;=E\big[\left[X-E(X)\right]^2\big] \\
+        &amp;=V(X). 
+   \end{aligned}\]</span></p></li>
+<li><p><span class="math inline">\(V(aX)=a^2V(X)\)</span><br />
+en effet: <span class="math display">\[\begin{aligned}
+   V(aX)  &amp;= E\big[\left[aX-E(aX)\right]^2\big] \\
+      &amp;=E\big[\left[aX-aE(X)\right]^2\big] \\ 
+      &amp;=E\big[a^2\left[X-E(X)\right]^2\big] \\
+      &amp;=a^2\big[E\left[X-E(X)\right]^2\big] \\
+      &amp;= a^2V(X). 
+   \end{aligned}\]</span></p></li>
+</ol>
+</div>
+<div id="ecart-type" class="section level3 unnumbered">
+<h3>Ecart-type</h3>
+
+<div class="definition">
+<p><span id="def:unnamed-chunk-172" class="definition"><strong>Définition 7.5  </strong></span>La racine carrée de <span class="math inline">\(V(X)\)</span> est appelée l’<strong><em>écart-type</em></strong> de <span class="math inline">\(X\)</span>, qui se
+note <span class="math inline">\(\sigma_{X}\)</span>. On a</p>
+<p><span class="math display">\[\sigma_{X} = \sqrt{V(X)}\]</span></p>
+<span class="math inline">\(\sigma_{X}\)</span> s’exprime dans les mêmes unités de mesure que la variable
+aléatoire <span class="math inline">\(X\)</span>.
+</div>
+
+<p>A noter:</p>
+<ul>
+<li><p>L’écart type sert à mesurer la dispersion d’un ensemble de données.</p></li>
+<li><p>Plus il est faible, plus les valeurs sont regroupées autour de la
+moyenne.</p></li>
+<li><p>Exemple: La répartition des notes d’une classe. Plus l’écart type
+est faible, plus la classe est homogène.</p></li>
+<li><p>L’espérance et l’écart-type sont reliés par l’<em>inégalité de
+Bienaymé-Tchebychev</em>.</p></li>
+</ul>
+<div id="inégalité-de-bienaymé-tchebychev" class="section level4 unnumbered">
+<h4>Inégalité de Bienaymé-Tchebychev</h4>
+
+<div class="theorem">
+<p><span id="thm:unnamed-chunk-173" class="theorem"><strong>Théorème 7.2  </strong></span>Soit <span class="math inline">\(X\)</span> une variable aléatoire d’espérance <span class="math inline">\(\mu\)</span> et de variance
+<span class="math inline">\(\sigma^2\)</span>. Pour tout <span class="math inline">\(\varepsilon &gt; 0\)</span>, on a l’inégalité suivante:
+<span class="math display">\[P\left(|X-E(X)| \geq \varepsilon \right) \leq \frac{\sigma^2}{\varepsilon^2}\]</span></p>
+On peut l’écrire autrement. Soit <span class="math inline">\(k=\varepsilon/\sigma\)</span>.
+<span class="math display">\[P\left(|X-E(X)| \geq k\sigma \right) \leq \frac{1}{k^2}\]</span>
+</div>
+
+<div class="rmdinsight">
+<p>
+<span style="color: blue">Importance</span>: Cette inégalité relie la probabilité pour <span class="math inline"><span class="math inline">\(X\)</span></span> de s’écarter de sa moyenne <span class="math inline"><span class="math inline">\(E(X)\)</span></span>, à sa variance qui est justement un indicateur de dispersion autour de la moyenne de la loi. Elle montre quantitativement que “plus l’écart type est faible, plus la probabilité de s’écarter de la moyenne est faible”.
+</p>
+</div>
+
+<div class="theorem">
+<span id="thm:unnamed-chunk-175" class="theorem"><strong>Théorème 7.3  (Inégalité de Markov)  </strong></span>Soit <span class="math inline">\(X\)</span> une variable aléatoire à valeur non
+négatives. Pour tout réel <span class="math inline">\(a &gt; 0\)</span> <span class="math display">\[P(X&gt;a) \leq \frac{E(X)}{a}\]</span>
+</div>
+
+</div>
+</div>
+<div id="moments-non-centrés-et-centrés" class="section level3 unnumbered">
+<h3>Moments non centrés et centrés</h3>
+<p>On appelle moment non centré d’ordre <span class="math inline">\(r \in \mathbb{N^*}\)</span> de <span class="math inline">\(X\)</span> la
+quantité, lorsqu’elle existe:
+<span class="math display">\[m_{r}(X)=\sum_{i \in \mathbb{N} } x_{i}^r p(x_{i})=E(X^r).\]</span> Le moment
+centré d’ordre <span class="math inline">\(r \in \mathbb{N^*}\)</span> est la quantité, lorsqu’elle existe:
+<span class="math display">\[\mu_{r}(X)=\sum_{i \in \mathbb{N} } p_{i}\left[x_{i}-E(X)\right]^r=E\left[X-E(X)\right]^r.\]</span></p>
+<p>Les premiers moments sont: <span class="math display">\[m_{1}(X)=E(X), \quad \mu_{1}(X)=0\]</span>
+<span class="math display">\[\mu_{2}(X)=V(X)=m_{2}(X)-m_{1}^2(X)\]</span></p>
+</div>
+</div>
+<div id="couple-de-variables-aléatoires-discrètes" class="section level2 unnumbered">
+<h2>Couple de variables aléatoires discrètes</h2>
+<p>Considérons deux variables aléatoires discrètes <span class="math inline">\(X\)</span> et <span class="math inline">\(Y\)</span>. Il nous faut
+pour modéliser le problème une fonction qui nous donne la probabilité
+que <span class="math inline">\((X = x_i )\)</span> en même temps que <span class="math inline">\((Y = y_j )\)</span>. C’est la loi de
+probabilité conjointe.</p>
+<p>Soit <span class="math inline">\(X\)</span> et <span class="math inline">\(Y\)</span> deux variables aléatoires réelles discrètes, définies
+sur un espace probabilisé <span class="math inline">\((\Omega,\mathcal{A},P)\)</span> et que</p>
+<p><span class="math display">\[\begin{aligned}
+  X(\Omega) &amp;= \{x_1,x_2,\ldots,x_l\} \\
+  Y(\Omega) &amp;= \{y_1,y_2,\ldots,y_k\} \\
+            &amp; \quad (l \text{ et } k \in \mathbb{N})\end{aligned}\]</span></p>
+<p>La <strong><em>loi du couple <span class="math inline">\((X,Y)\)</span></em></strong>, dite <strong>loi de probabilité conjointe ou
+simultanée</strong>, est entièrement définie par les probabilités:</p>
+<p><span class="math display">\[p_{ij} = P(X=x_i;Y=y_j) = P(\{X=x_i\}\cap\{Y=y_j\})\]</span></p>
+<p>On a</p>
+<p><span class="math display">\[p_{ij} \geq 0 \quad \text{et} \quad \sum_{i=1}^{l} \sum_{j=1}^{k} p_{ij} = 1\]</span></p>
+<p>Le couple <span class="math inline">\((X,Y)\)</span> s’appelle variable aléatoire à deux dimensions et peut
+prendre <span class="math inline">\(l\times k\)</span> valeurs.</p>
+<div id="table-de-probabilité-conjointe" class="section level3 unnumbered">
+<h3>Table de probabilité conjointe</h3>
+<p>Les probabilités <span class="math inline">\(p_{ij}\)</span> peuvent être présentées dans un tableau à deux
+dimensions qu’on appelle <strong>table de probabilité conjointe</strong>:</p>
+<table class="table table-striped" style="width: auto !important; margin-left: auto; margin-right: auto;">
+<tbody>
+<tr>
+<td style="text-align:left;">
+<span class="math inline">\(X\backslash Y\)</span>
+</td>
+<td style="text-align:left;">
+<span class="math inline">\(y_1\)</span>
+</td>
+<td style="text-align:left;">
+<span class="math inline">\(y_2\)</span>
+</td>
+<td style="text-align:left;">
+<span class="math inline">\(\ldots\)</span>
+</td>
+<td style="text-align:left;">
+<span class="math inline">\(y_j\)</span>
+</td>
+<td style="text-align:left;">
+<span class="math inline">\(\ldots\)</span>
+</td>
+<td style="text-align:left;">
+<span class="math inline">\(y_k\)</span>
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+<span class="math inline">\(x_1\)</span>
+</td>
+<td style="text-align:left;">
+<span class="math inline">\(p_{11}\)</span>
+</td>
+<td style="text-align:left;">
+<span class="math inline">\(p_{12}\)</span>
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+<span class="math inline">\(p_{1j}\)</span>
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+<span class="math inline">\(p_{1k}\)</span>
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+<span class="math inline">\(x_2\)</span>
+</td>
+<td style="text-align:left;">
+<span class="math inline">\(p_{21}\)</span>
+</td>
+<td style="text-align:left;">
+<span class="math inline">\(p_{22}\)</span>
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+<span class="math inline">\(p_{2j}\)</span>
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+<span class="math inline">\(p_{2k}\)</span>
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+<span class="math inline">\(\vdots\)</span>
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+<span class="math inline">\(x_i\)</span>
+</td>
+<td style="text-align:left;">
+<span class="math inline">\(p_{i1}\)</span>
+</td>
+<td style="text-align:left;">
+<span class="math inline">\(p_{i2}\)</span>
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+<span class="math inline">\(p_{ij}\)</span>
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+<span class="math inline">\(p_{ik}\)</span>
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+<span class="math inline">\(\vdots\)</span>
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+<span class="math inline">\(x_l\)</span>
+</td>
+<td style="text-align:left;">
+<span class="math inline">\(p_{l1}\)</span>
+</td>
+<td style="text-align:left;">
+<span class="math inline">\(p_{l2}\)</span>
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+<span class="math inline">\(p_{lj}\)</span>
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+<span class="math inline">\(p_{lk}\)</span>
+</td>
+</tr>
+</tbody>
+</table>
+<p>A la première ligne figure l’ensemble des valeurs de <span class="math inline">\(Y\)</span> et à la
+première colonne figure l’ensemble des valeurs de <span class="math inline">\(X\)</span>. La probabilité
+<span class="math inline">\(p_{ij} = P(X=x_i;Y=y_j)\)</span> est à l’intersection de la <span class="math inline">\(i^{e}\)</span> et de la
+<span class="math inline">\(j^{e}\)</span> colonne.</p>
+</div>
+<div id="lois-marginales" class="section level3 unnumbered">
+<h3>Lois marginales</h3>
+<p>Lorsqu’on connaît la loi conjointe des variables aléatoires <span class="math inline">\(X\)</span> et <span class="math inline">\(Y\)</span>,
+on peut aussi s’intéresser à la loi de probabilité de <span class="math inline">\(X\)</span> seule et de
+<span class="math inline">\(Y\)</span> seule. Ce sont les lois de probabilité marginales.</p>
+<ul>
+<li><p>Loi marginale de <span class="math inline">\(X\)</span>:
+<span class="math display">\[p_{i.} = P(X=x_i) = P[\{X=x_i\}\cap \Omega] = \sum_{j=1}^k p_{ij} \quad \quad \forall \, i=1,2,\ldots,l\]</span></p></li>
+<li><p>Loi marginale de <span class="math inline">\(Y\)</span>:
+<span class="math display">\[p_{.j} = P(Y=y_j) = P[ \Omega \cap \{Y=y_j\}] = \sum_{i=1}^l p_{ij} \quad \quad \forall \, j=1,2,\ldots,k\]</span></p></li>
+</ul>
+<p>On peut calculer les lois marginales directement depuis la table de la
+loi conjointe. La loi marginale de <span class="math inline">\(X\)</span> est
+calculée en faisant les totaux par ligne, tandis que celle de <span class="math inline">\(Y\)</span> l’est
+en faisant les totaux par colonne.</p>
+<p>C’est le fait que les lois de <span class="math inline">\(X\)</span> et <span class="math inline">\(Y\)</span> individuellement puissent être lues dans les marges du tableau qui leur vaut leur nom de lois
+marginales.</p>
+<table class="table table-striped" style="width: auto !important; margin-left: auto; margin-right: auto;">
+<tbody>
+<tr>
+<td style="text-align:left;">
+<span class="math inline">\(X\backslash Y\)</span>
+</td>
+<td style="text-align:left;">
+<span class="math inline">\(y_1\)</span>
+</td>
+<td style="text-align:left;">
+<span class="math inline">\(y_2\)</span>
+</td>
+<td style="text-align:left;">
+<span class="math inline">\(\ldots\)</span>
+</td>
+<td style="text-align:left;">
+<span class="math inline">\(y_j\)</span>
+</td>
+<td style="text-align:left;">
+<span class="math inline">\(\ldots\)</span>
+</td>
+<td style="text-align:left;">
+<span class="math inline">\(y_k\)</span>
+</td>
+<td style="text-align:left;">
+Marginale de <span class="math inline">\(X\)</span>
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+<span class="math inline">\(x_1\)</span>
+</td>
+<td style="text-align:left;">
+<span class="math inline">\(p_{11}\)</span>
+</td>
+<td style="text-align:left;">
+<span class="math inline">\(p_{12}\)</span>
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+<span class="math inline">\(p_{1j}\)</span>
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+<span class="math inline">\(p_{1k}\)</span>
+</td>
+<td style="text-align:left;">
+<span class="math inline">\(p_{1.}\)</span>
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+<span class="math inline">\(x_2\)</span>
+</td>
+<td style="text-align:left;">
+<span class="math inline">\(p_{21}\)</span>
+</td>
+<td style="text-align:left;">
+<span class="math inline">\(p_{22}\)</span>
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+<span class="math inline">\(p_{2j}\)</span>
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+<span class="math inline">\(p_{2k}\)</span>
+</td>
+<td style="text-align:left;">
+<span class="math inline">\(p_{2.}\)</span>
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+<span class="math inline">\(\vdots\)</span>
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+<span class="math inline">\(x_i\)</span>
+</td>
+<td style="text-align:left;">
+<span class="math inline">\(p_{i1}\)</span>
+</td>
+<td style="text-align:left;">
+<span class="math inline">\(p_{i2}\)</span>
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+<span class="math inline">\(p_{ij}\)</span>
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+<span class="math inline">\(p_{ik}\)</span>
+</td>
+<td style="text-align:left;">
+<span class="math inline">\(p_{i.}\)</span>
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+<span class="math inline">\(\vdots\)</span>
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+<span class="math inline">\(x_l\)</span>
+</td>
+<td style="text-align:left;">
+<span class="math inline">\(p_{l1}\)</span>
+</td>
+<td style="text-align:left;">
+<span class="math inline">\(p_{l2}\)</span>
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+<span class="math inline">\(p_{lj}\)</span>
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+<span class="math inline">\(p_{lk}\)</span>
+</td>
+<td style="text-align:left;">
+<span class="math inline">\(p_{l.}\)</span>
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Marginale de <span class="math inline">\(Y\)</span>
+</td>
+<td style="text-align:left;">
+<span class="math inline">\(p_{.1}\)</span>
+</td>
+<td style="text-align:left;">
+<span class="math inline">\(p_{.2}\)</span>
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+<span class="math inline">\(p_{.j}\)</span>
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+<span class="math inline">\(p_{.k}\)</span>
+</td>
+<td style="text-align:left;">
+<span class="math inline">\(1\)</span>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="rmdexercise">
+<p>
+On tire au hasard 3 boules d’une urne contenant 3 boules rouges, 4 blanches et 5 noires. <span class="math inline"><span class="math inline">\(X\)</span></span> et <span class="math inline"><span class="math inline">\(Y\)</span></span> désignent respectivement le nombre de boules rouges et celui de boules blanches tirées. Déterminer la loi de probabilité conjointe du couple <span class="math inline"><span class="math inline">\((X,Y)\)</span></span> ainsi que les lois marginales de <span class="math inline"><span class="math inline">\(X\)</span></span> et de <span class="math inline"><span class="math inline">\(Y\)</span></span>.
+</p>
+</div>
+</div>
+<div id="lois-conditionnelles" class="section level3 unnumbered">
+<h3>Lois conditionnelles</h3>
+<p>Pour chaque valeur <span class="math inline">\(y_j\)</span> de <span class="math inline">\(Y\)</span> telle que <span class="math inline">\(p_{.j} = P(Y=y_j) \neq 0\)</span> on
+peut définir la loi conditionnelle de <span class="math inline">\(X\)</span> sachant <span class="math inline">\(Y=y_j\)</span> par</p>
+<p><span class="math display">\[p_{i/j} = P(X=x_i / Y=y_j) = \frac{P(X=x_i;Y=y_j)}{P(Y=y_j)} = \frac{p_{ij}}{p_{.j}} \quad \quad \forall i = 1,2,\ldots,l\]</span></p>
+<p>De même on définit la loi de <span class="math inline">\(Y\)</span> sachant <span class="math inline">\(X=x_i\)</span> par</p>
+<p><span class="math display">\[p_{j/i} = P(Y=y_j / X=x_i) = \frac{P(X=x_i;Y=y_j)}{P(X=x_i)} = \frac{p_{ij}}{p_{i.}} \quad \quad \forall j = 1,2,\ldots,k\]</span></p>
+</div>
+<div id="indépendance-de-variables-aléatoires" class="section level3 unnumbered">
+<h3>Indépendance de variables aléatoires</h3>
+
+<div class="theorem">
+<p><span id="thm:unnamed-chunk-179" class="theorem"><strong>Théorème 7.4  </strong></span>On dit que deux v.a.r.d sont indépendantes si et seulement si</p>
+<span class="math display">\[P(X=x_i;Y=y_j) = P(X=x_i) P(Y=y_j) \quad \quad \forall \, i = 1,2,\ldots,l \text{ et }  j = 1,2,\ldots,k\]</span>
+</div>
+
+<p>On montre que</p>
+<p><span class="math display">\[P(\{X\in A\} \cap \{Y \in B\}) = P(\{X\in A\}) P(\{Y \in B\}) \quad \quad \forall \,\, A \text{ et } B \in \mathcal{A}\]</span></p>
+<p><strong>Propriétés</strong></p>
+<p>Soit deux v.a.r.d. <span class="math inline">\(X\)</span> et <span class="math inline">\(Y\)</span>,</p>
+<ol style="list-style-type: decimal">
+<li><p><span class="math inline">\(E(X+Y)=E(X)+E(Y)\)</span></p></li>
+<li><p>Si <span class="math inline">\(X\)</span> et <span class="math inline">\(Y\)</span> sont indépendantes alors <span class="math inline">\(E(XY)=E(X)E(Y)\)</span>. Mais la
+réciproque n’est pas toujours vraie.</p></li>
+</ol>
+</div>
+<div id="covariance" class="section level3 unnumbered">
+<h3>Covariance</h3>
+<p>Soit <span class="math inline">\(X\)</span> et <span class="math inline">\(Y\)</span> deux v.a.r.d. On appelle <strong><em>covariance</em></strong> de <span class="math inline">\(X\)</span> et de
+<span class="math inline">\(Y\)</span> la valeur si elle existe de</p>
+<p><span class="math display">\[Cov(X,Y) = E[(X-E(X))(Y-E(Y))] = \sum_i \sum_j (x_i-E(X))(y_j-E(Y)) p_{ij}\]</span></p>
+<p>qu’on peut calculer en utilisant la formule suivante</p>
+<p><span class="math display">\[Cov(X,Y) = E(XY) - E(X)E(Y)\]</span></p>
+<p><strong>Propriétés</strong></p>
+<ul>
+<li><p><span class="math inline">\(Cov(X,Y)=Cov(Y,X)\)</span></p></li>
+<li><p><span class="math inline">\(Cov(aX_1+bX_2,Y) = a Cov(X_1,Y) + b Cov(X_2,Y)\)</span></p></li>
+<li><p><span class="math inline">\(V(X+Y)= V(X) + V(Y) + 2 Cov(X,Y)\)</span></p></li>
+<li><p>Si <span class="math inline">\(X\)</span> et <span class="math inline">\(Y\)</span> sont indépendantes alors</p>
+<ul>
+<li><p><span class="math inline">\(Cov(X,Y) = 0\)</span> (la réciproque n’est pas vraie)</p></li>
+<li><p><span class="math inline">\(V(X+Y) = V(X) + V(Y)\)</span> (la réciproque n’est pas vraie)</p></li>
+</ul></li>
+</ul>
+</div>
+<div id="coefficient-de-corrélation-linéaire-1" class="section level3 unnumbered">
+<h3>Coefficient de corrélation linéaire</h3>
+<p>On appelle coefficient de corrélation linéaire de <span class="math inline">\(X\)</span> et de <span class="math inline">\(Y\)</span> la
+valeur définie par</p>
+<p><span class="math display">\[\rho = \rho(X,Y) = \frac{Cov(X,Y)}{\sqrt{V(X)V(Y)}} = \frac{Cov(X,Y)}{\sigma_X \sigma_Y}\]</span></p>
+<p>On peut montrer que <span class="math display">\[-1 \leq \rho(X,Y) \leq 1\]</span></p>
+<p>Pour le montrer on peut partir du fait que la variance est toujours
+positive ou nulle. Donc
+<span class="math inline">\(V(\frac{X}{\sigma_X} + \frac{Y}{\sigma_Y}) \geq 0\)</span> et
+<span class="math inline">\(V(\frac{X}{\sigma_X} - \frac{Y}{\sigma_Y}) \geq 0\)</span>.</p>
+<p><strong>Interprétation de <span class="math inline">\(\rho\)</span></strong></p>
+<ul>
+<li><p>Le coefficient de corrélation est une mesure du degré de linéarité
+entre <span class="math inline">\(X\)</span> et <span class="math inline">\(Y\)</span>.</p></li>
+<li><p>Les valeurs de <span class="math inline">\(\rho\)</span> proches de <span class="math inline">\(1\)</span> ou <span class="math inline">\(-1\)</span> indiquent une linéarité
+quasiment rigoureuse entre <span class="math inline">\(X\)</span> et <span class="math inline">\(Y\)</span>.</p></li>
+<li><p>Les valeurs de <span class="math inline">\(\rho\)</span> proche de 0 indiquent une absence de toute
+relation linéaire.</p></li>
+<li><p>Lorsque <span class="math inline">\(\rho(X,Y)\)</span> est positif, <span class="math inline">\(Y\)</span> a tendance à augmenter si <span class="math inline">\(X\)</span>
+en fait autant.</p></li>
+<li><p>Lorsque <span class="math inline">\(\rho(X,Y) &lt; 0\)</span>, <span class="math inline">\(Y\)</span> a tendance à diminuer si <span class="math inline">\(X\)</span> augmente.</p></li>
+<li><p>Si <span class="math inline">\(\rho(X,Y) =0\)</span>, on dit que ces deux statistiques sont non
+corrélées.</p></li>
+</ul>
+</div>
+</div>
+<div id="lois-usuelles-discrètes" class="section level2 unnumbered">
+<h2>Lois usuelles discrètes</h2>
+<div id="loi-uniforme-discrète-mathcalun" class="section level3 unnumbered">
+<h3>Loi uniforme discrète <span class="math inline">\(\mathcal{U}(n)\)</span></h3>
+
+<div class="definition">
+<p><span id="def:unnamed-chunk-180" class="definition"><strong>Définition 7.6  </strong></span>Une distribution de probabilité suit une loi uniforme lorsque toutes les
+valeurs prises par la variable aléatoire sont équiprobables. Si <span class="math inline">\(n\)</span> est
+le nombre de valeurs différentes prises par la variable aléatoire alors
+on a:</p>
+<span class="math display">\[\label{eq:unif}
+    P(X=x_i)=\frac{1}{n} \qquad \forall \, i \in \{1,\ldots, n\}\]</span>
+</div>
+
+<p><strong>Exemple:</strong> La distribution des chiffres obtenus au lancer de dé (si ce dernier est
+non pipé) suit une loi uniforme dont la loi de probabilité est la
+suivante :</p>
+<table class="table table-striped" style="width: auto !important; margin-left: auto; margin-right: auto;">
+<tbody>
+<tr>
+<td style="text-align:left;">
+<span class="math inline">\(x_i\)</span>
+</td>
+<td style="text-align:left;">
+<span class="math inline">\(1\)</span>
+</td>
+<td style="text-align:left;">
+<span class="math inline">\(2\)</span>
+</td>
+<td style="text-align:left;">
+<span class="math inline">\(3\)</span>
+</td>
+<td style="text-align:left;">
+<span class="math inline">\(4\)</span>
+</td>
+<td style="text-align:left;">
+<span class="math inline">\(5\)</span>
+</td>
+<td style="text-align:left;">
+<span class="math inline">\(6\)</span>
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+<span class="math inline">\(P(X = x_i)\)</span>
+</td>
+<td style="text-align:left;">
+<span class="math inline">\(\frac{1}{6}\)</span>
+</td>
+<td style="text-align:left;">
+<span class="math inline">\(\frac{1}{6}\)</span>
+</td>
+<td style="text-align:left;">
+<span class="math inline">\(\frac{1}{6}\)</span>
+</td>
+<td style="text-align:left;">
+<span class="math inline">\(\frac{1}{6}\)</span>
+</td>
+<td style="text-align:left;">
+<span class="math inline">\(\frac{1}{6}\)</span>
+</td>
+<td style="text-align:left;">
+<span class="math inline">\(\frac{1}{6}\)</span>
+</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Moments de loi uniforme discrète</strong></p>
+<p>Dans le <strong>cas particulier</strong> d’une loi uniforme discrète où chaque valeur
+de la variable aléatoire <span class="math inline">\(X\)</span> correspond à son rang, i.e.
+<span class="math inline">\(x_i=i \, \, \forall i \in \{1,\ldots, n\}\)</span>, on a:
+<span class="math display">\[E(X)=\frac{n+1}{2} \quad \text{et} \quad V(X)=\frac{n^2-1}{12}\]</span> La
+démonstration de ces résultats est établie en utilisant les égalités
+(cf. Annexe)
+<span class="math display">\[\sum_{i=1}^n i=\frac{n(n+1)}{2} \quad \text{et} \quad \sum_{i=1}^n i^2=\frac{n(n+1)(2n+1)}{6}.\]</span></p>
+<p>En revenant à l’exemple du lancer du dé de cette section, on peut
+calculer directement les moments de <span class="math inline">\(X\)</span>: <span class="math display">\[E(X)=\frac{6+1}{2}=3.5\]</span> et
+<span class="math display">\[V(X)=\frac{6^2-1}{12}=\frac{35}{12}\simeq 2.92.\]</span></p>
+</div>
+<div id="loi-de-bernoulli-mathcalbp" class="section level3 unnumbered">
+<h3>Loi de Bernoulli <span class="math inline">\(\mathcal{B}(p)\)</span></h3>
+
+<div class="definition">
+<p><span id="def:unnamed-chunk-182" class="definition"><strong>Définition 7.7  </strong></span>On réalise une expérience dont le résultat sera interprété soit comme un
+succès soit comme un échec. On définit alors la variable aléatoire <span class="math inline">\(X\)</span>
+en lui donnant la valeur 1 lors d’un succès et 0 lors d’un échec
+(variable indicatrice). La loi de probabilité de <span class="math inline">\(X\)</span> est alors</p>
+<p><span class="math display" id="eq:bern">\[\begin{align}
+    &amp;p(1)=P(X=1)=p \tag{7.1} \\ 
+    &amp;p(0)=P(X=0)= 1-p=q \notag
+\end{align}\]</span></p>
+<p>où <span class="math inline">\(p\)</span> est la probabilité d’un succès, <span class="math inline">\(0 \leq p \leq 1\)</span>.</p>
+Une variable aléatoire <span class="math inline">\(X\)</span> est dite de <strong>Bernoulli</strong>
+<span class="math inline">\(X \sim \mathcal{B} \left({p}\right)\)</span> s’il existe un nombre
+<span class="math inline">\(p \, \in \, ]0,1[\)</span> tel que la loi de probabilité de <span class="math inline">\(X\)</span> soit donnée par <a href="variables-aléatoires-discrètes.html#eq:bern">(7.1)</a>.
+</div>
+
+<p>La fonction de répartition est définie par: <span class="math display">\[F(x) = 
+       \left\{
+       \begin{array}{ll}
+         0 &amp; \quad \text{si $x &lt; 0$} \\
+         1 - p &amp; \quad \text{si $0 \leq x &lt; 1$} \\
+         1 &amp; \quad \text{si $x \geq 1$}.
+       \end{array}
+       \right.\]</span></p>
+<p>L’espérance la loi de Bernoulli est <span class="math inline">\(p\)</span>, en effet</p>
+<p><span class="math display">\[E(X) =1 \times P(X=1)+0 \times P(X=0)=P(X=1)=p\]</span></p>
+<p>La variance la loi de Bernoulli est <span class="math inline">\(np\)</span>, en effet</p>
+<p><span class="math display">\[V(X) =E(X^2)-E^2(X)=p-p^2=p(1-p)=pq\]</span> car
+<span class="math display">\[E(X^2) =1^2\times P(X=1)+0^2 \times P(X=0)=P(X=1)=p\]</span></p>
+</div>
+<div id="loi-binomiale-mathcalbnp" class="section level3 unnumbered">
+<h3>Loi Binomiale <span class="math inline">\(\mathcal{B}(n,p)\)</span></h3>
+
+<div class="rmdtip">
+Décrite pour la première fois par <em>Isaac Newton</em> en 1676 et démontrée pour la première fois par le mathématicien suisse <em>Jacob Bernoulli</em> en 1713, la loi binomiale est l’une des distributions de probabilité les plus fréquemment rencontrées en statistique appliquée.
+</div>
+
+<p>Supposons qu’on exécute maintenant <span class="math inline">\(n\)</span> épreuves <strong>indépendantes</strong>,
+chacune ayant <span class="math inline">\(p\)</span> pour probabilité de succès et <span class="math inline">\(1-p\)</span> pour probabilité
+d’échec. La variable aléatoire <span class="math inline">\(X\)</span> qui compte <strong>le nombre de succès</strong>
+sur l’ensemble des <span class="math inline">\(n\)</span> épreuves est dite variable aléatoire
+<strong>binomiale</strong> de paramètres <span class="math inline">\(n\)</span> et <span class="math inline">\(p\)</span>.</p>
+
+<div class="rmdinsight">
+Une variable de Bernoulli n’est donc qu’une variable binomiale de paramètres <span class="math inline">\((1,p)\)</span>.
+</div>
+
+
+<div class="definition">
+<p><span id="def:unnamed-chunk-185" class="definition"><strong>Définition 7.8  </strong></span>Si on effectue <span class="math inline">\(n\)</span> épreuves successives indépendantes où on note à
+chaque fois la réalisation ou non d’un certain événement <span class="math inline">\(A\)</span>, on obtient une suite de la forme <span class="math inline">\(AA\bar{A}A\bar{A}\ldots \bar{A}AA\)</span>. Soit <span class="math inline">\(X\)</span> le nombre de réalisations de <span class="math inline">\(A\)</span>. On définit ainsi une v.a. <span class="math inline">\(X\)</span> qui suit une loi binomiale de paramètres <span class="math inline">\(n\)</span> et <span class="math inline">\(p=P(A)\)</span>, caractérisée par
+<span class="math inline">\(X(\Omega)=\{0, 1,\ldots, n\}\)</span> :</p>
+<p><span class="math display" id="eq:binom">\[\begin{equation}
+    P(X=k)=\binom{n}{k}p^k (1-p)^{n-k} \qquad 0\leq k \leq n
+    \tag{7.2}
+\end{equation}\]</span></p>
+On écrit <span class="math inline">\(X \sim \mathcal{B} \left({n, p}\right)\)</span>. Donc la loi binomiale modélise le nombre de réalisations de <span class="math inline">\(A\)</span> (succès) obtenues lors de la répétition indépendante et identique de <span class="math inline">\(n\)</span> épreuves de Bernoulli.
+</div>
+
+
+<div class="rmdinsight">
+Pour établir <a href="variables-aléatoires-discrètes.html#eq:binom">(7.2)</a> il faut remarquer que <span class="math inline">\(\binom{n}{k}\)</span> est le nombre d’échantillons de taille <span class="math inline">\(n\)</span> comportant exactement <span class="math inline">\(k\)</span> événements <span class="math inline">\(A\)</span>, de probabilité <span class="math inline">\(p^k\)</span>, indépendamment de l’ordre, et donc <span class="math inline">\(n-k\)</span> événements <span class="math inline">\(\bar{A}\)</span>, de probabilité <span class="math inline">\((1-p)^{n-k}\)</span>.
+</div>
+
+<p><strong>Remarque:</strong> Il est possible d’obtenir aisément les valeurs des combinaisons de la loi binomiale en utilisant le triangle de Pascal.</p>
+<p>En utilisant la formule du binôme de Newton, on vérifie
+bien que c’est une loi de probabilité:</p>
+<p><span class="math display">\[{\sum_{k=0}^nP(X=k)=\sum_{k=0}^n\binom{n}{k} p^{k}(1-p)^{n-k}=[p+(1-p)]^n=1}\]</span></p>
+<p><strong>Exemple:</strong> On jette cinq pièces équilibrées. Les résultats sont supposés
+indépendants. Donner la loi de probabilité de la variable <span class="math inline">\(X\)</span> qui compte
+le nombre de piles obtenus.</p>
+<p><strong>Moments de la loi Binomiale</strong></p>
+<p>Pour calculer facilement les moments de cette loi, nous allons associer
+à chaque épreuve <span class="math inline">\(i\)</span>, <span class="math inline">\(1\leq i \leq n\)</span>, une v.a. de Bernoulli (variable
+indicatrice sur <span class="math inline">\(A\)</span>): <span class="math display">\[{1}_A=X_i = \left\{ 
+\begin{array}{l l}
+ 1 &amp; \quad \text{si $A$ est réalisé}\\
+ 0 &amp; \quad \text{si $\bar{A}$ est réalisé}\\ 
+  \end{array} \right.\]</span> On peut écrire alors:
+<span class="math inline">\(X=\sum_{i=1}^nX_i=X_1+X_2+\ldots+X_n\)</span>, ce qui nous permet de déduire
+aisément: <span class="math display">\[\begin{aligned}
+    E(X)&amp;=E\left(\sum_{i=1}^nX_i\right)=\sum_{i=1}^nE(X_i)=np \\
+    \text{et} \nonumber \\
+    V(X)&amp;=V\left(\sum_{i=1}^nX_i\right)=\sum_{i=1}^nV(X_i)=np(1-p) \quad \text{car les v.a. $X_i$ sont indépendantes.}
+  \end{aligned}\]</span></p>
+<p>Le calcul direct des moments de <span class="math inline">\(X\)</span> peut s’effectuer à partir de la
+définition générale, mais de façon beaucoup plus laborieuse:
+<span class="math display">\[\begin{aligned}
+ E(X)&amp;= \sum_{k=0}^nk \binom{n}{k} p^{k}(1-p)^{n-k}=\sum_{k=1}^nk \frac{n!}{k!(n-k)!} p^{k}(1-p)^{n-k} \\
+ &amp;= \sum_{k=1}^n\frac{n!}{(k-1)!(n-k)!} p^{k}(1-p)^{n-k}= np \sum_{k=1}^n\frac{(n-1)!}{(k-1)!(n-k)!} p^{k-1}(1-p)^{n-k} \\ 
+ &amp;= np \sum_{j=0}^{n-1}\frac{(n-1)!}{j!(n-1-j)!}p^j (1-p)^{n-1-j} =np \sum_{j=0}^{n-1}\binom{n-1}{j} p^{j}(1-p)^{n-1-j} \\
+ &amp;= np [p+(1-p)]^{n-1}=np
+ \end{aligned}\]</span></p>
+<p>Pour obtenir <span class="math inline">\(E(X^2)\)</span> par un procédé de calcul identique, on passe par
+l’intermédiaire du moment factoriel <span class="math inline">\(E[X(X-1)]=E(X^2)-E(X)\)</span>:
+<span class="math display">\[\begin{aligned}
+  E[X(X-1)]&amp;= \sum_{k=0}^nk(k-1) \frac{n!}{k!(n-k)!} p^{k}(1-p)^{n-k} \\ 
+  &amp;= n(n-1)p^2 \sum_{k=2}^{n}\frac{(n-2)!}{(k-2)!(n-k)!} p^{k-2}(1-p)^{n-k} \\ &amp;= n(n-1)p^2 \sum_{j=0}^{n-2}\binom{n-2}{j} p^{j}(1-p)^{n-2-j} \\
+  &amp;= n(n-1)p^2[p+(1-p)]^{n-2}= n(n-1)p^2
+   \end{aligned}\]</span> On en déduit alors:
+<span class="math display">\[E(X^2)=E[X(X-1)]+E(X)= n(n-1)p^2+np,\]</span> puis: <span class="math display">\[\begin{aligned}
+   V(X)&amp;=n(n-1)p^2+np-(np)^2 \\ &amp;=n^2p^2+np(1-p)-n^2p^2 \\ &amp;=np(1-p).
+  \end{aligned}\]</span></p>
+<p>Le nombre de résultats pile apparus au cours de <span class="math inline">\(n\)</span> jets d’une pièce de
+monnaie suit une loi binomiale <span class="math inline">\(\mathcal{B} \left({n, 1/2}\right)\)</span>:
+<span class="math display">\[P(X=k)=\binom{n}{k}\left(\frac{1}{2}\right)^k \left(\frac{1}{2}\right)^{n-k}=\frac{\binom{n}{k}}{2^n}, \quad 0\leq k \leq n\]</span>
+avec <span class="math inline">\(E(X)=n/2\)</span> et <span class="math inline">\(V(X)=n/4\)</span>.</p>
+<p>Le nombre <span class="math inline">\(N\)</span> de boules rouges apparues au cours de <span class="math inline">\(n\)</span> tirages avec
+remise dans une urne contenant deux rouges, trois vertes et une noire
+suit une loi binomiale <span class="math inline">\(\mathcal{B} \left({n, 1/3}\right)\)</span>:
+<span class="math display">\[P(N=k)=\binom{n}{k}\left(\frac{1}{3}\right)^k \left(\frac{2}{3}\right)^{n-k}=\binom{n}{k} \frac{2^{n-k}}{3^n}, \quad 0\leq k \leq n\]</span>
+avec <span class="math inline">\(E(X)=n/3\)</span> et <span class="math inline">\(V(X)=2n/9\)</span>.</p>
+
+<div class="theorem">
+<span id="thm:unnamed-chunk-187" class="theorem"><strong>Théorème 7.5  </strong></span>Si <span class="math inline">\(X_1 \sim \mathcal{B} \left({n_1, p}\right)\)</span> et
+<span class="math inline">\(X_2 \sim \mathcal{B} \left({n_2, p}\right)\)</span>, les v.a. <span class="math inline">\(X_1\)</span> et <span class="math inline">\(X_2\)</span>
+étant indépendantes, alors
+<span class="math inline">\(X_1+X_2 \sim \mathcal{B} \left({n_1+n_2, p}\right)\)</span>. Ceci résulte de la
+définition d’une loi binomiale puisqu’on totalise ici le résultat de
+<span class="math inline">\(n_1+n_2\)</span> épreuves indépendantes.
+</div>
+
+</div>
+<div id="loi-de-poisson-mathcalplambda" class="section level3 unnumbered">
+<h3>Loi de Poisson <span class="math inline">\(\mathcal{P}(\lambda)\)</span></h3>
+
+<div class="rmdtip">
+La loi de Poisson est découverte au début du XIX<span class="math inline">\(^e\)</span> siècle par le
+magistrat français <em>Siméon-Denis Poisson</em>. Les variables aléatoires
+de Poisson ont un champ d’application fort vaste, en particulier du
+fait qu’on peut les utiliser pour approximer des variables
+aléatoires binomiales de paramètres <span class="math inline">\((n,p)\)</span> pour autant que <span class="math inline">\(n\)</span> soit
+grand et <span class="math inline">\(p\)</span> assez petit pour que <span class="math inline">\(np\)</span> soit d’ordre de grandeur
+moyen.
+</div>
+
+
+<div class="definition">
+<span id="def:unnamed-chunk-189" class="definition"><strong>Définition 7.9  </strong></span>Une v.a. <span class="math inline">\(X\)</span> suit une loi de Poisson de paramètre <span class="math inline">\(\lambda&gt;0\)</span> si c’est
+une variable à valeurs entières, <span class="math inline">\(X(\Omega)=\mathbb{N}\)</span>, donc avec une
+infinité de valeurs possibles, de probabilité: <span class="math display">\[\label{eq:poisson}
+    P(X=k)=e^{-\lambda} \frac{\lambda^k}{k!}, \quad k \in \mathbb{N}\]</span>
+Cette loi ne dépend qu’un seul paramètre réel positif <span class="math inline">\(\lambda\)</span>, avec
+l’écriture symbolique <span class="math inline">\(X \sim \mathcal{P}(\lambda)\)</span>.
+</div>
+
+<p>Le développement en série entière de l’exponentielle
+<span class="math inline">\(e^\lambda=\sum_{k=0}^{+\infty} \frac{\lambda^k}{k!}\)</span> permet de
+vérifier qu’il s’agit bien d’une loi de probabilité:
+<span class="math display">\[\sum_{k=0}^{\infty} P(X=k)=\sum_{k=0}^{\infty} e^{-\lambda} \frac{\lambda^k}{k!}=e^{-\lambda}\sum_{k=0}^{\infty} \frac{\lambda^k}{k!}=e^{-\lambda}e^{\lambda}=1\]</span></p>
+<p><strong>Moments de loi de Poisson</strong></p>
+<p>Le calcul de l’espérance mathématique se déduit du développement en
+série entière de l’exponentielle: <span class="math display">\[\begin{aligned}
+    E(X)&amp;=\sum_{k=0}^{\infty} k P(X=k)=\sum_{k=1}^{\infty} k e^{-\lambda} \frac{\lambda^k}{k!} \\
+        &amp;=e^{-\lambda} \sum_{k=1}^{\infty}  \frac{\lambda^k}{(k-1)!}=\lambda e^{-\lambda} \sum_{k=1}^{\infty}  \frac{\lambda^{k-1}}{(k-1)!} \\
+        &amp;= \lambda e^{-\lambda} \sum_{j=0}^{\infty}  \frac{\lambda^{j}}{j!}= \lambda e^{-\lambda}  e^{\lambda} \\
+        &amp;= \lambda.\end{aligned}\]</span> Pour calculer la variance nous
+n’allons pas calculer <span class="math inline">\(E(X^2)\)</span> mais le moment factoriel <span class="math inline">\(E[X(X-1)]\)</span> qui
+s’obtient plus facilement, selon la méthode précédente:
+<span class="math display">\[\begin{aligned}
+    E[X(X-1)] &amp;=\sum_{k=0}^{\infty} k(k-1)P(X=k)=\sum_{k=2}^{\infty} k(k-1)  \,e^{-\lambda} \frac{\lambda^k}{k!} \\
+        &amp;=e^{-\lambda} \sum_{k=2}^{\infty}  \frac{\lambda^k}{(k-2)!}=\lambda^2 e^{-\lambda} \sum_{k=2}^{\infty}  \frac{\lambda^{k-2}}{(k-2)!} \\ 
+        &amp;= \lambda^2 e^{-\lambda} \sum_{j=0}^{\infty}  \frac{\lambda^{j}}{j!}= \lambda^2 e^{-\lambda}  e^{\lambda} = \lambda^2.\end{aligned}\]</span>
+On en déduit: <span class="math display">\[\begin{aligned}
+    V(X)&amp;=E(X^2)-E^2(X)=E[X(X-1)]+E(X)-E^2(X) \\
+        &amp;=\lambda^2+\lambda-\lambda^2=\lambda.\end{aligned}\]</span></p>
+
+<div class="theorem">
+<span id="thm:unnamed-chunk-190" class="theorem"><strong>Théorème 7.6  </strong></span>Si <span class="math inline">\(X\)</span> et <span class="math inline">\(Y\)</span> sont deux variables <strong>indépendantes</strong> suivant des lois de
+Poisson
+<span class="math display">\[X \sim \mathcal{P}(\lambda) \quad \text{et} \quad Y \sim \mathcal{P}(\mu)\]</span>
+alors leur somme suit aussi une loi de Poisson:
+<span class="math display">\[X+Y \sim \mathcal{P}(\lambda+\mu).\]</span>
+</div>
+
+<p><strong>Exemple:</strong> Soit <span class="math inline">\(X\)</span> la variable aléatoire associée au nombre de micro-ordinateurs
+vendus chaque jour dans le magasin. On suppose que <span class="math inline">\(X\)</span> suit une loi de
+Poisson de paramètre <span class="math inline">\(\lambda=5\)</span>. On écrit alors
+<span class="math inline">\(X \sim \mathcal{P}(5).\)</span><br />
+La probabilité associée à la vente de 5 micro-ordinateurs se détermine
+par : <span class="math display">\[P(X=5)=e^{-5} \frac{5^5}{5!}=e^{-5}\simeq 0.1755\]</span> La
+probabilité de vendre au moins 2 micro-ordinateurs est égal à:
+<span class="math display">\[\begin{aligned}
+P(X \geq 2)&amp;=1-\left(e^{-5} \frac{5^0}{0!}+e^{-5} \frac{5^1}{1!}\right)\simeq 0.9596\end{aligned}\]</span>
+Le nombre moyen de micro-ordinateurs vendus chaque jour dans le magasin
+est égal à 5 puisque <span class="math inline">\(E(X)=\lambda=5\)</span>.</p>
+</div>
+<div id="approximation-dune-loi-binomiale" class="section level3 unnumbered">
+<h3>Approximation d’une loi binomiale</h3>
+<p>Le théorème de Poisson nous montre que si <span class="math inline">\(n\)</span> est suffisamment grand et
+<span class="math inline">\(p\)</span> assez petit, alors on peut approcher la distribution d’une loi
+binomiale de paramètres <span class="math inline">\(n\)</span> et <span class="math inline">\(p\)</span> par celle d’une loi de Poisson de
+paramètre <span class="math inline">\(\lambda=np\)</span>, en effet
+<span class="math display">\[\text{si} \; n \rightarrow \infty \; \text{et}\; p \rightarrow 0 \; \text{alors} \; X: \mathcal{B}(n, p) \rightarrow \mathcal{P}(\lambda).\]</span></p>
+<p>Une bonne approximation est obtenue si <span class="math inline">\(n \geq 50\)</span> et <span class="math inline">\(np \leq 5\)</span>.</p>
+<p>Dans ce contexte, la loi de Poisson est souvent utilisée pour modéliser
+le nombre de succès lorsqu’on répète un très grand nombre de fois une
+expérience ayant une chance très faible de réussir par une loi de
+Poisson (nombre de personnes dans la population française atteints d’une
+maladie rare, par exemple).</p>
+<p>On cherche la probabilité de trouver au moins un centenaire parmi 200
+personnes dans une population où une personne sur cent est un
+centenaire.</p>
+<p>La probabilité <span class="math inline">\(p=1/100=0.01\)</span> étant faible et <span class="math inline">\(n=200\)</span> étant suffisamment
+grand, on peut modéliser le nombre <span class="math inline">\(X\)</span> de centenaires pris parmi 200
+personnes par la loi de Poisson de paramètre
+<span class="math inline">\(\lambda=200 \times 0.01=2\)</span>. Donc on a:
+<span class="math display">\[P(X\geq 1)=1-P(X=0)=1-e^{-2}\simeq 0.86\]</span></p>
+<p>Soit une v.a. <span class="math inline">\(X\)</span> telle que <span class="math inline">\(X \sim \mathcal{B}(100, 0.01)\)</span>, les valeurs
+des probabilités pour <span class="math inline">\(k\)</span> de 0 à 5 ainsi que leur approximation à
+<span class="math inline">\(10^{-3}\)</span> avec une loi de Poisson de paramètre <span class="math inline">\(\lambda= np =1\)</span> sont
+données dans le tableau ci-dessous :</p>
+<table class="table table-striped" style="width: auto !important; margin-left: auto; margin-right: auto;">
+<tbody>
+<tr>
+<td style="text-align:left;">
+<span class="math inline">\(k\)</span>
+</td>
+<td style="text-align:left;">
+<span class="math inline">\(1\)</span>
+</td>
+<td style="text-align:left;">
+<span class="math inline">\(2\)</span>
+</td>
+<td style="text-align:left;">
+<span class="math inline">\(3\)</span>
+</td>
+<td style="text-align:left;">
+<span class="math inline">\(4\)</span>
+</td>
+<td style="text-align:left;">
+<span class="math inline">\(5\)</span>
+</td>
+<td style="text-align:left;">
+<span class="math inline">\(k\)</span>
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+<span class="math inline">\(P(X = k)\)</span>
+</td>
+<td style="text-align:left;">
+<span class="math inline">\(0.366\)</span>
+</td>
+<td style="text-align:left;">
+<span class="math inline">\(0.370\)</span>
+</td>
+<td style="text-align:left;">
+<span class="math inline">\(0.185\)</span>
+</td>
+<td style="text-align:left;">
+<span class="math inline">\(0.061\)</span>
+</td>
+<td style="text-align:left;">
+<span class="math inline">\(0.015\)</span>
+</td>
+<td style="text-align:left;">
+<span class="math inline">\(0.000\)</span>
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Approximation
+</td>
+<td style="text-align:left;">
+<span class="math inline">\(0.368\)</span>
+</td>
+<td style="text-align:left;">
+<span class="math inline">\(0.368\)</span>
+</td>
+<td style="text-align:left;">
+<span class="math inline">\(0.184\)</span>
+</td>
+<td style="text-align:left;">
+<span class="math inline">\(0.061\)</span>
+</td>
+<td style="text-align:left;">
+<span class="math inline">\(0.015\)</span>
+</td>
+<td style="text-align:left;">
+<span class="math inline">\(0.003\)</span>
+</td>
+</tr>
+</tbody>
+</table>
+<p>Dans le cas de cet exemple où <span class="math inline">\(n =100\)</span> et <span class="math inline">\(np =1\)</span>, l’approximation de la
+loi binomiale par une loi de poisson donne des valeurs de probabilités
+identiques à <span class="math inline">\(10^{-3}\)</span> près.</p>
+</div>
+<div id="loi-géométrique-ou-de-pascal-mathcalgp" class="section level3 unnumbered">
+<h3>Loi Géométrique ou de Pascal <span class="math inline">\(\mathcal{G}(p)\)</span></h3>
+<p>On effectue des épreuves successives indépendantes jusqu’à la
+réalisation d’un événement particulier <span class="math inline">\(A\)</span> de probabilité <span class="math inline">\(p=P(A)\)</span> et on
+note <span class="math inline">\(X\)</span> le nombre aléatoire d’épreuves effectuées. On définit ainsi une
+v.a. à valeurs entières de loi géométrique, ou de Pascal. A chaque
+épreuve est associé l’ensemble fondamental <span class="math inline">\(\Omega=\{A, \bar{A}\}\)</span> et
+l’événement <span class="math inline">\(\{X=k\}\)</span> pour <span class="math inline">\(k\in \mathbb{N^*}\)</span> est représenté par une
+suite de <span class="math inline">\(k-1\)</span> événements <span class="math inline">\(\bar{A}\)</span>, terminée par l’événement <span class="math inline">\(A\)</span>:
+<span class="math display">\[\underbrace{\bar{A}\bar{A}\ldots \bar{A}}_{k-1}A\]</span> D’où:</p>
+<p><span class="math display" id="eq:geom">\[\begin{equation}
+    P(X=k)=(1-p)^{k-1}p \quad \forall \, k \in \mathbb{N^*}
+    \tag{7.3}
+\end{equation}\]</span>
+Cette loi peut servir à modéliser des temps de vie, ou des temps
+d’attente, lorsque le temps est mesuré de manière discrète (nombre de
+jours par exemple).</p>
+<p>En utilisant la série entière <span class="math display">\[\label{eq:serie_entiere}
+        \sum_{k=0}^\infty x^k = 1/(1-x) \quad \text{pour} \quad |x|&lt;1\]</span>
+on vérifie bien que c’est une loi de probabilité:</p>
+<p><span class="math display">\[\begin{aligned}
+\sum_{k=1}^\infty P(X=k)&amp;= \sum_{k=1}^\infty (1-p)^{k-1}p = p \sum_{j=0}^\infty (1-p)^{j} \\
+&amp;= p \frac{1}{1-(1-p)}=1\end{aligned}\]</span></p>
+<p><strong>Moments de loi Géométrique</strong></p>
+<p>En dérivant la série entière
+<a href="variables-aléatoires-discrètes.html#eq:geom">(7.3)</a> ci-dessus, on obtient
+<span class="math inline">\(\sum_{k=1}^\infty k x^{k-1}=1/(1-x)^2\)</span>. Ceci permet d’obtenir
+l’espérance:
+<span class="math display">\[E(X)=\sum_{k=1}^\infty kp(1-p)^{k-1}=\frac{p}{[1-(1-p)]^2}=\frac{1}{p}\]</span></p>
+<ul>
+<li>En d’autres termes, si des épreuves indépendantes ayant une
+probabilité <span class="math inline">\(p\)</span> d’obtenir un succès sont réalisés jusqu’à ce que le
+premier succès se produise, le nombre espéré d’essais nécessaires
+est égal à <span class="math inline">\(1/p\)</span>. Par exemple, le nombre espéré de jets d’un dé
+équilibré qu’il faut pour obtenir la valeur 1 est 6.</li>
+</ul>
+<p>Le calcul de la variance se fait à partir du moment factoriel et en
+utilisant la dérivée seconde de la série entière
+<a href="variables-aléatoires-discrètes.html#eq:geom">(7.3)</a>:
+<span class="math inline">\(\sum_{k=2}^\infty k(k-1) x^{k-2} = 2/(1-x)^3\)</span>, Donc</p>
+<p><span class="math display">\[\begin{aligned}
+E[X(X-1)]&amp;=\sum_{k=2}^\infty k(k-1)p(1-p)^{k-1} \\ &amp;= p(1-p)\sum_{k=2}^\infty k(k-1)(1-p)^{k-2} \\
+&amp;=  \frac{2p(1-p)}{[1-(1-p)]^3}=\frac{2(1-p)}{p^2}\end{aligned}\]</span> d’où
+on déduit: <span class="math display">\[V(X)=E[X(X-1)]+E(X)-E^2(X)=\frac{1-p}{p^2}.\]</span></p>
+<p>Si l’on considère la variable aléatoire <span class="math inline">\(X\)</span> “nombre de naissances
+observées jusqu’à l’obtention d’une fille” avec p = 1/2 (même
+probabilité de naissance d’une fille ou d’un garçon), alors X suit une
+loi géométrique et on a pour tout <span class="math inline">\(k\in \mathbb{N^*}\)</span>:
+<span class="math display">\[P(X=k)=(1-1/2)^{k-1}(1/2)=1/2^k\]</span> avec <span class="math inline">\(E(X)=2\)</span> et <span class="math inline">\(V(X)=2.\)</span></p>
+</div>
+<div id="loi-binomiale-négative-mathcalbnrp" class="section level3 unnumbered">
+<h3>Loi Binomiale Négative <span class="math inline">\(\mathcal{BN}(r,p)\)</span></h3>
+<ul>
+<li><p><span class="math inline">\(\varepsilon\)</span>: “On répéte l’épreuve de Bernoulli jusqu’à obtenir
+un total de <span class="math inline">\(r\)</span> succès”.</p></li>
+<li><p>Exemple avec :
+<span class="math display">\[\bar{A} \quad  {A} \quad  \bar{A} \quad  \bar{A} \quad  \bar{A} \quad  {A} \quad \bar{A} \quad  \bar{A} \quad  {A}\]</span>
+<span class="math display">\[{E} \quad  {S} \quad  {E} \quad  {E} \quad  {E} \quad  {S} \quad {E} \quad  {E} \quad  {S}\]</span></p></li>
+<li><p>Mais on peut obtenir d’autres façons:
+<span class="math display">\[{S} \quad  {E} \quad  {E} \quad  {E} \quad  {E} \quad  {E} \quad {S} \quad  {E} \quad  {S}\]</span>
+<span class="math display">\[{E} \quad  {E} \quad  {E} \quad  {E} \quad  {S} \quad  {E} \quad {S} \quad  {E} \quad  {S}\]</span></p></li>
+<li><p>Chaque épreuve a <span class="math inline">\({p}\)</span> pour probabilité de
+succès et <span class="math inline">\({1-p}\)</span> pour probabilité d’échec.</p></li>
+<li><p>Désignons <span class="math inline">\(X=\)</span>“le nombre d’épreuves nécessaires pour atteindre ce résultat”.
+<span class="math display">\[\underbrace{\overbrace{{E} \quad  {S} \quad  {E} \quad  {E} \quad  {E} \quad  {S} \quad {E} \quad  {E}}^{ {r-1 \, succès}\, et \, {k-r \, échecs}} \quad  {S}}_{X=k}\]</span></p></li>
+<li><p><span class="math inline">\(X(\Omega)=\{r,r+1,r+2,\ldots\}\)</span>. On dit <span class="math inline">\(X \sim \mathcal{BN}(r,p)\)</span>.</p></li>
+<li><p><span class="math inline">\(\forall \, k \in X(\Omega),\)</span>
+<span class="math display">\[P(X=k) = \binom{{k-1}}{{r-1}} {p^r} {(1-p)^{k-r}}\]</span></p></li>
+</ul>
+<div id="mathcalgpmathcalbn1p" class="section level4 unnumbered">
+<h4><span class="math inline">\(\mathcal{G}(p)=\mathcal{BN}(1,p)\)</span></h4>
+<ul>
+<li><p><span class="math inline">\(\varepsilon\)</span>: “On répéte l’épreuve de Bernoulli jusqu’à obtenir
+un total de <span class="math inline">\(r\)</span> succès”.</p></li>
+<li><p>Soit,
+<span class="math display">\[{E} \quad \ldots \quad {E} \quad {S} \quad  {E} \quad  \ldots \quad  {E} \quad  {S} \ldots \quad {E} \ldots \quad  {E} \quad  {S}\]</span></p></li>
+<li><p>Soit, <span class="math inline">\(Y_1\)</span> le nombre d’épreuves nécessaires jusqu’au premier
+succès, <span class="math inline">\(Y_2\)</span> le nombre d’épreuves supplémentaires nécessaires pour
+obtenir un deuxième succès, <span class="math inline">\(Y_3\)</span> celui menant au 3ème et ainsi de
+suite.</p></li>
+<li><p>Càd,
+<span class="math display">\[\underbrace{{E} \quad \ldots \quad {E} \quad {S}}_{Y_1} \quad  \underbrace{{E} \quad  \ldots \quad  {E} \quad  {S}}_{Y_2} \quad \underbrace{\ldots}_{\ldots} \quad \underbrace{{E} \quad \ldots \quad  {E} \quad  {S}}_{Y_r}\]</span></p></li>
+<li><p>Les tirages étants indépendantes et ayant toujours la même
+probabilité de succès, chacune des variables <span class="math inline">\(Y_1,Y_2,\ldots,Y_r\)</span>
+est géométrique <span class="math inline">\(\mathcal{G}(p)\)</span>.</p></li>
+<li><p><span class="math inline">\(X=\)</span>“le nombre d’épreuves nécessaires à l’obtention de <span class="math inline">\(r\)</span>
+succès”<span class="math inline">\(=Y_1 + Y_2 + \ldots + Y_r\)</span>.</p></li>
+<li><p>Donc,
+<span class="math display">\[E(X)= E(Y_1) + E(Y_2) + \ldots + E(Y_r) = \sum_{i=1}^r \frac{1}{p} = \frac{r}{p}\]</span>
+et <span class="math display">\[V(X)= \sum_{i=1}^r V(Y_i) = \frac{r(1-p)}{p^2}\]</span> car les <span class="math inline">\(Y_i\)</span>
+sont indépendantes.</p></li>
+</ul>
+
+</div>
+</div>
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="tp.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="variables-aléatoires-continues.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="book_assets/gitbook-2.6.7/js/app.min.js"></script>
+<script src="book_assets/gitbook-2.6.7/js/lunr.js"></script>
+<script src="book_assets/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="book_assets/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="book_assets/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="book_assets/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="book_assets/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="book_assets/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="book_assets/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": false,
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": null,
+"toc": {
+"collapse": "section",
+"scroll_highlight": true
+},
+"toolbar": {
+"position": "fixed"
+},
+"search": true,
+"plugins": "copy-code-button"
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>

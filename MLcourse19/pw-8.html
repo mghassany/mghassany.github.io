@@ -1,0 +1,628 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>PW 8 | Machine Learning</title>
+  <meta name="description" content="PW 8 | Machine Learning course" />
+  <meta name="generator" content="bookdown 0.14 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="PW 8 | Machine Learning" />
+  <meta property="og:type" content="book" />
+  
+  
+  <meta property="og:description" content="PW 8 | Machine Learning course" />
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="PW 8 | Machine Learning" />
+  
+  <meta name="twitter:description" content="PW 8 | Machine Learning course" />
+  
+
+<meta name="author" content="Mohamad Ghassany" />
+
+
+<meta name="date" content="2020-01-08" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="gaussian-mixture-models-em.html"/>
+<link rel="next" href="hierarchical-clustering.html"/>
+<script src="book_assets/jquery-2.2.3/jquery.min.js"></script>
+<link href="book_assets/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="book_assets/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="book_assets/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="book_assets/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="book_assets/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="book_assets/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="book_assets/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+<link href="book_assets/font-awesome-5.3.1/css/fontawesome-all.min.css" rel="stylesheet" />
+<script src="book_assets/htmlwidgets-1.5.1/htmlwidgets.js"></script>
+<script src="book_assets/plotly-binding-4.9.0/plotly.js"></script>
+<script src="book_assets/typedarray-0.1/typedarray.min.js"></script>
+<link href="book_assets/crosstalk-1.0.0/css/crosstalk.css" rel="stylesheet" />
+<script src="book_assets/crosstalk-1.0.0/js/crosstalk.min.js"></script>
+<link href="book_assets/plotly-htmlwidgets-css-1.46.1/plotly-htmlwidgets.css" rel="stylesheet" />
+<script src="book_assets/plotly-main-1.46.1/plotly-latest.min.js"></script>
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-88489172-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-88489172-1');
+</script>
+
+
+<style type="text/css">
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource a.sourceLine
+  { position: relative; left: -4em; }
+pre.numberSource a.sourceLine::before
+  { content: attr(title);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    background-color: #ffffff;
+    color: #a0a0a0;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #a0a0a0;  padding-left: 4px; }
+div.sourceCode
+  { color: #1f1c1b; background-color: #ffffff; }
+@media screen {
+a.sourceLine::before { text-decoration: underline; }
+}
+code span. { color: #1f1c1b; } /* Normal */
+code span.al { color: #bf0303; background-color: #f7e6e6; font-weight: bold; } /* Alert */
+code span.an { color: #ca60ca; } /* Annotation */
+code span.at { color: #0057ae; } /* Attribute */
+code span.bn { color: #b08000; } /* BaseN */
+code span.bu { color: #644a9b; font-weight: bold; } /* BuiltIn */
+code span.cf { color: #1f1c1b; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #924c9d; } /* Char */
+code span.cn { color: #aa5500; } /* Constant */
+code span.co { color: #898887; } /* Comment */
+code span.cv { color: #0095ff; } /* CommentVar */
+code span.do { color: #607880; } /* Documentation */
+code span.dt { color: #0057ae; } /* DataType */
+code span.dv { color: #b08000; } /* DecVal */
+code span.er { color: #bf0303; text-decoration: underline; } /* Error */
+code span.ex { color: #0095ff; font-weight: bold; } /* Extension */
+code span.fl { color: #b08000; } /* Float */
+code span.fu { color: #644a9b; } /* Function */
+code span.im { color: #ff5500; } /* Import */
+code span.in { color: #b08000; } /* Information */
+code span.kw { color: #1f1c1b; font-weight: bold; } /* Keyword */
+code span.op { color: #1f1c1b; } /* Operator */
+code span.ot { color: #006e28; } /* Other */
+code span.pp { color: #006e28; } /* Preprocessor */
+code span.re { color: #0057ae; background-color: #e0e9f8; } /* RegionMarker */
+code span.sc { color: #3daee9; } /* SpecialChar */
+code span.ss { color: #ff5500; } /* SpecialString */
+code span.st { color: #bf0303; } /* String */
+code span.va { color: #0057ae; } /* Variable */
+code span.vs { color: #bf0303; } /* VerbatimString */
+code span.wa { color: #bf0303; } /* Warning */
+</style>
+
+<link rel="stylesheet" href="css\style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li class='beforeimg'>            
+   <a href="https://www.esilv.fr/">
+       <img src="img/Logo_ESILV_tout_blanc.png" style="width:75%; padding:0px 0; display:block; margin: 0 auto;" alt="ESILV logo">
+    </a>
+</li>
+<li class='before'><a href="./">Machine Learning</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Welcome</a><ul>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#course-overview"><i class="fa fa-check"></i>Course Overview</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="introduction.html"><a href="introduction.html"><i class="fa fa-check"></i>Introduction</a><ul>
+<li class="chapter" data-level="" data-path="introduction.html"><a href="introduction.html#what-is-machine-learning"><i class="fa fa-check"></i>What is Machine Learning ?</a></li>
+<li class="chapter" data-level="" data-path="introduction.html"><a href="introduction.html#supervised-learning"><i class="fa fa-check"></i>Supervised Learning</a></li>
+<li class="chapter" data-level="" data-path="introduction.html"><a href="introduction.html#unsupervised-learning"><i class="fa fa-check"></i>Unsupervised Learning</a></li>
+</ul></li>
+<li class="part"><span><b>I Supervised Learning</b></span></li>
+<li class="part"><span><b>Regression</b></span></li>
+<li class="chapter" data-level="1" data-path="linear-regression.html"><a href="linear-regression.html"><i class="fa fa-check"></i><b>1</b> Linear Regression</a><ul>
+<li class="chapter" data-level="1.1" data-path="linear-regression.html"><a href="linear-regression.html#notation"><i class="fa fa-check"></i><b>1.1</b> Notation</a></li>
+<li class="chapter" data-level="1.2" data-path="linear-regression.html"><a href="linear-regression.html#model-representation"><i class="fa fa-check"></i><b>1.2</b> Model Representation</a></li>
+<li class="chapter" data-level="1.3" data-path="linear-regression.html"><a href="linear-regression.html#why-estimate-f"><i class="fa fa-check"></i><b>1.3</b> Why Estimate <span class="math inline">\(f\)</span> ?</a><ul>
+<li class="chapter" data-level="" data-path="linear-regression.html"><a href="linear-regression.html#prediction"><i class="fa fa-check"></i>Prediction</a></li>
+<li class="chapter" data-level="" data-path="linear-regression.html"><a href="linear-regression.html#inference"><i class="fa fa-check"></i>Inference</a></li>
+</ul></li>
+<li class="chapter" data-level="1.4" data-path="linear-regression.html"><a href="linear-regression.html#simple-linear-regression-model"><i class="fa fa-check"></i><b>1.4</b> Simple Linear Regression Model</a></li>
+<li class="chapter" data-level="1.5" data-path="linear-regression.html"><a href="linear-regression.html#estimating-the-coefficients"><i class="fa fa-check"></i><b>1.5</b> Estimating the Coefficients</a></li>
+<li class="chapter" data-level="1.6" data-path="linear-regression.html"><a href="linear-regression.html#assessing-the-accuracy-of-the-coefficient-estimates"><i class="fa fa-check"></i><b>1.6</b> Assessing the Accuracy of the Coefficient Estimates</a><ul>
+<li class="chapter" data-level="" data-path="linear-regression.html"><a href="linear-regression.html#hypothesis-testing"><i class="fa fa-check"></i>Hypothesis testing</a></li>
+</ul></li>
+<li class="chapter" data-level="1.7" data-path="linear-regression.html"><a href="linear-regression.html#anova-and-model-fit"><i class="fa fa-check"></i><b>1.7</b> ANOVA and model fit</a><ul>
+<li class="chapter" data-level="1.7.1" data-path="linear-regression.html"><a href="linear-regression.html#anova"><i class="fa fa-check"></i><b>1.7.1</b> ANOVA</a></li>
+<li class="chapter" data-level="1.7.2" data-path="linear-regression.html"><a href="linear-regression.html#the-r2-statistic"><i class="fa fa-check"></i><b>1.7.2</b> The <span class="math inline">\(R^2\)</span> Statistic</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="practical-work-1.html"><a href="practical-work-1.html"><i class="fa fa-check"></i>Practical Work 1</a><ul>
+<li class="chapter" data-level="1.8" data-path="practical-work-1.html"><a href="practical-work-1.html#some-basics"><i class="fa fa-check"></i><b>1.8</b> Some <svg style="height:0.8em;top:.04em;position:relative;fill:steelblue;" viewBox="0 0 581 512"><path d="M581 226.6C581 119.1 450.9 32 290.5 32S0 119.1 0 226.6C0 322.4 103.3 402 239.4 418.1V480h99.1v-61.5c24.3-2.7 47.6-7.4 69.4-13.9L448 480h112l-67.4-113.7c54.5-35.4 88.4-84.9 88.4-139.7zm-466.8 14.5c0-73.5 98.9-133 220.8-133s211.9 40.7 211.9 133c0 50.1-26.5 85-70.3 106.4-2.4-1.6-4.7-2.9-6.4-3.7-10.2-5.2-27.8-10.5-27.8-10.5s86.6-6.4 86.6-92.7-90.6-87.9-90.6-87.9h-199V361c-74.1-21.5-125.2-67.1-125.2-119.9zm225.1 38.3v-55.6c57.8 0 87.8-6.8 87.8 27.3 0 36.5-38.2 28.3-87.8 28.3zm-.9 72.5H365c10.8 0 18.9 11.7 24 19.2-16.1 1.9-33 2.8-50.6 2.9v-22.1z"/></svg> basics</a><ul>
+<li class="chapter" data-level="1.8.1" data-path="practical-work-1.html"><a href="practical-work-1.html#basic-commands"><i class="fa fa-check"></i><b>1.8.1</b> Basic Commands</a></li>
+<li class="chapter" data-level="1.8.2" data-path="practical-work-1.html"><a href="practical-work-1.html#vectors"><i class="fa fa-check"></i><b>1.8.2</b> Vectors</a></li>
+<li class="chapter" data-level="1.8.3" data-path="practical-work-1.html"><a href="practical-work-1.html#matrices-data-frames-and-lists"><i class="fa fa-check"></i><b>1.8.3</b> Matrices, data frames and lists</a></li>
+<li class="chapter" data-level="1.8.4" data-path="practical-work-1.html"><a href="practical-work-1.html#graphics"><i class="fa fa-check"></i><b>1.8.4</b> Graphics</a></li>
+<li class="chapter" data-level="1.8.5" data-path="practical-work-1.html"><a href="practical-work-1.html#distributions"><i class="fa fa-check"></i><b>1.8.5</b> Distributions</a></li>
+<li class="chapter" data-level="1.8.6" data-path="practical-work-1.html"><a href="practical-work-1.html#working-directory"><i class="fa fa-check"></i><b>1.8.6</b> Working directory</a></li>
+<li class="chapter" data-level="1.8.7" data-path="practical-work-1.html"><a href="practical-work-1.html#loading-data"><i class="fa fa-check"></i><b>1.8.7</b> Loading Data</a></li>
+</ul></li>
+<li class="chapter" data-level="1.9" data-path="practical-work-1.html"><a href="practical-work-1.html#regression"><i class="fa fa-check"></i><b>1.9</b> Regression</a><ul>
+<li class="chapter" data-level="1.9.1" data-path="practical-work-1.html"><a href="practical-work-1.html#the-lm-function"><i class="fa fa-check"></i><b>1.9.1</b> The <code>lm</code> function</a></li>
+<li class="chapter" data-level="1.9.2" data-path="practical-work-1.html"><a href="practical-work-1.html#boston"><i class="fa fa-check"></i><b>1.9.2</b> Predicting House Value: Boston dataset</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="multiple-linear-regression.html"><a href="multiple-linear-regression.html"><i class="fa fa-check"></i><b>2</b> Multiple Linear Regression</a><ul>
+<li class="chapter" data-level="2.1" data-path="multiple-linear-regression.html"><a href="multiple-linear-regression.html#the-model"><i class="fa fa-check"></i><b>2.1</b> The Model</a></li>
+<li class="chapter" data-level="2.2" data-path="multiple-linear-regression.html"><a href="multiple-linear-regression.html#estimating-the-regression-coefficients"><i class="fa fa-check"></i><b>2.2</b> Estimating the Regression Coefficients</a></li>
+<li class="chapter" data-level="2.3" data-path="multiple-linear-regression.html"><a href="multiple-linear-regression.html#some-important-questions"><i class="fa fa-check"></i><b>2.3</b> Some important questions</a><ul>
+<li class="chapter" data-level="2.3.1" data-path="multiple-linear-regression.html"><a href="multiple-linear-regression.html#other-consid"><i class="fa fa-check"></i><b>2.3.1</b> Other Considerations in Regression Model</a></li>
+</ul></li>
+<li class="chapter" data-level="2.4" data-path="multiple-linear-regression.html"><a href="multiple-linear-regression.html#how-to-select-the-best-performing-model"><i class="fa fa-check"></i><b>2.4</b> How to select the best performing model</a><ul>
+<li><a href="multiple-linear-regression.html#use-the-adjusted-r_adj2-for-univariate-models">Use the Adjusted <span class="math inline">\(R_{adj}^2\)</span> for univariate models</a></li>
+<li class="chapter" data-level="" data-path="multiple-linear-regression.html"><a href="multiple-linear-regression.html#have-a-look-at-the-residuals-or-error-terms"><i class="fa fa-check"></i>Have a look at the residuals or error terms</a></li>
+<li class="chapter" data-level="" data-path="multiple-linear-regression.html"><a href="multiple-linear-regression.html#histogram-of-residuals"><i class="fa fa-check"></i>Histogram of residuals</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="pw-2.html"><a href="pw-2.html"><i class="fa fa-check"></i>PW 2</a><ul>
+<li class="chapter" data-level="" data-path="pw-2.html"><a href="pw-2.html#multiple-linear-regression-1"><i class="fa fa-check"></i>Multiple Linear Regression</a></li>
+<li class="chapter" data-level="" data-path="pw-2.html"><a href="pw-2.html#reporting"><i class="fa fa-check"></i>Reporting</a></li>
+</ul></li>
+<li class="part"><span><b>Classification</b></span></li>
+<li class="chapter" data-level="3" data-path="logistic-regression.html"><a href="logistic-regression.html"><i class="fa fa-check"></i><b>3</b> Logistic Regression</a><ul>
+<li class="chapter" data-level="3.1" data-path="logistic-regression.html"><a href="logistic-regression.html#introduction-1"><i class="fa fa-check"></i><b>3.1</b> Introduction</a></li>
+<li class="chapter" data-level="3.2" data-path="logistic-regression.html"><a href="logistic-regression.html#logistic-regression-1"><i class="fa fa-check"></i><b>3.2</b> Logistic Regression</a><ul>
+<li class="chapter" data-level="3.2.1" data-path="logistic-regression.html"><a href="logistic-regression.html#the-logistic-model"><i class="fa fa-check"></i><b>3.2.1</b> The Logistic Model</a></li>
+<li class="chapter" data-level="3.2.2" data-path="logistic-regression.html"><a href="logistic-regression.html#estimating-the-regression-coefficients-1"><i class="fa fa-check"></i><b>3.2.2</b> Estimating the Regression Coefficients</a></li>
+<li class="chapter" data-level="3.2.3" data-path="logistic-regression.html"><a href="logistic-regression.html#prediction-1"><i class="fa fa-check"></i><b>3.2.3</b> Prediction</a></li>
+</ul></li>
+<li class="chapter" data-level="3.3" data-path="logistic-regression.html"><a href="logistic-regression.html#multiple-logistic-regression"><i class="fa fa-check"></i><b>3.3</b> Multiple Logistic Regression</a></li>
+<li class="chapter" data-level="3.4" data-path="logistic-regression.html"><a href="logistic-regression.html#logreg-examps"><i class="fa fa-check"></i><b>3.4</b> Example</a><ul>
+<li class="chapter" data-level="3.4.1" data-path="logistic-regression.html"><a href="logistic-regression.html#logreg-examps-challenger"><i class="fa fa-check"></i><b>3.4.1</b> Case study: <em>The Challenger disaster</em></a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="pw-3.html"><a href="pw-3.html"><i class="fa fa-check"></i>PW 3</a><ul>
+<li class="chapter" data-level="" data-path="pw-3.html"><a href="pw-3.html#social-networks-ads"><i class="fa fa-check"></i>Social Networks Ads</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="discriminant-analysis.html"><a href="discriminant-analysis.html"><i class="fa fa-check"></i><b>4</b> Discriminant Analysis</a><ul>
+<li class="chapter" data-level="4.1" data-path="discriminant-analysis.html"><a href="discriminant-analysis.html#introduction-2"><i class="fa fa-check"></i><b>4.1</b> Introduction</a></li>
+<li class="chapter" data-level="4.2" data-path="discriminant-analysis.html"><a href="discriminant-analysis.html#bayes-theorem"><i class="fa fa-check"></i><b>4.2</b> Bayes’ Theorem</a></li>
+<li class="chapter" data-level="4.3" data-path="discriminant-analysis.html"><a href="discriminant-analysis.html#lda-for-p1"><i class="fa fa-check"></i><b>4.3</b> LDA for <span class="math inline">\(p=1\)</span></a></li>
+<li class="chapter" data-level="4.4" data-path="discriminant-analysis.html"><a href="discriminant-analysis.html#estimating-the-parameters"><i class="fa fa-check"></i><b>4.4</b> Estimating the parameters</a></li>
+<li class="chapter" data-level="4.5" data-path="discriminant-analysis.html"><a href="discriminant-analysis.html#lda-for-p-1"><i class="fa fa-check"></i><b>4.5</b> LDA for <span class="math inline">\(p &gt; 1\)</span></a></li>
+<li class="chapter" data-level="4.6" data-path="discriminant-analysis.html"><a href="discriminant-analysis.html#making-predictions"><i class="fa fa-check"></i><b>4.6</b> Making predictions</a></li>
+<li class="chapter" data-level="4.7" data-path="discriminant-analysis.html"><a href="discriminant-analysis.html#other-forms-of-discriminant-analysis"><i class="fa fa-check"></i><b>4.7</b> Other forms of Discriminant Analysis</a><ul>
+<li class="chapter" data-level="4.7.1" data-path="discriminant-analysis.html"><a href="discriminant-analysis.html#quadratic-discriminant-analysis-qda"><i class="fa fa-check"></i><b>4.7.1</b> Quadratic Discriminant Analysis (QDA)</a></li>
+<li class="chapter" data-level="4.7.2" data-path="discriminant-analysis.html"><a href="discriminant-analysis.html#naive-bayes"><i class="fa fa-check"></i><b>4.7.2</b> Naive Bayes</a></li>
+</ul></li>
+<li class="chapter" data-level="4.8" data-path="discriminant-analysis.html"><a href="discriminant-analysis.html#lda-vs-logistic-regression"><i class="fa fa-check"></i><b>4.8</b> LDA vs Logistic Regression</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="pw-4.html"><a href="pw-4.html"><i class="fa fa-check"></i>PW 4</a><ul>
+<li class="chapter" data-level="" data-path="pw-4.html"><a href="pw-4.html#logistic-regression-2"><i class="fa fa-check"></i>Logistic Regression</a></li>
+<li class="chapter" data-level="" data-path="pw-4.html"><a href="pw-4.html#decision-boundary-of-logistic-regression"><i class="fa fa-check"></i>Decision Boundary of Logistic Regression</a></li>
+<li class="chapter" data-level="" data-path="pw-4.html"><a href="pw-4.html#linear-discriminant-analysis-lda"><i class="fa fa-check"></i>Linear Discriminant Analysis (LDA)</a></li>
+<li class="chapter" data-level="" data-path="pw-4.html"><a href="pw-4.html#lda-from-scratch"><i class="fa fa-check"></i>LDA from scratch</a></li>
+<li class="chapter" data-level="" data-path="pw-4.html"><a href="pw-4.html#quadratic-discriminant-analysis-qda-1"><i class="fa fa-check"></i>Quadratic Discriminant Analysis (QDA)</a></li>
+<li class="chapter" data-level="" data-path="pw-4.html"><a href="pw-4.html#comparison"><i class="fa fa-check"></i>Comparison</a></li>
+</ul></li>
+<li class="part"><span><b>Special Session</b></span></li>
+<li class="chapter" data-level="5" data-path="session-5.html"><a href="session-5.html"><i class="fa fa-check"></i><b>5</b> Session 5</a></li>
+<li class="part"><span><b>II Dimensionality Reduction</b></span></li>
+<li class="chapter" data-level="6" data-path="principal-components-analysis.html"><a href="principal-components-analysis.html"><i class="fa fa-check"></i><b>6</b> Principal Components Analysis</a><ul>
+<li class="chapter" data-level="6.1" data-path="principal-components-analysis.html"><a href="principal-components-analysis.html#introduction-3"><i class="fa fa-check"></i><b>6.1</b> Introduction</a></li>
+<li class="chapter" data-level="6.2" data-path="principal-components-analysis.html"><a href="principal-components-analysis.html#principal-components"><i class="fa fa-check"></i><b>6.2</b> Principal Components</a><ul>
+<li class="chapter" data-level="" data-path="principal-components-analysis.html"><a href="principal-components-analysis.html#notations-and-procedure"><i class="fa fa-check"></i>Notations and Procedure</a></li>
+<li><a href="principal-components-analysis.html#first-principal-component-textpc_1-y_1">First Principal Component (<span class="math inline">\(\text{PC}_1\)</span>): <span class="math inline">\(Y_1\)</span></a></li>
+<li><a href="principal-components-analysis.html#second-principal-component-textpc_2-y_2">Second Principal Component (<span class="math inline">\(\text{PC}_2\)</span>): <span class="math inline">\(Y_2\)</span></a></li>
+<li><a href="principal-components-analysis.html#ith-principal-component-textpc_i-y_i"><span class="math inline">\(i^{th}\)</span> Principal Component (<span class="math inline">\(\text{PC}_i\)</span>): <span class="math inline">\(Y_i\)</span></a></li>
+</ul></li>
+<li class="chapter" data-level="6.3" data-path="principal-components-analysis.html"><a href="principal-components-analysis.html#how-do-we-find-the-coefficients"><i class="fa fa-check"></i><b>6.3</b> How do we find the coefficients?</a><ul>
+<li class="chapter" data-level="" data-path="principal-components-analysis.html"><a href="principal-components-analysis.html#why-it-may-be-possible-to-reduce-dimensions"><i class="fa fa-check"></i>Why It May Be Possible to Reduce Dimensions</a></li>
+<li class="chapter" data-level="" data-path="principal-components-analysis.html"><a href="principal-components-analysis.html#procedure"><i class="fa fa-check"></i>Procedure</a></li>
+</ul></li>
+<li class="chapter" data-level="6.4" data-path="principal-components-analysis.html"><a href="principal-components-analysis.html#standardization-of-the-features"><i class="fa fa-check"></i><b>6.4</b> Standardization of the features</a></li>
+<li class="chapter" data-level="6.5" data-path="principal-components-analysis.html"><a href="principal-components-analysis.html#projection-of-the-data"><i class="fa fa-check"></i><b>6.5</b> Projection of the data</a><ul>
+<li class="chapter" data-level="" data-path="principal-components-analysis.html"><a href="principal-components-analysis.html#scores"><i class="fa fa-check"></i>Scores</a></li>
+<li class="chapter" data-level="" data-path="principal-components-analysis.html"><a href="principal-components-analysis.html#visualization"><i class="fa fa-check"></i>Visualization</a></li>
+<li class="chapter" data-level="" data-path="principal-components-analysis.html"><a href="principal-components-analysis.html#extra"><i class="fa fa-check"></i>Extra</a></li>
+</ul></li>
+<li class="chapter" data-level="6.6" data-path="principal-components-analysis.html"><a href="principal-components-analysis.html#case-study"><i class="fa fa-check"></i><b>6.6</b> Case study</a><ul>
+<li class="chapter" data-level="" data-path="principal-components-analysis.html"><a href="principal-components-analysis.html#employement-in-european-countries-in-the-late-70s"><i class="fa fa-check"></i>Employement in European countries in the late 70s</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="pw-6.html"><a href="pw-6.html"><i class="fa fa-check"></i>PW 6</a><ul>
+<li class="chapter" data-level="" data-path="pw-6.html"><a href="pw-6.html#the-iris-dataset"><i class="fa fa-check"></i>The Iris Dataset</a></li>
+<li class="chapter" data-level="" data-path="pw-6.html"><a href="pw-6.html#loading-data-1"><i class="fa fa-check"></i>Loading Data</a></li>
+<li class="chapter" data-level="" data-path="pw-6.html"><a href="pw-6.html#exploratory-analysis"><i class="fa fa-check"></i>Exploratory analysis</a></li>
+<li><a href="pw-6.html#pca-using-princomp">PCA using <code>princomp()</code></a></li>
+<li><a href="pw-6.html#deeper-pca-using-factoextra-package">Deeper PCA using <code>factoextra</code> package</a></li>
+<li class="chapter" data-level="" data-path="pw-6.html"><a href="pw-6.html#step-by-step-pca"><i class="fa fa-check"></i>Step-by-step PCA</a></li>
+</ul></li>
+<li class="part"><span><b>III Unsupervised Learning</b></span></li>
+<li class="chapter" data-level="7" data-path="clustering.html"><a href="clustering.html"><i class="fa fa-check"></i><b>7</b> Clustering</a><ul>
+<li class="chapter" data-level="7.1" data-path="clustering.html"><a href="clustering.html#unsupervised-learning-1"><i class="fa fa-check"></i><b>7.1</b> Unsupervised Learning</a></li>
+<li class="chapter" data-level="7.2" data-path="clustering.html"><a href="clustering.html#clustering-1"><i class="fa fa-check"></i><b>7.2</b> Clustering</a></li>
+<li class="chapter" data-level="7.3" data-path="clustering.html"><a href="clustering.html#introduction-4"><i class="fa fa-check"></i><b>7.3</b> Introduction</a><ul>
+<li class="chapter" data-level="" data-path="clustering.html"><a href="clustering.html#hard-clustering"><i class="fa fa-check"></i>Hard clustering</a></li>
+<li class="chapter" data-level="" data-path="clustering.html"><a href="clustering.html#fuzzy-clustering"><i class="fa fa-check"></i>Fuzzy clustering</a></li>
+</ul></li>
+<li class="chapter" data-level="7.4" data-path="clustering.html"><a href="clustering.html#k-means"><i class="fa fa-check"></i><b>7.4</b> <span class="math inline">\(k\)</span>-Means</a></li>
+<li class="chapter" data-level="7.5" data-path="clustering.html"><a href="clustering.html#k-means-in"><i class="fa fa-check"></i><b>7.5</b> <span class="math inline">\(k\)</span>-means in <svg style="height:0.8em;top:.04em;position:relative;fill:steelblue;" viewBox="0 0 581 512"><path d="M581 226.6C581 119.1 450.9 32 290.5 32S0 119.1 0 226.6C0 322.4 103.3 402 239.4 418.1V480h99.1v-61.5c24.3-2.7 47.6-7.4 69.4-13.9L448 480h112l-67.4-113.7c54.5-35.4 88.4-84.9 88.4-139.7zm-466.8 14.5c0-73.5 98.9-133 220.8-133s211.9 40.7 211.9 133c0 50.1-26.5 85-70.3 106.4-2.4-1.6-4.7-2.9-6.4-3.7-10.2-5.2-27.8-10.5-27.8-10.5s86.6-6.4 86.6-92.7-90.6-87.9-90.6-87.9h-199V361c-74.1-21.5-125.2-67.1-125.2-119.9zm225.1 38.3v-55.6c57.8 0 87.8-6.8 87.8 27.3 0 36.5-38.2 28.3-87.8 28.3zm-.9 72.5H365c10.8 0 18.9 11.7 24 19.2-16.1 1.9-33 2.8-50.6 2.9v-22.1z"/></svg></a><ul>
+<li class="chapter" data-level="7.5.1" data-path="clustering.html"><a href="clustering.html#cluster-validity-choosing-the-number-of-clusters"><i class="fa fa-check"></i><b>7.5.1</b> Cluster Validity, Choosing the Number of Clusters</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="pw-7.html"><a href="pw-7.html"><i class="fa fa-check"></i>PW 7</a><ul>
+<li class="chapter" data-level="" data-path="pw-7.html"><a href="pw-7.html#reporting-1"><i class="fa fa-check"></i>Reporting</a><ul>
+<li class="chapter" data-level="" data-path="pw-7.html"><a href="pw-7.html#markdown"><i class="fa fa-check"></i>Markdown</a></li>
+<li class="chapter" data-level="" data-path="pw-7.html"><a href="pw-7.html#r-markdown"><i class="fa fa-check"></i>R Markdown</a></li>
+<li class="chapter" data-level="" data-path="pw-7.html"><a href="pw-7.html#the-report-to-be-submitted"><i class="fa fa-check"></i>The report to be submitted</a></li>
+</ul></li>
+<li><a href="pw-7.html#k-means-clustering"><span class="math inline">\(k\)</span>-means clustering</a><ul>
+<li><a href="pw-7.html#pointscards"><code>pointsCards</code></a></li>
+<li><a href="pw-7.html#ligue-1"><code>Ligue 1</code></a></li>
+<li><a href="pw-7.html#pca"><code>PCA</code></a></li>
+<li><a href="pw-7.html#implementing-k-means"><code>Implementing k-means</code></a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="8" data-path="gaussian-mixture-models-em.html"><a href="gaussian-mixture-models-em.html"><i class="fa fa-check"></i><b>8</b> Gaussian Mixture Models &amp; EM</a><ul>
+<li class="chapter" data-level="8.1" data-path="gaussian-mixture-models-em.html"><a href="gaussian-mixture-models-em.html#the-gaussian-distribution"><i class="fa fa-check"></i><b>8.1</b> The Gaussian distribution</a></li>
+<li class="chapter" data-level="8.2" data-path="gaussian-mixture-models-em.html"><a href="gaussian-mixture-models-em.html#mixture-of-gaussians"><i class="fa fa-check"></i><b>8.2</b> Mixture of Gaussians</a></li>
+<li class="chapter" data-level="8.3" data-path="gaussian-mixture-models-em.html"><a href="gaussian-mixture-models-em.html#em-for-gaussian-mixtures"><i class="fa fa-check"></i><b>8.3</b> EM for Gaussian Mixtures</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="pw-8.html"><a href="pw-8.html"><i class="fa fa-check"></i>PW 8</a><ul>
+<li class="chapter" data-level="" data-path="pw-8.html"><a href="pw-8.html#report-template"><i class="fa fa-check"></i>Report template</a></li>
+<li class="chapter" data-level="8.4" data-path="pw-8.html"><a href="pw-8.html#em-using-mclust"><i class="fa fa-check"></i><b>8.4</b> EM using <code>mclust</code></a><ul>
+<li><a href="pw-8.html#gmm-vs-k-means">GMM vs <span class="math inline">\(k\)</span>-means</a></li>
+<li class="chapter" data-level="" data-path="pw-8.html"><a href="pw-8.html#em-on-1d"><i class="fa fa-check"></i>EM on 1D</a></li>
+</ul></li>
+<li class="chapter" data-level="8.5" data-path="pw-8.html"><a href="pw-8.html#em-from-scratch"><i class="fa fa-check"></i><b>8.5</b> EM from scratch</a></li>
+</ul></li>
+<li class="chapter" data-level="9" data-path="hierarchical-clustering.html"><a href="hierarchical-clustering.html"><i class="fa fa-check"></i><b>9</b> Hierarchical Clustering</a><ul>
+<li class="chapter" data-level="9.1" data-path="hierarchical-clustering.html"><a href="hierarchical-clustering.html#dendrogram"><i class="fa fa-check"></i><b>9.1</b> Dendrogram</a></li>
+<li class="chapter" data-level="9.2" data-path="hierarchical-clustering.html"><a href="hierarchical-clustering.html#the-hierarchical-clustering-algorithm"><i class="fa fa-check"></i><b>9.2</b> The Hierarchical Clustering Algorithm</a></li>
+<li class="chapter" data-level="9.3" data-path="hierarchical-clustering.html"><a href="hierarchical-clustering.html#hierarchical-clustering-in-r"><i class="fa fa-check"></i><b>9.3</b> Hierarchical clustering in <code>R</code></a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="pw-9.html"><a href="pw-9.html"><i class="fa fa-check"></i>PW 9</a><ul>
+<li><a href="pw-9.html#distances-dist">Distances <code>dist()</code></a></li>
+<li><a href="pw-9.html#dendrogram-hclust">Dendrogram <code>hclust()</code></a></li>
+<li class="chapter" data-level="" data-path="pw-9.html"><a href="pw-9.html#hierarchical-clustering-on-iris-dataset"><i class="fa fa-check"></i>Hierarchical clustering on Iris dataset</a></li>
+</ul></li>
+<li class="appendix"><span><b>Appendix</b></span></li>
+<li class="chapter" data-level="A" data-path="app-introRStudio.html"><a href="app-introRStudio.html"><i class="fa fa-check"></i><b>A</b> Introduction to <code>RStudio</code></a></li>
+<li class="chapter" data-level="B" data-path="app-ht.html"><a href="app-ht.html"><i class="fa fa-check"></i><b>B</b> Review on hypothesis testing</a></li>
+<li class="chapter" data-level="C" data-path="use-qual.html"><a href="use-qual.html"><i class="fa fa-check"></i><b>C</b> Use of qualitative predictors</a></li>
+<li class="chapter" data-level="D" data-path="model-selection.html"><a href="model-selection.html"><i class="fa fa-check"></i><b>D</b> Model Selection</a><ul>
+<li class="chapter" data-level="" data-path="model-selection.html"><a href="model-selection.html#linear-model-selection-and-best-subset-selection"><i class="fa fa-check"></i>Linear Model Selection and Best Subset Selection</a></li>
+<li class="chapter" data-level="" data-path="model-selection.html"><a href="model-selection.html#forward-stepwise-selection"><i class="fa fa-check"></i>Forward Stepwise Selection</a></li>
+<li class="chapter" data-level="" data-path="model-selection.html"><a href="model-selection.html#backward-stepwise-selection"><i class="fa fa-check"></i>Backward Stepwise Selection</a></li>
+<li class="chapter" data-level="" data-path="model-selection.html"><a href="model-selection.html#estimating-test-error-using-mallows-cp-aic-bic-adjusted-r-squared"><i class="fa fa-check"></i>Estimating Test Error Using Mallow’s Cp, AIC, BIC, Adjusted R-squared</a></li>
+<li class="chapter" data-level="" data-path="model-selection.html"><a href="model-selection.html#estimating-test-error-using-cross-validation"><i class="fa fa-check"></i>Estimating Test Error Using Cross-Validation</a></li>
+<li class="chapter" data-level="" data-path="model-selection.html"><a href="model-selection.html#examples"><i class="fa fa-check"></i>Examples</a><ul>
+<li class="chapter" data-level="" data-path="model-selection.html"><a href="model-selection.html#best-subset-selection"><i class="fa fa-check"></i>Best Subset Selection</a></li>
+<li class="chapter" data-level="" data-path="model-selection.html"><a href="model-selection.html#forward-stepwise-selection-and-model-selection-using-validation-set"><i class="fa fa-check"></i>Forward Stepwise Selection and Model Selection Using Validation Set</a></li>
+<li class="chapter" data-level="" data-path="model-selection.html"><a href="model-selection.html#model-selection-using-cross-validation"><i class="fa fa-check"></i>Model Selection Using Cross-Validation</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="E" data-path="final-grades.html"><a href="final-grades.html"><i class="fa fa-check"></i><b>E</b> Final Grades</a></li>
+<li class="chapter" data-level="F" data-path="references-and-credits.html"><a href="references-and-credits.html"><i class="fa fa-check"></i><b>F</b> References and Credits</a></li>
+<li class="chapter" data-level="G" data-path="other-references.html"><a href="other-references.html"><i class="fa fa-check"></i><b>G</b> Other References</a></li>
+<li class="chapter" data-level="" data-path="main-references-credits.html"><a href="main-references-credits.html"><i class="fa fa-check"></i>Main References &amp; Credits</a></li>
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Machine Learning</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="pw-8" class="section level1 unnumbered">
+<h1>PW 8</h1>
+<!-- https://www.python-course.eu/expectation_maximization_and_gaussian_mixture_models.php -->
+<!-- mclust -->
+<!-- https://chamroukhi.users.lmno.cnrs.fr/teaching.php -->
+<!-- https://chamroukhi.users.lmno.cnrs.fr/Teaching/ApprentissageM2/tp-EM-GMM.pdf -->
+<!-- From my Firefox session: -->
+<!-- In Depth: Gaussian Mixture Models | Python Data Science Handbook -->
+<!-- https://jakevdp.github.io/PythonDataScienceHandbook/05.12-gaussian-mixtures.html -->
+<!-- A quick tour of mclust -->
+<!-- https://cran.r-project.org/web/packages/mclust/vignettes/mclust.html -->
+<!-- mclust: an R package for normal mixture modeling -->
+<!-- https://www.stat.washington.edu/mclust/ -->
+<!-- mclust Version 4 for R: Normal Mixture Modeling for Model-Based Clustering, Classification, and Density Estimation - tr597.pdf -->
+<!-- https://www.stat.washington.edu/sites/default/files/files/reports/2012/tr597.pdf -->
+<!-- tp-EM-GMM.pdf -->
+<!-- https://chamroukhi.users.lmno.cnrs.fr/Teaching/ApprentissageM2/tp-EM-GMM.pdf -->
+<!-- Machine Learning with Python: Expectation Maximization and Gaussian Mixture Models in Python -->
+<!-- https://www.python-course.eu/expectation_maximization_and_gaussian_mixture_models.php -->
+<!-- Fitting a Mixture Model Using the Expectation-Maximization Algorithm in R -->
+<!-- http://tinyheero.github.io/2016/01/03/gmm-em.html -->
+<!-- Using Mixture Models for Clustering -->
+<!-- http://tinyheero.github.io/2015/10/13/mixture-model.html -->
+<!-- Practical session on Clustering methods -->
+<!-- http://perso.mines-paristech.fr/fabien.moutarde/ES_MachineLearning/Practical_clustering/Practical_clustering.htm -->
+<!-- Mines ParisTech machine learning practical session: Model selection and clustering, 13 May 2011. -->
+<!-- http://members.cbio.mines-paristech.fr/~thocking/mines-course/2011-05-13-clustering/2011-05-13-clustering.html -->
+<p>In the first part of this PW you will:</p>
+<ul>
+<li>Learn how to fit a Gaussian Mixture Model (GMM) using the <code>mclust</code> <i class="fab  fa-r-project " style="color:steelblue;"></i> package.</li>
+<li>Compare <span class="math inline">\(k\)</span>-means and GMM on artificial data (2-D data).</li>
+<li>Fit a GMM on univariate (1-D) simulated data.</li>
+</ul>
+<p>In the second part of this PW you will build an algorithm from <strong>scratch</strong>. Your algorithm must fit a GMM model using the <strong>E</strong>xpectation-<strong>M</strong>aximization (EM) technique on any multi dimensional dataset.</p>
+<div id="report-template" class="section level2 unnumbered">
+<h2>Report template</h2>
+<p>For this session, write your report in a RMarkdown script, in which you must use the following YAML header settings (replace the default YAML header by this one, edit the author’s name and show the date):</p>
+<pre><code>---
+title: &quot;Week 8&quot;
+subtitle: &quot;Gaussian Mixture Models &amp; EM&quot;
+author: LastName FirstName
+date: &quot;`#r format(Sys.time())`&quot; # remove the # to show the date
+output:
+  html_document:
+    toc: true
+    toc_depth: 2
+    toc_float: true
+    theme: cerulean
+    highlight: espresso
+---</code></pre>
+</div>
+<div id="em-using-mclust" class="section level2">
+<h2><span class="header-section-number">8.4</span> EM using <code>mclust</code></h2>
+<div id="gmm-vs-k-means" class="section level3 unnumbered">
+<h3>GMM vs <span class="math inline">\(k\)</span>-means</h3>
+<p>In this section, we will use two artificial (simulated) datasets in which we know the ground truth (true labels) in order to compare the performances of <span class="math inline">\(k\)</span>-means and GMM. To fit a GMM using EM technique you need to install and use the package <code>mclust</code>.</p>
+<p><strong>1.</strong> Download and import  <a target="_blank" href="datasets/data1.csv"> Data1 <i class="fa fa-table" aria-hidden="true"></i></a> and  <a target="_blank" href="datasets/data2.csv"> Data2 <i class="fa fa-table" aria-hidden="true"></i></a>. Plot both of the datasets on the same window. Color the observations with respect to the ground truth, like in Figure <a href="pw-8.html#fig:fig1">8.6</a>.</p>
+<div class="figure" style="text-align: center"><span id="fig:fig1"></span>
+<img src="Machine-Learning_files/figure-html/fig1-1.png" alt="Data1 is plotted on left. Data2 on right. Colors shown with respect to ground truth." width="70%" />
+<p class="caption">
+Figure 8.6: Data1 is plotted on left. Data2 on right. Colors shown with respect to ground truth.
+</p>
+</div>
+<p><strong>2.</strong> Apply <span class="math inline">\(k\)</span>-means on both datasets with 4 clusters. Plot both of the dataset on the same window and color the observations with respect to <span class="math inline">\(k\)</span>-means results. Interpret the results.</p>
+<div class="rmdinsight">
+<p>
+One way to think about the <span class="math inline"><span class="math inline">\(k\)</span></span>-means model is that it places a circle (or, in higher dimensions, a hyper-sphere) at the center of each cluster, with a radius defined by the most distant point in the cluster. This radius acts as a hard cutoff for cluster assignment within the training set: any point outside this circle is not considered a member of the cluster. You can try to visualize the circles on your plots.
+</p>
+</div>
+<p><strong>3.</strong> Now fit a GMM model on the datasets. To do so, load the <code>mclust</code> library. Then you can use the function <code>Mclust()</code> on your data (this function will choose automatically the number of mixtures, basing on BIC criterion). Use the clustering results from your GMM model to visualize the results on both of the datasets, color the observations with respect to the clusters obtained from the GMM model. Interpret the results.</p>
+<p><strong>In the following questions from this section, explore the <code>mclust</code> library and what it offers. Apply its functions on Data2.</strong></p>
+<div class="rmdinsight">
+<p><code>mclust</code> is a contributed <i class="fab  fa-r-project " style="color:steelblue;"></i> package for model-based clustering, classification, and density estimation based on finite normal mixture modelling. It provides functions for parameter estimation via the EM algorithm for normal mixture models with a variety of covariance structures, and functions for simulation from these models. Also included are functions that combine model-based hierarchical clustering, EM for mixture estimation and the Bayesian Information Criterion (BIC) in comprehensive strategies for clustering, density estimation and discriminant analysis. Additional functionalities are available for displaying and visualizing fitted models along with clustering, classification, and density estimation results.</p>
+</div>
+<p><strong>4.</strong> Show the summary of the GMM model you fitted on Data2. Explain what it shows.</p>
+<p><strong>5.</strong> <code>mclust</code> package offers some visualization. To plot your two-dimensional data, use the standard plot function applied on your model. Apply the following code, given that the model is named <code>gmm_model</code>, and interpret what it shows.</p>
+<div class="sourceCode" id="cb68"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb68-1" title="1"><span class="kw">plot</span>(gmm_model, <span class="dt">what =</span> <span class="st">&quot;classification&quot;</span>)</a>
+<a class="sourceLine" id="cb68-2" title="2"><span class="kw">plot</span>(gmm_model, <span class="dt">what =</span> <span class="st">&quot;uncertainty&quot;</span>)</a></code></pre></div>
+<p><strong>6.</strong> <code>mclust</code> package uses the Bayesian Information Criterion (BIC) to choose the best number of mixtures. To see the values of BIC for different number of mixtures use the following code.</p>
+<div class="sourceCode" id="cb69"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb69-1" title="1"><span class="kw">plot</span>(gmm_model, <span class="dt">what =</span> <span class="st">&quot;BIC&quot;</span>)</a></code></pre></div>
+<p>Information criteria are based on penalised forms of the log-likelihood. As the likelihood increases with the addition of more components, a penalty term for the number of estimated parameters is subtracted from the log-likelihood. The BIC is a popular choice in the context of GMMs, and takes the form</p>
+<p><span class="math display">\[ \text{BIC} \approx 2 \ell (X|\hat{\theta}) - \nu \log (n)\]</span></p>
+<p>where <span class="math inline">\(\theta\)</span> is the set of parameters (in GMM it is <span class="math inline">\(\theta=\{\mu,\Sigma,\pi\})\)</span>, and <span class="math inline">\(\ell (X|\hat{\theta})\)</span> is the log-likelihood at the Maximum Likelihood Estimators <span class="math inline">\(\hat{\theta}\)</span> for the model, <span class="math inline">\(n\)</span> is the sample size, and <span class="math inline">\(\nu\)</span> is the number of estimated parameters. We select the model that maximises BIC.</p>
+<div class="rmdinsight">
+<p>
+What you see on the figure showing the BIC values are different parameterisations of the within-group covariance matrix <span class="math inline"><span class="math inline">\(\Sigma_k\)</span></span>. In GMM, clusters are ellipsoidal, centered at the mean vector <span class="math inline"><span class="math inline">\(\mu_k\)</span></span>, and with other geometric features, such as volume, shape and orientation, determined by the covariance matrix <span class="math inline"><span class="math inline">\(\Sigma_k\)</span></span>.
+</p>
+<p>
+<img src="img/gmm_mclust_sigma.png" />
+</p>
+</div>
+<p><strong>7.</strong> Though GMM is often categorized as a clustering algorithm, fundamentally it is an algorithm for density estimation. That is to say, the result of a GMM fit to some data is technically not a clustering model, but a generative probabilistic model describing the distribution of the data. Density estimation plays an important role in applied statistical data analysis and theoretical research. A density estimate based on GMM can be obtained using the function <code>densityMclust()</code>. Apply it on Data2 and visualize the estimated densities (show an “image” and a “perspective” plot of the bivariate density estimate).</p>
+</div>
+<div id="em-on-1d" class="section level3 unnumbered">
+<h3>EM on 1D</h3>
+<p>In this part you must fit a GMM model on a one dimensional simulated data.</p>
+<p><strong>8.</strong> Create a data table of 300 observations in which you have two columns:</p>
+<ul>
+<li>The first column contains generated data. Those data are generated from three Gaussian distributions with different parameters.</li>
+<li>The second column corresponds to the groud truth (every observation was generated from which Gaussian).</li>
+<li>Hint: functions you may need are <code>rnorm()</code>, <code>rep()</code>, <code>rbind()</code> or <code>cbind()</code>.</li>
+<li>You must of course <strong>set a seed</strong> (your sutdent_pk).
+An example of 9 generated values from three Gaussians is shown in the following table:</li>
+</ul>
+<center>
+<table style="width:28%;">
+<colgroup>
+<col width="13%" />
+<col width="13%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th align="center">X</th>
+<th align="center">source</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="center">-5.626</td>
+<td align="center">1</td>
+</tr>
+<tr class="even">
+<td align="center">-4.816</td>
+<td align="center">1</td>
+</tr>
+<tr class="odd">
+<td align="center">-5.836</td>
+<td align="center">1</td>
+</tr>
+<tr class="even">
+<td align="center">1.595</td>
+<td align="center">2</td>
+</tr>
+<tr class="odd">
+<td align="center">0.3295</td>
+<td align="center">2</td>
+</tr>
+<tr class="even">
+<td align="center">-0.8205</td>
+<td align="center">2</td>
+</tr>
+<tr class="odd">
+<td align="center">5.487</td>
+<td align="center">3</td>
+</tr>
+<tr class="even">
+<td align="center">5.738</td>
+<td align="center">3</td>
+</tr>
+<tr class="odd">
+<td align="center">5.576</td>
+<td align="center">3</td>
+</tr>
+</tbody>
+</table>
+</center>
+<p><strong>9.</strong> Show you generated data on one axe (this kind of figures are called stripchart), color them with respect to ground truth, you must obtain something like:</p>
+<p><img src="Machine-Learning_files/figure-html/unnamed-chunk-199-1.png" width="70%" style="display: block; margin: auto;" /></p>
+<p><strong>10.</strong> Plot the histogram corresponding to your generated data. Interpret it.</p>
+<p><strong>11.</strong> Fit a GMM model on your generated data. Print the summary and visualize your results. Explain your results.</p>
+<p><strong>12.</strong> Apply a density estimate on your generated data and visualize it. Interpret the obtained figure.</p>
+</div>
+</div>
+<div id="em-from-scratch" class="section level2">
+<h2><span class="header-section-number">8.5</span> EM from scratch</h2>
+<p>In this second part of this PW you will build a GMM model from scratch, you must develop the EM technique to fit the model.</p>
+<p><strong>2.1</strong> Generate a two-dimensional dataset from a <span class="math inline">\(k\)</span>-component Gaussian mixture density with different means and different covariance matrices. It is up to you to choose the mixing proportions <span class="math inline">\(\{\pi_1,\ldots,\pi_k\}\)</span>.</p>
+<p><strong>2.2</strong> Implement the EM algorithm to fit a GMM on your generated data:</p>
+<ul>
+<li>Initialize the mixing proportions and the covariance matrices (e.g., you can initialize with equal mixing proportions and Identity covariance matrices).</li>
+<li>Initialize the means “randomly” (by your own choice of <span class="math inline">\(k\)</span>).</li>
+<li>In the EM training loop, store the value of the observed-data log-likelihood at each iteration.</li>
+<li>At convergence, plot the log-likelihood curve.</li>
+</ul>
+<p><strong>2.3</strong> Create a function that selects the number of mixture components by computing the values of BIC criterion for <span class="math inline">\(k\)</span> varying from 1 to 10.</p>
+<p><strong>2.4</strong> On your generated data, compare your results obtained with the algorithm you developed and the ground truth (in terms of the chosen number of mixture components; and in terms of error rate).</p>
+<p><strong>2.5</strong> Apply the algorithm you developed on  <a target="_blank" href="datasets/iris.data"> Iris <i class="fa fa-table" aria-hidden="true"></i></a> dataset.</p>
+<div class="rmdinsight">
+<p>
+To visualize your results on Iris dataset, you can use PCA projection and coloring with respect to clustering results.
+</p>
+<p>
+The package <code>mclust</code> provides also a dimensionality reduction technique in function <code>MclustDR()</code>.
+</p>
+</div>
+<p align="right">
+◼
+</p>
+
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="gaussian-mixture-models-em.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="hierarchical-clustering.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="book_assets/gitbook-2.6.7/js/app.min.js"></script>
+<script src="book_assets/gitbook-2.6.7/js/lunr.js"></script>
+<script src="book_assets/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="book_assets/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="book_assets/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="book_assets/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="book_assets/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="book_assets/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="book_assets/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": false,
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"history": {
+"link": null,
+"text": null
+},
+"download": null,
+"toc": {
+"collapse": "section",
+"scroll_highlight": true
+},
+"toolbar": {
+"position": "fixed"
+},
+"search": true
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>

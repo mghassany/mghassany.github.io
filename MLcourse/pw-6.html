@@ -4,21 +4,21 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>PW 5 | Machine Learning</title>
-  <meta name="description" content="PW 5 | Machine Learning course" />
+  <title>PW 6 | Machine Learning</title>
+  <meta name="description" content="PW 6 | Machine Learning course" />
   <meta name="generator" content="bookdown 0.20 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="PW 5 | Machine Learning" />
+  <meta property="og:title" content="PW 6 | Machine Learning" />
   <meta property="og:type" content="book" />
   
   
-  <meta property="og:description" content="PW 5 | Machine Learning course" />
+  <meta property="og:description" content="PW 6 | Machine Learning course" />
   
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="PW 5 | Machine Learning" />
+  <meta name="twitter:title" content="PW 6 | Machine Learning" />
   
-  <meta name="twitter:description" content="PW 5 | Machine Learning course" />
+  <meta name="twitter:description" content="PW 6 | Machine Learning course" />
   
 
 <meta name="author" content="Mohamad Ghassany" />
@@ -31,8 +31,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="decision-trees-random-forests.html"/>
-<link rel="next" href="principal-components-analysis.html"/>
+<link rel="prev" href="principal-components-analysis.html"/>
+<link rel="next" href="kmeans-hierarchical-clustering.html"/>
 <script src="book_assets/header-attrs-2.4/header-attrs.js"></script>
 <script src="book_assets/jquery-2.2.3/jquery.min.js"></script>
 <link href="book_assets/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -447,180 +447,258 @@ code span.wa { color: #bf0303; } /* Warning */
       in the upper right-hand corner of the page.
     </p>
 </div>
-<div id="pw-5" class="section level1 unnumbered" number="">
-<h1>PW 5</h1>
-<p>In this practical work, we will build some decision trees for both <em>regression</em> and <em>classification</em> problems. Note that there are many packages to do this in <i class="fab  fa-r-project " style="color:steelblue;"></i> . The <code>tree</code> package is the basic package to do so, while the <code>rpart</code><a href="#fn17" class="footnote-ref" id="fnref17"><sup>17</sup></a> package seems more widely suggested and provides better plotting features. So we will use the <code>rpart</code> package.</p>
-<div class="rmdcaution">
-<p>It is recommended for correct and better using of <i class="fab  fa-r-project " style="color:steelblue;"></i> functions that you consult their documentations. Every <i class="fab  fa-r-project " style="color:steelblue;"></i> function is well documented indeed. You can do so by writing <code>?function_name</code> or <code>help(function_name)</code>in the console.</p>
-<p>Especially for functions with multiple use, for example, <code>glm()</code> is a function that fits generalizes linear models, one of them is logistic regression when <code>type = "binomial"</code>.</p>
-<p>Another example, is the function <code>predict()</code>, that is a generic function for predictions from the results of various model fitting functions. Its first argument is a <i class="fab  fa-r-project " style="color:steelblue;"></i> object, a model, and the rest of the arguments depends on the nature of the object. If you want to consult the documentation about using <code>predict()</code> for a tree built with <code>rpart()</code>, do <code>?predict.rpart</code> or <code>help(predict.rpart)</code></p>
+<div id="pw-6" class="section level1 unnumbered" number="">
+<h1>PW 6</h1>
+<div id="the-iris-dataset" class="section level3 unnumbered" number="">
+<h3>The Iris Dataset</h3>
+<p>The <strong><em>Iris flower dataset</em></strong> or <strong><em>Fisher’s Iris dataset</em></strong> is a multivariate data set introduced by the British statistician and biologist <a href="https://en.wikipedia.org/wiki/Ronald_Fisher">Ronald Fisher</a> in his <strong>1936</strong> paper <span class="citation">(FISHER <a href="#ref-Fisher1936" role="doc-biblioref">1936</a>)</span>.</p>
+<p>The data set consists of 50 samples from each of three species of Iris. Four features were measured from each sample.</p>
+<p>The three species in the Iris dataset are:</p>
+<ol style="list-style-type: decimal">
+<li><em>Iris-setosa</em> (<span class="math inline">\(n_1=50\)</span>)</li>
+<li><em>Iris-versicolor</em> (<span class="math inline">\(n_2=50\)</span>)</li>
+<li><em>Iris-virginica</em> (<span class="math inline">\(n_3=50\)</span>)</li>
+</ol>
+<p>And the four features in Iris dataset are:</p>
+<ol style="list-style-type: decimal">
+<li><em>sepal length</em> in cm</li>
+<li><em>sepal width</em> in cm</li>
+<li><em>petal length</em> in cm</li>
+<li><em>petal width</em> in cm</li>
+</ol>
+<p><img src="img/iris.png" width="85%" style="display: block; margin: auto;" /></p>
 </div>
+<div id="loading-data" class="section level3 unnumbered" number="">
+<h3>Loading Data</h3>
+<p><strong>1.</strong> Download the iris dataset from  <a target="_blank" href="datasets/iris.data"> here <i class="fa fa-table" aria-hidden="true"></i></a> and import it into <i class="fab  fa-r-project " style="color:steelblue;"></i>.</p>
+<!-- 
+**2.** Show the last 5 rows of the iris dataset.
+
+
+
+ -->
+</div>
+<div id="exploratory-analysis" class="section level3 unnumbered" number="">
+<h3>Exploratory analysis</h3>
+<p><strong>2.</strong> Compare the means and the quartiles of the 3 different flower classes for the 4 different features (Plot 4 boxplots into the same figure).</p>
 <div class="rmdtip">
-<p>If you want to run a function from a certain package without loading the package, you can write <code>package::function()</code>. For example <code>MASS::lda()</code> or <code>rpart::rpart()</code>. It is also helpful to remember the name of the package in which the function is defined.</p>
+<p><strong>Hint</strong>: you can use <code>par(mfrow=c(2,2))</code> to show multiple plots on the same figure (<span class="math inline">\(2 \times 2\)</span> plots here). Like follows:</p>
 </div>
-<div id="regression-trees" class="section level2 unnumbered" number="">
-<h2>Regression Trees</h2>
-<div id="single-tree" class="section level3 unnumbered" number="">
-<h3>Single tree</h3>
-<p>To demonstrate regression trees, we will use the <code>Boston</code> dataset that we used during the first two practical works, from the <code>MASS</code> package. Recall that <code>medv</code> is the response.</p>
-<p><strong>1</strong>. Load the Boston dataset from <code>MASS</code> package. Split the dataset randomly in half.</p>
-<div class="sourceCode" id="cb45"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb45-1"><a href="pw-5.html#cb45-1"></a><span class="kw">library</span>(MASS)</span>
-<span id="cb45-2"><a href="pw-5.html#cb45-2"></a><span class="kw">library</span>(caTools)</span>
-<span id="cb45-3"><a href="pw-5.html#cb45-3"></a><span class="kw">set.seed</span>(<span class="dv">18</span>)</span>
-<span id="cb45-4"><a href="pw-5.html#cb45-4"></a>Boston_idx =<span class="st"> </span><span class="kw">sample</span>(<span class="dv">1</span><span class="op">:</span><span class="kw">nrow</span>(Boston), <span class="kw">nrow</span>(Boston) <span class="op">/</span><span class="st"> </span><span class="dv">2</span>) </span>
-<span id="cb45-5"><a href="pw-5.html#cb45-5"></a><span class="co"># You don&#39;t know what we just did?</span></span>
-<span id="cb45-6"><a href="pw-5.html#cb45-6"></a><span class="co"># open the documentation of the function sample by </span></span>
-<span id="cb45-7"><a href="pw-5.html#cb45-7"></a><span class="co"># writing ?sample in the R console.</span></span>
-<span id="cb45-8"><a href="pw-5.html#cb45-8"></a><span class="co"># Note that this is one of the ways to split it randomly and it is not necessary the best.</span></span>
-<span id="cb45-9"><a href="pw-5.html#cb45-9"></a>Boston_train =<span class="st"> </span>Boston[Boston_idx,]</span>
-<span id="cb45-10"><a href="pw-5.html#cb45-10"></a>Boston_test  =<span class="st"> </span>Boston[<span class="op">-</span>Boston_idx,]</span></code></pre></div>
-<p><strong>2</strong>. Fit a regression tree to the training data using the <code>rpart()</code> function from the <code>rpart</code> package. Name the tree <code>Boston_tree</code>.</p>
-<p><strong>3</strong>. Plot the obtained tree using the following code.</p>
-<div class="sourceCode" id="cb46"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb46-1"><a href="pw-5.html#cb46-1"></a><span class="kw">plot</span>(Boston_tree)</span>
-<span id="cb46-2"><a href="pw-5.html#cb46-2"></a><span class="kw">text</span>(Boston_tree, <span class="dt">pretty =</span> <span class="dv">0</span>)</span>
-<span id="cb46-3"><a href="pw-5.html#cb46-3"></a><span class="kw">title</span>(<span class="dt">main =</span> <span class="st">&quot;Regression Tree&quot;</span>)</span></code></pre></div>
-<p><img src="Machine-Learning_files/figure-html/unnamed-chunk-137-1.png" width="70%" style="display: block; margin: auto;" /></p>
-<p><strong>4</strong>. A better plot can be obtained using the <code>rpart.plot</code><a href="#fn18" class="footnote-ref" id="fnref18"><sup>18</sup></a> package. Re-plot the tree using it. You can use the <code>rpart.plot()</code> function which by default, when the output is continuous, each node shows: the predicted value, and the percentage of observations in the node. You can also use the <code>prp()</code> function.</p>
-<p><img src="Machine-Learning_files/figure-html/unnamed-chunk-138-1.png" width="50%" style="display: block; margin: auto;" /><img src="Machine-Learning_files/figure-html/unnamed-chunk-138-2.png" width="50%" style="display: block; margin: auto;" /></p>
-<p><strong>5</strong>. Print the obtained tree and print its summary. Between the things that you can see in the summary, the CP (complexity parameter) table and the importance of each variable in the model. Print the CP table using the <code>printcp()</code> function to see the cross validation results. Plot a comparison figure using the <code>plotcp()</code> function.</p>
-<p>You will notice the obtained tree is <strong>pruned</strong>. This is because <code>rpart</code> prunes the tree by default by performing 10-fold cross-validation.</p>
+<p><img src="Machine-Learning_files/figure-html/unnamed-chunk-178-1.png" width="70%" style="display: block; margin: auto;" /></p>
+<p><strong>3.</strong> To explore how the 3 different flower classes are distributed along the 4 different features, visualize them via histograms using the following code.</p>
+<div class="sourceCode" id="cb59"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb59-1"><a href="pw-6.html#cb59-1"></a><span class="co"># Let&#39;s use the ggplot2 library</span></span>
+<span id="cb59-2"><a href="pw-6.html#cb59-2"></a><span class="co"># ggplot2 is the most advanced package for data visualization</span></span>
+<span id="cb59-3"><a href="pw-6.html#cb59-3"></a><span class="co"># gg corresponds to The Grammar of Graphics.</span></span>
+<span id="cb59-4"><a href="pw-6.html#cb59-4"></a><span class="kw">library</span>(ggplot2) <span class="co">#of course you must install it first if you don&#39;t have it already</span></span>
+<span id="cb59-5"><a href="pw-6.html#cb59-5"></a></span>
+<span id="cb59-6"><a href="pw-6.html#cb59-6"></a><span class="co"># histogram of sepal_length</span></span>
+<span id="cb59-7"><a href="pw-6.html#cb59-7"></a><span class="kw">ggplot</span>(iris, <span class="kw">aes</span>(<span class="dt">x=</span>sepal_length, <span class="dt">fill=</span>class)) <span class="op">+</span></span>
+<span id="cb59-8"><a href="pw-6.html#cb59-8"></a><span class="st">  </span><span class="kw">geom_histogram</span>(<span class="dt">binwidth=</span>.<span class="dv">2</span>, <span class="dt">alpha=</span>.<span class="dv">5</span>)</span>
+<span id="cb59-9"><a href="pw-6.html#cb59-9"></a><span class="co"># histogram of sepal_width</span></span>
+<span id="cb59-10"><a href="pw-6.html#cb59-10"></a><span class="kw">ggplot</span>(iris, <span class="kw">aes</span>(<span class="dt">x=</span>sepal_width, <span class="dt">fill=</span>class)) <span class="op">+</span></span>
+<span id="cb59-11"><a href="pw-6.html#cb59-11"></a><span class="st">  </span><span class="kw">geom_histogram</span>(<span class="dt">binwidth=</span>.<span class="dv">2</span>, <span class="dt">alpha=</span>.<span class="dv">5</span>)</span>
+<span id="cb59-12"><a href="pw-6.html#cb59-12"></a><span class="co"># histogram of petal_length</span></span>
+<span id="cb59-13"><a href="pw-6.html#cb59-13"></a><span class="kw">ggplot</span>(iris, <span class="kw">aes</span>(<span class="dt">x=</span>petal_length, <span class="dt">fill=</span>class)) <span class="op">+</span></span>
+<span id="cb59-14"><a href="pw-6.html#cb59-14"></a><span class="st">  </span><span class="kw">geom_histogram</span>(<span class="dt">binwidth=</span>.<span class="dv">2</span>, <span class="dt">alpha=</span>.<span class="dv">5</span>)</span>
+<span id="cb59-15"><a href="pw-6.html#cb59-15"></a><span class="co"># histogram of petal_width</span></span>
+<span id="cb59-16"><a href="pw-6.html#cb59-16"></a><span class="kw">ggplot</span>(iris, <span class="kw">aes</span>(<span class="dt">x=</span>petal_width, <span class="dt">fill=</span>class)) <span class="op">+</span></span>
+<span id="cb59-17"><a href="pw-6.html#cb59-17"></a><span class="st">  </span><span class="kw">geom_histogram</span>(<span class="dt">binwidth=</span>.<span class="dv">2</span>, <span class="dt">alpha=</span>.<span class="dv">5</span>)</span></code></pre></div>
+<p><img src="Machine-Learning_files/figure-html/unnamed-chunk-180-1.png" width="70%" style="display: block; margin: auto;" /></p>
+</div>
+<div id="pca-using-princomp" class="section level3 unnumbered" number="">
+<h3>PCA using <code>princomp()</code></h3>
 <div class="rmdtip">
-<p><code>rpart</code> keeps track of something called the complexity of a tree. The complexity measure is a combination of the size of a tree and the ability of the tree to separate the classes of the target variable. If the next best split in growing a tree does not reduce the tree’s overall complexity by a certain amount, <code>rpart</code> will terminate the growing process. This amount is specified by the complexity parameter, <code>cp</code>, in the call to <code>rpart()</code>. Setting <code>cp</code> to a negative amount (like -1) ensures that the tree will be fully grown. You can try it and then plot the tree.</p>
-<p>Notice that the default <code>cp</code> value may over prune the tree. As a rule of thumb, it’s best to prune a decision tree using the <code>cp</code> of smallest tree that is within one standard deviation of the tree with the smallest <code>xerror</code>. In the example above, it’s maybe best to prune the tree with a <code>cp</code> slightly greater than <code>0.03</code>.</p>
+<p>Both <code>princomp()</code> and <code>prcomp()</code> are built-in <i class="fab  fa-r-project " style="color:steelblue;"></i> functions. They both perform PCA.</p>
 </div>
-<p>Next we will compare this regression tree to a linear model and will use RMSE as our metric. RMSE is the <strong>R</strong>oot <strong>M</strong>ean <strong>S</strong>quare <strong>E</strong>rror, which is the square root of the MSE.</p>
-<p><strong>5</strong>. Write a <i class="fab  fa-r-project " style="color:steelblue;"></i> function that returns the RMSE of two vectors.</p>
-<p><strong>6</strong>. Use the function <code>predict()</code> to predict the response on the test set. Then calculate the RMSE obtained with tree model.</p>
-<p><strong>7</strong>. Fit a linear regression model on the training set. Then predict the response on the test set using the linear model. Calculate the RMSE and compare the performance of the tree and the linear regression model.</p>
+<p><strong>4.</strong> Apply a PCA on the Iris dataset using the <code>princomp()</code> function and interpret the results.</p>
+<div class="sourceCode" id="cb60"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb60-1"><a href="pw-6.html#cb60-1"></a>pcairis=<span class="kw">princomp</span>(iris[,<span class="op">-</span><span class="dv">5</span>], <span class="dt">cor=</span>T) </span>
+<span id="cb60-2"><a href="pw-6.html#cb60-2"></a><span class="co"># Note that we take only the numerical columns to apply PCA.</span></span>
+<span id="cb60-3"><a href="pw-6.html#cb60-3"></a><span class="co"># now pcairis is a R object of type princomp</span></span>
+<span id="cb60-4"><a href="pw-6.html#cb60-4"></a></span>
+<span id="cb60-5"><a href="pw-6.html#cb60-5"></a><span class="co"># To display the internal structure of pcairis</span></span>
+<span id="cb60-6"><a href="pw-6.html#cb60-6"></a><span class="kw">str</span>(pcairis)</span>
+<span id="cb60-7"><a href="pw-6.html#cb60-7"></a><span class="co">#ans&gt; List of 7</span></span>
+<span id="cb60-8"><a href="pw-6.html#cb60-8"></a><span class="co">#ans&gt;  $ sdev    : Named num [1:4] 1.706 0.96 0.384 0.144</span></span>
+<span id="cb60-9"><a href="pw-6.html#cb60-9"></a><span class="co">#ans&gt;   ..- attr(*, &quot;names&quot;)= chr [1:4] &quot;Comp.1&quot; &quot;Comp.2&quot; &quot;Comp.3&quot; &quot;Comp.4&quot;</span></span>
+<span id="cb60-10"><a href="pw-6.html#cb60-10"></a><span class="co">#ans&gt;  $ loadings: &#39;loadings&#39; num [1:4, 1:4] 0.522 -0.263 0.581 0.566 0.372 ...</span></span>
+<span id="cb60-11"><a href="pw-6.html#cb60-11"></a><span class="co">#ans&gt;   ..- attr(*, &quot;dimnames&quot;)=List of 2</span></span>
+<span id="cb60-12"><a href="pw-6.html#cb60-12"></a><span class="co">#ans&gt;   .. ..$ : chr [1:4] &quot;sepal_length&quot; &quot;sepal_width&quot; &quot;petal_length&quot; &quot;petal_width&quot;</span></span>
+<span id="cb60-13"><a href="pw-6.html#cb60-13"></a><span class="co">#ans&gt;   .. ..$ : chr [1:4] &quot;Comp.1&quot; &quot;Comp.2&quot; &quot;Comp.3&quot; &quot;Comp.4&quot;</span></span>
+<span id="cb60-14"><a href="pw-6.html#cb60-14"></a><span class="co">#ans&gt;  $ center  : Named num [1:4] 5.84 3.05 3.76 1.2</span></span>
+<span id="cb60-15"><a href="pw-6.html#cb60-15"></a><span class="co">#ans&gt;   ..- attr(*, &quot;names&quot;)= chr [1:4] &quot;sepal_length&quot; &quot;sepal_width&quot; &quot;petal_length&quot; &quot;petal_width&quot;</span></span>
+<span id="cb60-16"><a href="pw-6.html#cb60-16"></a><span class="co">#ans&gt;  $ scale   : Named num [1:4] 0.825 0.432 1.759 0.761</span></span>
+<span id="cb60-17"><a href="pw-6.html#cb60-17"></a><span class="co">#ans&gt;   ..- attr(*, &quot;names&quot;)= chr [1:4] &quot;sepal_length&quot; &quot;sepal_width&quot; &quot;petal_length&quot; &quot;petal_width&quot;</span></span>
+<span id="cb60-18"><a href="pw-6.html#cb60-18"></a><span class="co">#ans&gt;  $ n.obs   : int 150</span></span>
+<span id="cb60-19"><a href="pw-6.html#cb60-19"></a><span class="co">#ans&gt;  $ scores  : num [1:150, 1:4] -2.26 -2.09 -2.37 -2.3 -2.39 ...</span></span>
+<span id="cb60-20"><a href="pw-6.html#cb60-20"></a><span class="co">#ans&gt;   ..- attr(*, &quot;dimnames&quot;)=List of 2</span></span>
+<span id="cb60-21"><a href="pw-6.html#cb60-21"></a><span class="co">#ans&gt;   .. ..$ : NULL</span></span>
+<span id="cb60-22"><a href="pw-6.html#cb60-22"></a><span class="co">#ans&gt;   .. ..$ : chr [1:4] &quot;Comp.1&quot; &quot;Comp.2&quot; &quot;Comp.3&quot; &quot;Comp.4&quot;</span></span>
+<span id="cb60-23"><a href="pw-6.html#cb60-23"></a><span class="co">#ans&gt;  $ call    : language princomp(x = iris[, -5], cor = T)</span></span>
+<span id="cb60-24"><a href="pw-6.html#cb60-24"></a><span class="co">#ans&gt;  - attr(*, &quot;class&quot;)= chr &quot;princomp&quot;</span></span>
+<span id="cb60-25"><a href="pw-6.html#cb60-25"></a></span>
+<span id="cb60-26"><a href="pw-6.html#cb60-26"></a><span class="co"># To see the variance explained by the the pcs</span></span>
+<span id="cb60-27"><a href="pw-6.html#cb60-27"></a><span class="kw">summary</span>(pcairis) </span>
+<span id="cb60-28"><a href="pw-6.html#cb60-28"></a><span class="co">#ans&gt; Importance of components:</span></span>
+<span id="cb60-29"><a href="pw-6.html#cb60-29"></a><span class="co">#ans&gt;                        Comp.1 Comp.2 Comp.3</span></span>
+<span id="cb60-30"><a href="pw-6.html#cb60-30"></a><span class="co">#ans&gt; Standard deviation      1.706  0.960 0.3839</span></span>
+<span id="cb60-31"><a href="pw-6.html#cb60-31"></a><span class="co">#ans&gt; Proportion of Variance  0.728  0.230 0.0368</span></span>
+<span id="cb60-32"><a href="pw-6.html#cb60-32"></a><span class="co">#ans&gt; Cumulative Proportion   0.728  0.958 0.9948</span></span>
+<span id="cb60-33"><a href="pw-6.html#cb60-33"></a><span class="co">#ans&gt;                         Comp.4</span></span>
+<span id="cb60-34"><a href="pw-6.html#cb60-34"></a><span class="co">#ans&gt; Standard deviation     0.14355</span></span>
+<span id="cb60-35"><a href="pw-6.html#cb60-35"></a><span class="co">#ans&gt; Proportion of Variance 0.00515</span></span>
+<span id="cb60-36"><a href="pw-6.html#cb60-36"></a><span class="co">#ans&gt; Cumulative Proportion  1.00000</span></span>
+<span id="cb60-37"><a href="pw-6.html#cb60-37"></a></span>
+<span id="cb60-38"><a href="pw-6.html#cb60-38"></a><span class="co"># To plot the variance explained by each pc</span></span>
+<span id="cb60-39"><a href="pw-6.html#cb60-39"></a><span class="kw">plot</span>(pcairis) </span></code></pre></div>
+<p><img src="Machine-Learning_files/figure-html/unnamed-chunk-181-1.png" width="70%" style="display: block; margin: auto;" /></p>
+<div class="sourceCode" id="cb61"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb61-1"><a href="pw-6.html#cb61-1"></a></span>
+<span id="cb61-2"><a href="pw-6.html#cb61-2"></a><span class="co"># To plot together the scores for PC1 and PC2 and the </span></span>
+<span id="cb61-3"><a href="pw-6.html#cb61-3"></a><span class="co"># variables expressed in terms of PC1 and PC2.</span></span>
+<span id="cb61-4"><a href="pw-6.html#cb61-4"></a><span class="kw">biplot</span>(pcairis) </span></code></pre></div>
+<p><img src="Machine-Learning_files/figure-html/unnamed-chunk-181-2.png" width="70%" style="display: block; margin: auto;" /></p>
+</div>
+<div id="deeper-pca-using-factoextra-package" class="section level3 unnumbered" number="">
+<h3>Deeper PCA using <code>factoextra</code> package</h3>
 <div class="rmdinsight">
-<p>Here the most obvious linear regression beats the tree! We’ll improve on this tree by considering ensembles of trees.</p>
+<p>To help in the interpretation and in the visualization of PCA we are going to use the package named <code>factoextra</code>.</p>
+<p>No matter which function or package you decide to use for computing principal component methods, the <code>factoextra</code> <i class="fab  fa-r-project " style="color:steelblue;"></i> package can help to extract easily, in a human readable data format, the analysis results from the different functions mentioned above. <code>factoextra</code> provides also convenient solutions to create <code>ggplot2</code> based beautiful graphs.</p>
+<p>You can take a look at this <a href="http://www.sthda.com/french/articles/38-methodes-des-composantes-principales-dans-r-guide-pratique/73-acp-analyse-en-composantes-principales-avec-r-l-essentiel/" target="_blank">link <i class="fas  fa-external-link-alt "></i></a> for a detailed example.</p>
 </div>
-<p>You can visually compare the performance of both models by plotting the Actual (reality) response values against the predicted values. The model with closer points are to the diagonal (<code>y=x</code>) line is the better one. You can try to reproduce the figure below.</p>
-<p><img src="Machine-Learning_files/figure-html/unnamed-chunk-144-1.png" width="50%" style="display: block; margin: auto;" /><img src="Machine-Learning_files/figure-html/unnamed-chunk-144-2.png" width="50%" style="display: block; margin: auto;" /></p>
-<p>By aggregating many decision trees, using methods like <em>bagging</em>,
-<em>random forests</em>, and <em>boosting</em>, the predictive performance of trees can be
-substantially improved. We will now use these concepts, called <em>ensemble methods</em>.</p>
-</div>
-<div id="bagging" class="section level3 unnumbered" number="">
-<h3>Bagging</h3>
-<p>Bagging, or <em>Bootstrap aggregation</em>, is a general-purpose procedure for reducing the variance of a statistical learning method, it is particularly useful and frequently used in the context of decision trees. The idea is to take many training sets from the population, build a separate prediction model using each training set, and average the resulting predictions. Generally we do not have access to multiple training sets. Instead, we can bootstrap, by taking repeated samples from the (single) training data set.</p>
-<p>To apply bagging to regression
-trees, we simply construct <span class="math inline">\(B\)</span> regression trees using B bootstrapped training
-sets, and average the resulting predictions. These trees are grown deep,
-and are not pruned. Hence each individual tree has high variance, but
-low bias. Averaging these <span class="math inline">\(B\)</span> trees reduces the variance.</p>
-<p><strong>8</strong>. Fit a bagged model, using the <code>randomForest()</code> function from the <code>randomForest</code> package.</p>
-<div class="rmdinsight">
-<p>Bagging is actually a special case of a random forest where <code>mtry</code> is equal to <span class="math inline">\(p\)</span>, the number of predictors.</p>
-</div>
-<p><strong>9</strong>. Predict the response on the test set using the bagging model. Calculate the RMSE. Is the performance of the model better than linear regression or a simple tree?</p>
-<p>Note that the “Mean of squared residuals” which is output by <code>randomForest()</code> is the <strong>Out of Bag</strong> estimate of the error. Here is its plot:</p>
-<p><img src="Machine-Learning_files/figure-html/unnamed-chunk-148-1.png" width="70%" style="display: block; margin: auto;" /></p>
-</div>
-<div id="random-forests" class="section level3 unnumbered" number="">
-<h3>Random Forests</h3>
-<p>Now try a random forest. For regression, on suggestion is to use <code>mtry</code> equal to <span class="math inline">\(p/3\)</span>.<a href="#fn19" class="footnote-ref" id="fnref19"><sup>19</sup></a></p>
-<p><strong>10</strong>. Fit a random forest on the training set and compare its performance with the previous models by calculating the predictions and the RMSE.</p>
-<p><strong>11</strong>. Use the function <code>importance()</code> from the <code>randomForest</code> package to see the most important predictors in the obtained random forest model. What are the three most important predictors? Did you find the same results when you selected the best predictors for the linear regression model during session 2?</p>
-<p><strong>12</strong>. Plot the importance of the predictors to the model using the <code>varImpPlot()</code> function.</p>
-</div>
-<div id="boosting" class="section level3 unnumbered" number="">
-<h3>Boosting</h3>
-<p>Last and not least, let us try a <em>boosted</em> model, which by default will produce a nice <strong>variable importance</strong> plot as well as plots of the marginal effects of the predictors. To do so, we will use the <code>gbm</code> package<a href="#fn20" class="footnote-ref" id="fnref20"><sup>20</sup></a>.</p>
-<p><strong>10</strong>. Using the <code>gbm()</code> function like following, fit a boosted model on the training set. Then compare its performance with the previous models by calculating the predictions and the RMSE.</p>
-<div class="sourceCode" id="cb47"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb47-1"><a href="pw-5.html#cb47-1"></a><span class="kw">library</span>(gbm)</span>
-<span id="cb47-2"><a href="pw-5.html#cb47-2"></a>Boston_boost =<span class="st"> </span><span class="kw">gbm</span>(medv <span class="op">~</span><span class="st"> </span>., <span class="dt">data =</span> Boston_train, <span class="dt">distribution =</span> <span class="st">&quot;gaussian&quot;</span>, </span>
-<span id="cb47-3"><a href="pw-5.html#cb47-3"></a>                    <span class="dt">n.trees =</span> <span class="dv">5000</span>, <span class="dt">interaction.depth =</span> <span class="dv">4</span>, <span class="dt">shrinkage =</span> <span class="fl">0.01</span>)</span></code></pre></div>
-<pre><code>#ans&gt; Using 5000 trees...</code></pre>
-<p><strong>11</strong>. Show the summary of the boosted model. A figure of the variable importance will be shown.</p>
-</div>
-<div id="comparison" class="section level3 unnumbered" number="">
-<h3>Comparison</h3>
-<p><strong>12</strong>. Reproduce the following comparison: A table in which we show the obtained RMSE with each tested model, you can create a <span class="math inline">\(5 \times 2\)</span> data.frame in which you put the names of the models and the corresponding RMSE. To visualize the data frame in the compiled html report you can use the <code>kable()</code> function from the <code>knitr</code> package. Or, compare the models by plotting the Actual (reality) response values against the predicted values.</p>
-<p><img src="Machine-Learning_files/figure-html/unnamed-chunk-158-1.png" width="90%" style="display: block; margin: auto;" /></p>
-</div>
-</div>
-<div id="classification-trees" class="section level2 unnumbered" number="">
-<h2>Classification Trees</h2>
-<p>A classification tree is very similar to a regression tree, except that the classification tree is used to predict a qualitative response rather than a quantitative one. Recall that for a regression tree, the predicted response for an observation is given by the mean response of the training observations that belong to the
-same terminal node. In contrast, for a classification tree, we predict that
-each observation belongs to the <strong><em>most commonly occurring class</em></strong> of training
-observations in the region to which it belongs.</p>
-<p>To construct classification trees, we will use the <strong>spam</strong><a href="#fn21" class="footnote-ref" id="fnref21"><sup>21</sup></a> dataset, available <a href="datasets/spam.csv" target="_blank">here <svg style="height:0.8em;top:.04em;position:relative;fill:#cd0050;" viewBox="0 0 512 512"><path d="M464 32H48C21.49 32 0 53.49 0 80v352c0 26.51 21.49 48 48 48h416c26.51 0 48-21.49 48-48V80c0-26.51-21.49-48-48-48zM224 416H64v-96h160v96zm0-160H64v-96h160v96zm224 160H288v-96h160v96zm0-160H288v-96h160v96z"/></svg></a>. A description of the dataset is given below.</p>
-<div class="rmdexercise">
-<p>For the rest of this PW, you must:</p>
+<p><strong>5.</strong> Using <code>factoextra</code> packag plot the following:</p>
 <ul>
-<li>Import the <code>spam</code> dataset and explore it. Be aware that it is preferable that the response column is of type factor.</li>
-<li>Split the dataset into training and test sets (choose your own seed when using <code>set.seed()</code>).</li>
-<li>Fit (using <code>rpart</code> and <code>gbm</code> packages):
-<ul>
-<li>A <strong>logistic</strong> regression model.</li>
-<li>A simple classification tree.</li>
-<li>Bagging, Random Forests<a href="#fn22" class="footnote-ref" id="fnref22"><sup>22</sup></a>, and Boosting models.</li>
-</ul></li>
-<li>For each model, predict the response on the test set and evaluate the performance of the model, using the <em>prediction accuracy</em> (create a function that returns the accuracy for two binary vectors).</li>
+<li>The scree plot.</li>
+<li>The graph of individuals.</li>
+<li>The graph of variables.</li>
+<li>The biplot graph.</li>
+<li>The contributions of the variables to the first 2 principal components.</li>
 </ul>
 </div>
-<div id="the-spam-dataset" class="section level3 unnumbered" number="">
-<h3>The Spam dataset</h3>
-<p>This dataset consists of information from 4601 email messages, in a study to try to predict whether the email was junk email, or
-“spam”. For all 4601 email messages, the true outcome, spam or not, is available,
-along with 57 predictors as described below:</p>
-<ul>
-<li>48 quantitative predictors: the <em>percentage</em> of words in the email that match a given word. Examples include <em>business</em>, <em>address</em>, <em>internet</em>; etc.</li>
-<li>6 quantitative predictors: the percentage of characters in the email that match a given character. The characters are <code>;</code> , <code>(</code> , <code>[</code> , <code>!</code> , <code>$</code> and <code>#</code>.</li>
-<li>The average length of uninterrupted sequences of capital letters: <code>crl.ave</code>.</li>
-<li>The length of the longest uninterrupted sequence of capital letters: <code>crl.long</code>.</li>
-<li>The sum of the length of uninterrupted sequences of capital letters: <code>crl.tot</code>.</li>
-</ul>
+<div id="step-by-step-pca" class="section level3 unnumbered" number="">
+<h3>Step-by-step PCA</h3>
+<p>In order to understand how PCA works, let’s implement it step-by-step.</p>
 <div class="rmdtip">
-<p>Note that the spam dataset given here is already treated and ready to be explored. To achieve this stage, some steps are required to treat the raw data, like Tokenization, Stemming, and Lemmatization. In this dataset the most important words are already selected and other variables are added.
-Curious students can read more about these steps. Two famous <i class="fab  fa-r-project " style="color:steelblue;"></i> packages for text mining are <a href="https://cran.r-project.org/web/packages/tm/vignettes/tm.pdf" target="_blank">tm</a> and <a href="https://www.tidytextmining.com/index.html" target="_blank">tidytext</a>.</p>
-</div>
-</div>
-<div id="extra-tuning" class="section level3 unnumbered" number="">
-<h3>Extra: Tuning</h3>
-<p>So far in this PW, we fit bagging, boosting and random forest models, but did not <strong>tune</strong> any of them, we simply used certain, somewhat arbitrary, parameters. Actually, to make these models better the parameters should be tuned. The parameters include:</p>
+<p>
+<strong>Summary of the PCA Approach</strong>:
+</p>
 <ul>
-<li>Bagging: Actually just a subset of Random Forest with <code>mtry</code> = <span class="math inline">\(p\)</span>.</li>
-<li>Random Forest: <code>mtry</code></li>
-<li>Boosting: <code>n.trees</code>, <code>interaction.depth</code>, <code>shrinkage</code>, <code>n.minobsinnode</code></li>
+<li>
+Standardize the data.
+</li>
+<li>
+Obtain the Eigenvectors and Eigenvalues from the covariance matrix or correlation matrix.
+</li>
+<li>
+Sort eigenvalues in descending order and choose the <span class="math inline"><span class="math inline">\(k\)</span></span> eigenvectors that correspond to the <span class="math inline"><span class="math inline">\(k\)</span></span> largest eigenvalues, where <span class="math inline"><span class="math inline">\(k\)</span></span> is the number of dimensions of the new feature subspace (<span class="math inline"><span class="math inline">\(k \le p\)</span></span>).
+</li>
+<li>
+Construct the projection matrix <span class="math inline"><span class="math inline">\(\mathbf{A}\)</span></span> from the selected <span class="math inline"><span class="math inline">\(k\)</span></span> eigenvectors.
+</li>
+<li>
+Transform the original dataset <span class="math inline"><span class="math inline">\(X\)</span></span> via <span class="math inline"><span class="math inline">\(\mathbf{A}\)</span></span> to obtain a <span class="math inline"><span class="math inline">\(k\)</span></span>-dimensional feature subspace <span class="math inline"><span class="math inline">\(\mathbf{Y}\)</span></span>.
+</li>
 </ul>
-<p>The <code>caret</code> package provides excellent functions to accomplish this. Note that with these tree-based ensemble methods there are two resampling solutions for tuning the model:</p>
+</div>
+<p><strong>6.</strong> First step, split the iris dataset into data <span class="math inline">\(X\)</span> and class labels <span class="math inline">\(y\)</span>.</p>
+<div class="sourceCode" id="cb62"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb62-1"><a href="pw-6.html#cb62-1"></a>X &lt;-<span class="st"> </span>iris[,<span class="op">-</span><span class="dv">5</span>]</span>
+<span id="cb62-2"><a href="pw-6.html#cb62-2"></a>y &lt;-<span class="st"> </span>iris[,<span class="dv">5</span>]</span></code></pre></div>
+<div class="rmdinsight">
+<p>
+The iris dataset is now stored in form of a <span class="math inline"><span class="math inline">\(150 \times 4\)</span></span> matrix where the columns are the different features, and every row represents a separate flower sample. Each sample row <span class="math inline"><span class="math inline">\(X^i\)</span></span> can be pictured as a 4-dimensional vector
+</p>
+<p>
+<span class="math display"><span class="math display">\[ (X^i)^T = \begin{pmatrix} X_1^i \\ X_2^i \\ X_3^i \\ X_4^i \end{pmatrix}
+= \begin{pmatrix} \text{sepal length} \\ \text{sepal width} \\\text{petal length} \\ \text{petal width} \end{pmatrix}\]</span></span>
+</p>
+</div>
+<div class="rmdinsight">
+<p>
+<strong>Eigendecomposition - Computing Eigenvectors and Eigenvalues</strong>
+</p>
+<p>
+The eigenvectors and eigenvalues of a covariance (or correlation) matrix represent the “core” of a PCA: The eigenvectors (principal components) determine the directions of the new feature space, and the eigenvalues determine their magnitude. In other words, the eigenvalues explain the variance of the data along the new feature axes.
+</p>
+</div>
+<p><strong>Standardizing</strong></p>
+<p><strong>7.</strong> Scale the 4 features. Store the scaled matrix into a new one (for example, name it <code>X_scaled</code>).</p>
+<p><strong>Covariance Matrix</strong></p>
+<p><strong>8.</strong> The classic approach to PCA is to perform the eigendecomposition on the covariance matrix <span class="math inline">\(\Sigma\)</span>, which is a <span class="math inline">\(p\times p\)</span> matrix where each element represents the covariance between two features. Compute the Covariance Matrix of the scaled features (Print the results).</p>
+<div class="rmdtip">
+<p>
+We can summarize the calculation of the covariance matrix via the following matrix equation: <span class="math display"><span class="math display">\[ \Sigma = \frac{1}{n-1} \left( (\mathbf{X} - \mathbf{\bar{X}})^T\;(\mathbf{X} - \mathbf{\bar{X}}) \right) \]</span></span> where <span class="math inline"><span class="math inline">\(\mathbf{\bar{X}}\)</span></span> is the mean vector <span class="math inline"><span class="math inline">\(\mathbf{\bar{X}} = \frac{1}{n} \sum\limits_{k=1}^n x_{k}\)</span></span>.
+</p>
+<p>
+The mean vector is a <span class="math inline"><span class="math inline">\(p\)</span></span>-dimensional vector where each value in this vector represents the sample mean of a feature column in the dataset.
+</p>
+</div>
+<p><strong>9.</strong> Perform an eigendecomposition on the covariance matrix. Compute the Eigenvectors and the Eigenvalues (you can use the <code>eigen()</code> function). What do you obtain?</p>
+<p><strong>Correlation Matrix</strong></p>
+<div class="rmdinsight">
+<p>
+Especially, in the field of “Finance”, the correlation matrix typically used instead of the covariance matrix. However, the eigendecomposition of the covariance matrix (if the input data was standardized) yields the same results as a eigendecomposition on the correlation matrix, since the correlation matrix can be understood as the normalized covariance matrix.
+</p>
+</div>
+<p><strong>10.</strong> Perform an eigendecomposition of the standardized data based on the correlation matrix.</p>
+<p><strong>11.</strong> Perform an eigendecomposition of the raw data based on the correlation matrix. Compare the obtained results with the previous question.</p>
+<div class="rmdinsight">
+<p>
+We should see that all three approaches yield the same eigenvectors and eigenvalue pairs:
+</p>
 <ul>
-<li>Out of Bag</li>
-<li>Cross-Validation</li>
+<li>
+Eigendecomposition of the covariance matrix after standardizing the data.
+</li>
+<li>
+Eigendecomposition of the correlation matrix.
+</li>
+<li>
+Eigendecomposition of the correlation matrix after standardizing the data.
+</li>
 </ul>
-<p>Using Out of Bag samples is advantageous with these methods as compared to Cross-Validation since it removes the need to refit the model and is thus much more computationally efficient. Unfortunately OOB methods cannot be used with <code>gbm</code> models. See the <code>caret</code> documentation: <a href="https://cran.r-project.org/web/packages/caret/vignettes/caret.html" target="_blank">Short intro</a>, <a href="https://topepo.github.io/caret/index.html" target="_blank">Long intro</a> for details.</p>
-<p>TEST</p>
-<p class="text-right">
+</div>
+<p><strong>Selecting Principal Components</strong></p>
+<div class="rmdinsight">
+<p>
+The <code>eigen()</code> function will, by default, sort the eigenvalues in decreasing order.
+</p>
+</div>
+<p><strong>Explained Variance</strong></p>
+<p><strong>12.</strong> Calculate the individual explained variation and the cumulative explained variation of each principal component. Show the results.</p>
+<p><strong>13.</strong> Plot the individual explained variation. (scree plot)</p>
+<p><strong>Projection Matrix</strong></p>
+<p><strong>14.</strong> Construct the projection matrix that will be used to transform the Iris data onto the new feature subspace.</p>
+<div class="rmdtip">
+<p>
+The “projection matrix” is basically just a matrix of our concatenated top <span class="math inline"><span class="math inline">\(k\)</span></span> eigenvectors. Here, the projection matrix <span class="math inline"><span class="math inline">\(\mathbf{A}\)</span></span> is a <span class="math inline"><span class="math inline">\(4 \times 2\)</span></span>-dimensional matrix.
+</p>
+</div>
+<p><strong>Projection Onto the New Feature Space</strong></p>
+<p>In this last step we will use the <span class="math inline">\(4 \times 2\)</span>-dimensional projection matrix <span class="math inline">\(\mathbf{A}\)</span> to transform our samples (observations) onto the new subspace via the equation <span class="math inline">\(\mathbf{Y}=X \times \mathbf{A}\)</span> where <span class="math inline">\(\mathbf{Y}\)</span> is a <span class="math inline">\(150 \times 2\)</span> matrix of our transformed samples.</p>
+<p><strong>15.</strong> Compute <span class="math inline">\(\mathbf{Y}\)</span> (Recall the <span class="math inline">\(\mathbf{Y}\)</span> is the matrix of scores, <span class="math inline">\(\mathbf{A}\)</span> is the matrix of loadings).</p>
+<p><strong>Visualization</strong></p>
+<p><strong>16.</strong> Plot the observations on the new feature space. Name the axis PC1 and PC2.</p>
+<p><strong>17.</strong> On the same plot, color the observations (the flowers) with respect to their flower classes.</p>
+<p align="right">
 ◼
 </p>
 
 </div>
 </div>
+
+
+
+<h3>References</h3>
+<div id="refs" class="references">
+<div id="ref-Fisher1936">
+<p>FISHER, R. A. 1936. “THE Use of Multiple Measurements in Taxonomic Problems.” <em>Annals of Eugenics</em> 7 (2): 179–88. <a href="https://doi.org/10.1111/j.1469-1809.1936.tb02137.x">https://doi.org/10.1111/j.1469-1809.1936.tb02137.x</a>.</p>
 </div>
-
-
-
-<div class="footnotes">
-<hr />
-<ol start="17">
-<li id="fn17"><p><a href="https://cran.r-project.org/web/packages/rpart/vignettes/longintro.pdf">An Introduction to Recursive Partitioning Using the <code>rpart</code> Routines</a> - Details of the <code>rpart</code> package.<a href="pw-5.html#fnref17" class="footnote-back">↩︎</a></p></li>
-<li id="fn18"><p><a href="http://www.milbo.org/doc/prp.pdf"><code>rpart.plot</code> Package</a> - Detailed manual on plotting with <code>rpart</code> using the <code>rpart.plot</code> package.<a href="pw-5.html#fnref18" class="footnote-back">↩︎</a></p></li>
-<li id="fn19"><p>For classification a suggestion is <code>mtry</code> = <span class="math inline">\(\sqrt{p}\)</span>.<a href="pw-5.html#fnref19" class="footnote-back">↩︎</a></p></li>
-<li id="fn20"><p><a href="https://www.rdocumentation.org/packages/gbm/versions/2.1.8" target="_blank"><strong>g</strong>eneralized <strong>b</strong>oosted <strong>m</strong>odels</a> <i class="fab  fa-r-project " style="color:steelblue;"></i> package<a href="pw-5.html#fnref20" class="footnote-back">↩︎</a></p></li>
-<li id="fn21"><p><a href="https://archive.ics.uci.edu/ml/datasets/Spambase" target="_blank">Source</a><a href="pw-5.html#fnref21" class="footnote-back">↩︎</a></p></li>
-<li id="fn22"><p>For classification, the suggested <code>mtry</code> for a random forest is <span class="math inline">\(\sqrt{p}\)</span>.<a href="pw-5.html#fnref22" class="footnote-back">↩︎</a></p></li>
-</ol>
 </div>
             </section>
 
           </div>
         </div>
       </div>
-<a href="decision-trees-random-forests.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="principal-components-analysis.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="principal-components-analysis.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="kmeans-hierarchical-clustering.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="book_assets/gitbook-2.6.7/js/app.min.js"></script>

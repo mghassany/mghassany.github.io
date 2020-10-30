@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>3 Logistic Regression | Machine Learning</title>
   <meta name="description" content="3 Logistic Regression | Machine Learning course" />
-  <meta name="generator" content="bookdown 0.20 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.21 and GitBook 2.6.7" />
 
   <meta property="og:title" content="3 Logistic Regression | Machine Learning" />
   <meta property="og:type" content="book" />
@@ -24,7 +24,7 @@
 <meta name="author" content="Mohamad Ghassany" />
 
 
-<meta name="date" content="2020-10-15" />
+<meta name="date" content="2020-10-30" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -33,7 +33,6 @@
   
 <link rel="prev" href="pw-2.html"/>
 <link rel="next" href="pw-3.html"/>
-<script src="book_assets/header-attrs-2.4/header-attrs.js"></script>
 <script src="book_assets/jquery-2.2.3/jquery.min.js"></script>
 <link href="book_assets/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="book_assets/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -51,7 +50,6 @@
 
 
 
-<script src="book_assets/accessible-code-block-0.0.1/empty-anchor.js"></script>
 <script src="book_assets/kePrint-0.0.1/kePrint.js"></script>
 <link href="book_assets/font-awesome-5.3.1/css/fontawesome-all.min.css" rel="stylesheet" />
 <link href="book_assets/vembedr-0.1.4/css/vembedr.css" rel="stylesheet" />
@@ -67,28 +65,26 @@
 <script async defer src="https://hypothes.is/embed.js"></script>
 
 
-
 <style type="text/css">
-pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
-pre > code.sourceCode > span:empty { height: 1.2em; }
-code.sourceCode > span { color: inherit; text-decoration: inherit; }
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
 pre.sourceCode { margin: 0; }
 @media screen {
 div.sourceCode { overflow: auto; }
 }
 @media print {
-pre > code.sourceCode { white-space: pre-wrap; }
-pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
 }
-pre.numberSource code
-  { counter-reset: source-line 0; }
-pre.numberSource code > span
-  { position: relative; left: -4em; counter-increment: source-line; }
-pre.numberSource code > span > a:first-child::before
-  { content: counter(source-line);
+pre.numberSource a.sourceLine
+  { position: relative; left: -4em; }
+pre.numberSource a.sourceLine::before
+  { content: attr(title);
     position: relative; left: -1em; text-align: right; vertical-align: baseline;
-    border: none; display: inline-block;
+    border: none; pointer-events: all; display: inline-block;
     -webkit-touch-callout: none; -webkit-user-select: none;
     -khtml-user-select: none; -moz-user-select: none;
     -ms-user-select: none; user-select: none;
@@ -100,7 +96,7 @@ pre.numberSource { margin-left: 3em; border-left: 1px solid #a0a0a0;  padding-le
 div.sourceCode
   { color: #1f1c1b; background-color: #ffffff; }
 @media screen {
-pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+a.sourceLine::before { text-decoration: underline; }
 }
 code span. { color: #1f1c1b; } /* Normal */
 code span.al { color: #bf0303; background-color: #f7e6e6; font-weight: bold; } /* Alert */
@@ -156,44 +152,36 @@ code span.wa { color: #bf0303; } /* Warning */
 <li class='before'><a href="./">Machine Learning</a></li>
 
 <li class="divider"></li>
-<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Welcome</a>
-<ul>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Welcome</a><ul>
 <li class="chapter" data-level="" data-path="index.html"><a href="index.html#course-overview"><i class="fa fa-check"></i>Course Overview</a></li>
 <li class="chapter" data-level="" data-path="index.html"><a href="index.html#course-schedule"><i class="fa fa-check"></i>Course Schedule</a></li>
 </ul></li>
-<li class="chapter" data-level="" data-path="introduction.html"><a href="introduction.html"><i class="fa fa-check"></i>Introduction</a>
-<ul>
+<li class="chapter" data-level="" data-path="introduction.html"><a href="introduction.html"><i class="fa fa-check"></i>Introduction</a><ul>
 <li class="chapter" data-level="" data-path="introduction.html"><a href="introduction.html#what-is-machine-learning"><i class="fa fa-check"></i>What is Machine Learning ?</a></li>
 <li class="chapter" data-level="" data-path="introduction.html"><a href="introduction.html#supervised-learning"><i class="fa fa-check"></i>Supervised Learning</a></li>
 <li class="chapter" data-level="" data-path="introduction.html"><a href="introduction.html#unsupervised-learning"><i class="fa fa-check"></i>Unsupervised Learning</a></li>
 </ul></li>
 <li class="part"><span><b>I Supervised Learning</b></span></li>
 <li class="part"><span><b>Regression</b></span></li>
-<li class="chapter" data-level="1" data-path="linear-regression.html"><a href="linear-regression.html"><i class="fa fa-check"></i><b>1</b> Linear Regression</a>
-<ul>
+<li class="chapter" data-level="1" data-path="linear-regression.html"><a href="linear-regression.html"><i class="fa fa-check"></i><b>1</b> Linear Regression</a><ul>
 <li class="chapter" data-level="1.1" data-path="linear-regression.html"><a href="linear-regression.html#notation"><i class="fa fa-check"></i><b>1.1</b> Notation</a></li>
 <li class="chapter" data-level="1.2" data-path="linear-regression.html"><a href="linear-regression.html#model-representation"><i class="fa fa-check"></i><b>1.2</b> Model Representation</a></li>
-<li class="chapter" data-level="1.3" data-path="linear-regression.html"><a href="linear-regression.html#why-estimate-f"><i class="fa fa-check"></i><b>1.3</b> Why Estimate <span class="math inline">\(f\)</span> ?</a>
-<ul>
+<li class="chapter" data-level="1.3" data-path="linear-regression.html"><a href="linear-regression.html#why-estimate-f"><i class="fa fa-check"></i><b>1.3</b> Why Estimate <span class="math inline">\(f\)</span> ?</a><ul>
 <li class="chapter" data-level="" data-path="linear-regression.html"><a href="linear-regression.html#prediction"><i class="fa fa-check"></i>Prediction</a></li>
 <li class="chapter" data-level="" data-path="linear-regression.html"><a href="linear-regression.html#inference"><i class="fa fa-check"></i>Inference</a></li>
 </ul></li>
 <li class="chapter" data-level="1.4" data-path="linear-regression.html"><a href="linear-regression.html#simple-linear-regression-model"><i class="fa fa-check"></i><b>1.4</b> Simple Linear Regression Model</a></li>
 <li class="chapter" data-level="1.5" data-path="linear-regression.html"><a href="linear-regression.html#estimating-the-coefficients"><i class="fa fa-check"></i><b>1.5</b> Estimating the Coefficients</a></li>
-<li class="chapter" data-level="1.6" data-path="linear-regression.html"><a href="linear-regression.html#assessing-the-accuracy-of-the-coefficient-estimates"><i class="fa fa-check"></i><b>1.6</b> Assessing the Accuracy of the Coefficient Estimates</a>
-<ul>
+<li class="chapter" data-level="1.6" data-path="linear-regression.html"><a href="linear-regression.html#assessing-the-accuracy-of-the-coefficient-estimates"><i class="fa fa-check"></i><b>1.6</b> Assessing the Accuracy of the Coefficient Estimates</a><ul>
 <li class="chapter" data-level="" data-path="linear-regression.html"><a href="linear-regression.html#hypothesis-testing"><i class="fa fa-check"></i>Hypothesis testing</a></li>
 </ul></li>
-<li class="chapter" data-level="1.7" data-path="linear-regression.html"><a href="linear-regression.html#anova-and-model-fit"><i class="fa fa-check"></i><b>1.7</b> ANOVA and model fit</a>
-<ul>
+<li class="chapter" data-level="1.7" data-path="linear-regression.html"><a href="linear-regression.html#anova-and-model-fit"><i class="fa fa-check"></i><b>1.7</b> ANOVA and model fit</a><ul>
 <li class="chapter" data-level="1.7.1" data-path="linear-regression.html"><a href="linear-regression.html#anova"><i class="fa fa-check"></i><b>1.7.1</b> ANOVA</a></li>
 <li class="chapter" data-level="1.7.2" data-path="linear-regression.html"><a href="linear-regression.html#the-r2-statistic"><i class="fa fa-check"></i><b>1.7.2</b> The <span class="math inline">\(R^2\)</span> Statistic</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="" data-path="practical-work-1.html"><a href="practical-work-1.html"><i class="fa fa-check"></i>Practical Work 1</a>
-<ul>
-<li class="chapter" data-level="1.8" data-path="practical-work-1.html"><a href="practical-work-1.html#some-basics"><i class="fa fa-check"></i><b>1.8</b> Some <svg style="height:0.8em;top:.04em;position:relative;fill:steelblue;" viewBox="0 0 581 512"><path d="M581 226.6C581 119.1 450.9 32 290.5 32S0 119.1 0 226.6C0 322.4 103.3 402 239.4 418.1V480h99.1v-61.5c24.3-2.7 47.6-7.4 69.4-13.9L448 480h112l-67.4-113.7c54.5-35.4 88.4-84.9 88.4-139.7zm-466.8 14.5c0-73.5 98.9-133 220.8-133s211.9 40.7 211.9 133c0 50.1-26.5 85-70.3 106.4-2.4-1.6-4.7-2.9-6.4-3.7-10.2-5.2-27.8-10.5-27.8-10.5s86.6-6.4 86.6-92.7-90.6-87.9-90.6-87.9h-199V361c-74.1-21.5-125.2-67.1-125.2-119.9zm225.1 38.3v-55.6c57.8 0 87.8-6.8 87.8 27.3 0 36.5-38.2 28.3-87.8 28.3zm-.9 72.5H365c10.8 0 18.9 11.7 24 19.2-16.1 1.9-33 2.8-50.6 2.9v-22.1z"/></svg> basics</a>
-<ul>
+<li class="chapter" data-level="" data-path="practical-work-1.html"><a href="practical-work-1.html"><i class="fa fa-check"></i>Practical Work 1</a><ul>
+<li class="chapter" data-level="1.8" data-path="practical-work-1.html"><a href="practical-work-1.html#some-basics"><i class="fa fa-check"></i><b>1.8</b> Some <svg style="height:0.8em;top:.04em;position:relative;fill:steelblue;" viewBox="0 0 581 512"><path d="M581 226.6C581 119.1 450.9 32 290.5 32S0 119.1 0 226.6C0 322.4 103.3 402 239.4 418.1V480h99.1v-61.5c24.3-2.7 47.6-7.4 69.4-13.9L448 480h112l-67.4-113.7c54.5-35.4 88.4-84.9 88.4-139.7zm-466.8 14.5c0-73.5 98.9-133 220.8-133s211.9 40.7 211.9 133c0 50.1-26.5 85-70.3 106.4-2.4-1.6-4.7-2.9-6.4-3.7-10.2-5.2-27.8-10.5-27.8-10.5s86.6-6.4 86.6-92.7-90.6-87.9-90.6-87.9h-199V361c-74.1-21.5-125.2-67.1-125.2-119.9zm225.1 38.3v-55.6c57.8 0 87.8-6.8 87.8 27.3 0 36.5-38.2 28.3-87.8 28.3zm-.9 72.5H365c10.8 0 18.9 11.7 24 19.2-16.1 1.9-33 2.8-50.6 2.9v-22.1z"/></svg> basics</a><ul>
 <li class="chapter" data-level="1.8.1" data-path="practical-work-1.html"><a href="practical-work-1.html#basic-commands"><i class="fa fa-check"></i><b>1.8.1</b> Basic Commands</a></li>
 <li class="chapter" data-level="1.8.2" data-path="practical-work-1.html"><a href="practical-work-1.html#vectors"><i class="fa fa-check"></i><b>1.8.2</b> Vectors</a></li>
 <li class="chapter" data-level="1.8.3" data-path="practical-work-1.html"><a href="practical-work-1.html#matrices-data-frames-and-lists"><i class="fa fa-check"></i><b>1.8.3</b> Matrices, data frames and lists</a></li>
@@ -202,78 +190,65 @@ code span.wa { color: #bf0303; } /* Warning */
 <li class="chapter" data-level="1.8.6" data-path="practical-work-1.html"><a href="practical-work-1.html#working-directory"><i class="fa fa-check"></i><b>1.8.6</b> Working directory</a></li>
 <li class="chapter" data-level="1.8.7" data-path="practical-work-1.html"><a href="practical-work-1.html#loading-data"><i class="fa fa-check"></i><b>1.8.7</b> Loading Data</a></li>
 </ul></li>
-<li class="chapter" data-level="1.9" data-path="practical-work-1.html"><a href="practical-work-1.html#regression"><i class="fa fa-check"></i><b>1.9</b> Regression</a>
-<ul>
+<li class="chapter" data-level="1.9" data-path="practical-work-1.html"><a href="practical-work-1.html#regression"><i class="fa fa-check"></i><b>1.9</b> Regression</a><ul>
 <li class="chapter" data-level="1.9.1" data-path="practical-work-1.html"><a href="practical-work-1.html#the-lm-function"><i class="fa fa-check"></i><b>1.9.1</b> The <code>lm</code> function</a></li>
 <li class="chapter" data-level="1.9.2" data-path="practical-work-1.html"><a href="practical-work-1.html#boston"><i class="fa fa-check"></i><b>1.9.2</b> Predicting House Value: Boston dataset</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="2" data-path="multiple-linear-regression.html"><a href="multiple-linear-regression.html"><i class="fa fa-check"></i><b>2</b> Multiple Linear Regression</a>
-<ul>
+<li class="chapter" data-level="2" data-path="multiple-linear-regression.html"><a href="multiple-linear-regression.html"><i class="fa fa-check"></i><b>2</b> Multiple Linear Regression</a><ul>
 <li class="chapter" data-level="2.1" data-path="multiple-linear-regression.html"><a href="multiple-linear-regression.html#the-model"><i class="fa fa-check"></i><b>2.1</b> The Model</a></li>
 <li class="chapter" data-level="2.2" data-path="multiple-linear-regression.html"><a href="multiple-linear-regression.html#estimating-the-regression-coefficients"><i class="fa fa-check"></i><b>2.2</b> Estimating the Regression Coefficients</a></li>
-<li class="chapter" data-level="2.3" data-path="multiple-linear-regression.html"><a href="multiple-linear-regression.html#some-important-questions"><i class="fa fa-check"></i><b>2.3</b> Some important questions</a>
-<ul>
+<li class="chapter" data-level="2.3" data-path="multiple-linear-regression.html"><a href="multiple-linear-regression.html#some-important-questions"><i class="fa fa-check"></i><b>2.3</b> Some important questions</a><ul>
 <li class="chapter" data-level="2.3.1" data-path="multiple-linear-regression.html"><a href="multiple-linear-regression.html#other-consid"><i class="fa fa-check"></i><b>2.3.1</b> Other Considerations in Regression Model</a></li>
 </ul></li>
-<li class="chapter" data-level="2.4" data-path="multiple-linear-regression.html"><a href="multiple-linear-regression.html#how-to-select-the-best-performing-model"><i class="fa fa-check"></i><b>2.4</b> How to select the best performing model</a>
-<ul>
+<li class="chapter" data-level="2.4" data-path="multiple-linear-regression.html"><a href="multiple-linear-regression.html#how-to-select-the-best-performing-model"><i class="fa fa-check"></i><b>2.4</b> How to select the best performing model</a><ul>
 <li><a href="multiple-linear-regression.html#use-the-adjusted-r_adj2-for-multivariate-models">Use the Adjusted <span class="math inline">\(R_{adj}^2\)</span> for multivariate models</a></li>
 <li class="chapter" data-level="" data-path="multiple-linear-regression.html"><a href="multiple-linear-regression.html#have-a-look-at-the-residuals-or-error-terms"><i class="fa fa-check"></i>Have a look at the residuals or error terms</a></li>
 <li class="chapter" data-level="" data-path="multiple-linear-regression.html"><a href="multiple-linear-regression.html#histogram-of-residuals"><i class="fa fa-check"></i>Histogram of residuals</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="" data-path="pw-2.html"><a href="pw-2.html"><i class="fa fa-check"></i>PW 2</a>
-<ul>
-<li class="chapter" data-level="" data-path="multiple-linear-regression.html"><a href="multiple-linear-regression.html#multiple-linear-regression"><i class="fa fa-check"></i>Multiple Linear Regression</a></li>
+<li class="chapter" data-level="" data-path="pw-2.html"><a href="pw-2.html"><i class="fa fa-check"></i>PW 2</a><ul>
+<li class="chapter" data-level="" data-path="pw-2.html"><a href="pw-2.html#multiple-linear-regression-1"><i class="fa fa-check"></i>Multiple Linear Regression</a></li>
 <li class="chapter" data-level="" data-path="pw-2.html"><a href="pw-2.html#reporting"><i class="fa fa-check"></i>Reporting</a></li>
 </ul></li>
 <li class="part"><span><b>Classification</b></span></li>
-<li class="chapter" data-level="3" data-path="logistic-regression.html"><a href="logistic-regression.html"><i class="fa fa-check"></i><b>3</b> Logistic Regression</a>
-<ul>
-<li class="chapter" data-level="3.1" data-path="introduction.html"><a href="introduction.html#introduction"><i class="fa fa-check"></i><b>3.1</b> Introduction</a></li>
-<li class="chapter" data-level="3.2" data-path="logistic-regression.html"><a href="logistic-regression.html#logistic-regression-1"><i class="fa fa-check"></i><b>3.2</b> Logistic Regression</a>
-<ul>
+<li class="chapter" data-level="3" data-path="logistic-regression.html"><a href="logistic-regression.html"><i class="fa fa-check"></i><b>3</b> Logistic Regression</a><ul>
+<li class="chapter" data-level="3.1" data-path="logistic-regression.html"><a href="logistic-regression.html#introduction-1"><i class="fa fa-check"></i><b>3.1</b> Introduction</a></li>
+<li class="chapter" data-level="3.2" data-path="logistic-regression.html"><a href="logistic-regression.html#logistic-regression-1"><i class="fa fa-check"></i><b>3.2</b> Logistic Regression</a><ul>
 <li class="chapter" data-level="3.2.1" data-path="logistic-regression.html"><a href="logistic-regression.html#the-logistic-model"><i class="fa fa-check"></i><b>3.2.1</b> The Logistic Model</a></li>
-<li class="chapter" data-level="3.2.2" data-path="multiple-linear-regression.html"><a href="multiple-linear-regression.html#estimating-the-regression-coefficients"><i class="fa fa-check"></i><b>3.2.2</b> Estimating the Regression Coefficients</a></li>
-<li class="chapter" data-level="3.2.3" data-path="linear-regression.html"><a href="linear-regression.html#prediction"><i class="fa fa-check"></i><b>3.2.3</b> Prediction</a></li>
+<li class="chapter" data-level="3.2.2" data-path="logistic-regression.html"><a href="logistic-regression.html#estimating-the-regression-coefficients-1"><i class="fa fa-check"></i><b>3.2.2</b> Estimating the Regression Coefficients</a></li>
+<li class="chapter" data-level="3.2.3" data-path="logistic-regression.html"><a href="logistic-regression.html#prediction-1"><i class="fa fa-check"></i><b>3.2.3</b> Prediction</a></li>
 </ul></li>
 <li class="chapter" data-level="3.3" data-path="logistic-regression.html"><a href="logistic-regression.html#multiple-logistic-regression"><i class="fa fa-check"></i><b>3.3</b> Multiple Logistic Regression</a></li>
-<li class="chapter" data-level="3.4" data-path="logistic-regression.html"><a href="logistic-regression.html#logreg-examps"><i class="fa fa-check"></i><b>3.4</b> Example</a>
-<ul>
+<li class="chapter" data-level="3.4" data-path="logistic-regression.html"><a href="logistic-regression.html#logreg-examps"><i class="fa fa-check"></i><b>3.4</b> Example</a><ul>
 <li class="chapter" data-level="3.4.1" data-path="logistic-regression.html"><a href="logistic-regression.html#logreg-examps-challenger"><i class="fa fa-check"></i><b>3.4.1</b> Case study: <em>The Challenger disaster</em></a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="" data-path="pw-3.html"><a href="pw-3.html"><i class="fa fa-check"></i>PW 3</a>
-<ul>
+<li class="chapter" data-level="" data-path="pw-3.html"><a href="pw-3.html"><i class="fa fa-check"></i>PW 3</a><ul>
 <li class="chapter" data-level="" data-path="pw-3.html"><a href="pw-3.html#social-networks-ads"><i class="fa fa-check"></i>Social Networks Ads</a></li>
 </ul></li>
-<li class="chapter" data-level="4" data-path="discriminant-analysis.html"><a href="discriminant-analysis.html"><i class="fa fa-check"></i><b>4</b> Discriminant Analysis</a>
-<ul>
-<li class="chapter" data-level="4.1" data-path="introduction.html"><a href="introduction.html#introduction"><i class="fa fa-check"></i><b>4.1</b> Introduction</a></li>
+<li class="chapter" data-level="4" data-path="discriminant-analysis.html"><a href="discriminant-analysis.html"><i class="fa fa-check"></i><b>4</b> Discriminant Analysis</a><ul>
+<li class="chapter" data-level="4.1" data-path="discriminant-analysis.html"><a href="discriminant-analysis.html#introduction-2"><i class="fa fa-check"></i><b>4.1</b> Introduction</a></li>
 <li class="chapter" data-level="4.2" data-path="discriminant-analysis.html"><a href="discriminant-analysis.html#bayes-theorem"><i class="fa fa-check"></i><b>4.2</b> Bayes’ Theorem</a></li>
 <li class="chapter" data-level="4.3" data-path="discriminant-analysis.html"><a href="discriminant-analysis.html#lda-for-p1"><i class="fa fa-check"></i><b>4.3</b> LDA for <span class="math inline">\(p=1\)</span></a></li>
 <li class="chapter" data-level="4.4" data-path="discriminant-analysis.html"><a href="discriminant-analysis.html#estimating-the-parameters"><i class="fa fa-check"></i><b>4.4</b> Estimating the parameters</a></li>
 <li class="chapter" data-level="4.5" data-path="discriminant-analysis.html"><a href="discriminant-analysis.html#lda-for-p-1"><i class="fa fa-check"></i><b>4.5</b> LDA for <span class="math inline">\(p &gt; 1\)</span></a></li>
 <li class="chapter" data-level="4.6" data-path="discriminant-analysis.html"><a href="discriminant-analysis.html#making-predictions"><i class="fa fa-check"></i><b>4.6</b> Making predictions</a></li>
-<li class="chapter" data-level="4.7" data-path="discriminant-analysis.html"><a href="discriminant-analysis.html#other-forms-of-discriminant-analysis"><i class="fa fa-check"></i><b>4.7</b> Other forms of Discriminant Analysis</a>
-<ul>
+<li class="chapter" data-level="4.7" data-path="discriminant-analysis.html"><a href="discriminant-analysis.html#other-forms-of-discriminant-analysis"><i class="fa fa-check"></i><b>4.7</b> Other forms of Discriminant Analysis</a><ul>
 <li class="chapter" data-level="4.7.1" data-path="discriminant-analysis.html"><a href="discriminant-analysis.html#quadratic-discriminant-analysis-qda"><i class="fa fa-check"></i><b>4.7.1</b> Quadratic Discriminant Analysis (QDA)</a></li>
 <li class="chapter" data-level="4.7.2" data-path="discriminant-analysis.html"><a href="discriminant-analysis.html#naive-bayes"><i class="fa fa-check"></i><b>4.7.2</b> Naive Bayes</a></li>
 </ul></li>
 <li class="chapter" data-level="4.8" data-path="discriminant-analysis.html"><a href="discriminant-analysis.html#lda-vs-logistic-regression"><i class="fa fa-check"></i><b>4.8</b> LDA vs Logistic Regression</a></li>
 </ul></li>
-<li class="chapter" data-level="" data-path="pw-4.html"><a href="pw-4.html"><i class="fa fa-check"></i>PW 4</a>
-<ul>
-<li class="chapter" data-level="" data-path="logistic-regression.html"><a href="logistic-regression.html#logistic-regression"><i class="fa fa-check"></i>Logistic Regression</a></li>
+<li class="chapter" data-level="" data-path="pw-4.html"><a href="pw-4.html"><i class="fa fa-check"></i>PW 4</a><ul>
+<li class="chapter" data-level="" data-path="pw-4.html"><a href="pw-4.html#logistic-regression-2"><i class="fa fa-check"></i>Logistic Regression</a></li>
 <li class="chapter" data-level="" data-path="pw-4.html"><a href="pw-4.html#decision-boundary-of-logistic-regression"><i class="fa fa-check"></i>Decision Boundary of Logistic Regression</a></li>
 <li class="chapter" data-level="" data-path="pw-4.html"><a href="pw-4.html#linear-discriminant-analysis-lda"><i class="fa fa-check"></i>Linear Discriminant Analysis (LDA)</a></li>
 <li class="chapter" data-level="" data-path="pw-4.html"><a href="pw-4.html#lda-from-scratch"><i class="fa fa-check"></i>LDA from scratch</a></li>
-<li class="chapter" data-level="" data-path="discriminant-analysis.html"><a href="discriminant-analysis.html#quadratic-discriminant-analysis-qda"><i class="fa fa-check"></i>Quadratic Discriminant Analysis (QDA)</a></li>
+<li class="chapter" data-level="" data-path="pw-4.html"><a href="pw-4.html#quadratic-discriminant-analysis-qda-1"><i class="fa fa-check"></i>Quadratic Discriminant Analysis (QDA)</a></li>
 <li class="chapter" data-level="" data-path="pw-4.html"><a href="pw-4.html#comparison"><i class="fa fa-check"></i>Comparison</a></li>
 </ul></li>
-<li class="chapter" data-level="5" data-path="decision-trees-random-forests.html"><a href="decision-trees-random-forests.html"><i class="fa fa-check"></i><b>5</b> Decision Trees &amp; Random Forests</a>
-<ul>
+<li class="chapter" data-level="5" data-path="decision-trees-random-forests.html"><a href="decision-trees-random-forests.html"><i class="fa fa-check"></i><b>5</b> Decision Trees &amp; Random Forests</a><ul>
 <li class="chapter" data-level="" data-path="decision-trees-random-forests.html"><a href="decision-trees-random-forests.html#the-basics-of-decision-trees"><i class="fa fa-check"></i>The Basics of Decision Trees</a></li>
 <li class="chapter" data-level="" data-path="decision-trees-random-forests.html"><a href="decision-trees-random-forests.html#classification-trees"><i class="fa fa-check"></i>Classification Trees</a></li>
 <li class="chapter" data-level="" data-path="decision-trees-random-forests.html"><a href="decision-trees-random-forests.html#bagging-random-forests"><i class="fa fa-check"></i>Bagging &amp; Random Forests</a></li>
@@ -281,114 +256,94 @@ code span.wa { color: #bf0303; } /* Warning */
 <li><a href="decision-trees-random-forests.html#trees-in-r">Trees in <code>R</code></a></li>
 <li class="chapter" data-level="" data-path="decision-trees-random-forests.html"><a href="decision-trees-random-forests.html#random-forests---the-first-choice-method-for-every-data-analysis"><i class="fa fa-check"></i>Random forests - the first-choice method for every data analysis?</a></li>
 </ul></li>
-<li class="chapter" data-level="" data-path="pw-5.html"><a href="pw-5.html"><i class="fa fa-check"></i>PW 5</a>
-<ul>
-<li class="chapter" data-level="" data-path="pw-5.html"><a href="pw-5.html#regression-trees"><i class="fa fa-check"></i>Regression Trees</a>
-<ul>
+<li class="chapter" data-level="" data-path="pw-5.html"><a href="pw-5.html"><i class="fa fa-check"></i>PW 5</a><ul>
+<li class="chapter" data-level="" data-path="pw-5.html"><a href="pw-5.html#regression-trees"><i class="fa fa-check"></i>Regression Trees</a><ul>
 <li class="chapter" data-level="" data-path="pw-5.html"><a href="pw-5.html#single-tree"><i class="fa fa-check"></i>Single tree</a></li>
 <li class="chapter" data-level="" data-path="pw-5.html"><a href="pw-5.html#bagging"><i class="fa fa-check"></i>Bagging</a></li>
 <li class="chapter" data-level="" data-path="pw-5.html"><a href="pw-5.html#random-forests"><i class="fa fa-check"></i>Random Forests</a></li>
-<li class="chapter" data-level="" data-path="decision-trees-random-forests.html"><a href="decision-trees-random-forests.html#boosting"><i class="fa fa-check"></i>Boosting</a></li>
-<li class="chapter" data-level="" data-path="pw-4.html"><a href="pw-4.html#comparison"><i class="fa fa-check"></i>Comparison</a></li>
+<li class="chapter" data-level="" data-path="pw-5.html"><a href="pw-5.html#boosting-1"><i class="fa fa-check"></i>Boosting</a></li>
+<li class="chapter" data-level="" data-path="pw-5.html"><a href="pw-5.html#comparison-1"><i class="fa fa-check"></i>Comparison</a></li>
 </ul></li>
-<li class="chapter" data-level="" data-path="decision-trees-random-forests.html"><a href="decision-trees-random-forests.html#classification-trees"><i class="fa fa-check"></i>Classification Trees</a>
-<ul>
+<li class="chapter" data-level="" data-path="pw-5.html"><a href="pw-5.html#classification-trees-1"><i class="fa fa-check"></i>Classification Trees</a><ul>
 <li class="chapter" data-level="" data-path="pw-5.html"><a href="pw-5.html#the-spam-dataset"><i class="fa fa-check"></i>The Spam dataset</a></li>
 <li class="chapter" data-level="" data-path="pw-5.html"><a href="pw-5.html#extra-tuning"><i class="fa fa-check"></i>Extra: Tuning</a></li>
 </ul></li>
 </ul></li>
 <li class="part"><span><b>II Dimensionality Reduction</b></span></li>
-<li class="chapter" data-level="6" data-path="principal-components-analysis.html"><a href="principal-components-analysis.html"><i class="fa fa-check"></i><b>6</b> Principal Components Analysis</a>
-<ul>
-<li class="chapter" data-level="6.1" data-path="introduction.html"><a href="introduction.html#introduction"><i class="fa fa-check"></i><b>6.1</b> Introduction</a></li>
-<li class="chapter" data-level="6.2" data-path="principal-components-analysis.html"><a href="principal-components-analysis.html#principal-components"><i class="fa fa-check"></i><b>6.2</b> Principal Components</a>
-<ul>
+<li class="chapter" data-level="6" data-path="principal-components-analysis.html"><a href="principal-components-analysis.html"><i class="fa fa-check"></i><b>6</b> Principal Components Analysis</a><ul>
+<li class="chapter" data-level="6.1" data-path="principal-components-analysis.html"><a href="principal-components-analysis.html#introduction-3"><i class="fa fa-check"></i><b>6.1</b> Introduction</a></li>
+<li class="chapter" data-level="6.2" data-path="principal-components-analysis.html"><a href="principal-components-analysis.html#principal-components"><i class="fa fa-check"></i><b>6.2</b> Principal Components</a><ul>
 <li class="chapter" data-level="" data-path="principal-components-analysis.html"><a href="principal-components-analysis.html#notations-and-procedure"><i class="fa fa-check"></i>Notations and Procedure</a></li>
 <li><a href="principal-components-analysis.html#first-principal-component-textpc_1-y_1">First Principal Component (<span class="math inline">\(\text{PC}_1\)</span>): <span class="math inline">\(Y_1\)</span></a></li>
 <li><a href="principal-components-analysis.html#second-principal-component-textpc_2-y_2">Second Principal Component (<span class="math inline">\(\text{PC}_2\)</span>): <span class="math inline">\(Y_2\)</span></a></li>
 <li><a href="principal-components-analysis.html#ith-principal-component-textpc_i-y_i"><span class="math inline">\(i^{th}\)</span> Principal Component (<span class="math inline">\(\text{PC}_i\)</span>): <span class="math inline">\(Y_i\)</span></a></li>
 </ul></li>
-<li class="chapter" data-level="6.3" data-path="principal-components-analysis.html"><a href="principal-components-analysis.html#how-do-we-find-the-coefficients"><i class="fa fa-check"></i><b>6.3</b> How do we find the coefficients?</a>
-<ul>
+<li class="chapter" data-level="6.3" data-path="principal-components-analysis.html"><a href="principal-components-analysis.html#how-do-we-find-the-coefficients"><i class="fa fa-check"></i><b>6.3</b> How do we find the coefficients?</a><ul>
 <li class="chapter" data-level="" data-path="principal-components-analysis.html"><a href="principal-components-analysis.html#why-it-may-be-possible-to-reduce-dimensions"><i class="fa fa-check"></i>Why It May Be Possible to Reduce Dimensions</a></li>
 <li class="chapter" data-level="" data-path="principal-components-analysis.html"><a href="principal-components-analysis.html#procedure"><i class="fa fa-check"></i>Procedure</a></li>
 </ul></li>
 <li class="chapter" data-level="6.4" data-path="principal-components-analysis.html"><a href="principal-components-analysis.html#standardization-of-the-features"><i class="fa fa-check"></i><b>6.4</b> Standardization of the features</a></li>
-<li class="chapter" data-level="6.5" data-path="principal-components-analysis.html"><a href="principal-components-analysis.html#projection-of-the-data"><i class="fa fa-check"></i><b>6.5</b> Projection of the data</a>
-<ul>
+<li class="chapter" data-level="6.5" data-path="principal-components-analysis.html"><a href="principal-components-analysis.html#projection-of-the-data"><i class="fa fa-check"></i><b>6.5</b> Projection of the data</a><ul>
 <li class="chapter" data-level="" data-path="principal-components-analysis.html"><a href="principal-components-analysis.html#scores"><i class="fa fa-check"></i>Scores</a></li>
 <li class="chapter" data-level="" data-path="principal-components-analysis.html"><a href="principal-components-analysis.html#visualization"><i class="fa fa-check"></i>Visualization</a></li>
 <li class="chapter" data-level="" data-path="principal-components-analysis.html"><a href="principal-components-analysis.html#extra"><i class="fa fa-check"></i>Extra</a></li>
 </ul></li>
-<li class="chapter" data-level="6.6" data-path="principal-components-analysis.html"><a href="principal-components-analysis.html#case-study"><i class="fa fa-check"></i><b>6.6</b> Case study</a>
-<ul>
+<li class="chapter" data-level="6.6" data-path="principal-components-analysis.html"><a href="principal-components-analysis.html#case-study"><i class="fa fa-check"></i><b>6.6</b> Case study</a><ul>
 <li class="chapter" data-level="" data-path="principal-components-analysis.html"><a href="principal-components-analysis.html#employement-in-european-countries-in-the-late-70s"><i class="fa fa-check"></i>Employement in European countries in the late 70s</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="" data-path="pw-6.html"><a href="pw-6.html"><i class="fa fa-check"></i>PW 6</a>
-<ul>
+<li class="chapter" data-level="" data-path="pw-6.html"><a href="pw-6.html"><i class="fa fa-check"></i>PW 6</a><ul>
 <li class="chapter" data-level="" data-path="pw-6.html"><a href="pw-6.html#the-iris-dataset"><i class="fa fa-check"></i>The Iris Dataset</a></li>
-<li class="chapter" data-level="" data-path="practical-work-1.html"><a href="practical-work-1.html#loading-data"><i class="fa fa-check"></i>Loading Data</a></li>
+<li class="chapter" data-level="" data-path="pw-6.html"><a href="pw-6.html#loading-data-1"><i class="fa fa-check"></i>Loading Data</a></li>
 <li class="chapter" data-level="" data-path="pw-6.html"><a href="pw-6.html#exploratory-analysis"><i class="fa fa-check"></i>Exploratory analysis</a></li>
 <li><a href="pw-6.html#pca-using-princomp">PCA using <code>princomp()</code></a></li>
 <li><a href="pw-6.html#deeper-pca-using-factoextra-package">Deeper PCA using <code>factoextra</code> package</a></li>
 <li class="chapter" data-level="" data-path="pw-6.html"><a href="pw-6.html#step-by-step-pca"><i class="fa fa-check"></i>Step-by-step PCA</a></li>
 </ul></li>
 <li class="part"><span><b>III Unsupervised Learning</b></span></li>
-<li class="chapter" data-level="7" data-path="kmeans-hierarchical-clustering.html"><a href="kmeans-hierarchical-clustering.html"><i class="fa fa-check"></i><b>7</b> Kmeans &amp; Hierarchical Clustering</a>
-<ul>
-<li class="chapter" data-level="7.1" data-path="introduction.html"><a href="introduction.html#unsupervised-learning"><i class="fa fa-check"></i><b>7.1</b> Unsupervised Learning</a></li>
+<li class="chapter" data-level="7" data-path="kmeans-hierarchical-clustering.html"><a href="kmeans-hierarchical-clustering.html"><i class="fa fa-check"></i><b>7</b> Kmeans &amp; Hierarchical Clustering</a><ul>
+<li class="chapter" data-level="7.1" data-path="kmeans-hierarchical-clustering.html"><a href="kmeans-hierarchical-clustering.html#unsupervised-learning-1"><i class="fa fa-check"></i><b>7.1</b> Unsupervised Learning</a></li>
 <li class="chapter" data-level="7.2" data-path="kmeans-hierarchical-clustering.html"><a href="kmeans-hierarchical-clustering.html#clustering"><i class="fa fa-check"></i><b>7.2</b> Clustering</a></li>
-<li class="chapter" data-level="7.3" data-path="introduction.html"><a href="introduction.html#introduction"><i class="fa fa-check"></i><b>7.3</b> Introduction</a>
-<ul>
+<li class="chapter" data-level="7.3" data-path="kmeans-hierarchical-clustering.html"><a href="kmeans-hierarchical-clustering.html#introduction-4"><i class="fa fa-check"></i><b>7.3</b> Introduction</a><ul>
 <li class="chapter" data-level="" data-path="kmeans-hierarchical-clustering.html"><a href="kmeans-hierarchical-clustering.html#hard-clustering"><i class="fa fa-check"></i>Hard clustering</a></li>
 <li class="chapter" data-level="" data-path="kmeans-hierarchical-clustering.html"><a href="kmeans-hierarchical-clustering.html#fuzzy-clustering"><i class="fa fa-check"></i>Fuzzy clustering</a></li>
 </ul></li>
-<li class="chapter" data-level="7.4" data-path="kmeans-hierarchical-clustering.html"><a href="kmeans-hierarchical-clustering.html#k-means"><i class="fa fa-check"></i><b>7.4</b> <span class="math inline">\(k\)</span>-Means</a>
-<ul>
+<li class="chapter" data-level="7.4" data-path="kmeans-hierarchical-clustering.html"><a href="kmeans-hierarchical-clustering.html#k-means"><i class="fa fa-check"></i><b>7.4</b> <span class="math inline">\(k\)</span>-Means</a><ul>
 <li class="chapter" data-level="7.4.1" data-path="kmeans-hierarchical-clustering.html"><a href="kmeans-hierarchical-clustering.html#k-means-in"><i class="fa fa-check"></i><b>7.4.1</b> <span class="math inline">\(k\)</span>-means in <svg style="height:0.8em;top:.04em;position:relative;fill:steelblue;" viewBox="0 0 581 512"><path d="M581 226.6C581 119.1 450.9 32 290.5 32S0 119.1 0 226.6C0 322.4 103.3 402 239.4 418.1V480h99.1v-61.5c24.3-2.7 47.6-7.4 69.4-13.9L448 480h112l-67.4-113.7c54.5-35.4 88.4-84.9 88.4-139.7zm-466.8 14.5c0-73.5 98.9-133 220.8-133s211.9 40.7 211.9 133c0 50.1-26.5 85-70.3 106.4-2.4-1.6-4.7-2.9-6.4-3.7-10.2-5.2-27.8-10.5-27.8-10.5s86.6-6.4 86.6-92.7-90.6-87.9-90.6-87.9h-199V361c-74.1-21.5-125.2-67.1-125.2-119.9zm225.1 38.3v-55.6c57.8 0 87.8-6.8 87.8 27.3 0 36.5-38.2 28.3-87.8 28.3zm-.9 72.5H365c10.8 0 18.9 11.7 24 19.2-16.1 1.9-33 2.8-50.6 2.9v-22.1z"/></svg></a></li>
 <li class="chapter" data-level="7.4.2" data-path="kmeans-hierarchical-clustering.html"><a href="kmeans-hierarchical-clustering.html#cluster-validity-choosing-the-number-of-clusters"><i class="fa fa-check"></i><b>7.4.2</b> Cluster Validity, Choosing the Number of Clusters</a></li>
 </ul></li>
-<li class="chapter" data-level="7.5" data-path="kmeans-hierarchical-clustering.html"><a href="kmeans-hierarchical-clustering.html#hierarchical-clustering"><i class="fa fa-check"></i><b>7.5</b> Hierarchical Clustering</a>
-<ul>
+<li class="chapter" data-level="7.5" data-path="kmeans-hierarchical-clustering.html"><a href="kmeans-hierarchical-clustering.html#hierarchical-clustering"><i class="fa fa-check"></i><b>7.5</b> Hierarchical Clustering</a><ul>
 <li class="chapter" data-level="7.5.1" data-path="kmeans-hierarchical-clustering.html"><a href="kmeans-hierarchical-clustering.html#dendrogram"><i class="fa fa-check"></i><b>7.5.1</b> Dendrogram</a></li>
 <li class="chapter" data-level="7.5.2" data-path="kmeans-hierarchical-clustering.html"><a href="kmeans-hierarchical-clustering.html#the-hierarchical-clustering-algorithm"><i class="fa fa-check"></i><b>7.5.2</b> The Hierarchical Clustering Algorithm</a></li>
 <li class="chapter" data-level="7.5.3" data-path="kmeans-hierarchical-clustering.html"><a href="kmeans-hierarchical-clustering.html#hierarchical-clustering-in"><i class="fa fa-check"></i><b>7.5.3</b> Hierarchical clustering in <svg style="height:0.8em;top:.04em;position:relative;fill:steelblue;" viewBox="0 0 581 512"><path d="M581 226.6C581 119.1 450.9 32 290.5 32S0 119.1 0 226.6C0 322.4 103.3 402 239.4 418.1V480h99.1v-61.5c24.3-2.7 47.6-7.4 69.4-13.9L448 480h112l-67.4-113.7c54.5-35.4 88.4-84.9 88.4-139.7zm-466.8 14.5c0-73.5 98.9-133 220.8-133s211.9 40.7 211.9 133c0 50.1-26.5 85-70.3 106.4-2.4-1.6-4.7-2.9-6.4-3.7-10.2-5.2-27.8-10.5-27.8-10.5s86.6-6.4 86.6-92.7-90.6-87.9-90.6-87.9h-199V361c-74.1-21.5-125.2-67.1-125.2-119.9zm225.1 38.3v-55.6c57.8 0 87.8-6.8 87.8 27.3 0 36.5-38.2 28.3-87.8 28.3zm-.9 72.5H365c10.8 0 18.9 11.7 24 19.2-16.1 1.9-33 2.8-50.6 2.9v-22.1z"/></svg></a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="" data-path="pw-7.html"><a href="pw-7.html"><i class="fa fa-check"></i>PW 7</a>
-<ul>
-<li class="chapter" data-level="" data-path="pw-2.html"><a href="pw-2.html#reporting"><i class="fa fa-check"></i>Reporting</a>
-<ul>
+<li class="chapter" data-level="" data-path="pw-7.html"><a href="pw-7.html"><i class="fa fa-check"></i>PW 7</a><ul>
+<li class="chapter" data-level="" data-path="pw-7.html"><a href="pw-7.html#reporting-1"><i class="fa fa-check"></i>Reporting</a><ul>
 <li class="chapter" data-level="" data-path="pw-7.html"><a href="pw-7.html#markdown"><i class="fa fa-check"></i>Markdown</a></li>
 <li class="chapter" data-level="" data-path="pw-7.html"><a href="pw-7.html#r-markdown"><i class="fa fa-check"></i>R Markdown</a></li>
 <li class="chapter" data-level="" data-path="pw-7.html"><a href="pw-7.html#the-report-to-be-submitted"><i class="fa fa-check"></i>The report to be submitted</a></li>
 </ul></li>
-<li><a href="pw-7.html#k-means-clustering"><span class="math inline">\(k\)</span>-means clustering</a>
-<ul>
+<li><a href="pw-7.html#k-means-clustering"><span class="math inline">\(k\)</span>-means clustering</a><ul>
 <li><a href="pw-7.html#pointscards"><code>pointsCards</code></a></li>
 <li><a href="pw-7.html#ligue-1"><code>Ligue 1</code></a></li>
 <li><a href="pw-7.html#pca"><code>PCA</code></a></li>
 <li><a href="pw-7.html#implementing-k-means"><code>Implementing k-means</code></a></li>
 </ul></li>
-<li class="chapter" data-level="" data-path="kmeans-hierarchical-clustering.html"><a href="kmeans-hierarchical-clustering.html#hierarchical-clustering"><i class="fa fa-check"></i>Hierarchical clustering</a>
-<ul>
+<li class="chapter" data-level="" data-path="pw-7.html"><a href="pw-7.html#hierarchical-clustering-1"><i class="fa fa-check"></i>Hierarchical clustering</a><ul>
 <li><a href="pw-7.html#distances-dist">Distances <code>dist()</code></a></li>
 <li><a href="pw-7.html#dendrogram-hclust">Dendrogram <code>hclust()</code></a></li>
 <li class="chapter" data-level="" data-path="pw-7.html"><a href="pw-7.html#hierarchical-clustering-on-iris-dataset"><i class="fa fa-check"></i>Hierarchical clustering on Iris dataset</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="8" data-path="gaussian-mixture-models-em.html"><a href="gaussian-mixture-models-em.html"><i class="fa fa-check"></i><b>8</b> Gaussian Mixture Models &amp; EM</a>
-<ul>
+<li class="chapter" data-level="8" data-path="gaussian-mixture-models-em.html"><a href="gaussian-mixture-models-em.html"><i class="fa fa-check"></i><b>8</b> Gaussian Mixture Models &amp; EM</a><ul>
 <li class="chapter" data-level="8.1" data-path="gaussian-mixture-models-em.html"><a href="gaussian-mixture-models-em.html#the-gaussian-distribution"><i class="fa fa-check"></i><b>8.1</b> The Gaussian distribution</a></li>
 <li class="chapter" data-level="8.2" data-path="gaussian-mixture-models-em.html"><a href="gaussian-mixture-models-em.html#mixture-of-gaussians"><i class="fa fa-check"></i><b>8.2</b> Mixture of Gaussians</a></li>
 <li class="chapter" data-level="8.3" data-path="gaussian-mixture-models-em.html"><a href="gaussian-mixture-models-em.html#em-for-gaussian-mixtures"><i class="fa fa-check"></i><b>8.3</b> EM for Gaussian Mixtures</a></li>
 </ul></li>
-<li class="chapter" data-level="" data-path="pw-8.html"><a href="pw-8.html"><i class="fa fa-check"></i>PW 8</a>
-<ul>
+<li class="chapter" data-level="" data-path="pw-8.html"><a href="pw-8.html"><i class="fa fa-check"></i>PW 8</a><ul>
 <li class="chapter" data-level="" data-path="pw-8.html"><a href="pw-8.html#report-template"><i class="fa fa-check"></i>Report template</a></li>
-<li class="chapter" data-level="8.4" data-path="pw-8.html"><a href="pw-8.html#em-using-mclust"><i class="fa fa-check"></i><b>8.4</b> EM using <code>mclust</code></a>
-<ul>
+<li class="chapter" data-level="8.4" data-path="pw-8.html"><a href="pw-8.html#em-using-mclust"><i class="fa fa-check"></i><b>8.4</b> EM using <code>mclust</code></a><ul>
 <li><a href="pw-8.html#gmm-vs-k-means">GMM vs <span class="math inline">\(k\)</span>-means</a></li>
 <li class="chapter" data-level="" data-path="pw-8.html"><a href="pw-8.html#em-on-1d"><i class="fa fa-check"></i>EM on 1D</a></li>
 </ul></li>
@@ -400,15 +355,13 @@ code span.wa { color: #bf0303; } /* Warning */
 <li class="chapter" data-level="A" data-path="app-introRStudio.html"><a href="app-introRStudio.html"><i class="fa fa-check"></i><b>A</b> Introduction to <code>RStudio</code></a></li>
 <li class="chapter" data-level="B" data-path="app-ht.html"><a href="app-ht.html"><i class="fa fa-check"></i><b>B</b> Review on hypothesis testing</a></li>
 <li class="chapter" data-level="C" data-path="use-qual.html"><a href="use-qual.html"><i class="fa fa-check"></i><b>C</b> Use of qualitative predictors</a></li>
-<li class="chapter" data-level="D" data-path="model-selection.html"><a href="model-selection.html"><i class="fa fa-check"></i><b>D</b> Model Selection</a>
-<ul>
+<li class="chapter" data-level="D" data-path="model-selection.html"><a href="model-selection.html"><i class="fa fa-check"></i><b>D</b> Model Selection</a><ul>
 <li class="chapter" data-level="" data-path="model-selection.html"><a href="model-selection.html#linear-model-selection-and-best-subset-selection"><i class="fa fa-check"></i>Linear Model Selection and Best Subset Selection</a></li>
 <li class="chapter" data-level="" data-path="model-selection.html"><a href="model-selection.html#forward-stepwise-selection"><i class="fa fa-check"></i>Forward Stepwise Selection</a></li>
 <li class="chapter" data-level="" data-path="model-selection.html"><a href="model-selection.html#backward-stepwise-selection"><i class="fa fa-check"></i>Backward Stepwise Selection</a></li>
 <li class="chapter" data-level="" data-path="model-selection.html"><a href="model-selection.html#estimating-test-error-using-mallows-cp-aic-bic-adjusted-r-squared"><i class="fa fa-check"></i>Estimating Test Error Using Mallow’s Cp, AIC, BIC, Adjusted R-squared</a></li>
 <li class="chapter" data-level="" data-path="model-selection.html"><a href="model-selection.html#estimating-test-error-using-cross-validation"><i class="fa fa-check"></i>Estimating Test Error Using Cross-Validation</a></li>
-<li class="chapter" data-level="" data-path="model-selection.html"><a href="model-selection.html#examples"><i class="fa fa-check"></i>Examples</a>
-<ul>
+<li class="chapter" data-level="" data-path="model-selection.html"><a href="model-selection.html#examples"><i class="fa fa-check"></i>Examples</a><ul>
 <li class="chapter" data-level="" data-path="model-selection.html"><a href="model-selection.html#best-subset-selection"><i class="fa fa-check"></i>Best Subset Selection</a></li>
 <li class="chapter" data-level="" data-path="model-selection.html"><a href="model-selection.html#forward-stepwise-selection-and-model-selection-using-validation-set"><i class="fa fa-check"></i>Forward Stepwise Selection and Model Selection Using Validation Set</a></li>
 <li class="chapter" data-level="" data-path="model-selection.html"><a href="model-selection.html#model-selection-using-cross-validation"><i class="fa fa-check"></i>Model Selection Using Cross-Validation</a></li>
@@ -447,9 +400,9 @@ code span.wa { color: #bf0303; } /* Warning */
       in the upper right-hand corner of the page.
     </p>
 </div>
-<div id="logistic-regression" class="section level1" number="3">
+<div id="logistic-regression" class="section level1">
 <h1><span class="header-section-number">3</span> Logistic Regression</h1>
-<div id="introduction" class="section level2" number="3.1">
+<div id="introduction-1" class="section level2">
 <h2><span class="header-section-number">3.1</span> Introduction</h2>
 <p>In the previous chapters we discussed the linear regression model, which assumes that the response variable <span class="math inline">\(Y\)</span> is quantitative. But in many situations, the response variable is instead qualitative (categorical). For example, eye color is qualitative, taking on values blue, brown, or green.</p>
 <p>The process for predicting qualitative responses is known as <strong><em>classification</em></strong>.</p>
@@ -463,10 +416,10 @@ code span.wa { color: #bf0303; } /* Warning */
 </iframe>
 </center>
 </div>
-<div id="logistic-regression-1" class="section level2" number="3.2">
+<div id="logistic-regression-1" class="section level2">
 <h2><span class="header-section-number">3.2</span> Logistic Regression</h2>
 <p>Consider a data set where the response falls into one of two categories, Yes or No. Rather than modeling the response <span class="math inline">\(Y\)</span> directly, logistic regression models the <em>probability</em> that <span class="math inline">\(Y\)</span> belongs to a particular category.</p>
-<div id="the-logistic-model" class="section level3" number="3.2.1">
+<div id="the-logistic-model" class="section level3">
 <h3><span class="header-section-number">3.2.1</span> The Logistic Model</h3>
 <p>Let us suppose the response has two categories and we use the generic 0/1 coding for the response. How should we model the relationship between <span class="math inline">\(p(X) = \mathbb{P}(Y = 1|X)\)</span> and <span class="math inline">\(X\)</span>?</p>
 <p>The simplest situation is when <span class="math inline">\(Y\)</span> is <em>binary</em>: it can only take two values, codified for convenience as <span class="math inline">\(1\)</span> (success) and <span class="math inline">\(0\)</span> (failure).</p>
@@ -526,7 +479,7 @@ The left-hand side is called the <em>log-odds</em> or <em>logit</em>. We see tha
 </p>
 </div>
 </div>
-<div id="estimating-the-regression-coefficients" class="section level3" number="3.2.2">
+<div id="estimating-the-regression-coefficients-1" class="section level3">
 <h3><span class="header-section-number">3.2.2</span> Estimating the Regression Coefficients</h3>
 <center>
 <iframe width="560" height="349" src="https://www.youtube.com/embed/0dhcIQ6bX8c" frameborder="0" allowfullscreen>
@@ -550,7 +503,7 @@ In the linear regression setting, the least squares approach is a special case o
 </iframe>
 <p>Note that the <strong>animation</strong> will not be displayed the first time it is browsed (The reason is because it is hosted at <code>https</code> websites with auto-signed SSL certificates). <strong>To see it</strong>, click on the link above. You will get a warning from your browser saying that <em>“Your connection is not private”</em>. Click in <em>“Advanced”</em> and <strong>allow an exception</strong> in your browser. The next time the animation will show up correctly.</p>
 </div>
-<div id="prediction" class="section level3" number="3.2.3">
+<div id="prediction-1" class="section level3">
 <h3><span class="header-section-number">3.2.3</span> Prediction</h3>
 <center>
 <iframe width="560" height="349" src="https://www.youtube.com/embed/CBPZNizyiqA" frameborder="0" allowfullscreen>
@@ -593,7 +546,7 @@ In the linear regression setting, the least squares approach is a special case o
 <p><span class="math display">\[ \hat{p}(X) = \frac{e^{\hat{\beta_0} + \hat{\beta_1} X}}{1+e^{\hat{\beta_0} + \hat{\beta_1} X}} = \frac{e^{-10.6513+0.0055 \times 2000}}{1+e^{-10.6513+0.0055 \times 2000}} = 0.586\]</span></p>
 </div>
 </div>
-<div id="multiple-logistic-regression" class="section level2" number="3.3">
+<div id="multiple-logistic-regression" class="section level2">
 <h2><span class="header-section-number">3.3</span> Multiple Logistic Regression</h2>
 <p>We now consider the problem of predicting a binary response using multiple predictors. By analogy with the extension from simple to multiple linear regression in the previous chapters, we can generalize the simple logistic regression equation as follows:</p>
 <p><span class="math display">\[ \log( \frac{p(X)}{1-p(X)} ) = \beta_0 + \beta_1 X_1 +  \ldots + \beta_p X_p\]</span></p>
@@ -605,9 +558,9 @@ In the linear regression setting, the least squares approach is a special case o
 </iframe>
 </center>
 </div>
-<div id="logreg-examps" class="section level2" number="3.4">
+<div id="logreg-examps" class="section level2">
 <h2><span class="header-section-number">3.4</span> Example</h2>
-<div id="logreg-examps-challenger" class="section level3" number="3.4.1">
+<div id="logreg-examps-challenger" class="section level3">
 <h3><span class="header-section-number">3.4.1</span> Case study: <em>The Challenger disaster</em></h3>
 <p>The <em>Challenger</em> disaster occurred on the 28th January of 1986, when the NASA Space Shuttle orbiter <em>Challenger</em> broke apart and disintegrated at 73 seconds into its flight, leading to the deaths of its seven crew members. The accident deeply shocked the US society, in part due to the attention the mission had received because of the presence of Christa McAuliffe, who would have been the first astronaut-teacher. Because of this, NASA TV broadcasted live the launch to US public schools, which resulted in millions of school children witnessing the accident. The accident had serious consequences for the NASA credibility and resulted in an interruption of 32 months in the shuttle program. The Presidential <em>Rogers Commission</em> (formed by astronaut Neil A. Armstrong and Nobel laureate Richard P. Feynman, among others) was created to investigate the disaster.</p>
 <div class="figure" style="text-align: center"><span id="fig:video3"></span>
@@ -1063,18 +1016,18 @@ temp
 </tbody>
 </table>
 <p>Let’s begin the analysis by replicating Figures <a href="logistic-regression.html#fig:rogerts">3.2</a>a and <a href="logistic-regression.html#fig:rogerts">3.2</a>b and checking that linear regression is not the right tool for answering Q1–Q3. For that, we make two scatterplots of <code>nfails.field</code> (number of total incidents in the field joints) in function of <code>temp</code>, the first one excluding the launches without incidents (<code>subset = nfails.field &gt; 0</code>) and the second one for all the data.</p>
-<div class="sourceCode" id="cb31"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb31-1"><a href="logistic-regression.html#cb31-1"></a><span class="kw">require</span>(car)</span>
-<span id="cb31-2"><a href="logistic-regression.html#cb31-2"></a><span class="kw">scatterplot</span>(nfails.field <span class="op">~</span><span class="st"> </span>temp, <span class="dt">reg.line =</span> lm, <span class="dt">smooth =</span> <span class="ot">FALSE</span>, <span class="dt">spread =</span> <span class="ot">FALSE</span>,</span>
-<span id="cb31-3"><a href="logistic-regression.html#cb31-3"></a>            <span class="dt">boxplots =</span> <span class="ot">FALSE</span>, <span class="dt">data =</span> challenger, <span class="dt">subset =</span> nfails.field <span class="op">&gt;</span><span class="st"> </span><span class="dv">0</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb31"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb31-1" title="1"><span class="kw">require</span>(car)</a>
+<a class="sourceLine" id="cb31-2" title="2"><span class="kw">scatterplot</span>(nfails.field <span class="op">~</span><span class="st"> </span>temp, <span class="dt">reg.line =</span> lm, <span class="dt">smooth =</span> <span class="ot">FALSE</span>, <span class="dt">spread =</span> <span class="ot">FALSE</span>,</a>
+<a class="sourceLine" id="cb31-3" title="3">            <span class="dt">boxplots =</span> <span class="ot">FALSE</span>, <span class="dt">data =</span> challenger, <span class="dt">subset =</span> nfails.field <span class="op">&gt;</span><span class="st"> </span><span class="dv">0</span>)</a></code></pre></div>
 <p><img src="Machine-Learning_files/figure-html/unnamed-chunk-79-1.png" width="70%" style="display: block; margin: auto;" /></p>
-<div class="sourceCode" id="cb32"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb32-1"><a href="logistic-regression.html#cb32-1"></a><span class="kw">scatterplot</span>(nfails.field <span class="op">~</span><span class="st"> </span>temp, <span class="dt">reg.line =</span> lm, <span class="dt">smooth =</span> <span class="ot">FALSE</span>, <span class="dt">spread =</span> <span class="ot">FALSE</span>,</span>
-<span id="cb32-2"><a href="logistic-regression.html#cb32-2"></a>            <span class="dt">boxplots =</span> <span class="ot">FALSE</span>, <span class="dt">data =</span> challenger)</span></code></pre></div>
+<div class="sourceCode" id="cb32"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb32-1" title="1"><span class="kw">scatterplot</span>(nfails.field <span class="op">~</span><span class="st"> </span>temp, <span class="dt">reg.line =</span> lm, <span class="dt">smooth =</span> <span class="ot">FALSE</span>, <span class="dt">spread =</span> <span class="ot">FALSE</span>,</a>
+<a class="sourceLine" id="cb32-2" title="2">            <span class="dt">boxplots =</span> <span class="ot">FALSE</span>, <span class="dt">data =</span> challenger)</a></code></pre></div>
 <p><img src="Machine-Learning_files/figure-html/unnamed-chunk-79-2.png" width="70%" style="display: block; margin: auto;" /></p>
 <p>There is a fundamental problem in using linear regression for this data: <strong>the response is not continuous</strong>. As a consequence, there is no linearity and the errors around the mean are not normal (indeed, they are strongly non normal). We can check this with the corresponding diagnostic plots:</p>
-<div class="sourceCode" id="cb33"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb33-1"><a href="logistic-regression.html#cb33-1"></a>mod &lt;-<span class="st"> </span><span class="kw">lm</span>(nfails.field <span class="op">~</span><span class="st"> </span>temp, <span class="dt">data =</span> challenger)</span>
-<span id="cb33-2"><a href="logistic-regression.html#cb33-2"></a><span class="kw">par</span>(<span class="dt">mfrow =</span> <span class="dv">1</span><span class="op">:</span><span class="dv">2</span>)</span>
-<span id="cb33-3"><a href="logistic-regression.html#cb33-3"></a><span class="kw">plot</span>(mod, <span class="dv">1</span>)</span>
-<span id="cb33-4"><a href="logistic-regression.html#cb33-4"></a><span class="kw">plot</span>(mod, <span class="dv">2</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb33"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb33-1" title="1">mod &lt;-<span class="st"> </span><span class="kw">lm</span>(nfails.field <span class="op">~</span><span class="st"> </span>temp, <span class="dt">data =</span> challenger)</a>
+<a class="sourceLine" id="cb33-2" title="2"><span class="kw">par</span>(<span class="dt">mfrow =</span> <span class="dv">1</span><span class="op">:</span><span class="dv">2</span>)</a>
+<a class="sourceLine" id="cb33-3" title="3"><span class="kw">plot</span>(mod, <span class="dv">1</span>)</a>
+<a class="sourceLine" id="cb33-4" title="4"><span class="kw">plot</span>(mod, <span class="dv">2</span>)</a></code></pre></div>
 <p><img src="Machine-Learning_files/figure-html/unnamed-chunk-80-1.png" width="70%" style="display: block; margin: auto;" /></p>
 <p>Although linear regression is not the adequate tool for this data, it is able to detect the obvious difference between the two plots:</p>
 <ol style="list-style-type: decimal">
@@ -1087,37 +1040,37 @@ p(x)=\mathbb{P}(\text{incident}=1|\text{temperature}=x)
 \mathbb{P}(\text{incident}=1|\text{temperature}=x)=\text{logistic}\left(\beta_0+\beta_1x\right)=\frac{1}{1+e^{-(\beta_0+\beta_1x)}},
 \]</span> with <span class="math inline">\(\beta_0\)</span> and <span class="math inline">\(\beta_1\)</span> unknown.</p>
 <p>Let’s fit the model to the data by estimating <span class="math inline">\(\beta_0\)</span> and <span class="math inline">\(\beta_1\)</span>.</p>
-<div class="sourceCode" id="cb34"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb34-1"><a href="logistic-regression.html#cb34-1"></a>nasa &lt;-<span class="st"> </span><span class="kw">glm</span>(fail.field <span class="op">~</span><span class="st"> </span>temp, <span class="dt">family =</span> <span class="st">&quot;binomial&quot;</span>, <span class="dt">data =</span> challenger)</span>
-<span id="cb34-2"><a href="logistic-regression.html#cb34-2"></a><span class="kw">summary</span>(nasa)</span>
-<span id="cb34-3"><a href="logistic-regression.html#cb34-3"></a><span class="co">#ans&gt; </span></span>
-<span id="cb34-4"><a href="logistic-regression.html#cb34-4"></a><span class="co">#ans&gt; Call:</span></span>
-<span id="cb34-5"><a href="logistic-regression.html#cb34-5"></a><span class="co">#ans&gt; glm(formula = fail.field ~ temp, family = &quot;binomial&quot;, data = challenger)</span></span>
-<span id="cb34-6"><a href="logistic-regression.html#cb34-6"></a><span class="co">#ans&gt; </span></span>
-<span id="cb34-7"><a href="logistic-regression.html#cb34-7"></a><span class="co">#ans&gt; Deviance Residuals: </span></span>
-<span id="cb34-8"><a href="logistic-regression.html#cb34-8"></a><span class="co">#ans&gt;    Min      1Q  Median      3Q     Max  </span></span>
-<span id="cb34-9"><a href="logistic-regression.html#cb34-9"></a><span class="co">#ans&gt; -1.057  -0.757  -0.382   0.457   2.220  </span></span>
-<span id="cb34-10"><a href="logistic-regression.html#cb34-10"></a><span class="co">#ans&gt; </span></span>
-<span id="cb34-11"><a href="logistic-regression.html#cb34-11"></a><span class="co">#ans&gt; Coefficients:</span></span>
-<span id="cb34-12"><a href="logistic-regression.html#cb34-12"></a><span class="co">#ans&gt;             Estimate Std. Error z value</span></span>
-<span id="cb34-13"><a href="logistic-regression.html#cb34-13"></a><span class="co">#ans&gt; (Intercept)    7.584      3.915    1.94</span></span>
-<span id="cb34-14"><a href="logistic-regression.html#cb34-14"></a><span class="co">#ans&gt; temp          -0.417      0.194   -2.15</span></span>
-<span id="cb34-15"><a href="logistic-regression.html#cb34-15"></a><span class="co">#ans&gt;             Pr(&gt;|z|)  </span></span>
-<span id="cb34-16"><a href="logistic-regression.html#cb34-16"></a><span class="co">#ans&gt; (Intercept)    0.053 .</span></span>
-<span id="cb34-17"><a href="logistic-regression.html#cb34-17"></a><span class="co">#ans&gt; temp           0.032 *</span></span>
-<span id="cb34-18"><a href="logistic-regression.html#cb34-18"></a><span class="co">#ans&gt; ---</span></span>
-<span id="cb34-19"><a href="logistic-regression.html#cb34-19"></a><span class="co">#ans&gt; Signif. codes:  </span></span>
-<span id="cb34-20"><a href="logistic-regression.html#cb34-20"></a><span class="co">#ans&gt; 0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</span></span>
-<span id="cb34-21"><a href="logistic-regression.html#cb34-21"></a><span class="co">#ans&gt; </span></span>
-<span id="cb34-22"><a href="logistic-regression.html#cb34-22"></a><span class="co">#ans&gt; (Dispersion parameter for binomial family taken to be 1)</span></span>
-<span id="cb34-23"><a href="logistic-regression.html#cb34-23"></a><span class="co">#ans&gt; </span></span>
-<span id="cb34-24"><a href="logistic-regression.html#cb34-24"></a><span class="co">#ans&gt;     Null deviance: 28.267  on 22  degrees of freedom</span></span>
-<span id="cb34-25"><a href="logistic-regression.html#cb34-25"></a><span class="co">#ans&gt; Residual deviance: 20.335  on 21  degrees of freedom</span></span>
-<span id="cb34-26"><a href="logistic-regression.html#cb34-26"></a><span class="co">#ans&gt; AIC: 24.33</span></span>
-<span id="cb34-27"><a href="logistic-regression.html#cb34-27"></a><span class="co">#ans&gt; </span></span>
-<span id="cb34-28"><a href="logistic-regression.html#cb34-28"></a><span class="co">#ans&gt; Number of Fisher Scoring iterations: 5</span></span>
-<span id="cb34-29"><a href="logistic-regression.html#cb34-29"></a><span class="kw">exp</span>(<span class="kw">coef</span>(nasa)) <span class="co"># Exponentiated coefficients (&quot;odds ratios&quot;)</span></span>
-<span id="cb34-30"><a href="logistic-regression.html#cb34-30"></a><span class="co">#ans&gt; (Intercept)        temp </span></span>
-<span id="cb34-31"><a href="logistic-regression.html#cb34-31"></a><span class="co">#ans&gt;    1965.974       0.659</span></span></code></pre></div>
+<div class="sourceCode" id="cb34"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb34-1" title="1">nasa &lt;-<span class="st"> </span><span class="kw">glm</span>(fail.field <span class="op">~</span><span class="st"> </span>temp, <span class="dt">family =</span> <span class="st">&quot;binomial&quot;</span>, <span class="dt">data =</span> challenger)</a>
+<a class="sourceLine" id="cb34-2" title="2"><span class="kw">summary</span>(nasa)</a>
+<a class="sourceLine" id="cb34-3" title="3"><span class="co">#ans&gt; </span></a>
+<a class="sourceLine" id="cb34-4" title="4"><span class="co">#ans&gt; Call:</span></a>
+<a class="sourceLine" id="cb34-5" title="5"><span class="co">#ans&gt; glm(formula = fail.field ~ temp, family = &quot;binomial&quot;, data = challenger)</span></a>
+<a class="sourceLine" id="cb34-6" title="6"><span class="co">#ans&gt; </span></a>
+<a class="sourceLine" id="cb34-7" title="7"><span class="co">#ans&gt; Deviance Residuals: </span></a>
+<a class="sourceLine" id="cb34-8" title="8"><span class="co">#ans&gt;    Min      1Q  Median      3Q     Max  </span></a>
+<a class="sourceLine" id="cb34-9" title="9"><span class="co">#ans&gt; -1.057  -0.757  -0.382   0.457   2.220  </span></a>
+<a class="sourceLine" id="cb34-10" title="10"><span class="co">#ans&gt; </span></a>
+<a class="sourceLine" id="cb34-11" title="11"><span class="co">#ans&gt; Coefficients:</span></a>
+<a class="sourceLine" id="cb34-12" title="12"><span class="co">#ans&gt;             Estimate Std. Error z value</span></a>
+<a class="sourceLine" id="cb34-13" title="13"><span class="co">#ans&gt; (Intercept)    7.584      3.915    1.94</span></a>
+<a class="sourceLine" id="cb34-14" title="14"><span class="co">#ans&gt; temp          -0.417      0.194   -2.15</span></a>
+<a class="sourceLine" id="cb34-15" title="15"><span class="co">#ans&gt;             Pr(&gt;|z|)  </span></a>
+<a class="sourceLine" id="cb34-16" title="16"><span class="co">#ans&gt; (Intercept)    0.053 .</span></a>
+<a class="sourceLine" id="cb34-17" title="17"><span class="co">#ans&gt; temp           0.032 *</span></a>
+<a class="sourceLine" id="cb34-18" title="18"><span class="co">#ans&gt; ---</span></a>
+<a class="sourceLine" id="cb34-19" title="19"><span class="co">#ans&gt; Signif. codes:  </span></a>
+<a class="sourceLine" id="cb34-20" title="20"><span class="co">#ans&gt; 0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</span></a>
+<a class="sourceLine" id="cb34-21" title="21"><span class="co">#ans&gt; </span></a>
+<a class="sourceLine" id="cb34-22" title="22"><span class="co">#ans&gt; (Dispersion parameter for binomial family taken to be 1)</span></a>
+<a class="sourceLine" id="cb34-23" title="23"><span class="co">#ans&gt; </span></a>
+<a class="sourceLine" id="cb34-24" title="24"><span class="co">#ans&gt;     Null deviance: 28.267  on 22  degrees of freedom</span></a>
+<a class="sourceLine" id="cb34-25" title="25"><span class="co">#ans&gt; Residual deviance: 20.335  on 21  degrees of freedom</span></a>
+<a class="sourceLine" id="cb34-26" title="26"><span class="co">#ans&gt; AIC: 24.33</span></a>
+<a class="sourceLine" id="cb34-27" title="27"><span class="co">#ans&gt; </span></a>
+<a class="sourceLine" id="cb34-28" title="28"><span class="co">#ans&gt; Number of Fisher Scoring iterations: 5</span></a>
+<a class="sourceLine" id="cb34-29" title="29"><span class="kw">exp</span>(<span class="kw">coef</span>(nasa)) <span class="co"># Exponentiated coefficients (&quot;odds ratios&quot;)</span></a>
+<a class="sourceLine" id="cb34-30" title="30"><span class="co">#ans&gt; (Intercept)        temp </span></a>
+<a class="sourceLine" id="cb34-31" title="31"><span class="co">#ans&gt;    1965.974       0.659</span></a></code></pre></div>
 <div class="rmdtip">
 <p>
 The <code>glm()</code> function fits <strong>g</strong>eneralized <strong>l</strong>inear <strong>m</strong>odels, a class of models that includes logistic regression. The syntax of the <code>glm()</code> function is similar to that of <code>lm()</code>, except that we must pass in the argument <code>family=binomial</code> in order to tell <span style="color: Steelblue;"><i class="fab fa-r-project" aria-hidden="true"></i> </span> to run a logistic regression rather than some other type of generalized linear model.
@@ -1125,29 +1078,29 @@ The <code>glm()</code> function fits <strong>g</strong>eneralized <strong>l</str
 </div>
 <p>The summary of the logistic model is notably different from the linear regression, as the methodology behind is quite different. Nevertheless, we have tests for the significance of each coefficient. Here we obtain that <code>temp</code> is significantly different from zero, at least at a level <span class="math inline">\(\alpha=0.05\)</span>. Therefore we can conclude that <strong>the temperature is indeed affecting the probability of an incident with the O-rings</strong> (answers Q1).</p>
 <p>The coefficient of <code>temp</code>, <span class="math inline">\(\hat\beta_1\)</span>, can be regarded the “correlation between the temperature and the probability of having at least one incident”. This correlation, as evidenced by the sign of <span class="math inline">\(\hat\beta_1\)</span>, is negative. Let’s plot the fitted logistic curve to see that indeed the probability of incident and temperature are negatively correlated:</p>
-<div class="sourceCode" id="cb35"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb35-1"><a href="logistic-regression.html#cb35-1"></a><span class="co"># Plot data</span></span>
-<span id="cb35-2"><a href="logistic-regression.html#cb35-2"></a><span class="kw">plot</span>(challenger<span class="op">$</span>temp, challenger<span class="op">$</span>fail.field, <span class="dt">xlim =</span> <span class="kw">c</span>(<span class="op">-</span><span class="dv">1</span>, <span class="dv">30</span>), <span class="dt">xlab =</span> <span class="st">&quot;Temperature&quot;</span>,</span>
-<span id="cb35-3"><a href="logistic-regression.html#cb35-3"></a>     <span class="dt">ylab =</span> <span class="st">&quot;Incident probability&quot;</span>)</span>
-<span id="cb35-4"><a href="logistic-regression.html#cb35-4"></a></span>
-<span id="cb35-5"><a href="logistic-regression.html#cb35-5"></a><span class="co"># Draw the fitted logistic curve</span></span>
-<span id="cb35-6"><a href="logistic-regression.html#cb35-6"></a>x &lt;-<span class="st"> </span><span class="kw">seq</span>(<span class="op">-</span><span class="dv">1</span>, <span class="dv">30</span>, <span class="dt">l =</span> <span class="dv">200</span>)</span>
-<span id="cb35-7"><a href="logistic-regression.html#cb35-7"></a>y &lt;-<span class="st"> </span><span class="kw">exp</span>(<span class="op">-</span>(nasa<span class="op">$</span>coefficients[<span class="dv">1</span>] <span class="op">+</span><span class="st"> </span>nasa<span class="op">$</span>coefficients[<span class="dv">2</span>] <span class="op">*</span><span class="st"> </span>x))</span>
-<span id="cb35-8"><a href="logistic-regression.html#cb35-8"></a>y &lt;-<span class="st"> </span><span class="dv">1</span> <span class="op">/</span><span class="st"> </span>(<span class="dv">1</span> <span class="op">+</span><span class="st"> </span>y)</span>
-<span id="cb35-9"><a href="logistic-regression.html#cb35-9"></a><span class="kw">lines</span>(x, y, <span class="dt">col =</span> <span class="dv">2</span>, <span class="dt">lwd =</span> <span class="dv">2</span>)</span>
-<span id="cb35-10"><a href="logistic-regression.html#cb35-10"></a></span>
-<span id="cb35-11"><a href="logistic-regression.html#cb35-11"></a><span class="co"># The Challenger</span></span>
-<span id="cb35-12"><a href="logistic-regression.html#cb35-12"></a><span class="kw">points</span>(<span class="op">-</span><span class="fl">0.6</span>, <span class="dv">1</span>, <span class="dt">pch =</span> <span class="dv">16</span>)</span>
-<span id="cb35-13"><a href="logistic-regression.html#cb35-13"></a><span class="kw">text</span>(<span class="op">-</span><span class="fl">0.6</span>, <span class="dv">1</span>, <span class="dt">labels =</span> <span class="st">&quot;Challenger&quot;</span>, <span class="dt">pos =</span> <span class="dv">4</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb35"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb35-1" title="1"><span class="co"># Plot data</span></a>
+<a class="sourceLine" id="cb35-2" title="2"><span class="kw">plot</span>(challenger<span class="op">$</span>temp, challenger<span class="op">$</span>fail.field, <span class="dt">xlim =</span> <span class="kw">c</span>(<span class="op">-</span><span class="dv">1</span>, <span class="dv">30</span>), <span class="dt">xlab =</span> <span class="st">&quot;Temperature&quot;</span>,</a>
+<a class="sourceLine" id="cb35-3" title="3">     <span class="dt">ylab =</span> <span class="st">&quot;Incident probability&quot;</span>)</a>
+<a class="sourceLine" id="cb35-4" title="4"></a>
+<a class="sourceLine" id="cb35-5" title="5"><span class="co"># Draw the fitted logistic curve</span></a>
+<a class="sourceLine" id="cb35-6" title="6">x &lt;-<span class="st"> </span><span class="kw">seq</span>(<span class="op">-</span><span class="dv">1</span>, <span class="dv">30</span>, <span class="dt">l =</span> <span class="dv">200</span>)</a>
+<a class="sourceLine" id="cb35-7" title="7">y &lt;-<span class="st"> </span><span class="kw">exp</span>(<span class="op">-</span>(nasa<span class="op">$</span>coefficients[<span class="dv">1</span>] <span class="op">+</span><span class="st"> </span>nasa<span class="op">$</span>coefficients[<span class="dv">2</span>] <span class="op">*</span><span class="st"> </span>x))</a>
+<a class="sourceLine" id="cb35-8" title="8">y &lt;-<span class="st"> </span><span class="dv">1</span> <span class="op">/</span><span class="st"> </span>(<span class="dv">1</span> <span class="op">+</span><span class="st"> </span>y)</a>
+<a class="sourceLine" id="cb35-9" title="9"><span class="kw">lines</span>(x, y, <span class="dt">col =</span> <span class="dv">2</span>, <span class="dt">lwd =</span> <span class="dv">2</span>)</a>
+<a class="sourceLine" id="cb35-10" title="10"></a>
+<a class="sourceLine" id="cb35-11" title="11"><span class="co"># The Challenger</span></a>
+<a class="sourceLine" id="cb35-12" title="12"><span class="kw">points</span>(<span class="op">-</span><span class="fl">0.6</span>, <span class="dv">1</span>, <span class="dt">pch =</span> <span class="dv">16</span>)</a>
+<a class="sourceLine" id="cb35-13" title="13"><span class="kw">text</span>(<span class="op">-</span><span class="fl">0.6</span>, <span class="dv">1</span>, <span class="dt">labels =</span> <span class="st">&quot;Challenger&quot;</span>, <span class="dt">pos =</span> <span class="dv">4</span>)</a></code></pre></div>
 <p><img src="Machine-Learning_files/figure-html/unnamed-chunk-83-1.png" width="70%" style="display: block; margin: auto;" /></p>
 <p>At the sight of this curve and the summary of the model we can conclude that <strong>the temperature was increasing the probability of an O-ring incident</strong> (Q2). Indeed, the confidence intervals for the coefficients show a significative negative correlation at level <span class="math inline">\(\alpha=0.05\)</span>:</p>
-<div class="sourceCode" id="cb36"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb36-1"><a href="logistic-regression.html#cb36-1"></a><span class="kw">confint</span>(nasa, <span class="dt">level =</span> <span class="fl">0.95</span>)</span>
-<span id="cb36-2"><a href="logistic-regression.html#cb36-2"></a><span class="co">#ans&gt;              2.5 % 97.5 %</span></span>
-<span id="cb36-3"><a href="logistic-regression.html#cb36-3"></a><span class="co">#ans&gt; (Intercept)  1.336 17.783</span></span>
-<span id="cb36-4"><a href="logistic-regression.html#cb36-4"></a><span class="co">#ans&gt; temp        -0.924 -0.109</span></span></code></pre></div>
+<div class="sourceCode" id="cb36"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb36-1" title="1"><span class="kw">confint</span>(nasa, <span class="dt">level =</span> <span class="fl">0.95</span>)</a>
+<a class="sourceLine" id="cb36-2" title="2"><span class="co">#ans&gt;              2.5 % 97.5 %</span></a>
+<a class="sourceLine" id="cb36-3" title="3"><span class="co">#ans&gt; (Intercept)  1.336 17.783</span></a>
+<a class="sourceLine" id="cb36-4" title="4"><span class="co">#ans&gt; temp        -0.924 -0.109</span></a></code></pre></div>
 <p>Finally, <strong>the probability of having at least one incident with the O-rings in the launch day was</strong> <span class="math inline">\(0.9996\)</span> according to the fitted logistic model (Q3). This is easily obtained:</p>
-<div class="sourceCode" id="cb37"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb37-1"><a href="logistic-regression.html#cb37-1"></a><span class="kw">predict</span>(nasa, <span class="dt">newdata =</span> <span class="kw">data.frame</span>(<span class="dt">temp =</span> <span class="fl">-0.6</span>), <span class="dt">type =</span> <span class="st">&quot;response&quot;</span>)</span>
-<span id="cb37-2"><a href="logistic-regression.html#cb37-2"></a><span class="co">#ans&gt; 1 </span></span>
-<span id="cb37-3"><a href="logistic-regression.html#cb37-3"></a><span class="co">#ans&gt; 1</span></span></code></pre></div>
+<div class="sourceCode" id="cb37"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb37-1" title="1"><span class="kw">predict</span>(nasa, <span class="dt">newdata =</span> <span class="kw">data.frame</span>(<span class="dt">temp =</span> <span class="fl">-0.6</span>), <span class="dt">type =</span> <span class="st">&quot;response&quot;</span>)</a>
+<a class="sourceLine" id="cb37-2" title="2"><span class="co">#ans&gt; 1 </span></a>
+<a class="sourceLine" id="cb37-3" title="3"><span class="co">#ans&gt; 1</span></a></code></pre></div>
 <p>Be aware that <code>type = "response"</code> has a different meaning in logistic regression. In linear models it returns a CI for the prediction. But, <code>type = "response"</code> means that the <em>probability</em> should be returned, instead of the value of the link function, which is returned with <code>type = "link"</code> (the default).</p>
 <p>Recall that there is a serious problem of <strong>extrapolation</strong> in the prediction, which makes it less precise (or more variable). But this extrapolation, together with the evidences raised by a simple analysis like we did, should have been strong arguments for postponing the launch.</p>
 <p align="right">
@@ -1169,8 +1122,14 @@ The <code>glm()</code> function fits <strong>g</strong>eneralized <strong>l</str
 <div class="footnotes">
 <hr />
 <ol start="12">
-<li id="fn12"><p>in the formula, <span class="math inline">\(\log\)</span> is the natural logarithm <span class="math inline">\(\ln\)</span><a href="logistic-regression.html#fnref12" class="footnote-back">↩︎</a></p></li>
-<li id="fn13"><p>After the shuttle exits the atmosphere, the solid rocket boosters separate and descend to land using a parachute where they are carefully analyzed.<a href="logistic-regression.html#fnref13" class="footnote-back">↩︎</a></p></li>
+<li id="fn12"><p>in the formula, <span class="math inline">\(\log\)</span> is the natural logarithm <span class="math inline">\(\ln\)</span><a href="logistic-regression.html#fnref12" class="footnote-back">↩</a></p></li>
+<li id="fn13"><p>Old Faithful, is a
+hydrothermal geyser in Yellowstone National Park in the state of
+Wyoming, U.S.A., and is a popular tourist attraction. Its name stems
+from the supposed regularity of its eruptions. The data set comprises
+272 observations, each of which represents a single eruption and
+contains two variables corresponding to the duration in minutes of the
+eruption, and the time until the next eruption, also in minutes.<a href="logistic-regression.html#fnref13" class="footnote-back">↩</a></p></li>
 </ol>
 </div>
             </section>

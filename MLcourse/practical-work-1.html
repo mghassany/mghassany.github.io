@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>Practical Work 1 | Machine Learning</title>
   <meta name="description" content="Practical Work 1 | Machine Learning course" />
-  <meta name="generator" content="bookdown 0.20 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.21 and GitBook 2.6.7" />
 
   <meta property="og:title" content="Practical Work 1 | Machine Learning" />
   <meta property="og:type" content="book" />
@@ -24,7 +24,7 @@
 <meta name="author" content="Mohamad Ghassany" />
 
 
-<meta name="date" content="2020-10-15" />
+<meta name="date" content="2020-10-30" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -33,7 +33,6 @@
   
 <link rel="prev" href="linear-regression.html"/>
 <link rel="next" href="multiple-linear-regression.html"/>
-<script src="book_assets/header-attrs-2.4/header-attrs.js"></script>
 <script src="book_assets/jquery-2.2.3/jquery.min.js"></script>
 <link href="book_assets/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="book_assets/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -51,7 +50,6 @@
 
 
 
-<script src="book_assets/accessible-code-block-0.0.1/empty-anchor.js"></script>
 <script src="book_assets/kePrint-0.0.1/kePrint.js"></script>
 <link href="book_assets/font-awesome-5.3.1/css/fontawesome-all.min.css" rel="stylesheet" />
 <link href="book_assets/vembedr-0.1.4/css/vembedr.css" rel="stylesheet" />
@@ -67,28 +65,26 @@
 <script async defer src="https://hypothes.is/embed.js"></script>
 
 
-
 <style type="text/css">
-pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
-pre > code.sourceCode > span:empty { height: 1.2em; }
-code.sourceCode > span { color: inherit; text-decoration: inherit; }
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
 pre.sourceCode { margin: 0; }
 @media screen {
 div.sourceCode { overflow: auto; }
 }
 @media print {
-pre > code.sourceCode { white-space: pre-wrap; }
-pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
 }
-pre.numberSource code
-  { counter-reset: source-line 0; }
-pre.numberSource code > span
-  { position: relative; left: -4em; counter-increment: source-line; }
-pre.numberSource code > span > a:first-child::before
-  { content: counter(source-line);
+pre.numberSource a.sourceLine
+  { position: relative; left: -4em; }
+pre.numberSource a.sourceLine::before
+  { content: attr(title);
     position: relative; left: -1em; text-align: right; vertical-align: baseline;
-    border: none; display: inline-block;
+    border: none; pointer-events: all; display: inline-block;
     -webkit-touch-callout: none; -webkit-user-select: none;
     -khtml-user-select: none; -moz-user-select: none;
     -ms-user-select: none; user-select: none;
@@ -100,7 +96,7 @@ pre.numberSource { margin-left: 3em; border-left: 1px solid #a0a0a0;  padding-le
 div.sourceCode
   { color: #1f1c1b; background-color: #ffffff; }
 @media screen {
-pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+a.sourceLine::before { text-decoration: underline; }
 }
 code span. { color: #1f1c1b; } /* Normal */
 code span.al { color: #bf0303; background-color: #f7e6e6; font-weight: bold; } /* Alert */
@@ -156,44 +152,36 @@ code span.wa { color: #bf0303; } /* Warning */
 <li class='before'><a href="./">Machine Learning</a></li>
 
 <li class="divider"></li>
-<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Welcome</a>
-<ul>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Welcome</a><ul>
 <li class="chapter" data-level="" data-path="index.html"><a href="index.html#course-overview"><i class="fa fa-check"></i>Course Overview</a></li>
 <li class="chapter" data-level="" data-path="index.html"><a href="index.html#course-schedule"><i class="fa fa-check"></i>Course Schedule</a></li>
 </ul></li>
-<li class="chapter" data-level="" data-path="introduction.html"><a href="introduction.html"><i class="fa fa-check"></i>Introduction</a>
-<ul>
+<li class="chapter" data-level="" data-path="introduction.html"><a href="introduction.html"><i class="fa fa-check"></i>Introduction</a><ul>
 <li class="chapter" data-level="" data-path="introduction.html"><a href="introduction.html#what-is-machine-learning"><i class="fa fa-check"></i>What is Machine Learning ?</a></li>
 <li class="chapter" data-level="" data-path="introduction.html"><a href="introduction.html#supervised-learning"><i class="fa fa-check"></i>Supervised Learning</a></li>
 <li class="chapter" data-level="" data-path="introduction.html"><a href="introduction.html#unsupervised-learning"><i class="fa fa-check"></i>Unsupervised Learning</a></li>
 </ul></li>
 <li class="part"><span><b>I Supervised Learning</b></span></li>
 <li class="part"><span><b>Regression</b></span></li>
-<li class="chapter" data-level="1" data-path="linear-regression.html"><a href="linear-regression.html"><i class="fa fa-check"></i><b>1</b> Linear Regression</a>
-<ul>
+<li class="chapter" data-level="1" data-path="linear-regression.html"><a href="linear-regression.html"><i class="fa fa-check"></i><b>1</b> Linear Regression</a><ul>
 <li class="chapter" data-level="1.1" data-path="linear-regression.html"><a href="linear-regression.html#notation"><i class="fa fa-check"></i><b>1.1</b> Notation</a></li>
 <li class="chapter" data-level="1.2" data-path="linear-regression.html"><a href="linear-regression.html#model-representation"><i class="fa fa-check"></i><b>1.2</b> Model Representation</a></li>
-<li class="chapter" data-level="1.3" data-path="linear-regression.html"><a href="linear-regression.html#why-estimate-f"><i class="fa fa-check"></i><b>1.3</b> Why Estimate <span class="math inline">\(f\)</span> ?</a>
-<ul>
+<li class="chapter" data-level="1.3" data-path="linear-regression.html"><a href="linear-regression.html#why-estimate-f"><i class="fa fa-check"></i><b>1.3</b> Why Estimate <span class="math inline">\(f\)</span> ?</a><ul>
 <li class="chapter" data-level="" data-path="linear-regression.html"><a href="linear-regression.html#prediction"><i class="fa fa-check"></i>Prediction</a></li>
 <li class="chapter" data-level="" data-path="linear-regression.html"><a href="linear-regression.html#inference"><i class="fa fa-check"></i>Inference</a></li>
 </ul></li>
 <li class="chapter" data-level="1.4" data-path="linear-regression.html"><a href="linear-regression.html#simple-linear-regression-model"><i class="fa fa-check"></i><b>1.4</b> Simple Linear Regression Model</a></li>
 <li class="chapter" data-level="1.5" data-path="linear-regression.html"><a href="linear-regression.html#estimating-the-coefficients"><i class="fa fa-check"></i><b>1.5</b> Estimating the Coefficients</a></li>
-<li class="chapter" data-level="1.6" data-path="linear-regression.html"><a href="linear-regression.html#assessing-the-accuracy-of-the-coefficient-estimates"><i class="fa fa-check"></i><b>1.6</b> Assessing the Accuracy of the Coefficient Estimates</a>
-<ul>
+<li class="chapter" data-level="1.6" data-path="linear-regression.html"><a href="linear-regression.html#assessing-the-accuracy-of-the-coefficient-estimates"><i class="fa fa-check"></i><b>1.6</b> Assessing the Accuracy of the Coefficient Estimates</a><ul>
 <li class="chapter" data-level="" data-path="linear-regression.html"><a href="linear-regression.html#hypothesis-testing"><i class="fa fa-check"></i>Hypothesis testing</a></li>
 </ul></li>
-<li class="chapter" data-level="1.7" data-path="linear-regression.html"><a href="linear-regression.html#anova-and-model-fit"><i class="fa fa-check"></i><b>1.7</b> ANOVA and model fit</a>
-<ul>
+<li class="chapter" data-level="1.7" data-path="linear-regression.html"><a href="linear-regression.html#anova-and-model-fit"><i class="fa fa-check"></i><b>1.7</b> ANOVA and model fit</a><ul>
 <li class="chapter" data-level="1.7.1" data-path="linear-regression.html"><a href="linear-regression.html#anova"><i class="fa fa-check"></i><b>1.7.1</b> ANOVA</a></li>
 <li class="chapter" data-level="1.7.2" data-path="linear-regression.html"><a href="linear-regression.html#the-r2-statistic"><i class="fa fa-check"></i><b>1.7.2</b> The <span class="math inline">\(R^2\)</span> Statistic</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="" data-path="practical-work-1.html"><a href="practical-work-1.html"><i class="fa fa-check"></i>Practical Work 1</a>
-<ul>
-<li class="chapter" data-level="1.8" data-path="practical-work-1.html"><a href="practical-work-1.html#some-basics"><i class="fa fa-check"></i><b>1.8</b> Some <svg style="height:0.8em;top:.04em;position:relative;fill:steelblue;" viewBox="0 0 581 512"><path d="M581 226.6C581 119.1 450.9 32 290.5 32S0 119.1 0 226.6C0 322.4 103.3 402 239.4 418.1V480h99.1v-61.5c24.3-2.7 47.6-7.4 69.4-13.9L448 480h112l-67.4-113.7c54.5-35.4 88.4-84.9 88.4-139.7zm-466.8 14.5c0-73.5 98.9-133 220.8-133s211.9 40.7 211.9 133c0 50.1-26.5 85-70.3 106.4-2.4-1.6-4.7-2.9-6.4-3.7-10.2-5.2-27.8-10.5-27.8-10.5s86.6-6.4 86.6-92.7-90.6-87.9-90.6-87.9h-199V361c-74.1-21.5-125.2-67.1-125.2-119.9zm225.1 38.3v-55.6c57.8 0 87.8-6.8 87.8 27.3 0 36.5-38.2 28.3-87.8 28.3zm-.9 72.5H365c10.8 0 18.9 11.7 24 19.2-16.1 1.9-33 2.8-50.6 2.9v-22.1z"/></svg> basics</a>
-<ul>
+<li class="chapter" data-level="" data-path="practical-work-1.html"><a href="practical-work-1.html"><i class="fa fa-check"></i>Practical Work 1</a><ul>
+<li class="chapter" data-level="1.8" data-path="practical-work-1.html"><a href="practical-work-1.html#some-basics"><i class="fa fa-check"></i><b>1.8</b> Some <svg style="height:0.8em;top:.04em;position:relative;fill:steelblue;" viewBox="0 0 581 512"><path d="M581 226.6C581 119.1 450.9 32 290.5 32S0 119.1 0 226.6C0 322.4 103.3 402 239.4 418.1V480h99.1v-61.5c24.3-2.7 47.6-7.4 69.4-13.9L448 480h112l-67.4-113.7c54.5-35.4 88.4-84.9 88.4-139.7zm-466.8 14.5c0-73.5 98.9-133 220.8-133s211.9 40.7 211.9 133c0 50.1-26.5 85-70.3 106.4-2.4-1.6-4.7-2.9-6.4-3.7-10.2-5.2-27.8-10.5-27.8-10.5s86.6-6.4 86.6-92.7-90.6-87.9-90.6-87.9h-199V361c-74.1-21.5-125.2-67.1-125.2-119.9zm225.1 38.3v-55.6c57.8 0 87.8-6.8 87.8 27.3 0 36.5-38.2 28.3-87.8 28.3zm-.9 72.5H365c10.8 0 18.9 11.7 24 19.2-16.1 1.9-33 2.8-50.6 2.9v-22.1z"/></svg> basics</a><ul>
 <li class="chapter" data-level="1.8.1" data-path="practical-work-1.html"><a href="practical-work-1.html#basic-commands"><i class="fa fa-check"></i><b>1.8.1</b> Basic Commands</a></li>
 <li class="chapter" data-level="1.8.2" data-path="practical-work-1.html"><a href="practical-work-1.html#vectors"><i class="fa fa-check"></i><b>1.8.2</b> Vectors</a></li>
 <li class="chapter" data-level="1.8.3" data-path="practical-work-1.html"><a href="practical-work-1.html#matrices-data-frames-and-lists"><i class="fa fa-check"></i><b>1.8.3</b> Matrices, data frames and lists</a></li>
@@ -202,78 +190,65 @@ code span.wa { color: #bf0303; } /* Warning */
 <li class="chapter" data-level="1.8.6" data-path="practical-work-1.html"><a href="practical-work-1.html#working-directory"><i class="fa fa-check"></i><b>1.8.6</b> Working directory</a></li>
 <li class="chapter" data-level="1.8.7" data-path="practical-work-1.html"><a href="practical-work-1.html#loading-data"><i class="fa fa-check"></i><b>1.8.7</b> Loading Data</a></li>
 </ul></li>
-<li class="chapter" data-level="1.9" data-path="practical-work-1.html"><a href="practical-work-1.html#regression"><i class="fa fa-check"></i><b>1.9</b> Regression</a>
-<ul>
+<li class="chapter" data-level="1.9" data-path="practical-work-1.html"><a href="practical-work-1.html#regression"><i class="fa fa-check"></i><b>1.9</b> Regression</a><ul>
 <li class="chapter" data-level="1.9.1" data-path="practical-work-1.html"><a href="practical-work-1.html#the-lm-function"><i class="fa fa-check"></i><b>1.9.1</b> The <code>lm</code> function</a></li>
 <li class="chapter" data-level="1.9.2" data-path="practical-work-1.html"><a href="practical-work-1.html#boston"><i class="fa fa-check"></i><b>1.9.2</b> Predicting House Value: Boston dataset</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="2" data-path="multiple-linear-regression.html"><a href="multiple-linear-regression.html"><i class="fa fa-check"></i><b>2</b> Multiple Linear Regression</a>
-<ul>
+<li class="chapter" data-level="2" data-path="multiple-linear-regression.html"><a href="multiple-linear-regression.html"><i class="fa fa-check"></i><b>2</b> Multiple Linear Regression</a><ul>
 <li class="chapter" data-level="2.1" data-path="multiple-linear-regression.html"><a href="multiple-linear-regression.html#the-model"><i class="fa fa-check"></i><b>2.1</b> The Model</a></li>
 <li class="chapter" data-level="2.2" data-path="multiple-linear-regression.html"><a href="multiple-linear-regression.html#estimating-the-regression-coefficients"><i class="fa fa-check"></i><b>2.2</b> Estimating the Regression Coefficients</a></li>
-<li class="chapter" data-level="2.3" data-path="multiple-linear-regression.html"><a href="multiple-linear-regression.html#some-important-questions"><i class="fa fa-check"></i><b>2.3</b> Some important questions</a>
-<ul>
+<li class="chapter" data-level="2.3" data-path="multiple-linear-regression.html"><a href="multiple-linear-regression.html#some-important-questions"><i class="fa fa-check"></i><b>2.3</b> Some important questions</a><ul>
 <li class="chapter" data-level="2.3.1" data-path="multiple-linear-regression.html"><a href="multiple-linear-regression.html#other-consid"><i class="fa fa-check"></i><b>2.3.1</b> Other Considerations in Regression Model</a></li>
 </ul></li>
-<li class="chapter" data-level="2.4" data-path="multiple-linear-regression.html"><a href="multiple-linear-regression.html#how-to-select-the-best-performing-model"><i class="fa fa-check"></i><b>2.4</b> How to select the best performing model</a>
-<ul>
+<li class="chapter" data-level="2.4" data-path="multiple-linear-regression.html"><a href="multiple-linear-regression.html#how-to-select-the-best-performing-model"><i class="fa fa-check"></i><b>2.4</b> How to select the best performing model</a><ul>
 <li><a href="multiple-linear-regression.html#use-the-adjusted-r_adj2-for-multivariate-models">Use the Adjusted <span class="math inline">\(R_{adj}^2\)</span> for multivariate models</a></li>
 <li class="chapter" data-level="" data-path="multiple-linear-regression.html"><a href="multiple-linear-regression.html#have-a-look-at-the-residuals-or-error-terms"><i class="fa fa-check"></i>Have a look at the residuals or error terms</a></li>
 <li class="chapter" data-level="" data-path="multiple-linear-regression.html"><a href="multiple-linear-regression.html#histogram-of-residuals"><i class="fa fa-check"></i>Histogram of residuals</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="" data-path="pw-2.html"><a href="pw-2.html"><i class="fa fa-check"></i>PW 2</a>
-<ul>
-<li class="chapter" data-level="" data-path="multiple-linear-regression.html"><a href="multiple-linear-regression.html#multiple-linear-regression"><i class="fa fa-check"></i>Multiple Linear Regression</a></li>
+<li class="chapter" data-level="" data-path="pw-2.html"><a href="pw-2.html"><i class="fa fa-check"></i>PW 2</a><ul>
+<li class="chapter" data-level="" data-path="pw-2.html"><a href="pw-2.html#multiple-linear-regression-1"><i class="fa fa-check"></i>Multiple Linear Regression</a></li>
 <li class="chapter" data-level="" data-path="pw-2.html"><a href="pw-2.html#reporting"><i class="fa fa-check"></i>Reporting</a></li>
 </ul></li>
 <li class="part"><span><b>Classification</b></span></li>
-<li class="chapter" data-level="3" data-path="logistic-regression.html"><a href="logistic-regression.html"><i class="fa fa-check"></i><b>3</b> Logistic Regression</a>
-<ul>
-<li class="chapter" data-level="3.1" data-path="introduction.html"><a href="introduction.html#introduction"><i class="fa fa-check"></i><b>3.1</b> Introduction</a></li>
-<li class="chapter" data-level="3.2" data-path="logistic-regression.html"><a href="logistic-regression.html#logistic-regression-1"><i class="fa fa-check"></i><b>3.2</b> Logistic Regression</a>
-<ul>
+<li class="chapter" data-level="3" data-path="logistic-regression.html"><a href="logistic-regression.html"><i class="fa fa-check"></i><b>3</b> Logistic Regression</a><ul>
+<li class="chapter" data-level="3.1" data-path="logistic-regression.html"><a href="logistic-regression.html#introduction-1"><i class="fa fa-check"></i><b>3.1</b> Introduction</a></li>
+<li class="chapter" data-level="3.2" data-path="logistic-regression.html"><a href="logistic-regression.html#logistic-regression-1"><i class="fa fa-check"></i><b>3.2</b> Logistic Regression</a><ul>
 <li class="chapter" data-level="3.2.1" data-path="logistic-regression.html"><a href="logistic-regression.html#the-logistic-model"><i class="fa fa-check"></i><b>3.2.1</b> The Logistic Model</a></li>
-<li class="chapter" data-level="3.2.2" data-path="multiple-linear-regression.html"><a href="multiple-linear-regression.html#estimating-the-regression-coefficients"><i class="fa fa-check"></i><b>3.2.2</b> Estimating the Regression Coefficients</a></li>
-<li class="chapter" data-level="3.2.3" data-path="linear-regression.html"><a href="linear-regression.html#prediction"><i class="fa fa-check"></i><b>3.2.3</b> Prediction</a></li>
+<li class="chapter" data-level="3.2.2" data-path="logistic-regression.html"><a href="logistic-regression.html#estimating-the-regression-coefficients-1"><i class="fa fa-check"></i><b>3.2.2</b> Estimating the Regression Coefficients</a></li>
+<li class="chapter" data-level="3.2.3" data-path="logistic-regression.html"><a href="logistic-regression.html#prediction-1"><i class="fa fa-check"></i><b>3.2.3</b> Prediction</a></li>
 </ul></li>
 <li class="chapter" data-level="3.3" data-path="logistic-regression.html"><a href="logistic-regression.html#multiple-logistic-regression"><i class="fa fa-check"></i><b>3.3</b> Multiple Logistic Regression</a></li>
-<li class="chapter" data-level="3.4" data-path="logistic-regression.html"><a href="logistic-regression.html#logreg-examps"><i class="fa fa-check"></i><b>3.4</b> Example</a>
-<ul>
+<li class="chapter" data-level="3.4" data-path="logistic-regression.html"><a href="logistic-regression.html#logreg-examps"><i class="fa fa-check"></i><b>3.4</b> Example</a><ul>
 <li class="chapter" data-level="3.4.1" data-path="logistic-regression.html"><a href="logistic-regression.html#logreg-examps-challenger"><i class="fa fa-check"></i><b>3.4.1</b> Case study: <em>The Challenger disaster</em></a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="" data-path="pw-3.html"><a href="pw-3.html"><i class="fa fa-check"></i>PW 3</a>
-<ul>
+<li class="chapter" data-level="" data-path="pw-3.html"><a href="pw-3.html"><i class="fa fa-check"></i>PW 3</a><ul>
 <li class="chapter" data-level="" data-path="pw-3.html"><a href="pw-3.html#social-networks-ads"><i class="fa fa-check"></i>Social Networks Ads</a></li>
 </ul></li>
-<li class="chapter" data-level="4" data-path="discriminant-analysis.html"><a href="discriminant-analysis.html"><i class="fa fa-check"></i><b>4</b> Discriminant Analysis</a>
-<ul>
-<li class="chapter" data-level="4.1" data-path="introduction.html"><a href="introduction.html#introduction"><i class="fa fa-check"></i><b>4.1</b> Introduction</a></li>
+<li class="chapter" data-level="4" data-path="discriminant-analysis.html"><a href="discriminant-analysis.html"><i class="fa fa-check"></i><b>4</b> Discriminant Analysis</a><ul>
+<li class="chapter" data-level="4.1" data-path="discriminant-analysis.html"><a href="discriminant-analysis.html#introduction-2"><i class="fa fa-check"></i><b>4.1</b> Introduction</a></li>
 <li class="chapter" data-level="4.2" data-path="discriminant-analysis.html"><a href="discriminant-analysis.html#bayes-theorem"><i class="fa fa-check"></i><b>4.2</b> Bayes’ Theorem</a></li>
 <li class="chapter" data-level="4.3" data-path="discriminant-analysis.html"><a href="discriminant-analysis.html#lda-for-p1"><i class="fa fa-check"></i><b>4.3</b> LDA for <span class="math inline">\(p=1\)</span></a></li>
 <li class="chapter" data-level="4.4" data-path="discriminant-analysis.html"><a href="discriminant-analysis.html#estimating-the-parameters"><i class="fa fa-check"></i><b>4.4</b> Estimating the parameters</a></li>
 <li class="chapter" data-level="4.5" data-path="discriminant-analysis.html"><a href="discriminant-analysis.html#lda-for-p-1"><i class="fa fa-check"></i><b>4.5</b> LDA for <span class="math inline">\(p &gt; 1\)</span></a></li>
 <li class="chapter" data-level="4.6" data-path="discriminant-analysis.html"><a href="discriminant-analysis.html#making-predictions"><i class="fa fa-check"></i><b>4.6</b> Making predictions</a></li>
-<li class="chapter" data-level="4.7" data-path="discriminant-analysis.html"><a href="discriminant-analysis.html#other-forms-of-discriminant-analysis"><i class="fa fa-check"></i><b>4.7</b> Other forms of Discriminant Analysis</a>
-<ul>
+<li class="chapter" data-level="4.7" data-path="discriminant-analysis.html"><a href="discriminant-analysis.html#other-forms-of-discriminant-analysis"><i class="fa fa-check"></i><b>4.7</b> Other forms of Discriminant Analysis</a><ul>
 <li class="chapter" data-level="4.7.1" data-path="discriminant-analysis.html"><a href="discriminant-analysis.html#quadratic-discriminant-analysis-qda"><i class="fa fa-check"></i><b>4.7.1</b> Quadratic Discriminant Analysis (QDA)</a></li>
 <li class="chapter" data-level="4.7.2" data-path="discriminant-analysis.html"><a href="discriminant-analysis.html#naive-bayes"><i class="fa fa-check"></i><b>4.7.2</b> Naive Bayes</a></li>
 </ul></li>
 <li class="chapter" data-level="4.8" data-path="discriminant-analysis.html"><a href="discriminant-analysis.html#lda-vs-logistic-regression"><i class="fa fa-check"></i><b>4.8</b> LDA vs Logistic Regression</a></li>
 </ul></li>
-<li class="chapter" data-level="" data-path="pw-4.html"><a href="pw-4.html"><i class="fa fa-check"></i>PW 4</a>
-<ul>
-<li class="chapter" data-level="" data-path="logistic-regression.html"><a href="logistic-regression.html#logistic-regression"><i class="fa fa-check"></i>Logistic Regression</a></li>
+<li class="chapter" data-level="" data-path="pw-4.html"><a href="pw-4.html"><i class="fa fa-check"></i>PW 4</a><ul>
+<li class="chapter" data-level="" data-path="pw-4.html"><a href="pw-4.html#logistic-regression-2"><i class="fa fa-check"></i>Logistic Regression</a></li>
 <li class="chapter" data-level="" data-path="pw-4.html"><a href="pw-4.html#decision-boundary-of-logistic-regression"><i class="fa fa-check"></i>Decision Boundary of Logistic Regression</a></li>
 <li class="chapter" data-level="" data-path="pw-4.html"><a href="pw-4.html#linear-discriminant-analysis-lda"><i class="fa fa-check"></i>Linear Discriminant Analysis (LDA)</a></li>
 <li class="chapter" data-level="" data-path="pw-4.html"><a href="pw-4.html#lda-from-scratch"><i class="fa fa-check"></i>LDA from scratch</a></li>
-<li class="chapter" data-level="" data-path="discriminant-analysis.html"><a href="discriminant-analysis.html#quadratic-discriminant-analysis-qda"><i class="fa fa-check"></i>Quadratic Discriminant Analysis (QDA)</a></li>
+<li class="chapter" data-level="" data-path="pw-4.html"><a href="pw-4.html#quadratic-discriminant-analysis-qda-1"><i class="fa fa-check"></i>Quadratic Discriminant Analysis (QDA)</a></li>
 <li class="chapter" data-level="" data-path="pw-4.html"><a href="pw-4.html#comparison"><i class="fa fa-check"></i>Comparison</a></li>
 </ul></li>
-<li class="chapter" data-level="5" data-path="decision-trees-random-forests.html"><a href="decision-trees-random-forests.html"><i class="fa fa-check"></i><b>5</b> Decision Trees &amp; Random Forests</a>
-<ul>
+<li class="chapter" data-level="5" data-path="decision-trees-random-forests.html"><a href="decision-trees-random-forests.html"><i class="fa fa-check"></i><b>5</b> Decision Trees &amp; Random Forests</a><ul>
 <li class="chapter" data-level="" data-path="decision-trees-random-forests.html"><a href="decision-trees-random-forests.html#the-basics-of-decision-trees"><i class="fa fa-check"></i>The Basics of Decision Trees</a></li>
 <li class="chapter" data-level="" data-path="decision-trees-random-forests.html"><a href="decision-trees-random-forests.html#classification-trees"><i class="fa fa-check"></i>Classification Trees</a></li>
 <li class="chapter" data-level="" data-path="decision-trees-random-forests.html"><a href="decision-trees-random-forests.html#bagging-random-forests"><i class="fa fa-check"></i>Bagging &amp; Random Forests</a></li>
@@ -281,114 +256,94 @@ code span.wa { color: #bf0303; } /* Warning */
 <li><a href="decision-trees-random-forests.html#trees-in-r">Trees in <code>R</code></a></li>
 <li class="chapter" data-level="" data-path="decision-trees-random-forests.html"><a href="decision-trees-random-forests.html#random-forests---the-first-choice-method-for-every-data-analysis"><i class="fa fa-check"></i>Random forests - the first-choice method for every data analysis?</a></li>
 </ul></li>
-<li class="chapter" data-level="" data-path="pw-5.html"><a href="pw-5.html"><i class="fa fa-check"></i>PW 5</a>
-<ul>
-<li class="chapter" data-level="" data-path="pw-5.html"><a href="pw-5.html#regression-trees"><i class="fa fa-check"></i>Regression Trees</a>
-<ul>
+<li class="chapter" data-level="" data-path="pw-5.html"><a href="pw-5.html"><i class="fa fa-check"></i>PW 5</a><ul>
+<li class="chapter" data-level="" data-path="pw-5.html"><a href="pw-5.html#regression-trees"><i class="fa fa-check"></i>Regression Trees</a><ul>
 <li class="chapter" data-level="" data-path="pw-5.html"><a href="pw-5.html#single-tree"><i class="fa fa-check"></i>Single tree</a></li>
 <li class="chapter" data-level="" data-path="pw-5.html"><a href="pw-5.html#bagging"><i class="fa fa-check"></i>Bagging</a></li>
 <li class="chapter" data-level="" data-path="pw-5.html"><a href="pw-5.html#random-forests"><i class="fa fa-check"></i>Random Forests</a></li>
-<li class="chapter" data-level="" data-path="decision-trees-random-forests.html"><a href="decision-trees-random-forests.html#boosting"><i class="fa fa-check"></i>Boosting</a></li>
-<li class="chapter" data-level="" data-path="pw-4.html"><a href="pw-4.html#comparison"><i class="fa fa-check"></i>Comparison</a></li>
+<li class="chapter" data-level="" data-path="pw-5.html"><a href="pw-5.html#boosting-1"><i class="fa fa-check"></i>Boosting</a></li>
+<li class="chapter" data-level="" data-path="pw-5.html"><a href="pw-5.html#comparison-1"><i class="fa fa-check"></i>Comparison</a></li>
 </ul></li>
-<li class="chapter" data-level="" data-path="decision-trees-random-forests.html"><a href="decision-trees-random-forests.html#classification-trees"><i class="fa fa-check"></i>Classification Trees</a>
-<ul>
+<li class="chapter" data-level="" data-path="pw-5.html"><a href="pw-5.html#classification-trees-1"><i class="fa fa-check"></i>Classification Trees</a><ul>
 <li class="chapter" data-level="" data-path="pw-5.html"><a href="pw-5.html#the-spam-dataset"><i class="fa fa-check"></i>The Spam dataset</a></li>
 <li class="chapter" data-level="" data-path="pw-5.html"><a href="pw-5.html#extra-tuning"><i class="fa fa-check"></i>Extra: Tuning</a></li>
 </ul></li>
 </ul></li>
 <li class="part"><span><b>II Dimensionality Reduction</b></span></li>
-<li class="chapter" data-level="6" data-path="principal-components-analysis.html"><a href="principal-components-analysis.html"><i class="fa fa-check"></i><b>6</b> Principal Components Analysis</a>
-<ul>
-<li class="chapter" data-level="6.1" data-path="introduction.html"><a href="introduction.html#introduction"><i class="fa fa-check"></i><b>6.1</b> Introduction</a></li>
-<li class="chapter" data-level="6.2" data-path="principal-components-analysis.html"><a href="principal-components-analysis.html#principal-components"><i class="fa fa-check"></i><b>6.2</b> Principal Components</a>
-<ul>
+<li class="chapter" data-level="6" data-path="principal-components-analysis.html"><a href="principal-components-analysis.html"><i class="fa fa-check"></i><b>6</b> Principal Components Analysis</a><ul>
+<li class="chapter" data-level="6.1" data-path="principal-components-analysis.html"><a href="principal-components-analysis.html#introduction-3"><i class="fa fa-check"></i><b>6.1</b> Introduction</a></li>
+<li class="chapter" data-level="6.2" data-path="principal-components-analysis.html"><a href="principal-components-analysis.html#principal-components"><i class="fa fa-check"></i><b>6.2</b> Principal Components</a><ul>
 <li class="chapter" data-level="" data-path="principal-components-analysis.html"><a href="principal-components-analysis.html#notations-and-procedure"><i class="fa fa-check"></i>Notations and Procedure</a></li>
 <li><a href="principal-components-analysis.html#first-principal-component-textpc_1-y_1">First Principal Component (<span class="math inline">\(\text{PC}_1\)</span>): <span class="math inline">\(Y_1\)</span></a></li>
 <li><a href="principal-components-analysis.html#second-principal-component-textpc_2-y_2">Second Principal Component (<span class="math inline">\(\text{PC}_2\)</span>): <span class="math inline">\(Y_2\)</span></a></li>
 <li><a href="principal-components-analysis.html#ith-principal-component-textpc_i-y_i"><span class="math inline">\(i^{th}\)</span> Principal Component (<span class="math inline">\(\text{PC}_i\)</span>): <span class="math inline">\(Y_i\)</span></a></li>
 </ul></li>
-<li class="chapter" data-level="6.3" data-path="principal-components-analysis.html"><a href="principal-components-analysis.html#how-do-we-find-the-coefficients"><i class="fa fa-check"></i><b>6.3</b> How do we find the coefficients?</a>
-<ul>
+<li class="chapter" data-level="6.3" data-path="principal-components-analysis.html"><a href="principal-components-analysis.html#how-do-we-find-the-coefficients"><i class="fa fa-check"></i><b>6.3</b> How do we find the coefficients?</a><ul>
 <li class="chapter" data-level="" data-path="principal-components-analysis.html"><a href="principal-components-analysis.html#why-it-may-be-possible-to-reduce-dimensions"><i class="fa fa-check"></i>Why It May Be Possible to Reduce Dimensions</a></li>
 <li class="chapter" data-level="" data-path="principal-components-analysis.html"><a href="principal-components-analysis.html#procedure"><i class="fa fa-check"></i>Procedure</a></li>
 </ul></li>
 <li class="chapter" data-level="6.4" data-path="principal-components-analysis.html"><a href="principal-components-analysis.html#standardization-of-the-features"><i class="fa fa-check"></i><b>6.4</b> Standardization of the features</a></li>
-<li class="chapter" data-level="6.5" data-path="principal-components-analysis.html"><a href="principal-components-analysis.html#projection-of-the-data"><i class="fa fa-check"></i><b>6.5</b> Projection of the data</a>
-<ul>
+<li class="chapter" data-level="6.5" data-path="principal-components-analysis.html"><a href="principal-components-analysis.html#projection-of-the-data"><i class="fa fa-check"></i><b>6.5</b> Projection of the data</a><ul>
 <li class="chapter" data-level="" data-path="principal-components-analysis.html"><a href="principal-components-analysis.html#scores"><i class="fa fa-check"></i>Scores</a></li>
 <li class="chapter" data-level="" data-path="principal-components-analysis.html"><a href="principal-components-analysis.html#visualization"><i class="fa fa-check"></i>Visualization</a></li>
 <li class="chapter" data-level="" data-path="principal-components-analysis.html"><a href="principal-components-analysis.html#extra"><i class="fa fa-check"></i>Extra</a></li>
 </ul></li>
-<li class="chapter" data-level="6.6" data-path="principal-components-analysis.html"><a href="principal-components-analysis.html#case-study"><i class="fa fa-check"></i><b>6.6</b> Case study</a>
-<ul>
+<li class="chapter" data-level="6.6" data-path="principal-components-analysis.html"><a href="principal-components-analysis.html#case-study"><i class="fa fa-check"></i><b>6.6</b> Case study</a><ul>
 <li class="chapter" data-level="" data-path="principal-components-analysis.html"><a href="principal-components-analysis.html#employement-in-european-countries-in-the-late-70s"><i class="fa fa-check"></i>Employement in European countries in the late 70s</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="" data-path="pw-6.html"><a href="pw-6.html"><i class="fa fa-check"></i>PW 6</a>
-<ul>
+<li class="chapter" data-level="" data-path="pw-6.html"><a href="pw-6.html"><i class="fa fa-check"></i>PW 6</a><ul>
 <li class="chapter" data-level="" data-path="pw-6.html"><a href="pw-6.html#the-iris-dataset"><i class="fa fa-check"></i>The Iris Dataset</a></li>
-<li class="chapter" data-level="" data-path="practical-work-1.html"><a href="practical-work-1.html#loading-data"><i class="fa fa-check"></i>Loading Data</a></li>
+<li class="chapter" data-level="" data-path="pw-6.html"><a href="pw-6.html#loading-data-1"><i class="fa fa-check"></i>Loading Data</a></li>
 <li class="chapter" data-level="" data-path="pw-6.html"><a href="pw-6.html#exploratory-analysis"><i class="fa fa-check"></i>Exploratory analysis</a></li>
 <li><a href="pw-6.html#pca-using-princomp">PCA using <code>princomp()</code></a></li>
 <li><a href="pw-6.html#deeper-pca-using-factoextra-package">Deeper PCA using <code>factoextra</code> package</a></li>
 <li class="chapter" data-level="" data-path="pw-6.html"><a href="pw-6.html#step-by-step-pca"><i class="fa fa-check"></i>Step-by-step PCA</a></li>
 </ul></li>
 <li class="part"><span><b>III Unsupervised Learning</b></span></li>
-<li class="chapter" data-level="7" data-path="kmeans-hierarchical-clustering.html"><a href="kmeans-hierarchical-clustering.html"><i class="fa fa-check"></i><b>7</b> Kmeans &amp; Hierarchical Clustering</a>
-<ul>
-<li class="chapter" data-level="7.1" data-path="introduction.html"><a href="introduction.html#unsupervised-learning"><i class="fa fa-check"></i><b>7.1</b> Unsupervised Learning</a></li>
+<li class="chapter" data-level="7" data-path="kmeans-hierarchical-clustering.html"><a href="kmeans-hierarchical-clustering.html"><i class="fa fa-check"></i><b>7</b> Kmeans &amp; Hierarchical Clustering</a><ul>
+<li class="chapter" data-level="7.1" data-path="kmeans-hierarchical-clustering.html"><a href="kmeans-hierarchical-clustering.html#unsupervised-learning-1"><i class="fa fa-check"></i><b>7.1</b> Unsupervised Learning</a></li>
 <li class="chapter" data-level="7.2" data-path="kmeans-hierarchical-clustering.html"><a href="kmeans-hierarchical-clustering.html#clustering"><i class="fa fa-check"></i><b>7.2</b> Clustering</a></li>
-<li class="chapter" data-level="7.3" data-path="introduction.html"><a href="introduction.html#introduction"><i class="fa fa-check"></i><b>7.3</b> Introduction</a>
-<ul>
+<li class="chapter" data-level="7.3" data-path="kmeans-hierarchical-clustering.html"><a href="kmeans-hierarchical-clustering.html#introduction-4"><i class="fa fa-check"></i><b>7.3</b> Introduction</a><ul>
 <li class="chapter" data-level="" data-path="kmeans-hierarchical-clustering.html"><a href="kmeans-hierarchical-clustering.html#hard-clustering"><i class="fa fa-check"></i>Hard clustering</a></li>
 <li class="chapter" data-level="" data-path="kmeans-hierarchical-clustering.html"><a href="kmeans-hierarchical-clustering.html#fuzzy-clustering"><i class="fa fa-check"></i>Fuzzy clustering</a></li>
 </ul></li>
-<li class="chapter" data-level="7.4" data-path="kmeans-hierarchical-clustering.html"><a href="kmeans-hierarchical-clustering.html#k-means"><i class="fa fa-check"></i><b>7.4</b> <span class="math inline">\(k\)</span>-Means</a>
-<ul>
+<li class="chapter" data-level="7.4" data-path="kmeans-hierarchical-clustering.html"><a href="kmeans-hierarchical-clustering.html#k-means"><i class="fa fa-check"></i><b>7.4</b> <span class="math inline">\(k\)</span>-Means</a><ul>
 <li class="chapter" data-level="7.4.1" data-path="kmeans-hierarchical-clustering.html"><a href="kmeans-hierarchical-clustering.html#k-means-in"><i class="fa fa-check"></i><b>7.4.1</b> <span class="math inline">\(k\)</span>-means in <svg style="height:0.8em;top:.04em;position:relative;fill:steelblue;" viewBox="0 0 581 512"><path d="M581 226.6C581 119.1 450.9 32 290.5 32S0 119.1 0 226.6C0 322.4 103.3 402 239.4 418.1V480h99.1v-61.5c24.3-2.7 47.6-7.4 69.4-13.9L448 480h112l-67.4-113.7c54.5-35.4 88.4-84.9 88.4-139.7zm-466.8 14.5c0-73.5 98.9-133 220.8-133s211.9 40.7 211.9 133c0 50.1-26.5 85-70.3 106.4-2.4-1.6-4.7-2.9-6.4-3.7-10.2-5.2-27.8-10.5-27.8-10.5s86.6-6.4 86.6-92.7-90.6-87.9-90.6-87.9h-199V361c-74.1-21.5-125.2-67.1-125.2-119.9zm225.1 38.3v-55.6c57.8 0 87.8-6.8 87.8 27.3 0 36.5-38.2 28.3-87.8 28.3zm-.9 72.5H365c10.8 0 18.9 11.7 24 19.2-16.1 1.9-33 2.8-50.6 2.9v-22.1z"/></svg></a></li>
 <li class="chapter" data-level="7.4.2" data-path="kmeans-hierarchical-clustering.html"><a href="kmeans-hierarchical-clustering.html#cluster-validity-choosing-the-number-of-clusters"><i class="fa fa-check"></i><b>7.4.2</b> Cluster Validity, Choosing the Number of Clusters</a></li>
 </ul></li>
-<li class="chapter" data-level="7.5" data-path="kmeans-hierarchical-clustering.html"><a href="kmeans-hierarchical-clustering.html#hierarchical-clustering"><i class="fa fa-check"></i><b>7.5</b> Hierarchical Clustering</a>
-<ul>
+<li class="chapter" data-level="7.5" data-path="kmeans-hierarchical-clustering.html"><a href="kmeans-hierarchical-clustering.html#hierarchical-clustering"><i class="fa fa-check"></i><b>7.5</b> Hierarchical Clustering</a><ul>
 <li class="chapter" data-level="7.5.1" data-path="kmeans-hierarchical-clustering.html"><a href="kmeans-hierarchical-clustering.html#dendrogram"><i class="fa fa-check"></i><b>7.5.1</b> Dendrogram</a></li>
 <li class="chapter" data-level="7.5.2" data-path="kmeans-hierarchical-clustering.html"><a href="kmeans-hierarchical-clustering.html#the-hierarchical-clustering-algorithm"><i class="fa fa-check"></i><b>7.5.2</b> The Hierarchical Clustering Algorithm</a></li>
 <li class="chapter" data-level="7.5.3" data-path="kmeans-hierarchical-clustering.html"><a href="kmeans-hierarchical-clustering.html#hierarchical-clustering-in"><i class="fa fa-check"></i><b>7.5.3</b> Hierarchical clustering in <svg style="height:0.8em;top:.04em;position:relative;fill:steelblue;" viewBox="0 0 581 512"><path d="M581 226.6C581 119.1 450.9 32 290.5 32S0 119.1 0 226.6C0 322.4 103.3 402 239.4 418.1V480h99.1v-61.5c24.3-2.7 47.6-7.4 69.4-13.9L448 480h112l-67.4-113.7c54.5-35.4 88.4-84.9 88.4-139.7zm-466.8 14.5c0-73.5 98.9-133 220.8-133s211.9 40.7 211.9 133c0 50.1-26.5 85-70.3 106.4-2.4-1.6-4.7-2.9-6.4-3.7-10.2-5.2-27.8-10.5-27.8-10.5s86.6-6.4 86.6-92.7-90.6-87.9-90.6-87.9h-199V361c-74.1-21.5-125.2-67.1-125.2-119.9zm225.1 38.3v-55.6c57.8 0 87.8-6.8 87.8 27.3 0 36.5-38.2 28.3-87.8 28.3zm-.9 72.5H365c10.8 0 18.9 11.7 24 19.2-16.1 1.9-33 2.8-50.6 2.9v-22.1z"/></svg></a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="" data-path="pw-7.html"><a href="pw-7.html"><i class="fa fa-check"></i>PW 7</a>
-<ul>
-<li class="chapter" data-level="" data-path="pw-2.html"><a href="pw-2.html#reporting"><i class="fa fa-check"></i>Reporting</a>
-<ul>
+<li class="chapter" data-level="" data-path="pw-7.html"><a href="pw-7.html"><i class="fa fa-check"></i>PW 7</a><ul>
+<li class="chapter" data-level="" data-path="pw-7.html"><a href="pw-7.html#reporting-1"><i class="fa fa-check"></i>Reporting</a><ul>
 <li class="chapter" data-level="" data-path="pw-7.html"><a href="pw-7.html#markdown"><i class="fa fa-check"></i>Markdown</a></li>
 <li class="chapter" data-level="" data-path="pw-7.html"><a href="pw-7.html#r-markdown"><i class="fa fa-check"></i>R Markdown</a></li>
 <li class="chapter" data-level="" data-path="pw-7.html"><a href="pw-7.html#the-report-to-be-submitted"><i class="fa fa-check"></i>The report to be submitted</a></li>
 </ul></li>
-<li><a href="pw-7.html#k-means-clustering"><span class="math inline">\(k\)</span>-means clustering</a>
-<ul>
+<li><a href="pw-7.html#k-means-clustering"><span class="math inline">\(k\)</span>-means clustering</a><ul>
 <li><a href="pw-7.html#pointscards"><code>pointsCards</code></a></li>
 <li><a href="pw-7.html#ligue-1"><code>Ligue 1</code></a></li>
 <li><a href="pw-7.html#pca"><code>PCA</code></a></li>
 <li><a href="pw-7.html#implementing-k-means"><code>Implementing k-means</code></a></li>
 </ul></li>
-<li class="chapter" data-level="" data-path="kmeans-hierarchical-clustering.html"><a href="kmeans-hierarchical-clustering.html#hierarchical-clustering"><i class="fa fa-check"></i>Hierarchical clustering</a>
-<ul>
+<li class="chapter" data-level="" data-path="pw-7.html"><a href="pw-7.html#hierarchical-clustering-1"><i class="fa fa-check"></i>Hierarchical clustering</a><ul>
 <li><a href="pw-7.html#distances-dist">Distances <code>dist()</code></a></li>
 <li><a href="pw-7.html#dendrogram-hclust">Dendrogram <code>hclust()</code></a></li>
 <li class="chapter" data-level="" data-path="pw-7.html"><a href="pw-7.html#hierarchical-clustering-on-iris-dataset"><i class="fa fa-check"></i>Hierarchical clustering on Iris dataset</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="8" data-path="gaussian-mixture-models-em.html"><a href="gaussian-mixture-models-em.html"><i class="fa fa-check"></i><b>8</b> Gaussian Mixture Models &amp; EM</a>
-<ul>
+<li class="chapter" data-level="8" data-path="gaussian-mixture-models-em.html"><a href="gaussian-mixture-models-em.html"><i class="fa fa-check"></i><b>8</b> Gaussian Mixture Models &amp; EM</a><ul>
 <li class="chapter" data-level="8.1" data-path="gaussian-mixture-models-em.html"><a href="gaussian-mixture-models-em.html#the-gaussian-distribution"><i class="fa fa-check"></i><b>8.1</b> The Gaussian distribution</a></li>
 <li class="chapter" data-level="8.2" data-path="gaussian-mixture-models-em.html"><a href="gaussian-mixture-models-em.html#mixture-of-gaussians"><i class="fa fa-check"></i><b>8.2</b> Mixture of Gaussians</a></li>
 <li class="chapter" data-level="8.3" data-path="gaussian-mixture-models-em.html"><a href="gaussian-mixture-models-em.html#em-for-gaussian-mixtures"><i class="fa fa-check"></i><b>8.3</b> EM for Gaussian Mixtures</a></li>
 </ul></li>
-<li class="chapter" data-level="" data-path="pw-8.html"><a href="pw-8.html"><i class="fa fa-check"></i>PW 8</a>
-<ul>
+<li class="chapter" data-level="" data-path="pw-8.html"><a href="pw-8.html"><i class="fa fa-check"></i>PW 8</a><ul>
 <li class="chapter" data-level="" data-path="pw-8.html"><a href="pw-8.html#report-template"><i class="fa fa-check"></i>Report template</a></li>
-<li class="chapter" data-level="8.4" data-path="pw-8.html"><a href="pw-8.html#em-using-mclust"><i class="fa fa-check"></i><b>8.4</b> EM using <code>mclust</code></a>
-<ul>
+<li class="chapter" data-level="8.4" data-path="pw-8.html"><a href="pw-8.html#em-using-mclust"><i class="fa fa-check"></i><b>8.4</b> EM using <code>mclust</code></a><ul>
 <li><a href="pw-8.html#gmm-vs-k-means">GMM vs <span class="math inline">\(k\)</span>-means</a></li>
 <li class="chapter" data-level="" data-path="pw-8.html"><a href="pw-8.html#em-on-1d"><i class="fa fa-check"></i>EM on 1D</a></li>
 </ul></li>
@@ -400,15 +355,13 @@ code span.wa { color: #bf0303; } /* Warning */
 <li class="chapter" data-level="A" data-path="app-introRStudio.html"><a href="app-introRStudio.html"><i class="fa fa-check"></i><b>A</b> Introduction to <code>RStudio</code></a></li>
 <li class="chapter" data-level="B" data-path="app-ht.html"><a href="app-ht.html"><i class="fa fa-check"></i><b>B</b> Review on hypothesis testing</a></li>
 <li class="chapter" data-level="C" data-path="use-qual.html"><a href="use-qual.html"><i class="fa fa-check"></i><b>C</b> Use of qualitative predictors</a></li>
-<li class="chapter" data-level="D" data-path="model-selection.html"><a href="model-selection.html"><i class="fa fa-check"></i><b>D</b> Model Selection</a>
-<ul>
+<li class="chapter" data-level="D" data-path="model-selection.html"><a href="model-selection.html"><i class="fa fa-check"></i><b>D</b> Model Selection</a><ul>
 <li class="chapter" data-level="" data-path="model-selection.html"><a href="model-selection.html#linear-model-selection-and-best-subset-selection"><i class="fa fa-check"></i>Linear Model Selection and Best Subset Selection</a></li>
 <li class="chapter" data-level="" data-path="model-selection.html"><a href="model-selection.html#forward-stepwise-selection"><i class="fa fa-check"></i>Forward Stepwise Selection</a></li>
 <li class="chapter" data-level="" data-path="model-selection.html"><a href="model-selection.html#backward-stepwise-selection"><i class="fa fa-check"></i>Backward Stepwise Selection</a></li>
 <li class="chapter" data-level="" data-path="model-selection.html"><a href="model-selection.html#estimating-test-error-using-mallows-cp-aic-bic-adjusted-r-squared"><i class="fa fa-check"></i>Estimating Test Error Using Mallow’s Cp, AIC, BIC, Adjusted R-squared</a></li>
 <li class="chapter" data-level="" data-path="model-selection.html"><a href="model-selection.html#estimating-test-error-using-cross-validation"><i class="fa fa-check"></i>Estimating Test Error Using Cross-Validation</a></li>
-<li class="chapter" data-level="" data-path="model-selection.html"><a href="model-selection.html#examples"><i class="fa fa-check"></i>Examples</a>
-<ul>
+<li class="chapter" data-level="" data-path="model-selection.html"><a href="model-selection.html#examples"><i class="fa fa-check"></i>Examples</a><ul>
 <li class="chapter" data-level="" data-path="model-selection.html"><a href="model-selection.html#best-subset-selection"><i class="fa fa-check"></i>Best Subset Selection</a></li>
 <li class="chapter" data-level="" data-path="model-selection.html"><a href="model-selection.html#forward-stepwise-selection-and-model-selection-using-validation-set"><i class="fa fa-check"></i>Forward Stepwise Selection and Model Selection Using Validation Set</a></li>
 <li class="chapter" data-level="" data-path="model-selection.html"><a href="model-selection.html#model-selection-using-cross-validation"><i class="fa fa-check"></i>Model Selection Using Cross-Validation</a></li>
@@ -447,103 +400,103 @@ code span.wa { color: #bf0303; } /* Warning */
       in the upper right-hand corner of the page.
     </p>
 </div>
-<div id="practical-work-1" class="section level1 unnumbered" number="">
+<div id="practical-work-1" class="section level1 unnumbered">
 <h1>Practical Work 1</h1>
-<div id="some-basics" class="section level2" number="1.8">
+<div id="some-basics" class="section level2">
 <h2><span class="header-section-number">1.8</span> Some <svg style="height:0.8em;top:.04em;position:relative;fill:steelblue;" viewBox="0 0 581 512"><path d="M581 226.6C581 119.1 450.9 32 290.5 32S0 119.1 0 226.6C0 322.4 103.3 402 239.4 418.1V480h99.1v-61.5c24.3-2.7 47.6-7.4 69.4-13.9L448 480h112l-67.4-113.7c54.5-35.4 88.4-84.9 88.4-139.7zm-466.8 14.5c0-73.5 98.9-133 220.8-133s211.9 40.7 211.9 133c0 50.1-26.5 85-70.3 106.4-2.4-1.6-4.7-2.9-6.4-3.7-10.2-5.2-27.8-10.5-27.8-10.5s86.6-6.4 86.6-92.7-90.6-87.9-90.6-87.9h-199V361c-74.1-21.5-125.2-67.1-125.2-119.9zm225.1 38.3v-55.6c57.8 0 87.8-6.8 87.8 27.3 0 36.5-38.2 28.3-87.8 28.3zm-.9 72.5H365c10.8 0 18.9 11.7 24 19.2-16.1 1.9-33 2.8-50.6 2.9v-22.1z"/></svg> basics</h2>
-<div id="basic-commands" class="section level3" number="1.8.1">
+<div id="basic-commands" class="section level3">
 <h3><span class="header-section-number">1.8.1</span> Basic Commands</h3>
 <p><i class="fab  fa-r-project " style="color:steelblue;"></i> uses functions to perform operations. To run a function called <code>funcname</code>,we type <code>funcname(input1, input2)</code> , where the inputs (or arguments) <code>input1</code> and <code>input2</code> tell <i class="fab  fa-r-project " style="color:steelblue;"></i> how to run the function. A function can have any number of inputs. For example, to create a vector of numbers, we use the function <code>c()</code> (for <em>concatenate</em>).</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="practical-work-1.html#cb1-1"></a>x &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">3</span>,<span class="dv">2</span>,<span class="dv">5</span>)</span>
-<span id="cb1-2"><a href="practical-work-1.html#cb1-2"></a>x</span>
-<span id="cb1-3"><a href="practical-work-1.html#cb1-3"></a><span class="co">#ans&gt; [1] 1 3 2 5</span></span></code></pre></div>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" title="1">x &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">3</span>,<span class="dv">2</span>,<span class="dv">5</span>)</a>
+<a class="sourceLine" id="cb1-2" title="2">x</a>
+<a class="sourceLine" id="cb1-3" title="3"><span class="co">#ans&gt; [1] 1 3 2 5</span></a></code></pre></div>
 <p>Note that the <code>&gt;</code> is not part of the command; rather, it is printed by <i class="fab  fa-r-project " style="color:steelblue;"></i> to indicate that it is ready for another command to be entered. We can also save things using <code>=</code> rather than <code>&lt;-</code>. Note that the answer in the code above is followed by <code>#ans&gt;</code> while in the <i class="fab  fa-r-project " style="color:steelblue;"></i> console it is not.</p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="practical-work-1.html#cb2-1"></a>x =<span class="st"> </span><span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">6</span>,<span class="dv">2</span>)</span>
-<span id="cb2-2"><a href="practical-work-1.html#cb2-2"></a>x</span>
-<span id="cb2-3"><a href="practical-work-1.html#cb2-3"></a><span class="co">#ans&gt; [1] 1 6 2</span></span>
-<span id="cb2-4"><a href="practical-work-1.html#cb2-4"></a>y =<span class="st"> </span><span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">4</span>,<span class="dv">3</span>)</span>
-<span id="cb2-5"><a href="practical-work-1.html#cb2-5"></a><span class="kw">length</span>(x)</span>
-<span id="cb2-6"><a href="practical-work-1.html#cb2-6"></a><span class="co">#ans&gt; [1] 3</span></span>
-<span id="cb2-7"><a href="practical-work-1.html#cb2-7"></a><span class="kw">length</span>(y)</span>
-<span id="cb2-8"><a href="practical-work-1.html#cb2-8"></a><span class="co">#ans&gt; [1] 3</span></span>
-<span id="cb2-9"><a href="practical-work-1.html#cb2-9"></a>x<span class="op">+</span>y</span>
-<span id="cb2-10"><a href="practical-work-1.html#cb2-10"></a><span class="co">#ans&gt; [1]  2 10  5</span></span></code></pre></div>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2-1" title="1">x =<span class="st"> </span><span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">6</span>,<span class="dv">2</span>)</a>
+<a class="sourceLine" id="cb2-2" title="2">x</a>
+<a class="sourceLine" id="cb2-3" title="3"><span class="co">#ans&gt; [1] 1 6 2</span></a>
+<a class="sourceLine" id="cb2-4" title="4">y =<span class="st"> </span><span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">4</span>,<span class="dv">3</span>)</a>
+<a class="sourceLine" id="cb2-5" title="5"><span class="kw">length</span>(x)</a>
+<a class="sourceLine" id="cb2-6" title="6"><span class="co">#ans&gt; [1] 3</span></a>
+<a class="sourceLine" id="cb2-7" title="7"><span class="kw">length</span>(y)</a>
+<a class="sourceLine" id="cb2-8" title="8"><span class="co">#ans&gt; [1] 3</span></a>
+<a class="sourceLine" id="cb2-9" title="9">x<span class="op">+</span>y</a>
+<a class="sourceLine" id="cb2-10" title="10"><span class="co">#ans&gt; [1]  2 10  5</span></a></code></pre></div>
 <p>Hitting the <em>up arrow</em> multiple times will display the previous commands, which can then be edited. This is useful since one often wishes to repeat a similar command.</p>
 <p>The <code>ls()</code> function allows us to look at a list of all of the objects, such <code>ls()</code> as data and functions, that we have saved so far. The <code>rm()</code> function can be used to delete any object that we don’t want.</p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="practical-work-1.html#cb3-1"></a><span class="kw">ls</span>()</span>
-<span id="cb3-2"><a href="practical-work-1.html#cb3-2"></a><span class="co">#ans&gt;  [1] &quot;acc_bag&quot;           &quot;acc_boost&quot;        </span></span>
-<span id="cb3-3"><a href="practical-work-1.html#cb3-3"></a><span class="co">#ans&gt;  [3] &quot;acc_logreg&quot;        &quot;acc_rf&quot;           </span></span>
-<span id="cb3-4"><a href="practical-work-1.html#cb3-4"></a><span class="co">#ans&gt;  [5] &quot;acc_tree&quot;          &quot;calc_acc&quot;         </span></span>
-<span id="cb3-5"><a href="practical-work-1.html#cb3-5"></a><span class="co">#ans&gt;  [7] &quot;classifier.logreg&quot; &quot;dataset&quot;          </span></span>
-<span id="cb3-6"><a href="practical-work-1.html#cb3-6"></a><span class="co">#ans&gt;  [9] &quot;pdf2png&quot;           &quot;pred.glm&quot;         </span></span>
-<span id="cb3-7"><a href="practical-work-1.html#cb3-7"></a><span class="co">#ans&gt; [11] &quot;pred.glm_T_F&quot;      &quot;seat_acc&quot;         </span></span>
-<span id="cb3-8"><a href="practical-work-1.html#cb3-8"></a><span class="co">#ans&gt; [13] &quot;spam_acc&quot;          &quot;spam_bag&quot;         </span></span>
-<span id="cb3-9"><a href="practical-work-1.html#cb3-9"></a><span class="co">#ans&gt; [15] &quot;spam_bag_pred&quot;     &quot;spam_boost&quot;       </span></span>
-<span id="cb3-10"><a href="practical-work-1.html#cb3-10"></a><span class="co">#ans&gt; [17] &quot;spam_boost_pred&quot;   &quot;spam_boost_pred01&quot;</span></span>
-<span id="cb3-11"><a href="practical-work-1.html#cb3-11"></a><span class="co">#ans&gt; [19] &quot;spam_rf&quot;           &quot;spam_rf_pred&quot;     </span></span>
-<span id="cb3-12"><a href="practical-work-1.html#cb3-12"></a><span class="co">#ans&gt; [21] &quot;spam_tree&quot;         &quot;spam_tree_pred&quot;   </span></span>
-<span id="cb3-13"><a href="practical-work-1.html#cb3-13"></a><span class="co">#ans&gt; [23] &quot;split&quot;             &quot;test_set&quot;         </span></span>
-<span id="cb3-14"><a href="practical-work-1.html#cb3-14"></a><span class="co">#ans&gt; [25] &quot;training_set&quot;      &quot;x&quot;                </span></span>
-<span id="cb3-15"><a href="practical-work-1.html#cb3-15"></a><span class="co">#ans&gt; [27] &quot;x1&quot;                &quot;x2&quot;               </span></span>
-<span id="cb3-16"><a href="practical-work-1.html#cb3-16"></a><span class="co">#ans&gt; [29] &quot;x3&quot;                &quot;x4&quot;               </span></span>
-<span id="cb3-17"><a href="practical-work-1.html#cb3-17"></a><span class="co">#ans&gt; [31] &quot;y&quot;</span></span>
-<span id="cb3-18"><a href="practical-work-1.html#cb3-18"></a><span class="kw">rm</span>(x)</span>
-<span id="cb3-19"><a href="practical-work-1.html#cb3-19"></a><span class="kw">ls</span>()</span>
-<span id="cb3-20"><a href="practical-work-1.html#cb3-20"></a><span class="co">#ans&gt;  [1] &quot;acc_bag&quot;           &quot;acc_boost&quot;        </span></span>
-<span id="cb3-21"><a href="practical-work-1.html#cb3-21"></a><span class="co">#ans&gt;  [3] &quot;acc_logreg&quot;        &quot;acc_rf&quot;           </span></span>
-<span id="cb3-22"><a href="practical-work-1.html#cb3-22"></a><span class="co">#ans&gt;  [5] &quot;acc_tree&quot;          &quot;calc_acc&quot;         </span></span>
-<span id="cb3-23"><a href="practical-work-1.html#cb3-23"></a><span class="co">#ans&gt;  [7] &quot;classifier.logreg&quot; &quot;dataset&quot;          </span></span>
-<span id="cb3-24"><a href="practical-work-1.html#cb3-24"></a><span class="co">#ans&gt;  [9] &quot;pdf2png&quot;           &quot;pred.glm&quot;         </span></span>
-<span id="cb3-25"><a href="practical-work-1.html#cb3-25"></a><span class="co">#ans&gt; [11] &quot;pred.glm_T_F&quot;      &quot;seat_acc&quot;         </span></span>
-<span id="cb3-26"><a href="practical-work-1.html#cb3-26"></a><span class="co">#ans&gt; [13] &quot;spam_acc&quot;          &quot;spam_bag&quot;         </span></span>
-<span id="cb3-27"><a href="practical-work-1.html#cb3-27"></a><span class="co">#ans&gt; [15] &quot;spam_bag_pred&quot;     &quot;spam_boost&quot;       </span></span>
-<span id="cb3-28"><a href="practical-work-1.html#cb3-28"></a><span class="co">#ans&gt; [17] &quot;spam_boost_pred&quot;   &quot;spam_boost_pred01&quot;</span></span>
-<span id="cb3-29"><a href="practical-work-1.html#cb3-29"></a><span class="co">#ans&gt; [19] &quot;spam_rf&quot;           &quot;spam_rf_pred&quot;     </span></span>
-<span id="cb3-30"><a href="practical-work-1.html#cb3-30"></a><span class="co">#ans&gt; [21] &quot;spam_tree&quot;         &quot;spam_tree_pred&quot;   </span></span>
-<span id="cb3-31"><a href="practical-work-1.html#cb3-31"></a><span class="co">#ans&gt; [23] &quot;split&quot;             &quot;test_set&quot;         </span></span>
-<span id="cb3-32"><a href="practical-work-1.html#cb3-32"></a><span class="co">#ans&gt; [25] &quot;training_set&quot;      &quot;x1&quot;               </span></span>
-<span id="cb3-33"><a href="practical-work-1.html#cb3-33"></a><span class="co">#ans&gt; [27] &quot;x2&quot;                &quot;x3&quot;               </span></span>
-<span id="cb3-34"><a href="practical-work-1.html#cb3-34"></a><span class="co">#ans&gt; [29] &quot;x4&quot;                &quot;y&quot;</span></span></code></pre></div>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb3-1" title="1"><span class="kw">ls</span>()</a>
+<a class="sourceLine" id="cb3-2" title="2"><span class="co">#ans&gt;  [1] &quot;acc_bag&quot;           &quot;acc_boost&quot;        </span></a>
+<a class="sourceLine" id="cb3-3" title="3"><span class="co">#ans&gt;  [3] &quot;acc_logreg&quot;        &quot;acc_rf&quot;           </span></a>
+<a class="sourceLine" id="cb3-4" title="4"><span class="co">#ans&gt;  [5] &quot;acc_tree&quot;          &quot;calc_acc&quot;         </span></a>
+<a class="sourceLine" id="cb3-5" title="5"><span class="co">#ans&gt;  [7] &quot;classifier.logreg&quot; &quot;dataset&quot;          </span></a>
+<a class="sourceLine" id="cb3-6" title="6"><span class="co">#ans&gt;  [9] &quot;pdf2png&quot;           &quot;pred.glm&quot;         </span></a>
+<a class="sourceLine" id="cb3-7" title="7"><span class="co">#ans&gt; [11] &quot;pred.glm_T_F&quot;      &quot;seat_acc&quot;         </span></a>
+<a class="sourceLine" id="cb3-8" title="8"><span class="co">#ans&gt; [13] &quot;spam_acc&quot;          &quot;spam_bag&quot;         </span></a>
+<a class="sourceLine" id="cb3-9" title="9"><span class="co">#ans&gt; [15] &quot;spam_bag_pred&quot;     &quot;spam_boost&quot;       </span></a>
+<a class="sourceLine" id="cb3-10" title="10"><span class="co">#ans&gt; [17] &quot;spam_boost_pred&quot;   &quot;spam_boost_pred01&quot;</span></a>
+<a class="sourceLine" id="cb3-11" title="11"><span class="co">#ans&gt; [19] &quot;spam_rf&quot;           &quot;spam_rf_pred&quot;     </span></a>
+<a class="sourceLine" id="cb3-12" title="12"><span class="co">#ans&gt; [21] &quot;spam_tree&quot;         &quot;spam_tree_pred&quot;   </span></a>
+<a class="sourceLine" id="cb3-13" title="13"><span class="co">#ans&gt; [23] &quot;split&quot;             &quot;test_set&quot;         </span></a>
+<a class="sourceLine" id="cb3-14" title="14"><span class="co">#ans&gt; [25] &quot;training_set&quot;      &quot;x&quot;                </span></a>
+<a class="sourceLine" id="cb3-15" title="15"><span class="co">#ans&gt; [27] &quot;x1&quot;                &quot;x2&quot;               </span></a>
+<a class="sourceLine" id="cb3-16" title="16"><span class="co">#ans&gt; [29] &quot;x3&quot;                &quot;x4&quot;               </span></a>
+<a class="sourceLine" id="cb3-17" title="17"><span class="co">#ans&gt; [31] &quot;y&quot;</span></a>
+<a class="sourceLine" id="cb3-18" title="18"><span class="kw">rm</span>(x)</a>
+<a class="sourceLine" id="cb3-19" title="19"><span class="kw">ls</span>()</a>
+<a class="sourceLine" id="cb3-20" title="20"><span class="co">#ans&gt;  [1] &quot;acc_bag&quot;           &quot;acc_boost&quot;        </span></a>
+<a class="sourceLine" id="cb3-21" title="21"><span class="co">#ans&gt;  [3] &quot;acc_logreg&quot;        &quot;acc_rf&quot;           </span></a>
+<a class="sourceLine" id="cb3-22" title="22"><span class="co">#ans&gt;  [5] &quot;acc_tree&quot;          &quot;calc_acc&quot;         </span></a>
+<a class="sourceLine" id="cb3-23" title="23"><span class="co">#ans&gt;  [7] &quot;classifier.logreg&quot; &quot;dataset&quot;          </span></a>
+<a class="sourceLine" id="cb3-24" title="24"><span class="co">#ans&gt;  [9] &quot;pdf2png&quot;           &quot;pred.glm&quot;         </span></a>
+<a class="sourceLine" id="cb3-25" title="25"><span class="co">#ans&gt; [11] &quot;pred.glm_T_F&quot;      &quot;seat_acc&quot;         </span></a>
+<a class="sourceLine" id="cb3-26" title="26"><span class="co">#ans&gt; [13] &quot;spam_acc&quot;          &quot;spam_bag&quot;         </span></a>
+<a class="sourceLine" id="cb3-27" title="27"><span class="co">#ans&gt; [15] &quot;spam_bag_pred&quot;     &quot;spam_boost&quot;       </span></a>
+<a class="sourceLine" id="cb3-28" title="28"><span class="co">#ans&gt; [17] &quot;spam_boost_pred&quot;   &quot;spam_boost_pred01&quot;</span></a>
+<a class="sourceLine" id="cb3-29" title="29"><span class="co">#ans&gt; [19] &quot;spam_rf&quot;           &quot;spam_rf_pred&quot;     </span></a>
+<a class="sourceLine" id="cb3-30" title="30"><span class="co">#ans&gt; [21] &quot;spam_tree&quot;         &quot;spam_tree_pred&quot;   </span></a>
+<a class="sourceLine" id="cb3-31" title="31"><span class="co">#ans&gt; [23] &quot;split&quot;             &quot;test_set&quot;         </span></a>
+<a class="sourceLine" id="cb3-32" title="32"><span class="co">#ans&gt; [25] &quot;training_set&quot;      &quot;x1&quot;               </span></a>
+<a class="sourceLine" id="cb3-33" title="33"><span class="co">#ans&gt; [27] &quot;x2&quot;                &quot;x3&quot;               </span></a>
+<a class="sourceLine" id="cb3-34" title="34"><span class="co">#ans&gt; [29] &quot;x4&quot;                &quot;y&quot;</span></a></code></pre></div>
 </div>
-<div id="vectors" class="section level3" number="1.8.2">
+<div id="vectors" class="section level3">
 <h3><span class="header-section-number">1.8.2</span> Vectors</h3>
-<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="practical-work-1.html#cb4-1"></a></span>
-<span id="cb4-2"><a href="practical-work-1.html#cb4-2"></a><span class="co"># A handy way of creating sequences is the operator :</span></span>
-<span id="cb4-3"><a href="practical-work-1.html#cb4-3"></a><span class="co"># Sequence from 1 to 5</span></span>
-<span id="cb4-4"><a href="practical-work-1.html#cb4-4"></a><span class="dv">1</span><span class="op">:</span><span class="dv">5</span></span>
-<span id="cb4-5"><a href="practical-work-1.html#cb4-5"></a><span class="co">#ans&gt; [1] 1 2 3 4 5</span></span>
-<span id="cb4-6"><a href="practical-work-1.html#cb4-6"></a></span>
-<span id="cb4-7"><a href="practical-work-1.html#cb4-7"></a><span class="co"># Storing some vectors</span></span>
-<span id="cb4-8"><a href="practical-work-1.html#cb4-8"></a>vec &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="op">-</span><span class="fl">4.12</span>, <span class="dv">0</span>, <span class="fl">1.1</span>, <span class="dv">1</span>, <span class="dv">3</span>, <span class="dv">4</span>)</span>
-<span id="cb4-9"><a href="practical-work-1.html#cb4-9"></a>vec</span>
-<span id="cb4-10"><a href="practical-work-1.html#cb4-10"></a><span class="co">#ans&gt; [1] -4.12  0.00  1.10  1.00  3.00  4.00</span></span>
-<span id="cb4-11"><a href="practical-work-1.html#cb4-11"></a></span>
-<span id="cb4-12"><a href="practical-work-1.html#cb4-12"></a><span class="co"># Entry-wise operations</span></span>
-<span id="cb4-13"><a href="practical-work-1.html#cb4-13"></a>vec <span class="op">+</span><span class="st"> </span><span class="dv">1</span></span>
-<span id="cb4-14"><a href="practical-work-1.html#cb4-14"></a><span class="co">#ans&gt; [1] -3.12  1.00  2.10  2.00  4.00  5.00</span></span>
-<span id="cb4-15"><a href="practical-work-1.html#cb4-15"></a>vec<span class="op">^</span><span class="dv">2</span></span>
-<span id="cb4-16"><a href="practical-work-1.html#cb4-16"></a><span class="co">#ans&gt; [1] 16.97  0.00  1.21  1.00  9.00 16.00</span></span>
-<span id="cb4-17"><a href="practical-work-1.html#cb4-17"></a></span>
-<span id="cb4-18"><a href="practical-work-1.html#cb4-18"></a><span class="co"># If you want to access a position of a vector, use [position]</span></span>
-<span id="cb4-19"><a href="practical-work-1.html#cb4-19"></a>vec[<span class="dv">6</span>]</span>
-<span id="cb4-20"><a href="practical-work-1.html#cb4-20"></a><span class="co">#ans&gt; [1] 4</span></span>
-<span id="cb4-21"><a href="practical-work-1.html#cb4-21"></a></span>
-<span id="cb4-22"><a href="practical-work-1.html#cb4-22"></a><span class="co"># You also can change elements</span></span>
-<span id="cb4-23"><a href="practical-work-1.html#cb4-23"></a>vec[<span class="dv">2</span>] &lt;-<span class="st"> </span><span class="dv">-1</span></span>
-<span id="cb4-24"><a href="practical-work-1.html#cb4-24"></a>vec</span>
-<span id="cb4-25"><a href="practical-work-1.html#cb4-25"></a><span class="co">#ans&gt; [1] -4.12 -1.00  1.10  1.00  3.00  4.00</span></span>
-<span id="cb4-26"><a href="practical-work-1.html#cb4-26"></a></span>
-<span id="cb4-27"><a href="practical-work-1.html#cb4-27"></a><span class="co"># If you want to access all the elements except a position, use [-position]</span></span>
-<span id="cb4-28"><a href="practical-work-1.html#cb4-28"></a>vec[<span class="op">-</span><span class="dv">2</span>]</span>
-<span id="cb4-29"><a href="practical-work-1.html#cb4-29"></a><span class="co">#ans&gt; [1] -4.12  1.10  1.00  3.00  4.00</span></span>
-<span id="cb4-30"><a href="practical-work-1.html#cb4-30"></a></span>
-<span id="cb4-31"><a href="practical-work-1.html#cb4-31"></a><span class="co"># Also with vectors as indexes</span></span>
-<span id="cb4-32"><a href="practical-work-1.html#cb4-32"></a>vec[<span class="dv">1</span><span class="op">:</span><span class="dv">2</span>]</span>
-<span id="cb4-33"><a href="practical-work-1.html#cb4-33"></a><span class="co">#ans&gt; [1] -4.12 -1.00</span></span>
-<span id="cb4-34"><a href="practical-work-1.html#cb4-34"></a></span>
-<span id="cb4-35"><a href="practical-work-1.html#cb4-35"></a><span class="co"># And also</span></span>
-<span id="cb4-36"><a href="practical-work-1.html#cb4-36"></a>vec[<span class="op">-</span><span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">2</span>)]</span>
-<span id="cb4-37"><a href="practical-work-1.html#cb4-37"></a><span class="co">#ans&gt; [1] 1.1 1.0 3.0 4.0</span></span></code></pre></div>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb4-1" title="1"></a>
+<a class="sourceLine" id="cb4-2" title="2"><span class="co"># A handy way of creating sequences is the operator :</span></a>
+<a class="sourceLine" id="cb4-3" title="3"><span class="co"># Sequence from 1 to 5</span></a>
+<a class="sourceLine" id="cb4-4" title="4"><span class="dv">1</span><span class="op">:</span><span class="dv">5</span></a>
+<a class="sourceLine" id="cb4-5" title="5"><span class="co">#ans&gt; [1] 1 2 3 4 5</span></a>
+<a class="sourceLine" id="cb4-6" title="6"></a>
+<a class="sourceLine" id="cb4-7" title="7"><span class="co"># Storing some vectors</span></a>
+<a class="sourceLine" id="cb4-8" title="8">vec &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="op">-</span><span class="fl">4.12</span>, <span class="dv">0</span>, <span class="fl">1.1</span>, <span class="dv">1</span>, <span class="dv">3</span>, <span class="dv">4</span>)</a>
+<a class="sourceLine" id="cb4-9" title="9">vec</a>
+<a class="sourceLine" id="cb4-10" title="10"><span class="co">#ans&gt; [1] -4.12  0.00  1.10  1.00  3.00  4.00</span></a>
+<a class="sourceLine" id="cb4-11" title="11"></a>
+<a class="sourceLine" id="cb4-12" title="12"><span class="co"># Entry-wise operations</span></a>
+<a class="sourceLine" id="cb4-13" title="13">vec <span class="op">+</span><span class="st"> </span><span class="dv">1</span></a>
+<a class="sourceLine" id="cb4-14" title="14"><span class="co">#ans&gt; [1] -3.12  1.00  2.10  2.00  4.00  5.00</span></a>
+<a class="sourceLine" id="cb4-15" title="15">vec<span class="op">^</span><span class="dv">2</span></a>
+<a class="sourceLine" id="cb4-16" title="16"><span class="co">#ans&gt; [1] 16.97  0.00  1.21  1.00  9.00 16.00</span></a>
+<a class="sourceLine" id="cb4-17" title="17"></a>
+<a class="sourceLine" id="cb4-18" title="18"><span class="co"># If you want to access a position of a vector, use [position]</span></a>
+<a class="sourceLine" id="cb4-19" title="19">vec[<span class="dv">6</span>]</a>
+<a class="sourceLine" id="cb4-20" title="20"><span class="co">#ans&gt; [1] 4</span></a>
+<a class="sourceLine" id="cb4-21" title="21"></a>
+<a class="sourceLine" id="cb4-22" title="22"><span class="co"># You also can change elements</span></a>
+<a class="sourceLine" id="cb4-23" title="23">vec[<span class="dv">2</span>] &lt;-<span class="st"> </span><span class="dv">-1</span></a>
+<a class="sourceLine" id="cb4-24" title="24">vec</a>
+<a class="sourceLine" id="cb4-25" title="25"><span class="co">#ans&gt; [1] -4.12 -1.00  1.10  1.00  3.00  4.00</span></a>
+<a class="sourceLine" id="cb4-26" title="26"></a>
+<a class="sourceLine" id="cb4-27" title="27"><span class="co"># If you want to access all the elements except a position, use [-position]</span></a>
+<a class="sourceLine" id="cb4-28" title="28">vec[<span class="op">-</span><span class="dv">2</span>]</a>
+<a class="sourceLine" id="cb4-29" title="29"><span class="co">#ans&gt; [1] -4.12  1.10  1.00  3.00  4.00</span></a>
+<a class="sourceLine" id="cb4-30" title="30"></a>
+<a class="sourceLine" id="cb4-31" title="31"><span class="co"># Also with vectors as indexes</span></a>
+<a class="sourceLine" id="cb4-32" title="32">vec[<span class="dv">1</span><span class="op">:</span><span class="dv">2</span>]</a>
+<a class="sourceLine" id="cb4-33" title="33"><span class="co">#ans&gt; [1] -4.12 -1.00</span></a>
+<a class="sourceLine" id="cb4-34" title="34"></a>
+<a class="sourceLine" id="cb4-35" title="35"><span class="co"># And also</span></a>
+<a class="sourceLine" id="cb4-36" title="36">vec[<span class="op">-</span><span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">2</span>)]</a>
+<a class="sourceLine" id="cb4-37" title="37"><span class="co">#ans&gt; [1] 1.1 1.0 3.0 4.0</span></a></code></pre></div>
 
 <div class="rmdexercise">
 <p>Do the following:</p>
@@ -555,193 +508,194 @@ code span.wa { color: #bf0303; } /* Warning */
 <li>Index <span class="math inline">\(y\)</span> by <span class="math inline">\(x+1\)</span> and store it as <code>z</code>. What is the output? (Answer: <code>z</code> is <code>c(-1, 93, 100, 96)</code>)</li>
 </ul>
 </div>
+
 </div>
-<div id="matrices-data-frames-and-lists" class="section level3" number="1.8.3">
+<div id="matrices-data-frames-and-lists" class="section level3">
 <h3><span class="header-section-number">1.8.3</span> Matrices, data frames and lists</h3>
-<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="practical-work-1.html#cb5-1"></a><span class="co"># A matrix is an array of vectors</span></span>
-<span id="cb5-2"><a href="practical-work-1.html#cb5-2"></a>A &lt;-<span class="st"> </span><span class="kw">matrix</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">4</span>, <span class="dt">nrow =</span> <span class="dv">2</span>, <span class="dt">ncol =</span> <span class="dv">2</span>)</span>
-<span id="cb5-3"><a href="practical-work-1.html#cb5-3"></a>A</span>
-<span id="cb5-4"><a href="practical-work-1.html#cb5-4"></a><span class="co">#ans&gt;      [,1] [,2]</span></span>
-<span id="cb5-5"><a href="practical-work-1.html#cb5-5"></a><span class="co">#ans&gt; [1,]    1    3</span></span>
-<span id="cb5-6"><a href="practical-work-1.html#cb5-6"></a><span class="co">#ans&gt; [2,]    2    4</span></span>
-<span id="cb5-7"><a href="practical-work-1.html#cb5-7"></a></span>
-<span id="cb5-8"><a href="practical-work-1.html#cb5-8"></a><span class="co"># Another matrix</span></span>
-<span id="cb5-9"><a href="practical-work-1.html#cb5-9"></a>B &lt;-<span class="st"> </span><span class="kw">matrix</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">4</span>, <span class="dt">nrow =</span> <span class="dv">2</span>, <span class="dt">ncol =</span> <span class="dv">2</span>, <span class="dt">byrow =</span> <span class="ot">TRUE</span>)</span>
-<span id="cb5-10"><a href="practical-work-1.html#cb5-10"></a>B</span>
-<span id="cb5-11"><a href="practical-work-1.html#cb5-11"></a><span class="co">#ans&gt;      [,1] [,2]</span></span>
-<span id="cb5-12"><a href="practical-work-1.html#cb5-12"></a><span class="co">#ans&gt; [1,]    1    2</span></span>
-<span id="cb5-13"><a href="practical-work-1.html#cb5-13"></a><span class="co">#ans&gt; [2,]    3    4</span></span>
-<span id="cb5-14"><a href="practical-work-1.html#cb5-14"></a></span>
-<span id="cb5-15"><a href="practical-work-1.html#cb5-15"></a><span class="co"># Binding by rows or columns</span></span>
-<span id="cb5-16"><a href="practical-work-1.html#cb5-16"></a><span class="kw">rbind</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">3</span>, <span class="dv">4</span><span class="op">:</span><span class="dv">6</span>)</span>
-<span id="cb5-17"><a href="practical-work-1.html#cb5-17"></a><span class="co">#ans&gt;      [,1] [,2] [,3]</span></span>
-<span id="cb5-18"><a href="practical-work-1.html#cb5-18"></a><span class="co">#ans&gt; [1,]    1    2    3</span></span>
-<span id="cb5-19"><a href="practical-work-1.html#cb5-19"></a><span class="co">#ans&gt; [2,]    4    5    6</span></span>
-<span id="cb5-20"><a href="practical-work-1.html#cb5-20"></a><span class="kw">cbind</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">3</span>, <span class="dv">4</span><span class="op">:</span><span class="dv">6</span>)</span>
-<span id="cb5-21"><a href="practical-work-1.html#cb5-21"></a><span class="co">#ans&gt;      [,1] [,2]</span></span>
-<span id="cb5-22"><a href="practical-work-1.html#cb5-22"></a><span class="co">#ans&gt; [1,]    1    4</span></span>
-<span id="cb5-23"><a href="practical-work-1.html#cb5-23"></a><span class="co">#ans&gt; [2,]    2    5</span></span>
-<span id="cb5-24"><a href="practical-work-1.html#cb5-24"></a><span class="co">#ans&gt; [3,]    3    6</span></span>
-<span id="cb5-25"><a href="practical-work-1.html#cb5-25"></a></span>
-<span id="cb5-26"><a href="practical-work-1.html#cb5-26"></a><span class="co"># Entry-wise operations</span></span>
-<span id="cb5-27"><a href="practical-work-1.html#cb5-27"></a>A <span class="op">+</span><span class="st"> </span><span class="dv">1</span></span>
-<span id="cb5-28"><a href="practical-work-1.html#cb5-28"></a><span class="co">#ans&gt;      [,1] [,2]</span></span>
-<span id="cb5-29"><a href="practical-work-1.html#cb5-29"></a><span class="co">#ans&gt; [1,]    2    4</span></span>
-<span id="cb5-30"><a href="practical-work-1.html#cb5-30"></a><span class="co">#ans&gt; [2,]    3    5</span></span>
-<span id="cb5-31"><a href="practical-work-1.html#cb5-31"></a>A <span class="op">*</span><span class="st"> </span>B</span>
-<span id="cb5-32"><a href="practical-work-1.html#cb5-32"></a><span class="co">#ans&gt;      [,1] [,2]</span></span>
-<span id="cb5-33"><a href="practical-work-1.html#cb5-33"></a><span class="co">#ans&gt; [1,]    1    6</span></span>
-<span id="cb5-34"><a href="practical-work-1.html#cb5-34"></a><span class="co">#ans&gt; [2,]    6   16</span></span>
-<span id="cb5-35"><a href="practical-work-1.html#cb5-35"></a></span>
-<span id="cb5-36"><a href="practical-work-1.html#cb5-36"></a><span class="co"># Accessing elements</span></span>
-<span id="cb5-37"><a href="practical-work-1.html#cb5-37"></a>A[<span class="dv">2</span>, <span class="dv">1</span>] <span class="co"># Element (2, 1)</span></span>
-<span id="cb5-38"><a href="practical-work-1.html#cb5-38"></a><span class="co">#ans&gt; [1] 2</span></span>
-<span id="cb5-39"><a href="practical-work-1.html#cb5-39"></a>A[<span class="dv">1</span>, ] <span class="co"># First row</span></span>
-<span id="cb5-40"><a href="practical-work-1.html#cb5-40"></a><span class="co">#ans&gt; [1] 1 3</span></span>
-<span id="cb5-41"><a href="practical-work-1.html#cb5-41"></a>A[, <span class="dv">2</span>] <span class="co"># Second column</span></span>
-<span id="cb5-42"><a href="practical-work-1.html#cb5-42"></a><span class="co">#ans&gt; [1] 3 4</span></span>
-<span id="cb5-43"><a href="practical-work-1.html#cb5-43"></a></span>
-<span id="cb5-44"><a href="practical-work-1.html#cb5-44"></a><span class="co"># A data frame is a matrix with column names</span></span>
-<span id="cb5-45"><a href="practical-work-1.html#cb5-45"></a><span class="co"># Useful when you have multiple variables</span></span>
-<span id="cb5-46"><a href="practical-work-1.html#cb5-46"></a>myDf &lt;-<span class="st"> </span><span class="kw">data.frame</span>(<span class="dt">var1 =</span> <span class="dv">1</span><span class="op">:</span><span class="dv">2</span>, <span class="dt">var2 =</span> <span class="dv">3</span><span class="op">:</span><span class="dv">4</span>)</span>
-<span id="cb5-47"><a href="practical-work-1.html#cb5-47"></a>myDf</span>
-<span id="cb5-48"><a href="practical-work-1.html#cb5-48"></a><span class="co">#ans&gt;   var1 var2</span></span>
-<span id="cb5-49"><a href="practical-work-1.html#cb5-49"></a><span class="co">#ans&gt; 1    1    3</span></span>
-<span id="cb5-50"><a href="practical-work-1.html#cb5-50"></a><span class="co">#ans&gt; 2    2    4</span></span>
-<span id="cb5-51"><a href="practical-work-1.html#cb5-51"></a></span>
-<span id="cb5-52"><a href="practical-work-1.html#cb5-52"></a><span class="co"># You can change names</span></span>
-<span id="cb5-53"><a href="practical-work-1.html#cb5-53"></a><span class="kw">names</span>(myDf) &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;newname1&quot;</span>, <span class="st">&quot;newname2&quot;</span>)</span>
-<span id="cb5-54"><a href="practical-work-1.html#cb5-54"></a>myDf</span>
-<span id="cb5-55"><a href="practical-work-1.html#cb5-55"></a><span class="co">#ans&gt;   newname1 newname2</span></span>
-<span id="cb5-56"><a href="practical-work-1.html#cb5-56"></a><span class="co">#ans&gt; 1        1        3</span></span>
-<span id="cb5-57"><a href="practical-work-1.html#cb5-57"></a><span class="co">#ans&gt; 2        2        4</span></span>
-<span id="cb5-58"><a href="practical-work-1.html#cb5-58"></a></span>
-<span id="cb5-59"><a href="practical-work-1.html#cb5-59"></a><span class="co"># The nice thing is that you can access variables by its name with the $ operator</span></span>
-<span id="cb5-60"><a href="practical-work-1.html#cb5-60"></a>myDf<span class="op">$</span>newname1</span>
-<span id="cb5-61"><a href="practical-work-1.html#cb5-61"></a><span class="co">#ans&gt; [1] 1 2</span></span>
-<span id="cb5-62"><a href="practical-work-1.html#cb5-62"></a></span>
-<span id="cb5-63"><a href="practical-work-1.html#cb5-63"></a><span class="co"># And create new variables also (it has to be of the same</span></span>
-<span id="cb5-64"><a href="practical-work-1.html#cb5-64"></a><span class="co"># length as the rest of variables)</span></span>
-<span id="cb5-65"><a href="practical-work-1.html#cb5-65"></a>myDf<span class="op">$</span>myNewVariable &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">1</span>)</span>
-<span id="cb5-66"><a href="practical-work-1.html#cb5-66"></a>myDf</span>
-<span id="cb5-67"><a href="practical-work-1.html#cb5-67"></a><span class="co">#ans&gt;   newname1 newname2 myNewVariable</span></span>
-<span id="cb5-68"><a href="practical-work-1.html#cb5-68"></a><span class="co">#ans&gt; 1        1        3             0</span></span>
-<span id="cb5-69"><a href="practical-work-1.html#cb5-69"></a><span class="co">#ans&gt; 2        2        4             1</span></span>
-<span id="cb5-70"><a href="practical-work-1.html#cb5-70"></a></span>
-<span id="cb5-71"><a href="practical-work-1.html#cb5-71"></a><span class="co"># A list is a collection of arbitrary variables</span></span>
-<span id="cb5-72"><a href="practical-work-1.html#cb5-72"></a>myList &lt;-<span class="st"> </span><span class="kw">list</span>(<span class="dt">vec =</span> vec, <span class="dt">A =</span> A, <span class="dt">myDf =</span> myDf)</span>
-<span id="cb5-73"><a href="practical-work-1.html#cb5-73"></a></span>
-<span id="cb5-74"><a href="practical-work-1.html#cb5-74"></a><span class="co"># Access elements by names</span></span>
-<span id="cb5-75"><a href="practical-work-1.html#cb5-75"></a>myList<span class="op">$</span>vec</span>
-<span id="cb5-76"><a href="practical-work-1.html#cb5-76"></a><span class="co">#ans&gt; [1] -4.12 -1.00  1.10  1.00  3.00  4.00</span></span>
-<span id="cb5-77"><a href="practical-work-1.html#cb5-77"></a>myList<span class="op">$</span>A</span>
-<span id="cb5-78"><a href="practical-work-1.html#cb5-78"></a><span class="co">#ans&gt;      [,1] [,2]</span></span>
-<span id="cb5-79"><a href="practical-work-1.html#cb5-79"></a><span class="co">#ans&gt; [1,]    1    3</span></span>
-<span id="cb5-80"><a href="practical-work-1.html#cb5-80"></a><span class="co">#ans&gt; [2,]    2    4</span></span>
-<span id="cb5-81"><a href="practical-work-1.html#cb5-81"></a>myList<span class="op">$</span>myDf</span>
-<span id="cb5-82"><a href="practical-work-1.html#cb5-82"></a><span class="co">#ans&gt;   newname1 newname2 myNewVariable</span></span>
-<span id="cb5-83"><a href="practical-work-1.html#cb5-83"></a><span class="co">#ans&gt; 1        1        3             0</span></span>
-<span id="cb5-84"><a href="practical-work-1.html#cb5-84"></a><span class="co">#ans&gt; 2        2        4             1</span></span>
-<span id="cb5-85"><a href="practical-work-1.html#cb5-85"></a></span>
-<span id="cb5-86"><a href="practical-work-1.html#cb5-86"></a><span class="co"># Reveal the structure of an object</span></span>
-<span id="cb5-87"><a href="practical-work-1.html#cb5-87"></a><span class="kw">str</span>(myList)</span>
-<span id="cb5-88"><a href="practical-work-1.html#cb5-88"></a><span class="co">#ans&gt; List of 3</span></span>
-<span id="cb5-89"><a href="practical-work-1.html#cb5-89"></a><span class="co">#ans&gt;  $ vec : num [1:6] -4.12 -1 1.1 1 3 4</span></span>
-<span id="cb5-90"><a href="practical-work-1.html#cb5-90"></a><span class="co">#ans&gt;  $ A   : int [1:2, 1:2] 1 2 3 4</span></span>
-<span id="cb5-91"><a href="practical-work-1.html#cb5-91"></a><span class="co">#ans&gt;  $ myDf:&#39;data.frame&#39;:	2 obs. of  3 variables:</span></span>
-<span id="cb5-92"><a href="practical-work-1.html#cb5-92"></a><span class="co">#ans&gt;   ..$ newname1     : int [1:2] 1 2</span></span>
-<span id="cb5-93"><a href="practical-work-1.html#cb5-93"></a><span class="co">#ans&gt;   ..$ newname2     : int [1:2] 3 4</span></span>
-<span id="cb5-94"><a href="practical-work-1.html#cb5-94"></a><span class="co">#ans&gt;   ..$ myNewVariable: num [1:2] 0 1</span></span>
-<span id="cb5-95"><a href="practical-work-1.html#cb5-95"></a><span class="kw">str</span>(myDf)</span>
-<span id="cb5-96"><a href="practical-work-1.html#cb5-96"></a><span class="co">#ans&gt; &#39;data.frame&#39;:	2 obs. of  3 variables:</span></span>
-<span id="cb5-97"><a href="practical-work-1.html#cb5-97"></a><span class="co">#ans&gt;  $ newname1     : int  1 2</span></span>
-<span id="cb5-98"><a href="practical-work-1.html#cb5-98"></a><span class="co">#ans&gt;  $ newname2     : int  3 4</span></span>
-<span id="cb5-99"><a href="practical-work-1.html#cb5-99"></a><span class="co">#ans&gt;  $ myNewVariable: num  0 1</span></span>
-<span id="cb5-100"><a href="practical-work-1.html#cb5-100"></a></span>
-<span id="cb5-101"><a href="practical-work-1.html#cb5-101"></a><span class="co"># A less lengthy output</span></span>
-<span id="cb5-102"><a href="practical-work-1.html#cb5-102"></a><span class="kw">names</span>(myList)</span>
-<span id="cb5-103"><a href="practical-work-1.html#cb5-103"></a><span class="co">#ans&gt; [1] &quot;vec&quot;  &quot;A&quot;    &quot;myDf&quot;</span></span></code></pre></div>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb5-1" title="1"><span class="co"># A matrix is an array of vectors</span></a>
+<a class="sourceLine" id="cb5-2" title="2">A &lt;-<span class="st"> </span><span class="kw">matrix</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">4</span>, <span class="dt">nrow =</span> <span class="dv">2</span>, <span class="dt">ncol =</span> <span class="dv">2</span>)</a>
+<a class="sourceLine" id="cb5-3" title="3">A</a>
+<a class="sourceLine" id="cb5-4" title="4"><span class="co">#ans&gt;      [,1] [,2]</span></a>
+<a class="sourceLine" id="cb5-5" title="5"><span class="co">#ans&gt; [1,]    1    3</span></a>
+<a class="sourceLine" id="cb5-6" title="6"><span class="co">#ans&gt; [2,]    2    4</span></a>
+<a class="sourceLine" id="cb5-7" title="7"></a>
+<a class="sourceLine" id="cb5-8" title="8"><span class="co"># Another matrix</span></a>
+<a class="sourceLine" id="cb5-9" title="9">B &lt;-<span class="st"> </span><span class="kw">matrix</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">4</span>, <span class="dt">nrow =</span> <span class="dv">2</span>, <span class="dt">ncol =</span> <span class="dv">2</span>, <span class="dt">byrow =</span> <span class="ot">TRUE</span>)</a>
+<a class="sourceLine" id="cb5-10" title="10">B</a>
+<a class="sourceLine" id="cb5-11" title="11"><span class="co">#ans&gt;      [,1] [,2]</span></a>
+<a class="sourceLine" id="cb5-12" title="12"><span class="co">#ans&gt; [1,]    1    2</span></a>
+<a class="sourceLine" id="cb5-13" title="13"><span class="co">#ans&gt; [2,]    3    4</span></a>
+<a class="sourceLine" id="cb5-14" title="14"></a>
+<a class="sourceLine" id="cb5-15" title="15"><span class="co"># Binding by rows or columns</span></a>
+<a class="sourceLine" id="cb5-16" title="16"><span class="kw">rbind</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">3</span>, <span class="dv">4</span><span class="op">:</span><span class="dv">6</span>)</a>
+<a class="sourceLine" id="cb5-17" title="17"><span class="co">#ans&gt;      [,1] [,2] [,3]</span></a>
+<a class="sourceLine" id="cb5-18" title="18"><span class="co">#ans&gt; [1,]    1    2    3</span></a>
+<a class="sourceLine" id="cb5-19" title="19"><span class="co">#ans&gt; [2,]    4    5    6</span></a>
+<a class="sourceLine" id="cb5-20" title="20"><span class="kw">cbind</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">3</span>, <span class="dv">4</span><span class="op">:</span><span class="dv">6</span>)</a>
+<a class="sourceLine" id="cb5-21" title="21"><span class="co">#ans&gt;      [,1] [,2]</span></a>
+<a class="sourceLine" id="cb5-22" title="22"><span class="co">#ans&gt; [1,]    1    4</span></a>
+<a class="sourceLine" id="cb5-23" title="23"><span class="co">#ans&gt; [2,]    2    5</span></a>
+<a class="sourceLine" id="cb5-24" title="24"><span class="co">#ans&gt; [3,]    3    6</span></a>
+<a class="sourceLine" id="cb5-25" title="25"></a>
+<a class="sourceLine" id="cb5-26" title="26"><span class="co"># Entry-wise operations</span></a>
+<a class="sourceLine" id="cb5-27" title="27">A <span class="op">+</span><span class="st"> </span><span class="dv">1</span></a>
+<a class="sourceLine" id="cb5-28" title="28"><span class="co">#ans&gt;      [,1] [,2]</span></a>
+<a class="sourceLine" id="cb5-29" title="29"><span class="co">#ans&gt; [1,]    2    4</span></a>
+<a class="sourceLine" id="cb5-30" title="30"><span class="co">#ans&gt; [2,]    3    5</span></a>
+<a class="sourceLine" id="cb5-31" title="31">A <span class="op">*</span><span class="st"> </span>B</a>
+<a class="sourceLine" id="cb5-32" title="32"><span class="co">#ans&gt;      [,1] [,2]</span></a>
+<a class="sourceLine" id="cb5-33" title="33"><span class="co">#ans&gt; [1,]    1    6</span></a>
+<a class="sourceLine" id="cb5-34" title="34"><span class="co">#ans&gt; [2,]    6   16</span></a>
+<a class="sourceLine" id="cb5-35" title="35"></a>
+<a class="sourceLine" id="cb5-36" title="36"><span class="co"># Accessing elements</span></a>
+<a class="sourceLine" id="cb5-37" title="37">A[<span class="dv">2</span>, <span class="dv">1</span>] <span class="co"># Element (2, 1)</span></a>
+<a class="sourceLine" id="cb5-38" title="38"><span class="co">#ans&gt; [1] 2</span></a>
+<a class="sourceLine" id="cb5-39" title="39">A[<span class="dv">1</span>, ] <span class="co"># First row</span></a>
+<a class="sourceLine" id="cb5-40" title="40"><span class="co">#ans&gt; [1] 1 3</span></a>
+<a class="sourceLine" id="cb5-41" title="41">A[, <span class="dv">2</span>] <span class="co"># Second column</span></a>
+<a class="sourceLine" id="cb5-42" title="42"><span class="co">#ans&gt; [1] 3 4</span></a>
+<a class="sourceLine" id="cb5-43" title="43"></a>
+<a class="sourceLine" id="cb5-44" title="44"><span class="co"># A data frame is a matrix with column names</span></a>
+<a class="sourceLine" id="cb5-45" title="45"><span class="co"># Useful when you have multiple variables</span></a>
+<a class="sourceLine" id="cb5-46" title="46">myDf &lt;-<span class="st"> </span><span class="kw">data.frame</span>(<span class="dt">var1 =</span> <span class="dv">1</span><span class="op">:</span><span class="dv">2</span>, <span class="dt">var2 =</span> <span class="dv">3</span><span class="op">:</span><span class="dv">4</span>)</a>
+<a class="sourceLine" id="cb5-47" title="47">myDf</a>
+<a class="sourceLine" id="cb5-48" title="48"><span class="co">#ans&gt;   var1 var2</span></a>
+<a class="sourceLine" id="cb5-49" title="49"><span class="co">#ans&gt; 1    1    3</span></a>
+<a class="sourceLine" id="cb5-50" title="50"><span class="co">#ans&gt; 2    2    4</span></a>
+<a class="sourceLine" id="cb5-51" title="51"></a>
+<a class="sourceLine" id="cb5-52" title="52"><span class="co"># You can change names</span></a>
+<a class="sourceLine" id="cb5-53" title="53"><span class="kw">names</span>(myDf) &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;newname1&quot;</span>, <span class="st">&quot;newname2&quot;</span>)</a>
+<a class="sourceLine" id="cb5-54" title="54">myDf</a>
+<a class="sourceLine" id="cb5-55" title="55"><span class="co">#ans&gt;   newname1 newname2</span></a>
+<a class="sourceLine" id="cb5-56" title="56"><span class="co">#ans&gt; 1        1        3</span></a>
+<a class="sourceLine" id="cb5-57" title="57"><span class="co">#ans&gt; 2        2        4</span></a>
+<a class="sourceLine" id="cb5-58" title="58"></a>
+<a class="sourceLine" id="cb5-59" title="59"><span class="co"># The nice thing is that you can access variables by its name with the $ operator</span></a>
+<a class="sourceLine" id="cb5-60" title="60">myDf<span class="op">$</span>newname1</a>
+<a class="sourceLine" id="cb5-61" title="61"><span class="co">#ans&gt; [1] 1 2</span></a>
+<a class="sourceLine" id="cb5-62" title="62"></a>
+<a class="sourceLine" id="cb5-63" title="63"><span class="co"># And create new variables also (it has to be of the same</span></a>
+<a class="sourceLine" id="cb5-64" title="64"><span class="co"># length as the rest of variables)</span></a>
+<a class="sourceLine" id="cb5-65" title="65">myDf<span class="op">$</span>myNewVariable &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">1</span>)</a>
+<a class="sourceLine" id="cb5-66" title="66">myDf</a>
+<a class="sourceLine" id="cb5-67" title="67"><span class="co">#ans&gt;   newname1 newname2 myNewVariable</span></a>
+<a class="sourceLine" id="cb5-68" title="68"><span class="co">#ans&gt; 1        1        3             0</span></a>
+<a class="sourceLine" id="cb5-69" title="69"><span class="co">#ans&gt; 2        2        4             1</span></a>
+<a class="sourceLine" id="cb5-70" title="70"></a>
+<a class="sourceLine" id="cb5-71" title="71"><span class="co"># A list is a collection of arbitrary variables</span></a>
+<a class="sourceLine" id="cb5-72" title="72">myList &lt;-<span class="st"> </span><span class="kw">list</span>(<span class="dt">vec =</span> vec, <span class="dt">A =</span> A, <span class="dt">myDf =</span> myDf)</a>
+<a class="sourceLine" id="cb5-73" title="73"></a>
+<a class="sourceLine" id="cb5-74" title="74"><span class="co"># Access elements by names</span></a>
+<a class="sourceLine" id="cb5-75" title="75">myList<span class="op">$</span>vec</a>
+<a class="sourceLine" id="cb5-76" title="76"><span class="co">#ans&gt; [1] -4.12 -1.00  1.10  1.00  3.00  4.00</span></a>
+<a class="sourceLine" id="cb5-77" title="77">myList<span class="op">$</span>A</a>
+<a class="sourceLine" id="cb5-78" title="78"><span class="co">#ans&gt;      [,1] [,2]</span></a>
+<a class="sourceLine" id="cb5-79" title="79"><span class="co">#ans&gt; [1,]    1    3</span></a>
+<a class="sourceLine" id="cb5-80" title="80"><span class="co">#ans&gt; [2,]    2    4</span></a>
+<a class="sourceLine" id="cb5-81" title="81">myList<span class="op">$</span>myDf</a>
+<a class="sourceLine" id="cb5-82" title="82"><span class="co">#ans&gt;   newname1 newname2 myNewVariable</span></a>
+<a class="sourceLine" id="cb5-83" title="83"><span class="co">#ans&gt; 1        1        3             0</span></a>
+<a class="sourceLine" id="cb5-84" title="84"><span class="co">#ans&gt; 2        2        4             1</span></a>
+<a class="sourceLine" id="cb5-85" title="85"></a>
+<a class="sourceLine" id="cb5-86" title="86"><span class="co"># Reveal the structure of an object</span></a>
+<a class="sourceLine" id="cb5-87" title="87"><span class="kw">str</span>(myList)</a>
+<a class="sourceLine" id="cb5-88" title="88"><span class="co">#ans&gt; List of 3</span></a>
+<a class="sourceLine" id="cb5-89" title="89"><span class="co">#ans&gt;  $ vec : num [1:6] -4.12 -1 1.1 1 3 4</span></a>
+<a class="sourceLine" id="cb5-90" title="90"><span class="co">#ans&gt;  $ A   : int [1:2, 1:2] 1 2 3 4</span></a>
+<a class="sourceLine" id="cb5-91" title="91"><span class="co">#ans&gt;  $ myDf:&#39;data.frame&#39;: 2 obs. of  3 variables:</span></a>
+<a class="sourceLine" id="cb5-92" title="92"><span class="co">#ans&gt;   ..$ newname1     : int [1:2] 1 2</span></a>
+<a class="sourceLine" id="cb5-93" title="93"><span class="co">#ans&gt;   ..$ newname2     : int [1:2] 3 4</span></a>
+<a class="sourceLine" id="cb5-94" title="94"><span class="co">#ans&gt;   ..$ myNewVariable: num [1:2] 0 1</span></a>
+<a class="sourceLine" id="cb5-95" title="95"><span class="kw">str</span>(myDf)</a>
+<a class="sourceLine" id="cb5-96" title="96"><span class="co">#ans&gt; &#39;data.frame&#39;: 2 obs. of  3 variables:</span></a>
+<a class="sourceLine" id="cb5-97" title="97"><span class="co">#ans&gt;  $ newname1     : int  1 2</span></a>
+<a class="sourceLine" id="cb5-98" title="98"><span class="co">#ans&gt;  $ newname2     : int  3 4</span></a>
+<a class="sourceLine" id="cb5-99" title="99"><span class="co">#ans&gt;  $ myNewVariable: num  0 1</span></a>
+<a class="sourceLine" id="cb5-100" title="100"></a>
+<a class="sourceLine" id="cb5-101" title="101"><span class="co"># A less lengthy output</span></a>
+<a class="sourceLine" id="cb5-102" title="102"><span class="kw">names</span>(myList)</a>
+<a class="sourceLine" id="cb5-103" title="103"><span class="co">#ans&gt; [1] &quot;vec&quot;  &quot;A&quot;    &quot;myDf&quot;</span></a></code></pre></div>
 </div>
-<div id="graphics" class="section level3" number="1.8.4">
+<div id="graphics" class="section level3">
 <h3><span class="header-section-number">1.8.4</span> Graphics</h3>
 <p>The <code>plot()</code> function is the primary way to plot data in <i class="fab  fa-r-project " style="color:steelblue;"></i> . For instance, <code>plot(x,y)</code> produces a scatterplot of the numbers in <code>x</code> versus the numbers in <code>y</code>. There are many additional options that can be passed in to the <code>plot()</code> function. For example, passing in the argument <code>xlab</code> will result in a label on the <code>x-axis</code>. To find out more information about the <code>plot()</code> function, type <code>?plot</code>.</p>
-<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="practical-work-1.html#cb6-1"></a>x=<span class="kw">rnorm</span>(<span class="dv">100</span>)</span>
-<span id="cb6-2"><a href="practical-work-1.html#cb6-2"></a><span class="co"># The rnorm() function generates a vector of random normal variables,</span></span>
-<span id="cb6-3"><a href="practical-work-1.html#cb6-3"></a><span class="co"># rnorm() with first argument n the sample size. Each time we call this</span></span>
-<span id="cb6-4"><a href="practical-work-1.html#cb6-4"></a><span class="co"># function, we will get a different answer.</span></span>
-<span id="cb6-5"><a href="practical-work-1.html#cb6-5"></a>y=<span class="kw">rnorm</span>(<span class="dv">100</span>)</span>
-<span id="cb6-6"><a href="practical-work-1.html#cb6-6"></a><span class="kw">plot</span>(x,y)</span></code></pre></div>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb6-1" title="1">x=<span class="kw">rnorm</span>(<span class="dv">100</span>)</a>
+<a class="sourceLine" id="cb6-2" title="2"><span class="co"># The rnorm() function generates a vector of random normal variables,</span></a>
+<a class="sourceLine" id="cb6-3" title="3"><span class="co"># rnorm() with first argument n the sample size. Each time we call this</span></a>
+<a class="sourceLine" id="cb6-4" title="4"><span class="co"># function, we will get a different answer.</span></a>
+<a class="sourceLine" id="cb6-5" title="5">y=<span class="kw">rnorm</span>(<span class="dv">100</span>)</a>
+<a class="sourceLine" id="cb6-6" title="6"><span class="kw">plot</span>(x,y)</a></code></pre></div>
 <p><img src="Machine-Learning_files/figure-html/unnamed-chunk-16-1.png" width="70%" style="display: block; margin: auto;" /></p>
-<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="practical-work-1.html#cb7-1"></a></span>
-<span id="cb7-2"><a href="practical-work-1.html#cb7-2"></a><span class="co"># with titles</span></span>
-<span id="cb7-3"><a href="practical-work-1.html#cb7-3"></a><span class="kw">plot</span>(x,y,<span class="dt">xlab=</span><span class="st">&quot;this is the x-axis&quot;</span>,<span class="dt">ylab=</span><span class="st">&quot;this is the y-axis&quot;</span>,</span>
-<span id="cb7-4"><a href="practical-work-1.html#cb7-4"></a><span class="dt">main=</span><span class="st">&quot;Plot of X vs Y&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb7-1" title="1"></a>
+<a class="sourceLine" id="cb7-2" title="2"><span class="co"># with titles</span></a>
+<a class="sourceLine" id="cb7-3" title="3"><span class="kw">plot</span>(x,y,<span class="dt">xlab=</span><span class="st">&quot;this is the x-axis&quot;</span>,<span class="dt">ylab=</span><span class="st">&quot;this is the y-axis&quot;</span>,</a>
+<a class="sourceLine" id="cb7-4" title="4"><span class="dt">main=</span><span class="st">&quot;Plot of X vs Y&quot;</span>)</a></code></pre></div>
 <p><img src="Machine-Learning_files/figure-html/unnamed-chunk-16-2.png" width="70%" style="display: block; margin: auto;" /></p>
 </div>
-<div id="distributions" class="section level3" number="1.8.5">
+<div id="distributions" class="section level3">
 <h3><span class="header-section-number">1.8.5</span> Distributions</h3>
-<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="practical-work-1.html#cb8-1"></a><span class="co"># R allows to sample [r], compute density/probability mass [d],</span></span>
-<span id="cb8-2"><a href="practical-work-1.html#cb8-2"></a><span class="co"># compute distribution function [p] and compute quantiles [q] for several</span></span>
-<span id="cb8-3"><a href="practical-work-1.html#cb8-3"></a><span class="co"># continuous and discrete distributions. The format employed is [rdpq]name,</span></span>
-<span id="cb8-4"><a href="practical-work-1.html#cb8-4"></a><span class="co"># where name stands for:</span></span>
-<span id="cb8-5"><a href="practical-work-1.html#cb8-5"></a><span class="co"># - norm -&gt; Normal</span></span>
-<span id="cb8-6"><a href="practical-work-1.html#cb8-6"></a><span class="co"># - unif -&gt; Uniform</span></span>
-<span id="cb8-7"><a href="practical-work-1.html#cb8-7"></a><span class="co"># - exp -&gt; Exponential</span></span>
-<span id="cb8-8"><a href="practical-work-1.html#cb8-8"></a><span class="co"># - t -&gt; Student&#39;s t</span></span>
-<span id="cb8-9"><a href="practical-work-1.html#cb8-9"></a><span class="co"># - f -&gt; Snedecor&#39;s F (Fisher)</span></span>
-<span id="cb8-10"><a href="practical-work-1.html#cb8-10"></a><span class="co"># - chisq -&gt; Chi squared</span></span>
-<span id="cb8-11"><a href="practical-work-1.html#cb8-11"></a><span class="co"># - pois -&gt; Poisson</span></span>
-<span id="cb8-12"><a href="practical-work-1.html#cb8-12"></a><span class="co"># - binom -&gt; Binomial</span></span>
-<span id="cb8-13"><a href="practical-work-1.html#cb8-13"></a><span class="co"># More distributions: ?Distributions</span></span>
-<span id="cb8-14"><a href="practical-work-1.html#cb8-14"></a></span>
-<span id="cb8-15"><a href="practical-work-1.html#cb8-15"></a></span>
-<span id="cb8-16"><a href="practical-work-1.html#cb8-16"></a><span class="co"># Sampling from a Normal - 100 random points from a N(0, 1)</span></span>
-<span id="cb8-17"><a href="practical-work-1.html#cb8-17"></a><span class="kw">rnorm</span>(<span class="dt">n =</span> <span class="dv">10</span>, <span class="dt">mean =</span> <span class="dv">0</span>, <span class="dt">sd =</span> <span class="dv">1</span>)</span>
-<span id="cb8-18"><a href="practical-work-1.html#cb8-18"></a><span class="co">#ans&gt;  [1]  0.611  1.114  0.619  0.172  0.732 -0.820</span></span>
-<span id="cb8-19"><a href="practical-work-1.html#cb8-19"></a><span class="co">#ans&gt;  [7] -2.793  2.841 -0.478  0.445</span></span>
-<span id="cb8-20"><a href="practical-work-1.html#cb8-20"></a></span>
-<span id="cb8-21"><a href="practical-work-1.html#cb8-21"></a><span class="co"># If you want to have always the same result, set the seed of the random number</span></span>
-<span id="cb8-22"><a href="practical-work-1.html#cb8-22"></a><span class="co"># generator</span></span>
-<span id="cb8-23"><a href="practical-work-1.html#cb8-23"></a><span class="kw">set.seed</span>(<span class="dv">45678</span>)</span>
-<span id="cb8-24"><a href="practical-work-1.html#cb8-24"></a><span class="kw">rnorm</span>(<span class="dt">n =</span> <span class="dv">10</span>, <span class="dt">mean =</span> <span class="dv">0</span>, <span class="dt">sd =</span> <span class="dv">1</span>)</span>
-<span id="cb8-25"><a href="practical-work-1.html#cb8-25"></a><span class="co">#ans&gt;  [1]  1.440 -0.720  0.671 -0.422  0.378 -1.667</span></span>
-<span id="cb8-26"><a href="practical-work-1.html#cb8-26"></a><span class="co">#ans&gt;  [7] -0.508  0.443 -1.799 -0.618</span></span>
-<span id="cb8-27"><a href="practical-work-1.html#cb8-27"></a></span>
-<span id="cb8-28"><a href="practical-work-1.html#cb8-28"></a><span class="co"># Plotting the density of a N(0, 1) - the Gauss bell</span></span>
-<span id="cb8-29"><a href="practical-work-1.html#cb8-29"></a>x &lt;-<span class="st"> </span><span class="kw">seq</span>(<span class="op">-</span><span class="dv">4</span>, <span class="dv">4</span>, <span class="dt">l =</span> <span class="dv">100</span>)</span>
-<span id="cb8-30"><a href="practical-work-1.html#cb8-30"></a>y &lt;-<span class="st"> </span><span class="kw">dnorm</span>(<span class="dt">x =</span> x, <span class="dt">mean =</span> <span class="dv">0</span>, <span class="dt">sd =</span> <span class="dv">1</span>)</span>
-<span id="cb8-31"><a href="practical-work-1.html#cb8-31"></a><span class="kw">plot</span>(x, y, <span class="dt">type =</span> <span class="st">&quot;l&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb8-1" title="1"><span class="co"># R allows to sample [r], compute density/probability mass [d],</span></a>
+<a class="sourceLine" id="cb8-2" title="2"><span class="co"># compute distribution function [p] and compute quantiles [q] for several</span></a>
+<a class="sourceLine" id="cb8-3" title="3"><span class="co"># continuous and discrete distributions. The format employed is [rdpq]name,</span></a>
+<a class="sourceLine" id="cb8-4" title="4"><span class="co"># where name stands for:</span></a>
+<a class="sourceLine" id="cb8-5" title="5"><span class="co"># - norm -&gt; Normal</span></a>
+<a class="sourceLine" id="cb8-6" title="6"><span class="co"># - unif -&gt; Uniform</span></a>
+<a class="sourceLine" id="cb8-7" title="7"><span class="co"># - exp -&gt; Exponential</span></a>
+<a class="sourceLine" id="cb8-8" title="8"><span class="co"># - t -&gt; Student&#39;s t</span></a>
+<a class="sourceLine" id="cb8-9" title="9"><span class="co"># - f -&gt; Snedecor&#39;s F (Fisher)</span></a>
+<a class="sourceLine" id="cb8-10" title="10"><span class="co"># - chisq -&gt; Chi squared</span></a>
+<a class="sourceLine" id="cb8-11" title="11"><span class="co"># - pois -&gt; Poisson</span></a>
+<a class="sourceLine" id="cb8-12" title="12"><span class="co"># - binom -&gt; Binomial</span></a>
+<a class="sourceLine" id="cb8-13" title="13"><span class="co"># More distributions: ?Distributions</span></a>
+<a class="sourceLine" id="cb8-14" title="14"></a>
+<a class="sourceLine" id="cb8-15" title="15"></a>
+<a class="sourceLine" id="cb8-16" title="16"><span class="co"># Sampling from a Normal - 100 random points from a N(0, 1)</span></a>
+<a class="sourceLine" id="cb8-17" title="17"><span class="kw">rnorm</span>(<span class="dt">n =</span> <span class="dv">10</span>, <span class="dt">mean =</span> <span class="dv">0</span>, <span class="dt">sd =</span> <span class="dv">1</span>)</a>
+<a class="sourceLine" id="cb8-18" title="18"><span class="co">#ans&gt;  [1]  0.611  1.114  0.619  0.172  0.732 -0.820</span></a>
+<a class="sourceLine" id="cb8-19" title="19"><span class="co">#ans&gt;  [7] -2.793  2.841 -0.478  0.445</span></a>
+<a class="sourceLine" id="cb8-20" title="20"></a>
+<a class="sourceLine" id="cb8-21" title="21"><span class="co"># If you want to have always the same result, set the seed of the random number</span></a>
+<a class="sourceLine" id="cb8-22" title="22"><span class="co"># generator</span></a>
+<a class="sourceLine" id="cb8-23" title="23"><span class="kw">set.seed</span>(<span class="dv">45678</span>)</a>
+<a class="sourceLine" id="cb8-24" title="24"><span class="kw">rnorm</span>(<span class="dt">n =</span> <span class="dv">10</span>, <span class="dt">mean =</span> <span class="dv">0</span>, <span class="dt">sd =</span> <span class="dv">1</span>)</a>
+<a class="sourceLine" id="cb8-25" title="25"><span class="co">#ans&gt;  [1]  1.440 -0.720  0.671 -0.422  0.378 -1.667</span></a>
+<a class="sourceLine" id="cb8-26" title="26"><span class="co">#ans&gt;  [7] -0.508  0.443 -1.799 -0.618</span></a>
+<a class="sourceLine" id="cb8-27" title="27"></a>
+<a class="sourceLine" id="cb8-28" title="28"><span class="co"># Plotting the density of a N(0, 1) - the Gauss bell</span></a>
+<a class="sourceLine" id="cb8-29" title="29">x &lt;-<span class="st"> </span><span class="kw">seq</span>(<span class="op">-</span><span class="dv">4</span>, <span class="dv">4</span>, <span class="dt">l =</span> <span class="dv">100</span>)</a>
+<a class="sourceLine" id="cb8-30" title="30">y &lt;-<span class="st"> </span><span class="kw">dnorm</span>(<span class="dt">x =</span> x, <span class="dt">mean =</span> <span class="dv">0</span>, <span class="dt">sd =</span> <span class="dv">1</span>)</a>
+<a class="sourceLine" id="cb8-31" title="31"><span class="kw">plot</span>(x, y, <span class="dt">type =</span> <span class="st">&quot;l&quot;</span>)</a></code></pre></div>
 <p><img src="Machine-Learning_files/figure-html/unnamed-chunk-17-1.png" width="70%" style="display: block; margin: auto;" /></p>
-<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="practical-work-1.html#cb9-1"></a></span>
-<span id="cb9-2"><a href="practical-work-1.html#cb9-2"></a><span class="co"># Plotting the distribution function of a N(0, 1)</span></span>
-<span id="cb9-3"><a href="practical-work-1.html#cb9-3"></a>x &lt;-<span class="st"> </span><span class="kw">seq</span>(<span class="op">-</span><span class="dv">4</span>, <span class="dv">4</span>, <span class="dt">l =</span> <span class="dv">100</span>)</span>
-<span id="cb9-4"><a href="practical-work-1.html#cb9-4"></a>y &lt;-<span class="st"> </span><span class="kw">pnorm</span>(<span class="dt">q =</span> x, <span class="dt">mean =</span> <span class="dv">0</span>, <span class="dt">sd =</span> <span class="dv">1</span>)</span>
-<span id="cb9-5"><a href="practical-work-1.html#cb9-5"></a><span class="kw">plot</span>(x, y, <span class="dt">type =</span> <span class="st">&quot;l&quot;</span>, <span class="dt">lwd =</span> <span class="dv">3</span>, <span class="dt">main=</span><span class="st">&quot;The distribution function of a N(0, 1)&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb9-1" title="1"></a>
+<a class="sourceLine" id="cb9-2" title="2"><span class="co"># Plotting the distribution function of a N(0, 1)</span></a>
+<a class="sourceLine" id="cb9-3" title="3">x &lt;-<span class="st"> </span><span class="kw">seq</span>(<span class="op">-</span><span class="dv">4</span>, <span class="dv">4</span>, <span class="dt">l =</span> <span class="dv">100</span>)</a>
+<a class="sourceLine" id="cb9-4" title="4">y &lt;-<span class="st"> </span><span class="kw">pnorm</span>(<span class="dt">q =</span> x, <span class="dt">mean =</span> <span class="dv">0</span>, <span class="dt">sd =</span> <span class="dv">1</span>)</a>
+<a class="sourceLine" id="cb9-5" title="5"><span class="kw">plot</span>(x, y, <span class="dt">type =</span> <span class="st">&quot;l&quot;</span>, <span class="dt">lwd =</span> <span class="dv">3</span>, <span class="dt">main=</span><span class="st">&quot;The distribution function of a N(0, 1)&quot;</span>)</a></code></pre></div>
 <p><img src="Machine-Learning_files/figure-html/unnamed-chunk-17-2.png" width="70%" style="display: block; margin: auto;" /></p>
-<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="practical-work-1.html#cb10-1"></a></span>
-<span id="cb10-2"><a href="practical-work-1.html#cb10-2"></a><span class="co"># Computing the 95% quantile for a N(0, 1)</span></span>
-<span id="cb10-3"><a href="practical-work-1.html#cb10-3"></a><span class="kw">qnorm</span>(<span class="dt">p =</span> <span class="fl">0.95</span>, <span class="dt">mean =</span> <span class="dv">0</span>, <span class="dt">sd =</span> <span class="dv">1</span>)</span>
-<span id="cb10-4"><a href="practical-work-1.html#cb10-4"></a><span class="co">#ans&gt; [1] 1.64</span></span>
-<span id="cb10-5"><a href="practical-work-1.html#cb10-5"></a></span>
-<span id="cb10-6"><a href="practical-work-1.html#cb10-6"></a><span class="co"># All distributions have the same syntax: rname(n,...), dname(x,...), dname(p,...)  </span></span>
-<span id="cb10-7"><a href="practical-work-1.html#cb10-7"></a><span class="co"># and qname(p,...), but the parameters in ... change. Look them in ?Distributions</span></span>
-<span id="cb10-8"><a href="practical-work-1.html#cb10-8"></a><span class="co"># For example, here is que same for the uniform distribution</span></span>
-<span id="cb10-9"><a href="practical-work-1.html#cb10-9"></a></span>
-<span id="cb10-10"><a href="practical-work-1.html#cb10-10"></a><span class="co"># Sampling from a U(0, 1)</span></span>
-<span id="cb10-11"><a href="practical-work-1.html#cb10-11"></a><span class="kw">set.seed</span>(<span class="dv">45678</span>)</span>
-<span id="cb10-12"><a href="practical-work-1.html#cb10-12"></a><span class="kw">runif</span>(<span class="dt">n =</span> <span class="dv">10</span>, <span class="dt">min =</span> <span class="dv">0</span>, <span class="dt">max =</span> <span class="dv">1</span>)</span>
-<span id="cb10-13"><a href="practical-work-1.html#cb10-13"></a><span class="co">#ans&gt;  [1] 0.9251 0.3340 0.2359 0.3366 0.7489 0.9327</span></span>
-<span id="cb10-14"><a href="practical-work-1.html#cb10-14"></a><span class="co">#ans&gt;  [7] 0.3365 0.2246 0.6474 0.0808</span></span>
-<span id="cb10-15"><a href="practical-work-1.html#cb10-15"></a></span>
-<span id="cb10-16"><a href="practical-work-1.html#cb10-16"></a><span class="co"># Plotting the density of a U(0, 1)</span></span>
-<span id="cb10-17"><a href="practical-work-1.html#cb10-17"></a>x &lt;-<span class="st"> </span><span class="kw">seq</span>(<span class="op">-</span><span class="dv">2</span>, <span class="dv">2</span>, <span class="dt">l =</span> <span class="dv">100</span>)</span>
-<span id="cb10-18"><a href="practical-work-1.html#cb10-18"></a>y &lt;-<span class="st"> </span><span class="kw">dunif</span>(<span class="dt">x =</span> x, <span class="dt">min =</span> <span class="dv">0</span>, <span class="dt">max =</span> <span class="dv">1</span>)</span>
-<span id="cb10-19"><a href="practical-work-1.html#cb10-19"></a><span class="kw">plot</span>(x, y, <span class="dt">type =</span> <span class="st">&quot;l&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb10-1" title="1"></a>
+<a class="sourceLine" id="cb10-2" title="2"><span class="co"># Computing the 95% quantile for a N(0, 1)</span></a>
+<a class="sourceLine" id="cb10-3" title="3"><span class="kw">qnorm</span>(<span class="dt">p =</span> <span class="fl">0.95</span>, <span class="dt">mean =</span> <span class="dv">0</span>, <span class="dt">sd =</span> <span class="dv">1</span>)</a>
+<a class="sourceLine" id="cb10-4" title="4"><span class="co">#ans&gt; [1] 1.64</span></a>
+<a class="sourceLine" id="cb10-5" title="5"></a>
+<a class="sourceLine" id="cb10-6" title="6"><span class="co"># All distributions have the same syntax: rname(n,...), dname(x,...), dname(p,...)  </span></a>
+<a class="sourceLine" id="cb10-7" title="7"><span class="co"># and qname(p,...), but the parameters in ... change. Look them in ?Distributions</span></a>
+<a class="sourceLine" id="cb10-8" title="8"><span class="co"># For example, here is que same for the uniform distribution</span></a>
+<a class="sourceLine" id="cb10-9" title="9"></a>
+<a class="sourceLine" id="cb10-10" title="10"><span class="co"># Sampling from a U(0, 1)</span></a>
+<a class="sourceLine" id="cb10-11" title="11"><span class="kw">set.seed</span>(<span class="dv">45678</span>)</a>
+<a class="sourceLine" id="cb10-12" title="12"><span class="kw">runif</span>(<span class="dt">n =</span> <span class="dv">10</span>, <span class="dt">min =</span> <span class="dv">0</span>, <span class="dt">max =</span> <span class="dv">1</span>)</a>
+<a class="sourceLine" id="cb10-13" title="13"><span class="co">#ans&gt;  [1] 0.9251 0.3340 0.2359 0.3366 0.7489 0.9327</span></a>
+<a class="sourceLine" id="cb10-14" title="14"><span class="co">#ans&gt;  [7] 0.3365 0.2246 0.6474 0.0808</span></a>
+<a class="sourceLine" id="cb10-15" title="15"></a>
+<a class="sourceLine" id="cb10-16" title="16"><span class="co"># Plotting the density of a U(0, 1)</span></a>
+<a class="sourceLine" id="cb10-17" title="17">x &lt;-<span class="st"> </span><span class="kw">seq</span>(<span class="op">-</span><span class="dv">2</span>, <span class="dv">2</span>, <span class="dt">l =</span> <span class="dv">100</span>)</a>
+<a class="sourceLine" id="cb10-18" title="18">y &lt;-<span class="st"> </span><span class="kw">dunif</span>(<span class="dt">x =</span> x, <span class="dt">min =</span> <span class="dv">0</span>, <span class="dt">max =</span> <span class="dv">1</span>)</a>
+<a class="sourceLine" id="cb10-19" title="19"><span class="kw">plot</span>(x, y, <span class="dt">type =</span> <span class="st">&quot;l&quot;</span>)</a></code></pre></div>
 <p><img src="Machine-Learning_files/figure-html/unnamed-chunk-17-3.png" width="70%" style="display: block; margin: auto;" /></p>
-<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb11-1"><a href="practical-work-1.html#cb11-1"></a></span>
-<span id="cb11-2"><a href="practical-work-1.html#cb11-2"></a><span class="co"># Computing the 95% quantile for a U(0, 1)</span></span>
-<span id="cb11-3"><a href="practical-work-1.html#cb11-3"></a><span class="kw">qunif</span>(<span class="dt">p =</span> <span class="fl">0.95</span>, <span class="dt">min =</span> <span class="dv">0</span>, <span class="dt">max =</span> <span class="dv">1</span>)</span>
-<span id="cb11-4"><a href="practical-work-1.html#cb11-4"></a><span class="co">#ans&gt; [1] 0.95</span></span></code></pre></div>
+<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb11-1" title="1"></a>
+<a class="sourceLine" id="cb11-2" title="2"><span class="co"># Computing the 95% quantile for a U(0, 1)</span></a>
+<a class="sourceLine" id="cb11-3" title="3"><span class="kw">qunif</span>(<span class="dt">p =</span> <span class="fl">0.95</span>, <span class="dt">min =</span> <span class="dv">0</span>, <span class="dt">max =</span> <span class="dv">1</span>)</a>
+<a class="sourceLine" id="cb11-4" title="4"><span class="co">#ans&gt; [1] 0.95</span></a></code></pre></div>
 
 <div class="rmdexercise">
 <p>Do the following:</p>
@@ -752,22 +706,22 @@ code span.wa { color: #bf0303; } /* Warning */
 </div></li>
 </ul>
 </div>
-<div id="working-directory" class="section level3" number="1.8.6">
+<div id="working-directory" class="section level3">
 <h3><span class="header-section-number">1.8.6</span> Working directory</h3>
 <p>Your <em>working directory</em> is the folder on your computer in which you are currently working. When you ask R to open a certain file, it will look in the working directory for this file, and when you tell R to save a data file or figure, it will save it in the working directory.</p>
 <p>To set your working directory within RStudio you can go to <code>Tools / Set working directory</code>, or use the command <code>setwd()</code>, we put the complete path of the directory between the brackets, do not forget to put the path into quotation marks <code>""</code>.</p>
 <p>To know the actual working directory we use <code>getwd()</code>.</p>
 </div>
-<div id="loading-data" class="section level3" number="1.8.7">
+<div id="loading-data" class="section level3">
 <h3><span class="header-section-number">1.8.7</span> Loading Data</h3>
 <p>The <code>read.table()</code> function is one of the primary ways to import a data set into <i class="fab  fa-r-project " style="color:steelblue;"></i>. The help file <code>?read.table()</code> contains details about how to use this function. We can use the function <code>write.table()</code> to export data.</p>
 <p>Next we will show how to load the data set <code>Auto.data</code> (Download it from  <a target="_blank" href="datasets/Auto.data"> here <i class="fa fa-table" aria-hidden="true"></i></a>).</p>
-<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb12-1"><a href="practical-work-1.html#cb12-1"></a>Auto=<span class="kw">read.table</span>(<span class="st">&quot;Auto.data&quot;</span>,<span class="dt">header=</span>T,<span class="dt">na.strings =</span><span class="st">&quot;?&quot;</span>)</span>
-<span id="cb12-2"><a href="practical-work-1.html#cb12-2"></a><span class="co"># For this file we needed to tell R that the first row is the</span></span>
-<span id="cb12-3"><a href="practical-work-1.html#cb12-3"></a><span class="co"># names of the variables.</span></span>
-<span id="cb12-4"><a href="practical-work-1.html#cb12-4"></a><span class="co"># na.strings tells R that any time it sees a particular character</span></span>
-<span id="cb12-5"><a href="practical-work-1.html#cb12-5"></a><span class="co"># or set of characters (such as a question mark), it should be</span></span>
-<span id="cb12-6"><a href="practical-work-1.html#cb12-6"></a><span class="co"># treated as a missing element of the data matrix. </span></span></code></pre></div>
+<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb12-1" title="1">Auto=<span class="kw">read.table</span>(<span class="st">&quot;Auto.data&quot;</span>,<span class="dt">header=</span>T,<span class="dt">na.strings =</span><span class="st">&quot;?&quot;</span>)</a>
+<a class="sourceLine" id="cb12-2" title="2"><span class="co"># For this file we needed to tell R that the first row is the</span></a>
+<a class="sourceLine" id="cb12-3" title="3"><span class="co"># names of the variables.</span></a>
+<a class="sourceLine" id="cb12-4" title="4"><span class="co"># na.strings tells R that any time it sees a particular character</span></a>
+<a class="sourceLine" id="cb12-5" title="5"><span class="co"># or set of characters (such as a question mark), it should be</span></a>
+<a class="sourceLine" id="cb12-6" title="6"><span class="co"># treated as a missing element of the data matrix. </span></a></code></pre></div>
 
 <div class="rmdinsight">
 <ul>
@@ -777,52 +731,53 @@ code span.wa { color: #bf0303; } /* Warning */
 <li>For text editors, I suggest <a href="https://www.sublimetext.com/"><code>Sublime Text</code></a> or <a href="https://atom.io/"><code>Atom</code></a>.
 </div></li>
 </ul>
-<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb13-1"><a href="practical-work-1.html#cb13-1"></a><span class="kw">dim</span>(Auto) <span class="co"># To see the dimensions of the data set</span></span>
-<span id="cb13-2"><a href="practical-work-1.html#cb13-2"></a><span class="co">#ans&gt; [1] 397   9</span></span>
-<span id="cb13-3"><a href="practical-work-1.html#cb13-3"></a><span class="kw">nrow</span>(Auto) <span class="co"># To see the number of rows</span></span>
-<span id="cb13-4"><a href="practical-work-1.html#cb13-4"></a><span class="co">#ans&gt; [1] 397</span></span>
-<span id="cb13-5"><a href="practical-work-1.html#cb13-5"></a><span class="kw">ncol</span>(Auto) <span class="co"># To see the number of columns</span></span>
-<span id="cb13-6"><a href="practical-work-1.html#cb13-6"></a><span class="co">#ans&gt; [1] 9</span></span>
-<span id="cb13-7"><a href="practical-work-1.html#cb13-7"></a>Auto[<span class="dv">1</span><span class="op">:</span><span class="dv">4</span>,] <span class="co"># The first 4 rows of the data set</span></span>
-<span id="cb13-8"><a href="practical-work-1.html#cb13-8"></a><span class="co">#ans&gt;   mpg cylinders displacement horsepower</span></span>
-<span id="cb13-9"><a href="practical-work-1.html#cb13-9"></a><span class="co">#ans&gt; 1  18         8          307        130</span></span>
-<span id="cb13-10"><a href="practical-work-1.html#cb13-10"></a><span class="co">#ans&gt; 2  15         8          350        165</span></span>
-<span id="cb13-11"><a href="practical-work-1.html#cb13-11"></a><span class="co">#ans&gt; 3  18         8          318        150</span></span>
-<span id="cb13-12"><a href="practical-work-1.html#cb13-12"></a><span class="co">#ans&gt; 4  16         8          304        150</span></span>
-<span id="cb13-13"><a href="practical-work-1.html#cb13-13"></a><span class="co">#ans&gt;   weight acceleration year origin</span></span>
-<span id="cb13-14"><a href="practical-work-1.html#cb13-14"></a><span class="co">#ans&gt; 1   3504         12.0   70      1</span></span>
-<span id="cb13-15"><a href="practical-work-1.html#cb13-15"></a><span class="co">#ans&gt; 2   3693         11.5   70      1</span></span>
-<span id="cb13-16"><a href="practical-work-1.html#cb13-16"></a><span class="co">#ans&gt; 3   3436         11.0   70      1</span></span>
-<span id="cb13-17"><a href="practical-work-1.html#cb13-17"></a><span class="co">#ans&gt; 4   3433         12.0   70      1</span></span>
-<span id="cb13-18"><a href="practical-work-1.html#cb13-18"></a><span class="co">#ans&gt;                        name</span></span>
-<span id="cb13-19"><a href="practical-work-1.html#cb13-19"></a><span class="co">#ans&gt; 1 chevrolet chevelle malibu</span></span>
-<span id="cb13-20"><a href="practical-work-1.html#cb13-20"></a><span class="co">#ans&gt; 2         buick skylark 320</span></span>
-<span id="cb13-21"><a href="practical-work-1.html#cb13-21"></a><span class="co">#ans&gt; 3        plymouth satellite</span></span>
-<span id="cb13-22"><a href="practical-work-1.html#cb13-22"></a><span class="co">#ans&gt; 4             amc rebel sst</span></span></code></pre></div>
-<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb14-1"><a href="practical-work-1.html#cb14-1"></a><span class="co"># Once the data are loaded correctly, we can use names()</span></span>
-<span id="cb14-2"><a href="practical-work-1.html#cb14-2"></a><span class="co"># to check the variable names.</span></span>
-<span id="cb14-3"><a href="practical-work-1.html#cb14-3"></a><span class="kw">names</span>(Auto)</span>
-<span id="cb14-4"><a href="practical-work-1.html#cb14-4"></a><span class="co">#ans&gt; [1] &quot;mpg&quot;          &quot;cylinders&quot;   </span></span>
-<span id="cb14-5"><a href="practical-work-1.html#cb14-5"></a><span class="co">#ans&gt; [3] &quot;displacement&quot; &quot;horsepower&quot;  </span></span>
-<span id="cb14-6"><a href="practical-work-1.html#cb14-6"></a><span class="co">#ans&gt; [5] &quot;weight&quot;       &quot;acceleration&quot;</span></span>
-<span id="cb14-7"><a href="practical-work-1.html#cb14-7"></a><span class="co">#ans&gt; [7] &quot;year&quot;         &quot;origin&quot;      </span></span>
-<span id="cb14-8"><a href="practical-work-1.html#cb14-8"></a><span class="co">#ans&gt; [9] &quot;name&quot;</span></span></code></pre></div>
+<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb13-1" title="1"><span class="kw">dim</span>(Auto) <span class="co"># To see the dimensions of the data set</span></a>
+<a class="sourceLine" id="cb13-2" title="2"><span class="co">#ans&gt; [1] 397   9</span></a>
+<a class="sourceLine" id="cb13-3" title="3"><span class="kw">nrow</span>(Auto) <span class="co"># To see the number of rows</span></a>
+<a class="sourceLine" id="cb13-4" title="4"><span class="co">#ans&gt; [1] 397</span></a>
+<a class="sourceLine" id="cb13-5" title="5"><span class="kw">ncol</span>(Auto) <span class="co"># To see the number of columns</span></a>
+<a class="sourceLine" id="cb13-6" title="6"><span class="co">#ans&gt; [1] 9</span></a>
+<a class="sourceLine" id="cb13-7" title="7">Auto[<span class="dv">1</span><span class="op">:</span><span class="dv">4</span>,] <span class="co"># The first 4 rows of the data set</span></a>
+<a class="sourceLine" id="cb13-8" title="8"><span class="co">#ans&gt;   mpg cylinders displacement horsepower</span></a>
+<a class="sourceLine" id="cb13-9" title="9"><span class="co">#ans&gt; 1  18         8          307        130</span></a>
+<a class="sourceLine" id="cb13-10" title="10"><span class="co">#ans&gt; 2  15         8          350        165</span></a>
+<a class="sourceLine" id="cb13-11" title="11"><span class="co">#ans&gt; 3  18         8          318        150</span></a>
+<a class="sourceLine" id="cb13-12" title="12"><span class="co">#ans&gt; 4  16         8          304        150</span></a>
+<a class="sourceLine" id="cb13-13" title="13"><span class="co">#ans&gt;   weight acceleration year origin</span></a>
+<a class="sourceLine" id="cb13-14" title="14"><span class="co">#ans&gt; 1   3504         12.0   70      1</span></a>
+<a class="sourceLine" id="cb13-15" title="15"><span class="co">#ans&gt; 2   3693         11.5   70      1</span></a>
+<a class="sourceLine" id="cb13-16" title="16"><span class="co">#ans&gt; 3   3436         11.0   70      1</span></a>
+<a class="sourceLine" id="cb13-17" title="17"><span class="co">#ans&gt; 4   3433         12.0   70      1</span></a>
+<a class="sourceLine" id="cb13-18" title="18"><span class="co">#ans&gt;                        name</span></a>
+<a class="sourceLine" id="cb13-19" title="19"><span class="co">#ans&gt; 1 chevrolet chevelle malibu</span></a>
+<a class="sourceLine" id="cb13-20" title="20"><span class="co">#ans&gt; 2         buick skylark 320</span></a>
+<a class="sourceLine" id="cb13-21" title="21"><span class="co">#ans&gt; 3        plymouth satellite</span></a>
+<a class="sourceLine" id="cb13-22" title="22"><span class="co">#ans&gt; 4             amc rebel sst</span></a></code></pre></div>
+<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb14-1" title="1"><span class="co"># Once the data are loaded correctly, we can use names()</span></a>
+<a class="sourceLine" id="cb14-2" title="2"><span class="co"># to check the variable names.</span></a>
+<a class="sourceLine" id="cb14-3" title="3"><span class="kw">names</span>(Auto)</a>
+<a class="sourceLine" id="cb14-4" title="4"><span class="co">#ans&gt; [1] &quot;mpg&quot;          &quot;cylinders&quot;   </span></a>
+<a class="sourceLine" id="cb14-5" title="5"><span class="co">#ans&gt; [3] &quot;displacement&quot; &quot;horsepower&quot;  </span></a>
+<a class="sourceLine" id="cb14-6" title="6"><span class="co">#ans&gt; [5] &quot;weight&quot;       &quot;acceleration&quot;</span></a>
+<a class="sourceLine" id="cb14-7" title="7"><span class="co">#ans&gt; [7] &quot;year&quot;         &quot;origin&quot;      </span></a>
+<a class="sourceLine" id="cb14-8" title="8"><span class="co">#ans&gt; [9] &quot;name&quot;</span></a></code></pre></div>
 
 <div class="rmdinsight">
 Take a look at this <a href="https://cran.r-project.org/doc/contrib/Torfs+Brauer-Short-R-Intro.pdf">(very) short introduction to R</a>. It can be useful.
 </div>
+
 </div>
 </div>
-<div id="regression" class="section level2" number="1.9">
+<div id="regression" class="section level2">
 <h2><span class="header-section-number">1.9</span> Regression</h2>
-<div id="the-lm-function" class="section level3" number="1.9.1">
+<div id="the-lm-function" class="section level3">
 <h3><span class="header-section-number">1.9.1</span> The <code>lm</code> function</h3>
 <p>We are going to employ the <code>EU</code> dataset. The <code>EU</code> dataset contains 28 rows with the member states of the European Union (Country), the number of seats assigned under different years (Seats2011, Seats2014), the Cambridge Compromise apportionment (CamCom2011), and the countries population (Population2010,Population2013). Click  <a target="_blank" href="datasets/EU.RData"> here <i class="fa fa-table" aria-hidden="true"></i></a> to download the <code>EU</code> dataset.</p>
-<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb15-1"><a href="practical-work-1.html#cb15-1"></a><span class="co"># Load the dataset, when we load an .RData using load()</span></span>
-<span id="cb15-2"><a href="practical-work-1.html#cb15-2"></a><span class="co"># function we do not attribute it to a name like we did</span></span>
-<span id="cb15-3"><a href="practical-work-1.html#cb15-3"></a><span class="co"># when we used read.table() or when we use read.csv()</span></span>
-<span id="cb15-4"><a href="practical-work-1.html#cb15-4"></a></span>
-<span id="cb15-5"><a href="practical-work-1.html#cb15-5"></a><span class="kw">load</span>(<span class="st">&quot;EU.RData&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb15-1" title="1"><span class="co"># Load the dataset, when we load an .RData using load()</span></a>
+<a class="sourceLine" id="cb15-2" title="2"><span class="co"># function we do not attribute it to a name like we did</span></a>
+<a class="sourceLine" id="cb15-3" title="3"><span class="co"># when we used read.table() or when we use read.csv()</span></a>
+<a class="sourceLine" id="cb15-4" title="4"></a>
+<a class="sourceLine" id="cb15-5" title="5"><span class="kw">load</span>(<span class="st">&quot;EU.RData&quot;</span>)</a></code></pre></div>
 
 <div class="rmdinsight">
 <p>There are two ways to tell <span style="color: Steelblue;"><i class="fab fa-r-project" aria-hidden="true"></i>
@@ -832,107 +787,107 @@ Take a look at this <a href="https://cran.r-project.org/doc/contrib/Torfs+Brauer
 <li>set a working directory and put the files in it.
 </div></li>
 </ol>
-<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb16-1"><a href="practical-work-1.html#cb16-1"></a><span class="co"># lm (for linear model) has the syntax: </span></span>
-<span id="cb16-2"><a href="practical-work-1.html#cb16-2"></a><span class="co"># lm(formula = response ~ predictor, data = data)</span></span>
-<span id="cb16-3"><a href="practical-work-1.html#cb16-3"></a><span class="co"># The response is the y in the model. The predictor is x.</span></span>
-<span id="cb16-4"><a href="practical-work-1.html#cb16-4"></a><span class="co"># For example (after loading the EU dataset)</span></span>
-<span id="cb16-5"><a href="practical-work-1.html#cb16-5"></a>mod &lt;-<span class="st"> </span><span class="kw">lm</span>(<span class="dt">formula =</span> Seats2011 <span class="op">~</span><span class="st"> </span>Population2010, <span class="dt">data =</span> EU)</span>
-<span id="cb16-6"><a href="practical-work-1.html#cb16-6"></a></span>
-<span id="cb16-7"><a href="practical-work-1.html#cb16-7"></a><span class="co"># We have saved the linear model into mod, which now contains all the output of lm</span></span>
-<span id="cb16-8"><a href="practical-work-1.html#cb16-8"></a><span class="co"># You can see it by typing</span></span>
-<span id="cb16-9"><a href="practical-work-1.html#cb16-9"></a>mod</span>
-<span id="cb16-10"><a href="practical-work-1.html#cb16-10"></a><span class="co">#ans&gt; </span></span>
-<span id="cb16-11"><a href="practical-work-1.html#cb16-11"></a><span class="co">#ans&gt; Call:</span></span>
-<span id="cb16-12"><a href="practical-work-1.html#cb16-12"></a><span class="co">#ans&gt; lm(formula = Seats2011 ~ Population2010, data = EU)</span></span>
-<span id="cb16-13"><a href="practical-work-1.html#cb16-13"></a><span class="co">#ans&gt; </span></span>
-<span id="cb16-14"><a href="practical-work-1.html#cb16-14"></a><span class="co">#ans&gt; Coefficients:</span></span>
-<span id="cb16-15"><a href="practical-work-1.html#cb16-15"></a><span class="co">#ans&gt;    (Intercept)  Population2010  </span></span>
-<span id="cb16-16"><a href="practical-work-1.html#cb16-16"></a><span class="co">#ans&gt;       7.91e+00        1.08e-06</span></span>
-<span id="cb16-17"><a href="practical-work-1.html#cb16-17"></a></span>
-<span id="cb16-18"><a href="practical-work-1.html#cb16-18"></a><span class="co"># mod is indeed a list of objects whose names are</span></span>
-<span id="cb16-19"><a href="practical-work-1.html#cb16-19"></a><span class="kw">names</span>(mod)</span>
-<span id="cb16-20"><a href="practical-work-1.html#cb16-20"></a><span class="co">#ans&gt;  [1] &quot;coefficients&quot;  &quot;residuals&quot;    </span></span>
-<span id="cb16-21"><a href="practical-work-1.html#cb16-21"></a><span class="co">#ans&gt;  [3] &quot;effects&quot;       &quot;rank&quot;         </span></span>
-<span id="cb16-22"><a href="practical-work-1.html#cb16-22"></a><span class="co">#ans&gt;  [5] &quot;fitted.values&quot; &quot;assign&quot;       </span></span>
-<span id="cb16-23"><a href="practical-work-1.html#cb16-23"></a><span class="co">#ans&gt;  [7] &quot;qr&quot;            &quot;df.residual&quot;  </span></span>
-<span id="cb16-24"><a href="practical-work-1.html#cb16-24"></a><span class="co">#ans&gt;  [9] &quot;na.action&quot;     &quot;xlevels&quot;      </span></span>
-<span id="cb16-25"><a href="practical-work-1.html#cb16-25"></a><span class="co">#ans&gt; [11] &quot;call&quot;          &quot;terms&quot;        </span></span>
-<span id="cb16-26"><a href="practical-work-1.html#cb16-26"></a><span class="co">#ans&gt; [13] &quot;model&quot;</span></span>
-<span id="cb16-27"><a href="practical-work-1.html#cb16-27"></a></span>
-<span id="cb16-28"><a href="practical-work-1.html#cb16-28"></a><span class="co"># We can access these elements by $</span></span>
-<span id="cb16-29"><a href="practical-work-1.html#cb16-29"></a><span class="co"># For example</span></span>
-<span id="cb16-30"><a href="practical-work-1.html#cb16-30"></a>mod<span class="op">$</span>coefficients</span>
-<span id="cb16-31"><a href="practical-work-1.html#cb16-31"></a><span class="co">#ans&gt;    (Intercept) Population2010 </span></span>
-<span id="cb16-32"><a href="practical-work-1.html#cb16-32"></a><span class="co">#ans&gt;       7.91e+00       1.08e-06</span></span>
-<span id="cb16-33"><a href="practical-work-1.html#cb16-33"></a></span>
-<span id="cb16-34"><a href="practical-work-1.html#cb16-34"></a><span class="co"># The residuals</span></span>
-<span id="cb16-35"><a href="practical-work-1.html#cb16-35"></a>mod<span class="op">$</span>residuals</span>
-<span id="cb16-36"><a href="practical-work-1.html#cb16-36"></a><span class="co">#ans&gt;        Germany         France United Kingdom </span></span>
-<span id="cb16-37"><a href="practical-work-1.html#cb16-37"></a><span class="co">#ans&gt;         2.8675        -3.7031        -1.7847 </span></span>
-<span id="cb16-38"><a href="practical-work-1.html#cb16-38"></a><span class="co">#ans&gt;          Italy          Spain         Poland </span></span>
-<span id="cb16-39"><a href="practical-work-1.html#cb16-39"></a><span class="co">#ans&gt;         0.0139        -3.5084         1.9272 </span></span>
-<span id="cb16-40"><a href="practical-work-1.html#cb16-40"></a><span class="co">#ans&gt;        Romania    Netherlands         Greece </span></span>
-<span id="cb16-41"><a href="practical-work-1.html#cb16-41"></a><span class="co">#ans&gt;         1.9434         0.2142         1.8977 </span></span>
-<span id="cb16-42"><a href="practical-work-1.html#cb16-42"></a><span class="co">#ans&gt;        Belgium       Portugal Czech Republic </span></span>
-<span id="cb16-43"><a href="practical-work-1.html#cb16-43"></a><span class="co">#ans&gt;         2.3994         2.6175         2.7587 </span></span>
-<span id="cb16-44"><a href="practical-work-1.html#cb16-44"></a><span class="co">#ans&gt;        Hungary         Sweden        Austria </span></span>
-<span id="cb16-45"><a href="practical-work-1.html#cb16-45"></a><span class="co">#ans&gt;         3.2898         2.0163         2.0575 </span></span>
-<span id="cb16-46"><a href="practical-work-1.html#cb16-46"></a><span class="co">#ans&gt;       Bulgaria        Denmark       Slovakia </span></span>
-<span id="cb16-47"><a href="practical-work-1.html#cb16-47"></a><span class="co">#ans&gt;         1.9328        -0.8790        -0.7606 </span></span>
-<span id="cb16-48"><a href="practical-work-1.html#cb16-48"></a><span class="co">#ans&gt;        Finland        Ireland      Lithuania </span></span>
-<span id="cb16-49"><a href="practical-work-1.html#cb16-49"></a><span class="co">#ans&gt;        -0.6813        -0.7284         0.4998 </span></span>
-<span id="cb16-50"><a href="practical-work-1.html#cb16-50"></a><span class="co">#ans&gt;         Latvia       Slovenia        Estonia </span></span>
-<span id="cb16-51"><a href="practical-work-1.html#cb16-51"></a><span class="co">#ans&gt;        -1.3347        -2.1175        -3.3552 </span></span>
-<span id="cb16-52"><a href="practical-work-1.html#cb16-52"></a><span class="co">#ans&gt;         Cyprus     Luxembourg          Malta </span></span>
-<span id="cb16-53"><a href="practical-work-1.html#cb16-53"></a><span class="co">#ans&gt;        -2.7761        -2.4514        -2.3553</span></span>
-<span id="cb16-54"><a href="practical-work-1.html#cb16-54"></a></span>
-<span id="cb16-55"><a href="practical-work-1.html#cb16-55"></a><span class="co"># The fitted values</span></span>
-<span id="cb16-56"><a href="practical-work-1.html#cb16-56"></a>mod<span class="op">$</span>fitted.values</span>
-<span id="cb16-57"><a href="practical-work-1.html#cb16-57"></a><span class="co">#ans&gt;        Germany         France United Kingdom </span></span>
-<span id="cb16-58"><a href="practical-work-1.html#cb16-58"></a><span class="co">#ans&gt;          96.13          77.70          74.78 </span></span>
-<span id="cb16-59"><a href="practical-work-1.html#cb16-59"></a><span class="co">#ans&gt;          Italy          Spain         Poland </span></span>
-<span id="cb16-60"><a href="practical-work-1.html#cb16-60"></a><span class="co">#ans&gt;          72.99          57.51          49.07 </span></span>
-<span id="cb16-61"><a href="practical-work-1.html#cb16-61"></a><span class="co">#ans&gt;        Romania    Netherlands         Greece </span></span>
-<span id="cb16-62"><a href="practical-work-1.html#cb16-62"></a><span class="co">#ans&gt;          31.06          25.79          20.10 </span></span>
-<span id="cb16-63"><a href="practical-work-1.html#cb16-63"></a><span class="co">#ans&gt;        Belgium       Portugal Czech Republic </span></span>
-<span id="cb16-64"><a href="practical-work-1.html#cb16-64"></a><span class="co">#ans&gt;          19.60          19.38          19.24 </span></span>
-<span id="cb16-65"><a href="practical-work-1.html#cb16-65"></a><span class="co">#ans&gt;        Hungary         Sweden        Austria </span></span>
-<span id="cb16-66"><a href="practical-work-1.html#cb16-66"></a><span class="co">#ans&gt;          18.71          17.98          16.94 </span></span>
-<span id="cb16-67"><a href="practical-work-1.html#cb16-67"></a><span class="co">#ans&gt;       Bulgaria        Denmark       Slovakia </span></span>
-<span id="cb16-68"><a href="practical-work-1.html#cb16-68"></a><span class="co">#ans&gt;          16.07          13.88          13.76 </span></span>
-<span id="cb16-69"><a href="practical-work-1.html#cb16-69"></a><span class="co">#ans&gt;        Finland        Ireland      Lithuania </span></span>
-<span id="cb16-70"><a href="practical-work-1.html#cb16-70"></a><span class="co">#ans&gt;          13.68          12.73          11.50 </span></span>
-<span id="cb16-71"><a href="practical-work-1.html#cb16-71"></a><span class="co">#ans&gt;         Latvia       Slovenia        Estonia </span></span>
-<span id="cb16-72"><a href="practical-work-1.html#cb16-72"></a><span class="co">#ans&gt;          10.33          10.12           9.36 </span></span>
-<span id="cb16-73"><a href="practical-work-1.html#cb16-73"></a><span class="co">#ans&gt;         Cyprus     Luxembourg          Malta </span></span>
-<span id="cb16-74"><a href="practical-work-1.html#cb16-74"></a><span class="co">#ans&gt;           8.78           8.45           8.36</span></span>
-<span id="cb16-75"><a href="practical-work-1.html#cb16-75"></a></span>
-<span id="cb16-76"><a href="practical-work-1.html#cb16-76"></a><span class="co"># Summary of the model</span></span>
-<span id="cb16-77"><a href="practical-work-1.html#cb16-77"></a>sumMod &lt;-<span class="st"> </span><span class="kw">summary</span>(mod)</span>
-<span id="cb16-78"><a href="practical-work-1.html#cb16-78"></a>sumMod</span>
-<span id="cb16-79"><a href="practical-work-1.html#cb16-79"></a><span class="co">#ans&gt; </span></span>
-<span id="cb16-80"><a href="practical-work-1.html#cb16-80"></a><span class="co">#ans&gt; Call:</span></span>
-<span id="cb16-81"><a href="practical-work-1.html#cb16-81"></a><span class="co">#ans&gt; lm(formula = Seats2011 ~ Population2010, data = EU)</span></span>
-<span id="cb16-82"><a href="practical-work-1.html#cb16-82"></a><span class="co">#ans&gt; </span></span>
-<span id="cb16-83"><a href="practical-work-1.html#cb16-83"></a><span class="co">#ans&gt; Residuals:</span></span>
-<span id="cb16-84"><a href="practical-work-1.html#cb16-84"></a><span class="co">#ans&gt;    Min     1Q Median     3Q    Max </span></span>
-<span id="cb16-85"><a href="practical-work-1.html#cb16-85"></a><span class="co">#ans&gt; -3.703 -1.951  0.014  1.980  3.290 </span></span>
-<span id="cb16-86"><a href="practical-work-1.html#cb16-86"></a><span class="co">#ans&gt; </span></span>
-<span id="cb16-87"><a href="practical-work-1.html#cb16-87"></a><span class="co">#ans&gt; Coefficients:</span></span>
-<span id="cb16-88"><a href="practical-work-1.html#cb16-88"></a><span class="co">#ans&gt;                Estimate Std. Error t value</span></span>
-<span id="cb16-89"><a href="practical-work-1.html#cb16-89"></a><span class="co">#ans&gt; (Intercept)    7.91e+00   5.66e-01    14.0</span></span>
-<span id="cb16-90"><a href="practical-work-1.html#cb16-90"></a><span class="co">#ans&gt; Population2010 1.08e-06   1.92e-08    56.3</span></span>
-<span id="cb16-91"><a href="practical-work-1.html#cb16-91"></a><span class="co">#ans&gt;                Pr(&gt;|t|)    </span></span>
-<span id="cb16-92"><a href="practical-work-1.html#cb16-92"></a><span class="co">#ans&gt; (Intercept)     2.6e-13 ***</span></span>
-<span id="cb16-93"><a href="practical-work-1.html#cb16-93"></a><span class="co">#ans&gt; Population2010  &lt; 2e-16 ***</span></span>
-<span id="cb16-94"><a href="practical-work-1.html#cb16-94"></a><span class="co">#ans&gt; ---</span></span>
-<span id="cb16-95"><a href="practical-work-1.html#cb16-95"></a><span class="co">#ans&gt; Signif. codes:  </span></span>
-<span id="cb16-96"><a href="practical-work-1.html#cb16-96"></a><span class="co">#ans&gt; 0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</span></span>
-<span id="cb16-97"><a href="practical-work-1.html#cb16-97"></a><span class="co">#ans&gt; </span></span>
-<span id="cb16-98"><a href="practical-work-1.html#cb16-98"></a><span class="co">#ans&gt; Residual standard error: 2.29 on 25 degrees of freedom</span></span>
-<span id="cb16-99"><a href="practical-work-1.html#cb16-99"></a><span class="co">#ans&gt;   (1 observation deleted due to missingness)</span></span>
-<span id="cb16-100"><a href="practical-work-1.html#cb16-100"></a><span class="co">#ans&gt; Multiple R-squared:  0.992,	Adjusted R-squared:  0.992 </span></span>
-<span id="cb16-101"><a href="practical-work-1.html#cb16-101"></a><span class="co">#ans&gt; F-statistic: 3.17e+03 on 1 and 25 DF,  p-value: &lt;2e-16</span></span></code></pre></div>
+<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb16-1" title="1"><span class="co"># lm (for linear model) has the syntax: </span></a>
+<a class="sourceLine" id="cb16-2" title="2"><span class="co"># lm(formula = response ~ predictor, data = data)</span></a>
+<a class="sourceLine" id="cb16-3" title="3"><span class="co"># The response is the y in the model. The predictor is x.</span></a>
+<a class="sourceLine" id="cb16-4" title="4"><span class="co"># For example (after loading the EU dataset)</span></a>
+<a class="sourceLine" id="cb16-5" title="5">mod &lt;-<span class="st"> </span><span class="kw">lm</span>(<span class="dt">formula =</span> Seats2011 <span class="op">~</span><span class="st"> </span>Population2010, <span class="dt">data =</span> EU)</a>
+<a class="sourceLine" id="cb16-6" title="6"></a>
+<a class="sourceLine" id="cb16-7" title="7"><span class="co"># We have saved the linear model into mod, which now contains all the output of lm</span></a>
+<a class="sourceLine" id="cb16-8" title="8"><span class="co"># You can see it by typing</span></a>
+<a class="sourceLine" id="cb16-9" title="9">mod</a>
+<a class="sourceLine" id="cb16-10" title="10"><span class="co">#ans&gt; </span></a>
+<a class="sourceLine" id="cb16-11" title="11"><span class="co">#ans&gt; Call:</span></a>
+<a class="sourceLine" id="cb16-12" title="12"><span class="co">#ans&gt; lm(formula = Seats2011 ~ Population2010, data = EU)</span></a>
+<a class="sourceLine" id="cb16-13" title="13"><span class="co">#ans&gt; </span></a>
+<a class="sourceLine" id="cb16-14" title="14"><span class="co">#ans&gt; Coefficients:</span></a>
+<a class="sourceLine" id="cb16-15" title="15"><span class="co">#ans&gt;    (Intercept)  Population2010  </span></a>
+<a class="sourceLine" id="cb16-16" title="16"><span class="co">#ans&gt;       7.91e+00        1.08e-06</span></a>
+<a class="sourceLine" id="cb16-17" title="17"></a>
+<a class="sourceLine" id="cb16-18" title="18"><span class="co"># mod is indeed a list of objects whose names are</span></a>
+<a class="sourceLine" id="cb16-19" title="19"><span class="kw">names</span>(mod)</a>
+<a class="sourceLine" id="cb16-20" title="20"><span class="co">#ans&gt;  [1] &quot;coefficients&quot;  &quot;residuals&quot;    </span></a>
+<a class="sourceLine" id="cb16-21" title="21"><span class="co">#ans&gt;  [3] &quot;effects&quot;       &quot;rank&quot;         </span></a>
+<a class="sourceLine" id="cb16-22" title="22"><span class="co">#ans&gt;  [5] &quot;fitted.values&quot; &quot;assign&quot;       </span></a>
+<a class="sourceLine" id="cb16-23" title="23"><span class="co">#ans&gt;  [7] &quot;qr&quot;            &quot;df.residual&quot;  </span></a>
+<a class="sourceLine" id="cb16-24" title="24"><span class="co">#ans&gt;  [9] &quot;na.action&quot;     &quot;xlevels&quot;      </span></a>
+<a class="sourceLine" id="cb16-25" title="25"><span class="co">#ans&gt; [11] &quot;call&quot;          &quot;terms&quot;        </span></a>
+<a class="sourceLine" id="cb16-26" title="26"><span class="co">#ans&gt; [13] &quot;model&quot;</span></a>
+<a class="sourceLine" id="cb16-27" title="27"></a>
+<a class="sourceLine" id="cb16-28" title="28"><span class="co"># We can access these elements by $</span></a>
+<a class="sourceLine" id="cb16-29" title="29"><span class="co"># For example</span></a>
+<a class="sourceLine" id="cb16-30" title="30">mod<span class="op">$</span>coefficients</a>
+<a class="sourceLine" id="cb16-31" title="31"><span class="co">#ans&gt;    (Intercept) Population2010 </span></a>
+<a class="sourceLine" id="cb16-32" title="32"><span class="co">#ans&gt;       7.91e+00       1.08e-06</span></a>
+<a class="sourceLine" id="cb16-33" title="33"></a>
+<a class="sourceLine" id="cb16-34" title="34"><span class="co"># The residuals</span></a>
+<a class="sourceLine" id="cb16-35" title="35">mod<span class="op">$</span>residuals</a>
+<a class="sourceLine" id="cb16-36" title="36"><span class="co">#ans&gt;        Germany         France United Kingdom </span></a>
+<a class="sourceLine" id="cb16-37" title="37"><span class="co">#ans&gt;         2.8675        -3.7031        -1.7847 </span></a>
+<a class="sourceLine" id="cb16-38" title="38"><span class="co">#ans&gt;          Italy          Spain         Poland </span></a>
+<a class="sourceLine" id="cb16-39" title="39"><span class="co">#ans&gt;         0.0139        -3.5084         1.9272 </span></a>
+<a class="sourceLine" id="cb16-40" title="40"><span class="co">#ans&gt;        Romania    Netherlands         Greece </span></a>
+<a class="sourceLine" id="cb16-41" title="41"><span class="co">#ans&gt;         1.9434         0.2142         1.8977 </span></a>
+<a class="sourceLine" id="cb16-42" title="42"><span class="co">#ans&gt;        Belgium       Portugal Czech Republic </span></a>
+<a class="sourceLine" id="cb16-43" title="43"><span class="co">#ans&gt;         2.3994         2.6175         2.7587 </span></a>
+<a class="sourceLine" id="cb16-44" title="44"><span class="co">#ans&gt;        Hungary         Sweden        Austria </span></a>
+<a class="sourceLine" id="cb16-45" title="45"><span class="co">#ans&gt;         3.2898         2.0163         2.0575 </span></a>
+<a class="sourceLine" id="cb16-46" title="46"><span class="co">#ans&gt;       Bulgaria        Denmark       Slovakia </span></a>
+<a class="sourceLine" id="cb16-47" title="47"><span class="co">#ans&gt;         1.9328        -0.8790        -0.7606 </span></a>
+<a class="sourceLine" id="cb16-48" title="48"><span class="co">#ans&gt;        Finland        Ireland      Lithuania </span></a>
+<a class="sourceLine" id="cb16-49" title="49"><span class="co">#ans&gt;        -0.6813        -0.7284         0.4998 </span></a>
+<a class="sourceLine" id="cb16-50" title="50"><span class="co">#ans&gt;         Latvia       Slovenia        Estonia </span></a>
+<a class="sourceLine" id="cb16-51" title="51"><span class="co">#ans&gt;        -1.3347        -2.1175        -3.3552 </span></a>
+<a class="sourceLine" id="cb16-52" title="52"><span class="co">#ans&gt;         Cyprus     Luxembourg          Malta </span></a>
+<a class="sourceLine" id="cb16-53" title="53"><span class="co">#ans&gt;        -2.7761        -2.4514        -2.3553</span></a>
+<a class="sourceLine" id="cb16-54" title="54"></a>
+<a class="sourceLine" id="cb16-55" title="55"><span class="co"># The fitted values</span></a>
+<a class="sourceLine" id="cb16-56" title="56">mod<span class="op">$</span>fitted.values</a>
+<a class="sourceLine" id="cb16-57" title="57"><span class="co">#ans&gt;        Germany         France United Kingdom </span></a>
+<a class="sourceLine" id="cb16-58" title="58"><span class="co">#ans&gt;          96.13          77.70          74.78 </span></a>
+<a class="sourceLine" id="cb16-59" title="59"><span class="co">#ans&gt;          Italy          Spain         Poland </span></a>
+<a class="sourceLine" id="cb16-60" title="60"><span class="co">#ans&gt;          72.99          57.51          49.07 </span></a>
+<a class="sourceLine" id="cb16-61" title="61"><span class="co">#ans&gt;        Romania    Netherlands         Greece </span></a>
+<a class="sourceLine" id="cb16-62" title="62"><span class="co">#ans&gt;          31.06          25.79          20.10 </span></a>
+<a class="sourceLine" id="cb16-63" title="63"><span class="co">#ans&gt;        Belgium       Portugal Czech Republic </span></a>
+<a class="sourceLine" id="cb16-64" title="64"><span class="co">#ans&gt;          19.60          19.38          19.24 </span></a>
+<a class="sourceLine" id="cb16-65" title="65"><span class="co">#ans&gt;        Hungary         Sweden        Austria </span></a>
+<a class="sourceLine" id="cb16-66" title="66"><span class="co">#ans&gt;          18.71          17.98          16.94 </span></a>
+<a class="sourceLine" id="cb16-67" title="67"><span class="co">#ans&gt;       Bulgaria        Denmark       Slovakia </span></a>
+<a class="sourceLine" id="cb16-68" title="68"><span class="co">#ans&gt;          16.07          13.88          13.76 </span></a>
+<a class="sourceLine" id="cb16-69" title="69"><span class="co">#ans&gt;        Finland        Ireland      Lithuania </span></a>
+<a class="sourceLine" id="cb16-70" title="70"><span class="co">#ans&gt;          13.68          12.73          11.50 </span></a>
+<a class="sourceLine" id="cb16-71" title="71"><span class="co">#ans&gt;         Latvia       Slovenia        Estonia </span></a>
+<a class="sourceLine" id="cb16-72" title="72"><span class="co">#ans&gt;          10.33          10.12           9.36 </span></a>
+<a class="sourceLine" id="cb16-73" title="73"><span class="co">#ans&gt;         Cyprus     Luxembourg          Malta </span></a>
+<a class="sourceLine" id="cb16-74" title="74"><span class="co">#ans&gt;           8.78           8.45           8.36</span></a>
+<a class="sourceLine" id="cb16-75" title="75"></a>
+<a class="sourceLine" id="cb16-76" title="76"><span class="co"># Summary of the model</span></a>
+<a class="sourceLine" id="cb16-77" title="77">sumMod &lt;-<span class="st"> </span><span class="kw">summary</span>(mod)</a>
+<a class="sourceLine" id="cb16-78" title="78">sumMod</a>
+<a class="sourceLine" id="cb16-79" title="79"><span class="co">#ans&gt; </span></a>
+<a class="sourceLine" id="cb16-80" title="80"><span class="co">#ans&gt; Call:</span></a>
+<a class="sourceLine" id="cb16-81" title="81"><span class="co">#ans&gt; lm(formula = Seats2011 ~ Population2010, data = EU)</span></a>
+<a class="sourceLine" id="cb16-82" title="82"><span class="co">#ans&gt; </span></a>
+<a class="sourceLine" id="cb16-83" title="83"><span class="co">#ans&gt; Residuals:</span></a>
+<a class="sourceLine" id="cb16-84" title="84"><span class="co">#ans&gt;    Min     1Q Median     3Q    Max </span></a>
+<a class="sourceLine" id="cb16-85" title="85"><span class="co">#ans&gt; -3.703 -1.951  0.014  1.980  3.290 </span></a>
+<a class="sourceLine" id="cb16-86" title="86"><span class="co">#ans&gt; </span></a>
+<a class="sourceLine" id="cb16-87" title="87"><span class="co">#ans&gt; Coefficients:</span></a>
+<a class="sourceLine" id="cb16-88" title="88"><span class="co">#ans&gt;                Estimate Std. Error t value</span></a>
+<a class="sourceLine" id="cb16-89" title="89"><span class="co">#ans&gt; (Intercept)    7.91e+00   5.66e-01    14.0</span></a>
+<a class="sourceLine" id="cb16-90" title="90"><span class="co">#ans&gt; Population2010 1.08e-06   1.92e-08    56.3</span></a>
+<a class="sourceLine" id="cb16-91" title="91"><span class="co">#ans&gt;                Pr(&gt;|t|)    </span></a>
+<a class="sourceLine" id="cb16-92" title="92"><span class="co">#ans&gt; (Intercept)     2.6e-13 ***</span></a>
+<a class="sourceLine" id="cb16-93" title="93"><span class="co">#ans&gt; Population2010  &lt; 2e-16 ***</span></a>
+<a class="sourceLine" id="cb16-94" title="94"><span class="co">#ans&gt; ---</span></a>
+<a class="sourceLine" id="cb16-95" title="95"><span class="co">#ans&gt; Signif. codes:  </span></a>
+<a class="sourceLine" id="cb16-96" title="96"><span class="co">#ans&gt; 0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</span></a>
+<a class="sourceLine" id="cb16-97" title="97"><span class="co">#ans&gt; </span></a>
+<a class="sourceLine" id="cb16-98" title="98"><span class="co">#ans&gt; Residual standard error: 2.29 on 25 degrees of freedom</span></a>
+<a class="sourceLine" id="cb16-99" title="99"><span class="co">#ans&gt;   (1 observation deleted due to missingness)</span></a>
+<a class="sourceLine" id="cb16-100" title="100"><span class="co">#ans&gt; Multiple R-squared:  0.992,   Adjusted R-squared:  0.992 </span></a>
+<a class="sourceLine" id="cb16-101" title="101"><span class="co">#ans&gt; F-statistic: 3.17e+03 on 1 and 25 DF,  p-value: &lt;2e-16</span></a></code></pre></div>
 <p>The following table contains a handy cheat sheet of equivalences between <i class="fab  fa-r-project " style="color:steelblue;"></i> code and some of the statistical concepts associated to linear regression.</p>
 <table>
 <colgroup>
@@ -1012,36 +967,36 @@ Take a look at this <a href="https://cran.r-project.org/doc/contrib/Torfs+Brauer
 </div></li>
 </ul>
 </div>
-<div id="boston" class="section level3" number="1.9.2">
+<div id="boston" class="section level3">
 <h3><span class="header-section-number">1.9.2</span> Predicting House Value: Boston dataset</h3>
 <p>We are going to use a dataset called Boston which is part of the <code>MASS</code> package. It recordes the median value of houses for 506 neighborhoods around Boston. Our task is to predict the median house value (<code>medv</code>) using only one predictor (<code>lstat</code>: percent of households with low socioeconomic status).</p>
-<div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb17-1"><a href="practical-work-1.html#cb17-1"></a><span class="co"># First, install the MASS package using the command: install.packages(&quot;MASS&quot;)</span></span>
-<span id="cb17-2"><a href="practical-work-1.html#cb17-2"></a></span>
-<span id="cb17-3"><a href="practical-work-1.html#cb17-3"></a><span class="co"># load MASS package</span></span>
-<span id="cb17-4"><a href="practical-work-1.html#cb17-4"></a><span class="kw">library</span>(MASS)</span>
-<span id="cb17-5"><a href="practical-work-1.html#cb17-5"></a></span>
-<span id="cb17-6"><a href="practical-work-1.html#cb17-6"></a><span class="co"># Check the dimensions of the Boston dataset</span></span>
-<span id="cb17-7"><a href="practical-work-1.html#cb17-7"></a><span class="kw">dim</span>(Boston)</span>
-<span id="cb17-8"><a href="practical-work-1.html#cb17-8"></a><span class="co">#ans&gt; [1] 506  14</span></span></code></pre></div>
+<div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb17-1" title="1"><span class="co"># First, install the MASS package using the command: install.packages(&quot;MASS&quot;)</span></a>
+<a class="sourceLine" id="cb17-2" title="2"></a>
+<a class="sourceLine" id="cb17-3" title="3"><span class="co"># load MASS package</span></a>
+<a class="sourceLine" id="cb17-4" title="4"><span class="kw">library</span>(MASS)</a>
+<a class="sourceLine" id="cb17-5" title="5"></a>
+<a class="sourceLine" id="cb17-6" title="6"><span class="co"># Check the dimensions of the Boston dataset</span></a>
+<a class="sourceLine" id="cb17-7" title="7"><span class="kw">dim</span>(Boston)</a>
+<a class="sourceLine" id="cb17-8" title="8"><span class="co">#ans&gt; [1] 506  14</span></a></code></pre></div>
 <p><strong>STEP 1: Split the dataset</strong></p>
-<div class="sourceCode" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb18-1"><a href="practical-work-1.html#cb18-1"></a><span class="co"># Split the data by using the first 400 observations as the training</span></span>
-<span id="cb18-2"><a href="practical-work-1.html#cb18-2"></a><span class="co"># data and the remaining as the testing data</span></span>
-<span id="cb18-3"><a href="practical-work-1.html#cb18-3"></a>train =<span class="st"> </span><span class="dv">1</span><span class="op">:</span><span class="dv">400</span></span>
-<span id="cb18-4"><a href="practical-work-1.html#cb18-4"></a>test =<span class="st"> </span><span class="op">-</span>train</span>
-<span id="cb18-5"><a href="practical-work-1.html#cb18-5"></a></span>
-<span id="cb18-6"><a href="practical-work-1.html#cb18-6"></a><span class="co"># Speficy that we are going to use only two variables (lstat and medv)</span></span>
-<span id="cb18-7"><a href="practical-work-1.html#cb18-7"></a>variables =<span class="st"> </span><span class="kw">which</span>(<span class="kw">names</span>(Boston) <span class="op">==</span><span class="kw">c</span>(<span class="st">&quot;lstat&quot;</span>, <span class="st">&quot;medv&quot;</span>))</span>
-<span id="cb18-8"><a href="practical-work-1.html#cb18-8"></a>training_data =<span class="st"> </span>Boston[train, variables]</span>
-<span id="cb18-9"><a href="practical-work-1.html#cb18-9"></a>testing_data =<span class="st"> </span>Boston[test, variables]</span>
-<span id="cb18-10"><a href="practical-work-1.html#cb18-10"></a></span>
-<span id="cb18-11"><a href="practical-work-1.html#cb18-11"></a><span class="co"># Check the dimensions of the new dataset</span></span>
-<span id="cb18-12"><a href="practical-work-1.html#cb18-12"></a><span class="kw">dim</span>(training_data)</span>
-<span id="cb18-13"><a href="practical-work-1.html#cb18-13"></a><span class="co">#ans&gt; [1] 400   2</span></span></code></pre></div>
+<div class="sourceCode" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb18-1" title="1"><span class="co"># Split the data by using the first 400 observations as the training</span></a>
+<a class="sourceLine" id="cb18-2" title="2"><span class="co"># data and the remaining as the testing data</span></a>
+<a class="sourceLine" id="cb18-3" title="3">train =<span class="st"> </span><span class="dv">1</span><span class="op">:</span><span class="dv">400</span></a>
+<a class="sourceLine" id="cb18-4" title="4">test =<span class="st"> </span><span class="op">-</span>train</a>
+<a class="sourceLine" id="cb18-5" title="5"></a>
+<a class="sourceLine" id="cb18-6" title="6"><span class="co"># Speficy that we are going to use only two variables (lstat and medv)</span></a>
+<a class="sourceLine" id="cb18-7" title="7">variables =<span class="st"> </span><span class="kw">which</span>(<span class="kw">names</span>(Boston) <span class="op">==</span><span class="kw">c</span>(<span class="st">&quot;lstat&quot;</span>, <span class="st">&quot;medv&quot;</span>))</a>
+<a class="sourceLine" id="cb18-8" title="8">training_data =<span class="st"> </span>Boston[train, variables]</a>
+<a class="sourceLine" id="cb18-9" title="9">testing_data =<span class="st"> </span>Boston[test, variables]</a>
+<a class="sourceLine" id="cb18-10" title="10"></a>
+<a class="sourceLine" id="cb18-11" title="11"><span class="co"># Check the dimensions of the new dataset</span></a>
+<a class="sourceLine" id="cb18-12" title="12"><span class="kw">dim</span>(training_data)</a>
+<a class="sourceLine" id="cb18-13" title="13"><span class="co">#ans&gt; [1] 400   2</span></a></code></pre></div>
 <p><strong>STEP 2: Check for Linearity</strong></p>
 <p>In order to perfom linear regression in <i class="fab  fa-r-project " style="color:steelblue;"></i>, we will use the function <code>lm()</code>to fit a simple linear regression with <code>medv</code> as the response (dependent variable) and <code>lstat</code> as the predictor or independent variable, and then save it in <code>model</code>.</p>
 <p>But before we run our model, let’s visually check if the relationship between x and y is linear.</p>
-<div class="sourceCode" id="cb19"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb19-1"><a href="practical-work-1.html#cb19-1"></a><span class="co"># Scatterplot of lstat vs. medv</span></span>
-<span id="cb19-2"><a href="practical-work-1.html#cb19-2"></a><span class="kw">plot</span>(training_data<span class="op">$</span>lstat, training_data<span class="op">$</span>medv)</span></code></pre></div>
+<div class="sourceCode" id="cb19"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb19-1" title="1"><span class="co"># Scatterplot of lstat vs. medv</span></a>
+<a class="sourceLine" id="cb19-2" title="2"><span class="kw">plot</span>(training_data<span class="op">$</span>lstat, training_data<span class="op">$</span>medv)</a></code></pre></div>
 <p><img src="Machine-Learning_files/figure-html/unnamed-chunk-32-1.png" width="70%" style="display: block; margin: auto;" /></p>
 
 <div class="rmdexercise">
@@ -1054,113 +1009,113 @@ Take a look at this <a href="https://cran.r-project.org/doc/contrib/Torfs+Brauer
 </div></li>
 </ul>
 <p>According to the plot, we see that the relationship is not linear. Let’s try a transformation of our explanatory variable <code>lstat</code>.</p>
-<div class="sourceCode" id="cb20"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb20-1"><a href="practical-work-1.html#cb20-1"></a><span class="co"># Scatterplot of log(lstat) vs. medv</span></span>
-<span id="cb20-2"><a href="practical-work-1.html#cb20-2"></a><span class="kw">plot</span>(<span class="kw">log</span>(training_data<span class="op">$</span>lstat), training_data<span class="op">$</span>medv)</span></code></pre></div>
+<div class="sourceCode" id="cb20"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb20-1" title="1"><span class="co"># Scatterplot of log(lstat) vs. medv</span></a>
+<a class="sourceLine" id="cb20-2" title="2"><span class="kw">plot</span>(<span class="kw">log</span>(training_data<span class="op">$</span>lstat), training_data<span class="op">$</span>medv)</a></code></pre></div>
 <p><img src="Machine-Learning_files/figure-html/unnamed-chunk-34-1.png" width="70%" style="display: block; margin: auto;" /></p>
 <p>Look at the plot, it is more linear, so we can proceed and perform <code>lm()</code>:</p>
 <p><strong>STEP 3: Run the linear regression model</strong></p>
-<div class="sourceCode" id="cb21"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb21-1"><a href="practical-work-1.html#cb21-1"></a>model =<span class="st"> </span><span class="kw">lm</span>(medv <span class="op">~</span><span class="st"> </span><span class="kw">log</span>(lstat), <span class="dt">data =</span> training_data)</span>
-<span id="cb21-2"><a href="practical-work-1.html#cb21-2"></a>model</span>
-<span id="cb21-3"><a href="practical-work-1.html#cb21-3"></a><span class="co">#ans&gt; </span></span>
-<span id="cb21-4"><a href="practical-work-1.html#cb21-4"></a><span class="co">#ans&gt; Call:</span></span>
-<span id="cb21-5"><a href="practical-work-1.html#cb21-5"></a><span class="co">#ans&gt; lm(formula = medv ~ log(lstat), data = training_data)</span></span>
-<span id="cb21-6"><a href="practical-work-1.html#cb21-6"></a><span class="co">#ans&gt; </span></span>
-<span id="cb21-7"><a href="practical-work-1.html#cb21-7"></a><span class="co">#ans&gt; Coefficients:</span></span>
-<span id="cb21-8"><a href="practical-work-1.html#cb21-8"></a><span class="co">#ans&gt; (Intercept)   log(lstat)  </span></span>
-<span id="cb21-9"><a href="practical-work-1.html#cb21-9"></a><span class="co">#ans&gt;        51.8        -12.2</span></span></code></pre></div>
+<div class="sourceCode" id="cb21"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb21-1" title="1">model =<span class="st"> </span><span class="kw">lm</span>(medv <span class="op">~</span><span class="st"> </span><span class="kw">log</span>(lstat), <span class="dt">data =</span> training_data)</a>
+<a class="sourceLine" id="cb21-2" title="2">model</a>
+<a class="sourceLine" id="cb21-3" title="3"><span class="co">#ans&gt; </span></a>
+<a class="sourceLine" id="cb21-4" title="4"><span class="co">#ans&gt; Call:</span></a>
+<a class="sourceLine" id="cb21-5" title="5"><span class="co">#ans&gt; lm(formula = medv ~ log(lstat), data = training_data)</span></a>
+<a class="sourceLine" id="cb21-6" title="6"><span class="co">#ans&gt; </span></a>
+<a class="sourceLine" id="cb21-7" title="7"><span class="co">#ans&gt; Coefficients:</span></a>
+<a class="sourceLine" id="cb21-8" title="8"><span class="co">#ans&gt; (Intercept)   log(lstat)  </span></a>
+<a class="sourceLine" id="cb21-9" title="9"><span class="co">#ans&gt;        51.8        -12.2</span></a></code></pre></div>
 <p>Notice that basic information when we print <code>model</code>. This only give us the slope <span class="math inline">\((-12.2)\)</span> and the intercept <span class="math inline">\((51.8)\)</span> of the linear model. Note that here we are looking at <code>log(lstat)</code> and not <code>lstat</code> anymore. So for every one unit increase in <code>lstat</code>, the median value of the house will decrease by <span class="math inline">\(e^{12.2}\)</span>.
 For more detailed information, we can use the <code>summary()</code> function:</p>
-<div class="sourceCode" id="cb22"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb22-1"><a href="practical-work-1.html#cb22-1"></a><span class="kw">summary</span>(model)</span>
-<span id="cb22-2"><a href="practical-work-1.html#cb22-2"></a><span class="co">#ans&gt; </span></span>
-<span id="cb22-3"><a href="practical-work-1.html#cb22-3"></a><span class="co">#ans&gt; Call:</span></span>
-<span id="cb22-4"><a href="practical-work-1.html#cb22-4"></a><span class="co">#ans&gt; lm(formula = medv ~ log(lstat), data = training_data)</span></span>
-<span id="cb22-5"><a href="practical-work-1.html#cb22-5"></a><span class="co">#ans&gt; </span></span>
-<span id="cb22-6"><a href="practical-work-1.html#cb22-6"></a><span class="co">#ans&gt; Residuals:</span></span>
-<span id="cb22-7"><a href="practical-work-1.html#cb22-7"></a><span class="co">#ans&gt;     Min      1Q  Median      3Q     Max </span></span>
-<span id="cb22-8"><a href="practical-work-1.html#cb22-8"></a><span class="co">#ans&gt; -11.385  -3.908  -0.779   2.245  25.728 </span></span>
-<span id="cb22-9"><a href="practical-work-1.html#cb22-9"></a><span class="co">#ans&gt; </span></span>
-<span id="cb22-10"><a href="practical-work-1.html#cb22-10"></a><span class="co">#ans&gt; Coefficients:</span></span>
-<span id="cb22-11"><a href="practical-work-1.html#cb22-11"></a><span class="co">#ans&gt;             Estimate Std. Error t value</span></span>
-<span id="cb22-12"><a href="practical-work-1.html#cb22-12"></a><span class="co">#ans&gt; (Intercept)   51.783      1.097    47.2</span></span>
-<span id="cb22-13"><a href="practical-work-1.html#cb22-13"></a><span class="co">#ans&gt; log(lstat)   -12.203      0.472   -25.9</span></span>
-<span id="cb22-14"><a href="practical-work-1.html#cb22-14"></a><span class="co">#ans&gt;             Pr(&gt;|t|)    </span></span>
-<span id="cb22-15"><a href="practical-work-1.html#cb22-15"></a><span class="co">#ans&gt; (Intercept)   &lt;2e-16 ***</span></span>
-<span id="cb22-16"><a href="practical-work-1.html#cb22-16"></a><span class="co">#ans&gt; log(lstat)    &lt;2e-16 ***</span></span>
-<span id="cb22-17"><a href="practical-work-1.html#cb22-17"></a><span class="co">#ans&gt; ---</span></span>
-<span id="cb22-18"><a href="practical-work-1.html#cb22-18"></a><span class="co">#ans&gt; Signif. codes:  </span></span>
-<span id="cb22-19"><a href="practical-work-1.html#cb22-19"></a><span class="co">#ans&gt; 0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</span></span>
-<span id="cb22-20"><a href="practical-work-1.html#cb22-20"></a><span class="co">#ans&gt; </span></span>
-<span id="cb22-21"><a href="practical-work-1.html#cb22-21"></a><span class="co">#ans&gt; Residual standard error: 5.6 on 398 degrees of freedom</span></span>
-<span id="cb22-22"><a href="practical-work-1.html#cb22-22"></a><span class="co">#ans&gt; Multiple R-squared:  0.627,	Adjusted R-squared:  0.626 </span></span>
-<span id="cb22-23"><a href="practical-work-1.html#cb22-23"></a><span class="co">#ans&gt; F-statistic:  669 on 1 and 398 DF,  p-value: &lt;2e-16</span></span></code></pre></div>
+<div class="sourceCode" id="cb22"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb22-1" title="1"><span class="kw">summary</span>(model)</a>
+<a class="sourceLine" id="cb22-2" title="2"><span class="co">#ans&gt; </span></a>
+<a class="sourceLine" id="cb22-3" title="3"><span class="co">#ans&gt; Call:</span></a>
+<a class="sourceLine" id="cb22-4" title="4"><span class="co">#ans&gt; lm(formula = medv ~ log(lstat), data = training_data)</span></a>
+<a class="sourceLine" id="cb22-5" title="5"><span class="co">#ans&gt; </span></a>
+<a class="sourceLine" id="cb22-6" title="6"><span class="co">#ans&gt; Residuals:</span></a>
+<a class="sourceLine" id="cb22-7" title="7"><span class="co">#ans&gt;     Min      1Q  Median      3Q     Max </span></a>
+<a class="sourceLine" id="cb22-8" title="8"><span class="co">#ans&gt; -11.385  -3.908  -0.779   2.245  25.728 </span></a>
+<a class="sourceLine" id="cb22-9" title="9"><span class="co">#ans&gt; </span></a>
+<a class="sourceLine" id="cb22-10" title="10"><span class="co">#ans&gt; Coefficients:</span></a>
+<a class="sourceLine" id="cb22-11" title="11"><span class="co">#ans&gt;             Estimate Std. Error t value</span></a>
+<a class="sourceLine" id="cb22-12" title="12"><span class="co">#ans&gt; (Intercept)   51.783      1.097    47.2</span></a>
+<a class="sourceLine" id="cb22-13" title="13"><span class="co">#ans&gt; log(lstat)   -12.203      0.472   -25.9</span></a>
+<a class="sourceLine" id="cb22-14" title="14"><span class="co">#ans&gt;             Pr(&gt;|t|)    </span></a>
+<a class="sourceLine" id="cb22-15" title="15"><span class="co">#ans&gt; (Intercept)   &lt;2e-16 ***</span></a>
+<a class="sourceLine" id="cb22-16" title="16"><span class="co">#ans&gt; log(lstat)    &lt;2e-16 ***</span></a>
+<a class="sourceLine" id="cb22-17" title="17"><span class="co">#ans&gt; ---</span></a>
+<a class="sourceLine" id="cb22-18" title="18"><span class="co">#ans&gt; Signif. codes:  </span></a>
+<a class="sourceLine" id="cb22-19" title="19"><span class="co">#ans&gt; 0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</span></a>
+<a class="sourceLine" id="cb22-20" title="20"><span class="co">#ans&gt; </span></a>
+<a class="sourceLine" id="cb22-21" title="21"><span class="co">#ans&gt; Residual standard error: 5.6 on 398 degrees of freedom</span></a>
+<a class="sourceLine" id="cb22-22" title="22"><span class="co">#ans&gt; Multiple R-squared:  0.627,   Adjusted R-squared:  0.626 </span></a>
+<a class="sourceLine" id="cb22-23" title="23"><span class="co">#ans&gt; F-statistic:  669 on 1 and 398 DF,  p-value: &lt;2e-16</span></a></code></pre></div>
 <p>Now, we have access to p-values and standard errors for the coefficients, as well as the <span class="math inline">\(R^2\)</span>.</p>
 <ul>
 <li>The output states that the slope is statistically significant and different from <span class="math inline">\(0\)</span> and with a t-value= <span class="math inline">\(-25.9\)</span> (p-value <span class="math inline">\(&lt; 0.05\)</span>), which means that there is a significant relationship between the percentage of households with low socioeconomic income and the median house value.</li>
 <li>This relationship is negative. That is as the percantage of household with low socioeconomic income increases, the median house value decreases.</li>
 <li>Looking at <span class="math inline">\(R^2\)</span>, we can deduce that <span class="math inline">\(62.7\%\)</span> of the model variation is being explained by the predictor <code>log(lstat)</code>. This is probably low, but indeed it would increase if we had more independent (explanatory) variables. We can use the <code>names()</code> function to see what other pieces of information are stored in our linear model (<code>model</code>).</li>
 </ul>
-<div class="sourceCode" id="cb23"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb23-1"><a href="practical-work-1.html#cb23-1"></a><span class="kw">names</span>(model)</span>
-<span id="cb23-2"><a href="practical-work-1.html#cb23-2"></a><span class="co">#ans&gt;  [1] &quot;coefficients&quot;  &quot;residuals&quot;    </span></span>
-<span id="cb23-3"><a href="practical-work-1.html#cb23-3"></a><span class="co">#ans&gt;  [3] &quot;effects&quot;       &quot;rank&quot;         </span></span>
-<span id="cb23-4"><a href="practical-work-1.html#cb23-4"></a><span class="co">#ans&gt;  [5] &quot;fitted.values&quot; &quot;assign&quot;       </span></span>
-<span id="cb23-5"><a href="practical-work-1.html#cb23-5"></a><span class="co">#ans&gt;  [7] &quot;qr&quot;            &quot;df.residual&quot;  </span></span>
-<span id="cb23-6"><a href="practical-work-1.html#cb23-6"></a><span class="co">#ans&gt;  [9] &quot;xlevels&quot;       &quot;call&quot;         </span></span>
-<span id="cb23-7"><a href="practical-work-1.html#cb23-7"></a><span class="co">#ans&gt; [11] &quot;terms&quot;         &quot;model&quot;</span></span></code></pre></div>
-<div class="sourceCode" id="cb24"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb24-1"><a href="practical-work-1.html#cb24-1"></a>model<span class="op">$</span>coefficients</span>
-<span id="cb24-2"><a href="practical-work-1.html#cb24-2"></a><span class="co">#ans&gt; (Intercept)  log(lstat) </span></span>
-<span id="cb24-3"><a href="practical-work-1.html#cb24-3"></a><span class="co">#ans&gt;        51.8       -12.2</span></span></code></pre></div>
+<div class="sourceCode" id="cb23"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb23-1" title="1"><span class="kw">names</span>(model)</a>
+<a class="sourceLine" id="cb23-2" title="2"><span class="co">#ans&gt;  [1] &quot;coefficients&quot;  &quot;residuals&quot;    </span></a>
+<a class="sourceLine" id="cb23-3" title="3"><span class="co">#ans&gt;  [3] &quot;effects&quot;       &quot;rank&quot;         </span></a>
+<a class="sourceLine" id="cb23-4" title="4"><span class="co">#ans&gt;  [5] &quot;fitted.values&quot; &quot;assign&quot;       </span></a>
+<a class="sourceLine" id="cb23-5" title="5"><span class="co">#ans&gt;  [7] &quot;qr&quot;            &quot;df.residual&quot;  </span></a>
+<a class="sourceLine" id="cb23-6" title="6"><span class="co">#ans&gt;  [9] &quot;xlevels&quot;       &quot;call&quot;         </span></a>
+<a class="sourceLine" id="cb23-7" title="7"><span class="co">#ans&gt; [11] &quot;terms&quot;         &quot;model&quot;</span></a></code></pre></div>
+<div class="sourceCode" id="cb24"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb24-1" title="1">model<span class="op">$</span>coefficients</a>
+<a class="sourceLine" id="cb24-2" title="2"><span class="co">#ans&gt; (Intercept)  log(lstat) </span></a>
+<a class="sourceLine" id="cb24-3" title="3"><span class="co">#ans&gt;        51.8       -12.2</span></a></code></pre></div>
 <p>To obtain the confidence interval for the linear model (<code>model</code>), we can use the <code>confint()</code> function:</p>
-<div class="sourceCode" id="cb25"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb25-1"><a href="practical-work-1.html#cb25-1"></a><span class="kw">confint</span>(model, <span class="dt">level =</span> <span class="fl">0.95</span>)</span>
-<span id="cb25-2"><a href="practical-work-1.html#cb25-2"></a><span class="co">#ans&gt;             2.5 % 97.5 %</span></span>
-<span id="cb25-3"><a href="practical-work-1.html#cb25-3"></a><span class="co">#ans&gt; (Intercept)  49.6   53.9</span></span>
-<span id="cb25-4"><a href="practical-work-1.html#cb25-4"></a><span class="co">#ans&gt; log(lstat)  -13.1  -11.3</span></span></code></pre></div>
+<div class="sourceCode" id="cb25"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb25-1" title="1"><span class="kw">confint</span>(model, <span class="dt">level =</span> <span class="fl">0.95</span>)</a>
+<a class="sourceLine" id="cb25-2" title="2"><span class="co">#ans&gt;             2.5 % 97.5 %</span></a>
+<a class="sourceLine" id="cb25-3" title="3"><span class="co">#ans&gt; (Intercept)  49.6   53.9</span></a>
+<a class="sourceLine" id="cb25-4" title="4"><span class="co">#ans&gt; log(lstat)  -13.1  -11.3</span></a></code></pre></div>
 <p>So, a <span class="math inline">\(95\%\)</span> confidence interval for the slope of <code>log(lstat)</code> is <span class="math inline">\((-13.13, -11.28)\)</span>. Notice that this confidence interval gives us the same result as the hypothesis test performed earlier, by stating that we are <span class="math inline">\(95\%\)</span> confident that the slope of <code>lstat</code> is not zero (in fact it is less than zero, which means that the relationship is negative.)</p>
 <p><strong>STEP 4: Plot the regression model</strong></p>
 <p>Now, let’s plot our regression line on top of our data.</p>
-<div class="sourceCode" id="cb26"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb26-1"><a href="practical-work-1.html#cb26-1"></a><span class="co"># Scatterplot of lstat vs. medv</span></span>
-<span id="cb26-2"><a href="practical-work-1.html#cb26-2"></a><span class="kw">plot</span>(<span class="kw">log</span>(training_data<span class="op">$</span>lstat), training_data<span class="op">$</span>medv)</span>
-<span id="cb26-3"><a href="practical-work-1.html#cb26-3"></a></span>
-<span id="cb26-4"><a href="practical-work-1.html#cb26-4"></a><span class="co"># Add the regression line to the existing scatterplot</span></span>
-<span id="cb26-5"><a href="practical-work-1.html#cb26-5"></a><span class="kw">abline</span>(model)</span></code></pre></div>
+<div class="sourceCode" id="cb26"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb26-1" title="1"><span class="co"># Scatterplot of lstat vs. medv</span></a>
+<a class="sourceLine" id="cb26-2" title="2"><span class="kw">plot</span>(<span class="kw">log</span>(training_data<span class="op">$</span>lstat), training_data<span class="op">$</span>medv)</a>
+<a class="sourceLine" id="cb26-3" title="3"></a>
+<a class="sourceLine" id="cb26-4" title="4"><span class="co"># Add the regression line to the existing scatterplot</span></a>
+<a class="sourceLine" id="cb26-5" title="5"><span class="kw">abline</span>(model)</a></code></pre></div>
 <p><img src="Machine-Learning_files/figure-html/unnamed-chunk-40-1.png" width="70%" style="display: block; margin: auto;" /></p>
 <p>Let’s play with the look of the plot, and makes it prettier!</p>
-<div class="sourceCode" id="cb27"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb27-1"><a href="practical-work-1.html#cb27-1"></a><span class="co"># Scatterplot of lstat vs. medv</span></span>
-<span id="cb27-2"><a href="practical-work-1.html#cb27-2"></a><span class="kw">plot</span>(<span class="kw">log</span>(training_data<span class="op">$</span>lstat), training_data<span class="op">$</span>medv,</span>
-<span id="cb27-3"><a href="practical-work-1.html#cb27-3"></a><span class="dt">xlab =</span> <span class="st">&quot;Log Transform of % of Houshold with Low Socioeconomic Income&quot;</span>,</span>
-<span id="cb27-4"><a href="practical-work-1.html#cb27-4"></a><span class="dt">ylab =</span> <span class="st">&quot;Median House Value&quot;</span>,</span>
-<span id="cb27-5"><a href="practical-work-1.html#cb27-5"></a><span class="dt">col =</span> <span class="st">&quot;red&quot;</span>,</span>
-<span id="cb27-6"><a href="practical-work-1.html#cb27-6"></a><span class="dt">pch =</span> <span class="dv">20</span>)</span>
-<span id="cb27-7"><a href="practical-work-1.html#cb27-7"></a></span>
-<span id="cb27-8"><a href="practical-work-1.html#cb27-8"></a><span class="co"># Make the line color blue, and the line&#39;s width =3 (play with the width!)</span></span>
-<span id="cb27-9"><a href="practical-work-1.html#cb27-9"></a><span class="kw">abline</span>(model, <span class="dt">col =</span> <span class="st">&quot;blue&quot;</span>, <span class="dt">lwd =</span><span class="dv">3</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb27"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb27-1" title="1"><span class="co"># Scatterplot of lstat vs. medv</span></a>
+<a class="sourceLine" id="cb27-2" title="2"><span class="kw">plot</span>(<span class="kw">log</span>(training_data<span class="op">$</span>lstat), training_data<span class="op">$</span>medv,</a>
+<a class="sourceLine" id="cb27-3" title="3"><span class="dt">xlab =</span> <span class="st">&quot;Log Transform of % of Houshold with Low Socioeconomic Income&quot;</span>,</a>
+<a class="sourceLine" id="cb27-4" title="4"><span class="dt">ylab =</span> <span class="st">&quot;Median House Value&quot;</span>,</a>
+<a class="sourceLine" id="cb27-5" title="5"><span class="dt">col =</span> <span class="st">&quot;red&quot;</span>,</a>
+<a class="sourceLine" id="cb27-6" title="6"><span class="dt">pch =</span> <span class="dv">20</span>)</a>
+<a class="sourceLine" id="cb27-7" title="7"></a>
+<a class="sourceLine" id="cb27-8" title="8"><span class="co"># Make the line color blue, and the line&#39;s width =3 (play with the width!)</span></a>
+<a class="sourceLine" id="cb27-9" title="9"><span class="kw">abline</span>(model, <span class="dt">col =</span> <span class="st">&quot;blue&quot;</span>, <span class="dt">lwd =</span><span class="dv">3</span>)</a></code></pre></div>
 <p><img src="Machine-Learning_files/figure-html/unnamed-chunk-41-1.png" width="70%" style="display: block; margin: auto;" /></p>
 <p><strong>STEP 5: Assess the model</strong></p>
 <p>Final thing we will do is to predict using our fitted model. We can use
 the <code>predict()</code> function for this purpose:</p>
-<div class="sourceCode" id="cb28"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb28-1"><a href="practical-work-1.html#cb28-1"></a><span class="co"># Predict what is the median value of the house with lstat= 5%</span></span>
-<span id="cb28-2"><a href="practical-work-1.html#cb28-2"></a><span class="kw">predict</span>(model, <span class="kw">data.frame</span>(<span class="dt">lstat =</span> <span class="kw">c</span>(<span class="dv">5</span>)))</span>
-<span id="cb28-3"><a href="practical-work-1.html#cb28-3"></a><span class="co">#ans&gt;    1 </span></span>
-<span id="cb28-4"><a href="practical-work-1.html#cb28-4"></a><span class="co">#ans&gt; 32.1</span></span></code></pre></div>
-<div class="sourceCode" id="cb29"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb29-1"><a href="practical-work-1.html#cb29-1"></a><span class="co"># Predict what is the median values of houses with lstat= 5%, 10%, and 15%</span></span>
-<span id="cb29-2"><a href="practical-work-1.html#cb29-2"></a><span class="kw">predict</span>(model, <span class="kw">data.frame</span>(<span class="dt">lstat =</span> <span class="kw">c</span>(<span class="dv">5</span>,<span class="dv">10</span>,<span class="dv">15</span>)), <span class="dt">interval =</span> <span class="st">&quot;prediction&quot;</span>)</span>
-<span id="cb29-3"><a href="practical-work-1.html#cb29-3"></a><span class="co">#ans&gt;    fit  lwr  upr</span></span>
-<span id="cb29-4"><a href="practical-work-1.html#cb29-4"></a><span class="co">#ans&gt; 1 32.1 21.1 43.2</span></span>
-<span id="cb29-5"><a href="practical-work-1.html#cb29-5"></a><span class="co">#ans&gt; 2 23.7 12.7 34.7</span></span>
-<span id="cb29-6"><a href="practical-work-1.html#cb29-6"></a><span class="co">#ans&gt; 3 18.7  7.7 29.8</span></span></code></pre></div>
+<div class="sourceCode" id="cb28"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb28-1" title="1"><span class="co"># Predict what is the median value of the house with lstat= 5%</span></a>
+<a class="sourceLine" id="cb28-2" title="2"><span class="kw">predict</span>(model, <span class="kw">data.frame</span>(<span class="dt">lstat =</span> <span class="kw">c</span>(<span class="dv">5</span>)))</a>
+<a class="sourceLine" id="cb28-3" title="3"><span class="co">#ans&gt;    1 </span></a>
+<a class="sourceLine" id="cb28-4" title="4"><span class="co">#ans&gt; 32.1</span></a></code></pre></div>
+<div class="sourceCode" id="cb29"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb29-1" title="1"><span class="co"># Predict what is the median values of houses with lstat= 5%, 10%, and 15%</span></a>
+<a class="sourceLine" id="cb29-2" title="2"><span class="kw">predict</span>(model, <span class="kw">data.frame</span>(<span class="dt">lstat =</span> <span class="kw">c</span>(<span class="dv">5</span>,<span class="dv">10</span>,<span class="dv">15</span>)), <span class="dt">interval =</span> <span class="st">&quot;prediction&quot;</span>)</a>
+<a class="sourceLine" id="cb29-3" title="3"><span class="co">#ans&gt;    fit  lwr  upr</span></a>
+<a class="sourceLine" id="cb29-4" title="4"><span class="co">#ans&gt; 1 32.1 21.1 43.2</span></a>
+<a class="sourceLine" id="cb29-5" title="5"><span class="co">#ans&gt; 2 23.7 12.7 34.7</span></a>
+<a class="sourceLine" id="cb29-6" title="6"><span class="co">#ans&gt; 3 18.7  7.7 29.8</span></a></code></pre></div>
 <p>Now let’s assess our model, by computing th mean squared error (MSE). To assess the model we created, then we will be using the test data!</p>
-<div class="sourceCode" id="cb30"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb30-1"><a href="practical-work-1.html#cb30-1"></a><span class="co"># Save the testing median values for houses (testing y) in y</span></span>
-<span id="cb30-2"><a href="practical-work-1.html#cb30-2"></a>y =<span class="st"> </span>testing_data<span class="op">$</span>medv</span>
-<span id="cb30-3"><a href="practical-work-1.html#cb30-3"></a></span>
-<span id="cb30-4"><a href="practical-work-1.html#cb30-4"></a><span class="co"># Compute the predicted value for this y (y hat)</span></span>
-<span id="cb30-5"><a href="practical-work-1.html#cb30-5"></a>y_hat =<span class="st"> </span><span class="kw">predict</span>(model, <span class="kw">data.frame</span>(<span class="dt">lstat =</span> testing_data<span class="op">$</span>lstat))</span>
-<span id="cb30-6"><a href="practical-work-1.html#cb30-6"></a></span>
-<span id="cb30-7"><a href="practical-work-1.html#cb30-7"></a><span class="co"># Now we have both y and y_hat for our testing data. </span></span>
-<span id="cb30-8"><a href="practical-work-1.html#cb30-8"></a><span class="co"># let&#39;s find the mean square error</span></span>
-<span id="cb30-9"><a href="practical-work-1.html#cb30-9"></a>error =<span class="st"> </span>y<span class="op">-</span>y_hat</span>
-<span id="cb30-10"><a href="practical-work-1.html#cb30-10"></a>error_squared =<span class="st"> </span>error<span class="op">^</span><span class="dv">2</span></span>
-<span id="cb30-11"><a href="practical-work-1.html#cb30-11"></a>MSE =<span class="st"> </span><span class="kw">mean</span>(error_squared)</span>
-<span id="cb30-12"><a href="practical-work-1.html#cb30-12"></a>MSE</span>
-<span id="cb30-13"><a href="practical-work-1.html#cb30-13"></a><span class="co">#ans&gt; [1] 17.7</span></span></code></pre></div>
+<div class="sourceCode" id="cb30"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb30-1" title="1"><span class="co"># Save the testing median values for houses (testing y) in y</span></a>
+<a class="sourceLine" id="cb30-2" title="2">y =<span class="st"> </span>testing_data<span class="op">$</span>medv</a>
+<a class="sourceLine" id="cb30-3" title="3"></a>
+<a class="sourceLine" id="cb30-4" title="4"><span class="co"># Compute the predicted value for this y (y hat)</span></a>
+<a class="sourceLine" id="cb30-5" title="5">y_hat =<span class="st"> </span><span class="kw">predict</span>(model, <span class="kw">data.frame</span>(<span class="dt">lstat =</span> testing_data<span class="op">$</span>lstat))</a>
+<a class="sourceLine" id="cb30-6" title="6"></a>
+<a class="sourceLine" id="cb30-7" title="7"><span class="co"># Now we have both y and y_hat for our testing data. </span></a>
+<a class="sourceLine" id="cb30-8" title="8"><span class="co"># let&#39;s find the mean square error</span></a>
+<a class="sourceLine" id="cb30-9" title="9">error =<span class="st"> </span>y<span class="op">-</span>y_hat</a>
+<a class="sourceLine" id="cb30-10" title="10">error_squared =<span class="st"> </span>error<span class="op">^</span><span class="dv">2</span></a>
+<a class="sourceLine" id="cb30-11" title="11">MSE =<span class="st"> </span><span class="kw">mean</span>(error_squared)</a>
+<a class="sourceLine" id="cb30-12" title="12">MSE</a>
+<a class="sourceLine" id="cb30-13" title="13"><span class="co">#ans&gt; [1] 17.7</span></a></code></pre></div>
 <p class="text-right">
 ◼
 </p>

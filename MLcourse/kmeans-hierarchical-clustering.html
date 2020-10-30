@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>7 Kmeans &amp; Hierarchical Clustering | Machine Learning</title>
   <meta name="description" content="7 Kmeans &amp; Hierarchical Clustering | Machine Learning course" />
-  <meta name="generator" content="bookdown 0.20 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.21 and GitBook 2.6.7" />
 
   <meta property="og:title" content="7 Kmeans &amp; Hierarchical Clustering | Machine Learning" />
   <meta property="og:type" content="book" />
@@ -24,7 +24,7 @@
 <meta name="author" content="Mohamad Ghassany" />
 
 
-<meta name="date" content="2020-10-15" />
+<meta name="date" content="2020-10-30" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -33,7 +33,6 @@
   
 <link rel="prev" href="pw-6.html"/>
 <link rel="next" href="pw-7.html"/>
-<script src="book_assets/header-attrs-2.4/header-attrs.js"></script>
 <script src="book_assets/jquery-2.2.3/jquery.min.js"></script>
 <link href="book_assets/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="book_assets/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -51,7 +50,6 @@
 
 
 
-<script src="book_assets/accessible-code-block-0.0.1/empty-anchor.js"></script>
 <script src="book_assets/kePrint-0.0.1/kePrint.js"></script>
 <link href="book_assets/font-awesome-5.3.1/css/fontawesome-all.min.css" rel="stylesheet" />
 <link href="book_assets/vembedr-0.1.4/css/vembedr.css" rel="stylesheet" />
@@ -67,28 +65,26 @@
 <script async defer src="https://hypothes.is/embed.js"></script>
 
 
-
 <style type="text/css">
-pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
-pre > code.sourceCode > span:empty { height: 1.2em; }
-code.sourceCode > span { color: inherit; text-decoration: inherit; }
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
 pre.sourceCode { margin: 0; }
 @media screen {
 div.sourceCode { overflow: auto; }
 }
 @media print {
-pre > code.sourceCode { white-space: pre-wrap; }
-pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
 }
-pre.numberSource code
-  { counter-reset: source-line 0; }
-pre.numberSource code > span
-  { position: relative; left: -4em; counter-increment: source-line; }
-pre.numberSource code > span > a:first-child::before
-  { content: counter(source-line);
+pre.numberSource a.sourceLine
+  { position: relative; left: -4em; }
+pre.numberSource a.sourceLine::before
+  { content: attr(title);
     position: relative; left: -1em; text-align: right; vertical-align: baseline;
-    border: none; display: inline-block;
+    border: none; pointer-events: all; display: inline-block;
     -webkit-touch-callout: none; -webkit-user-select: none;
     -khtml-user-select: none; -moz-user-select: none;
     -ms-user-select: none; user-select: none;
@@ -100,7 +96,7 @@ pre.numberSource { margin-left: 3em; border-left: 1px solid #a0a0a0;  padding-le
 div.sourceCode
   { color: #1f1c1b; background-color: #ffffff; }
 @media screen {
-pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+a.sourceLine::before { text-decoration: underline; }
 }
 code span. { color: #1f1c1b; } /* Normal */
 code span.al { color: #bf0303; background-color: #f7e6e6; font-weight: bold; } /* Alert */
@@ -156,44 +152,36 @@ code span.wa { color: #bf0303; } /* Warning */
 <li class='before'><a href="./">Machine Learning</a></li>
 
 <li class="divider"></li>
-<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Welcome</a>
-<ul>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Welcome</a><ul>
 <li class="chapter" data-level="" data-path="index.html"><a href="index.html#course-overview"><i class="fa fa-check"></i>Course Overview</a></li>
 <li class="chapter" data-level="" data-path="index.html"><a href="index.html#course-schedule"><i class="fa fa-check"></i>Course Schedule</a></li>
 </ul></li>
-<li class="chapter" data-level="" data-path="introduction.html"><a href="introduction.html"><i class="fa fa-check"></i>Introduction</a>
-<ul>
+<li class="chapter" data-level="" data-path="introduction.html"><a href="introduction.html"><i class="fa fa-check"></i>Introduction</a><ul>
 <li class="chapter" data-level="" data-path="introduction.html"><a href="introduction.html#what-is-machine-learning"><i class="fa fa-check"></i>What is Machine Learning ?</a></li>
 <li class="chapter" data-level="" data-path="introduction.html"><a href="introduction.html#supervised-learning"><i class="fa fa-check"></i>Supervised Learning</a></li>
 <li class="chapter" data-level="" data-path="introduction.html"><a href="introduction.html#unsupervised-learning"><i class="fa fa-check"></i>Unsupervised Learning</a></li>
 </ul></li>
 <li class="part"><span><b>I Supervised Learning</b></span></li>
 <li class="part"><span><b>Regression</b></span></li>
-<li class="chapter" data-level="1" data-path="linear-regression.html"><a href="linear-regression.html"><i class="fa fa-check"></i><b>1</b> Linear Regression</a>
-<ul>
+<li class="chapter" data-level="1" data-path="linear-regression.html"><a href="linear-regression.html"><i class="fa fa-check"></i><b>1</b> Linear Regression</a><ul>
 <li class="chapter" data-level="1.1" data-path="linear-regression.html"><a href="linear-regression.html#notation"><i class="fa fa-check"></i><b>1.1</b> Notation</a></li>
 <li class="chapter" data-level="1.2" data-path="linear-regression.html"><a href="linear-regression.html#model-representation"><i class="fa fa-check"></i><b>1.2</b> Model Representation</a></li>
-<li class="chapter" data-level="1.3" data-path="linear-regression.html"><a href="linear-regression.html#why-estimate-f"><i class="fa fa-check"></i><b>1.3</b> Why Estimate <span class="math inline">\(f\)</span> ?</a>
-<ul>
+<li class="chapter" data-level="1.3" data-path="linear-regression.html"><a href="linear-regression.html#why-estimate-f"><i class="fa fa-check"></i><b>1.3</b> Why Estimate <span class="math inline">\(f\)</span> ?</a><ul>
 <li class="chapter" data-level="" data-path="linear-regression.html"><a href="linear-regression.html#prediction"><i class="fa fa-check"></i>Prediction</a></li>
 <li class="chapter" data-level="" data-path="linear-regression.html"><a href="linear-regression.html#inference"><i class="fa fa-check"></i>Inference</a></li>
 </ul></li>
 <li class="chapter" data-level="1.4" data-path="linear-regression.html"><a href="linear-regression.html#simple-linear-regression-model"><i class="fa fa-check"></i><b>1.4</b> Simple Linear Regression Model</a></li>
 <li class="chapter" data-level="1.5" data-path="linear-regression.html"><a href="linear-regression.html#estimating-the-coefficients"><i class="fa fa-check"></i><b>1.5</b> Estimating the Coefficients</a></li>
-<li class="chapter" data-level="1.6" data-path="linear-regression.html"><a href="linear-regression.html#assessing-the-accuracy-of-the-coefficient-estimates"><i class="fa fa-check"></i><b>1.6</b> Assessing the Accuracy of the Coefficient Estimates</a>
-<ul>
+<li class="chapter" data-level="1.6" data-path="linear-regression.html"><a href="linear-regression.html#assessing-the-accuracy-of-the-coefficient-estimates"><i class="fa fa-check"></i><b>1.6</b> Assessing the Accuracy of the Coefficient Estimates</a><ul>
 <li class="chapter" data-level="" data-path="linear-regression.html"><a href="linear-regression.html#hypothesis-testing"><i class="fa fa-check"></i>Hypothesis testing</a></li>
 </ul></li>
-<li class="chapter" data-level="1.7" data-path="linear-regression.html"><a href="linear-regression.html#anova-and-model-fit"><i class="fa fa-check"></i><b>1.7</b> ANOVA and model fit</a>
-<ul>
+<li class="chapter" data-level="1.7" data-path="linear-regression.html"><a href="linear-regression.html#anova-and-model-fit"><i class="fa fa-check"></i><b>1.7</b> ANOVA and model fit</a><ul>
 <li class="chapter" data-level="1.7.1" data-path="linear-regression.html"><a href="linear-regression.html#anova"><i class="fa fa-check"></i><b>1.7.1</b> ANOVA</a></li>
 <li class="chapter" data-level="1.7.2" data-path="linear-regression.html"><a href="linear-regression.html#the-r2-statistic"><i class="fa fa-check"></i><b>1.7.2</b> The <span class="math inline">\(R^2\)</span> Statistic</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="" data-path="practical-work-1.html"><a href="practical-work-1.html"><i class="fa fa-check"></i>Practical Work 1</a>
-<ul>
-<li class="chapter" data-level="1.8" data-path="practical-work-1.html"><a href="practical-work-1.html#some-basics"><i class="fa fa-check"></i><b>1.8</b> Some <svg style="height:0.8em;top:.04em;position:relative;fill:steelblue;" viewBox="0 0 581 512"><path d="M581 226.6C581 119.1 450.9 32 290.5 32S0 119.1 0 226.6C0 322.4 103.3 402 239.4 418.1V480h99.1v-61.5c24.3-2.7 47.6-7.4 69.4-13.9L448 480h112l-67.4-113.7c54.5-35.4 88.4-84.9 88.4-139.7zm-466.8 14.5c0-73.5 98.9-133 220.8-133s211.9 40.7 211.9 133c0 50.1-26.5 85-70.3 106.4-2.4-1.6-4.7-2.9-6.4-3.7-10.2-5.2-27.8-10.5-27.8-10.5s86.6-6.4 86.6-92.7-90.6-87.9-90.6-87.9h-199V361c-74.1-21.5-125.2-67.1-125.2-119.9zm225.1 38.3v-55.6c57.8 0 87.8-6.8 87.8 27.3 0 36.5-38.2 28.3-87.8 28.3zm-.9 72.5H365c10.8 0 18.9 11.7 24 19.2-16.1 1.9-33 2.8-50.6 2.9v-22.1z"/></svg> basics</a>
-<ul>
+<li class="chapter" data-level="" data-path="practical-work-1.html"><a href="practical-work-1.html"><i class="fa fa-check"></i>Practical Work 1</a><ul>
+<li class="chapter" data-level="1.8" data-path="practical-work-1.html"><a href="practical-work-1.html#some-basics"><i class="fa fa-check"></i><b>1.8</b> Some <svg style="height:0.8em;top:.04em;position:relative;fill:steelblue;" viewBox="0 0 581 512"><path d="M581 226.6C581 119.1 450.9 32 290.5 32S0 119.1 0 226.6C0 322.4 103.3 402 239.4 418.1V480h99.1v-61.5c24.3-2.7 47.6-7.4 69.4-13.9L448 480h112l-67.4-113.7c54.5-35.4 88.4-84.9 88.4-139.7zm-466.8 14.5c0-73.5 98.9-133 220.8-133s211.9 40.7 211.9 133c0 50.1-26.5 85-70.3 106.4-2.4-1.6-4.7-2.9-6.4-3.7-10.2-5.2-27.8-10.5-27.8-10.5s86.6-6.4 86.6-92.7-90.6-87.9-90.6-87.9h-199V361c-74.1-21.5-125.2-67.1-125.2-119.9zm225.1 38.3v-55.6c57.8 0 87.8-6.8 87.8 27.3 0 36.5-38.2 28.3-87.8 28.3zm-.9 72.5H365c10.8 0 18.9 11.7 24 19.2-16.1 1.9-33 2.8-50.6 2.9v-22.1z"/></svg> basics</a><ul>
 <li class="chapter" data-level="1.8.1" data-path="practical-work-1.html"><a href="practical-work-1.html#basic-commands"><i class="fa fa-check"></i><b>1.8.1</b> Basic Commands</a></li>
 <li class="chapter" data-level="1.8.2" data-path="practical-work-1.html"><a href="practical-work-1.html#vectors"><i class="fa fa-check"></i><b>1.8.2</b> Vectors</a></li>
 <li class="chapter" data-level="1.8.3" data-path="practical-work-1.html"><a href="practical-work-1.html#matrices-data-frames-and-lists"><i class="fa fa-check"></i><b>1.8.3</b> Matrices, data frames and lists</a></li>
@@ -202,78 +190,65 @@ code span.wa { color: #bf0303; } /* Warning */
 <li class="chapter" data-level="1.8.6" data-path="practical-work-1.html"><a href="practical-work-1.html#working-directory"><i class="fa fa-check"></i><b>1.8.6</b> Working directory</a></li>
 <li class="chapter" data-level="1.8.7" data-path="practical-work-1.html"><a href="practical-work-1.html#loading-data"><i class="fa fa-check"></i><b>1.8.7</b> Loading Data</a></li>
 </ul></li>
-<li class="chapter" data-level="1.9" data-path="practical-work-1.html"><a href="practical-work-1.html#regression"><i class="fa fa-check"></i><b>1.9</b> Regression</a>
-<ul>
+<li class="chapter" data-level="1.9" data-path="practical-work-1.html"><a href="practical-work-1.html#regression"><i class="fa fa-check"></i><b>1.9</b> Regression</a><ul>
 <li class="chapter" data-level="1.9.1" data-path="practical-work-1.html"><a href="practical-work-1.html#the-lm-function"><i class="fa fa-check"></i><b>1.9.1</b> The <code>lm</code> function</a></li>
 <li class="chapter" data-level="1.9.2" data-path="practical-work-1.html"><a href="practical-work-1.html#boston"><i class="fa fa-check"></i><b>1.9.2</b> Predicting House Value: Boston dataset</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="2" data-path="multiple-linear-regression.html"><a href="multiple-linear-regression.html"><i class="fa fa-check"></i><b>2</b> Multiple Linear Regression</a>
-<ul>
+<li class="chapter" data-level="2" data-path="multiple-linear-regression.html"><a href="multiple-linear-regression.html"><i class="fa fa-check"></i><b>2</b> Multiple Linear Regression</a><ul>
 <li class="chapter" data-level="2.1" data-path="multiple-linear-regression.html"><a href="multiple-linear-regression.html#the-model"><i class="fa fa-check"></i><b>2.1</b> The Model</a></li>
 <li class="chapter" data-level="2.2" data-path="multiple-linear-regression.html"><a href="multiple-linear-regression.html#estimating-the-regression-coefficients"><i class="fa fa-check"></i><b>2.2</b> Estimating the Regression Coefficients</a></li>
-<li class="chapter" data-level="2.3" data-path="multiple-linear-regression.html"><a href="multiple-linear-regression.html#some-important-questions"><i class="fa fa-check"></i><b>2.3</b> Some important questions</a>
-<ul>
+<li class="chapter" data-level="2.3" data-path="multiple-linear-regression.html"><a href="multiple-linear-regression.html#some-important-questions"><i class="fa fa-check"></i><b>2.3</b> Some important questions</a><ul>
 <li class="chapter" data-level="2.3.1" data-path="multiple-linear-regression.html"><a href="multiple-linear-regression.html#other-consid"><i class="fa fa-check"></i><b>2.3.1</b> Other Considerations in Regression Model</a></li>
 </ul></li>
-<li class="chapter" data-level="2.4" data-path="multiple-linear-regression.html"><a href="multiple-linear-regression.html#how-to-select-the-best-performing-model"><i class="fa fa-check"></i><b>2.4</b> How to select the best performing model</a>
-<ul>
+<li class="chapter" data-level="2.4" data-path="multiple-linear-regression.html"><a href="multiple-linear-regression.html#how-to-select-the-best-performing-model"><i class="fa fa-check"></i><b>2.4</b> How to select the best performing model</a><ul>
 <li><a href="multiple-linear-regression.html#use-the-adjusted-r_adj2-for-multivariate-models">Use the Adjusted <span class="math inline">\(R_{adj}^2\)</span> for multivariate models</a></li>
 <li class="chapter" data-level="" data-path="multiple-linear-regression.html"><a href="multiple-linear-regression.html#have-a-look-at-the-residuals-or-error-terms"><i class="fa fa-check"></i>Have a look at the residuals or error terms</a></li>
 <li class="chapter" data-level="" data-path="multiple-linear-regression.html"><a href="multiple-linear-regression.html#histogram-of-residuals"><i class="fa fa-check"></i>Histogram of residuals</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="" data-path="pw-2.html"><a href="pw-2.html"><i class="fa fa-check"></i>PW 2</a>
-<ul>
-<li class="chapter" data-level="" data-path="multiple-linear-regression.html"><a href="multiple-linear-regression.html#multiple-linear-regression"><i class="fa fa-check"></i>Multiple Linear Regression</a></li>
+<li class="chapter" data-level="" data-path="pw-2.html"><a href="pw-2.html"><i class="fa fa-check"></i>PW 2</a><ul>
+<li class="chapter" data-level="" data-path="pw-2.html"><a href="pw-2.html#multiple-linear-regression-1"><i class="fa fa-check"></i>Multiple Linear Regression</a></li>
 <li class="chapter" data-level="" data-path="pw-2.html"><a href="pw-2.html#reporting"><i class="fa fa-check"></i>Reporting</a></li>
 </ul></li>
 <li class="part"><span><b>Classification</b></span></li>
-<li class="chapter" data-level="3" data-path="logistic-regression.html"><a href="logistic-regression.html"><i class="fa fa-check"></i><b>3</b> Logistic Regression</a>
-<ul>
-<li class="chapter" data-level="3.1" data-path="introduction.html"><a href="introduction.html#introduction"><i class="fa fa-check"></i><b>3.1</b> Introduction</a></li>
-<li class="chapter" data-level="3.2" data-path="logistic-regression.html"><a href="logistic-regression.html#logistic-regression-1"><i class="fa fa-check"></i><b>3.2</b> Logistic Regression</a>
-<ul>
+<li class="chapter" data-level="3" data-path="logistic-regression.html"><a href="logistic-regression.html"><i class="fa fa-check"></i><b>3</b> Logistic Regression</a><ul>
+<li class="chapter" data-level="3.1" data-path="logistic-regression.html"><a href="logistic-regression.html#introduction-1"><i class="fa fa-check"></i><b>3.1</b> Introduction</a></li>
+<li class="chapter" data-level="3.2" data-path="logistic-regression.html"><a href="logistic-regression.html#logistic-regression-1"><i class="fa fa-check"></i><b>3.2</b> Logistic Regression</a><ul>
 <li class="chapter" data-level="3.2.1" data-path="logistic-regression.html"><a href="logistic-regression.html#the-logistic-model"><i class="fa fa-check"></i><b>3.2.1</b> The Logistic Model</a></li>
-<li class="chapter" data-level="3.2.2" data-path="multiple-linear-regression.html"><a href="multiple-linear-regression.html#estimating-the-regression-coefficients"><i class="fa fa-check"></i><b>3.2.2</b> Estimating the Regression Coefficients</a></li>
-<li class="chapter" data-level="3.2.3" data-path="linear-regression.html"><a href="linear-regression.html#prediction"><i class="fa fa-check"></i><b>3.2.3</b> Prediction</a></li>
+<li class="chapter" data-level="3.2.2" data-path="logistic-regression.html"><a href="logistic-regression.html#estimating-the-regression-coefficients-1"><i class="fa fa-check"></i><b>3.2.2</b> Estimating the Regression Coefficients</a></li>
+<li class="chapter" data-level="3.2.3" data-path="logistic-regression.html"><a href="logistic-regression.html#prediction-1"><i class="fa fa-check"></i><b>3.2.3</b> Prediction</a></li>
 </ul></li>
 <li class="chapter" data-level="3.3" data-path="logistic-regression.html"><a href="logistic-regression.html#multiple-logistic-regression"><i class="fa fa-check"></i><b>3.3</b> Multiple Logistic Regression</a></li>
-<li class="chapter" data-level="3.4" data-path="logistic-regression.html"><a href="logistic-regression.html#logreg-examps"><i class="fa fa-check"></i><b>3.4</b> Example</a>
-<ul>
+<li class="chapter" data-level="3.4" data-path="logistic-regression.html"><a href="logistic-regression.html#logreg-examps"><i class="fa fa-check"></i><b>3.4</b> Example</a><ul>
 <li class="chapter" data-level="3.4.1" data-path="logistic-regression.html"><a href="logistic-regression.html#logreg-examps-challenger"><i class="fa fa-check"></i><b>3.4.1</b> Case study: <em>The Challenger disaster</em></a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="" data-path="pw-3.html"><a href="pw-3.html"><i class="fa fa-check"></i>PW 3</a>
-<ul>
+<li class="chapter" data-level="" data-path="pw-3.html"><a href="pw-3.html"><i class="fa fa-check"></i>PW 3</a><ul>
 <li class="chapter" data-level="" data-path="pw-3.html"><a href="pw-3.html#social-networks-ads"><i class="fa fa-check"></i>Social Networks Ads</a></li>
 </ul></li>
-<li class="chapter" data-level="4" data-path="discriminant-analysis.html"><a href="discriminant-analysis.html"><i class="fa fa-check"></i><b>4</b> Discriminant Analysis</a>
-<ul>
-<li class="chapter" data-level="4.1" data-path="introduction.html"><a href="introduction.html#introduction"><i class="fa fa-check"></i><b>4.1</b> Introduction</a></li>
+<li class="chapter" data-level="4" data-path="discriminant-analysis.html"><a href="discriminant-analysis.html"><i class="fa fa-check"></i><b>4</b> Discriminant Analysis</a><ul>
+<li class="chapter" data-level="4.1" data-path="discriminant-analysis.html"><a href="discriminant-analysis.html#introduction-2"><i class="fa fa-check"></i><b>4.1</b> Introduction</a></li>
 <li class="chapter" data-level="4.2" data-path="discriminant-analysis.html"><a href="discriminant-analysis.html#bayes-theorem"><i class="fa fa-check"></i><b>4.2</b> Bayes’ Theorem</a></li>
 <li class="chapter" data-level="4.3" data-path="discriminant-analysis.html"><a href="discriminant-analysis.html#lda-for-p1"><i class="fa fa-check"></i><b>4.3</b> LDA for <span class="math inline">\(p=1\)</span></a></li>
 <li class="chapter" data-level="4.4" data-path="discriminant-analysis.html"><a href="discriminant-analysis.html#estimating-the-parameters"><i class="fa fa-check"></i><b>4.4</b> Estimating the parameters</a></li>
 <li class="chapter" data-level="4.5" data-path="discriminant-analysis.html"><a href="discriminant-analysis.html#lda-for-p-1"><i class="fa fa-check"></i><b>4.5</b> LDA for <span class="math inline">\(p &gt; 1\)</span></a></li>
 <li class="chapter" data-level="4.6" data-path="discriminant-analysis.html"><a href="discriminant-analysis.html#making-predictions"><i class="fa fa-check"></i><b>4.6</b> Making predictions</a></li>
-<li class="chapter" data-level="4.7" data-path="discriminant-analysis.html"><a href="discriminant-analysis.html#other-forms-of-discriminant-analysis"><i class="fa fa-check"></i><b>4.7</b> Other forms of Discriminant Analysis</a>
-<ul>
+<li class="chapter" data-level="4.7" data-path="discriminant-analysis.html"><a href="discriminant-analysis.html#other-forms-of-discriminant-analysis"><i class="fa fa-check"></i><b>4.7</b> Other forms of Discriminant Analysis</a><ul>
 <li class="chapter" data-level="4.7.1" data-path="discriminant-analysis.html"><a href="discriminant-analysis.html#quadratic-discriminant-analysis-qda"><i class="fa fa-check"></i><b>4.7.1</b> Quadratic Discriminant Analysis (QDA)</a></li>
 <li class="chapter" data-level="4.7.2" data-path="discriminant-analysis.html"><a href="discriminant-analysis.html#naive-bayes"><i class="fa fa-check"></i><b>4.7.2</b> Naive Bayes</a></li>
 </ul></li>
 <li class="chapter" data-level="4.8" data-path="discriminant-analysis.html"><a href="discriminant-analysis.html#lda-vs-logistic-regression"><i class="fa fa-check"></i><b>4.8</b> LDA vs Logistic Regression</a></li>
 </ul></li>
-<li class="chapter" data-level="" data-path="pw-4.html"><a href="pw-4.html"><i class="fa fa-check"></i>PW 4</a>
-<ul>
-<li class="chapter" data-level="" data-path="logistic-regression.html"><a href="logistic-regression.html#logistic-regression"><i class="fa fa-check"></i>Logistic Regression</a></li>
+<li class="chapter" data-level="" data-path="pw-4.html"><a href="pw-4.html"><i class="fa fa-check"></i>PW 4</a><ul>
+<li class="chapter" data-level="" data-path="pw-4.html"><a href="pw-4.html#logistic-regression-2"><i class="fa fa-check"></i>Logistic Regression</a></li>
 <li class="chapter" data-level="" data-path="pw-4.html"><a href="pw-4.html#decision-boundary-of-logistic-regression"><i class="fa fa-check"></i>Decision Boundary of Logistic Regression</a></li>
 <li class="chapter" data-level="" data-path="pw-4.html"><a href="pw-4.html#linear-discriminant-analysis-lda"><i class="fa fa-check"></i>Linear Discriminant Analysis (LDA)</a></li>
 <li class="chapter" data-level="" data-path="pw-4.html"><a href="pw-4.html#lda-from-scratch"><i class="fa fa-check"></i>LDA from scratch</a></li>
-<li class="chapter" data-level="" data-path="discriminant-analysis.html"><a href="discriminant-analysis.html#quadratic-discriminant-analysis-qda"><i class="fa fa-check"></i>Quadratic Discriminant Analysis (QDA)</a></li>
+<li class="chapter" data-level="" data-path="pw-4.html"><a href="pw-4.html#quadratic-discriminant-analysis-qda-1"><i class="fa fa-check"></i>Quadratic Discriminant Analysis (QDA)</a></li>
 <li class="chapter" data-level="" data-path="pw-4.html"><a href="pw-4.html#comparison"><i class="fa fa-check"></i>Comparison</a></li>
 </ul></li>
-<li class="chapter" data-level="5" data-path="decision-trees-random-forests.html"><a href="decision-trees-random-forests.html"><i class="fa fa-check"></i><b>5</b> Decision Trees &amp; Random Forests</a>
-<ul>
+<li class="chapter" data-level="5" data-path="decision-trees-random-forests.html"><a href="decision-trees-random-forests.html"><i class="fa fa-check"></i><b>5</b> Decision Trees &amp; Random Forests</a><ul>
 <li class="chapter" data-level="" data-path="decision-trees-random-forests.html"><a href="decision-trees-random-forests.html#the-basics-of-decision-trees"><i class="fa fa-check"></i>The Basics of Decision Trees</a></li>
 <li class="chapter" data-level="" data-path="decision-trees-random-forests.html"><a href="decision-trees-random-forests.html#classification-trees"><i class="fa fa-check"></i>Classification Trees</a></li>
 <li class="chapter" data-level="" data-path="decision-trees-random-forests.html"><a href="decision-trees-random-forests.html#bagging-random-forests"><i class="fa fa-check"></i>Bagging &amp; Random Forests</a></li>
@@ -281,114 +256,94 @@ code span.wa { color: #bf0303; } /* Warning */
 <li><a href="decision-trees-random-forests.html#trees-in-r">Trees in <code>R</code></a></li>
 <li class="chapter" data-level="" data-path="decision-trees-random-forests.html"><a href="decision-trees-random-forests.html#random-forests---the-first-choice-method-for-every-data-analysis"><i class="fa fa-check"></i>Random forests - the first-choice method for every data analysis?</a></li>
 </ul></li>
-<li class="chapter" data-level="" data-path="pw-5.html"><a href="pw-5.html"><i class="fa fa-check"></i>PW 5</a>
-<ul>
-<li class="chapter" data-level="" data-path="pw-5.html"><a href="pw-5.html#regression-trees"><i class="fa fa-check"></i>Regression Trees</a>
-<ul>
+<li class="chapter" data-level="" data-path="pw-5.html"><a href="pw-5.html"><i class="fa fa-check"></i>PW 5</a><ul>
+<li class="chapter" data-level="" data-path="pw-5.html"><a href="pw-5.html#regression-trees"><i class="fa fa-check"></i>Regression Trees</a><ul>
 <li class="chapter" data-level="" data-path="pw-5.html"><a href="pw-5.html#single-tree"><i class="fa fa-check"></i>Single tree</a></li>
 <li class="chapter" data-level="" data-path="pw-5.html"><a href="pw-5.html#bagging"><i class="fa fa-check"></i>Bagging</a></li>
 <li class="chapter" data-level="" data-path="pw-5.html"><a href="pw-5.html#random-forests"><i class="fa fa-check"></i>Random Forests</a></li>
-<li class="chapter" data-level="" data-path="decision-trees-random-forests.html"><a href="decision-trees-random-forests.html#boosting"><i class="fa fa-check"></i>Boosting</a></li>
-<li class="chapter" data-level="" data-path="pw-4.html"><a href="pw-4.html#comparison"><i class="fa fa-check"></i>Comparison</a></li>
+<li class="chapter" data-level="" data-path="pw-5.html"><a href="pw-5.html#boosting-1"><i class="fa fa-check"></i>Boosting</a></li>
+<li class="chapter" data-level="" data-path="pw-5.html"><a href="pw-5.html#comparison-1"><i class="fa fa-check"></i>Comparison</a></li>
 </ul></li>
-<li class="chapter" data-level="" data-path="decision-trees-random-forests.html"><a href="decision-trees-random-forests.html#classification-trees"><i class="fa fa-check"></i>Classification Trees</a>
-<ul>
+<li class="chapter" data-level="" data-path="pw-5.html"><a href="pw-5.html#classification-trees-1"><i class="fa fa-check"></i>Classification Trees</a><ul>
 <li class="chapter" data-level="" data-path="pw-5.html"><a href="pw-5.html#the-spam-dataset"><i class="fa fa-check"></i>The Spam dataset</a></li>
 <li class="chapter" data-level="" data-path="pw-5.html"><a href="pw-5.html#extra-tuning"><i class="fa fa-check"></i>Extra: Tuning</a></li>
 </ul></li>
 </ul></li>
 <li class="part"><span><b>II Dimensionality Reduction</b></span></li>
-<li class="chapter" data-level="6" data-path="principal-components-analysis.html"><a href="principal-components-analysis.html"><i class="fa fa-check"></i><b>6</b> Principal Components Analysis</a>
-<ul>
-<li class="chapter" data-level="6.1" data-path="introduction.html"><a href="introduction.html#introduction"><i class="fa fa-check"></i><b>6.1</b> Introduction</a></li>
-<li class="chapter" data-level="6.2" data-path="principal-components-analysis.html"><a href="principal-components-analysis.html#principal-components"><i class="fa fa-check"></i><b>6.2</b> Principal Components</a>
-<ul>
+<li class="chapter" data-level="6" data-path="principal-components-analysis.html"><a href="principal-components-analysis.html"><i class="fa fa-check"></i><b>6</b> Principal Components Analysis</a><ul>
+<li class="chapter" data-level="6.1" data-path="principal-components-analysis.html"><a href="principal-components-analysis.html#introduction-3"><i class="fa fa-check"></i><b>6.1</b> Introduction</a></li>
+<li class="chapter" data-level="6.2" data-path="principal-components-analysis.html"><a href="principal-components-analysis.html#principal-components"><i class="fa fa-check"></i><b>6.2</b> Principal Components</a><ul>
 <li class="chapter" data-level="" data-path="principal-components-analysis.html"><a href="principal-components-analysis.html#notations-and-procedure"><i class="fa fa-check"></i>Notations and Procedure</a></li>
 <li><a href="principal-components-analysis.html#first-principal-component-textpc_1-y_1">First Principal Component (<span class="math inline">\(\text{PC}_1\)</span>): <span class="math inline">\(Y_1\)</span></a></li>
 <li><a href="principal-components-analysis.html#second-principal-component-textpc_2-y_2">Second Principal Component (<span class="math inline">\(\text{PC}_2\)</span>): <span class="math inline">\(Y_2\)</span></a></li>
 <li><a href="principal-components-analysis.html#ith-principal-component-textpc_i-y_i"><span class="math inline">\(i^{th}\)</span> Principal Component (<span class="math inline">\(\text{PC}_i\)</span>): <span class="math inline">\(Y_i\)</span></a></li>
 </ul></li>
-<li class="chapter" data-level="6.3" data-path="principal-components-analysis.html"><a href="principal-components-analysis.html#how-do-we-find-the-coefficients"><i class="fa fa-check"></i><b>6.3</b> How do we find the coefficients?</a>
-<ul>
+<li class="chapter" data-level="6.3" data-path="principal-components-analysis.html"><a href="principal-components-analysis.html#how-do-we-find-the-coefficients"><i class="fa fa-check"></i><b>6.3</b> How do we find the coefficients?</a><ul>
 <li class="chapter" data-level="" data-path="principal-components-analysis.html"><a href="principal-components-analysis.html#why-it-may-be-possible-to-reduce-dimensions"><i class="fa fa-check"></i>Why It May Be Possible to Reduce Dimensions</a></li>
 <li class="chapter" data-level="" data-path="principal-components-analysis.html"><a href="principal-components-analysis.html#procedure"><i class="fa fa-check"></i>Procedure</a></li>
 </ul></li>
 <li class="chapter" data-level="6.4" data-path="principal-components-analysis.html"><a href="principal-components-analysis.html#standardization-of-the-features"><i class="fa fa-check"></i><b>6.4</b> Standardization of the features</a></li>
-<li class="chapter" data-level="6.5" data-path="principal-components-analysis.html"><a href="principal-components-analysis.html#projection-of-the-data"><i class="fa fa-check"></i><b>6.5</b> Projection of the data</a>
-<ul>
+<li class="chapter" data-level="6.5" data-path="principal-components-analysis.html"><a href="principal-components-analysis.html#projection-of-the-data"><i class="fa fa-check"></i><b>6.5</b> Projection of the data</a><ul>
 <li class="chapter" data-level="" data-path="principal-components-analysis.html"><a href="principal-components-analysis.html#scores"><i class="fa fa-check"></i>Scores</a></li>
 <li class="chapter" data-level="" data-path="principal-components-analysis.html"><a href="principal-components-analysis.html#visualization"><i class="fa fa-check"></i>Visualization</a></li>
 <li class="chapter" data-level="" data-path="principal-components-analysis.html"><a href="principal-components-analysis.html#extra"><i class="fa fa-check"></i>Extra</a></li>
 </ul></li>
-<li class="chapter" data-level="6.6" data-path="principal-components-analysis.html"><a href="principal-components-analysis.html#case-study"><i class="fa fa-check"></i><b>6.6</b> Case study</a>
-<ul>
+<li class="chapter" data-level="6.6" data-path="principal-components-analysis.html"><a href="principal-components-analysis.html#case-study"><i class="fa fa-check"></i><b>6.6</b> Case study</a><ul>
 <li class="chapter" data-level="" data-path="principal-components-analysis.html"><a href="principal-components-analysis.html#employement-in-european-countries-in-the-late-70s"><i class="fa fa-check"></i>Employement in European countries in the late 70s</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="" data-path="pw-6.html"><a href="pw-6.html"><i class="fa fa-check"></i>PW 6</a>
-<ul>
+<li class="chapter" data-level="" data-path="pw-6.html"><a href="pw-6.html"><i class="fa fa-check"></i>PW 6</a><ul>
 <li class="chapter" data-level="" data-path="pw-6.html"><a href="pw-6.html#the-iris-dataset"><i class="fa fa-check"></i>The Iris Dataset</a></li>
-<li class="chapter" data-level="" data-path="practical-work-1.html"><a href="practical-work-1.html#loading-data"><i class="fa fa-check"></i>Loading Data</a></li>
+<li class="chapter" data-level="" data-path="pw-6.html"><a href="pw-6.html#loading-data-1"><i class="fa fa-check"></i>Loading Data</a></li>
 <li class="chapter" data-level="" data-path="pw-6.html"><a href="pw-6.html#exploratory-analysis"><i class="fa fa-check"></i>Exploratory analysis</a></li>
 <li><a href="pw-6.html#pca-using-princomp">PCA using <code>princomp()</code></a></li>
 <li><a href="pw-6.html#deeper-pca-using-factoextra-package">Deeper PCA using <code>factoextra</code> package</a></li>
 <li class="chapter" data-level="" data-path="pw-6.html"><a href="pw-6.html#step-by-step-pca"><i class="fa fa-check"></i>Step-by-step PCA</a></li>
 </ul></li>
 <li class="part"><span><b>III Unsupervised Learning</b></span></li>
-<li class="chapter" data-level="7" data-path="kmeans-hierarchical-clustering.html"><a href="kmeans-hierarchical-clustering.html"><i class="fa fa-check"></i><b>7</b> Kmeans &amp; Hierarchical Clustering</a>
-<ul>
-<li class="chapter" data-level="7.1" data-path="introduction.html"><a href="introduction.html#unsupervised-learning"><i class="fa fa-check"></i><b>7.1</b> Unsupervised Learning</a></li>
+<li class="chapter" data-level="7" data-path="kmeans-hierarchical-clustering.html"><a href="kmeans-hierarchical-clustering.html"><i class="fa fa-check"></i><b>7</b> Kmeans &amp; Hierarchical Clustering</a><ul>
+<li class="chapter" data-level="7.1" data-path="kmeans-hierarchical-clustering.html"><a href="kmeans-hierarchical-clustering.html#unsupervised-learning-1"><i class="fa fa-check"></i><b>7.1</b> Unsupervised Learning</a></li>
 <li class="chapter" data-level="7.2" data-path="kmeans-hierarchical-clustering.html"><a href="kmeans-hierarchical-clustering.html#clustering"><i class="fa fa-check"></i><b>7.2</b> Clustering</a></li>
-<li class="chapter" data-level="7.3" data-path="introduction.html"><a href="introduction.html#introduction"><i class="fa fa-check"></i><b>7.3</b> Introduction</a>
-<ul>
+<li class="chapter" data-level="7.3" data-path="kmeans-hierarchical-clustering.html"><a href="kmeans-hierarchical-clustering.html#introduction-4"><i class="fa fa-check"></i><b>7.3</b> Introduction</a><ul>
 <li class="chapter" data-level="" data-path="kmeans-hierarchical-clustering.html"><a href="kmeans-hierarchical-clustering.html#hard-clustering"><i class="fa fa-check"></i>Hard clustering</a></li>
 <li class="chapter" data-level="" data-path="kmeans-hierarchical-clustering.html"><a href="kmeans-hierarchical-clustering.html#fuzzy-clustering"><i class="fa fa-check"></i>Fuzzy clustering</a></li>
 </ul></li>
-<li class="chapter" data-level="7.4" data-path="kmeans-hierarchical-clustering.html"><a href="kmeans-hierarchical-clustering.html#k-means"><i class="fa fa-check"></i><b>7.4</b> <span class="math inline">\(k\)</span>-Means</a>
-<ul>
+<li class="chapter" data-level="7.4" data-path="kmeans-hierarchical-clustering.html"><a href="kmeans-hierarchical-clustering.html#k-means"><i class="fa fa-check"></i><b>7.4</b> <span class="math inline">\(k\)</span>-Means</a><ul>
 <li class="chapter" data-level="7.4.1" data-path="kmeans-hierarchical-clustering.html"><a href="kmeans-hierarchical-clustering.html#k-means-in"><i class="fa fa-check"></i><b>7.4.1</b> <span class="math inline">\(k\)</span>-means in <svg style="height:0.8em;top:.04em;position:relative;fill:steelblue;" viewBox="0 0 581 512"><path d="M581 226.6C581 119.1 450.9 32 290.5 32S0 119.1 0 226.6C0 322.4 103.3 402 239.4 418.1V480h99.1v-61.5c24.3-2.7 47.6-7.4 69.4-13.9L448 480h112l-67.4-113.7c54.5-35.4 88.4-84.9 88.4-139.7zm-466.8 14.5c0-73.5 98.9-133 220.8-133s211.9 40.7 211.9 133c0 50.1-26.5 85-70.3 106.4-2.4-1.6-4.7-2.9-6.4-3.7-10.2-5.2-27.8-10.5-27.8-10.5s86.6-6.4 86.6-92.7-90.6-87.9-90.6-87.9h-199V361c-74.1-21.5-125.2-67.1-125.2-119.9zm225.1 38.3v-55.6c57.8 0 87.8-6.8 87.8 27.3 0 36.5-38.2 28.3-87.8 28.3zm-.9 72.5H365c10.8 0 18.9 11.7 24 19.2-16.1 1.9-33 2.8-50.6 2.9v-22.1z"/></svg></a></li>
 <li class="chapter" data-level="7.4.2" data-path="kmeans-hierarchical-clustering.html"><a href="kmeans-hierarchical-clustering.html#cluster-validity-choosing-the-number-of-clusters"><i class="fa fa-check"></i><b>7.4.2</b> Cluster Validity, Choosing the Number of Clusters</a></li>
 </ul></li>
-<li class="chapter" data-level="7.5" data-path="kmeans-hierarchical-clustering.html"><a href="kmeans-hierarchical-clustering.html#hierarchical-clustering"><i class="fa fa-check"></i><b>7.5</b> Hierarchical Clustering</a>
-<ul>
+<li class="chapter" data-level="7.5" data-path="kmeans-hierarchical-clustering.html"><a href="kmeans-hierarchical-clustering.html#hierarchical-clustering"><i class="fa fa-check"></i><b>7.5</b> Hierarchical Clustering</a><ul>
 <li class="chapter" data-level="7.5.1" data-path="kmeans-hierarchical-clustering.html"><a href="kmeans-hierarchical-clustering.html#dendrogram"><i class="fa fa-check"></i><b>7.5.1</b> Dendrogram</a></li>
 <li class="chapter" data-level="7.5.2" data-path="kmeans-hierarchical-clustering.html"><a href="kmeans-hierarchical-clustering.html#the-hierarchical-clustering-algorithm"><i class="fa fa-check"></i><b>7.5.2</b> The Hierarchical Clustering Algorithm</a></li>
 <li class="chapter" data-level="7.5.3" data-path="kmeans-hierarchical-clustering.html"><a href="kmeans-hierarchical-clustering.html#hierarchical-clustering-in"><i class="fa fa-check"></i><b>7.5.3</b> Hierarchical clustering in <svg style="height:0.8em;top:.04em;position:relative;fill:steelblue;" viewBox="0 0 581 512"><path d="M581 226.6C581 119.1 450.9 32 290.5 32S0 119.1 0 226.6C0 322.4 103.3 402 239.4 418.1V480h99.1v-61.5c24.3-2.7 47.6-7.4 69.4-13.9L448 480h112l-67.4-113.7c54.5-35.4 88.4-84.9 88.4-139.7zm-466.8 14.5c0-73.5 98.9-133 220.8-133s211.9 40.7 211.9 133c0 50.1-26.5 85-70.3 106.4-2.4-1.6-4.7-2.9-6.4-3.7-10.2-5.2-27.8-10.5-27.8-10.5s86.6-6.4 86.6-92.7-90.6-87.9-90.6-87.9h-199V361c-74.1-21.5-125.2-67.1-125.2-119.9zm225.1 38.3v-55.6c57.8 0 87.8-6.8 87.8 27.3 0 36.5-38.2 28.3-87.8 28.3zm-.9 72.5H365c10.8 0 18.9 11.7 24 19.2-16.1 1.9-33 2.8-50.6 2.9v-22.1z"/></svg></a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="" data-path="pw-7.html"><a href="pw-7.html"><i class="fa fa-check"></i>PW 7</a>
-<ul>
-<li class="chapter" data-level="" data-path="pw-2.html"><a href="pw-2.html#reporting"><i class="fa fa-check"></i>Reporting</a>
-<ul>
+<li class="chapter" data-level="" data-path="pw-7.html"><a href="pw-7.html"><i class="fa fa-check"></i>PW 7</a><ul>
+<li class="chapter" data-level="" data-path="pw-7.html"><a href="pw-7.html#reporting-1"><i class="fa fa-check"></i>Reporting</a><ul>
 <li class="chapter" data-level="" data-path="pw-7.html"><a href="pw-7.html#markdown"><i class="fa fa-check"></i>Markdown</a></li>
 <li class="chapter" data-level="" data-path="pw-7.html"><a href="pw-7.html#r-markdown"><i class="fa fa-check"></i>R Markdown</a></li>
 <li class="chapter" data-level="" data-path="pw-7.html"><a href="pw-7.html#the-report-to-be-submitted"><i class="fa fa-check"></i>The report to be submitted</a></li>
 </ul></li>
-<li><a href="pw-7.html#k-means-clustering"><span class="math inline">\(k\)</span>-means clustering</a>
-<ul>
+<li><a href="pw-7.html#k-means-clustering"><span class="math inline">\(k\)</span>-means clustering</a><ul>
 <li><a href="pw-7.html#pointscards"><code>pointsCards</code></a></li>
 <li><a href="pw-7.html#ligue-1"><code>Ligue 1</code></a></li>
 <li><a href="pw-7.html#pca"><code>PCA</code></a></li>
 <li><a href="pw-7.html#implementing-k-means"><code>Implementing k-means</code></a></li>
 </ul></li>
-<li class="chapter" data-level="" data-path="kmeans-hierarchical-clustering.html"><a href="kmeans-hierarchical-clustering.html#hierarchical-clustering"><i class="fa fa-check"></i>Hierarchical clustering</a>
-<ul>
+<li class="chapter" data-level="" data-path="pw-7.html"><a href="pw-7.html#hierarchical-clustering-1"><i class="fa fa-check"></i>Hierarchical clustering</a><ul>
 <li><a href="pw-7.html#distances-dist">Distances <code>dist()</code></a></li>
 <li><a href="pw-7.html#dendrogram-hclust">Dendrogram <code>hclust()</code></a></li>
 <li class="chapter" data-level="" data-path="pw-7.html"><a href="pw-7.html#hierarchical-clustering-on-iris-dataset"><i class="fa fa-check"></i>Hierarchical clustering on Iris dataset</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="8" data-path="gaussian-mixture-models-em.html"><a href="gaussian-mixture-models-em.html"><i class="fa fa-check"></i><b>8</b> Gaussian Mixture Models &amp; EM</a>
-<ul>
+<li class="chapter" data-level="8" data-path="gaussian-mixture-models-em.html"><a href="gaussian-mixture-models-em.html"><i class="fa fa-check"></i><b>8</b> Gaussian Mixture Models &amp; EM</a><ul>
 <li class="chapter" data-level="8.1" data-path="gaussian-mixture-models-em.html"><a href="gaussian-mixture-models-em.html#the-gaussian-distribution"><i class="fa fa-check"></i><b>8.1</b> The Gaussian distribution</a></li>
 <li class="chapter" data-level="8.2" data-path="gaussian-mixture-models-em.html"><a href="gaussian-mixture-models-em.html#mixture-of-gaussians"><i class="fa fa-check"></i><b>8.2</b> Mixture of Gaussians</a></li>
 <li class="chapter" data-level="8.3" data-path="gaussian-mixture-models-em.html"><a href="gaussian-mixture-models-em.html#em-for-gaussian-mixtures"><i class="fa fa-check"></i><b>8.3</b> EM for Gaussian Mixtures</a></li>
 </ul></li>
-<li class="chapter" data-level="" data-path="pw-8.html"><a href="pw-8.html"><i class="fa fa-check"></i>PW 8</a>
-<ul>
+<li class="chapter" data-level="" data-path="pw-8.html"><a href="pw-8.html"><i class="fa fa-check"></i>PW 8</a><ul>
 <li class="chapter" data-level="" data-path="pw-8.html"><a href="pw-8.html#report-template"><i class="fa fa-check"></i>Report template</a></li>
-<li class="chapter" data-level="8.4" data-path="pw-8.html"><a href="pw-8.html#em-using-mclust"><i class="fa fa-check"></i><b>8.4</b> EM using <code>mclust</code></a>
-<ul>
+<li class="chapter" data-level="8.4" data-path="pw-8.html"><a href="pw-8.html#em-using-mclust"><i class="fa fa-check"></i><b>8.4</b> EM using <code>mclust</code></a><ul>
 <li><a href="pw-8.html#gmm-vs-k-means">GMM vs <span class="math inline">\(k\)</span>-means</a></li>
 <li class="chapter" data-level="" data-path="pw-8.html"><a href="pw-8.html#em-on-1d"><i class="fa fa-check"></i>EM on 1D</a></li>
 </ul></li>
@@ -400,15 +355,13 @@ code span.wa { color: #bf0303; } /* Warning */
 <li class="chapter" data-level="A" data-path="app-introRStudio.html"><a href="app-introRStudio.html"><i class="fa fa-check"></i><b>A</b> Introduction to <code>RStudio</code></a></li>
 <li class="chapter" data-level="B" data-path="app-ht.html"><a href="app-ht.html"><i class="fa fa-check"></i><b>B</b> Review on hypothesis testing</a></li>
 <li class="chapter" data-level="C" data-path="use-qual.html"><a href="use-qual.html"><i class="fa fa-check"></i><b>C</b> Use of qualitative predictors</a></li>
-<li class="chapter" data-level="D" data-path="model-selection.html"><a href="model-selection.html"><i class="fa fa-check"></i><b>D</b> Model Selection</a>
-<ul>
+<li class="chapter" data-level="D" data-path="model-selection.html"><a href="model-selection.html"><i class="fa fa-check"></i><b>D</b> Model Selection</a><ul>
 <li class="chapter" data-level="" data-path="model-selection.html"><a href="model-selection.html#linear-model-selection-and-best-subset-selection"><i class="fa fa-check"></i>Linear Model Selection and Best Subset Selection</a></li>
 <li class="chapter" data-level="" data-path="model-selection.html"><a href="model-selection.html#forward-stepwise-selection"><i class="fa fa-check"></i>Forward Stepwise Selection</a></li>
 <li class="chapter" data-level="" data-path="model-selection.html"><a href="model-selection.html#backward-stepwise-selection"><i class="fa fa-check"></i>Backward Stepwise Selection</a></li>
 <li class="chapter" data-level="" data-path="model-selection.html"><a href="model-selection.html#estimating-test-error-using-mallows-cp-aic-bic-adjusted-r-squared"><i class="fa fa-check"></i>Estimating Test Error Using Mallow’s Cp, AIC, BIC, Adjusted R-squared</a></li>
 <li class="chapter" data-level="" data-path="model-selection.html"><a href="model-selection.html#estimating-test-error-using-cross-validation"><i class="fa fa-check"></i>Estimating Test Error Using Cross-Validation</a></li>
-<li class="chapter" data-level="" data-path="model-selection.html"><a href="model-selection.html#examples"><i class="fa fa-check"></i>Examples</a>
-<ul>
+<li class="chapter" data-level="" data-path="model-selection.html"><a href="model-selection.html#examples"><i class="fa fa-check"></i>Examples</a><ul>
 <li class="chapter" data-level="" data-path="model-selection.html"><a href="model-selection.html#best-subset-selection"><i class="fa fa-check"></i>Best Subset Selection</a></li>
 <li class="chapter" data-level="" data-path="model-selection.html"><a href="model-selection.html#forward-stepwise-selection-and-model-selection-using-validation-set"><i class="fa fa-check"></i>Forward Stepwise Selection and Model Selection Using Validation Set</a></li>
 <li class="chapter" data-level="" data-path="model-selection.html"><a href="model-selection.html#model-selection-using-cross-validation"><i class="fa fa-check"></i>Model Selection Using Cross-Validation</a></li>
@@ -447,14 +400,14 @@ code span.wa { color: #bf0303; } /* Warning */
       in the upper right-hand corner of the page.
     </p>
 </div>
-<div id="kmeans-hierarchical-clustering" class="section level1" number="7">
+<div id="kmeans-hierarchical-clustering" class="section level1">
 <h1><span class="header-section-number">7</span> Kmeans &amp; Hierarchical Clustering</h1>
-<div id="unsupervised-learning" class="section level2" number="7.1">
+<div id="unsupervised-learning-1" class="section level2">
 <h2><span class="header-section-number">7.1</span> Unsupervised Learning</h2>
 <p>Previously we considered <em>supervised</em> learning methods such as regression and classification, where we typically have access to a set of <span class="math inline">\(p\)</span> features <span class="math inline">\(X_1,X_2,\ldots,X_p\)</span>, measured on <span class="math inline">\(n\)</span> observations, and a response <span class="math inline">\(Y\)</span> also measured on those same <span class="math inline">\(n\)</span> observations (what we call <strong>labels</strong>). The goal was then to predict <span class="math inline">\(Y\)</span> using <span class="math inline">\(X_1,X_2,\ldots,X_p\)</span>. From now on we will instead focus on <strong>unsupervised</strong> learning, a set of statistical tools where we have only a set of features <span class="math inline">\(X_1,X_2,\ldots,X_p\)</span> measured on <span class="math inline">\(n\)</span> observations. We are not interested in prediction, because we do not have an associated response variable <span class="math inline">\(Y\)</span>. Rather, the goal is to discover interesting things about the measurements on <span class="math inline">\(X_1,X_2,\ldots,X_p\)</span>. Is there an informative way to visualize the data? Can we discover subgroups among the variables or among the observations? Unsupervised learning refers to a diverse set of techniques for answering questions such as these. In this chapter, we will focus on a particular type of unsupervised learning: Principal Components Analysis (PCA), a tool used for <em>data visualization</em> or <em>data pre-processing</em> before supervised techniques are applied. In the next chapters, we will talk about clustering, another particular type of unsupervised learning. Clustering is a broad class of methods for discovering unknown subgroups in data.</p>
 <p>Unsupervised learning is often much more challenging than supervised learning. The exercise tends to be more subjective, and there is no simple goal for the analysis, such as prediction of a response. Unsupervised learning is often performed as part of an <em>exploratory data analysis</em>. It is hard to assess the results obtained from unsupervised learning methods. If we fit a predictive model using a supervised learning technique, then it is possible to check our work by seeing how well our model predicts the response <span class="math inline">\(Y\)</span> on observations not used in fitting the model. But in unsupervised learning, there is no way to check our work because we don’t know the true answer: the problem is <em>unsupervised</em>.</p>
 </div>
-<div id="clustering" class="section level2" number="7.2">
+<div id="clustering" class="section level2">
 <h2><span class="header-section-number">7.2</span> Clustering</h2>
 <p><strong>Clustering</strong> (or Cluster analysis) is the collection of techniques designed to find subgroups or <em>clusters</em> in a dataset of variables <span class="math inline">\(X_1,\ldots,X_p\)</span>. Depending on the similarities between the observations, these are partitioned in homogeneous groups as separated as possible between them. Clustering methods can be classified into these main categories:</p>
 <ul>
@@ -475,7 +428,7 @@ https://scikit-learn.org/stable/auto_examples/cluster/plot_cluster_comparison.ht
 -->
 <p>In this chapter we will see the basics of the <strong>partition methods</strong>, and one of the most well-known clustering techniques, namely <strong><em><span class="math inline">\(k\)</span>-means clustering</em></strong>.</p>
 </div>
-<div id="introduction" class="section level2" number="7.3">
+<div id="introduction-4" class="section level2">
 <h2><span class="header-section-number">7.3</span> Introduction</h2>
 <p><strong>Clustering</strong> (or Cluster analysis) is the process of partitioning a
 set of data objects (observations) into subsets. Each subset is a
@@ -515,7 +468,7 @@ methods.</p>
 clusters can formally be seen as subsets of the data set, one possible
 classification of clustering methods can be according to whether the
 subsets are <strong>fuzzy</strong> or <strong>crisp</strong> (<strong>hard</strong>).</p>
-<div id="hard-clustering" class="section level3 unnumbered" number="">
+<div id="hard-clustering" class="section level3 unnumbered">
 <h3>Hard clustering</h3>
 <p>Hard clustering methods are based on classical set theory, and
 require that an object either does or does not belong to a cluster. Hard
@@ -523,7 +476,7 @@ clustering means partitioning the data into a specified number of
 mutually exclusive subsets. The most common hard clustering method is
 <span class="math inline">\(k\)</span>-means.</p>
 </div>
-<div id="fuzzy-clustering" class="section level3 unnumbered" number="">
+<div id="fuzzy-clustering" class="section level3 unnumbered">
 <h3>Fuzzy clustering</h3>
 <p>Fuzzy clustering methods, however, allow the objects to belong to
 several clusters simultaneously, with different degrees of membership.
@@ -532,7 +485,7 @@ clustering. The most known technique of fuzzy clustering is the fuzzy
 <span class="math inline">\(c\)</span>-means.</p>
 </div>
 </div>
-<div id="k-means" class="section level2" number="7.4">
+<div id="k-means" class="section level2">
 <h2><span class="header-section-number">7.4</span> <span class="math inline">\(k\)</span>-Means</h2>
 <p>If you have ever watched a group of tourists with a couple of tour
 guides who hold umbrellas up so that everybody can see them and follow
@@ -669,14 +622,14 @@ Figure 7.2: Illustration of the <span class="math inline">\(k\)</span>-means alg
 <iframe src="https://jjallaire.shinyapps.io/shiny-kmeans/?showcase=0" width="90%" height="900px">
 </iframe>
 </center>
-<div id="k-means-in" class="section level3" number="7.4.1">
+<div id="k-means-in" class="section level3">
 <h3><span class="header-section-number">7.4.1</span> <span class="math inline">\(k\)</span>-means in <svg style="height:0.8em;top:.04em;position:relative;fill:steelblue;" viewBox="0 0 581 512"><path d="M581 226.6C581 119.1 450.9 32 290.5 32S0 119.1 0 226.6C0 322.4 103.3 402 239.4 418.1V480h99.1v-61.5c24.3-2.7 47.6-7.4 69.4-13.9L448 480h112l-67.4-113.7c54.5-35.4 88.4-84.9 88.4-139.7zm-466.8 14.5c0-73.5 98.9-133 220.8-133s211.9 40.7 211.9 133c0 50.1-26.5 85-70.3 106.4-2.4-1.6-4.7-2.9-6.4-3.7-10.2-5.2-27.8-10.5-27.8-10.5s86.6-6.4 86.6-92.7-90.6-87.9-90.6-87.9h-199V361c-74.1-21.5-125.2-67.1-125.2-119.9zm225.1 38.3v-55.6c57.8 0 87.8-6.8 87.8 27.3 0 36.5-38.2 28.3-87.8 28.3zm-.9 72.5H365c10.8 0 18.9 11.7 24 19.2-16.1 1.9-33 2.8-50.6 2.9v-22.1z"/></svg></h3>
 <p>We will use an example with simulated data to demonstrate how the <span class="math inline">\(k\)</span>-means algorithm works. Here we simulate some data from three clusters and plot the dataset below.</p>
-<div class="sourceCode" id="cb63"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb63-1"><a href="kmeans-hierarchical-clustering.html#cb63-1"></a><span class="kw">set.seed</span>(<span class="dv">1234</span>)</span>
-<span id="cb63-2"><a href="kmeans-hierarchical-clustering.html#cb63-2"></a>x &lt;-<span class="st"> </span><span class="kw">rnorm</span>(<span class="dv">12</span>,<span class="dt">mean=</span><span class="kw">rep</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">3</span>,<span class="dt">each=</span><span class="dv">4</span>),<span class="dt">sd=</span><span class="fl">0.2</span>)</span>
-<span id="cb63-3"><a href="kmeans-hierarchical-clustering.html#cb63-3"></a>y &lt;-<span class="st"> </span><span class="kw">rnorm</span>(<span class="dv">12</span>,<span class="dt">mean=</span><span class="kw">rep</span>(<span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">1</span>),<span class="dt">each=</span><span class="dv">4</span>),<span class="dt">sd=</span><span class="fl">0.2</span>)</span>
-<span id="cb63-4"><a href="kmeans-hierarchical-clustering.html#cb63-4"></a><span class="kw">plot</span>(x,y,<span class="dt">col=</span><span class="st">&quot;blue&quot;</span>,<span class="dt">pch=</span><span class="dv">19</span>,<span class="dt">cex=</span><span class="dv">2</span>)</span>
-<span id="cb63-5"><a href="kmeans-hierarchical-clustering.html#cb63-5"></a><span class="kw">text</span>(x<span class="fl">+0.05</span>,y<span class="fl">+0.05</span>,<span class="dt">labels=</span><span class="kw">as.character</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">12</span>))</span></code></pre></div>
+<div class="sourceCode" id="cb63"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb63-1" title="1"><span class="kw">set.seed</span>(<span class="dv">1234</span>)</a>
+<a class="sourceLine" id="cb63-2" title="2">x &lt;-<span class="st"> </span><span class="kw">rnorm</span>(<span class="dv">12</span>,<span class="dt">mean=</span><span class="kw">rep</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">3</span>,<span class="dt">each=</span><span class="dv">4</span>),<span class="dt">sd=</span><span class="fl">0.2</span>)</a>
+<a class="sourceLine" id="cb63-3" title="3">y &lt;-<span class="st"> </span><span class="kw">rnorm</span>(<span class="dv">12</span>,<span class="dt">mean=</span><span class="kw">rep</span>(<span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">1</span>),<span class="dt">each=</span><span class="dv">4</span>),<span class="dt">sd=</span><span class="fl">0.2</span>)</a>
+<a class="sourceLine" id="cb63-4" title="4"><span class="kw">plot</span>(x,y,<span class="dt">col=</span><span class="st">&quot;blue&quot;</span>,<span class="dt">pch=</span><span class="dv">19</span>,<span class="dt">cex=</span><span class="dv">2</span>)</a>
+<a class="sourceLine" id="cb63-5" title="5"><span class="kw">text</span>(x<span class="fl">+0.05</span>,y<span class="fl">+0.05</span>,<span class="dt">labels=</span><span class="kw">as.character</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">12</span>))</a></code></pre></div>
 <div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-207"></span>
 <img src="Machine-Learning_files/figure-html/unnamed-chunk-207-1.png" alt="Simulated dataset" width="70%" />
 <p class="caption">
@@ -684,20 +637,20 @@ Figure 7.3: Simulated dataset
 </p>
 </div>
 <p>The <code>kmeans()</code> function in R implements the <span class="math inline">\(k\)</span>-means algorithm and can be found in the <code>stats</code> package, which comes with R and is usually already loaded when you start R. Two key parameters that you have to specify are <code>x</code>, which is a matrix or data frame of data, and <code>centers</code> which is either an integer indicating the number of clusters or a matrix indicating the locations of the initial cluster centroids. The data should be organized so that each row is an observation and each column is a variable or feature of that observation.</p>
-<div class="sourceCode" id="cb64"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb64-1"><a href="kmeans-hierarchical-clustering.html#cb64-1"></a>dataFrame &lt;-<span class="st"> </span><span class="kw">data.frame</span>(x,y)</span>
-<span id="cb64-2"><a href="kmeans-hierarchical-clustering.html#cb64-2"></a>kmeansObj &lt;-<span class="st"> </span><span class="kw">kmeans</span>(dataFrame,<span class="dt">centers=</span><span class="dv">3</span>)</span>
-<span id="cb64-3"><a href="kmeans-hierarchical-clustering.html#cb64-3"></a><span class="kw">names</span>(kmeansObj)</span>
-<span id="cb64-4"><a href="kmeans-hierarchical-clustering.html#cb64-4"></a><span class="co">#ans&gt; [1] &quot;cluster&quot;      &quot;centers&quot;     </span></span>
-<span id="cb64-5"><a href="kmeans-hierarchical-clustering.html#cb64-5"></a><span class="co">#ans&gt; [3] &quot;totss&quot;        &quot;withinss&quot;    </span></span>
-<span id="cb64-6"><a href="kmeans-hierarchical-clustering.html#cb64-6"></a><span class="co">#ans&gt; [5] &quot;tot.withinss&quot; &quot;betweenss&quot;   </span></span>
-<span id="cb64-7"><a href="kmeans-hierarchical-clustering.html#cb64-7"></a><span class="co">#ans&gt; [7] &quot;size&quot;         &quot;iter&quot;        </span></span>
-<span id="cb64-8"><a href="kmeans-hierarchical-clustering.html#cb64-8"></a><span class="co">#ans&gt; [9] &quot;ifault&quot;</span></span></code></pre></div>
+<div class="sourceCode" id="cb64"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb64-1" title="1">dataFrame &lt;-<span class="st"> </span><span class="kw">data.frame</span>(x,y)</a>
+<a class="sourceLine" id="cb64-2" title="2">kmeansObj &lt;-<span class="st"> </span><span class="kw">kmeans</span>(dataFrame,<span class="dt">centers=</span><span class="dv">3</span>)</a>
+<a class="sourceLine" id="cb64-3" title="3"><span class="kw">names</span>(kmeansObj)</a>
+<a class="sourceLine" id="cb64-4" title="4"><span class="co">#ans&gt; [1] &quot;cluster&quot;      &quot;centers&quot;     </span></a>
+<a class="sourceLine" id="cb64-5" title="5"><span class="co">#ans&gt; [3] &quot;totss&quot;        &quot;withinss&quot;    </span></a>
+<a class="sourceLine" id="cb64-6" title="6"><span class="co">#ans&gt; [5] &quot;tot.withinss&quot; &quot;betweenss&quot;   </span></a>
+<a class="sourceLine" id="cb64-7" title="7"><span class="co">#ans&gt; [7] &quot;size&quot;         &quot;iter&quot;        </span></a>
+<a class="sourceLine" id="cb64-8" title="8"><span class="co">#ans&gt; [9] &quot;ifault&quot;</span></a></code></pre></div>
 <p>You can see which cluster each data point got assigned to by looking at the <code>cluster</code> element of the list returned by the <code>kmeans()</code> function.</p>
-<div class="sourceCode" id="cb65"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb65-1"><a href="kmeans-hierarchical-clustering.html#cb65-1"></a>kmeansObj<span class="op">$</span>cluster</span>
-<span id="cb65-2"><a href="kmeans-hierarchical-clustering.html#cb65-2"></a><span class="co">#ans&gt;  [1] 3 1 1 3 2 2 2 2 2 2 2 2</span></span></code></pre></div>
+<div class="sourceCode" id="cb65"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb65-1" title="1">kmeansObj<span class="op">$</span>cluster</a>
+<a class="sourceLine" id="cb65-2" title="2"><span class="co">#ans&gt;  [1] 3 1 1 3 2 2 2 2 2 2 2 2</span></a></code></pre></div>
 <p>Here is a plot of the <span class="math inline">\(k\)</span>-means clustering solution.</p>
-<div class="sourceCode" id="cb66"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb66-1"><a href="kmeans-hierarchical-clustering.html#cb66-1"></a><span class="kw">plot</span>(x,y,<span class="dt">col=</span>kmeansObj<span class="op">$</span>cluster,<span class="dt">pch=</span><span class="dv">19</span>,<span class="dt">cex=</span><span class="dv">2</span>)</span>
-<span id="cb66-2"><a href="kmeans-hierarchical-clustering.html#cb66-2"></a><span class="kw">points</span>(kmeansObj<span class="op">$</span>centers,<span class="dt">col=</span><span class="dv">1</span><span class="op">:</span><span class="dv">3</span>,<span class="dt">pch=</span><span class="dv">3</span>,<span class="dt">cex=</span><span class="dv">3</span>,<span class="dt">lwd=</span><span class="dv">3</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb66"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb66-1" title="1"><span class="kw">plot</span>(x,y,<span class="dt">col=</span>kmeansObj<span class="op">$</span>cluster,<span class="dt">pch=</span><span class="dv">19</span>,<span class="dt">cex=</span><span class="dv">2</span>)</a>
+<a class="sourceLine" id="cb66-2" title="2"><span class="kw">points</span>(kmeansObj<span class="op">$</span>centers,<span class="dt">col=</span><span class="dv">1</span><span class="op">:</span><span class="dv">3</span>,<span class="dt">pch=</span><span class="dv">3</span>,<span class="dt">cex=</span><span class="dv">3</span>,<span class="dt">lwd=</span><span class="dv">3</span>)</a></code></pre></div>
 <div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-210"></span>
 <img src="Machine-Learning_files/figure-html/unnamed-chunk-210-1.png" alt="$k$-means clustering solution" width="70%" />
 <p class="caption">
@@ -705,7 +658,7 @@ Figure 7.4: <span class="math inline">\(k\)</span>-means clustering solution
 </p>
 </div>
 </div>
-<div id="cluster-validity-choosing-the-number-of-clusters" class="section level3" number="7.4.2">
+<div id="cluster-validity-choosing-the-number-of-clusters" class="section level3">
 <h3><span class="header-section-number">7.4.2</span> Cluster Validity, Choosing the Number of Clusters</h3>
 <p>The result of a clustering algorithm can be very different from each
 other on the same data set as the other input parameters of an algorithm
@@ -743,11 +696,11 @@ and the compactness of the clusters.</p>
 </div>
 </div>
 </div>
-<div id="hierarchical-clustering" class="section level2" number="7.5">
+<div id="hierarchical-clustering" class="section level2">
 <h2><span class="header-section-number">7.5</span> Hierarchical Clustering</h2>
 <p>In the previous part we introduced <span class="math inline">\(k\)</span>-means. One potential disadvantage of it is that it requires us to pre-specify the number of clusters <span class="math inline">\(k\)</span>. Hierarchical clustering is an alternative approach which does not require that we commit to a particular choice of <span class="math inline">\(k\)</span>. Hierarchical clustering has an added advantage over <span class="math inline">\(k\)</span>-means clustering in that it results in an attractive tree-based representation of the observations, called a <strong><em>dendrogram</em></strong>.</p>
 <p>The most common type of hierarchical clustering is the <em>agglomerative</em> clustering (or <em>bottom-up</em> clustering). It refers to the fact that a dendrogram (generally depicted as an upside-down tree) is built starting from the leaves and combining clusters up to the trunk.</p>
-<div id="dendrogram" class="section level3" number="7.5.1">
+<div id="dendrogram" class="section level3">
 <h3><span class="header-section-number">7.5.1</span> Dendrogram</h3>
 <p>Suppose that we have the simulated data in the following figure:</p>
 <div class="figure" style="text-align: center"><span id="fig:dendro"></span>
@@ -787,7 +740,7 @@ Figure 7.9: The dendrogram from the simulated dataset, cut at a height of five (
 </div>
 <p>The term <em>hierarchical</em> refers to the fact that clusters obtained by cutting the dendrogram at a given height are necessarily nested within the clusters obtained by cutting the dendrogram at any greater height.</p>
 </div>
-<div id="the-hierarchical-clustering-algorithm" class="section level3" number="7.5.2">
+<div id="the-hierarchical-clustering-algorithm" class="section level3">
 <h3><span class="header-section-number">7.5.2</span> The Hierarchical Clustering Algorithm</h3>
 <p>The hierarchical clustering dendrogram is obtained via an extremely simple algorithm. We begin by defining some sort of <em>dissimilarity</em> measure between each pair of observations. Most often, Euclidean distance is used. The algorithm proceeds iteratively. Starting out at the bottom of the dendrogram, each of the n observations is treated as its own cluster. The two clusters that are most similar to each other are then fused so that there now are <span class="math inline">\(n−1\)</span> clusters. Next the two clusters that are most similar to each other are fused again, so that there now are <span class="math inline">\(n − 2\)</span> clusters. The algorithm proceeds in this fashion until all of the observations belong to one single cluster, and the dendrogram is complete.</p>
 <p>Figure <a href="kmeans-hierarchical-clustering.html#fig:cah">7.10</a> depicts the first few steps of the algorithm.</p>
@@ -836,82 +789,82 @@ Figure 7.11: Average, complete, and single linkage applied to an example data se
 </p>
 </div>
 </div>
-<div id="hierarchical-clustering-in" class="section level3" number="7.5.3">
+<div id="hierarchical-clustering-in" class="section level3">
 <h3><span class="header-section-number">7.5.3</span> Hierarchical clustering in <svg style="height:0.8em;top:.04em;position:relative;fill:steelblue;" viewBox="0 0 581 512"><path d="M581 226.6C581 119.1 450.9 32 290.5 32S0 119.1 0 226.6C0 322.4 103.3 402 239.4 418.1V480h99.1v-61.5c24.3-2.7 47.6-7.4 69.4-13.9L448 480h112l-67.4-113.7c54.5-35.4 88.4-84.9 88.4-139.7zm-466.8 14.5c0-73.5 98.9-133 220.8-133s211.9 40.7 211.9 133c0 50.1-26.5 85-70.3 106.4-2.4-1.6-4.7-2.9-6.4-3.7-10.2-5.2-27.8-10.5-27.8-10.5s86.6-6.4 86.6-92.7-90.6-87.9-90.6-87.9h-199V361c-74.1-21.5-125.2-67.1-125.2-119.9zm225.1 38.3v-55.6c57.8 0 87.8-6.8 87.8 27.3 0 36.5-38.2 28.3-87.8 28.3zm-.9 72.5H365c10.8 0 18.9 11.7 24 19.2-16.1 1.9-33 2.8-50.6 2.9v-22.1z"/></svg></h3>
 <p>Let’s illustrate how to perform hierarchical clustering on dataset  <a target="_blank" href="datasets/ligue1_17_18.csv"> Ligue1 2017-2018 <i class="fa fa-table" aria-hidden="true"></i></a>.</p>
-<div class="sourceCode" id="cb67"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb67-1"><a href="kmeans-hierarchical-clustering.html#cb67-1"></a><span class="co"># Load the dataset</span></span>
-<span id="cb67-2"><a href="kmeans-hierarchical-clustering.html#cb67-2"></a>ligue1 &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&quot;datasets/ligue1_17_18.csv&quot;</span>, <span class="dt">row.names=</span><span class="dv">1</span>,<span class="dt">sep=</span><span class="st">&quot;;&quot;</span>)</span>
-<span id="cb67-3"><a href="kmeans-hierarchical-clustering.html#cb67-3"></a></span>
-<span id="cb67-4"><a href="kmeans-hierarchical-clustering.html#cb67-4"></a><span class="co"># Work with standardized data</span></span>
-<span id="cb67-5"><a href="kmeans-hierarchical-clustering.html#cb67-5"></a>ligue1_scaled &lt;-<span class="st"> </span><span class="kw">data.frame</span>(<span class="kw">scale</span>(ligue1))</span>
-<span id="cb67-6"><a href="kmeans-hierarchical-clustering.html#cb67-6"></a></span>
-<span id="cb67-7"><a href="kmeans-hierarchical-clustering.html#cb67-7"></a><span class="co"># Compute dissimilary matrix - in this case Euclidean distance</span></span>
-<span id="cb67-8"><a href="kmeans-hierarchical-clustering.html#cb67-8"></a>d &lt;-<span class="st"> </span><span class="kw">dist</span>(ligue1_scaled)</span>
-<span id="cb67-9"><a href="kmeans-hierarchical-clustering.html#cb67-9"></a></span>
-<span id="cb67-10"><a href="kmeans-hierarchical-clustering.html#cb67-10"></a><span class="co"># Hierarchical clustering with complete linkage</span></span>
-<span id="cb67-11"><a href="kmeans-hierarchical-clustering.html#cb67-11"></a>treeComp &lt;-<span class="st"> </span><span class="kw">hclust</span>(d, <span class="dt">method =</span> <span class="st">&quot;complete&quot;</span>)</span>
-<span id="cb67-12"><a href="kmeans-hierarchical-clustering.html#cb67-12"></a><span class="kw">plot</span>(treeComp)</span></code></pre></div>
+<div class="sourceCode" id="cb67"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb67-1" title="1"><span class="co"># Load the dataset</span></a>
+<a class="sourceLine" id="cb67-2" title="2">ligue1 &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&quot;datasets/ligue1_17_18.csv&quot;</span>, <span class="dt">row.names=</span><span class="dv">1</span>,<span class="dt">sep=</span><span class="st">&quot;;&quot;</span>)</a>
+<a class="sourceLine" id="cb67-3" title="3"></a>
+<a class="sourceLine" id="cb67-4" title="4"><span class="co"># Work with standardized data</span></a>
+<a class="sourceLine" id="cb67-5" title="5">ligue1_scaled &lt;-<span class="st"> </span><span class="kw">data.frame</span>(<span class="kw">scale</span>(ligue1))</a>
+<a class="sourceLine" id="cb67-6" title="6"></a>
+<a class="sourceLine" id="cb67-7" title="7"><span class="co"># Compute dissimilary matrix - in this case Euclidean distance</span></a>
+<a class="sourceLine" id="cb67-8" title="8">d &lt;-<span class="st"> </span><span class="kw">dist</span>(ligue1_scaled)</a>
+<a class="sourceLine" id="cb67-9" title="9"></a>
+<a class="sourceLine" id="cb67-10" title="10"><span class="co"># Hierarchical clustering with complete linkage</span></a>
+<a class="sourceLine" id="cb67-11" title="11">treeComp &lt;-<span class="st"> </span><span class="kw">hclust</span>(d, <span class="dt">method =</span> <span class="st">&quot;complete&quot;</span>)</a>
+<a class="sourceLine" id="cb67-12" title="12"><span class="kw">plot</span>(treeComp)</a></code></pre></div>
 <p><img src="Machine-Learning_files/figure-html/unnamed-chunk-211-1.png" width="70%" style="display: block; margin: auto;" /></p>
-<div class="sourceCode" id="cb68"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb68-1"><a href="kmeans-hierarchical-clustering.html#cb68-1"></a></span>
-<span id="cb68-2"><a href="kmeans-hierarchical-clustering.html#cb68-2"></a><span class="co"># With average linkage</span></span>
-<span id="cb68-3"><a href="kmeans-hierarchical-clustering.html#cb68-3"></a>treeAve &lt;-<span class="st"> </span><span class="kw">hclust</span>(d, <span class="dt">method =</span> <span class="st">&quot;average&quot;</span>)</span>
-<span id="cb68-4"><a href="kmeans-hierarchical-clustering.html#cb68-4"></a><span class="kw">plot</span>(treeAve)</span></code></pre></div>
+<div class="sourceCode" id="cb68"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb68-1" title="1"></a>
+<a class="sourceLine" id="cb68-2" title="2"><span class="co"># With average linkage</span></a>
+<a class="sourceLine" id="cb68-3" title="3">treeAve &lt;-<span class="st"> </span><span class="kw">hclust</span>(d, <span class="dt">method =</span> <span class="st">&quot;average&quot;</span>)</a>
+<a class="sourceLine" id="cb68-4" title="4"><span class="kw">plot</span>(treeAve)</a></code></pre></div>
 <p><img src="Machine-Learning_files/figure-html/unnamed-chunk-211-2.png" width="70%" style="display: block; margin: auto;" /></p>
-<div class="sourceCode" id="cb69"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb69-1"><a href="kmeans-hierarchical-clustering.html#cb69-1"></a></span>
-<span id="cb69-2"><a href="kmeans-hierarchical-clustering.html#cb69-2"></a><span class="co"># With single linkage</span></span>
-<span id="cb69-3"><a href="kmeans-hierarchical-clustering.html#cb69-3"></a>treeSingle &lt;-<span class="st"> </span><span class="kw">hclust</span>(d, <span class="dt">method =</span> <span class="st">&quot;single&quot;</span>)</span>
-<span id="cb69-4"><a href="kmeans-hierarchical-clustering.html#cb69-4"></a><span class="kw">plot</span>(treeSingle) <span class="co"># Chaining</span></span></code></pre></div>
+<div class="sourceCode" id="cb69"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb69-1" title="1"></a>
+<a class="sourceLine" id="cb69-2" title="2"><span class="co"># With single linkage</span></a>
+<a class="sourceLine" id="cb69-3" title="3">treeSingle &lt;-<span class="st"> </span><span class="kw">hclust</span>(d, <span class="dt">method =</span> <span class="st">&quot;single&quot;</span>)</a>
+<a class="sourceLine" id="cb69-4" title="4"><span class="kw">plot</span>(treeSingle) <span class="co"># Chaining</span></a></code></pre></div>
 <p><img src="Machine-Learning_files/figure-html/unnamed-chunk-211-3.png" width="70%" style="display: block; margin: auto;" /></p>
-<div class="sourceCode" id="cb70"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb70-1"><a href="kmeans-hierarchical-clustering.html#cb70-1"></a></span>
-<span id="cb70-2"><a href="kmeans-hierarchical-clustering.html#cb70-2"></a><span class="co"># Set the number of clusters after inspecting visually</span></span>
-<span id="cb70-3"><a href="kmeans-hierarchical-clustering.html#cb70-3"></a><span class="co"># the dendogram for &quot;long&quot; groups of hanging leaves</span></span>
-<span id="cb70-4"><a href="kmeans-hierarchical-clustering.html#cb70-4"></a><span class="co"># These are the cluster assignments</span></span>
-<span id="cb70-5"><a href="kmeans-hierarchical-clustering.html#cb70-5"></a><span class="kw">cutree</span>(treeComp, <span class="dt">k =</span> <span class="dv">2</span>) <span class="co"># (Barcelona, Real Madrid) and (rest)</span></span>
-<span id="cb70-6"><a href="kmeans-hierarchical-clustering.html#cb70-6"></a><span class="co">#ans&gt;      Paris-SG        Monaco          Lyon </span></span>
-<span id="cb70-7"><a href="kmeans-hierarchical-clustering.html#cb70-7"></a><span class="co">#ans&gt;             1             1             1 </span></span>
-<span id="cb70-8"><a href="kmeans-hierarchical-clustering.html#cb70-8"></a><span class="co">#ans&gt;     Marseille        Rennes      Bordeaux </span></span>
-<span id="cb70-9"><a href="kmeans-hierarchical-clustering.html#cb70-9"></a><span class="co">#ans&gt;             1             2             2 </span></span>
-<span id="cb70-10"><a href="kmeans-hierarchical-clustering.html#cb70-10"></a><span class="co">#ans&gt; Saint-Etienne          Nice        Nantes </span></span>
-<span id="cb70-11"><a href="kmeans-hierarchical-clustering.html#cb70-11"></a><span class="co">#ans&gt;             2             2             2 </span></span>
-<span id="cb70-12"><a href="kmeans-hierarchical-clustering.html#cb70-12"></a><span class="co">#ans&gt;   Montpellier         Dijon      Guingamp </span></span>
-<span id="cb70-13"><a href="kmeans-hierarchical-clustering.html#cb70-13"></a><span class="co">#ans&gt;             2             2             2 </span></span>
-<span id="cb70-14"><a href="kmeans-hierarchical-clustering.html#cb70-14"></a><span class="co">#ans&gt;        Amiens        Angers    Strasbourg </span></span>
-<span id="cb70-15"><a href="kmeans-hierarchical-clustering.html#cb70-15"></a><span class="co">#ans&gt;             2             2             2 </span></span>
-<span id="cb70-16"><a href="kmeans-hierarchical-clustering.html#cb70-16"></a><span class="co">#ans&gt;          Caen         Lille      Toulouse </span></span>
-<span id="cb70-17"><a href="kmeans-hierarchical-clustering.html#cb70-17"></a><span class="co">#ans&gt;             2             2             2 </span></span>
-<span id="cb70-18"><a href="kmeans-hierarchical-clustering.html#cb70-18"></a><span class="co">#ans&gt;        Troyes          Metz </span></span>
-<span id="cb70-19"><a href="kmeans-hierarchical-clustering.html#cb70-19"></a><span class="co">#ans&gt;             2             2</span></span>
-<span id="cb70-20"><a href="kmeans-hierarchical-clustering.html#cb70-20"></a><span class="kw">cutree</span>(treeComp, <span class="dt">k =</span> <span class="dv">3</span>) <span class="co"># (Barcelona, Real Madrid), (Atlético Madrid) and (rest)</span></span>
-<span id="cb70-21"><a href="kmeans-hierarchical-clustering.html#cb70-21"></a><span class="co">#ans&gt;      Paris-SG        Monaco          Lyon </span></span>
-<span id="cb70-22"><a href="kmeans-hierarchical-clustering.html#cb70-22"></a><span class="co">#ans&gt;             1             1             1 </span></span>
-<span id="cb70-23"><a href="kmeans-hierarchical-clustering.html#cb70-23"></a><span class="co">#ans&gt;     Marseille        Rennes      Bordeaux </span></span>
-<span id="cb70-24"><a href="kmeans-hierarchical-clustering.html#cb70-24"></a><span class="co">#ans&gt;             1             2             2 </span></span>
-<span id="cb70-25"><a href="kmeans-hierarchical-clustering.html#cb70-25"></a><span class="co">#ans&gt; Saint-Etienne          Nice        Nantes </span></span>
-<span id="cb70-26"><a href="kmeans-hierarchical-clustering.html#cb70-26"></a><span class="co">#ans&gt;             2             2             2 </span></span>
-<span id="cb70-27"><a href="kmeans-hierarchical-clustering.html#cb70-27"></a><span class="co">#ans&gt;   Montpellier         Dijon      Guingamp </span></span>
-<span id="cb70-28"><a href="kmeans-hierarchical-clustering.html#cb70-28"></a><span class="co">#ans&gt;             2             3             3 </span></span>
-<span id="cb70-29"><a href="kmeans-hierarchical-clustering.html#cb70-29"></a><span class="co">#ans&gt;        Amiens        Angers    Strasbourg </span></span>
-<span id="cb70-30"><a href="kmeans-hierarchical-clustering.html#cb70-30"></a><span class="co">#ans&gt;             3             3             3 </span></span>
-<span id="cb70-31"><a href="kmeans-hierarchical-clustering.html#cb70-31"></a><span class="co">#ans&gt;          Caen         Lille      Toulouse </span></span>
-<span id="cb70-32"><a href="kmeans-hierarchical-clustering.html#cb70-32"></a><span class="co">#ans&gt;             3             3             3 </span></span>
-<span id="cb70-33"><a href="kmeans-hierarchical-clustering.html#cb70-33"></a><span class="co">#ans&gt;        Troyes          Metz </span></span>
-<span id="cb70-34"><a href="kmeans-hierarchical-clustering.html#cb70-34"></a><span class="co">#ans&gt;             3             3</span></span>
-<span id="cb70-35"><a href="kmeans-hierarchical-clustering.html#cb70-35"></a><span class="co"># Compare differences - treeComp makes more sense than treeAve</span></span>
-<span id="cb70-36"><a href="kmeans-hierarchical-clustering.html#cb70-36"></a><span class="kw">cutree</span>(treeComp, <span class="dt">k =</span> <span class="dv">4</span>) </span>
-<span id="cb70-37"><a href="kmeans-hierarchical-clustering.html#cb70-37"></a><span class="co">#ans&gt;      Paris-SG        Monaco          Lyon </span></span>
-<span id="cb70-38"><a href="kmeans-hierarchical-clustering.html#cb70-38"></a><span class="co">#ans&gt;             1             2             2 </span></span>
-<span id="cb70-39"><a href="kmeans-hierarchical-clustering.html#cb70-39"></a><span class="co">#ans&gt;     Marseille        Rennes      Bordeaux </span></span>
-<span id="cb70-40"><a href="kmeans-hierarchical-clustering.html#cb70-40"></a><span class="co">#ans&gt;             2             3             3 </span></span>
-<span id="cb70-41"><a href="kmeans-hierarchical-clustering.html#cb70-41"></a><span class="co">#ans&gt; Saint-Etienne          Nice        Nantes </span></span>
-<span id="cb70-42"><a href="kmeans-hierarchical-clustering.html#cb70-42"></a><span class="co">#ans&gt;             3             3             3 </span></span>
-<span id="cb70-43"><a href="kmeans-hierarchical-clustering.html#cb70-43"></a><span class="co">#ans&gt;   Montpellier         Dijon      Guingamp </span></span>
-<span id="cb70-44"><a href="kmeans-hierarchical-clustering.html#cb70-44"></a><span class="co">#ans&gt;             3             4             4 </span></span>
-<span id="cb70-45"><a href="kmeans-hierarchical-clustering.html#cb70-45"></a><span class="co">#ans&gt;        Amiens        Angers    Strasbourg </span></span>
-<span id="cb70-46"><a href="kmeans-hierarchical-clustering.html#cb70-46"></a><span class="co">#ans&gt;             4             4             4 </span></span>
-<span id="cb70-47"><a href="kmeans-hierarchical-clustering.html#cb70-47"></a><span class="co">#ans&gt;          Caen         Lille      Toulouse </span></span>
-<span id="cb70-48"><a href="kmeans-hierarchical-clustering.html#cb70-48"></a><span class="co">#ans&gt;             4             4             4 </span></span>
-<span id="cb70-49"><a href="kmeans-hierarchical-clustering.html#cb70-49"></a><span class="co">#ans&gt;        Troyes          Metz </span></span>
-<span id="cb70-50"><a href="kmeans-hierarchical-clustering.html#cb70-50"></a><span class="co">#ans&gt;             4             4</span></span></code></pre></div>
+<div class="sourceCode" id="cb70"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb70-1" title="1"></a>
+<a class="sourceLine" id="cb70-2" title="2"><span class="co"># Set the number of clusters after inspecting visually</span></a>
+<a class="sourceLine" id="cb70-3" title="3"><span class="co"># the dendogram for &quot;long&quot; groups of hanging leaves</span></a>
+<a class="sourceLine" id="cb70-4" title="4"><span class="co"># These are the cluster assignments</span></a>
+<a class="sourceLine" id="cb70-5" title="5"><span class="kw">cutree</span>(treeComp, <span class="dt">k =</span> <span class="dv">2</span>) <span class="co"># (Barcelona, Real Madrid) and (rest)</span></a>
+<a class="sourceLine" id="cb70-6" title="6"><span class="co">#ans&gt;      Paris-SG        Monaco          Lyon </span></a>
+<a class="sourceLine" id="cb70-7" title="7"><span class="co">#ans&gt;             1             1             1 </span></a>
+<a class="sourceLine" id="cb70-8" title="8"><span class="co">#ans&gt;     Marseille        Rennes      Bordeaux </span></a>
+<a class="sourceLine" id="cb70-9" title="9"><span class="co">#ans&gt;             1             2             2 </span></a>
+<a class="sourceLine" id="cb70-10" title="10"><span class="co">#ans&gt; Saint-Etienne          Nice        Nantes </span></a>
+<a class="sourceLine" id="cb70-11" title="11"><span class="co">#ans&gt;             2             2             2 </span></a>
+<a class="sourceLine" id="cb70-12" title="12"><span class="co">#ans&gt;   Montpellier         Dijon      Guingamp </span></a>
+<a class="sourceLine" id="cb70-13" title="13"><span class="co">#ans&gt;             2             2             2 </span></a>
+<a class="sourceLine" id="cb70-14" title="14"><span class="co">#ans&gt;        Amiens        Angers    Strasbourg </span></a>
+<a class="sourceLine" id="cb70-15" title="15"><span class="co">#ans&gt;             2             2             2 </span></a>
+<a class="sourceLine" id="cb70-16" title="16"><span class="co">#ans&gt;          Caen         Lille      Toulouse </span></a>
+<a class="sourceLine" id="cb70-17" title="17"><span class="co">#ans&gt;             2             2             2 </span></a>
+<a class="sourceLine" id="cb70-18" title="18"><span class="co">#ans&gt;        Troyes          Metz </span></a>
+<a class="sourceLine" id="cb70-19" title="19"><span class="co">#ans&gt;             2             2</span></a>
+<a class="sourceLine" id="cb70-20" title="20"><span class="kw">cutree</span>(treeComp, <span class="dt">k =</span> <span class="dv">3</span>) <span class="co"># (Barcelona, Real Madrid), (Atlético Madrid) and (rest)</span></a>
+<a class="sourceLine" id="cb70-21" title="21"><span class="co">#ans&gt;      Paris-SG        Monaco          Lyon </span></a>
+<a class="sourceLine" id="cb70-22" title="22"><span class="co">#ans&gt;             1             1             1 </span></a>
+<a class="sourceLine" id="cb70-23" title="23"><span class="co">#ans&gt;     Marseille        Rennes      Bordeaux </span></a>
+<a class="sourceLine" id="cb70-24" title="24"><span class="co">#ans&gt;             1             2             2 </span></a>
+<a class="sourceLine" id="cb70-25" title="25"><span class="co">#ans&gt; Saint-Etienne          Nice        Nantes </span></a>
+<a class="sourceLine" id="cb70-26" title="26"><span class="co">#ans&gt;             2             2             2 </span></a>
+<a class="sourceLine" id="cb70-27" title="27"><span class="co">#ans&gt;   Montpellier         Dijon      Guingamp </span></a>
+<a class="sourceLine" id="cb70-28" title="28"><span class="co">#ans&gt;             2             3             3 </span></a>
+<a class="sourceLine" id="cb70-29" title="29"><span class="co">#ans&gt;        Amiens        Angers    Strasbourg </span></a>
+<a class="sourceLine" id="cb70-30" title="30"><span class="co">#ans&gt;             3             3             3 </span></a>
+<a class="sourceLine" id="cb70-31" title="31"><span class="co">#ans&gt;          Caen         Lille      Toulouse </span></a>
+<a class="sourceLine" id="cb70-32" title="32"><span class="co">#ans&gt;             3             3             3 </span></a>
+<a class="sourceLine" id="cb70-33" title="33"><span class="co">#ans&gt;        Troyes          Metz </span></a>
+<a class="sourceLine" id="cb70-34" title="34"><span class="co">#ans&gt;             3             3</span></a>
+<a class="sourceLine" id="cb70-35" title="35"><span class="co"># Compare differences - treeComp makes more sense than treeAve</span></a>
+<a class="sourceLine" id="cb70-36" title="36"><span class="kw">cutree</span>(treeComp, <span class="dt">k =</span> <span class="dv">4</span>) </a>
+<a class="sourceLine" id="cb70-37" title="37"><span class="co">#ans&gt;      Paris-SG        Monaco          Lyon </span></a>
+<a class="sourceLine" id="cb70-38" title="38"><span class="co">#ans&gt;             1             2             2 </span></a>
+<a class="sourceLine" id="cb70-39" title="39"><span class="co">#ans&gt;     Marseille        Rennes      Bordeaux </span></a>
+<a class="sourceLine" id="cb70-40" title="40"><span class="co">#ans&gt;             2             3             3 </span></a>
+<a class="sourceLine" id="cb70-41" title="41"><span class="co">#ans&gt; Saint-Etienne          Nice        Nantes </span></a>
+<a class="sourceLine" id="cb70-42" title="42"><span class="co">#ans&gt;             3             3             3 </span></a>
+<a class="sourceLine" id="cb70-43" title="43"><span class="co">#ans&gt;   Montpellier         Dijon      Guingamp </span></a>
+<a class="sourceLine" id="cb70-44" title="44"><span class="co">#ans&gt;             3             4             4 </span></a>
+<a class="sourceLine" id="cb70-45" title="45"><span class="co">#ans&gt;        Amiens        Angers    Strasbourg </span></a>
+<a class="sourceLine" id="cb70-46" title="46"><span class="co">#ans&gt;             4             4             4 </span></a>
+<a class="sourceLine" id="cb70-47" title="47"><span class="co">#ans&gt;          Caen         Lille      Toulouse </span></a>
+<a class="sourceLine" id="cb70-48" title="48"><span class="co">#ans&gt;             4             4             4 </span></a>
+<a class="sourceLine" id="cb70-49" title="49"><span class="co">#ans&gt;        Troyes          Metz </span></a>
+<a class="sourceLine" id="cb70-50" title="50"><span class="co">#ans&gt;             4             4</span></a></code></pre></div>
 <p align="right">
 ◼
 </p>
@@ -928,8 +881,8 @@ Wyoming, U.S.A., and is a popular tourist attraction. Its name stems
 from the supposed regularity of its eruptions. The data set comprises
 272 observations, each of which represents a single eruption and
 contains two variables corresponding to the duration in minutes of the
-eruption, and the time until the next eruption, also in minutes.<a href="kmeans-hierarchical-clustering.html#fnref23" class="footnote-back">↩︎</a></p></li>
-<li id="fn24"><p>Made by Joseph J. Allaire <a href="https://github.com/jjallaire" class="uri">https://github.com/jjallaire</a><a href="kmeans-hierarchical-clustering.html#fnref24" class="footnote-back">↩︎</a></p></li>
+eruption, and the time until the next eruption, also in minutes.<a href="kmeans-hierarchical-clustering.html#fnref23" class="footnote-back">↩</a></p></li>
+<li id="fn24"><p>Made by Joseph J. Allaire <a href="https://github.com/jjallaire" class="uri">https://github.com/jjallaire</a><a href="kmeans-hierarchical-clustering.html#fnref24" class="footnote-back">↩</a></p></li>
 </ol>
 </div>
             </section>

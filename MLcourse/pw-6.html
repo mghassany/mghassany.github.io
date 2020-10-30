@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>PW 6 | Machine Learning</title>
   <meta name="description" content="PW 6 | Machine Learning course" />
-  <meta name="generator" content="bookdown 0.20 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.21 and GitBook 2.6.7" />
 
   <meta property="og:title" content="PW 6 | Machine Learning" />
   <meta property="og:type" content="book" />
@@ -24,7 +24,7 @@
 <meta name="author" content="Mohamad Ghassany" />
 
 
-<meta name="date" content="2020-10-15" />
+<meta name="date" content="2020-10-30" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -33,7 +33,6 @@
   
 <link rel="prev" href="principal-components-analysis.html"/>
 <link rel="next" href="kmeans-hierarchical-clustering.html"/>
-<script src="book_assets/header-attrs-2.4/header-attrs.js"></script>
 <script src="book_assets/jquery-2.2.3/jquery.min.js"></script>
 <link href="book_assets/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="book_assets/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -51,7 +50,6 @@
 
 
 
-<script src="book_assets/accessible-code-block-0.0.1/empty-anchor.js"></script>
 <script src="book_assets/kePrint-0.0.1/kePrint.js"></script>
 <link href="book_assets/font-awesome-5.3.1/css/fontawesome-all.min.css" rel="stylesheet" />
 <link href="book_assets/vembedr-0.1.4/css/vembedr.css" rel="stylesheet" />
@@ -67,28 +65,26 @@
 <script async defer src="https://hypothes.is/embed.js"></script>
 
 
-
 <style type="text/css">
-pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
-pre > code.sourceCode > span:empty { height: 1.2em; }
-code.sourceCode > span { color: inherit; text-decoration: inherit; }
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
 pre.sourceCode { margin: 0; }
 @media screen {
 div.sourceCode { overflow: auto; }
 }
 @media print {
-pre > code.sourceCode { white-space: pre-wrap; }
-pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
 }
-pre.numberSource code
-  { counter-reset: source-line 0; }
-pre.numberSource code > span
-  { position: relative; left: -4em; counter-increment: source-line; }
-pre.numberSource code > span > a:first-child::before
-  { content: counter(source-line);
+pre.numberSource a.sourceLine
+  { position: relative; left: -4em; }
+pre.numberSource a.sourceLine::before
+  { content: attr(title);
     position: relative; left: -1em; text-align: right; vertical-align: baseline;
-    border: none; display: inline-block;
+    border: none; pointer-events: all; display: inline-block;
     -webkit-touch-callout: none; -webkit-user-select: none;
     -khtml-user-select: none; -moz-user-select: none;
     -ms-user-select: none; user-select: none;
@@ -100,7 +96,7 @@ pre.numberSource { margin-left: 3em; border-left: 1px solid #a0a0a0;  padding-le
 div.sourceCode
   { color: #1f1c1b; background-color: #ffffff; }
 @media screen {
-pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+a.sourceLine::before { text-decoration: underline; }
 }
 code span. { color: #1f1c1b; } /* Normal */
 code span.al { color: #bf0303; background-color: #f7e6e6; font-weight: bold; } /* Alert */
@@ -156,44 +152,36 @@ code span.wa { color: #bf0303; } /* Warning */
 <li class='before'><a href="./">Machine Learning</a></li>
 
 <li class="divider"></li>
-<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Welcome</a>
-<ul>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Welcome</a><ul>
 <li class="chapter" data-level="" data-path="index.html"><a href="index.html#course-overview"><i class="fa fa-check"></i>Course Overview</a></li>
 <li class="chapter" data-level="" data-path="index.html"><a href="index.html#course-schedule"><i class="fa fa-check"></i>Course Schedule</a></li>
 </ul></li>
-<li class="chapter" data-level="" data-path="introduction.html"><a href="introduction.html"><i class="fa fa-check"></i>Introduction</a>
-<ul>
+<li class="chapter" data-level="" data-path="introduction.html"><a href="introduction.html"><i class="fa fa-check"></i>Introduction</a><ul>
 <li class="chapter" data-level="" data-path="introduction.html"><a href="introduction.html#what-is-machine-learning"><i class="fa fa-check"></i>What is Machine Learning ?</a></li>
 <li class="chapter" data-level="" data-path="introduction.html"><a href="introduction.html#supervised-learning"><i class="fa fa-check"></i>Supervised Learning</a></li>
 <li class="chapter" data-level="" data-path="introduction.html"><a href="introduction.html#unsupervised-learning"><i class="fa fa-check"></i>Unsupervised Learning</a></li>
 </ul></li>
 <li class="part"><span><b>I Supervised Learning</b></span></li>
 <li class="part"><span><b>Regression</b></span></li>
-<li class="chapter" data-level="1" data-path="linear-regression.html"><a href="linear-regression.html"><i class="fa fa-check"></i><b>1</b> Linear Regression</a>
-<ul>
+<li class="chapter" data-level="1" data-path="linear-regression.html"><a href="linear-regression.html"><i class="fa fa-check"></i><b>1</b> Linear Regression</a><ul>
 <li class="chapter" data-level="1.1" data-path="linear-regression.html"><a href="linear-regression.html#notation"><i class="fa fa-check"></i><b>1.1</b> Notation</a></li>
 <li class="chapter" data-level="1.2" data-path="linear-regression.html"><a href="linear-regression.html#model-representation"><i class="fa fa-check"></i><b>1.2</b> Model Representation</a></li>
-<li class="chapter" data-level="1.3" data-path="linear-regression.html"><a href="linear-regression.html#why-estimate-f"><i class="fa fa-check"></i><b>1.3</b> Why Estimate <span class="math inline">\(f\)</span> ?</a>
-<ul>
+<li class="chapter" data-level="1.3" data-path="linear-regression.html"><a href="linear-regression.html#why-estimate-f"><i class="fa fa-check"></i><b>1.3</b> Why Estimate <span class="math inline">\(f\)</span> ?</a><ul>
 <li class="chapter" data-level="" data-path="linear-regression.html"><a href="linear-regression.html#prediction"><i class="fa fa-check"></i>Prediction</a></li>
 <li class="chapter" data-level="" data-path="linear-regression.html"><a href="linear-regression.html#inference"><i class="fa fa-check"></i>Inference</a></li>
 </ul></li>
 <li class="chapter" data-level="1.4" data-path="linear-regression.html"><a href="linear-regression.html#simple-linear-regression-model"><i class="fa fa-check"></i><b>1.4</b> Simple Linear Regression Model</a></li>
 <li class="chapter" data-level="1.5" data-path="linear-regression.html"><a href="linear-regression.html#estimating-the-coefficients"><i class="fa fa-check"></i><b>1.5</b> Estimating the Coefficients</a></li>
-<li class="chapter" data-level="1.6" data-path="linear-regression.html"><a href="linear-regression.html#assessing-the-accuracy-of-the-coefficient-estimates"><i class="fa fa-check"></i><b>1.6</b> Assessing the Accuracy of the Coefficient Estimates</a>
-<ul>
+<li class="chapter" data-level="1.6" data-path="linear-regression.html"><a href="linear-regression.html#assessing-the-accuracy-of-the-coefficient-estimates"><i class="fa fa-check"></i><b>1.6</b> Assessing the Accuracy of the Coefficient Estimates</a><ul>
 <li class="chapter" data-level="" data-path="linear-regression.html"><a href="linear-regression.html#hypothesis-testing"><i class="fa fa-check"></i>Hypothesis testing</a></li>
 </ul></li>
-<li class="chapter" data-level="1.7" data-path="linear-regression.html"><a href="linear-regression.html#anova-and-model-fit"><i class="fa fa-check"></i><b>1.7</b> ANOVA and model fit</a>
-<ul>
+<li class="chapter" data-level="1.7" data-path="linear-regression.html"><a href="linear-regression.html#anova-and-model-fit"><i class="fa fa-check"></i><b>1.7</b> ANOVA and model fit</a><ul>
 <li class="chapter" data-level="1.7.1" data-path="linear-regression.html"><a href="linear-regression.html#anova"><i class="fa fa-check"></i><b>1.7.1</b> ANOVA</a></li>
 <li class="chapter" data-level="1.7.2" data-path="linear-regression.html"><a href="linear-regression.html#the-r2-statistic"><i class="fa fa-check"></i><b>1.7.2</b> The <span class="math inline">\(R^2\)</span> Statistic</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="" data-path="practical-work-1.html"><a href="practical-work-1.html"><i class="fa fa-check"></i>Practical Work 1</a>
-<ul>
-<li class="chapter" data-level="1.8" data-path="practical-work-1.html"><a href="practical-work-1.html#some-basics"><i class="fa fa-check"></i><b>1.8</b> Some <svg style="height:0.8em;top:.04em;position:relative;fill:steelblue;" viewBox="0 0 581 512"><path d="M581 226.6C581 119.1 450.9 32 290.5 32S0 119.1 0 226.6C0 322.4 103.3 402 239.4 418.1V480h99.1v-61.5c24.3-2.7 47.6-7.4 69.4-13.9L448 480h112l-67.4-113.7c54.5-35.4 88.4-84.9 88.4-139.7zm-466.8 14.5c0-73.5 98.9-133 220.8-133s211.9 40.7 211.9 133c0 50.1-26.5 85-70.3 106.4-2.4-1.6-4.7-2.9-6.4-3.7-10.2-5.2-27.8-10.5-27.8-10.5s86.6-6.4 86.6-92.7-90.6-87.9-90.6-87.9h-199V361c-74.1-21.5-125.2-67.1-125.2-119.9zm225.1 38.3v-55.6c57.8 0 87.8-6.8 87.8 27.3 0 36.5-38.2 28.3-87.8 28.3zm-.9 72.5H365c10.8 0 18.9 11.7 24 19.2-16.1 1.9-33 2.8-50.6 2.9v-22.1z"/></svg> basics</a>
-<ul>
+<li class="chapter" data-level="" data-path="practical-work-1.html"><a href="practical-work-1.html"><i class="fa fa-check"></i>Practical Work 1</a><ul>
+<li class="chapter" data-level="1.8" data-path="practical-work-1.html"><a href="practical-work-1.html#some-basics"><i class="fa fa-check"></i><b>1.8</b> Some <svg style="height:0.8em;top:.04em;position:relative;fill:steelblue;" viewBox="0 0 581 512"><path d="M581 226.6C581 119.1 450.9 32 290.5 32S0 119.1 0 226.6C0 322.4 103.3 402 239.4 418.1V480h99.1v-61.5c24.3-2.7 47.6-7.4 69.4-13.9L448 480h112l-67.4-113.7c54.5-35.4 88.4-84.9 88.4-139.7zm-466.8 14.5c0-73.5 98.9-133 220.8-133s211.9 40.7 211.9 133c0 50.1-26.5 85-70.3 106.4-2.4-1.6-4.7-2.9-6.4-3.7-10.2-5.2-27.8-10.5-27.8-10.5s86.6-6.4 86.6-92.7-90.6-87.9-90.6-87.9h-199V361c-74.1-21.5-125.2-67.1-125.2-119.9zm225.1 38.3v-55.6c57.8 0 87.8-6.8 87.8 27.3 0 36.5-38.2 28.3-87.8 28.3zm-.9 72.5H365c10.8 0 18.9 11.7 24 19.2-16.1 1.9-33 2.8-50.6 2.9v-22.1z"/></svg> basics</a><ul>
 <li class="chapter" data-level="1.8.1" data-path="practical-work-1.html"><a href="practical-work-1.html#basic-commands"><i class="fa fa-check"></i><b>1.8.1</b> Basic Commands</a></li>
 <li class="chapter" data-level="1.8.2" data-path="practical-work-1.html"><a href="practical-work-1.html#vectors"><i class="fa fa-check"></i><b>1.8.2</b> Vectors</a></li>
 <li class="chapter" data-level="1.8.3" data-path="practical-work-1.html"><a href="practical-work-1.html#matrices-data-frames-and-lists"><i class="fa fa-check"></i><b>1.8.3</b> Matrices, data frames and lists</a></li>
@@ -202,78 +190,65 @@ code span.wa { color: #bf0303; } /* Warning */
 <li class="chapter" data-level="1.8.6" data-path="practical-work-1.html"><a href="practical-work-1.html#working-directory"><i class="fa fa-check"></i><b>1.8.6</b> Working directory</a></li>
 <li class="chapter" data-level="1.8.7" data-path="practical-work-1.html"><a href="practical-work-1.html#loading-data"><i class="fa fa-check"></i><b>1.8.7</b> Loading Data</a></li>
 </ul></li>
-<li class="chapter" data-level="1.9" data-path="practical-work-1.html"><a href="practical-work-1.html#regression"><i class="fa fa-check"></i><b>1.9</b> Regression</a>
-<ul>
+<li class="chapter" data-level="1.9" data-path="practical-work-1.html"><a href="practical-work-1.html#regression"><i class="fa fa-check"></i><b>1.9</b> Regression</a><ul>
 <li class="chapter" data-level="1.9.1" data-path="practical-work-1.html"><a href="practical-work-1.html#the-lm-function"><i class="fa fa-check"></i><b>1.9.1</b> The <code>lm</code> function</a></li>
 <li class="chapter" data-level="1.9.2" data-path="practical-work-1.html"><a href="practical-work-1.html#boston"><i class="fa fa-check"></i><b>1.9.2</b> Predicting House Value: Boston dataset</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="2" data-path="multiple-linear-regression.html"><a href="multiple-linear-regression.html"><i class="fa fa-check"></i><b>2</b> Multiple Linear Regression</a>
-<ul>
+<li class="chapter" data-level="2" data-path="multiple-linear-regression.html"><a href="multiple-linear-regression.html"><i class="fa fa-check"></i><b>2</b> Multiple Linear Regression</a><ul>
 <li class="chapter" data-level="2.1" data-path="multiple-linear-regression.html"><a href="multiple-linear-regression.html#the-model"><i class="fa fa-check"></i><b>2.1</b> The Model</a></li>
 <li class="chapter" data-level="2.2" data-path="multiple-linear-regression.html"><a href="multiple-linear-regression.html#estimating-the-regression-coefficients"><i class="fa fa-check"></i><b>2.2</b> Estimating the Regression Coefficients</a></li>
-<li class="chapter" data-level="2.3" data-path="multiple-linear-regression.html"><a href="multiple-linear-regression.html#some-important-questions"><i class="fa fa-check"></i><b>2.3</b> Some important questions</a>
-<ul>
+<li class="chapter" data-level="2.3" data-path="multiple-linear-regression.html"><a href="multiple-linear-regression.html#some-important-questions"><i class="fa fa-check"></i><b>2.3</b> Some important questions</a><ul>
 <li class="chapter" data-level="2.3.1" data-path="multiple-linear-regression.html"><a href="multiple-linear-regression.html#other-consid"><i class="fa fa-check"></i><b>2.3.1</b> Other Considerations in Regression Model</a></li>
 </ul></li>
-<li class="chapter" data-level="2.4" data-path="multiple-linear-regression.html"><a href="multiple-linear-regression.html#how-to-select-the-best-performing-model"><i class="fa fa-check"></i><b>2.4</b> How to select the best performing model</a>
-<ul>
+<li class="chapter" data-level="2.4" data-path="multiple-linear-regression.html"><a href="multiple-linear-regression.html#how-to-select-the-best-performing-model"><i class="fa fa-check"></i><b>2.4</b> How to select the best performing model</a><ul>
 <li><a href="multiple-linear-regression.html#use-the-adjusted-r_adj2-for-multivariate-models">Use the Adjusted <span class="math inline">\(R_{adj}^2\)</span> for multivariate models</a></li>
 <li class="chapter" data-level="" data-path="multiple-linear-regression.html"><a href="multiple-linear-regression.html#have-a-look-at-the-residuals-or-error-terms"><i class="fa fa-check"></i>Have a look at the residuals or error terms</a></li>
 <li class="chapter" data-level="" data-path="multiple-linear-regression.html"><a href="multiple-linear-regression.html#histogram-of-residuals"><i class="fa fa-check"></i>Histogram of residuals</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="" data-path="pw-2.html"><a href="pw-2.html"><i class="fa fa-check"></i>PW 2</a>
-<ul>
-<li class="chapter" data-level="" data-path="multiple-linear-regression.html"><a href="multiple-linear-regression.html#multiple-linear-regression"><i class="fa fa-check"></i>Multiple Linear Regression</a></li>
+<li class="chapter" data-level="" data-path="pw-2.html"><a href="pw-2.html"><i class="fa fa-check"></i>PW 2</a><ul>
+<li class="chapter" data-level="" data-path="pw-2.html"><a href="pw-2.html#multiple-linear-regression-1"><i class="fa fa-check"></i>Multiple Linear Regression</a></li>
 <li class="chapter" data-level="" data-path="pw-2.html"><a href="pw-2.html#reporting"><i class="fa fa-check"></i>Reporting</a></li>
 </ul></li>
 <li class="part"><span><b>Classification</b></span></li>
-<li class="chapter" data-level="3" data-path="logistic-regression.html"><a href="logistic-regression.html"><i class="fa fa-check"></i><b>3</b> Logistic Regression</a>
-<ul>
-<li class="chapter" data-level="3.1" data-path="introduction.html"><a href="introduction.html#introduction"><i class="fa fa-check"></i><b>3.1</b> Introduction</a></li>
-<li class="chapter" data-level="3.2" data-path="logistic-regression.html"><a href="logistic-regression.html#logistic-regression-1"><i class="fa fa-check"></i><b>3.2</b> Logistic Regression</a>
-<ul>
+<li class="chapter" data-level="3" data-path="logistic-regression.html"><a href="logistic-regression.html"><i class="fa fa-check"></i><b>3</b> Logistic Regression</a><ul>
+<li class="chapter" data-level="3.1" data-path="logistic-regression.html"><a href="logistic-regression.html#introduction-1"><i class="fa fa-check"></i><b>3.1</b> Introduction</a></li>
+<li class="chapter" data-level="3.2" data-path="logistic-regression.html"><a href="logistic-regression.html#logistic-regression-1"><i class="fa fa-check"></i><b>3.2</b> Logistic Regression</a><ul>
 <li class="chapter" data-level="3.2.1" data-path="logistic-regression.html"><a href="logistic-regression.html#the-logistic-model"><i class="fa fa-check"></i><b>3.2.1</b> The Logistic Model</a></li>
-<li class="chapter" data-level="3.2.2" data-path="multiple-linear-regression.html"><a href="multiple-linear-regression.html#estimating-the-regression-coefficients"><i class="fa fa-check"></i><b>3.2.2</b> Estimating the Regression Coefficients</a></li>
-<li class="chapter" data-level="3.2.3" data-path="linear-regression.html"><a href="linear-regression.html#prediction"><i class="fa fa-check"></i><b>3.2.3</b> Prediction</a></li>
+<li class="chapter" data-level="3.2.2" data-path="logistic-regression.html"><a href="logistic-regression.html#estimating-the-regression-coefficients-1"><i class="fa fa-check"></i><b>3.2.2</b> Estimating the Regression Coefficients</a></li>
+<li class="chapter" data-level="3.2.3" data-path="logistic-regression.html"><a href="logistic-regression.html#prediction-1"><i class="fa fa-check"></i><b>3.2.3</b> Prediction</a></li>
 </ul></li>
 <li class="chapter" data-level="3.3" data-path="logistic-regression.html"><a href="logistic-regression.html#multiple-logistic-regression"><i class="fa fa-check"></i><b>3.3</b> Multiple Logistic Regression</a></li>
-<li class="chapter" data-level="3.4" data-path="logistic-regression.html"><a href="logistic-regression.html#logreg-examps"><i class="fa fa-check"></i><b>3.4</b> Example</a>
-<ul>
+<li class="chapter" data-level="3.4" data-path="logistic-regression.html"><a href="logistic-regression.html#logreg-examps"><i class="fa fa-check"></i><b>3.4</b> Example</a><ul>
 <li class="chapter" data-level="3.4.1" data-path="logistic-regression.html"><a href="logistic-regression.html#logreg-examps-challenger"><i class="fa fa-check"></i><b>3.4.1</b> Case study: <em>The Challenger disaster</em></a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="" data-path="pw-3.html"><a href="pw-3.html"><i class="fa fa-check"></i>PW 3</a>
-<ul>
+<li class="chapter" data-level="" data-path="pw-3.html"><a href="pw-3.html"><i class="fa fa-check"></i>PW 3</a><ul>
 <li class="chapter" data-level="" data-path="pw-3.html"><a href="pw-3.html#social-networks-ads"><i class="fa fa-check"></i>Social Networks Ads</a></li>
 </ul></li>
-<li class="chapter" data-level="4" data-path="discriminant-analysis.html"><a href="discriminant-analysis.html"><i class="fa fa-check"></i><b>4</b> Discriminant Analysis</a>
-<ul>
-<li class="chapter" data-level="4.1" data-path="introduction.html"><a href="introduction.html#introduction"><i class="fa fa-check"></i><b>4.1</b> Introduction</a></li>
+<li class="chapter" data-level="4" data-path="discriminant-analysis.html"><a href="discriminant-analysis.html"><i class="fa fa-check"></i><b>4</b> Discriminant Analysis</a><ul>
+<li class="chapter" data-level="4.1" data-path="discriminant-analysis.html"><a href="discriminant-analysis.html#introduction-2"><i class="fa fa-check"></i><b>4.1</b> Introduction</a></li>
 <li class="chapter" data-level="4.2" data-path="discriminant-analysis.html"><a href="discriminant-analysis.html#bayes-theorem"><i class="fa fa-check"></i><b>4.2</b> Bayes’ Theorem</a></li>
 <li class="chapter" data-level="4.3" data-path="discriminant-analysis.html"><a href="discriminant-analysis.html#lda-for-p1"><i class="fa fa-check"></i><b>4.3</b> LDA for <span class="math inline">\(p=1\)</span></a></li>
 <li class="chapter" data-level="4.4" data-path="discriminant-analysis.html"><a href="discriminant-analysis.html#estimating-the-parameters"><i class="fa fa-check"></i><b>4.4</b> Estimating the parameters</a></li>
 <li class="chapter" data-level="4.5" data-path="discriminant-analysis.html"><a href="discriminant-analysis.html#lda-for-p-1"><i class="fa fa-check"></i><b>4.5</b> LDA for <span class="math inline">\(p &gt; 1\)</span></a></li>
 <li class="chapter" data-level="4.6" data-path="discriminant-analysis.html"><a href="discriminant-analysis.html#making-predictions"><i class="fa fa-check"></i><b>4.6</b> Making predictions</a></li>
-<li class="chapter" data-level="4.7" data-path="discriminant-analysis.html"><a href="discriminant-analysis.html#other-forms-of-discriminant-analysis"><i class="fa fa-check"></i><b>4.7</b> Other forms of Discriminant Analysis</a>
-<ul>
+<li class="chapter" data-level="4.7" data-path="discriminant-analysis.html"><a href="discriminant-analysis.html#other-forms-of-discriminant-analysis"><i class="fa fa-check"></i><b>4.7</b> Other forms of Discriminant Analysis</a><ul>
 <li class="chapter" data-level="4.7.1" data-path="discriminant-analysis.html"><a href="discriminant-analysis.html#quadratic-discriminant-analysis-qda"><i class="fa fa-check"></i><b>4.7.1</b> Quadratic Discriminant Analysis (QDA)</a></li>
 <li class="chapter" data-level="4.7.2" data-path="discriminant-analysis.html"><a href="discriminant-analysis.html#naive-bayes"><i class="fa fa-check"></i><b>4.7.2</b> Naive Bayes</a></li>
 </ul></li>
 <li class="chapter" data-level="4.8" data-path="discriminant-analysis.html"><a href="discriminant-analysis.html#lda-vs-logistic-regression"><i class="fa fa-check"></i><b>4.8</b> LDA vs Logistic Regression</a></li>
 </ul></li>
-<li class="chapter" data-level="" data-path="pw-4.html"><a href="pw-4.html"><i class="fa fa-check"></i>PW 4</a>
-<ul>
-<li class="chapter" data-level="" data-path="logistic-regression.html"><a href="logistic-regression.html#logistic-regression"><i class="fa fa-check"></i>Logistic Regression</a></li>
+<li class="chapter" data-level="" data-path="pw-4.html"><a href="pw-4.html"><i class="fa fa-check"></i>PW 4</a><ul>
+<li class="chapter" data-level="" data-path="pw-4.html"><a href="pw-4.html#logistic-regression-2"><i class="fa fa-check"></i>Logistic Regression</a></li>
 <li class="chapter" data-level="" data-path="pw-4.html"><a href="pw-4.html#decision-boundary-of-logistic-regression"><i class="fa fa-check"></i>Decision Boundary of Logistic Regression</a></li>
 <li class="chapter" data-level="" data-path="pw-4.html"><a href="pw-4.html#linear-discriminant-analysis-lda"><i class="fa fa-check"></i>Linear Discriminant Analysis (LDA)</a></li>
 <li class="chapter" data-level="" data-path="pw-4.html"><a href="pw-4.html#lda-from-scratch"><i class="fa fa-check"></i>LDA from scratch</a></li>
-<li class="chapter" data-level="" data-path="discriminant-analysis.html"><a href="discriminant-analysis.html#quadratic-discriminant-analysis-qda"><i class="fa fa-check"></i>Quadratic Discriminant Analysis (QDA)</a></li>
+<li class="chapter" data-level="" data-path="pw-4.html"><a href="pw-4.html#quadratic-discriminant-analysis-qda-1"><i class="fa fa-check"></i>Quadratic Discriminant Analysis (QDA)</a></li>
 <li class="chapter" data-level="" data-path="pw-4.html"><a href="pw-4.html#comparison"><i class="fa fa-check"></i>Comparison</a></li>
 </ul></li>
-<li class="chapter" data-level="5" data-path="decision-trees-random-forests.html"><a href="decision-trees-random-forests.html"><i class="fa fa-check"></i><b>5</b> Decision Trees &amp; Random Forests</a>
-<ul>
+<li class="chapter" data-level="5" data-path="decision-trees-random-forests.html"><a href="decision-trees-random-forests.html"><i class="fa fa-check"></i><b>5</b> Decision Trees &amp; Random Forests</a><ul>
 <li class="chapter" data-level="" data-path="decision-trees-random-forests.html"><a href="decision-trees-random-forests.html#the-basics-of-decision-trees"><i class="fa fa-check"></i>The Basics of Decision Trees</a></li>
 <li class="chapter" data-level="" data-path="decision-trees-random-forests.html"><a href="decision-trees-random-forests.html#classification-trees"><i class="fa fa-check"></i>Classification Trees</a></li>
 <li class="chapter" data-level="" data-path="decision-trees-random-forests.html"><a href="decision-trees-random-forests.html#bagging-random-forests"><i class="fa fa-check"></i>Bagging &amp; Random Forests</a></li>
@@ -281,114 +256,94 @@ code span.wa { color: #bf0303; } /* Warning */
 <li><a href="decision-trees-random-forests.html#trees-in-r">Trees in <code>R</code></a></li>
 <li class="chapter" data-level="" data-path="decision-trees-random-forests.html"><a href="decision-trees-random-forests.html#random-forests---the-first-choice-method-for-every-data-analysis"><i class="fa fa-check"></i>Random forests - the first-choice method for every data analysis?</a></li>
 </ul></li>
-<li class="chapter" data-level="" data-path="pw-5.html"><a href="pw-5.html"><i class="fa fa-check"></i>PW 5</a>
-<ul>
-<li class="chapter" data-level="" data-path="pw-5.html"><a href="pw-5.html#regression-trees"><i class="fa fa-check"></i>Regression Trees</a>
-<ul>
+<li class="chapter" data-level="" data-path="pw-5.html"><a href="pw-5.html"><i class="fa fa-check"></i>PW 5</a><ul>
+<li class="chapter" data-level="" data-path="pw-5.html"><a href="pw-5.html#regression-trees"><i class="fa fa-check"></i>Regression Trees</a><ul>
 <li class="chapter" data-level="" data-path="pw-5.html"><a href="pw-5.html#single-tree"><i class="fa fa-check"></i>Single tree</a></li>
 <li class="chapter" data-level="" data-path="pw-5.html"><a href="pw-5.html#bagging"><i class="fa fa-check"></i>Bagging</a></li>
 <li class="chapter" data-level="" data-path="pw-5.html"><a href="pw-5.html#random-forests"><i class="fa fa-check"></i>Random Forests</a></li>
-<li class="chapter" data-level="" data-path="decision-trees-random-forests.html"><a href="decision-trees-random-forests.html#boosting"><i class="fa fa-check"></i>Boosting</a></li>
-<li class="chapter" data-level="" data-path="pw-4.html"><a href="pw-4.html#comparison"><i class="fa fa-check"></i>Comparison</a></li>
+<li class="chapter" data-level="" data-path="pw-5.html"><a href="pw-5.html#boosting-1"><i class="fa fa-check"></i>Boosting</a></li>
+<li class="chapter" data-level="" data-path="pw-5.html"><a href="pw-5.html#comparison-1"><i class="fa fa-check"></i>Comparison</a></li>
 </ul></li>
-<li class="chapter" data-level="" data-path="decision-trees-random-forests.html"><a href="decision-trees-random-forests.html#classification-trees"><i class="fa fa-check"></i>Classification Trees</a>
-<ul>
+<li class="chapter" data-level="" data-path="pw-5.html"><a href="pw-5.html#classification-trees-1"><i class="fa fa-check"></i>Classification Trees</a><ul>
 <li class="chapter" data-level="" data-path="pw-5.html"><a href="pw-5.html#the-spam-dataset"><i class="fa fa-check"></i>The Spam dataset</a></li>
 <li class="chapter" data-level="" data-path="pw-5.html"><a href="pw-5.html#extra-tuning"><i class="fa fa-check"></i>Extra: Tuning</a></li>
 </ul></li>
 </ul></li>
 <li class="part"><span><b>II Dimensionality Reduction</b></span></li>
-<li class="chapter" data-level="6" data-path="principal-components-analysis.html"><a href="principal-components-analysis.html"><i class="fa fa-check"></i><b>6</b> Principal Components Analysis</a>
-<ul>
-<li class="chapter" data-level="6.1" data-path="introduction.html"><a href="introduction.html#introduction"><i class="fa fa-check"></i><b>6.1</b> Introduction</a></li>
-<li class="chapter" data-level="6.2" data-path="principal-components-analysis.html"><a href="principal-components-analysis.html#principal-components"><i class="fa fa-check"></i><b>6.2</b> Principal Components</a>
-<ul>
+<li class="chapter" data-level="6" data-path="principal-components-analysis.html"><a href="principal-components-analysis.html"><i class="fa fa-check"></i><b>6</b> Principal Components Analysis</a><ul>
+<li class="chapter" data-level="6.1" data-path="principal-components-analysis.html"><a href="principal-components-analysis.html#introduction-3"><i class="fa fa-check"></i><b>6.1</b> Introduction</a></li>
+<li class="chapter" data-level="6.2" data-path="principal-components-analysis.html"><a href="principal-components-analysis.html#principal-components"><i class="fa fa-check"></i><b>6.2</b> Principal Components</a><ul>
 <li class="chapter" data-level="" data-path="principal-components-analysis.html"><a href="principal-components-analysis.html#notations-and-procedure"><i class="fa fa-check"></i>Notations and Procedure</a></li>
 <li><a href="principal-components-analysis.html#first-principal-component-textpc_1-y_1">First Principal Component (<span class="math inline">\(\text{PC}_1\)</span>): <span class="math inline">\(Y_1\)</span></a></li>
 <li><a href="principal-components-analysis.html#second-principal-component-textpc_2-y_2">Second Principal Component (<span class="math inline">\(\text{PC}_2\)</span>): <span class="math inline">\(Y_2\)</span></a></li>
 <li><a href="principal-components-analysis.html#ith-principal-component-textpc_i-y_i"><span class="math inline">\(i^{th}\)</span> Principal Component (<span class="math inline">\(\text{PC}_i\)</span>): <span class="math inline">\(Y_i\)</span></a></li>
 </ul></li>
-<li class="chapter" data-level="6.3" data-path="principal-components-analysis.html"><a href="principal-components-analysis.html#how-do-we-find-the-coefficients"><i class="fa fa-check"></i><b>6.3</b> How do we find the coefficients?</a>
-<ul>
+<li class="chapter" data-level="6.3" data-path="principal-components-analysis.html"><a href="principal-components-analysis.html#how-do-we-find-the-coefficients"><i class="fa fa-check"></i><b>6.3</b> How do we find the coefficients?</a><ul>
 <li class="chapter" data-level="" data-path="principal-components-analysis.html"><a href="principal-components-analysis.html#why-it-may-be-possible-to-reduce-dimensions"><i class="fa fa-check"></i>Why It May Be Possible to Reduce Dimensions</a></li>
 <li class="chapter" data-level="" data-path="principal-components-analysis.html"><a href="principal-components-analysis.html#procedure"><i class="fa fa-check"></i>Procedure</a></li>
 </ul></li>
 <li class="chapter" data-level="6.4" data-path="principal-components-analysis.html"><a href="principal-components-analysis.html#standardization-of-the-features"><i class="fa fa-check"></i><b>6.4</b> Standardization of the features</a></li>
-<li class="chapter" data-level="6.5" data-path="principal-components-analysis.html"><a href="principal-components-analysis.html#projection-of-the-data"><i class="fa fa-check"></i><b>6.5</b> Projection of the data</a>
-<ul>
+<li class="chapter" data-level="6.5" data-path="principal-components-analysis.html"><a href="principal-components-analysis.html#projection-of-the-data"><i class="fa fa-check"></i><b>6.5</b> Projection of the data</a><ul>
 <li class="chapter" data-level="" data-path="principal-components-analysis.html"><a href="principal-components-analysis.html#scores"><i class="fa fa-check"></i>Scores</a></li>
 <li class="chapter" data-level="" data-path="principal-components-analysis.html"><a href="principal-components-analysis.html#visualization"><i class="fa fa-check"></i>Visualization</a></li>
 <li class="chapter" data-level="" data-path="principal-components-analysis.html"><a href="principal-components-analysis.html#extra"><i class="fa fa-check"></i>Extra</a></li>
 </ul></li>
-<li class="chapter" data-level="6.6" data-path="principal-components-analysis.html"><a href="principal-components-analysis.html#case-study"><i class="fa fa-check"></i><b>6.6</b> Case study</a>
-<ul>
+<li class="chapter" data-level="6.6" data-path="principal-components-analysis.html"><a href="principal-components-analysis.html#case-study"><i class="fa fa-check"></i><b>6.6</b> Case study</a><ul>
 <li class="chapter" data-level="" data-path="principal-components-analysis.html"><a href="principal-components-analysis.html#employement-in-european-countries-in-the-late-70s"><i class="fa fa-check"></i>Employement in European countries in the late 70s</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="" data-path="pw-6.html"><a href="pw-6.html"><i class="fa fa-check"></i>PW 6</a>
-<ul>
+<li class="chapter" data-level="" data-path="pw-6.html"><a href="pw-6.html"><i class="fa fa-check"></i>PW 6</a><ul>
 <li class="chapter" data-level="" data-path="pw-6.html"><a href="pw-6.html#the-iris-dataset"><i class="fa fa-check"></i>The Iris Dataset</a></li>
-<li class="chapter" data-level="" data-path="practical-work-1.html"><a href="practical-work-1.html#loading-data"><i class="fa fa-check"></i>Loading Data</a></li>
+<li class="chapter" data-level="" data-path="pw-6.html"><a href="pw-6.html#loading-data-1"><i class="fa fa-check"></i>Loading Data</a></li>
 <li class="chapter" data-level="" data-path="pw-6.html"><a href="pw-6.html#exploratory-analysis"><i class="fa fa-check"></i>Exploratory analysis</a></li>
 <li><a href="pw-6.html#pca-using-princomp">PCA using <code>princomp()</code></a></li>
 <li><a href="pw-6.html#deeper-pca-using-factoextra-package">Deeper PCA using <code>factoextra</code> package</a></li>
 <li class="chapter" data-level="" data-path="pw-6.html"><a href="pw-6.html#step-by-step-pca"><i class="fa fa-check"></i>Step-by-step PCA</a></li>
 </ul></li>
 <li class="part"><span><b>III Unsupervised Learning</b></span></li>
-<li class="chapter" data-level="7" data-path="kmeans-hierarchical-clustering.html"><a href="kmeans-hierarchical-clustering.html"><i class="fa fa-check"></i><b>7</b> Kmeans &amp; Hierarchical Clustering</a>
-<ul>
-<li class="chapter" data-level="7.1" data-path="introduction.html"><a href="introduction.html#unsupervised-learning"><i class="fa fa-check"></i><b>7.1</b> Unsupervised Learning</a></li>
+<li class="chapter" data-level="7" data-path="kmeans-hierarchical-clustering.html"><a href="kmeans-hierarchical-clustering.html"><i class="fa fa-check"></i><b>7</b> Kmeans &amp; Hierarchical Clustering</a><ul>
+<li class="chapter" data-level="7.1" data-path="kmeans-hierarchical-clustering.html"><a href="kmeans-hierarchical-clustering.html#unsupervised-learning-1"><i class="fa fa-check"></i><b>7.1</b> Unsupervised Learning</a></li>
 <li class="chapter" data-level="7.2" data-path="kmeans-hierarchical-clustering.html"><a href="kmeans-hierarchical-clustering.html#clustering"><i class="fa fa-check"></i><b>7.2</b> Clustering</a></li>
-<li class="chapter" data-level="7.3" data-path="introduction.html"><a href="introduction.html#introduction"><i class="fa fa-check"></i><b>7.3</b> Introduction</a>
-<ul>
+<li class="chapter" data-level="7.3" data-path="kmeans-hierarchical-clustering.html"><a href="kmeans-hierarchical-clustering.html#introduction-4"><i class="fa fa-check"></i><b>7.3</b> Introduction</a><ul>
 <li class="chapter" data-level="" data-path="kmeans-hierarchical-clustering.html"><a href="kmeans-hierarchical-clustering.html#hard-clustering"><i class="fa fa-check"></i>Hard clustering</a></li>
 <li class="chapter" data-level="" data-path="kmeans-hierarchical-clustering.html"><a href="kmeans-hierarchical-clustering.html#fuzzy-clustering"><i class="fa fa-check"></i>Fuzzy clustering</a></li>
 </ul></li>
-<li class="chapter" data-level="7.4" data-path="kmeans-hierarchical-clustering.html"><a href="kmeans-hierarchical-clustering.html#k-means"><i class="fa fa-check"></i><b>7.4</b> <span class="math inline">\(k\)</span>-Means</a>
-<ul>
+<li class="chapter" data-level="7.4" data-path="kmeans-hierarchical-clustering.html"><a href="kmeans-hierarchical-clustering.html#k-means"><i class="fa fa-check"></i><b>7.4</b> <span class="math inline">\(k\)</span>-Means</a><ul>
 <li class="chapter" data-level="7.4.1" data-path="kmeans-hierarchical-clustering.html"><a href="kmeans-hierarchical-clustering.html#k-means-in"><i class="fa fa-check"></i><b>7.4.1</b> <span class="math inline">\(k\)</span>-means in <svg style="height:0.8em;top:.04em;position:relative;fill:steelblue;" viewBox="0 0 581 512"><path d="M581 226.6C581 119.1 450.9 32 290.5 32S0 119.1 0 226.6C0 322.4 103.3 402 239.4 418.1V480h99.1v-61.5c24.3-2.7 47.6-7.4 69.4-13.9L448 480h112l-67.4-113.7c54.5-35.4 88.4-84.9 88.4-139.7zm-466.8 14.5c0-73.5 98.9-133 220.8-133s211.9 40.7 211.9 133c0 50.1-26.5 85-70.3 106.4-2.4-1.6-4.7-2.9-6.4-3.7-10.2-5.2-27.8-10.5-27.8-10.5s86.6-6.4 86.6-92.7-90.6-87.9-90.6-87.9h-199V361c-74.1-21.5-125.2-67.1-125.2-119.9zm225.1 38.3v-55.6c57.8 0 87.8-6.8 87.8 27.3 0 36.5-38.2 28.3-87.8 28.3zm-.9 72.5H365c10.8 0 18.9 11.7 24 19.2-16.1 1.9-33 2.8-50.6 2.9v-22.1z"/></svg></a></li>
 <li class="chapter" data-level="7.4.2" data-path="kmeans-hierarchical-clustering.html"><a href="kmeans-hierarchical-clustering.html#cluster-validity-choosing-the-number-of-clusters"><i class="fa fa-check"></i><b>7.4.2</b> Cluster Validity, Choosing the Number of Clusters</a></li>
 </ul></li>
-<li class="chapter" data-level="7.5" data-path="kmeans-hierarchical-clustering.html"><a href="kmeans-hierarchical-clustering.html#hierarchical-clustering"><i class="fa fa-check"></i><b>7.5</b> Hierarchical Clustering</a>
-<ul>
+<li class="chapter" data-level="7.5" data-path="kmeans-hierarchical-clustering.html"><a href="kmeans-hierarchical-clustering.html#hierarchical-clustering"><i class="fa fa-check"></i><b>7.5</b> Hierarchical Clustering</a><ul>
 <li class="chapter" data-level="7.5.1" data-path="kmeans-hierarchical-clustering.html"><a href="kmeans-hierarchical-clustering.html#dendrogram"><i class="fa fa-check"></i><b>7.5.1</b> Dendrogram</a></li>
 <li class="chapter" data-level="7.5.2" data-path="kmeans-hierarchical-clustering.html"><a href="kmeans-hierarchical-clustering.html#the-hierarchical-clustering-algorithm"><i class="fa fa-check"></i><b>7.5.2</b> The Hierarchical Clustering Algorithm</a></li>
 <li class="chapter" data-level="7.5.3" data-path="kmeans-hierarchical-clustering.html"><a href="kmeans-hierarchical-clustering.html#hierarchical-clustering-in"><i class="fa fa-check"></i><b>7.5.3</b> Hierarchical clustering in <svg style="height:0.8em;top:.04em;position:relative;fill:steelblue;" viewBox="0 0 581 512"><path d="M581 226.6C581 119.1 450.9 32 290.5 32S0 119.1 0 226.6C0 322.4 103.3 402 239.4 418.1V480h99.1v-61.5c24.3-2.7 47.6-7.4 69.4-13.9L448 480h112l-67.4-113.7c54.5-35.4 88.4-84.9 88.4-139.7zm-466.8 14.5c0-73.5 98.9-133 220.8-133s211.9 40.7 211.9 133c0 50.1-26.5 85-70.3 106.4-2.4-1.6-4.7-2.9-6.4-3.7-10.2-5.2-27.8-10.5-27.8-10.5s86.6-6.4 86.6-92.7-90.6-87.9-90.6-87.9h-199V361c-74.1-21.5-125.2-67.1-125.2-119.9zm225.1 38.3v-55.6c57.8 0 87.8-6.8 87.8 27.3 0 36.5-38.2 28.3-87.8 28.3zm-.9 72.5H365c10.8 0 18.9 11.7 24 19.2-16.1 1.9-33 2.8-50.6 2.9v-22.1z"/></svg></a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="" data-path="pw-7.html"><a href="pw-7.html"><i class="fa fa-check"></i>PW 7</a>
-<ul>
-<li class="chapter" data-level="" data-path="pw-2.html"><a href="pw-2.html#reporting"><i class="fa fa-check"></i>Reporting</a>
-<ul>
+<li class="chapter" data-level="" data-path="pw-7.html"><a href="pw-7.html"><i class="fa fa-check"></i>PW 7</a><ul>
+<li class="chapter" data-level="" data-path="pw-7.html"><a href="pw-7.html#reporting-1"><i class="fa fa-check"></i>Reporting</a><ul>
 <li class="chapter" data-level="" data-path="pw-7.html"><a href="pw-7.html#markdown"><i class="fa fa-check"></i>Markdown</a></li>
 <li class="chapter" data-level="" data-path="pw-7.html"><a href="pw-7.html#r-markdown"><i class="fa fa-check"></i>R Markdown</a></li>
 <li class="chapter" data-level="" data-path="pw-7.html"><a href="pw-7.html#the-report-to-be-submitted"><i class="fa fa-check"></i>The report to be submitted</a></li>
 </ul></li>
-<li><a href="pw-7.html#k-means-clustering"><span class="math inline">\(k\)</span>-means clustering</a>
-<ul>
+<li><a href="pw-7.html#k-means-clustering"><span class="math inline">\(k\)</span>-means clustering</a><ul>
 <li><a href="pw-7.html#pointscards"><code>pointsCards</code></a></li>
 <li><a href="pw-7.html#ligue-1"><code>Ligue 1</code></a></li>
 <li><a href="pw-7.html#pca"><code>PCA</code></a></li>
 <li><a href="pw-7.html#implementing-k-means"><code>Implementing k-means</code></a></li>
 </ul></li>
-<li class="chapter" data-level="" data-path="kmeans-hierarchical-clustering.html"><a href="kmeans-hierarchical-clustering.html#hierarchical-clustering"><i class="fa fa-check"></i>Hierarchical clustering</a>
-<ul>
+<li class="chapter" data-level="" data-path="pw-7.html"><a href="pw-7.html#hierarchical-clustering-1"><i class="fa fa-check"></i>Hierarchical clustering</a><ul>
 <li><a href="pw-7.html#distances-dist">Distances <code>dist()</code></a></li>
 <li><a href="pw-7.html#dendrogram-hclust">Dendrogram <code>hclust()</code></a></li>
 <li class="chapter" data-level="" data-path="pw-7.html"><a href="pw-7.html#hierarchical-clustering-on-iris-dataset"><i class="fa fa-check"></i>Hierarchical clustering on Iris dataset</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="8" data-path="gaussian-mixture-models-em.html"><a href="gaussian-mixture-models-em.html"><i class="fa fa-check"></i><b>8</b> Gaussian Mixture Models &amp; EM</a>
-<ul>
+<li class="chapter" data-level="8" data-path="gaussian-mixture-models-em.html"><a href="gaussian-mixture-models-em.html"><i class="fa fa-check"></i><b>8</b> Gaussian Mixture Models &amp; EM</a><ul>
 <li class="chapter" data-level="8.1" data-path="gaussian-mixture-models-em.html"><a href="gaussian-mixture-models-em.html#the-gaussian-distribution"><i class="fa fa-check"></i><b>8.1</b> The Gaussian distribution</a></li>
 <li class="chapter" data-level="8.2" data-path="gaussian-mixture-models-em.html"><a href="gaussian-mixture-models-em.html#mixture-of-gaussians"><i class="fa fa-check"></i><b>8.2</b> Mixture of Gaussians</a></li>
 <li class="chapter" data-level="8.3" data-path="gaussian-mixture-models-em.html"><a href="gaussian-mixture-models-em.html#em-for-gaussian-mixtures"><i class="fa fa-check"></i><b>8.3</b> EM for Gaussian Mixtures</a></li>
 </ul></li>
-<li class="chapter" data-level="" data-path="pw-8.html"><a href="pw-8.html"><i class="fa fa-check"></i>PW 8</a>
-<ul>
+<li class="chapter" data-level="" data-path="pw-8.html"><a href="pw-8.html"><i class="fa fa-check"></i>PW 8</a><ul>
 <li class="chapter" data-level="" data-path="pw-8.html"><a href="pw-8.html#report-template"><i class="fa fa-check"></i>Report template</a></li>
-<li class="chapter" data-level="8.4" data-path="pw-8.html"><a href="pw-8.html#em-using-mclust"><i class="fa fa-check"></i><b>8.4</b> EM using <code>mclust</code></a>
-<ul>
+<li class="chapter" data-level="8.4" data-path="pw-8.html"><a href="pw-8.html#em-using-mclust"><i class="fa fa-check"></i><b>8.4</b> EM using <code>mclust</code></a><ul>
 <li><a href="pw-8.html#gmm-vs-k-means">GMM vs <span class="math inline">\(k\)</span>-means</a></li>
 <li class="chapter" data-level="" data-path="pw-8.html"><a href="pw-8.html#em-on-1d"><i class="fa fa-check"></i>EM on 1D</a></li>
 </ul></li>
@@ -400,15 +355,13 @@ code span.wa { color: #bf0303; } /* Warning */
 <li class="chapter" data-level="A" data-path="app-introRStudio.html"><a href="app-introRStudio.html"><i class="fa fa-check"></i><b>A</b> Introduction to <code>RStudio</code></a></li>
 <li class="chapter" data-level="B" data-path="app-ht.html"><a href="app-ht.html"><i class="fa fa-check"></i><b>B</b> Review on hypothesis testing</a></li>
 <li class="chapter" data-level="C" data-path="use-qual.html"><a href="use-qual.html"><i class="fa fa-check"></i><b>C</b> Use of qualitative predictors</a></li>
-<li class="chapter" data-level="D" data-path="model-selection.html"><a href="model-selection.html"><i class="fa fa-check"></i><b>D</b> Model Selection</a>
-<ul>
+<li class="chapter" data-level="D" data-path="model-selection.html"><a href="model-selection.html"><i class="fa fa-check"></i><b>D</b> Model Selection</a><ul>
 <li class="chapter" data-level="" data-path="model-selection.html"><a href="model-selection.html#linear-model-selection-and-best-subset-selection"><i class="fa fa-check"></i>Linear Model Selection and Best Subset Selection</a></li>
 <li class="chapter" data-level="" data-path="model-selection.html"><a href="model-selection.html#forward-stepwise-selection"><i class="fa fa-check"></i>Forward Stepwise Selection</a></li>
 <li class="chapter" data-level="" data-path="model-selection.html"><a href="model-selection.html#backward-stepwise-selection"><i class="fa fa-check"></i>Backward Stepwise Selection</a></li>
 <li class="chapter" data-level="" data-path="model-selection.html"><a href="model-selection.html#estimating-test-error-using-mallows-cp-aic-bic-adjusted-r-squared"><i class="fa fa-check"></i>Estimating Test Error Using Mallow’s Cp, AIC, BIC, Adjusted R-squared</a></li>
 <li class="chapter" data-level="" data-path="model-selection.html"><a href="model-selection.html#estimating-test-error-using-cross-validation"><i class="fa fa-check"></i>Estimating Test Error Using Cross-Validation</a></li>
-<li class="chapter" data-level="" data-path="model-selection.html"><a href="model-selection.html#examples"><i class="fa fa-check"></i>Examples</a>
-<ul>
+<li class="chapter" data-level="" data-path="model-selection.html"><a href="model-selection.html#examples"><i class="fa fa-check"></i>Examples</a><ul>
 <li class="chapter" data-level="" data-path="model-selection.html"><a href="model-selection.html#best-subset-selection"><i class="fa fa-check"></i>Best Subset Selection</a></li>
 <li class="chapter" data-level="" data-path="model-selection.html"><a href="model-selection.html#forward-stepwise-selection-and-model-selection-using-validation-set"><i class="fa fa-check"></i>Forward Stepwise Selection and Model Selection Using Validation Set</a></li>
 <li class="chapter" data-level="" data-path="model-selection.html"><a href="model-selection.html#model-selection-using-cross-validation"><i class="fa fa-check"></i>Model Selection Using Cross-Validation</a></li>
@@ -447,9 +400,9 @@ code span.wa { color: #bf0303; } /* Warning */
       in the upper right-hand corner of the page.
     </p>
 </div>
-<div id="pw-6" class="section level1 unnumbered" number="">
+<div id="pw-6" class="section level1 unnumbered">
 <h1>PW 6</h1>
-<div id="the-iris-dataset" class="section level3 unnumbered" number="">
+<div id="the-iris-dataset" class="section level3 unnumbered">
 <h3>The Iris Dataset</h3>
 <p>The <strong><em>Iris flower dataset</em></strong> or <strong><em>Fisher’s Iris dataset</em></strong> is a multivariate data set introduced by the British statistician and biologist <a href="https://en.wikipedia.org/wiki/Ronald_Fisher">Ronald Fisher</a> in his <strong>1936</strong> paper <span class="citation">(FISHER <a href="#ref-Fisher1936" role="doc-biblioref">1936</a>)</span>.</p>
 <p>The data set consists of 50 samples from each of three species of Iris. Four features were measured from each sample.</p>
@@ -468,7 +421,7 @@ code span.wa { color: #bf0303; } /* Warning */
 </ol>
 <p><img src="img/iris.png" width="85%" style="display: block; margin: auto;" /></p>
 </div>
-<div id="loading-data" class="section level3 unnumbered" number="">
+<div id="loading-data-1" class="section level3 unnumbered">
 <h3>Loading Data</h3>
 <p><strong>1.</strong> Download the iris dataset from  <a target="_blank" href="datasets/iris.data"> here <i class="fa fa-table" aria-hidden="true"></i></a> and import it into <i class="fab  fa-r-project " style="color:steelblue;"></i>.</p>
 <!-- 
@@ -478,7 +431,7 @@ code span.wa { color: #bf0303; } /* Warning */
 
  -->
 </div>
-<div id="exploratory-analysis" class="section level3 unnumbered" number="">
+<div id="exploratory-analysis" class="section level3 unnumbered">
 <h3>Exploratory analysis</h3>
 <p><strong>2.</strong> Compare the means and the quartiles of the 3 different flower classes for the 4 different features (Plot 4 boxplots into the same figure).</p>
 <div class="rmdtip">
@@ -486,78 +439,78 @@ code span.wa { color: #bf0303; } /* Warning */
 </div>
 <p><img src="Machine-Learning_files/figure-html/unnamed-chunk-178-1.png" width="70%" style="display: block; margin: auto;" /></p>
 <p><strong>3.</strong> To explore how the 3 different flower classes are distributed along the 4 different features, visualize them via histograms using the following code.</p>
-<div class="sourceCode" id="cb59"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb59-1"><a href="pw-6.html#cb59-1"></a><span class="co"># Let&#39;s use the ggplot2 library</span></span>
-<span id="cb59-2"><a href="pw-6.html#cb59-2"></a><span class="co"># ggplot2 is the most advanced package for data visualization</span></span>
-<span id="cb59-3"><a href="pw-6.html#cb59-3"></a><span class="co"># gg corresponds to The Grammar of Graphics.</span></span>
-<span id="cb59-4"><a href="pw-6.html#cb59-4"></a><span class="kw">library</span>(ggplot2) <span class="co">#of course you must install it first if you don&#39;t have it already</span></span>
-<span id="cb59-5"><a href="pw-6.html#cb59-5"></a></span>
-<span id="cb59-6"><a href="pw-6.html#cb59-6"></a><span class="co"># histogram of sepal_length</span></span>
-<span id="cb59-7"><a href="pw-6.html#cb59-7"></a><span class="kw">ggplot</span>(iris, <span class="kw">aes</span>(<span class="dt">x=</span>sepal_length, <span class="dt">fill=</span>class)) <span class="op">+</span></span>
-<span id="cb59-8"><a href="pw-6.html#cb59-8"></a><span class="st">  </span><span class="kw">geom_histogram</span>(<span class="dt">binwidth=</span>.<span class="dv">2</span>, <span class="dt">alpha=</span>.<span class="dv">5</span>)</span>
-<span id="cb59-9"><a href="pw-6.html#cb59-9"></a><span class="co"># histogram of sepal_width</span></span>
-<span id="cb59-10"><a href="pw-6.html#cb59-10"></a><span class="kw">ggplot</span>(iris, <span class="kw">aes</span>(<span class="dt">x=</span>sepal_width, <span class="dt">fill=</span>class)) <span class="op">+</span></span>
-<span id="cb59-11"><a href="pw-6.html#cb59-11"></a><span class="st">  </span><span class="kw">geom_histogram</span>(<span class="dt">binwidth=</span>.<span class="dv">2</span>, <span class="dt">alpha=</span>.<span class="dv">5</span>)</span>
-<span id="cb59-12"><a href="pw-6.html#cb59-12"></a><span class="co"># histogram of petal_length</span></span>
-<span id="cb59-13"><a href="pw-6.html#cb59-13"></a><span class="kw">ggplot</span>(iris, <span class="kw">aes</span>(<span class="dt">x=</span>petal_length, <span class="dt">fill=</span>class)) <span class="op">+</span></span>
-<span id="cb59-14"><a href="pw-6.html#cb59-14"></a><span class="st">  </span><span class="kw">geom_histogram</span>(<span class="dt">binwidth=</span>.<span class="dv">2</span>, <span class="dt">alpha=</span>.<span class="dv">5</span>)</span>
-<span id="cb59-15"><a href="pw-6.html#cb59-15"></a><span class="co"># histogram of petal_width</span></span>
-<span id="cb59-16"><a href="pw-6.html#cb59-16"></a><span class="kw">ggplot</span>(iris, <span class="kw">aes</span>(<span class="dt">x=</span>petal_width, <span class="dt">fill=</span>class)) <span class="op">+</span></span>
-<span id="cb59-17"><a href="pw-6.html#cb59-17"></a><span class="st">  </span><span class="kw">geom_histogram</span>(<span class="dt">binwidth=</span>.<span class="dv">2</span>, <span class="dt">alpha=</span>.<span class="dv">5</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb59"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb59-1" title="1"><span class="co"># Let&#39;s use the ggplot2 library</span></a>
+<a class="sourceLine" id="cb59-2" title="2"><span class="co"># ggplot2 is the most advanced package for data visualization</span></a>
+<a class="sourceLine" id="cb59-3" title="3"><span class="co"># gg corresponds to The Grammar of Graphics.</span></a>
+<a class="sourceLine" id="cb59-4" title="4"><span class="kw">library</span>(ggplot2) <span class="co">#of course you must install it first if you don&#39;t have it already</span></a>
+<a class="sourceLine" id="cb59-5" title="5"></a>
+<a class="sourceLine" id="cb59-6" title="6"><span class="co"># histogram of sepal_length</span></a>
+<a class="sourceLine" id="cb59-7" title="7"><span class="kw">ggplot</span>(iris, <span class="kw">aes</span>(<span class="dt">x=</span>sepal_length, <span class="dt">fill=</span>class)) <span class="op">+</span></a>
+<a class="sourceLine" id="cb59-8" title="8"><span class="st">  </span><span class="kw">geom_histogram</span>(<span class="dt">binwidth=</span>.<span class="dv">2</span>, <span class="dt">alpha=</span>.<span class="dv">5</span>)</a>
+<a class="sourceLine" id="cb59-9" title="9"><span class="co"># histogram of sepal_width</span></a>
+<a class="sourceLine" id="cb59-10" title="10"><span class="kw">ggplot</span>(iris, <span class="kw">aes</span>(<span class="dt">x=</span>sepal_width, <span class="dt">fill=</span>class)) <span class="op">+</span></a>
+<a class="sourceLine" id="cb59-11" title="11"><span class="st">  </span><span class="kw">geom_histogram</span>(<span class="dt">binwidth=</span>.<span class="dv">2</span>, <span class="dt">alpha=</span>.<span class="dv">5</span>)</a>
+<a class="sourceLine" id="cb59-12" title="12"><span class="co"># histogram of petal_length</span></a>
+<a class="sourceLine" id="cb59-13" title="13"><span class="kw">ggplot</span>(iris, <span class="kw">aes</span>(<span class="dt">x=</span>petal_length, <span class="dt">fill=</span>class)) <span class="op">+</span></a>
+<a class="sourceLine" id="cb59-14" title="14"><span class="st">  </span><span class="kw">geom_histogram</span>(<span class="dt">binwidth=</span>.<span class="dv">2</span>, <span class="dt">alpha=</span>.<span class="dv">5</span>)</a>
+<a class="sourceLine" id="cb59-15" title="15"><span class="co"># histogram of petal_width</span></a>
+<a class="sourceLine" id="cb59-16" title="16"><span class="kw">ggplot</span>(iris, <span class="kw">aes</span>(<span class="dt">x=</span>petal_width, <span class="dt">fill=</span>class)) <span class="op">+</span></a>
+<a class="sourceLine" id="cb59-17" title="17"><span class="st">  </span><span class="kw">geom_histogram</span>(<span class="dt">binwidth=</span>.<span class="dv">2</span>, <span class="dt">alpha=</span>.<span class="dv">5</span>)</a></code></pre></div>
 <p><img src="Machine-Learning_files/figure-html/unnamed-chunk-180-1.png" width="70%" style="display: block; margin: auto;" /></p>
 </div>
-<div id="pca-using-princomp" class="section level3 unnumbered" number="">
+<div id="pca-using-princomp" class="section level3 unnumbered">
 <h3>PCA using <code>princomp()</code></h3>
 <div class="rmdtip">
 <p>Both <code>princomp()</code> and <code>prcomp()</code> are built-in <i class="fab  fa-r-project " style="color:steelblue;"></i> functions. They both perform PCA.</p>
 </div>
 <p><strong>4.</strong> Apply a PCA on the Iris dataset using the <code>princomp()</code> function and interpret the results.</p>
-<div class="sourceCode" id="cb60"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb60-1"><a href="pw-6.html#cb60-1"></a>pcairis=<span class="kw">princomp</span>(iris[,<span class="op">-</span><span class="dv">5</span>], <span class="dt">cor=</span>T) </span>
-<span id="cb60-2"><a href="pw-6.html#cb60-2"></a><span class="co"># Note that we take only the numerical columns to apply PCA.</span></span>
-<span id="cb60-3"><a href="pw-6.html#cb60-3"></a><span class="co"># now pcairis is a R object of type princomp</span></span>
-<span id="cb60-4"><a href="pw-6.html#cb60-4"></a></span>
-<span id="cb60-5"><a href="pw-6.html#cb60-5"></a><span class="co"># To display the internal structure of pcairis</span></span>
-<span id="cb60-6"><a href="pw-6.html#cb60-6"></a><span class="kw">str</span>(pcairis)</span>
-<span id="cb60-7"><a href="pw-6.html#cb60-7"></a><span class="co">#ans&gt; List of 7</span></span>
-<span id="cb60-8"><a href="pw-6.html#cb60-8"></a><span class="co">#ans&gt;  $ sdev    : Named num [1:4] 1.706 0.96 0.384 0.144</span></span>
-<span id="cb60-9"><a href="pw-6.html#cb60-9"></a><span class="co">#ans&gt;   ..- attr(*, &quot;names&quot;)= chr [1:4] &quot;Comp.1&quot; &quot;Comp.2&quot; &quot;Comp.3&quot; &quot;Comp.4&quot;</span></span>
-<span id="cb60-10"><a href="pw-6.html#cb60-10"></a><span class="co">#ans&gt;  $ loadings: &#39;loadings&#39; num [1:4, 1:4] 0.522 -0.263 0.581 0.566 0.372 ...</span></span>
-<span id="cb60-11"><a href="pw-6.html#cb60-11"></a><span class="co">#ans&gt;   ..- attr(*, &quot;dimnames&quot;)=List of 2</span></span>
-<span id="cb60-12"><a href="pw-6.html#cb60-12"></a><span class="co">#ans&gt;   .. ..$ : chr [1:4] &quot;sepal_length&quot; &quot;sepal_width&quot; &quot;petal_length&quot; &quot;petal_width&quot;</span></span>
-<span id="cb60-13"><a href="pw-6.html#cb60-13"></a><span class="co">#ans&gt;   .. ..$ : chr [1:4] &quot;Comp.1&quot; &quot;Comp.2&quot; &quot;Comp.3&quot; &quot;Comp.4&quot;</span></span>
-<span id="cb60-14"><a href="pw-6.html#cb60-14"></a><span class="co">#ans&gt;  $ center  : Named num [1:4] 5.84 3.05 3.76 1.2</span></span>
-<span id="cb60-15"><a href="pw-6.html#cb60-15"></a><span class="co">#ans&gt;   ..- attr(*, &quot;names&quot;)= chr [1:4] &quot;sepal_length&quot; &quot;sepal_width&quot; &quot;petal_length&quot; &quot;petal_width&quot;</span></span>
-<span id="cb60-16"><a href="pw-6.html#cb60-16"></a><span class="co">#ans&gt;  $ scale   : Named num [1:4] 0.825 0.432 1.759 0.761</span></span>
-<span id="cb60-17"><a href="pw-6.html#cb60-17"></a><span class="co">#ans&gt;   ..- attr(*, &quot;names&quot;)= chr [1:4] &quot;sepal_length&quot; &quot;sepal_width&quot; &quot;petal_length&quot; &quot;petal_width&quot;</span></span>
-<span id="cb60-18"><a href="pw-6.html#cb60-18"></a><span class="co">#ans&gt;  $ n.obs   : int 150</span></span>
-<span id="cb60-19"><a href="pw-6.html#cb60-19"></a><span class="co">#ans&gt;  $ scores  : num [1:150, 1:4] -2.26 -2.09 -2.37 -2.3 -2.39 ...</span></span>
-<span id="cb60-20"><a href="pw-6.html#cb60-20"></a><span class="co">#ans&gt;   ..- attr(*, &quot;dimnames&quot;)=List of 2</span></span>
-<span id="cb60-21"><a href="pw-6.html#cb60-21"></a><span class="co">#ans&gt;   .. ..$ : NULL</span></span>
-<span id="cb60-22"><a href="pw-6.html#cb60-22"></a><span class="co">#ans&gt;   .. ..$ : chr [1:4] &quot;Comp.1&quot; &quot;Comp.2&quot; &quot;Comp.3&quot; &quot;Comp.4&quot;</span></span>
-<span id="cb60-23"><a href="pw-6.html#cb60-23"></a><span class="co">#ans&gt;  $ call    : language princomp(x = iris[, -5], cor = T)</span></span>
-<span id="cb60-24"><a href="pw-6.html#cb60-24"></a><span class="co">#ans&gt;  - attr(*, &quot;class&quot;)= chr &quot;princomp&quot;</span></span>
-<span id="cb60-25"><a href="pw-6.html#cb60-25"></a></span>
-<span id="cb60-26"><a href="pw-6.html#cb60-26"></a><span class="co"># To see the variance explained by the the pcs</span></span>
-<span id="cb60-27"><a href="pw-6.html#cb60-27"></a><span class="kw">summary</span>(pcairis) </span>
-<span id="cb60-28"><a href="pw-6.html#cb60-28"></a><span class="co">#ans&gt; Importance of components:</span></span>
-<span id="cb60-29"><a href="pw-6.html#cb60-29"></a><span class="co">#ans&gt;                        Comp.1 Comp.2 Comp.3</span></span>
-<span id="cb60-30"><a href="pw-6.html#cb60-30"></a><span class="co">#ans&gt; Standard deviation      1.706  0.960 0.3839</span></span>
-<span id="cb60-31"><a href="pw-6.html#cb60-31"></a><span class="co">#ans&gt; Proportion of Variance  0.728  0.230 0.0368</span></span>
-<span id="cb60-32"><a href="pw-6.html#cb60-32"></a><span class="co">#ans&gt; Cumulative Proportion   0.728  0.958 0.9948</span></span>
-<span id="cb60-33"><a href="pw-6.html#cb60-33"></a><span class="co">#ans&gt;                         Comp.4</span></span>
-<span id="cb60-34"><a href="pw-6.html#cb60-34"></a><span class="co">#ans&gt; Standard deviation     0.14355</span></span>
-<span id="cb60-35"><a href="pw-6.html#cb60-35"></a><span class="co">#ans&gt; Proportion of Variance 0.00515</span></span>
-<span id="cb60-36"><a href="pw-6.html#cb60-36"></a><span class="co">#ans&gt; Cumulative Proportion  1.00000</span></span>
-<span id="cb60-37"><a href="pw-6.html#cb60-37"></a></span>
-<span id="cb60-38"><a href="pw-6.html#cb60-38"></a><span class="co"># To plot the variance explained by each pc</span></span>
-<span id="cb60-39"><a href="pw-6.html#cb60-39"></a><span class="kw">plot</span>(pcairis) </span></code></pre></div>
+<div class="sourceCode" id="cb60"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb60-1" title="1">pcairis=<span class="kw">princomp</span>(iris[,<span class="op">-</span><span class="dv">5</span>], <span class="dt">cor=</span>T) </a>
+<a class="sourceLine" id="cb60-2" title="2"><span class="co"># Note that we take only the numerical columns to apply PCA.</span></a>
+<a class="sourceLine" id="cb60-3" title="3"><span class="co"># now pcairis is a R object of type princomp</span></a>
+<a class="sourceLine" id="cb60-4" title="4"></a>
+<a class="sourceLine" id="cb60-5" title="5"><span class="co"># To display the internal structure of pcairis</span></a>
+<a class="sourceLine" id="cb60-6" title="6"><span class="kw">str</span>(pcairis)</a>
+<a class="sourceLine" id="cb60-7" title="7"><span class="co">#ans&gt; List of 7</span></a>
+<a class="sourceLine" id="cb60-8" title="8"><span class="co">#ans&gt;  $ sdev    : Named num [1:4] 1.706 0.96 0.384 0.144</span></a>
+<a class="sourceLine" id="cb60-9" title="9"><span class="co">#ans&gt;   ..- attr(*, &quot;names&quot;)= chr [1:4] &quot;Comp.1&quot; &quot;Comp.2&quot; &quot;Comp.3&quot; &quot;Comp.4&quot;</span></a>
+<a class="sourceLine" id="cb60-10" title="10"><span class="co">#ans&gt;  $ loadings: &#39;loadings&#39; num [1:4, 1:4] 0.522 -0.263 0.581 0.566 0.372 ...</span></a>
+<a class="sourceLine" id="cb60-11" title="11"><span class="co">#ans&gt;   ..- attr(*, &quot;dimnames&quot;)=List of 2</span></a>
+<a class="sourceLine" id="cb60-12" title="12"><span class="co">#ans&gt;   .. ..$ : chr [1:4] &quot;sepal_length&quot; &quot;sepal_width&quot; &quot;petal_length&quot; &quot;petal_width&quot;</span></a>
+<a class="sourceLine" id="cb60-13" title="13"><span class="co">#ans&gt;   .. ..$ : chr [1:4] &quot;Comp.1&quot; &quot;Comp.2&quot; &quot;Comp.3&quot; &quot;Comp.4&quot;</span></a>
+<a class="sourceLine" id="cb60-14" title="14"><span class="co">#ans&gt;  $ center  : Named num [1:4] 5.84 3.05 3.76 1.2</span></a>
+<a class="sourceLine" id="cb60-15" title="15"><span class="co">#ans&gt;   ..- attr(*, &quot;names&quot;)= chr [1:4] &quot;sepal_length&quot; &quot;sepal_width&quot; &quot;petal_length&quot; &quot;petal_width&quot;</span></a>
+<a class="sourceLine" id="cb60-16" title="16"><span class="co">#ans&gt;  $ scale   : Named num [1:4] 0.825 0.432 1.759 0.761</span></a>
+<a class="sourceLine" id="cb60-17" title="17"><span class="co">#ans&gt;   ..- attr(*, &quot;names&quot;)= chr [1:4] &quot;sepal_length&quot; &quot;sepal_width&quot; &quot;petal_length&quot; &quot;petal_width&quot;</span></a>
+<a class="sourceLine" id="cb60-18" title="18"><span class="co">#ans&gt;  $ n.obs   : int 150</span></a>
+<a class="sourceLine" id="cb60-19" title="19"><span class="co">#ans&gt;  $ scores  : num [1:150, 1:4] -2.26 -2.09 -2.37 -2.3 -2.39 ...</span></a>
+<a class="sourceLine" id="cb60-20" title="20"><span class="co">#ans&gt;   ..- attr(*, &quot;dimnames&quot;)=List of 2</span></a>
+<a class="sourceLine" id="cb60-21" title="21"><span class="co">#ans&gt;   .. ..$ : NULL</span></a>
+<a class="sourceLine" id="cb60-22" title="22"><span class="co">#ans&gt;   .. ..$ : chr [1:4] &quot;Comp.1&quot; &quot;Comp.2&quot; &quot;Comp.3&quot; &quot;Comp.4&quot;</span></a>
+<a class="sourceLine" id="cb60-23" title="23"><span class="co">#ans&gt;  $ call    : language princomp(x = iris[, -5], cor = T)</span></a>
+<a class="sourceLine" id="cb60-24" title="24"><span class="co">#ans&gt;  - attr(*, &quot;class&quot;)= chr &quot;princomp&quot;</span></a>
+<a class="sourceLine" id="cb60-25" title="25"></a>
+<a class="sourceLine" id="cb60-26" title="26"><span class="co"># To see the variance explained by the the pcs</span></a>
+<a class="sourceLine" id="cb60-27" title="27"><span class="kw">summary</span>(pcairis) </a>
+<a class="sourceLine" id="cb60-28" title="28"><span class="co">#ans&gt; Importance of components:</span></a>
+<a class="sourceLine" id="cb60-29" title="29"><span class="co">#ans&gt;                        Comp.1 Comp.2 Comp.3</span></a>
+<a class="sourceLine" id="cb60-30" title="30"><span class="co">#ans&gt; Standard deviation      1.706  0.960 0.3839</span></a>
+<a class="sourceLine" id="cb60-31" title="31"><span class="co">#ans&gt; Proportion of Variance  0.728  0.230 0.0368</span></a>
+<a class="sourceLine" id="cb60-32" title="32"><span class="co">#ans&gt; Cumulative Proportion   0.728  0.958 0.9948</span></a>
+<a class="sourceLine" id="cb60-33" title="33"><span class="co">#ans&gt;                         Comp.4</span></a>
+<a class="sourceLine" id="cb60-34" title="34"><span class="co">#ans&gt; Standard deviation     0.14355</span></a>
+<a class="sourceLine" id="cb60-35" title="35"><span class="co">#ans&gt; Proportion of Variance 0.00515</span></a>
+<a class="sourceLine" id="cb60-36" title="36"><span class="co">#ans&gt; Cumulative Proportion  1.00000</span></a>
+<a class="sourceLine" id="cb60-37" title="37"></a>
+<a class="sourceLine" id="cb60-38" title="38"><span class="co"># To plot the variance explained by each pc</span></a>
+<a class="sourceLine" id="cb60-39" title="39"><span class="kw">plot</span>(pcairis) </a></code></pre></div>
 <p><img src="Machine-Learning_files/figure-html/unnamed-chunk-181-1.png" width="70%" style="display: block; margin: auto;" /></p>
-<div class="sourceCode" id="cb61"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb61-1"><a href="pw-6.html#cb61-1"></a></span>
-<span id="cb61-2"><a href="pw-6.html#cb61-2"></a><span class="co"># To plot together the scores for PC1 and PC2 and the </span></span>
-<span id="cb61-3"><a href="pw-6.html#cb61-3"></a><span class="co"># variables expressed in terms of PC1 and PC2.</span></span>
-<span id="cb61-4"><a href="pw-6.html#cb61-4"></a><span class="kw">biplot</span>(pcairis) </span></code></pre></div>
+<div class="sourceCode" id="cb61"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb61-1" title="1"></a>
+<a class="sourceLine" id="cb61-2" title="2"><span class="co"># To plot together the scores for PC1 and PC2 and the </span></a>
+<a class="sourceLine" id="cb61-3" title="3"><span class="co"># variables expressed in terms of PC1 and PC2.</span></a>
+<a class="sourceLine" id="cb61-4" title="4"><span class="kw">biplot</span>(pcairis) </a></code></pre></div>
 <p><img src="Machine-Learning_files/figure-html/unnamed-chunk-181-2.png" width="70%" style="display: block; margin: auto;" /></p>
 </div>
-<div id="deeper-pca-using-factoextra-package" class="section level3 unnumbered" number="">
+<div id="deeper-pca-using-factoextra-package" class="section level3 unnumbered">
 <h3>Deeper PCA using <code>factoextra</code> package</h3>
 <div class="rmdinsight">
 <p>To help in the interpretation and in the visualization of PCA we are going to use the package named <code>factoextra</code>.</p>
@@ -566,14 +519,16 @@ code span.wa { color: #bf0303; } /* Warning */
 </div>
 <p><strong>5.</strong> Using <code>factoextra</code> packag plot the following:</p>
 <ul>
-<li>The scree plot.</li>
+<li>The scree plot.
+<ul>
 <li>The graph of individuals.</li>
 <li>The graph of variables.</li>
 <li>The biplot graph.</li>
 <li>The contributions of the variables to the first 2 principal components.</li>
+</ul></li>
 </ul>
 </div>
-<div id="step-by-step-pca" class="section level3 unnumbered" number="">
+<div id="step-by-step-pca" class="section level3 unnumbered">
 <h3>Step-by-step PCA</h3>
 <p>In order to understand how PCA works, let’s implement it step-by-step.</p>
 <div class="rmdtip">
@@ -599,8 +554,8 @@ Transform the original dataset <span class="math inline"><span class="math inlin
 </ul>
 </div>
 <p><strong>6.</strong> First step, split the iris dataset into data <span class="math inline">\(X\)</span> and class labels <span class="math inline">\(y\)</span>.</p>
-<div class="sourceCode" id="cb62"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb62-1"><a href="pw-6.html#cb62-1"></a>X &lt;-<span class="st"> </span>iris[,<span class="op">-</span><span class="dv">5</span>]</span>
-<span id="cb62-2"><a href="pw-6.html#cb62-2"></a>y &lt;-<span class="st"> </span>iris[,<span class="dv">5</span>]</span></code></pre></div>
+<div class="sourceCode" id="cb62"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb62-1" title="1">X &lt;-<span class="st"> </span>iris[,<span class="op">-</span><span class="dv">5</span>]</a>
+<a class="sourceLine" id="cb62-2" title="2">y &lt;-<span class="st"> </span>iris[,<span class="dv">5</span>]</a></code></pre></div>
 <div class="rmdinsight">
 <p>
 The iris dataset is now stored in form of a <span class="math inline"><span class="math inline">\(150 \times 4\)</span></span> matrix where the columns are the different features, and every row represents a separate flower sample. Each sample row <span class="math inline"><span class="math inline">\(X^i\)</span></span> can be pictured as a 4-dimensional vector

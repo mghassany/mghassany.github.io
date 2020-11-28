@@ -24,7 +24,7 @@
 <meta name="author" content="Mohamad Ghassany" />
 
 
-<meta name="date" content="2020-11-27" />
+<meta name="date" content="2020-11-28" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -1492,61 +1492,44 @@ Yugoslavia
 </tbody>
 </table>
 <p><strong>Note</strong>: To set the case names as <code>Country</code>, we do</p>
-<div class="sourceCode" id="cb48"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb48-1" title="1"><span class="kw">row.names</span>(eurojob) &lt;-<span class="st"> </span>eurojob<span class="op">$</span>Country</a>
-<a class="sourceLine" id="cb48-2" title="2">eurojob<span class="op">$</span>Country &lt;-<span class="st"> </span><span class="ot">NULL</span></a></code></pre></div>
+<div class="sourceCode" id="cb49"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb49-1" title="1"><span class="kw">row.names</span>(eurojob) &lt;-<span class="st"> </span>eurojob<span class="op">$</span>Country</a>
+<a class="sourceLine" id="cb49-2" title="2">eurojob<span class="op">$</span>Country &lt;-<span class="st"> </span><span class="ot">NULL</span></a></code></pre></div>
 <p>So far, we know how to compute summaries for <em>each variable</em>, and how to quantify and visualize relations between variables with the correlation matrix and the scatterplot matrix. But even for a moderate number of variables like this, their results are hard to process.</p>
-<div class="sourceCode" id="cb49"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb49-1" title="1"><span class="co"># Summary of the data - marginal</span></a>
-<a class="sourceLine" id="cb49-2" title="2"><span class="kw">summary</span>(eurojob)</a>
-<a class="sourceLine" id="cb49-3" title="3"><span class="co">#ans&gt;       Agr            Min             Man      </span></a>
-<a class="sourceLine" id="cb49-4" title="4"><span class="co">#ans&gt;  Min.   : 2.7   Min.   :0.100   Min.   : 7.9  </span></a>
-<a class="sourceLine" id="cb49-5" title="5"><span class="co">#ans&gt;  1st Qu.: 7.7   1st Qu.:0.525   1st Qu.:23.0  </span></a>
-<a class="sourceLine" id="cb49-6" title="6"><span class="co">#ans&gt;  Median :14.4   Median :0.950   Median :27.6  </span></a>
-<a class="sourceLine" id="cb49-7" title="7"><span class="co">#ans&gt;  Mean   :19.1   Mean   :1.254   Mean   :27.0  </span></a>
-<a class="sourceLine" id="cb49-8" title="8"><span class="co">#ans&gt;  3rd Qu.:23.7   3rd Qu.:1.800   3rd Qu.:30.2  </span></a>
-<a class="sourceLine" id="cb49-9" title="9"><span class="co">#ans&gt;  Max.   :66.8   Max.   :3.100   Max.   :41.2  </span></a>
-<a class="sourceLine" id="cb49-10" title="10"><span class="co">#ans&gt;       Pow             Con             Ser       </span></a>
-<a class="sourceLine" id="cb49-11" title="11"><span class="co">#ans&gt;  Min.   :0.100   Min.   : 2.80   Min.   : 5.20  </span></a>
-<a class="sourceLine" id="cb49-12" title="12"><span class="co">#ans&gt;  1st Qu.:0.600   1st Qu.: 7.53   1st Qu.: 9.25  </span></a>
-<a class="sourceLine" id="cb49-13" title="13"><span class="co">#ans&gt;  Median :0.850   Median : 8.35   Median :14.40  </span></a>
-<a class="sourceLine" id="cb49-14" title="14"><span class="co">#ans&gt;  Mean   :0.908   Mean   : 8.17   Mean   :12.96  </span></a>
-<a class="sourceLine" id="cb49-15" title="15"><span class="co">#ans&gt;  3rd Qu.:1.175   3rd Qu.: 8.97   3rd Qu.:16.88  </span></a>
-<a class="sourceLine" id="cb49-16" title="16"><span class="co">#ans&gt;  Max.   :1.900   Max.   :11.50   Max.   :19.10  </span></a>
-<a class="sourceLine" id="cb49-17" title="17"><span class="co">#ans&gt;       Fin             Soc            Tra      </span></a>
-<a class="sourceLine" id="cb49-18" title="18"><span class="co">#ans&gt;  Min.   : 0.50   Min.   : 5.3   Min.   :3.20  </span></a>
-<a class="sourceLine" id="cb49-19" title="19"><span class="co">#ans&gt;  1st Qu.: 1.23   1st Qu.:16.2   1st Qu.:5.70  </span></a>
-<a class="sourceLine" id="cb49-20" title="20"><span class="co">#ans&gt;  Median : 4.65   Median :19.6   Median :6.70  </span></a>
-<a class="sourceLine" id="cb49-21" title="21"><span class="co">#ans&gt;  Mean   : 4.00   Mean   :20.0   Mean   :6.55  </span></a>
-<a class="sourceLine" id="cb49-22" title="22"><span class="co">#ans&gt;  3rd Qu.: 5.92   3rd Qu.:24.1   3rd Qu.:7.08  </span></a>
-<a class="sourceLine" id="cb49-23" title="23"><span class="co">#ans&gt;  Max.   :11.30   Max.   :32.4   Max.   :9.40</span></a>
-<a class="sourceLine" id="cb49-24" title="24"></a>
-<a class="sourceLine" id="cb49-25" title="25"><span class="co"># Correlation matrix</span></a>
-<a class="sourceLine" id="cb49-26" title="26"><span class="kw">cor</span>(eurojob)</a>
-<a class="sourceLine" id="cb49-27" title="27"><span class="co">#ans&gt;         Agr     Min    Man     Pow     Con    Ser     Fin</span></a>
-<a class="sourceLine" id="cb49-28" title="28"><span class="co">#ans&gt; Agr  1.0000  0.0358 -0.671 -0.4001 -0.5383 -0.737 -0.2198</span></a>
-<a class="sourceLine" id="cb49-29" title="29"><span class="co">#ans&gt; Min  0.0358  1.0000  0.445  0.4055 -0.0256 -0.397 -0.4427</span></a>
-<a class="sourceLine" id="cb49-30" title="30"><span class="co">#ans&gt; Man -0.6711  0.4452  1.000  0.3853  0.4945  0.204 -0.1558</span></a>
-<a class="sourceLine" id="cb49-31" title="31"><span class="co">#ans&gt; Pow -0.4001  0.4055  0.385  1.0000  0.0599  0.202  0.1099</span></a>
-<a class="sourceLine" id="cb49-32" title="32"><span class="co">#ans&gt; Con -0.5383 -0.0256  0.494  0.0599  1.0000  0.356  0.0163</span></a>
-<a class="sourceLine" id="cb49-33" title="33"><span class="co">#ans&gt; Ser -0.7370 -0.3966  0.204  0.2019  0.3560  1.000  0.3656</span></a>
-<a class="sourceLine" id="cb49-34" title="34"><span class="co">#ans&gt; Fin -0.2198 -0.4427 -0.156  0.1099  0.0163  0.366  1.0000</span></a>
-<a class="sourceLine" id="cb49-35" title="35"><span class="co">#ans&gt; Soc -0.7468 -0.2810  0.154  0.1324  0.1582  0.572  0.1076</span></a>
-<a class="sourceLine" id="cb49-36" title="36"><span class="co">#ans&gt; Tra -0.5649  0.1566  0.351  0.3752  0.3877  0.188 -0.2459</span></a>
-<a class="sourceLine" id="cb49-37" title="37"><span class="co">#ans&gt;        Soc    Tra</span></a>
-<a class="sourceLine" id="cb49-38" title="38"><span class="co">#ans&gt; Agr -0.747 -0.565</span></a>
-<a class="sourceLine" id="cb49-39" title="39"><span class="co">#ans&gt; Min -0.281  0.157</span></a>
-<a class="sourceLine" id="cb49-40" title="40"><span class="co">#ans&gt; Man  0.154  0.351</span></a>
-<a class="sourceLine" id="cb49-41" title="41"><span class="co">#ans&gt; Pow  0.132  0.375</span></a>
-<a class="sourceLine" id="cb49-42" title="42"><span class="co">#ans&gt; Con  0.158  0.388</span></a>
-<a class="sourceLine" id="cb49-43" title="43"><span class="co">#ans&gt; Ser  0.572  0.188</span></a>
-<a class="sourceLine" id="cb49-44" title="44"><span class="co">#ans&gt; Fin  0.108 -0.246</span></a>
-<a class="sourceLine" id="cb49-45" title="45"><span class="co">#ans&gt; Soc  1.000  0.568</span></a>
-<a class="sourceLine" id="cb49-46" title="46"><span class="co">#ans&gt; Tra  0.568  1.000</span></a>
-<a class="sourceLine" id="cb49-47" title="47"></a>
-<a class="sourceLine" id="cb49-48" title="48"><span class="co"># Scatterplot matrix</span></a>
-<a class="sourceLine" id="cb49-49" title="49"><span class="kw">require</span>(car)</a>
-<a class="sourceLine" id="cb49-50" title="50"><span class="kw">scatterplotMatrix</span>(eurojob, <span class="dt">regLine =</span> <span class="kw">list</span>(<span class="dt">method=</span>lm, <span class="dt">lty=</span><span class="dv">1</span>, <span class="dt">lwd=</span><span class="dv">2</span>, <span class="dt">col=</span><span class="st">&quot;green&quot;</span>), <span class="dt">smooth =</span> <span class="ot">FALSE</span>,</a>
-<a class="sourceLine" id="cb49-51" title="51">                  <span class="dt">ellipse =</span> <span class="ot">FALSE</span>, <span class="dt">plot.points =</span> T, <span class="dt">col=</span><span class="st">&quot;black&quot;</span>,</a>
-<a class="sourceLine" id="cb49-52" title="52">                  <span class="dt">diagonal =</span> <span class="ot">TRUE</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb50"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb50-1" title="1"><span class="co"># Summary of the data - marginal</span></a>
+<a class="sourceLine" id="cb50-2" title="2"><span class="kw">summary</span>(eurojob)</a>
+<a class="sourceLine" id="cb50-3" title="3"><span class="co">#ans&gt;       Agr            Min             Man            Pow             Con       </span></a>
+<a class="sourceLine" id="cb50-4" title="4"><span class="co">#ans&gt;  Min.   : 2.7   Min.   :0.100   Min.   : 7.9   Min.   :0.100   Min.   : 2.80  </span></a>
+<a class="sourceLine" id="cb50-5" title="5"><span class="co">#ans&gt;  1st Qu.: 7.7   1st Qu.:0.525   1st Qu.:23.0   1st Qu.:0.600   1st Qu.: 7.53  </span></a>
+<a class="sourceLine" id="cb50-6" title="6"><span class="co">#ans&gt;  Median :14.4   Median :0.950   Median :27.6   Median :0.850   Median : 8.35  </span></a>
+<a class="sourceLine" id="cb50-7" title="7"><span class="co">#ans&gt;  Mean   :19.1   Mean   :1.254   Mean   :27.0   Mean   :0.908   Mean   : 8.17  </span></a>
+<a class="sourceLine" id="cb50-8" title="8"><span class="co">#ans&gt;  3rd Qu.:23.7   3rd Qu.:1.800   3rd Qu.:30.2   3rd Qu.:1.175   3rd Qu.: 8.97  </span></a>
+<a class="sourceLine" id="cb50-9" title="9"><span class="co">#ans&gt;  Max.   :66.8   Max.   :3.100   Max.   :41.2   Max.   :1.900   Max.   :11.50  </span></a>
+<a class="sourceLine" id="cb50-10" title="10"><span class="co">#ans&gt;       Ser             Fin             Soc            Tra      </span></a>
+<a class="sourceLine" id="cb50-11" title="11"><span class="co">#ans&gt;  Min.   : 5.20   Min.   : 0.50   Min.   : 5.3   Min.   :3.20  </span></a>
+<a class="sourceLine" id="cb50-12" title="12"><span class="co">#ans&gt;  1st Qu.: 9.25   1st Qu.: 1.23   1st Qu.:16.2   1st Qu.:5.70  </span></a>
+<a class="sourceLine" id="cb50-13" title="13"><span class="co">#ans&gt;  Median :14.40   Median : 4.65   Median :19.6   Median :6.70  </span></a>
+<a class="sourceLine" id="cb50-14" title="14"><span class="co">#ans&gt;  Mean   :12.96   Mean   : 4.00   Mean   :20.0   Mean   :6.55  </span></a>
+<a class="sourceLine" id="cb50-15" title="15"><span class="co">#ans&gt;  3rd Qu.:16.88   3rd Qu.: 5.92   3rd Qu.:24.1   3rd Qu.:7.08  </span></a>
+<a class="sourceLine" id="cb50-16" title="16"><span class="co">#ans&gt;  Max.   :19.10   Max.   :11.30   Max.   :32.4   Max.   :9.40</span></a>
+<a class="sourceLine" id="cb50-17" title="17"></a>
+<a class="sourceLine" id="cb50-18" title="18"><span class="co"># Correlation matrix</span></a>
+<a class="sourceLine" id="cb50-19" title="19"><span class="kw">cor</span>(eurojob)</a>
+<a class="sourceLine" id="cb50-20" title="20"><span class="co">#ans&gt;         Agr     Min    Man     Pow     Con    Ser     Fin    Soc    Tra</span></a>
+<a class="sourceLine" id="cb50-21" title="21"><span class="co">#ans&gt; Agr  1.0000  0.0358 -0.671 -0.4001 -0.5383 -0.737 -0.2198 -0.747 -0.565</span></a>
+<a class="sourceLine" id="cb50-22" title="22"><span class="co">#ans&gt; Min  0.0358  1.0000  0.445  0.4055 -0.0256 -0.397 -0.4427 -0.281  0.157</span></a>
+<a class="sourceLine" id="cb50-23" title="23"><span class="co">#ans&gt; Man -0.6711  0.4452  1.000  0.3853  0.4945  0.204 -0.1558  0.154  0.351</span></a>
+<a class="sourceLine" id="cb50-24" title="24"><span class="co">#ans&gt; Pow -0.4001  0.4055  0.385  1.0000  0.0599  0.202  0.1099  0.132  0.375</span></a>
+<a class="sourceLine" id="cb50-25" title="25"><span class="co">#ans&gt; Con -0.5383 -0.0256  0.494  0.0599  1.0000  0.356  0.0163  0.158  0.388</span></a>
+<a class="sourceLine" id="cb50-26" title="26"><span class="co">#ans&gt; Ser -0.7370 -0.3966  0.204  0.2019  0.3560  1.000  0.3656  0.572  0.188</span></a>
+<a class="sourceLine" id="cb50-27" title="27"><span class="co">#ans&gt; Fin -0.2198 -0.4427 -0.156  0.1099  0.0163  0.366  1.0000  0.108 -0.246</span></a>
+<a class="sourceLine" id="cb50-28" title="28"><span class="co">#ans&gt; Soc -0.7468 -0.2810  0.154  0.1324  0.1582  0.572  0.1076  1.000  0.568</span></a>
+<a class="sourceLine" id="cb50-29" title="29"><span class="co">#ans&gt; Tra -0.5649  0.1566  0.351  0.3752  0.3877  0.188 -0.2459  0.568  1.000</span></a>
+<a class="sourceLine" id="cb50-30" title="30"></a>
+<a class="sourceLine" id="cb50-31" title="31"><span class="co"># Scatterplot matrix</span></a>
+<a class="sourceLine" id="cb50-32" title="32"><span class="kw">require</span>(car)</a>
+<a class="sourceLine" id="cb50-33" title="33"><span class="kw">scatterplotMatrix</span>(eurojob, <span class="dt">regLine =</span> <span class="kw">list</span>(<span class="dt">method=</span>lm, <span class="dt">lty=</span><span class="dv">1</span>, <span class="dt">lwd=</span><span class="dv">2</span>, <span class="dt">col=</span><span class="st">&quot;green&quot;</span>), <span class="dt">smooth =</span> <span class="ot">FALSE</span>,</a>
+<a class="sourceLine" id="cb50-34" title="34">                  <span class="dt">ellipse =</span> <span class="ot">FALSE</span>, <span class="dt">plot.points =</span> T, <span class="dt">col=</span><span class="st">&quot;black&quot;</span>,</a>
+<a class="sourceLine" id="cb50-35" title="35">                  <span class="dt">diagonal =</span> <span class="ot">TRUE</span>)</a></code></pre></div>
 <p><img src="Machine-Learning_files/figure-html/unnamed-chunk-167-1.png" width="70%" style="display: block; margin: auto;" />
 We definitely need a way of visualizing and quantifying the relations between variables for a moderate to large amount of variables. PCA will be a handy way. Recall what PCA does:</p>
 <ol style="list-style-type: decimal">
@@ -1567,103 +1550,76 @@ We definitely need a way of visualizing and quantifying the relations between va
 </ol>
 <p>Hence, PCA rearranges our variables in an information-equivalent, but more convenient, layout where the variables are <strong>sorted according to the ammount of information they are able to explain</strong>. From this position, the next step is clear: <strong>stick only with a limited number of PCs such that they explain most of the information</strong> (e.g., 70% of the total variance) and do <em>dimension reduction</em>. The effectiveness of PCA in practice varies from the structure present in the dataset. For example, in the case of highly dependent data, it could explain more than the 90% of variability of a dataset with tens of variables with just two PCs.</p>
 <p>Let’s see how to compute a full PCA in <svg style="height:0.8em;top:.04em;position:relative;fill:steelblue;" viewBox="0 0 581 512"><path d="M581 226.6C581 119.1 450.9 32 290.5 32S0 119.1 0 226.6C0 322.4 103.3 402 239.4 418.1V480h99.1v-61.5c24.3-2.7 47.6-7.4 69.4-13.9L448 480h112l-67.4-113.7c54.5-35.4 88.4-84.9 88.4-139.7zm-466.8 14.5c0-73.5 98.9-133 220.8-133s211.9 40.7 211.9 133c0 50.1-26.5 85-70.3 106.4-2.4-1.6-4.7-2.9-6.4-3.7-10.2-5.2-27.8-10.5-27.8-10.5s86.6-6.4 86.6-92.7-90.6-87.9-90.6-87.9h-199V361c-74.1-21.5-125.2-67.1-125.2-119.9zm225.1 38.3v-55.6c57.8 0 87.8-6.8 87.8 27.3 0 36.5-38.2 28.3-87.8 28.3zm-.9 72.5H365c10.8 0 18.9 11.7 24 19.2-16.1 1.9-33 2.8-50.6 2.9v-22.1z"/></svg>.</p>
-<div class="sourceCode" id="cb50"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb50-1" title="1"><span class="co"># The main function - use cor = TRUE to avoid scale distortions</span></a>
-<a class="sourceLine" id="cb50-2" title="2">pca &lt;-<span class="st"> </span><span class="kw">princomp</span>(eurojob, <span class="dt">cor =</span> <span class="ot">TRUE</span>)</a>
-<a class="sourceLine" id="cb50-3" title="3"></a>
-<a class="sourceLine" id="cb50-4" title="4"><span class="co"># What is inside?</span></a>
-<a class="sourceLine" id="cb50-5" title="5"><span class="kw">str</span>(pca)</a>
-<a class="sourceLine" id="cb50-6" title="6"><span class="co">#ans&gt; List of 7</span></a>
-<a class="sourceLine" id="cb50-7" title="7"><span class="co">#ans&gt;  $ sdev    : Named num [1:9] 1.867 1.46 1.048 0.997 0.737 ...</span></a>
-<a class="sourceLine" id="cb50-8" title="8"><span class="co">#ans&gt;   ..- attr(*, &quot;names&quot;)= chr [1:9] &quot;Comp.1&quot; &quot;Comp.2&quot; &quot;Comp.3&quot; &quot;Comp.4&quot; ...</span></a>
-<a class="sourceLine" id="cb50-9" title="9"><span class="co">#ans&gt;  $ loadings: &#39;loadings&#39; num [1:9, 1:9] 0.52379 0.00132 -0.3475 -0.25572 -0.32518 ...</span></a>
-<a class="sourceLine" id="cb50-10" title="10"><span class="co">#ans&gt;   ..- attr(*, &quot;dimnames&quot;)=List of 2</span></a>
-<a class="sourceLine" id="cb50-11" title="11"><span class="co">#ans&gt;   .. ..$ : chr [1:9] &quot;Agr&quot; &quot;Min&quot; &quot;Man&quot; &quot;Pow&quot; ...</span></a>
-<a class="sourceLine" id="cb50-12" title="12"><span class="co">#ans&gt;   .. ..$ : chr [1:9] &quot;Comp.1&quot; &quot;Comp.2&quot; &quot;Comp.3&quot; &quot;Comp.4&quot; ...</span></a>
-<a class="sourceLine" id="cb50-13" title="13"><span class="co">#ans&gt;  $ center  : Named num [1:9] 19.131 1.254 27.008 0.908 8.165 ...</span></a>
-<a class="sourceLine" id="cb50-14" title="14"><span class="co">#ans&gt;   ..- attr(*, &quot;names&quot;)= chr [1:9] &quot;Agr&quot; &quot;Min&quot; &quot;Man&quot; &quot;Pow&quot; ...</span></a>
-<a class="sourceLine" id="cb50-15" title="15"><span class="co">#ans&gt;  $ scale   : Named num [1:9] 15.245 0.951 6.872 0.369 1.614 ...</span></a>
-<a class="sourceLine" id="cb50-16" title="16"><span class="co">#ans&gt;   ..- attr(*, &quot;names&quot;)= chr [1:9] &quot;Agr&quot; &quot;Min&quot; &quot;Man&quot; &quot;Pow&quot; ...</span></a>
-<a class="sourceLine" id="cb50-17" title="17"><span class="co">#ans&gt;  $ n.obs   : int 26</span></a>
-<a class="sourceLine" id="cb50-18" title="18"><span class="co">#ans&gt;  $ scores  : num [1:26, 1:9] -1.71 -0.953 -0.755 -0.853 0.104 ...</span></a>
-<a class="sourceLine" id="cb50-19" title="19"><span class="co">#ans&gt;   ..- attr(*, &quot;dimnames&quot;)=List of 2</span></a>
-<a class="sourceLine" id="cb50-20" title="20"><span class="co">#ans&gt;   .. ..$ : chr [1:26] &quot;Belgium&quot; &quot;Denmark&quot; &quot;France&quot; &quot;WGerm&quot; ...</span></a>
-<a class="sourceLine" id="cb50-21" title="21"><span class="co">#ans&gt;   .. ..$ : chr [1:9] &quot;Comp.1&quot; &quot;Comp.2&quot; &quot;Comp.3&quot; &quot;Comp.4&quot; ...</span></a>
-<a class="sourceLine" id="cb50-22" title="22"><span class="co">#ans&gt;  $ call    : language princomp(x = eurojob, cor = TRUE)</span></a>
-<a class="sourceLine" id="cb50-23" title="23"><span class="co">#ans&gt;  - attr(*, &quot;class&quot;)= chr &quot;princomp&quot;</span></a>
-<a class="sourceLine" id="cb50-24" title="24"></a>
-<a class="sourceLine" id="cb50-25" title="25"><span class="co"># The standard deviation of each PC</span></a>
-<a class="sourceLine" id="cb50-26" title="26">pca<span class="op">$</span>sdev</a>
-<a class="sourceLine" id="cb50-27" title="27"><span class="co">#ans&gt;  Comp.1  Comp.2  Comp.3  Comp.4  Comp.5  Comp.6  Comp.7 </span></a>
-<a class="sourceLine" id="cb50-28" title="28"><span class="co">#ans&gt; 1.86739 1.45951 1.04831 0.99724 0.73703 0.61922 0.47514 </span></a>
-<a class="sourceLine" id="cb50-29" title="29"><span class="co">#ans&gt;  Comp.8  Comp.9 </span></a>
-<a class="sourceLine" id="cb50-30" title="30"><span class="co">#ans&gt; 0.36985 0.00675</span></a>
-<a class="sourceLine" id="cb50-31" title="31"></a>
-<a class="sourceLine" id="cb50-32" title="32"><span class="co"># Weights: the expression of the original variables in the PCs</span></a>
-<a class="sourceLine" id="cb50-33" title="33"><span class="co"># E.g. Agr = -0.524 * PC1 + 0.213 * PC5 - 0.152 * PC6 + 0.806 * PC9</span></a>
-<a class="sourceLine" id="cb50-34" title="34"><span class="co"># And also: PC1 = -0.524 * Agr + 0.347 * Man + 0256 * Pow + 0.325 * Con + ...</span></a>
-<a class="sourceLine" id="cb50-35" title="35"><span class="co"># (Because the matrix is orthogonal, so the transpose is the inverse)</span></a>
-<a class="sourceLine" id="cb50-36" title="36">pca<span class="op">$</span>loadings</a>
-<a class="sourceLine" id="cb50-37" title="37"><span class="co">#ans&gt; </span></a>
-<a class="sourceLine" id="cb50-38" title="38"><span class="co">#ans&gt; Loadings:</span></a>
-<a class="sourceLine" id="cb50-39" title="39"><span class="co">#ans&gt;     Comp.1 Comp.2 Comp.3 Comp.4 Comp.5 Comp.6 Comp.7</span></a>
-<a class="sourceLine" id="cb50-40" title="40"><span class="co">#ans&gt; Agr  0.524                       0.213  0.153       </span></a>
-<a class="sourceLine" id="cb50-41" title="41"><span class="co">#ans&gt; Min         0.618 -0.201        -0.164 -0.101 -0.726</span></a>
-<a class="sourceLine" id="cb50-42" title="42"><span class="co">#ans&gt; Man -0.347  0.355 -0.150 -0.346 -0.385 -0.288  0.479</span></a>
-<a class="sourceLine" id="cb50-43" title="43"><span class="co">#ans&gt; Pow -0.256  0.261 -0.561  0.393  0.295  0.357  0.256</span></a>
-<a class="sourceLine" id="cb50-44" title="44"><span class="co">#ans&gt; Con -0.325         0.153 -0.668  0.472  0.130 -0.221</span></a>
-<a class="sourceLine" id="cb50-45" title="45"><span class="co">#ans&gt; Ser -0.379 -0.350 -0.115        -0.284  0.615 -0.229</span></a>
-<a class="sourceLine" id="cb50-46" title="46"><span class="co">#ans&gt; Fin        -0.454 -0.587         0.280 -0.526 -0.187</span></a>
-<a class="sourceLine" id="cb50-47" title="47"><span class="co">#ans&gt; Soc -0.387 -0.222  0.312  0.412 -0.220 -0.263 -0.191</span></a>
-<a class="sourceLine" id="cb50-48" title="48"><span class="co">#ans&gt; Tra -0.367  0.203  0.375  0.314  0.513 -0.124       </span></a>
-<a class="sourceLine" id="cb50-49" title="49"><span class="co">#ans&gt;     Comp.8 Comp.9</span></a>
-<a class="sourceLine" id="cb50-50" title="50"><span class="co">#ans&gt; Agr         0.806</span></a>
-<a class="sourceLine" id="cb50-51" title="51"><span class="co">#ans&gt; Min              </span></a>
-<a class="sourceLine" id="cb50-52" title="52"><span class="co">#ans&gt; Man  0.126  0.366</span></a>
-<a class="sourceLine" id="cb50-53" title="53"><span class="co">#ans&gt; Pow -0.341       </span></a>
-<a class="sourceLine" id="cb50-54" title="54"><span class="co">#ans&gt; Con -0.356       </span></a>
-<a class="sourceLine" id="cb50-55" title="55"><span class="co">#ans&gt; Ser  0.388  0.238</span></a>
-<a class="sourceLine" id="cb50-56" title="56"><span class="co">#ans&gt; Fin  0.174  0.145</span></a>
-<a class="sourceLine" id="cb50-57" title="57"><span class="co">#ans&gt; Soc -0.506  0.351</span></a>
-<a class="sourceLine" id="cb50-58" title="58"><span class="co">#ans&gt; Tra  0.545       </span></a>
-<a class="sourceLine" id="cb50-59" title="59"><span class="co">#ans&gt; </span></a>
-<a class="sourceLine" id="cb50-60" title="60"><span class="co">#ans&gt;                Comp.1 Comp.2 Comp.3 Comp.4 Comp.5 Comp.6</span></a>
-<a class="sourceLine" id="cb50-61" title="61"><span class="co">#ans&gt; SS loadings     1.000  1.000  1.000  1.000  1.000  1.000</span></a>
-<a class="sourceLine" id="cb50-62" title="62"><span class="co">#ans&gt; Proportion Var  0.111  0.111  0.111  0.111  0.111  0.111</span></a>
-<a class="sourceLine" id="cb50-63" title="63"><span class="co">#ans&gt; Cumulative Var  0.111  0.222  0.333  0.444  0.556  0.667</span></a>
-<a class="sourceLine" id="cb50-64" title="64"><span class="co">#ans&gt;                Comp.7 Comp.8 Comp.9</span></a>
-<a class="sourceLine" id="cb50-65" title="65"><span class="co">#ans&gt; SS loadings     1.000  1.000  1.000</span></a>
-<a class="sourceLine" id="cb50-66" title="66"><span class="co">#ans&gt; Proportion Var  0.111  0.111  0.111</span></a>
-<a class="sourceLine" id="cb50-67" title="67"><span class="co">#ans&gt; Cumulative Var  0.778  0.889  1.000</span></a>
-<a class="sourceLine" id="cb50-68" title="68"></a>
-<a class="sourceLine" id="cb50-69" title="69"><span class="co"># Scores of the data on the PCs: how is the data reexpressed into PCs</span></a>
-<a class="sourceLine" id="cb50-70" title="70"><span class="kw">head</span>(pca<span class="op">$</span>scores, <span class="dv">10</span>)</a>
-<a class="sourceLine" id="cb50-71" title="71"><span class="co">#ans&gt;         Comp.1  Comp.2  Comp.3  Comp.4  Comp.5  Comp.6</span></a>
-<a class="sourceLine" id="cb50-72" title="72"><span class="co">#ans&gt; Belgium -1.710 -1.2218 -0.1148  0.3395 -0.3245 -0.0473</span></a>
-<a class="sourceLine" id="cb50-73" title="73"><span class="co">#ans&gt; Denmark -0.953 -2.1278  0.9507  0.5939  0.1027 -0.8273</span></a>
-<a class="sourceLine" id="cb50-74" title="74"><span class="co">#ans&gt; France  -0.755 -1.1212 -0.4980 -0.5003 -0.2997  0.1158</span></a>
-<a class="sourceLine" id="cb50-75" title="75"><span class="co">#ans&gt; WGerm   -0.853 -0.0114 -0.5795 -0.1105 -1.1652 -0.6181</span></a>
-<a class="sourceLine" id="cb50-76" title="76"><span class="co">#ans&gt; Ireland  0.104 -0.4140 -0.3840  0.9267  0.0152  1.4242</span></a>
-<a class="sourceLine" id="cb50-77" title="77"><span class="co">#ans&gt; Italy   -0.375 -0.7695  1.0606 -1.4772 -0.6452  1.0021</span></a>
-<a class="sourceLine" id="cb50-78" title="78"><span class="co">#ans&gt; Luxem   -1.059  0.7558 -0.6515 -0.8352 -0.8659  0.2188</span></a>
-<a class="sourceLine" id="cb50-79" title="79"><span class="co">#ans&gt; Nether  -1.688 -2.0048  0.0637 -0.0235  0.6352  0.2120</span></a>
-<a class="sourceLine" id="cb50-80" title="80"><span class="co">#ans&gt; UK      -1.630 -0.3731 -1.1409  1.2669 -0.8129 -0.0361</span></a>
-<a class="sourceLine" id="cb50-81" title="81"><span class="co">#ans&gt; Austria -1.176  0.1431 -1.0434 -0.1577  0.5210  0.8019</span></a>
-<a class="sourceLine" id="cb50-82" title="82"><span class="co">#ans&gt;          Comp.7 Comp.8    Comp.9</span></a>
-<a class="sourceLine" id="cb50-83" title="83"><span class="co">#ans&gt; Belgium -0.3401  0.403 -0.001090</span></a>
-<a class="sourceLine" id="cb50-84" title="84"><span class="co">#ans&gt; Denmark -0.3029 -0.352  0.015619</span></a>
-<a class="sourceLine" id="cb50-85" title="85"><span class="co">#ans&gt; France  -0.1855 -0.266 -0.000507</span></a>
-<a class="sourceLine" id="cb50-86" title="86"><span class="co">#ans&gt; WGerm    0.4446  0.194 -0.006539</span></a>
-<a class="sourceLine" id="cb50-87" title="87"><span class="co">#ans&gt; Ireland -0.0370 -0.334  0.010879</span></a>
-<a class="sourceLine" id="cb50-88" title="88"><span class="co">#ans&gt; Italy   -0.1418 -0.130  0.005602</span></a>
-<a class="sourceLine" id="cb50-89" title="89"><span class="co">#ans&gt; Luxem   -1.6942  0.547  0.003453</span></a>
-<a class="sourceLine" id="cb50-90" title="90"><span class="co">#ans&gt; Nether  -0.3034 -0.591 -0.010931</span></a>
-<a class="sourceLine" id="cb50-91" title="91"><span class="co">#ans&gt; UK       0.0413 -0.349 -0.005478</span></a>
-<a class="sourceLine" id="cb50-92" title="92"><span class="co">#ans&gt; Austria  0.4150  0.215 -0.002816</span></a>
-<a class="sourceLine" id="cb50-93" title="93"></a>
-<a class="sourceLine" id="cb50-94" title="94"><span class="co"># Scatterplot matrix of the scores - See how they are uncorrelated!</span></a>
-<a class="sourceLine" id="cb50-95" title="95"><span class="kw">scatterplotMatrix</span>(pca<span class="op">$</span>scores, <span class="dt">regLine =</span> <span class="kw">list</span>(<span class="dt">method=</span>lm, <span class="dt">lty=</span><span class="dv">1</span>, <span class="dt">lwd=</span><span class="dv">2</span>, <span class="dt">col=</span><span class="st">&quot;green&quot;</span>), <span class="dt">smooth =</span> <span class="ot">FALSE</span>,</a>
-<a class="sourceLine" id="cb50-96" title="96">                  <span class="dt">ellipse =</span> <span class="ot">FALSE</span>, <span class="dt">plot.points =</span> T, <span class="dt">col=</span><span class="st">&quot;black&quot;</span>,</a>
-<a class="sourceLine" id="cb50-97" title="97">                  <span class="dt">diagonal =</span> <span class="ot">TRUE</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb51"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb51-1" title="1"><span class="co"># The main function - use cor = TRUE to avoid scale distortions</span></a>
+<a class="sourceLine" id="cb51-2" title="2">pca &lt;-<span class="st"> </span><span class="kw">princomp</span>(eurojob, <span class="dt">cor =</span> <span class="ot">TRUE</span>)</a>
+<a class="sourceLine" id="cb51-3" title="3"></a>
+<a class="sourceLine" id="cb51-4" title="4"><span class="co"># What is inside?</span></a>
+<a class="sourceLine" id="cb51-5" title="5"><span class="kw">str</span>(pca)</a>
+<a class="sourceLine" id="cb51-6" title="6"><span class="co">#ans&gt; List of 7</span></a>
+<a class="sourceLine" id="cb51-7" title="7"><span class="co">#ans&gt;  $ sdev    : Named num [1:9] 1.867 1.46 1.048 0.997 0.737 ...</span></a>
+<a class="sourceLine" id="cb51-8" title="8"><span class="co">#ans&gt;   ..- attr(*, &quot;names&quot;)= chr [1:9] &quot;Comp.1&quot; &quot;Comp.2&quot; &quot;Comp.3&quot; &quot;Comp.4&quot; ...</span></a>
+<a class="sourceLine" id="cb51-9" title="9"><span class="co">#ans&gt;  $ loadings: &#39;loadings&#39; num [1:9, 1:9] 0.52379 0.00132 -0.3475 -0.25572 -0.32518 ...</span></a>
+<a class="sourceLine" id="cb51-10" title="10"><span class="co">#ans&gt;   ..- attr(*, &quot;dimnames&quot;)=List of 2</span></a>
+<a class="sourceLine" id="cb51-11" title="11"><span class="co">#ans&gt;   .. ..$ : chr [1:9] &quot;Agr&quot; &quot;Min&quot; &quot;Man&quot; &quot;Pow&quot; ...</span></a>
+<a class="sourceLine" id="cb51-12" title="12"><span class="co">#ans&gt;   .. ..$ : chr [1:9] &quot;Comp.1&quot; &quot;Comp.2&quot; &quot;Comp.3&quot; &quot;Comp.4&quot; ...</span></a>
+<a class="sourceLine" id="cb51-13" title="13"><span class="co">#ans&gt;  $ center  : Named num [1:9] 19.131 1.254 27.008 0.908 8.165 ...</span></a>
+<a class="sourceLine" id="cb51-14" title="14"><span class="co">#ans&gt;   ..- attr(*, &quot;names&quot;)= chr [1:9] &quot;Agr&quot; &quot;Min&quot; &quot;Man&quot; &quot;Pow&quot; ...</span></a>
+<a class="sourceLine" id="cb51-15" title="15"><span class="co">#ans&gt;  $ scale   : Named num [1:9] 15.245 0.951 6.872 0.369 1.614 ...</span></a>
+<a class="sourceLine" id="cb51-16" title="16"><span class="co">#ans&gt;   ..- attr(*, &quot;names&quot;)= chr [1:9] &quot;Agr&quot; &quot;Min&quot; &quot;Man&quot; &quot;Pow&quot; ...</span></a>
+<a class="sourceLine" id="cb51-17" title="17"><span class="co">#ans&gt;  $ n.obs   : int 26</span></a>
+<a class="sourceLine" id="cb51-18" title="18"><span class="co">#ans&gt;  $ scores  : num [1:26, 1:9] -1.71 -0.953 -0.755 -0.853 0.104 ...</span></a>
+<a class="sourceLine" id="cb51-19" title="19"><span class="co">#ans&gt;   ..- attr(*, &quot;dimnames&quot;)=List of 2</span></a>
+<a class="sourceLine" id="cb51-20" title="20"><span class="co">#ans&gt;   .. ..$ : chr [1:26] &quot;Belgium&quot; &quot;Denmark&quot; &quot;France&quot; &quot;WGerm&quot; ...</span></a>
+<a class="sourceLine" id="cb51-21" title="21"><span class="co">#ans&gt;   .. ..$ : chr [1:9] &quot;Comp.1&quot; &quot;Comp.2&quot; &quot;Comp.3&quot; &quot;Comp.4&quot; ...</span></a>
+<a class="sourceLine" id="cb51-22" title="22"><span class="co">#ans&gt;  $ call    : language princomp(x = eurojob, cor = TRUE)</span></a>
+<a class="sourceLine" id="cb51-23" title="23"><span class="co">#ans&gt;  - attr(*, &quot;class&quot;)= chr &quot;princomp&quot;</span></a>
+<a class="sourceLine" id="cb51-24" title="24"></a>
+<a class="sourceLine" id="cb51-25" title="25"><span class="co"># The standard deviation of each PC</span></a>
+<a class="sourceLine" id="cb51-26" title="26">pca<span class="op">$</span>sdev</a>
+<a class="sourceLine" id="cb51-27" title="27"><span class="co">#ans&gt;  Comp.1  Comp.2  Comp.3  Comp.4  Comp.5  Comp.6  Comp.7  Comp.8  Comp.9 </span></a>
+<a class="sourceLine" id="cb51-28" title="28"><span class="co">#ans&gt; 1.86739 1.45951 1.04831 0.99724 0.73703 0.61922 0.47514 0.36985 0.00675</span></a>
+<a class="sourceLine" id="cb51-29" title="29"></a>
+<a class="sourceLine" id="cb51-30" title="30"><span class="co"># Weights: the expression of the original variables in the PCs</span></a>
+<a class="sourceLine" id="cb51-31" title="31"><span class="co"># E.g. Agr = -0.524 * PC1 + 0.213 * PC5 - 0.152 * PC6 + 0.806 * PC9</span></a>
+<a class="sourceLine" id="cb51-32" title="32"><span class="co"># And also: PC1 = -0.524 * Agr + 0.347 * Man + 0256 * Pow + 0.325 * Con + ...</span></a>
+<a class="sourceLine" id="cb51-33" title="33"><span class="co"># (Because the matrix is orthogonal, so the transpose is the inverse)</span></a>
+<a class="sourceLine" id="cb51-34" title="34">pca<span class="op">$</span>loadings</a>
+<a class="sourceLine" id="cb51-35" title="35"><span class="co">#ans&gt; </span></a>
+<a class="sourceLine" id="cb51-36" title="36"><span class="co">#ans&gt; Loadings:</span></a>
+<a class="sourceLine" id="cb51-37" title="37"><span class="co">#ans&gt;     Comp.1 Comp.2 Comp.3 Comp.4 Comp.5 Comp.6 Comp.7 Comp.8 Comp.9</span></a>
+<a class="sourceLine" id="cb51-38" title="38"><span class="co">#ans&gt; Agr  0.524                       0.213  0.153                0.806</span></a>
+<a class="sourceLine" id="cb51-39" title="39"><span class="co">#ans&gt; Min         0.618 -0.201        -0.164 -0.101 -0.726              </span></a>
+<a class="sourceLine" id="cb51-40" title="40"><span class="co">#ans&gt; Man -0.347  0.355 -0.150 -0.346 -0.385 -0.288  0.479  0.126  0.366</span></a>
+<a class="sourceLine" id="cb51-41" title="41"><span class="co">#ans&gt; Pow -0.256  0.261 -0.561  0.393  0.295  0.357  0.256 -0.341       </span></a>
+<a class="sourceLine" id="cb51-42" title="42"><span class="co">#ans&gt; Con -0.325         0.153 -0.668  0.472  0.130 -0.221 -0.356       </span></a>
+<a class="sourceLine" id="cb51-43" title="43"><span class="co">#ans&gt; Ser -0.379 -0.350 -0.115        -0.284  0.615 -0.229  0.388  0.238</span></a>
+<a class="sourceLine" id="cb51-44" title="44"><span class="co">#ans&gt; Fin        -0.454 -0.587         0.280 -0.526 -0.187  0.174  0.145</span></a>
+<a class="sourceLine" id="cb51-45" title="45"><span class="co">#ans&gt; Soc -0.387 -0.222  0.312  0.412 -0.220 -0.263 -0.191 -0.506  0.351</span></a>
+<a class="sourceLine" id="cb51-46" title="46"><span class="co">#ans&gt; Tra -0.367  0.203  0.375  0.314  0.513 -0.124         0.545       </span></a>
+<a class="sourceLine" id="cb51-47" title="47"><span class="co">#ans&gt; </span></a>
+<a class="sourceLine" id="cb51-48" title="48"><span class="co">#ans&gt;                Comp.1 Comp.2 Comp.3 Comp.4 Comp.5 Comp.6 Comp.7 Comp.8 Comp.9</span></a>
+<a class="sourceLine" id="cb51-49" title="49"><span class="co">#ans&gt; SS loadings     1.000  1.000  1.000  1.000  1.000  1.000  1.000  1.000  1.000</span></a>
+<a class="sourceLine" id="cb51-50" title="50"><span class="co">#ans&gt; Proportion Var  0.111  0.111  0.111  0.111  0.111  0.111  0.111  0.111  0.111</span></a>
+<a class="sourceLine" id="cb51-51" title="51"><span class="co">#ans&gt; Cumulative Var  0.111  0.222  0.333  0.444  0.556  0.667  0.778  0.889  1.000</span></a>
+<a class="sourceLine" id="cb51-52" title="52"></a>
+<a class="sourceLine" id="cb51-53" title="53"><span class="co"># Scores of the data on the PCs: how is the data reexpressed into PCs</span></a>
+<a class="sourceLine" id="cb51-54" title="54"><span class="kw">head</span>(pca<span class="op">$</span>scores, <span class="dv">10</span>)</a>
+<a class="sourceLine" id="cb51-55" title="55"><span class="co">#ans&gt;         Comp.1  Comp.2  Comp.3  Comp.4  Comp.5  Comp.6  Comp.7 Comp.8    Comp.9</span></a>
+<a class="sourceLine" id="cb51-56" title="56"><span class="co">#ans&gt; Belgium -1.710 -1.2218 -0.1148  0.3395 -0.3245 -0.0473 -0.3401  0.403 -0.001090</span></a>
+<a class="sourceLine" id="cb51-57" title="57"><span class="co">#ans&gt; Denmark -0.953 -2.1278  0.9507  0.5939  0.1027 -0.8273 -0.3029 -0.352  0.015619</span></a>
+<a class="sourceLine" id="cb51-58" title="58"><span class="co">#ans&gt; France  -0.755 -1.1212 -0.4980 -0.5003 -0.2997  0.1158 -0.1855 -0.266 -0.000507</span></a>
+<a class="sourceLine" id="cb51-59" title="59"><span class="co">#ans&gt; WGerm   -0.853 -0.0114 -0.5795 -0.1105 -1.1652 -0.6181  0.4446  0.194 -0.006539</span></a>
+<a class="sourceLine" id="cb51-60" title="60"><span class="co">#ans&gt; Ireland  0.104 -0.4140 -0.3840  0.9267  0.0152  1.4242 -0.0370 -0.334  0.010879</span></a>
+<a class="sourceLine" id="cb51-61" title="61"><span class="co">#ans&gt; Italy   -0.375 -0.7695  1.0606 -1.4772 -0.6452  1.0021 -0.1418 -0.130  0.005602</span></a>
+<a class="sourceLine" id="cb51-62" title="62"><span class="co">#ans&gt; Luxem   -1.059  0.7558 -0.6515 -0.8352 -0.8659  0.2188 -1.6942  0.547  0.003453</span></a>
+<a class="sourceLine" id="cb51-63" title="63"><span class="co">#ans&gt; Nether  -1.688 -2.0048  0.0637 -0.0235  0.6352  0.2120 -0.3034 -0.591 -0.010931</span></a>
+<a class="sourceLine" id="cb51-64" title="64"><span class="co">#ans&gt; UK      -1.630 -0.3731 -1.1409  1.2669 -0.8129 -0.0361  0.0413 -0.349 -0.005478</span></a>
+<a class="sourceLine" id="cb51-65" title="65"><span class="co">#ans&gt; Austria -1.176  0.1431 -1.0434 -0.1577  0.5210  0.8019  0.4150  0.215 -0.002816</span></a>
+<a class="sourceLine" id="cb51-66" title="66"></a>
+<a class="sourceLine" id="cb51-67" title="67"><span class="co"># Scatterplot matrix of the scores - See how they are uncorrelated!</span></a>
+<a class="sourceLine" id="cb51-68" title="68"><span class="kw">scatterplotMatrix</span>(pca<span class="op">$</span>scores, <span class="dt">regLine =</span> <span class="kw">list</span>(<span class="dt">method=</span>lm, <span class="dt">lty=</span><span class="dv">1</span>, <span class="dt">lwd=</span><span class="dv">2</span>, <span class="dt">col=</span><span class="st">&quot;green&quot;</span>), <span class="dt">smooth =</span> <span class="ot">FALSE</span>,</a>
+<a class="sourceLine" id="cb51-69" title="69">                  <span class="dt">ellipse =</span> <span class="ot">FALSE</span>, <span class="dt">plot.points =</span> T, <span class="dt">col=</span><span class="st">&quot;black&quot;</span>,</a>
+<a class="sourceLine" id="cb51-70" title="70">                  <span class="dt">diagonal =</span> <span class="ot">TRUE</span>)</a></code></pre></div>
 <p><img src="Machine-Learning_files/figure-html/unnamed-chunk-168-1.png" width="70%" style="display: block; margin: auto;" /></p>
 <div class="rmdinsight">
 <p>
@@ -1678,55 +1634,51 @@ An uncorrelated or independent variable in <span class="math inline"><span class
 </li>
 </ul>
 </div>
-<div class="sourceCode" id="cb51"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb51-1" title="1"></a>
-<a class="sourceLine" id="cb51-2" title="2"><span class="co"># Means of the variables - before PCA the variables are centered</span></a>
-<a class="sourceLine" id="cb51-3" title="3">pca<span class="op">$</span>center</a>
-<a class="sourceLine" id="cb51-4" title="4"><span class="co">#ans&gt;    Agr    Min    Man    Pow    Con    Ser    Fin    Soc </span></a>
-<a class="sourceLine" id="cb51-5" title="5"><span class="co">#ans&gt; 19.131  1.254 27.008  0.908  8.165 12.958  4.000 20.023 </span></a>
-<a class="sourceLine" id="cb51-6" title="6"><span class="co">#ans&gt;    Tra </span></a>
-<a class="sourceLine" id="cb51-7" title="7"><span class="co">#ans&gt;  6.546</span></a>
-<a class="sourceLine" id="cb51-8" title="8"></a>
-<a class="sourceLine" id="cb51-9" title="9"><span class="co"># Rescalation done to each variable</span></a>
-<a class="sourceLine" id="cb51-10" title="10"><span class="co"># - if cor = FALSE (default), a vector of ones</span></a>
-<a class="sourceLine" id="cb51-11" title="11"><span class="co"># - if cor = TRUE, a vector with the standard deviations of the variables</span></a>
-<a class="sourceLine" id="cb51-12" title="12">pca<span class="op">$</span>scale</a>
-<a class="sourceLine" id="cb51-13" title="13"><span class="co">#ans&gt;    Agr    Min    Man    Pow    Con    Ser    Fin    Soc </span></a>
-<a class="sourceLine" id="cb51-14" title="14"><span class="co">#ans&gt; 15.245  0.951  6.872  0.369  1.614  4.486  2.752  6.697 </span></a>
-<a class="sourceLine" id="cb51-15" title="15"><span class="co">#ans&gt;    Tra </span></a>
-<a class="sourceLine" id="cb51-16" title="16"><span class="co">#ans&gt;  1.364</span></a>
-<a class="sourceLine" id="cb51-17" title="17"></a>
-<a class="sourceLine" id="cb51-18" title="18"><span class="co"># Summary of the importance of components - the third row is key</span></a>
-<a class="sourceLine" id="cb51-19" title="19"><span class="kw">summary</span>(pca)</a>
-<a class="sourceLine" id="cb51-20" title="20"><span class="co">#ans&gt; Importance of components:</span></a>
-<a class="sourceLine" id="cb51-21" title="21"><span class="co">#ans&gt;                        Comp.1 Comp.2 Comp.3 Comp.4 Comp.5</span></a>
-<a class="sourceLine" id="cb51-22" title="22"><span class="co">#ans&gt; Standard deviation      1.867  1.460  1.048  0.997 0.7370</span></a>
-<a class="sourceLine" id="cb51-23" title="23"><span class="co">#ans&gt; Proportion of Variance  0.387  0.237  0.122  0.110 0.0604</span></a>
-<a class="sourceLine" id="cb51-24" title="24"><span class="co">#ans&gt; Cumulative Proportion   0.387  0.624  0.746  0.857 0.9171</span></a>
-<a class="sourceLine" id="cb51-25" title="25"><span class="co">#ans&gt;                        Comp.6 Comp.7 Comp.8   Comp.9</span></a>
-<a class="sourceLine" id="cb51-26" title="26"><span class="co">#ans&gt; Standard deviation     0.6192 0.4751 0.3699 6.75e-03</span></a>
-<a class="sourceLine" id="cb51-27" title="27"><span class="co">#ans&gt; Proportion of Variance 0.0426 0.0251 0.0152 5.07e-06</span></a>
-<a class="sourceLine" id="cb51-28" title="28"><span class="co">#ans&gt; Cumulative Proportion  0.9597 0.9848 1.0000 1.00e+00</span></a>
-<a class="sourceLine" id="cb51-29" title="29"></a>
-<a class="sourceLine" id="cb51-30" title="30"><span class="co"># Scree plot - the variance of each component</span></a>
-<a class="sourceLine" id="cb51-31" title="31"><span class="kw">plot</span>(pca)</a></code></pre></div>
-<p><img src="Machine-Learning_files/figure-html/unnamed-chunk-170-1.png" width="70%" style="display: block; margin: auto;" /></p>
 <div class="sourceCode" id="cb52"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb52-1" title="1"></a>
-<a class="sourceLine" id="cb52-2" title="2"><span class="co"># With connected lines - useful for looking for the &quot;elbow&quot;</span></a>
-<a class="sourceLine" id="cb52-3" title="3"><span class="kw">plot</span>(pca, <span class="dt">type =</span> <span class="st">&quot;l&quot;</span>)</a></code></pre></div>
-<p><img src="Machine-Learning_files/figure-html/unnamed-chunk-170-2.png" width="70%" style="display: block; margin: auto;" /></p>
+<a class="sourceLine" id="cb52-2" title="2"><span class="co"># Means of the variables - before PCA the variables are centered</span></a>
+<a class="sourceLine" id="cb52-3" title="3">pca<span class="op">$</span>center</a>
+<a class="sourceLine" id="cb52-4" title="4"><span class="co">#ans&gt;    Agr    Min    Man    Pow    Con    Ser    Fin    Soc    Tra </span></a>
+<a class="sourceLine" id="cb52-5" title="5"><span class="co">#ans&gt; 19.131  1.254 27.008  0.908  8.165 12.958  4.000 20.023  6.546</span></a>
+<a class="sourceLine" id="cb52-6" title="6"></a>
+<a class="sourceLine" id="cb52-7" title="7"><span class="co"># Rescalation done to each variable</span></a>
+<a class="sourceLine" id="cb52-8" title="8"><span class="co"># - if cor = FALSE (default), a vector of ones</span></a>
+<a class="sourceLine" id="cb52-9" title="9"><span class="co"># - if cor = TRUE, a vector with the standard deviations of the variables</span></a>
+<a class="sourceLine" id="cb52-10" title="10">pca<span class="op">$</span>scale</a>
+<a class="sourceLine" id="cb52-11" title="11"><span class="co">#ans&gt;    Agr    Min    Man    Pow    Con    Ser    Fin    Soc    Tra </span></a>
+<a class="sourceLine" id="cb52-12" title="12"><span class="co">#ans&gt; 15.245  0.951  6.872  0.369  1.614  4.486  2.752  6.697  1.364</span></a>
+<a class="sourceLine" id="cb52-13" title="13"></a>
+<a class="sourceLine" id="cb52-14" title="14"><span class="co"># Summary of the importance of components - the third row is key</span></a>
+<a class="sourceLine" id="cb52-15" title="15"><span class="kw">summary</span>(pca)</a>
+<a class="sourceLine" id="cb52-16" title="16"><span class="co">#ans&gt; Importance of components:</span></a>
+<a class="sourceLine" id="cb52-17" title="17"><span class="co">#ans&gt;                        Comp.1 Comp.2 Comp.3 Comp.4 Comp.5 Comp.6 Comp.7 Comp.8</span></a>
+<a class="sourceLine" id="cb52-18" title="18"><span class="co">#ans&gt; Standard deviation      1.867  1.460  1.048  0.997 0.7370 0.6192 0.4751 0.3699</span></a>
+<a class="sourceLine" id="cb52-19" title="19"><span class="co">#ans&gt; Proportion of Variance  0.387  0.237  0.122  0.110 0.0604 0.0426 0.0251 0.0152</span></a>
+<a class="sourceLine" id="cb52-20" title="20"><span class="co">#ans&gt; Cumulative Proportion   0.387  0.624  0.746  0.857 0.9171 0.9597 0.9848 1.0000</span></a>
+<a class="sourceLine" id="cb52-21" title="21"><span class="co">#ans&gt;                          Comp.9</span></a>
+<a class="sourceLine" id="cb52-22" title="22"><span class="co">#ans&gt; Standard deviation     6.75e-03</span></a>
+<a class="sourceLine" id="cb52-23" title="23"><span class="co">#ans&gt; Proportion of Variance 5.07e-06</span></a>
+<a class="sourceLine" id="cb52-24" title="24"><span class="co">#ans&gt; Cumulative Proportion  1.00e+00</span></a>
+<a class="sourceLine" id="cb52-25" title="25"></a>
+<a class="sourceLine" id="cb52-26" title="26"><span class="co"># Scree plot - the variance of each component</span></a>
+<a class="sourceLine" id="cb52-27" title="27"><span class="kw">plot</span>(pca)</a></code></pre></div>
+<p><img src="Machine-Learning_files/figure-html/unnamed-chunk-170-1.png" width="70%" style="display: block; margin: auto;" /></p>
 <div class="sourceCode" id="cb53"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb53-1" title="1"></a>
-<a class="sourceLine" id="cb53-2" title="2"><span class="co"># PC1 and PC2 -- These are the weights of the variables on the first two Principal Components</span></a>
-<a class="sourceLine" id="cb53-3" title="3">pca<span class="op">$</span>loadings[, <span class="dv">1</span><span class="op">:</span><span class="dv">2</span>]</a>
-<a class="sourceLine" id="cb53-4" title="4"><span class="co">#ans&gt;       Comp.1  Comp.2</span></a>
-<a class="sourceLine" id="cb53-5" title="5"><span class="co">#ans&gt; Agr  0.52379  0.0536</span></a>
-<a class="sourceLine" id="cb53-6" title="6"><span class="co">#ans&gt; Min  0.00132  0.6178</span></a>
-<a class="sourceLine" id="cb53-7" title="7"><span class="co">#ans&gt; Man -0.34750  0.3551</span></a>
-<a class="sourceLine" id="cb53-8" title="8"><span class="co">#ans&gt; Pow -0.25572  0.2611</span></a>
-<a class="sourceLine" id="cb53-9" title="9"><span class="co">#ans&gt; Con -0.32518  0.0513</span></a>
-<a class="sourceLine" id="cb53-10" title="10"><span class="co">#ans&gt; Ser -0.37892 -0.3502</span></a>
-<a class="sourceLine" id="cb53-11" title="11"><span class="co">#ans&gt; Fin -0.07437 -0.4537</span></a>
-<a class="sourceLine" id="cb53-12" title="12"><span class="co">#ans&gt; Soc -0.38741 -0.2215</span></a>
-<a class="sourceLine" id="cb53-13" title="13"><span class="co">#ans&gt; Tra -0.36682  0.2026</span></a></code></pre></div>
+<a class="sourceLine" id="cb53-2" title="2"><span class="co"># With connected lines - useful for looking for the &quot;elbow&quot;</span></a>
+<a class="sourceLine" id="cb53-3" title="3"><span class="kw">plot</span>(pca, <span class="dt">type =</span> <span class="st">&quot;l&quot;</span>)</a></code></pre></div>
+<p><img src="Machine-Learning_files/figure-html/unnamed-chunk-170-2.png" width="70%" style="display: block; margin: auto;" /></p>
+<div class="sourceCode" id="cb54"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb54-1" title="1"></a>
+<a class="sourceLine" id="cb54-2" title="2"><span class="co"># PC1 and PC2 -- These are the weights of the variables on the first two Principal Components</span></a>
+<a class="sourceLine" id="cb54-3" title="3">pca<span class="op">$</span>loadings[, <span class="dv">1</span><span class="op">:</span><span class="dv">2</span>]</a>
+<a class="sourceLine" id="cb54-4" title="4"><span class="co">#ans&gt;       Comp.1  Comp.2</span></a>
+<a class="sourceLine" id="cb54-5" title="5"><span class="co">#ans&gt; Agr  0.52379  0.0536</span></a>
+<a class="sourceLine" id="cb54-6" title="6"><span class="co">#ans&gt; Min  0.00132  0.6178</span></a>
+<a class="sourceLine" id="cb54-7" title="7"><span class="co">#ans&gt; Man -0.34750  0.3551</span></a>
+<a class="sourceLine" id="cb54-8" title="8"><span class="co">#ans&gt; Pow -0.25572  0.2611</span></a>
+<a class="sourceLine" id="cb54-9" title="9"><span class="co">#ans&gt; Con -0.32518  0.0513</span></a>
+<a class="sourceLine" id="cb54-10" title="10"><span class="co">#ans&gt; Ser -0.37892 -0.3502</span></a>
+<a class="sourceLine" id="cb54-11" title="11"><span class="co">#ans&gt; Fin -0.07437 -0.4537</span></a>
+<a class="sourceLine" id="cb54-12" title="12"><span class="co">#ans&gt; Soc -0.38741 -0.2215</span></a>
+<a class="sourceLine" id="cb54-13" title="13"><span class="co">#ans&gt; Tra -0.36682  0.2026</span></a></code></pre></div>
 <p>Based on the weights of the variables on the PCs shown above, we can extract the following interpretation:</p>
 <ul>
 <li>PC1 is roughly a linear combination of <code>Agr</code>, with <em>negative</em> weight, and (<code>Man</code>, <code>Pow</code>, <code>Con</code>, <code>Ser</code>, <code>Soc</code>, <code>Tra</code>), with <em>positive</em> weights. So it can be interpreted as an <em>indicator</em> of the kind of economy of the country: agricultural (negative values) or industrial (positive values).</li>
@@ -1738,36 +1690,36 @@ The interpretation of the PCs involves inspecting the weights and interpreting t
 </p>
 </div>
 <p>To conclude, let’s see how we can represent our original data into a plot called <em>biplot</em> that summarizes all the analysis for two PCs.</p>
-<div class="sourceCode" id="cb54"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb54-1" title="1"><span class="co"># Biplot - plot together the scores for PC1 and PC2 and the</span></a>
-<a class="sourceLine" id="cb54-2" title="2"><span class="co"># variables expressed in terms of PC1 and PC2</span></a>
-<a class="sourceLine" id="cb54-3" title="3"><span class="kw">biplot</span>(pca)</a></code></pre></div>
+<div class="sourceCode" id="cb55"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb55-1" title="1"><span class="co"># Biplot - plot together the scores for PC1 and PC2 and the</span></a>
+<a class="sourceLine" id="cb55-2" title="2"><span class="co"># variables expressed in terms of PC1 and PC2</span></a>
+<a class="sourceLine" id="cb55-3" title="3"><span class="kw">biplot</span>(pca)</a></code></pre></div>
 <p><img src="Machine-Learning_files/figure-html/unnamed-chunk-172-1.png" width="90%" style="display: block; margin: auto;" /></p>
 <p>This biplot confirms the above interpretation.</p>
 <p>Recall that the biplot is a superposition of two figures: the first one is the scatterplot of the principal component scores (the projections of the observations on the new low dimensional space - also know as graph of individuals) and the second one is the figure of loading vectors (also known as graph of variables). In fact, the graph of variables is a correlation circle, the variables whose unit vectors are close to each other are said to be positively correlated, meaning that their influence on the positioning of individuals is similar (again, these proximities are reflected in the projections of variables on the graph of individuals). However, variables far away from each other will be defined as being negatively correlated. Variables that have perpendicular unit vector are uncorrelated. To see both graphs we can use the <code>factoextra</code> package like follows:</p>
-<div class="sourceCode" id="cb55"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb55-1" title="1"><span class="co"># loading factoextra library</span></a>
-<a class="sourceLine" id="cb55-2" title="2"><span class="kw">require</span>(factoextra)</a>
-<a class="sourceLine" id="cb55-3" title="3"><span class="co"># Calculating pca using prcomp(), which is a built-in function in R </span></a>
-<a class="sourceLine" id="cb55-4" title="4">res.pca &lt;-<span class="st"> </span><span class="kw">prcomp</span>(eurojob, <span class="dt">scale =</span> <span class="ot">TRUE</span>)</a>
-<a class="sourceLine" id="cb55-5" title="5"></a>
-<a class="sourceLine" id="cb55-6" title="6"><span class="co"># Graph of individuals</span></a>
-<a class="sourceLine" id="cb55-7" title="7"><span class="kw">fviz_pca_ind</span>(res.pca,</a>
-<a class="sourceLine" id="cb55-8" title="8">             <span class="dt">col.ind =</span> <span class="st">&quot;contrib&quot;</span>, <span class="co"># Color by their contribution to axes</span></a>
-<a class="sourceLine" id="cb55-9" title="9">             <span class="dt">gradient.cols =</span> <span class="kw">c</span>(<span class="st">&quot;#00AFBB&quot;</span>, <span class="st">&quot;#E7B800&quot;</span>, <span class="st">&quot;#FC4E07&quot;</span>),</a>
-<a class="sourceLine" id="cb55-10" title="10">             <span class="dt">repel =</span> <span class="ot">TRUE</span>     </a>
-<a class="sourceLine" id="cb55-11" title="11">             )</a></code></pre></div>
+<div class="sourceCode" id="cb56"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb56-1" title="1"><span class="co"># loading factoextra library</span></a>
+<a class="sourceLine" id="cb56-2" title="2"><span class="kw">require</span>(factoextra)</a>
+<a class="sourceLine" id="cb56-3" title="3"><span class="co"># Calculating pca using prcomp(), which is a built-in function in R </span></a>
+<a class="sourceLine" id="cb56-4" title="4">res.pca &lt;-<span class="st"> </span><span class="kw">prcomp</span>(eurojob, <span class="dt">scale =</span> <span class="ot">TRUE</span>)</a>
+<a class="sourceLine" id="cb56-5" title="5"></a>
+<a class="sourceLine" id="cb56-6" title="6"><span class="co"># Graph of individuals</span></a>
+<a class="sourceLine" id="cb56-7" title="7"><span class="kw">fviz_pca_ind</span>(res.pca,</a>
+<a class="sourceLine" id="cb56-8" title="8">             <span class="dt">col.ind =</span> <span class="st">&quot;contrib&quot;</span>, <span class="co"># Color by their contribution to axes</span></a>
+<a class="sourceLine" id="cb56-9" title="9">             <span class="dt">gradient.cols =</span> <span class="kw">c</span>(<span class="st">&quot;#00AFBB&quot;</span>, <span class="st">&quot;#E7B800&quot;</span>, <span class="st">&quot;#FC4E07&quot;</span>),</a>
+<a class="sourceLine" id="cb56-10" title="10">             <span class="dt">repel =</span> <span class="ot">TRUE</span>     </a>
+<a class="sourceLine" id="cb56-11" title="11">             )</a></code></pre></div>
 <p><img src="Machine-Learning_files/figure-html/unnamed-chunk-173-1.png" width="90%" style="display: block; margin: auto;" /></p>
-<div class="sourceCode" id="cb56"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb56-1" title="1"><span class="co"># Graph of variables</span></a>
-<a class="sourceLine" id="cb56-2" title="2"><span class="kw">fviz_pca_var</span>(res.pca,</a>
-<a class="sourceLine" id="cb56-3" title="3">             <span class="dt">col.var =</span> <span class="st">&quot;contrib&quot;</span>, </a>
-<a class="sourceLine" id="cb56-4" title="4">             <span class="dt">gradient.cols =</span> <span class="kw">c</span>(<span class="st">&quot;#00AFBB&quot;</span>, <span class="st">&quot;#E7B800&quot;</span>, <span class="st">&quot;#FC4E07&quot;</span>),</a>
-<a class="sourceLine" id="cb56-5" title="5">             <span class="dt">repel =</span> <span class="ot">TRUE</span>     </a>
-<a class="sourceLine" id="cb56-6" title="6">             )</a></code></pre></div>
+<div class="sourceCode" id="cb57"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb57-1" title="1"><span class="co"># Graph of variables</span></a>
+<a class="sourceLine" id="cb57-2" title="2"><span class="kw">fviz_pca_var</span>(res.pca,</a>
+<a class="sourceLine" id="cb57-3" title="3">             <span class="dt">col.var =</span> <span class="st">&quot;contrib&quot;</span>, </a>
+<a class="sourceLine" id="cb57-4" title="4">             <span class="dt">gradient.cols =</span> <span class="kw">c</span>(<span class="st">&quot;#00AFBB&quot;</span>, <span class="st">&quot;#E7B800&quot;</span>, <span class="st">&quot;#FC4E07&quot;</span>),</a>
+<a class="sourceLine" id="cb57-5" title="5">             <span class="dt">repel =</span> <span class="ot">TRUE</span>     </a>
+<a class="sourceLine" id="cb57-6" title="6">             )</a></code></pre></div>
 <p><img src="Machine-Learning_files/figure-html/unnamed-chunk-173-2.png" width="90%" style="display: block; margin: auto;" /></p>
-<div class="sourceCode" id="cb57"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb57-1" title="1"><span class="co"># Biplot of individuals and variables</span></a>
-<a class="sourceLine" id="cb57-2" title="2"><span class="kw">fviz_pca_biplot</span>(res.pca, <span class="dt">repel =</span> <span class="ot">TRUE</span>,</a>
-<a class="sourceLine" id="cb57-3" title="3">                <span class="dt">col.var =</span> <span class="st">&quot;#2E9FDF&quot;</span>, </a>
-<a class="sourceLine" id="cb57-4" title="4">                <span class="dt">col.ind =</span> <span class="st">&quot;#696969&quot;</span>  </a>
-<a class="sourceLine" id="cb57-5" title="5">                )</a></code></pre></div>
+<div class="sourceCode" id="cb58"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb58-1" title="1"><span class="co"># Biplot of individuals and variables</span></a>
+<a class="sourceLine" id="cb58-2" title="2"><span class="kw">fviz_pca_biplot</span>(res.pca, <span class="dt">repel =</span> <span class="ot">TRUE</span>,</a>
+<a class="sourceLine" id="cb58-3" title="3">                <span class="dt">col.var =</span> <span class="st">&quot;#2E9FDF&quot;</span>, </a>
+<a class="sourceLine" id="cb58-4" title="4">                <span class="dt">col.ind =</span> <span class="st">&quot;#696969&quot;</span>  </a>
+<a class="sourceLine" id="cb58-5" title="5">                )</a></code></pre></div>
 <p><img src="Machine-Learning_files/figure-html/unnamed-chunk-173-3.png" width="90%" style="display: block; margin: auto;" /></p>
 <p align="right">
 ◼

@@ -24,7 +24,7 @@
 <meta name="author" content="Mohamad Ghassany" />
 
 
-<meta name="date" content="2020-11-27" />
+<meta name="date" content="2020-11-28" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -478,10 +478,10 @@ One way to think about the <span class="math inline"><span class="math inline">\
 </div>
 <p><strong>4.</strong> Show the summary of the GMM model you fitted on Data2. Explain what it shows.</p>
 <p><strong>5.</strong> <code>mclust</code> package offers some visualization. To plot your two-dimensional data, use the standard plot function applied on your model. Apply the following code, given that the model is named <code>gmm_model</code>, and interpret what it shows.</p>
-<div class="sourceCode" id="cb80"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb80-1" title="1"><span class="kw">plot</span>(gmm_model, <span class="dt">what =</span> <span class="st">&quot;classification&quot;</span>)</a>
-<a class="sourceLine" id="cb80-2" title="2"><span class="kw">plot</span>(gmm_model, <span class="dt">what =</span> <span class="st">&quot;uncertainty&quot;</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb81"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb81-1" title="1"><span class="kw">plot</span>(gmm_model, <span class="dt">what =</span> <span class="st">&quot;classification&quot;</span>)</a>
+<a class="sourceLine" id="cb81-2" title="2"><span class="kw">plot</span>(gmm_model, <span class="dt">what =</span> <span class="st">&quot;uncertainty&quot;</span>)</a></code></pre></div>
 <p><strong>6.</strong> <code>mclust</code> package uses the Bayesian Information Criterion (BIC) to choose the best number of mixtures. To see the values of BIC for different number of mixtures use the following code.</p>
-<div class="sourceCode" id="cb81"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb81-1" title="1"><span class="kw">plot</span>(gmm_model, <span class="dt">what =</span> <span class="st">&quot;BIC&quot;</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb82"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb82-1" title="1"><span class="kw">plot</span>(gmm_model, <span class="dt">what =</span> <span class="st">&quot;BIC&quot;</span>)</a></code></pre></div>
 <p>Information criteria are based on penalised forms of the log-likelihood. As the likelihood increases with the addition of more components, a penalty term for the number of estimated parameters is subtracted from the log-likelihood. The BIC is a popular choice in the context of GMMs, and takes the form</p>
 <p><span class="math display">\[ \text{BIC} \approx 2 \ell (X|\hat{\theta}) - \nu \log (n)\]</span></p>
 <p>where <span class="math inline">\(\theta\)</span> is the set of parameters (in GMM it is <span class="math inline">\(\theta=\{\mu,\Sigma,\pi\})\)</span>, and <span class="math inline">\(\ell (X|\hat{\theta})\)</span> is the log-likelihood at the Maximum Likelihood Estimators <span class="math inline">\(\hat{\theta}\)</span> for the model, <span class="math inline">\(n\)</span> is the sample size, and <span class="math inline">\(\nu\)</span> is the number of estimated parameters. We select the model that maximises BIC.</p>

@@ -1,0 +1,908 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>2 Multiple Linear Regression | Machine Learning</title>
+  <meta name="description" content="2 Multiple Linear Regression | Machine Learning course" />
+  <meta name="generator" content="bookdown 0.21 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="2 Multiple Linear Regression | Machine Learning" />
+  <meta property="og:type" content="book" />
+  
+  
+  <meta property="og:description" content="2 Multiple Linear Regression | Machine Learning course" />
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="2 Multiple Linear Regression | Machine Learning" />
+  
+  <meta name="twitter:description" content="2 Multiple Linear Regression | Machine Learning course" />
+  
+
+<meta name="author" content="Mohamad Ghassany" />
+
+
+<meta name="date" content="2021-01-27" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="practical-work-1.html"/>
+<link rel="next" href="pw-2.html"/>
+<script src="book_assets/header-attrs-2.6/header-attrs.js"></script>
+<script src="book_assets/jquery-2.2.3/jquery.min.js"></script>
+<link href="book_assets/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="book_assets/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="book_assets/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="book_assets/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="book_assets/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="book_assets/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="book_assets/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+<script src="book_assets/kePrint-0.0.1/kePrint.js"></script>
+<link href="book_assets/lightable-0.0.1/lightable.css" rel="stylesheet" />
+<link href="book_assets/vembedr-0.1.4/css/vembedr.css" rel="stylesheet" />
+<script src="book_assets/htmlwidgets-1.5.3/htmlwidgets.js"></script>
+<script src="book_assets/plotly-binding-4.9.2.1/plotly.js"></script>
+<script src="book_assets/typedarray-0.1/typedarray.min.js"></script>
+<link href="book_assets/crosstalk-1.1.0.1/css/crosstalk.css" rel="stylesheet" />
+<script src="book_assets/crosstalk-1.1.0.1/js/crosstalk.min.js"></script>
+<link href="book_assets/plotly-htmlwidgets-css-1.52.2/plotly-htmlwidgets.css" rel="stylesheet" />
+<script src="book_assets/plotly-main-1.52.2/plotly-latest.min.js"></script>
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-88489172-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-88489172-1');
+</script>
+<script async defer src="https://hypothes.is/embed.js"></script>
+
+
+
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    background-color: #ffffff;
+    color: #a0a0a0;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #a0a0a0;  padding-left: 4px; }
+div.sourceCode
+  { color: #1f1c1b; background-color: #ffffff; }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span { color: #1f1c1b; } /* Normal */
+code span.al { color: #bf0303; background-color: #f7e6e6; font-weight: bold; } /* Alert */
+code span.an { color: #ca60ca; } /* Annotation */
+code span.at { color: #0057ae; } /* Attribute */
+code span.bn { color: #b08000; } /* BaseN */
+code span.bu { color: #644a9b; font-weight: bold; } /* BuiltIn */
+code span.cf { color: #1f1c1b; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #924c9d; } /* Char */
+code span.cn { color: #aa5500; } /* Constant */
+code span.co { color: #898887; } /* Comment */
+code span.cv { color: #0095ff; } /* CommentVar */
+code span.do { color: #607880; } /* Documentation */
+code span.dt { color: #0057ae; } /* DataType */
+code span.dv { color: #b08000; } /* DecVal */
+code span.er { color: #bf0303; text-decoration: underline; } /* Error */
+code span.ex { color: #0095ff; font-weight: bold; } /* Extension */
+code span.fl { color: #b08000; } /* Float */
+code span.fu { color: #644a9b; } /* Function */
+code span.im { color: #ff5500; } /* Import */
+code span.in { color: #b08000; } /* Information */
+code span.kw { color: #1f1c1b; font-weight: bold; } /* Keyword */
+code span.op { color: #1f1c1b; } /* Operator */
+code span.ot { color: #006e28; } /* Other */
+code span.pp { color: #006e28; } /* Preprocessor */
+code span.re { color: #0057ae; background-color: #e0e9f8; } /* RegionMarker */
+code span.sc { color: #3daee9; } /* SpecialChar */
+code span.ss { color: #ff5500; } /* SpecialString */
+code span.st { color: #bf0303; } /* String */
+code span.va { color: #0057ae; } /* Variable */
+code span.vs { color: #bf0303; } /* VerbatimString */
+code span.wa { color: #bf0303; } /* Warning */
+</style>
+
+<link rel="stylesheet" href="css/style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li class='beforeimg'>            
+   <a href="https://www.esilv.fr/">
+       <img src="img/Logo_ESILV_new.png" style="width:75%; padding:0px 0; display:block; margin: 0 auto;" alt="ESILV logo">
+    </a>
+</li>
+<li class='before'><a href="./">Machine Learning</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Welcome</a>
+<ul>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#course-overview"><i class="fa fa-check"></i>Course Overview</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#course-schedule"><i class="fa fa-check"></i>Course Schedule</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="introduction.html"><a href="introduction.html"><i class="fa fa-check"></i>Introduction</a>
+<ul>
+<li class="chapter" data-level="" data-path="introduction.html"><a href="introduction.html#what-is-machine-learning"><i class="fa fa-check"></i>What is Machine Learning ?</a></li>
+<li class="chapter" data-level="" data-path="introduction.html"><a href="introduction.html#supervised-learning"><i class="fa fa-check"></i>Supervised Learning</a></li>
+<li class="chapter" data-level="" data-path="introduction.html"><a href="introduction.html#unsupervised-learning"><i class="fa fa-check"></i>Unsupervised Learning</a></li>
+</ul></li>
+<li class="part"><span><b>I Supervised Learning</b></span></li>
+<li class="part"><span><b>Regression</b></span></li>
+<li class="chapter" data-level="1" data-path="linear-regression.html"><a href="linear-regression.html"><i class="fa fa-check"></i><b>1</b> Linear Regression</a>
+<ul>
+<li class="chapter" data-level="1.1" data-path="linear-regression.html"><a href="linear-regression.html#notation"><i class="fa fa-check"></i><b>1.1</b> Notation</a></li>
+<li class="chapter" data-level="1.2" data-path="linear-regression.html"><a href="linear-regression.html#model-representation"><i class="fa fa-check"></i><b>1.2</b> Model Representation</a></li>
+<li class="chapter" data-level="1.3" data-path="linear-regression.html"><a href="linear-regression.html#why-estimate-f"><i class="fa fa-check"></i><b>1.3</b> Why Estimate <span class="math inline">\(f\)</span> ?</a>
+<ul>
+<li class="chapter" data-level="" data-path="linear-regression.html"><a href="linear-regression.html#prediction"><i class="fa fa-check"></i>Prediction</a></li>
+<li class="chapter" data-level="" data-path="linear-regression.html"><a href="linear-regression.html#inference"><i class="fa fa-check"></i>Inference</a></li>
+</ul></li>
+<li class="chapter" data-level="1.4" data-path="linear-regression.html"><a href="linear-regression.html#simple-linear-regression-model"><i class="fa fa-check"></i><b>1.4</b> Simple Linear Regression Model</a></li>
+<li class="chapter" data-level="1.5" data-path="linear-regression.html"><a href="linear-regression.html#estimating-the-coefficients"><i class="fa fa-check"></i><b>1.5</b> Estimating the Coefficients</a></li>
+<li class="chapter" data-level="1.6" data-path="linear-regression.html"><a href="linear-regression.html#assessing-the-accuracy-of-the-coefficient-estimates"><i class="fa fa-check"></i><b>1.6</b> Assessing the Accuracy of the Coefficient Estimates</a>
+<ul>
+<li class="chapter" data-level="" data-path="linear-regression.html"><a href="linear-regression.html#hypothesis-testing"><i class="fa fa-check"></i>Hypothesis testing</a></li>
+</ul></li>
+<li class="chapter" data-level="1.7" data-path="linear-regression.html"><a href="linear-regression.html#anova-and-model-fit"><i class="fa fa-check"></i><b>1.7</b> ANOVA and model fit</a>
+<ul>
+<li class="chapter" data-level="1.7.1" data-path="linear-regression.html"><a href="linear-regression.html#anova"><i class="fa fa-check"></i><b>1.7.1</b> ANOVA</a></li>
+<li class="chapter" data-level="1.7.2" data-path="linear-regression.html"><a href="linear-regression.html#the-r2-statistic"><i class="fa fa-check"></i><b>1.7.2</b> The <span class="math inline">\(R^2\)</span> Statistic</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="practical-work-1.html"><a href="practical-work-1.html"><i class="fa fa-check"></i>Practical Work 1</a>
+<ul>
+<li class="chapter" data-level="1.8" data-path="practical-work-1.html"><a href="practical-work-1.html#some-basics"><i class="fa fa-check"></i><b>1.8</b> Some <svg style="height:0.8em;top:.04em;position:relative;fill:steelblue;" viewBox="0 0 581 512"><path d="M581 226.6C581 119.1 450.9 32 290.5 32S0 119.1 0 226.6C0 322.4 103.3 402 239.4 418.1V480h99.1v-61.5c24.3-2.7 47.6-7.4 69.4-13.9L448 480h112l-67.4-113.7c54.5-35.4 88.4-84.9 88.4-139.7zm-466.8 14.5c0-73.5 98.9-133 220.8-133s211.9 40.7 211.9 133c0 50.1-26.5 85-70.3 106.4-2.4-1.6-4.7-2.9-6.4-3.7-10.2-5.2-27.8-10.5-27.8-10.5s86.6-6.4 86.6-92.7-90.6-87.9-90.6-87.9h-199V361c-74.1-21.5-125.2-67.1-125.2-119.9zm225.1 38.3v-55.6c57.8 0 87.8-6.8 87.8 27.3 0 36.5-38.2 28.3-87.8 28.3zm-.9 72.5H365c10.8 0 18.9 11.7 24 19.2-16.1 1.9-33 2.8-50.6 2.9v-22.1z"/></svg> basics</a>
+<ul>
+<li class="chapter" data-level="1.8.1" data-path="practical-work-1.html"><a href="practical-work-1.html#basic-commands"><i class="fa fa-check"></i><b>1.8.1</b> Basic Commands</a></li>
+<li class="chapter" data-level="1.8.2" data-path="practical-work-1.html"><a href="practical-work-1.html#vectors"><i class="fa fa-check"></i><b>1.8.2</b> Vectors</a></li>
+<li class="chapter" data-level="1.8.3" data-path="practical-work-1.html"><a href="practical-work-1.html#matrices-data-frames-and-lists"><i class="fa fa-check"></i><b>1.8.3</b> Matrices, data frames and lists</a></li>
+<li class="chapter" data-level="1.8.4" data-path="practical-work-1.html"><a href="practical-work-1.html#graphics"><i class="fa fa-check"></i><b>1.8.4</b> Graphics</a></li>
+<li class="chapter" data-level="1.8.5" data-path="practical-work-1.html"><a href="practical-work-1.html#distributions"><i class="fa fa-check"></i><b>1.8.5</b> Distributions</a></li>
+<li class="chapter" data-level="1.8.6" data-path="practical-work-1.html"><a href="practical-work-1.html#working-directory"><i class="fa fa-check"></i><b>1.8.6</b> Working directory</a></li>
+<li class="chapter" data-level="1.8.7" data-path="practical-work-1.html"><a href="practical-work-1.html#loading-data"><i class="fa fa-check"></i><b>1.8.7</b> Loading Data</a></li>
+</ul></li>
+<li class="chapter" data-level="1.9" data-path="practical-work-1.html"><a href="practical-work-1.html#regression"><i class="fa fa-check"></i><b>1.9</b> Regression</a>
+<ul>
+<li class="chapter" data-level="1.9.1" data-path="practical-work-1.html"><a href="practical-work-1.html#the-lm-function"><i class="fa fa-check"></i><b>1.9.1</b> The <code>lm</code> function</a></li>
+<li class="chapter" data-level="1.9.2" data-path="practical-work-1.html"><a href="practical-work-1.html#boston"><i class="fa fa-check"></i><b>1.9.2</b> Predicting House Value: Boston dataset</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="multiple-linear-regression.html"><a href="multiple-linear-regression.html"><i class="fa fa-check"></i><b>2</b> Multiple Linear Regression</a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="multiple-linear-regression.html"><a href="multiple-linear-regression.html#the-model"><i class="fa fa-check"></i><b>2.1</b> The Model</a></li>
+<li class="chapter" data-level="2.2" data-path="multiple-linear-regression.html"><a href="multiple-linear-regression.html#estimating-the-regression-coefficients"><i class="fa fa-check"></i><b>2.2</b> Estimating the Regression Coefficients</a></li>
+<li class="chapter" data-level="2.3" data-path="multiple-linear-regression.html"><a href="multiple-linear-regression.html#some-important-questions"><i class="fa fa-check"></i><b>2.3</b> Some important questions</a>
+<ul>
+<li class="chapter" data-level="2.3.1" data-path="multiple-linear-regression.html"><a href="multiple-linear-regression.html#other-consid"><i class="fa fa-check"></i><b>2.3.1</b> Other Considerations in Regression Model</a></li>
+</ul></li>
+<li class="chapter" data-level="2.4" data-path="multiple-linear-regression.html"><a href="multiple-linear-regression.html#how-to-select-the-best-performing-model"><i class="fa fa-check"></i><b>2.4</b> How to select the best performing model</a>
+<ul>
+<li><a href="multiple-linear-regression.html#use-the-adjusted-r_adj2-for-multivariate-models">Use the Adjusted <span class="math inline">\(R_{adj}^2\)</span> for multivariate models</a></li>
+<li class="chapter" data-level="" data-path="multiple-linear-regression.html"><a href="multiple-linear-regression.html#have-a-look-at-the-residuals-or-error-terms"><i class="fa fa-check"></i>Have a look at the residuals or error terms</a></li>
+<li class="chapter" data-level="" data-path="multiple-linear-regression.html"><a href="multiple-linear-regression.html#histogram-of-residuals"><i class="fa fa-check"></i>Histogram of residuals</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="pw-2.html"><a href="pw-2.html"><i class="fa fa-check"></i>PW 2</a>
+<ul>
+<li class="chapter" data-level="" data-path="pw-2.html"><a href="pw-2.html#multiple-linear-regression-1"><i class="fa fa-check"></i>Multiple Linear Regression</a></li>
+<li class="chapter" data-level="" data-path="pw-2.html"><a href="pw-2.html#reporting"><i class="fa fa-check"></i>Reporting</a></li>
+</ul></li>
+<li class="part"><span><b>Classification</b></span></li>
+<li class="chapter" data-level="3" data-path="logistic-regression.html"><a href="logistic-regression.html"><i class="fa fa-check"></i><b>3</b> Logistic Regression</a>
+<ul>
+<li class="chapter" data-level="3.1" data-path="logistic-regression.html"><a href="logistic-regression.html#introduction-1"><i class="fa fa-check"></i><b>3.1</b> Introduction</a></li>
+<li class="chapter" data-level="3.2" data-path="logistic-regression.html"><a href="logistic-regression.html#logistic-regression-1"><i class="fa fa-check"></i><b>3.2</b> Logistic Regression</a>
+<ul>
+<li class="chapter" data-level="3.2.1" data-path="logistic-regression.html"><a href="logistic-regression.html#the-logistic-model"><i class="fa fa-check"></i><b>3.2.1</b> The Logistic Model</a></li>
+<li class="chapter" data-level="3.2.2" data-path="logistic-regression.html"><a href="logistic-regression.html#estimating-the-regression-coefficients-1"><i class="fa fa-check"></i><b>3.2.2</b> Estimating the Regression Coefficients</a></li>
+<li class="chapter" data-level="3.2.3" data-path="logistic-regression.html"><a href="logistic-regression.html#prediction-1"><i class="fa fa-check"></i><b>3.2.3</b> Prediction</a></li>
+</ul></li>
+<li class="chapter" data-level="3.3" data-path="logistic-regression.html"><a href="logistic-regression.html#multiple-logistic-regression"><i class="fa fa-check"></i><b>3.3</b> Multiple Logistic Regression</a></li>
+<li class="chapter" data-level="3.4" data-path="logistic-regression.html"><a href="logistic-regression.html#logreg-examps"><i class="fa fa-check"></i><b>3.4</b> Example</a>
+<ul>
+<li class="chapter" data-level="3.4.1" data-path="logistic-regression.html"><a href="logistic-regression.html#logreg-examps-challenger"><i class="fa fa-check"></i><b>3.4.1</b> Case study: <em>The Challenger disaster</em></a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="pw-3.html"><a href="pw-3.html"><i class="fa fa-check"></i>PW 3</a>
+<ul>
+<li class="chapter" data-level="" data-path="pw-3.html"><a href="pw-3.html#social-networks-ads"><i class="fa fa-check"></i>Social Networks Ads</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="discriminant-analysis.html"><a href="discriminant-analysis.html"><i class="fa fa-check"></i><b>4</b> Discriminant Analysis</a>
+<ul>
+<li class="chapter" data-level="4.1" data-path="discriminant-analysis.html"><a href="discriminant-analysis.html#introduction-2"><i class="fa fa-check"></i><b>4.1</b> Introduction</a></li>
+<li class="chapter" data-level="4.2" data-path="discriminant-analysis.html"><a href="discriminant-analysis.html#bayes-theorem"><i class="fa fa-check"></i><b>4.2</b> Bayes’ Theorem</a></li>
+<li class="chapter" data-level="4.3" data-path="discriminant-analysis.html"><a href="discriminant-analysis.html#lda-for-p1"><i class="fa fa-check"></i><b>4.3</b> LDA for <span class="math inline">\(p=1\)</span></a></li>
+<li class="chapter" data-level="4.4" data-path="discriminant-analysis.html"><a href="discriminant-analysis.html#estimating-the-parameters"><i class="fa fa-check"></i><b>4.4</b> Estimating the parameters</a></li>
+<li class="chapter" data-level="4.5" data-path="discriminant-analysis.html"><a href="discriminant-analysis.html#lda-for-p-1"><i class="fa fa-check"></i><b>4.5</b> LDA for <span class="math inline">\(p &gt; 1\)</span></a></li>
+<li class="chapter" data-level="4.6" data-path="discriminant-analysis.html"><a href="discriminant-analysis.html#making-predictions"><i class="fa fa-check"></i><b>4.6</b> Making predictions</a></li>
+<li class="chapter" data-level="4.7" data-path="discriminant-analysis.html"><a href="discriminant-analysis.html#other-forms-of-discriminant-analysis"><i class="fa fa-check"></i><b>4.7</b> Other forms of Discriminant Analysis</a>
+<ul>
+<li class="chapter" data-level="4.7.1" data-path="discriminant-analysis.html"><a href="discriminant-analysis.html#quadratic-discriminant-analysis-qda"><i class="fa fa-check"></i><b>4.7.1</b> Quadratic Discriminant Analysis (QDA)</a></li>
+<li class="chapter" data-level="4.7.2" data-path="discriminant-analysis.html"><a href="discriminant-analysis.html#naive-bayes"><i class="fa fa-check"></i><b>4.7.2</b> Naive Bayes</a></li>
+</ul></li>
+<li class="chapter" data-level="4.8" data-path="discriminant-analysis.html"><a href="discriminant-analysis.html#lda-vs-logistic-regression"><i class="fa fa-check"></i><b>4.8</b> LDA vs Logistic Regression</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="pw-4.html"><a href="pw-4.html"><i class="fa fa-check"></i>PW 4</a>
+<ul>
+<li class="chapter" data-level="" data-path="pw-4.html"><a href="pw-4.html#logistic-regression-2"><i class="fa fa-check"></i>Logistic Regression</a></li>
+<li class="chapter" data-level="" data-path="pw-4.html"><a href="pw-4.html#decision-boundary-of-logistic-regression"><i class="fa fa-check"></i>Decision Boundary of Logistic Regression</a></li>
+<li class="chapter" data-level="" data-path="pw-4.html"><a href="pw-4.html#linear-discriminant-analysis-lda"><i class="fa fa-check"></i>Linear Discriminant Analysis (LDA)</a></li>
+<li class="chapter" data-level="" data-path="pw-4.html"><a href="pw-4.html#lda-from-scratch"><i class="fa fa-check"></i>LDA from scratch</a></li>
+<li class="chapter" data-level="" data-path="pw-4.html"><a href="pw-4.html#quadratic-discriminant-analysis-qda-1"><i class="fa fa-check"></i>Quadratic Discriminant Analysis (QDA)</a></li>
+<li class="chapter" data-level="" data-path="pw-4.html"><a href="pw-4.html#comparison"><i class="fa fa-check"></i>Comparison</a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="decision-trees-random-forests.html"><a href="decision-trees-random-forests.html"><i class="fa fa-check"></i><b>5</b> Decision Trees &amp; Random Forests</a>
+<ul>
+<li class="chapter" data-level="" data-path="decision-trees-random-forests.html"><a href="decision-trees-random-forests.html#the-basics-of-decision-trees"><i class="fa fa-check"></i>The Basics of Decision Trees</a></li>
+<li class="chapter" data-level="" data-path="decision-trees-random-forests.html"><a href="decision-trees-random-forests.html#classification-trees"><i class="fa fa-check"></i>Classification Trees</a></li>
+<li class="chapter" data-level="" data-path="decision-trees-random-forests.html"><a href="decision-trees-random-forests.html#bagging-random-forests"><i class="fa fa-check"></i>Bagging &amp; Random Forests</a></li>
+<li class="chapter" data-level="" data-path="decision-trees-random-forests.html"><a href="decision-trees-random-forests.html#boosting"><i class="fa fa-check"></i>Boosting</a></li>
+<li><a href="decision-trees-random-forests.html#trees-in-r">Trees in <code>R</code></a></li>
+<li class="chapter" data-level="" data-path="decision-trees-random-forests.html"><a href="decision-trees-random-forests.html#random-forests---the-first-choice-method-for-every-data-analysis"><i class="fa fa-check"></i>Random forests - the first-choice method for every data analysis?</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="pw-5.html"><a href="pw-5.html"><i class="fa fa-check"></i>PW 5</a>
+<ul>
+<li class="chapter" data-level="" data-path="pw-5.html"><a href="pw-5.html#regression-trees"><i class="fa fa-check"></i>Regression Trees</a>
+<ul>
+<li class="chapter" data-level="" data-path="pw-5.html"><a href="pw-5.html#single-tree"><i class="fa fa-check"></i>Single tree</a></li>
+<li class="chapter" data-level="" data-path="pw-5.html"><a href="pw-5.html#bagging"><i class="fa fa-check"></i>Bagging</a></li>
+<li class="chapter" data-level="" data-path="pw-5.html"><a href="pw-5.html#random-forests"><i class="fa fa-check"></i>Random Forests</a></li>
+<li class="chapter" data-level="" data-path="pw-5.html"><a href="pw-5.html#boosting-1"><i class="fa fa-check"></i>Boosting</a></li>
+<li class="chapter" data-level="" data-path="pw-5.html"><a href="pw-5.html#comparison-1"><i class="fa fa-check"></i>Comparison</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="pw-5.html"><a href="pw-5.html#classification-trees-1"><i class="fa fa-check"></i>Classification Trees</a>
+<ul>
+<li class="chapter" data-level="" data-path="pw-5.html"><a href="pw-5.html#the-spam-dataset"><i class="fa fa-check"></i>The Spam dataset</a></li>
+<li class="chapter" data-level="" data-path="pw-5.html"><a href="pw-5.html#extra-tuning"><i class="fa fa-check"></i>Extra: Tuning</a></li>
+</ul></li>
+</ul></li>
+<li class="part"><span><b>II Dimensionality Reduction</b></span></li>
+<li class="chapter" data-level="6" data-path="principal-components-analysis.html"><a href="principal-components-analysis.html"><i class="fa fa-check"></i><b>6</b> Principal Components Analysis</a>
+<ul>
+<li class="chapter" data-level="6.1" data-path="principal-components-analysis.html"><a href="principal-components-analysis.html#introduction-3"><i class="fa fa-check"></i><b>6.1</b> Introduction</a></li>
+<li class="chapter" data-level="6.2" data-path="principal-components-analysis.html"><a href="principal-components-analysis.html#principal-components"><i class="fa fa-check"></i><b>6.2</b> Principal Components</a>
+<ul>
+<li class="chapter" data-level="" data-path="principal-components-analysis.html"><a href="principal-components-analysis.html#notations-and-procedure"><i class="fa fa-check"></i>Notations and Procedure</a></li>
+<li><a href="principal-components-analysis.html#first-principal-component-textpc_1-y_1">First Principal Component (<span class="math inline">\(\text{PC}_1\)</span>): <span class="math inline">\(Y_1\)</span></a></li>
+<li><a href="principal-components-analysis.html#second-principal-component-textpc_2-y_2">Second Principal Component (<span class="math inline">\(\text{PC}_2\)</span>): <span class="math inline">\(Y_2\)</span></a></li>
+<li><a href="principal-components-analysis.html#ith-principal-component-textpc_i-y_i"><span class="math inline">\(i^{th}\)</span> Principal Component (<span class="math inline">\(\text{PC}_i\)</span>): <span class="math inline">\(Y_i\)</span></a></li>
+</ul></li>
+<li class="chapter" data-level="6.3" data-path="principal-components-analysis.html"><a href="principal-components-analysis.html#how-do-we-find-the-coefficients"><i class="fa fa-check"></i><b>6.3</b> How do we find the coefficients?</a>
+<ul>
+<li class="chapter" data-level="" data-path="principal-components-analysis.html"><a href="principal-components-analysis.html#why-it-may-be-possible-to-reduce-dimensions"><i class="fa fa-check"></i>Why It May Be Possible to Reduce Dimensions</a></li>
+<li class="chapter" data-level="" data-path="principal-components-analysis.html"><a href="principal-components-analysis.html#procedure"><i class="fa fa-check"></i>Procedure</a></li>
+</ul></li>
+<li class="chapter" data-level="6.4" data-path="principal-components-analysis.html"><a href="principal-components-analysis.html#standardization-of-the-features"><i class="fa fa-check"></i><b>6.4</b> Standardization of the features</a></li>
+<li class="chapter" data-level="6.5" data-path="principal-components-analysis.html"><a href="principal-components-analysis.html#projection-of-the-data"><i class="fa fa-check"></i><b>6.5</b> Projection of the data</a>
+<ul>
+<li class="chapter" data-level="" data-path="principal-components-analysis.html"><a href="principal-components-analysis.html#scores"><i class="fa fa-check"></i>Scores</a></li>
+<li class="chapter" data-level="" data-path="principal-components-analysis.html"><a href="principal-components-analysis.html#visualization"><i class="fa fa-check"></i>Visualization</a></li>
+<li class="chapter" data-level="" data-path="principal-components-analysis.html"><a href="principal-components-analysis.html#extra"><i class="fa fa-check"></i>Extra</a></li>
+</ul></li>
+<li class="chapter" data-level="6.6" data-path="principal-components-analysis.html"><a href="principal-components-analysis.html#case-study"><i class="fa fa-check"></i><b>6.6</b> Case study</a>
+<ul>
+<li class="chapter" data-level="" data-path="principal-components-analysis.html"><a href="principal-components-analysis.html#employement-in-european-countries-in-the-late-70s"><i class="fa fa-check"></i>Employement in European countries in the late 70s</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="pw-6.html"><a href="pw-6.html"><i class="fa fa-check"></i>PW 6</a>
+<ul>
+<li class="chapter" data-level="" data-path="pw-6.html"><a href="pw-6.html#the-iris-dataset"><i class="fa fa-check"></i>The Iris Dataset</a></li>
+<li class="chapter" data-level="" data-path="pw-6.html"><a href="pw-6.html#loading-data-1"><i class="fa fa-check"></i>Loading Data</a></li>
+<li class="chapter" data-level="" data-path="pw-6.html"><a href="pw-6.html#exploratory-analysis"><i class="fa fa-check"></i>Exploratory analysis</a></li>
+<li><a href="pw-6.html#pca-using-princomp">PCA using <code>princomp()</code></a></li>
+<li><a href="pw-6.html#deeper-pca-using-factoextra-package">Deeper PCA using <code>factoextra</code> package</a></li>
+<li class="chapter" data-level="" data-path="pw-6.html"><a href="pw-6.html#step-by-step-pca"><i class="fa fa-check"></i>Step-by-step PCA</a></li>
+</ul></li>
+<li class="part"><span><b>III Unsupervised Learning</b></span></li>
+<li class="chapter" data-level="7" data-path="kmeans-hierarchical-clustering.html"><a href="kmeans-hierarchical-clustering.html"><i class="fa fa-check"></i><b>7</b> Kmeans &amp; Hierarchical Clustering</a>
+<ul>
+<li class="chapter" data-level="7.1" data-path="kmeans-hierarchical-clustering.html"><a href="kmeans-hierarchical-clustering.html#unsupervised-learning-1"><i class="fa fa-check"></i><b>7.1</b> Unsupervised Learning</a></li>
+<li class="chapter" data-level="7.2" data-path="kmeans-hierarchical-clustering.html"><a href="kmeans-hierarchical-clustering.html#clustering"><i class="fa fa-check"></i><b>7.2</b> Clustering</a></li>
+<li class="chapter" data-level="7.3" data-path="kmeans-hierarchical-clustering.html"><a href="kmeans-hierarchical-clustering.html#introduction-4"><i class="fa fa-check"></i><b>7.3</b> Introduction</a>
+<ul>
+<li class="chapter" data-level="" data-path="kmeans-hierarchical-clustering.html"><a href="kmeans-hierarchical-clustering.html#hard-clustering"><i class="fa fa-check"></i>Hard clustering</a></li>
+<li class="chapter" data-level="" data-path="kmeans-hierarchical-clustering.html"><a href="kmeans-hierarchical-clustering.html#fuzzy-clustering"><i class="fa fa-check"></i>Fuzzy clustering</a></li>
+</ul></li>
+<li class="chapter" data-level="7.4" data-path="kmeans-hierarchical-clustering.html"><a href="kmeans-hierarchical-clustering.html#k-means"><i class="fa fa-check"></i><b>7.4</b> <span class="math inline">\(k\)</span>-Means</a>
+<ul>
+<li class="chapter" data-level="7.4.1" data-path="kmeans-hierarchical-clustering.html"><a href="kmeans-hierarchical-clustering.html#k-means-in"><i class="fa fa-check"></i><b>7.4.1</b> <span class="math inline">\(k\)</span>-means in <svg style="height:0.8em;top:.04em;position:relative;fill:steelblue;" viewBox="0 0 581 512"><path d="M581 226.6C581 119.1 450.9 32 290.5 32S0 119.1 0 226.6C0 322.4 103.3 402 239.4 418.1V480h99.1v-61.5c24.3-2.7 47.6-7.4 69.4-13.9L448 480h112l-67.4-113.7c54.5-35.4 88.4-84.9 88.4-139.7zm-466.8 14.5c0-73.5 98.9-133 220.8-133s211.9 40.7 211.9 133c0 50.1-26.5 85-70.3 106.4-2.4-1.6-4.7-2.9-6.4-3.7-10.2-5.2-27.8-10.5-27.8-10.5s86.6-6.4 86.6-92.7-90.6-87.9-90.6-87.9h-199V361c-74.1-21.5-125.2-67.1-125.2-119.9zm225.1 38.3v-55.6c57.8 0 87.8-6.8 87.8 27.3 0 36.5-38.2 28.3-87.8 28.3zm-.9 72.5H365c10.8 0 18.9 11.7 24 19.2-16.1 1.9-33 2.8-50.6 2.9v-22.1z"/></svg></a></li>
+<li class="chapter" data-level="7.4.2" data-path="kmeans-hierarchical-clustering.html"><a href="kmeans-hierarchical-clustering.html#cluster-validity-choosing-the-number-of-clusters"><i class="fa fa-check"></i><b>7.4.2</b> Cluster Validity, Choosing the Number of Clusters</a></li>
+</ul></li>
+<li class="chapter" data-level="7.5" data-path="kmeans-hierarchical-clustering.html"><a href="kmeans-hierarchical-clustering.html#hierarchical-clustering"><i class="fa fa-check"></i><b>7.5</b> Hierarchical Clustering</a>
+<ul>
+<li class="chapter" data-level="7.5.1" data-path="kmeans-hierarchical-clustering.html"><a href="kmeans-hierarchical-clustering.html#dendrogram"><i class="fa fa-check"></i><b>7.5.1</b> Dendrogram</a></li>
+<li class="chapter" data-level="7.5.2" data-path="kmeans-hierarchical-clustering.html"><a href="kmeans-hierarchical-clustering.html#the-hierarchical-clustering-algorithm"><i class="fa fa-check"></i><b>7.5.2</b> The Hierarchical Clustering Algorithm</a></li>
+<li class="chapter" data-level="7.5.3" data-path="kmeans-hierarchical-clustering.html"><a href="kmeans-hierarchical-clustering.html#hierarchical-clustering-in"><i class="fa fa-check"></i><b>7.5.3</b> Hierarchical clustering in <svg style="height:0.8em;top:.04em;position:relative;fill:steelblue;" viewBox="0 0 581 512"><path d="M581 226.6C581 119.1 450.9 32 290.5 32S0 119.1 0 226.6C0 322.4 103.3 402 239.4 418.1V480h99.1v-61.5c24.3-2.7 47.6-7.4 69.4-13.9L448 480h112l-67.4-113.7c54.5-35.4 88.4-84.9 88.4-139.7zm-466.8 14.5c0-73.5 98.9-133 220.8-133s211.9 40.7 211.9 133c0 50.1-26.5 85-70.3 106.4-2.4-1.6-4.7-2.9-6.4-3.7-10.2-5.2-27.8-10.5-27.8-10.5s86.6-6.4 86.6-92.7-90.6-87.9-90.6-87.9h-199V361c-74.1-21.5-125.2-67.1-125.2-119.9zm225.1 38.3v-55.6c57.8 0 87.8-6.8 87.8 27.3 0 36.5-38.2 28.3-87.8 28.3zm-.9 72.5H365c10.8 0 18.9 11.7 24 19.2-16.1 1.9-33 2.8-50.6 2.9v-22.1z"/></svg></a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="pw-7.html"><a href="pw-7.html"><i class="fa fa-check"></i>PW 7</a>
+<ul>
+<li class="chapter" data-level="" data-path="pw-7.html"><a href="pw-7.html#reporting-1"><i class="fa fa-check"></i>Reporting</a>
+<ul>
+<li class="chapter" data-level="" data-path="pw-7.html"><a href="pw-7.html#markdown"><i class="fa fa-check"></i>Markdown</a></li>
+<li class="chapter" data-level="" data-path="pw-7.html"><a href="pw-7.html#r-markdown"><i class="fa fa-check"></i>R Markdown</a></li>
+<li class="chapter" data-level="" data-path="pw-7.html"><a href="pw-7.html#the-report-to-be-submitted"><i class="fa fa-check"></i>The report to be submitted</a></li>
+</ul></li>
+<li><a href="pw-7.html#k-means-clustering"><span class="math inline">\(k\)</span>-means clustering</a>
+<ul>
+<li><a href="pw-7.html#pointscards"><code>pointsCards</code></a></li>
+<li><a href="pw-7.html#ligue-1"><code>Ligue 1</code></a></li>
+<li><a href="pw-7.html#pca"><code>PCA</code></a></li>
+<li><a href="pw-7.html#implementing-k-means"><code>Implementing k-means</code></a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="pw-7.html"><a href="pw-7.html#hierarchical-clustering-1"><i class="fa fa-check"></i>Hierarchical clustering</a>
+<ul>
+<li><a href="pw-7.html#distances-dist">Distances <code>dist()</code></a></li>
+<li><a href="pw-7.html#dendrogram-hclust">Dendrogram <code>hclust()</code></a></li>
+<li class="chapter" data-level="" data-path="pw-7.html"><a href="pw-7.html#hierarchical-clustering-on-iris-dataset"><i class="fa fa-check"></i>Hierarchical clustering on Iris dataset</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="8" data-path="gaussian-mixture-models-em.html"><a href="gaussian-mixture-models-em.html"><i class="fa fa-check"></i><b>8</b> Gaussian Mixture Models &amp; EM</a>
+<ul>
+<li class="chapter" data-level="8.1" data-path="gaussian-mixture-models-em.html"><a href="gaussian-mixture-models-em.html#the-gaussian-distribution"><i class="fa fa-check"></i><b>8.1</b> The Gaussian distribution</a></li>
+<li class="chapter" data-level="8.2" data-path="gaussian-mixture-models-em.html"><a href="gaussian-mixture-models-em.html#mixture-of-gaussians"><i class="fa fa-check"></i><b>8.2</b> Mixture of Gaussians</a></li>
+<li class="chapter" data-level="8.3" data-path="gaussian-mixture-models-em.html"><a href="gaussian-mixture-models-em.html#em-for-gaussian-mixtures"><i class="fa fa-check"></i><b>8.3</b> EM for Gaussian Mixtures</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="pw-8.html"><a href="pw-8.html"><i class="fa fa-check"></i>PW 8</a>
+<ul>
+<li class="chapter" data-level="" data-path="pw-8.html"><a href="pw-8.html#report-template"><i class="fa fa-check"></i>Report template</a></li>
+<li class="chapter" data-level="8.4" data-path="pw-8.html"><a href="pw-8.html#em-using-mclust"><i class="fa fa-check"></i><b>8.4</b> EM using <code>mclust</code></a>
+<ul>
+<li><a href="pw-8.html#gmm-vs-k-means">GMM vs <span class="math inline">\(k\)</span>-means</a></li>
+<li class="chapter" data-level="" data-path="pw-8.html"><a href="pw-8.html#em-on-1d"><i class="fa fa-check"></i>EM on 1D</a></li>
+</ul></li>
+<li class="chapter" data-level="8.5" data-path="pw-8.html"><a href="pw-8.html#em-from-scratch"><i class="fa fa-check"></i><b>8.5</b> EM from scratch</a></li>
+</ul></li>
+<li class="part"><span><b>Hackathon</b></span></li>
+<li class="chapter" data-level="" data-path="hackathon.html"><a href="hackathon.html"><i class="fa fa-check"></i>Hackathon</a></li>
+<li class="appendix"><span><b>Appendix</b></span></li>
+<li class="chapter" data-level="A" data-path="final-grades.html"><a href="final-grades.html"><i class="fa fa-check"></i><b>A</b> Final Grades</a></li>
+<li class="chapter" data-level="B" data-path="app-introRStudio.html"><a href="app-introRStudio.html"><i class="fa fa-check"></i><b>B</b> Introduction to <code>RStudio</code></a></li>
+<li class="chapter" data-level="C" data-path="app-ht.html"><a href="app-ht.html"><i class="fa fa-check"></i><b>C</b> Review on hypothesis testing</a></li>
+<li class="chapter" data-level="D" data-path="use-qual.html"><a href="use-qual.html"><i class="fa fa-check"></i><b>D</b> Use of qualitative predictors</a></li>
+<li class="chapter" data-level="E" data-path="model-selection.html"><a href="model-selection.html"><i class="fa fa-check"></i><b>E</b> Model Selection</a>
+<ul>
+<li class="chapter" data-level="" data-path="model-selection.html"><a href="model-selection.html#linear-model-selection-and-best-subset-selection"><i class="fa fa-check"></i>Linear Model Selection and Best Subset Selection</a></li>
+<li class="chapter" data-level="" data-path="model-selection.html"><a href="model-selection.html#forward-stepwise-selection"><i class="fa fa-check"></i>Forward Stepwise Selection</a></li>
+<li class="chapter" data-level="" data-path="model-selection.html"><a href="model-selection.html#backward-stepwise-selection"><i class="fa fa-check"></i>Backward Stepwise Selection</a></li>
+<li class="chapter" data-level="" data-path="model-selection.html"><a href="model-selection.html#estimating-test-error-using-mallows-cp-aic-bic-adjusted-r-squared"><i class="fa fa-check"></i>Estimating Test Error Using Mallow’s Cp, AIC, BIC, Adjusted R-squared</a></li>
+<li class="chapter" data-level="" data-path="model-selection.html"><a href="model-selection.html#estimating-test-error-using-cross-validation"><i class="fa fa-check"></i>Estimating Test Error Using Cross-Validation</a></li>
+<li class="chapter" data-level="" data-path="model-selection.html"><a href="model-selection.html#examples"><i class="fa fa-check"></i>Examples</a>
+<ul>
+<li class="chapter" data-level="" data-path="model-selection.html"><a href="model-selection.html#best-subset-selection"><i class="fa fa-check"></i>Best Subset Selection</a></li>
+<li class="chapter" data-level="" data-path="model-selection.html"><a href="model-selection.html#forward-stepwise-selection-and-model-selection-using-validation-set"><i class="fa fa-check"></i>Forward Stepwise Selection and Model Selection Using Validation Set</a></li>
+<li class="chapter" data-level="" data-path="model-selection.html"><a href="model-selection.html#model-selection-using-cross-validation"><i class="fa fa-check"></i>Model Selection Using Cross-Validation</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="F" data-path="references-and-credits.html"><a href="references-and-credits.html"><i class="fa fa-check"></i><b>F</b> References and Credits</a></li>
+<li class="chapter" data-level="G" data-path="other-references.html"><a href="other-references.html"><i class="fa fa-check"></i><b>G</b> Other References</a></li>
+<li class="chapter" data-level="" data-path="main-references-credits.html"><a href="main-references-credits.html"><i class="fa fa-check"></i>Main References &amp; Credits</a></li>
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Machine Learning</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div class="rmdreview">
+    If you find any typos, errors, or places where the text may be improved, please let me know by adding an annotation using <a href="https://hypothes.is">hypothes.is</a>. To add an annotation, <span style="background-color: #3297FD; color: white">select some text</span> and then click the
+      <span class="svg-icon--inline"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" class="annotator-adder-actions__icon">
+      <path fill="currentColor" fill-rule="nonzero" d="M15 0c.27 0 .505.099.703.297A.961.961 0 0116 1v15l-4-3H1a.974.974 0 01-.703-.29A.953.953 0 010 12V1C0 .719.096.482.29.29A.966.966 0 011 0h14zM7 3l-.469.063c-.312.041-.656.187-1.031.437-.375.25-.719.646-1.031 1.188C4.156 5.229 4 6 4 7l.002.063.006.062a.896.896 0 01.008.11l-.002.074-.006.066a1.447 1.447 0 00.43 1.188C4.729 8.854 5.082 9 5.5 9c.417 0 .77-.146 1.063-.438C6.854 8.271 7 7.918 7 7.5c0-.417-.146-.77-.438-1.063A1.447 1.447 0 005.5 6c-.073 0-.146.005-.219.016-.073.01-.14.026-.203.046.177-1.03.542-1.632 1.094-1.804L7 4V3zm5 0l-.469.063c-.312.041-.656.187-1.031.437-.375.25-.719.646-1.031 1.188C9.156 5.229 9 6 9 7l.002.063.006.062a.896.896 0 01.008.11l-.002.074-.006.066a1.447 1.447 0 00.43 1.188c.291.291.645.437 1.062.437.417 0 .77-.146 1.063-.438.291-.291.437-.645.437-1.062 0-.417-.146-.77-.438-1.063A1.447 1.447 0 0010.5 6c-.073 0-.146.005-.219.016-.073.01-.14.026-.203.046.177-1.03.542-1.632 1.094-1.804L12 4V3z"></path>
+    </svg>
+    </span>
+      on the pop-up menu.
+      To see the annotations of others, click the
+      <span class="svg-icon--inline"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" class=""><g fill-rule="evenodd"><rect fill="none" stroke="none" x="0" y="0" width="16" height="16"></rect><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 12L6 8l4-4"></path></g></svg>
+</span>
+      in the upper right-hand corner of the page.
+    </p>
+</div>
+<div id="multiple-linear-regression" class="section level1" number="2">
+<h1><span class="header-section-number">2</span> Multiple Linear Regression</h1>
+<p>Simple linear regression is a useful approach for predicting a response on the basis of a single predictor variable. However, in practice we often have more than one predictor.
+In the previous chapter, we took for example the prediction of housing prices considering we had the size of each house. We had a single feature <span class="math inline">\(X\)</span>, the size of the house. But now imagine if we had not only the size of the house as a feature but we also knew the number of bedrooms, the number of flours and the age of the house in years. It seems like this would give us a lot more information with which to predict the price.</p>
+<div id="the-model" class="section level2" number="2.1">
+<h2><span class="header-section-number">2.1</span> The Model</h2>
+<p>In general, suppose that we have <span class="math inline">\(p\)</span> distinct predictors. Then the multiple linear regression model takes the form</p>
+<p><span class="math display">\[ Y = \beta_0 + \beta_1 X_1 + \beta_2 X_2 + \dots + \beta_p X_p + \epsilon \]</span></p>
+<p>where <span class="math inline">\(X_j\)</span> represents the <span class="math inline">\(j\)</span>th predictor and <span class="math inline">\(\beta_j\)</span> quantifies the association between that variable and the response. We interpret <span class="math inline">\(\beta_j\)</span> as the average effect on <span class="math inline">\(Y\)</span> of a one unit increase in <span class="math inline">\(X_j\)</span>, <em>holding all other predictors fixed</em>.</p>
+<p>In matrix terms, supposing we have <span class="math inline">\(n\)</span> observations and <span class="math inline">\(p\)</span> variables, we need to define the following matrices:</p>
+<p><span class="math display">\[\begin{equation}
+ \textbf{Y}_{n \times 1} = \begin{pmatrix}
+    Y_{1} \\
+    Y_{2} \\
+    \vdots \\
+    Y_{n}
+\end{pmatrix}   \,\,\,\,\,\,\,\,\,\,\,\,  \textbf{X}_{n \times (p+1)}  = \begin{pmatrix}
+    1      &amp; X_{11} &amp; X_{12} &amp; \dots  &amp; X_{1p} \\
+    1      &amp; X_{21} &amp; X_{22} &amp; \dots  &amp; X_{2p} \\
+    \vdots &amp; \vdots &amp; \vdots &amp; \ddots &amp; \vdots \\
+    1      &amp; X_{n1} &amp; X_{n2} &amp; \dots  &amp; X_{np}
+\end{pmatrix}
+\end{equation}\]</span></p>
+<p><span class="math display">\[\begin{equation}
+ {\mathbb{\beta}}_{(p+1) \times 1} = \begin{pmatrix}
+    \beta_{0} \\
+    \beta_{1} \\
+    \vdots \\
+    \beta_{p}
+    \end{pmatrix}   \,\,\,\,\,\,\,\,\,\,\,\,  {\epsilon}_{n \times 1} = \begin{pmatrix}
+        \epsilon_{1} \\
+        \epsilon_{2} \\
+        \vdots \\
+        \epsilon_{n}
+    \end{pmatrix}
+\end{equation}\]</span></p>
+<p>In matrix terms, the general linear regression model is</p>
+<p><span class="math display">\[ \textbf{Y}_{n \times 1} = \textbf{X}_{n \times (p+1)} {\mathbb{\beta}}_{(p+1) \times 1} + {\epsilon}_{n \times 1} \]</span></p>
+<p>where,</p>
+<ul>
+<li><span class="math inline">\(\textbf{Y}\)</span> is a vector of responses.</li>
+<li><span class="math inline">\(\mathbb{\beta}\)</span> is a vector of parameters.</li>
+<li><span class="math inline">\(\textbf{X}\)</span> is a matrix of constants.</li>
+<li><span class="math inline">\(\epsilon\)</span> is a vector of independent <em>normal</em> (Gaussian) random variables.</li>
+</ul>
+</div>
+<div id="estimating-the-regression-coefficients" class="section level2" number="2.2">
+<h2><span class="header-section-number">2.2</span> Estimating the Regression Coefficients</h2>
+<p>As was the case in the simple linear regression setting, the regression coefficients <span class="math inline">\(\beta_{0}, \beta_{1}, \ldots, \beta_{p}\)</span> are unknown, and must be estimated. Given estimates <span class="math inline">\(\hat{\beta_{0}}, \hat{\beta_{1}}, \ldots, \hat{\beta_{p}}\)</span>, we can make predictions using the formula</p>
+<p><span class="math display">\[ \hat{y} = \hat{\beta_{0}} + \hat{\beta_{1}} x_1 + \hat{\beta_{2}} x_2 + \ldots + \hat{\beta_{p}} x_p \]</span></p>
+<p>We choose <span class="math inline">\(\beta_{0}, \beta_{1}, \ldots, \beta_{p}\)</span> to minimize the residual sum of squares</p>
+<p><span class="math display">\[ \begin{aligned}
+RSS &amp;= \sum_{i=1}^{n} (y_i - \hat{y}_i)^2 \\
+    &amp;= \sum_{i=1}^{n} (y_i - \hat{\beta_0} - \hat{\beta_1} {x}_{i1}  - \hat{\beta_2} {x}_{i2} - \ldots  -  \hat{\beta_p} {x}_{ip})^2 \\
+\end{aligned}
+\]</span></p>
+<p>The values <span class="math inline">\(\hat{\beta_{0}}, \hat{\beta_{1}}, \ldots, \hat{\beta_{p}}\)</span> that minimize the RSS are the multiple least squares regression coefficient estimates, they are calculated using this formula (in matrix terms):</p>
+<p><span class="math display">\[ \hat{\beta} = (\textbf{X}^T \textbf{X})^{-1}\textbf{X}^T \textbf{Y} \]</span></p>
+<p>To obtain <span class="math inline">\(\hat{\beta}\)</span>, we can write the residual sum of squares as</p>
+<p><span class="math display">\[ RSS = (\textbf{Y}-\textbf{X}\beta)^T(\textbf{Y}-\textbf{X}\beta) \]</span></p>
+<p>This is a quadratic function in the <span class="math inline">\(p+1\)</span> parameters. Differentiating with respect to <span class="math inline">\(\beta\)</span> we obtain
+<span class="math display">\[ \begin{aligned}
+\frac{\partial RSS}{\partial \beta} &amp;= -2\textbf{X}^T(\textbf{Y}-\textbf{X}\beta) \\
+\frac{\partial^2 RSS}{\partial \beta \partial \beta^T}   &amp;= 2\textbf{X}^T\textbf{X}.\\
+\end{aligned}
+\]</span></p>
+<p>Assuming (for the moment) that <span class="math inline">\(\textbf{X}\)</span> has full column rank, and hence <span class="math inline">\(\textbf{X}^T\textbf{X}\)</span> is positive definite<a href="#fn7" class="footnote-ref" id="fnref7"><sup>7</sup></a>, we set the first derivative to zero</p>
+<p><span class="math display">\[\textbf{X}^T(\textbf{Y}-\textbf{X}\beta)=0\]</span>
+to obtain the unique solution</p>
+<p><span class="math display">\[ \hat{\beta} = (\textbf{X}^T \textbf{X})^{-1}\textbf{X}^T \textbf{Y} \]</span></p>
+<p>Note 1:</p>
+<div class="rmdinsight">
+<p>It is a remarkable property of matrix algebra that the results for the general linear regression model in matrix notation appear exactly as those for the simple linear regression model. Only the degrees of freedom and other constants related to the number of <span class="math inline">\(X\)</span> variables and the dimensions of some matrices are different. Which means there are some similarities between <span class="math inline">\(\hat{\beta} = (\textbf{X}^T \textbf{X})^{-1}\textbf{X}^T \textbf{Y}\)</span> and <span class="math inline">\(\hat\beta_1=(s_x^2)^{-1}s_{xy}\)</span> from the simple linear model: both are related to the covariance between <span class="math inline">\(\mathbf{X}\)</span> and <span class="math inline">\(\mathbf{Y}\)</span> weighted by the variance of <span class="math inline">\(\mathbf{X}\)</span>.</p>
+</div>
+<p>Note 2:</p>
+<div class="rmdinsight">
+<p>If <span class="math inline">\(\textbf{X}^T \textbf{X}\)</span> is noninvertible, the common causes might be having:</p>
+<ul>
+<li>Redundant features, where two features are very closely related (i.e. they are linearly dependent)</li>
+<li>Too many features (e.g. <span class="math inline">\(p \geq n\)</span>). In this case, we delete some features or we use “regularization” (to be, maybe, explained in a later lesson).</li>
+</ul>
+</div>
+</div>
+<div id="some-important-questions" class="section level2" number="2.3">
+<h2><span class="header-section-number">2.3</span> Some important questions</h2>
+<p>When we perform multiple linear regression, we usually are interested in answering a few important questions.</p>
+<ol style="list-style-type: decimal">
+<li>Is at least one of the predictors <span class="math inline">\(X_1 ,X_2 ,\ldots,X_p\)</span> useful in predicting the response?</li>
+<li>Do all the predictors help to explain <span class="math inline">\(Y\)</span>, or is only a subset of the predictors useful?</li>
+<li>How well does the model fit the data?</li>
+<li>Given a set of predictor values, what response value should we predict, and how accurate is our prediction?</li>
+</ol>
+<p><strong><em>Relationship Between the Response and Predictors?</em></strong></p>
+<p><strong><span class="math inline">\(F\)</span>-Statistic</strong></p>
+<p>Recall that in the simple linear regression setting, in order to determine whether there is a relationship between the response and the predictor we can simply check whether <span class="math inline">\(\beta_1 = 0\)</span>. In the multiple regression setting with <span class="math inline">\(p\)</span> predictors, we need to ask whether all of the regression coefficients are zero, i.e. whether <span class="math inline">\(\beta_1 = \beta_2 = \ldots = \beta_p = 0\)</span>. As in the simple linear regression setting, we use a hypothesis test to answer this question. We test the null hypothesis,</p>
+<p><span class="math display">\[ H_0 : \beta_1 = \beta_2 = \ldots = \beta_p = 0 \]</span></p>
+<p>versus the alternative hypothesis</p>
+<p><span class="math display">\[ H_1 : \text{at least one} \, \beta_j \, \text{is non-zero} \]</span></p>
+<p>This hypothesis test is performed by computing the <span class="math inline">\(F\)</span>-statistic (<em>Fisher</em>):</p>
+<p><span class="math display">\[ F = \frac{ (\text{TSS} - \text{RSS})/p}{\text{RSS}/(n-p-1)} \sim F_{p,n-p-1} \]</span></p>
+<p>where, as with simple linear regression, <span class="math inline">\(\text{TSS} = \sum (y_i - \bar{y})^2\)</span> and <span class="math inline">\(\text{RSS} = \sum (y_i - \hat{y}_i)^2\)</span>.</p>
+<p>Note that <span class="math inline">\(F_{p,n-p-1}\)</span> represents the <em>Fisher-Snedecor’s <span class="math inline">\(F\)</span> distribution</em> with <span class="math inline">\(p\)</span> and <span class="math inline">\(n-p-1\)</span> degrees of freedom. If <span class="math inline">\(H_0\)</span> is true, then <span class="math inline">\(F\)</span> is expected to be <em>small</em> since ESS<a href="#fn8" class="footnote-ref" id="fnref8"><sup>8</sup></a> will be close to zero (little variation is explained by the regression model since <span class="math inline">\(\hat{\boldsymbol{\beta}}\approx\mathbf{0}\)</span>).</p>
+<p>So the question we ask here: <em>Is the whole regression explaining anything at all?</em> The answer comes from the <span class="math inline">\(F\)</span>-test in the ANOVA (ANalysis Of VAriance) table. This is what we get in an ANOVA table:</p>
+<table>
+<thead>
+<tr class="header">
+<th>Source</th>
+<th>df</th>
+<th>SS</th>
+<th>MS</th>
+<th><span class="math inline">\(F\)</span></th>
+<th>p-value</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Factor (Explained)</td>
+<td><span class="math inline">\(p\)</span></td>
+<td>ESS=SSR</td>
+<td>MSR=ESS/<span class="math inline">\((p)\)</span></td>
+<td>F=MSR/MSE</td>
+<td>p-value</td>
+</tr>
+<tr class="even">
+<td>Error (Unexplained)</td>
+<td><span class="math inline">\(n-p-1\)</span></td>
+<td>RSS=SSE</td>
+<td>MSE=RSS/<span class="math inline">\((n-p-1)\)</span></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="odd">
+<td>Total</td>
+<td><span class="math inline">\(n-1\)</span></td>
+<td>TSS=SST</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<p>The ANOVA table has many pieces of information. What we care about is the <span class="math inline">\(F\)</span> Ratio and the corresponding p-value. We compare the <span class="math inline">\(F\)</span> Ratio with <span class="math inline">\(F_{(p,n-p-1)}\)</span> and a corresponding <span class="math inline">\(\alpha\)</span> value (error).</p>
+<div class="rmdcaution">
+<p>
+The “ANOVA table” is a broad concept in statistics, with different variants. Here we are only covering the basic ANOVA table from the relation <span class="math inline"><span class="math inline">\(\text{SST} = \text{SSR} + \text{SSE}\)</span></span>. However, further sophistications are possible when <span class="math inline"><span class="math inline">\(\text{SSR}\)</span></span> is decomposed into the variations contributed by <em>each</em> predictor. In particular, for multiple linear regression <code>r fontawesome::fa(“r-project,” fill =“steelblue”)</code>’s <code>anova</code> implements a <em>sequential (type I) ANOVA table</em>, which is <strong>not</strong> the previous table!
+</p>
+</div>
+<p>The <code>anova</code> function in <svg style="height:0.8em;top:.04em;position:relative;fill:steelblue;" viewBox="0 0 581 512"><path d="M581 226.6C581 119.1 450.9 32 290.5 32S0 119.1 0 226.6C0 322.4 103.3 402 239.4 418.1V480h99.1v-61.5c24.3-2.7 47.6-7.4 69.4-13.9L448 480h112l-67.4-113.7c54.5-35.4 88.4-84.9 88.4-139.7zm-466.8 14.5c0-73.5 98.9-133 220.8-133s211.9 40.7 211.9 133c0 50.1-26.5 85-70.3 106.4-2.4-1.6-4.7-2.9-6.4-3.7-10.2-5.2-27.8-10.5-27.8-10.5s86.6-6.4 86.6-92.7-90.6-87.9-90.6-87.9h-199V361c-74.1-21.5-125.2-67.1-125.2-119.9zm225.1 38.3v-55.6c57.8 0 87.8-6.8 87.8 27.3 0 36.5-38.2 28.3-87.8 28.3zm-.9 72.5H365c10.8 0 18.9 11.7 24 19.2-16.1 1.9-33 2.8-50.6 2.9v-22.1z"/></svg> takes a model as an input and returns the following <em>sequential</em> ANOVA table<a href="#fn9" class="footnote-ref" id="fnref9"><sup>9</sup></a>:</p>
+<table>
+<colgroup>
+<col width="19%" />
+<col width="16%" />
+<col width="11%" />
+<col width="12%" />
+<col width="22%" />
+<col width="18%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th></th>
+<th>Degrees of freedom</th>
+<th>Sum Squares</th>
+<th>Mean Squares</th>
+<th><span class="math inline">\(F\)</span>-value</th>
+<th><span class="math inline">\(p\)</span>-value</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Predictor 1</td>
+<td><span class="math inline">\(1\)</span></td>
+<td>ESS<span class="math inline">\(_1\)</span></td>
+<td><span class="math inline">\(\frac{\text{ESS}_1}{1}\)</span></td>
+<td><span class="math inline">\(\frac{\text{ESS}_1/1}{\text{RSS}/(n-p-1)}\)</span></td>
+<td><span class="math inline">\(p_1\)</span></td>
+</tr>
+<tr class="even">
+<td>Predictor 2</td>
+<td><span class="math inline">\(1\)</span></td>
+<td>ESS<span class="math inline">\(_2\)</span></td>
+<td><span class="math inline">\(\frac{\text{ESS}_2}{1}\)</span></td>
+<td><span class="math inline">\(\frac{\text{ESS}_2/1}{\text{RSS}/(n-p-1)}\)</span></td>
+<td><span class="math inline">\(p_2\)</span></td>
+</tr>
+<tr class="odd">
+<td><span class="math inline">\(\vdots\)</span></td>
+<td><span class="math inline">\(\vdots\)</span></td>
+<td><span class="math inline">\(\vdots\)</span></td>
+<td><span class="math inline">\(\vdots\)</span></td>
+<td><span class="math inline">\(\vdots\)</span></td>
+<td><span class="math inline">\(\vdots\)</span></td>
+</tr>
+<tr class="even">
+<td>Predictor <span class="math inline">\(p\)</span></td>
+<td><span class="math inline">\(1\)</span></td>
+<td>ESS<span class="math inline">\(_p\)</span></td>
+<td><span class="math inline">\(\frac{\text{ESS}_p}{1}\)</span></td>
+<td><span class="math inline">\(\frac{\text{ESS}_p/1}{\text{RSS}/(n-p-1)}\)</span></td>
+<td><span class="math inline">\(p_p\)</span></td>
+</tr>
+<tr class="odd">
+<td>Residuals</td>
+<td><span class="math inline">\(n - p - 1\)</span></td>
+<td>RSS</td>
+<td><span class="math inline">\(\frac{\text{RSS}}{n-p-1}\)</span></td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<p>Here the ESS<span class="math inline">\(_j\)</span> represents the explained sum of squares (same as regression sum of squares) associated to the inclusion of <span class="math inline">\(X_j\)</span> in the model with predictors <span class="math inline">\(X_1,\ldots,X_{j-1}\)</span>, this is:
+<span class="math display">\[
+\text{ESS}_j=\text{ESS}(X_1,\ldots,X_j)-\text{ESS}(X_1,\ldots,X_{j-1}).
+\]</span>
+The <span class="math inline">\(p\)</span>-values <span class="math inline">\(p_1,\ldots,p_p\)</span> correspond to the testing of the hypotheses
+<span class="math display">\[\begin{align*}
+H_0:\beta_j=0\quad\text{vs.}\quad H_1:\beta_j\neq 0,
+\end{align*}\]</span>
+carried out <em>inside the linear model</em> <span class="math inline">\(Y=\beta_0+\beta_1X_1+\ldots+\beta_jX_j+\varepsilon\)</span>. This is like the <span class="math inline">\(t\)</span>-test for <span class="math inline">\(\beta_j\)</span> for the model with predictors <span class="math inline">\(X_1,\ldots,X_j\)</span>. Recall that there is no <span class="math inline">\(F\)</span>-test in this version of the ANOVA table.</p>
+<p><strong>p-values</strong></p>
+<p>The p-values provide information about whether each individual predictor is related to the response, after adjusting for the other predictors. Let’s look at the following table we obtain in general using a statistical software for example</p>
+<table>
+<thead>
+<tr class="header">
+<th></th>
+<th>Coefficient</th>
+<th>Std. error</th>
+<th><span class="math inline">\(t\)</span>-statistic</th>
+<th>p-value</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Constant</td>
+<td>2.939</td>
+<td>0.3119</td>
+<td>9.42</td>
+<td>&lt;0.0001</td>
+</tr>
+<tr class="even">
+<td><span class="math inline">\(X_1\)</span></td>
+<td>0.046</td>
+<td>0.0014</td>
+<td>32.81</td>
+<td>&lt;0.0001</td>
+</tr>
+<tr class="odd">
+<td><span class="math inline">\(X_2\)</span></td>
+<td>0.189</td>
+<td>0.0086</td>
+<td>21.89</td>
+<td>&lt;0.0001</td>
+</tr>
+<tr class="even">
+<td><span class="math inline">\(X_3\)</span></td>
+<td>-0.001</td>
+<td>0.0059</td>
+<td>-0.18</td>
+<td>0.8599</td>
+</tr>
+</tbody>
+</table>
+<p>In this table we have the following model</p>
+<p><span class="math display">\[ Y = 2.939 + 0.046 X_1 + 0.189 X_2 - 0.001 X_3 \]</span></p>
+<p>Note that for each individual predictor a <span class="math inline">\(t\)</span>-statistic and a p-value were reported. These p-values indicate that <span class="math inline">\(X_1\)</span> and <span class="math inline">\(X_2\)</span> are related to <span class="math inline">\(Y\)</span>, but that there is no evidence that <span class="math inline">\(X_3\)</span> is associated with <span class="math inline">\(Y\)</span>, in the presence of these two.</p>
+<p><strong><em>Deciding on Important Variables</em></strong></p>
+<p>The most direct approach is called <em>all subsets</em> or <em>best subsets</em> regression: we compute the least squares fit for all possible subsets and then choose between them based on some criterion that balances training error with model size.</p>
+<p>However we often can’t examine all possible models, since they are <span class="math inline">\(2^p\)</span> of them; for example when <span class="math inline">\(p = 40\)</span> there are over a billion models! Instead we need an automated approach that searches through a subset of them. Here are two commonly use approaches:</p>
+<p><strong>Forward selection</strong>:</p>
+<ul>
+<li>Begin with the <em>null model</em> — a model that contains an intercept (constant) but no predictors.</li>
+<li>Fit <span class="math inline">\(p\)</span> simple linear regressions and add to the null model the variable that results in the lowest RSS.</li>
+<li>Add to that model the variable that results in the lowest RSS amongst all two-variable models.</li>
+<li>Continue until some stopping rule is satisfied, for example when all remaining variables have a p-value above some threshold.</li>
+</ul>
+<p><strong>Backward selection</strong>:</p>
+<ul>
+<li>Start with all variables in the model.</li>
+<li>Remove the variable with the largest p-value — that is, the variable that is the least statistically significant.</li>
+<li>The new <span class="math inline">\((p − 1)\)</span>-variable model is fit, and the variable with the largest p-value is removed.</li>
+<li>Continue until a stopping rule is reached. For instance, we may stop when all remaining variables have a significant p-value defined by some significance threshold.</li>
+</ul>
+<div class="rmdinsight">
+<p>There are more systematic criteria for choosing an “optimal” member in the path of models produced by forward or backward stepwise selection. These include <em>Mallow’s <span class="math inline">\(C_p\)</span></em> , <em>Akaike information criterion (AIC)</em>, <em>Bayesian information criterion (BIC)</em>, <em>adjusted <span class="math inline">\(R^2\)</span></em> and <em>Cross-validation (CV)</em>.</p>
+</div>
+<p><strong><em>Model Fit</em></strong></p>
+<p>Two of the most common numerical measures of model fit are the RSE and <span class="math inline">\(R^2\)</span>, the fraction of variance explained. These quantities are computed and interpreted in the same fashion as for simple linear regression. Recall that in simple regression, <span class="math inline">\(R^2\)</span> is the square of the correlation of the response and the variable. In multiple linear regression, it turns out that it equals <span class="math inline">\(Cor(Y, \hat{Y})^2\)</span> , the square of the correlation between the response and the fitted linear model; in fact one property of the fitted linear model is that it maximizes this correlation among all possible linear models. An <span class="math inline">\(R^2\)</span> value close to 1 indicates that the model explains a large portion of the variance in the response variable.</p>
+<p>In general RSE is defined as</p>
+<p><span class="math display">\[ \text{RSE} = \sqrt{\frac{1}{n-p-1}\text{RSS}} \]</span></p>
+<div id="other-consid" class="section level3" number="2.3.1">
+<h3><span class="header-section-number">2.3.1</span> Other Considerations in Regression Model</h3>
+<p><strong>Qualitative Predictors</strong></p>
+<ul>
+<li>If we have a categorial (qualitative) variable (feature), how do we fit into a regression equation?</li>
+<li>For example, if <span class="math inline">\(X_1\)</span> is the gender (male or female).</li>
+<li>We can code, for example, male = 0 and female = 1.</li>
+<li>Suppose <span class="math inline">\(X_2\)</span> is a quantitative variable, the regression equation becomes:</li>
+</ul>
+<p><span class="math display">\[ Y_i \approx \beta_0 + \beta_1 X_1 + \beta_2 X_2 = \begin{cases}
+  \beta_0 + \beta_2 X_2 &amp; \text{ if male} \\
+  \beta_0 + \beta_1 X_1 + \beta_2 X_2 &amp; \text{ if female}
+\end{cases} \]</span></p>
+<ul>
+<li>Another possible coding scheme is to let male = -1 and female = 1, the regression equation is then:</li>
+</ul>
+<p><span class="math display">\[ Y_i \approx \beta_0 + \beta_1 X_1 + \beta_2 X_2 = \begin{cases}
+  \beta_0 -\beta_1 X_1 + \beta_2 X_2 &amp; \text{ if male} \\
+  \beta_0 + \beta_1 X_1 + \beta_2 X_2 &amp; \text{ if female}
+\end{cases} \]</span></p>
+<p><strong>Interaction Terms</strong></p>
+<ul>
+<li>When the effect on <span class="math inline">\(Y\)</span> of increasing <span class="math inline">\(X_1\)</span> depends on another <span class="math inline">\(X_2\)</span>.</li>
+<li>We may in this case try the model</li>
+</ul>
+<p><span class="math display">\[ Y_i = \beta_0 + \beta_1 X_1 + \beta_2 X_2 + \beta_3 X_1 X_2 \]</span></p>
+<ul>
+<li><span class="math inline">\(X_1 X_2\)</span> is the Interaction term.</li>
+</ul>
+</div>
+</div>
+<div id="how-to-select-the-best-performing-model" class="section level2" number="2.4">
+<h2><span class="header-section-number">2.4</span> How to select the best performing model</h2>
+<p>After trying different linear models, you need to make a choice which model you want to use. More specifically, the questions that one can ask: “How to determine which model suits best to my data? Do I just look at the R square, SSE, etc.?” and “As the interpretation of that model (quadratic, root, etc.) will be very different, won’t it be an issue?”</p>
+<p>The second question can be answered easily. First, find a model that best suits to your data and then interpret its results. It is good if you have ideas how your data might be explained. However, interpret the best model, only. Now we will address the first question. Note that there are multiple ways to select a best model. In addition, this approach only applies to univariate models (simple models) whith just one input variable.</p>
+<p>Use the following <strong>interactive application</strong> and play around with different datasets and models. Notice how parameters change and become more confident with assessing simple linear models.</p>
+<iframe src="https://bjoernhartmann.shinyapps.io/linear_model_selection/?showcase=0" width="100%" height="900px">
+</iframe>
+<div id="use-the-adjusted-r_adj2-for-multivariate-models" class="section level3 unnumbered">
+<h3>Use the Adjusted <span class="math inline">\(R_{adj}^2\)</span> for multivariate models</h3>
+<p>If you only use one input variable, the adjusted <span class="math inline">\(R_{adj}^2\)</span> value gives you a good indication of how well your model performs. It illustrates how much variation is explained by your model.</p>
+<p>In contrast to the simple <span class="math inline">\(R^2\)</span><a href="#fn10" class="footnote-ref" id="fnref10"><sup>10</sup></a>, the adjusted adjusted <span class="math inline">\(R_{adj}^2\)</span><a href="#fn11" class="footnote-ref" id="fnref11"><sup>11</sup></a> takes the number of input factors into account. It penalizes too many input factors and favors parsimonious models.</p>
+<p>The adjusted <span class="math inline">\(R_{adj}^2\)</span> is sensitive to the amount of noise in the data. As such, only compare this indicator of models for the same dataset than comparing it across different datasets.</p>
+
+<div class="figure" style="text-align: center"><span id="fig:R2"></span>
+<img src="img/R2vsAdjR2.png" alt="Comparison of \(R^2\) and \(R^2_{\text{adj}}\) for \(n=200\) and \(p\) ranging from \(1\) to \(198\). \(M=100\) datasets were simulated with only the first two predictors being significant. The thicker curves are the mean of each color’s curves." width="70%" />
+<p class="caption">
+Figure 2.1: Comparison of <span class="math inline">\(R^2\)</span> and <span class="math inline">\(R^2_{\text{adj}}\)</span> for <span class="math inline">\(n=200\)</span> and <span class="math inline">\(p\)</span> ranging from <span class="math inline">\(1\)</span> to <span class="math inline">\(198\)</span>. <span class="math inline">\(M=100\)</span> datasets were simulated with <strong>only the first two</strong> predictors being significant. The thicker curves are the mean of each color’s curves.
+</p>
+</div>
+<p>Figure <a href="multiple-linear-regression.html#fig:R2">2.1</a> contains the results of an experiment where 100 datasets were simulated with <strong>only the first two</strong> predictors being significant. As you can see <span class="math inline">\(R^2\)</span> increases linearly with the number of predictors considered, although only the first two ones were important! On the contrary, <span class="math inline">\(R^2_\text{adj}\)</span> only increases in the first two variables and then is flat on average, but it has a huge variability when <span class="math inline">\(p\)</span> approaches <span class="math inline">\(n-2\)</span>. The experiment evidences that <strong><span class="math inline">\(R^2_\text{adj}\)</span> is more adequate than the <span class="math inline">\(R^2\)</span> for evaluating the fit of a multiple linear regression</strong>.</p>
+</div>
+<div id="have-a-look-at-the-residuals-or-error-terms" class="section level3 unnumbered">
+<h3>Have a look at the residuals or error terms</h3>
+<p>What is often ignored are error terms or so-called residuals. They often tell you more than what you might think. The residuals are the difference between your predicted values and the actual values. Their benefit is that they can show both the magnitude as well as the direction of the errors.</p>
+<p>Let’s have a look at an example:</p>
+<center>
+<img src="img/residuals.png" />
+</center>
+<p>Here, we try to predict a polynomial dataset with a linear function. Analyzing the residuals shows that there are areas where the model has an upward or downward bias.</p>
+<p>For <code>50 &lt; x &lt; 100</code>, the residuals are above zero. So in this area, the actual values have been higher than the predicted values — our model has a downward bias.</p>
+<p>For <code>100 &lt; x &lt; 150</code>, however, the residuals are below zero. Thus, the actual values have been lower than the predicted values — the model has an upward bias.</p>
+<p>It is always good to know, whether your model suggests too high or too low values. But you usually do not want to have patterns like this.</p>
+<p>The residuals should be zero on average (as indicated by the mean) and they should be equally distributed. Predicting the same dataset with a polynomial function of <code>3 degrees</code> suggests a much better fit:</p>
+<center>
+<img src="img/residuals2.png" />
+</center>
+<p>In addition, you can observe whether the variance of your errors increases. In statistics, this is called <a href="https://en.wikipedia.org/wiki/Heteroscedasticity">Heteroscedasticity</a>. You can fix this easily with robust standard errors. Otherwise, your hypothesis tests are likely to be wrong.</p>
+</div>
+<div id="histogram-of-residuals" class="section level3 unnumbered">
+<h3>Histogram of residuals</h3>
+<p>Finally, the histogram summarizes the magnitude of your error terms. It provides information about the bandwidth of errors and indicates how often which errors occurred.</p>
+<center>
+<img src="img/residuals_hist.png" />
+<img src="img/residuals_hist2.png" />
+</center>
+<p>The above screenshots show two models for the same dataset. In the first histogram, errors occur within a range of -338 and 520. In the second histogram, errors occur within -293 and 401. So the outliers are much lower. Furthermore, most errors in the model of the second histogram are closer to zero. So we would favor the second model.</p>
+<p align="right">
+◼
+</p>
+
+</div>
+</div>
+</div>
+<div class="footnotes">
+<hr />
+<ol start="7">
+<li id="fn7"><p>Important to be sure that <span class="math inline">\(\hat{\beta}\)</span> is minimising RSS.<a href="multiple-linear-regression.html#fnref7" class="footnote-back">↩︎</a></p></li>
+<li id="fn8"><p>Recal that ESS is the explained sum of squares, ESS = TSS - RSS.<a href="multiple-linear-regression.html#fnref8" class="footnote-back">↩︎</a></p></li>
+<li id="fn9"><p>More complex – included here just for clarification of the <code>anova</code>’s output.<a href="multiple-linear-regression.html#fnref9" class="footnote-back">↩︎</a></p></li>
+<li id="fn10"><p>Recall that <span class="math inline">\(R^2 = 1- \frac{\text{RSS}}{\text{TSS}}\)</span><a href="multiple-linear-regression.html#fnref10" class="footnote-back">↩︎</a></p></li>
+<li id="fn11"><p>It is defined as <span class="math inline">\(R_{adj}^2 = 1- \frac{\text{RSS}/(n-p-1)}{\text{TSS}/(n-1)} = 1- \frac{\text{RSS}}{\text{TSS}}\times\frac{n-1}{n-p-1}\)</span><a href="multiple-linear-regression.html#fnref11" class="footnote-back">↩︎</a></p></li>
+</ol>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="practical-work-1.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="pw-2.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="book_assets/gitbook-2.6.7/js/app.min.js"></script>
+<script src="book_assets/gitbook-2.6.7/js/lunr.js"></script>
+<script src="book_assets/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="book_assets/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="book_assets/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="book_assets/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="book_assets/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="book_assets/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="book_assets/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": false,
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": null,
+"toc": {
+"collapse": "section",
+"scroll_highlight": true
+},
+"toolbar": {
+"position": "fixed"
+},
+"search": true
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>

@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>3 Logistic Regression | Machine Learning</title>
   <meta name="description" content="3 Logistic Regression | Machine Learning course" />
-  <meta name="generator" content="bookdown 0.21 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.22 and GitBook 2.6.7" />
 
   <meta property="og:title" content="3 Logistic Regression | Machine Learning" />
   <meta property="og:type" content="book" />
@@ -24,7 +24,7 @@
 <meta name="author" content="Mohamad Ghassany" />
 
 
-<meta name="date" content="2021-01-27" />
+<meta name="date" content="2021-09-09" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -33,7 +33,7 @@
   
 <link rel="prev" href="pw-2.html"/>
 <link rel="next" href="pw-3.html"/>
-<script src="book_assets/header-attrs-2.6/header-attrs.js"></script>
+<script src="book_assets/header-attrs-2.9/header-attrs.js"></script>
 <script src="book_assets/jquery-2.2.3/jquery.min.js"></script>
 <link href="book_assets/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="book_assets/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -51,6 +51,8 @@
 
 
 
+<link href="book_assets/anchor-sections-1.0.1/anchor-sections.css" rel="stylesheet" />
+<script src="book_assets/anchor-sections-1.0.1/anchor-sections.js"></script>
 <script src="book_assets/kePrint-0.0.1/kePrint.js"></script>
 <link href="book_assets/lightable-0.0.1/lightable.css" rel="stylesheet" />
 <link href="book_assets/vembedr-0.1.4/css/vembedr.css" rel="stylesheet" />
@@ -141,6 +143,29 @@ code span.vs { color: #bf0303; } /* VerbatimString */
 code span.wa { color: #bf0303; } /* Warning */
 </style>
 
+<style type="text/css">
+/* Used with Pandoc 2.11+ new --citeproc when CSL is used */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+}
+.hanging div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}
+</style>
+
 <link rel="stylesheet" href="css/style.css" type="text/css" />
 </head>
 
@@ -198,7 +223,7 @@ code span.wa { color: #bf0303; } /* Warning */
 </ul></li>
 <li class="chapter" data-level="" data-path="practical-work-1.html"><a href="practical-work-1.html"><i class="fa fa-check"></i>Practical Work 1</a>
 <ul>
-<li class="chapter" data-level="1.8" data-path="practical-work-1.html"><a href="practical-work-1.html#some-basics"><i class="fa fa-check"></i><b>1.8</b> Some <svg style="height:0.8em;top:.04em;position:relative;fill:steelblue;" viewBox="0 0 581 512"><path d="M581 226.6C581 119.1 450.9 32 290.5 32S0 119.1 0 226.6C0 322.4 103.3 402 239.4 418.1V480h99.1v-61.5c24.3-2.7 47.6-7.4 69.4-13.9L448 480h112l-67.4-113.7c54.5-35.4 88.4-84.9 88.4-139.7zm-466.8 14.5c0-73.5 98.9-133 220.8-133s211.9 40.7 211.9 133c0 50.1-26.5 85-70.3 106.4-2.4-1.6-4.7-2.9-6.4-3.7-10.2-5.2-27.8-10.5-27.8-10.5s86.6-6.4 86.6-92.7-90.6-87.9-90.6-87.9h-199V361c-74.1-21.5-125.2-67.1-125.2-119.9zm225.1 38.3v-55.6c57.8 0 87.8-6.8 87.8 27.3 0 36.5-38.2 28.3-87.8 28.3zm-.9 72.5H365c10.8 0 18.9 11.7 24 19.2-16.1 1.9-33 2.8-50.6 2.9v-22.1z"/></svg> basics</a>
+<li class="chapter" data-level="1.8" data-path="practical-work-1.html"><a href="practical-work-1.html#some-basics"><i class="fa fa-check"></i><b>1.8</b> Some <svg aria-hidden="true" role="img" viewBox="0 0 581 512" style="height:1em;width:1.13em;vertical-align:-0.125em;margin-left:auto;margin-right:auto;font-size:inherit;fill:steelblue;overflow:visible;position:relative;"><path d="M581 226.6C581 119.1 450.9 32 290.5 32S0 119.1 0 226.6C0 322.4 103.3 402 239.4 418.1V480h99.1v-61.5c24.3-2.7 47.6-7.4 69.4-13.9L448 480h112l-67.4-113.7c54.5-35.4 88.4-84.9 88.4-139.7zm-466.8 14.5c0-73.5 98.9-133 220.8-133s211.9 40.7 211.9 133c0 50.1-26.5 85-70.3 106.4-2.4-1.6-4.7-2.9-6.4-3.7-10.2-5.2-27.8-10.5-27.8-10.5s86.6-6.4 86.6-92.7-90.6-87.9-90.6-87.9h-199V361c-74.1-21.5-125.2-67.1-125.2-119.9zm225.1 38.3v-55.6c57.8 0 87.8-6.8 87.8 27.3 0 36.5-38.2 28.3-87.8 28.3zm-.9 72.5H365c10.8 0 18.9 11.7 24 19.2-16.1 1.9-33 2.8-50.6 2.9v-22.1z"/></svg> basics</a>
 <ul>
 <li class="chapter" data-level="1.8.1" data-path="practical-work-1.html"><a href="practical-work-1.html#basic-commands"><i class="fa fa-check"></i><b>1.8.1</b> Basic Commands</a></li>
 <li class="chapter" data-level="1.8.2" data-path="practical-work-1.html"><a href="practical-work-1.html#vectors"><i class="fa fa-check"></i><b>1.8.2</b> Vectors</a></li>
@@ -352,14 +377,14 @@ code span.wa { color: #bf0303; } /* Warning */
 </ul></li>
 <li class="chapter" data-level="7.4" data-path="kmeans-hierarchical-clustering.html"><a href="kmeans-hierarchical-clustering.html#k-means"><i class="fa fa-check"></i><b>7.4</b> <span class="math inline">\(k\)</span>-Means</a>
 <ul>
-<li class="chapter" data-level="7.4.1" data-path="kmeans-hierarchical-clustering.html"><a href="kmeans-hierarchical-clustering.html#k-means-in"><i class="fa fa-check"></i><b>7.4.1</b> <span class="math inline">\(k\)</span>-means in <svg style="height:0.8em;top:.04em;position:relative;fill:steelblue;" viewBox="0 0 581 512"><path d="M581 226.6C581 119.1 450.9 32 290.5 32S0 119.1 0 226.6C0 322.4 103.3 402 239.4 418.1V480h99.1v-61.5c24.3-2.7 47.6-7.4 69.4-13.9L448 480h112l-67.4-113.7c54.5-35.4 88.4-84.9 88.4-139.7zm-466.8 14.5c0-73.5 98.9-133 220.8-133s211.9 40.7 211.9 133c0 50.1-26.5 85-70.3 106.4-2.4-1.6-4.7-2.9-6.4-3.7-10.2-5.2-27.8-10.5-27.8-10.5s86.6-6.4 86.6-92.7-90.6-87.9-90.6-87.9h-199V361c-74.1-21.5-125.2-67.1-125.2-119.9zm225.1 38.3v-55.6c57.8 0 87.8-6.8 87.8 27.3 0 36.5-38.2 28.3-87.8 28.3zm-.9 72.5H365c10.8 0 18.9 11.7 24 19.2-16.1 1.9-33 2.8-50.6 2.9v-22.1z"/></svg></a></li>
+<li class="chapter" data-level="7.4.1" data-path="kmeans-hierarchical-clustering.html"><a href="kmeans-hierarchical-clustering.html#k-means-in"><i class="fa fa-check"></i><b>7.4.1</b> <span class="math inline">\(k\)</span>-means in <svg aria-hidden="true" role="img" viewBox="0 0 581 512" style="height:1em;width:1.13em;vertical-align:-0.125em;margin-left:auto;margin-right:auto;font-size:inherit;fill:steelblue;overflow:visible;position:relative;"><path d="M581 226.6C581 119.1 450.9 32 290.5 32S0 119.1 0 226.6C0 322.4 103.3 402 239.4 418.1V480h99.1v-61.5c24.3-2.7 47.6-7.4 69.4-13.9L448 480h112l-67.4-113.7c54.5-35.4 88.4-84.9 88.4-139.7zm-466.8 14.5c0-73.5 98.9-133 220.8-133s211.9 40.7 211.9 133c0 50.1-26.5 85-70.3 106.4-2.4-1.6-4.7-2.9-6.4-3.7-10.2-5.2-27.8-10.5-27.8-10.5s86.6-6.4 86.6-92.7-90.6-87.9-90.6-87.9h-199V361c-74.1-21.5-125.2-67.1-125.2-119.9zm225.1 38.3v-55.6c57.8 0 87.8-6.8 87.8 27.3 0 36.5-38.2 28.3-87.8 28.3zm-.9 72.5H365c10.8 0 18.9 11.7 24 19.2-16.1 1.9-33 2.8-50.6 2.9v-22.1z"/></svg></a></li>
 <li class="chapter" data-level="7.4.2" data-path="kmeans-hierarchical-clustering.html"><a href="kmeans-hierarchical-clustering.html#cluster-validity-choosing-the-number-of-clusters"><i class="fa fa-check"></i><b>7.4.2</b> Cluster Validity, Choosing the Number of Clusters</a></li>
 </ul></li>
 <li class="chapter" data-level="7.5" data-path="kmeans-hierarchical-clustering.html"><a href="kmeans-hierarchical-clustering.html#hierarchical-clustering"><i class="fa fa-check"></i><b>7.5</b> Hierarchical Clustering</a>
 <ul>
 <li class="chapter" data-level="7.5.1" data-path="kmeans-hierarchical-clustering.html"><a href="kmeans-hierarchical-clustering.html#dendrogram"><i class="fa fa-check"></i><b>7.5.1</b> Dendrogram</a></li>
 <li class="chapter" data-level="7.5.2" data-path="kmeans-hierarchical-clustering.html"><a href="kmeans-hierarchical-clustering.html#the-hierarchical-clustering-algorithm"><i class="fa fa-check"></i><b>7.5.2</b> The Hierarchical Clustering Algorithm</a></li>
-<li class="chapter" data-level="7.5.3" data-path="kmeans-hierarchical-clustering.html"><a href="kmeans-hierarchical-clustering.html#hierarchical-clustering-in"><i class="fa fa-check"></i><b>7.5.3</b> Hierarchical clustering in <svg style="height:0.8em;top:.04em;position:relative;fill:steelblue;" viewBox="0 0 581 512"><path d="M581 226.6C581 119.1 450.9 32 290.5 32S0 119.1 0 226.6C0 322.4 103.3 402 239.4 418.1V480h99.1v-61.5c24.3-2.7 47.6-7.4 69.4-13.9L448 480h112l-67.4-113.7c54.5-35.4 88.4-84.9 88.4-139.7zm-466.8 14.5c0-73.5 98.9-133 220.8-133s211.9 40.7 211.9 133c0 50.1-26.5 85-70.3 106.4-2.4-1.6-4.7-2.9-6.4-3.7-10.2-5.2-27.8-10.5-27.8-10.5s86.6-6.4 86.6-92.7-90.6-87.9-90.6-87.9h-199V361c-74.1-21.5-125.2-67.1-125.2-119.9zm225.1 38.3v-55.6c57.8 0 87.8-6.8 87.8 27.3 0 36.5-38.2 28.3-87.8 28.3zm-.9 72.5H365c10.8 0 18.9 11.7 24 19.2-16.1 1.9-33 2.8-50.6 2.9v-22.1z"/></svg></a></li>
+<li class="chapter" data-level="7.5.3" data-path="kmeans-hierarchical-clustering.html"><a href="kmeans-hierarchical-clustering.html#hierarchical-clustering-in"><i class="fa fa-check"></i><b>7.5.3</b> Hierarchical clustering in <svg aria-hidden="true" role="img" viewBox="0 0 581 512" style="height:1em;width:1.13em;vertical-align:-0.125em;margin-left:auto;margin-right:auto;font-size:inherit;fill:steelblue;overflow:visible;position:relative;"><path d="M581 226.6C581 119.1 450.9 32 290.5 32S0 119.1 0 226.6C0 322.4 103.3 402 239.4 418.1V480h99.1v-61.5c24.3-2.7 47.6-7.4 69.4-13.9L448 480h112l-67.4-113.7c54.5-35.4 88.4-84.9 88.4-139.7zm-466.8 14.5c0-73.5 98.9-133 220.8-133s211.9 40.7 211.9 133c0 50.1-26.5 85-70.3 106.4-2.4-1.6-4.7-2.9-6.4-3.7-10.2-5.2-27.8-10.5-27.8-10.5s86.6-6.4 86.6-92.7-90.6-87.9-90.6-87.9h-199V361c-74.1-21.5-125.2-67.1-125.2-119.9zm225.1 38.3v-55.6c57.8 0 87.8-6.8 87.8 27.3 0 36.5-38.2 28.3-87.8 28.3zm-.9 72.5H365c10.8 0 18.9 11.7 24 19.2-16.1 1.9-33 2.8-50.6 2.9v-22.1z"/></svg></a></li>
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="pw-7.html"><a href="pw-7.html"><i class="fa fa-check"></i>PW 7</a>
@@ -525,7 +550,7 @@ The logistic <em>distribution</em> function is: <span class="math display"><span
 The quantity <span class="math inline"><span class="math inline">\(p(X)/[1−p(X)]\)</span></span> is called the <em>odds</em>, and can take on any value between <span class="math inline"><span class="math inline">\(0\)</span></span> and <span class="math inline"><span class="math inline">\(\infty\)</span></span>.
 </p>
 </div>
-<p>By taking the logarithm of both sides of the equation, we arrive at<a href="#fn12" class="footnote-ref" id="fnref12"><sup>12</sup></a></p>
+<p>By taking the logarithm of both sides of the equation, we arrive at<a href="main-references-credits.html#fn12" class="footnote-ref" id="fnref12"><sup>12</sup></a></p>
 <p><span class="math display">\[ \log( \frac{p(X)}{1-p(X)} ) = \beta_0 + \beta_1 X \]</span></p>
 <div class="rmdinsight">
 <p>
@@ -551,9 +576,9 @@ The left-hand side is called the <em>log-odds</em> or <em>logit</em>. We see tha
 In the linear regression setting, the least squares approach is a special case of maximum likelihood.
 </p>
 </div>
-<p>We will not give mathematical details about the maximum likelihood and how to estimate the parameters. We will use <svg style="height:0.8em;top:.04em;position:relative;fill:steelblue;" viewBox="0 0 581 512"><path d="M581 226.6C581 119.1 450.9 32 290.5 32S0 119.1 0 226.6C0 322.4 103.3 402 239.4 418.1V480h99.1v-61.5c24.3-2.7 47.6-7.4 69.4-13.9L448 480h112l-67.4-113.7c54.5-35.4 88.4-84.9 88.4-139.7zm-466.8 14.5c0-73.5 98.9-133 220.8-133s211.9 40.7 211.9 133c0 50.1-26.5 85-70.3 106.4-2.4-1.6-4.7-2.9-6.4-3.7-10.2-5.2-27.8-10.5-27.8-10.5s86.6-6.4 86.6-92.7-90.6-87.9-90.6-87.9h-199V361c-74.1-21.5-125.2-67.1-125.2-119.9zm225.1 38.3v-55.6c57.8 0 87.8-6.8 87.8 27.3 0 36.5-38.2 28.3-87.8 28.3zm-.9 72.5H365c10.8 0 18.9 11.7 24 19.2-16.1 1.9-33 2.8-50.6 2.9v-22.1z"/></svg> to fit the logistic regression models (using <code>glm</code> function).</p>
-<p>Use the following application (also available <a href="https://ec2-35-177-34-200.eu-west-2.compute.amazonaws.com/log-maximum-likelihood/" target="_blank">here <svg style="height:0.8em;top:.04em;position:relative;" viewBox="0 0 576 512"><path d="M576 24v127.984c0 21.461-25.96 31.98-40.971 16.971l-35.707-35.709-243.523 243.523c-9.373 9.373-24.568 9.373-33.941 0l-22.627-22.627c-9.373-9.373-9.373-24.569 0-33.941L442.756 76.676l-35.703-35.705C391.982 25.9 402.656 0 424.024 0H552c13.255 0 24 10.745 24 24zM407.029 270.794l-16 16A23.999 23.999 0 0 0 384 303.765V448H64V128h264a24.003 24.003 0 0 0 16.97-7.029l16-16C376.089 89.851 365.381 64 344 64H48C21.49 64 0 85.49 0 112v352c0 26.51 21.49 48 48 48h352c26.51 0 48-21.49 48-48V287.764c0-21.382-25.852-32.09-40.971-16.97z"/></svg></a>) to see how the log-likelihood changes with respect to the values for <span class="math inline">\((\beta_0,\beta_1)\)</span> in three data patterns. The logistic regression fit and its dependence on <span class="math inline">\(\beta_0\)</span> (horizontal displacement) and <span class="math inline">\(\beta_1\)</span> (steepness of the curve). Recall the effect of the sign of <span class="math inline">\(\beta_1\)</span> in the curve: if positive, the logistic curve has an <span class="math inline">\(s\)</span> form; if negative, the form is a reflected <span class="math inline">\(s\)</span>.</p>
-<iframe src="https://ec2-35-177-34-200.eu-west-2.compute.amazonaws.com/log-maximum-likelihood/?showcase=0" width="90%" height="900px">
+<p>We will not give mathematical details about the maximum likelihood and how to estimate the parameters. We will use <svg aria-hidden="true" role="img" viewBox="0 0 581 512" style="height:1em;width:1.13em;vertical-align:-0.125em;margin-left:auto;margin-right:auto;font-size:inherit;fill:steelblue;overflow:visible;position:relative;"><path d="M581 226.6C581 119.1 450.9 32 290.5 32S0 119.1 0 226.6C0 322.4 103.3 402 239.4 418.1V480h99.1v-61.5c24.3-2.7 47.6-7.4 69.4-13.9L448 480h112l-67.4-113.7c54.5-35.4 88.4-84.9 88.4-139.7zm-466.8 14.5c0-73.5 98.9-133 220.8-133s211.9 40.7 211.9 133c0 50.1-26.5 85-70.3 106.4-2.4-1.6-4.7-2.9-6.4-3.7-10.2-5.2-27.8-10.5-27.8-10.5s86.6-6.4 86.6-92.7-90.6-87.9-90.6-87.9h-199V361c-74.1-21.5-125.2-67.1-125.2-119.9zm225.1 38.3v-55.6c57.8 0 87.8-6.8 87.8 27.3 0 36.5-38.2 28.3-87.8 28.3zm-.9 72.5H365c10.8 0 18.9 11.7 24 19.2-16.1 1.9-33 2.8-50.6 2.9v-22.1z"/></svg> to fit the logistic regression models (using <code>glm</code> function).</p>
+<p>Use the following application (also available <a href="https://shinyserv.es/shiny/log-maximum-likelihood/" target="_blank">here <svg aria-hidden="true" role="img" viewBox="0 0 512 512" style="height:1em;width:1em;vertical-align:-0.125em;margin-left:auto;margin-right:auto;font-size:inherit;fill:currentColor;overflow:visible;position:relative;"><path d="M432,320H400a16,16,0,0,0-16,16V448H64V128H208a16,16,0,0,0,16-16V80a16,16,0,0,0-16-16H48A48,48,0,0,0,0,112V464a48,48,0,0,0,48,48H400a48,48,0,0,0,48-48V336A16,16,0,0,0,432,320ZM488,0h-128c-21.37,0-32.05,25.91-17,41l35.73,35.73L135,320.37a24,24,0,0,0,0,34L157.67,377a24,24,0,0,0,34,0L435.28,133.32,471,169c15,15,41,4.5,41-17V24A24,24,0,0,0,488,0Z"/></svg></a>) to see how the log-likelihood changes with respect to the values for <span class="math inline">\((\beta_0,\beta_1)\)</span> in three data patterns. The logistic regression fit and its dependence on <span class="math inline">\(\beta_0\)</span> (horizontal displacement) and <span class="math inline">\(\beta_1\)</span> (steepness of the curve). Recall the effect of the sign of <span class="math inline">\(\beta_1\)</span> in the curve: if positive, the logistic curve has an <span class="math inline">\(s\)</span> form; if negative, the form is a reflected <span class="math inline">\(s\)</span>.</p>
+<iframe src="https://shinyserv.es/shiny/log-maximum-likelihood/?showcase=0" width="90%" height="900px">
 </iframe>
 <p>Note that the <strong>animation</strong> will not be displayed the first time it is browsed (The reason is because it is hosted at <code>https</code> websites with auto-signed SSL certificates). <strong>To see it</strong>, click on the link above. You will get a warning from your browser saying that <em>“Your connection is not private”</em>. Click in <em>“Advanced”</em> and <strong>allow an exception</strong> in your browser. The next time the animation will show up correctly.</p>
 </div>
@@ -624,7 +649,7 @@ In the linear regression setting, the least squares approach is a special case o
 Figure 3.1: Challenger launch and posterior explosion, as broadcasted live by NBC in 28/01/1986.
 </p>
 </div>
-<p>The Rogers Commission elaborated a report <span class="citation">(<a href="main-references-credits.html#ref-Roberts1986" role="doc-biblioref">Presidential Commission on the Space Shuttle Challenger Accident 1986</a>)</span> with all the findings. The commission determined that the disintegration began with the <strong>failure of an O-ring seal in the solid rocket motor due to the unusual cold temperatures (-0.6 Celsius degrees)</strong> during the launch. This failure produced a breach of burning gas through the solid rocket motor that compromised the whole shuttle structure, resulting in its disintegration due to the extreme aerodynamic forces. The <strong>problematic with O-rings was something known</strong>: the night before the launch, there was a three-hour teleconference between motor engineers and NASA management, discussing the effect of low temperature forecasted for the launch on the O-ring performance. The conclusion, influenced by Figure <a href="logistic-regression.html#fig:rogerts">3.2</a>a, was:</p>
+<p>The Rogers Commission elaborated a report <span class="citation">(<a href="#ref-Roberts1986" role="doc-biblioref">Presidential Commission on the Space Shuttle Challenger Accident 1986</a>)</span> with all the findings. The commission determined that the disintegration began with the <strong>failure of an O-ring seal in the solid rocket motor due to the unusual cold temperatures (-0.6 Celsius degrees)</strong> during the launch. This failure produced a breach of burning gas through the solid rocket motor that compromised the whole shuttle structure, resulting in its disintegration due to the extreme aerodynamic forces. The <strong>problematic with O-rings was something known</strong>: the night before the launch, there was a three-hour teleconference between motor engineers and NASA management, discussing the effect of low temperature forecasted for the launch on the O-ring performance. The conclusion, influenced by Figure <a href="logistic-regression.html#fig:rogerts">3.2</a>a, was:</p>
 <blockquote>
 <p><strong>“Temperature data [are] not conclusive on predicting primary O-ring blowby.”</strong></p>
 </blockquote>
@@ -639,13 +664,13 @@ Figure 3.2: Number of incidents in the O-rings (filed joints) versus temperature
 <blockquote>
 <p><strong>“A careful analysis of the flight history of O-ring performance would have revealed the correlation of O-ring damage in low temperature”</strong>.</p>
 </blockquote>
-<p>The purpose of this case study, inspired by <span class="citation">(<a href="main-references-credits.html#ref-Dalal1989" role="doc-biblioref">Dalal, Fowlkes, and Hoadley 1989</a>)</span>, is to quantify what was the influence of the temperature in the probability of having at least one incident related with the O-rings. Specifically, we want to address the following questions:</p>
+<p>The purpose of this case study, inspired by <span class="citation">(<a href="#ref-Dalal1989" role="doc-biblioref">Dalal, Fowlkes, and Hoadley 1989</a>)</span>, is to quantify what was the influence of the temperature in the probability of having at least one incident related with the O-rings. Specifically, we want to address the following questions:</p>
 <ul>
 <li>Q1. <em>Is the temperature associated with O-ring incidents?</em></li>
 <li>Q2. <em>In which way was the temperature affecting the probability of O-ring incidents?</em></li>
 <li>Q3. <em>What was the predicted probability of an incidient in an O-ring for the temperature of the launch day?</em></li>
 </ul>
-<p>To try to answer these questions we have the <code>challenger</code> ( <a target="_blank" href="datasets/challenger.txt"> dataset <i class="fa fa-table" aria-hidden="true"></i></a>). The dataset contains (as shown in the table below) information regarding the state of the solid rocket boosters after launch<a href="#fn13" class="footnote-ref" id="fnref13"><sup>13</sup></a> for 23 flights. Each row has, among others, the following variables:</p>
+<p>To try to answer these questions we have the <code>challenger</code> ( <a target="_blank" href="datasets/challenger.txt"> dataset <i class="fa fa-table" aria-hidden="true"></i></a>). The dataset contains (as shown in the table below) information regarding the state of the solid rocket boosters after launch<a href="main-references-credits.html#fn13" class="footnote-ref" id="fnref13"><sup>13</sup></a> for 23 flights. Each row has, among others, the following variables:</p>
 <ul>
 <li><code>fail.field</code>, <code>fail.nozzle</code>: binary variables indicating whether there was an incident with the O-rings in the field joints or in the nozzles of the solid rocket boosters. <code>1</code> codifies an incident and <code>0</code> its absence. On the analysis, we focus on the O-rings of the field joint as being the most determinants for the accident.</li>
 <li><code>temp</code>: temperature in the day of launch. Measured in Celsius degrees.</li>
@@ -1158,6 +1183,15 @@ The <code>glm()</code> function fits <strong>g</strong>eneralized <strong>l</str
 </p>
 
 </div>
+</div>
+</div>
+<h3>References</h3>
+<div id="refs" class="references csl-bib-body hanging-indent">
+<div id="ref-Dalal1989" class="csl-entry">
+Dalal, Siddhartha R., Edward B. Fowlkes, and Bruce Hoadley. 1989. <span>“Risk Analysis of the Space Shuttle: Pre-Challenger Prediction of Failure.”</span> <em>Journal of the American Statistical Association</em> 84 (408): 945–57. <a href="https://doi.org/10.1080/01621459.1989.10478858">https://doi.org/10.1080/01621459.1989.10478858</a>.
+</div>
+<div id="ref-Roberts1986" class="csl-entry">
+Presidential Commission on the Space Shuttle Challenger Accident. 1986. <em>Report of the Presidential Commission on the Space Shuttle Challenger Accident (Vols. 1 &amp; 2)</em>. Washington, DC. <a href="http://history.nasa.gov/rogersrep/genindex.htm">http://history.nasa.gov/rogersrep/genindex.htm</a>.
 </div>
 </div>
 <div class="footnotes">

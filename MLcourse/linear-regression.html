@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>1 Linear Regression | Machine Learning</title>
   <meta name="description" content="1 Linear Regression | Machine Learning course" />
-  <meta name="generator" content="bookdown 0.21 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.22 and GitBook 2.6.7" />
 
   <meta property="og:title" content="1 Linear Regression | Machine Learning" />
   <meta property="og:type" content="book" />
@@ -24,7 +24,7 @@
 <meta name="author" content="Mohamad Ghassany" />
 
 
-<meta name="date" content="2021-01-27" />
+<meta name="date" content="2021-09-09" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -33,7 +33,7 @@
   
 <link rel="prev" href="introduction.html"/>
 <link rel="next" href="practical-work-1.html"/>
-<script src="book_assets/header-attrs-2.6/header-attrs.js"></script>
+<script src="book_assets/header-attrs-2.9/header-attrs.js"></script>
 <script src="book_assets/jquery-2.2.3/jquery.min.js"></script>
 <link href="book_assets/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="book_assets/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -51,6 +51,8 @@
 
 
 
+<link href="book_assets/anchor-sections-1.0.1/anchor-sections.css" rel="stylesheet" />
+<script src="book_assets/anchor-sections-1.0.1/anchor-sections.js"></script>
 <script src="book_assets/kePrint-0.0.1/kePrint.js"></script>
 <link href="book_assets/lightable-0.0.1/lightable.css" rel="stylesheet" />
 <link href="book_assets/vembedr-0.1.4/css/vembedr.css" rel="stylesheet" />
@@ -141,6 +143,29 @@ code span.vs { color: #bf0303; } /* VerbatimString */
 code span.wa { color: #bf0303; } /* Warning */
 </style>
 
+<style type="text/css">
+/* Used with Pandoc 2.11+ new --citeproc when CSL is used */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+}
+.hanging div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}
+</style>
+
 <link rel="stylesheet" href="css/style.css" type="text/css" />
 </head>
 
@@ -198,7 +223,7 @@ code span.wa { color: #bf0303; } /* Warning */
 </ul></li>
 <li class="chapter" data-level="" data-path="practical-work-1.html"><a href="practical-work-1.html"><i class="fa fa-check"></i>Practical Work 1</a>
 <ul>
-<li class="chapter" data-level="1.8" data-path="practical-work-1.html"><a href="practical-work-1.html#some-basics"><i class="fa fa-check"></i><b>1.8</b> Some <svg style="height:0.8em;top:.04em;position:relative;fill:steelblue;" viewBox="0 0 581 512"><path d="M581 226.6C581 119.1 450.9 32 290.5 32S0 119.1 0 226.6C0 322.4 103.3 402 239.4 418.1V480h99.1v-61.5c24.3-2.7 47.6-7.4 69.4-13.9L448 480h112l-67.4-113.7c54.5-35.4 88.4-84.9 88.4-139.7zm-466.8 14.5c0-73.5 98.9-133 220.8-133s211.9 40.7 211.9 133c0 50.1-26.5 85-70.3 106.4-2.4-1.6-4.7-2.9-6.4-3.7-10.2-5.2-27.8-10.5-27.8-10.5s86.6-6.4 86.6-92.7-90.6-87.9-90.6-87.9h-199V361c-74.1-21.5-125.2-67.1-125.2-119.9zm225.1 38.3v-55.6c57.8 0 87.8-6.8 87.8 27.3 0 36.5-38.2 28.3-87.8 28.3zm-.9 72.5H365c10.8 0 18.9 11.7 24 19.2-16.1 1.9-33 2.8-50.6 2.9v-22.1z"/></svg> basics</a>
+<li class="chapter" data-level="1.8" data-path="practical-work-1.html"><a href="practical-work-1.html#some-basics"><i class="fa fa-check"></i><b>1.8</b> Some <svg aria-hidden="true" role="img" viewBox="0 0 581 512" style="height:1em;width:1.13em;vertical-align:-0.125em;margin-left:auto;margin-right:auto;font-size:inherit;fill:steelblue;overflow:visible;position:relative;"><path d="M581 226.6C581 119.1 450.9 32 290.5 32S0 119.1 0 226.6C0 322.4 103.3 402 239.4 418.1V480h99.1v-61.5c24.3-2.7 47.6-7.4 69.4-13.9L448 480h112l-67.4-113.7c54.5-35.4 88.4-84.9 88.4-139.7zm-466.8 14.5c0-73.5 98.9-133 220.8-133s211.9 40.7 211.9 133c0 50.1-26.5 85-70.3 106.4-2.4-1.6-4.7-2.9-6.4-3.7-10.2-5.2-27.8-10.5-27.8-10.5s86.6-6.4 86.6-92.7-90.6-87.9-90.6-87.9h-199V361c-74.1-21.5-125.2-67.1-125.2-119.9zm225.1 38.3v-55.6c57.8 0 87.8-6.8 87.8 27.3 0 36.5-38.2 28.3-87.8 28.3zm-.9 72.5H365c10.8 0 18.9 11.7 24 19.2-16.1 1.9-33 2.8-50.6 2.9v-22.1z"/></svg> basics</a>
 <ul>
 <li class="chapter" data-level="1.8.1" data-path="practical-work-1.html"><a href="practical-work-1.html#basic-commands"><i class="fa fa-check"></i><b>1.8.1</b> Basic Commands</a></li>
 <li class="chapter" data-level="1.8.2" data-path="practical-work-1.html"><a href="practical-work-1.html#vectors"><i class="fa fa-check"></i><b>1.8.2</b> Vectors</a></li>
@@ -352,14 +377,14 @@ code span.wa { color: #bf0303; } /* Warning */
 </ul></li>
 <li class="chapter" data-level="7.4" data-path="kmeans-hierarchical-clustering.html"><a href="kmeans-hierarchical-clustering.html#k-means"><i class="fa fa-check"></i><b>7.4</b> <span class="math inline">\(k\)</span>-Means</a>
 <ul>
-<li class="chapter" data-level="7.4.1" data-path="kmeans-hierarchical-clustering.html"><a href="kmeans-hierarchical-clustering.html#k-means-in"><i class="fa fa-check"></i><b>7.4.1</b> <span class="math inline">\(k\)</span>-means in <svg style="height:0.8em;top:.04em;position:relative;fill:steelblue;" viewBox="0 0 581 512"><path d="M581 226.6C581 119.1 450.9 32 290.5 32S0 119.1 0 226.6C0 322.4 103.3 402 239.4 418.1V480h99.1v-61.5c24.3-2.7 47.6-7.4 69.4-13.9L448 480h112l-67.4-113.7c54.5-35.4 88.4-84.9 88.4-139.7zm-466.8 14.5c0-73.5 98.9-133 220.8-133s211.9 40.7 211.9 133c0 50.1-26.5 85-70.3 106.4-2.4-1.6-4.7-2.9-6.4-3.7-10.2-5.2-27.8-10.5-27.8-10.5s86.6-6.4 86.6-92.7-90.6-87.9-90.6-87.9h-199V361c-74.1-21.5-125.2-67.1-125.2-119.9zm225.1 38.3v-55.6c57.8 0 87.8-6.8 87.8 27.3 0 36.5-38.2 28.3-87.8 28.3zm-.9 72.5H365c10.8 0 18.9 11.7 24 19.2-16.1 1.9-33 2.8-50.6 2.9v-22.1z"/></svg></a></li>
+<li class="chapter" data-level="7.4.1" data-path="kmeans-hierarchical-clustering.html"><a href="kmeans-hierarchical-clustering.html#k-means-in"><i class="fa fa-check"></i><b>7.4.1</b> <span class="math inline">\(k\)</span>-means in <svg aria-hidden="true" role="img" viewBox="0 0 581 512" style="height:1em;width:1.13em;vertical-align:-0.125em;margin-left:auto;margin-right:auto;font-size:inherit;fill:steelblue;overflow:visible;position:relative;"><path d="M581 226.6C581 119.1 450.9 32 290.5 32S0 119.1 0 226.6C0 322.4 103.3 402 239.4 418.1V480h99.1v-61.5c24.3-2.7 47.6-7.4 69.4-13.9L448 480h112l-67.4-113.7c54.5-35.4 88.4-84.9 88.4-139.7zm-466.8 14.5c0-73.5 98.9-133 220.8-133s211.9 40.7 211.9 133c0 50.1-26.5 85-70.3 106.4-2.4-1.6-4.7-2.9-6.4-3.7-10.2-5.2-27.8-10.5-27.8-10.5s86.6-6.4 86.6-92.7-90.6-87.9-90.6-87.9h-199V361c-74.1-21.5-125.2-67.1-125.2-119.9zm225.1 38.3v-55.6c57.8 0 87.8-6.8 87.8 27.3 0 36.5-38.2 28.3-87.8 28.3zm-.9 72.5H365c10.8 0 18.9 11.7 24 19.2-16.1 1.9-33 2.8-50.6 2.9v-22.1z"/></svg></a></li>
 <li class="chapter" data-level="7.4.2" data-path="kmeans-hierarchical-clustering.html"><a href="kmeans-hierarchical-clustering.html#cluster-validity-choosing-the-number-of-clusters"><i class="fa fa-check"></i><b>7.4.2</b> Cluster Validity, Choosing the Number of Clusters</a></li>
 </ul></li>
 <li class="chapter" data-level="7.5" data-path="kmeans-hierarchical-clustering.html"><a href="kmeans-hierarchical-clustering.html#hierarchical-clustering"><i class="fa fa-check"></i><b>7.5</b> Hierarchical Clustering</a>
 <ul>
 <li class="chapter" data-level="7.5.1" data-path="kmeans-hierarchical-clustering.html"><a href="kmeans-hierarchical-clustering.html#dendrogram"><i class="fa fa-check"></i><b>7.5.1</b> Dendrogram</a></li>
 <li class="chapter" data-level="7.5.2" data-path="kmeans-hierarchical-clustering.html"><a href="kmeans-hierarchical-clustering.html#the-hierarchical-clustering-algorithm"><i class="fa fa-check"></i><b>7.5.2</b> The Hierarchical Clustering Algorithm</a></li>
-<li class="chapter" data-level="7.5.3" data-path="kmeans-hierarchical-clustering.html"><a href="kmeans-hierarchical-clustering.html#hierarchical-clustering-in"><i class="fa fa-check"></i><b>7.5.3</b> Hierarchical clustering in <svg style="height:0.8em;top:.04em;position:relative;fill:steelblue;" viewBox="0 0 581 512"><path d="M581 226.6C581 119.1 450.9 32 290.5 32S0 119.1 0 226.6C0 322.4 103.3 402 239.4 418.1V480h99.1v-61.5c24.3-2.7 47.6-7.4 69.4-13.9L448 480h112l-67.4-113.7c54.5-35.4 88.4-84.9 88.4-139.7zm-466.8 14.5c0-73.5 98.9-133 220.8-133s211.9 40.7 211.9 133c0 50.1-26.5 85-70.3 106.4-2.4-1.6-4.7-2.9-6.4-3.7-10.2-5.2-27.8-10.5-27.8-10.5s86.6-6.4 86.6-92.7-90.6-87.9-90.6-87.9h-199V361c-74.1-21.5-125.2-67.1-125.2-119.9zm225.1 38.3v-55.6c57.8 0 87.8-6.8 87.8 27.3 0 36.5-38.2 28.3-87.8 28.3zm-.9 72.5H365c10.8 0 18.9 11.7 24 19.2-16.1 1.9-33 2.8-50.6 2.9v-22.1z"/></svg></a></li>
+<li class="chapter" data-level="7.5.3" data-path="kmeans-hierarchical-clustering.html"><a href="kmeans-hierarchical-clustering.html#hierarchical-clustering-in"><i class="fa fa-check"></i><b>7.5.3</b> Hierarchical clustering in <svg aria-hidden="true" role="img" viewBox="0 0 581 512" style="height:1em;width:1.13em;vertical-align:-0.125em;margin-left:auto;margin-right:auto;font-size:inherit;fill:steelblue;overflow:visible;position:relative;"><path d="M581 226.6C581 119.1 450.9 32 290.5 32S0 119.1 0 226.6C0 322.4 103.3 402 239.4 418.1V480h99.1v-61.5c24.3-2.7 47.6-7.4 69.4-13.9L448 480h112l-67.4-113.7c54.5-35.4 88.4-84.9 88.4-139.7zm-466.8 14.5c0-73.5 98.9-133 220.8-133s211.9 40.7 211.9 133c0 50.1-26.5 85-70.3 106.4-2.4-1.6-4.7-2.9-6.4-3.7-10.2-5.2-27.8-10.5-27.8-10.5s86.6-6.4 86.6-92.7-90.6-87.9-90.6-87.9h-199V361c-74.1-21.5-125.2-67.1-125.2-119.9zm225.1 38.3v-55.6c57.8 0 87.8-6.8 87.8 27.3 0 36.5-38.2 28.3-87.8 28.3zm-.9 72.5H365c10.8 0 18.9 11.7 24 19.2-16.1 1.9-33 2.8-50.6 2.9v-22.1z"/></svg></a></li>
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="pw-7.html"><a href="pw-7.html"><i class="fa fa-check"></i>PW 7</a>
@@ -566,7 +591,7 @@ The <em>hat</em> symbol, <span class="math inline">\(\hat{}\)</span>, denotes an
 <div id="estimating-the-coefficients" class="section level2" number="1.5">
 <h2><span class="header-section-number">1.5</span> Estimating the Coefficients</h2>
 <p>Let <span class="math inline">\(\hat{y}_i = \hat{\beta_0} + \hat{\beta_1} x_i\)</span> be the prediction for <span class="math inline">\(Y\)</span> based on the <span class="math inline">\(i\)</span>th value of <span class="math inline">\(X\)</span>. Then <span class="math inline">\(e_i = y_i - \hat{y}_i\)</span> represents the <span class="math inline">\(i\)</span>th <strong><em>residual</em></strong>.</p>
-<p>We define the <strong><em>Residual Sum of Squares</em></strong> (<strong>RSS</strong>)<a href="#fn1" class="footnote-ref" id="fnref1"><sup>1</sup></a> as</p>
+<p>We define the <strong><em>Residual Sum of Squares</em></strong> (<strong>RSS</strong>)<a href="main-references-credits.html#fn1" class="footnote-ref" id="fnref1"><sup>1</sup></a> as</p>
 <p><span class="math display">\[  \begin{aligned}
 RSS &amp;= e_1^2 + e_2^2 + \ldots + e_n^2 \\
     &amp;= \sum_{i=1}^{n} e_i^2
@@ -576,7 +601,7 @@ RSS &amp;= e_1^2 + e_2^2 + \ldots + e_n^2 \\
 RSS &amp;= (y_1 - \hat{\beta_0} - \hat{\beta_1} x_1)^2 + (y_2 - \hat{\beta_0} - \hat{\beta_1} x_2)^2 + \ldots + (y_n - \hat{\beta_0} - \hat{\beta_1} x_n)^2 \\
     &amp;= \sum_{i=1}^{n} (y_i - \hat{\beta_0} - \hat{\beta_1} x_i)^2
 \end{aligned} \]</span></p>
-<p>The <em>least squares</em> approach chooses <span class="math inline">\(\hat{\beta_0}\)</span> and <span class="math inline">\(\hat{\beta_1}\)</span> to minimize the RSS. The minimizing values can be shown to be<a href="#fn2" class="footnote-ref" id="fnref2"><sup>2</sup></a></p>
+<p>The <em>least squares</em> approach chooses <span class="math inline">\(\hat{\beta_0}\)</span> and <span class="math inline">\(\hat{\beta_1}\)</span> to minimize the RSS. The minimizing values can be shown to be<a href="main-references-credits.html#fn2" class="footnote-ref" id="fnref2"><sup>2</sup></a></p>
 <p><span class="math display">\[  \begin{aligned}
 \hat{\beta_1} &amp;=  \frac{\sum_{i=1}^{n} (x_i - \bar{x})(y_i - \bar{y})  }{\sum_{i=1}^{n} (x_i - \bar{x})^2 } = \frac{s_{xy}}{s_x^2} = (s_x^2)^{-1} s_{xy} \\
 \text{and} \\
@@ -627,7 +652,7 @@ RSS &amp;= (y_1 - \hat{\beta_0} - \hat{\beta_1} x_1)^2 + (y_2 - \hat{\beta_0} - 
 <p><span class="math display">\[ H_0 : \beta_1 = 0 \]</span></p>
 <p>versus</p>
 <p><span class="math display">\[ H_1 : \beta_1 \neq 0 \]</span></p>
-<p>since if <span class="math inline">\(\beta_1 = 0\)</span> then the simple linear regression model reduces to <span class="math inline">\(Y = \beta_0 + \epsilon\)</span>, and <span class="math inline">\(X\)</span> is not associated with <span class="math inline">\(Y\)</span><a href="#fn3" class="footnote-ref" id="fnref3"><sup>3</sup></a>.</p>
+<p>since if <span class="math inline">\(\beta_1 = 0\)</span> then the simple linear regression model reduces to <span class="math inline">\(Y = \beta_0 + \epsilon\)</span>, and <span class="math inline">\(X\)</span> is not associated with <span class="math inline">\(Y\)</span><a href="main-references-credits.html#fn3" class="footnote-ref" id="fnref3"><sup>3</sup></a>.</p>
 <p>To test the null hypothesis <span class="math inline">\(H_0\)</span>, we compute a <strong><em>t-statistic</em></strong>, given by</p>
 <p><span class="math display">\[ t = \frac{\hat{\beta_1} - 0}{\text{SE}(\hat{\beta_1})} \]</span></p>
 <p>This will have a <span class="math inline">\(t\)</span>-distribution (<em>Student</em>) with <span class="math inline">\(n-2\)</span> degrees of freedom, assuming <span class="math inline">\(\beta_1=0\)</span>.</p>
@@ -647,8 +672,8 @@ RSS &amp;= (y_1 - \hat{\beta_0} - \hat{\beta_1} x_1)^2 + (y_2 - \hat{\beta_0} - 
 The ANOVA decomposition considers the following measures of variation related with the response:</p>
 <ul>
 <li><span class="math inline">\(\text{SST}=\text{TSS}=\sum_{i=1}^n\left(Y_i-\bar Y\right)^2\)</span>, the <strong>Total Sum of Squares</strong>. This is the <em>total variation</em> of <span class="math inline">\(Y_1,\ldots,Y_n\)</span>, since <span class="math inline">\(\text{SST}=ns_y^2\)</span>, where <span class="math inline">\(s_y^2\)</span> is the sample variance of <span class="math inline">\(Y_1,\ldots,Y_n\)</span>.</li>
-<li><span class="math inline">\(\text{SSR}=\text{ESS}=\sum_{i=1}^n\left(\hat Y_i-\bar Y\right)^2\)</span>, the <strong>Regression Sum of Squares</strong> or <strong>Explained Sum of Squares</strong><a href="#fn4" class="footnote-ref" id="fnref4"><sup>4</sup></a>. This is the variation explained by the regression line, that is, <em>the variation from <span class="math inline">\(\bar Y\)</span> that is explained by the estimated conditional mean <span class="math inline">\(\hat Y_i=\hat\beta_0+\hat\beta_1X_i\)</span></em>. <span class="math inline">\(\text{SSR}=ns_{\hat y}^2\)</span>, where <span class="math inline">\(s_{\hat y}^2\)</span> is the sample variance of <span class="math inline">\(\hat Y_1,\ldots,\hat Y_n\)</span>.</li>
-<li><span class="math inline">\(\text{SSE}=\text{RSS}=\sum_{i=1}^n\left(Y_i-\hat Y_i\right)^2\)</span>, the <strong>Sum of Squared Errors</strong> or <strong>Residual Sum of Squares</strong><a href="#fn5" class="footnote-ref" id="fnref5"><sup>5</sup></a>. Is the variation around the conditional mean. Recall that <span class="math inline">\(\text{SSE}=\sum_{i=1}^n \hat\varepsilon_i^2=(n-2)\hat\sigma^2\)</span>, where <span class="math inline">\(\hat\sigma^2\)</span> is the sample variance of <span class="math inline">\(\hat \varepsilon_1,\ldots,\hat \varepsilon_n\)</span>.</li>
+<li><span class="math inline">\(\text{SSR}=\text{ESS}=\sum_{i=1}^n\left(\hat Y_i-\bar Y\right)^2\)</span>, the <strong>Regression Sum of Squares</strong> or <strong>Explained Sum of Squares</strong><a href="main-references-credits.html#fn4" class="footnote-ref" id="fnref4"><sup>4</sup></a>. This is the variation explained by the regression line, that is, <em>the variation from <span class="math inline">\(\bar Y\)</span> that is explained by the estimated conditional mean <span class="math inline">\(\hat Y_i=\hat\beta_0+\hat\beta_1X_i\)</span></em>. <span class="math inline">\(\text{SSR}=ns_{\hat y}^2\)</span>, where <span class="math inline">\(s_{\hat y}^2\)</span> is the sample variance of <span class="math inline">\(\hat Y_1,\ldots,\hat Y_n\)</span>.</li>
+<li><span class="math inline">\(\text{SSE}=\text{RSS}=\sum_{i=1}^n\left(Y_i-\hat Y_i\right)^2\)</span>, the <strong>Sum of Squared Errors</strong> or <strong>Residual Sum of Squares</strong><a href="main-references-credits.html#fn5" class="footnote-ref" id="fnref5"><sup>5</sup></a>. Is the variation around the conditional mean. Recall that <span class="math inline">\(\text{SSE}=\sum_{i=1}^n \hat\varepsilon_i^2=(n-2)\hat\sigma^2\)</span>, where <span class="math inline">\(\hat\sigma^2\)</span> is the sample variance of <span class="math inline">\(\hat \varepsilon_1,\ldots,\hat \varepsilon_n\)</span>.</li>
 </ul>
 <p>The ANOVA decomposition is
 <span class="math display">\[\begin{align*}
@@ -663,15 +688,25 @@ Figure 1.1: Visualization of the ANOVA decomposition. SSR measures the variation
 </div>
 <div class="rmdinsight">
 <p>
-Below the ANOVA decomposition and its dependence on <span class="math inline"><span class="math inline">\(\sigma^2\)</span></span> and <span class="math inline"><span class="math inline">\(\hat\sigma^2\)</span></span>. Application is also available <a href="https://ec2-35-177-34-200.eu-west-2.compute.amazonaws.com/anova/" target="_blank">here</a>.
+Below the ANOVA decomposition and its dependence on <span class="math inline"><span class="math inline">\(\sigma^2\)</span></span> and <span class="math inline"><span class="math inline">\(\hat\sigma^2\)</span></span>. Application is also available <a href="https://shinyserv.es/shiny/anova/" target="_blank">here</a><a href="main-references-credits.html#fn1" class="footnote-ref" id="fnref1"><sup>1</sup></a>.
 </p>
 <p>
 Note that the <strong>animation</strong> will not be displayed the first time it is browsed (The reason is because it is hosted at <code>https</code> websites with auto-signed SSL certificates). <strong>To see it</strong>, click on the link above. You will get a warning from your browser saying that <em>“Your connection is not private”</em>. Click in <em>“Advanced”</em> and <strong>allow an exception</strong> in your browser. The next time the animation will show up correctly.
 </p>
+
+
+
+
+
+
+
+
+
+
 </div>
-<iframe src="https://ec2-35-177-34-200.eu-west-2.compute.amazonaws.com/anova/?showcase=0" width="90%" height="900px">
+<iframe src="https://shinyserv.es/shiny/anova/?showcase=0" width="90%" height="900px">
 </iframe>
-<p>The ANOVA table summarizes the decomposition of the variance. Here is given in the layout employed by <svg style="height:0.8em;top:.04em;position:relative;fill:steelblue;" viewBox="0 0 581 512"><path d="M581 226.6C581 119.1 450.9 32 290.5 32S0 119.1 0 226.6C0 322.4 103.3 402 239.4 418.1V480h99.1v-61.5c24.3-2.7 47.6-7.4 69.4-13.9L448 480h112l-67.4-113.7c54.5-35.4 88.4-84.9 88.4-139.7zm-466.8 14.5c0-73.5 98.9-133 220.8-133s211.9 40.7 211.9 133c0 50.1-26.5 85-70.3 106.4-2.4-1.6-4.7-2.9-6.4-3.7-10.2-5.2-27.8-10.5-27.8-10.5s86.6-6.4 86.6-92.7-90.6-87.9-90.6-87.9h-199V361c-74.1-21.5-125.2-67.1-125.2-119.9zm225.1 38.3v-55.6c57.8 0 87.8-6.8 87.8 27.3 0 36.5-38.2 28.3-87.8 28.3zm-.9 72.5H365c10.8 0 18.9 11.7 24 19.2-16.1 1.9-33 2.8-50.6 2.9v-22.1z"/></svg>.</p>
+<p>The ANOVA table summarizes the decomposition of the variance. Here is given in the layout employed by <svg aria-hidden="true" role="img" viewBox="0 0 581 512" style="height:1em;width:1.13em;vertical-align:-0.125em;margin-left:auto;margin-right:auto;font-size:inherit;fill:steelblue;overflow:visible;position:relative;"><path d="M581 226.6C581 119.1 450.9 32 290.5 32S0 119.1 0 226.6C0 322.4 103.3 402 239.4 418.1V480h99.1v-61.5c24.3-2.7 47.6-7.4 69.4-13.9L448 480h112l-67.4-113.7c54.5-35.4 88.4-84.9 88.4-139.7zm-466.8 14.5c0-73.5 98.9-133 220.8-133s211.9 40.7 211.9 133c0 50.1-26.5 85-70.3 106.4-2.4-1.6-4.7-2.9-6.4-3.7-10.2-5.2-27.8-10.5-27.8-10.5s86.6-6.4 86.6-92.7-90.6-87.9-90.6-87.9h-199V361c-74.1-21.5-125.2-67.1-125.2-119.9zm225.1 38.3v-55.6c57.8 0 87.8-6.8 87.8 27.3 0 36.5-38.2 28.3-87.8 28.3zm-.9 72.5H365c10.8 0 18.9 11.7 24 19.2-16.1 1.9-33 2.8-50.6 2.9v-22.1z"/></svg>.</p>
 <table>
 <colgroup>
 <col width="3%" />
@@ -718,7 +753,7 @@ Note that the <strong>animation</strong> will not be displayed the first time it
 </tr>
 </tbody>
 </table>
-<p>The <code>anova</code> function in <svg style="height:0.8em;top:.04em;position:relative;fill:steelblue;" viewBox="0 0 581 512"><path d="M581 226.6C581 119.1 450.9 32 290.5 32S0 119.1 0 226.6C0 322.4 103.3 402 239.4 418.1V480h99.1v-61.5c24.3-2.7 47.6-7.4 69.4-13.9L448 480h112l-67.4-113.7c54.5-35.4 88.4-84.9 88.4-139.7zm-466.8 14.5c0-73.5 98.9-133 220.8-133s211.9 40.7 211.9 133c0 50.1-26.5 85-70.3 106.4-2.4-1.6-4.7-2.9-6.4-3.7-10.2-5.2-27.8-10.5-27.8-10.5s86.6-6.4 86.6-92.7-90.6-87.9-90.6-87.9h-199V361c-74.1-21.5-125.2-67.1-125.2-119.9zm225.1 38.3v-55.6c57.8 0 87.8-6.8 87.8 27.3 0 36.5-38.2 28.3-87.8 28.3zm-.9 72.5H365c10.8 0 18.9 11.7 24 19.2-16.1 1.9-33 2.8-50.6 2.9v-22.1z"/></svg> takes a model as an input and returns the ANOVA table.</p>
+<p>The <code>anova</code> function in <svg aria-hidden="true" role="img" viewBox="0 0 581 512" style="height:1em;width:1.13em;vertical-align:-0.125em;margin-left:auto;margin-right:auto;font-size:inherit;fill:steelblue;overflow:visible;position:relative;"><path d="M581 226.6C581 119.1 450.9 32 290.5 32S0 119.1 0 226.6C0 322.4 103.3 402 239.4 418.1V480h99.1v-61.5c24.3-2.7 47.6-7.4 69.4-13.9L448 480h112l-67.4-113.7c54.5-35.4 88.4-84.9 88.4-139.7zm-466.8 14.5c0-73.5 98.9-133 220.8-133s211.9 40.7 211.9 133c0 50.1-26.5 85-70.3 106.4-2.4-1.6-4.7-2.9-6.4-3.7-10.2-5.2-27.8-10.5-27.8-10.5s86.6-6.4 86.6-92.7-90.6-87.9-90.6-87.9h-199V361c-74.1-21.5-125.2-67.1-125.2-119.9zm225.1 38.3v-55.6c57.8 0 87.8-6.8 87.8 27.3 0 36.5-38.2 28.3-87.8 28.3zm-.9 72.5H365c10.8 0 18.9 11.7 24 19.2-16.1 1.9-33 2.8-50.6 2.9v-22.1z"/></svg> takes a model as an input and returns the ANOVA table.</p>
 <p>The “<span class="math inline">\(F\)</span>-value” of the ANOVA table represents the value of the <span class="math inline">\(F\)</span>-statistic <span class="math inline">\(\frac{\text{SSR}/1}{\text{SSE}/(n-2)}\)</span>. This statistic is employed to test
 <span class="math display">\[\begin{align*}
 H_0:\beta_1=0\quad\text{vs.}\quad H_1:\beta_1\neq 0,
@@ -728,7 +763,7 @@ that is, the hypothesis of no linear dependence of <span class="math inline">\(Y
 <span class="math display">\[\begin{align*}
 F=\frac{\text{SSR}/1}{\text{SSE}/(n-2)}\stackrel{H_0}{\sim} F_{1,n-2},
 \end{align*}\]</span>
-where <span class="math inline">\(F_{1,n-2}\)</span> is the <em>Snedecor’s <span class="math inline">\(F\)</span> distribution</em><a href="#fn6" class="footnote-ref" id="fnref6"><sup>6</sup></a> with <span class="math inline">\(1\)</span> and <span class="math inline">\(n-2\)</span> degrees of freedom.</p>
+where <span class="math inline">\(F_{1,n-2}\)</span> is the <em>Snedecor’s <span class="math inline">\(F\)</span> distribution</em><a href="main-references-credits.html#fn6" class="footnote-ref" id="fnref6"><sup>6</sup></a> with <span class="math inline">\(1\)</span> and <span class="math inline">\(n-2\)</span> degrees of freedom.</p>
 <p>If <span class="math inline">\(H_0\)</span> is true, then <span class="math inline">\(F\)</span> is expected to be <em>small</em> since SSR will be close to zero. The <span class="math inline">\(p\)</span>-value of this test is the same as the <span class="math inline">\(p\)</span>-value of the <span class="math inline">\(t\)</span>-test for <span class="math inline">\(H_0:\beta_1=0\)</span>.</p>
 </div>
 <div id="the-r2-statistic" class="section level3" number="1.7.2">
@@ -737,7 +772,7 @@ where <span class="math inline">\(F_{1,n-2}\)</span> is the <em>Snedecor’s <sp
 <p><span class="math display">\[ R^2 = \frac{\text{TSS} - \text{RSS}}{\text{TSS}} = 1- \frac{\text{RSS}}{\text{TSS}} \]</span></p>
 <p>where <span class="math inline">\(\text{TSS} = \sum (y_i - \bar{y})^2\)</span> is the <em>total sum of squares</em>.</p>
 <p><span class="math inline">\(R^2\)</span> measures the <em>proportion of variability in</em> <span class="math inline">\(Y\)</span> <em>that can be explained using</em> <span class="math inline">\(X\)</span>. An <span class="math inline">\(R^2\)</span> statistic that is close to 1 indicates that a large proportion of the variability in the response has been explained by the regression. A number near 0 indicates that the regression did not explain much of the variability in the response; this might occur because the linear model is wrong, or the inherent error <span class="math inline">\(\sigma^2\)</span> is high, or both.</p>
-<p>It can be shown that in this simple linear linear regression setting that <span class="math inline">\(R^2 = r^2\)</span>, where <span class="math inline">\(r\)</span> is the correlation between <span class="math inline">\(X\)</span> and <span class="math inline">\(Y\)</span>:</p>
+<p>It can be shown that in this simple linear regression setting that <span class="math inline">\(R^2 = r^2\)</span>, where <span class="math inline">\(r\)</span> is the correlation between <span class="math inline">\(X\)</span> and <span class="math inline">\(Y\)</span>:</p>
 <p><span class="math display">\[ r = \frac{cov(X,Y)}{\sigma_X \sigma_Y} \]</span></p>
 <div class="rmdcaution">
 <p>

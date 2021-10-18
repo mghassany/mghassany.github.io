@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>PW 5 | Machine Learning</title>
   <meta name="description" content="PW 5 | Machine Learning course" />
-  <meta name="generator" content="bookdown 0.22 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.24 and GitBook 2.6.7" />
 
   <meta property="og:title" content="PW 5 | Machine Learning" />
   <meta property="og:type" content="book" />
@@ -24,7 +24,7 @@
 <meta name="author" content="Mohamad Ghassany" />
 
 
-<meta name="date" content="2021-09-09" />
+<meta name="date" content="2021-10-18" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -33,8 +33,9 @@
   
 <link rel="prev" href="decision-trees-random-forests.html"/>
 <link rel="next" href="principal-components-analysis.html"/>
-<script src="book_assets/header-attrs-2.9/header-attrs.js"></script>
-<script src="book_assets/jquery-2.2.3/jquery.min.js"></script>
+<script src="book_assets/header-attrs-2.11/header-attrs.js"></script>
+<script src="book_assets/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="book_assets/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="book_assets/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
 <link href="book_assets/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
@@ -50,19 +51,18 @@
 
 
 
-
 <link href="book_assets/anchor-sections-1.0.1/anchor-sections.css" rel="stylesheet" />
 <script src="book_assets/anchor-sections-1.0.1/anchor-sections.js"></script>
 <script src="book_assets/kePrint-0.0.1/kePrint.js"></script>
 <link href="book_assets/lightable-0.0.1/lightable.css" rel="stylesheet" />
 <link href="book_assets/vembedr-0.1.4/css/vembedr.css" rel="stylesheet" />
-<script src="book_assets/htmlwidgets-1.5.3/htmlwidgets.js"></script>
-<script src="book_assets/plotly-binding-4.9.2.1/plotly.js"></script>
+<script src="book_assets/htmlwidgets-1.5.4/htmlwidgets.js"></script>
+<script src="book_assets/plotly-binding-4.10.0/plotly.js"></script>
 <script src="book_assets/typedarray-0.1/typedarray.min.js"></script>
-<link href="book_assets/crosstalk-1.1.0.1/css/crosstalk.css" rel="stylesheet" />
-<script src="book_assets/crosstalk-1.1.0.1/js/crosstalk.min.js"></script>
-<link href="book_assets/plotly-htmlwidgets-css-1.52.2/plotly-htmlwidgets.css" rel="stylesheet" />
-<script src="book_assets/plotly-main-1.52.2/plotly-latest.min.js"></script>
+<link href="book_assets/crosstalk-1.1.1/css/crosstalk.css" rel="stylesheet" />
+<script src="book_assets/crosstalk-1.1.1/js/crosstalk.min.js"></script>
+<link href="book_assets/plotly-htmlwidgets-css-2.5.1/plotly-htmlwidgets.css" rel="stylesheet" />
+<script src="book_assets/plotly-main-2.5.1/plotly-latest.min.js"></script>
 <!-- Global site tag (gtag.js) - Google Analytics -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=UA-88489172-1"></script>
 <script>
@@ -80,6 +80,7 @@
 pre > code.sourceCode { white-space: pre; position: relative; }
 pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
 pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
 code.sourceCode > span { color: inherit; text-decoration: inherit; }
 pre.sourceCode { margin: 0; }
 @media screen {
@@ -496,26 +497,24 @@ div.csl-indent {
 <h3>Single tree</h3>
 <p>To demonstrate regression trees, we will use the <code>Boston</code> dataset that we used during the first two practical works, from the <code>MASS</code> package. Recall that <code>medv</code> is the response.</p>
 <p><strong>1</strong>. Load the Boston dataset from <code>MASS</code> package. Split the dataset randomly in half.</p>
-<div class="sourceCode" id="cb44"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb44-1"><a href="pw-5.html#cb44-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(MASS)</span>
-<span id="cb44-2"><a href="pw-5.html#cb44-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(caTools)</span>
-<span id="cb44-3"><a href="pw-5.html#cb44-3" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">18</span>)</span>
-<span id="cb44-4"><a href="pw-5.html#cb44-4" aria-hidden="true" tabindex="-1"></a>Boston_idx <span class="ot">=</span> <span class="fu">sample</span>(<span class="dv">1</span><span class="sc">:</span><span class="fu">nrow</span>(Boston), <span class="fu">nrow</span>(Boston) <span class="sc">/</span> <span class="dv">2</span>) </span>
-<span id="cb44-5"><a href="pw-5.html#cb44-5" aria-hidden="true" tabindex="-1"></a><span class="co"># You don&#39;t know what we just did?</span></span>
-<span id="cb44-6"><a href="pw-5.html#cb44-6" aria-hidden="true" tabindex="-1"></a><span class="co"># open the documentation of the function sample by </span></span>
-<span id="cb44-7"><a href="pw-5.html#cb44-7" aria-hidden="true" tabindex="-1"></a><span class="co"># writing ?sample in the R console.</span></span>
-<span id="cb44-8"><a href="pw-5.html#cb44-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Note that this is one of the ways to split it randomly and it is not necessary the best.</span></span>
-<span id="cb44-9"><a href="pw-5.html#cb44-9" aria-hidden="true" tabindex="-1"></a>Boston_train <span class="ot">=</span> Boston[Boston_idx,]</span>
-<span id="cb44-10"><a href="pw-5.html#cb44-10" aria-hidden="true" tabindex="-1"></a>Boston_test  <span class="ot">=</span> Boston[<span class="sc">-</span>Boston_idx,]</span></code></pre></div>
+<div class="sourceCode" id="cb45"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb45-1"><a href="pw-5.html#cb45-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(MASS)</span>
+<span id="cb45-2"><a href="pw-5.html#cb45-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(caTools)</span>
+<span id="cb45-3"><a href="pw-5.html#cb45-3" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">18</span>)</span>
+<span id="cb45-4"><a href="pw-5.html#cb45-4" aria-hidden="true" tabindex="-1"></a>Boston_idx <span class="ot">=</span> <span class="fu">sample</span>(<span class="dv">1</span><span class="sc">:</span><span class="fu">nrow</span>(Boston), <span class="fu">nrow</span>(Boston) <span class="sc">/</span> <span class="dv">2</span>) </span>
+<span id="cb45-5"><a href="pw-5.html#cb45-5" aria-hidden="true" tabindex="-1"></a><span class="co"># You don&#39;t know what we just did?</span></span>
+<span id="cb45-6"><a href="pw-5.html#cb45-6" aria-hidden="true" tabindex="-1"></a><span class="co"># open the documentation of the function sample by </span></span>
+<span id="cb45-7"><a href="pw-5.html#cb45-7" aria-hidden="true" tabindex="-1"></a><span class="co"># writing ?sample in the R console.</span></span>
+<span id="cb45-8"><a href="pw-5.html#cb45-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Note that this is one of the ways to split it randomly and it is not necessary the best.</span></span>
+<span id="cb45-9"><a href="pw-5.html#cb45-9" aria-hidden="true" tabindex="-1"></a>Boston_train <span class="ot">=</span> Boston[Boston_idx,]</span>
+<span id="cb45-10"><a href="pw-5.html#cb45-10" aria-hidden="true" tabindex="-1"></a>Boston_test  <span class="ot">=</span> Boston[<span class="sc">-</span>Boston_idx,]</span></code></pre></div>
 <p><strong>2</strong>. Fit a regression tree to the training data using the <code>rpart()</code> function from the <code>rpart</code> package. Name the tree <code>Boston_tree</code>.</p>
 <p><strong>3</strong>. Plot the obtained tree using the following code.</p>
-<div class="sourceCode" id="cb45"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb45-1"><a href="pw-5.html#cb45-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(Boston_tree)</span>
-<span id="cb45-2"><a href="pw-5.html#cb45-2" aria-hidden="true" tabindex="-1"></a><span class="fu">text</span>(Boston_tree, <span class="at">pretty =</span> <span class="dv">0</span>)</span>
-<span id="cb45-3"><a href="pw-5.html#cb45-3" aria-hidden="true" tabindex="-1"></a><span class="fu">title</span>(<span class="at">main =</span> <span class="st">&quot;Regression Tree&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb46"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb46-1"><a href="pw-5.html#cb46-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(Boston_tree)</span>
+<span id="cb46-2"><a href="pw-5.html#cb46-2" aria-hidden="true" tabindex="-1"></a><span class="fu">text</span>(Boston_tree, <span class="at">pretty =</span> <span class="dv">0</span>)</span>
+<span id="cb46-3"><a href="pw-5.html#cb46-3" aria-hidden="true" tabindex="-1"></a><span class="fu">title</span>(<span class="at">main =</span> <span class="st">&quot;Regression Tree&quot;</span>)</span></code></pre></div>
 <p><img src="Machine-Learning_files/figure-html/unnamed-chunk-137-1.png" width="70%" style="display: block; margin: auto;" /></p>
 <p><strong>4</strong>. A better plot can be obtained using the <code>rpart.plot</code><a href="main-references-credits.html#fn18" class="footnote-ref" id="fnref18"><sup>18</sup></a> package. Re-plot the tree using it. You can use the <code>rpart.plot()</code> function which by default, when the output is continuous, each node shows: the predicted value, and the percentage of observations in the node. You can also use the <code>prp()</code> function.</p>
-<pre><code>#ans&gt; Error in library(rpart.plot): there is no package called &#39;rpart.plot&#39;
-#ans&gt; Error in rpart.plot(Boston_tree): impossible de trouver la fonction &quot;rpart.plot&quot;
-#ans&gt; Error in prp(Boston_tree): impossible de trouver la fonction &quot;prp&quot;</code></pre>
+<p><img src="Machine-Learning_files/figure-html/unnamed-chunk-138-1.png" width="50%" style="display: block; margin: auto;" /><img src="Machine-Learning_files/figure-html/unnamed-chunk-138-2.png" width="50%" style="display: block; margin: auto;" /></p>
 <p><strong>5</strong>. Print the obtained tree and print its summary. Between the things that you can see in the summary, the CP (complexity parameter) table and the importance of each variable in the model. Print the CP table using the <code>printcp()</code> function to see the cross validation results. Plot a comparison figure using the <code>plotcp()</code> function.</p>
 <p>You will notice the obtained tree is <strong>pruned</strong>. This is because <code>rpart</code> prunes the tree by default by performing 10-fold cross-validation.</p>
 <div class="rmdtip">
@@ -563,17 +562,14 @@ low bias. Averaging these <span class="math inline">\(B\)</span> trees reduces t
 <p>Last and not least, let us try a <em>boosted</em> model, which by default will produce a nice <strong>variable importance</strong> plot as well as plots of the marginal effects of the predictors. To do so, we will use the <code>gbm</code> package<a href="main-references-credits.html#fn20" class="footnote-ref" id="fnref20"><sup>20</sup></a>.</p>
 <p><strong>14</strong>. Using the <code>gbm()</code> function like following, fit a boosted model on the training set. Then compare its performance with the previous models by calculating the predictions and the RMSE.</p>
 <div class="sourceCode" id="cb47"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb47-1"><a href="pw-5.html#cb47-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(gbm)</span>
-<span id="cb47-2"><a href="pw-5.html#cb47-2" aria-hidden="true" tabindex="-1"></a><span class="co">#ans&gt; Error in library(gbm): there is no package called &#39;gbm&#39;</span></span>
-<span id="cb47-3"><a href="pw-5.html#cb47-3" aria-hidden="true" tabindex="-1"></a>Boston_boost <span class="ot">=</span> <span class="fu">gbm</span>(medv <span class="sc">~</span> ., <span class="at">data =</span> Boston_train, <span class="at">distribution =</span> <span class="st">&quot;gaussian&quot;</span>, </span>
-<span id="cb47-4"><a href="pw-5.html#cb47-4" aria-hidden="true" tabindex="-1"></a>                    <span class="at">n.trees =</span> <span class="dv">5000</span>, <span class="at">interaction.depth =</span> <span class="dv">4</span>, <span class="at">shrinkage =</span> <span class="fl">0.01</span>)</span>
-<span id="cb47-5"><a href="pw-5.html#cb47-5" aria-hidden="true" tabindex="-1"></a><span class="co">#ans&gt; Error in gbm(medv ~ ., data = Boston_train, distribution = &quot;gaussian&quot;, : impossible de trouver la fonction &quot;gbm&quot;</span></span></code></pre></div>
-<pre><code>#ans&gt; Error in predict(Boston_boost, newdata = Boston_test): objet &#39;Boston_boost&#39; introuvable</code></pre>
+<span id="cb47-2"><a href="pw-5.html#cb47-2" aria-hidden="true" tabindex="-1"></a>Boston_boost <span class="ot">=</span> <span class="fu">gbm</span>(medv <span class="sc">~</span> ., <span class="at">data =</span> Boston_train, <span class="at">distribution =</span> <span class="st">&quot;gaussian&quot;</span>, </span>
+<span id="cb47-3"><a href="pw-5.html#cb47-3" aria-hidden="true" tabindex="-1"></a>                    <span class="at">n.trees =</span> <span class="dv">5000</span>, <span class="at">interaction.depth =</span> <span class="dv">4</span>, <span class="at">shrinkage =</span> <span class="fl">0.01</span>)</span></code></pre></div>
+<pre><code>#ans&gt; Using 5000 trees...</code></pre>
 <p><strong>15</strong>. Show the summary of the boosted model. A figure of the variable importance will be shown.</p>
 </div>
 <div id="comparison-1" class="section level3 unnumbered">
 <h3>Comparison</h3>
 <p><strong>16</strong>. Reproduce the following comparison: A table in which we show the obtained RMSE with each tested model, you can create a <span class="math inline">\(5 \times 2\)</span> data.frame in which you put the names of the models and the corresponding RMSE. To visualize the data frame in the compiled html report you can use the <code>kable()</code> function from the <code>knitr</code> package. Or, compare the models by plotting the Actual (reality) response values against the predicted values.</p>
-<pre><code>#ans&gt; Error in plot(Boston_boost_pred, Boston_test$medv, xlab = &quot;Predicted&quot;, : objet &#39;Boston_boost_pred&#39; introuvable</code></pre>
 <p><img src="Machine-Learning_files/figure-html/unnamed-chunk-158-1.png" width="90%" style="display: block; margin: auto;" /></p>
 </div>
 </div>
@@ -601,7 +597,7 @@ observations in the region to which it belongs.</p>
 <div id="the-spam-dataset" class="section level3 unnumbered">
 <h3>The Spam dataset</h3>
 <p>This dataset consists of information from 4601 email messages, in a study to try to predict whether the email was junk email, or
-“spam.” For all 4601 email messages, the true outcome, spam or not, is available,
+“spam”. For all 4601 email messages, the true outcome, spam or not, is available,
 along with 57 predictors as described below:</p>
 <ul>
 <li>48 quantitative predictors: the <em>percentage</em> of words in the email that match a given word. Examples include <em>business</em>, <em>address</em>, <em>internet</em>; etc.</li>
@@ -660,7 +656,6 @@ Curious students can read more about these steps. Two famous <svg aria-hidden="t
     </div>
   </div>
 <script src="book_assets/gitbook-2.6.7/js/app.min.js"></script>
-<script src="book_assets/gitbook-2.6.7/js/lunr.js"></script>
 <script src="book_assets/gitbook-2.6.7/js/clipboard.min.js"></script>
 <script src="book_assets/gitbook-2.6.7/js/plugin-search.js"></script>
 <script src="book_assets/gitbook-2.6.7/js/plugin-sharing.js"></script>
@@ -690,14 +685,17 @@ gitbook.start({
 "text": null
 },
 "download": null,
+"search": {
+"engine": "fuse",
+"options": null
+},
 "toc": {
 "collapse": "section",
 "scroll_highlight": true
 },
 "toolbar": {
 "position": "fixed"
-},
-"search": true
+}
 });
 });
 </script>

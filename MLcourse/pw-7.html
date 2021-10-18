@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>PW 7 | Machine Learning</title>
   <meta name="description" content="PW 7 | Machine Learning course" />
-  <meta name="generator" content="bookdown 0.22 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.24 and GitBook 2.6.7" />
 
   <meta property="og:title" content="PW 7 | Machine Learning" />
   <meta property="og:type" content="book" />
@@ -24,7 +24,7 @@
 <meta name="author" content="Mohamad Ghassany" />
 
 
-<meta name="date" content="2021-09-09" />
+<meta name="date" content="2021-10-18" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -33,8 +33,9 @@
   
 <link rel="prev" href="kmeans-hierarchical-clustering.html"/>
 <link rel="next" href="gaussian-mixture-models-em.html"/>
-<script src="book_assets/header-attrs-2.9/header-attrs.js"></script>
-<script src="book_assets/jquery-2.2.3/jquery.min.js"></script>
+<script src="book_assets/header-attrs-2.11/header-attrs.js"></script>
+<script src="book_assets/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="book_assets/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="book_assets/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
 <link href="book_assets/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
@@ -50,19 +51,18 @@
 
 
 
-
 <link href="book_assets/anchor-sections-1.0.1/anchor-sections.css" rel="stylesheet" />
 <script src="book_assets/anchor-sections-1.0.1/anchor-sections.js"></script>
 <script src="book_assets/kePrint-0.0.1/kePrint.js"></script>
 <link href="book_assets/lightable-0.0.1/lightable.css" rel="stylesheet" />
 <link href="book_assets/vembedr-0.1.4/css/vembedr.css" rel="stylesheet" />
-<script src="book_assets/htmlwidgets-1.5.3/htmlwidgets.js"></script>
-<script src="book_assets/plotly-binding-4.9.2.1/plotly.js"></script>
+<script src="book_assets/htmlwidgets-1.5.4/htmlwidgets.js"></script>
+<script src="book_assets/plotly-binding-4.10.0/plotly.js"></script>
 <script src="book_assets/typedarray-0.1/typedarray.min.js"></script>
-<link href="book_assets/crosstalk-1.1.0.1/css/crosstalk.css" rel="stylesheet" />
-<script src="book_assets/crosstalk-1.1.0.1/js/crosstalk.min.js"></script>
-<link href="book_assets/plotly-htmlwidgets-css-1.52.2/plotly-htmlwidgets.css" rel="stylesheet" />
-<script src="book_assets/plotly-main-1.52.2/plotly-latest.min.js"></script>
+<link href="book_assets/crosstalk-1.1.1/css/crosstalk.css" rel="stylesheet" />
+<script src="book_assets/crosstalk-1.1.1/js/crosstalk.min.js"></script>
+<link href="book_assets/plotly-htmlwidgets-css-2.5.1/plotly-htmlwidgets.css" rel="stylesheet" />
+<script src="book_assets/plotly-main-2.5.1/plotly-latest.min.js"></script>
 <!-- Global site tag (gtag.js) - Google Analytics -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=UA-88489172-1"></script>
 <script>
@@ -80,6 +80,7 @@
 pre > code.sourceCode { white-space: pre; position: relative; }
 pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
 pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
 code.sourceCode > span { color: inherit; text-decoration: inherit; }
 pre.sourceCode { margin: 0; }
 @media screen {
@@ -609,8 +610,8 @@ output:
 <div id="k-means-clustering" class="section level2 unnumbered">
 <h2><span class="math inline">\(k\)</span>-means clustering</h2>
 <p><strong>1.</strong> Download the dataset:  <a target="_blank" href="datasets/ligue1_17_18.csv"> Ligue1 2017-2018 <i class="fa fa-table" aria-hidden="true"></i></a> and import it into <svg aria-hidden="true" role="img" viewBox="0 0 581 512" style="height:1em;width:1.13em;vertical-align:-0.125em;margin-left:auto;margin-right:auto;font-size:inherit;fill:steelblue;overflow:visible;position:relative;"><path d="M581 226.6C581 119.1 450.9 32 290.5 32S0 119.1 0 226.6C0 322.4 103.3 402 239.4 418.1V480h99.1v-61.5c24.3-2.7 47.6-7.4 69.4-13.9L448 480h112l-67.4-113.7c54.5-35.4 88.4-84.9 88.4-139.7zm-466.8 14.5c0-73.5 98.9-133 220.8-133s211.9 40.7 211.9 133c0 50.1-26.5 85-70.3 106.4-2.4-1.6-4.7-2.9-6.4-3.7-10.2-5.2-27.8-10.5-27.8-10.5s86.6-6.4 86.6-92.7-90.6-87.9-90.6-87.9h-199V361c-74.1-21.5-125.2-67.1-125.2-119.9zm225.1 38.3v-55.6c57.8 0 87.8-6.8 87.8 27.3 0 36.5-38.2 28.3-87.8 28.3zm-.9 72.5H365c10.8 0 18.9 11.7 24 19.2-16.1 1.9-33 2.8-50.6 2.9v-22.1z"/></svg>. Put the argument <code>row.names</code> to 1.</p>
-<div class="sourceCode" id="cb72"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb72-1"><a href="pw-7.html#cb72-1" aria-hidden="true" tabindex="-1"></a><span class="co"># You can import directly from my website (instead of downloading it..)</span></span>
-<span id="cb72-2"><a href="pw-7.html#cb72-2" aria-hidden="true" tabindex="-1"></a>ligue1 <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">&quot;http://mghassany.com/MLcourse/datasets/ligue1_17_18.csv&quot;</span>, <span class="at">row.names=</span><span class="dv">1</span>, <span class="at">sep=</span><span class="st">&quot;;&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb73"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb73-1"><a href="pw-7.html#cb73-1" aria-hidden="true" tabindex="-1"></a><span class="co"># You can import directly from my website (instead of downloading it..)</span></span>
+<span id="cb73-2"><a href="pw-7.html#cb73-2" aria-hidden="true" tabindex="-1"></a>ligue1 <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">&quot;http://mghassany.com/MLcourse/datasets/ligue1_17_18.csv&quot;</span>, <span class="at">row.names=</span><span class="dv">1</span>, <span class="at">sep=</span><span class="st">&quot;;&quot;</span>)</span></code></pre></div>
 <p><strong>2.</strong> Print the first two rows of the dataset and the total number of features in this dataset.</p>
 <div class="rmdtip">
 <p>
@@ -634,7 +635,7 @@ You can create an awesome HTML table by using the function <code>kable</code> fr
 <center>
 <img src="img/wss_bss.jpg" />
 </center>
-<p><strong>11.</strong> Modify the code of the previous question in order to visualize the ‘between_SS / total_SS.’ Interpret the results.</p>
+<p><strong>11.</strong> Modify the code of the previous question in order to visualize the ‘between_SS / total_SS’. Interpret the results.</p>
 </div>
 <div id="ligue-1" class="section level3 unnumbered">
 <h3><code>Ligue 1</code></h3>
@@ -649,12 +650,12 @@ You can create an awesome HTML table by using the function <code>kable</code> fr
 <p><strong>15.</strong> Apply PCA on <code>ligue1</code> dataset and store you results in <code>pcaligue1</code>. Do we need to apply PCA on the scaled dataset? Justify your answer.</p>
 <p><strong>16.</strong> Plot the observations and the variables on the first two principal components (biplot). Interpret the results.</p>
 <p><strong>17.</strong> Visualize the teams on the first two principal components and color them with respect to their cluster.</p>
-<div class="sourceCode" id="cb73"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb73-1"><a href="pw-7.html#cb73-1" aria-hidden="true" tabindex="-1"></a><span class="co"># You can use the following code, based on `factoextra` library.</span></span>
-<span id="cb73-2"><a href="pw-7.html#cb73-2" aria-hidden="true" tabindex="-1"></a><span class="fu">fviz_cluster</span>(km.ligue1, <span class="at">data =</span> ligue1, <span class="co"># km.ligue1 is where you stored your kmeans results</span></span>
-<span id="cb73-3"><a href="pw-7.html#cb73-3" aria-hidden="true" tabindex="-1"></a>              <span class="at">palette =</span> <span class="fu">c</span>(<span class="st">&quot;red&quot;</span>, <span class="st">&quot;blue&quot;</span>, <span class="st">&quot;green&quot;</span>), <span class="co"># 3 colors since 3 clusters</span></span>
-<span id="cb73-4"><a href="pw-7.html#cb73-4" aria-hidden="true" tabindex="-1"></a>              <span class="at">ggtheme =</span> <span class="fu">theme_minimal</span>(),</span>
-<span id="cb73-5"><a href="pw-7.html#cb73-5" aria-hidden="true" tabindex="-1"></a>              <span class="at">main =</span> <span class="st">&quot;Clustering Plot&quot;</span></span>
-<span id="cb73-6"><a href="pw-7.html#cb73-6" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div>
+<div class="sourceCode" id="cb74"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb74-1"><a href="pw-7.html#cb74-1" aria-hidden="true" tabindex="-1"></a><span class="co"># You can use the following code, based on `factoextra` library.</span></span>
+<span id="cb74-2"><a href="pw-7.html#cb74-2" aria-hidden="true" tabindex="-1"></a><span class="fu">fviz_cluster</span>(km.ligue1, <span class="at">data =</span> ligue1, <span class="co"># km.ligue1 is where you stored your kmeans results</span></span>
+<span id="cb74-3"><a href="pw-7.html#cb74-3" aria-hidden="true" tabindex="-1"></a>              <span class="at">palette =</span> <span class="fu">c</span>(<span class="st">&quot;red&quot;</span>, <span class="st">&quot;blue&quot;</span>, <span class="st">&quot;green&quot;</span>), <span class="co"># 3 colors since 3 clusters</span></span>
+<span id="cb74-4"><a href="pw-7.html#cb74-4" aria-hidden="true" tabindex="-1"></a>              <span class="at">ggtheme =</span> <span class="fu">theme_minimal</span>(),</span>
+<span id="cb74-5"><a href="pw-7.html#cb74-5" aria-hidden="true" tabindex="-1"></a>              <span class="at">main =</span> <span class="st">&quot;Clustering Plot&quot;</span></span>
+<span id="cb74-6"><a href="pw-7.html#cb74-6" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div>
 <p><strong>18.</strong> Recall that the figure of question <strong>17</strong> is a visualization with PC1 and PC2 of the clustering done with all the variables, not on PC1 and PC2. Now apply the <code>kmeans()</code> clustering taking only the first two PCs instead the variables of original dataset. Visualize the results and compare with the question <strong>17</strong>.</p>
 <div class="rmdinsight">
 <p>
@@ -729,40 +730,40 @@ cluster labels obtained.</p>
 <div id="distances-dist" class="section level3 unnumbered">
 <h3>Distances <code>dist()</code></h3>
 <p>To calculate the distance in <svg aria-hidden="true" role="img" viewBox="0 0 581 512" style="height:1em;width:1.13em;vertical-align:-0.125em;margin-left:auto;margin-right:auto;font-size:inherit;fill:steelblue;overflow:visible;position:relative;"><path d="M581 226.6C581 119.1 450.9 32 290.5 32S0 119.1 0 226.6C0 322.4 103.3 402 239.4 418.1V480h99.1v-61.5c24.3-2.7 47.6-7.4 69.4-13.9L448 480h112l-67.4-113.7c54.5-35.4 88.4-84.9 88.4-139.7zm-466.8 14.5c0-73.5 98.9-133 220.8-133s211.9 40.7 211.9 133c0 50.1-26.5 85-70.3 106.4-2.4-1.6-4.7-2.9-6.4-3.7-10.2-5.2-27.8-10.5-27.8-10.5s86.6-6.4 86.6-92.7-90.6-87.9-90.6-87.9h-199V361c-74.1-21.5-125.2-67.1-125.2-119.9zm225.1 38.3v-55.6c57.8 0 87.8-6.8 87.8 27.3 0 36.5-38.2 28.3-87.8 28.3zm-.9 72.5H365c10.8 0 18.9 11.7 24 19.2-16.1 1.9-33 2.8-50.6 2.9v-22.1z"/></svg> we use the <code>dist()</code> function. Here is a tutorial of how use it.</p>
-<div class="sourceCode" id="cb74"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb74-1"><a href="pw-7.html#cb74-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Generate a matrix M of values from 1 to 15 with 5 rows and 3 columns</span></span>
-<span id="cb74-2"><a href="pw-7.html#cb74-2" aria-hidden="true" tabindex="-1"></a>M <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">15</span>,<span class="dv">5</span>,<span class="dv">3</span>)</span>
-<span id="cb74-3"><a href="pw-7.html#cb74-3" aria-hidden="true" tabindex="-1"></a>M</span>
-<span id="cb74-4"><a href="pw-7.html#cb74-4" aria-hidden="true" tabindex="-1"></a><span class="co">#ans&gt;      [,1] [,2] [,3]</span></span>
-<span id="cb74-5"><a href="pw-7.html#cb74-5" aria-hidden="true" tabindex="-1"></a><span class="co">#ans&gt; [1,]    1    6   11</span></span>
-<span id="cb74-6"><a href="pw-7.html#cb74-6" aria-hidden="true" tabindex="-1"></a><span class="co">#ans&gt; [2,]    2    7   12</span></span>
-<span id="cb74-7"><a href="pw-7.html#cb74-7" aria-hidden="true" tabindex="-1"></a><span class="co">#ans&gt; [3,]    3    8   13</span></span>
-<span id="cb74-8"><a href="pw-7.html#cb74-8" aria-hidden="true" tabindex="-1"></a><span class="co">#ans&gt; [4,]    4    9   14</span></span>
-<span id="cb74-9"><a href="pw-7.html#cb74-9" aria-hidden="true" tabindex="-1"></a><span class="co">#ans&gt; [5,]    5   10   15</span></span></code></pre></div>
-<div class="sourceCode" id="cb75"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb75-1"><a href="pw-7.html#cb75-1" aria-hidden="true" tabindex="-1"></a><span class="co"># - Compute the distance between rows of M.</span></span>
-<span id="cb75-2"><a href="pw-7.html#cb75-2" aria-hidden="true" tabindex="-1"></a><span class="co"># - The default distance is the euclidian distance.</span></span>
-<span id="cb75-3"><a href="pw-7.html#cb75-3" aria-hidden="true" tabindex="-1"></a><span class="co"># - Since there are 3 columns, it is the euclidian</span></span>
-<span id="cb75-4"><a href="pw-7.html#cb75-4" aria-hidden="true" tabindex="-1"></a><span class="co">#        distance between tri-dimensional points.</span></span>
-<span id="cb75-5"><a href="pw-7.html#cb75-5" aria-hidden="true" tabindex="-1"></a><span class="fu">dist</span>(M)</span>
-<span id="cb75-6"><a href="pw-7.html#cb75-6" aria-hidden="true" tabindex="-1"></a><span class="co">#ans&gt;      1    2    3    4</span></span>
-<span id="cb75-7"><a href="pw-7.html#cb75-7" aria-hidden="true" tabindex="-1"></a><span class="co">#ans&gt; 2 1.73               </span></span>
-<span id="cb75-8"><a href="pw-7.html#cb75-8" aria-hidden="true" tabindex="-1"></a><span class="co">#ans&gt; 3 3.46 1.73          </span></span>
-<span id="cb75-9"><a href="pw-7.html#cb75-9" aria-hidden="true" tabindex="-1"></a><span class="co">#ans&gt; 4 5.20 3.46 1.73     </span></span>
-<span id="cb75-10"><a href="pw-7.html#cb75-10" aria-hidden="true" tabindex="-1"></a><span class="co">#ans&gt; 5 6.93 5.20 3.46 1.73</span></span></code></pre></div>
-<div class="sourceCode" id="cb76"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb76-1"><a href="pw-7.html#cb76-1" aria-hidden="true" tabindex="-1"></a><span class="co"># To compute the Manhattan distance </span></span>
-<span id="cb76-2"><a href="pw-7.html#cb76-2" aria-hidden="true" tabindex="-1"></a><span class="fu">dist</span>(M, <span class="at">method=</span> <span class="st">&quot;manhattan&quot;</span>)</span>
-<span id="cb76-3"><a href="pw-7.html#cb76-3" aria-hidden="true" tabindex="-1"></a><span class="co">#ans&gt;    1  2  3  4</span></span>
-<span id="cb76-4"><a href="pw-7.html#cb76-4" aria-hidden="true" tabindex="-1"></a><span class="co">#ans&gt; 2  3         </span></span>
-<span id="cb76-5"><a href="pw-7.html#cb76-5" aria-hidden="true" tabindex="-1"></a><span class="co">#ans&gt; 3  6  3      </span></span>
-<span id="cb76-6"><a href="pw-7.html#cb76-6" aria-hidden="true" tabindex="-1"></a><span class="co">#ans&gt; 4  9  6  3   </span></span>
-<span id="cb76-7"><a href="pw-7.html#cb76-7" aria-hidden="true" tabindex="-1"></a><span class="co">#ans&gt; 5 12  9  6  3</span></span></code></pre></div>
+<div class="sourceCode" id="cb75"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb75-1"><a href="pw-7.html#cb75-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Generate a matrix M of values from 1 to 15 with 5 rows and 3 columns</span></span>
+<span id="cb75-2"><a href="pw-7.html#cb75-2" aria-hidden="true" tabindex="-1"></a>M <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">15</span>,<span class="dv">5</span>,<span class="dv">3</span>)</span>
+<span id="cb75-3"><a href="pw-7.html#cb75-3" aria-hidden="true" tabindex="-1"></a>M</span>
+<span id="cb75-4"><a href="pw-7.html#cb75-4" aria-hidden="true" tabindex="-1"></a><span class="co">#ans&gt;      [,1] [,2] [,3]</span></span>
+<span id="cb75-5"><a href="pw-7.html#cb75-5" aria-hidden="true" tabindex="-1"></a><span class="co">#ans&gt; [1,]    1    6   11</span></span>
+<span id="cb75-6"><a href="pw-7.html#cb75-6" aria-hidden="true" tabindex="-1"></a><span class="co">#ans&gt; [2,]    2    7   12</span></span>
+<span id="cb75-7"><a href="pw-7.html#cb75-7" aria-hidden="true" tabindex="-1"></a><span class="co">#ans&gt; [3,]    3    8   13</span></span>
+<span id="cb75-8"><a href="pw-7.html#cb75-8" aria-hidden="true" tabindex="-1"></a><span class="co">#ans&gt; [4,]    4    9   14</span></span>
+<span id="cb75-9"><a href="pw-7.html#cb75-9" aria-hidden="true" tabindex="-1"></a><span class="co">#ans&gt; [5,]    5   10   15</span></span></code></pre></div>
+<div class="sourceCode" id="cb76"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb76-1"><a href="pw-7.html#cb76-1" aria-hidden="true" tabindex="-1"></a><span class="co"># - Compute the distance between rows of M.</span></span>
+<span id="cb76-2"><a href="pw-7.html#cb76-2" aria-hidden="true" tabindex="-1"></a><span class="co"># - The default distance is the euclidian distance.</span></span>
+<span id="cb76-3"><a href="pw-7.html#cb76-3" aria-hidden="true" tabindex="-1"></a><span class="co"># - Since there are 3 columns, it is the euclidian</span></span>
+<span id="cb76-4"><a href="pw-7.html#cb76-4" aria-hidden="true" tabindex="-1"></a><span class="co">#        distance between tri-dimensional points.</span></span>
+<span id="cb76-5"><a href="pw-7.html#cb76-5" aria-hidden="true" tabindex="-1"></a><span class="fu">dist</span>(M)</span>
+<span id="cb76-6"><a href="pw-7.html#cb76-6" aria-hidden="true" tabindex="-1"></a><span class="co">#ans&gt;      1    2    3    4</span></span>
+<span id="cb76-7"><a href="pw-7.html#cb76-7" aria-hidden="true" tabindex="-1"></a><span class="co">#ans&gt; 2 1.73               </span></span>
+<span id="cb76-8"><a href="pw-7.html#cb76-8" aria-hidden="true" tabindex="-1"></a><span class="co">#ans&gt; 3 3.46 1.73          </span></span>
+<span id="cb76-9"><a href="pw-7.html#cb76-9" aria-hidden="true" tabindex="-1"></a><span class="co">#ans&gt; 4 5.20 3.46 1.73     </span></span>
+<span id="cb76-10"><a href="pw-7.html#cb76-10" aria-hidden="true" tabindex="-1"></a><span class="co">#ans&gt; 5 6.93 5.20 3.46 1.73</span></span></code></pre></div>
+<div class="sourceCode" id="cb77"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb77-1"><a href="pw-7.html#cb77-1" aria-hidden="true" tabindex="-1"></a><span class="co"># To compute the Manhattan distance </span></span>
+<span id="cb77-2"><a href="pw-7.html#cb77-2" aria-hidden="true" tabindex="-1"></a><span class="fu">dist</span>(M, <span class="at">method=</span> <span class="st">&quot;manhattan&quot;</span>)</span>
+<span id="cb77-3"><a href="pw-7.html#cb77-3" aria-hidden="true" tabindex="-1"></a><span class="co">#ans&gt;    1  2  3  4</span></span>
+<span id="cb77-4"><a href="pw-7.html#cb77-4" aria-hidden="true" tabindex="-1"></a><span class="co">#ans&gt; 2  3         </span></span>
+<span id="cb77-5"><a href="pw-7.html#cb77-5" aria-hidden="true" tabindex="-1"></a><span class="co">#ans&gt; 3  6  3      </span></span>
+<span id="cb77-6"><a href="pw-7.html#cb77-6" aria-hidden="true" tabindex="-1"></a><span class="co">#ans&gt; 4  9  6  3   </span></span>
+<span id="cb77-7"><a href="pw-7.html#cb77-7" aria-hidden="true" tabindex="-1"></a><span class="co">#ans&gt; 5 12  9  6  3</span></span></code></pre></div>
 </div>
 <div id="dendrogram-hclust" class="section level3 unnumbered">
 <h3>Dendrogram <code>hclust()</code></h3>
-<div class="sourceCode" id="cb77"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb77-1"><a href="pw-7.html#cb77-1" aria-hidden="true" tabindex="-1"></a><span class="co"># First we construct the dendrogram </span></span>
-<span id="cb77-2"><a href="pw-7.html#cb77-2" aria-hidden="true" tabindex="-1"></a>dendro <span class="ot">&lt;-</span> <span class="fu">hclust</span>(<span class="fu">dist</span>(M))</span>
-<span id="cb77-3"><a href="pw-7.html#cb77-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb77-4"><a href="pw-7.html#cb77-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Then we plot it</span></span>
-<span id="cb77-5"><a href="pw-7.html#cb77-5" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(dendro)</span></code></pre></div>
+<div class="sourceCode" id="cb78"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb78-1"><a href="pw-7.html#cb78-1" aria-hidden="true" tabindex="-1"></a><span class="co"># First we construct the dendrogram </span></span>
+<span id="cb78-2"><a href="pw-7.html#cb78-2" aria-hidden="true" tabindex="-1"></a>dendro <span class="ot">&lt;-</span> <span class="fu">hclust</span>(<span class="fu">dist</span>(M))</span>
+<span id="cb78-3"><a href="pw-7.html#cb78-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb78-4"><a href="pw-7.html#cb78-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Then we plot it</span></span>
+<span id="cb78-5"><a href="pw-7.html#cb78-5" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(dendro)</span></code></pre></div>
 <p><img src="Machine-Learning_files/figure-html/unnamed-chunk-242-1.png" width="70%" style="display: block; margin: auto;" /></p>
 </div>
 <div id="hierarchical-clustering-on-iris-dataset" class="section level3 unnumbered">
@@ -774,7 +775,7 @@ cluster labels obtained.</p>
 <p><strong>4.</strong> Construct a dendrogram on the iris dataset using the method <em>average</em>. Store the result in <code>dendro.avg</code>.</p>
 <p><strong>5.</strong> Plot the dendrogram.</p>
 <p><strong>6.</strong> Plot again the dendrogram using the following command:</p>
-<div class="sourceCode" id="cb78"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb78-1"><a href="pw-7.html#cb78-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(dendro.avg, <span class="at">hang=</span><span class="sc">-</span><span class="dv">1</span>, <span class="at">label=</span>sampleiris<span class="sc">$</span>class)</span></code></pre></div>
+<div class="sourceCode" id="cb79"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb79-1"><a href="pw-7.html#cb79-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(dendro.avg, <span class="at">hang=</span><span class="sc">-</span><span class="dv">1</span>, <span class="at">label=</span>sampleiris<span class="sc">$</span>class)</span></code></pre></div>
 <p><strong>7.</strong> To cut the dendrogram and obtain a clustering use the <code>cutree</code>. You can choose the number of clusters you wish to obtain, or you can cut by choosing the height from the dendrogram figure. Cut the dendrogram in order to obtain 3 clusters. Store the results into vector <code>groups.avg</code>.</p>
 <p><strong>8.</strong> Visualize the cut tree using the function <code>rect.hclust()</code>. You can choose the colors of the rectangles too!</p>
 <p><strong>9.</strong> Compare the obtained results obtained with Hierarchical clustering and the real class labels of the flowers (function <code>table()</code>). Interpret the results.</p>
@@ -798,7 +799,6 @@ On the figure, click on the clusters you wish to obtain. Then hit <code>Escape</
     </div>
   </div>
 <script src="book_assets/gitbook-2.6.7/js/app.min.js"></script>
-<script src="book_assets/gitbook-2.6.7/js/lunr.js"></script>
 <script src="book_assets/gitbook-2.6.7/js/clipboard.min.js"></script>
 <script src="book_assets/gitbook-2.6.7/js/plugin-search.js"></script>
 <script src="book_assets/gitbook-2.6.7/js/plugin-sharing.js"></script>
@@ -828,14 +828,17 @@ gitbook.start({
 "text": null
 },
 "download": null,
+"search": {
+"engine": "fuse",
+"options": null
+},
 "toc": {
 "collapse": "section",
 "scroll_highlight": true
 },
 "toolbar": {
 "position": "fixed"
-},
-"search": true
+}
 });
 });
 </script>

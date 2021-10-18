@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>2 Multiple Linear Regression | Machine Learning</title>
   <meta name="description" content="2 Multiple Linear Regression | Machine Learning course" />
-  <meta name="generator" content="bookdown 0.22 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.24 and GitBook 2.6.7" />
 
   <meta property="og:title" content="2 Multiple Linear Regression | Machine Learning" />
   <meta property="og:type" content="book" />
@@ -24,7 +24,7 @@
 <meta name="author" content="Mohamad Ghassany" />
 
 
-<meta name="date" content="2021-09-09" />
+<meta name="date" content="2021-10-18" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -33,8 +33,9 @@
   
 <link rel="prev" href="practical-work-1.html"/>
 <link rel="next" href="pw-2.html"/>
-<script src="book_assets/header-attrs-2.9/header-attrs.js"></script>
-<script src="book_assets/jquery-2.2.3/jquery.min.js"></script>
+<script src="book_assets/header-attrs-2.11/header-attrs.js"></script>
+<script src="book_assets/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="book_assets/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="book_assets/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
 <link href="book_assets/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
@@ -50,19 +51,18 @@
 
 
 
-
 <link href="book_assets/anchor-sections-1.0.1/anchor-sections.css" rel="stylesheet" />
 <script src="book_assets/anchor-sections-1.0.1/anchor-sections.js"></script>
 <script src="book_assets/kePrint-0.0.1/kePrint.js"></script>
 <link href="book_assets/lightable-0.0.1/lightable.css" rel="stylesheet" />
 <link href="book_assets/vembedr-0.1.4/css/vembedr.css" rel="stylesheet" />
-<script src="book_assets/htmlwidgets-1.5.3/htmlwidgets.js"></script>
-<script src="book_assets/plotly-binding-4.9.2.1/plotly.js"></script>
+<script src="book_assets/htmlwidgets-1.5.4/htmlwidgets.js"></script>
+<script src="book_assets/plotly-binding-4.10.0/plotly.js"></script>
 <script src="book_assets/typedarray-0.1/typedarray.min.js"></script>
-<link href="book_assets/crosstalk-1.1.0.1/css/crosstalk.css" rel="stylesheet" />
-<script src="book_assets/crosstalk-1.1.0.1/js/crosstalk.min.js"></script>
-<link href="book_assets/plotly-htmlwidgets-css-1.52.2/plotly-htmlwidgets.css" rel="stylesheet" />
-<script src="book_assets/plotly-main-1.52.2/plotly-latest.min.js"></script>
+<link href="book_assets/crosstalk-1.1.1/css/crosstalk.css" rel="stylesheet" />
+<script src="book_assets/crosstalk-1.1.1/js/crosstalk.min.js"></script>
+<link href="book_assets/plotly-htmlwidgets-css-2.5.1/plotly-htmlwidgets.css" rel="stylesheet" />
+<script src="book_assets/plotly-main-2.5.1/plotly-latest.min.js"></script>
 <!-- Global site tag (gtag.js) - Google Analytics -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=UA-88489172-1"></script>
 <script>
@@ -80,6 +80,7 @@
 pre > code.sourceCode { white-space: pre; position: relative; }
 pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
 pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
 code.sourceCode > span { color: inherit; text-decoration: inherit; }
 pre.sourceCode { margin: 0; }
 @media screen {
@@ -623,7 +624,7 @@ to obtain the unique solution</p>
 <p>The ANOVA table has many pieces of information. What we care about is the <span class="math inline">\(F\)</span> Ratio and the corresponding p-value. We compare the <span class="math inline">\(F\)</span> Ratio with <span class="math inline">\(F_{(p,n-p-1)}\)</span> and a corresponding <span class="math inline">\(\alpha\)</span> value (error).</p>
 <div class="rmdcaution">
 <p>
-The “ANOVA table” is a broad concept in statistics, with different variants. Here we are only covering the basic ANOVA table from the relation <span class="math inline"><span class="math inline">\(\text{SST} = \text{SSR} + \text{SSE}\)</span></span>. However, further sophistications are possible when <span class="math inline"><span class="math inline">\(\text{SSR}\)</span></span> is decomposed into the variations contributed by <em>each</em> predictor. In particular, for multiple linear regression <code>r fontawesome::fa(“r-project,” fill =“steelblue”)</code>’s <code>anova</code> implements a <em>sequential (type I) ANOVA table</em>, which is <strong>not</strong> the previous table!
+The “ANOVA table” is a broad concept in statistics, with different variants. Here we are only covering the basic ANOVA table from the relation <span class="math inline"><span class="math inline">\(\text{SST} = \text{SSR} + \text{SSE}\)</span></span>. However, further sophistications are possible when <span class="math inline"><span class="math inline">\(\text{SSR}\)</span></span> is decomposed into the variations contributed by <em>each</em> predictor. In particular, for multiple linear regression <code>r fontawesome::fa(“r-project”, fill =“steelblue”)</code>’s <code>anova</code> implements a <em>sequential (type I) ANOVA table</em>, which is <strong>not</strong> the previous table!
 </p>
 </div>
 <p>The <code>anova</code> function in <svg aria-hidden="true" role="img" viewBox="0 0 581 512" style="height:1em;width:1.13em;vertical-align:-0.125em;margin-left:auto;margin-right:auto;font-size:inherit;fill:steelblue;overflow:visible;position:relative;"><path d="M581 226.6C581 119.1 450.9 32 290.5 32S0 119.1 0 226.6C0 322.4 103.3 402 239.4 418.1V480h99.1v-61.5c24.3-2.7 47.6-7.4 69.4-13.9L448 480h112l-67.4-113.7c54.5-35.4 88.4-84.9 88.4-139.7zm-466.8 14.5c0-73.5 98.9-133 220.8-133s211.9 40.7 211.9 133c0 50.1-26.5 85-70.3 106.4-2.4-1.6-4.7-2.9-6.4-3.7-10.2-5.2-27.8-10.5-27.8-10.5s86.6-6.4 86.6-92.7-90.6-87.9-90.6-87.9h-199V361c-74.1-21.5-125.2-67.1-125.2-119.9zm225.1 38.3v-55.6c57.8 0 87.8-6.8 87.8 27.3 0 36.5-38.2 28.3-87.8 28.3zm-.9 72.5H365c10.8 0 18.9 11.7 24 19.2-16.1 1.9-33 2.8-50.6 2.9v-22.1z"/></svg> takes a model as an input and returns the following <em>sequential</em> ANOVA table<a href="main-references-credits.html#fn9" class="footnote-ref" id="fnref9"><sup>9</sup></a>:</p>
@@ -804,7 +805,7 @@ carried out <em>inside the linear model</em> <span class="math inline">\(Y=\beta
 <p>After trying different linear models, you need to make a choice which model you want to use. More specifically, the questions that one can ask: “How to determine which model suits best to my data? Do I just look at the R square, SSE, etc.?” and “As the interpretation of that model (quadratic, root, etc.) will be very different, won’t it be an issue?”</p>
 <p>The second question can be answered easily. First, find a model that best suits to your data and then interpret its results. It is good if you have ideas how your data might be explained. However, interpret the best model, only. Now we will address the first question. Note that there are multiple ways to select a best model. In addition, this approach only applies to univariate models (simple models) whith just one input variable.</p>
 <p>Use the following <strong>interactive application</strong> and play around with different datasets and models. Notice how parameters change and become more confident with assessing simple linear models.</p>
-<iframe src="https://bjoernhartmann.shinyapps.io/linear_model_selection/?showcase=0" width="100%" height="900px">
+<iframe src="https://bjoernhartmann.shinyapps.io/linear_model_selection/?showcase=0" width="100%" height="900px" data-external="1">
 </iframe>
 <div id="use-the-adjusted-r_adj2-for-multivariate-models" class="section level3 unnumbered">
 <h3>Use the Adjusted <span class="math inline">\(R_{adj}^2\)</span> for multivariate models</h3>
@@ -812,7 +813,7 @@ carried out <em>inside the linear model</em> <span class="math inline">\(Y=\beta
 <p>In contrast to the simple <span class="math inline">\(R^2\)</span><a href="main-references-credits.html#fn10" class="footnote-ref" id="fnref10"><sup>10</sup></a>, the adjusted adjusted <span class="math inline">\(R_{adj}^2\)</span><a href="main-references-credits.html#fn11" class="footnote-ref" id="fnref11"><sup>11</sup></a> takes the number of input factors into account. It penalizes too many input factors and favors parsimonious models.</p>
 <p>The adjusted <span class="math inline">\(R_{adj}^2\)</span> is sensitive to the amount of noise in the data. As such, only compare this indicator of models for the same dataset than comparing it across different datasets.</p>
 
-<div class="figure" style="text-align: center"><span id="fig:R2"></span>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:R2"></span>
 <img src="img/R2vsAdjR2.png" alt="Comparison of \(R^2\) and \(R^2_{\text{adj}}\) for \(n=200\) and \(p\) ranging from \(1\) to \(198\). \(M=100\) datasets were simulated with only the first two predictors being significant. The thicker curves are the mean of each color’s curves." width="70%" />
 <p class="caption">
 Figure 2.1: Comparison of <span class="math inline">\(R^2\)</span> and <span class="math inline">\(R^2_{\text{adj}}\)</span> for <span class="math inline">\(n=200\)</span> and <span class="math inline">\(p\)</span> ranging from <span class="math inline">\(1\)</span> to <span class="math inline">\(198\)</span>. <span class="math inline">\(M=100\)</span> datasets were simulated with <strong>only the first two</strong> predictors being significant. The thicker curves are the mean of each color’s curves.
@@ -872,7 +873,6 @@ Figure 2.1: Comparison of <span class="math inline">\(R^2\)</span> and <span cla
     </div>
   </div>
 <script src="book_assets/gitbook-2.6.7/js/app.min.js"></script>
-<script src="book_assets/gitbook-2.6.7/js/lunr.js"></script>
 <script src="book_assets/gitbook-2.6.7/js/clipboard.min.js"></script>
 <script src="book_assets/gitbook-2.6.7/js/plugin-search.js"></script>
 <script src="book_assets/gitbook-2.6.7/js/plugin-sharing.js"></script>
@@ -902,14 +902,17 @@ gitbook.start({
 "text": null
 },
 "download": null,
+"search": {
+"engine": "fuse",
+"options": null
+},
 "toc": {
 "collapse": "section",
 "scroll_highlight": true
 },
 "toolbar": {
 "position": "fixed"
-},
-"search": true
+}
 });
 });
 </script>

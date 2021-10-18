@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>7 Kmeans &amp; Hierarchical Clustering | Machine Learning</title>
   <meta name="description" content="7 Kmeans &amp; Hierarchical Clustering | Machine Learning course" />
-  <meta name="generator" content="bookdown 0.22 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.24 and GitBook 2.6.7" />
 
   <meta property="og:title" content="7 Kmeans &amp; Hierarchical Clustering | Machine Learning" />
   <meta property="og:type" content="book" />
@@ -24,7 +24,7 @@
 <meta name="author" content="Mohamad Ghassany" />
 
 
-<meta name="date" content="2021-09-09" />
+<meta name="date" content="2021-10-18" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -33,8 +33,9 @@
   
 <link rel="prev" href="pw-6.html"/>
 <link rel="next" href="pw-7.html"/>
-<script src="book_assets/header-attrs-2.9/header-attrs.js"></script>
-<script src="book_assets/jquery-2.2.3/jquery.min.js"></script>
+<script src="book_assets/header-attrs-2.11/header-attrs.js"></script>
+<script src="book_assets/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="book_assets/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="book_assets/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
 <link href="book_assets/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
@@ -50,19 +51,18 @@
 
 
 
-
 <link href="book_assets/anchor-sections-1.0.1/anchor-sections.css" rel="stylesheet" />
 <script src="book_assets/anchor-sections-1.0.1/anchor-sections.js"></script>
 <script src="book_assets/kePrint-0.0.1/kePrint.js"></script>
 <link href="book_assets/lightable-0.0.1/lightable.css" rel="stylesheet" />
 <link href="book_assets/vembedr-0.1.4/css/vembedr.css" rel="stylesheet" />
-<script src="book_assets/htmlwidgets-1.5.3/htmlwidgets.js"></script>
-<script src="book_assets/plotly-binding-4.9.2.1/plotly.js"></script>
+<script src="book_assets/htmlwidgets-1.5.4/htmlwidgets.js"></script>
+<script src="book_assets/plotly-binding-4.10.0/plotly.js"></script>
 <script src="book_assets/typedarray-0.1/typedarray.min.js"></script>
-<link href="book_assets/crosstalk-1.1.0.1/css/crosstalk.css" rel="stylesheet" />
-<script src="book_assets/crosstalk-1.1.0.1/js/crosstalk.min.js"></script>
-<link href="book_assets/plotly-htmlwidgets-css-1.52.2/plotly-htmlwidgets.css" rel="stylesheet" />
-<script src="book_assets/plotly-main-1.52.2/plotly-latest.min.js"></script>
+<link href="book_assets/crosstalk-1.1.1/css/crosstalk.css" rel="stylesheet" />
+<script src="book_assets/crosstalk-1.1.1/js/crosstalk.min.js"></script>
+<link href="book_assets/plotly-htmlwidgets-css-2.5.1/plotly-htmlwidgets.css" rel="stylesheet" />
+<script src="book_assets/plotly-main-2.5.1/plotly-latest.min.js"></script>
 <!-- Global site tag (gtag.js) - Google Analytics -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=UA-88489172-1"></script>
 <script>
@@ -80,6 +80,7 @@
 pre > code.sourceCode { white-space: pre; position: relative; }
 pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
 pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
 code.sourceCode > span { color: inherit; text-decoration: inherit; }
 pre.sourceCode { margin: 0; }
 @media screen {
@@ -495,7 +496,7 @@ div.csl-indent {
 <li><strong>Hierarchical methods</strong>: These methods construct a hierarchy for the observations in terms of their similitudes. This results in a tree-based representation of the data in terms of a <em>dendrogram</em>, which depicts how the observations are clustered at different levels – from the smallest groups of one element to the largest representing the whole dataset.</li>
 <li><strong>Density Models</strong>: These models search the data space for areas of varied density of data points in the data space. It isolates various different density regions and assign the data points within these regions in the same cluster. Popular examples of density models are DBSCAN and OPTICS.</li>
 </ul>
-<div class="figure" style="text-align: center"><span id="fig:clusteringcomparison"></span>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:clusteringcomparison"></span>
 <img src="img/clustering_comparison.png" alt="Performance comparison of different clustering methods on different datasets" width="65%" />
 <p class="caption">
 Figure 7.1: Performance comparison of different clustering methods on different datasets
@@ -688,9 +689,9 @@ in the assignments (or until some maximum number of iterations is
 exceeded). Because each phase reduces the value of the objective
 function <span class="math inline">\(J\)</span>, convergence of the algorithm is assured. However, it may
 converge to a local rather than global minimum of <span class="math inline">\(J\)</span>.</p>
-<p>The <span class="math inline">\(k\)</span>-means algorithm is illustrated using the Old Faithful data set<a href="main-references-credits.html#fn23" class="footnote-ref" id="fnref23"><sup>23</sup></a>
+<p>The <span class="math inline">\(k\)</span>-means algorithm is illustrated using the Old Faithful data set <a href="main-references-credits.html#fn23" class="footnote-ref" id="fnref23"><sup>23</sup></a>
 in following figure.</p>
-<div class="figure" style="text-align: center"><span id="fig:oldfaithful"></span>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:oldfaithful"></span>
 <img src="img/kmeans.png" alt="Illustration of the $k$-means algorithm using the re-scaled Old Faithful data set, where $k=2$. We can see how the $k$-means algorithm works. (a) The first thing $k$-means has to do is assign an initial set of centroids. (b) The next stage in the algorithm assigns every point in the dataset to the closest centroid. (c) The next stage is to re-calculate the centroids based on the new cluster assignments of the data points. (d) Now we have completed one full cycle of the algorithm we can continue and re-assign points to their (new) closest cluster centroid. (e) And we can update the centroid positions one more time based on the re-assigned points. (g)(h)(f) The algorithm stops when we obtain the same results in consecutive iterations." width="90%" />
 <p class="caption">
 Figure 7.2: Illustration of the <span class="math inline">\(k\)</span>-means algorithm using the re-scaled Old Faithful data set, where <span class="math inline">\(k=2\)</span>. We can see how the <span class="math inline">\(k\)</span>-means algorithm works. (a) The first thing <span class="math inline">\(k\)</span>-means has to do is assign an initial set of centroids. (b) The next stage in the algorithm assigns every point in the dataset to the closest centroid. (c) The next stage is to re-calculate the centroids based on the new cluster assignments of the data points. (d) Now we have completed one full cycle of the algorithm we can continue and re-assign points to their (new) closest cluster centroid. (e) And we can update the centroid positions one more time based on the re-assigned points. (g)(h)(f) The algorithm stops when we obtain the same results in consecutive iterations.
@@ -698,36 +699,37 @@ Figure 7.2: Illustration of the <span class="math inline">\(k\)</span>-means alg
 </div>
 <p>The <span class="math inline">\(k\)</span>-means algorithm is illustrated using the Iris data set in following interactive figure<a href="main-references-credits.html#fn24" class="footnote-ref" id="fnref24"><sup>24</sup></a>. (Try to modify the X and Y variables and the numbers of chosen clusters and see the result)</p>
 <center>
-<iframe src="https://jjallaire.shinyapps.io/shiny-kmeans/?showcase=0" width="90%" height="900px">
+<iframe src="https://jjallaire.shinyapps.io/shiny-kmeans/?showcase=0" width="90%" height="900px" data-external="1">
 </iframe>
 </center>
 <div id="k-means-in" class="section level3" number="7.4.1">
 <h3><span class="header-section-number">7.4.1</span> <span class="math inline">\(k\)</span>-means in <svg aria-hidden="true" role="img" viewBox="0 0 581 512" style="height:1em;width:1.13em;vertical-align:-0.125em;margin-left:auto;margin-right:auto;font-size:inherit;fill:steelblue;overflow:visible;position:relative;"><path d="M581 226.6C581 119.1 450.9 32 290.5 32S0 119.1 0 226.6C0 322.4 103.3 402 239.4 418.1V480h99.1v-61.5c24.3-2.7 47.6-7.4 69.4-13.9L448 480h112l-67.4-113.7c54.5-35.4 88.4-84.9 88.4-139.7zm-466.8 14.5c0-73.5 98.9-133 220.8-133s211.9 40.7 211.9 133c0 50.1-26.5 85-70.3 106.4-2.4-1.6-4.7-2.9-6.4-3.7-10.2-5.2-27.8-10.5-27.8-10.5s86.6-6.4 86.6-92.7-90.6-87.9-90.6-87.9h-199V361c-74.1-21.5-125.2-67.1-125.2-119.9zm225.1 38.3v-55.6c57.8 0 87.8-6.8 87.8 27.3 0 36.5-38.2 28.3-87.8 28.3zm-.9 72.5H365c10.8 0 18.9 11.7 24 19.2-16.1 1.9-33 2.8-50.6 2.9v-22.1z"/></svg></h3>
 <p>We will use an example with simulated data to demonstrate how the <span class="math inline">\(k\)</span>-means algorithm works. Here we simulate some data from three clusters and plot the dataset below.</p>
-<div class="sourceCode" id="cb62"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb62-1"><a href="kmeans-hierarchical-clustering.html#cb62-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">1234</span>)</span>
-<span id="cb62-2"><a href="kmeans-hierarchical-clustering.html#cb62-2" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(<span class="dv">12</span>,<span class="at">mean=</span><span class="fu">rep</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>,<span class="at">each=</span><span class="dv">4</span>),<span class="at">sd=</span><span class="fl">0.2</span>)</span>
-<span id="cb62-3"><a href="kmeans-hierarchical-clustering.html#cb62-3" aria-hidden="true" tabindex="-1"></a>y <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(<span class="dv">12</span>,<span class="at">mean=</span><span class="fu">rep</span>(<span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">1</span>),<span class="at">each=</span><span class="dv">4</span>),<span class="at">sd=</span><span class="fl">0.2</span>)</span>
-<span id="cb62-4"><a href="kmeans-hierarchical-clustering.html#cb62-4" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(x,y,<span class="at">col=</span><span class="st">&quot;blue&quot;</span>,<span class="at">pch=</span><span class="dv">19</span>,<span class="at">cex=</span><span class="dv">2</span>)</span>
-<span id="cb62-5"><a href="kmeans-hierarchical-clustering.html#cb62-5" aria-hidden="true" tabindex="-1"></a><span class="fu">text</span>(x<span class="fl">+0.05</span>,y<span class="fl">+0.05</span>,<span class="at">labels=</span><span class="fu">as.character</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">12</span>))</span></code></pre></div>
-<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-207"></span>
+<div class="sourceCode" id="cb63"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb63-1"><a href="kmeans-hierarchical-clustering.html#cb63-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">1234</span>)</span>
+<span id="cb63-2"><a href="kmeans-hierarchical-clustering.html#cb63-2" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(<span class="dv">12</span>,<span class="at">mean=</span><span class="fu">rep</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>,<span class="at">each=</span><span class="dv">4</span>),<span class="at">sd=</span><span class="fl">0.2</span>)</span>
+<span id="cb63-3"><a href="kmeans-hierarchical-clustering.html#cb63-3" aria-hidden="true" tabindex="-1"></a>y <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(<span class="dv">12</span>,<span class="at">mean=</span><span class="fu">rep</span>(<span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">1</span>),<span class="at">each=</span><span class="dv">4</span>),<span class="at">sd=</span><span class="fl">0.2</span>)</span>
+<span id="cb63-4"><a href="kmeans-hierarchical-clustering.html#cb63-4" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(x,y,<span class="at">col=</span><span class="st">&quot;blue&quot;</span>,<span class="at">pch=</span><span class="dv">19</span>,<span class="at">cex=</span><span class="dv">2</span>)</span>
+<span id="cb63-5"><a href="kmeans-hierarchical-clustering.html#cb63-5" aria-hidden="true" tabindex="-1"></a><span class="fu">text</span>(x<span class="fl">+0.05</span>,y<span class="fl">+0.05</span>,<span class="at">labels=</span><span class="fu">as.character</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">12</span>))</span></code></pre></div>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:unnamed-chunk-207"></span>
 <img src="Machine-Learning_files/figure-html/unnamed-chunk-207-1.png" alt="Simulated dataset" width="70%" />
 <p class="caption">
 Figure 7.3: Simulated dataset
 </p>
 </div>
 <p>The <code>kmeans()</code> function in R implements the <span class="math inline">\(k\)</span>-means algorithm and can be found in the <code>stats</code> package, which comes with R and is usually already loaded when you start R. Two key parameters that you have to specify are <code>x</code>, which is a matrix or data frame of data, and <code>centers</code> which is either an integer indicating the number of clusters or a matrix indicating the locations of the initial cluster centroids. The data should be organized so that each row is an observation and each column is a variable or feature of that observation.</p>
-<div class="sourceCode" id="cb63"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb63-1"><a href="kmeans-hierarchical-clustering.html#cb63-1" aria-hidden="true" tabindex="-1"></a>dataFrame <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(x,y)</span>
-<span id="cb63-2"><a href="kmeans-hierarchical-clustering.html#cb63-2" aria-hidden="true" tabindex="-1"></a>kmeansObj <span class="ot">&lt;-</span> <span class="fu">kmeans</span>(dataFrame,<span class="at">centers=</span><span class="dv">3</span>)</span>
-<span id="cb63-3"><a href="kmeans-hierarchical-clustering.html#cb63-3" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(kmeansObj)</span>
-<span id="cb63-4"><a href="kmeans-hierarchical-clustering.html#cb63-4" aria-hidden="true" tabindex="-1"></a><span class="co">#ans&gt; [1] &quot;cluster&quot;      &quot;centers&quot;      &quot;totss&quot;        &quot;withinss&quot;     &quot;tot.withinss&quot;</span></span>
-<span id="cb63-5"><a href="kmeans-hierarchical-clustering.html#cb63-5" aria-hidden="true" tabindex="-1"></a><span class="co">#ans&gt; [6] &quot;betweenss&quot;    &quot;size&quot;         &quot;iter&quot;         &quot;ifault&quot;</span></span></code></pre></div>
+<div class="sourceCode" id="cb64"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb64-1"><a href="kmeans-hierarchical-clustering.html#cb64-1" aria-hidden="true" tabindex="-1"></a>dataFrame <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(x,y)</span>
+<span id="cb64-2"><a href="kmeans-hierarchical-clustering.html#cb64-2" aria-hidden="true" tabindex="-1"></a>kmeansObj <span class="ot">&lt;-</span> <span class="fu">kmeans</span>(dataFrame,<span class="at">centers=</span><span class="dv">3</span>)</span>
+<span id="cb64-3"><a href="kmeans-hierarchical-clustering.html#cb64-3" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(kmeansObj)</span>
+<span id="cb64-4"><a href="kmeans-hierarchical-clustering.html#cb64-4" aria-hidden="true" tabindex="-1"></a><span class="co">#ans&gt; [1] &quot;cluster&quot;      &quot;centers&quot;      &quot;totss&quot;        &quot;withinss&quot;    </span></span>
+<span id="cb64-5"><a href="kmeans-hierarchical-clustering.html#cb64-5" aria-hidden="true" tabindex="-1"></a><span class="co">#ans&gt; [5] &quot;tot.withinss&quot; &quot;betweenss&quot;    &quot;size&quot;         &quot;iter&quot;        </span></span>
+<span id="cb64-6"><a href="kmeans-hierarchical-clustering.html#cb64-6" aria-hidden="true" tabindex="-1"></a><span class="co">#ans&gt; [9] &quot;ifault&quot;</span></span></code></pre></div>
 <p>You can see which cluster each data point got assigned to by looking at the <code>cluster</code> element of the list returned by the <code>kmeans()</code> function.</p>
-<div class="sourceCode" id="cb64"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb64-1"><a href="kmeans-hierarchical-clustering.html#cb64-1" aria-hidden="true" tabindex="-1"></a>kmeansObj<span class="sc">$</span>cluster</span>
-<span id="cb64-2"><a href="kmeans-hierarchical-clustering.html#cb64-2" aria-hidden="true" tabindex="-1"></a><span class="co">#ans&gt;  [1] 3 1 1 3 2 2 2 2 2 2 2 2</span></span></code></pre></div>
+<div class="sourceCode" id="cb65"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb65-1"><a href="kmeans-hierarchical-clustering.html#cb65-1" aria-hidden="true" tabindex="-1"></a>kmeansObj<span class="sc">$</span>cluster</span>
+<span id="cb65-2"><a href="kmeans-hierarchical-clustering.html#cb65-2" aria-hidden="true" tabindex="-1"></a><span class="co">#ans&gt;  [1] 3 1 1 3 2 2 2 2 2 2 2 2</span></span></code></pre></div>
 <p>Here is a plot of the <span class="math inline">\(k\)</span>-means clustering solution.</p>
-<div class="sourceCode" id="cb65"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb65-1"><a href="kmeans-hierarchical-clustering.html#cb65-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(x,y,<span class="at">col=</span>kmeansObj<span class="sc">$</span>cluster,<span class="at">pch=</span><span class="dv">19</span>,<span class="at">cex=</span><span class="dv">2</span>)</span>
-<span id="cb65-2"><a href="kmeans-hierarchical-clustering.html#cb65-2" aria-hidden="true" tabindex="-1"></a><span class="fu">points</span>(kmeansObj<span class="sc">$</span>centers,<span class="at">col=</span><span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>,<span class="at">pch=</span><span class="dv">3</span>,<span class="at">cex=</span><span class="dv">3</span>,<span class="at">lwd=</span><span class="dv">3</span>)</span></code></pre></div>
-<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-210"></span>
+<div class="sourceCode" id="cb66"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb66-1"><a href="kmeans-hierarchical-clustering.html#cb66-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(x,y,<span class="at">col=</span>kmeansObj<span class="sc">$</span>cluster,<span class="at">pch=</span><span class="dv">19</span>,<span class="at">cex=</span><span class="dv">2</span>)</span>
+<span id="cb66-2"><a href="kmeans-hierarchical-clustering.html#cb66-2" aria-hidden="true" tabindex="-1"></a><span class="fu">points</span>(kmeansObj<span class="sc">$</span>centers,<span class="at">col=</span><span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>,<span class="at">pch=</span><span class="dv">3</span>,<span class="at">cex=</span><span class="dv">3</span>,<span class="at">lwd=</span><span class="dv">3</span>)</span></code></pre></div>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:unnamed-chunk-210"></span>
 <img src="Machine-Learning_files/figure-html/unnamed-chunk-210-1.png" alt="$k$-means clustering solution" width="70%" />
 <p class="caption">
 Figure 7.4: <span class="math inline">\(k\)</span>-means clustering solution
@@ -779,14 +781,14 @@ and the compactness of the clusters.</p>
 <div id="dendrogram" class="section level3" number="7.5.1">
 <h3><span class="header-section-number">7.5.1</span> Dendrogram</h3>
 <p>Suppose that we have the simulated data in the following figure:</p>
-<div class="figure" style="text-align: center"><span id="fig:dendro"></span>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:dendro"></span>
 <img src="img/dendro.png" alt="Simulated data of 45 observations generated from a three-class model." width="60%" />
 <p class="caption">
 Figure 7.5: Simulated data of 45 observations generated from a three-class model.
 </p>
 </div>
 <p>The data in the figure above consists of 45 observations in two-dimensional space. The data were generated from a three-class model; the true class labels for each observation are shown in distinct colors. However, suppose that the data were observed without the class labels, and that we wanted to perform hierarchical clustering of the data. Hierarchical clustering (with complete linkage, to be discussed later) yields the result shown in Figure <a href="kmeans-hierarchical-clustering.html#fig:dendro2">7.6</a>. How can we interpret this dendrogram?</p>
-<div class="figure" style="text-align: center"><span id="fig:dendro2"></span>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:dendro2"></span>
 <img src="img/dendro2.png" alt="Dendrogram" width="50%" />
 <p class="caption">
 Figure 7.6: Dendrogram
@@ -794,21 +796,21 @@ Figure 7.6: Dendrogram
 </div>
 <p>In the dendrogram of Figure <a href="kmeans-hierarchical-clustering.html#fig:dendro2">7.6</a>, each leaf of the dendrogram represents one of the 45 observations. However, as we move up the tree, some leaves begin to fuse into branches. These correspond to observations that are similar to each other. As we move higher up the tree, branches themselves fuse, either with leaves or other branches. The earlier (lower in the tree) fusions occur, the more similar the groups of observations are to each other. On the other hand, observations that fuse later (near the top of the tree) can be quite different. In fact, this statement can be made precise: for any two observations, we can look for the point in the tree where branches containing those two observations are first fused. The height of this fusion, as measured on the vertical axis, indicates how different the two observations are. Thus, observations that fuse at the very bottom of the tree are quite similar to each other, whereas observations that fuse close to the top of the tree will tend to be quite different.</p>
 <p>An example of interpreting a dendrogram is presented in Figure <a href="kmeans-hierarchical-clustering.html#fig:dendro3">7.7</a></p>
-<div class="figure" style="text-align: center"><span id="fig:dendro3"></span>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:dendro3"></span>
 <img src="img/dendro3.png" alt="An illustration of how to properly interpret a dendrogram with nine observations in two-dimensional space. Left: a dendrogram generated using Euclidean distance and complete linkage. Observations 5 and 7 are quite similar to each other, as are observations 1 and 6. However, observation 9 is no more similar to observation 2 than it is to observations 8, 5, and 7, even though observations 9 and 2 are close together in terms of horizontal distance. This is because observations 2, 8, 5, and 7 all fuse with observation 9 at the same height, approximately 1.8. Right: the raw data used to generate the dendrogram can be used to confirm that indeed, observation 9 is no more similar to observation 2 than it is to observations 8, 5, and 7." width="100%" />
 <p class="caption">
 Figure 7.7: An illustration of how to properly interpret a dendrogram with nine observations in two-dimensional space. Left: a dendrogram generated using Euclidean distance and complete linkage. Observations 5 and 7 are quite similar to each other, as are observations 1 and 6. However, observation 9 is no more similar to observation 2 than it is to observations 8, 5, and 7, even though observations 9 and 2 are close together in terms of horizontal distance. This is because observations 2, 8, 5, and 7 all fuse with observation 9 at the same height, approximately 1.8. Right: the raw data used to generate the dendrogram can be used to confirm that indeed, observation 9 is no more similar to observation 2 than it is to observations 8, 5, and 7.
 </p>
 </div>
 <p>Now that we understand how to interpret the dendrogram of Figure <a href="kmeans-hierarchical-clustering.html#fig:dendro2">7.6</a>, we can move on to the issue of identifying clusters on the basis of a dendrogram. In order to do this, we make a horizontal cut across the dendrogram, as shown in the following Figure <a href="kmeans-hierarchical-clustering.html#fig:dendro4">7.8</a> where we cut the dendrogram at a height of nine results in two clusters.</p>
-<div class="figure" style="text-align: center"><span id="fig:dendro4"></span>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:dendro4"></span>
 <img src="img/dendro4.png" alt="The dendrogram from the simulated dataset, cut at a height of nine (indicated by the dashed line). This cut results in two distinct clusters, shown in different colors." width="50%" />
 <p class="caption">
 Figure 7.8: The dendrogram from the simulated dataset, cut at a height of nine (indicated by the dashed line). This cut results in two distinct clusters, shown in different colors.
 </p>
 </div>
 <p>The distinct sets of observations beneath the cut can be interpreted as clusters. In Figure <a href="kmeans-hierarchical-clustering.html#fig:dendro5">7.9</a>, cutting the dendrogram at a height of five results in three clusters.</p>
-<div class="figure" style="text-align: center"><span id="fig:dendro5"></span>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:dendro5"></span>
 <img src="img/dendro5.png" alt="The dendrogram from the simulated dataset, cut at a height of five (indicated by the dashed line). This cut results in three distinct clusters, shown in different colors." width="50%" />
 <p class="caption">
 Figure 7.9: The dendrogram from the simulated dataset, cut at a height of five (indicated by the dashed line). This cut results in three distinct clusters, shown in different colors.
@@ -820,7 +822,7 @@ Figure 7.9: The dendrogram from the simulated dataset, cut at a height of five (
 <h3><span class="header-section-number">7.5.2</span> The Hierarchical Clustering Algorithm</h3>
 <p>The hierarchical clustering dendrogram is obtained via an extremely simple algorithm. We begin by defining some sort of <em>dissimilarity</em> measure between each pair of observations. Most often, Euclidean distance is used. The algorithm proceeds iteratively. Starting out at the bottom of the dendrogram, each of the n observations is treated as its own cluster. The two clusters that are most similar to each other are then fused so that there now are <span class="math inline">\(n−1\)</span> clusters. Next the two clusters that are most similar to each other are fused again, so that there now are <span class="math inline">\(n − 2\)</span> clusters. The algorithm proceeds in this fashion until all of the observations belong to one single cluster, and the dendrogram is complete.</p>
 <p>Figure <a href="kmeans-hierarchical-clustering.html#fig:cah">7.10</a> depicts the first few steps of the algorithm.</p>
-<div class="figure" style="text-align: center"><span id="fig:cah"></span>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:cah"></span>
 <img src="img/cah.png" alt="An illustration of the first few steps of the hierarchical clustering algorithm, with complete linkage and Euclidean distance. Top Left: initially, there are nine distinct clusters {1}, {2}, ..., {9}. Top Right: the two clusters that are closest together, {5} and {7}, are fused into a single cluster. Bottom Left: the two clusters that are closest together, {6} and {1},are fused into a single cluster. Bottom Right: the two clusters that are closest together using complete linkage, {8} and the cluster {5, 7}, are fused into a single cluster." width="70%" />
 <p class="caption">
 Figure 7.10: An illustration of the first few steps of the hierarchical clustering algorithm, with complete linkage and Euclidean distance. Top Left: initially, there are nine distinct clusters {1}, {2}, …, {9}. Top Right: the two clusters that are closest together, {5} and {7}, are fused into a single cluster. Bottom Left: the two clusters that are closest together, {6} and {1},are fused into a single cluster. Bottom Right: the two clusters that are closest together using complete linkage, {8} and the cluster {5, 7}, are fused into a single cluster.
@@ -858,7 +860,7 @@ Figure 7.10: An illustration of the first few steps of the hierarchical clusteri
 </ul>
 <p>Average and complete linkage are generally preferred over single linkage, as they tend to yield more balanced dendrograms. Centroid linkage is often used in genomics.</p>
 <p>The dissimilarities computed in Step 2(b) of the hierarchical clustering algorithm will depend on the type of linkage used, as well as on the choice of dissimilarity measure. Hence, the resulting dendrogram typically depends quite strongly on the type of linkage used, as is shown in Figure <a href="kmeans-hierarchical-clustering.html#fig:linkage">7.11</a>.</p>
-<div class="figure" style="text-align: center"><span id="fig:linkage"></span>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:linkage"></span>
 <img src="img/linkage.png" alt="Average, complete, and single linkage applied to an example data set. Average and complete linkage tend to yield more balanced clusters." width="70%" />
 <p class="caption">
 Figure 7.11: Average, complete, and single linkage applied to an example data set. Average and complete linkage tend to yield more balanced clusters.
@@ -868,60 +870,66 @@ Figure 7.11: Average, complete, and single linkage applied to an example data se
 <div id="hierarchical-clustering-in" class="section level3" number="7.5.3">
 <h3><span class="header-section-number">7.5.3</span> Hierarchical clustering in <svg aria-hidden="true" role="img" viewBox="0 0 581 512" style="height:1em;width:1.13em;vertical-align:-0.125em;margin-left:auto;margin-right:auto;font-size:inherit;fill:steelblue;overflow:visible;position:relative;"><path d="M581 226.6C581 119.1 450.9 32 290.5 32S0 119.1 0 226.6C0 322.4 103.3 402 239.4 418.1V480h99.1v-61.5c24.3-2.7 47.6-7.4 69.4-13.9L448 480h112l-67.4-113.7c54.5-35.4 88.4-84.9 88.4-139.7zm-466.8 14.5c0-73.5 98.9-133 220.8-133s211.9 40.7 211.9 133c0 50.1-26.5 85-70.3 106.4-2.4-1.6-4.7-2.9-6.4-3.7-10.2-5.2-27.8-10.5-27.8-10.5s86.6-6.4 86.6-92.7-90.6-87.9-90.6-87.9h-199V361c-74.1-21.5-125.2-67.1-125.2-119.9zm225.1 38.3v-55.6c57.8 0 87.8-6.8 87.8 27.3 0 36.5-38.2 28.3-87.8 28.3zm-.9 72.5H365c10.8 0 18.9 11.7 24 19.2-16.1 1.9-33 2.8-50.6 2.9v-22.1z"/></svg></h3>
 <p>Let’s illustrate how to perform hierarchical clustering on dataset  <a target="_blank" href="datasets/ligue1_17_18.csv"> Ligue1 2017-2018 <i class="fa fa-table" aria-hidden="true"></i></a>.</p>
-<div class="sourceCode" id="cb66"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb66-1"><a href="kmeans-hierarchical-clustering.html#cb66-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Load the dataset</span></span>
-<span id="cb66-2"><a href="kmeans-hierarchical-clustering.html#cb66-2" aria-hidden="true" tabindex="-1"></a>ligue1 <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">&quot;datasets/ligue1_17_18.csv&quot;</span>, <span class="at">row.names=</span><span class="dv">1</span>,<span class="at">sep=</span><span class="st">&quot;;&quot;</span>)</span>
-<span id="cb66-3"><a href="kmeans-hierarchical-clustering.html#cb66-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb66-4"><a href="kmeans-hierarchical-clustering.html#cb66-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Work with standardized data</span></span>
-<span id="cb66-5"><a href="kmeans-hierarchical-clustering.html#cb66-5" aria-hidden="true" tabindex="-1"></a>ligue1_scaled <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="fu">scale</span>(ligue1))</span>
-<span id="cb66-6"><a href="kmeans-hierarchical-clustering.html#cb66-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb66-7"><a href="kmeans-hierarchical-clustering.html#cb66-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Compute dissimilary matrix - in this case Euclidean distance</span></span>
-<span id="cb66-8"><a href="kmeans-hierarchical-clustering.html#cb66-8" aria-hidden="true" tabindex="-1"></a>d <span class="ot">&lt;-</span> <span class="fu">dist</span>(ligue1_scaled)</span>
-<span id="cb66-9"><a href="kmeans-hierarchical-clustering.html#cb66-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb66-10"><a href="kmeans-hierarchical-clustering.html#cb66-10" aria-hidden="true" tabindex="-1"></a><span class="co"># Hierarchical clustering with complete linkage</span></span>
-<span id="cb66-11"><a href="kmeans-hierarchical-clustering.html#cb66-11" aria-hidden="true" tabindex="-1"></a>treeComp <span class="ot">&lt;-</span> <span class="fu">hclust</span>(d, <span class="at">method =</span> <span class="st">&quot;complete&quot;</span>)</span>
-<span id="cb66-12"><a href="kmeans-hierarchical-clustering.html#cb66-12" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(treeComp)</span></code></pre></div>
+<div class="sourceCode" id="cb67"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb67-1"><a href="kmeans-hierarchical-clustering.html#cb67-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Load the dataset</span></span>
+<span id="cb67-2"><a href="kmeans-hierarchical-clustering.html#cb67-2" aria-hidden="true" tabindex="-1"></a>ligue1 <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">&quot;datasets/ligue1_17_18.csv&quot;</span>, <span class="at">row.names=</span><span class="dv">1</span>,<span class="at">sep=</span><span class="st">&quot;;&quot;</span>)</span>
+<span id="cb67-3"><a href="kmeans-hierarchical-clustering.html#cb67-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb67-4"><a href="kmeans-hierarchical-clustering.html#cb67-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Work with standardized data</span></span>
+<span id="cb67-5"><a href="kmeans-hierarchical-clustering.html#cb67-5" aria-hidden="true" tabindex="-1"></a>ligue1_scaled <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="fu">scale</span>(ligue1))</span>
+<span id="cb67-6"><a href="kmeans-hierarchical-clustering.html#cb67-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb67-7"><a href="kmeans-hierarchical-clustering.html#cb67-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Compute dissimilary matrix - in this case Euclidean distance</span></span>
+<span id="cb67-8"><a href="kmeans-hierarchical-clustering.html#cb67-8" aria-hidden="true" tabindex="-1"></a>d <span class="ot">&lt;-</span> <span class="fu">dist</span>(ligue1_scaled)</span>
+<span id="cb67-9"><a href="kmeans-hierarchical-clustering.html#cb67-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb67-10"><a href="kmeans-hierarchical-clustering.html#cb67-10" aria-hidden="true" tabindex="-1"></a><span class="co"># Hierarchical clustering with complete linkage</span></span>
+<span id="cb67-11"><a href="kmeans-hierarchical-clustering.html#cb67-11" aria-hidden="true" tabindex="-1"></a>treeComp <span class="ot">&lt;-</span> <span class="fu">hclust</span>(d, <span class="at">method =</span> <span class="st">&quot;complete&quot;</span>)</span>
+<span id="cb67-12"><a href="kmeans-hierarchical-clustering.html#cb67-12" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(treeComp)</span></code></pre></div>
 <p><img src="Machine-Learning_files/figure-html/unnamed-chunk-211-1.png" width="70%" style="display: block; margin: auto;" /></p>
-<div class="sourceCode" id="cb67"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb67-1"><a href="kmeans-hierarchical-clustering.html#cb67-1" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb67-2"><a href="kmeans-hierarchical-clustering.html#cb67-2" aria-hidden="true" tabindex="-1"></a><span class="co"># With average linkage</span></span>
-<span id="cb67-3"><a href="kmeans-hierarchical-clustering.html#cb67-3" aria-hidden="true" tabindex="-1"></a>treeAve <span class="ot">&lt;-</span> <span class="fu">hclust</span>(d, <span class="at">method =</span> <span class="st">&quot;average&quot;</span>)</span>
-<span id="cb67-4"><a href="kmeans-hierarchical-clustering.html#cb67-4" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(treeAve)</span></code></pre></div>
-<p><img src="Machine-Learning_files/figure-html/unnamed-chunk-211-2.png" width="70%" style="display: block; margin: auto;" /></p>
 <div class="sourceCode" id="cb68"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb68-1"><a href="kmeans-hierarchical-clustering.html#cb68-1" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb68-2"><a href="kmeans-hierarchical-clustering.html#cb68-2" aria-hidden="true" tabindex="-1"></a><span class="co"># With single linkage</span></span>
-<span id="cb68-3"><a href="kmeans-hierarchical-clustering.html#cb68-3" aria-hidden="true" tabindex="-1"></a>treeSingle <span class="ot">&lt;-</span> <span class="fu">hclust</span>(d, <span class="at">method =</span> <span class="st">&quot;single&quot;</span>)</span>
-<span id="cb68-4"><a href="kmeans-hierarchical-clustering.html#cb68-4" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(treeSingle) <span class="co"># Chaining</span></span></code></pre></div>
-<p><img src="Machine-Learning_files/figure-html/unnamed-chunk-211-3.png" width="70%" style="display: block; margin: auto;" /></p>
+<span id="cb68-2"><a href="kmeans-hierarchical-clustering.html#cb68-2" aria-hidden="true" tabindex="-1"></a><span class="co"># With average linkage</span></span>
+<span id="cb68-3"><a href="kmeans-hierarchical-clustering.html#cb68-3" aria-hidden="true" tabindex="-1"></a>treeAve <span class="ot">&lt;-</span> <span class="fu">hclust</span>(d, <span class="at">method =</span> <span class="st">&quot;average&quot;</span>)</span>
+<span id="cb68-4"><a href="kmeans-hierarchical-clustering.html#cb68-4" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(treeAve)</span></code></pre></div>
+<p><img src="Machine-Learning_files/figure-html/unnamed-chunk-211-2.png" width="70%" style="display: block; margin: auto;" /></p>
 <div class="sourceCode" id="cb69"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb69-1"><a href="kmeans-hierarchical-clustering.html#cb69-1" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb69-2"><a href="kmeans-hierarchical-clustering.html#cb69-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Set the number of clusters after inspecting visually</span></span>
-<span id="cb69-3"><a href="kmeans-hierarchical-clustering.html#cb69-3" aria-hidden="true" tabindex="-1"></a><span class="co"># the dendrogram for &quot;long&quot; groups of hanging leaves</span></span>
-<span id="cb69-4"><a href="kmeans-hierarchical-clustering.html#cb69-4" aria-hidden="true" tabindex="-1"></a><span class="co"># These are the cluster assignments</span></span>
-<span id="cb69-5"><a href="kmeans-hierarchical-clustering.html#cb69-5" aria-hidden="true" tabindex="-1"></a><span class="fu">cutree</span>(treeComp, <span class="at">k =</span> <span class="dv">2</span>) </span>
-<span id="cb69-6"><a href="kmeans-hierarchical-clustering.html#cb69-6" aria-hidden="true" tabindex="-1"></a><span class="co">#ans&gt;      Paris-SG        Monaco          Lyon     Marseille        Rennes </span></span>
-<span id="cb69-7"><a href="kmeans-hierarchical-clustering.html#cb69-7" aria-hidden="true" tabindex="-1"></a><span class="co">#ans&gt;             1             1             1             1             2 </span></span>
-<span id="cb69-8"><a href="kmeans-hierarchical-clustering.html#cb69-8" aria-hidden="true" tabindex="-1"></a><span class="co">#ans&gt;      Bordeaux Saint-Etienne          Nice        Nantes   Montpellier </span></span>
-<span id="cb69-9"><a href="kmeans-hierarchical-clustering.html#cb69-9" aria-hidden="true" tabindex="-1"></a><span class="co">#ans&gt;             2             2             2             2             2 </span></span>
-<span id="cb69-10"><a href="kmeans-hierarchical-clustering.html#cb69-10" aria-hidden="true" tabindex="-1"></a><span class="co">#ans&gt;         Dijon      Guingamp        Amiens        Angers    Strasbourg </span></span>
-<span id="cb69-11"><a href="kmeans-hierarchical-clustering.html#cb69-11" aria-hidden="true" tabindex="-1"></a><span class="co">#ans&gt;             2             2             2             2             2 </span></span>
-<span id="cb69-12"><a href="kmeans-hierarchical-clustering.html#cb69-12" aria-hidden="true" tabindex="-1"></a><span class="co">#ans&gt;          Caen         Lille      Toulouse        Troyes          Metz </span></span>
-<span id="cb69-13"><a href="kmeans-hierarchical-clustering.html#cb69-13" aria-hidden="true" tabindex="-1"></a><span class="co">#ans&gt;             2             2             2             2             2</span></span>
-<span id="cb69-14"><a href="kmeans-hierarchical-clustering.html#cb69-14" aria-hidden="true" tabindex="-1"></a><span class="fu">cutree</span>(treeComp, <span class="at">k =</span> <span class="dv">3</span>) </span>
-<span id="cb69-15"><a href="kmeans-hierarchical-clustering.html#cb69-15" aria-hidden="true" tabindex="-1"></a><span class="co">#ans&gt;      Paris-SG        Monaco          Lyon     Marseille        Rennes </span></span>
-<span id="cb69-16"><a href="kmeans-hierarchical-clustering.html#cb69-16" aria-hidden="true" tabindex="-1"></a><span class="co">#ans&gt;             1             1             1             1             2 </span></span>
-<span id="cb69-17"><a href="kmeans-hierarchical-clustering.html#cb69-17" aria-hidden="true" tabindex="-1"></a><span class="co">#ans&gt;      Bordeaux Saint-Etienne          Nice        Nantes   Montpellier </span></span>
-<span id="cb69-18"><a href="kmeans-hierarchical-clustering.html#cb69-18" aria-hidden="true" tabindex="-1"></a><span class="co">#ans&gt;             2             2             2             2             2 </span></span>
-<span id="cb69-19"><a href="kmeans-hierarchical-clustering.html#cb69-19" aria-hidden="true" tabindex="-1"></a><span class="co">#ans&gt;         Dijon      Guingamp        Amiens        Angers    Strasbourg </span></span>
-<span id="cb69-20"><a href="kmeans-hierarchical-clustering.html#cb69-20" aria-hidden="true" tabindex="-1"></a><span class="co">#ans&gt;             3             3             3             3             3 </span></span>
-<span id="cb69-21"><a href="kmeans-hierarchical-clustering.html#cb69-21" aria-hidden="true" tabindex="-1"></a><span class="co">#ans&gt;          Caen         Lille      Toulouse        Troyes          Metz </span></span>
-<span id="cb69-22"><a href="kmeans-hierarchical-clustering.html#cb69-22" aria-hidden="true" tabindex="-1"></a><span class="co">#ans&gt;             3             3             3             3             3</span></span>
-<span id="cb69-23"><a href="kmeans-hierarchical-clustering.html#cb69-23" aria-hidden="true" tabindex="-1"></a><span class="fu">cutree</span>(treeComp, <span class="at">k =</span> <span class="dv">4</span>) </span>
-<span id="cb69-24"><a href="kmeans-hierarchical-clustering.html#cb69-24" aria-hidden="true" tabindex="-1"></a><span class="co">#ans&gt;      Paris-SG        Monaco          Lyon     Marseille        Rennes </span></span>
-<span id="cb69-25"><a href="kmeans-hierarchical-clustering.html#cb69-25" aria-hidden="true" tabindex="-1"></a><span class="co">#ans&gt;             1             2             2             2             3 </span></span>
-<span id="cb69-26"><a href="kmeans-hierarchical-clustering.html#cb69-26" aria-hidden="true" tabindex="-1"></a><span class="co">#ans&gt;      Bordeaux Saint-Etienne          Nice        Nantes   Montpellier </span></span>
-<span id="cb69-27"><a href="kmeans-hierarchical-clustering.html#cb69-27" aria-hidden="true" tabindex="-1"></a><span class="co">#ans&gt;             3             3             3             3             3 </span></span>
-<span id="cb69-28"><a href="kmeans-hierarchical-clustering.html#cb69-28" aria-hidden="true" tabindex="-1"></a><span class="co">#ans&gt;         Dijon      Guingamp        Amiens        Angers    Strasbourg </span></span>
-<span id="cb69-29"><a href="kmeans-hierarchical-clustering.html#cb69-29" aria-hidden="true" tabindex="-1"></a><span class="co">#ans&gt;             4             4             4             4             4 </span></span>
-<span id="cb69-30"><a href="kmeans-hierarchical-clustering.html#cb69-30" aria-hidden="true" tabindex="-1"></a><span class="co">#ans&gt;          Caen         Lille      Toulouse        Troyes          Metz </span></span>
-<span id="cb69-31"><a href="kmeans-hierarchical-clustering.html#cb69-31" aria-hidden="true" tabindex="-1"></a><span class="co">#ans&gt;             4             4             4             4             4</span></span></code></pre></div>
+<span id="cb69-2"><a href="kmeans-hierarchical-clustering.html#cb69-2" aria-hidden="true" tabindex="-1"></a><span class="co"># With single linkage</span></span>
+<span id="cb69-3"><a href="kmeans-hierarchical-clustering.html#cb69-3" aria-hidden="true" tabindex="-1"></a>treeSingle <span class="ot">&lt;-</span> <span class="fu">hclust</span>(d, <span class="at">method =</span> <span class="st">&quot;single&quot;</span>)</span>
+<span id="cb69-4"><a href="kmeans-hierarchical-clustering.html#cb69-4" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(treeSingle) <span class="co"># Chaining</span></span></code></pre></div>
+<p><img src="Machine-Learning_files/figure-html/unnamed-chunk-211-3.png" width="70%" style="display: block; margin: auto;" /></p>
+<div class="sourceCode" id="cb70"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb70-1"><a href="kmeans-hierarchical-clustering.html#cb70-1" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb70-2"><a href="kmeans-hierarchical-clustering.html#cb70-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Set the number of clusters after inspecting visually</span></span>
+<span id="cb70-3"><a href="kmeans-hierarchical-clustering.html#cb70-3" aria-hidden="true" tabindex="-1"></a><span class="co"># the dendrogram for &quot;long&quot; groups of hanging leaves</span></span>
+<span id="cb70-4"><a href="kmeans-hierarchical-clustering.html#cb70-4" aria-hidden="true" tabindex="-1"></a><span class="co"># These are the cluster assignments</span></span>
+<span id="cb70-5"><a href="kmeans-hierarchical-clustering.html#cb70-5" aria-hidden="true" tabindex="-1"></a><span class="fu">cutree</span>(treeComp, <span class="at">k =</span> <span class="dv">2</span>) </span>
+<span id="cb70-6"><a href="kmeans-hierarchical-clustering.html#cb70-6" aria-hidden="true" tabindex="-1"></a><span class="co">#ans&gt;      Paris-SG        Monaco          Lyon     Marseille </span></span>
+<span id="cb70-7"><a href="kmeans-hierarchical-clustering.html#cb70-7" aria-hidden="true" tabindex="-1"></a><span class="co">#ans&gt;             1             1             1             1 </span></span>
+<span id="cb70-8"><a href="kmeans-hierarchical-clustering.html#cb70-8" aria-hidden="true" tabindex="-1"></a><span class="co">#ans&gt;        Rennes      Bordeaux Saint-Etienne          Nice </span></span>
+<span id="cb70-9"><a href="kmeans-hierarchical-clustering.html#cb70-9" aria-hidden="true" tabindex="-1"></a><span class="co">#ans&gt;             2             2             2             2 </span></span>
+<span id="cb70-10"><a href="kmeans-hierarchical-clustering.html#cb70-10" aria-hidden="true" tabindex="-1"></a><span class="co">#ans&gt;        Nantes   Montpellier         Dijon      Guingamp </span></span>
+<span id="cb70-11"><a href="kmeans-hierarchical-clustering.html#cb70-11" aria-hidden="true" tabindex="-1"></a><span class="co">#ans&gt;             2             2             2             2 </span></span>
+<span id="cb70-12"><a href="kmeans-hierarchical-clustering.html#cb70-12" aria-hidden="true" tabindex="-1"></a><span class="co">#ans&gt;        Amiens        Angers    Strasbourg          Caen </span></span>
+<span id="cb70-13"><a href="kmeans-hierarchical-clustering.html#cb70-13" aria-hidden="true" tabindex="-1"></a><span class="co">#ans&gt;             2             2             2             2 </span></span>
+<span id="cb70-14"><a href="kmeans-hierarchical-clustering.html#cb70-14" aria-hidden="true" tabindex="-1"></a><span class="co">#ans&gt;         Lille      Toulouse        Troyes          Metz </span></span>
+<span id="cb70-15"><a href="kmeans-hierarchical-clustering.html#cb70-15" aria-hidden="true" tabindex="-1"></a><span class="co">#ans&gt;             2             2             2             2</span></span>
+<span id="cb70-16"><a href="kmeans-hierarchical-clustering.html#cb70-16" aria-hidden="true" tabindex="-1"></a><span class="fu">cutree</span>(treeComp, <span class="at">k =</span> <span class="dv">3</span>) </span>
+<span id="cb70-17"><a href="kmeans-hierarchical-clustering.html#cb70-17" aria-hidden="true" tabindex="-1"></a><span class="co">#ans&gt;      Paris-SG        Monaco          Lyon     Marseille </span></span>
+<span id="cb70-18"><a href="kmeans-hierarchical-clustering.html#cb70-18" aria-hidden="true" tabindex="-1"></a><span class="co">#ans&gt;             1             1             1             1 </span></span>
+<span id="cb70-19"><a href="kmeans-hierarchical-clustering.html#cb70-19" aria-hidden="true" tabindex="-1"></a><span class="co">#ans&gt;        Rennes      Bordeaux Saint-Etienne          Nice </span></span>
+<span id="cb70-20"><a href="kmeans-hierarchical-clustering.html#cb70-20" aria-hidden="true" tabindex="-1"></a><span class="co">#ans&gt;             2             2             2             2 </span></span>
+<span id="cb70-21"><a href="kmeans-hierarchical-clustering.html#cb70-21" aria-hidden="true" tabindex="-1"></a><span class="co">#ans&gt;        Nantes   Montpellier         Dijon      Guingamp </span></span>
+<span id="cb70-22"><a href="kmeans-hierarchical-clustering.html#cb70-22" aria-hidden="true" tabindex="-1"></a><span class="co">#ans&gt;             2             2             3             3 </span></span>
+<span id="cb70-23"><a href="kmeans-hierarchical-clustering.html#cb70-23" aria-hidden="true" tabindex="-1"></a><span class="co">#ans&gt;        Amiens        Angers    Strasbourg          Caen </span></span>
+<span id="cb70-24"><a href="kmeans-hierarchical-clustering.html#cb70-24" aria-hidden="true" tabindex="-1"></a><span class="co">#ans&gt;             3             3             3             3 </span></span>
+<span id="cb70-25"><a href="kmeans-hierarchical-clustering.html#cb70-25" aria-hidden="true" tabindex="-1"></a><span class="co">#ans&gt;         Lille      Toulouse        Troyes          Metz </span></span>
+<span id="cb70-26"><a href="kmeans-hierarchical-clustering.html#cb70-26" aria-hidden="true" tabindex="-1"></a><span class="co">#ans&gt;             3             3             3             3</span></span>
+<span id="cb70-27"><a href="kmeans-hierarchical-clustering.html#cb70-27" aria-hidden="true" tabindex="-1"></a><span class="fu">cutree</span>(treeComp, <span class="at">k =</span> <span class="dv">4</span>) </span>
+<span id="cb70-28"><a href="kmeans-hierarchical-clustering.html#cb70-28" aria-hidden="true" tabindex="-1"></a><span class="co">#ans&gt;      Paris-SG        Monaco          Lyon     Marseille </span></span>
+<span id="cb70-29"><a href="kmeans-hierarchical-clustering.html#cb70-29" aria-hidden="true" tabindex="-1"></a><span class="co">#ans&gt;             1             2             2             2 </span></span>
+<span id="cb70-30"><a href="kmeans-hierarchical-clustering.html#cb70-30" aria-hidden="true" tabindex="-1"></a><span class="co">#ans&gt;        Rennes      Bordeaux Saint-Etienne          Nice </span></span>
+<span id="cb70-31"><a href="kmeans-hierarchical-clustering.html#cb70-31" aria-hidden="true" tabindex="-1"></a><span class="co">#ans&gt;             3             3             3             3 </span></span>
+<span id="cb70-32"><a href="kmeans-hierarchical-clustering.html#cb70-32" aria-hidden="true" tabindex="-1"></a><span class="co">#ans&gt;        Nantes   Montpellier         Dijon      Guingamp </span></span>
+<span id="cb70-33"><a href="kmeans-hierarchical-clustering.html#cb70-33" aria-hidden="true" tabindex="-1"></a><span class="co">#ans&gt;             3             3             4             4 </span></span>
+<span id="cb70-34"><a href="kmeans-hierarchical-clustering.html#cb70-34" aria-hidden="true" tabindex="-1"></a><span class="co">#ans&gt;        Amiens        Angers    Strasbourg          Caen </span></span>
+<span id="cb70-35"><a href="kmeans-hierarchical-clustering.html#cb70-35" aria-hidden="true" tabindex="-1"></a><span class="co">#ans&gt;             4             4             4             4 </span></span>
+<span id="cb70-36"><a href="kmeans-hierarchical-clustering.html#cb70-36" aria-hidden="true" tabindex="-1"></a><span class="co">#ans&gt;         Lille      Toulouse        Troyes          Metz </span></span>
+<span id="cb70-37"><a href="kmeans-hierarchical-clustering.html#cb70-37" aria-hidden="true" tabindex="-1"></a><span class="co">#ans&gt;             4             4             4             4</span></span></code></pre></div>
 <p align="right">
 ◼
 </p>
@@ -952,7 +960,6 @@ eruption, and the time until the next eruption, also in minutes.<a href="kmeans-
     </div>
   </div>
 <script src="book_assets/gitbook-2.6.7/js/app.min.js"></script>
-<script src="book_assets/gitbook-2.6.7/js/lunr.js"></script>
 <script src="book_assets/gitbook-2.6.7/js/clipboard.min.js"></script>
 <script src="book_assets/gitbook-2.6.7/js/plugin-search.js"></script>
 <script src="book_assets/gitbook-2.6.7/js/plugin-sharing.js"></script>
@@ -982,14 +989,17 @@ gitbook.start({
 "text": null
 },
 "download": null,
+"search": {
+"engine": "fuse",
+"options": null
+},
 "toc": {
 "collapse": "section",
 "scroll_highlight": true
 },
 "toolbar": {
 "position": "fixed"
-},
-"search": true
+}
 });
 });
 </script>

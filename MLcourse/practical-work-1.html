@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>Practical Work 1 | Machine Learning</title>
   <meta name="description" content="Practical Work 1 | Machine Learning course" />
-  <meta name="generator" content="bookdown 0.22 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.24 and GitBook 2.6.7" />
 
   <meta property="og:title" content="Practical Work 1 | Machine Learning" />
   <meta property="og:type" content="book" />
@@ -24,7 +24,7 @@
 <meta name="author" content="Mohamad Ghassany" />
 
 
-<meta name="date" content="2021-09-09" />
+<meta name="date" content="2021-10-18" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -33,8 +33,9 @@
   
 <link rel="prev" href="linear-regression.html"/>
 <link rel="next" href="multiple-linear-regression.html"/>
-<script src="book_assets/header-attrs-2.9/header-attrs.js"></script>
-<script src="book_assets/jquery-2.2.3/jquery.min.js"></script>
+<script src="book_assets/header-attrs-2.11/header-attrs.js"></script>
+<script src="book_assets/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="book_assets/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="book_assets/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
 <link href="book_assets/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
@@ -50,19 +51,18 @@
 
 
 
-
 <link href="book_assets/anchor-sections-1.0.1/anchor-sections.css" rel="stylesheet" />
 <script src="book_assets/anchor-sections-1.0.1/anchor-sections.js"></script>
 <script src="book_assets/kePrint-0.0.1/kePrint.js"></script>
 <link href="book_assets/lightable-0.0.1/lightable.css" rel="stylesheet" />
 <link href="book_assets/vembedr-0.1.4/css/vembedr.css" rel="stylesheet" />
-<script src="book_assets/htmlwidgets-1.5.3/htmlwidgets.js"></script>
-<script src="book_assets/plotly-binding-4.9.2.1/plotly.js"></script>
+<script src="book_assets/htmlwidgets-1.5.4/htmlwidgets.js"></script>
+<script src="book_assets/plotly-binding-4.10.0/plotly.js"></script>
 <script src="book_assets/typedarray-0.1/typedarray.min.js"></script>
-<link href="book_assets/crosstalk-1.1.0.1/css/crosstalk.css" rel="stylesheet" />
-<script src="book_assets/crosstalk-1.1.0.1/js/crosstalk.min.js"></script>
-<link href="book_assets/plotly-htmlwidgets-css-1.52.2/plotly-htmlwidgets.css" rel="stylesheet" />
-<script src="book_assets/plotly-main-1.52.2/plotly-latest.min.js"></script>
+<link href="book_assets/crosstalk-1.1.1/css/crosstalk.css" rel="stylesheet" />
+<script src="book_assets/crosstalk-1.1.1/js/crosstalk.min.js"></script>
+<link href="book_assets/plotly-htmlwidgets-css-2.5.1/plotly-htmlwidgets.css" rel="stylesheet" />
+<script src="book_assets/plotly-main-2.5.1/plotly-latest.min.js"></script>
 <!-- Global site tag (gtag.js) - Google Analytics -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=UA-88489172-1"></script>
 <script>
@@ -80,6 +80,7 @@
 pre > code.sourceCode { white-space: pre; position: relative; }
 pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
 pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
 code.sourceCode > span { color: inherit; text-decoration: inherit; }
 pre.sourceCode { margin: 0; }
 @media screen {
@@ -503,10 +504,11 @@ div.csl-indent {
 <p>Hitting the <em>up arrow</em> multiple times will display the previous commands, which can then be edited. This is useful since one often wishes to repeat a similar command.</p>
 <p>The <code>ls()</code> function allows us to look at a list of all of the objects, such <code>ls()</code> as data and functions, that we have saved so far. The <code>rm()</code> function can be used to delete any object that we don’t want.</p>
 <div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="practical-work-1.html#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ls</span>()</span>
-<span id="cb3-2"><a href="practical-work-1.html#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="co">#ans&gt; [1] &quot;pdf2png&quot; &quot;x&quot;       &quot;x1&quot;      &quot;x2&quot;      &quot;x3&quot;      &quot;x4&quot;      &quot;y&quot;</span></span>
-<span id="cb3-3"><a href="practical-work-1.html#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="fu">rm</span>(x)</span>
-<span id="cb3-4"><a href="practical-work-1.html#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="fu">ls</span>()</span>
-<span id="cb3-5"><a href="practical-work-1.html#cb3-5" aria-hidden="true" tabindex="-1"></a><span class="co">#ans&gt; [1] &quot;pdf2png&quot; &quot;x1&quot;      &quot;x2&quot;      &quot;x3&quot;      &quot;x4&quot;      &quot;y&quot;</span></span></code></pre></div>
+<span id="cb3-2"><a href="practical-work-1.html#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="co">#ans&gt; [1] &quot;pdf2png&quot; &quot;x&quot;       &quot;x1&quot;      &quot;x2&quot;      &quot;x3&quot;      &quot;x4&quot;     </span></span>
+<span id="cb3-3"><a href="practical-work-1.html#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="co">#ans&gt; [7] &quot;y&quot;</span></span>
+<span id="cb3-4"><a href="practical-work-1.html#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="fu">rm</span>(x)</span>
+<span id="cb3-5"><a href="practical-work-1.html#cb3-5" aria-hidden="true" tabindex="-1"></a><span class="fu">ls</span>()</span>
+<span id="cb3-6"><a href="practical-work-1.html#cb3-6" aria-hidden="true" tabindex="-1"></a><span class="co">#ans&gt; [1] &quot;pdf2png&quot; &quot;x1&quot;      &quot;x2&quot;      &quot;x3&quot;      &quot;x4&quot;      &quot;y&quot;</span></span></code></pre></div>
 </div>
 <div id="vectors" class="section level3" number="1.8.2">
 <h3><span class="header-section-number">1.8.2</span> Vectors</h3>
@@ -700,18 +702,20 @@ div.csl-indent {
 <span id="cb8-15"><a href="practical-work-1.html#cb8-15" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb8-16"><a href="practical-work-1.html#cb8-16" aria-hidden="true" tabindex="-1"></a><span class="co"># Sampling from a Normal - 100 random points from a N(0, 1)</span></span>
 <span id="cb8-17"><a href="practical-work-1.html#cb8-17" aria-hidden="true" tabindex="-1"></a><span class="fu">rnorm</span>(<span class="at">n =</span> <span class="dv">10</span>, <span class="at">mean =</span> <span class="dv">0</span>, <span class="at">sd =</span> <span class="dv">1</span>)</span>
-<span id="cb8-18"><a href="practical-work-1.html#cb8-18" aria-hidden="true" tabindex="-1"></a><span class="co">#ans&gt;  [1]  0.580 -0.490  0.146 -0.586  1.002  1.964 -0.748  0.196  0.535  0.642</span></span>
-<span id="cb8-19"><a href="practical-work-1.html#cb8-19" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-20"><a href="practical-work-1.html#cb8-20" aria-hidden="true" tabindex="-1"></a><span class="co"># If you want to have always the same result, set the seed of the random number</span></span>
-<span id="cb8-21"><a href="practical-work-1.html#cb8-21" aria-hidden="true" tabindex="-1"></a><span class="co"># generator</span></span>
-<span id="cb8-22"><a href="practical-work-1.html#cb8-22" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">45678</span>)</span>
-<span id="cb8-23"><a href="practical-work-1.html#cb8-23" aria-hidden="true" tabindex="-1"></a><span class="fu">rnorm</span>(<span class="at">n =</span> <span class="dv">10</span>, <span class="at">mean =</span> <span class="dv">0</span>, <span class="at">sd =</span> <span class="dv">1</span>)</span>
-<span id="cb8-24"><a href="practical-work-1.html#cb8-24" aria-hidden="true" tabindex="-1"></a><span class="co">#ans&gt;  [1]  1.440 -0.720  0.671 -0.422  0.378 -1.667 -0.508  0.443 -1.799 -0.618</span></span>
-<span id="cb8-25"><a href="practical-work-1.html#cb8-25" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-26"><a href="practical-work-1.html#cb8-26" aria-hidden="true" tabindex="-1"></a><span class="co"># Plotting the density of a N(0, 1) - the Gauss bell</span></span>
-<span id="cb8-27"><a href="practical-work-1.html#cb8-27" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">seq</span>(<span class="sc">-</span><span class="dv">4</span>, <span class="dv">4</span>, <span class="at">l =</span> <span class="dv">100</span>)</span>
-<span id="cb8-28"><a href="practical-work-1.html#cb8-28" aria-hidden="true" tabindex="-1"></a>y <span class="ot">&lt;-</span> <span class="fu">dnorm</span>(<span class="at">x =</span> x, <span class="at">mean =</span> <span class="dv">0</span>, <span class="at">sd =</span> <span class="dv">1</span>)</span>
-<span id="cb8-29"><a href="practical-work-1.html#cb8-29" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(x, y, <span class="at">type =</span> <span class="st">&quot;l&quot;</span>)</span></code></pre></div>
+<span id="cb8-18"><a href="practical-work-1.html#cb8-18" aria-hidden="true" tabindex="-1"></a><span class="co">#ans&gt;  [1] -0.3856  1.5571 -0.0803 -0.9014  0.2409 -1.8958 -0.2989 -0.0555</span></span>
+<span id="cb8-19"><a href="practical-work-1.html#cb8-19" aria-hidden="true" tabindex="-1"></a><span class="co">#ans&gt;  [9]  0.7545 -0.6982</span></span>
+<span id="cb8-20"><a href="practical-work-1.html#cb8-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-21"><a href="practical-work-1.html#cb8-21" aria-hidden="true" tabindex="-1"></a><span class="co"># If you want to have always the same result, set the seed of the random number</span></span>
+<span id="cb8-22"><a href="practical-work-1.html#cb8-22" aria-hidden="true" tabindex="-1"></a><span class="co"># generator</span></span>
+<span id="cb8-23"><a href="practical-work-1.html#cb8-23" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">45678</span>)</span>
+<span id="cb8-24"><a href="practical-work-1.html#cb8-24" aria-hidden="true" tabindex="-1"></a><span class="fu">rnorm</span>(<span class="at">n =</span> <span class="dv">10</span>, <span class="at">mean =</span> <span class="dv">0</span>, <span class="at">sd =</span> <span class="dv">1</span>)</span>
+<span id="cb8-25"><a href="practical-work-1.html#cb8-25" aria-hidden="true" tabindex="-1"></a><span class="co">#ans&gt;  [1]  1.440 -0.720  0.671 -0.422  0.378 -1.667 -0.508  0.443 -1.799</span></span>
+<span id="cb8-26"><a href="practical-work-1.html#cb8-26" aria-hidden="true" tabindex="-1"></a><span class="co">#ans&gt; [10] -0.618</span></span>
+<span id="cb8-27"><a href="practical-work-1.html#cb8-27" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-28"><a href="practical-work-1.html#cb8-28" aria-hidden="true" tabindex="-1"></a><span class="co"># Plotting the density of a N(0, 1) - the Gauss bell</span></span>
+<span id="cb8-29"><a href="practical-work-1.html#cb8-29" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">seq</span>(<span class="sc">-</span><span class="dv">4</span>, <span class="dv">4</span>, <span class="at">l =</span> <span class="dv">100</span>)</span>
+<span id="cb8-30"><a href="practical-work-1.html#cb8-30" aria-hidden="true" tabindex="-1"></a>y <span class="ot">&lt;-</span> <span class="fu">dnorm</span>(<span class="at">x =</span> x, <span class="at">mean =</span> <span class="dv">0</span>, <span class="at">sd =</span> <span class="dv">1</span>)</span>
+<span id="cb8-31"><a href="practical-work-1.html#cb8-31" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(x, y, <span class="at">type =</span> <span class="st">&quot;l&quot;</span>)</span></code></pre></div>
 <p><img src="Machine-Learning_files/figure-html/unnamed-chunk-17-1.png" width="70%" style="display: block; margin: auto;" /></p>
 <div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="practical-work-1.html#cb9-1" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb9-2"><a href="practical-work-1.html#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Plotting the distribution function of a N(0, 1)</span></span>
@@ -731,12 +735,13 @@ div.csl-indent {
 <span id="cb10-10"><a href="practical-work-1.html#cb10-10" aria-hidden="true" tabindex="-1"></a><span class="co"># Sampling from a U(0, 1)</span></span>
 <span id="cb10-11"><a href="practical-work-1.html#cb10-11" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">45678</span>)</span>
 <span id="cb10-12"><a href="practical-work-1.html#cb10-12" aria-hidden="true" tabindex="-1"></a><span class="fu">runif</span>(<span class="at">n =</span> <span class="dv">10</span>, <span class="at">min =</span> <span class="dv">0</span>, <span class="at">max =</span> <span class="dv">1</span>)</span>
-<span id="cb10-13"><a href="practical-work-1.html#cb10-13" aria-hidden="true" tabindex="-1"></a><span class="co">#ans&gt;  [1] 0.9251 0.3340 0.2359 0.3366 0.7489 0.9327 0.3365 0.2246 0.6474 0.0808</span></span>
-<span id="cb10-14"><a href="practical-work-1.html#cb10-14" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-15"><a href="practical-work-1.html#cb10-15" aria-hidden="true" tabindex="-1"></a><span class="co"># Plotting the density of a U(0, 1)</span></span>
-<span id="cb10-16"><a href="practical-work-1.html#cb10-16" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">seq</span>(<span class="sc">-</span><span class="dv">2</span>, <span class="dv">2</span>, <span class="at">l =</span> <span class="dv">100</span>)</span>
-<span id="cb10-17"><a href="practical-work-1.html#cb10-17" aria-hidden="true" tabindex="-1"></a>y <span class="ot">&lt;-</span> <span class="fu">dunif</span>(<span class="at">x =</span> x, <span class="at">min =</span> <span class="dv">0</span>, <span class="at">max =</span> <span class="dv">1</span>)</span>
-<span id="cb10-18"><a href="practical-work-1.html#cb10-18" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(x, y, <span class="at">type =</span> <span class="st">&quot;l&quot;</span>)</span></code></pre></div>
+<span id="cb10-13"><a href="practical-work-1.html#cb10-13" aria-hidden="true" tabindex="-1"></a><span class="co">#ans&gt;  [1] 0.9251 0.3340 0.2359 0.3366 0.7489 0.9327 0.3365 0.2246 0.6474</span></span>
+<span id="cb10-14"><a href="practical-work-1.html#cb10-14" aria-hidden="true" tabindex="-1"></a><span class="co">#ans&gt; [10] 0.0808</span></span>
+<span id="cb10-15"><a href="practical-work-1.html#cb10-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-16"><a href="practical-work-1.html#cb10-16" aria-hidden="true" tabindex="-1"></a><span class="co"># Plotting the density of a U(0, 1)</span></span>
+<span id="cb10-17"><a href="practical-work-1.html#cb10-17" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">seq</span>(<span class="sc">-</span><span class="dv">2</span>, <span class="dv">2</span>, <span class="at">l =</span> <span class="dv">100</span>)</span>
+<span id="cb10-18"><a href="practical-work-1.html#cb10-18" aria-hidden="true" tabindex="-1"></a>y <span class="ot">&lt;-</span> <span class="fu">dunif</span>(<span class="at">x =</span> x, <span class="at">min =</span> <span class="dv">0</span>, <span class="at">max =</span> <span class="dv">1</span>)</span>
+<span id="cb10-19"><a href="practical-work-1.html#cb10-19" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(x, y, <span class="at">type =</span> <span class="st">&quot;l&quot;</span>)</span></code></pre></div>
 <p><img src="Machine-Learning_files/figure-html/unnamed-chunk-17-3.png" width="70%" style="display: block; margin: auto;" /></p>
 <div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb11-1"><a href="practical-work-1.html#cb11-1" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb11-2"><a href="practical-work-1.html#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Computing the 95% quantile for a U(0, 1)</span></span>
@@ -784,21 +789,22 @@ div.csl-indent {
 <span id="cb13-5"><a href="practical-work-1.html#cb13-5" aria-hidden="true" tabindex="-1"></a><span class="fu">ncol</span>(Auto) <span class="co"># To see the number of columns</span></span>
 <span id="cb13-6"><a href="practical-work-1.html#cb13-6" aria-hidden="true" tabindex="-1"></a><span class="co">#ans&gt; [1] 9</span></span>
 <span id="cb13-7"><a href="practical-work-1.html#cb13-7" aria-hidden="true" tabindex="-1"></a>Auto[<span class="dv">1</span><span class="sc">:</span><span class="dv">4</span>,] <span class="co"># The first 4 rows of the data set</span></span>
-<span id="cb13-8"><a href="practical-work-1.html#cb13-8" aria-hidden="true" tabindex="-1"></a><span class="co">#ans&gt;   mpg cylinders displacement horsepower weight acceleration year origin</span></span>
-<span id="cb13-9"><a href="practical-work-1.html#cb13-9" aria-hidden="true" tabindex="-1"></a><span class="co">#ans&gt; 1  18         8          307        130   3504         12.0   70      1</span></span>
-<span id="cb13-10"><a href="practical-work-1.html#cb13-10" aria-hidden="true" tabindex="-1"></a><span class="co">#ans&gt; 2  15         8          350        165   3693         11.5   70      1</span></span>
-<span id="cb13-11"><a href="practical-work-1.html#cb13-11" aria-hidden="true" tabindex="-1"></a><span class="co">#ans&gt; 3  18         8          318        150   3436         11.0   70      1</span></span>
-<span id="cb13-12"><a href="practical-work-1.html#cb13-12" aria-hidden="true" tabindex="-1"></a><span class="co">#ans&gt; 4  16         8          304        150   3433         12.0   70      1</span></span>
-<span id="cb13-13"><a href="practical-work-1.html#cb13-13" aria-hidden="true" tabindex="-1"></a><span class="co">#ans&gt;                        name</span></span>
-<span id="cb13-14"><a href="practical-work-1.html#cb13-14" aria-hidden="true" tabindex="-1"></a><span class="co">#ans&gt; 1 chevrolet chevelle malibu</span></span>
-<span id="cb13-15"><a href="practical-work-1.html#cb13-15" aria-hidden="true" tabindex="-1"></a><span class="co">#ans&gt; 2         buick skylark 320</span></span>
-<span id="cb13-16"><a href="practical-work-1.html#cb13-16" aria-hidden="true" tabindex="-1"></a><span class="co">#ans&gt; 3        plymouth satellite</span></span>
-<span id="cb13-17"><a href="practical-work-1.html#cb13-17" aria-hidden="true" tabindex="-1"></a><span class="co">#ans&gt; 4             amc rebel sst</span></span></code></pre></div>
+<span id="cb13-8"><a href="practical-work-1.html#cb13-8" aria-hidden="true" tabindex="-1"></a><span class="co">#ans&gt;   mpg cylinders displacement horsepower weight acceleration year</span></span>
+<span id="cb13-9"><a href="practical-work-1.html#cb13-9" aria-hidden="true" tabindex="-1"></a><span class="co">#ans&gt; 1  18         8          307        130   3504         12.0   70</span></span>
+<span id="cb13-10"><a href="practical-work-1.html#cb13-10" aria-hidden="true" tabindex="-1"></a><span class="co">#ans&gt; 2  15         8          350        165   3693         11.5   70</span></span>
+<span id="cb13-11"><a href="practical-work-1.html#cb13-11" aria-hidden="true" tabindex="-1"></a><span class="co">#ans&gt; 3  18         8          318        150   3436         11.0   70</span></span>
+<span id="cb13-12"><a href="practical-work-1.html#cb13-12" aria-hidden="true" tabindex="-1"></a><span class="co">#ans&gt; 4  16         8          304        150   3433         12.0   70</span></span>
+<span id="cb13-13"><a href="practical-work-1.html#cb13-13" aria-hidden="true" tabindex="-1"></a><span class="co">#ans&gt;   origin                      name</span></span>
+<span id="cb13-14"><a href="practical-work-1.html#cb13-14" aria-hidden="true" tabindex="-1"></a><span class="co">#ans&gt; 1      1 chevrolet chevelle malibu</span></span>
+<span id="cb13-15"><a href="practical-work-1.html#cb13-15" aria-hidden="true" tabindex="-1"></a><span class="co">#ans&gt; 2      1         buick skylark 320</span></span>
+<span id="cb13-16"><a href="practical-work-1.html#cb13-16" aria-hidden="true" tabindex="-1"></a><span class="co">#ans&gt; 3      1        plymouth satellite</span></span>
+<span id="cb13-17"><a href="practical-work-1.html#cb13-17" aria-hidden="true" tabindex="-1"></a><span class="co">#ans&gt; 4      1             amc rebel sst</span></span></code></pre></div>
 <div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb14-1"><a href="practical-work-1.html#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Once the data are loaded correctly, we can use names()</span></span>
 <span id="cb14-2"><a href="practical-work-1.html#cb14-2" aria-hidden="true" tabindex="-1"></a><span class="co"># to check the variable names.</span></span>
 <span id="cb14-3"><a href="practical-work-1.html#cb14-3" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(Auto)</span>
-<span id="cb14-4"><a href="practical-work-1.html#cb14-4" aria-hidden="true" tabindex="-1"></a><span class="co">#ans&gt; [1] &quot;mpg&quot;          &quot;cylinders&quot;    &quot;displacement&quot; &quot;horsepower&quot;   &quot;weight&quot;      </span></span>
-<span id="cb14-5"><a href="practical-work-1.html#cb14-5" aria-hidden="true" tabindex="-1"></a><span class="co">#ans&gt; [6] &quot;acceleration&quot; &quot;year&quot;         &quot;origin&quot;       &quot;name&quot;</span></span></code></pre></div>
+<span id="cb14-4"><a href="practical-work-1.html#cb14-4" aria-hidden="true" tabindex="-1"></a><span class="co">#ans&gt; [1] &quot;mpg&quot;          &quot;cylinders&quot;    &quot;displacement&quot; &quot;horsepower&quot;  </span></span>
+<span id="cb14-5"><a href="practical-work-1.html#cb14-5" aria-hidden="true" tabindex="-1"></a><span class="co">#ans&gt; [5] &quot;weight&quot;       &quot;acceleration&quot; &quot;year&quot;         &quot;origin&quot;      </span></span>
+<span id="cb14-6"><a href="practical-work-1.html#cb14-6" aria-hidden="true" tabindex="-1"></a><span class="co">#ans&gt; [9] &quot;name&quot;</span></span></code></pre></div>
 
 <div class="rmdinsight">
 Take a look at this <a href="https://cran.r-project.org/doc/contrib/Torfs+Brauer-Short-R-Intro.pdf">(very) short introduction to R</a>. It can be useful.
@@ -856,56 +862,60 @@ Take a look at this <a href="https://cran.r-project.org/doc/contrib/Torfs+Brauer
 <span id="cb16-30"><a href="practical-work-1.html#cb16-30" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb16-31"><a href="practical-work-1.html#cb16-31" aria-hidden="true" tabindex="-1"></a><span class="co"># The residuals</span></span>
 <span id="cb16-32"><a href="practical-work-1.html#cb16-32" aria-hidden="true" tabindex="-1"></a>mod<span class="sc">$</span>residuals</span>
-<span id="cb16-33"><a href="practical-work-1.html#cb16-33" aria-hidden="true" tabindex="-1"></a><span class="co">#ans&gt;        Germany         France United Kingdom          Italy          Spain </span></span>
-<span id="cb16-34"><a href="practical-work-1.html#cb16-34" aria-hidden="true" tabindex="-1"></a><span class="co">#ans&gt;         2.8675        -3.7031        -1.7847         0.0139        -3.5084 </span></span>
-<span id="cb16-35"><a href="practical-work-1.html#cb16-35" aria-hidden="true" tabindex="-1"></a><span class="co">#ans&gt;         Poland        Romania    Netherlands         Greece        Belgium </span></span>
-<span id="cb16-36"><a href="practical-work-1.html#cb16-36" aria-hidden="true" tabindex="-1"></a><span class="co">#ans&gt;         1.9272         1.9434         0.2142         1.8977         2.3994 </span></span>
-<span id="cb16-37"><a href="practical-work-1.html#cb16-37" aria-hidden="true" tabindex="-1"></a><span class="co">#ans&gt;       Portugal Czech Republic        Hungary         Sweden        Austria </span></span>
-<span id="cb16-38"><a href="practical-work-1.html#cb16-38" aria-hidden="true" tabindex="-1"></a><span class="co">#ans&gt;         2.6175         2.7587         3.2898         2.0163         2.0575 </span></span>
-<span id="cb16-39"><a href="practical-work-1.html#cb16-39" aria-hidden="true" tabindex="-1"></a><span class="co">#ans&gt;       Bulgaria        Denmark       Slovakia        Finland        Ireland </span></span>
-<span id="cb16-40"><a href="practical-work-1.html#cb16-40" aria-hidden="true" tabindex="-1"></a><span class="co">#ans&gt;         1.9328        -0.8790        -0.7606        -0.6813        -0.7284 </span></span>
-<span id="cb16-41"><a href="practical-work-1.html#cb16-41" aria-hidden="true" tabindex="-1"></a><span class="co">#ans&gt;      Lithuania         Latvia       Slovenia        Estonia         Cyprus </span></span>
-<span id="cb16-42"><a href="practical-work-1.html#cb16-42" aria-hidden="true" tabindex="-1"></a><span class="co">#ans&gt;         0.4998        -1.3347        -2.1175        -3.3552        -2.7761 </span></span>
-<span id="cb16-43"><a href="practical-work-1.html#cb16-43" aria-hidden="true" tabindex="-1"></a><span class="co">#ans&gt;     Luxembourg          Malta </span></span>
-<span id="cb16-44"><a href="practical-work-1.html#cb16-44" aria-hidden="true" tabindex="-1"></a><span class="co">#ans&gt;        -2.4514        -2.3553</span></span>
-<span id="cb16-45"><a href="practical-work-1.html#cb16-45" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-46"><a href="practical-work-1.html#cb16-46" aria-hidden="true" tabindex="-1"></a><span class="co"># The fitted values</span></span>
-<span id="cb16-47"><a href="practical-work-1.html#cb16-47" aria-hidden="true" tabindex="-1"></a>mod<span class="sc">$</span>fitted.values</span>
-<span id="cb16-48"><a href="practical-work-1.html#cb16-48" aria-hidden="true" tabindex="-1"></a><span class="co">#ans&gt;        Germany         France United Kingdom          Italy          Spain </span></span>
-<span id="cb16-49"><a href="practical-work-1.html#cb16-49" aria-hidden="true" tabindex="-1"></a><span class="co">#ans&gt;          96.13          77.70          74.78          72.99          57.51 </span></span>
-<span id="cb16-50"><a href="practical-work-1.html#cb16-50" aria-hidden="true" tabindex="-1"></a><span class="co">#ans&gt;         Poland        Romania    Netherlands         Greece        Belgium </span></span>
-<span id="cb16-51"><a href="practical-work-1.html#cb16-51" aria-hidden="true" tabindex="-1"></a><span class="co">#ans&gt;          49.07          31.06          25.79          20.10          19.60 </span></span>
-<span id="cb16-52"><a href="practical-work-1.html#cb16-52" aria-hidden="true" tabindex="-1"></a><span class="co">#ans&gt;       Portugal Czech Republic        Hungary         Sweden        Austria </span></span>
-<span id="cb16-53"><a href="practical-work-1.html#cb16-53" aria-hidden="true" tabindex="-1"></a><span class="co">#ans&gt;          19.38          19.24          18.71          17.98          16.94 </span></span>
-<span id="cb16-54"><a href="practical-work-1.html#cb16-54" aria-hidden="true" tabindex="-1"></a><span class="co">#ans&gt;       Bulgaria        Denmark       Slovakia        Finland        Ireland </span></span>
-<span id="cb16-55"><a href="practical-work-1.html#cb16-55" aria-hidden="true" tabindex="-1"></a><span class="co">#ans&gt;          16.07          13.88          13.76          13.68          12.73 </span></span>
-<span id="cb16-56"><a href="practical-work-1.html#cb16-56" aria-hidden="true" tabindex="-1"></a><span class="co">#ans&gt;      Lithuania         Latvia       Slovenia        Estonia         Cyprus </span></span>
-<span id="cb16-57"><a href="practical-work-1.html#cb16-57" aria-hidden="true" tabindex="-1"></a><span class="co">#ans&gt;          11.50          10.33          10.12           9.36           8.78 </span></span>
-<span id="cb16-58"><a href="practical-work-1.html#cb16-58" aria-hidden="true" tabindex="-1"></a><span class="co">#ans&gt;     Luxembourg          Malta </span></span>
-<span id="cb16-59"><a href="practical-work-1.html#cb16-59" aria-hidden="true" tabindex="-1"></a><span class="co">#ans&gt;           8.45           8.36</span></span>
-<span id="cb16-60"><a href="practical-work-1.html#cb16-60" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-61"><a href="practical-work-1.html#cb16-61" aria-hidden="true" tabindex="-1"></a><span class="co"># Summary of the model</span></span>
-<span id="cb16-62"><a href="practical-work-1.html#cb16-62" aria-hidden="true" tabindex="-1"></a>sumMod <span class="ot">&lt;-</span> <span class="fu">summary</span>(mod)</span>
-<span id="cb16-63"><a href="practical-work-1.html#cb16-63" aria-hidden="true" tabindex="-1"></a>sumMod</span>
-<span id="cb16-64"><a href="practical-work-1.html#cb16-64" aria-hidden="true" tabindex="-1"></a><span class="co">#ans&gt; </span></span>
-<span id="cb16-65"><a href="practical-work-1.html#cb16-65" aria-hidden="true" tabindex="-1"></a><span class="co">#ans&gt; Call:</span></span>
-<span id="cb16-66"><a href="practical-work-1.html#cb16-66" aria-hidden="true" tabindex="-1"></a><span class="co">#ans&gt; lm(formula = Seats2011 ~ Population2010, data = EU)</span></span>
-<span id="cb16-67"><a href="practical-work-1.html#cb16-67" aria-hidden="true" tabindex="-1"></a><span class="co">#ans&gt; </span></span>
-<span id="cb16-68"><a href="practical-work-1.html#cb16-68" aria-hidden="true" tabindex="-1"></a><span class="co">#ans&gt; Residuals:</span></span>
-<span id="cb16-69"><a href="practical-work-1.html#cb16-69" aria-hidden="true" tabindex="-1"></a><span class="co">#ans&gt;    Min     1Q Median     3Q    Max </span></span>
-<span id="cb16-70"><a href="practical-work-1.html#cb16-70" aria-hidden="true" tabindex="-1"></a><span class="co">#ans&gt; -3.703 -1.951  0.014  1.980  3.290 </span></span>
+<span id="cb16-33"><a href="practical-work-1.html#cb16-33" aria-hidden="true" tabindex="-1"></a><span class="co">#ans&gt;        Germany         France United Kingdom          Italy </span></span>
+<span id="cb16-34"><a href="practical-work-1.html#cb16-34" aria-hidden="true" tabindex="-1"></a><span class="co">#ans&gt;         2.8675        -3.7031        -1.7847         0.0139 </span></span>
+<span id="cb16-35"><a href="practical-work-1.html#cb16-35" aria-hidden="true" tabindex="-1"></a><span class="co">#ans&gt;          Spain         Poland        Romania    Netherlands </span></span>
+<span id="cb16-36"><a href="practical-work-1.html#cb16-36" aria-hidden="true" tabindex="-1"></a><span class="co">#ans&gt;        -3.5084         1.9272         1.9434         0.2142 </span></span>
+<span id="cb16-37"><a href="practical-work-1.html#cb16-37" aria-hidden="true" tabindex="-1"></a><span class="co">#ans&gt;         Greece        Belgium       Portugal Czech Republic </span></span>
+<span id="cb16-38"><a href="practical-work-1.html#cb16-38" aria-hidden="true" tabindex="-1"></a><span class="co">#ans&gt;         1.8977         2.3994         2.6175         2.7587 </span></span>
+<span id="cb16-39"><a href="practical-work-1.html#cb16-39" aria-hidden="true" tabindex="-1"></a><span class="co">#ans&gt;        Hungary         Sweden        Austria       Bulgaria </span></span>
+<span id="cb16-40"><a href="practical-work-1.html#cb16-40" aria-hidden="true" tabindex="-1"></a><span class="co">#ans&gt;         3.2898         2.0163         2.0575         1.9328 </span></span>
+<span id="cb16-41"><a href="practical-work-1.html#cb16-41" aria-hidden="true" tabindex="-1"></a><span class="co">#ans&gt;        Denmark       Slovakia        Finland        Ireland </span></span>
+<span id="cb16-42"><a href="practical-work-1.html#cb16-42" aria-hidden="true" tabindex="-1"></a><span class="co">#ans&gt;        -0.8790        -0.7606        -0.6813        -0.7284 </span></span>
+<span id="cb16-43"><a href="practical-work-1.html#cb16-43" aria-hidden="true" tabindex="-1"></a><span class="co">#ans&gt;      Lithuania         Latvia       Slovenia        Estonia </span></span>
+<span id="cb16-44"><a href="practical-work-1.html#cb16-44" aria-hidden="true" tabindex="-1"></a><span class="co">#ans&gt;         0.4998        -1.3347        -2.1175        -3.3552 </span></span>
+<span id="cb16-45"><a href="practical-work-1.html#cb16-45" aria-hidden="true" tabindex="-1"></a><span class="co">#ans&gt;         Cyprus     Luxembourg          Malta </span></span>
+<span id="cb16-46"><a href="practical-work-1.html#cb16-46" aria-hidden="true" tabindex="-1"></a><span class="co">#ans&gt;        -2.7761        -2.4514        -2.3553</span></span>
+<span id="cb16-47"><a href="practical-work-1.html#cb16-47" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-48"><a href="practical-work-1.html#cb16-48" aria-hidden="true" tabindex="-1"></a><span class="co"># The fitted values</span></span>
+<span id="cb16-49"><a href="practical-work-1.html#cb16-49" aria-hidden="true" tabindex="-1"></a>mod<span class="sc">$</span>fitted.values</span>
+<span id="cb16-50"><a href="practical-work-1.html#cb16-50" aria-hidden="true" tabindex="-1"></a><span class="co">#ans&gt;        Germany         France United Kingdom          Italy </span></span>
+<span id="cb16-51"><a href="practical-work-1.html#cb16-51" aria-hidden="true" tabindex="-1"></a><span class="co">#ans&gt;          96.13          77.70          74.78          72.99 </span></span>
+<span id="cb16-52"><a href="practical-work-1.html#cb16-52" aria-hidden="true" tabindex="-1"></a><span class="co">#ans&gt;          Spain         Poland        Romania    Netherlands </span></span>
+<span id="cb16-53"><a href="practical-work-1.html#cb16-53" aria-hidden="true" tabindex="-1"></a><span class="co">#ans&gt;          57.51          49.07          31.06          25.79 </span></span>
+<span id="cb16-54"><a href="practical-work-1.html#cb16-54" aria-hidden="true" tabindex="-1"></a><span class="co">#ans&gt;         Greece        Belgium       Portugal Czech Republic </span></span>
+<span id="cb16-55"><a href="practical-work-1.html#cb16-55" aria-hidden="true" tabindex="-1"></a><span class="co">#ans&gt;          20.10          19.60          19.38          19.24 </span></span>
+<span id="cb16-56"><a href="practical-work-1.html#cb16-56" aria-hidden="true" tabindex="-1"></a><span class="co">#ans&gt;        Hungary         Sweden        Austria       Bulgaria </span></span>
+<span id="cb16-57"><a href="practical-work-1.html#cb16-57" aria-hidden="true" tabindex="-1"></a><span class="co">#ans&gt;          18.71          17.98          16.94          16.07 </span></span>
+<span id="cb16-58"><a href="practical-work-1.html#cb16-58" aria-hidden="true" tabindex="-1"></a><span class="co">#ans&gt;        Denmark       Slovakia        Finland        Ireland </span></span>
+<span id="cb16-59"><a href="practical-work-1.html#cb16-59" aria-hidden="true" tabindex="-1"></a><span class="co">#ans&gt;          13.88          13.76          13.68          12.73 </span></span>
+<span id="cb16-60"><a href="practical-work-1.html#cb16-60" aria-hidden="true" tabindex="-1"></a><span class="co">#ans&gt;      Lithuania         Latvia       Slovenia        Estonia </span></span>
+<span id="cb16-61"><a href="practical-work-1.html#cb16-61" aria-hidden="true" tabindex="-1"></a><span class="co">#ans&gt;          11.50          10.33          10.12           9.36 </span></span>
+<span id="cb16-62"><a href="practical-work-1.html#cb16-62" aria-hidden="true" tabindex="-1"></a><span class="co">#ans&gt;         Cyprus     Luxembourg          Malta </span></span>
+<span id="cb16-63"><a href="practical-work-1.html#cb16-63" aria-hidden="true" tabindex="-1"></a><span class="co">#ans&gt;           8.78           8.45           8.36</span></span>
+<span id="cb16-64"><a href="practical-work-1.html#cb16-64" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-65"><a href="practical-work-1.html#cb16-65" aria-hidden="true" tabindex="-1"></a><span class="co"># Summary of the model</span></span>
+<span id="cb16-66"><a href="practical-work-1.html#cb16-66" aria-hidden="true" tabindex="-1"></a>sumMod <span class="ot">&lt;-</span> <span class="fu">summary</span>(mod)</span>
+<span id="cb16-67"><a href="practical-work-1.html#cb16-67" aria-hidden="true" tabindex="-1"></a>sumMod</span>
+<span id="cb16-68"><a href="practical-work-1.html#cb16-68" aria-hidden="true" tabindex="-1"></a><span class="co">#ans&gt; </span></span>
+<span id="cb16-69"><a href="practical-work-1.html#cb16-69" aria-hidden="true" tabindex="-1"></a><span class="co">#ans&gt; Call:</span></span>
+<span id="cb16-70"><a href="practical-work-1.html#cb16-70" aria-hidden="true" tabindex="-1"></a><span class="co">#ans&gt; lm(formula = Seats2011 ~ Population2010, data = EU)</span></span>
 <span id="cb16-71"><a href="practical-work-1.html#cb16-71" aria-hidden="true" tabindex="-1"></a><span class="co">#ans&gt; </span></span>
-<span id="cb16-72"><a href="practical-work-1.html#cb16-72" aria-hidden="true" tabindex="-1"></a><span class="co">#ans&gt; Coefficients:</span></span>
-<span id="cb16-73"><a href="practical-work-1.html#cb16-73" aria-hidden="true" tabindex="-1"></a><span class="co">#ans&gt;                Estimate Std. Error t value Pr(&gt;|t|)    </span></span>
-<span id="cb16-74"><a href="practical-work-1.html#cb16-74" aria-hidden="true" tabindex="-1"></a><span class="co">#ans&gt; (Intercept)    7.91e+00   5.66e-01    14.0  2.6e-13 ***</span></span>
-<span id="cb16-75"><a href="practical-work-1.html#cb16-75" aria-hidden="true" tabindex="-1"></a><span class="co">#ans&gt; Population2010 1.08e-06   1.92e-08    56.3  &lt; 2e-16 ***</span></span>
-<span id="cb16-76"><a href="practical-work-1.html#cb16-76" aria-hidden="true" tabindex="-1"></a><span class="co">#ans&gt; ---</span></span>
-<span id="cb16-77"><a href="practical-work-1.html#cb16-77" aria-hidden="true" tabindex="-1"></a><span class="co">#ans&gt; Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</span></span>
-<span id="cb16-78"><a href="practical-work-1.html#cb16-78" aria-hidden="true" tabindex="-1"></a><span class="co">#ans&gt; </span></span>
-<span id="cb16-79"><a href="practical-work-1.html#cb16-79" aria-hidden="true" tabindex="-1"></a><span class="co">#ans&gt; Residual standard error: 2.29 on 25 degrees of freedom</span></span>
-<span id="cb16-80"><a href="practical-work-1.html#cb16-80" aria-hidden="true" tabindex="-1"></a><span class="co">#ans&gt;   (1 observation deleted due to missingness)</span></span>
-<span id="cb16-81"><a href="practical-work-1.html#cb16-81" aria-hidden="true" tabindex="-1"></a><span class="co">#ans&gt; Multiple R-squared:  0.992,   Adjusted R-squared:  0.992 </span></span>
-<span id="cb16-82"><a href="practical-work-1.html#cb16-82" aria-hidden="true" tabindex="-1"></a><span class="co">#ans&gt; F-statistic: 3.17e+03 on 1 and 25 DF,  p-value: &lt;2e-16</span></span></code></pre></div>
+<span id="cb16-72"><a href="practical-work-1.html#cb16-72" aria-hidden="true" tabindex="-1"></a><span class="co">#ans&gt; Residuals:</span></span>
+<span id="cb16-73"><a href="practical-work-1.html#cb16-73" aria-hidden="true" tabindex="-1"></a><span class="co">#ans&gt;    Min     1Q Median     3Q    Max </span></span>
+<span id="cb16-74"><a href="practical-work-1.html#cb16-74" aria-hidden="true" tabindex="-1"></a><span class="co">#ans&gt; -3.703 -1.951  0.014  1.980  3.290 </span></span>
+<span id="cb16-75"><a href="practical-work-1.html#cb16-75" aria-hidden="true" tabindex="-1"></a><span class="co">#ans&gt; </span></span>
+<span id="cb16-76"><a href="practical-work-1.html#cb16-76" aria-hidden="true" tabindex="-1"></a><span class="co">#ans&gt; Coefficients:</span></span>
+<span id="cb16-77"><a href="practical-work-1.html#cb16-77" aria-hidden="true" tabindex="-1"></a><span class="co">#ans&gt;                Estimate Std. Error t value Pr(&gt;|t|)    </span></span>
+<span id="cb16-78"><a href="practical-work-1.html#cb16-78" aria-hidden="true" tabindex="-1"></a><span class="co">#ans&gt; (Intercept)    7.91e+00   5.66e-01    14.0  2.6e-13 ***</span></span>
+<span id="cb16-79"><a href="practical-work-1.html#cb16-79" aria-hidden="true" tabindex="-1"></a><span class="co">#ans&gt; Population2010 1.08e-06   1.92e-08    56.3  &lt; 2e-16 ***</span></span>
+<span id="cb16-80"><a href="practical-work-1.html#cb16-80" aria-hidden="true" tabindex="-1"></a><span class="co">#ans&gt; ---</span></span>
+<span id="cb16-81"><a href="practical-work-1.html#cb16-81" aria-hidden="true" tabindex="-1"></a><span class="co">#ans&gt; Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</span></span>
+<span id="cb16-82"><a href="practical-work-1.html#cb16-82" aria-hidden="true" tabindex="-1"></a><span class="co">#ans&gt; </span></span>
+<span id="cb16-83"><a href="practical-work-1.html#cb16-83" aria-hidden="true" tabindex="-1"></a><span class="co">#ans&gt; Residual standard error: 2.29 on 25 degrees of freedom</span></span>
+<span id="cb16-84"><a href="practical-work-1.html#cb16-84" aria-hidden="true" tabindex="-1"></a><span class="co">#ans&gt;   (1 observation effacée parce que manquante)</span></span>
+<span id="cb16-85"><a href="practical-work-1.html#cb16-85" aria-hidden="true" tabindex="-1"></a><span class="co">#ans&gt; Multiple R-squared:  0.992,   Adjusted R-squared:  0.992 </span></span>
+<span id="cb16-86"><a href="practical-work-1.html#cb16-86" aria-hidden="true" tabindex="-1"></a><span class="co">#ans&gt; F-statistic: 3.17e+03 on 1 and 25 DF,  p-value: &lt;2e-16</span></span></code></pre></div>
 <p>The following table contains a handy cheat sheet of equivalences between <svg aria-hidden="true" role="img" viewBox="0 0 581 512" style="height:1em;width:1.13em;vertical-align:-0.125em;margin-left:auto;margin-right:auto;font-size:inherit;fill:steelblue;overflow:visible;position:relative;"><path d="M581 226.6C581 119.1 450.9 32 290.5 32S0 119.1 0 226.6C0 322.4 103.3 402 239.4 418.1V480h99.1v-61.5c24.3-2.7 47.6-7.4 69.4-13.9L448 480h112l-67.4-113.7c54.5-35.4 88.4-84.9 88.4-139.7zm-466.8 14.5c0-73.5 98.9-133 220.8-133s211.9 40.7 211.9 133c0 50.1-26.5 85-70.3 106.4-2.4-1.6-4.7-2.9-6.4-3.7-10.2-5.2-27.8-10.5-27.8-10.5s86.6-6.4 86.6-92.7-90.6-87.9-90.6-87.9h-199V361c-74.1-21.5-125.2-67.1-125.2-119.9zm225.1 38.3v-55.6c57.8 0 87.8-6.8 87.8 27.3 0 36.5-38.2 28.3-87.8 28.3zm-.9 72.5H365c10.8 0 18.9 11.7 24 19.2-16.1 1.9-33 2.8-50.6 2.9v-22.1z"/></svg> code and some of the statistical concepts associated to linear regression.</p>
 <table>
 <colgroup>
@@ -1144,7 +1154,6 @@ the <code>predict()</code> function for this purpose:</p>
     </div>
   </div>
 <script src="book_assets/gitbook-2.6.7/js/app.min.js"></script>
-<script src="book_assets/gitbook-2.6.7/js/lunr.js"></script>
 <script src="book_assets/gitbook-2.6.7/js/clipboard.min.js"></script>
 <script src="book_assets/gitbook-2.6.7/js/plugin-search.js"></script>
 <script src="book_assets/gitbook-2.6.7/js/plugin-sharing.js"></script>
@@ -1174,14 +1183,17 @@ gitbook.start({
 "text": null
 },
 "download": null,
+"search": {
+"engine": "fuse",
+"options": null
+},
 "toc": {
 "collapse": "section",
 "scroll_highlight": true
 },
 "toolbar": {
 "position": "fixed"
-},
-"search": true
+}
 });
 });
 </script>

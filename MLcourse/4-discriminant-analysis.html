@@ -4,21 +4,21 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>PW 6 | Machine Learning</title>
-  <meta name="description" content="PW 6 | Machine Learning course" />
+  <title>4 Discriminant Analysis | Machine Learning</title>
+  <meta name="description" content="4 Discriminant Analysis | Machine Learning course" />
   <meta name="generator" content="bookdown 0.24.10 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="PW 6 | Machine Learning" />
+  <meta property="og:title" content="4 Discriminant Analysis | Machine Learning" />
   <meta property="og:type" content="book" />
   
   
-  <meta property="og:description" content="PW 6 | Machine Learning course" />
+  <meta property="og:description" content="4 Discriminant Analysis | Machine Learning course" />
   
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="PW 6 | Machine Learning" />
+  <meta name="twitter:title" content="4 Discriminant Analysis | Machine Learning" />
   
-  <meta name="twitter:description" content="PW 6 | Machine Learning course" />
+  <meta name="twitter:description" content="4 Discriminant Analysis | Machine Learning course" />
   
 
 <meta name="author" content="Mohamad Ghassany" />
@@ -31,8 +31,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="6-principal-components-analysis.html"/>
-<link rel="next" href="7-kmeans-hierarchical-clustering.html"/>
+<link rel="prev" href="pw-3.html"/>
+<link rel="next" href="pw-4.html"/>
 <script src="book_assets/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="book_assets/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -456,274 +456,239 @@ div.csl-indent {
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="pw-6" class="section level1 unnumbered hasAnchor">
-<h1>PW 6<a href="pw-6.html#pw-6" class="anchor-section" aria-label="Anchor link to header"></a></h1>
-<div id="the-iris-dataset" class="section level3 unnumbered hasAnchor">
-<h3>The Iris Dataset<a href="pw-6.html#the-iris-dataset" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<p>The <strong><em>Iris flower dataset</em></strong> or <strong><em>Fisher’s Iris dataset</em></strong> is a multivariate data set introduced by the British statistician and biologist <a href="https://en.wikipedia.org/wiki/Ronald_Fisher">Ronald Fisher</a> in his <strong>1936</strong> paper <span class="citation">(<a href="#ref-Fisher1936" role="doc-biblioref">FISHER 1936</a>)</span>.</p>
-<p>The data set consists of 50 samples from each of three species of Iris. Four features were measured from each sample.</p>
-<p>The three species in the Iris dataset are:</p>
-<ol style="list-style-type: decimal">
-<li><em>Iris-setosa</em> (<span class="math inline">\(n_1=50\)</span>)</li>
-<li><em>Iris-versicolor</em> (<span class="math inline">\(n_2=50\)</span>)</li>
-<li><em>Iris-virginica</em> (<span class="math inline">\(n_3=50\)</span>)</li>
-</ol>
-<p>And the four features in Iris dataset are:</p>
-<ol style="list-style-type: decimal">
-<li><em>sepal length</em> in cm</li>
-<li><em>sepal width</em> in cm</li>
-<li><em>petal length</em> in cm</li>
-<li><em>petal width</em> in cm</li>
-</ol>
-<p><img src="img/iris.png" width="85%" style="display: block; margin: auto;" /></p>
-</div>
-<div id="loading-data-1" class="section level3 unnumbered hasAnchor">
-<h3>Loading Data<a href="pw-6.html#loading-data-1" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<p><strong>1.</strong> Download the iris dataset from <a target="_blank" href="datasets/iris.data"> here <i class="fa fa-table" aria-hidden="true"></i></a> and import it into <svg aria-hidden="true" role="img" viewBox="0 0 581 512" style="height:1em;width:1.13em;vertical-align:-0.125em;margin-left:auto;margin-right:auto;font-size:inherit;fill:steelblue;overflow:visible;position:relative;"><path d="M581 226.6C581 119.1 450.9 32 290.5 32S0 119.1 0 226.6C0 322.4 103.3 402 239.4 418.1V480h99.1v-61.5c24.3-2.7 47.6-7.4 69.4-13.9L448 480h112l-67.4-113.7c54.5-35.4 88.4-84.9 88.4-139.7zm-466.8 14.5c0-73.5 98.9-133 220.8-133s211.9 40.7 211.9 133c0 50.1-26.5 85-70.3 106.4-2.4-1.6-4.7-2.9-6.4-3.7-10.2-5.2-27.8-10.5-27.8-10.5s86.6-6.4 86.6-92.7-90.6-87.9-90.6-87.9h-199V361c-74.1-21.5-125.2-67.1-125.2-119.9zm225.1 38.3v-55.6c57.8 0 87.8-6.8 87.8 27.3 0 36.5-38.2 28.3-87.8 28.3zm-.9 72.5H365c10.8 0 18.9 11.7 24 19.2-16.1 1.9-33 2.8-50.6 2.9v-22.1z"/></svg>.</p>
-<!-- 
-**2.** Show the last 5 rows of the iris dataset.
-
-
-
- -->
-</div>
-<div id="exploratory-analysis" class="section level3 unnumbered hasAnchor">
-<h3>Exploratory analysis<a href="pw-6.html#exploratory-analysis" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<p><strong>2.</strong> Compare the means and the quartiles of the 3 different flower classes for the 4 different features (Plot 4 boxplots into the same figure).</p>
-<div class="rmdtip">
-<p><strong>Hint</strong>: you can use <code>par(mfrow=c(2,2))</code> to show multiple plots on the same figure (<span class="math inline">\(2 \times 2\)</span> plots here). Like follows:</p>
-</div>
-<p><img src="Machine-Learning_files/figure-html/unnamed-chunk-178-1.png" width="70%" style="display: block; margin: auto;" /></p>
-<p><strong>3.</strong> To explore how the 3 different flower classes are distributed along the 4 different features, visualize them via histograms using the following code.</p>
-<div class="sourceCode" id="cb59"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb59-1"><a href="pw-6.html#cb59-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Let&#39;s use the ggplot2 library</span></span>
-<span id="cb59-2"><a href="pw-6.html#cb59-2" aria-hidden="true" tabindex="-1"></a><span class="co"># ggplot2 is the most advanced package for data visualization</span></span>
-<span id="cb59-3"><a href="pw-6.html#cb59-3" aria-hidden="true" tabindex="-1"></a><span class="co"># gg corresponds to The Grammar of Graphics.</span></span>
-<span id="cb59-4"><a href="pw-6.html#cb59-4" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2) <span class="co">#of course you must install it first if you don&#39;t have it already</span></span>
-<span id="cb59-5"><a href="pw-6.html#cb59-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb59-6"><a href="pw-6.html#cb59-6" aria-hidden="true" tabindex="-1"></a><span class="co"># histogram of sepal_length</span></span>
-<span id="cb59-7"><a href="pw-6.html#cb59-7" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(iris, <span class="fu">aes</span>(<span class="at">x=</span>sepal_length, <span class="at">fill=</span>class)) <span class="sc">+</span></span>
-<span id="cb59-8"><a href="pw-6.html#cb59-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(<span class="at">binwidth=</span>.<span class="dv">2</span>, <span class="at">alpha=</span>.<span class="dv">5</span>)</span>
-<span id="cb59-9"><a href="pw-6.html#cb59-9" aria-hidden="true" tabindex="-1"></a><span class="co"># histogram of sepal_width</span></span>
-<span id="cb59-10"><a href="pw-6.html#cb59-10" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(iris, <span class="fu">aes</span>(<span class="at">x=</span>sepal_width, <span class="at">fill=</span>class)) <span class="sc">+</span></span>
-<span id="cb59-11"><a href="pw-6.html#cb59-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(<span class="at">binwidth=</span>.<span class="dv">2</span>, <span class="at">alpha=</span>.<span class="dv">5</span>)</span>
-<span id="cb59-12"><a href="pw-6.html#cb59-12" aria-hidden="true" tabindex="-1"></a><span class="co"># histogram of petal_length</span></span>
-<span id="cb59-13"><a href="pw-6.html#cb59-13" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(iris, <span class="fu">aes</span>(<span class="at">x=</span>petal_length, <span class="at">fill=</span>class)) <span class="sc">+</span></span>
-<span id="cb59-14"><a href="pw-6.html#cb59-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(<span class="at">binwidth=</span>.<span class="dv">2</span>, <span class="at">alpha=</span>.<span class="dv">5</span>)</span>
-<span id="cb59-15"><a href="pw-6.html#cb59-15" aria-hidden="true" tabindex="-1"></a><span class="co"># histogram of petal_width</span></span>
-<span id="cb59-16"><a href="pw-6.html#cb59-16" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(iris, <span class="fu">aes</span>(<span class="at">x=</span>petal_width, <span class="at">fill=</span>class)) <span class="sc">+</span></span>
-<span id="cb59-17"><a href="pw-6.html#cb59-17" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(<span class="at">binwidth=</span>.<span class="dv">2</span>, <span class="at">alpha=</span>.<span class="dv">5</span>)</span></code></pre></div>
-<p><img src="Machine-Learning_files/figure-html/unnamed-chunk-180-1.png" width="70%" style="display: block; margin: auto;" /></p>
-</div>
-<div id="pca-using-princomp" class="section level3 unnumbered hasAnchor">
-<h3>PCA using <code>princomp()</code><a href="pw-6.html#pca-using-princomp" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<div class="rmdtip">
-<p>Both <code>princomp()</code> and <code>prcomp()</code> are built-in <svg aria-hidden="true" role="img" viewBox="0 0 581 512" style="height:1em;width:1.13em;vertical-align:-0.125em;margin-left:auto;margin-right:auto;font-size:inherit;fill:steelblue;overflow:visible;position:relative;"><path d="M581 226.6C581 119.1 450.9 32 290.5 32S0 119.1 0 226.6C0 322.4 103.3 402 239.4 418.1V480h99.1v-61.5c24.3-2.7 47.6-7.4 69.4-13.9L448 480h112l-67.4-113.7c54.5-35.4 88.4-84.9 88.4-139.7zm-466.8 14.5c0-73.5 98.9-133 220.8-133s211.9 40.7 211.9 133c0 50.1-26.5 85-70.3 106.4-2.4-1.6-4.7-2.9-6.4-3.7-10.2-5.2-27.8-10.5-27.8-10.5s86.6-6.4 86.6-92.7-90.6-87.9-90.6-87.9h-199V361c-74.1-21.5-125.2-67.1-125.2-119.9zm225.1 38.3v-55.6c57.8 0 87.8-6.8 87.8 27.3 0 36.5-38.2 28.3-87.8 28.3zm-.9 72.5H365c10.8 0 18.9 11.7 24 19.2-16.1 1.9-33 2.8-50.6 2.9v-22.1z"/></svg> functions. They both perform PCA.</p>
-</div>
-<p><strong>4.</strong> Apply a PCA on the Iris dataset using the <code>princomp()</code> function and interpret the results.</p>
-<div class="sourceCode" id="cb60"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb60-1"><a href="pw-6.html#cb60-1" aria-hidden="true" tabindex="-1"></a>pcairis<span class="ot">=</span><span class="fu">princomp</span>(iris[,<span class="sc">-</span><span class="dv">5</span>], <span class="at">cor=</span>T) </span>
-<span id="cb60-2"><a href="pw-6.html#cb60-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Note that we take only the numerical columns to apply PCA.</span></span>
-<span id="cb60-3"><a href="pw-6.html#cb60-3" aria-hidden="true" tabindex="-1"></a><span class="co"># now pcairis is a R object of type princomp</span></span>
-<span id="cb60-4"><a href="pw-6.html#cb60-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb60-5"><a href="pw-6.html#cb60-5" aria-hidden="true" tabindex="-1"></a><span class="co"># To display the internal structure of pcairis</span></span>
-<span id="cb60-6"><a href="pw-6.html#cb60-6" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(pcairis)</span>
-<span id="cb60-7"><a href="pw-6.html#cb60-7" aria-hidden="true" tabindex="-1"></a><span class="co">#ans&gt; List of 7</span></span>
-<span id="cb60-8"><a href="pw-6.html#cb60-8" aria-hidden="true" tabindex="-1"></a><span class="co">#ans&gt;  $ sdev    : Named num [1:4] 1.706 0.96 0.384 0.144</span></span>
-<span id="cb60-9"><a href="pw-6.html#cb60-9" aria-hidden="true" tabindex="-1"></a><span class="co">#ans&gt;   ..- attr(*, &quot;names&quot;)= chr [1:4] &quot;Comp.1&quot; &quot;Comp.2&quot; &quot;Comp.3&quot; &quot;Comp.4&quot;</span></span>
-<span id="cb60-10"><a href="pw-6.html#cb60-10" aria-hidden="true" tabindex="-1"></a><span class="co">#ans&gt;  $ loadings: &#39;loadings&#39; num [1:4, 1:4] 0.522 -0.263 0.581 0.566 0.372 ...</span></span>
-<span id="cb60-11"><a href="pw-6.html#cb60-11" aria-hidden="true" tabindex="-1"></a><span class="co">#ans&gt;   ..- attr(*, &quot;dimnames&quot;)=List of 2</span></span>
-<span id="cb60-12"><a href="pw-6.html#cb60-12" aria-hidden="true" tabindex="-1"></a><span class="co">#ans&gt;   .. ..$ : chr [1:4] &quot;sepal_length&quot; &quot;sepal_width&quot; &quot;petal_length&quot; &quot;petal_width&quot;</span></span>
-<span id="cb60-13"><a href="pw-6.html#cb60-13" aria-hidden="true" tabindex="-1"></a><span class="co">#ans&gt;   .. ..$ : chr [1:4] &quot;Comp.1&quot; &quot;Comp.2&quot; &quot;Comp.3&quot; &quot;Comp.4&quot;</span></span>
-<span id="cb60-14"><a href="pw-6.html#cb60-14" aria-hidden="true" tabindex="-1"></a><span class="co">#ans&gt;  $ center  : Named num [1:4] 5.84 3.05 3.76 1.2</span></span>
-<span id="cb60-15"><a href="pw-6.html#cb60-15" aria-hidden="true" tabindex="-1"></a><span class="co">#ans&gt;   ..- attr(*, &quot;names&quot;)= chr [1:4] &quot;sepal_length&quot; &quot;sepal_width&quot; &quot;petal_length&quot; &quot;petal_width&quot;</span></span>
-<span id="cb60-16"><a href="pw-6.html#cb60-16" aria-hidden="true" tabindex="-1"></a><span class="co">#ans&gt;  $ scale   : Named num [1:4] 0.825 0.432 1.759 0.761</span></span>
-<span id="cb60-17"><a href="pw-6.html#cb60-17" aria-hidden="true" tabindex="-1"></a><span class="co">#ans&gt;   ..- attr(*, &quot;names&quot;)= chr [1:4] &quot;sepal_length&quot; &quot;sepal_width&quot; &quot;petal_length&quot; &quot;petal_width&quot;</span></span>
-<span id="cb60-18"><a href="pw-6.html#cb60-18" aria-hidden="true" tabindex="-1"></a><span class="co">#ans&gt;  $ n.obs   : int 150</span></span>
-<span id="cb60-19"><a href="pw-6.html#cb60-19" aria-hidden="true" tabindex="-1"></a><span class="co">#ans&gt;  $ scores  : num [1:150, 1:4] -2.26 -2.09 -2.37 -2.3 -2.39 ...</span></span>
-<span id="cb60-20"><a href="pw-6.html#cb60-20" aria-hidden="true" tabindex="-1"></a><span class="co">#ans&gt;   ..- attr(*, &quot;dimnames&quot;)=List of 2</span></span>
-<span id="cb60-21"><a href="pw-6.html#cb60-21" aria-hidden="true" tabindex="-1"></a><span class="co">#ans&gt;   .. ..$ : NULL</span></span>
-<span id="cb60-22"><a href="pw-6.html#cb60-22" aria-hidden="true" tabindex="-1"></a><span class="co">#ans&gt;   .. ..$ : chr [1:4] &quot;Comp.1&quot; &quot;Comp.2&quot; &quot;Comp.3&quot; &quot;Comp.4&quot;</span></span>
-<span id="cb60-23"><a href="pw-6.html#cb60-23" aria-hidden="true" tabindex="-1"></a><span class="co">#ans&gt;  $ call    : language princomp(x = iris[, -5], cor = T)</span></span>
-<span id="cb60-24"><a href="pw-6.html#cb60-24" aria-hidden="true" tabindex="-1"></a><span class="co">#ans&gt;  - attr(*, &quot;class&quot;)= chr &quot;princomp&quot;</span></span>
-<span id="cb60-25"><a href="pw-6.html#cb60-25" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb60-26"><a href="pw-6.html#cb60-26" aria-hidden="true" tabindex="-1"></a><span class="co"># To see the variance explained by the the pcs</span></span>
-<span id="cb60-27"><a href="pw-6.html#cb60-27" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(pcairis) </span>
-<span id="cb60-28"><a href="pw-6.html#cb60-28" aria-hidden="true" tabindex="-1"></a><span class="co">#ans&gt; Importance of components:</span></span>
-<span id="cb60-29"><a href="pw-6.html#cb60-29" aria-hidden="true" tabindex="-1"></a><span class="co">#ans&gt;                        Comp.1 Comp.2 Comp.3  Comp.4</span></span>
-<span id="cb60-30"><a href="pw-6.html#cb60-30" aria-hidden="true" tabindex="-1"></a><span class="co">#ans&gt; Standard deviation      1.706  0.960 0.3839 0.14355</span></span>
-<span id="cb60-31"><a href="pw-6.html#cb60-31" aria-hidden="true" tabindex="-1"></a><span class="co">#ans&gt; Proportion of Variance  0.728  0.230 0.0368 0.00515</span></span>
-<span id="cb60-32"><a href="pw-6.html#cb60-32" aria-hidden="true" tabindex="-1"></a><span class="co">#ans&gt; Cumulative Proportion   0.728  0.958 0.9948 1.00000</span></span>
-<span id="cb60-33"><a href="pw-6.html#cb60-33" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb60-34"><a href="pw-6.html#cb60-34" aria-hidden="true" tabindex="-1"></a><span class="co"># To plot the variance explained by each pc</span></span>
-<span id="cb60-35"><a href="pw-6.html#cb60-35" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(pcairis) </span></code></pre></div>
-<p><img src="Machine-Learning_files/figure-html/unnamed-chunk-181-1.png" width="70%" style="display: block; margin: auto;" /></p>
-<div class="sourceCode" id="cb61"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb61-1"><a href="pw-6.html#cb61-1" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb61-2"><a href="pw-6.html#cb61-2" aria-hidden="true" tabindex="-1"></a><span class="co"># To plot together the scores for PC1 and PC2 and the </span></span>
-<span id="cb61-3"><a href="pw-6.html#cb61-3" aria-hidden="true" tabindex="-1"></a><span class="co"># variables expressed in terms of PC1 and PC2.</span></span>
-<span id="cb61-4"><a href="pw-6.html#cb61-4" aria-hidden="true" tabindex="-1"></a><span class="fu">biplot</span>(pcairis) </span></code></pre></div>
-<p><img src="Machine-Learning_files/figure-html/unnamed-chunk-181-2.png" width="70%" style="display: block; margin: auto;" /></p>
-</div>
-<div id="deeper-pca-using-factoextra-package" class="section level3 unnumbered hasAnchor">
-<h3>Deeper PCA using <code>factoextra</code> package<a href="pw-6.html#deeper-pca-using-factoextra-package" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<div class="rmdinsight">
-<p>To help in the interpretation and in the visualization of PCA we are going to use the package named <code>factoextra</code>.</p>
-<p>No matter which function or package you decide to use for computing principal component methods, the <code>factoextra</code> <svg aria-hidden="true" role="img" viewBox="0 0 581 512" style="height:1em;width:1.13em;vertical-align:-0.125em;margin-left:auto;margin-right:auto;font-size:inherit;fill:steelblue;overflow:visible;position:relative;"><path d="M581 226.6C581 119.1 450.9 32 290.5 32S0 119.1 0 226.6C0 322.4 103.3 402 239.4 418.1V480h99.1v-61.5c24.3-2.7 47.6-7.4 69.4-13.9L448 480h112l-67.4-113.7c54.5-35.4 88.4-84.9 88.4-139.7zm-466.8 14.5c0-73.5 98.9-133 220.8-133s211.9 40.7 211.9 133c0 50.1-26.5 85-70.3 106.4-2.4-1.6-4.7-2.9-6.4-3.7-10.2-5.2-27.8-10.5-27.8-10.5s86.6-6.4 86.6-92.7-90.6-87.9-90.6-87.9h-199V361c-74.1-21.5-125.2-67.1-125.2-119.9zm225.1 38.3v-55.6c57.8 0 87.8-6.8 87.8 27.3 0 36.5-38.2 28.3-87.8 28.3zm-.9 72.5H365c10.8 0 18.9 11.7 24 19.2-16.1 1.9-33 2.8-50.6 2.9v-22.1z"/></svg> package can help to extract easily, in a human readable data format, the analysis results from the different functions mentioned above. <code>factoextra</code> provides also convenient solutions to create <code>ggplot2</code> based beautiful graphs.</p>
-<p>You can take a look at this <a href="http://www.sthda.com/french/articles/38-methodes-des-composantes-principales-dans-r-guide-pratique/73-acp-analyse-en-composantes-principales-avec-r-l-essentiel/" target="_blank">link <svg aria-hidden="true" role="img" viewBox="0 0 512 512" style="height:1em;width:1em;vertical-align:-0.125em;margin-left:auto;margin-right:auto;font-size:inherit;fill:currentColor;overflow:visible;position:relative;"><path d="M432,320H400a16,16,0,0,0-16,16V448H64V128H208a16,16,0,0,0,16-16V80a16,16,0,0,0-16-16H48A48,48,0,0,0,0,112V464a48,48,0,0,0,48,48H400a48,48,0,0,0,48-48V336A16,16,0,0,0,432,320ZM488,0h-128c-21.37,0-32.05,25.91-17,41l35.73,35.73L135,320.37a24,24,0,0,0,0,34L157.67,377a24,24,0,0,0,34,0L435.28,133.32,471,169c15,15,41,4.5,41-17V24A24,24,0,0,0,488,0Z"/></svg></a> for a detailed example.</p>
-</div>
-<p><strong>5.</strong> Using <code>factoextra</code> package plot the following:</p>
+<div id="discriminant-analysis" class="section level1 hasAnchor" number="4">
+<h1><span class="header-section-number">4</span> Discriminant Analysis<a href="4-discriminant-analysis.html#discriminant-analysis" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<p>Discriminant analysis is a popular method for multiple-class classiﬁcation. We will start first by the <em>Linear Discriminant Analysis (LDA)</em>.</p>
+<center>
+<iframe width="560" height="349" src="https://www.youtube.com/embed/P9O3FdfeqM0" frameborder="0" allowfullscreen>
+</iframe>
+</center>
+<div id="introduction-2" class="section level2 hasAnchor" number="4.1">
+<h2><span class="header-section-number">4.1</span> Introduction<a href="4-discriminant-analysis.html#introduction-2" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>As we saw in the previous chapter, Logistic regression involves directly modeling <span class="math inline">\(\mathbb{P} (Y = k|X = x)\)</span> using the <em>logistic function</em>, for the case of two response classes. In logistic regression, we model the conditional distribution of the response <span class="math inline">\(Y\)</span>, given the predictor(s) <span class="math inline">\(X\)</span>. We now consider an alternative and less direct approach to estimating these probabilities. In this alternative approach, <strong><em>we model the distribution</em></strong> of the predictors <span class="math inline">\(X\)</span> <strong><em>separately</em></strong> in each of the response classes (i.e. given <span class="math inline">\(Y\)</span>), and then use <strong>Bayes’ theorem</strong> to flip these around into estimates for <span class="math inline">\(\mathbb{P} (Y = k|X = x)\)</span>. When these distributions are assumed to be <em>Normal</em>, it turns out that the model is very similar in form to logistic regression.</p>
+<p><strong>Why not logistic regression?</strong>
+Why do we need another method, when we have logistic regression? There are several reasons:</p>
 <ul>
-<li>The scree plot.</li>
-<li>The graph of individuals.</li>
-<li>The graph of variables.</li>
-<li>The biplot graph.</li>
-<li>The contributions of the variables to the first 2 principal components.</li>
+<li>When the classes are well-separated, the parameter estimates for the logistic regression model are surprisingly unstable. Linear discriminant analysis does not suﬀer from this problem.</li>
+<li>If <span class="math inline">\(n\)</span> is small and the distribution of the predictors <span class="math inline">\(X\)</span> is approximately normal in each of the classes, the linear discriminant model is again more stable than the logistic regression model.</li>
+<li>Linear discriminant analysis is popular when we have <em>more than two response classes</em>.</li>
 </ul>
 </div>
-<div id="step-by-step-pca" class="section level3 unnumbered hasAnchor">
-<h3>Step-by-step PCA<a href="pw-6.html#step-by-step-pca" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<p>In order to understand how PCA works, let’s implement it step-by-step.</p>
-<div class="rmdtip">
-<p>
-<strong>Summary of the PCA Approach</strong>:
-</p>
+<div id="bayes-theorem" class="section level2 hasAnchor" number="4.2">
+<h2><span class="header-section-number">4.2</span> Bayes’ Theorem<a href="4-discriminant-analysis.html#bayes-theorem" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<center>
+<iframe width="560" height="349" src="https://www.youtube.com/embed/oD4vJioxZHk" frameborder="0" allowfullscreen>
+</iframe>
+</center>
+<p>Bayes’ theorem is stated mathematically as the following equation:</p>
+<p><span class="math display">\[ P(A | B) = \frac{P(A \cap B)}{P(B)} =  \frac{P(B|A) P(A)}{P(B)}\]</span></p>
+<p>where <span class="math inline">\(A\)</span> and <span class="math inline">\(B\)</span> are events and <span class="math inline">\(P(B) \neq 0\)</span>.</p>
 <ul>
-<li>
-Standardize the data.
-</li>
-<li>
-Obtain the Eigenvectors and Eigenvalues from the covariance matrix
-or correlation matrix.
-</li>
-<li>
-Sort eigenvalues in descending order and choose the <span class="math inline"><span class="math inline">\(k\)</span></span> eigenvectors that correspond to the
-<span class="math inline"><span class="math inline">\(k\)</span></span> largest eigenvalues, where <span class="math inline"><span class="math inline">\(k\)</span></span> is the number of dimensions of the new
-feature subspace (<span class="math inline"><span class="math inline">\(k \le p\)</span></span>).
-</li>
-<li>
-Construct the projection matrix <span class="math inline"><span class="math inline">\(\mathbf{A}\)</span></span> from the selected <span class="math inline"><span class="math inline">\(k\)</span></span> eigenvectors.
-</li>
-<li>
-Transform the original dataset <span class="math inline"><span class="math inline">\(X\)</span></span> via <span class="math inline"><span class="math inline">\(\mathbf{A}\)</span></span> to obtain a <span class="math inline"><span class="math inline">\(k\)</span></span>-dimensional feature subspace <span class="math inline"><span class="math inline">\(\mathbf{Y}\)</span></span>.
-</li>
+<li><span class="math inline">\(P(A | B)\)</span>, a conditional probability, is the probability of observing event <span class="math inline">\(A\)</span> given that <span class="math inline">\(B\)</span> is true. It is called the <strong><em>posterior</em></strong> probability.</li>
+<li><span class="math inline">\(P(A)\)</span>, is called the <strong><em>prior</em></strong>, is the initial degree of belief in A.</li>
+<li><span class="math inline">\(P(B)\)</span> is the <strong><em>likelihood</em></strong>.</li>
 </ul>
-</div>
-<p><strong>6.</strong> First step, split the iris dataset into data <span class="math inline">\(X\)</span> and class labels <span class="math inline">\(y\)</span>.</p>
-<div class="sourceCode" id="cb62"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb62-1"><a href="pw-6.html#cb62-1" aria-hidden="true" tabindex="-1"></a>X <span class="ot">&lt;-</span> iris[,<span class="sc">-</span><span class="dv">5</span>]</span>
-<span id="cb62-2"><a href="pw-6.html#cb62-2" aria-hidden="true" tabindex="-1"></a>y <span class="ot">&lt;-</span> iris[,<span class="dv">5</span>]</span></code></pre></div>
 <div class="rmdinsight">
-<p>
-The iris dataset is now stored in form of a <span class="math inline"><span class="math inline">\(150 \times 4\)</span></span> matrix where the columns are
-the different features, and every row represents a separate flower
-sample. Each sample row <span class="math inline"><span class="math inline">\(X^i\)</span></span> can be
-pictured as a 4-dimensional vector
-</p>
-<p>
-<span class="math display"><span class="math display">\[ (X^i)^T = \begin{pmatrix} X_1^i \\
-X_2^i \\ X_3^i \\ X_4^i \end{pmatrix}
-= \begin{pmatrix} \text{sepal length} \\ \text{sepal width}
-\\\text{petal length} \\ \text{petal width} \end{pmatrix}\]</span></span>
-</p>
+<p>The posterior probability can be written in the memorable form as :</p>
+<p>Posterior probability <span class="math inline">\(\propto\)</span> Likelihood <span class="math inline">\(\times\)</span> Prior probability.</p>
 </div>
+<p><strong>Extended form</strong>:</p>
+<p>Suppose we have a partition <span class="math inline">\(\{A_i\}\)</span> of the sample space, the even space is given or conceptualized in terms of <span class="math inline">\(P(A_j)\)</span> and <span class="math inline">\(P(B | A_j)\)</span>. It is then useful to compute <span class="math inline">\(P(B)\)</span> using the law of total probability:</p>
+<p><span class="math display">\[ P(B) = \sum_j P(B|A_j) P(A_j) \]</span></p>
+<p><span class="math display">\[ \Rightarrow P(A_i|B) = \frac{P(B|A_i) P(A_i)}{\sum_j P(B|A_j) P(A_j)} \]</span></p>
+<p><strong>Bayes’ Theorem for Classification</strong>:</p>
+<p>Suppose that we wish to classify an observation into one of <span class="math inline">\(K\)</span> classes, where <span class="math inline">\(K \geq 2\)</span>. In other words, the qualitative response variable <span class="math inline">\(Y\)</span> can take on <span class="math inline">\(K\)</span> possible distinct and unordered values.</p>
+<p>Let <span class="math inline">\(\pi_k\)</span> represent the overall or <em>prior</em> probability that a randomly chosen observation comes from the <span class="math inline">\(k\)</span>-th class; this is the probability that a given observation is associated with the <span class="math inline">\(k\)</span>-th category of the response variable <span class="math inline">\(Y\)</span>.</p>
+<p>Let <span class="math inline">\(f_k(X) \equiv P(X = x|Y = k)\)</span> denote the <em>density function</em> of <span class="math inline">\(X\)</span> for an observation that comes from the <span class="math inline">\(k\)</span>-th class. In other words, <span class="math inline">\(f_k(x)\)</span> is relatively large if there is a high probability that an observation in the <span class="math inline">\(k\)</span>-th class has <span class="math inline">\(X \approx x\)</span>, and <span class="math inline">\(f_k(x)\)</span> is small if it is very unlikely that an observation in the <span class="math inline">\(k\)</span>-th class has <span class="math inline">\(X \approx x\)</span>. Then <em>Bayes’ theorem</em> states that</p>
+<p><span class="math display" id="eq:bayes">\[\begin{equation}
+P(Y=k|X=x) = \frac{ \pi_k f_k(x)}{\sum_{c=1}^K \pi_c f_c(x)}
+\tag{4.1}
+\end{equation}\]</span></p>
+<p>As we did in the last chapter, we will use the abbreviation <span class="math inline">\(p_k(X) =P(Y = k|X)\)</span>.</p>
+<p>The equation above stated by <em>Bayes’ theorem</em> suggests that instead of directly computing <span class="math inline">\(p_k(X)\)</span> as we did in the logistic regression, we can simply plug in estimates of <span class="math inline">\(\pi_k\)</span> and <span class="math inline">\(f_k(X)\)</span> into the equation. In general, estimating <span class="math inline">\(\pi_k\)</span> is easy (the fraction of the training observations that belong to the <span class="math inline">\(k\)</span>-th class). But estimating <span class="math inline">\(f_k(X)\)</span> tends to be more challenging.</p>
+<blockquote>
+<p>Recall that <span class="math inline">\(p_k(x)\)</span> is the <em>posterior</em> probability that an observation <span class="math inline">\(X=x\)</span> belongs to <span class="math inline">\(k\)</span>-th class.</p>
+</blockquote>
+<blockquote>
+<p>If we can find a way to estimate <span class="math inline">\(f_k(X)\)</span>, we can develop a classifier with the lowest possibe error rate out of all classifiers.</p>
+</blockquote>
+</div>
+<div id="lda-for-p1" class="section level2 hasAnchor" number="4.3">
+<h2><span class="header-section-number">4.3</span> LDA for <span class="math inline">\(p=1\)</span><a href="4-discriminant-analysis.html#lda-for-p1" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<center>
+<iframe width="560" height="349" src="https://www.youtube.com/embed/pZgN043seQQ" frameborder="0" allowfullscreen>
+</iframe>
+</center>
+<p>Assume that <span class="math inline">\(p=1\)</span>, which mean we have only one predictor. We would like to obtain an estimate for <span class="math inline">\(f_k(x)\)</span> that we can plug into the Equation <a href="4-discriminant-analysis.html#eq:bayes">(4.1)</a> in order to estimate <span class="math inline">\(p_k(x)\)</span>. <strong>We will then classify an observation to the class for which <span class="math inline">\(p_k(x)\)</span> is greatest</strong>.</p>
+<p>In order to estimate <span class="math inline">\(f_k(x)\)</span>, we will first make some assumptions about its form.</p>
+<p>Suppose we assume that <span class="math inline">\(f_k(x)\)</span> is <em>normal</em> (<em>Gaussian</em>). In the one-dimensional setting, the normal density take the form</p>
+<p><span class="math display" id="eq:normal01">\[\begin{equation}
+f_k(x)= \frac{1}{\sigma_k\sqrt{2\pi}} \exp \big( - \frac{1}{2\sigma_k^2 } (x-\mu_k)^2\big)
+\tag{4.2}
+\end{equation}\]</span></p>
+<p>where <span class="math inline">\(\mu_k\)</span> and <span class="math inline">\(\sigma_k^2\)</span> are the mean and variance parameters for <span class="math inline">\(k\)</span>-th class. Let us assume that <span class="math inline">\(\sigma_1^2 = \ldots = \sigma_K^2 = \sigma^2\)</span> (which means there is a shared variance term across all <span class="math inline">\(K\)</span> classes). Plugging Eq. <a href="4-discriminant-analysis.html#eq:normal01">(4.2)</a> into the Bayes formula in Eq. <a href="4-discriminant-analysis.html#eq:bayes">(4.1)</a> we get,</p>
+<p><span class="math display" id="eq:pkx">\[\begin{equation}
+p_k(x) = \frac{  \pi_k \frac{1}{\sigma \sqrt{2\pi}} e^{-\frac{1}{2} \big(\frac{x-\mu_k}{\sigma}\big)^2 } }{  \sum_{c=1}^K  \pi_c \frac{1}{\sigma \sqrt{2\pi}} e^{-\frac{1}{2} \big(\frac{x-\mu_c}{\sigma}\big)^2 } }
+\tag{4.3}
+\end{equation}\]</span></p>
+<div class="rmdcaution">
+<p>Note that <span class="math inline">\(\pi_k\)</span> and <span class="math inline">\(\pi_c\)</span> denote the prior probabilities. And <span class="math inline">\(\pi\)</span> is the mathematical constant <span class="math inline">\(\pi \approx 3.14159\)</span>.</p>
+</div>
+<p>To classify at the value <span class="math inline">\(X = x\)</span>, we need to see which of the <span class="math inline">\(p_k(x)\)</span> is largest. Taking logs, and discarding terms that do not depend on <span class="math inline">\(k\)</span>, we see that this is equivalent to assigning <span class="math inline">\(x\)</span> to the class with the largest <strong><em>discriminant score</em></strong>:</p>
+<p><span class="math display" id="eq:discscore">\[\begin{equation}
+\delta_k(x) = x.\frac{\mu_k}{\sigma^2} - \frac{\mu_k^2}{2\sigma^2} + \log (\pi_k)
+\tag{4.4}
+\end{equation}\]</span></p>
+<p>Note that <span class="math inline">\(\delta_k(x)\)</span> is a <em>linear</em> function of <span class="math inline">\(x\)</span>.</p>
 <div class="rmdinsight">
-<p>
-<strong>Eigendecomposition - Computing Eigenvectors and
-Eigenvalues</strong>
-</p>
-<p>
-The eigenvectors and eigenvalues of a covariance (or correlation)
-matrix represent the “core” of a PCA: The eigenvectors (principal
-components) determine the directions of the new feature space, and the
-eigenvalues determine their magnitude. In other words, the eigenvalues
-explain the variance of the data along the new feature axes.
-</p>
-</div>
-<p><strong>Standardizing</strong></p>
-<p><strong>7.</strong> Scale the 4 features. Store the scaled matrix into a new one (for example, name it <code>X_scaled</code>).</p>
-<p><strong>Covariance Matrix</strong></p>
-<p><strong>8.</strong> The classic approach to PCA is to perform the eigendecomposition on the covariance matrix <span class="math inline">\(\Sigma\)</span>, which is a <span class="math inline">\(p\times p\)</span> matrix where each element represents the covariance between two features. Compute the Covariance Matrix of the scaled features (Print the results).</p>
-<div class="rmdtip">
-<p>
-We can summarize the calculation of the covariance matrix via the
-following matrix equation: <span class="math display"><span class="math display">\[ \Sigma =
-\frac{1}{n-1} \left( (\mathbf{X} - \mathbf{\bar{X}})^T\;(\mathbf{X} -
-\mathbf{\bar{X}}) \right) \]</span></span> where <span class="math inline"><span class="math inline">\(\mathbf{\bar{X}}\)</span></span> is the mean vector <span class="math inline"><span class="math inline">\(\mathbf{\bar{X}} = \frac{1}{n} \sum\limits_{k=1}^n x_{k}\)</span></span>.
-</p>
-<p>
-The mean vector is a <span class="math inline"><span class="math inline">\(p\)</span></span>-dimensional vector where each value in
-this vector represents the sample mean of a feature column in the
-dataset.
-</p>
-</div>
-<p><strong>9.</strong> Perform an eigendecomposition on the covariance matrix. Compute the Eigenvectors and the Eigenvalues (you can use the <code>eigen()</code> function). What do you obtain?</p>
-<p><strong>Correlation Matrix</strong></p>
-<div class="rmdinsight">
-<p>
-Especially, in the field of “Finance”, the correlation matrix
-typically used instead of the covariance matrix. However, the
-eigendecomposition of the covariance matrix (if the input data was
-standardized) yields the same results as a eigendecomposition on the
-correlation matrix, since the correlation matrix can be understood as
-the normalized covariance matrix.
-</p>
-</div>
-<p><strong>10.</strong> Perform an eigendecomposition of the standardized data based on the correlation matrix.</p>
-<p><strong>11.</strong> Perform an eigendecomposition of the raw data based on the correlation matrix. Compare the obtained results with the previous question.</p>
-<div class="rmdinsight">
-<p>
-We should see that all three approaches yield the same eigenvectors
-and eigenvalue pairs:
-</p>
 <ul>
-<li>
-Eigendecomposition of the covariance matrix after standardizing the
-data.
-</li>
-<li>
-Eigendecomposition of the correlation matrix.
-</li>
-<li>
-Eigendecomposition of the correlation matrix after standardizing the
-data.
-</li>
+<li>The decision surfaces (e.g. decision boundaries) for a linear discriminant classifiers are defined by the linear equations <span class="math inline">\(\delta_k(x) = \delta_c(x)\)</span>, for all classes <span class="math inline">\(k\neq c\)</span>. It represents the set of values <span class="math inline">\(x\)</span> for which the probability of belonging to classes <span class="math inline">\(k\)</span> and <span class="math inline">\(c\)</span> is the same, <span class="math inline">\(0.5\)</span>.</li>
+<li>Example: If <span class="math inline">\(K=2\)</span> and <span class="math inline">\(\pi_1=\pi_2\)</span>, then the <strong>desicion boundary</strong> is at <span class="math inline">\(x=\frac{\mu_1+\mu2}{2}\)</span> (<strong>Prove it!</strong>).</li>
+<li>An example where <span class="math inline">\(\mu_1=-1.5\)</span>, <span class="math inline">\(\mu_2=1.5\)</span>, <span class="math inline">\(\pi_1=\pi_2=0.5\)</span> and <span class="math inline">\(\sigma^2=1\)</span> is shown in this following figure</li>
 </ul>
+<center>
+<img src="img/decbound.png" />
+</center>
+<ul>
+<li><p>See this <a target="_blank" href="https://www.coursera.org/learn/machine-learning/lecture/WuL1H/decision-boundary"> video <i class="fa fa-video-camera" aria-hidden="true"></i></a> to understand more about <em>decision boundary</em> (Applied on logistic regression).</p></li>
+<li><p>As we classify a new point according to which density is highest, when the priors are diﬀerent we take them into account as well, and compare <span class="math inline">\(\pi_k f_k(x)\)</span>. On the right of the following figure, we favor the pink class (remark that the decision boundary has shifted to the left).</p></li>
+</ul>
+<center>
+<img src="img/decbound2.png" />
+</center>
 </div>
-<p><strong>Selecting Principal Components</strong></p>
+</div>
+<div id="estimating-the-parameters" class="section level2 hasAnchor" number="4.4">
+<h2><span class="header-section-number">4.4</span> Estimating the parameters<a href="4-discriminant-analysis.html#estimating-the-parameters" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Typically we don’t know these parameters; we just have the training data. In that case we simply estimate the parameters and plug them into the rule.</p>
+<p>Let <span class="math inline">\(n\)</span> the total number of training observations, and <span class="math inline">\(n_k\)</span> the number of training observations in the <span class="math inline">\(k\)</span>-th class. The following estimates are used:</p>
+<p><span class="math display">\[\begin{align*}
+\hat{\pi}_k &amp;= \frac{n_k}{n} \\
+\hat{\mu}_k &amp;= \frac{1}{n_k} \sum_{i: y_i=k} x_i \\
+\hat{\sigma}^2 &amp;= \frac{1}{n - K} \sum_{k=1}^K \sum_{i: y_i=k} (x_i-\hat{\mu}_k)^2 \\
+&amp;= \sum_{k=1}^K \frac{n_k-1}{n - K} . \hat{\sigma}_k^2
+\end{align*}\]</span></p>
+<p>where <span class="math inline">\(\hat{\sigma}_k^2 = \frac{1}{n_k-1}\sum_{i: y_i=k}(x_i-\hat{\mu}_k)^2\)</span> is the usual formula for the estimated variance in the -<span class="math inline">\(k\)</span>-th class.</p>
+<p>The linear discriminant analysis (LDA) classifier plugs these estimates in Eq. <a href="4-discriminant-analysis.html#eq:discscore">(4.4)</a> and assigns an observation <span class="math inline">\(X=x\)</span> to the class for which</p>
+<p><span class="math display" id="eq:discscoreest">\[\begin{equation}
+\hat{\delta}_k(x) = x.\frac{\hat{\mu}_k}{\hat{\sigma}^2} - \frac{\hat{\mu}_k^2}{2\hat{\sigma}^2} + \log (\hat{\pi}_k)
+\tag{4.5}
+\end{equation}\]</span></p>
+<p>is largest.</p>
+<p>The <em>discriminant functions</em> in Eq. <a href="4-discriminant-analysis.html#eq:discscoreest">(4.5)</a> are linear functions of <span class="math inline">\(x\)</span>.</p>
+<blockquote>
+<p>Recall that we assumed that the observations come from a normal distribution with a common variance <span class="math inline">\(\sigma^2\)</span>.</p>
+</blockquote>
+</div>
+<div id="lda-for-p-1" class="section level2 hasAnchor" number="4.5">
+<h2><span class="header-section-number">4.5</span> LDA for <span class="math inline">\(p &gt; 1\)</span><a href="4-discriminant-analysis.html#lda-for-p-1" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<center>
+<iframe width="560" height="349" src="https://www.youtube.com/embed/qcxdQgPuQ_Q" frameborder="0" allowfullscreen>
+</iframe>
+</center>
+<p>Let us now suppose that we have multiple predictors. We assume that <span class="math inline">\(X=(X_1,X_2,\ldots,X_p)\)</span> is drawn from <em>multivariate Gaussian</em> distribution (assuming they have a common covariance matrix, e.g. same variances as in the case of <span class="math inline">\(p=1\)</span>). The multivariate Gaussian distribution assumes that each individual predictor follows a one-dimensional normal distribution as in Eq. <a href="4-discriminant-analysis.html#eq:normal01">(4.2)</a>, with some correlation between each pair of predictors.</p>
+<p>To indicate that a <span class="math inline">\(p\)</span>-dimensional random variable <span class="math inline">\(X\)</span> has a multivariate Gaussian distribution, we write <span class="math inline">\(X \sim \mathcal{N}(\mu,\Sigma)\)</span>. Where</p>
+<p><span class="math display">\[ \mu = E(X) = \begin{pmatrix}
+    \mu_1 \\
+    \mu_2 \\
+    \vdots \\
+    \mu_p
+\end{pmatrix} \]</span></p>
+<p>and,
+<span class="math display">\[ \Sigma = Cov(X) = \begin{pmatrix}
+    \sigma_1^2 &amp; Cov[X_1, X_2]  &amp; \dots  &amp; Cov[X_1, X_p] \\
+    Cov[X_2, X_1] &amp; \sigma_2^2  &amp; \dots  &amp; Cov[X_2, X_p] \\
+    \vdots &amp; \vdots &amp;  \ddots &amp; \vdots \\
+    Cov[X_p, X_1] &amp; Cov[X_p, X_2]  &amp; \dots  &amp; \sigma_p^2
+\end{pmatrix}  \]</span></p>
+<blockquote>
+<p><span class="math inline">\(\Sigma\)</span> is the <span class="math inline">\(p\times p\)</span> covariance matrix of <span class="math inline">\(X\)</span>.</p>
+</blockquote>
+<p>Formally, the multivariate Gaussian density is deﬁned as</p>
+<p><span class="math display">\[f(x) = \frac{1}{(2\pi)^{p/2} |\Sigma|^{1/2}} \exp \bigg( - \frac{1}{2} (x-\mu)^T \Sigma^{-1} (x-\mu) \bigg)
+\]</span></p>
+<p>Plugging the density function for the <span class="math inline">\(k\)</span>-th class, <span class="math inline">\(f_k(X=x)\)</span>, into Eq. <a href="4-discriminant-analysis.html#eq:bayes">(4.1)</a> reveals that the Bayes classifier assigns an observation <span class="math inline">\(X=x\)</span> to the class for which</p>
+<p><span class="math display" id="eq:discscorematrix">\[\begin{equation}
+\delta_k(x) = x^T \Sigma^{-1} \mu_k - \frac{1}{2} \mu_k^T \Sigma^{-1}  \mu_k + \log \pi_k
+\tag{4.6}
+\end{equation}\]</span></p>
+<p>is largest. This is the vector/matrix version of <a href="4-discriminant-analysis.html#eq:discscore">(4.4)</a>.</p>
+<p>An example is shown in the following figure. Three equally-sized Gaussian classes are shown with class-specific mean vectors and a common covariance matrix (<span class="math inline">\(\pi_1=\pi_2=\pi_3=1/3\)</span>). The three ellipses represent regions that contain <span class="math inline">\(95\%\)</span> of the probability for each of the three classes. The dashed lines are the Bayes decision boundaries.</p>
+<center>
+<img src="img/lda2.png" />
+</center>
+<p>Recall that the decision boundaries represent the set of values <span class="math inline">\(x\)</span> for which <span class="math inline">\(\delta_k(x)=\delta_c(x)\)</span>; i.e. for <span class="math inline">\(k\neq c\)</span>.</p>
+<p><span class="math display">\[ x^T \Sigma^{-1} \mu_k - \frac{1}{2} \mu_k^T \Sigma^{-1}  \mu_k = x^T \Sigma^{-1} \mu_c - \frac{1}{2} \mu_c^T \Sigma^{-1}  \mu_c  \]</span></p>
+<p>Note that there are three lines representing the Bayes decision boundaries because there are three pairs of classes among the three classes. That is, one Bayes decision boundary separates class 1 from class 2, one separates class 1 from class 3, and one separates class 2 from class 3. These three Bayes decision boundaries divide the predictor space into three regions. The Bayes classiﬁer will classify an observation according to the region in which it is located.</p>
+<p>Once again, we need to estimate the unknown parameters <span class="math inline">\(\mu_1,\ldots,\mu_k,\)</span> and <span class="math inline">\(\pi_1,\ldots,\pi_k,\)</span> and <span class="math inline">\(\Sigma\)</span>; the formulas are similar to those used in the one-dimensional case. To assign a new observation <span class="math inline">\(X = x\)</span>, LDA plugs these estimates into Eq. <a href="4-discriminant-analysis.html#eq:discscorematrix">(4.6)</a> and classiﬁes to the class for which <span class="math inline">\(\delta_k(x)\)</span> is largest.</p>
+<p>Note that in Eq. <a href="4-discriminant-analysis.html#eq:discscorematrix">(4.6)</a> <span class="math inline">\(\delta_k(x)\)</span> is a <em>linear</em> function of <span class="math inline">\(x\)</span>; that is, the LDA decision rule depends on <span class="math inline">\(x\)</span> only through a linear combination of its elements (e.g. the decision boundaries are linear). This is the reason for the word linear in LDA.</p>
+</div>
+<div id="making-predictions" class="section level2 hasAnchor" number="4.6">
+<h2><span class="header-section-number">4.6</span> Making predictions<a href="4-discriminant-analysis.html#making-predictions" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Once we have estimates <span class="math inline">\(\hat{\delta}_k(x)\)</span>, we can turn these into estimates for class probabilities:</p>
+<p><span class="math display">\[ \hat{P}(Y=k|X=x)= \frac{e^{\hat{\delta}_k(x)}}{\sum_{c=1}^K e^{\hat{\delta}_c(x)}} \]</span></p>
+<p>So classifying to the largest <span class="math inline">\(\hat{\delta}_k(x)\)</span> amounts to classifying to the class for which <span class="math inline">\(\hat{P}(Y=k|X=x)\)</span> is largest.</p>
+<p>When <span class="math inline">\(K=2\)</span>, we classify to class 2 if <span class="math inline">\(\hat{P}(Y=2|X=x) \geq 0.5\)</span>, else to class <span class="math inline">\(1\)</span>.</p>
+</div>
+<div id="other-forms-of-discriminant-analysis" class="section level2 hasAnchor" number="4.7">
+<h2><span class="header-section-number">4.7</span> Other forms of Discriminant Analysis<a href="4-discriminant-analysis.html#other-forms-of-discriminant-analysis" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p><span class="math display">\[P(Y=k|X=x) = \frac{ \pi_k f_k(x)}{\sum_{c=1}^K \pi_c f_c(x)}\]</span></p>
+<p>We saw before that when <span class="math inline">\(f_k(x)\)</span> are Gaussian densities, whith the same covariance matrix <span class="math inline">\(\Sigma\)</span> in each class, this leads to Linear Discriminant Analysis (LDA).</p>
+<p>By altering the forms for <span class="math inline">\(f_k(x)\)</span>, we get different classifiers.</p>
+<ul>
+<li>With Gaussians but different <span class="math inline">\(\Sigma_k\)</span> in each class, we get <em>Quadratic Discriminant Analysis (QDA)</em>.</li>
+<li>With <span class="math inline">\(f_k(x) = \prod_{j=1}^p f_{jk}(x_j)\)</span> (conditional independence model) in each class we get <em>Naive Bayes</em>. (For Gaussian, this mean the <span class="math inline">\(\Sigma_k\)</span> are diagonal, e.g. <span class="math inline">\(Cov(X_i,X_j)=0 \,\, \forall \, \, 1\leq i,j \leq p\)</span>).</li>
+<li>Many other forms by proposing specific density models for <span class="math inline">\(f_k(x)\)</span>, including <em>nonparametric approaches</em>.</li>
+</ul>
+<div id="quadratic-discriminant-analysis-qda" class="section level3 hasAnchor" number="4.7.1">
+<h3><span class="header-section-number">4.7.1</span> Quadratic Discriminant Analysis (QDA)<a href="4-discriminant-analysis.html#quadratic-discriminant-analysis-qda" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Like LDA, the QDA classiﬁer results from assuming that the observations from each class are drawn from a Gaussian distribution, and plugging estimates for the parameters into Bayes’ theorem in order to perform prediction.</p>
+<p>However, unlike LDA, QDA assumes that each class has its own covariance matrix. Under this assumption, the Bayes classiﬁer assigns an observation <span class="math inline">\(X = x\)</span> to the class for which</p>
+<p><span class="math display">\[\begin{align*}
+\delta_k(x) &amp;= - \frac{1}{2} (x-\mu)^T \Sigma_k^{-1} (x-\mu) - \frac{1}{2} \log |\Sigma_k| + \log \pi_k \\
+            &amp;= - \frac{1}{2} x^T \Sigma_k^{-1} x + \frac{1}{2} x^T \Sigma_k^{-1} \mu_k - \frac{1}{2} \mu_k^T \Sigma_k^{-1} \mu_k - \frac{1}{2} \log |\Sigma_k| + \log \pi_k
+\end{align*}\]</span></p>
+<p>is largest.</p>
+<p>Unlike in LDA, the quantity <span class="math inline">\(x\)</span> appears as a quadratic function in QDA. This is where QDA gets its name.</p>
+<div class="rmdcaution">
+<p>The decision boundary in QDA is non-linear. It is quadratic (a curve).</p>
+</div>
+</div>
+<div id="naive-bayes" class="section level3 hasAnchor" number="4.7.2">
+<h3><span class="header-section-number">4.7.2</span> Naive Bayes<a href="4-discriminant-analysis.html#naive-bayes" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>We use Naive Bayes classifier if the features are independant in each class. It is useful when <span class="math inline">\(p\)</span> is large (unklike LDA and QDA).</p>
+<p>Naive Bayes assumes that each <span class="math inline">\(\Sigma_k\)</span> is diagonal, so</p>
+<p><span class="math display">\[\begin{align*}
+\delta_k(x) &amp;\propto \log \bigg[\pi_k \prod_{j=1}^p f_{kj}(x_j) \bigg] \\
+            &amp;= -\frac{1}{2} \sum_{j=1}^p \frac{(x_j-\mu_{kj})^2}{\sigma_{kj}^2} + \log \pi_k
+\end{align*}\]</span></p>
+<p>It can used for mixed feature vectors (qualitative and quantitative). If <span class="math inline">\(X_j\)</span> is qualitative, we replace <span class="math inline">\(f_{kj}(x_j)\)</span> by probability mass function (histogram) over discrete categories.</p>
+</div>
+</div>
+<div id="lda-vs-logistic-regression" class="section level2 hasAnchor" number="4.8">
+<h2><span class="header-section-number">4.8</span> LDA vs Logistic Regression<a href="4-discriminant-analysis.html#lda-vs-logistic-regression" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>the logistic regression and LDA methods are closely connected. Consider the two-class setting with <span class="math inline">\(p =1\)</span> predictor, and let <span class="math inline">\(p_1(x)\)</span> and <span class="math inline">\(p_2(x)=1−p_1(x)\)</span> be the probabilities that the observation <span class="math inline">\(X = x\)</span> belongs to class 1 and class 2, respectively. In the LDA framework, we can see from Eq. <a href="4-discriminant-analysis.html#eq:discscore">(4.4)</a> (and a bit of simple algebra) that the log odds is given by</p>
+<p><span class="math display">\[ \log \bigg(\frac{p_1(x)}{1-p_1(x)}\bigg) = \log \bigg(\frac{p_1(x)}{p_2(x)}\bigg) = c_0 + c_1 x\]</span></p>
+<p>where <span class="math inline">\(c_0\)</span> and <span class="math inline">\(c_1\)</span> are functions of <span class="math inline">\(\mu_1, \mu_2,\)</span> and <span class="math inline">\(\sigma^2\)</span>.</p>
+<p>On the other hand, we know that in logistic regression</p>
+<p><span class="math display">\[ \log \bigg(\frac{p_1}{1-p_1}\bigg) = \beta_0 + \beta_1 x\]</span></p>
+<p>Both of the equations above are linear functions of <span class="math inline">\(x\)</span>. Hence both logistic regression and LDA produce linear decision boundaries. The only diﬀerence between the two approaches lies in the fact that <span class="math inline">\(\beta_0\)</span> and <span class="math inline">\(\beta_1\)</span> are estimated using <em>maximum likelihood</em>, whereas <span class="math inline">\(c_0\)</span> and <span class="math inline">\(c_1\)</span> are computed using the estimated mean and variance from a <em>normal distribution</em>. This same connection between LDA and logistic regression also holds for multidimensional data with <span class="math inline">\(p&gt; 1\)</span>.</p>
 <div class="rmdinsight">
-<p>
-The <code>eigen()</code> function will, by default, sort the
-eigenvalues in decreasing order.
-</p>
+<ul>
+<li>Logistic regression uses the conditional likelihood based on <span class="math inline">\(P(Y|X)\)</span> (known as <em>discriminative learning</em>).</li>
+<li>LDA uses the full likelihood based on <span class="math inline">\(P(X,Y )\)</span> (known as
+<em>generative learning</em>).</li>
+<li>Despite these differences, in practice the results are often very similar.</li>
+</ul>
+<p><strong>Remark</strong>: Logistic regression can also fit quadratic boundaries like QDA, by explicitly including quadratic terms in the model.</p>
 </div>
-<p><strong>Explained Variance</strong></p>
-<p><strong>12.</strong> Calculate the individual explained variation and the cumulative explained variation of each principal component. Show the results.</p>
-<p><strong>13.</strong> Plot the individual explained variation. (scree plot)</p>
-<p><strong>Projection Matrix</strong></p>
-<p><strong>14.</strong> Construct the projection matrix that will be used to transform the Iris data onto the new feature subspace.</p>
-<div class="rmdtip">
-<p>
-The “projection matrix” is basically just a matrix of our
-concatenated top <span class="math inline"><span class="math inline">\(k\)</span></span> eigenvectors.
-Here, the projection matrix <span class="math inline"><span class="math inline">\(\mathbf{A}\)</span></span> is a <span class="math inline"><span class="math inline">\(4 \times 2\)</span></span>-dimensional matrix.
-</p>
-</div>
-<p><strong>Projection Onto the New Feature Space</strong></p>
-<p>In this last step we will use the <span class="math inline">\(4 \times 2\)</span>-dimensional projection matrix <span class="math inline">\(\mathbf{A}\)</span> to transform our samples (observations) onto the new subspace via the equation <span class="math inline">\(\mathbf{Y}=X \times \mathbf{A}\)</span> where <span class="math inline">\(\mathbf{Y}\)</span> is a <span class="math inline">\(150 \times 2\)</span> matrix of our transformed samples.</p>
-<p><strong>15.</strong> Compute <span class="math inline">\(\mathbf{Y}\)</span> (Recall the <span class="math inline">\(\mathbf{Y}\)</span> is the matrix of scores, <span class="math inline">\(\mathbf{A}\)</span> is the matrix of loadings).</p>
-<p><strong>Visualization</strong></p>
-<p><strong>16.</strong> Plot the observations on the new feature space. Name the axis PC1 and PC2.</p>
-<p><strong>17.</strong> On the same plot, color the observations (the flowers) with respect to their flower classes.</p>
 <p align="right">
 ◼
 </p>
 
-</div>
-</div>
-
-
-
-<h3>References</h3>
-<div id="refs" class="references csl-bib-body hanging-indent">
-<div id="ref-Fisher1936" class="csl-entry">
-FISHER, R. A. 1936. <span>“THE USE OF MULTIPLE MEASUREMENTS IN TAXONOMIC PROBLEMS.”</span> <em>Annals of Eugenics</em> 7 (2): 179–88. <a href="https://doi.org/10.1111/j.1469-1809.1936.tb02137.x">https://doi.org/10.1111/j.1469-1809.1936.tb02137.x</a>.
+<!-- ```{r setup, include=FALSE} -->
+<!-- htmltools::tagList(rmarkdown::html_dependency_font_awesome()) -->
+<!-- ``` -->
 </div>
 </div>
             </section>
@@ -731,8 +696,8 @@ FISHER, R. A. 1936. <span>“THE USE OF MULTIPLE MEASUREMENTS IN TAXONOMIC PROBL
           </div>
         </div>
       </div>
-<a href="6-principal-components-analysis.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="7-kmeans-hierarchical-clustering.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="pw-3.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="pw-4.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="book_assets/gitbook-2.6.7/js/app.min.js"></script>

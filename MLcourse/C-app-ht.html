@@ -4,21 +4,21 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>PW 6 | Machine Learning</title>
-  <meta name="description" content="PW 6 | Machine Learning course" />
+  <title>C Review on hypothesis testing | Machine Learning</title>
+  <meta name="description" content="C Review on hypothesis testing | Machine Learning course" />
   <meta name="generator" content="bookdown 0.24.10 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="PW 6 | Machine Learning" />
+  <meta property="og:title" content="C Review on hypothesis testing | Machine Learning" />
   <meta property="og:type" content="book" />
   
   
-  <meta property="og:description" content="PW 6 | Machine Learning course" />
+  <meta property="og:description" content="C Review on hypothesis testing | Machine Learning course" />
   
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="PW 6 | Machine Learning" />
+  <meta name="twitter:title" content="C Review on hypothesis testing | Machine Learning" />
   
-  <meta name="twitter:description" content="PW 6 | Machine Learning course" />
+  <meta name="twitter:description" content="C Review on hypothesis testing | Machine Learning course" />
   
 
 <meta name="author" content="Mohamad Ghassany" />
@@ -31,8 +31,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="6-principal-components-analysis.html"/>
-<link rel="next" href="7-kmeans-hierarchical-clustering.html"/>
+<link rel="prev" href="B-app-introRStudio.html"/>
+<link rel="next" href="D-use-qual.html"/>
 <script src="book_assets/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="book_assets/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -456,274 +456,70 @@ div.csl-indent {
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="pw-6" class="section level1 unnumbered hasAnchor">
-<h1>PW 6<a href="pw-6.html#pw-6" class="anchor-section" aria-label="Anchor link to header"></a></h1>
-<div id="the-iris-dataset" class="section level3 unnumbered hasAnchor">
-<h3>The Iris Dataset<a href="pw-6.html#the-iris-dataset" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<p>The <strong><em>Iris flower dataset</em></strong> or <strong><em>Fisher’s Iris dataset</em></strong> is a multivariate data set introduced by the British statistician and biologist <a href="https://en.wikipedia.org/wiki/Ronald_Fisher">Ronald Fisher</a> in his <strong>1936</strong> paper <span class="citation">(<a href="#ref-Fisher1936" role="doc-biblioref">FISHER 1936</a>)</span>.</p>
-<p>The data set consists of 50 samples from each of three species of Iris. Four features were measured from each sample.</p>
-<p>The three species in the Iris dataset are:</p>
-<ol style="list-style-type: decimal">
-<li><em>Iris-setosa</em> (<span class="math inline">\(n_1=50\)</span>)</li>
-<li><em>Iris-versicolor</em> (<span class="math inline">\(n_2=50\)</span>)</li>
-<li><em>Iris-virginica</em> (<span class="math inline">\(n_3=50\)</span>)</li>
-</ol>
-<p>And the four features in Iris dataset are:</p>
-<ol style="list-style-type: decimal">
-<li><em>sepal length</em> in cm</li>
-<li><em>sepal width</em> in cm</li>
-<li><em>petal length</em> in cm</li>
-<li><em>petal width</em> in cm</li>
-</ol>
-<p><img src="img/iris.png" width="85%" style="display: block; margin: auto;" /></p>
-</div>
-<div id="loading-data-1" class="section level3 unnumbered hasAnchor">
-<h3>Loading Data<a href="pw-6.html#loading-data-1" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<p><strong>1.</strong> Download the iris dataset from <a target="_blank" href="datasets/iris.data"> here <i class="fa fa-table" aria-hidden="true"></i></a> and import it into <svg aria-hidden="true" role="img" viewBox="0 0 581 512" style="height:1em;width:1.13em;vertical-align:-0.125em;margin-left:auto;margin-right:auto;font-size:inherit;fill:steelblue;overflow:visible;position:relative;"><path d="M581 226.6C581 119.1 450.9 32 290.5 32S0 119.1 0 226.6C0 322.4 103.3 402 239.4 418.1V480h99.1v-61.5c24.3-2.7 47.6-7.4 69.4-13.9L448 480h112l-67.4-113.7c54.5-35.4 88.4-84.9 88.4-139.7zm-466.8 14.5c0-73.5 98.9-133 220.8-133s211.9 40.7 211.9 133c0 50.1-26.5 85-70.3 106.4-2.4-1.6-4.7-2.9-6.4-3.7-10.2-5.2-27.8-10.5-27.8-10.5s86.6-6.4 86.6-92.7-90.6-87.9-90.6-87.9h-199V361c-74.1-21.5-125.2-67.1-125.2-119.9zm225.1 38.3v-55.6c57.8 0 87.8-6.8 87.8 27.3 0 36.5-38.2 28.3-87.8 28.3zm-.9 72.5H365c10.8 0 18.9 11.7 24 19.2-16.1 1.9-33 2.8-50.6 2.9v-22.1z"/></svg>.</p>
-<!-- 
-**2.** Show the last 5 rows of the iris dataset.
-
-
-
- -->
-</div>
-<div id="exploratory-analysis" class="section level3 unnumbered hasAnchor">
-<h3>Exploratory analysis<a href="pw-6.html#exploratory-analysis" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<p><strong>2.</strong> Compare the means and the quartiles of the 3 different flower classes for the 4 different features (Plot 4 boxplots into the same figure).</p>
-<div class="rmdtip">
-<p><strong>Hint</strong>: you can use <code>par(mfrow=c(2,2))</code> to show multiple plots on the same figure (<span class="math inline">\(2 \times 2\)</span> plots here). Like follows:</p>
-</div>
-<p><img src="Machine-Learning_files/figure-html/unnamed-chunk-178-1.png" width="70%" style="display: block; margin: auto;" /></p>
-<p><strong>3.</strong> To explore how the 3 different flower classes are distributed along the 4 different features, visualize them via histograms using the following code.</p>
-<div class="sourceCode" id="cb59"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb59-1"><a href="pw-6.html#cb59-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Let&#39;s use the ggplot2 library</span></span>
-<span id="cb59-2"><a href="pw-6.html#cb59-2" aria-hidden="true" tabindex="-1"></a><span class="co"># ggplot2 is the most advanced package for data visualization</span></span>
-<span id="cb59-3"><a href="pw-6.html#cb59-3" aria-hidden="true" tabindex="-1"></a><span class="co"># gg corresponds to The Grammar of Graphics.</span></span>
-<span id="cb59-4"><a href="pw-6.html#cb59-4" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2) <span class="co">#of course you must install it first if you don&#39;t have it already</span></span>
-<span id="cb59-5"><a href="pw-6.html#cb59-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb59-6"><a href="pw-6.html#cb59-6" aria-hidden="true" tabindex="-1"></a><span class="co"># histogram of sepal_length</span></span>
-<span id="cb59-7"><a href="pw-6.html#cb59-7" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(iris, <span class="fu">aes</span>(<span class="at">x=</span>sepal_length, <span class="at">fill=</span>class)) <span class="sc">+</span></span>
-<span id="cb59-8"><a href="pw-6.html#cb59-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(<span class="at">binwidth=</span>.<span class="dv">2</span>, <span class="at">alpha=</span>.<span class="dv">5</span>)</span>
-<span id="cb59-9"><a href="pw-6.html#cb59-9" aria-hidden="true" tabindex="-1"></a><span class="co"># histogram of sepal_width</span></span>
-<span id="cb59-10"><a href="pw-6.html#cb59-10" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(iris, <span class="fu">aes</span>(<span class="at">x=</span>sepal_width, <span class="at">fill=</span>class)) <span class="sc">+</span></span>
-<span id="cb59-11"><a href="pw-6.html#cb59-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(<span class="at">binwidth=</span>.<span class="dv">2</span>, <span class="at">alpha=</span>.<span class="dv">5</span>)</span>
-<span id="cb59-12"><a href="pw-6.html#cb59-12" aria-hidden="true" tabindex="-1"></a><span class="co"># histogram of petal_length</span></span>
-<span id="cb59-13"><a href="pw-6.html#cb59-13" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(iris, <span class="fu">aes</span>(<span class="at">x=</span>petal_length, <span class="at">fill=</span>class)) <span class="sc">+</span></span>
-<span id="cb59-14"><a href="pw-6.html#cb59-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(<span class="at">binwidth=</span>.<span class="dv">2</span>, <span class="at">alpha=</span>.<span class="dv">5</span>)</span>
-<span id="cb59-15"><a href="pw-6.html#cb59-15" aria-hidden="true" tabindex="-1"></a><span class="co"># histogram of petal_width</span></span>
-<span id="cb59-16"><a href="pw-6.html#cb59-16" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(iris, <span class="fu">aes</span>(<span class="at">x=</span>petal_width, <span class="at">fill=</span>class)) <span class="sc">+</span></span>
-<span id="cb59-17"><a href="pw-6.html#cb59-17" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(<span class="at">binwidth=</span>.<span class="dv">2</span>, <span class="at">alpha=</span>.<span class="dv">5</span>)</span></code></pre></div>
-<p><img src="Machine-Learning_files/figure-html/unnamed-chunk-180-1.png" width="70%" style="display: block; margin: auto;" /></p>
-</div>
-<div id="pca-using-princomp" class="section level3 unnumbered hasAnchor">
-<h3>PCA using <code>princomp()</code><a href="pw-6.html#pca-using-princomp" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<div class="rmdtip">
-<p>Both <code>princomp()</code> and <code>prcomp()</code> are built-in <svg aria-hidden="true" role="img" viewBox="0 0 581 512" style="height:1em;width:1.13em;vertical-align:-0.125em;margin-left:auto;margin-right:auto;font-size:inherit;fill:steelblue;overflow:visible;position:relative;"><path d="M581 226.6C581 119.1 450.9 32 290.5 32S0 119.1 0 226.6C0 322.4 103.3 402 239.4 418.1V480h99.1v-61.5c24.3-2.7 47.6-7.4 69.4-13.9L448 480h112l-67.4-113.7c54.5-35.4 88.4-84.9 88.4-139.7zm-466.8 14.5c0-73.5 98.9-133 220.8-133s211.9 40.7 211.9 133c0 50.1-26.5 85-70.3 106.4-2.4-1.6-4.7-2.9-6.4-3.7-10.2-5.2-27.8-10.5-27.8-10.5s86.6-6.4 86.6-92.7-90.6-87.9-90.6-87.9h-199V361c-74.1-21.5-125.2-67.1-125.2-119.9zm225.1 38.3v-55.6c57.8 0 87.8-6.8 87.8 27.3 0 36.5-38.2 28.3-87.8 28.3zm-.9 72.5H365c10.8 0 18.9 11.7 24 19.2-16.1 1.9-33 2.8-50.6 2.9v-22.1z"/></svg> functions. They both perform PCA.</p>
-</div>
-<p><strong>4.</strong> Apply a PCA on the Iris dataset using the <code>princomp()</code> function and interpret the results.</p>
-<div class="sourceCode" id="cb60"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb60-1"><a href="pw-6.html#cb60-1" aria-hidden="true" tabindex="-1"></a>pcairis<span class="ot">=</span><span class="fu">princomp</span>(iris[,<span class="sc">-</span><span class="dv">5</span>], <span class="at">cor=</span>T) </span>
-<span id="cb60-2"><a href="pw-6.html#cb60-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Note that we take only the numerical columns to apply PCA.</span></span>
-<span id="cb60-3"><a href="pw-6.html#cb60-3" aria-hidden="true" tabindex="-1"></a><span class="co"># now pcairis is a R object of type princomp</span></span>
-<span id="cb60-4"><a href="pw-6.html#cb60-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb60-5"><a href="pw-6.html#cb60-5" aria-hidden="true" tabindex="-1"></a><span class="co"># To display the internal structure of pcairis</span></span>
-<span id="cb60-6"><a href="pw-6.html#cb60-6" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(pcairis)</span>
-<span id="cb60-7"><a href="pw-6.html#cb60-7" aria-hidden="true" tabindex="-1"></a><span class="co">#ans&gt; List of 7</span></span>
-<span id="cb60-8"><a href="pw-6.html#cb60-8" aria-hidden="true" tabindex="-1"></a><span class="co">#ans&gt;  $ sdev    : Named num [1:4] 1.706 0.96 0.384 0.144</span></span>
-<span id="cb60-9"><a href="pw-6.html#cb60-9" aria-hidden="true" tabindex="-1"></a><span class="co">#ans&gt;   ..- attr(*, &quot;names&quot;)= chr [1:4] &quot;Comp.1&quot; &quot;Comp.2&quot; &quot;Comp.3&quot; &quot;Comp.4&quot;</span></span>
-<span id="cb60-10"><a href="pw-6.html#cb60-10" aria-hidden="true" tabindex="-1"></a><span class="co">#ans&gt;  $ loadings: &#39;loadings&#39; num [1:4, 1:4] 0.522 -0.263 0.581 0.566 0.372 ...</span></span>
-<span id="cb60-11"><a href="pw-6.html#cb60-11" aria-hidden="true" tabindex="-1"></a><span class="co">#ans&gt;   ..- attr(*, &quot;dimnames&quot;)=List of 2</span></span>
-<span id="cb60-12"><a href="pw-6.html#cb60-12" aria-hidden="true" tabindex="-1"></a><span class="co">#ans&gt;   .. ..$ : chr [1:4] &quot;sepal_length&quot; &quot;sepal_width&quot; &quot;petal_length&quot; &quot;petal_width&quot;</span></span>
-<span id="cb60-13"><a href="pw-6.html#cb60-13" aria-hidden="true" tabindex="-1"></a><span class="co">#ans&gt;   .. ..$ : chr [1:4] &quot;Comp.1&quot; &quot;Comp.2&quot; &quot;Comp.3&quot; &quot;Comp.4&quot;</span></span>
-<span id="cb60-14"><a href="pw-6.html#cb60-14" aria-hidden="true" tabindex="-1"></a><span class="co">#ans&gt;  $ center  : Named num [1:4] 5.84 3.05 3.76 1.2</span></span>
-<span id="cb60-15"><a href="pw-6.html#cb60-15" aria-hidden="true" tabindex="-1"></a><span class="co">#ans&gt;   ..- attr(*, &quot;names&quot;)= chr [1:4] &quot;sepal_length&quot; &quot;sepal_width&quot; &quot;petal_length&quot; &quot;petal_width&quot;</span></span>
-<span id="cb60-16"><a href="pw-6.html#cb60-16" aria-hidden="true" tabindex="-1"></a><span class="co">#ans&gt;  $ scale   : Named num [1:4] 0.825 0.432 1.759 0.761</span></span>
-<span id="cb60-17"><a href="pw-6.html#cb60-17" aria-hidden="true" tabindex="-1"></a><span class="co">#ans&gt;   ..- attr(*, &quot;names&quot;)= chr [1:4] &quot;sepal_length&quot; &quot;sepal_width&quot; &quot;petal_length&quot; &quot;petal_width&quot;</span></span>
-<span id="cb60-18"><a href="pw-6.html#cb60-18" aria-hidden="true" tabindex="-1"></a><span class="co">#ans&gt;  $ n.obs   : int 150</span></span>
-<span id="cb60-19"><a href="pw-6.html#cb60-19" aria-hidden="true" tabindex="-1"></a><span class="co">#ans&gt;  $ scores  : num [1:150, 1:4] -2.26 -2.09 -2.37 -2.3 -2.39 ...</span></span>
-<span id="cb60-20"><a href="pw-6.html#cb60-20" aria-hidden="true" tabindex="-1"></a><span class="co">#ans&gt;   ..- attr(*, &quot;dimnames&quot;)=List of 2</span></span>
-<span id="cb60-21"><a href="pw-6.html#cb60-21" aria-hidden="true" tabindex="-1"></a><span class="co">#ans&gt;   .. ..$ : NULL</span></span>
-<span id="cb60-22"><a href="pw-6.html#cb60-22" aria-hidden="true" tabindex="-1"></a><span class="co">#ans&gt;   .. ..$ : chr [1:4] &quot;Comp.1&quot; &quot;Comp.2&quot; &quot;Comp.3&quot; &quot;Comp.4&quot;</span></span>
-<span id="cb60-23"><a href="pw-6.html#cb60-23" aria-hidden="true" tabindex="-1"></a><span class="co">#ans&gt;  $ call    : language princomp(x = iris[, -5], cor = T)</span></span>
-<span id="cb60-24"><a href="pw-6.html#cb60-24" aria-hidden="true" tabindex="-1"></a><span class="co">#ans&gt;  - attr(*, &quot;class&quot;)= chr &quot;princomp&quot;</span></span>
-<span id="cb60-25"><a href="pw-6.html#cb60-25" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb60-26"><a href="pw-6.html#cb60-26" aria-hidden="true" tabindex="-1"></a><span class="co"># To see the variance explained by the the pcs</span></span>
-<span id="cb60-27"><a href="pw-6.html#cb60-27" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(pcairis) </span>
-<span id="cb60-28"><a href="pw-6.html#cb60-28" aria-hidden="true" tabindex="-1"></a><span class="co">#ans&gt; Importance of components:</span></span>
-<span id="cb60-29"><a href="pw-6.html#cb60-29" aria-hidden="true" tabindex="-1"></a><span class="co">#ans&gt;                        Comp.1 Comp.2 Comp.3  Comp.4</span></span>
-<span id="cb60-30"><a href="pw-6.html#cb60-30" aria-hidden="true" tabindex="-1"></a><span class="co">#ans&gt; Standard deviation      1.706  0.960 0.3839 0.14355</span></span>
-<span id="cb60-31"><a href="pw-6.html#cb60-31" aria-hidden="true" tabindex="-1"></a><span class="co">#ans&gt; Proportion of Variance  0.728  0.230 0.0368 0.00515</span></span>
-<span id="cb60-32"><a href="pw-6.html#cb60-32" aria-hidden="true" tabindex="-1"></a><span class="co">#ans&gt; Cumulative Proportion   0.728  0.958 0.9948 1.00000</span></span>
-<span id="cb60-33"><a href="pw-6.html#cb60-33" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb60-34"><a href="pw-6.html#cb60-34" aria-hidden="true" tabindex="-1"></a><span class="co"># To plot the variance explained by each pc</span></span>
-<span id="cb60-35"><a href="pw-6.html#cb60-35" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(pcairis) </span></code></pre></div>
-<p><img src="Machine-Learning_files/figure-html/unnamed-chunk-181-1.png" width="70%" style="display: block; margin: auto;" /></p>
-<div class="sourceCode" id="cb61"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb61-1"><a href="pw-6.html#cb61-1" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb61-2"><a href="pw-6.html#cb61-2" aria-hidden="true" tabindex="-1"></a><span class="co"># To plot together the scores for PC1 and PC2 and the </span></span>
-<span id="cb61-3"><a href="pw-6.html#cb61-3" aria-hidden="true" tabindex="-1"></a><span class="co"># variables expressed in terms of PC1 and PC2.</span></span>
-<span id="cb61-4"><a href="pw-6.html#cb61-4" aria-hidden="true" tabindex="-1"></a><span class="fu">biplot</span>(pcairis) </span></code></pre></div>
-<p><img src="Machine-Learning_files/figure-html/unnamed-chunk-181-2.png" width="70%" style="display: block; margin: auto;" /></p>
-</div>
-<div id="deeper-pca-using-factoextra-package" class="section level3 unnumbered hasAnchor">
-<h3>Deeper PCA using <code>factoextra</code> package<a href="pw-6.html#deeper-pca-using-factoextra-package" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<div class="rmdinsight">
-<p>To help in the interpretation and in the visualization of PCA we are going to use the package named <code>factoextra</code>.</p>
-<p>No matter which function or package you decide to use for computing principal component methods, the <code>factoextra</code> <svg aria-hidden="true" role="img" viewBox="0 0 581 512" style="height:1em;width:1.13em;vertical-align:-0.125em;margin-left:auto;margin-right:auto;font-size:inherit;fill:steelblue;overflow:visible;position:relative;"><path d="M581 226.6C581 119.1 450.9 32 290.5 32S0 119.1 0 226.6C0 322.4 103.3 402 239.4 418.1V480h99.1v-61.5c24.3-2.7 47.6-7.4 69.4-13.9L448 480h112l-67.4-113.7c54.5-35.4 88.4-84.9 88.4-139.7zm-466.8 14.5c0-73.5 98.9-133 220.8-133s211.9 40.7 211.9 133c0 50.1-26.5 85-70.3 106.4-2.4-1.6-4.7-2.9-6.4-3.7-10.2-5.2-27.8-10.5-27.8-10.5s86.6-6.4 86.6-92.7-90.6-87.9-90.6-87.9h-199V361c-74.1-21.5-125.2-67.1-125.2-119.9zm225.1 38.3v-55.6c57.8 0 87.8-6.8 87.8 27.3 0 36.5-38.2 28.3-87.8 28.3zm-.9 72.5H365c10.8 0 18.9 11.7 24 19.2-16.1 1.9-33 2.8-50.6 2.9v-22.1z"/></svg> package can help to extract easily, in a human readable data format, the analysis results from the different functions mentioned above. <code>factoextra</code> provides also convenient solutions to create <code>ggplot2</code> based beautiful graphs.</p>
-<p>You can take a look at this <a href="http://www.sthda.com/french/articles/38-methodes-des-composantes-principales-dans-r-guide-pratique/73-acp-analyse-en-composantes-principales-avec-r-l-essentiel/" target="_blank">link <svg aria-hidden="true" role="img" viewBox="0 0 512 512" style="height:1em;width:1em;vertical-align:-0.125em;margin-left:auto;margin-right:auto;font-size:inherit;fill:currentColor;overflow:visible;position:relative;"><path d="M432,320H400a16,16,0,0,0-16,16V448H64V128H208a16,16,0,0,0,16-16V80a16,16,0,0,0-16-16H48A48,48,0,0,0,0,112V464a48,48,0,0,0,48,48H400a48,48,0,0,0,48-48V336A16,16,0,0,0,432,320ZM488,0h-128c-21.37,0-32.05,25.91-17,41l35.73,35.73L135,320.37a24,24,0,0,0,0,34L157.67,377a24,24,0,0,0,34,0L435.28,133.32,471,169c15,15,41,4.5,41-17V24A24,24,0,0,0,488,0Z"/></svg></a> for a detailed example.</p>
-</div>
-<p><strong>5.</strong> Using <code>factoextra</code> package plot the following:</p>
-<ul>
-<li>The scree plot.</li>
-<li>The graph of individuals.</li>
-<li>The graph of variables.</li>
-<li>The biplot graph.</li>
-<li>The contributions of the variables to the first 2 principal components.</li>
-</ul>
-</div>
-<div id="step-by-step-pca" class="section level3 unnumbered hasAnchor">
-<h3>Step-by-step PCA<a href="pw-6.html#step-by-step-pca" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<p>In order to understand how PCA works, let’s implement it step-by-step.</p>
-<div class="rmdtip">
-<p>
-<strong>Summary of the PCA Approach</strong>:
-</p>
-<ul>
-<li>
-Standardize the data.
-</li>
-<li>
-Obtain the Eigenvectors and Eigenvalues from the covariance matrix
-or correlation matrix.
-</li>
-<li>
-Sort eigenvalues in descending order and choose the <span class="math inline"><span class="math inline">\(k\)</span></span> eigenvectors that correspond to the
-<span class="math inline"><span class="math inline">\(k\)</span></span> largest eigenvalues, where <span class="math inline"><span class="math inline">\(k\)</span></span> is the number of dimensions of the new
-feature subspace (<span class="math inline"><span class="math inline">\(k \le p\)</span></span>).
-</li>
-<li>
-Construct the projection matrix <span class="math inline"><span class="math inline">\(\mathbf{A}\)</span></span> from the selected <span class="math inline"><span class="math inline">\(k\)</span></span> eigenvectors.
-</li>
-<li>
-Transform the original dataset <span class="math inline"><span class="math inline">\(X\)</span></span> via <span class="math inline"><span class="math inline">\(\mathbf{A}\)</span></span> to obtain a <span class="math inline"><span class="math inline">\(k\)</span></span>-dimensional feature subspace <span class="math inline"><span class="math inline">\(\mathbf{Y}\)</span></span>.
-</li>
-</ul>
-</div>
-<p><strong>6.</strong> First step, split the iris dataset into data <span class="math inline">\(X\)</span> and class labels <span class="math inline">\(y\)</span>.</p>
-<div class="sourceCode" id="cb62"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb62-1"><a href="pw-6.html#cb62-1" aria-hidden="true" tabindex="-1"></a>X <span class="ot">&lt;-</span> iris[,<span class="sc">-</span><span class="dv">5</span>]</span>
-<span id="cb62-2"><a href="pw-6.html#cb62-2" aria-hidden="true" tabindex="-1"></a>y <span class="ot">&lt;-</span> iris[,<span class="dv">5</span>]</span></code></pre></div>
+<div id="app-ht" class="section level1 hasAnchor" number="11">
+<h1><span class="header-section-number">C</span> Review on hypothesis testing<a href="C-app-ht.html#app-ht" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<p>The process of hypothesis testing has an interesting analogy with a trial that helps on understanding the elements present in a formal hypothesis test in an intuitive way.</p>
+<table>
+<colgroup>
+<col width="40%" />
+<col width="60%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th align="left">Hypothesis testing</th>
+<th align="left">Trial</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">Null hypothesis <span class="math inline">\(H_0\)</span></td>
+<td align="left"><strong>Accused of comitting a crime</strong>. It has the “presumption of innocence”, which means that it is <em>not guilty</em> until there is enough evidence to supporting its guilt</td>
+</tr>
+<tr class="even">
+<td align="left">Sample <span class="math inline">\(X_1,\ldots,X_n\)</span></td>
+<td align="left">Collection of small <strong>evidences supporting innocence and guilt</strong>. These evidences contain a certain degree of uncontrollable randomness because of how they were collected and the context regarding the case</td>
+</tr>
+<tr class="odd">
+<td align="left">Statistic <span class="math inline">\(T_n\)</span></td>
+<td align="left"><strong>Summary of the evicences presented</strong> by the prosecutor and defense lawyer</td>
+</tr>
+<tr class="even">
+<td align="left">Distribution of <span class="math inline">\(T_n\)</span> under <span class="math inline">\(H_0\)</span></td>
+<td align="left">The <strong>judge</strong> conducting the trial. Evaluates the evidence presented by both sides and presents a verdict for <span class="math inline">\(H_0\)</span></td>
+</tr>
+<tr class="odd">
+<td align="left">Significance level <span class="math inline">\(\alpha\)</span></td>
+<td align="left"><span class="math inline">\(1-\alpha\)</span> is the <strong>strength of evidences required by the judge for condemning <span class="math inline">\(H_0\)</span></strong>. The judge allows evidences that on average condemn <span class="math inline">\(100\alpha\%\)</span> of the innocents, due to the randomness inherent to the evidence collection process. <span class="math inline">\(\alpha=0.05\)</span> is considered a reasonable level</td>
+</tr>
+<tr class="even">
+<td align="left"><span class="math inline">\(p\)</span>-value</td>
+<td align="left"><strong>Decision</strong> of the judge that measures the degree of compatibility, in a scale <span class="math inline">\(0\)</span>–<span class="math inline">\(1\)</span>, of the presumption of innocence with the summary of the evidences presented. If <span class="math inline">\(p\)</span>-value<span class="math inline">\(&lt;\alpha\)</span>, <span class="math inline">\(H_0\)</span> is declared guilty. Otherwise, is declared not guilty</td>
+</tr>
+<tr class="odd">
+<td align="left"><span class="math inline">\(H_0\)</span> is rejected</td>
+<td align="left"><span class="math inline">\(H_0\)</span> is declared guilty: there are <strong>strong evidences supporting its guilt</strong></td>
+</tr>
+<tr class="even">
+<td align="left"><span class="math inline">\(H_0\)</span> is not rejected</td>
+<td align="left"><span class="math inline">\(H_0\)</span> is declared not guilty: either is <strong>innocent or there are no enough evidences supporting its guilt</strong></td>
+</tr>
+</tbody>
+</table>
+<p>More formally, the <span class="math inline">\(p\)</span>-value of an hypothesis test about <span class="math inline">\(H0\)</span> is defined as:</p>
+<blockquote>
+<p>The <span class="math inline">\(p\)</span>-value is the probability of obtaining a statistic more unfavourable to <span class="math inline">\(H_0\)</span> than the observed, assuming that <span class="math inline">\(H_0\)</span> is true.</p>
+</blockquote>
+<p>Therefore, <strong>if the <span class="math inline">\(p\)</span>-value is small</strong> (smaller than the chosen level <span class="math inline">\(\alpha\)</span>), <strong>it is unlikely that the evidence against <span class="math inline">\(H_0\)</span> is due to randomness. As a consequence, <span class="math inline">\(H_0\)</span> is rejected</strong>. If the <span class="math inline">\(p\)</span>-value is large (larger than <span class="math inline">\(\alpha\)</span>), then it is more possible that the evidences against <span class="math inline">\(H_0\)</span> are merely due to the randomness of the data. In this case, we do not reject <span class="math inline">\(H_0\)</span>.</p>
 <div class="rmdinsight">
 <p>
-The iris dataset is now stored in form of a <span class="math inline"><span class="math inline">\(150 \times 4\)</span></span> matrix where the columns are
-the different features, and every row represents a separate flower
-sample. Each sample row <span class="math inline"><span class="math inline">\(X^i\)</span></span> can be
-pictured as a 4-dimensional vector
+If <span class="math inline"><span class="math inline">\(H_0\)</span></span> holds, then the <span class="math inline"><span class="math inline">\(p\)</span></span>-value (which is a random variable) is
+distributed uniformly in <span class="math inline"><span class="math inline">\((0,1)\)</span></span>. If
+<span class="math inline"><span class="math inline">\(H_0\)</span></span> does not hold, then the
+distribution of the <span class="math inline"><span class="math inline">\(p\)</span></span>-value is not
+uniform but concentrated at <span class="math inline"><span class="math inline">\(0\)</span></span>
+(where the rejections of <span class="math inline"><span class="math inline">\(H_0\)</span></span> take
+place).
 </p>
-<p>
-<span class="math display"><span class="math display">\[ (X^i)^T = \begin{pmatrix} X_1^i \\
-X_2^i \\ X_3^i \\ X_4^i \end{pmatrix}
-= \begin{pmatrix} \text{sepal length} \\ \text{sepal width}
-\\\text{petal length} \\ \text{petal width} \end{pmatrix}\]</span></span>
-</p>
-</div>
-<div class="rmdinsight">
-<p>
-<strong>Eigendecomposition - Computing Eigenvectors and
-Eigenvalues</strong>
-</p>
-<p>
-The eigenvectors and eigenvalues of a covariance (or correlation)
-matrix represent the “core” of a PCA: The eigenvectors (principal
-components) determine the directions of the new feature space, and the
-eigenvalues determine their magnitude. In other words, the eigenvalues
-explain the variance of the data along the new feature axes.
-</p>
-</div>
-<p><strong>Standardizing</strong></p>
-<p><strong>7.</strong> Scale the 4 features. Store the scaled matrix into a new one (for example, name it <code>X_scaled</code>).</p>
-<p><strong>Covariance Matrix</strong></p>
-<p><strong>8.</strong> The classic approach to PCA is to perform the eigendecomposition on the covariance matrix <span class="math inline">\(\Sigma\)</span>, which is a <span class="math inline">\(p\times p\)</span> matrix where each element represents the covariance between two features. Compute the Covariance Matrix of the scaled features (Print the results).</p>
-<div class="rmdtip">
-<p>
-We can summarize the calculation of the covariance matrix via the
-following matrix equation: <span class="math display"><span class="math display">\[ \Sigma =
-\frac{1}{n-1} \left( (\mathbf{X} - \mathbf{\bar{X}})^T\;(\mathbf{X} -
-\mathbf{\bar{X}}) \right) \]</span></span> where <span class="math inline"><span class="math inline">\(\mathbf{\bar{X}}\)</span></span> is the mean vector <span class="math inline"><span class="math inline">\(\mathbf{\bar{X}} = \frac{1}{n} \sum\limits_{k=1}^n x_{k}\)</span></span>.
-</p>
-<p>
-The mean vector is a <span class="math inline"><span class="math inline">\(p\)</span></span>-dimensional vector where each value in
-this vector represents the sample mean of a feature column in the
-dataset.
-</p>
-</div>
-<p><strong>9.</strong> Perform an eigendecomposition on the covariance matrix. Compute the Eigenvectors and the Eigenvalues (you can use the <code>eigen()</code> function). What do you obtain?</p>
-<p><strong>Correlation Matrix</strong></p>
-<div class="rmdinsight">
-<p>
-Especially, in the field of “Finance”, the correlation matrix
-typically used instead of the covariance matrix. However, the
-eigendecomposition of the covariance matrix (if the input data was
-standardized) yields the same results as a eigendecomposition on the
-correlation matrix, since the correlation matrix can be understood as
-the normalized covariance matrix.
-</p>
-</div>
-<p><strong>10.</strong> Perform an eigendecomposition of the standardized data based on the correlation matrix.</p>
-<p><strong>11.</strong> Perform an eigendecomposition of the raw data based on the correlation matrix. Compare the obtained results with the previous question.</p>
-<div class="rmdinsight">
-<p>
-We should see that all three approaches yield the same eigenvectors
-and eigenvalue pairs:
-</p>
-<ul>
-<li>
-Eigendecomposition of the covariance matrix after standardizing the
-data.
-</li>
-<li>
-Eigendecomposition of the correlation matrix.
-</li>
-<li>
-Eigendecomposition of the correlation matrix after standardizing the
-data.
-</li>
-</ul>
-</div>
-<p><strong>Selecting Principal Components</strong></p>
-<div class="rmdinsight">
-<p>
-The <code>eigen()</code> function will, by default, sort the
-eigenvalues in decreasing order.
-</p>
-</div>
-<p><strong>Explained Variance</strong></p>
-<p><strong>12.</strong> Calculate the individual explained variation and the cumulative explained variation of each principal component. Show the results.</p>
-<p><strong>13.</strong> Plot the individual explained variation. (scree plot)</p>
-<p><strong>Projection Matrix</strong></p>
-<p><strong>14.</strong> Construct the projection matrix that will be used to transform the Iris data onto the new feature subspace.</p>
-<div class="rmdtip">
-<p>
-The “projection matrix” is basically just a matrix of our
-concatenated top <span class="math inline"><span class="math inline">\(k\)</span></span> eigenvectors.
-Here, the projection matrix <span class="math inline"><span class="math inline">\(\mathbf{A}\)</span></span> is a <span class="math inline"><span class="math inline">\(4 \times 2\)</span></span>-dimensional matrix.
-</p>
-</div>
-<p><strong>Projection Onto the New Feature Space</strong></p>
-<p>In this last step we will use the <span class="math inline">\(4 \times 2\)</span>-dimensional projection matrix <span class="math inline">\(\mathbf{A}\)</span> to transform our samples (observations) onto the new subspace via the equation <span class="math inline">\(\mathbf{Y}=X \times \mathbf{A}\)</span> where <span class="math inline">\(\mathbf{Y}\)</span> is a <span class="math inline">\(150 \times 2\)</span> matrix of our transformed samples.</p>
-<p><strong>15.</strong> Compute <span class="math inline">\(\mathbf{Y}\)</span> (Recall the <span class="math inline">\(\mathbf{Y}\)</span> is the matrix of scores, <span class="math inline">\(\mathbf{A}\)</span> is the matrix of loadings).</p>
-<p><strong>Visualization</strong></p>
-<p><strong>16.</strong> Plot the observations on the new feature space. Name the axis PC1 and PC2.</p>
-<p><strong>17.</strong> On the same plot, color the observations (the flowers) with respect to their flower classes.</p>
-<p align="right">
-◼
-</p>
-
-</div>
-</div>
-
-
-
-<h3>References</h3>
-<div id="refs" class="references csl-bib-body hanging-indent">
-<div id="ref-Fisher1936" class="csl-entry">
-FISHER, R. A. 1936. <span>“THE USE OF MULTIPLE MEASUREMENTS IN TAXONOMIC PROBLEMS.”</span> <em>Annals of Eugenics</em> 7 (2): 179–88. <a href="https://doi.org/10.1111/j.1469-1809.1936.tb02137.x">https://doi.org/10.1111/j.1469-1809.1936.tb02137.x</a>.
 </div>
 </div>
             </section>
@@ -731,8 +527,8 @@ FISHER, R. A. 1936. <span>“THE USE OF MULTIPLE MEASUREMENTS IN TAXONOMIC PROBL
           </div>
         </div>
       </div>
-<a href="6-principal-components-analysis.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="7-kmeans-hierarchical-clustering.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="B-app-introRStudio.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="D-use-qual.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="book_assets/gitbook-2.6.7/js/app.min.js"></script>

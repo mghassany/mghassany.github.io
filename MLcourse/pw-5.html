@@ -1,0 +1,695 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>PW 5 | Machine Learning</title>
+  <meta name="description" content="PW 5 | Machine Learning course" />
+  <meta name="generator" content="bookdown 0.24.10 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="PW 5 | Machine Learning" />
+  <meta property="og:type" content="book" />
+  
+  
+  <meta property="og:description" content="PW 5 | Machine Learning course" />
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="PW 5 | Machine Learning" />
+  
+  <meta name="twitter:description" content="PW 5 | Machine Learning course" />
+  
+
+<meta name="author" content="Mohamad Ghassany" />
+
+
+<meta name="date" content="2022-03-17" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="5-decision-trees-random-forests.html"/>
+<link rel="next" href="6-principal-components-analysis.html"/>
+<script src="book_assets/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
+<link href="book_assets/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="book_assets/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="book_assets/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="book_assets/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="book_assets/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="book_assets/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="book_assets/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+<link href="book_assets/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
+<link href="book_assets/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
+<script src="book_assets/anchor-sections-1.1.0/anchor-sections.js"></script>
+<script src="book_assets/kePrint-0.0.1/kePrint.js"></script>
+<link href="book_assets/lightable-0.0.1/lightable.css" rel="stylesheet" />
+<link href="book_assets/vembedr-0.1.5/css/vembedr.css" rel="stylesheet" />
+<script src="book_assets/htmlwidgets-1.5.4/htmlwidgets.js"></script>
+<script src="book_assets/plotly-binding-4.10.0/plotly.js"></script>
+<script src="book_assets/typedarray-0.1/typedarray.min.js"></script>
+<link href="book_assets/crosstalk-1.2.0/css/crosstalk.min.css" rel="stylesheet" />
+<script src="book_assets/crosstalk-1.2.0/js/crosstalk.min.js"></script>
+<link href="book_assets/plotly-htmlwidgets-css-2.5.1/plotly-htmlwidgets.css" rel="stylesheet" />
+<script src="book_assets/plotly-main-2.5.1/plotly-latest.min.js"></script>
+
+
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    background-color: #ffffff;
+    color: #a0a0a0;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #a0a0a0;  padding-left: 4px; }
+div.sourceCode
+  { color: #1f1c1b; background-color: #ffffff; }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span { color: #1f1c1b; } /* Normal */
+code span.al { color: #bf0303; background-color: #f7e6e6; font-weight: bold; } /* Alert */
+code span.an { color: #ca60ca; } /* Annotation */
+code span.at { color: #0057ae; } /* Attribute */
+code span.bn { color: #b08000; } /* BaseN */
+code span.bu { color: #644a9b; font-weight: bold; } /* BuiltIn */
+code span.cf { color: #1f1c1b; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #924c9d; } /* Char */
+code span.cn { color: #aa5500; } /* Constant */
+code span.co { color: #898887; } /* Comment */
+code span.cv { color: #0095ff; } /* CommentVar */
+code span.do { color: #607880; } /* Documentation */
+code span.dt { color: #0057ae; } /* DataType */
+code span.dv { color: #b08000; } /* DecVal */
+code span.er { color: #bf0303; text-decoration: underline; } /* Error */
+code span.ex { color: #0095ff; font-weight: bold; } /* Extension */
+code span.fl { color: #b08000; } /* Float */
+code span.fu { color: #644a9b; } /* Function */
+code span.im { color: #ff5500; } /* Import */
+code span.in { color: #b08000; } /* Information */
+code span.kw { color: #1f1c1b; font-weight: bold; } /* Keyword */
+code span.op { color: #1f1c1b; } /* Operator */
+code span.ot { color: #006e28; } /* Other */
+code span.pp { color: #006e28; } /* Preprocessor */
+code span.re { color: #0057ae; background-color: #e0e9f8; } /* RegionMarker */
+code span.sc { color: #3daee9; } /* SpecialChar */
+code span.ss { color: #ff5500; } /* SpecialString */
+code span.st { color: #bf0303; } /* String */
+code span.va { color: #0057ae; } /* Variable */
+code span.vs { color: #bf0303; } /* VerbatimString */
+code span.wa { color: #bf0303; } /* Warning */
+</style>
+
+<style type="text/css">
+/* Used with Pandoc 2.11+ new --citeproc when CSL is used */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+}
+.hanging div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}
+</style>
+
+<link rel="stylesheet" href="css/style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li class='beforeimg'>            
+   <a href="https://www.esilv.fr/">
+       <img src="img/Logo_ESILV_new.png" style="width:75%; padding:0px 0; display:block; margin: 0 auto;" alt="ESILV logo">
+    </a>
+</li>
+<li class='before'><a href="./">Machine Learning</a></li>
+
+<li class="divider"></li>
+<li><a href="index.html#welcome">Welcome<span></span></a>
+<ul>
+<li><a href="index.html#course-overview">Course Overview<span></span></a></li>
+<li><a href="index.html#course-schedule">Course Schedule<span></span></a></li>
+</ul></li>
+<li><a href="introduction.html#introduction">Introduction<span></span></a>
+<ul>
+<li><a href="introduction.html#what-is-machine-learning">What is Machine Learning ?<span></span></a></li>
+<li><a href="introduction.html#supervised-learning">Supervised Learning<span></span></a></li>
+<li><a href="introduction.html#unsupervised-learning">Unsupervised Learning<span></span></a></li>
+</ul></li>
+<li class="part"><span><b>I Supervised Learning<span></span></b></span></li>
+<li class="part"><span><b>Regression<span></span></b></span></li>
+<li class="chapter" data-level="1" data-path="1-linear-regression.html"><a href="1-linear-regression.html"><i class="fa fa-check"></i><b>1</b> Linear Regression<span></span></a>
+<ul>
+<li class="chapter" data-level="1.1" data-path="1-linear-regression.html"><a href="1-linear-regression.html#notation"><i class="fa fa-check"></i><b>1.1</b> Notation<span></span></a></li>
+<li class="chapter" data-level="1.2" data-path="1-linear-regression.html"><a href="1-linear-regression.html#model-representation"><i class="fa fa-check"></i><b>1.2</b> Model Representation<span></span></a></li>
+<li class="chapter" data-level="1.3" data-path="1-linear-regression.html"><a href="1-linear-regression.html#why-estimate-f"><i class="fa fa-check"></i><b>1.3</b> Why Estimate <span class="math inline">\(f\)</span> ?<span></span></a>
+<ul>
+<li><a href="1-linear-regression.html#prediction">Prediction<span></span></a></li>
+<li><a href="1-linear-regression.html#inference">Inference<span></span></a></li>
+</ul></li>
+<li class="chapter" data-level="1.4" data-path="1-linear-regression.html"><a href="1-linear-regression.html#simple-linear-regression-model"><i class="fa fa-check"></i><b>1.4</b> Simple Linear Regression Model<span></span></a></li>
+<li class="chapter" data-level="1.5" data-path="1-linear-regression.html"><a href="1-linear-regression.html#estimating-the-coefficients"><i class="fa fa-check"></i><b>1.5</b> Estimating the Coefficients<span></span></a></li>
+<li class="chapter" data-level="1.6" data-path="1-linear-regression.html"><a href="1-linear-regression.html#assessing-the-accuracy-of-the-coefficient-estimates"><i class="fa fa-check"></i><b>1.6</b> Assessing the Accuracy of the Coefficient Estimates<span></span></a>
+<ul>
+<li><a href="1-linear-regression.html#hypothesis-testing">Hypothesis testing<span></span></a></li>
+</ul></li>
+<li class="chapter" data-level="1.7" data-path="1-linear-regression.html"><a href="1-linear-regression.html#anova-and-model-fit"><i class="fa fa-check"></i><b>1.7</b> ANOVA and model fit<span></span></a>
+<ul>
+<li class="chapter" data-level="1.7.1" data-path="1-linear-regression.html"><a href="1-linear-regression.html#anova"><i class="fa fa-check"></i><b>1.7.1</b> ANOVA<span></span></a></li>
+<li class="chapter" data-level="1.7.2" data-path="1-linear-regression.html"><a href="1-linear-regression.html#the-r2-statistic"><i class="fa fa-check"></i><b>1.7.2</b> The <span class="math inline">\(R^2\)</span> Statistic<span></span></a></li>
+</ul></li>
+</ul></li>
+<li><a href="practical-work-1.html#practical-work-1">Practical Work 1<span></span></a>
+<ul>
+<li class="chapter" data-level="1.8" data-path="practical-work-1.html"><a href="practical-work-1.html"><i class="fa fa-check"></i><b>1.8</b> Some <svg aria-hidden="true" role="img" viewBox="0 0 581 512" style="height:1em;width:1.13em;vertical-align:-0.125em;margin-left:auto;margin-right:auto;font-size:inherit;fill:steelblue;overflow:visible;position:relative;"><path d="M581 226.6C581 119.1 450.9 32 290.5 32S0 119.1 0 226.6C0 322.4 103.3 402 239.4 418.1V480h99.1v-61.5c24.3-2.7 47.6-7.4 69.4-13.9L448 480h112l-67.4-113.7c54.5-35.4 88.4-84.9 88.4-139.7zm-466.8 14.5c0-73.5 98.9-133 220.8-133s211.9 40.7 211.9 133c0 50.1-26.5 85-70.3 106.4-2.4-1.6-4.7-2.9-6.4-3.7-10.2-5.2-27.8-10.5-27.8-10.5s86.6-6.4 86.6-92.7-90.6-87.9-90.6-87.9h-199V361c-74.1-21.5-125.2-67.1-125.2-119.9zm225.1 38.3v-55.6c57.8 0 87.8-6.8 87.8 27.3 0 36.5-38.2 28.3-87.8 28.3zm-.9 72.5H365c10.8 0 18.9 11.7 24 19.2-16.1 1.9-33 2.8-50.6 2.9v-22.1z"/></svg> basics<span></span></a>
+<ul>
+<li class="chapter" data-level="1.8.1" data-path="practical-work-1.html"><a href="practical-work-1.html#basic-commands"><i class="fa fa-check"></i><b>1.8.1</b> Basic Commands<span></span></a></li>
+<li class="chapter" data-level="1.8.2" data-path="practical-work-1.html"><a href="practical-work-1.html#vectors"><i class="fa fa-check"></i><b>1.8.2</b> Vectors<span></span></a></li>
+<li class="chapter" data-level="1.8.3" data-path="practical-work-1.html"><a href="practical-work-1.html#matrices-data-frames-and-lists"><i class="fa fa-check"></i><b>1.8.3</b> Matrices, data frames and lists<span></span></a></li>
+<li class="chapter" data-level="1.8.4" data-path="practical-work-1.html"><a href="practical-work-1.html#graphics"><i class="fa fa-check"></i><b>1.8.4</b> Graphics<span></span></a></li>
+<li class="chapter" data-level="1.8.5" data-path="practical-work-1.html"><a href="practical-work-1.html#distributions"><i class="fa fa-check"></i><b>1.8.5</b> Distributions<span></span></a></li>
+<li class="chapter" data-level="1.8.6" data-path="practical-work-1.html"><a href="practical-work-1.html#working-directory"><i class="fa fa-check"></i><b>1.8.6</b> Working directory<span></span></a></li>
+<li class="chapter" data-level="1.8.7" data-path="practical-work-1.html"><a href="practical-work-1.html#loading-data"><i class="fa fa-check"></i><b>1.8.7</b> Loading Data<span></span></a></li>
+</ul></li>
+<li class="chapter" data-level="1.9" data-path="practical-work-1.html"><a href="practical-work-1.html#regression"><i class="fa fa-check"></i><b>1.9</b> Regression<span></span></a>
+<ul>
+<li class="chapter" data-level="1.9.1" data-path="practical-work-1.html"><a href="practical-work-1.html#the-lm-function"><i class="fa fa-check"></i><b>1.9.1</b> The <code>lm</code> function<span></span></a></li>
+<li class="chapter" data-level="1.9.2" data-path="practical-work-1.html"><a href="practical-work-1.html#boston"><i class="fa fa-check"></i><b>1.9.2</b> Predicting House Value: Boston dataset<span></span></a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="2-multiple-linear-regression.html"><a href="2-multiple-linear-regression.html"><i class="fa fa-check"></i><b>2</b> Multiple Linear Regression<span></span></a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="2-multiple-linear-regression.html"><a href="2-multiple-linear-regression.html#the-model"><i class="fa fa-check"></i><b>2.1</b> The Model<span></span></a></li>
+<li class="chapter" data-level="2.2" data-path="2-multiple-linear-regression.html"><a href="2-multiple-linear-regression.html#estimating-the-regression-coefficients"><i class="fa fa-check"></i><b>2.2</b> Estimating the Regression Coefficients<span></span></a></li>
+<li class="chapter" data-level="2.3" data-path="2-multiple-linear-regression.html"><a href="2-multiple-linear-regression.html#some-important-questions"><i class="fa fa-check"></i><b>2.3</b> Some important questions<span></span></a>
+<ul>
+<li class="chapter" data-level="2.3.1" data-path="2-multiple-linear-regression.html"><a href="2-multiple-linear-regression.html#other-consid"><i class="fa fa-check"></i><b>2.3.1</b> Other Considerations in Regression Model<span></span></a></li>
+</ul></li>
+<li class="chapter" data-level="2.4" data-path="2-multiple-linear-regression.html"><a href="2-multiple-linear-regression.html#how-to-select-the-best-performing-model"><i class="fa fa-check"></i><b>2.4</b> How to select the best performing model<span></span></a>
+<ul>
+<li><a href="2-multiple-linear-regression.html#use-the-adjusted-r_adj2-for-multivariate-models">Use the Adjusted <span class="math inline">\(R_{adj}^2\)</span> for multivariate models<span></span></a></li>
+<li><a href="2-multiple-linear-regression.html#have-a-look-at-the-residuals-or-error-terms">Have a look at the residuals or error terms<span></span></a></li>
+<li><a href="2-multiple-linear-regression.html#histogram-of-residuals">Histogram of residuals<span></span></a></li>
+</ul></li>
+</ul></li>
+<li><a href="pw-2.html#pw-2">PW 2<span></span></a>
+<ul>
+<li><a href="pw-2.html#multiple-linear-regression-1">Multiple Linear Regression<span></span></a></li>
+<li><a href="pw-2.html#reporting">Reporting<span></span></a></li>
+</ul></li>
+<li class="part"><span><b>Classification<span></span></b></span></li>
+<li class="chapter" data-level="3" data-path="3-logistic-regression.html"><a href="3-logistic-regression.html"><i class="fa fa-check"></i><b>3</b> Logistic Regression<span></span></a>
+<ul>
+<li class="chapter" data-level="3.1" data-path="3-logistic-regression.html"><a href="3-logistic-regression.html#introduction-1"><i class="fa fa-check"></i><b>3.1</b> Introduction<span></span></a></li>
+<li class="chapter" data-level="3.2" data-path="3-logistic-regression.html"><a href="3-logistic-regression.html#logistic-regression-1"><i class="fa fa-check"></i><b>3.2</b> Logistic Regression<span></span></a>
+<ul>
+<li class="chapter" data-level="3.2.1" data-path="3-logistic-regression.html"><a href="3-logistic-regression.html#the-logistic-model"><i class="fa fa-check"></i><b>3.2.1</b> The Logistic Model<span></span></a></li>
+<li class="chapter" data-level="3.2.2" data-path="3-logistic-regression.html"><a href="3-logistic-regression.html#estimating-the-regression-coefficients-1"><i class="fa fa-check"></i><b>3.2.2</b> Estimating the Regression Coefficients<span></span></a></li>
+<li class="chapter" data-level="3.2.3" data-path="3-logistic-regression.html"><a href="3-logistic-regression.html#prediction-1"><i class="fa fa-check"></i><b>3.2.3</b> Prediction<span></span></a></li>
+</ul></li>
+<li class="chapter" data-level="3.3" data-path="3-logistic-regression.html"><a href="3-logistic-regression.html#multiple-logistic-regression"><i class="fa fa-check"></i><b>3.3</b> Multiple Logistic Regression<span></span></a></li>
+<li class="chapter" data-level="3.4" data-path="3-logistic-regression.html"><a href="3-logistic-regression.html#logreg-examps"><i class="fa fa-check"></i><b>3.4</b> Example<span></span></a>
+<ul>
+<li class="chapter" data-level="3.4.1" data-path="3-logistic-regression.html"><a href="3-logistic-regression.html#logreg-examps-challenger"><i class="fa fa-check"></i><b>3.4.1</b> Case study: <em>The Challenger disaster</em><span></span></a></li>
+</ul></li>
+</ul></li>
+<li><a href="pw-3.html#pw-3">PW 3<span></span></a>
+<ul>
+<li><a href="pw-3.html#social-networks-ads">Social Networks Ads<span></span></a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="4-discriminant-analysis.html"><a href="4-discriminant-analysis.html"><i class="fa fa-check"></i><b>4</b> Discriminant Analysis<span></span></a>
+<ul>
+<li class="chapter" data-level="4.1" data-path="4-discriminant-analysis.html"><a href="4-discriminant-analysis.html#introduction-2"><i class="fa fa-check"></i><b>4.1</b> Introduction<span></span></a></li>
+<li class="chapter" data-level="4.2" data-path="4-discriminant-analysis.html"><a href="4-discriminant-analysis.html#bayes-theorem"><i class="fa fa-check"></i><b>4.2</b> Bayes’ Theorem<span></span></a></li>
+<li class="chapter" data-level="4.3" data-path="4-discriminant-analysis.html"><a href="4-discriminant-analysis.html#lda-for-p1"><i class="fa fa-check"></i><b>4.3</b> LDA for <span class="math inline">\(p=1\)</span><span></span></a></li>
+<li class="chapter" data-level="4.4" data-path="4-discriminant-analysis.html"><a href="4-discriminant-analysis.html#estimating-the-parameters"><i class="fa fa-check"></i><b>4.4</b> Estimating the parameters<span></span></a></li>
+<li class="chapter" data-level="4.5" data-path="4-discriminant-analysis.html"><a href="4-discriminant-analysis.html#lda-for-p-1"><i class="fa fa-check"></i><b>4.5</b> LDA for <span class="math inline">\(p &gt; 1\)</span><span></span></a></li>
+<li class="chapter" data-level="4.6" data-path="4-discriminant-analysis.html"><a href="4-discriminant-analysis.html#making-predictions"><i class="fa fa-check"></i><b>4.6</b> Making predictions<span></span></a></li>
+<li class="chapter" data-level="4.7" data-path="4-discriminant-analysis.html"><a href="4-discriminant-analysis.html#other-forms-of-discriminant-analysis"><i class="fa fa-check"></i><b>4.7</b> Other forms of Discriminant Analysis<span></span></a>
+<ul>
+<li class="chapter" data-level="4.7.1" data-path="4-discriminant-analysis.html"><a href="4-discriminant-analysis.html#quadratic-discriminant-analysis-qda"><i class="fa fa-check"></i><b>4.7.1</b> Quadratic Discriminant Analysis (QDA)<span></span></a></li>
+<li class="chapter" data-level="4.7.2" data-path="4-discriminant-analysis.html"><a href="4-discriminant-analysis.html#naive-bayes"><i class="fa fa-check"></i><b>4.7.2</b> Naive Bayes<span></span></a></li>
+</ul></li>
+<li class="chapter" data-level="4.8" data-path="4-discriminant-analysis.html"><a href="4-discriminant-analysis.html#lda-vs-logistic-regression"><i class="fa fa-check"></i><b>4.8</b> LDA vs Logistic Regression<span></span></a></li>
+</ul></li>
+<li><a href="pw-4.html#pw-4">PW 4<span></span></a>
+<ul>
+<li><a href="pw-4.html#logistic-regression-2">Logistic Regression<span></span></a></li>
+<li><a href="pw-4.html#decision-boundary-of-logistic-regression">Decision Boundary of Logistic Regression<span></span></a></li>
+<li><a href="pw-4.html#linear-discriminant-analysis-lda">Linear Discriminant Analysis (LDA)<span></span></a></li>
+<li><a href="pw-4.html#lda-from-scratch">LDA from scratch<span></span></a></li>
+<li><a href="pw-4.html#quadratic-discriminant-analysis-qda-1">Quadratic Discriminant Analysis (QDA)<span></span></a></li>
+<li><a href="pw-4.html#comparison">Comparison<span></span></a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="5-decision-trees-random-forests.html"><a href="5-decision-trees-random-forests.html"><i class="fa fa-check"></i><b>5</b> Decision Trees &amp; Random Forests<span></span></a>
+<ul>
+<li><a href="5-decision-trees-random-forests.html#the-basics-of-decision-trees">The Basics of Decision Trees<span></span></a></li>
+<li><a href="5-decision-trees-random-forests.html#classification-trees">Classification Trees<span></span></a></li>
+<li><a href="5-decision-trees-random-forests.html#bagging-random-forests">Bagging &amp; Random Forests<span></span></a></li>
+<li><a href="5-decision-trees-random-forests.html#boosting">Boosting<span></span></a></li>
+<li><a href="5-decision-trees-random-forests.html#trees-in-r">Trees in <code>R</code><span></span></a></li>
+<li><a href="5-decision-trees-random-forests.html#random-forests---the-first-choice-method-for-every-data-analysis">Random forests - the first-choice method for every data analysis?<span></span></a></li>
+</ul></li>
+<li><a href="pw-5.html#pw-5">PW 5<span></span></a>
+<ul>
+<li><a href="pw-5.html#regression-trees">Regression Trees<span></span></a>
+<ul>
+<li><a href="pw-5.html#single-tree">Single tree<span></span></a></li>
+<li><a href="pw-5.html#bagging">Bagging<span></span></a></li>
+<li><a href="pw-5.html#random-forests">Random Forests<span></span></a></li>
+<li><a href="pw-5.html#boosting-1">Boosting<span></span></a></li>
+<li><a href="pw-5.html#comparison-1">Comparison<span></span></a></li>
+</ul></li>
+<li><a href="pw-5.html#classification-trees-1">Classification Trees<span></span></a>
+<ul>
+<li><a href="pw-5.html#the-spam-dataset">The Spam dataset<span></span></a></li>
+<li><a href="pw-5.html#extra-tuning">Extra: Tuning<span></span></a></li>
+</ul></li>
+</ul></li>
+<li class="part"><span><b>II Dimensionality Reduction<span></span></b></span></li>
+<li class="chapter" data-level="6" data-path="6-principal-components-analysis.html"><a href="6-principal-components-analysis.html"><i class="fa fa-check"></i><b>6</b> Principal Components Analysis<span></span></a>
+<ul>
+<li class="chapter" data-level="6.1" data-path="6-principal-components-analysis.html"><a href="6-principal-components-analysis.html#introduction-3"><i class="fa fa-check"></i><b>6.1</b> Introduction<span></span></a></li>
+<li class="chapter" data-level="6.2" data-path="6-principal-components-analysis.html"><a href="6-principal-components-analysis.html#principal-components"><i class="fa fa-check"></i><b>6.2</b> Principal Components<span></span></a>
+<ul>
+<li><a href="6-principal-components-analysis.html#notations-and-procedure">Notations and Procedure<span></span></a></li>
+<li><a href="6-principal-components-analysis.html#first-principal-component-textpc_1-y_1">First Principal Component (<span class="math inline">\(\text{PC}_1\)</span>): <span class="math inline">\(Y_1\)</span><span></span></a></li>
+<li><a href="6-principal-components-analysis.html#second-principal-component-textpc_2-y_2">Second Principal Component (<span class="math inline">\(\text{PC}_2\)</span>): <span class="math inline">\(Y_2\)</span><span></span></a></li>
+<li><a href="6-principal-components-analysis.html#ith-principal-component-textpc_i-y_i"><span class="math inline">\(i^{th}\)</span> Principal Component (<span class="math inline">\(\text{PC}_i\)</span>): <span class="math inline">\(Y_i\)</span><span></span></a></li>
+</ul></li>
+<li class="chapter" data-level="6.3" data-path="6-principal-components-analysis.html"><a href="6-principal-components-analysis.html#how-do-we-find-the-coefficients"><i class="fa fa-check"></i><b>6.3</b> How do we find the coefficients?<span></span></a>
+<ul>
+<li><a href="6-principal-components-analysis.html#why-it-may-be-possible-to-reduce-dimensions">Why It May Be Possible to Reduce Dimensions<span></span></a></li>
+<li><a href="6-principal-components-analysis.html#procedure">Procedure<span></span></a></li>
+</ul></li>
+<li class="chapter" data-level="6.4" data-path="6-principal-components-analysis.html"><a href="6-principal-components-analysis.html#standardization-of-the-features"><i class="fa fa-check"></i><b>6.4</b> Standardization of the features<span></span></a></li>
+<li class="chapter" data-level="6.5" data-path="6-principal-components-analysis.html"><a href="6-principal-components-analysis.html#projection-of-the-data"><i class="fa fa-check"></i><b>6.5</b> Projection of the data<span></span></a>
+<ul>
+<li><a href="6-principal-components-analysis.html#scores">Scores<span></span></a></li>
+<li><a href="6-principal-components-analysis.html#visualization">Visualization<span></span></a></li>
+<li><a href="6-principal-components-analysis.html#extra">Extra<span></span></a></li>
+</ul></li>
+<li class="chapter" data-level="6.6" data-path="6-principal-components-analysis.html"><a href="6-principal-components-analysis.html#case-study"><i class="fa fa-check"></i><b>6.6</b> Case study<span></span></a>
+<ul>
+<li><a href="6-principal-components-analysis.html#employement-in-european-countries-in-the-late-70s">Employement in European countries in the late 70s<span></span></a></li>
+</ul></li>
+</ul></li>
+<li><a href="pw-6.html#pw-6">PW 6<span></span></a>
+<ul>
+<li><a href="pw-6.html#the-iris-dataset">The Iris Dataset<span></span></a></li>
+<li><a href="pw-6.html#loading-data-1">Loading Data<span></span></a></li>
+<li><a href="pw-6.html#exploratory-analysis">Exploratory analysis<span></span></a></li>
+<li><a href="pw-6.html#pca-using-princomp">PCA using <code>princomp()</code><span></span></a></li>
+<li><a href="pw-6.html#deeper-pca-using-factoextra-package">Deeper PCA using <code>factoextra</code> package<span></span></a></li>
+<li><a href="pw-6.html#step-by-step-pca">Step-by-step PCA<span></span></a></li>
+</ul></li>
+<li class="part"><span><b>III Unsupervised Learning<span></span></b></span></li>
+<li class="chapter" data-level="7" data-path="7-kmeans-hierarchical-clustering.html"><a href="7-kmeans-hierarchical-clustering.html"><i class="fa fa-check"></i><b>7</b> Kmeans &amp; Hierarchical Clustering<span></span></a>
+<ul>
+<li class="chapter" data-level="7.1" data-path="7-kmeans-hierarchical-clustering.html"><a href="7-kmeans-hierarchical-clustering.html#unsupervised-learning-1"><i class="fa fa-check"></i><b>7.1</b> Unsupervised Learning<span></span></a></li>
+<li class="chapter" data-level="7.2" data-path="7-kmeans-hierarchical-clustering.html"><a href="7-kmeans-hierarchical-clustering.html#clustering"><i class="fa fa-check"></i><b>7.2</b> Clustering<span></span></a></li>
+<li class="chapter" data-level="7.3" data-path="7-kmeans-hierarchical-clustering.html"><a href="7-kmeans-hierarchical-clustering.html#introduction-4"><i class="fa fa-check"></i><b>7.3</b> Introduction<span></span></a>
+<ul>
+<li><a href="7-kmeans-hierarchical-clustering.html#hard-clustering">Hard clustering<span></span></a></li>
+<li><a href="7-kmeans-hierarchical-clustering.html#fuzzy-clustering">Fuzzy clustering<span></span></a></li>
+</ul></li>
+<li class="chapter" data-level="7.4" data-path="7-kmeans-hierarchical-clustering.html"><a href="7-kmeans-hierarchical-clustering.html#k-means"><i class="fa fa-check"></i><b>7.4</b> <span class="math inline">\(k\)</span>-Means<span></span></a>
+<ul>
+<li class="chapter" data-level="7.4.1" data-path="7-kmeans-hierarchical-clustering.html"><a href="7-kmeans-hierarchical-clustering.html#k-means-in"><i class="fa fa-check"></i><b>7.4.1</b> <span class="math inline">\(k\)</span>-means in <svg aria-hidden="true" role="img" viewBox="0 0 581 512" style="height:1em;width:1.13em;vertical-align:-0.125em;margin-left:auto;margin-right:auto;font-size:inherit;fill:steelblue;overflow:visible;position:relative;"><path d="M581 226.6C581 119.1 450.9 32 290.5 32S0 119.1 0 226.6C0 322.4 103.3 402 239.4 418.1V480h99.1v-61.5c24.3-2.7 47.6-7.4 69.4-13.9L448 480h112l-67.4-113.7c54.5-35.4 88.4-84.9 88.4-139.7zm-466.8 14.5c0-73.5 98.9-133 220.8-133s211.9 40.7 211.9 133c0 50.1-26.5 85-70.3 106.4-2.4-1.6-4.7-2.9-6.4-3.7-10.2-5.2-27.8-10.5-27.8-10.5s86.6-6.4 86.6-92.7-90.6-87.9-90.6-87.9h-199V361c-74.1-21.5-125.2-67.1-125.2-119.9zm225.1 38.3v-55.6c57.8 0 87.8-6.8 87.8 27.3 0 36.5-38.2 28.3-87.8 28.3zm-.9 72.5H365c10.8 0 18.9 11.7 24 19.2-16.1 1.9-33 2.8-50.6 2.9v-22.1z"/></svg><span></span></a></li>
+<li class="chapter" data-level="7.4.2" data-path="7-kmeans-hierarchical-clustering.html"><a href="7-kmeans-hierarchical-clustering.html#cluster-validity-choosing-the-number-of-clusters"><i class="fa fa-check"></i><b>7.4.2</b> Cluster Validity, Choosing the Number of Clusters<span></span></a></li>
+</ul></li>
+<li class="chapter" data-level="7.5" data-path="7-kmeans-hierarchical-clustering.html"><a href="7-kmeans-hierarchical-clustering.html#hierarchical-clustering"><i class="fa fa-check"></i><b>7.5</b> Hierarchical Clustering<span></span></a>
+<ul>
+<li class="chapter" data-level="7.5.1" data-path="7-kmeans-hierarchical-clustering.html"><a href="7-kmeans-hierarchical-clustering.html#dendrogram"><i class="fa fa-check"></i><b>7.5.1</b> Dendrogram<span></span></a></li>
+<li class="chapter" data-level="7.5.2" data-path="7-kmeans-hierarchical-clustering.html"><a href="7-kmeans-hierarchical-clustering.html#the-hierarchical-clustering-algorithm"><i class="fa fa-check"></i><b>7.5.2</b> The Hierarchical Clustering Algorithm<span></span></a></li>
+<li class="chapter" data-level="7.5.3" data-path="7-kmeans-hierarchical-clustering.html"><a href="7-kmeans-hierarchical-clustering.html#hierarchical-clustering-in"><i class="fa fa-check"></i><b>7.5.3</b> Hierarchical clustering in <svg aria-hidden="true" role="img" viewBox="0 0 581 512" style="height:1em;width:1.13em;vertical-align:-0.125em;margin-left:auto;margin-right:auto;font-size:inherit;fill:steelblue;overflow:visible;position:relative;"><path d="M581 226.6C581 119.1 450.9 32 290.5 32S0 119.1 0 226.6C0 322.4 103.3 402 239.4 418.1V480h99.1v-61.5c24.3-2.7 47.6-7.4 69.4-13.9L448 480h112l-67.4-113.7c54.5-35.4 88.4-84.9 88.4-139.7zm-466.8 14.5c0-73.5 98.9-133 220.8-133s211.9 40.7 211.9 133c0 50.1-26.5 85-70.3 106.4-2.4-1.6-4.7-2.9-6.4-3.7-10.2-5.2-27.8-10.5-27.8-10.5s86.6-6.4 86.6-92.7-90.6-87.9-90.6-87.9h-199V361c-74.1-21.5-125.2-67.1-125.2-119.9zm225.1 38.3v-55.6c57.8 0 87.8-6.8 87.8 27.3 0 36.5-38.2 28.3-87.8 28.3zm-.9 72.5H365c10.8 0 18.9 11.7 24 19.2-16.1 1.9-33 2.8-50.6 2.9v-22.1z"/></svg><span></span></a></li>
+</ul></li>
+</ul></li>
+<li><a href="pw-7.html#pw-7">PW 7<span></span></a>
+<ul>
+<li><a href="pw-7.html#reporting-1">Reporting<span></span></a>
+<ul>
+<li><a href="pw-7.html#markdown">Markdown<span></span></a></li>
+<li><a href="pw-7.html#r-markdown">R Markdown<span></span></a></li>
+<li><a href="pw-7.html#the-report-to-be-submitted">The report to be submitted<span></span></a></li>
+</ul></li>
+<li><a href="pw-7.html#k-means-clustering"><span class="math inline">\(k\)</span>-means clustering<span></span></a>
+<ul>
+<li><a href="pw-7.html#pointscards"><code>pointsCards</code><span></span></a></li>
+<li><a href="pw-7.html#ligue-1"><code>Ligue 1</code><span></span></a></li>
+<li><a href="pw-7.html#pca"><code>PCA</code><span></span></a></li>
+<li><a href="pw-7.html#implementing-k-means"><code>Implementing k-means</code><span></span></a></li>
+</ul></li>
+<li><a href="pw-7.html#hierarchical-clustering-1">Hierarchical clustering<span></span></a>
+<ul>
+<li><a href="pw-7.html#distances-dist">Distances <code>dist()</code><span></span></a></li>
+<li><a href="pw-7.html#dendrogram-hclust">Dendrogram <code>hclust()</code><span></span></a></li>
+<li><a href="pw-7.html#hierarchical-clustering-on-iris-dataset">Hierarchical clustering on Iris dataset<span></span></a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="8" data-path="8-gaussian-mixture-models-em.html"><a href="8-gaussian-mixture-models-em.html"><i class="fa fa-check"></i><b>8</b> Gaussian Mixture Models &amp; EM<span></span></a>
+<ul>
+<li class="chapter" data-level="8.1" data-path="8-gaussian-mixture-models-em.html"><a href="8-gaussian-mixture-models-em.html#the-gaussian-distribution"><i class="fa fa-check"></i><b>8.1</b> The Gaussian distribution<span></span></a></li>
+<li class="chapter" data-level="8.2" data-path="8-gaussian-mixture-models-em.html"><a href="8-gaussian-mixture-models-em.html#mixture-of-gaussians"><i class="fa fa-check"></i><b>8.2</b> Mixture of Gaussians<span></span></a></li>
+<li class="chapter" data-level="8.3" data-path="8-gaussian-mixture-models-em.html"><a href="8-gaussian-mixture-models-em.html#em-for-gaussian-mixtures"><i class="fa fa-check"></i><b>8.3</b> EM for Gaussian Mixtures<span></span></a></li>
+</ul></li>
+<li><a href="pw-8.html#pw-8">PW 8<span></span></a>
+<ul>
+<li><a href="pw-8.html#report-template">Report template<span></span></a></li>
+<li class="chapter" data-level="8.4" data-path="pw-8.html"><a href="pw-8.html"><i class="fa fa-check"></i><b>8.4</b> EM using <code>mclust</code><span></span></a>
+<ul>
+<li><a href="pw-8.html#gmm-vs-k-means">GMM vs <span class="math inline">\(k\)</span>-means<span></span></a></li>
+<li><a href="pw-8.html#em-on-1d">EM on 1D<span></span></a></li>
+</ul></li>
+<li class="chapter" data-level="8.5" data-path="pw-8.html"><a href="pw-8.html#em-from-scratch"><i class="fa fa-check"></i><b>8.5</b> EM from scratch<span></span></a></li>
+</ul></li>
+<li class="part"><span><b>Hackathon<span></span></b></span></li>
+<li><a href="hackathon.html#hackathon">Hackathon<span></span></a></li>
+<li class="appendix"><span><b>Appendix<span></span></b></span></li>
+<li class="chapter" data-level="A" data-path="A-final-grades.html"><a href="A-final-grades.html"><i class="fa fa-check"></i><b>A</b> Final Grades<span></span></a></li>
+<li class="chapter" data-level="B" data-path="B-app-introRStudio.html"><a href="B-app-introRStudio.html"><i class="fa fa-check"></i><b>B</b> Introduction to <code>RStudio</code><span></span></a></li>
+<li class="chapter" data-level="C" data-path="C-app-ht.html"><a href="C-app-ht.html"><i class="fa fa-check"></i><b>C</b> Review on hypothesis testing<span></span></a></li>
+<li class="chapter" data-level="D" data-path="D-use-qual.html"><a href="D-use-qual.html"><i class="fa fa-check"></i><b>D</b> Use of qualitative predictors<span></span></a></li>
+<li class="chapter" data-level="E" data-path="E-model-selection.html"><a href="E-model-selection.html"><i class="fa fa-check"></i><b>E</b> Model Selection<span></span></a>
+<ul>
+<li><a href="E-model-selection.html#linear-model-selection-and-best-subset-selection">Linear Model Selection and Best Subset Selection<span></span></a></li>
+<li><a href="E-model-selection.html#forward-stepwise-selection">Forward Stepwise Selection<span></span></a></li>
+<li><a href="E-model-selection.html#backward-stepwise-selection">Backward Stepwise Selection<span></span></a></li>
+<li><a href="E-model-selection.html#estimating-test-error-using-mallows-cp-aic-bic-adjusted-r-squared">Estimating Test Error Using Mallow’s Cp, AIC, BIC, Adjusted R-squared<span></span></a></li>
+<li><a href="E-model-selection.html#estimating-test-error-using-cross-validation">Estimating Test Error Using Cross-Validation<span></span></a></li>
+<li><a href="E-model-selection.html#examples">Examples<span></span></a>
+<ul>
+<li><a href="E-model-selection.html#best-subset-selection">Best Subset Selection<span></span></a></li>
+<li><a href="E-model-selection.html#forward-stepwise-selection-and-model-selection-using-validation-set">Forward Stepwise Selection and Model Selection Using Validation Set<span></span></a></li>
+<li><a href="E-model-selection.html#model-selection-using-cross-validation">Model Selection Using Cross-Validation<span></span></a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="F" data-path="F-references-and-credits.html"><a href="F-references-and-credits.html"><i class="fa fa-check"></i><b>F</b> References and Credits<span></span></a></li>
+<li class="chapter" data-level="G" data-path="G-other-references.html"><a href="G-other-references.html"><i class="fa fa-check"></i><b>G</b> Other References<span></span></a></li>
+<li><a href="main-references-credits.html#main-references-credits">Main References &amp; Credits<span></span></a></li>
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Machine Learning</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="pw-5" class="section level1 unnumbered hasAnchor">
+<h1>PW 5<a href="pw-5.html#pw-5" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<p>In this practical work, we will build some decision trees for both <em>regression</em> and <em>classification</em> problems. Note that there are many packages to do this in <svg aria-hidden="true" role="img" viewBox="0 0 581 512" style="height:1em;width:1.13em;vertical-align:-0.125em;margin-left:auto;margin-right:auto;font-size:inherit;fill:steelblue;overflow:visible;position:relative;"><path d="M581 226.6C581 119.1 450.9 32 290.5 32S0 119.1 0 226.6C0 322.4 103.3 402 239.4 418.1V480h99.1v-61.5c24.3-2.7 47.6-7.4 69.4-13.9L448 480h112l-67.4-113.7c54.5-35.4 88.4-84.9 88.4-139.7zm-466.8 14.5c0-73.5 98.9-133 220.8-133s211.9 40.7 211.9 133c0 50.1-26.5 85-70.3 106.4-2.4-1.6-4.7-2.9-6.4-3.7-10.2-5.2-27.8-10.5-27.8-10.5s86.6-6.4 86.6-92.7-90.6-87.9-90.6-87.9h-199V361c-74.1-21.5-125.2-67.1-125.2-119.9zm225.1 38.3v-55.6c57.8 0 87.8-6.8 87.8 27.3 0 36.5-38.2 28.3-87.8 28.3zm-.9 72.5H365c10.8 0 18.9 11.7 24 19.2-16.1 1.9-33 2.8-50.6 2.9v-22.1z"/></svg> . The <code>tree</code> package is the basic package to do so, while the <code>rpart</code><a href="main-references-credits.html#fn17" class="footnote-ref" id="fnref17"><sup>17</sup></a> package seems more widely suggested and provides better plotting features. So we will use the <code>rpart</code> package.</p>
+<div class="rmdcaution">
+<p>It is recommended for correct and better using of <svg aria-hidden="true" role="img" viewBox="0 0 581 512" style="height:1em;width:1.13em;vertical-align:-0.125em;margin-left:auto;margin-right:auto;font-size:inherit;fill:steelblue;overflow:visible;position:relative;"><path d="M581 226.6C581 119.1 450.9 32 290.5 32S0 119.1 0 226.6C0 322.4 103.3 402 239.4 418.1V480h99.1v-61.5c24.3-2.7 47.6-7.4 69.4-13.9L448 480h112l-67.4-113.7c54.5-35.4 88.4-84.9 88.4-139.7zm-466.8 14.5c0-73.5 98.9-133 220.8-133s211.9 40.7 211.9 133c0 50.1-26.5 85-70.3 106.4-2.4-1.6-4.7-2.9-6.4-3.7-10.2-5.2-27.8-10.5-27.8-10.5s86.6-6.4 86.6-92.7-90.6-87.9-90.6-87.9h-199V361c-74.1-21.5-125.2-67.1-125.2-119.9zm225.1 38.3v-55.6c57.8 0 87.8-6.8 87.8 27.3 0 36.5-38.2 28.3-87.8 28.3zm-.9 72.5H365c10.8 0 18.9 11.7 24 19.2-16.1 1.9-33 2.8-50.6 2.9v-22.1z"/></svg> functions that you consult their documentations. Every <svg aria-hidden="true" role="img" viewBox="0 0 581 512" style="height:1em;width:1.13em;vertical-align:-0.125em;margin-left:auto;margin-right:auto;font-size:inherit;fill:steelblue;overflow:visible;position:relative;"><path d="M581 226.6C581 119.1 450.9 32 290.5 32S0 119.1 0 226.6C0 322.4 103.3 402 239.4 418.1V480h99.1v-61.5c24.3-2.7 47.6-7.4 69.4-13.9L448 480h112l-67.4-113.7c54.5-35.4 88.4-84.9 88.4-139.7zm-466.8 14.5c0-73.5 98.9-133 220.8-133s211.9 40.7 211.9 133c0 50.1-26.5 85-70.3 106.4-2.4-1.6-4.7-2.9-6.4-3.7-10.2-5.2-27.8-10.5-27.8-10.5s86.6-6.4 86.6-92.7-90.6-87.9-90.6-87.9h-199V361c-74.1-21.5-125.2-67.1-125.2-119.9zm225.1 38.3v-55.6c57.8 0 87.8-6.8 87.8 27.3 0 36.5-38.2 28.3-87.8 28.3zm-.9 72.5H365c10.8 0 18.9 11.7 24 19.2-16.1 1.9-33 2.8-50.6 2.9v-22.1z"/></svg> function is well documented indeed. You can do so by writing <code>?function_name</code> or <code>help(function_name)</code>in the console.</p>
+<p>Especially for functions with multiple use, for example, <code>glm()</code> is a function that fits generalizes linear models, one of them is logistic regression when <code>type = "binomial"</code>.</p>
+<p>Another example, is the function <code>predict()</code>, that is a generic function for predictions from the results of various model fitting functions. Its first argument is a <svg aria-hidden="true" role="img" viewBox="0 0 581 512" style="height:1em;width:1.13em;vertical-align:-0.125em;margin-left:auto;margin-right:auto;font-size:inherit;fill:steelblue;overflow:visible;position:relative;"><path d="M581 226.6C581 119.1 450.9 32 290.5 32S0 119.1 0 226.6C0 322.4 103.3 402 239.4 418.1V480h99.1v-61.5c24.3-2.7 47.6-7.4 69.4-13.9L448 480h112l-67.4-113.7c54.5-35.4 88.4-84.9 88.4-139.7zm-466.8 14.5c0-73.5 98.9-133 220.8-133s211.9 40.7 211.9 133c0 50.1-26.5 85-70.3 106.4-2.4-1.6-4.7-2.9-6.4-3.7-10.2-5.2-27.8-10.5-27.8-10.5s86.6-6.4 86.6-92.7-90.6-87.9-90.6-87.9h-199V361c-74.1-21.5-125.2-67.1-125.2-119.9zm225.1 38.3v-55.6c57.8 0 87.8-6.8 87.8 27.3 0 36.5-38.2 28.3-87.8 28.3zm-.9 72.5H365c10.8 0 18.9 11.7 24 19.2-16.1 1.9-33 2.8-50.6 2.9v-22.1z"/></svg> object, a model, and the rest of the arguments depends on the nature of the object. If you want to consult the documentation about using <code>predict()</code> for a tree built with <code>rpart()</code>, do <code>?predict.rpart</code> or <code>help(predict.rpart)</code></p>
+</div>
+<div class="rmdtip">
+<p>If you want to run a function from a certain package without loading the package, you can write <code>package::function()</code>. For example <code>MASS::lda()</code> or <code>rpart::rpart()</code>. It is also helpful to remember the name of the package in which the function is defined.</p>
+</div>
+<div id="regression-trees" class="section level2 unnumbered hasAnchor">
+<h2>Regression Trees<a href="pw-5.html#regression-trees" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="single-tree" class="section level3 unnumbered hasAnchor">
+<h3>Single tree<a href="pw-5.html#single-tree" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>To demonstrate regression trees, we will use the <code>Boston</code> dataset that we used during the first two practical works, from the <code>MASS</code> package. Recall that <code>medv</code> is the response.</p>
+<p><strong>1</strong>. Load the Boston dataset from <code>MASS</code> package. Split the dataset randomly in half.</p>
+<div class="sourceCode" id="cb45"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb45-1"><a href="pw-5.html#cb45-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(MASS)</span>
+<span id="cb45-2"><a href="pw-5.html#cb45-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(caTools)</span>
+<span id="cb45-3"><a href="pw-5.html#cb45-3" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">18</span>)</span>
+<span id="cb45-4"><a href="pw-5.html#cb45-4" aria-hidden="true" tabindex="-1"></a>Boston_idx <span class="ot">=</span> <span class="fu">sample</span>(<span class="dv">1</span><span class="sc">:</span><span class="fu">nrow</span>(Boston), <span class="fu">nrow</span>(Boston) <span class="sc">/</span> <span class="dv">2</span>) </span>
+<span id="cb45-5"><a href="pw-5.html#cb45-5" aria-hidden="true" tabindex="-1"></a><span class="co"># You don&#39;t know what we just did?</span></span>
+<span id="cb45-6"><a href="pw-5.html#cb45-6" aria-hidden="true" tabindex="-1"></a><span class="co"># open the documentation of the function sample by </span></span>
+<span id="cb45-7"><a href="pw-5.html#cb45-7" aria-hidden="true" tabindex="-1"></a><span class="co"># writing ?sample in the R console.</span></span>
+<span id="cb45-8"><a href="pw-5.html#cb45-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Note that this is one of the ways to split it randomly and it is not necessary the best.</span></span>
+<span id="cb45-9"><a href="pw-5.html#cb45-9" aria-hidden="true" tabindex="-1"></a>Boston_train <span class="ot">=</span> Boston[Boston_idx,]</span>
+<span id="cb45-10"><a href="pw-5.html#cb45-10" aria-hidden="true" tabindex="-1"></a>Boston_test  <span class="ot">=</span> Boston[<span class="sc">-</span>Boston_idx,]</span></code></pre></div>
+<p><strong>2</strong>. Fit a regression tree to the training data using the <code>rpart()</code> function from the <code>rpart</code> package. Name the tree <code>Boston_tree</code>.</p>
+<p><strong>3</strong>. Plot the obtained tree using the following code.</p>
+<div class="sourceCode" id="cb46"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb46-1"><a href="pw-5.html#cb46-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(Boston_tree)</span>
+<span id="cb46-2"><a href="pw-5.html#cb46-2" aria-hidden="true" tabindex="-1"></a><span class="fu">text</span>(Boston_tree, <span class="at">pretty =</span> <span class="dv">0</span>)</span>
+<span id="cb46-3"><a href="pw-5.html#cb46-3" aria-hidden="true" tabindex="-1"></a><span class="fu">title</span>(<span class="at">main =</span> <span class="st">&quot;Regression Tree&quot;</span>)</span></code></pre></div>
+<p><img src="Machine-Learning_files/figure-html/unnamed-chunk-137-1.png" width="70%" style="display: block; margin: auto;" /></p>
+<p><strong>4</strong>. A better plot can be obtained using the <code>rpart.plot</code><a href="main-references-credits.html#fn18" class="footnote-ref" id="fnref18"><sup>18</sup></a> package. Re-plot the tree using it. You can use the <code>rpart.plot()</code> function which by default, when the output is continuous, each node shows: the predicted value, and the percentage of observations in the node. You can also use the <code>prp()</code> function.</p>
+<p><img src="Machine-Learning_files/figure-html/unnamed-chunk-138-1.png" width="50%" style="display: block; margin: auto;" /><img src="Machine-Learning_files/figure-html/unnamed-chunk-138-2.png" width="50%" style="display: block; margin: auto;" /></p>
+<p><strong>5</strong>. Print the obtained tree and print its summary. Between the things that you can see in the summary, the CP (complexity parameter) table and the importance of each variable in the model. Print the CP table using the <code>printcp()</code> function to see the cross validation results. Plot a comparison figure using the <code>plotcp()</code> function.</p>
+<p>You will notice the obtained tree is <strong>pruned</strong>. This is because <code>rpart</code> prunes the tree by default by performing 10-fold cross-validation.</p>
+<div class="rmdtip">
+<p><code>rpart</code> keeps track of something called the complexity of a tree. The complexity measure is a combination of the size of a tree and the ability of the tree to separate the classes of the target variable. If the next best split in growing a tree does not reduce the tree’s overall complexity by a certain amount, <code>rpart</code> will terminate the growing process. This amount is specified by the complexity parameter, <code>cp</code>, in the call to <code>rpart()</code>. Setting <code>cp</code> to a negative amount (like -1) ensures that the tree will be fully grown. You can try it and then plot the tree.</p>
+<p>Notice that the default <code>cp</code> value may over prune the tree (the default is the one with the lowest <code>xerror</code>). As a rule of thumb, it’s best to prune a decision tree using the <code>cp</code> of smallest tree that is within one standard deviation of the tree with the smallest <code>xerror</code>. In the example above (see the CP table and the figure obtained with <code>plotcp()</code>), the best <code>xerror</code> is 0.30517 with standard deviation 0.056180. So, we want the smallest tree with <code>xerror</code> less than 0.30517 + 0.05618 = 0.361. This is the tree with <code>cp = 0.025293</code>, so we’ll want to prune our tree with a <code>cp</code> slightly greater than <code>0.025293</code>.</p>
+</div>
+<p>Next we will compare this regression tree to a linear model and will use RMSE as our metric. RMSE is the <strong>R</strong>oot <strong>M</strong>ean <strong>S</strong>quare <strong>E</strong>rror, which is the square root of the MSE.</p>
+<p><strong>6</strong>. Write a <svg aria-hidden="true" role="img" viewBox="0 0 581 512" style="height:1em;width:1.13em;vertical-align:-0.125em;margin-left:auto;margin-right:auto;font-size:inherit;fill:steelblue;overflow:visible;position:relative;"><path d="M581 226.6C581 119.1 450.9 32 290.5 32S0 119.1 0 226.6C0 322.4 103.3 402 239.4 418.1V480h99.1v-61.5c24.3-2.7 47.6-7.4 69.4-13.9L448 480h112l-67.4-113.7c54.5-35.4 88.4-84.9 88.4-139.7zm-466.8 14.5c0-73.5 98.9-133 220.8-133s211.9 40.7 211.9 133c0 50.1-26.5 85-70.3 106.4-2.4-1.6-4.7-2.9-6.4-3.7-10.2-5.2-27.8-10.5-27.8-10.5s86.6-6.4 86.6-92.7-90.6-87.9-90.6-87.9h-199V361c-74.1-21.5-125.2-67.1-125.2-119.9zm225.1 38.3v-55.6c57.8 0 87.8-6.8 87.8 27.3 0 36.5-38.2 28.3-87.8 28.3zm-.9 72.5H365c10.8 0 18.9 11.7 24 19.2-16.1 1.9-33 2.8-50.6 2.9v-22.1z"/></svg> function that returns the RMSE of two vectors.</p>
+<p><strong>7</strong>. Use the function <code>predict()</code> to predict the response on the test set. Then calculate the RMSE obtained with tree model.</p>
+<p><strong>8</strong>. Fit a linear regression model on the training set. Then predict the response on the test set using the linear model. Calculate the RMSE and compare the performance of the tree and the linear regression model.</p>
+<div class="rmdinsight">
+<p>Here the most obvious linear regression beats the tree! We’ll improve on this tree by considering ensembles of trees.</p>
+</div>
+<p>You can visually compare the performance of both models by plotting the Actual (reality) response values against the predicted values. The model with closer points are to the diagonal (<code>y=x</code>) line is the better one. You can try to reproduce the figure below.</p>
+<p><img src="Machine-Learning_files/figure-html/unnamed-chunk-144-1.png" width="50%" style="display: block; margin: auto;" /><img src="Machine-Learning_files/figure-html/unnamed-chunk-144-2.png" width="50%" style="display: block; margin: auto;" /></p>
+<p>By aggregating many decision trees, using methods like <em>bagging</em>,
+<em>random forests</em>, and <em>boosting</em>, the predictive performance of trees can be
+substantially improved. We will now use these concepts, called <em>ensemble methods</em>.</p>
+</div>
+<div id="bagging" class="section level3 unnumbered hasAnchor">
+<h3>Bagging<a href="pw-5.html#bagging" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Bagging, or <em>Bootstrap aggregation</em>, is a general-purpose procedure for reducing the variance of a statistical learning method, it is particularly useful and frequently used in the context of decision trees. The idea is to take many training sets from the population, build a separate prediction model using each training set, and average the resulting predictions. Generally we do not have access to multiple training sets. Instead, we can bootstrap, by taking repeated samples from the (single) training data set.</p>
+<p>To apply bagging to regression
+trees, we simply construct <span class="math inline">\(B\)</span> regression trees using B bootstrapped training
+sets, and average the resulting predictions. These trees are grown deep,
+and are not pruned. Hence each individual tree has high variance, but
+low bias. Averaging these <span class="math inline">\(B\)</span> trees reduces the variance.</p>
+<p><strong>9</strong>. Fit a bagged model, using the <code>randomForest()</code> function from the <code>randomForest</code> package.</p>
+<div class="rmdinsight">
+<p>Bagging is actually a special case of a random forest where <code>mtry</code> is equal to <span class="math inline">\(p\)</span>, the number of predictors.</p>
+</div>
+<p><strong>10</strong>. Predict the response on the test set using the bagging model. Calculate the RMSE. Is the performance of the model better than linear regression or a simple tree?</p>
+<p>Note that the “Mean of squared residuals” which is output by <code>randomForest()</code> is the <strong>Out of Bag</strong> estimate of the error. Here is its plot:</p>
+<p><img src="Machine-Learning_files/figure-html/unnamed-chunk-148-1.png" width="70%" style="display: block; margin: auto;" /></p>
+</div>
+<div id="random-forests" class="section level3 unnumbered hasAnchor">
+<h3>Random Forests<a href="pw-5.html#random-forests" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Now try a random forest. For regression, on suggestion is to use <code>mtry</code> equal to <span class="math inline">\(p/3\)</span>.<a href="main-references-credits.html#fn19" class="footnote-ref" id="fnref19"><sup>19</sup></a></p>
+<p><strong>11</strong>. Fit a random forest on the training set and compare its performance with the previous models by calculating the predictions and the RMSE.</p>
+<p><strong>12</strong>. Use the function <code>importance()</code> from the <code>randomForest</code> package to see the most important predictors in the obtained random forest model. What are the three most important predictors? Did you find the same results when you selected the best predictors for the linear regression model during session 2?</p>
+<p><strong>13</strong>. Plot the importance of the predictors to the model using the <code>varImpPlot()</code> function.</p>
+</div>
+<div id="boosting-1" class="section level3 unnumbered hasAnchor">
+<h3>Boosting<a href="pw-5.html#boosting-1" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Last and not least, let us try a <em>boosted</em> model, which by default will produce a nice <strong>variable importance</strong> plot as well as plots of the marginal effects of the predictors. To do so, we will use the <code>gbm</code> package<a href="main-references-credits.html#fn20" class="footnote-ref" id="fnref20"><sup>20</sup></a>.</p>
+<p><strong>14</strong>. Using the <code>gbm()</code> function like following, fit a boosted model on the training set. Then compare its performance with the previous models by calculating the predictions and the RMSE.</p>
+<div class="sourceCode" id="cb47"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb47-1"><a href="pw-5.html#cb47-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(gbm)</span>
+<span id="cb47-2"><a href="pw-5.html#cb47-2" aria-hidden="true" tabindex="-1"></a>Boston_boost <span class="ot">=</span> <span class="fu">gbm</span>(medv <span class="sc">~</span> ., <span class="at">data =</span> Boston_train, <span class="at">distribution =</span> <span class="st">&quot;gaussian&quot;</span>, </span>
+<span id="cb47-3"><a href="pw-5.html#cb47-3" aria-hidden="true" tabindex="-1"></a>                    <span class="at">n.trees =</span> <span class="dv">5000</span>, <span class="at">interaction.depth =</span> <span class="dv">4</span>, <span class="at">shrinkage =</span> <span class="fl">0.01</span>)</span></code></pre></div>
+<pre><code>#ans&gt; Using 5000 trees...</code></pre>
+<p><strong>15</strong>. Show the summary of the boosted model. A figure of the variable importance will be shown.</p>
+</div>
+<div id="comparison-1" class="section level3 unnumbered hasAnchor">
+<h3>Comparison<a href="pw-5.html#comparison-1" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p><strong>16</strong>. Reproduce the following comparison: A table in which we show the obtained RMSE with each tested model, you can create a <span class="math inline">\(5 \times 2\)</span> data.frame in which you put the names of the models and the corresponding RMSE. To visualize the data frame in the compiled html report you can use the <code>kable()</code> function from the <code>knitr</code> package. Or, compare the models by plotting the Actual (reality) response values against the predicted values.</p>
+<p><img src="Machine-Learning_files/figure-html/unnamed-chunk-158-1.png" width="90%" style="display: block; margin: auto;" /></p>
+</div>
+</div>
+<div id="classification-trees-1" class="section level2 unnumbered hasAnchor">
+<h2>Classification Trees<a href="pw-5.html#classification-trees-1" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>A classification tree is very similar to a regression tree, except that the classification tree is used to predict a qualitative response rather than a quantitative one. Recall that for a regression tree, the predicted response for an observation is given by the mean response of the training observations that belong to the
+same terminal node. In contrast, for a classification tree, we predict that
+each observation belongs to the <strong><em>most commonly occurring class</em></strong> of training
+observations in the region to which it belongs.</p>
+<p>To construct classification trees, we will use the <strong>spam</strong><a href="main-references-credits.html#fn21" class="footnote-ref" id="fnref21"><sup>21</sup></a> dataset, available <a href="datasets/spam.csv" target="_blank">here <svg aria-hidden="true" role="img" viewBox="0 0 512 512" style="height:1em;width:1em;vertical-align:-0.125em;margin-left:auto;margin-right:auto;font-size:inherit;fill:#cd0050;overflow:visible;position:relative;"><path d="M464 32H48C21.49 32 0 53.49 0 80v352c0 26.51 21.49 48 48 48h416c26.51 0 48-21.49 48-48V80c0-26.51-21.49-48-48-48zM224 416H64v-96h160v96zm0-160H64v-96h160v96zm224 160H288v-96h160v96zm0-160H288v-96h160v96z"/></svg></a>. A description of the dataset is given below.</p>
+<div class="rmdexercise">
+<p>For the rest of this PW, you must:</p>
+<ul>
+<li>Import the <code>spam</code> dataset and explore it. Be aware that it is preferable that the response column is of type factor.</li>
+<li>Split the dataset into training and test sets (choose your own seed when using <code>set.seed()</code>).</li>
+<li>Fit (using <code>rpart</code> and <code>gbm</code> packages):
+<ul>
+<li>A <strong>logistic</strong> regression model.</li>
+<li>A simple classification tree.</li>
+<li>Bagging, Random Forests<a href="main-references-credits.html#fn22" class="footnote-ref" id="fnref22"><sup>22</sup></a>, and Boosting models.</li>
+</ul></li>
+<li>For each model, predict the response on the test set and evaluate the performance of the model, using the <em>prediction accuracy</em> (create a function that returns the accuracy for two binary vectors).</li>
+</ul>
+</div>
+<div id="the-spam-dataset" class="section level3 unnumbered hasAnchor">
+<h3>The Spam dataset<a href="pw-5.html#the-spam-dataset" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>This dataset consists of information from 4601 email messages, in a study to try to predict whether the email was junk email, or
+“spam”. For all 4601 email messages, the true outcome, spam or not, is available,
+along with 57 predictors as described below:</p>
+<ul>
+<li>48 quantitative predictors: the <em>percentage</em> of words in the email that match a given word. Examples include <em>business</em>, <em>address</em>, <em>internet</em>; etc.</li>
+<li>6 quantitative predictors: the percentage of characters in the email that match a given character. The characters are <code>;</code> , <code>(</code> , <code>[</code> , <code>!</code> , <code>$</code> and <code>#</code>.</li>
+<li>The average length of uninterrupted sequences of capital letters: <code>crl.ave</code>.</li>
+<li>The length of the longest uninterrupted sequence of capital letters: <code>crl.long</code>.</li>
+<li>The sum of the length of uninterrupted sequences of capital letters: <code>crl.tot</code>.</li>
+</ul>
+<div class="rmdtip">
+<p>Note that the spam dataset given here is already treated and ready to be explored. To achieve this stage, some steps are required to treat the raw data, like Tokenization, Stemming, and Lemmatization. In this dataset the most important words are already selected and other variables are added.
+Curious students can read more about these steps. Two famous <svg aria-hidden="true" role="img" viewBox="0 0 581 512" style="height:1em;width:1.13em;vertical-align:-0.125em;margin-left:auto;margin-right:auto;font-size:inherit;fill:steelblue;overflow:visible;position:relative;"><path d="M581 226.6C581 119.1 450.9 32 290.5 32S0 119.1 0 226.6C0 322.4 103.3 402 239.4 418.1V480h99.1v-61.5c24.3-2.7 47.6-7.4 69.4-13.9L448 480h112l-67.4-113.7c54.5-35.4 88.4-84.9 88.4-139.7zm-466.8 14.5c0-73.5 98.9-133 220.8-133s211.9 40.7 211.9 133c0 50.1-26.5 85-70.3 106.4-2.4-1.6-4.7-2.9-6.4-3.7-10.2-5.2-27.8-10.5-27.8-10.5s86.6-6.4 86.6-92.7-90.6-87.9-90.6-87.9h-199V361c-74.1-21.5-125.2-67.1-125.2-119.9zm225.1 38.3v-55.6c57.8 0 87.8-6.8 87.8 27.3 0 36.5-38.2 28.3-87.8 28.3zm-.9 72.5H365c10.8 0 18.9 11.7 24 19.2-16.1 1.9-33 2.8-50.6 2.9v-22.1z"/></svg> packages for text mining are <a href="https://cran.r-project.org/web/packages/tm/vignettes/tm.pdf" target="_blank">tm</a> and <a href="https://www.tidytextmining.com/index.html" target="_blank">tidytext</a>.</p>
+</div>
+</div>
+<div id="extra-tuning" class="section level3 unnumbered hasAnchor">
+<h3>Extra: Tuning<a href="pw-5.html#extra-tuning" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>So far in this PW, we fit bagging, boosting and random forest models, but did not <strong>tune</strong> any of them, we simply used certain, somewhat arbitrary, parameters. Actually, to make these models better the parameters should be tuned. The parameters include:</p>
+<ul>
+<li>Bagging: Actually just a subset of Random Forest with <code>mtry</code> = <span class="math inline">\(p\)</span>.</li>
+<li>Random Forest: <code>mtry</code></li>
+<li>Boosting: <code>n.trees</code>, <code>interaction.depth</code>, <code>shrinkage</code>, <code>n.minobsinnode</code></li>
+</ul>
+<p>The <code>caret</code> package provides excellent functions to accomplish this. Note that with these tree-based ensemble methods there are two resampling solutions for tuning the model:</p>
+<ul>
+<li>Out of Bag</li>
+<li>Cross-Validation</li>
+</ul>
+<p>Using Out of Bag samples is advantageous with these methods as compared to Cross-Validation since it removes the need to refit the model and is thus much more computationally efficient. Unfortunately OOB methods cannot be used with <code>gbm</code> models. See the <code>caret</code> documentation: <a href="https://cran.r-project.org/web/packages/caret/vignettes/caret.html" target="_blank">Short intro</a>, <a href="https://topepo.github.io/caret/index.html" target="_blank">Long intro</a> for details.</p>
+<p class="text-right">
+◼
+</p>
+
+</div>
+</div>
+</div>
+
+
+
+<div class="footnotes">
+<hr />
+<ol start="17">
+<li id="fn17"><p><a href="https://cran.r-project.org/web/packages/rpart/vignettes/longintro.pdf">An Introduction to Recursive Partitioning Using the <code>rpart</code> Routines</a> - Details of the <code>rpart</code> package.<a href="pw-5.html#fnref17" class="footnote-back">↩︎</a></p></li>
+<li id="fn18"><p><a href="http://www.milbo.org/doc/prp.pdf"><code>rpart.plot</code> Package</a> - Detailed manual on plotting with <code>rpart</code> using the <code>rpart.plot</code> package.<a href="pw-5.html#fnref18" class="footnote-back">↩︎</a></p></li>
+<li id="fn19"><p>For classification a suggestion is <code>mtry</code> = <span class="math inline">\(\sqrt{p}\)</span>.<a href="pw-5.html#fnref19" class="footnote-back">↩︎</a></p></li>
+<li id="fn20"><p><a href="https://www.rdocumentation.org/packages/gbm/versions/2.1.8" target="_blank"><strong>g</strong>eneralized <strong>b</strong>oosted <strong>m</strong>odels</a> <svg aria-hidden="true" role="img" viewBox="0 0 581 512" style="height:1em;width:1.13em;vertical-align:-0.125em;margin-left:auto;margin-right:auto;font-size:inherit;fill:steelblue;overflow:visible;position:relative;"><path d="M581 226.6C581 119.1 450.9 32 290.5 32S0 119.1 0 226.6C0 322.4 103.3 402 239.4 418.1V480h99.1v-61.5c24.3-2.7 47.6-7.4 69.4-13.9L448 480h112l-67.4-113.7c54.5-35.4 88.4-84.9 88.4-139.7zm-466.8 14.5c0-73.5 98.9-133 220.8-133s211.9 40.7 211.9 133c0 50.1-26.5 85-70.3 106.4-2.4-1.6-4.7-2.9-6.4-3.7-10.2-5.2-27.8-10.5-27.8-10.5s86.6-6.4 86.6-92.7-90.6-87.9-90.6-87.9h-199V361c-74.1-21.5-125.2-67.1-125.2-119.9zm225.1 38.3v-55.6c57.8 0 87.8-6.8 87.8 27.3 0 36.5-38.2 28.3-87.8 28.3zm-.9 72.5H365c10.8 0 18.9 11.7 24 19.2-16.1 1.9-33 2.8-50.6 2.9v-22.1z"/></svg> package<a href="pw-5.html#fnref20" class="footnote-back">↩︎</a></p></li>
+<li id="fn21"><p><a href="https://archive.ics.uci.edu/ml/datasets/Spambase" target="_blank">Source</a><a href="pw-5.html#fnref21" class="footnote-back">↩︎</a></p></li>
+<li id="fn22"><p>For classification, the suggested <code>mtry</code> for a random forest is <span class="math inline">\(\sqrt{p}\)</span>.<a href="pw-5.html#fnref22" class="footnote-back">↩︎</a></p></li>
+</ol>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="5-decision-trees-random-forests.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="6-principal-components-analysis.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="book_assets/gitbook-2.6.7/js/app.min.js"></script>
+<script src="book_assets/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="book_assets/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="book_assets/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="book_assets/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="book_assets/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="book_assets/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="book_assets/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": false,
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": null,
+"search": {
+"engine": "fuse",
+"options": null
+},
+"toc": {
+"collapse": "section",
+"scroll_highlight": true
+},
+"toolbar": {
+"position": "fixed"
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>

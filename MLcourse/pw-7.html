@@ -1,464 +1,110 @@
 <!DOCTYPE html>
-<html lang="" xml:lang="">
+<html lang="en">
 <head>
-
-  <meta charset="utf-8" />
-  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>PW 7 | Machine Learning</title>
-  <meta name="description" content="PW 7 | Machine Learning course" />
-  <meta name="generator" content="bookdown 0.24.10 and GitBook 2.6.7" />
-
-  <meta property="og:title" content="PW 7 | Machine Learning" />
-  <meta property="og:type" content="book" />
-  
-  
-  <meta property="og:description" content="PW 7 | Machine Learning course" />
-  
-
-  <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="PW 7 | Machine Learning" />
-  
-  <meta name="twitter:description" content="PW 7 | Machine Learning course" />
-  
-
-<meta name="author" content="Mohamad Ghassany" />
-
-
-<meta name="date" content="2022-03-17" />
-
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name="apple-mobile-web-app-capable" content="yes" />
-  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
-  
-  
-<link rel="prev" href="7-kmeans-hierarchical-clustering.html"/>
-<link rel="next" href="8-gaussian-mixture-models-em.html"/>
-<script src="book_assets/jquery-3.6.0/jquery-3.6.0.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
-<link href="book_assets/gitbook-2.6.7/css/style.css" rel="stylesheet" />
-<link href="book_assets/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
-<link href="book_assets/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
-<link href="book_assets/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
-<link href="book_assets/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
-<link href="book_assets/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
-<link href="book_assets/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
-
-
-
-
-
-
-
-
-<link href="book_assets/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
-<link href="book_assets/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
-<script src="book_assets/anchor-sections-1.1.0/anchor-sections.js"></script>
-<script src="book_assets/kePrint-0.0.1/kePrint.js"></script>
-<link href="book_assets/lightable-0.0.1/lightable.css" rel="stylesheet" />
-<link href="book_assets/vembedr-0.1.5/css/vembedr.css" rel="stylesheet" />
-<script src="book_assets/htmlwidgets-1.5.4/htmlwidgets.js"></script>
-<script src="book_assets/plotly-binding-4.10.0/plotly.js"></script>
-<script src="book_assets/typedarray-0.1/typedarray.min.js"></script>
-<link href="book_assets/crosstalk-1.2.0/css/crosstalk.min.css" rel="stylesheet" />
-<script src="book_assets/crosstalk-1.2.0/js/crosstalk.min.js"></script>
-<link href="book_assets/plotly-htmlwidgets-css-2.5.1/plotly-htmlwidgets.css" rel="stylesheet" />
-<script src="book_assets/plotly-main-2.5.1/plotly-latest.min.js"></script>
-
-
-<style type="text/css">
-pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
-pre > code.sourceCode > span:empty { height: 1.2em; }
-.sourceCode { overflow: visible; }
-code.sourceCode > span { color: inherit; text-decoration: inherit; }
-pre.sourceCode { margin: 0; }
-@media screen {
-div.sourceCode { overflow: auto; }
-}
-@media print {
-pre > code.sourceCode { white-space: pre-wrap; }
-pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
-}
-pre.numberSource code
-  { counter-reset: source-line 0; }
-pre.numberSource code > span
-  { position: relative; left: -4em; counter-increment: source-line; }
-pre.numberSource code > span > a:first-child::before
-  { content: counter(source-line);
-    position: relative; left: -1em; text-align: right; vertical-align: baseline;
-    border: none; display: inline-block;
-    -webkit-touch-callout: none; -webkit-user-select: none;
-    -khtml-user-select: none; -moz-user-select: none;
-    -ms-user-select: none; user-select: none;
-    padding: 0 4px; width: 4em;
-    background-color: #ffffff;
-    color: #a0a0a0;
-  }
-pre.numberSource { margin-left: 3em; border-left: 1px solid #a0a0a0;  padding-left: 4px; }
-div.sourceCode
-  { color: #1f1c1b; background-color: #ffffff; }
-@media screen {
-pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
-}
-code span { color: #1f1c1b; } /* Normal */
-code span.al { color: #bf0303; background-color: #f7e6e6; font-weight: bold; } /* Alert */
-code span.an { color: #ca60ca; } /* Annotation */
-code span.at { color: #0057ae; } /* Attribute */
-code span.bn { color: #b08000; } /* BaseN */
-code span.bu { color: #644a9b; font-weight: bold; } /* BuiltIn */
-code span.cf { color: #1f1c1b; font-weight: bold; } /* ControlFlow */
-code span.ch { color: #924c9d; } /* Char */
-code span.cn { color: #aa5500; } /* Constant */
-code span.co { color: #898887; } /* Comment */
-code span.cv { color: #0095ff; } /* CommentVar */
-code span.do { color: #607880; } /* Documentation */
-code span.dt { color: #0057ae; } /* DataType */
-code span.dv { color: #b08000; } /* DecVal */
-code span.er { color: #bf0303; text-decoration: underline; } /* Error */
-code span.ex { color: #0095ff; font-weight: bold; } /* Extension */
-code span.fl { color: #b08000; } /* Float */
-code span.fu { color: #644a9b; } /* Function */
-code span.im { color: #ff5500; } /* Import */
-code span.in { color: #b08000; } /* Information */
-code span.kw { color: #1f1c1b; font-weight: bold; } /* Keyword */
-code span.op { color: #1f1c1b; } /* Operator */
-code span.ot { color: #006e28; } /* Other */
-code span.pp { color: #006e28; } /* Preprocessor */
-code span.re { color: #0057ae; background-color: #e0e9f8; } /* RegionMarker */
-code span.sc { color: #3daee9; } /* SpecialChar */
-code span.ss { color: #ff5500; } /* SpecialString */
-code span.st { color: #bf0303; } /* String */
-code span.va { color: #0057ae; } /* Variable */
-code span.vs { color: #bf0303; } /* VerbatimString */
-code span.wa { color: #bf0303; } /* Warning */
-</style>
-
-<style type="text/css">
-/* Used with Pandoc 2.11+ new --citeproc when CSL is used */
-div.csl-bib-body { }
-div.csl-entry {
-  clear: both;
-}
-.hanging div.csl-entry {
-  margin-left:2em;
-  text-indent:-2em;
-}
-div.csl-left-margin {
-  min-width:2em;
-  float:left;
-}
-div.csl-right-inline {
-  margin-left:2em;
-  padding-left:1em;
-}
-div.csl-indent {
-  margin-left: 2em;
-}
-</style>
-
-<link rel="stylesheet" href="css/style.css" type="text/css" />
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<title>PW 7 | Machine Learning</title>
+<meta name="author" content="Mohamad Ghassany">
+<meta name="description" content="In this practical work we will learn how to create a report in Rstudio using Rmarkdown files. Then we will apply the \(k\)-means clustering algorithm using the standard function kmeans() in , we...">
+<meta name="generator" content="bookdown 0.24.10 with bs4_book()">
+<meta property="og:title" content="PW 7 | Machine Learning">
+<meta property="og:type" content="book">
+<meta property="og:description" content="In this practical work we will learn how to create a report in Rstudio using Rmarkdown files. Then we will apply the \(k\)-means clustering algorithm using the standard function kmeans() in , we...">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="PW 7 | Machine Learning">
+<meta name="twitter:description" content="In this practical work we will learn how to create a report in Rstudio using Rmarkdown files. Then we will apply the \(k\)-means clustering algorithm using the standard function kmeans() in , we...">
+<!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
+<script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.3.1/transition.js"></script><script src="libs/bs3compat-0.3.1/tabs.js"></script><script src="libs/bs3compat-0.3.1/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
+<script src="libs/bs4_book-1.0.0/bs4_book.js"></script><script src="libs/kePrint-0.0.1/kePrint.js"></script><link href="libs/lightable-0.0.1/lightable.css" rel="stylesheet">
+<link href="libs/vembedr-0.1.5/css/vembedr.css" rel="stylesheet">
+<script src="libs/htmlwidgets-1.5.4/htmlwidgets.js"></script><script src="libs/plotly-binding-4.10.0/plotly.js"></script><script src="libs/typedarray-0.1/typedarray.min.js"></script><link href="libs/crosstalk-1.2.0/css/crosstalk.min.css" rel="stylesheet">
+<script src="libs/crosstalk-1.2.0/js/crosstalk.min.js"></script><link href="libs/plotly-htmlwidgets-css-2.5.1/plotly-htmlwidgets.css" rel="stylesheet">
+<script src="libs/plotly-main-2.5.1/plotly-latest.min.js"></script><script type="text/x-mathjax-config">
+    const popovers = document.querySelectorAll('a.footnote-ref[data-toggle="popover"]');
+    for (let popover of popovers){
+      const div = document.createElement('div');
+      div.setAttribute('style', 'position: absolute; top: 0, left:0; width:0, height:0, overflow: hidden; visibility: hidden;');
+      div.innerHTML = popover.getAttribute('data-content');
+      
+      // Will this work with TeX on its own line?
+      var has_math = div.querySelector("span.math");
+      if (has_math) {
+        document.body.appendChild(div);
+      	MathJax.Hub.Queue(["Typeset", MathJax.Hub, div]);
+      	MathJax.Hub.Queue(function(){
+          popover.setAttribute('data-content', div.innerHTML);
+      	})
+      }
+    }
+    </script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- CSS --><link rel="stylesheet" href="css/ims-style.css">
 </head>
+<body data-spy="scroll" data-target="#toc">
 
-<body>
+<div class="container-fluid">
+<div class="row">
+  <header class="col-sm-12 col-lg-3 sidebar sidebar-book"><a class="sr-only sr-only-focusable" href="#content">Skip to main content</a>
 
-
-
-  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
-
-    <div class="book-summary">
-      <nav role="navigation">
-
-<ul class="summary">
-<li class='beforeimg'>            
-   <a href="https://www.esilv.fr/">
-       <img src="img/Logo_ESILV_new.png" style="width:75%; padding:0px 0; display:block; margin: 0 auto;" alt="ESILV logo">
-    </a>
-</li>
-<li class='before'><a href="./">Machine Learning</a></li>
-
-<li class="divider"></li>
-<li><a href="index.html#welcome">Welcome<span></span></a>
-<ul>
-<li><a href="index.html#course-overview">Course Overview<span></span></a></li>
-<li><a href="index.html#course-schedule">Course Schedule<span></span></a></li>
-</ul></li>
-<li><a href="introduction.html#introduction">Introduction<span></span></a>
-<ul>
-<li><a href="introduction.html#what-is-machine-learning">What is Machine Learning ?<span></span></a></li>
-<li><a href="introduction.html#supervised-learning">Supervised Learning<span></span></a></li>
-<li><a href="introduction.html#unsupervised-learning">Unsupervised Learning<span></span></a></li>
-</ul></li>
-<li class="part"><span><b>I Supervised Learning<span></span></b></span></li>
-<li class="part"><span><b>Regression<span></span></b></span></li>
-<li class="chapter" data-level="1" data-path="1-linear-regression.html"><a href="1-linear-regression.html"><i class="fa fa-check"></i><b>1</b> Linear Regression<span></span></a>
-<ul>
-<li class="chapter" data-level="1.1" data-path="1-linear-regression.html"><a href="1-linear-regression.html#notation"><i class="fa fa-check"></i><b>1.1</b> Notation<span></span></a></li>
-<li class="chapter" data-level="1.2" data-path="1-linear-regression.html"><a href="1-linear-regression.html#model-representation"><i class="fa fa-check"></i><b>1.2</b> Model Representation<span></span></a></li>
-<li class="chapter" data-level="1.3" data-path="1-linear-regression.html"><a href="1-linear-regression.html#why-estimate-f"><i class="fa fa-check"></i><b>1.3</b> Why Estimate <span class="math inline">\(f\)</span> ?<span></span></a>
-<ul>
-<li><a href="1-linear-regression.html#prediction">Prediction<span></span></a></li>
-<li><a href="1-linear-regression.html#inference">Inference<span></span></a></li>
-</ul></li>
-<li class="chapter" data-level="1.4" data-path="1-linear-regression.html"><a href="1-linear-regression.html#simple-linear-regression-model"><i class="fa fa-check"></i><b>1.4</b> Simple Linear Regression Model<span></span></a></li>
-<li class="chapter" data-level="1.5" data-path="1-linear-regression.html"><a href="1-linear-regression.html#estimating-the-coefficients"><i class="fa fa-check"></i><b>1.5</b> Estimating the Coefficients<span></span></a></li>
-<li class="chapter" data-level="1.6" data-path="1-linear-regression.html"><a href="1-linear-regression.html#assessing-the-accuracy-of-the-coefficient-estimates"><i class="fa fa-check"></i><b>1.6</b> Assessing the Accuracy of the Coefficient Estimates<span></span></a>
-<ul>
-<li><a href="1-linear-regression.html#hypothesis-testing">Hypothesis testing<span></span></a></li>
-</ul></li>
-<li class="chapter" data-level="1.7" data-path="1-linear-regression.html"><a href="1-linear-regression.html#anova-and-model-fit"><i class="fa fa-check"></i><b>1.7</b> ANOVA and model fit<span></span></a>
-<ul>
-<li class="chapter" data-level="1.7.1" data-path="1-linear-regression.html"><a href="1-linear-regression.html#anova"><i class="fa fa-check"></i><b>1.7.1</b> ANOVA<span></span></a></li>
-<li class="chapter" data-level="1.7.2" data-path="1-linear-regression.html"><a href="1-linear-regression.html#the-r2-statistic"><i class="fa fa-check"></i><b>1.7.2</b> The <span class="math inline">\(R^2\)</span> Statistic<span></span></a></li>
-</ul></li>
-</ul></li>
-<li><a href="practical-work-1.html#practical-work-1">Practical Work 1<span></span></a>
-<ul>
-<li class="chapter" data-level="1.8" data-path="practical-work-1.html"><a href="practical-work-1.html"><i class="fa fa-check"></i><b>1.8</b> Some <svg aria-hidden="true" role="img" viewBox="0 0 581 512" style="height:1em;width:1.13em;vertical-align:-0.125em;margin-left:auto;margin-right:auto;font-size:inherit;fill:steelblue;overflow:visible;position:relative;"><path d="M581 226.6C581 119.1 450.9 32 290.5 32S0 119.1 0 226.6C0 322.4 103.3 402 239.4 418.1V480h99.1v-61.5c24.3-2.7 47.6-7.4 69.4-13.9L448 480h112l-67.4-113.7c54.5-35.4 88.4-84.9 88.4-139.7zm-466.8 14.5c0-73.5 98.9-133 220.8-133s211.9 40.7 211.9 133c0 50.1-26.5 85-70.3 106.4-2.4-1.6-4.7-2.9-6.4-3.7-10.2-5.2-27.8-10.5-27.8-10.5s86.6-6.4 86.6-92.7-90.6-87.9-90.6-87.9h-199V361c-74.1-21.5-125.2-67.1-125.2-119.9zm225.1 38.3v-55.6c57.8 0 87.8-6.8 87.8 27.3 0 36.5-38.2 28.3-87.8 28.3zm-.9 72.5H365c10.8 0 18.9 11.7 24 19.2-16.1 1.9-33 2.8-50.6 2.9v-22.1z"/></svg> basics<span></span></a>
-<ul>
-<li class="chapter" data-level="1.8.1" data-path="practical-work-1.html"><a href="practical-work-1.html#basic-commands"><i class="fa fa-check"></i><b>1.8.1</b> Basic Commands<span></span></a></li>
-<li class="chapter" data-level="1.8.2" data-path="practical-work-1.html"><a href="practical-work-1.html#vectors"><i class="fa fa-check"></i><b>1.8.2</b> Vectors<span></span></a></li>
-<li class="chapter" data-level="1.8.3" data-path="practical-work-1.html"><a href="practical-work-1.html#matrices-data-frames-and-lists"><i class="fa fa-check"></i><b>1.8.3</b> Matrices, data frames and lists<span></span></a></li>
-<li class="chapter" data-level="1.8.4" data-path="practical-work-1.html"><a href="practical-work-1.html#graphics"><i class="fa fa-check"></i><b>1.8.4</b> Graphics<span></span></a></li>
-<li class="chapter" data-level="1.8.5" data-path="practical-work-1.html"><a href="practical-work-1.html#distributions"><i class="fa fa-check"></i><b>1.8.5</b> Distributions<span></span></a></li>
-<li class="chapter" data-level="1.8.6" data-path="practical-work-1.html"><a href="practical-work-1.html#working-directory"><i class="fa fa-check"></i><b>1.8.6</b> Working directory<span></span></a></li>
-<li class="chapter" data-level="1.8.7" data-path="practical-work-1.html"><a href="practical-work-1.html#loading-data"><i class="fa fa-check"></i><b>1.8.7</b> Loading Data<span></span></a></li>
-</ul></li>
-<li class="chapter" data-level="1.9" data-path="practical-work-1.html"><a href="practical-work-1.html#regression"><i class="fa fa-check"></i><b>1.9</b> Regression<span></span></a>
-<ul>
-<li class="chapter" data-level="1.9.1" data-path="practical-work-1.html"><a href="practical-work-1.html#the-lm-function"><i class="fa fa-check"></i><b>1.9.1</b> The <code>lm</code> function<span></span></a></li>
-<li class="chapter" data-level="1.9.2" data-path="practical-work-1.html"><a href="practical-work-1.html#boston"><i class="fa fa-check"></i><b>1.9.2</b> Predicting House Value: Boston dataset<span></span></a></li>
-</ul></li>
-</ul></li>
-<li class="chapter" data-level="2" data-path="2-multiple-linear-regression.html"><a href="2-multiple-linear-regression.html"><i class="fa fa-check"></i><b>2</b> Multiple Linear Regression<span></span></a>
-<ul>
-<li class="chapter" data-level="2.1" data-path="2-multiple-linear-regression.html"><a href="2-multiple-linear-regression.html#the-model"><i class="fa fa-check"></i><b>2.1</b> The Model<span></span></a></li>
-<li class="chapter" data-level="2.2" data-path="2-multiple-linear-regression.html"><a href="2-multiple-linear-regression.html#estimating-the-regression-coefficients"><i class="fa fa-check"></i><b>2.2</b> Estimating the Regression Coefficients<span></span></a></li>
-<li class="chapter" data-level="2.3" data-path="2-multiple-linear-regression.html"><a href="2-multiple-linear-regression.html#some-important-questions"><i class="fa fa-check"></i><b>2.3</b> Some important questions<span></span></a>
-<ul>
-<li class="chapter" data-level="2.3.1" data-path="2-multiple-linear-regression.html"><a href="2-multiple-linear-regression.html#other-consid"><i class="fa fa-check"></i><b>2.3.1</b> Other Considerations in Regression Model<span></span></a></li>
-</ul></li>
-<li class="chapter" data-level="2.4" data-path="2-multiple-linear-regression.html"><a href="2-multiple-linear-regression.html#how-to-select-the-best-performing-model"><i class="fa fa-check"></i><b>2.4</b> How to select the best performing model<span></span></a>
-<ul>
-<li><a href="2-multiple-linear-regression.html#use-the-adjusted-r_adj2-for-multivariate-models">Use the Adjusted <span class="math inline">\(R_{adj}^2\)</span> for multivariate models<span></span></a></li>
-<li><a href="2-multiple-linear-regression.html#have-a-look-at-the-residuals-or-error-terms">Have a look at the residuals or error terms<span></span></a></li>
-<li><a href="2-multiple-linear-regression.html#histogram-of-residuals">Histogram of residuals<span></span></a></li>
-</ul></li>
-</ul></li>
-<li><a href="pw-2.html#pw-2">PW 2<span></span></a>
-<ul>
-<li><a href="pw-2.html#multiple-linear-regression-1">Multiple Linear Regression<span></span></a></li>
-<li><a href="pw-2.html#reporting">Reporting<span></span></a></li>
-</ul></li>
-<li class="part"><span><b>Classification<span></span></b></span></li>
-<li class="chapter" data-level="3" data-path="3-logistic-regression.html"><a href="3-logistic-regression.html"><i class="fa fa-check"></i><b>3</b> Logistic Regression<span></span></a>
-<ul>
-<li class="chapter" data-level="3.1" data-path="3-logistic-regression.html"><a href="3-logistic-regression.html#introduction-1"><i class="fa fa-check"></i><b>3.1</b> Introduction<span></span></a></li>
-<li class="chapter" data-level="3.2" data-path="3-logistic-regression.html"><a href="3-logistic-regression.html#logistic-regression-1"><i class="fa fa-check"></i><b>3.2</b> Logistic Regression<span></span></a>
-<ul>
-<li class="chapter" data-level="3.2.1" data-path="3-logistic-regression.html"><a href="3-logistic-regression.html#the-logistic-model"><i class="fa fa-check"></i><b>3.2.1</b> The Logistic Model<span></span></a></li>
-<li class="chapter" data-level="3.2.2" data-path="3-logistic-regression.html"><a href="3-logistic-regression.html#estimating-the-regression-coefficients-1"><i class="fa fa-check"></i><b>3.2.2</b> Estimating the Regression Coefficients<span></span></a></li>
-<li class="chapter" data-level="3.2.3" data-path="3-logistic-regression.html"><a href="3-logistic-regression.html#prediction-1"><i class="fa fa-check"></i><b>3.2.3</b> Prediction<span></span></a></li>
-</ul></li>
-<li class="chapter" data-level="3.3" data-path="3-logistic-regression.html"><a href="3-logistic-regression.html#multiple-logistic-regression"><i class="fa fa-check"></i><b>3.3</b> Multiple Logistic Regression<span></span></a></li>
-<li class="chapter" data-level="3.4" data-path="3-logistic-regression.html"><a href="3-logistic-regression.html#logreg-examps"><i class="fa fa-check"></i><b>3.4</b> Example<span></span></a>
-<ul>
-<li class="chapter" data-level="3.4.1" data-path="3-logistic-regression.html"><a href="3-logistic-regression.html#logreg-examps-challenger"><i class="fa fa-check"></i><b>3.4.1</b> Case study: <em>The Challenger disaster</em><span></span></a></li>
-</ul></li>
-</ul></li>
-<li><a href="pw-3.html#pw-3">PW 3<span></span></a>
-<ul>
-<li><a href="pw-3.html#social-networks-ads">Social Networks Ads<span></span></a></li>
-</ul></li>
-<li class="chapter" data-level="4" data-path="4-discriminant-analysis.html"><a href="4-discriminant-analysis.html"><i class="fa fa-check"></i><b>4</b> Discriminant Analysis<span></span></a>
-<ul>
-<li class="chapter" data-level="4.1" data-path="4-discriminant-analysis.html"><a href="4-discriminant-analysis.html#introduction-2"><i class="fa fa-check"></i><b>4.1</b> Introduction<span></span></a></li>
-<li class="chapter" data-level="4.2" data-path="4-discriminant-analysis.html"><a href="4-discriminant-analysis.html#bayes-theorem"><i class="fa fa-check"></i><b>4.2</b> Bayes’ Theorem<span></span></a></li>
-<li class="chapter" data-level="4.3" data-path="4-discriminant-analysis.html"><a href="4-discriminant-analysis.html#lda-for-p1"><i class="fa fa-check"></i><b>4.3</b> LDA for <span class="math inline">\(p=1\)</span><span></span></a></li>
-<li class="chapter" data-level="4.4" data-path="4-discriminant-analysis.html"><a href="4-discriminant-analysis.html#estimating-the-parameters"><i class="fa fa-check"></i><b>4.4</b> Estimating the parameters<span></span></a></li>
-<li class="chapter" data-level="4.5" data-path="4-discriminant-analysis.html"><a href="4-discriminant-analysis.html#lda-for-p-1"><i class="fa fa-check"></i><b>4.5</b> LDA for <span class="math inline">\(p &gt; 1\)</span><span></span></a></li>
-<li class="chapter" data-level="4.6" data-path="4-discriminant-analysis.html"><a href="4-discriminant-analysis.html#making-predictions"><i class="fa fa-check"></i><b>4.6</b> Making predictions<span></span></a></li>
-<li class="chapter" data-level="4.7" data-path="4-discriminant-analysis.html"><a href="4-discriminant-analysis.html#other-forms-of-discriminant-analysis"><i class="fa fa-check"></i><b>4.7</b> Other forms of Discriminant Analysis<span></span></a>
-<ul>
-<li class="chapter" data-level="4.7.1" data-path="4-discriminant-analysis.html"><a href="4-discriminant-analysis.html#quadratic-discriminant-analysis-qda"><i class="fa fa-check"></i><b>4.7.1</b> Quadratic Discriminant Analysis (QDA)<span></span></a></li>
-<li class="chapter" data-level="4.7.2" data-path="4-discriminant-analysis.html"><a href="4-discriminant-analysis.html#naive-bayes"><i class="fa fa-check"></i><b>4.7.2</b> Naive Bayes<span></span></a></li>
-</ul></li>
-<li class="chapter" data-level="4.8" data-path="4-discriminant-analysis.html"><a href="4-discriminant-analysis.html#lda-vs-logistic-regression"><i class="fa fa-check"></i><b>4.8</b> LDA vs Logistic Regression<span></span></a></li>
-</ul></li>
-<li><a href="pw-4.html#pw-4">PW 4<span></span></a>
-<ul>
-<li><a href="pw-4.html#logistic-regression-2">Logistic Regression<span></span></a></li>
-<li><a href="pw-4.html#decision-boundary-of-logistic-regression">Decision Boundary of Logistic Regression<span></span></a></li>
-<li><a href="pw-4.html#linear-discriminant-analysis-lda">Linear Discriminant Analysis (LDA)<span></span></a></li>
-<li><a href="pw-4.html#lda-from-scratch">LDA from scratch<span></span></a></li>
-<li><a href="pw-4.html#quadratic-discriminant-analysis-qda-1">Quadratic Discriminant Analysis (QDA)<span></span></a></li>
-<li><a href="pw-4.html#comparison">Comparison<span></span></a></li>
-</ul></li>
-<li class="chapter" data-level="5" data-path="5-decision-trees-random-forests.html"><a href="5-decision-trees-random-forests.html"><i class="fa fa-check"></i><b>5</b> Decision Trees &amp; Random Forests<span></span></a>
-<ul>
-<li><a href="5-decision-trees-random-forests.html#the-basics-of-decision-trees">The Basics of Decision Trees<span></span></a></li>
-<li><a href="5-decision-trees-random-forests.html#classification-trees">Classification Trees<span></span></a></li>
-<li><a href="5-decision-trees-random-forests.html#bagging-random-forests">Bagging &amp; Random Forests<span></span></a></li>
-<li><a href="5-decision-trees-random-forests.html#boosting">Boosting<span></span></a></li>
-<li><a href="5-decision-trees-random-forests.html#trees-in-r">Trees in <code>R</code><span></span></a></li>
-<li><a href="5-decision-trees-random-forests.html#random-forests---the-first-choice-method-for-every-data-analysis">Random forests - the first-choice method for every data analysis?<span></span></a></li>
-</ul></li>
-<li><a href="pw-5.html#pw-5">PW 5<span></span></a>
-<ul>
-<li><a href="pw-5.html#regression-trees">Regression Trees<span></span></a>
-<ul>
-<li><a href="pw-5.html#single-tree">Single tree<span></span></a></li>
-<li><a href="pw-5.html#bagging">Bagging<span></span></a></li>
-<li><a href="pw-5.html#random-forests">Random Forests<span></span></a></li>
-<li><a href="pw-5.html#boosting-1">Boosting<span></span></a></li>
-<li><a href="pw-5.html#comparison-1">Comparison<span></span></a></li>
-</ul></li>
-<li><a href="pw-5.html#classification-trees-1">Classification Trees<span></span></a>
-<ul>
-<li><a href="pw-5.html#the-spam-dataset">The Spam dataset<span></span></a></li>
-<li><a href="pw-5.html#extra-tuning">Extra: Tuning<span></span></a></li>
-</ul></li>
-</ul></li>
-<li class="part"><span><b>II Dimensionality Reduction<span></span></b></span></li>
-<li class="chapter" data-level="6" data-path="6-principal-components-analysis.html"><a href="6-principal-components-analysis.html"><i class="fa fa-check"></i><b>6</b> Principal Components Analysis<span></span></a>
-<ul>
-<li class="chapter" data-level="6.1" data-path="6-principal-components-analysis.html"><a href="6-principal-components-analysis.html#introduction-3"><i class="fa fa-check"></i><b>6.1</b> Introduction<span></span></a></li>
-<li class="chapter" data-level="6.2" data-path="6-principal-components-analysis.html"><a href="6-principal-components-analysis.html#principal-components"><i class="fa fa-check"></i><b>6.2</b> Principal Components<span></span></a>
-<ul>
-<li><a href="6-principal-components-analysis.html#notations-and-procedure">Notations and Procedure<span></span></a></li>
-<li><a href="6-principal-components-analysis.html#first-principal-component-textpc_1-y_1">First Principal Component (<span class="math inline">\(\text{PC}_1\)</span>): <span class="math inline">\(Y_1\)</span><span></span></a></li>
-<li><a href="6-principal-components-analysis.html#second-principal-component-textpc_2-y_2">Second Principal Component (<span class="math inline">\(\text{PC}_2\)</span>): <span class="math inline">\(Y_2\)</span><span></span></a></li>
-<li><a href="6-principal-components-analysis.html#ith-principal-component-textpc_i-y_i"><span class="math inline">\(i^{th}\)</span> Principal Component (<span class="math inline">\(\text{PC}_i\)</span>): <span class="math inline">\(Y_i\)</span><span></span></a></li>
-</ul></li>
-<li class="chapter" data-level="6.3" data-path="6-principal-components-analysis.html"><a href="6-principal-components-analysis.html#how-do-we-find-the-coefficients"><i class="fa fa-check"></i><b>6.3</b> How do we find the coefficients?<span></span></a>
-<ul>
-<li><a href="6-principal-components-analysis.html#why-it-may-be-possible-to-reduce-dimensions">Why It May Be Possible to Reduce Dimensions<span></span></a></li>
-<li><a href="6-principal-components-analysis.html#procedure">Procedure<span></span></a></li>
-</ul></li>
-<li class="chapter" data-level="6.4" data-path="6-principal-components-analysis.html"><a href="6-principal-components-analysis.html#standardization-of-the-features"><i class="fa fa-check"></i><b>6.4</b> Standardization of the features<span></span></a></li>
-<li class="chapter" data-level="6.5" data-path="6-principal-components-analysis.html"><a href="6-principal-components-analysis.html#projection-of-the-data"><i class="fa fa-check"></i><b>6.5</b> Projection of the data<span></span></a>
-<ul>
-<li><a href="6-principal-components-analysis.html#scores">Scores<span></span></a></li>
-<li><a href="6-principal-components-analysis.html#visualization">Visualization<span></span></a></li>
-<li><a href="6-principal-components-analysis.html#extra">Extra<span></span></a></li>
-</ul></li>
-<li class="chapter" data-level="6.6" data-path="6-principal-components-analysis.html"><a href="6-principal-components-analysis.html#case-study"><i class="fa fa-check"></i><b>6.6</b> Case study<span></span></a>
-<ul>
-<li><a href="6-principal-components-analysis.html#employement-in-european-countries-in-the-late-70s">Employement in European countries in the late 70s<span></span></a></li>
-</ul></li>
-</ul></li>
-<li><a href="pw-6.html#pw-6">PW 6<span></span></a>
-<ul>
-<li><a href="pw-6.html#the-iris-dataset">The Iris Dataset<span></span></a></li>
-<li><a href="pw-6.html#loading-data-1">Loading Data<span></span></a></li>
-<li><a href="pw-6.html#exploratory-analysis">Exploratory analysis<span></span></a></li>
-<li><a href="pw-6.html#pca-using-princomp">PCA using <code>princomp()</code><span></span></a></li>
-<li><a href="pw-6.html#deeper-pca-using-factoextra-package">Deeper PCA using <code>factoextra</code> package<span></span></a></li>
-<li><a href="pw-6.html#step-by-step-pca">Step-by-step PCA<span></span></a></li>
-</ul></li>
-<li class="part"><span><b>III Unsupervised Learning<span></span></b></span></li>
-<li class="chapter" data-level="7" data-path="7-kmeans-hierarchical-clustering.html"><a href="7-kmeans-hierarchical-clustering.html"><i class="fa fa-check"></i><b>7</b> Kmeans &amp; Hierarchical Clustering<span></span></a>
-<ul>
-<li class="chapter" data-level="7.1" data-path="7-kmeans-hierarchical-clustering.html"><a href="7-kmeans-hierarchical-clustering.html#unsupervised-learning-1"><i class="fa fa-check"></i><b>7.1</b> Unsupervised Learning<span></span></a></li>
-<li class="chapter" data-level="7.2" data-path="7-kmeans-hierarchical-clustering.html"><a href="7-kmeans-hierarchical-clustering.html#clustering"><i class="fa fa-check"></i><b>7.2</b> Clustering<span></span></a></li>
-<li class="chapter" data-level="7.3" data-path="7-kmeans-hierarchical-clustering.html"><a href="7-kmeans-hierarchical-clustering.html#introduction-4"><i class="fa fa-check"></i><b>7.3</b> Introduction<span></span></a>
-<ul>
-<li><a href="7-kmeans-hierarchical-clustering.html#hard-clustering">Hard clustering<span></span></a></li>
-<li><a href="7-kmeans-hierarchical-clustering.html#fuzzy-clustering">Fuzzy clustering<span></span></a></li>
-</ul></li>
-<li class="chapter" data-level="7.4" data-path="7-kmeans-hierarchical-clustering.html"><a href="7-kmeans-hierarchical-clustering.html#k-means"><i class="fa fa-check"></i><b>7.4</b> <span class="math inline">\(k\)</span>-Means<span></span></a>
-<ul>
-<li class="chapter" data-level="7.4.1" data-path="7-kmeans-hierarchical-clustering.html"><a href="7-kmeans-hierarchical-clustering.html#k-means-in"><i class="fa fa-check"></i><b>7.4.1</b> <span class="math inline">\(k\)</span>-means in <svg aria-hidden="true" role="img" viewBox="0 0 581 512" style="height:1em;width:1.13em;vertical-align:-0.125em;margin-left:auto;margin-right:auto;font-size:inherit;fill:steelblue;overflow:visible;position:relative;"><path d="M581 226.6C581 119.1 450.9 32 290.5 32S0 119.1 0 226.6C0 322.4 103.3 402 239.4 418.1V480h99.1v-61.5c24.3-2.7 47.6-7.4 69.4-13.9L448 480h112l-67.4-113.7c54.5-35.4 88.4-84.9 88.4-139.7zm-466.8 14.5c0-73.5 98.9-133 220.8-133s211.9 40.7 211.9 133c0 50.1-26.5 85-70.3 106.4-2.4-1.6-4.7-2.9-6.4-3.7-10.2-5.2-27.8-10.5-27.8-10.5s86.6-6.4 86.6-92.7-90.6-87.9-90.6-87.9h-199V361c-74.1-21.5-125.2-67.1-125.2-119.9zm225.1 38.3v-55.6c57.8 0 87.8-6.8 87.8 27.3 0 36.5-38.2 28.3-87.8 28.3zm-.9 72.5H365c10.8 0 18.9 11.7 24 19.2-16.1 1.9-33 2.8-50.6 2.9v-22.1z"/></svg><span></span></a></li>
-<li class="chapter" data-level="7.4.2" data-path="7-kmeans-hierarchical-clustering.html"><a href="7-kmeans-hierarchical-clustering.html#cluster-validity-choosing-the-number-of-clusters"><i class="fa fa-check"></i><b>7.4.2</b> Cluster Validity, Choosing the Number of Clusters<span></span></a></li>
-</ul></li>
-<li class="chapter" data-level="7.5" data-path="7-kmeans-hierarchical-clustering.html"><a href="7-kmeans-hierarchical-clustering.html#hierarchical-clustering"><i class="fa fa-check"></i><b>7.5</b> Hierarchical Clustering<span></span></a>
-<ul>
-<li class="chapter" data-level="7.5.1" data-path="7-kmeans-hierarchical-clustering.html"><a href="7-kmeans-hierarchical-clustering.html#dendrogram"><i class="fa fa-check"></i><b>7.5.1</b> Dendrogram<span></span></a></li>
-<li class="chapter" data-level="7.5.2" data-path="7-kmeans-hierarchical-clustering.html"><a href="7-kmeans-hierarchical-clustering.html#the-hierarchical-clustering-algorithm"><i class="fa fa-check"></i><b>7.5.2</b> The Hierarchical Clustering Algorithm<span></span></a></li>
-<li class="chapter" data-level="7.5.3" data-path="7-kmeans-hierarchical-clustering.html"><a href="7-kmeans-hierarchical-clustering.html#hierarchical-clustering-in"><i class="fa fa-check"></i><b>7.5.3</b> Hierarchical clustering in <svg aria-hidden="true" role="img" viewBox="0 0 581 512" style="height:1em;width:1.13em;vertical-align:-0.125em;margin-left:auto;margin-right:auto;font-size:inherit;fill:steelblue;overflow:visible;position:relative;"><path d="M581 226.6C581 119.1 450.9 32 290.5 32S0 119.1 0 226.6C0 322.4 103.3 402 239.4 418.1V480h99.1v-61.5c24.3-2.7 47.6-7.4 69.4-13.9L448 480h112l-67.4-113.7c54.5-35.4 88.4-84.9 88.4-139.7zm-466.8 14.5c0-73.5 98.9-133 220.8-133s211.9 40.7 211.9 133c0 50.1-26.5 85-70.3 106.4-2.4-1.6-4.7-2.9-6.4-3.7-10.2-5.2-27.8-10.5-27.8-10.5s86.6-6.4 86.6-92.7-90.6-87.9-90.6-87.9h-199V361c-74.1-21.5-125.2-67.1-125.2-119.9zm225.1 38.3v-55.6c57.8 0 87.8-6.8 87.8 27.3 0 36.5-38.2 28.3-87.8 28.3zm-.9 72.5H365c10.8 0 18.9 11.7 24 19.2-16.1 1.9-33 2.8-50.6 2.9v-22.1z"/></svg><span></span></a></li>
-</ul></li>
-</ul></li>
-<li><a href="pw-7.html#pw-7">PW 7<span></span></a>
-<ul>
-<li><a href="pw-7.html#reporting-1">Reporting<span></span></a>
-<ul>
-<li><a href="pw-7.html#markdown">Markdown<span></span></a></li>
-<li><a href="pw-7.html#r-markdown">R Markdown<span></span></a></li>
-<li><a href="pw-7.html#the-report-to-be-submitted">The report to be submitted<span></span></a></li>
-</ul></li>
-<li><a href="pw-7.html#k-means-clustering"><span class="math inline">\(k\)</span>-means clustering<span></span></a>
-<ul>
-<li><a href="pw-7.html#pointscards"><code>pointsCards</code><span></span></a></li>
-<li><a href="pw-7.html#ligue-1"><code>Ligue 1</code><span></span></a></li>
-<li><a href="pw-7.html#pca"><code>PCA</code><span></span></a></li>
-<li><a href="pw-7.html#implementing-k-means"><code>Implementing k-means</code><span></span></a></li>
-</ul></li>
-<li><a href="pw-7.html#hierarchical-clustering-1">Hierarchical clustering<span></span></a>
-<ul>
-<li><a href="pw-7.html#distances-dist">Distances <code>dist()</code><span></span></a></li>
-<li><a href="pw-7.html#dendrogram-hclust">Dendrogram <code>hclust()</code><span></span></a></li>
-<li><a href="pw-7.html#hierarchical-clustering-on-iris-dataset">Hierarchical clustering on Iris dataset<span></span></a></li>
-</ul></li>
-</ul></li>
-<li class="chapter" data-level="8" data-path="8-gaussian-mixture-models-em.html"><a href="8-gaussian-mixture-models-em.html"><i class="fa fa-check"></i><b>8</b> Gaussian Mixture Models &amp; EM<span></span></a>
-<ul>
-<li class="chapter" data-level="8.1" data-path="8-gaussian-mixture-models-em.html"><a href="8-gaussian-mixture-models-em.html#the-gaussian-distribution"><i class="fa fa-check"></i><b>8.1</b> The Gaussian distribution<span></span></a></li>
-<li class="chapter" data-level="8.2" data-path="8-gaussian-mixture-models-em.html"><a href="8-gaussian-mixture-models-em.html#mixture-of-gaussians"><i class="fa fa-check"></i><b>8.2</b> Mixture of Gaussians<span></span></a></li>
-<li class="chapter" data-level="8.3" data-path="8-gaussian-mixture-models-em.html"><a href="8-gaussian-mixture-models-em.html#em-for-gaussian-mixtures"><i class="fa fa-check"></i><b>8.3</b> EM for Gaussian Mixtures<span></span></a></li>
-</ul></li>
-<li><a href="pw-8.html#pw-8">PW 8<span></span></a>
-<ul>
-<li><a href="pw-8.html#report-template">Report template<span></span></a></li>
-<li class="chapter" data-level="8.4" data-path="pw-8.html"><a href="pw-8.html"><i class="fa fa-check"></i><b>8.4</b> EM using <code>mclust</code><span></span></a>
-<ul>
-<li><a href="pw-8.html#gmm-vs-k-means">GMM vs <span class="math inline">\(k\)</span>-means<span></span></a></li>
-<li><a href="pw-8.html#em-on-1d">EM on 1D<span></span></a></li>
-</ul></li>
-<li class="chapter" data-level="8.5" data-path="pw-8.html"><a href="pw-8.html#em-from-scratch"><i class="fa fa-check"></i><b>8.5</b> EM from scratch<span></span></a></li>
-</ul></li>
-<li class="part"><span><b>Hackathon<span></span></b></span></li>
-<li><a href="hackathon.html#hackathon">Hackathon<span></span></a></li>
-<li class="appendix"><span><b>Appendix<span></span></b></span></li>
-<li class="chapter" data-level="A" data-path="A-final-grades.html"><a href="A-final-grades.html"><i class="fa fa-check"></i><b>A</b> Final Grades<span></span></a></li>
-<li class="chapter" data-level="B" data-path="B-app-introRStudio.html"><a href="B-app-introRStudio.html"><i class="fa fa-check"></i><b>B</b> Introduction to <code>RStudio</code><span></span></a></li>
-<li class="chapter" data-level="C" data-path="C-app-ht.html"><a href="C-app-ht.html"><i class="fa fa-check"></i><b>C</b> Review on hypothesis testing<span></span></a></li>
-<li class="chapter" data-level="D" data-path="D-use-qual.html"><a href="D-use-qual.html"><i class="fa fa-check"></i><b>D</b> Use of qualitative predictors<span></span></a></li>
-<li class="chapter" data-level="E" data-path="E-model-selection.html"><a href="E-model-selection.html"><i class="fa fa-check"></i><b>E</b> Model Selection<span></span></a>
-<ul>
-<li><a href="E-model-selection.html#linear-model-selection-and-best-subset-selection">Linear Model Selection and Best Subset Selection<span></span></a></li>
-<li><a href="E-model-selection.html#forward-stepwise-selection">Forward Stepwise Selection<span></span></a></li>
-<li><a href="E-model-selection.html#backward-stepwise-selection">Backward Stepwise Selection<span></span></a></li>
-<li><a href="E-model-selection.html#estimating-test-error-using-mallows-cp-aic-bic-adjusted-r-squared">Estimating Test Error Using Mallow’s Cp, AIC, BIC, Adjusted R-squared<span></span></a></li>
-<li><a href="E-model-selection.html#estimating-test-error-using-cross-validation">Estimating Test Error Using Cross-Validation<span></span></a></li>
-<li><a href="E-model-selection.html#examples">Examples<span></span></a>
-<ul>
-<li><a href="E-model-selection.html#best-subset-selection">Best Subset Selection<span></span></a></li>
-<li><a href="E-model-selection.html#forward-stepwise-selection-and-model-selection-using-validation-set">Forward Stepwise Selection and Model Selection Using Validation Set<span></span></a></li>
-<li><a href="E-model-selection.html#model-selection-using-cross-validation">Model Selection Using Cross-Validation<span></span></a></li>
-</ul></li>
-</ul></li>
-<li class="chapter" data-level="F" data-path="F-references-and-credits.html"><a href="F-references-and-credits.html"><i class="fa fa-check"></i><b>F</b> References and Credits<span></span></a></li>
-<li class="chapter" data-level="G" data-path="G-other-references.html"><a href="G-other-references.html"><i class="fa fa-check"></i><b>G</b> Other References<span></span></a></li>
-<li><a href="main-references-credits.html#main-references-credits">Main References &amp; Credits<span></span></a></li>
-</ul>
-
-      </nav>
+    <div class="d-flex align-items-start justify-content-between">
+      <h1>
+        <a href="index.html" title="">Machine Learning</a>
+      </h1>
+      <button class="btn btn-outline-primary d-lg-none ml-2 mt-1" type="button" data-toggle="collapse" data-target="#main-nav" aria-expanded="true" aria-controls="main-nav"><i class="fas fa-bars"></i><span class="sr-only">Show table of contents</span></button>
     </div>
 
-    <div class="book-body">
-      <div class="body-inner">
-        <div class="book-header" role="navigation">
-          <h1>
-            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Machine Learning</a>
-          </h1>
+    <div id="main-nav" class="collapse-lg">
+      <form role="search">
+        <input id="search" class="form-control" type="search" placeholder="Search" aria-label="Search">
+</form>
+
+      <nav aria-label="Table of contents"><h2>Table of contents</h2>
+        <ul class="book-toc list-unstyled">
+<li><a class="" href="index.html">Welcome</a></li>
+<li><a class="" href="introduction.html">Introduction</a></li>
+<li class="book-part">Supervised Learning</li>
+<li class="book-part">Regression</li>
+<li><a class="" href="linear-regression.html"><span class="header-section-number">1</span> Linear Regression</a></li>
+<li><a class="" href="practical-work-1.html">Practical Work 1</a></li>
+<li><a class="" href="multiple-linear-regression.html"><span class="header-section-number">2</span> Multiple Linear Regression</a></li>
+<li><a class="" href="pw-2.html">PW 2</a></li>
+<li class="book-part">Classification</li>
+<li><a class="" href="logistic-regression.html"><span class="header-section-number">3</span> Logistic Regression</a></li>
+<li><a class="" href="pw-3.html">PW 3</a></li>
+<li><a class="" href="discriminant-analysis.html"><span class="header-section-number">4</span> Discriminant Analysis</a></li>
+<li><a class="" href="pw-4.html">PW 4</a></li>
+<li><a class="" href="decision-trees-random-forests.html"><span class="header-section-number">5</span> Decision Trees &amp; Random Forests</a></li>
+<li><a class="" href="pw-5.html">PW 5</a></li>
+<li class="book-part">Dimensionality Reduction</li>
+<li><a class="" href="principal-components-analysis.html"><span class="header-section-number">6</span> Principal Components Analysis</a></li>
+<li><a class="" href="pw-6.html">PW 6</a></li>
+<li class="book-part">Unsupervised Learning</li>
+<li><a class="" href="kmeans-hierarchical-clustering.html"><span class="header-section-number">7</span> Kmeans &amp; Hierarchical Clustering</a></li>
+<li><a class="active" href="pw-7.html">PW 7</a></li>
+<li><a class="" href="gaussian-mixture-models-em.html"><span class="header-section-number">8</span> Gaussian Mixture Models &amp; EM</a></li>
+<li><a class="" href="pw-8.html">PW 8</a></li>
+<li class="book-part">Hackathon</li>
+<li><a class="" href="hackathon.html">Hackathon</a></li>
+<li class="book-part">Appendix</li>
+<li><a class="" href="final-grades.html"><span class="header-section-number">A</span> Final Grades</a></li>
+<li><a class="" href="app-introRStudio.html"><span class="header-section-number">B</span> Introduction to RStudio</a></li>
+<li><a class="" href="app-ht.html"><span class="header-section-number">C</span> Review on hypothesis testing</a></li>
+<li><a class="" href="use-qual.html"><span class="header-section-number">D</span> Use of qualitative predictors</a></li>
+<li><a class="" href="model-selection.html"><span class="header-section-number">E</span> Model Selection</a></li>
+<li><a class="" href="references-and-credits.html"><span class="header-section-number">F</span> References and Credits</a></li>
+<li><a class="" href="other-references.html"><span class="header-section-number">G</span> Other References</a></li>
+<li><a class="" href="main-references-credits.html">Main References &amp; Credits</a></li>
+</ul>
+
+        <div class="book-extra">
+          
         </div>
-
-        <div class="page-wrapper" tabindex="-1" role="main">
-          <div class="page-inner">
-
-            <section class="normal" id="section-">
-<div id="pw-7" class="section level1 unnumbered hasAnchor">
-<h1>PW 7<a href="pw-7.html#pw-7" class="anchor-section" aria-label="Anchor link to header"></a></h1>
-<p>In this practical work we will learn how to create a report in <code>Rstudio</code> using <code>Rmarkdown</code> files. Then we will apply the <span class="math inline">\(k\)</span>-means clustering algorithm using the standard function <code>kmeans()</code> in <svg aria-hidden="true" role="img" viewBox="0 0 581 512" style="height:1em;width:1.13em;vertical-align:-0.125em;margin-left:auto;margin-right:auto;font-size:inherit;fill:steelblue;overflow:visible;position:relative;"><path d="M581 226.6C581 119.1 450.9 32 290.5 32S0 119.1 0 226.6C0 322.4 103.3 402 239.4 418.1V480h99.1v-61.5c24.3-2.7 47.6-7.4 69.4-13.9L448 480h112l-67.4-113.7c54.5-35.4 88.4-84.9 88.4-139.7zm-466.8 14.5c0-73.5 98.9-133 220.8-133s211.9 40.7 211.9 133c0 50.1-26.5 85-70.3 106.4-2.4-1.6-4.7-2.9-6.4-3.7-10.2-5.2-27.8-10.5-27.8-10.5s86.6-6.4 86.6-92.7-90.6-87.9-90.6-87.9h-199V361c-74.1-21.5-125.2-67.1-125.2-119.9zm225.1 38.3v-55.6c57.8 0 87.8-6.8 87.8 27.3 0 36.5-38.2 28.3-87.8 28.3zm-.9 72.5H365c10.8 0 18.9 11.7 24 19.2-16.1 1.9-33 2.8-50.6 2.9v-22.1z"/></svg>, we will use the dataset <code>Ligue1 2017/2018</code>.</p>
+      </nav>
+</div>
+  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="pw-7" class="section level1 unnumbered">
+<h1>PW 7<a class="anchor" aria-label="anchor" href="#pw-7"><i class="fas fa-link"></i></a>
+</h1>
+<p>In this practical work we will learn how to create a report in <code>Rstudio</code> using <code>Rmarkdown</code> files. Then we will apply the <span class="math inline">\(k\)</span>-means clustering algorithm using the standard function <code><a href="https://rdrr.io/r/stats/kmeans.html">kmeans()</a></code> in <svg aria-hidden="true" role="img" viewbox="0 0 581 512" style="height:1em;width:1.13em;vertical-align:-0.125em;margin-left:auto;margin-right:auto;font-size:inherit;fill:steelblue;overflow:visible;position:relative;"><path d="M581 226.6C581 119.1 450.9 32 290.5 32S0 119.1 0 226.6C0 322.4 103.3 402 239.4 418.1V480h99.1v-61.5c24.3-2.7 47.6-7.4 69.4-13.9L448 480h112l-67.4-113.7c54.5-35.4 88.4-84.9 88.4-139.7zm-466.8 14.5c0-73.5 98.9-133 220.8-133s211.9 40.7 211.9 133c0 50.1-26.5 85-70.3 106.4-2.4-1.6-4.7-2.9-6.4-3.7-10.2-5.2-27.8-10.5-27.8-10.5s86.6-6.4 86.6-92.7-90.6-87.9-90.6-87.9h-199V361c-74.1-21.5-125.2-67.1-125.2-119.9zm225.1 38.3v-55.6c57.8 0 87.8-6.8 87.8 27.3 0 36.5-38.2 28.3-87.8 28.3zm-.9 72.5H365c10.8 0 18.9 11.7 24 19.2-16.1 1.9-33 2.8-50.6 2.9v-22.1z"></path></svg>, we will use the dataset <code>Ligue1 2017/2018</code>.</p>
 <!-- Use the following YAML header for the report that you must submit at the end of the session: -->
 <!-- ``` -->
 <!-- --- -->
@@ -475,12 +121,14 @@ div.csl-indent {
 <!--     highlight: pygments -->
 <!-- --- -->
 <!-- ``` -->
-<div id="reporting-1" class="section level2 unnumbered hasAnchor">
-<h2>Reporting<a href="pw-7.html#reporting-1" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<div id="markdown" class="section level3 unnumbered hasAnchor">
-<h3>Markdown<a href="pw-7.html#markdown" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div id="reporting-1" class="section level2 unnumbered">
+<h2>Reporting<a class="anchor" aria-label="anchor" href="#reporting-1"><i class="fas fa-link"></i></a>
+</h2>
+<div id="markdown" class="section level3 unnumbered">
+<h3>Markdown<a class="anchor" aria-label="anchor" href="#markdown"><i class="fas fa-link"></i></a>
+</h3>
 <p>Markdown is a lightweight markup language with plain text formatting syntax designed so that it can be converted to HTML and many other formats (pdf, docx, etc..).</p>
-<p>Click <a href="http://agea.github.io/tutorial.md/" target="_blank">here <svg aria-hidden="true" role="img" viewBox="0 0 512 512" style="height:1em;width:1em;vertical-align:-0.125em;margin-left:auto;margin-right:auto;font-size:inherit;fill:currentColor;overflow:visible;position:relative;"><path d="M432,320H400a16,16,0,0,0-16,16V448H64V128H208a16,16,0,0,0,16-16V80a16,16,0,0,0-16-16H48A48,48,0,0,0,0,112V464a48,48,0,0,0,48,48H400a48,48,0,0,0,48-48V336A16,16,0,0,0,432,320ZM488,0h-128c-21.37,0-32.05,25.91-17,41l35.73,35.73L135,320.37a24,24,0,0,0,0,34L157.67,377a24,24,0,0,0,34,0L435.28,133.32,471,169c15,15,41,4.5,41-17V24A24,24,0,0,0,488,0Z"/></svg></a> to see an example of a markdown (<code>.md</code>) syntaxes and the result in HTML. The markdown syntaxes are on right and their HTML result is on left. You can modify the source text to see the result.</p>
+<p>Click <a href="http://agea.github.io/tutorial.md/" target="_blank">here <svg aria-hidden="true" role="img" viewbox="0 0 512 512" style="height:1em;width:1em;vertical-align:-0.125em;margin-left:auto;margin-right:auto;font-size:inherit;fill:currentColor;overflow:visible;position:relative;"><path d="M432,320H400a16,16,0,0,0-16,16V448H64V128H208a16,16,0,0,0,16-16V80a16,16,0,0,0-16-16H48A48,48,0,0,0,0,112V464a48,48,0,0,0,48,48H400a48,48,0,0,0,48-48V336A16,16,0,0,0,432,320ZM488,0h-128c-21.37,0-32.05,25.91-17,41l35.73,35.73L135,320.37a24,24,0,0,0,0,34L157.67,377a24,24,0,0,0,34,0L435.28,133.32,471,169c15,15,41,4.5,41-17V24A24,24,0,0,0,488,0Z"></path></svg></a> to see an example of a markdown (<code>.md</code>) syntaxes and the result in HTML. The markdown syntaxes are on right and their HTML result is on left. You can modify the source text to see the result.</p>
 <div class="rmdtip">
 <p>
 <strong>Extra</strong>: There is some markdown online editors you can
@@ -490,25 +138,26 @@ see the result in the preview.
 </p>
 </div>
 </div>
-<div id="r-markdown" class="section level3 unnumbered hasAnchor">
-<h3>R Markdown<a href="pw-7.html#r-markdown" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<p>R Markdown is a variant of Markdown that has embedded <svg aria-hidden="true" role="img" viewBox="0 0 581 512" style="height:1em;width:1.13em;vertical-align:-0.125em;margin-left:auto;margin-right:auto;font-size:inherit;fill:steelblue;overflow:visible;position:relative;"><path d="M581 226.6C581 119.1 450.9 32 290.5 32S0 119.1 0 226.6C0 322.4 103.3 402 239.4 418.1V480h99.1v-61.5c24.3-2.7 47.6-7.4 69.4-13.9L448 480h112l-67.4-113.7c54.5-35.4 88.4-84.9 88.4-139.7zm-466.8 14.5c0-73.5 98.9-133 220.8-133s211.9 40.7 211.9 133c0 50.1-26.5 85-70.3 106.4-2.4-1.6-4.7-2.9-6.4-3.7-10.2-5.2-27.8-10.5-27.8-10.5s86.6-6.4 86.6-92.7-90.6-87.9-90.6-87.9h-199V361c-74.1-21.5-125.2-67.1-125.2-119.9zm225.1 38.3v-55.6c57.8 0 87.8-6.8 87.8 27.3 0 36.5-38.2 28.3-87.8 28.3zm-.9 72.5H365c10.8 0 18.9 11.7 24 19.2-16.1 1.9-33 2.8-50.6 2.9v-22.1z"/></svg> code chunks, to be used with the <code>knitr</code> package to make it <strong>easy to create reproducible web-based reports</strong>.</p>
+<div id="r-markdown" class="section level3 unnumbered">
+<h3>R Markdown<a class="anchor" aria-label="anchor" href="#r-markdown"><i class="fas fa-link"></i></a>
+</h3>
+<p>R Markdown is a variant of Markdown that has embedded <svg aria-hidden="true" role="img" viewbox="0 0 581 512" style="height:1em;width:1.13em;vertical-align:-0.125em;margin-left:auto;margin-right:auto;font-size:inherit;fill:steelblue;overflow:visible;position:relative;"><path d="M581 226.6C581 119.1 450.9 32 290.5 32S0 119.1 0 226.6C0 322.4 103.3 402 239.4 418.1V480h99.1v-61.5c24.3-2.7 47.6-7.4 69.4-13.9L448 480h112l-67.4-113.7c54.5-35.4 88.4-84.9 88.4-139.7zm-466.8 14.5c0-73.5 98.9-133 220.8-133s211.9 40.7 211.9 133c0 50.1-26.5 85-70.3 106.4-2.4-1.6-4.7-2.9-6.4-3.7-10.2-5.2-27.8-10.5-27.8-10.5s86.6-6.4 86.6-92.7-90.6-87.9-90.6-87.9h-199V361c-74.1-21.5-125.2-67.1-125.2-119.9zm225.1 38.3v-55.6c57.8 0 87.8-6.8 87.8 27.3 0 36.5-38.2 28.3-87.8 28.3zm-.9 72.5H365c10.8 0 18.9 11.7 24 19.2-16.1 1.9-33 2.8-50.6 2.9v-22.1z"></path></svg> code chunks, to be used with the <code>knitr</code> package to make it <strong>easy to create reproducible web-based reports</strong>.</p>
 <!-- First, in `Rstudio` create a new `R Notebook` file. A default template will be opened. There is some `<svg aria-hidden="true" role="img" viewBox="0 0 581 512" style="height:1em;width:1.13em;vertical-align:-0.125em;margin-left:auto;margin-right:auto;font-size:inherit;fill:steelblue;overflow:visible;position:relative;"><path d="M581 226.6C581 119.1 450.9 32 290.5 32S0 119.1 0 226.6C0 322.4 103.3 402 239.4 418.1V480h99.1v-61.5c24.3-2.7 47.6-7.4 69.4-13.9L448 480h112l-67.4-113.7c54.5-35.4 88.4-84.9 88.4-139.7zm-466.8 14.5c0-73.5 98.9-133 220.8-133s211.9 40.7 211.9 133c0 50.1-26.5 85-70.3 106.4-2.4-1.6-4.7-2.9-6.4-3.7-10.2-5.2-27.8-10.5-27.8-10.5s86.6-6.4 86.6-92.7-90.6-87.9-90.6-87.9h-199V361c-74.1-21.5-125.2-67.1-125.2-119.9zm225.1 38.3v-55.6c57.8 0 87.8-6.8 87.8 27.3 0 36.5-38.2 28.3-87.8 28.3zm-.9 72.5H365c10.8 0 18.9 11.7 24 19.2-16.1 1.9-33 2.8-50.6 2.9v-22.1z"/></svg>`{=html} code in `R chunks`, run them then click on `Preview` and save your file. Then your html report will be opened in the viewer pane. -->
 <!-- Every time you click on `Preview` the html file in the viewer pane will be updated. If your file is named `report.Rmd`, your report is named `report.nb.html`. -->
-<!-- ```{block, type = 'rmdcaution'} -->
+<!-- ```{block, type = 'caution'} -->
 <!-- * If there is no `R Notebook` button, this means you don't have the last version of `Rstudio`. -->
 <!-- * In this case, click on `R Markdown` buttonn make sure that you select HTML as output. This produces a `html_document` and you need to click on `knit` button to compile it. -->
 <!-- * If you have problems creating a `R Markdown` file (problem in installing packages, etc..) close your `Rstudio` and reopen it with administrative tools and retry. -->
 <!-- * If it doesn't work and in order to not loose more time, write your script in an `.R` file with your comments and submit it. -->
 <!-- ``` -->
-<!-- ```{block, type = 'rmdcaution'} -->
+<!-- ```{block, type = 'caution'} -->
 <!-- * Be ready to submit your report (your `.nb.html` file) at the end of each class. -->
 <!-- * You report must be named: -->
 <!-- `YouLastName_YourFirstName_WeekNumber.nb.html` -->
 <!-- ``` -->
-<p>First, in <code>Rstudio</code> create a new <code>R Markdown</code> file. A default template will be opened. There is some <svg aria-hidden="true" role="img" viewBox="0 0 581 512" style="height:1em;width:1.13em;vertical-align:-0.125em;margin-left:auto;margin-right:auto;font-size:inherit;fill:steelblue;overflow:visible;position:relative;"><path d="M581 226.6C581 119.1 450.9 32 290.5 32S0 119.1 0 226.6C0 322.4 103.3 402 239.4 418.1V480h99.1v-61.5c24.3-2.7 47.6-7.4 69.4-13.9L448 480h112l-67.4-113.7c54.5-35.4 88.4-84.9 88.4-139.7zm-466.8 14.5c0-73.5 98.9-133 220.8-133s211.9 40.7 211.9 133c0 50.1-26.5 85-70.3 106.4-2.4-1.6-4.7-2.9-6.4-3.7-10.2-5.2-27.8-10.5-27.8-10.5s86.6-6.4 86.6-92.7-90.6-87.9-90.6-87.9h-199V361c-74.1-21.5-125.2-67.1-125.2-119.9zm225.1 38.3v-55.6c57.8 0 87.8-6.8 87.8 27.3 0 36.5-38.2 28.3-87.8 28.3zm-.9 72.5H365c10.8 0 18.9 11.7 24 19.2-16.1 1.9-33 2.8-50.6 2.9v-22.1z"/></svg> code in <strong>R chunks</strong>. Click on <code>knit</code>, save your file and see the produced output. The output is a html report containing the results of the <svg aria-hidden="true" role="img" viewBox="0 0 581 512" style="height:1em;width:1.13em;vertical-align:-0.125em;margin-left:auto;margin-right:auto;font-size:inherit;fill:steelblue;overflow:visible;position:relative;"><path d="M581 226.6C581 119.1 450.9 32 290.5 32S0 119.1 0 226.6C0 322.4 103.3 402 239.4 418.1V480h99.1v-61.5c24.3-2.7 47.6-7.4 69.4-13.9L448 480h112l-67.4-113.7c54.5-35.4 88.4-84.9 88.4-139.7zm-466.8 14.5c0-73.5 98.9-133 220.8-133s211.9 40.7 211.9 133c0 50.1-26.5 85-70.3 106.4-2.4-1.6-4.7-2.9-6.4-3.7-10.2-5.2-27.8-10.5-27.8-10.5s86.6-6.4 86.6-92.7-90.6-87.9-90.6-87.9h-199V361c-74.1-21.5-125.2-67.1-125.2-119.9zm225.1 38.3v-55.6c57.8 0 87.8-6.8 87.8 27.3 0 36.5-38.2 28.3-87.8 28.3zm-.9 72.5H365c10.8 0 18.9 11.7 24 19.2-16.1 1.9-33 2.8-50.6 2.9v-22.1z"/></svg> codes.
+<p>First, in <code>Rstudio</code> create a new <code>R Markdown</code> file. A default template will be opened. There is some <svg aria-hidden="true" role="img" viewbox="0 0 581 512" style="height:1em;width:1.13em;vertical-align:-0.125em;margin-left:auto;margin-right:auto;font-size:inherit;fill:steelblue;overflow:visible;position:relative;"><path d="M581 226.6C581 119.1 450.9 32 290.5 32S0 119.1 0 226.6C0 322.4 103.3 402 239.4 418.1V480h99.1v-61.5c24.3-2.7 47.6-7.4 69.4-13.9L448 480h112l-67.4-113.7c54.5-35.4 88.4-84.9 88.4-139.7zm-466.8 14.5c0-73.5 98.9-133 220.8-133s211.9 40.7 211.9 133c0 50.1-26.5 85-70.3 106.4-2.4-1.6-4.7-2.9-6.4-3.7-10.2-5.2-27.8-10.5-27.8-10.5s86.6-6.4 86.6-92.7-90.6-87.9-90.6-87.9h-199V361c-74.1-21.5-125.2-67.1-125.2-119.9zm225.1 38.3v-55.6c57.8 0 87.8-6.8 87.8 27.3 0 36.5-38.2 28.3-87.8 28.3zm-.9 72.5H365c10.8 0 18.9 11.7 24 19.2-16.1 1.9-33 2.8-50.6 2.9v-22.1z"></path></svg> code in <strong>R chunks</strong>. Click on <code>knit</code>, save your file and see the produced output. The output is a html report containing the results of the <svg aria-hidden="true" role="img" viewbox="0 0 581 512" style="height:1em;width:1.13em;vertical-align:-0.125em;margin-left:auto;margin-right:auto;font-size:inherit;fill:steelblue;overflow:visible;position:relative;"><path d="M581 226.6C581 119.1 450.9 32 290.5 32S0 119.1 0 226.6C0 322.4 103.3 402 239.4 418.1V480h99.1v-61.5c24.3-2.7 47.6-7.4 69.4-13.9L448 480h112l-67.4-113.7c54.5-35.4 88.4-84.9 88.4-139.7zm-466.8 14.5c0-73.5 98.9-133 220.8-133s211.9 40.7 211.9 133c0 50.1-26.5 85-70.3 106.4-2.4-1.6-4.7-2.9-6.4-3.7-10.2-5.2-27.8-10.5-27.8-10.5s86.6-6.4 86.6-92.7-90.6-87.9-90.6-87.9h-199V361c-74.1-21.5-125.2-67.1-125.2-119.9zm225.1 38.3v-55.6c57.8 0 87.8-6.8 87.8 27.3 0 36.5-38.2 28.3-87.8 28.3zm-.9 72.5H365c10.8 0 18.9 11.7 24 19.2-16.1 1.9-33 2.8-50.6 2.9v-22.1z"></path></svg> codes.
 If your file is named <code>report.Rmd</code>, your report is named <code>report.html</code>.</p>
-<div class="rmdcaution">
+<div class="caution">
 <ul>
 <li>
 Make sure to have the latest version of <code>Rstudio</code>.
@@ -520,7 +169,7 @@ and reopen it with administrative tools and retry.
 </li>
 </ul>
 </div>
-<div class="rmdcaution">
+<div class="caution">
 <ul>
 <li>
 <p>
@@ -545,34 +194,35 @@ You report must be named:
 <li><a href="https://www.rstudio.com/wp-content/uploads/2016/03/rmarkdown-cheatsheet-2.0.pdf">The R Markdown Cheatsheet</a></li>
 </ul>
 </div>
-<div id="the-report-to-be-submitted" class="section level3 unnumbered hasAnchor">
-<h3>The report to be submitted<a href="pw-7.html#the-report-to-be-submitted" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div id="the-report-to-be-submitted" class="section level3 unnumbered">
+<h3>The report to be submitted<a class="anchor" aria-label="anchor" href="#the-report-to-be-submitted"><i class="fas fa-link"></i></a>
+</h3>
 <p>In <code>Rstudio</code>, start by creating a R Markdown file. When you create it a default template will be opened with the following first lines:</p>
 <pre><code>---
-title: &quot;Untitled&quot;
+title: "Untitled"
 output: html_document
 ---</code></pre>
 <p>These lines are the YAML header in which you choose the settings of your report (title, author, date, appearance, etc..)</p>
 <p>For your submitted report, use the following YAML header:</p>
 <pre><code>---
-title: &quot;Week 7&quot;
-subtitle: &quot;Clustering&quot;
+title: "Week 7"
+subtitle: "Clustering"
 author: LastName FirstName
-date: &quot;`#r format(Sys.time())`&quot; # remove the # to show the date
+date: "`#r format(Sys.time())`" # remove the # to show the date
 output:
   html_document:
     toc: true
     toc_depth: 2
     theme: flatly
 ---</code></pre>
-<div class="rmdcaution">
+<div class="caution">
 <p>
 <strong>Very Important Remark</strong>: Click on the settings button
 of Rstudio’s text editor and choose to Chunk Output in Console.
 </p>
-<p>
-<img src="img/chunk_output_in_console.png" />
-</p>
+<div class="inline-figure">
+<img src="img/chunk_output_in_console.png">
+</div>
 </div>
 <p>In the core of your report:</p>
 <ul>
@@ -581,7 +231,8 @@ of Rstudio’s text editor and choose to Chunk Output in Console.
 <li>Write the code of the exercise in R chunks.</li>
 <li>Run the chunk to make sure it works.</li>
 <li>If there is a need, explain the results.</li>
-<li>Click on <code>knit</code></li>
+<li>Click on <code>knit</code>
+</li>
 </ul>
 <!-- 
 <div class="rmdexercise">
@@ -591,11 +242,14 @@ exercise you must continue the analysis of the Boston data set.</p>
 -->
 </div>
 </div>
-<div id="k-means-clustering" class="section level2 unnumbered hasAnchor">
-<h2><span class="math inline">\(k\)</span>-means clustering<a href="pw-7.html#k-means-clustering" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p><strong>1.</strong> Download the dataset: <a target="_blank" href="datasets/ligue1_17_18.csv"> Ligue1 2017-2018 <i class="fa fa-table" aria-hidden="true"></i></a> and import it into <svg aria-hidden="true" role="img" viewBox="0 0 581 512" style="height:1em;width:1.13em;vertical-align:-0.125em;margin-left:auto;margin-right:auto;font-size:inherit;fill:steelblue;overflow:visible;position:relative;"><path d="M581 226.6C581 119.1 450.9 32 290.5 32S0 119.1 0 226.6C0 322.4 103.3 402 239.4 418.1V480h99.1v-61.5c24.3-2.7 47.6-7.4 69.4-13.9L448 480h112l-67.4-113.7c54.5-35.4 88.4-84.9 88.4-139.7zm-466.8 14.5c0-73.5 98.9-133 220.8-133s211.9 40.7 211.9 133c0 50.1-26.5 85-70.3 106.4-2.4-1.6-4.7-2.9-6.4-3.7-10.2-5.2-27.8-10.5-27.8-10.5s86.6-6.4 86.6-92.7-90.6-87.9-90.6-87.9h-199V361c-74.1-21.5-125.2-67.1-125.2-119.9zm225.1 38.3v-55.6c57.8 0 87.8-6.8 87.8 27.3 0 36.5-38.2 28.3-87.8 28.3zm-.9 72.5H365c10.8 0 18.9 11.7 24 19.2-16.1 1.9-33 2.8-50.6 2.9v-22.1z"/></svg>. Put the argument <code>row.names</code> to 1.</p>
-<div class="sourceCode" id="cb73"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb73-1"><a href="pw-7.html#cb73-1" aria-hidden="true" tabindex="-1"></a><span class="co"># You can import directly from my website (instead of downloading it..)</span></span>
-<span id="cb73-2"><a href="pw-7.html#cb73-2" aria-hidden="true" tabindex="-1"></a>ligue1 <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">&quot;http://mghassany.com/MLcourse/datasets/ligue1_17_18.csv&quot;</span>, <span class="at">row.names=</span><span class="dv">1</span>, <span class="at">sep=</span><span class="st">&quot;;&quot;</span>)</span></code></pre></div>
+<div id="k-means-clustering" class="section level2 unnumbered">
+<h2>
+<span class="math inline">\(k\)</span>-means clustering<a class="anchor" aria-label="anchor" href="#k-means-clustering"><i class="fas fa-link"></i></a>
+</h2>
+<p><strong>1.</strong> Download the dataset: <a target="_blank" href="datasets/ligue1_17_18.csv"> Ligue1 2017-2018 <i class="fa fa-table" aria-hidden="true"></i></a> and import it into <svg aria-hidden="true" role="img" viewbox="0 0 581 512" style="height:1em;width:1.13em;vertical-align:-0.125em;margin-left:auto;margin-right:auto;font-size:inherit;fill:steelblue;overflow:visible;position:relative;"><path d="M581 226.6C581 119.1 450.9 32 290.5 32S0 119.1 0 226.6C0 322.4 103.3 402 239.4 418.1V480h99.1v-61.5c24.3-2.7 47.6-7.4 69.4-13.9L448 480h112l-67.4-113.7c54.5-35.4 88.4-84.9 88.4-139.7zm-466.8 14.5c0-73.5 98.9-133 220.8-133s211.9 40.7 211.9 133c0 50.1-26.5 85-70.3 106.4-2.4-1.6-4.7-2.9-6.4-3.7-10.2-5.2-27.8-10.5-27.8-10.5s86.6-6.4 86.6-92.7-90.6-87.9-90.6-87.9h-199V361c-74.1-21.5-125.2-67.1-125.2-119.9zm225.1 38.3v-55.6c57.8 0 87.8-6.8 87.8 27.3 0 36.5-38.2 28.3-87.8 28.3zm-.9 72.5H365c10.8 0 18.9 11.7 24 19.2-16.1 1.9-33 2.8-50.6 2.9v-22.1z"></path></svg>. Put the argument <code>row.names</code> to 1.</p>
+<div class="sourceCode" id="cb73"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="co"># You can import directly from my website (instead of downloading it..)</span>
+<span class="va">ligue1</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/utils/read.table.html">read.csv</a></span><span class="op">(</span><span class="st">"http://mghassany.com/MLcourse/datasets/ligue1_17_18.csv"</span>, row.names<span class="op">=</span><span class="fl">1</span>, sep<span class="op">=</span><span class="st">";"</span><span class="op">)</span></code></pre></div>
 <p><strong>2.</strong> Print the first two rows of the dataset and the total number of features in this dataset.</p>
 <div class="rmdtip">
 <p>
@@ -606,46 +260,53 @@ can use <code>knitr::kable(ligue1[1:5,1:5])</code>. Give it a try and
 see the result on your html report!
 </p>
 </div>
-<div id="pointscards" class="section level3 unnumbered hasAnchor">
-<h3><code>pointsCards</code><a href="pw-7.html#pointscards" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div id="pointscards" class="section level3 unnumbered">
+<h3>
+<code>pointsCards</code><a class="anchor" aria-label="anchor" href="#pointscards"><i class="fas fa-link"></i></a>
+</h3>
 <p><strong>3.</strong> We will first consider a smaller dataset to easily understand the results of <span class="math inline">\(k\)</span>-means. Create a new dataset in which you consider only <code>Points</code> and <code>Yellow.cards</code> from the original dataset. Name it <code>pointsCards</code></p>
-<p><strong>4.</strong> Apply <span class="math inline">\(k\)</span>-means on <code>pointsCards</code>. Chose <span class="math inline">\(k=2\)</span> clusters and put the number of iterations to 20. Store your results into <code>km</code>. (<strong>Remark</strong>: <code>kmeans()</code> uses a random initialization of the clusters, so the results may vary from one call to another. Use <code>set.seed()</code> to have reproducible outputs).</p>
+<p><strong>4.</strong> Apply <span class="math inline">\(k\)</span>-means on <code>pointsCards</code>. Chose <span class="math inline">\(k=2\)</span> clusters and put the number of iterations to 20. Store your results into <code>km</code>. (<strong>Remark</strong>: <code><a href="https://rdrr.io/r/stats/kmeans.html">kmeans()</a></code> uses a random initialization of the clusters, so the results may vary from one call to another. Use <code><a href="https://rdrr.io/r/base/Random.html">set.seed()</a></code> to have reproducible outputs).</p>
 <p><strong>5.</strong> Print and describe what is inside <code>km</code>.</p>
 <p><strong>6.</strong> What are the coordinates of the centers of the clusters (called also prototypes or centroids) ?</p>
 <p><strong>7.</strong> Plot the data (<code>Yellow.cards</code> vs <code>Points</code>). Color the points corresponding to their cluster.</p>
 <p><strong>8.</strong> Add to the previous plot the clusters centroids and add the names of the observations.</p>
 <p><strong>9.</strong> Re-run <span class="math inline">\(k\)</span>-means on <code>pointsCards</code> using 3 and 4 clusters and store the results into <code>km3</code> and <code>km4</code> respectively. Visualize the results like in question <strong>7</strong> and <strong>8</strong>.</p>
-<div class="rmdcaution">
+<div class="caution">
 <p>How many clusters <span class="math inline">\(k\)</span> do we need in practice? There is not a single answer: the advice is to try several and compare. Inspecting the ‘between_SS / total_SS’ for a good trade-off between the number of clusters and the percentage of total variation explained usually gives a good starting point for deciding on <span class="math inline">\(k\)</span> (criterion to select <span class="math inline">\(k\)</span> similar to PCA).</p>
-<p>There is several methods of computing an optimal value of <span class="math inline">\(k\)</span> with <svg aria-hidden="true" role="img" viewBox="0 0 581 512" style="height:1em;width:1.13em;vertical-align:-0.125em;margin-left:auto;margin-right:auto;font-size:inherit;fill:steelblue;overflow:visible;position:relative;"><path d="M581 226.6C581 119.1 450.9 32 290.5 32S0 119.1 0 226.6C0 322.4 103.3 402 239.4 418.1V480h99.1v-61.5c24.3-2.7 47.6-7.4 69.4-13.9L448 480h112l-67.4-113.7c54.5-35.4 88.4-84.9 88.4-139.7zm-466.8 14.5c0-73.5 98.9-133 220.8-133s211.9 40.7 211.9 133c0 50.1-26.5 85-70.3 106.4-2.4-1.6-4.7-2.9-6.4-3.7-10.2-5.2-27.8-10.5-27.8-10.5s86.6-6.4 86.6-92.7-90.6-87.9-90.6-87.9h-199V361c-74.1-21.5-125.2-67.1-125.2-119.9zm225.1 38.3v-55.6c57.8 0 87.8-6.8 87.8 27.3 0 36.5-38.2 28.3-87.8 28.3zm-.9 72.5H365c10.8 0 18.9 11.7 24 19.2-16.1 1.9-33 2.8-50.6 2.9v-22.1z"/></svg> code on following <code>stackoverflow</code> answer: <a href="http://stackoverflow.com/a/15376462/" target="_blank">here <svg aria-hidden="true" role="img" viewBox="0 0 384 512" style="height:1em;width:0.75em;vertical-align:-0.125em;margin-left:auto;margin-right:auto;font-size:inherit;fill:currentColor;overflow:visible;position:relative;"><path d="M290.7 311L95 269.7 86.8 309l195.7 41zm51-87L188.2 95.7l-25.5 30.8 153.5 128.3zm-31.2 39.7L129.2 179l-16.7 36.5L293.7 300zM262 32l-32 24 119.3 160.3 32-24zm20.5 328h-200v39.7h200zm39.7 80H42.7V320h-40v160h359.5V320h-40z"/></svg></a>.</p>
+<p>There is several methods of computing an optimal value of <span class="math inline">\(k\)</span> with <svg aria-hidden="true" role="img" viewbox="0 0 581 512" style="height:1em;width:1.13em;vertical-align:-0.125em;margin-left:auto;margin-right:auto;font-size:inherit;fill:steelblue;overflow:visible;position:relative;"><path d="M581 226.6C581 119.1 450.9 32 290.5 32S0 119.1 0 226.6C0 322.4 103.3 402 239.4 418.1V480h99.1v-61.5c24.3-2.7 47.6-7.4 69.4-13.9L448 480h112l-67.4-113.7c54.5-35.4 88.4-84.9 88.4-139.7zm-466.8 14.5c0-73.5 98.9-133 220.8-133s211.9 40.7 211.9 133c0 50.1-26.5 85-70.3 106.4-2.4-1.6-4.7-2.9-6.4-3.7-10.2-5.2-27.8-10.5-27.8-10.5s86.6-6.4 86.6-92.7-90.6-87.9-90.6-87.9h-199V361c-74.1-21.5-125.2-67.1-125.2-119.9zm225.1 38.3v-55.6c57.8 0 87.8-6.8 87.8 27.3 0 36.5-38.2 28.3-87.8 28.3zm-.9 72.5H365c10.8 0 18.9 11.7 24 19.2-16.1 1.9-33 2.8-50.6 2.9v-22.1z"></path></svg> code on following <code>stackoverflow</code> answer: <a href="http://stackoverflow.com/a/15376462/" target="_blank">here <svg aria-hidden="true" role="img" viewbox="0 0 384 512" style="height:1em;width:0.75em;vertical-align:-0.125em;margin-left:auto;margin-right:auto;font-size:inherit;fill:currentColor;overflow:visible;position:relative;"><path d="M290.7 311L95 269.7 86.8 309l195.7 41zm51-87L188.2 95.7l-25.5 30.8 153.5 128.3zm-31.2 39.7L129.2 179l-16.7 36.5L293.7 300zM262 32l-32 24 119.3 160.3 32-24zm20.5 328h-200v39.7h200zm39.7 80H42.7V320h-40v160h359.5V320h-40z"></path></svg></a>.</p>
 </div>
 <p><strong>10.</strong> Visualize the “within groups sum of squares” of the <span class="math inline">\(k\)</span>-means clustering results (use the code in the link above).</p>
 <center>
-<img src="img/wss_bss.jpg" />
+<img src="img/wss_bss.jpg">
 </center>
 <p><strong>11.</strong> Modify the code of the previous question in order to visualize the ‘between_SS / total_SS’. Interpret the results.</p>
 </div>
-<div id="ligue-1" class="section level3 unnumbered hasAnchor">
-<h3><code>Ligue 1</code><a href="pw-7.html#ligue-1" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<p>So far, you have only taken the information of two variables for performing clustering. Now you will apply <code>kmeans()</code> on the original dataset <code>ligue1</code>. Using PCA, we can visualize the clustering performed with all the available variables in the dataset.</p>
-<p>By default, <code>kmeans()</code> does not standardize the variables, which will affect the clustering result. As a consequence, the clustering of a dataset will be different if one variable is expressed in millions or in tenths. If you want to avoid this distortion, use scale to automatically center and standardize the dataset (the result will be a matrix, so you need to transform it to a data frame again).</p>
+<div id="ligue-1" class="section level3 unnumbered">
+<h3>
+<code>Ligue 1</code><a class="anchor" aria-label="anchor" href="#ligue-1"><i class="fas fa-link"></i></a>
+</h3>
+<p>So far, you have only taken the information of two variables for performing clustering. Now you will apply <code><a href="https://rdrr.io/r/stats/kmeans.html">kmeans()</a></code> on the original dataset <code>ligue1</code>. Using PCA, we can visualize the clustering performed with all the available variables in the dataset.</p>
+<p>By default, <code><a href="https://rdrr.io/r/stats/kmeans.html">kmeans()</a></code> does not standardize the variables, which will affect the clustering result. As a consequence, the clustering of a dataset will be different if one variable is expressed in millions or in tenths. If you want to avoid this distortion, use scale to automatically center and standardize the dataset (the result will be a matrix, so you need to transform it to a data frame again).</p>
 <p><strong>12.</strong> Scale the dataset and transform it to a data frame again. Store the scaled dataset into <code>ligue1_scaled</code>.</p>
-<p><strong>13.</strong> Apply <code>kmeans()</code> on <code>ligue1</code> and on <code>ligue1_scaled</code> using 3 clusters and 20 iterations. Store the results into <code>km.ligue1</code> and <code>km.ligue1.scaled</code> respectively (do not forget to set a seed)</p>
-<p><strong>14.</strong> How many observations there are in each cluster of <code>km.ligue1</code> and <code>km.ligue1.scaled</code> ? (you can use <code>table()</code>). Do you obtain the same results when you perform <code>kmeans()</code> on the scaled and unscaled data?</p>
+<p><strong>13.</strong> Apply <code><a href="https://rdrr.io/r/stats/kmeans.html">kmeans()</a></code> on <code>ligue1</code> and on <code>ligue1_scaled</code> using 3 clusters and 20 iterations. Store the results into <code>km.ligue1</code> and <code>km.ligue1.scaled</code> respectively (do not forget to set a seed)</p>
+<p><strong>14.</strong> How many observations there are in each cluster of <code>km.ligue1</code> and <code>km.ligue1.scaled</code> ? (you can use <code><a href="https://rdrr.io/r/base/table.html">table()</a></code>). Do you obtain the same results when you perform <code><a href="https://rdrr.io/r/stats/kmeans.html">kmeans()</a></code> on the scaled and unscaled data?</p>
 </div>
-<div id="pca" class="section level3 unnumbered hasAnchor">
-<h3><code>PCA</code><a href="pw-7.html#pca" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div id="pca" class="section level3 unnumbered">
+<h3>
+<code>PCA</code><a class="anchor" aria-label="anchor" href="#pca"><i class="fas fa-link"></i></a>
+</h3>
 <p><strong>15.</strong> Apply PCA on <code>ligue1</code> dataset and store you results in <code>pcaligue1</code>. Do we need to apply PCA on the scaled dataset? Justify your answer.</p>
 <p><strong>16.</strong> Plot the observations and the variables on the first two principal components (biplot). Interpret the results.</p>
 <p><strong>17.</strong> Visualize the teams on the first two principal components and color them with respect to their cluster.</p>
-<div class="sourceCode" id="cb74"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb74-1"><a href="pw-7.html#cb74-1" aria-hidden="true" tabindex="-1"></a><span class="co"># You can use the following code, based on `factoextra` library.</span></span>
-<span id="cb74-2"><a href="pw-7.html#cb74-2" aria-hidden="true" tabindex="-1"></a><span class="fu">fviz_cluster</span>(km.ligue1, <span class="at">data =</span> ligue1, <span class="co"># km.ligue1 is where you stored your kmeans results</span></span>
-<span id="cb74-3"><a href="pw-7.html#cb74-3" aria-hidden="true" tabindex="-1"></a>              <span class="at">palette =</span> <span class="fu">c</span>(<span class="st">&quot;red&quot;</span>, <span class="st">&quot;blue&quot;</span>, <span class="st">&quot;green&quot;</span>), <span class="co"># 3 colors since 3 clusters</span></span>
-<span id="cb74-4"><a href="pw-7.html#cb74-4" aria-hidden="true" tabindex="-1"></a>              <span class="at">ggtheme =</span> <span class="fu">theme_minimal</span>(),</span>
-<span id="cb74-5"><a href="pw-7.html#cb74-5" aria-hidden="true" tabindex="-1"></a>              <span class="at">main =</span> <span class="st">&quot;Clustering Plot&quot;</span></span>
-<span id="cb74-6"><a href="pw-7.html#cb74-6" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div>
-<p><strong>18.</strong> Recall that the figure of question <strong>17</strong> is a visualization with PC1 and PC2 of the clustering done with all the variables, not on PC1 and PC2. Now apply the <code>kmeans()</code> clustering taking only the first two PCs instead the variables of original dataset. Visualize the results and compare with the question <strong>17</strong>.</p>
-<div class="rmdinsight">
+<div class="sourceCode" id="cb74"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="co"># You can use the following code, based on `factoextra` library.</span>
+<span class="fu"><a href="https://rdrr.io/pkg/factoextra/man/fviz_cluster.html">fviz_cluster</a></span><span class="op">(</span><span class="va">km.ligue1</span>, data <span class="op">=</span> <span class="va">ligue1</span>, <span class="co"># km.ligue1 is where you stored your kmeans results</span>
+              palette <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"red"</span>, <span class="st">"blue"</span>, <span class="st">"green"</span><span class="op">)</span>, <span class="co"># 3 colors since 3 clusters</span>
+              ggtheme <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html">theme_minimal</a></span><span class="op">(</span><span class="op">)</span>,
+              main <span class="op">=</span> <span class="st">"Clustering Plot"</span>
+<span class="op">)</span></code></pre></div>
+<p><strong>18.</strong> Recall that the figure of question <strong>17</strong> is a visualization with PC1 and PC2 of the clustering done with all the variables, not on PC1 and PC2. Now apply the <code><a href="https://rdrr.io/r/stats/kmeans.html">kmeans()</a></code> clustering taking only the first two PCs instead the variables of original dataset. Visualize the results and compare with the question <strong>17</strong>.</p>
+<div class="rmdtip">
 <p>
 By applying <span class="math inline"><span class="math inline">\(k\)</span></span>-means only on the
 PCs we obtain different and less accurate result, but it is still an
@@ -653,20 +314,20 @@ insightful way.
 </p>
 </div>
 </div>
-<div id="implementing-k-means" class="section level3 unnumbered hasAnchor">
-<h3><code>Implementing k-means</code><a href="pw-7.html#implementing-k-means" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div id="implementing-k-means" class="section level3 unnumbered">
+<h3>
+<code>Implementing k-means</code><a class="anchor" aria-label="anchor" href="#implementing-k-means"><i class="fas fa-link"></i></a>
+</h3>
 <p>In this part, you will perform <span class="math inline">\(k\)</span>-means clustering manually, with
 <span class="math inline">\(k=2\)</span>, on a small example with <span class="math inline">\(n=6\)</span> observations and <span class="math inline">\(p=2\)</span>
 features. The observations are as follows.</p>
 <center>
-<table>
-<thead>
-<tr class="header">
+<table class="table table-sm">
+<thead><tr class="header">
 <th align="center"><strong>Observation</strong></th>
 <th align="center"><strong><span class="math inline">\(X_1\)</span></strong></th>
 <th align="center"><strong><span class="math inline">\(X_2\)</span></strong></th>
-</tr>
-</thead>
+</tr></thead>
 <tbody>
 <tr class="odd">
 <td align="center">1</td>
@@ -703,7 +364,7 @@ features. The observations are as follows.</p>
 </center>
 <p><strong>19.</strong> Plot the observations.</p>
 <p><strong>20.</strong> Randomly assign a cluster label to each observation. You can
-use the <code>sample()</code> command in <svg aria-hidden="true" role="img" viewBox="0 0 581 512" style="height:1em;width:1.13em;vertical-align:-0.125em;margin-left:auto;margin-right:auto;font-size:inherit;fill:steelblue;overflow:visible;position:relative;"><path d="M581 226.6C581 119.1 450.9 32 290.5 32S0 119.1 0 226.6C0 322.4 103.3 402 239.4 418.1V480h99.1v-61.5c24.3-2.7 47.6-7.4 69.4-13.9L448 480h112l-67.4-113.7c54.5-35.4 88.4-84.9 88.4-139.7zm-466.8 14.5c0-73.5 98.9-133 220.8-133s211.9 40.7 211.9 133c0 50.1-26.5 85-70.3 106.4-2.4-1.6-4.7-2.9-6.4-3.7-10.2-5.2-27.8-10.5-27.8-10.5s86.6-6.4 86.6-92.7-90.6-87.9-90.6-87.9h-199V361c-74.1-21.5-125.2-67.1-125.2-119.9zm225.1 38.3v-55.6c57.8 0 87.8-6.8 87.8 27.3 0 36.5-38.2 28.3-87.8 28.3zm-.9 72.5H365c10.8 0 18.9 11.7 24 19.2-16.1 1.9-33 2.8-50.6 2.9v-22.1z"/></svg> to do this. Report the cluster
+use the <code><a href="https://rdrr.io/r/base/sample.html">sample()</a></code> command in <svg aria-hidden="true" role="img" viewbox="0 0 581 512" style="height:1em;width:1.13em;vertical-align:-0.125em;margin-left:auto;margin-right:auto;font-size:inherit;fill:steelblue;overflow:visible;position:relative;"><path d="M581 226.6C581 119.1 450.9 32 290.5 32S0 119.1 0 226.6C0 322.4 103.3 402 239.4 418.1V480h99.1v-61.5c24.3-2.7 47.6-7.4 69.4-13.9L448 480h112l-67.4-113.7c54.5-35.4 88.4-84.9 88.4-139.7zm-466.8 14.5c0-73.5 98.9-133 220.8-133s211.9 40.7 211.9 133c0 50.1-26.5 85-70.3 106.4-2.4-1.6-4.7-2.9-6.4-3.7-10.2-5.2-27.8-10.5-27.8-10.5s86.6-6.4 86.6-92.7-90.6-87.9-90.6-87.9h-199V361c-74.1-21.5-125.2-67.1-125.2-119.9zm225.1 38.3v-55.6c57.8 0 87.8-6.8 87.8 27.3 0 36.5-38.2 28.3-87.8 28.3zm-.9 72.5H365c10.8 0 18.9 11.7 24 19.2-16.1 1.9-33 2.8-50.6 2.9v-22.1z"></path></svg> to do this. Report the cluster
 labels for each observation.</p>
 <p><strong>21.</strong> Compute the centroid for each cluster.</p>
 <p><strong>22.</strong> Create a function that calculates the Euclidean distance for two observations.</p>
@@ -715,61 +376,70 @@ observation.</p>
 cluster labels obtained.</p>
 </div>
 </div>
-<div id="hierarchical-clustering-1" class="section level2 unnumbered hasAnchor">
-<h2>Hierarchical clustering<a href="pw-7.html#hierarchical-clustering-1" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<div id="distances-dist" class="section level3 unnumbered hasAnchor">
-<h3>Distances <code>dist()</code><a href="pw-7.html#distances-dist" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<p>To calculate the distance in <svg aria-hidden="true" role="img" viewBox="0 0 581 512" style="height:1em;width:1.13em;vertical-align:-0.125em;margin-left:auto;margin-right:auto;font-size:inherit;fill:steelblue;overflow:visible;position:relative;"><path d="M581 226.6C581 119.1 450.9 32 290.5 32S0 119.1 0 226.6C0 322.4 103.3 402 239.4 418.1V480h99.1v-61.5c24.3-2.7 47.6-7.4 69.4-13.9L448 480h112l-67.4-113.7c54.5-35.4 88.4-84.9 88.4-139.7zm-466.8 14.5c0-73.5 98.9-133 220.8-133s211.9 40.7 211.9 133c0 50.1-26.5 85-70.3 106.4-2.4-1.6-4.7-2.9-6.4-3.7-10.2-5.2-27.8-10.5-27.8-10.5s86.6-6.4 86.6-92.7-90.6-87.9-90.6-87.9h-199V361c-74.1-21.5-125.2-67.1-125.2-119.9zm225.1 38.3v-55.6c57.8 0 87.8-6.8 87.8 27.3 0 36.5-38.2 28.3-87.8 28.3zm-.9 72.5H365c10.8 0 18.9 11.7 24 19.2-16.1 1.9-33 2.8-50.6 2.9v-22.1z"/></svg> we use the <code>dist()</code> function. Here is a tutorial of how use it.</p>
-<div class="sourceCode" id="cb75"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb75-1"><a href="pw-7.html#cb75-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Generate a matrix M of values from 1 to 15 with 5 rows and 3 columns</span></span>
-<span id="cb75-2"><a href="pw-7.html#cb75-2" aria-hidden="true" tabindex="-1"></a>M <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">15</span>,<span class="dv">5</span>,<span class="dv">3</span>)</span>
-<span id="cb75-3"><a href="pw-7.html#cb75-3" aria-hidden="true" tabindex="-1"></a>M</span>
-<span id="cb75-4"><a href="pw-7.html#cb75-4" aria-hidden="true" tabindex="-1"></a><span class="co">#ans&gt;      [,1] [,2] [,3]</span></span>
-<span id="cb75-5"><a href="pw-7.html#cb75-5" aria-hidden="true" tabindex="-1"></a><span class="co">#ans&gt; [1,]    1    6   11</span></span>
-<span id="cb75-6"><a href="pw-7.html#cb75-6" aria-hidden="true" tabindex="-1"></a><span class="co">#ans&gt; [2,]    2    7   12</span></span>
-<span id="cb75-7"><a href="pw-7.html#cb75-7" aria-hidden="true" tabindex="-1"></a><span class="co">#ans&gt; [3,]    3    8   13</span></span>
-<span id="cb75-8"><a href="pw-7.html#cb75-8" aria-hidden="true" tabindex="-1"></a><span class="co">#ans&gt; [4,]    4    9   14</span></span>
-<span id="cb75-9"><a href="pw-7.html#cb75-9" aria-hidden="true" tabindex="-1"></a><span class="co">#ans&gt; [5,]    5   10   15</span></span></code></pre></div>
-<div class="sourceCode" id="cb76"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb76-1"><a href="pw-7.html#cb76-1" aria-hidden="true" tabindex="-1"></a><span class="co"># - Compute the distance between rows of M.</span></span>
-<span id="cb76-2"><a href="pw-7.html#cb76-2" aria-hidden="true" tabindex="-1"></a><span class="co"># - The default distance is the euclidian distance.</span></span>
-<span id="cb76-3"><a href="pw-7.html#cb76-3" aria-hidden="true" tabindex="-1"></a><span class="co"># - Since there are 3 columns, it is the euclidian</span></span>
-<span id="cb76-4"><a href="pw-7.html#cb76-4" aria-hidden="true" tabindex="-1"></a><span class="co">#        distance between tri-dimensional points.</span></span>
-<span id="cb76-5"><a href="pw-7.html#cb76-5" aria-hidden="true" tabindex="-1"></a><span class="fu">dist</span>(M)</span>
-<span id="cb76-6"><a href="pw-7.html#cb76-6" aria-hidden="true" tabindex="-1"></a><span class="co">#ans&gt;      1    2    3    4</span></span>
-<span id="cb76-7"><a href="pw-7.html#cb76-7" aria-hidden="true" tabindex="-1"></a><span class="co">#ans&gt; 2 1.73               </span></span>
-<span id="cb76-8"><a href="pw-7.html#cb76-8" aria-hidden="true" tabindex="-1"></a><span class="co">#ans&gt; 3 3.46 1.73          </span></span>
-<span id="cb76-9"><a href="pw-7.html#cb76-9" aria-hidden="true" tabindex="-1"></a><span class="co">#ans&gt; 4 5.20 3.46 1.73     </span></span>
-<span id="cb76-10"><a href="pw-7.html#cb76-10" aria-hidden="true" tabindex="-1"></a><span class="co">#ans&gt; 5 6.93 5.20 3.46 1.73</span></span></code></pre></div>
-<div class="sourceCode" id="cb77"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb77-1"><a href="pw-7.html#cb77-1" aria-hidden="true" tabindex="-1"></a><span class="co"># To compute the Manhattan distance </span></span>
-<span id="cb77-2"><a href="pw-7.html#cb77-2" aria-hidden="true" tabindex="-1"></a><span class="fu">dist</span>(M, <span class="at">method=</span> <span class="st">&quot;manhattan&quot;</span>)</span>
-<span id="cb77-3"><a href="pw-7.html#cb77-3" aria-hidden="true" tabindex="-1"></a><span class="co">#ans&gt;    1  2  3  4</span></span>
-<span id="cb77-4"><a href="pw-7.html#cb77-4" aria-hidden="true" tabindex="-1"></a><span class="co">#ans&gt; 2  3         </span></span>
-<span id="cb77-5"><a href="pw-7.html#cb77-5" aria-hidden="true" tabindex="-1"></a><span class="co">#ans&gt; 3  6  3      </span></span>
-<span id="cb77-6"><a href="pw-7.html#cb77-6" aria-hidden="true" tabindex="-1"></a><span class="co">#ans&gt; 4  9  6  3   </span></span>
-<span id="cb77-7"><a href="pw-7.html#cb77-7" aria-hidden="true" tabindex="-1"></a><span class="co">#ans&gt; 5 12  9  6  3</span></span></code></pre></div>
+<div id="hierarchical-clustering-1" class="section level2 unnumbered">
+<h2>Hierarchical clustering<a class="anchor" aria-label="anchor" href="#hierarchical-clustering-1"><i class="fas fa-link"></i></a>
+</h2>
+<div id="distances-dist" class="section level3 unnumbered">
+<h3>Distances <code>dist()</code><a class="anchor" aria-label="anchor" href="#distances-dist"><i class="fas fa-link"></i></a>
+</h3>
+<p>To calculate the distance in <svg aria-hidden="true" role="img" viewbox="0 0 581 512" style="height:1em;width:1.13em;vertical-align:-0.125em;margin-left:auto;margin-right:auto;font-size:inherit;fill:steelblue;overflow:visible;position:relative;"><path d="M581 226.6C581 119.1 450.9 32 290.5 32S0 119.1 0 226.6C0 322.4 103.3 402 239.4 418.1V480h99.1v-61.5c24.3-2.7 47.6-7.4 69.4-13.9L448 480h112l-67.4-113.7c54.5-35.4 88.4-84.9 88.4-139.7zm-466.8 14.5c0-73.5 98.9-133 220.8-133s211.9 40.7 211.9 133c0 50.1-26.5 85-70.3 106.4-2.4-1.6-4.7-2.9-6.4-3.7-10.2-5.2-27.8-10.5-27.8-10.5s86.6-6.4 86.6-92.7-90.6-87.9-90.6-87.9h-199V361c-74.1-21.5-125.2-67.1-125.2-119.9zm225.1 38.3v-55.6c57.8 0 87.8-6.8 87.8 27.3 0 36.5-38.2 28.3-87.8 28.3zm-.9 72.5H365c10.8 0 18.9 11.7 24 19.2-16.1 1.9-33 2.8-50.6 2.9v-22.1z"></path></svg> we use the <code><a href="https://rdrr.io/pkg/factoextra/man/dist.html">dist()</a></code> function. Here is a tutorial of how use it.</p>
+<div class="sourceCode" id="cb75"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="co"># Generate a matrix M of values from 1 to 15 with 5 rows and 3 columns</span>
+<span class="va">M</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/matrix.html">matrix</a></span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">15</span>,<span class="fl">5</span>,<span class="fl">3</span><span class="op">)</span>
+<span class="va">M</span>
+<span class="co">#ans&gt;      [,1] [,2] [,3]</span>
+<span class="co">#ans&gt; [1,]    1    6   11</span>
+<span class="co">#ans&gt; [2,]    2    7   12</span>
+<span class="co">#ans&gt; [3,]    3    8   13</span>
+<span class="co">#ans&gt; [4,]    4    9   14</span>
+<span class="co">#ans&gt; [5,]    5   10   15</span></code></pre></div>
+<div class="sourceCode" id="cb76"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="co"># - Compute the distance between rows of M.</span>
+<span class="co"># - The default distance is the euclidian distance.</span>
+<span class="co"># - Since there are 3 columns, it is the euclidian</span>
+<span class="co">#        distance between tri-dimensional points.</span>
+<span class="fu"><a href="https://rdrr.io/pkg/factoextra/man/dist.html">dist</a></span><span class="op">(</span><span class="va">M</span><span class="op">)</span>
+<span class="co">#ans&gt;      1    2    3    4</span>
+<span class="co">#ans&gt; 2 1.73               </span>
+<span class="co">#ans&gt; 3 3.46 1.73          </span>
+<span class="co">#ans&gt; 4 5.20 3.46 1.73     </span>
+<span class="co">#ans&gt; 5 6.93 5.20 3.46 1.73</span></code></pre></div>
+<div class="sourceCode" id="cb77"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="co"># To compute the Manhattan distance </span>
+<span class="fu"><a href="https://rdrr.io/pkg/factoextra/man/dist.html">dist</a></span><span class="op">(</span><span class="va">M</span>, method<span class="op">=</span> <span class="st">"manhattan"</span><span class="op">)</span>
+<span class="co">#ans&gt;    1  2  3  4</span>
+<span class="co">#ans&gt; 2  3         </span>
+<span class="co">#ans&gt; 3  6  3      </span>
+<span class="co">#ans&gt; 4  9  6  3   </span>
+<span class="co">#ans&gt; 5 12  9  6  3</span></code></pre></div>
 </div>
-<div id="dendrogram-hclust" class="section level3 unnumbered hasAnchor">
-<h3>Dendrogram <code>hclust()</code><a href="pw-7.html#dendrogram-hclust" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<div class="sourceCode" id="cb78"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb78-1"><a href="pw-7.html#cb78-1" aria-hidden="true" tabindex="-1"></a><span class="co"># First we construct the dendrogram </span></span>
-<span id="cb78-2"><a href="pw-7.html#cb78-2" aria-hidden="true" tabindex="-1"></a>dendro <span class="ot">&lt;-</span> <span class="fu">hclust</span>(<span class="fu">dist</span>(M))</span>
-<span id="cb78-3"><a href="pw-7.html#cb78-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb78-4"><a href="pw-7.html#cb78-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Then we plot it</span></span>
-<span id="cb78-5"><a href="pw-7.html#cb78-5" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(dendro)</span></code></pre></div>
-<p><img src="Machine-Learning_files/figure-html/unnamed-chunk-242-1.png" width="70%" style="display: block; margin: auto;" /></p>
+<div id="dendrogram-hclust" class="section level3 unnumbered">
+<h3>Dendrogram <code>hclust()</code><a class="anchor" aria-label="anchor" href="#dendrogram-hclust"><i class="fas fa-link"></i></a>
+</h3>
+<div class="sourceCode" id="cb78"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="co"># First we construct the dendrogram </span>
+<span class="va">dendro</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/hclust.html">hclust</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/factoextra/man/dist.html">dist</a></span><span class="op">(</span><span class="va">M</span><span class="op">)</span><span class="op">)</span>
+
+<span class="co"># Then we plot it</span>
+<span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">dendro</span><span class="op">)</span></code></pre></div>
+<div class="inline-figure"><img src="Machine-Learning_files/figure-html/unnamed-chunk-242-1.png" width="70%" style="display: block; margin: auto;"></div>
 </div>
-<div id="hierarchical-clustering-on-iris-dataset" class="section level3 unnumbered hasAnchor">
-<h3>Hierarchical clustering on Iris dataset<a href="pw-7.html#hierarchical-clustering-on-iris-dataset" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<p><img src="img/iris.png" width="85%" style="display: block; margin: auto;" /></p>
+<div id="hierarchical-clustering-on-iris-dataset" class="section level3 unnumbered">
+<h3>Hierarchical clustering on Iris dataset<a class="anchor" aria-label="anchor" href="#hierarchical-clustering-on-iris-dataset"><i class="fas fa-link"></i></a>
+</h3>
+<div class="inline-figure"><img src="img/iris.png" width="85%" style="display: block; margin: auto;"></div>
 <p><strong>1.</strong> Download the iris dataset from <a target="_blank" href="datasets/iris.data"> here <i class="fa fa-table" aria-hidden="true"></i></a> and import it into <code>R</code>.</p>
 <p><strong>2.</strong> Choose randomly 40 observations of the iris dataset and store the sample dataset into <code>sampleiris</code>.</p>
 <p><strong>3.</strong> Calculate the euclidean distances between the flowers. Store the results in a matrix called <code>D</code>. (<strong>Remark</strong>: the last column of the dataset is the class labels of the flowers)</p>
 <p><strong>4.</strong> Construct a dendrogram on the iris dataset using the method <em>average</em>. Store the result in <code>dendro.avg</code>.</p>
 <p><strong>5.</strong> Plot the dendrogram.</p>
 <p><strong>6.</strong> Plot again the dendrogram using the following command:</p>
-<div class="sourceCode" id="cb79"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb79-1"><a href="pw-7.html#cb79-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(dendro.avg, <span class="at">hang=</span><span class="sc">-</span><span class="dv">1</span>, <span class="at">label=</span>sampleiris<span class="sc">$</span>class)</span></code></pre></div>
+<div class="sourceCode" id="cb79"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">dendro.avg</span>, hang<span class="op">=</span><span class="op">-</span><span class="fl">1</span>, label<span class="op">=</span><span class="va">sampleiris</span><span class="op">$</span><span class="va">class</span><span class="op">)</span></code></pre></div>
 <p><strong>7.</strong> To cut the dendrogram and obtain a clustering use the <code>cutree</code>. You can choose the number of clusters you wish to obtain, or you can cut by choosing the height from the dendrogram figure. Cut the dendrogram in order to obtain 3 clusters. Store the results into vector <code>groups.avg</code>.</p>
-<p><strong>8.</strong> Visualize the cut tree using the function <code>rect.hclust()</code>. You can choose the colors of the rectangles too!</p>
-<p><strong>9.</strong> Compare the obtained results obtained with Hierarchical clustering and the real class labels of the flowers (function <code>table()</code>). Interpret the results.</p>
-<p><strong>Bonus</strong>: You can cut the tree manually (on demand!). To do so, plot a dendrogram first then use the function <code>identify()</code>.
+<p><strong>8.</strong> Visualize the cut tree using the function <code><a href="https://rdrr.io/r/stats/rect.hclust.html">rect.hclust()</a></code>. You can choose the colors of the rectangles too!</p>
+<p><strong>9.</strong> Compare the obtained results obtained with Hierarchical clustering and the real class labels of the flowers (function <code><a href="https://rdrr.io/r/base/table.html">table()</a></code>). Interpret the results.</p>
+<p><strong>Bonus</strong>: You can cut the tree manually (on demand!). To do so, plot a dendrogram first then use the function <code><a href="https://rdrr.io/r/graphics/identify.html">identify()</a></code>.
 On the figure, click on the clusters you wish to obtain. Then hit <code>Escape</code> to finish.</p>
 <p><strong>10.</strong> Now apply the Hierarchical clustering on the iris dataset (the 150 observations). Choose 3 clusters and compare the results with the real class labels. Compare different methods of Hierarchical clustering (<em>average</em>, <em>complete</em> and <em>single</em> linkages).</p>
 <p align="right">
@@ -779,62 +449,60 @@ On the figure, click on the clusters you wish to obtain. Then hit <code>Escape</
 </div>
 </div>
 </div>
-            </section>
+  <div class="chapter-nav">
+<div class="prev"><a href="kmeans-hierarchical-clustering.html"><span class="header-section-number">7</span> Kmeans &amp; Hierarchical Clustering</a></div>
+<div class="next"><a href="gaussian-mixture-models-em.html"><span class="header-section-number">8</span> Gaussian Mixture Models &amp; EM</a></div>
+</div></main><div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
+    <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
+      <ul class="nav navbar-nav">
+<li><a class="nav-link" href="#pw-7">PW 7</a></li>
+<li>
+<a class="nav-link" href="#reporting-1">Reporting</a><ul class="nav navbar-nav">
+<li><a class="nav-link" href="#markdown">Markdown</a></li>
+<li><a class="nav-link" href="#r-markdown">R Markdown</a></li>
+<li><a class="nav-link" href="#the-report-to-be-submitted">The report to be submitted</a></li>
+</ul>
+</li>
+<li>
+<a class="nav-link" href="#k-means-clustering">\(k\)-means clustering</a><ul class="nav navbar-nav">
+<li><a class="nav-link" href="#pointscards">pointsCards</a></li>
+<li><a class="nav-link" href="#ligue-1">Ligue 1</a></li>
+<li><a class="nav-link" href="#pca">PCA</a></li>
+<li><a class="nav-link" href="#implementing-k-means">Implementing k-means</a></li>
+</ul>
+</li>
+<li>
+<a class="nav-link" href="#hierarchical-clustering-1">Hierarchical clustering</a><ul class="nav navbar-nav">
+<li><a class="nav-link" href="#distances-dist">Distances dist()</a></li>
+<li><a class="nav-link" href="#dendrogram-hclust">Dendrogram hclust()</a></li>
+<li><a class="nav-link" href="#hierarchical-clustering-on-iris-dataset">Hierarchical clustering on Iris dataset</a></li>
+</ul>
+</li>
+</ul>
 
-          </div>
-        </div>
-      </div>
-<a href="7-kmeans-hierarchical-clustering.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="8-gaussian-mixture-models-em.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
-    </div>
+      <div class="book-extra">
+        <ul class="list-unstyled">
+          
+        </ul>
+</div>
+    </nav>
+</div>
+
+</div>
+</div> <!-- .container -->
+
+<footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
+
+  <div class="col-12 col-md-6 mt-3">
+    <p>"<strong>Machine Learning</strong>" was written by Mohamad Ghassany. It was last built on 2022-04-26.</p>
   </div>
-<script src="book_assets/gitbook-2.6.7/js/app.min.js"></script>
-<script src="book_assets/gitbook-2.6.7/js/clipboard.min.js"></script>
-<script src="book_assets/gitbook-2.6.7/js/plugin-search.js"></script>
-<script src="book_assets/gitbook-2.6.7/js/plugin-sharing.js"></script>
-<script src="book_assets/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
-<script src="book_assets/gitbook-2.6.7/js/plugin-bookdown.js"></script>
-<script src="book_assets/gitbook-2.6.7/js/jquery.highlight.js"></script>
-<script src="book_assets/gitbook-2.6.7/js/plugin-clipboard.js"></script>
-<script>
-gitbook.require(["gitbook"], function(gitbook) {
-gitbook.start({
-"sharing": false,
-"fontsettings": {
-"theme": "white",
-"family": "sans",
-"size": 2
-},
-"edit": {
-"link": null,
-"text": null
-},
-"history": {
-"link": null,
-"text": null
-},
-"view": {
-"link": null,
-"text": null
-},
-"download": null,
-"search": {
-"engine": "fuse",
-"options": null
-},
-"toc": {
-"collapse": "section",
-"scroll_highlight": true
-},
-"toolbar": {
-"position": "fixed"
-}
-});
-});
-</script>
 
-<!-- dynamically load mathjax for compatibility with self-contained -->
-<script>
+  <div class="col-12 col-md-6 mt-3">
+    <p>This book was built by the <a class="text-light" href="https://bookdown.org">bookdown</a> R package.</p>
+  </div>
+
+</div></div>
+</footer><!-- dynamically load mathjax for compatibility with self-contained --><script>
   (function () {
     var script = document.createElement("script");
     script.type = "text/javascript";
@@ -846,7 +514,22 @@ gitbook.start({
     script.src = src;
     document.getElementsByTagName("head")[0].appendChild(script);
   })();
+</script><script type="text/x-mathjax-config">const popovers = document.querySelectorAll('a.footnote-ref[data-toggle="popover"]');
+for (let popover of popovers) {
+  const div = document.createElement('div');
+  div.setAttribute('style', 'position: absolute; top: 0, left:0; width:0, height:0, overflow: hidden; visibility: hidden;');
+  div.innerHTML = popover.getAttribute('data-content');
+
+  var has_math = div.querySelector("span.math");
+  if (has_math) {
+    document.body.appendChild(div);
+    MathJax.Hub.Queue(["Typeset", MathJax.Hub, div]);
+    MathJax.Hub.Queue(function() {
+      popover.setAttribute('data-content', div.innerHTML);
+      document.body.removeChild(div);
+    })
+  }
+}
 </script>
 </body>
-
 </html>

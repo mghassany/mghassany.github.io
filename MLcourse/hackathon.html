@@ -1,463 +1,109 @@
 <!DOCTYPE html>
-<html lang="" xml:lang="">
+<html lang="en">
 <head>
-
-  <meta charset="utf-8" />
-  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Hackathon | Machine Learning</title>
-  <meta name="description" content="Hackathon | Machine Learning course" />
-  <meta name="generator" content="bookdown 0.24.10 and GitBook 2.6.7" />
-
-  <meta property="og:title" content="Hackathon | Machine Learning" />
-  <meta property="og:type" content="book" />
-  
-  
-  <meta property="og:description" content="Hackathon | Machine Learning course" />
-  
-
-  <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Hackathon | Machine Learning" />
-  
-  <meta name="twitter:description" content="Hackathon | Machine Learning course" />
-  
-
-<meta name="author" content="Mohamad Ghassany" />
-
-
-<meta name="date" content="2022-03-17" />
-
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name="apple-mobile-web-app-capable" content="yes" />
-  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
-  
-  
-<link rel="prev" href="pw-8.html"/>
-<link rel="next" href="A-final-grades.html"/>
-<script src="book_assets/jquery-3.6.0/jquery-3.6.0.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
-<link href="book_assets/gitbook-2.6.7/css/style.css" rel="stylesheet" />
-<link href="book_assets/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
-<link href="book_assets/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
-<link href="book_assets/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
-<link href="book_assets/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
-<link href="book_assets/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
-<link href="book_assets/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
-
-
-
-
-
-
-
-
-<link href="book_assets/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
-<link href="book_assets/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
-<script src="book_assets/anchor-sections-1.1.0/anchor-sections.js"></script>
-<script src="book_assets/kePrint-0.0.1/kePrint.js"></script>
-<link href="book_assets/lightable-0.0.1/lightable.css" rel="stylesheet" />
-<link href="book_assets/vembedr-0.1.5/css/vembedr.css" rel="stylesheet" />
-<script src="book_assets/htmlwidgets-1.5.4/htmlwidgets.js"></script>
-<script src="book_assets/plotly-binding-4.10.0/plotly.js"></script>
-<script src="book_assets/typedarray-0.1/typedarray.min.js"></script>
-<link href="book_assets/crosstalk-1.2.0/css/crosstalk.min.css" rel="stylesheet" />
-<script src="book_assets/crosstalk-1.2.0/js/crosstalk.min.js"></script>
-<link href="book_assets/plotly-htmlwidgets-css-2.5.1/plotly-htmlwidgets.css" rel="stylesheet" />
-<script src="book_assets/plotly-main-2.5.1/plotly-latest.min.js"></script>
-
-
-<style type="text/css">
-pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
-pre > code.sourceCode > span:empty { height: 1.2em; }
-.sourceCode { overflow: visible; }
-code.sourceCode > span { color: inherit; text-decoration: inherit; }
-pre.sourceCode { margin: 0; }
-@media screen {
-div.sourceCode { overflow: auto; }
-}
-@media print {
-pre > code.sourceCode { white-space: pre-wrap; }
-pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
-}
-pre.numberSource code
-  { counter-reset: source-line 0; }
-pre.numberSource code > span
-  { position: relative; left: -4em; counter-increment: source-line; }
-pre.numberSource code > span > a:first-child::before
-  { content: counter(source-line);
-    position: relative; left: -1em; text-align: right; vertical-align: baseline;
-    border: none; display: inline-block;
-    -webkit-touch-callout: none; -webkit-user-select: none;
-    -khtml-user-select: none; -moz-user-select: none;
-    -ms-user-select: none; user-select: none;
-    padding: 0 4px; width: 4em;
-    background-color: #ffffff;
-    color: #a0a0a0;
-  }
-pre.numberSource { margin-left: 3em; border-left: 1px solid #a0a0a0;  padding-left: 4px; }
-div.sourceCode
-  { color: #1f1c1b; background-color: #ffffff; }
-@media screen {
-pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
-}
-code span { color: #1f1c1b; } /* Normal */
-code span.al { color: #bf0303; background-color: #f7e6e6; font-weight: bold; } /* Alert */
-code span.an { color: #ca60ca; } /* Annotation */
-code span.at { color: #0057ae; } /* Attribute */
-code span.bn { color: #b08000; } /* BaseN */
-code span.bu { color: #644a9b; font-weight: bold; } /* BuiltIn */
-code span.cf { color: #1f1c1b; font-weight: bold; } /* ControlFlow */
-code span.ch { color: #924c9d; } /* Char */
-code span.cn { color: #aa5500; } /* Constant */
-code span.co { color: #898887; } /* Comment */
-code span.cv { color: #0095ff; } /* CommentVar */
-code span.do { color: #607880; } /* Documentation */
-code span.dt { color: #0057ae; } /* DataType */
-code span.dv { color: #b08000; } /* DecVal */
-code span.er { color: #bf0303; text-decoration: underline; } /* Error */
-code span.ex { color: #0095ff; font-weight: bold; } /* Extension */
-code span.fl { color: #b08000; } /* Float */
-code span.fu { color: #644a9b; } /* Function */
-code span.im { color: #ff5500; } /* Import */
-code span.in { color: #b08000; } /* Information */
-code span.kw { color: #1f1c1b; font-weight: bold; } /* Keyword */
-code span.op { color: #1f1c1b; } /* Operator */
-code span.ot { color: #006e28; } /* Other */
-code span.pp { color: #006e28; } /* Preprocessor */
-code span.re { color: #0057ae; background-color: #e0e9f8; } /* RegionMarker */
-code span.sc { color: #3daee9; } /* SpecialChar */
-code span.ss { color: #ff5500; } /* SpecialString */
-code span.st { color: #bf0303; } /* String */
-code span.va { color: #0057ae; } /* Variable */
-code span.vs { color: #bf0303; } /* VerbatimString */
-code span.wa { color: #bf0303; } /* Warning */
-</style>
-
-<style type="text/css">
-/* Used with Pandoc 2.11+ new --citeproc when CSL is used */
-div.csl-bib-body { }
-div.csl-entry {
-  clear: both;
-}
-.hanging div.csl-entry {
-  margin-left:2em;
-  text-indent:-2em;
-}
-div.csl-left-margin {
-  min-width:2em;
-  float:left;
-}
-div.csl-right-inline {
-  margin-left:2em;
-  padding-left:1em;
-}
-div.csl-indent {
-  margin-left: 2em;
-}
-</style>
-
-<link rel="stylesheet" href="css/style.css" type="text/css" />
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<title>Hackathon | Machine Learning</title>
+<meta name="author" content="Mohamad Ghassany">
+<meta name="description" content="This session is special.          –&gt;  –&gt; –&gt; –&gt; ◼">
+<meta name="generator" content="bookdown 0.24.10 with bs4_book()">
+<meta property="og:title" content="Hackathon | Machine Learning">
+<meta property="og:type" content="book">
+<meta property="og:description" content="This session is special.          –&gt;  –&gt; –&gt; –&gt; ◼">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Hackathon | Machine Learning">
+<meta name="twitter:description" content="This session is special.          –&gt;  –&gt; –&gt; –&gt; ◼">
+<!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
+<script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.3.1/transition.js"></script><script src="libs/bs3compat-0.3.1/tabs.js"></script><script src="libs/bs3compat-0.3.1/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
+<script src="libs/bs4_book-1.0.0/bs4_book.js"></script><script src="libs/kePrint-0.0.1/kePrint.js"></script><link href="libs/lightable-0.0.1/lightable.css" rel="stylesheet">
+<link href="libs/vembedr-0.1.5/css/vembedr.css" rel="stylesheet">
+<script src="libs/htmlwidgets-1.5.4/htmlwidgets.js"></script><script src="libs/plotly-binding-4.10.0/plotly.js"></script><script src="libs/typedarray-0.1/typedarray.min.js"></script><link href="libs/crosstalk-1.2.0/css/crosstalk.min.css" rel="stylesheet">
+<script src="libs/crosstalk-1.2.0/js/crosstalk.min.js"></script><link href="libs/plotly-htmlwidgets-css-2.5.1/plotly-htmlwidgets.css" rel="stylesheet">
+<script src="libs/plotly-main-2.5.1/plotly-latest.min.js"></script><script type="text/x-mathjax-config">
+    const popovers = document.querySelectorAll('a.footnote-ref[data-toggle="popover"]');
+    for (let popover of popovers){
+      const div = document.createElement('div');
+      div.setAttribute('style', 'position: absolute; top: 0, left:0; width:0, height:0, overflow: hidden; visibility: hidden;');
+      div.innerHTML = popover.getAttribute('data-content');
+      
+      // Will this work with TeX on its own line?
+      var has_math = div.querySelector("span.math");
+      if (has_math) {
+        document.body.appendChild(div);
+      	MathJax.Hub.Queue(["Typeset", MathJax.Hub, div]);
+      	MathJax.Hub.Queue(function(){
+          popover.setAttribute('data-content', div.innerHTML);
+      	})
+      }
+    }
+    </script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- CSS --><link rel="stylesheet" href="css/ims-style.css">
 </head>
+<body data-spy="scroll" data-target="#toc">
 
-<body>
+<div class="container-fluid">
+<div class="row">
+  <header class="col-sm-12 col-lg-3 sidebar sidebar-book"><a class="sr-only sr-only-focusable" href="#content">Skip to main content</a>
 
-
-
-  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
-
-    <div class="book-summary">
-      <nav role="navigation">
-
-<ul class="summary">
-<li class='beforeimg'>            
-   <a href="https://www.esilv.fr/">
-       <img src="img/Logo_ESILV_new.png" style="width:75%; padding:0px 0; display:block; margin: 0 auto;" alt="ESILV logo">
-    </a>
-</li>
-<li class='before'><a href="./">Machine Learning</a></li>
-
-<li class="divider"></li>
-<li><a href="index.html#welcome">Welcome<span></span></a>
-<ul>
-<li><a href="index.html#course-overview">Course Overview<span></span></a></li>
-<li><a href="index.html#course-schedule">Course Schedule<span></span></a></li>
-</ul></li>
-<li><a href="introduction.html#introduction">Introduction<span></span></a>
-<ul>
-<li><a href="introduction.html#what-is-machine-learning">What is Machine Learning ?<span></span></a></li>
-<li><a href="introduction.html#supervised-learning">Supervised Learning<span></span></a></li>
-<li><a href="introduction.html#unsupervised-learning">Unsupervised Learning<span></span></a></li>
-</ul></li>
-<li class="part"><span><b>I Supervised Learning<span></span></b></span></li>
-<li class="part"><span><b>Regression<span></span></b></span></li>
-<li class="chapter" data-level="1" data-path="1-linear-regression.html"><a href="1-linear-regression.html"><i class="fa fa-check"></i><b>1</b> Linear Regression<span></span></a>
-<ul>
-<li class="chapter" data-level="1.1" data-path="1-linear-regression.html"><a href="1-linear-regression.html#notation"><i class="fa fa-check"></i><b>1.1</b> Notation<span></span></a></li>
-<li class="chapter" data-level="1.2" data-path="1-linear-regression.html"><a href="1-linear-regression.html#model-representation"><i class="fa fa-check"></i><b>1.2</b> Model Representation<span></span></a></li>
-<li class="chapter" data-level="1.3" data-path="1-linear-regression.html"><a href="1-linear-regression.html#why-estimate-f"><i class="fa fa-check"></i><b>1.3</b> Why Estimate <span class="math inline">\(f\)</span> ?<span></span></a>
-<ul>
-<li><a href="1-linear-regression.html#prediction">Prediction<span></span></a></li>
-<li><a href="1-linear-regression.html#inference">Inference<span></span></a></li>
-</ul></li>
-<li class="chapter" data-level="1.4" data-path="1-linear-regression.html"><a href="1-linear-regression.html#simple-linear-regression-model"><i class="fa fa-check"></i><b>1.4</b> Simple Linear Regression Model<span></span></a></li>
-<li class="chapter" data-level="1.5" data-path="1-linear-regression.html"><a href="1-linear-regression.html#estimating-the-coefficients"><i class="fa fa-check"></i><b>1.5</b> Estimating the Coefficients<span></span></a></li>
-<li class="chapter" data-level="1.6" data-path="1-linear-regression.html"><a href="1-linear-regression.html#assessing-the-accuracy-of-the-coefficient-estimates"><i class="fa fa-check"></i><b>1.6</b> Assessing the Accuracy of the Coefficient Estimates<span></span></a>
-<ul>
-<li><a href="1-linear-regression.html#hypothesis-testing">Hypothesis testing<span></span></a></li>
-</ul></li>
-<li class="chapter" data-level="1.7" data-path="1-linear-regression.html"><a href="1-linear-regression.html#anova-and-model-fit"><i class="fa fa-check"></i><b>1.7</b> ANOVA and model fit<span></span></a>
-<ul>
-<li class="chapter" data-level="1.7.1" data-path="1-linear-regression.html"><a href="1-linear-regression.html#anova"><i class="fa fa-check"></i><b>1.7.1</b> ANOVA<span></span></a></li>
-<li class="chapter" data-level="1.7.2" data-path="1-linear-regression.html"><a href="1-linear-regression.html#the-r2-statistic"><i class="fa fa-check"></i><b>1.7.2</b> The <span class="math inline">\(R^2\)</span> Statistic<span></span></a></li>
-</ul></li>
-</ul></li>
-<li><a href="practical-work-1.html#practical-work-1">Practical Work 1<span></span></a>
-<ul>
-<li class="chapter" data-level="1.8" data-path="practical-work-1.html"><a href="practical-work-1.html"><i class="fa fa-check"></i><b>1.8</b> Some <svg aria-hidden="true" role="img" viewBox="0 0 581 512" style="height:1em;width:1.13em;vertical-align:-0.125em;margin-left:auto;margin-right:auto;font-size:inherit;fill:steelblue;overflow:visible;position:relative;"><path d="M581 226.6C581 119.1 450.9 32 290.5 32S0 119.1 0 226.6C0 322.4 103.3 402 239.4 418.1V480h99.1v-61.5c24.3-2.7 47.6-7.4 69.4-13.9L448 480h112l-67.4-113.7c54.5-35.4 88.4-84.9 88.4-139.7zm-466.8 14.5c0-73.5 98.9-133 220.8-133s211.9 40.7 211.9 133c0 50.1-26.5 85-70.3 106.4-2.4-1.6-4.7-2.9-6.4-3.7-10.2-5.2-27.8-10.5-27.8-10.5s86.6-6.4 86.6-92.7-90.6-87.9-90.6-87.9h-199V361c-74.1-21.5-125.2-67.1-125.2-119.9zm225.1 38.3v-55.6c57.8 0 87.8-6.8 87.8 27.3 0 36.5-38.2 28.3-87.8 28.3zm-.9 72.5H365c10.8 0 18.9 11.7 24 19.2-16.1 1.9-33 2.8-50.6 2.9v-22.1z"/></svg> basics<span></span></a>
-<ul>
-<li class="chapter" data-level="1.8.1" data-path="practical-work-1.html"><a href="practical-work-1.html#basic-commands"><i class="fa fa-check"></i><b>1.8.1</b> Basic Commands<span></span></a></li>
-<li class="chapter" data-level="1.8.2" data-path="practical-work-1.html"><a href="practical-work-1.html#vectors"><i class="fa fa-check"></i><b>1.8.2</b> Vectors<span></span></a></li>
-<li class="chapter" data-level="1.8.3" data-path="practical-work-1.html"><a href="practical-work-1.html#matrices-data-frames-and-lists"><i class="fa fa-check"></i><b>1.8.3</b> Matrices, data frames and lists<span></span></a></li>
-<li class="chapter" data-level="1.8.4" data-path="practical-work-1.html"><a href="practical-work-1.html#graphics"><i class="fa fa-check"></i><b>1.8.4</b> Graphics<span></span></a></li>
-<li class="chapter" data-level="1.8.5" data-path="practical-work-1.html"><a href="practical-work-1.html#distributions"><i class="fa fa-check"></i><b>1.8.5</b> Distributions<span></span></a></li>
-<li class="chapter" data-level="1.8.6" data-path="practical-work-1.html"><a href="practical-work-1.html#working-directory"><i class="fa fa-check"></i><b>1.8.6</b> Working directory<span></span></a></li>
-<li class="chapter" data-level="1.8.7" data-path="practical-work-1.html"><a href="practical-work-1.html#loading-data"><i class="fa fa-check"></i><b>1.8.7</b> Loading Data<span></span></a></li>
-</ul></li>
-<li class="chapter" data-level="1.9" data-path="practical-work-1.html"><a href="practical-work-1.html#regression"><i class="fa fa-check"></i><b>1.9</b> Regression<span></span></a>
-<ul>
-<li class="chapter" data-level="1.9.1" data-path="practical-work-1.html"><a href="practical-work-1.html#the-lm-function"><i class="fa fa-check"></i><b>1.9.1</b> The <code>lm</code> function<span></span></a></li>
-<li class="chapter" data-level="1.9.2" data-path="practical-work-1.html"><a href="practical-work-1.html#boston"><i class="fa fa-check"></i><b>1.9.2</b> Predicting House Value: Boston dataset<span></span></a></li>
-</ul></li>
-</ul></li>
-<li class="chapter" data-level="2" data-path="2-multiple-linear-regression.html"><a href="2-multiple-linear-regression.html"><i class="fa fa-check"></i><b>2</b> Multiple Linear Regression<span></span></a>
-<ul>
-<li class="chapter" data-level="2.1" data-path="2-multiple-linear-regression.html"><a href="2-multiple-linear-regression.html#the-model"><i class="fa fa-check"></i><b>2.1</b> The Model<span></span></a></li>
-<li class="chapter" data-level="2.2" data-path="2-multiple-linear-regression.html"><a href="2-multiple-linear-regression.html#estimating-the-regression-coefficients"><i class="fa fa-check"></i><b>2.2</b> Estimating the Regression Coefficients<span></span></a></li>
-<li class="chapter" data-level="2.3" data-path="2-multiple-linear-regression.html"><a href="2-multiple-linear-regression.html#some-important-questions"><i class="fa fa-check"></i><b>2.3</b> Some important questions<span></span></a>
-<ul>
-<li class="chapter" data-level="2.3.1" data-path="2-multiple-linear-regression.html"><a href="2-multiple-linear-regression.html#other-consid"><i class="fa fa-check"></i><b>2.3.1</b> Other Considerations in Regression Model<span></span></a></li>
-</ul></li>
-<li class="chapter" data-level="2.4" data-path="2-multiple-linear-regression.html"><a href="2-multiple-linear-regression.html#how-to-select-the-best-performing-model"><i class="fa fa-check"></i><b>2.4</b> How to select the best performing model<span></span></a>
-<ul>
-<li><a href="2-multiple-linear-regression.html#use-the-adjusted-r_adj2-for-multivariate-models">Use the Adjusted <span class="math inline">\(R_{adj}^2\)</span> for multivariate models<span></span></a></li>
-<li><a href="2-multiple-linear-regression.html#have-a-look-at-the-residuals-or-error-terms">Have a look at the residuals or error terms<span></span></a></li>
-<li><a href="2-multiple-linear-regression.html#histogram-of-residuals">Histogram of residuals<span></span></a></li>
-</ul></li>
-</ul></li>
-<li><a href="pw-2.html#pw-2">PW 2<span></span></a>
-<ul>
-<li><a href="pw-2.html#multiple-linear-regression-1">Multiple Linear Regression<span></span></a></li>
-<li><a href="pw-2.html#reporting">Reporting<span></span></a></li>
-</ul></li>
-<li class="part"><span><b>Classification<span></span></b></span></li>
-<li class="chapter" data-level="3" data-path="3-logistic-regression.html"><a href="3-logistic-regression.html"><i class="fa fa-check"></i><b>3</b> Logistic Regression<span></span></a>
-<ul>
-<li class="chapter" data-level="3.1" data-path="3-logistic-regression.html"><a href="3-logistic-regression.html#introduction-1"><i class="fa fa-check"></i><b>3.1</b> Introduction<span></span></a></li>
-<li class="chapter" data-level="3.2" data-path="3-logistic-regression.html"><a href="3-logistic-regression.html#logistic-regression-1"><i class="fa fa-check"></i><b>3.2</b> Logistic Regression<span></span></a>
-<ul>
-<li class="chapter" data-level="3.2.1" data-path="3-logistic-regression.html"><a href="3-logistic-regression.html#the-logistic-model"><i class="fa fa-check"></i><b>3.2.1</b> The Logistic Model<span></span></a></li>
-<li class="chapter" data-level="3.2.2" data-path="3-logistic-regression.html"><a href="3-logistic-regression.html#estimating-the-regression-coefficients-1"><i class="fa fa-check"></i><b>3.2.2</b> Estimating the Regression Coefficients<span></span></a></li>
-<li class="chapter" data-level="3.2.3" data-path="3-logistic-regression.html"><a href="3-logistic-regression.html#prediction-1"><i class="fa fa-check"></i><b>3.2.3</b> Prediction<span></span></a></li>
-</ul></li>
-<li class="chapter" data-level="3.3" data-path="3-logistic-regression.html"><a href="3-logistic-regression.html#multiple-logistic-regression"><i class="fa fa-check"></i><b>3.3</b> Multiple Logistic Regression<span></span></a></li>
-<li class="chapter" data-level="3.4" data-path="3-logistic-regression.html"><a href="3-logistic-regression.html#logreg-examps"><i class="fa fa-check"></i><b>3.4</b> Example<span></span></a>
-<ul>
-<li class="chapter" data-level="3.4.1" data-path="3-logistic-regression.html"><a href="3-logistic-regression.html#logreg-examps-challenger"><i class="fa fa-check"></i><b>3.4.1</b> Case study: <em>The Challenger disaster</em><span></span></a></li>
-</ul></li>
-</ul></li>
-<li><a href="pw-3.html#pw-3">PW 3<span></span></a>
-<ul>
-<li><a href="pw-3.html#social-networks-ads">Social Networks Ads<span></span></a></li>
-</ul></li>
-<li class="chapter" data-level="4" data-path="4-discriminant-analysis.html"><a href="4-discriminant-analysis.html"><i class="fa fa-check"></i><b>4</b> Discriminant Analysis<span></span></a>
-<ul>
-<li class="chapter" data-level="4.1" data-path="4-discriminant-analysis.html"><a href="4-discriminant-analysis.html#introduction-2"><i class="fa fa-check"></i><b>4.1</b> Introduction<span></span></a></li>
-<li class="chapter" data-level="4.2" data-path="4-discriminant-analysis.html"><a href="4-discriminant-analysis.html#bayes-theorem"><i class="fa fa-check"></i><b>4.2</b> Bayes’ Theorem<span></span></a></li>
-<li class="chapter" data-level="4.3" data-path="4-discriminant-analysis.html"><a href="4-discriminant-analysis.html#lda-for-p1"><i class="fa fa-check"></i><b>4.3</b> LDA for <span class="math inline">\(p=1\)</span><span></span></a></li>
-<li class="chapter" data-level="4.4" data-path="4-discriminant-analysis.html"><a href="4-discriminant-analysis.html#estimating-the-parameters"><i class="fa fa-check"></i><b>4.4</b> Estimating the parameters<span></span></a></li>
-<li class="chapter" data-level="4.5" data-path="4-discriminant-analysis.html"><a href="4-discriminant-analysis.html#lda-for-p-1"><i class="fa fa-check"></i><b>4.5</b> LDA for <span class="math inline">\(p &gt; 1\)</span><span></span></a></li>
-<li class="chapter" data-level="4.6" data-path="4-discriminant-analysis.html"><a href="4-discriminant-analysis.html#making-predictions"><i class="fa fa-check"></i><b>4.6</b> Making predictions<span></span></a></li>
-<li class="chapter" data-level="4.7" data-path="4-discriminant-analysis.html"><a href="4-discriminant-analysis.html#other-forms-of-discriminant-analysis"><i class="fa fa-check"></i><b>4.7</b> Other forms of Discriminant Analysis<span></span></a>
-<ul>
-<li class="chapter" data-level="4.7.1" data-path="4-discriminant-analysis.html"><a href="4-discriminant-analysis.html#quadratic-discriminant-analysis-qda"><i class="fa fa-check"></i><b>4.7.1</b> Quadratic Discriminant Analysis (QDA)<span></span></a></li>
-<li class="chapter" data-level="4.7.2" data-path="4-discriminant-analysis.html"><a href="4-discriminant-analysis.html#naive-bayes"><i class="fa fa-check"></i><b>4.7.2</b> Naive Bayes<span></span></a></li>
-</ul></li>
-<li class="chapter" data-level="4.8" data-path="4-discriminant-analysis.html"><a href="4-discriminant-analysis.html#lda-vs-logistic-regression"><i class="fa fa-check"></i><b>4.8</b> LDA vs Logistic Regression<span></span></a></li>
-</ul></li>
-<li><a href="pw-4.html#pw-4">PW 4<span></span></a>
-<ul>
-<li><a href="pw-4.html#logistic-regression-2">Logistic Regression<span></span></a></li>
-<li><a href="pw-4.html#decision-boundary-of-logistic-regression">Decision Boundary of Logistic Regression<span></span></a></li>
-<li><a href="pw-4.html#linear-discriminant-analysis-lda">Linear Discriminant Analysis (LDA)<span></span></a></li>
-<li><a href="pw-4.html#lda-from-scratch">LDA from scratch<span></span></a></li>
-<li><a href="pw-4.html#quadratic-discriminant-analysis-qda-1">Quadratic Discriminant Analysis (QDA)<span></span></a></li>
-<li><a href="pw-4.html#comparison">Comparison<span></span></a></li>
-</ul></li>
-<li class="chapter" data-level="5" data-path="5-decision-trees-random-forests.html"><a href="5-decision-trees-random-forests.html"><i class="fa fa-check"></i><b>5</b> Decision Trees &amp; Random Forests<span></span></a>
-<ul>
-<li><a href="5-decision-trees-random-forests.html#the-basics-of-decision-trees">The Basics of Decision Trees<span></span></a></li>
-<li><a href="5-decision-trees-random-forests.html#classification-trees">Classification Trees<span></span></a></li>
-<li><a href="5-decision-trees-random-forests.html#bagging-random-forests">Bagging &amp; Random Forests<span></span></a></li>
-<li><a href="5-decision-trees-random-forests.html#boosting">Boosting<span></span></a></li>
-<li><a href="5-decision-trees-random-forests.html#trees-in-r">Trees in <code>R</code><span></span></a></li>
-<li><a href="5-decision-trees-random-forests.html#random-forests---the-first-choice-method-for-every-data-analysis">Random forests - the first-choice method for every data analysis?<span></span></a></li>
-</ul></li>
-<li><a href="pw-5.html#pw-5">PW 5<span></span></a>
-<ul>
-<li><a href="pw-5.html#regression-trees">Regression Trees<span></span></a>
-<ul>
-<li><a href="pw-5.html#single-tree">Single tree<span></span></a></li>
-<li><a href="pw-5.html#bagging">Bagging<span></span></a></li>
-<li><a href="pw-5.html#random-forests">Random Forests<span></span></a></li>
-<li><a href="pw-5.html#boosting-1">Boosting<span></span></a></li>
-<li><a href="pw-5.html#comparison-1">Comparison<span></span></a></li>
-</ul></li>
-<li><a href="pw-5.html#classification-trees-1">Classification Trees<span></span></a>
-<ul>
-<li><a href="pw-5.html#the-spam-dataset">The Spam dataset<span></span></a></li>
-<li><a href="pw-5.html#extra-tuning">Extra: Tuning<span></span></a></li>
-</ul></li>
-</ul></li>
-<li class="part"><span><b>II Dimensionality Reduction<span></span></b></span></li>
-<li class="chapter" data-level="6" data-path="6-principal-components-analysis.html"><a href="6-principal-components-analysis.html"><i class="fa fa-check"></i><b>6</b> Principal Components Analysis<span></span></a>
-<ul>
-<li class="chapter" data-level="6.1" data-path="6-principal-components-analysis.html"><a href="6-principal-components-analysis.html#introduction-3"><i class="fa fa-check"></i><b>6.1</b> Introduction<span></span></a></li>
-<li class="chapter" data-level="6.2" data-path="6-principal-components-analysis.html"><a href="6-principal-components-analysis.html#principal-components"><i class="fa fa-check"></i><b>6.2</b> Principal Components<span></span></a>
-<ul>
-<li><a href="6-principal-components-analysis.html#notations-and-procedure">Notations and Procedure<span></span></a></li>
-<li><a href="6-principal-components-analysis.html#first-principal-component-textpc_1-y_1">First Principal Component (<span class="math inline">\(\text{PC}_1\)</span>): <span class="math inline">\(Y_1\)</span><span></span></a></li>
-<li><a href="6-principal-components-analysis.html#second-principal-component-textpc_2-y_2">Second Principal Component (<span class="math inline">\(\text{PC}_2\)</span>): <span class="math inline">\(Y_2\)</span><span></span></a></li>
-<li><a href="6-principal-components-analysis.html#ith-principal-component-textpc_i-y_i"><span class="math inline">\(i^{th}\)</span> Principal Component (<span class="math inline">\(\text{PC}_i\)</span>): <span class="math inline">\(Y_i\)</span><span></span></a></li>
-</ul></li>
-<li class="chapter" data-level="6.3" data-path="6-principal-components-analysis.html"><a href="6-principal-components-analysis.html#how-do-we-find-the-coefficients"><i class="fa fa-check"></i><b>6.3</b> How do we find the coefficients?<span></span></a>
-<ul>
-<li><a href="6-principal-components-analysis.html#why-it-may-be-possible-to-reduce-dimensions">Why It May Be Possible to Reduce Dimensions<span></span></a></li>
-<li><a href="6-principal-components-analysis.html#procedure">Procedure<span></span></a></li>
-</ul></li>
-<li class="chapter" data-level="6.4" data-path="6-principal-components-analysis.html"><a href="6-principal-components-analysis.html#standardization-of-the-features"><i class="fa fa-check"></i><b>6.4</b> Standardization of the features<span></span></a></li>
-<li class="chapter" data-level="6.5" data-path="6-principal-components-analysis.html"><a href="6-principal-components-analysis.html#projection-of-the-data"><i class="fa fa-check"></i><b>6.5</b> Projection of the data<span></span></a>
-<ul>
-<li><a href="6-principal-components-analysis.html#scores">Scores<span></span></a></li>
-<li><a href="6-principal-components-analysis.html#visualization">Visualization<span></span></a></li>
-<li><a href="6-principal-components-analysis.html#extra">Extra<span></span></a></li>
-</ul></li>
-<li class="chapter" data-level="6.6" data-path="6-principal-components-analysis.html"><a href="6-principal-components-analysis.html#case-study"><i class="fa fa-check"></i><b>6.6</b> Case study<span></span></a>
-<ul>
-<li><a href="6-principal-components-analysis.html#employement-in-european-countries-in-the-late-70s">Employement in European countries in the late 70s<span></span></a></li>
-</ul></li>
-</ul></li>
-<li><a href="pw-6.html#pw-6">PW 6<span></span></a>
-<ul>
-<li><a href="pw-6.html#the-iris-dataset">The Iris Dataset<span></span></a></li>
-<li><a href="pw-6.html#loading-data-1">Loading Data<span></span></a></li>
-<li><a href="pw-6.html#exploratory-analysis">Exploratory analysis<span></span></a></li>
-<li><a href="pw-6.html#pca-using-princomp">PCA using <code>princomp()</code><span></span></a></li>
-<li><a href="pw-6.html#deeper-pca-using-factoextra-package">Deeper PCA using <code>factoextra</code> package<span></span></a></li>
-<li><a href="pw-6.html#step-by-step-pca">Step-by-step PCA<span></span></a></li>
-</ul></li>
-<li class="part"><span><b>III Unsupervised Learning<span></span></b></span></li>
-<li class="chapter" data-level="7" data-path="7-kmeans-hierarchical-clustering.html"><a href="7-kmeans-hierarchical-clustering.html"><i class="fa fa-check"></i><b>7</b> Kmeans &amp; Hierarchical Clustering<span></span></a>
-<ul>
-<li class="chapter" data-level="7.1" data-path="7-kmeans-hierarchical-clustering.html"><a href="7-kmeans-hierarchical-clustering.html#unsupervised-learning-1"><i class="fa fa-check"></i><b>7.1</b> Unsupervised Learning<span></span></a></li>
-<li class="chapter" data-level="7.2" data-path="7-kmeans-hierarchical-clustering.html"><a href="7-kmeans-hierarchical-clustering.html#clustering"><i class="fa fa-check"></i><b>7.2</b> Clustering<span></span></a></li>
-<li class="chapter" data-level="7.3" data-path="7-kmeans-hierarchical-clustering.html"><a href="7-kmeans-hierarchical-clustering.html#introduction-4"><i class="fa fa-check"></i><b>7.3</b> Introduction<span></span></a>
-<ul>
-<li><a href="7-kmeans-hierarchical-clustering.html#hard-clustering">Hard clustering<span></span></a></li>
-<li><a href="7-kmeans-hierarchical-clustering.html#fuzzy-clustering">Fuzzy clustering<span></span></a></li>
-</ul></li>
-<li class="chapter" data-level="7.4" data-path="7-kmeans-hierarchical-clustering.html"><a href="7-kmeans-hierarchical-clustering.html#k-means"><i class="fa fa-check"></i><b>7.4</b> <span class="math inline">\(k\)</span>-Means<span></span></a>
-<ul>
-<li class="chapter" data-level="7.4.1" data-path="7-kmeans-hierarchical-clustering.html"><a href="7-kmeans-hierarchical-clustering.html#k-means-in"><i class="fa fa-check"></i><b>7.4.1</b> <span class="math inline">\(k\)</span>-means in <svg aria-hidden="true" role="img" viewBox="0 0 581 512" style="height:1em;width:1.13em;vertical-align:-0.125em;margin-left:auto;margin-right:auto;font-size:inherit;fill:steelblue;overflow:visible;position:relative;"><path d="M581 226.6C581 119.1 450.9 32 290.5 32S0 119.1 0 226.6C0 322.4 103.3 402 239.4 418.1V480h99.1v-61.5c24.3-2.7 47.6-7.4 69.4-13.9L448 480h112l-67.4-113.7c54.5-35.4 88.4-84.9 88.4-139.7zm-466.8 14.5c0-73.5 98.9-133 220.8-133s211.9 40.7 211.9 133c0 50.1-26.5 85-70.3 106.4-2.4-1.6-4.7-2.9-6.4-3.7-10.2-5.2-27.8-10.5-27.8-10.5s86.6-6.4 86.6-92.7-90.6-87.9-90.6-87.9h-199V361c-74.1-21.5-125.2-67.1-125.2-119.9zm225.1 38.3v-55.6c57.8 0 87.8-6.8 87.8 27.3 0 36.5-38.2 28.3-87.8 28.3zm-.9 72.5H365c10.8 0 18.9 11.7 24 19.2-16.1 1.9-33 2.8-50.6 2.9v-22.1z"/></svg><span></span></a></li>
-<li class="chapter" data-level="7.4.2" data-path="7-kmeans-hierarchical-clustering.html"><a href="7-kmeans-hierarchical-clustering.html#cluster-validity-choosing-the-number-of-clusters"><i class="fa fa-check"></i><b>7.4.2</b> Cluster Validity, Choosing the Number of Clusters<span></span></a></li>
-</ul></li>
-<li class="chapter" data-level="7.5" data-path="7-kmeans-hierarchical-clustering.html"><a href="7-kmeans-hierarchical-clustering.html#hierarchical-clustering"><i class="fa fa-check"></i><b>7.5</b> Hierarchical Clustering<span></span></a>
-<ul>
-<li class="chapter" data-level="7.5.1" data-path="7-kmeans-hierarchical-clustering.html"><a href="7-kmeans-hierarchical-clustering.html#dendrogram"><i class="fa fa-check"></i><b>7.5.1</b> Dendrogram<span></span></a></li>
-<li class="chapter" data-level="7.5.2" data-path="7-kmeans-hierarchical-clustering.html"><a href="7-kmeans-hierarchical-clustering.html#the-hierarchical-clustering-algorithm"><i class="fa fa-check"></i><b>7.5.2</b> The Hierarchical Clustering Algorithm<span></span></a></li>
-<li class="chapter" data-level="7.5.3" data-path="7-kmeans-hierarchical-clustering.html"><a href="7-kmeans-hierarchical-clustering.html#hierarchical-clustering-in"><i class="fa fa-check"></i><b>7.5.3</b> Hierarchical clustering in <svg aria-hidden="true" role="img" viewBox="0 0 581 512" style="height:1em;width:1.13em;vertical-align:-0.125em;margin-left:auto;margin-right:auto;font-size:inherit;fill:steelblue;overflow:visible;position:relative;"><path d="M581 226.6C581 119.1 450.9 32 290.5 32S0 119.1 0 226.6C0 322.4 103.3 402 239.4 418.1V480h99.1v-61.5c24.3-2.7 47.6-7.4 69.4-13.9L448 480h112l-67.4-113.7c54.5-35.4 88.4-84.9 88.4-139.7zm-466.8 14.5c0-73.5 98.9-133 220.8-133s211.9 40.7 211.9 133c0 50.1-26.5 85-70.3 106.4-2.4-1.6-4.7-2.9-6.4-3.7-10.2-5.2-27.8-10.5-27.8-10.5s86.6-6.4 86.6-92.7-90.6-87.9-90.6-87.9h-199V361c-74.1-21.5-125.2-67.1-125.2-119.9zm225.1 38.3v-55.6c57.8 0 87.8-6.8 87.8 27.3 0 36.5-38.2 28.3-87.8 28.3zm-.9 72.5H365c10.8 0 18.9 11.7 24 19.2-16.1 1.9-33 2.8-50.6 2.9v-22.1z"/></svg><span></span></a></li>
-</ul></li>
-</ul></li>
-<li><a href="pw-7.html#pw-7">PW 7<span></span></a>
-<ul>
-<li><a href="pw-7.html#reporting-1">Reporting<span></span></a>
-<ul>
-<li><a href="pw-7.html#markdown">Markdown<span></span></a></li>
-<li><a href="pw-7.html#r-markdown">R Markdown<span></span></a></li>
-<li><a href="pw-7.html#the-report-to-be-submitted">The report to be submitted<span></span></a></li>
-</ul></li>
-<li><a href="pw-7.html#k-means-clustering"><span class="math inline">\(k\)</span>-means clustering<span></span></a>
-<ul>
-<li><a href="pw-7.html#pointscards"><code>pointsCards</code><span></span></a></li>
-<li><a href="pw-7.html#ligue-1"><code>Ligue 1</code><span></span></a></li>
-<li><a href="pw-7.html#pca"><code>PCA</code><span></span></a></li>
-<li><a href="pw-7.html#implementing-k-means"><code>Implementing k-means</code><span></span></a></li>
-</ul></li>
-<li><a href="pw-7.html#hierarchical-clustering-1">Hierarchical clustering<span></span></a>
-<ul>
-<li><a href="pw-7.html#distances-dist">Distances <code>dist()</code><span></span></a></li>
-<li><a href="pw-7.html#dendrogram-hclust">Dendrogram <code>hclust()</code><span></span></a></li>
-<li><a href="pw-7.html#hierarchical-clustering-on-iris-dataset">Hierarchical clustering on Iris dataset<span></span></a></li>
-</ul></li>
-</ul></li>
-<li class="chapter" data-level="8" data-path="8-gaussian-mixture-models-em.html"><a href="8-gaussian-mixture-models-em.html"><i class="fa fa-check"></i><b>8</b> Gaussian Mixture Models &amp; EM<span></span></a>
-<ul>
-<li class="chapter" data-level="8.1" data-path="8-gaussian-mixture-models-em.html"><a href="8-gaussian-mixture-models-em.html#the-gaussian-distribution"><i class="fa fa-check"></i><b>8.1</b> The Gaussian distribution<span></span></a></li>
-<li class="chapter" data-level="8.2" data-path="8-gaussian-mixture-models-em.html"><a href="8-gaussian-mixture-models-em.html#mixture-of-gaussians"><i class="fa fa-check"></i><b>8.2</b> Mixture of Gaussians<span></span></a></li>
-<li class="chapter" data-level="8.3" data-path="8-gaussian-mixture-models-em.html"><a href="8-gaussian-mixture-models-em.html#em-for-gaussian-mixtures"><i class="fa fa-check"></i><b>8.3</b> EM for Gaussian Mixtures<span></span></a></li>
-</ul></li>
-<li><a href="pw-8.html#pw-8">PW 8<span></span></a>
-<ul>
-<li><a href="pw-8.html#report-template">Report template<span></span></a></li>
-<li class="chapter" data-level="8.4" data-path="pw-8.html"><a href="pw-8.html"><i class="fa fa-check"></i><b>8.4</b> EM using <code>mclust</code><span></span></a>
-<ul>
-<li><a href="pw-8.html#gmm-vs-k-means">GMM vs <span class="math inline">\(k\)</span>-means<span></span></a></li>
-<li><a href="pw-8.html#em-on-1d">EM on 1D<span></span></a></li>
-</ul></li>
-<li class="chapter" data-level="8.5" data-path="pw-8.html"><a href="pw-8.html#em-from-scratch"><i class="fa fa-check"></i><b>8.5</b> EM from scratch<span></span></a></li>
-</ul></li>
-<li class="part"><span><b>Hackathon<span></span></b></span></li>
-<li><a href="hackathon.html#hackathon">Hackathon<span></span></a></li>
-<li class="appendix"><span><b>Appendix<span></span></b></span></li>
-<li class="chapter" data-level="A" data-path="A-final-grades.html"><a href="A-final-grades.html"><i class="fa fa-check"></i><b>A</b> Final Grades<span></span></a></li>
-<li class="chapter" data-level="B" data-path="B-app-introRStudio.html"><a href="B-app-introRStudio.html"><i class="fa fa-check"></i><b>B</b> Introduction to <code>RStudio</code><span></span></a></li>
-<li class="chapter" data-level="C" data-path="C-app-ht.html"><a href="C-app-ht.html"><i class="fa fa-check"></i><b>C</b> Review on hypothesis testing<span></span></a></li>
-<li class="chapter" data-level="D" data-path="D-use-qual.html"><a href="D-use-qual.html"><i class="fa fa-check"></i><b>D</b> Use of qualitative predictors<span></span></a></li>
-<li class="chapter" data-level="E" data-path="E-model-selection.html"><a href="E-model-selection.html"><i class="fa fa-check"></i><b>E</b> Model Selection<span></span></a>
-<ul>
-<li><a href="E-model-selection.html#linear-model-selection-and-best-subset-selection">Linear Model Selection and Best Subset Selection<span></span></a></li>
-<li><a href="E-model-selection.html#forward-stepwise-selection">Forward Stepwise Selection<span></span></a></li>
-<li><a href="E-model-selection.html#backward-stepwise-selection">Backward Stepwise Selection<span></span></a></li>
-<li><a href="E-model-selection.html#estimating-test-error-using-mallows-cp-aic-bic-adjusted-r-squared">Estimating Test Error Using Mallow’s Cp, AIC, BIC, Adjusted R-squared<span></span></a></li>
-<li><a href="E-model-selection.html#estimating-test-error-using-cross-validation">Estimating Test Error Using Cross-Validation<span></span></a></li>
-<li><a href="E-model-selection.html#examples">Examples<span></span></a>
-<ul>
-<li><a href="E-model-selection.html#best-subset-selection">Best Subset Selection<span></span></a></li>
-<li><a href="E-model-selection.html#forward-stepwise-selection-and-model-selection-using-validation-set">Forward Stepwise Selection and Model Selection Using Validation Set<span></span></a></li>
-<li><a href="E-model-selection.html#model-selection-using-cross-validation">Model Selection Using Cross-Validation<span></span></a></li>
-</ul></li>
-</ul></li>
-<li class="chapter" data-level="F" data-path="F-references-and-credits.html"><a href="F-references-and-credits.html"><i class="fa fa-check"></i><b>F</b> References and Credits<span></span></a></li>
-<li class="chapter" data-level="G" data-path="G-other-references.html"><a href="G-other-references.html"><i class="fa fa-check"></i><b>G</b> Other References<span></span></a></li>
-<li><a href="main-references-credits.html#main-references-credits">Main References &amp; Credits<span></span></a></li>
-</ul>
-
-      </nav>
+    <div class="d-flex align-items-start justify-content-between">
+      <h1>
+        <a href="index.html" title="">Machine Learning</a>
+      </h1>
+      <button class="btn btn-outline-primary d-lg-none ml-2 mt-1" type="button" data-toggle="collapse" data-target="#main-nav" aria-expanded="true" aria-controls="main-nav"><i class="fas fa-bars"></i><span class="sr-only">Show table of contents</span></button>
     </div>
 
-    <div class="book-body">
-      <div class="body-inner">
-        <div class="book-header" role="navigation">
-          <h1>
-            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Machine Learning</a>
-          </h1>
+    <div id="main-nav" class="collapse-lg">
+      <form role="search">
+        <input id="search" class="form-control" type="search" placeholder="Search" aria-label="Search">
+</form>
+
+      <nav aria-label="Table of contents"><h2>Table of contents</h2>
+        <ul class="book-toc list-unstyled">
+<li><a class="" href="index.html">Welcome</a></li>
+<li><a class="" href="introduction.html">Introduction</a></li>
+<li class="book-part">Supervised Learning</li>
+<li class="book-part">Regression</li>
+<li><a class="" href="linear-regression.html"><span class="header-section-number">1</span> Linear Regression</a></li>
+<li><a class="" href="practical-work-1.html">Practical Work 1</a></li>
+<li><a class="" href="multiple-linear-regression.html"><span class="header-section-number">2</span> Multiple Linear Regression</a></li>
+<li><a class="" href="pw-2.html">PW 2</a></li>
+<li class="book-part">Classification</li>
+<li><a class="" href="logistic-regression.html"><span class="header-section-number">3</span> Logistic Regression</a></li>
+<li><a class="" href="pw-3.html">PW 3</a></li>
+<li><a class="" href="discriminant-analysis.html"><span class="header-section-number">4</span> Discriminant Analysis</a></li>
+<li><a class="" href="pw-4.html">PW 4</a></li>
+<li><a class="" href="decision-trees-random-forests.html"><span class="header-section-number">5</span> Decision Trees &amp; Random Forests</a></li>
+<li><a class="" href="pw-5.html">PW 5</a></li>
+<li class="book-part">Dimensionality Reduction</li>
+<li><a class="" href="principal-components-analysis.html"><span class="header-section-number">6</span> Principal Components Analysis</a></li>
+<li><a class="" href="pw-6.html">PW 6</a></li>
+<li class="book-part">Unsupervised Learning</li>
+<li><a class="" href="kmeans-hierarchical-clustering.html"><span class="header-section-number">7</span> Kmeans &amp; Hierarchical Clustering</a></li>
+<li><a class="" href="pw-7.html">PW 7</a></li>
+<li><a class="" href="gaussian-mixture-models-em.html"><span class="header-section-number">8</span> Gaussian Mixture Models &amp; EM</a></li>
+<li><a class="" href="pw-8.html">PW 8</a></li>
+<li class="book-part">Hackathon</li>
+<li><a class="active" href="hackathon.html">Hackathon</a></li>
+<li class="book-part">Appendix</li>
+<li><a class="" href="final-grades.html"><span class="header-section-number">A</span> Final Grades</a></li>
+<li><a class="" href="app-introRStudio.html"><span class="header-section-number">B</span> Introduction to RStudio</a></li>
+<li><a class="" href="app-ht.html"><span class="header-section-number">C</span> Review on hypothesis testing</a></li>
+<li><a class="" href="use-qual.html"><span class="header-section-number">D</span> Use of qualitative predictors</a></li>
+<li><a class="" href="model-selection.html"><span class="header-section-number">E</span> Model Selection</a></li>
+<li><a class="" href="references-and-credits.html"><span class="header-section-number">F</span> References and Credits</a></li>
+<li><a class="" href="other-references.html"><span class="header-section-number">G</span> Other References</a></li>
+<li><a class="" href="main-references-credits.html">Main References &amp; Credits</a></li>
+</ul>
+
+        <div class="book-extra">
+          
         </div>
-
-        <div class="page-wrapper" tabindex="-1" role="main">
-          <div class="page-inner">
-
-            <section class="normal" id="section-">
-<div id="hackathon" class="section level1 unnumbered hasAnchor">
-<h1>Hackathon<a href="hackathon.html#hackathon" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+      </nav>
+</div>
+  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="hackathon" class="section level1 unnumbered">
+<h1>Hackathon<a class="anchor" aria-label="anchor" href="#hackathon"><i class="fas fa-link"></i></a>
+</h1>
 <p>This session is special.</p>
 <!-- You are given a dataset on Devinci Online, go download it and analyze it. You must submit a report (in **html** format) of your analysis at the end of the session. This report is the most important one for your evaluation. -->
 <!-- Pay attention to the objective of the dataset, your analysis depends on your dataset's understanding. The data analysis must include all the following steps:  -->
@@ -493,62 +139,36 @@ div.csl-indent {
 
 
 
-            </section>
+  <div class="chapter-nav">
+<div class="prev"><a href="pw-8.html">PW 8</a></div>
+<div class="next"><a href="final-grades.html"><span class="header-section-number">A</span> Final Grades</a></div>
+</div></main><div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
+    <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
+      <ul class="nav navbar-nav"><li><a class="nav-link" href="#hackathon">Hackathon</a></li></ul>
 
-          </div>
-        </div>
-      </div>
-<a href="pw-8.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="A-final-grades.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
-    </div>
+      <div class="book-extra">
+        <ul class="list-unstyled">
+          
+        </ul>
+</div>
+    </nav>
+</div>
+
+</div>
+</div> <!-- .container -->
+
+<footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
+
+  <div class="col-12 col-md-6 mt-3">
+    <p>"<strong>Machine Learning</strong>" was written by Mohamad Ghassany. It was last built on 2022-04-26.</p>
   </div>
-<script src="book_assets/gitbook-2.6.7/js/app.min.js"></script>
-<script src="book_assets/gitbook-2.6.7/js/clipboard.min.js"></script>
-<script src="book_assets/gitbook-2.6.7/js/plugin-search.js"></script>
-<script src="book_assets/gitbook-2.6.7/js/plugin-sharing.js"></script>
-<script src="book_assets/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
-<script src="book_assets/gitbook-2.6.7/js/plugin-bookdown.js"></script>
-<script src="book_assets/gitbook-2.6.7/js/jquery.highlight.js"></script>
-<script src="book_assets/gitbook-2.6.7/js/plugin-clipboard.js"></script>
-<script>
-gitbook.require(["gitbook"], function(gitbook) {
-gitbook.start({
-"sharing": false,
-"fontsettings": {
-"theme": "white",
-"family": "sans",
-"size": 2
-},
-"edit": {
-"link": null,
-"text": null
-},
-"history": {
-"link": null,
-"text": null
-},
-"view": {
-"link": null,
-"text": null
-},
-"download": null,
-"search": {
-"engine": "fuse",
-"options": null
-},
-"toc": {
-"collapse": "section",
-"scroll_highlight": true
-},
-"toolbar": {
-"position": "fixed"
-}
-});
-});
-</script>
 
-<!-- dynamically load mathjax for compatibility with self-contained -->
-<script>
+  <div class="col-12 col-md-6 mt-3">
+    <p>This book was built by the <a class="text-light" href="https://bookdown.org">bookdown</a> R package.</p>
+  </div>
+
+</div></div>
+</footer><!-- dynamically load mathjax for compatibility with self-contained --><script>
   (function () {
     var script = document.createElement("script");
     script.type = "text/javascript";
@@ -560,7 +180,22 @@ gitbook.start({
     script.src = src;
     document.getElementsByTagName("head")[0].appendChild(script);
   })();
+</script><script type="text/x-mathjax-config">const popovers = document.querySelectorAll('a.footnote-ref[data-toggle="popover"]');
+for (let popover of popovers) {
+  const div = document.createElement('div');
+  div.setAttribute('style', 'position: absolute; top: 0, left:0; width:0, height:0, overflow: hidden; visibility: hidden;');
+  div.innerHTML = popover.getAttribute('data-content');
+
+  var has_math = div.querySelector("span.math");
+  if (has_math) {
+    document.body.appendChild(div);
+    MathJax.Hub.Queue(["Typeset", MathJax.Hub, div]);
+    MathJax.Hub.Queue(function() {
+      popover.setAttribute('data-content', div.innerHTML);
+      document.body.removeChild(div);
+    })
+  }
+}
 </script>
 </body>
-
 </html>

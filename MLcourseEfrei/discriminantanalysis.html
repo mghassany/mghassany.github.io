@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta charset="utf-8">
-<meta name="generator" content="quarto-0.9.309">
+<meta name="generator" content="quarto-0.9.368">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 <title>Machine Learning - 1&nbsp; Discriminant Analysis</title>
 <style>
@@ -42,7 +42,7 @@ ul.task-list{list-style: none;}
   }
 }</script><script async="" src="https://hypothes.is/embed.js"></script><script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script><link rel="stylesheet" href="mycss.css">
 </head>
-<body class="docked">
+<body class="nav-sidebar docked">
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top"><nav class="quarto-secondary-nav" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }"><div class="container-fluid d-flex justify-content-between">
@@ -56,7 +56,7 @@ ul.task-list{list-style: none;}
   </nav></header><!-- content --><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
 <!-- sidebar -->
   <nav id="quarto-sidebar" class="sidebar collapse sidebar-navigation docked overflow-auto"><div class="pt-lg-2 mt-2 text-left sidebar-header sidebar-header-stacked">
-      <a href="./">
+      <a href="./" class="sidebar-logo-link">
       <img src="./img/logo_efrei_assas_white.png" alt="" class="sidebar-logo py-0 d-lg-inline d-none"></a>
     <div class="sidebar-title mb-0 py-0">
       <a href="./">Machine Learning</a> 
@@ -213,7 +213,8 @@ Tip
 </div>
 <p><strong>Extended form</strong>:</p>
 <p>Suppose we have a partition <span class="math inline">\(\{A_i\}\)</span> of the sample space, the even space is given or conceptualized in terms of <span class="math inline">\(P(A_j)\)</span> and <span class="math inline">\(P(B | A_j)\)</span>. It is then useful to compute <span class="math inline">\(P(B)\)</span> using the law of total probability:</p>
-<p><span class="math display">\[ P(B) = \sum_j P(B|A_j) P(A_j) \]</span> <span class="math display">\[ \Rightarrow P(A_i|B) = \frac{P(B|A_i) P(A_i)}{\sum_j P(B|A_j) P(A_j)} \]</span></p>
+<p><span class="math display">\[ P(B) = \sum_j P(B|A_j) P(A_j) \]</span></p>
+<p><span class="math display">\[ \Rightarrow P(A_i|B) = \frac{P(B|A_i) P(A_i)}{\sum_j P(B|A_j) P(A_j)} \]</span></p>
 <p><strong>Bayes’ Theorem for Classification</strong>:</p>
 <p>Suppose that we wish to classify an observation into one of <span class="math inline">\(K\)</span> classes, where <span class="math inline">\(K \geq 2\)</span>. In other words, the qualitative response variable <span class="math inline">\(Y\)</span> can take on <span class="math inline">\(K\)</span> possible distinct and unordered values.</p>
 <p>Let <span class="math inline">\(\pi_k\)</span> represent the overall or <em>prior</em> probability that a randomly chosen observation comes from the <span class="math inline">\(k\)</span>-th class; this is the probability that a given observation is associated with the <span class="math inline">\(k\)</span>-th category of the response variable <span class="math inline">\(Y\)</span>.</p>
@@ -318,12 +319,16 @@ Tip
     \vdots \\
     \mu_p
 \end{pmatrix} \]</span></p>
-<p>and, <span class="math display">\[ \Sigma = Cov(X) = \begin{pmatrix}
+and, $$ = Cov(X) =
+<span class="math display">\[\begin{pmatrix}
+
+
     \sigma_1^2 &amp; Cov[X_1, X_2]  &amp; \dots  &amp; Cov[X_1, X_p] \\
     Cov[X_2, X_1] &amp; \sigma_2^2  &amp; \dots  &amp; Cov[X_2, X_p] \\
     \vdots &amp; \vdots &amp;  \ddots &amp; \vdots \\
     Cov[X_p, X_1] &amp; Cov[X_p, X_2]  &amp; \dots  &amp; \sigma_p^2
-\end{pmatrix}  \]</span></p>
+\end{pmatrix}\]</span>
+<p>$$</p>
 <blockquote class="blockquote">
 <p><span class="math inline">\(\Sigma\)</span> is the <span class="math inline">\(p\times p\)</span> covariance matrix of <span class="math inline">\(X\)</span>.</p>
 </blockquote>
@@ -423,7 +428,7 @@ Tip
 </p>
 
 
-</section></main><!-- /main --><script type="application/javascript">
+</section></main><!-- /main --><script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
   const disableStylesheet = (stylesheets) => {
     for (let i=0; i < stylesheets.length; i++) {

@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta charset="utf-8">
-<meta name="generator" content="quarto-0.9.309">
+<meta name="generator" content="quarto-0.9.368">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 <title>Machine Learning - Lab on Discriminant Analysis</title>
 <style>
@@ -105,7 +105,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   }
 }</script><script async="" src="https://hypothes.is/embed.js"></script><script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script><link rel="stylesheet" href="mycss.css">
 </head>
-<body class="docked">
+<body class="nav-sidebar docked">
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top"><nav class="quarto-secondary-nav" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }"><div class="container-fluid d-flex justify-content-between">
@@ -117,7 +117,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   </nav></header><!-- content --><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
 <!-- sidebar -->
   <nav id="quarto-sidebar" class="sidebar collapse sidebar-navigation docked overflow-auto"><div class="pt-lg-2 mt-2 text-left sidebar-header sidebar-header-stacked">
-      <a href="./">
+      <a href="./" class="sidebar-logo-link">
       <img src="./img/logo_efrei_assas_white.png" alt="" class="sidebar-logo py-0 d-lg-inline d-none"></a>
     <div class="sidebar-title mb-0 py-0">
       <a href="./">Machine Learning</a> 
@@ -378,6 +378,7 @@ Tip
 
 Now you are going to visualize the decision boundary for logistic regression.
 
+
 ::: {.cell type='rmdinsight'}
 <div class="rmdinsight">
 <ul>
@@ -412,11 +413,14 @@ line here) is <span class="math inline">\(X_2 = -
 </div>
 :::
 
+
 **2.** Plot the decision boundary obtained with logistic regression. In order to do so, calculate the intercept and the slope of the line presenting the decision boundary, then plot `EstimatedSalary` in function of `Age` (from the `test_set`) and add the line using `abline()`.
+
 
 ::: {.cell}
 
 :::
+
 
 **3.** In order to verify that your line (decision boundary) is well plotted, color the points on the last Figure with respect to the predicted response.
 
@@ -426,15 +430,19 @@ line here) is <span class="math inline">\(X_2 = -
 * Then, add the line using `abline()`, put the line width = 2 to make it more visible. Do not forget to title the Figure).
 
 
+
 ::: {.cell}
 
 :::
+
 
 **4.** Now make the same plot but color the points with respect to their real labels (the variable `Purchased`). From this figure, count the number of the false positive predictions and compare it to the value obtained in the confusion matrix.
 
+
 ::: {.cell}
 
 :::
+
  -->
 </section><section id="linear-discriminant-analysis-lda" class="level2 unnumbered"><h2 class="unnumbered anchored" data-anchor-id="linear-discriminant-analysis-lda">Linear Discriminant Analysis (LDA)</h2>
 <p>Let us apply linear discriminant analysis (LDA) now. First we will make use of the <code><a href="https://rdrr.io/pkg/MASS/man/lda.html">lda()</a></code> function in the package <code>MASS</code>. Second, you are going to create the model and predict the classes by yourself without using the <code><a href="https://rdrr.io/pkg/MASS/man/lda.html">lda()</a></code> function. And we will visualize the decision boundary of LDA.</p>
@@ -461,7 +469,8 @@ line here) is <span class="math inline">\(X_2 = -
 <div class="cell">
 
 </div>
-<p><strong>6.</strong> Now let us plot the decision boundary obtained with LDA. You saw in the course that decision boundary for LDA represent the set of values <span class="math inline">\(x\)</span> where <span class="math inline">\(\delta_k(x) = \delta_c(x)\)</span>. Recall that <span class="math display">\[\delta_k(X) = x^T \Sigma^{-1} \mu_k - \frac{1}{2} \mu_k^T \Sigma^{-1}  \mu_k + \log \pi_k\]</span></p>
+<p><strong>6.</strong> Now let us plot the decision boundary obtained with LDA. You saw in the course that decision boundary for LDA represent the set of values <span class="math inline">\(x\)</span> where <span class="math inline">\(\delta_k(x) = \delta_c(x)\)</span>. Recall that</p>
+<p><span class="math display">\[\delta_k(X) = x^T \Sigma^{-1} \mu_k - \frac{1}{2} \mu_k^T \Sigma^{-1}  \mu_k + \log \pi_k\]</span></p>
 <p>Here in our case, we have 2 classes (<span class="math inline">\(K=2\)</span>) and 2 predictors (<span class="math inline">\(p=2\)</span>). So the decision boundary (which is linear in the case of LDA, and line in our case since <span class="math inline">\(p=2\)</span>) will verify the equation <span class="math inline">\(\delta_0(x) = \delta_1(x)\)</span> Since we have two classes “0” and “1”. In the case of LDA this leads to linear boundary and is easy to be plotted. But in more complicated cases it is difficult to manually simplify the equations and plot the decision boundary. Anyway, there is a smart method to plot (but a little bit costy) the decision boundary in <code>R</code> using the function <code><a href="https://rdrr.io/r/graphics/contour.html">contour()</a></code>, the corresponding code is the following (you must adapt it and use it to plot your decision boundary):</p>
 <div class="cell">
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span class="co"># create a grid corresponding to the scales of Age and EstimatedSalary</span>
@@ -556,7 +565,8 @@ Tip
 <p><strong>11.1</strong> Subset the training set into two sets: <code>class0</code> where <code>Purchased = 0</code> and <code>class1</code> where <code>Purchased = 1</code>).</p>
 <p><strong>11.2</strong> Compute <span class="math inline">\(\pi_0\)</span> and <span class="math inline">\(\pi_1\)</span>.</p>
 <p><span class="math display">\[\pi_i = N_i / N, \,\, \text{where} \,\, N_i \,\, \text{is the number of data points in group i}\]</span></p>
-<p><strong>11.3</strong> Compute <span class="math inline">\(\mu_0\)</span> and <span class="math inline">\(\mu_1\)</span>. <span class="math display">\[\mu_0 = \begin{pmatrix}
+<p><strong>11.3</strong> Compute <span class="math inline">\(\mu_0\)</span> and <span class="math inline">\(\mu_1\)</span>.</p>
+<p><span class="math display">\[\mu_0 = \begin{pmatrix}
    \mu_0(X_1) \\
    \mu_0(X_2)
    \end{pmatrix} \,\, \text{and} \,\, \mu_1 = \begin{pmatrix}
@@ -578,7 +588,7 @@ Tip
 </p>
 
 
-</section></main><!-- /main --><script type="application/javascript">
+</section></main><!-- /main --><script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
   const disableStylesheet = (stylesheets) => {
     for (let i=0; i < stylesheets.length; i++) {

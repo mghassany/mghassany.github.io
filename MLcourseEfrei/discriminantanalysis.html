@@ -338,27 +338,29 @@ Tip
 </h2>
 <p>Let us now suppose that we have multiple predictors. We assume that <span class="math inline">\(X=(X_1,X_2,\ldots,X_p)\)</span> is drawn from <em>multivariate Gaussian</em> distribution (assuming they have a common covariance matrix, e.g.&nbsp;same variances as in the case of <span class="math inline">\(p=1\)</span>). The multivariate Gaussian distribution assumes that each individual predictor follows a one-dimensional normal distribution as in Equation (<a href="#eq-normal01"><span>1.2</span></a>), with some correlation between each pair of predictors.</p>
 <p>To indicate that a <span class="math inline">\(p\)</span>-dimensional random variable <span class="math inline">\(X\)</span> has a multivariate Gaussian distribution, we write <span class="math inline">\(X \sim \mathcal{N}(\mu,\Sigma)\)</span>. Where</p>
-<p><span class="math display">\[ \mu = E(X) = \begin{pmatrix}
+<p><span class="math display">\[
+mu = E(X) = \begin{pmatrix}
     \mu_1 \\
     \mu_2 \\
     \vdots \\
     \mu_p
-\end{pmatrix} \]</span></p>
-and, $$ = Cov(X) =
-<span class="math display">\[\begin{pmatrix}
-
-
+\end{pmatrix}
+\]</span></p>
+<p>and,</p>
+<p><span class="math display">\[
+\Sigma = Cov(X) = \begin{pmatrix}
     \sigma_1^2 &amp; Cov[X_1, X_2]  &amp; \dots  &amp; Cov[X_1, X_p] \\
     Cov[X_2, X_1] &amp; \sigma_2^2  &amp; \dots  &amp; Cov[X_2, X_p] \\
     \vdots &amp; \vdots &amp;  \ddots &amp; \vdots \\
     Cov[X_p, X_1] &amp; Cov[X_p, X_2]  &amp; \dots  &amp; \sigma_p^2
-\end{pmatrix}\]</span>
-<p>$$</p>
+\end{pmatrix}  
+\]</span></p>
 <blockquote class="blockquote">
 <p><span class="math inline">\(\Sigma\)</span> is the <span class="math inline">\(p\times p\)</span> covariance matrix of <span class="math inline">\(X\)</span>.</p>
 </blockquote>
 <p>Formally, the multivariate Gaussian density is deﬁned as</p>
-<p><span class="math display">\[f(x) = \frac{1}{(2\pi)^{p/2} |\Sigma|^{1/2}} \exp \bigg( - \frac{1}{2} (x-\mu)^T \Sigma^{-1} (x-\mu) \bigg)
+<p><span class="math display">\[
+f(x) = \frac{1}{(2\pi)^{p/2} |\Sigma|^{1/2}} \exp \bigg( - \frac{1}{2} (x-\mu)^T \Sigma^{-1} (x-\mu) \bigg)
 \]</span></p>
 <p>Plugging the density function for the <span class="math inline">\(k\)</span>-th class, <span class="math inline">\(f_k(X=x)\)</span>, into Equation (<a href="#eq-bayes"><span>1.1</span></a>) reveals that the Bayes classifier assigns an observation <span class="math inline">\(X=x\)</span> to the class for which</p>
 <p><span id="eq-discscorematrix"><span class="math display">\[

@@ -1,0 +1,873 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta charset="utf-8">
+<meta name="generator" content="quarto-0.9.406">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+<title>Machine Learning - 3&nbsp; Kmeans &amp; Hierarchical Clustering</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+span.underline{text-decoration: underline;}
+div.column{display: inline-block; vertical-align: top; width: 50%;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+<script src="site_libs/quarto-nav/quarto-nav.js"></script><script src="site_libs/quarto-nav/headroom.min.js"></script><script src="site_libs/clipboard/clipboard.min.js"></script><meta name="quarto:offset" content="./">
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script><script src="site_libs/quarto-search/fuse.min.js"></script><script src="site_libs/quarto-search/quarto-search.js"></script><link href="./Lab-kmeans.html" rel="next">
+<link href="./Lab-Dim-Red.html" rel="prev">
+<script src="site_libs/quarto-html/quarto.js"></script><script src="site_libs/quarto-html/popper.min.js"></script><script src="site_libs/quarto-html/tippy.umd.min.js"></script><script src="site_libs/quarto-html/anchor.min.js"></script><link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link class="quarto-color-scheme" id="quarto-text-highlighting-styles" href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet">
+<link class="quarto-color-scheme quarto-color-alternate" rel="prefetch" id="quarto-text-highlighting-styles" href="site_libs/quarto-html/quarto-syntax-highlighting-dark.css">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script><link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link class="quarto-color-scheme" href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet">
+<link class="quarto-color-scheme quarto-color-alternate" rel="prefetch" href="site_libs/bootstrap/bootstrap-dark.min.css">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 20,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit"
+  }
+}</script><script async="" src="https://hypothes.is/embed.js"></script><script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script><link rel="stylesheet" href="mycss.css">
+</head>
+<body class="nav-sidebar docked">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top"><nav class="quarto-secondary-nav" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }"><div class="container-fluid d-flex justify-content-between">
+      <h1 class="quarto-secondary-nav-title">
+<span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Kmeans &amp; Hierarchical Clustering</span>
+</h1>
+      <button type="button" class="quarto-btn-toggle btn" aria-label="Show secondary navigation">
+        <i class="bi bi-chevron-right"></i>
+      </button>
+    </div>
+  </nav></header><!-- content --><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse sidebar-navigation docked overflow-auto"><div class="pt-lg-2 mt-2 text-left sidebar-header sidebar-header-stacked">
+      <a href="./" class="sidebar-logo-link">
+      <img src="./img/logo_efrei_assas_white.png" alt="" class="sidebar-logo py-0 d-lg-inline d-none"></a>
+    <div class="sidebar-title mb-0 py-0">
+      <a href="./">Machine Learning</a> 
+        <div class="sidebar-tools-main">
+  <a href="" class="quarto-color-scheme-toggle sidebar-tool" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
+  <a href="" class="quarto-reader-toggle sidebar-tool" onclick="window.quartoToggleReader(); return false;" title="Toggle reader mode">
+  <div class="quarto-reader-toggle-btn">
+  <i class="bi"></i>
+  </div>
+</a>
+</div>
+    </div>
+      </div>
+      <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+      </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+<li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./index.html" class="sidebar-item-text sidebar-link">Preface</a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+    <div class="sidebar-item-container"> 
+        <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true">Supervised Learning</a>
+      <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true">
+        <i class="bi bi-chevron-right ms-2"></i>
+      </a>
+    </div>
+    <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">
+<li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./discriminantanalysis.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">📗 Discriminant Analysis</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Lab-DA.html" class="sidebar-item-text sidebar-link">- 💻 Lab</a>
+  </div>
+</li>
+    </ul>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+    <div class="sidebar-item-container"> 
+        <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true">Dimensionality Reduction</a>
+      <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true">
+        <i class="bi bi-chevron-right ms-2"></i>
+      </a>
+    </div>
+    <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">
+<li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./dimreduction.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">📗 PCA &amp; t-SNE</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Lab-Dim-Red.html" class="sidebar-item-text sidebar-link">- 💻 Lab</a>
+  </div>
+</li>
+    </ul>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+    <div class="sidebar-item-container"> 
+        <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="true">Unsupervised Learning</a>
+      <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="true">
+        <i class="bi bi-chevron-right ms-2"></i>
+      </a>
+    </div>
+    <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">
+<li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./kmeans.html" class="sidebar-item-text sidebar-link active"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">📗 Kmeans &amp; Hierarchical Clustering</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Lab-kmeans.html" class="sidebar-item-text sidebar-link">- 💻 Lab</a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./em.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">📗 Gaussian Mixture Models</span></a>
+  </div>
+</li>
+    </ul>
+</li>
+    </ul>
+</div>
+</nav><!-- margin-sidebar --><div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc"><h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+<li><a href="#unsupervised-learning" id="toc-unsupervised-learning" class="nav-link active" data-scroll-target="#unsupervised-learning"> <span class="header-section-number">3.1</span> Unsupervised Learning</a></li>
+  <li><a href="#clustering" id="toc-clustering" class="nav-link" data-scroll-target="#clustering"> <span class="header-section-number">3.2</span> Clustering</a></li>
+  <li>
+<a href="#introduction" id="toc-introduction" class="nav-link" data-scroll-target="#introduction"> <span class="header-section-number">3.3</span> Introduction</a>
+  <ul class="collapse">
+<li><a href="#hard-clustering" id="toc-hard-clustering" class="nav-link" data-scroll-target="#hard-clustering">Hard clustering</a></li>
+  <li><a href="#fuzzy-clustering" id="toc-fuzzy-clustering" class="nav-link" data-scroll-target="#fuzzy-clustering">Fuzzy clustering</a></li>
+  </ul>
+</li>
+  <li>
+<a href="#k-means" id="toc-k-means" class="nav-link" data-scroll-target="#k-means"> <span class="header-section-number">3.4</span> <span class="math inline">\(k\)</span>-Means</a>
+  <ul class="collapse">
+<li><a href="#k-means-in" id="toc-k-means-in" class="nav-link" data-scroll-target="#k-means-in"> <span class="header-section-number">3.4.1</span> <span class="math inline">\(k\)</span>-means in <svg aria-hidden="true" role="img" viewbox="0 0 581 512" style="height:1em;width:1.13em;vertical-align:-0.125em;margin-left:auto;margin-right:auto;font-size:inherit;fill:steelblue;overflow:visible;position:relative;"><path d="M581 226.6C581 119.1 450.9 32 290.5 32S0 119.1 0 226.6C0 322.4 103.3 402 239.4 418.1V480h99.1v-61.5c24.3-2.7 47.6-7.4 69.4-13.9L448 480h112l-67.4-113.7c54.5-35.4 88.4-84.9 88.4-139.7zm-466.8 14.5c0-73.5 98.9-133 220.8-133s211.9 40.7 211.9 133c0 50.1-26.5 85-70.3 106.4-2.4-1.6-4.7-2.9-6.4-3.7-10.2-5.2-27.8-10.5-27.8-10.5s86.6-6.4 86.6-92.7-90.6-87.9-90.6-87.9h-199V361c-74.1-21.5-125.2-67.1-125.2-119.9zm225.1 38.3v-55.6c57.8 0 87.8-6.8 87.8 27.3 0 36.5-38.2 28.3-87.8 28.3zm-.9 72.5H365c10.8 0 18.9 11.7 24 19.2-16.1 1.9-33 2.8-50.6 2.9v-22.1z"></path></svg></a></li>
+  <li><a href="#cluster-validity-choosing-the-number-of-clusters" id="toc-cluster-validity-choosing-the-number-of-clusters" class="nav-link" data-scroll-target="#cluster-validity-choosing-the-number-of-clusters"> <span class="header-section-number">3.4.2</span> Cluster Validity, Choosing the Number of Clusters</a></li>
+  </ul>
+</li>
+  <li>
+<a href="#hierarchical-clustering" id="toc-hierarchical-clustering" class="nav-link" data-scroll-target="#hierarchical-clustering"> <span class="header-section-number">3.5</span> Hierarchical Clustering</a>
+  <ul class="collapse">
+<li><a href="#dendrogram" id="toc-dendrogram" class="nav-link" data-scroll-target="#dendrogram"> <span class="header-section-number">3.5.1</span> Dendrogram</a></li>
+  <li><a href="#the-hierarchical-clustering-algorithm" id="toc-the-hierarchical-clustering-algorithm" class="nav-link" data-scroll-target="#the-hierarchical-clustering-algorithm"> <span class="header-section-number">3.5.2</span> The Hierarchical Clustering Algorithm</a></li>
+  <li><a href="#hierarchical-clustering-in" id="toc-hierarchical-clustering-in" class="nav-link" data-scroll-target="#hierarchical-clustering-in"> <span class="header-section-number">3.5.3</span> Hierarchical clustering in <svg aria-hidden="true" role="img" viewbox="0 0 581 512" style="height:1em;width:1.13em;vertical-align:-0.125em;margin-left:auto;margin-right:auto;font-size:inherit;fill:steelblue;overflow:visible;position:relative;"><path d="M581 226.6C581 119.1 450.9 32 290.5 32S0 119.1 0 226.6C0 322.4 103.3 402 239.4 418.1V480h99.1v-61.5c24.3-2.7 47.6-7.4 69.4-13.9L448 480h112l-67.4-113.7c54.5-35.4 88.4-84.9 88.4-139.7zm-466.8 14.5c0-73.5 98.9-133 220.8-133s211.9 40.7 211.9 133c0 50.1-26.5 85-70.3 106.4-2.4-1.6-4.7-2.9-6.4-3.7-10.2-5.2-27.8-10.5-27.8-10.5s86.6-6.4 86.6-92.7-90.6-87.9-90.6-87.9h-199V361c-74.1-21.5-125.2-67.1-125.2-119.9zm225.1 38.3v-55.6c57.8 0 87.8-6.8 87.8 27.3 0 36.5-38.2 28.3-87.8 28.3zm-.9 72.5H365c10.8 0 18.9 11.7 24 19.2-16.1 1.9-33 2.8-50.6 2.9v-22.1z"></path></svg></a></li>
+  </ul>
+</li>
+  </ul></nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block default"><div class="quarto-title">
+<h1 class="title d-none d-lg-block">
+<span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Kmeans &amp; Hierarchical Clustering</span>
+</h1>
+</div>
+
+
+
+
+
+<div class="quarto-title-meta">
+
+    
+    
+  </div>
+  
+
+</header><section id="unsupervised-learning" class="level2" data-number="3.1"><h2 data-number="3.1" class="anchored" data-anchor-id="unsupervised-learning">
+<span class="header-section-number">3.1</span> Unsupervised Learning</h2>
+<p>Previously we considered <em>supervised</em> learning methods such as regression and classification, where we typically have access to a set of <span class="math inline">\(p\)</span> features <span class="math inline">\(X_1,X_2,\ldots,X_p\)</span>, measured on <span class="math inline">\(n\)</span> observations, and a response <span class="math inline">\(Y\)</span> also measured on those same <span class="math inline">\(n\)</span> observations (what we call <strong>labels</strong>). The goal was then to predict <span class="math inline">\(Y\)</span> using <span class="math inline">\(X_1,X_2,\ldots,X_p\)</span>. From now on we will instead focus on <strong>unsupervised</strong> learning, a set of statistical tools where we have only a set of features <span class="math inline">\(X_1,X_2,\ldots,X_p\)</span> measured on <span class="math inline">\(n\)</span> observations. We are not interested in prediction, because we do not have an associated response variable <span class="math inline">\(Y\)</span>. Rather, the goal is to discover interesting things about the measurements on <span class="math inline">\(X_1,X_2,\ldots,X_p\)</span>. Is there an informative way to visualize the data? Can we discover subgroups among the variables or among the observations? Unsupervised learning refers to a diverse set of techniques for answering questions such as these. In this chapter, we will focus on a particular type of unsupervised learning: Principal Components Analysis (PCA), a tool used for <em>data visualization</em> or <em>data pre-processing</em> before supervised techniques are applied. In the next chapters, we will talk about clustering, another particular type of unsupervised learning. Clustering is a broad class of methods for discovering unknown subgroups in data.</p>
+<p>Unsupervised learning is often much more challenging than supervised learning. The exercise tends to be more subjective, and there is no simple goal for the analysis, such as prediction of a response. Unsupervised learning is often performed as part of an <em>exploratory data analysis</em>. It is hard to assess the results obtained from unsupervised learning methods. If we fit a predictive model using a supervised learning technique, then it is possible to check our work by seeing how well our model predicts the response <span class="math inline">\(Y\)</span> on observations not used in fitting the model. But in unsupervised learning, there is no way to check our work because we don’t know the true answer: the problem is <em>unsupervised</em>.</p>
+</section><section id="clustering" class="level2" data-number="3.2"><h2 data-number="3.2" class="anchored" data-anchor-id="clustering">
+<span class="header-section-number">3.2</span> Clustering</h2>
+<p><strong>Clustering</strong> (or Cluster analysis) is the collection of techniques designed to find subgroups or <em>clusters</em> in a dataset of variables <span class="math inline">\(X_1,\ldots,X_p\)</span>. Depending on the similarities between the observations, these are partitioned in homogeneous groups as separated as possible between them. Clustering methods can be classified into these main categories:</p>
+<ul>
+<li>
+<strong>Partition methods</strong>: Given a fixed number of cluster <span class="math inline">\(k\)</span>, these methods aim to assign each observation of <span class="math inline">\(X_1,\ldots,X_p\)</span> to a unique cluster, in such a way that the <em>within-cluster variation</em> is as small as possible (the clusters are as homogeneous as possible) while the <em>between cluster variation</em> is as large as possible (the clusters are as separated as possible).</li>
+<li>
+<strong>Distribution models</strong>: These clustering models are based on the notion of how probable is it that all data points in the cluster belong to the same distribution (For example: Normal, Poisson, etc..). A popular example of these models is Expectation-maximization algorithm using multivariate Normal distributions.</li>
+<li>
+<strong>Hierarchical methods</strong>: These methods construct a hierarchy for the observations in terms of their similitudes. This results in a tree-based representation of the data in terms of a <em>dendrogram</em>, which depicts how the observations are clustered at different levels – from the smallest groups of one element to the largest representing the whole dataset.</li>
+<li>
+<strong>Density Models</strong>: These models search the data space for areas of varied density of data points in the data space. It isolates various different density regions and assign the data points within these regions in the same cluster. Popular examples of density models are DBSCAN and OPTICS.</li>
+</ul>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure"><p><img src="img/clustering_comparison.png" class="img-fluid figure-img" style="width:65.0%"></p>
+<p></p><figcaption aria-hidden="true" class="figure-caption">Performance comparison of different clustering methods on different datasets</figcaption><p></p>
+</figure>
+</div>
+</div>
+</div>
+
+<!-- Link of the comparison https://cdn-images-1.medium.com/max/1200/1*oNt9G9UpVhtyFLDBwEMf8Q.png 
+
+https://scikit-learn.org/stable/auto_examples/cluster/plot_cluster_comparison.html
+-->
+<p>In this chapter we will see the basics of the <strong>partition methods</strong>, and one of the most well-known clustering techniques, namely <strong><em><span class="math inline">\(k\)</span>-means clustering</em></strong>.</p>
+</section><section id="introduction" class="level2" data-number="3.3"><h2 data-number="3.3" class="anchored" data-anchor-id="introduction">
+<span class="header-section-number">3.3</span> Introduction</h2>
+<p><strong>Clustering</strong> (or Cluster analysis) is the process of partitioning a set of data objects (observations) into subsets. Each subset is a <strong>cluster</strong>, such that objects in a cluster are similar to one another, yet dissimilar to objects in other clusters.</p>
+<p>The set of clusters resulting from a cluster analysis can be referred to as a clustering. In this context, different clustering methods may generate different clusterings on the same data set. The partitioning is not performed by humans, but by the clustering algorithm. Hence, clustering is useful in that it can lead to the discovery of previously unknown groups within the data.</p>
+<div class="callout-tip callout callout-style-default callout-captioned">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-caption-container flex-fill">
+Tip
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Different clustering methods may generate different clusterings on the same data set.</p>
+</div>
+</div>
+<p>Example: Imagine a Director of Customer Relationships at an Electronics magazine, and he has five managers working for him. He would like to organize all the company’s customers into five groups so that each group can be assigned to a different manager. Strategically, he would like that the customers in each group are as similar as possible. Moreover, two given customers having very different business patterns should not be placed in the same group. His intention behind this business strategy is to develop customer relationship campaigns that specifically target each group, based on common features shared by the customers per group. Unlike in classification, the class <strong>label</strong> of each customer is unknown. He needs to discover these groupings. Given a large number of customers and many attributes describing customer profiles, it can be very costly or even infeasible to have a human study the data and manually come up with a way to partition the customers into strategic groups. He needs a <em>clustering</em> tool to help.</p>
+<p>Clustering has been widely used in many applications such as business intelligence, image pattern recognition, Web search, biology, and security. In business intelligence, clustering can be used to organize a large number of customers into groups, where customers within a group share strong similar characteristics. In image recognition, clustering can be used to discover clusters or “subclasses” in handwritten character recognition systems, for example. Clustering has also found many applications in Web search. For example, a keyword search may often return a very large number of hits (i.e., pages relevant to the search) due to the extremely large number of web pages. Clustering can be used to organize the search results into groups and present the results in a concise and easily accessible way. Moreover, clustering techniques have been developed to cluster documents into topics (remember the google news example?), which are commonly used in information retrieval practice.</p>
+<p>Clustering is also called <strong>data segmentation</strong> in some applications because clustering partitions large data sets into groups according to their <em>similarity</em>.</p>
+<p>As a branch of statistics, clustering has been extensively studied, with the main focus on <em>distance-based cluster analysis</em>. Clustering tools were proposed like <strong><span class="math inline">\(k\)</span>-means</strong>, <strong>fuzzy <span class="math inline">\(c\)</span>-means</strong>, and several other methods.</p>
+<p>Many clustering algorithms have been introduced in the literature. Since clusters can formally be seen as subsets of the data set, one possible classification of clustering methods can be according to whether the subsets are <strong>fuzzy</strong> or <strong>crisp</strong> (<strong>hard</strong>).</p>
+<section id="hard-clustering" class="level3 unnumbered"><h3 class="unnumbered anchored" data-anchor-id="hard-clustering">Hard clustering</h3>
+<p>Hard clustering methods are based on classical set theory, and require that an object either does or does not belong to a cluster. Hard clustering means partitioning the data into a specified number of mutually exclusive subsets. The most common hard clustering method is <span class="math inline">\(k\)</span>-means.</p>
+</section><section id="fuzzy-clustering" class="level3 unnumbered"><h3 class="unnumbered anchored" data-anchor-id="fuzzy-clustering">Fuzzy clustering</h3>
+<p>Fuzzy clustering methods, however, allow the objects to belong to several clusters simultaneously, with different degrees of membership. In many situations, fuzzy clustering is more natural than hard clustering. The most known technique of fuzzy clustering is the fuzzy <span class="math inline">\(c\)</span>-means.</p>
+</section></section><section id="k-means" class="level2" data-number="3.4"><h2 data-number="3.4" class="anchored" data-anchor-id="k-means">
+<span class="header-section-number">3.4</span> <span class="math inline">\(k\)</span>-Means</h2>
+<p>If you have ever watched a group of tourists with a couple of tour guides who hold umbrellas up so that everybody can see them and follow them, then you have seen a dynamic version of the <span class="math inline">\(k\)</span>-means algorithm. <span class="math inline">\(k\)</span>-means is even simpler, because the data (playing the part of the tourists) does not move, only the tour guides move.</p>
+<p>Suppose that we want to divide our input data into <span class="math inline">\(K\)</span> categories, where we know the value of <span class="math inline">\(K\)</span>. We allocate <span class="math inline">\(K\)</span> <em>cluster centres</em> (also called <em>prototypes</em> or <em>centroids</em>) to our input space, and we would like to position these centres so that there is one cluster centre in the middle of each cluster. However, we don’t know where the clusters are, let alone where their ‘middle’ is, so we need an algorithm that will find them. Learning algorithms generally try to minimize some sort of error, so we need to think of an error criterion that describes this aim. There are two things that we need to define:</p>
+<p><strong>A distance measure</strong>: In order to talk about distances between points, we need some way to measure distances. It is often the normal <strong>Euclidean</strong> distance, but there are other alternatives like Manhattan distance, Correlation distance, Chessboard distance and other.</p>
+<p>The Euclidean distance: Let <span class="math inline">\(x=(x_1,x_2)\)</span> and <span class="math inline">\(y=(y_1,y_2)\)</span> two observations in a two-dimensional space. The Euclidean distance <span class="math inline">\(d_{x,y}\)</span> between <span class="math inline">\(x\)</span> and <span class="math inline">\(y\)</span> is</p>
+<p><span class="math display">\[\begin{align*}  
+d_{x,y}^2 &amp;= (x_1-y_1)^2+(x_2 - y_2)^2  \\
+d_{x,y} &amp;= \sqrt{(x_1-y_1)^2+(x_2 - y_2)^2}
+\end{align*}\]</span></p>
+<p><strong>The mean average</strong>: Once we have a distance measure, we can compute the central point of a set of data points, which is the mean average. Actually, this is only true in Euclidean space, which is the one we are used to, where everything is nice and flat.</p>
+<p>We can now think about a suitable way of positioning the cluster centres: we compute the mean point of each cluster, <span class="math inline">\(\textbf{v}_k\)</span>, <span class="math inline">\(i=1,\ldots,K\)</span>, and put the cluster centre there. This is equivalent to minimizing the Euclidean distance (which is the sum-of-squares error) from each data point to its cluster centre. Then we decide which points belong to which clusters by associating each point with the cluster centre that it is closest to. This changes as the algorithm iterates. We start by positioning the cluster centres <strong>randomly</strong> though the input space, since we don’t know where to put them, and we update their positions according to the data. We decide which cluster each data point belongs to by computing the distance between each data point and all of the cluster centres, and assigning it to the cluster that is the closest. For all the point that are assigned to a cluster, we then compute the mean of them, and move the cluster centre to that place. We iterate the algorithm until the cluster centres stop moving.</p>
+<p>It is convenient at this point to define some notation to describe the assignment of data points to clusters. For each data point <span class="math inline">\(x_i\)</span>, we introduce a corresponding set of binary indicator variables <span class="math inline">\(u_{ki} \in {0,1}\)</span>, where <span class="math inline">\(k=1,\ldots,K\)</span> describing which of the <span class="math inline">\(K\)</span> clusters the data point <span class="math inline">\(x_i\)</span> is assigned to, so that if data point <span class="math inline">\(x_i\)</span> is assigned to cluster <span class="math inline">\(k\)</span> then <span class="math inline">\(u_{ki}= 1\)</span>, and <span class="math inline">\(u_{ji}= 0\)</span> for <span class="math inline">\(j \neq k\)</span>. This is known as the <span class="math inline">\(1\)</span>-of-<span class="math inline">\(K\)</span> coding scheme. We can then define an objective function (and sometimes called a <em>distortion measure</em>), given by</p>
+<p><span class="math display">\[J= \sum_{i=1}^{N} \sum_{k=1}^{K} u_{ki} \| x_{i}- \mathbf{v}_{k} \|^2\]</span></p>
+<p>which represents the sum of the squares of the distances of each data point to its assigned vector <span class="math inline">\(\mathbf{v}_{k}\)</span>. The goal is to find values for the <span class="math inline">\(\{u_{ki}\}\)</span> and the <span class="math inline">\(\{\mathbf{v}_{k}\}\)</span> so as to minimize <span class="math inline">\(J\)</span>. We can do this through an iterative procedure in which each iteration involves two successive steps corresponding to successive optimizations with respect to the <span class="math inline">\(u_{ki}\)</span> and the <span class="math inline">\(\mathbf{v}_{k}\)</span>. The algorithm of <span class="math inline">\(k\)</span>-means is described in the following algorithm:</p>
+<table class="table">
+<colgroup>
+<col style="width: 37%">
+<col style="width: 62%">
+</colgroup>
+<thead><tr class="header">
+<th>The <span class="math inline">\(k\)</span>-means algorithm</th>
+<th></th>
+</tr></thead>
+<tbody>
+<tr class="odd">
+<td>
+<strong>Data</strong>:</td>
+<td><span class="math inline">\(\textbf{X}=\{x_{ij}, i=1,\ldots,n, j=1,\ldots,p\}\)</span></td>
+</tr>
+<tr class="even">
+<td>
+<strong>Result</strong>:</td>
+<td>Cluster centres (Prototypes)</td>
+</tr>
+<tr class="odd">
+<td>
+<strong>Initialization</strong>:</td>
+<td><ul>
+<li>Choose a value for <span class="math inline">\(K\)</span>.</li>
+<li>Choose <span class="math inline">\(K\)</span> random positions in the input space.</li>
+<li>Assign the prototypes <span class="math inline">\(\mathbf{v}_{k}\)</span> to those positions</li>
+</ul></td>
+</tr>
+<tr class="even">
+<td>
+<strong>Learning</strong>: <strong>repeat</strong>
+</td>
+<td>
+<p><strong>for</strong> <em>each data point <span class="math inline">\(x_i\)</span></em> <strong>do</strong></p>
+<ul>
+<li>compute the distance to each prototype: <span class="math display">\[d_{ki}= \text{min}_k d(x_i,\mathbf{v}_k)\]</span>
+</li>
+<li>assign the data point to the nearest prototype with distance <span class="math display">\[u_{ki}= \left\lbrace \begin{array}{ll}  1   &amp; \mbox{if} \quad k = argmin_j d(x_i,\mathbf{v}_j) \\  0 &amp; \mbox{otherwise} \end{array} \right.\]</span>
+</li>
+</ul>
+<p><strong>for</strong> <em>each prototype</em> <strong>do</strong></p>
+<ul>
+<li>move the position of the prototype to the mean of the points in that cluster: <span class="math display">\[\mathbf{v}_k = \frac{\sum_i u_{ki} x_i}{\sum_i u_{ki}}\]</span>
+</li>
+</ul>
+<p>Until the prototypes stop moving.</p>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="callout-tip callout callout-style-default callout-captioned">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-caption-container flex-fill">
+Tip
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>The <span class="math inline">\(k\)</span>-means algorithm produces</p>
+<ul>
+<li>A final estimate of cluster centroids (i.e.&nbsp;their coordinates).</li>
+<li>An assignment of each point to their respective cluster.</li>
+</ul>
+</div>
+</div>
+<p>The denominator in the expression <span class="math inline">\(\mathbf{v}_k = \frac{\sum_i u_{ki} x_i}{\sum_i u_{ki}}\)</span> is equal to the number of points assigned to cluster <span class="math inline">\(k\)</span>, and so this result has a simple interpretation, namely set <span class="math inline">\(\mathbf{v}_k\)</span> equal to the mean of all of the data points <span class="math inline">\(x_i\)</span> assigned to cluster <span class="math inline">\(k\)</span>. For this reason, the procedure is known as the <span class="math inline">\(k\)</span>-means algorithm.</p>
+<p>The two phases of re-assigning data points to clusters and re-computing the cluster means are repeated in turn until there is no further change in the assignments (or until some maximum number of iterations is exceeded). Because each phase reduces the value of the objective function <span class="math inline">\(J\)</span>, convergence of the algorithm is assured. However, it may converge to a local rather than global minimum of <span class="math inline">\(J\)</span>.</p>
+<p>The <span class="math inline">\(k\)</span>-means algorithm is illustrated using the Old Faithful data set <a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a> in following figure.</p>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure"><p><img src="img/kmeans.png" class="img-fluid figure-img" style="width:90.0%"></p>
+<p></p><figcaption aria-hidden="true" class="figure-caption">Illustration of the <span class="math inline">\(k\)</span>-means algorithm using the re-scaled Old Faithful data set, where <span class="math inline">\(k=2\)</span>. We can see how the <span class="math inline">\(k\)</span>-means algorithm works. (a) The first thing <span class="math inline">\(k\)</span>-means has to do is assign an initial set of centroids. (b) The next stage in the algorithm assigns every point in the dataset to the closest centroid. (c) The next stage is to re-calculate the centroids based on the new cluster assignments of the data points. (d) Now we have completed one full cycle of the algorithm we can continue and re-assign points to their (new) closest cluster centroid. (e) And we can update the centroid positions one more time based on the re-assigned points. (g)(h)(f) The algorithm stops when we obtain the same results in consecutive iterations.</figcaption><p></p>
+</figure>
+</div>
+</div>
+</div>
+<p>The <span class="math inline">\(k\)</span>-means algorithm is illustrated using the Iris data set in following interactive figure<a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a>. (Try to modify the X and Y variables and the numbers of chosen clusters and see the result)</p>
+<center>
+<div class="cell" data-layout-align="center">
+<iframe src="https://jjallaire.shinyapps.io/shiny-kmeans/?showcase=0" width="90%" height="900px" data-external="1">
+</iframe>
+</div>
+</center>
+<section id="k-means-in" class="level3" data-number="3.4.1"><h3 data-number="3.4.1" class="anchored" data-anchor-id="k-means-in">
+<span class="header-section-number">3.4.1</span> <span class="math inline">\(k\)</span>-means in <svg aria-hidden="true" role="img" viewbox="0 0 581 512" style="height:1em;width:1.13em;vertical-align:-0.125em;margin-left:auto;margin-right:auto;font-size:inherit;fill:steelblue;overflow:visible;position:relative;"><path d="M581 226.6C581 119.1 450.9 32 290.5 32S0 119.1 0 226.6C0 322.4 103.3 402 239.4 418.1V480h99.1v-61.5c24.3-2.7 47.6-7.4 69.4-13.9L448 480h112l-67.4-113.7c54.5-35.4 88.4-84.9 88.4-139.7zm-466.8 14.5c0-73.5 98.9-133 220.8-133s211.9 40.7 211.9 133c0 50.1-26.5 85-70.3 106.4-2.4-1.6-4.7-2.9-6.4-3.7-10.2-5.2-27.8-10.5-27.8-10.5s86.6-6.4 86.6-92.7-90.6-87.9-90.6-87.9h-199V361c-74.1-21.5-125.2-67.1-125.2-119.9zm225.1 38.3v-55.6c57.8 0 87.8-6.8 87.8 27.3 0 36.5-38.2 28.3-87.8 28.3zm-.9 72.5H365c10.8 0 18.9 11.7 24 19.2-16.1 1.9-33 2.8-50.6 2.9v-22.1z"></path></svg>
+</h3>
+<p>We will use an example with simulated data to demonstrate how the <span class="math inline">\(k\)</span>-means algorithm works. Here we simulate some data from three clusters and plot the dataset below.</p>
+<div class="cell">
+<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/Random.html">set.seed</a></span><span class="op">(</span><span class="fl">1234</span><span class="op">)</span>
+<span class="va">x</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/Normal.html">rnorm</a></span><span class="op">(</span><span class="fl">12</span>,mean<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/rep.html">rep</a></span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">3</span>,each<span class="op">=</span><span class="fl">4</span><span class="op">)</span>,sd<span class="op">=</span><span class="fl">0.2</span><span class="op">)</span>
+<span class="va">y</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/Normal.html">rnorm</a></span><span class="op">(</span><span class="fl">12</span>,mean<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/rep.html">rep</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1</span>,<span class="fl">2</span>,<span class="fl">1</span><span class="op">)</span>,each<span class="op">=</span><span class="fl">4</span><span class="op">)</span>,sd<span class="op">=</span><span class="fl">0.2</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">x</span>,<span class="va">y</span>,col<span class="op">=</span><span class="st">"blue"</span>,pch<span class="op">=</span><span class="fl">19</span>,cex<span class="op">=</span><span class="fl">2</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/r/graphics/text.html">text</a></span><span class="op">(</span><span class="va">x</span><span class="op">+</span><span class="fl">0.05</span>,<span class="va">y</span><span class="op">+</span><span class="fl">0.05</span>,labels<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/character.html">as.character</a></span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">12</span><span class="op">)</span><span class="op">)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure"><p><img src="kmeans_files/figure-html/unnamed-chunk-4-1.png" class="img-fluid figure-img" width="672"></p>
+<p></p><figcaption aria-hidden="true" class="figure-caption">Simulated dataset</figcaption><p></p>
+</figure>
+</div>
+</div>
+</div>
+<p>The <code><a href="https://rdrr.io/r/stats/kmeans.html">kmeans()</a></code> function in R implements the <span class="math inline">\(k\)</span>-means algorithm and can be found in the <code>stats</code> package, which comes with R and is usually already loaded when you start R. Two key parameters that you have to specify are <code>x</code>, which is a matrix or data frame of data, and <code>centers</code> which is either an integer indicating the number of clusters or a matrix indicating the locations of the initial cluster centroids. The data should be organized so that each row is an observation and each column is a variable or feature of that observation.</p>
+<div class="cell">
+<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span class="va">dataFrame</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span><span class="va">x</span>,<span class="va">y</span><span class="op">)</span>
+<span class="va">kmeansObj</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/kmeans.html">kmeans</a></span><span class="op">(</span><span class="va">dataFrame</span>,centers<span class="op">=</span><span class="fl">3</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/r/base/names.html">names</a></span><span class="op">(</span><span class="va">kmeansObj</span><span class="op">)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "cluster"      "centers"      "totss"        "withinss"     "tot.withinss"
+[6] "betweenss"    "size"         "iter"         "ifault"      </code></pre>
+</div>
+</div>
+<p>You can see which cluster each data point got assigned to by looking at the <code>cluster</code> element of the list returned by the <code><a href="https://rdrr.io/r/stats/kmeans.html">kmeans()</a></code> function.</p>
+<div class="cell">
+<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span class="va">kmeansObj</span><span class="op">$</span><span class="va">cluster</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code> [1] 3 1 1 3 2 2 2 2 2 2 2 2</code></pre>
+</div>
+</div>
+<p>Here is a plot of the <span class="math inline">\(k\)</span>-means clustering solution.</p>
+<div class="cell">
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">x</span>,<span class="va">y</span>,col<span class="op">=</span><span class="va">kmeansObj</span><span class="op">$</span><span class="va">cluster</span>,pch<span class="op">=</span><span class="fl">19</span>,cex<span class="op">=</span><span class="fl">2</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/r/graphics/points.html">points</a></span><span class="op">(</span><span class="va">kmeansObj</span><span class="op">$</span><span class="va">centers</span>,col<span class="op">=</span><span class="fl">1</span><span class="op">:</span><span class="fl">3</span>,pch<span class="op">=</span><span class="fl">3</span>,cex<span class="op">=</span><span class="fl">3</span>,lwd<span class="op">=</span><span class="fl">3</span><span class="op">)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure"><p><img src="kmeans_files/figure-html/unnamed-chunk-10-1.png" class="img-fluid figure-img" width="672"></p>
+<p></p><figcaption aria-hidden="true" class="figure-caption"><span class="math inline">\(k\)</span>-means clustering solution</figcaption><p></p>
+</figure>
+</div>
+</div>
+</div>
+</section><section id="cluster-validity-choosing-the-number-of-clusters" class="level3" data-number="3.4.2"><h3 data-number="3.4.2" class="anchored" data-anchor-id="cluster-validity-choosing-the-number-of-clusters">
+<span class="header-section-number">3.4.2</span> Cluster Validity, Choosing the Number of Clusters</h3>
+<p>The result of a clustering algorithm can be very different from each other on the same data set as the other input parameters of an algorithm can extremely modify the behavior and execution of the algorithm. The aim of the cluster validity is to find the partitioning that best fits the underlying data. Usually 2D data sets are used for evaluating clustering algorithms as the reader easily can verify the result. But in case of high dimensional data the visualization and visual validation are not trivial tasks therefore some formal methods are needed.</p>
+<p>The process of evaluating the results of a clustering algorithm is called cluster validity assessment. Two measurement criteria have been proposed for evaluating and selecting an optimal clustering scheme:</p>
+<ul>
+<li><p><em>Compactness</em>: The member of each cluster should be as close to each other as possible. A common measure of compactness is the variance.</p></li>
+<li><p><em>Separation</em>: The clusters themselves should be widely separated. There are three common approaches measuring the distance between two different clusters: distance between the closest member of the clusters, distance between the most distant members and distance between the centres of the clusters.</p></li>
+</ul>
+<p>There are three different techniques for evaluating the result of the clustering algorithms, and several <em>Validity measures</em> are proposed: Validity measures are scalar indices that assess the goodness of the obtained partition. Clustering algorithms generally aim at locating well separated and compact clusters. When the number of clusters is chosen equal to the number of groups that actually exist in the data, it can be expected that the clustering algorithm will identify them correctly. When this is not the case, misclassifications appear, and the clusters are not likely to be well separated and compact. Hence, most cluster validity measures are designed to quantify the separation and the compactness of the clusters.</p>
+<div class="callout-tip callout callout-style-default callout-captioned">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-caption-container flex-fill">
+Tip
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Check this answer on <em>stackoverflow</em> containing <svg aria-hidden="true" role="img" viewbox="0 0 581 512" style="height:1em;width:1.13em;vertical-align:-0.125em;margin-left:auto;margin-right:auto;font-size:inherit;fill:steelblue;overflow:visible;position:relative;"><path d="M581 226.6C581 119.1 450.9 32 290.5 32S0 119.1 0 226.6C0 322.4 103.3 402 239.4 418.1V480h99.1v-61.5c24.3-2.7 47.6-7.4 69.4-13.9L448 480h112l-67.4-113.7c54.5-35.4 88.4-84.9 88.4-139.7zm-466.8 14.5c0-73.5 98.9-133 220.8-133s211.9 40.7 211.9 133c0 50.1-26.5 85-70.3 106.4-2.4-1.6-4.7-2.9-6.4-3.7-10.2-5.2-27.8-10.5-27.8-10.5s86.6-6.4 86.6-92.7-90.6-87.9-90.6-87.9h-199V361c-74.1-21.5-125.2-67.1-125.2-119.9zm225.1 38.3v-55.6c57.8 0 87.8-6.8 87.8 27.3 0 36.5-38.2 28.3-87.8 28.3zm-.9 72.5H365c10.8 0 18.9 11.7 24 19.2-16.1 1.9-33 2.8-50.6 2.9v-22.1z"></path></svg> code for several methods of computing an optimal value of <span class="math inline">\(k\)</span> for <span class="math inline">\(k\)</span>-means cluster analysis: <a href="http://stackoverflow.com/a/15376462" target="_blank">here</a>.</p>
+</div>
+</div>
+</section></section><section id="hierarchical-clustering" class="level2" data-number="3.5"><h2 data-number="3.5" class="anchored" data-anchor-id="hierarchical-clustering">
+<span class="header-section-number">3.5</span> Hierarchical Clustering</h2>
+<p>In the previous part we introduced <span class="math inline">\(k\)</span>-means. One potential disadvantage of it is that it requires us to pre-specify the number of clusters <span class="math inline">\(k\)</span>. Hierarchical clustering is an alternative approach which does not require that we commit to a particular choice of <span class="math inline">\(k\)</span>. Hierarchical clustering has an added advantage over <span class="math inline">\(k\)</span>-means clustering in that it results in an attractive tree-based representation of the observations, called a <strong><em>dendrogram</em></strong>.</p>
+<p>The most common type of hierarchical clustering is the <em>agglomerative</em> clustering (or <em>bottom-up</em> clustering). It refers to the fact that a dendrogram (generally depicted as an upside-down tree) is built starting from the leaves and combining clusters up to the trunk.</p>
+<section id="dendrogram" class="level3" data-number="3.5.1"><h3 data-number="3.5.1" class="anchored" data-anchor-id="dendrogram">
+<span class="header-section-number">3.5.1</span> Dendrogram</h3>
+<p>Suppose that we have the simulated data in the following figure:</p>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div id="fig-dendro" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure"><p><img src="img/dendro.png" class="img-fluid figure-img" style="width:60.0%"></p>
+<p></p><figcaption aria-hidden="true" class="figure-caption">Figure 3.1: Simulated data of 45 observations generated from a three-class model.</figcaption><p></p>
+</figure>
+</div>
+</div>
+</div>
+<p>The data in the figure above consists of 45 observations in two-dimensional space. The data were generated from a three-class model; the true class labels for each observation are shown in distinct colors. However, suppose that the data were observed without the class labels, and that we wanted to perform hierarchical clustering of the data. Hierarchical clustering (with complete linkage, to be discussed later) yields the result shown in <a href="#fig-dendro2">Figure&nbsp;<span>3.2</span></a>. How can we interpret this dendrogram?</p>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div id="fig-dendro2" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure"><p><img src="img/dendro2.png" class="img-fluid figure-img" style="width:50.0%"></p>
+<p></p><figcaption aria-hidden="true" class="figure-caption">Figure 3.2: Dendrogram</figcaption><p></p>
+</figure>
+</div>
+</div>
+</div>
+<p>In the dendrogram of <a href="#fig-dendro2">Figure&nbsp;<span>3.2</span></a>, each leaf of the dendrogram represents one of the 45 observations. However, as we move up the tree, some leaves begin to fuse into branches. These correspond to observations that are similar to each other. As we move higher up the tree, branches themselves fuse, either with leaves or other branches. The earlier (lower in the tree) fusions occur, the more similar the groups of observations are to each other. On the other hand, observations that fuse later (near the top of the tree) can be quite different. In fact, this statement can be made precise: for any two observations, we can look for the point in the tree where branches containing those two observations are first fused. The height of this fusion, as measured on the vertical axis, indicates how different the two observations are. Thus, observations that fuse at the very bottom of the tree are quite similar to each other, whereas observations that fuse close to the top of the tree will tend to be quite different.</p>
+<p>An example of interpreting a dendrogram is presented in <a href="#fig-dendro3">Figure&nbsp;<span>3.3</span></a></p>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div id="fig-dendro3" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure"><p><img src="img/dendro3.png" class="img-fluid figure-img" style="width:100.0%"></p>
+<p></p><figcaption aria-hidden="true" class="figure-caption">Figure 3.3: An illustration of how to properly interpret a dendrogram with nine observations in two-dimensional space. Left: a dendrogram generated using Euclidean distance and complete linkage. Observations 5 and 7 are quite similar to each other, as are observations 1 and 6. However, observation 9 is no more similar to observation 2 than it is to observations 8, 5, and 7, even though observations 9 and 2 are close together in terms of horizontal distance. This is because observations 2, 8, 5, and 7 all fuse with observation 9 at the same height, approximately 1.8. Right: the raw data used to generate the dendrogram can be used to confirm that indeed, observation 9 is no more similar to observation 2 than it is to observations 8, 5, and 7.</figcaption><p></p>
+</figure>
+</div>
+</div>
+</div>
+<p>Now that we understand how to interpret the dendrogram of <a href="#fig-dendro2">Figure&nbsp;<span>3.2</span></a>, we can move on to the issue of identifying clusters on the basis of a dendrogram. In order to do this, we make a horizontal cut across the dendrogram, as shown in the following <a href="#fig-dendro4">Figure&nbsp;<span>3.4</span></a> where we cut the dendrogram at a height of nine results in two clusters.</p>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div id="fig-dendro4" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure"><p><img src="img/dendro4.png" class="img-fluid figure-img" style="width:50.0%"></p>
+<p></p><figcaption aria-hidden="true" class="figure-caption">Figure 3.4: The dendrogram from the simulated dataset, cut at a height of nine (indicated by the dashed line). This cut results in two distinct clusters, shown in different colors.</figcaption><p></p>
+</figure>
+</div>
+</div>
+</div>
+<p>The distinct sets of observations beneath the cut can be interpreted as clusters. In <a href="#fig-dendro5">Figure&nbsp;<span>3.5</span></a>, cutting the dendrogram at a height of five results in three clusters.</p>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div id="fig-dendro5" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure"><p><img src="img/dendro5.png" class="img-fluid figure-img" style="width:50.0%"></p>
+<p></p><figcaption aria-hidden="true" class="figure-caption">Figure 3.5: The dendrogram from the simulated dataset, cut at a height of five (indicated by the dashed line). This cut results in three distinct clusters, shown in different colors.</figcaption><p></p>
+</figure>
+</div>
+</div>
+</div>
+<p>The term <em>hierarchical</em> refers to the fact that clusters obtained by cutting the dendrogram at a given height are necessarily nested within the clusters obtained by cutting the dendrogram at any greater height.</p>
+</section><section id="the-hierarchical-clustering-algorithm" class="level3" data-number="3.5.2"><h3 data-number="3.5.2" class="anchored" data-anchor-id="the-hierarchical-clustering-algorithm">
+<span class="header-section-number">3.5.2</span> The Hierarchical Clustering Algorithm</h3>
+<p>The hierarchical clustering dendrogram is obtained via an extremely simple algorithm. We begin by defining some sort of <em>dissimilarity</em> measure between each pair of observations. Most often, Euclidean distance is used. The algorithm proceeds iteratively. Starting out at the bottom of the dendrogram, each of the n observations is treated as its own cluster. The two clusters that are most similar to each other are then fused so that there now are <span class="math inline">\(n−1\)</span> clusters. Next the two clusters that are most similar to each other are fused again, so that there now are <span class="math inline">\(n − 2\)</span> clusters. The algorithm proceeds in this fashion until all of the observations belong to one single cluster, and the dendrogram is complete.</p>
+<p><a href="#fig-cah">Figure&nbsp;<span>3.6</span></a> depicts the first few steps of the algorithm.</p>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div id="fig-cah" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure"><p><img src="img/cah.png" class="img-fluid figure-img" style="width:70.0%"></p>
+<p></p><figcaption aria-hidden="true" class="figure-caption">Figure 3.6: An illustration of the first few steps of the hierarchical clustering algorithm, with complete linkage and Euclidean distance. Top Left: initially, there are nine distinct clusters {1}, {2}, …, {9}. Top Right: the two clusters that are closest together, {5} and {7}, are fused into a single cluster. Bottom Left: the two clusters that are closest together, {6} and {1},are fused into a single cluster. Bottom Right: the two clusters that are closest together using complete linkage, {8} and the cluster {5, 7}, are fused into a single cluster.</figcaption><p></p>
+</figure>
+</div>
+</div>
+</div>
+<p>To summarize, the hierarchical clustering algorithm is given in the following Algorithm:</p>
+<table class="table">
+<colgroup><col style="width: 100%"></colgroup>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">
+<strong>Hierarchical Clustering</strong>:</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">
+<strong>1- Initialisation</strong>: Begin with <span class="math inline">\(n\)</span> observations and a measure (such as Euclidean distance) of all the <span class="math inline">\(C^2_n = n(n−1)/2\)</span> pairwise dissimilarities. Treat each observation as its own cluster.</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">
+<strong>2- For</strong> <span class="math inline">\(i=n,n-1,\ldots,2\)</span>:</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">(a) Examine all pairwise inter-cluster dissimilarities among the <span class="math inline">\(i\)</span> clusters and identify the pair of clusters that are least dissimilar (that is, most similar). Fuse these two clusters. The dissimilarity between these two clusters indicates the height in the dendrogram at which the fusion should be placed.</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">(b) Compute the new pairwise inter-cluster dissimilarities among the <span class="math inline">\(i − 1\)</span> remaining clusters.</td>
+</tr>
+</tbody>
+</table>
+<p>This algorithm seems simple enough, but one issue has not been addressed. Consider the bottom right panel in <a href="#fig-cah">Figure&nbsp;<span>3.6</span></a>. How did we determine that the cluster {5, 7} should be fused with the cluster {8}? We have a concept of the dissimilarity between pairs of observations, but how do we define the dissimilarity between two clusters if one or both of the clusters contains multiple observations? The concept of dissimilarity between a pair of observations needs to be extended to a pair of groups of observations. This extension is achieved by developing the notion of <strong><em>linkage</em></strong>, which defines the dissimilarity between two groups of observations. The four most common types of linkage: complete, average, single, and centroid are briefly are described like follows:</p>
+<ul>
+<li><p><strong>Complete</strong>: Maximal intercluster dissimilarity. Compute all pairwise dissimilarities between the observations in cluster A and the observations in cluster B, and record the largest of these dissimilarities.</p></li>
+<li><p><strong>Single</strong>: Minimal intercluster dissimilarity. Compute all pairwise dissimilarities between the observations in cluster A and the observations in cluster B, and record the smallest of these dissimilarities. Single linkage can result in extended, trailing clusters in which single observations are fused one-at-a-time</p></li>
+<li><p><strong>Average</strong>: Mean intercluster dissimilarity. Compute all pairwise dissimilarities between the observations in cluster A and the observations in cluster B, and record the average of these dissimilarities.</p></li>
+<li><p><strong>Centroid</strong>: Dissimilarity between the centroid for cluster A (a mean vector of length p) and the centroid for cluster B. Centroid linkage can result in undesirable inversions.</p></li>
+</ul>
+<p>Average and complete linkage are generally preferred over single linkage, as they tend to yield more balanced dendrograms. Centroid linkage is often used in genomics.</p>
+<p>The dissimilarities computed in Step 2(b) of the hierarchical clustering algorithm will depend on the type of linkage used, as well as on the choice of dissimilarity measure. Hence, the resulting dendrogram typically depends quite strongly on the type of linkage used, as is shown in <a href="#fig-linkage">Figure&nbsp;<span>3.7</span></a>.</p>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div id="fig-linkage" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure"><p><img src="img/linkage.png" class="img-fluid figure-img" style="width:70.0%"></p>
+<p></p><figcaption aria-hidden="true" class="figure-caption">Figure 3.7: Average, complete, and single linkage applied to an example data set. Average and complete linkage tend to yield more balanced clusters.</figcaption><p></p>
+</figure>
+</div>
+</div>
+</div>
+</section><section id="hierarchical-clustering-in" class="level3" data-number="3.5.3"><h3 data-number="3.5.3" class="anchored" data-anchor-id="hierarchical-clustering-in">
+<span class="header-section-number">3.5.3</span> Hierarchical clustering in <svg aria-hidden="true" role="img" viewbox="0 0 581 512" style="height:1em;width:1.13em;vertical-align:-0.125em;margin-left:auto;margin-right:auto;font-size:inherit;fill:steelblue;overflow:visible;position:relative;"><path d="M581 226.6C581 119.1 450.9 32 290.5 32S0 119.1 0 226.6C0 322.4 103.3 402 239.4 418.1V480h99.1v-61.5c24.3-2.7 47.6-7.4 69.4-13.9L448 480h112l-67.4-113.7c54.5-35.4 88.4-84.9 88.4-139.7zm-466.8 14.5c0-73.5 98.9-133 220.8-133s211.9 40.7 211.9 133c0 50.1-26.5 85-70.3 106.4-2.4-1.6-4.7-2.9-6.4-3.7-10.2-5.2-27.8-10.5-27.8-10.5s86.6-6.4 86.6-92.7-90.6-87.9-90.6-87.9h-199V361c-74.1-21.5-125.2-67.1-125.2-119.9zm225.1 38.3v-55.6c57.8 0 87.8-6.8 87.8 27.3 0 36.5-38.2 28.3-87.8 28.3zm-.9 72.5H365c10.8 0 18.9 11.7 24 19.2-16.1 1.9-33 2.8-50.6 2.9v-22.1z"></path></svg>
+</h3>
+<p>Let’s illustrate how to perform hierarchical clustering on dataset <a target="_blank" href="datasets/ligue1_17_18.csv"> Ligue1 2017-2018 <i class="fa fa-table" aria-hidden="true"></i></a>.</p>
+<div class="cell" data-fig.asp="0.7">
+<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span class="co"># Load the dataset</span>
+<span class="va">ligue1</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/utils/read.table.html">read.csv</a></span><span class="op">(</span><span class="st">"datasets/ligue1_17_18.csv"</span>, row.names<span class="op">=</span><span class="fl">1</span>,sep<span class="op">=</span><span class="st">";"</span><span class="op">)</span>
+
+<span class="co"># Work with standardized data</span>
+<span class="va">ligue1_scaled</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/scale.html">scale</a></span><span class="op">(</span><span class="va">ligue1</span><span class="op">)</span><span class="op">)</span>
+
+<span class="co"># Compute dissimilary matrix - in this case Euclidean distance</span>
+<span class="va">d</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/dist.html">dist</a></span><span class="op">(</span><span class="va">ligue1_scaled</span><span class="op">)</span>
+
+<span class="co"># Hierarchical clustering with complete linkage</span>
+<span class="va">treeComp</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/hclust.html">hclust</a></span><span class="op">(</span><span class="va">d</span>, method <span class="op">=</span> <span class="st">"complete"</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">treeComp</span><span class="op">)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="kmeans_files/figure-html/unnamed-chunk-12-1.png" class="img-fluid" width="864"></p>
+</div>
+<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span class="co"># With average linkage</span>
+<span class="va">treeAve</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/hclust.html">hclust</a></span><span class="op">(</span><span class="va">d</span>, method <span class="op">=</span> <span class="st">"average"</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">treeAve</span><span class="op">)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="kmeans_files/figure-html/unnamed-chunk-12-2.png" class="img-fluid" width="864"></p>
+</div>
+<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span class="co"># With single linkage</span>
+<span class="va">treeSingle</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/hclust.html">hclust</a></span><span class="op">(</span><span class="va">d</span>, method <span class="op">=</span> <span class="st">"single"</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">treeSingle</span><span class="op">)</span> <span class="co"># Chaining</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="kmeans_files/figure-html/unnamed-chunk-12-3.png" class="img-fluid" width="864"></p>
+</div>
+<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span class="co"># Set the number of clusters after inspecting visually</span>
+<span class="co"># the dendrogram for "long" groups of hanging leaves</span>
+<span class="co"># These are the cluster assignments</span>
+<span class="fu"><a href="https://rdrr.io/r/stats/cutree.html">cutree</a></span><span class="op">(</span><span class="va">treeComp</span>, k <span class="op">=</span> <span class="fl">2</span><span class="op">)</span> </code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>     Paris-SG        Monaco          Lyon     Marseille        Rennes 
+            1             1             1             1             2 
+     Bordeaux Saint-Etienne          Nice        Nantes   Montpellier 
+            2             2             2             2             2 
+        Dijon      Guingamp        Amiens        Angers    Strasbourg 
+            2             2             2             2             2 
+         Caen         Lille      Toulouse        Troyes          Metz 
+            2             2             2             2             2 </code></pre>
+</div>
+<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/stats/cutree.html">cutree</a></span><span class="op">(</span><span class="va">treeComp</span>, k <span class="op">=</span> <span class="fl">3</span><span class="op">)</span> </code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>     Paris-SG        Monaco          Lyon     Marseille        Rennes 
+            1             1             1             1             2 
+     Bordeaux Saint-Etienne          Nice        Nantes   Montpellier 
+            2             2             2             2             2 
+        Dijon      Guingamp        Amiens        Angers    Strasbourg 
+            3             3             3             3             3 
+         Caen         Lille      Toulouse        Troyes          Metz 
+            3             3             3             3             3 </code></pre>
+</div>
+<div class="sourceCode" id="cb14"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/stats/cutree.html">cutree</a></span><span class="op">(</span><span class="va">treeComp</span>, k <span class="op">=</span> <span class="fl">4</span><span class="op">)</span> </code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>     Paris-SG        Monaco          Lyon     Marseille        Rennes 
+            1             2             2             2             3 
+     Bordeaux Saint-Etienne          Nice        Nantes   Montpellier 
+            3             3             3             3             3 
+        Dijon      Guingamp        Amiens        Angers    Strasbourg 
+            4             4             4             4             4 
+         Caen         Lille      Toulouse        Troyes          Metz 
+            4             4             4             4             4 </code></pre>
+</div>
+</div>
+<p align="right">
+◼
+</p>
+
+
+</section></section><section class="footnotes footnotes-end-of-document" role="doc-endnotes"><hr>
+<ol>
+<li id="fn1" role="doc-endnote"><p>Old Faithful, is a hydrothermal geyser in Yellowstone National Park in the state of Wyoming, U.S.A., and is a popular tourist attraction. Its name stems from the supposed regularity of its eruptions. The data set comprises 272 observations, each of which represents a single eruption and contains two variables corresponding to the duration in minutes of the eruption, and the time until the next eruption, also in minutes.<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn2" role="doc-endnote"><p>Made by Joseph J. Allaire https://github.com/jjallaire<a href="#fnref2" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+</ol></section></main><!-- /main --><script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const disableStylesheet = (stylesheets) => {
+    for (let i=0; i < stylesheets.length; i++) {
+      const stylesheet = stylesheets[i];
+      stylesheet.rel = 'prefetch';
+    }
+  }
+  const enableStylesheet = (stylesheets) => {
+    for (let i=0; i < stylesheets.length; i++) {
+      const stylesheet = stylesheets[i];
+      stylesheet.rel = 'stylesheet';
+    }
+  }
+  const manageTransitions = (selector, allowTransitions) => {
+    const els = window.document.querySelectorAll(selector);
+    for (let i=0; i < els.length; i++) {
+      const el = els[i];
+      if (allowTransitions) {
+        el.classList.remove('notransition');
+      } else {
+        el.classList.add('notransition');
+      }
+    }
+  }
+  const toggleColorMode = (alternate) => {
+    // Switch the stylesheets
+    const alternateStylesheets = window.document.querySelectorAll('link.quarto-color-scheme.quarto-color-alternate');
+    manageTransitions('#quarto-margin-sidebar .nav-link', false);
+    if (alternate) {
+      enableStylesheet(alternateStylesheets);
+    } else {
+      disableStylesheet(alternateStylesheets);
+    }
+    manageTransitions('#quarto-margin-sidebar .nav-link', true);
+    // Switch the toggles
+    const toggles = window.document.querySelectorAll('.quarto-color-scheme-toggle');
+    for (let i=0; i < toggles.length; i++) {
+      const toggle = toggles[i];
+      if (toggle) {
+        if (alternate) {
+          toggle.classList.add("alternate");     
+        } else {
+          toggle.classList.remove("alternate");
+        }
+      }
+    }
+  }
+  const isFileUrl = () => { 
+    return window.location.protocol === 'file:';
+  }
+  const hasAlternateSentinel = () => {  
+    let styleSentinel = getColorSchemeSentinel();
+    if (styleSentinel !== null) {
+      return styleSentinel === "alternate";
+    } else {
+      return false;
+    }
+  }
+  const setStyleSentinel = (alternate) => {
+    const value = alternate ? "alternate" : "default";
+    if (!isFileUrl()) {
+      window.localStorage.setItem("quarto-color-scheme", value);
+    } else {
+      localAlternateSentinel = value;
+    }
+  }
+  const getColorSchemeSentinel = () => {
+    if (!isFileUrl()) {
+      const storageValue = window.localStorage.getItem("quarto-color-scheme");
+      return storageValue != null ? storageValue : localAlternateSentinel;
+    } else {
+      return localAlternateSentinel;
+    }
+  }
+  let localAlternateSentinel = 'default';
+  // Dark / light mode switch
+  window.quartoToggleColorScheme = () => {
+    // Read the current dark / light value 
+    let toAlternate = !hasAlternateSentinel();
+    toggleColorMode(toAlternate);
+    setStyleSentinel(toAlternate);
+  };
+  // Ensure there is a toggle, if there isn't float one in the top right
+  if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
+    const a = window.document.createElement('a');
+    a.classList.add('top-right');
+    a.classList.add('quarto-color-scheme-toggle');
+    a.href = "";
+    a.onclick = function() { try { window.quartoToggleColorScheme(); } catch {} return false; };
+    const i = window.document.createElement("i");
+    i.classList.add('bi');
+    a.appendChild(i);
+    window.document.body.appendChild(a);
+  }
+  // Switch to dark mode if need be
+  if (hasAlternateSentinel()) {
+    toggleColorMode(true);
+  } 
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    target: function(trigger) {
+      return trigger.previousElementSibling;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    setTimeout(function() {
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      let href = ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const cites = ref.parentNode.getAttribute('data-cites').split(' ');
+    tippyHover(ref, function() {
+      var popup = window.document.createElement('div');
+      cites.forEach(function(cite) {
+        var citeDiv = window.document.createElement('div');
+        citeDiv.classList.add('hanging-indent');
+        citeDiv.classList.add('csl-entry');
+        var biblioDiv = window.document.getElementById('ref-' + cite);
+        if (biblioDiv) {
+          citeDiv.innerHTML = biblioDiv.innerHTML;
+        }
+        popup.appendChild(citeDiv);
+      });
+      return popup.innerHTML;
+    });
+  }
+});
+</script><nav class="page-navigation"><div class="nav-page nav-page-previous">
+      <a href="./Lab-Dim-Red.html" class="pagination-link">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">- 💻 Lab</span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="./Lab-kmeans.html" class="pagination-link">
+        <span class="nav-page-text">- 💻 Lab</span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+
+
+
+</body></html>

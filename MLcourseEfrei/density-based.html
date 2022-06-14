@@ -186,7 +186,14 @@ ul.task-list{list-style: none;}
 </nav>
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        
+        <nav id="TOC" role="doc-toc">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#documents" id="toc-documents" class="nav-link active" data-scroll-target="#documents"> <span class="header-section-number">5.1</span> Documents</a></li>
+  <li><a href="#lab" id="toc-lab" class="nav-link" data-scroll-target="#lab"> <span class="header-section-number">5.2</span> Lab</a></li>
+  </ul>
+</nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
@@ -209,22 +216,72 @@ ul.task-list{list-style: none;}
 
 </header>
 
-<object width="600" height="400" data="pdf/KDDClusterAnalysis17-screen.pdf">
-<p>
-Oops! Your browser doesn’t support PDFs!
-</p>
-<p>
-<a href="pdf/KDDClusterAnalysis17-screen.pdf">Download Instead</a>
-</p>
+<!-- 
+<object width="600" height="400"data='pdf/KDDClusterAnalysis17-screen.pdf'>
+    <p>Oops! Your browser doesn't support PDFs!</p>
+    <p><a href="pdf/KDDClusterAnalysis17-screen.pdf">Download Instead</a></p>
 </object>
+
 <object data="pdf/KDDClusterAnalysis17-screen.pdf" type="application/pdf" frameborder="0" width="100%" height="600px" style="padding: 20px;">
-<embed src="pdf/KDDClusterAnalysis17-screen.pdf" width="100%" height="600px">
+    <embed src="pdf/KDDClusterAnalysis17-screen.pdf" width="100%" height="600px"/> 
 </object>
+ -->
+<section id="documents" class="level2" data-number="5.1">
+<h2 data-number="5.1" class="anchored" data-anchor-id="documents"><span class="header-section-number">5.1</span> Documents</h2>
+<div class="callout-note callout callout-style-default callout-captioned">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-caption-container flex-fill">
+Documents for this chapter
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<ul>
+<li><a href="pdf/toc-data-clustering.pdf" target="_blank">Table of contents 📄</a> from “Data Clustering Algorithms and Applications” book for authors C Aggarwal and C Reddy.</li>
+<li>Cluster analysis <a href="pdf/KDDClusterAnalysis17-screen.pdf" target="_blank">lecture notes 📄</a> from Prof.&nbsp;<a href="https://www.vitavonni.de/" target="_blank">Erich Schuberts</a>.</li>
+<li>Clustering <a href="pdf/clustering-slides.pdf" target="_blank">lecture notes 📄</a> from Prof.&nbsp;<a href="https://pages.saclay.inria.fr/emilie.chouzenoux/index.html" target="_blank">Emilie Chouzenoux</a> and Prof.&nbsp;<a href="https://fredericpascal.blogspot.com/p/home.html" target="_blank">Frédéric PASCAL</a>.</li>
+<li><a href="pdf/chapter3Jones.pdf" target="_blank">DBSCAN chapter 📄</a> from “The Unsupervised Learning” book for authors A Jones, C Kruger and B Johnston.</li>
+<li><a href="./pdf/data-mining-dbscan.pdf" target="_blank">Density-bsed Methods 📄</a> from “Data Mining Concepts and Techniques” book for authors J Han, M Kamber and J Pei.</li>
+<li><a href="pdf/dbscan-kassambara.pdf" target="_blank">DBSCAN: Density-Based Clustering 📄</a> from “Practical Guide To Cluster Analysis in R” book for author A Kassambara.</li>
+<li>Cluster validation: <a href="http://universitypress.org.uk/journals/cc/20-463.pdf" target="_blank">Internal versus External indexes</a>.</li>
+</ul>
+</div>
+</div>
+</section>
+<section id="lab" class="level2" data-number="5.2">
+<h2 data-number="5.2" class="anchored" data-anchor-id="lab"><span class="header-section-number">5.2</span> Lab</h2>
+<p>During an interview, you are asked to create the DBSCAN algorithm from scratch using a generated two-dimensional dataset. To do this, you will need to convert the theory behind neighborhood searching into production code, with a recursive call that adds neighbors. As explained in the documents, you will use a distance scan in space surrounding a specified point to add these neighbors.</p>
+<p>Given what you’ve learned about DBSCAN and distance metrics from the documents, build an implementation of DBSCAN from scratch in R or Python. You are free to use R or Python libraries to evaluate the distances.</p>
+<p>These steps will help you to complete the activity:</p>
+<ol type="1">
+<li>Generate a random cluster dataset.</li>
+<li>Visualize the data.</li>
+<li>Create functions from scratch that allow you to call DBSCAN on a dataset.</li>
+<li>Use your created DBSCAN implementation to find clusters in the generated dataset. Feel free to use hyperparameters as you see fit, tuning them based on their performance.</li>
+<li>Visualize the clustering performance of your DBSCAN implementation from scratch.</li>
+</ol>
+<p>The desired outcome of this lab is for you to implement how DBSCAN works from the ground up before you use the fully packaged implementation in scikit-learn for example. Taking this approach to any machine learning algorithm from scratch is important, as it helps you “earn” the ability to use easier implementations, while still being able to discuss DBSCAN in depth in the futur.</p>
+<p>Once your implementation is done, you can complete your work by<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a>:</p>
+<ul>
+<li>Extend your algorithm to multidimensional datasets (&gt;2).</li>
+<li>Implementing a tool to help tuning the hyperparameters of DBSCAN.</li>
+<li>Implementing a tool to compare the performances of DBSCAN with k-means and Hierarchical Clustering.</li>
+<li>Implementing other density based algorithms: HDBSCAN or OPTICS.</li>
+</ul>
 <p align="right">
 ◼
 </p>
 
 
+</section>
+<section class="footnotes footnotes-end-of-document" role="doc-endnotes">
+<hr>
+<ol>
+<li id="fn1" role="doc-endnote"><p>it is up to you to choose between them<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+</ol>
+</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">

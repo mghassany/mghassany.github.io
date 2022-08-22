@@ -1,0 +1,568 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<title>1 Linear Regression | Machine Learning</title>
+<meta name="author" content="Mohamad Ghassany">
+<meta name="description" content="1.1 Notation In general, we will let \(x_{ij}\) represent the value of the \(j\)th variable for the \(i\)th observation, where \(i=1,2,\ldots,n\) and \(j=1,2,\ldots,p\). We will use \(i\) to index...">
+<meta name="generator" content="bookdown 0.24.10 with bs4_book()">
+<meta property="og:title" content="1 Linear Regression | Machine Learning">
+<meta property="og:type" content="book">
+<meta property="og:description" content="1.1 Notation In general, we will let \(x_{ij}\) represent the value of the \(j\)th variable for the \(i\)th observation, where \(i=1,2,\ldots,n\) and \(j=1,2,\ldots,p\). We will use \(i\) to index...">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="1 Linear Regression | Machine Learning">
+<meta name="twitter:description" content="1.1 Notation In general, we will let \(x_{ij}\) represent the value of the \(j\)th variable for the \(i\)th observation, where \(i=1,2,\ldots,n\) and \(j=1,2,\ldots,p\). We will use \(i\) to index...">
+<!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
+<script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.3.1/transition.js"></script><script src="libs/bs3compat-0.3.1/tabs.js"></script><script src="libs/bs3compat-0.3.1/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
+<script src="libs/bs4_book-1.0.0/bs4_book.js"></script><script src="libs/kePrint-0.0.1/kePrint.js"></script><link href="libs/lightable-0.0.1/lightable.css" rel="stylesheet">
+<link href="libs/vembedr-0.1.5/css/vembedr.css" rel="stylesheet">
+<script src="libs/htmlwidgets-1.5.4/htmlwidgets.js"></script><script src="libs/plotly-binding-4.10.0/plotly.js"></script><script src="libs/typedarray-0.1/typedarray.min.js"></script><link href="libs/crosstalk-1.2.0/css/crosstalk.min.css" rel="stylesheet">
+<script src="libs/crosstalk-1.2.0/js/crosstalk.min.js"></script><link href="libs/plotly-htmlwidgets-css-2.5.1/plotly-htmlwidgets.css" rel="stylesheet">
+<script src="libs/plotly-main-2.5.1/plotly-latest.min.js"></script><script type="text/x-mathjax-config">
+    const popovers = document.querySelectorAll('a.footnote-ref[data-toggle="popover"]');
+    for (let popover of popovers){
+      const div = document.createElement('div');
+      div.setAttribute('style', 'position: absolute; top: 0, left:0; width:0, height:0, overflow: hidden; visibility: hidden;');
+      div.innerHTML = popover.getAttribute('data-content');
+      
+      // Will this work with TeX on its own line?
+      var has_math = div.querySelector("span.math");
+      if (has_math) {
+        document.body.appendChild(div);
+      	MathJax.Hub.Queue(["Typeset", MathJax.Hub, div]);
+      	MathJax.Hub.Queue(function(){
+          popover.setAttribute('data-content', div.innerHTML);
+      	})
+      }
+    }
+    </script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- CSS --><link rel="stylesheet" href="css/ims-style.css">
+</head>
+<body data-spy="scroll" data-target="#toc">
+
+<div class="container-fluid">
+<div class="row">
+  <header class="col-sm-12 col-lg-3 sidebar sidebar-book"><a class="sr-only sr-only-focusable" href="#content">Skip to main content</a>
+
+    <div class="d-flex align-items-start justify-content-between">
+      <h1>
+        <a href="index.html" title="">Machine Learning</a>
+      </h1>
+      <button class="btn btn-outline-primary d-lg-none ml-2 mt-1" type="button" data-toggle="collapse" data-target="#main-nav" aria-expanded="true" aria-controls="main-nav"><i class="fas fa-bars"></i><span class="sr-only">Show table of contents</span></button>
+    </div>
+
+    <div id="main-nav" class="collapse-lg">
+      <form role="search">
+        <input id="search" class="form-control" type="search" placeholder="Search" aria-label="Search">
+</form>
+
+      <nav aria-label="Table of contents"><h2>Table of contents</h2>
+        <ul class="book-toc list-unstyled">
+<li><a class="" href="index.html">Welcome</a></li>
+<li><a class="" href="introduction.html">Introduction</a></li>
+<li class="book-part">Supervised Learning</li>
+<li class="book-part">Regression</li>
+<li><a class="active" href="linear-regression.html"><span class="header-section-number">1</span> Linear Regression</a></li>
+<li><a class="" href="practical-work-1.html">Practical Work 1</a></li>
+<li><a class="" href="multiple-linear-regression.html"><span class="header-section-number">2</span> Multiple Linear Regression</a></li>
+<li><a class="" href="pw-2.html">PW 2</a></li>
+<li class="book-part">Classification</li>
+<li><a class="" href="logistic-regression.html"><span class="header-section-number">3</span> Logistic Regression</a></li>
+<li><a class="" href="pw-3.html">PW 3</a></li>
+<li><a class="" href="discriminant-analysis.html"><span class="header-section-number">4</span> Discriminant Analysis</a></li>
+<li><a class="" href="pw-4.html">PW 4</a></li>
+<li><a class="" href="decision-trees-random-forests.html"><span class="header-section-number">5</span> Decision Trees &amp; Random Forests</a></li>
+<li><a class="" href="pw-5.html">PW 5</a></li>
+<li class="book-part">Dimensionality Reduction</li>
+<li><a class="" href="principal-components-analysis.html"><span class="header-section-number">6</span> Principal Components Analysis</a></li>
+<li><a class="" href="pw-6.html">PW 6</a></li>
+<li class="book-part">Unsupervised Learning</li>
+<li><a class="" href="kmeans-hierarchical-clustering.html"><span class="header-section-number">7</span> Kmeans &amp; Hierarchical Clustering</a></li>
+<li><a class="" href="pw-7.html">PW 7</a></li>
+<li><a class="" href="gaussian-mixture-models-em.html"><span class="header-section-number">8</span> Gaussian Mixture Models &amp; EM</a></li>
+<li><a class="" href="pw-8.html">PW 8</a></li>
+<li class="book-part">Hackathon</li>
+<li><a class="" href="hackathon.html">Hackathon</a></li>
+<li class="book-part">Appendix</li>
+<li><a class="" href="final-grades.html"><span class="header-section-number">A</span> Final Grades</a></li>
+<li><a class="" href="app-introRStudio.html"><span class="header-section-number">B</span> Introduction to RStudio</a></li>
+<li><a class="" href="app-ht.html"><span class="header-section-number">C</span> Review on hypothesis testing</a></li>
+<li><a class="" href="use-qual.html"><span class="header-section-number">D</span> Use of qualitative predictors</a></li>
+<li><a class="" href="model-selection.html"><span class="header-section-number">E</span> Model Selection</a></li>
+<li><a class="" href="references-and-credits.html"><span class="header-section-number">F</span> References and Credits</a></li>
+<li><a class="" href="other-references.html"><span class="header-section-number">G</span> Other References</a></li>
+<li><a class="" href="main-references-credits.html">Main References &amp; Credits</a></li>
+</ul>
+
+        <div class="book-extra">
+          
+        </div>
+      </nav>
+</div>
+  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="linear-regression" class="section level1" number="1">
+<h1>
+<span class="header-section-number">1</span> Linear Regression<a class="anchor" aria-label="anchor" href="#linear-regression"><i class="fas fa-link"></i></a>
+</h1>
+<!-- Take a look to these slides -->
+<!-- <iframe src="linear_regression.pdf" frameborder="0" width="700" height="422" allowfullscreen="true" mozallowfullscreen="true" webkitallowfullscreen="true"></iframe> -->
+<div id="notation" class="section level2" number="1.1">
+<h2>
+<span class="header-section-number">1.1</span> Notation<a class="anchor" aria-label="anchor" href="#notation"><i class="fas fa-link"></i></a>
+</h2>
+<p>In general, we will let <span class="math inline">\(x_{ij}\)</span> represent the value of the <span class="math inline">\(j\)</span>th variable for the <span class="math inline">\(i\)</span>th observation, where <span class="math inline">\(i=1,2,\ldots,n\)</span> and <span class="math inline">\(j=1,2,\ldots,p\)</span>.
+We will use <span class="math inline">\(i\)</span> to index the samples or observations (from <span class="math inline">\(1\)</span> to <span class="math inline">\(n\)</span>) and <span class="math inline">\(j\)</span> will be used to index the variables (or features) (from <span class="math inline">\(1\)</span> to <span class="math inline">\(p\)</span>). We let <span class="math inline">\(\textbf{X}\)</span> denote a <span class="math inline">\(n \times p\)</span> matrix whose <span class="math inline">\((i,j)\)</span>th element is <span class="math inline">\(x_{ij}\)</span>. That is,</p>
+<p><span class="math display">\[ \textbf{X}  = \begin{pmatrix}
+    x_{11} &amp; x_{12} &amp; x_{13} &amp; \dots  &amp; x_{1p} \\
+    x_{21} &amp; x_{22} &amp; x_{23} &amp; \dots  &amp; x_{2p} \\
+    \vdots &amp; \vdots &amp; \vdots &amp; \ddots &amp; \vdots \\
+    x_{n1} &amp; x_{n2} &amp; x_{n3} &amp; \dots  &amp; x_{np}
+\end{pmatrix} \]</span></p>
+<p>Note that it is useful to visualize <span class="math inline">\(\textbf{X}\)</span> as a spreadsheet of numbers with <span class="math inline">\(n\)</span> rows and <span class="math inline">\(p\)</span> columns.
+We will write the rows of <span class="math inline">\(\textbf{X}\)</span> as <span class="math inline">\(x_1 , x_2 , \ldots, x_n\)</span>. Here <span class="math inline">\(x_i\)</span> is a vector of length <span class="math inline">\(p\)</span>, containing the <span class="math inline">\(p\)</span> variable measurements for the <span class="math inline">\(i\)</span>th observation. That is,</p>
+<p><span class="math display">\[ x_i = \begin{pmatrix}
+    x_{i1} \\
+    x_{i2} \\
+    \vdots \\
+    x_{ip}
+\end{pmatrix}\]</span></p>
+<p>(Vectors are by default represented as columns.)</p>
+<p>We will write the columns of <span class="math inline">\(\textbf{X}\)</span> as <span class="math inline">\(\textbf{x}_1 , \textbf{x}_2, \ldots, \textbf{x}_p\)</span>. Each is a vector of length <span class="math inline">\(n\)</span>. That is,</p>
+<p><span class="math display">\[ \textbf{x}_j = \begin{pmatrix}
+    \textbf{x}_{1j} \\
+    \textbf{x}_{2j} \\
+    \vdots \\
+    \textbf{x}_{nj}
+\end{pmatrix}\]</span></p>
+<p>Using this notation, the matrix <span class="math inline">\(\textbf{X}\)</span> can be written as</p>
+<p><span class="math display">\[ \textbf{X} = (\textbf{x}_1  \textbf{x}_2 \ldots \textbf{x}_p) \]</span></p>
+<p>or</p>
+<p><span class="math display">\[ \textbf{X} = \begin{pmatrix}
+    x_{1}^T \\
+    x_{2}^T \\
+    \vdots \\
+    x_{n}^T
+\end{pmatrix}\]</span></p>
+<p>The <span class="math inline">\(^T\)</span> notation denotes the transpose of a matrix or vector.</p>
+<p>We use <span class="math inline">\(y_i\)</span> to denote the <span class="math inline">\(i\)</span>th observation of the variable on which we wish to make predictions. We write the set of all <span class="math inline">\(n\)</span> observations in vector form as</p>
+<p><span class="math display">\[ \textbf{y} = \begin{pmatrix}
+    y_{1} \\
+    y_{2} \\
+    \vdots \\
+    y_{n}
+\end{pmatrix}\]</span></p>
+<p>Then the observed data consists of <span class="math inline">\(\{(x_1, y_1), (x_2 , y_2 ), \ldots , (x_n , y_n )\}\)</span>, where
+each <span class="math inline">\(x_i\)</span> is a vector of length <span class="math inline">\(p\)</span>. (If <span class="math inline">\(p = 1\)</span>, then <span class="math inline">\(x_i\)</span> is simply a scalar).</p>
+</div>
+<div id="model-representation" class="section level2" number="1.2">
+<h2>
+<span class="header-section-number">1.2</span> Model Representation<a class="anchor" aria-label="anchor" href="#model-representation"><i class="fas fa-link"></i></a>
+</h2>
+<p>Let’s consider the example about predicting housing prices. We’re going to use this data set as an example,</p>
+<div class="inline-figure"><img src="img/mr1.png"></div>
+<p>Suppose that there is a person trying to sell a house of size 1250 square feet and he wants to know how much he might be able to sell the house for. One thing we could do is fit a model. Maybe fit a straight line to this data. Looks something like this,</p>
+<div class="inline-figure"><img src="img/mr2.png"></div>
+<p>and based on that, maybe he can sell the house for around $220,000. Recall that this is an example of a supervised learning algorithm. And it’s supervised learning because we’re given the “right answer” for each of our examples. More precisely, this is an example of a regression problem where the term regression refers to the fact that we are predicting a real-valued output namely the price.</p>
+<p>More formally, in supervised learning, we have a data set and this data set is called a <strong>training set</strong>. So for housing prices example, we have a training set of different housing prices and our job is to learn from this data how to predict prices of the houses.</p>
+<p>Let’s define some notation from this data set:</p>
+<ul>
+<li>The size of the house is the input variable.</li>
+<li>The house price is the output variable.</li>
+<li>The input variables are typically denoted using the variable symbol <span class="math inline">\(X\)</span>,</li>
+<li>The inputs go by different names, such as <em>predictors</em>, <em>independent variables</em>, <em>features</em>, or sometimes just <em>variables</em>.</li>
+<li>The output variable is often called the <em>response</em>, <em>dependent variable</em> or <em>target</em>, and is typically denoted using the symbol <span class="math inline">\(Y\)</span>.</li>
+<li>
+<span class="math inline">\((x_i,y_i)\)</span> is the <span class="math inline">\(i\)</span>th training example.</li>
+<li>The set of <span class="math inline">\(\{(x_i, y_i)\}\)</span> is the training set.</li>
+<li>
+<span class="math inline">\(n\)</span> is the number of training examples.</li>
+</ul>
+<p>So here’s how this supervised learning algorithm works. Suppose that we observe a quantitative response <span class="math inline">\(Y\)</span> and <span class="math inline">\(p\)</span> different predictors, <span class="math inline">\(X_1 , X_2 ,\ldots, X_p\)</span> . We assume that there is some relationship between <span class="math inline">\(Y\)</span> and <span class="math inline">\(X = (X_1 , X_2 ,\ldots, X_p)\)</span>, which can be written in the very general form</p>
+<p><span class="math display">\[Y = f(X) + \epsilon\]</span></p>
+<center>
+<img src="img/mr3.png">
+</center>
+<p>Here <span class="math inline">\(f\)</span> is some fixed but unknown function of <span class="math inline">\(X_1 , X_2 ,\ldots, X_p\)</span> , and <span class="math inline">\(\epsilon\)</span> is a random error term, which is independent of <span class="math inline">\(X\)</span> and has mean zero. The <span class="math inline">\(f\)</span> function is also called <em>hypothesis</em> in Machine Learning. In general, the function <span class="math inline">\(f\)</span> may involve more than one input variable. In essence, Supervised Learning refers to a set of approaches for estimating <span class="math inline">\(f\)</span>.</p>
+</div>
+<div id="why-estimate-f" class="section level2" number="1.3">
+<h2>
+<span class="header-section-number">1.3</span> Why Estimate <span class="math inline">\(f\)</span> ?<a class="anchor" aria-label="anchor" href="#why-estimate-f"><i class="fas fa-link"></i></a>
+</h2>
+<p>There are two main reasons that we may wish to estimate <span class="math inline">\(f\)</span>: <em>prediction</em>
+and <em>inference</em>.</p>
+<div id="prediction" class="section level3 unnumbered">
+<h3>Prediction<a class="anchor" aria-label="anchor" href="#prediction"><i class="fas fa-link"></i></a>
+</h3>
+<p>In many situations, a set of inputs <span class="math inline">\(X\)</span> are readily available, but the output <span class="math inline">\(Y\)</span> cannot be easily obtained. In this setting, since the error term averages to zero, we can predict <span class="math inline">\(Y\)</span> using</p>
+<p><span class="math display">\[ \hat{Y} = \hat{f}(X) \]</span></p>
+<p>where <span class="math inline">\(\hat{f}\)</span> represents our estimate for <span class="math inline">\(f\)</span>, and <span class="math inline">\(\hat{Y}\)</span> represents the resulting prediction for <span class="math inline">\(Y\)</span>. Like in the example above about predicting housing prices.</p>
+<p>We can measure the accuracy of <span class="math inline">\(\hat{Y}\)</span> by using a <strong>cost function</strong>. In the regression models, the most commonly-used measure is the <em>mean squared error</em> (MSE), given by</p>
+<p><span class="math display">\[ MSE = \frac{1}{n} \sum_{i=1}^{n} (y_i - \hat{f}(x_i))^2\]</span></p>
+</div>
+<div id="inference" class="section level3 unnumbered">
+<h3>Inference<a class="anchor" aria-label="anchor" href="#inference"><i class="fas fa-link"></i></a>
+</h3>
+<p>We are often interested in understanding the way that <span class="math inline">\(Y\)</span> is affected as <span class="math inline">\(X_1 , X_2 ,\ldots, X_p\)</span> change. In this situation we wish to estimate <span class="math inline">\(f\)</span> , but our goal is not necessarily to make predictions for <span class="math inline">\(Y\)</span>. We instead want to understand the relationship between <span class="math inline">\(X\)</span> and <span class="math inline">\(Y\)</span>, or more specifically, to understand how <span class="math inline">\(Y\)</span> changes as a function of <span class="math inline">\(X_1 , X_2 ,\ldots, X_p\)</span>. In this case, one may be interested in answering the following questions:</p>
+<ul>
+<li>Which predictors are associated with the response?</li>
+<li>What is the relationship between the response and each predictor?</li>
+<li>Can the relationship between Y and each predictor be adequately summarized using a linear equation, or is the relationship more complicated?</li>
+</ul>
+</div>
+</div>
+<div id="simple-linear-regression-model" class="section level2" number="1.4">
+<h2>
+<span class="header-section-number">1.4</span> Simple Linear Regression Model<a class="anchor" aria-label="anchor" href="#simple-linear-regression-model"><i class="fas fa-link"></i></a>
+</h2>
+<p><em>Simple linear regression</em> is a very straightforward approach for predicting a quantitative response <span class="math inline">\(Y\)</span> on the basis of a single predictor variable <span class="math inline">\(X\)</span>. It assumes that there is approximately a linear relationship between <span class="math inline">\(X\)</span> and <span class="math inline">\(Y\)</span>. Mathematically, we can write this linear relationship as</p>
+<p><span class="math display">\[ Y = \beta_0 + \beta_1 X + \epsilon \]</span>
+<span class="math display">\[Y \approx \beta_0 + \beta_1 X\]</span></p>
+<p>where <span class="math inline">\(\beta_0\)</span> and <span class="math inline">\(\beta_1\)</span> are two unknown constants that represent the <em>intercept</em> and <em>slope</em>, also known as <strong><em>coefficients</em></strong> or <em>parameters</em>, and <span class="math inline">\(\epsilon\)</span> is the error term.</p>
+<p>Given some estimates <span class="math inline">\(\hat{\beta_0}\)</span> and <span class="math inline">\(\hat{\beta_1}\)</span> for the model coefficients, we predict future inputs <span class="math inline">\(x\)</span> using</p>
+<p><span class="math display">\[\hat{y} = \hat{\beta_0} + \hat{\beta_1} x\]</span></p>
+<p>where <span class="math inline">\(\hat{y}\)</span> indicates a prediction of <span class="math inline">\(Y\)</span> on the basis of <span class="math inline">\(X = x\)</span>.
+The <em>hat</em> symbol, <span class="math inline">\(\hat{}\)</span>, denotes an estimated value.</p>
+</div>
+<div id="estimating-the-coefficients" class="section level2" number="1.5">
+<h2>
+<span class="header-section-number">1.5</span> Estimating the Coefficients<a class="anchor" aria-label="anchor" href="#estimating-the-coefficients"><i class="fas fa-link"></i></a>
+</h2>
+<p>Let <span class="math inline">\(\hat{y}_i = \hat{\beta_0} + \hat{\beta_1} x_i\)</span> be the prediction for <span class="math inline">\(Y\)</span> based on the <span class="math inline">\(i\)</span>th value of <span class="math inline">\(X\)</span>. Then <span class="math inline">\(e_i = y_i - \hat{y}_i\)</span> represents the <span class="math inline">\(i\)</span>th <strong><em>residual</em></strong>.</p>
+<p>We define the <strong><em>Residual Sum of Squares</em></strong> (<strong>RSS</strong>)<a href="main-references-credits.html#fn1" class="footnote-ref" id="fnref1"><sup>1</sup></a> as</p>
+<p><span class="math display">\[  \begin{aligned}
+RSS &amp;= e_1^2 + e_2^2 + \ldots + e_n^2 \\
+    &amp;= \sum_{i=1}^{n} e_i^2
+\end{aligned}  \]</span></p>
+<p>or equivantly as</p>
+<p><span class="math display">\[ \begin{aligned}
+RSS &amp;= (y_1 - \hat{\beta_0} - \hat{\beta_1} x_1)^2 + (y_2 - \hat{\beta_0} - \hat{\beta_1} x_2)^2 + \ldots + (y_n - \hat{\beta_0} - \hat{\beta_1} x_n)^2 \\
+    &amp;= \sum_{i=1}^{n} (y_i - \hat{\beta_0} - \hat{\beta_1} x_i)^2
+\end{aligned} \]</span></p>
+<p>The <em>least squares</em> approach chooses <span class="math inline">\(\hat{\beta_0}\)</span> and <span class="math inline">\(\hat{\beta_1}\)</span> to minimize the RSS. The minimizing values can be shown to be<a href="main-references-credits.html#fn2" class="footnote-ref" id="fnref2"><sup>2</sup></a></p>
+<p><span class="math display">\[  \begin{aligned}
+\hat{\beta_1} &amp;=  \frac{\sum_{i=1}^{n} (x_i - \bar{x})(y_i - \bar{y})  }{\sum_{i=1}^{n} (x_i - \bar{x})^2 } = \frac{s_{xy}}{s_x^2} = (s_x^2)^{-1} s_{xy} \\
+\text{and} \\
+\hat{\beta_0} &amp;= \bar{y} - \hat{\beta_1} \bar{x}
+\end{aligned}  \]</span></p>
+<p>where:</p>
+<ul>
+<li>
+<span class="math inline">\(\bar{x}=\frac{1}{n}\sum_{i=1}^nx_i\)</span> is the <em>sample mean</em>.</li>
+<li>
+<span class="math inline">\(s_x^2=\frac{1}{n}\sum_{i=1}^n(x_i-\bar{x})^2\)</span> is the <em>sample variance</em>. The sample standard deviation is <span class="math inline">\(s_x=\sqrt{s_x^2}\)</span>.</li>
+<li>
+<span class="math inline">\(s_{xy}=\frac{1}{n}\sum_{i=1}^n(x_i-\bar{x})(y_i-\bar{y})\)</span> is the <em>sample covariance</em>. It measures the degree of linear association between <span class="math inline">\(x_1,\ldots,x_n\)</span> and <span class="math inline">\(y_1,\ldots,y_n\)</span>. Once scaled by <span class="math inline">\(s_xs_y\)</span>, it gives the <em>sample correlation coefficient</em>, <span class="math inline">\(r_{xy}=\frac{s_{xy}}{s_xs_y}\)</span>.</li>
+</ul>
+<div class="rmdtip">
+<p>
+1- To find the optimal estimates for <span class="math inline"><span class="math inline">\(\beta_0\)</span></span> and <span class="math inline"><span class="math inline">\(\beta_1\)</span></span> we need a choice-criterion. In
+the case of the <em>least squares</em> approach (more precisely, the
+<em>ordinary least squares OLS</em>) this criterion is the residual sum
+of squares <em>RSS</em>: we calculate <span class="math inline"><span class="math inline">\(\beta_0\)</span></span> and <span class="math inline"><span class="math inline">\(\beta_1\)</span></span> that minimise the
+<em>RSS</em>.
+</p>
+<p>
+2- Minimizing the <em>RSS</em> function requires to calculate the
+first order derivatives with respect to <span class="math inline"><span class="math inline">\(\beta_0\)</span></span> and <span class="math inline"><span class="math inline">\(\beta_1\)</span></span> and set them to zero.
+</p>
+<p>
+3- Click
+<a target="_blank" href="https://www.khanacademy.org/math/ap-statistics/bivariate-data-ap/least-squares-regression/v/introduction-to-residuals-and-least-squares-regression">
+here <i class="fa fa-video-camera" aria-hidden="true"></i></a> and watch
+the video to understand more about the residuals and least squares.
+</p>
+<p>
+4- Click
+<a href="https://egarpor.shinyapps.io/least-squares/" target="_blank">here
+<i class="fa fa-external-link-alt" aria-hidden="true"></i></a> to see
+the influence of the distance employed in the sum of squares. Try to
+minimize the sum of squares for the different datasets. The choices of
+intercept and slope that minimize the sum of squared distances for a
+kind of distance are not the optimal for a different kind of
+distance.
+</p>
+</div>
+</div>
+<div id="assessing-the-accuracy-of-the-coefficient-estimates" class="section level2" number="1.6">
+<h2>
+<span class="header-section-number">1.6</span> Assessing the Accuracy of the Coefficient Estimates<a class="anchor" aria-label="anchor" href="#assessing-the-accuracy-of-the-coefficient-estimates"><i class="fas fa-link"></i></a>
+</h2>
+<p>The standard error of an estimator reflects how it varies under repeated sampling. We have</p>
+<p><span class="math display">\[ \text{SE}(\hat{\beta_1})^2 =  \frac{\sigma^2}{\sum_{i=1}^{n} (x_i - \bar{x})^2} \]</span></p>
+<p><span class="math display">\[ \text{SE}(\hat{\beta_0})^2 = \sigma^2 \bigg[ \frac{1}{n} +  \frac{\bar{x}^2}{\sum_{i=1}^{n} (x_i - \bar{x})^2} \bigg] \]</span></p>
+<p>where <span class="math inline">\(\sigma^2 = Var(\epsilon)\)</span></p>
+<p>In general, <span class="math inline">\(\sigma^2\)</span> is unknown, but can be estimated from the data. The estimate of <span class="math inline">\(\sigma\)</span> is known as the <em>residual standard error</em>, and is given by</p>
+<p><span class="math display">\[ \text{RSE} = \sqrt{\frac{\text{RSS}}{(n-2)}} \]</span></p>
+<p>These standard errors can be used to compute <em>confidence intervals</em>. A <span class="math inline">\(95\%\)</span> confidence interval is defined as a range of values such that with <span class="math inline">\(95\%\)</span> probability, the range will contain the true unknown value of the parameter. It has the form</p>
+<p><span class="math display">\[ \hat{\beta_1} \pm 2 \cdot \text{SE}(\hat{\beta_1}) \]</span></p>
+<p>That is, there is approximately a <span class="math inline">\(95\%\)</span> chance that the interval</p>
+<p><span class="math display">\[ \bigg[  \hat{\beta_1} - 2 \cdot \text{SE}(\hat{\beta_1}), \hat{\beta_1} + 2 \cdot \text{SE}(\hat{\beta_1})   \bigg] \]</span></p>
+<p>will contain the true value of <span class="math inline">\(\beta_1\)</span>. Similarly, a confidence interval for <span class="math inline">\(\beta_0\)</span> approximately takes the form</p>
+<p><span class="math display">\[ \hat{\beta_0} \pm 2 \cdot \text{SE}(\hat{\beta_0}) \]</span></p>
+<div id="hypothesis-testing" class="section level3 unnumbered">
+<h3>Hypothesis testing<a class="anchor" aria-label="anchor" href="#hypothesis-testing"><i class="fas fa-link"></i></a>
+</h3>
+<p>Standard errors can also be used to perform <em>hypothesis tests</em> on the coefficients. The most common hypothesis test involves testing the <em>null hypothesis</em> of</p>
+<p><span class="math display">\[ H_0 : \text{There is no linear relationship between} \, X \, \text{and} \, Y \]</span></p>
+<p>versus the <em>alternative hypothesis</em></p>
+<p><span class="math display">\[ H_1 : \text{There is some relationship between} \, X \, \text{and} \, Y \]</span></p>
+<p>Mathematically, this corresponds to testing</p>
+<p><span class="math display">\[ H_0 : \beta_1 = 0 \]</span></p>
+<p>versus</p>
+<p><span class="math display">\[ H_1 : \beta_1 \neq 0 \]</span></p>
+<p>since if <span class="math inline">\(\beta_1 = 0\)</span> then the simple linear regression model reduces to <span class="math inline">\(Y = \beta_0 + \epsilon\)</span>, and <span class="math inline">\(X\)</span> is not associated with <span class="math inline">\(Y\)</span><a href="main-references-credits.html#fn3" class="footnote-ref" id="fnref3"><sup>3</sup></a>.</p>
+<p>To test the null hypothesis <span class="math inline">\(H_0\)</span>, we compute a <strong><em>t-statistic</em></strong>, given by</p>
+<p><span class="math display">\[ t = \frac{\hat{\beta_1} - 0}{\text{SE}(\hat{\beta_1})} \]</span></p>
+<p>This will have a <span class="math inline">\(t\)</span>-distribution (<em>Student</em>) with <span class="math inline">\(n-2\)</span> degrees of freedom, assuming <span class="math inline">\(\beta_1=0\)</span>.</p>
+<p>Using statistical software, it is easy to compute the probability of observing any value equal to <span class="math inline">\(|t|\)</span> or larger. We call this probability the <strong><em>p-value</em></strong>.</p>
+<p>If p-value is small enough (typically under <span class="math inline">\(0.01\)</span> (<span class="math inline">\(1\%\)</span> error) or <span class="math inline">\(0.05\)</span> (<span class="math inline">\(5\%\)</span> error)) we reject the null hypothesis, that is we declare a relationship to exist between <span class="math inline">\(X\)</span> and <span class="math inline">\(Y\)</span>.</p>
+</div>
+</div>
+<div id="anova-and-model-fit" class="section level2" number="1.7">
+<h2>
+<span class="header-section-number">1.7</span> ANOVA and model fit<a class="anchor" aria-label="anchor" href="#anova-and-model-fit"><i class="fas fa-link"></i></a>
+</h2>
+<div id="anova" class="section level3" number="1.7.1">
+<h3>
+<span class="header-section-number">1.7.1</span> ANOVA<a class="anchor" aria-label="anchor" href="#anova"><i class="fas fa-link"></i></a>
+</h3>
+<p>In this section we will see how the variance of <span class="math inline">\(Y\)</span> is decomposed into two parts, each one corresponding to the regression and to the error, respectively. This decomposition is called the <em>ANalysis Of VAriance</em> (ANOVA).</p>
+<p>Before explaining ANOVA, it is important to recall an interesting result: <em>the mean of the fitted values <span class="math inline">\(\hat Y_1,\ldots,\hat Y_n\)</span> is the mean of <span class="math inline">\(Y_1,\ldots, Y_n\)</span></em>. This is easily seen if we plug-in the expression of <span class="math inline">\(\hat\beta_0\)</span>:
+<span class="math display">\[\begin{align*}
+\frac{1}{n}\sum_{i=1}^n \hat Y_i=\frac{1}{n}\sum_{i=1}^n \left(\hat \beta_0+\hat\beta_1X_i\right)=\hat \beta_0+\hat\beta_1\bar X=\left(\bar Y - \hat\beta_1\bar X \right) + \hat\beta_1\bar X=\bar Y.
+\end{align*}\]</span>
+The ANOVA decomposition considers the following measures of variation related with the response:</p>
+<ul>
+<li>
+<span class="math inline">\(\text{SST}=\text{TSS}=\sum_{i=1}^n\left(Y_i-\bar Y\right)^2\)</span>, the <strong>Total Sum of Squares</strong>. This is the <em>total variation</em> of <span class="math inline">\(Y_1,\ldots,Y_n\)</span>, since <span class="math inline">\(\text{SST}=ns_y^2\)</span>, where <span class="math inline">\(s_y^2\)</span> is the sample variance of <span class="math inline">\(Y_1,\ldots,Y_n\)</span>.</li>
+<li>
+<span class="math inline">\(\text{SSR}=\text{ESS}=\sum_{i=1}^n\left(\hat Y_i-\bar Y\right)^2\)</span>, the <strong>Regression Sum of Squares</strong> or <strong>Explained Sum of Squares</strong><a href="main-references-credits.html#fn4" class="footnote-ref" id="fnref4"><sup>4</sup></a>. This is the variation explained by the regression line, that is, <em>the variation from <span class="math inline">\(\bar Y\)</span> that is explained by the estimated conditional mean <span class="math inline">\(\hat Y_i=\hat\beta_0+\hat\beta_1X_i\)</span></em>. <span class="math inline">\(\text{SSR}=ns_{\hat y}^2\)</span>, where <span class="math inline">\(s_{\hat y}^2\)</span> is the sample variance of <span class="math inline">\(\hat Y_1,\ldots,\hat Y_n\)</span>.</li>
+<li>
+<span class="math inline">\(\text{SSE}=\text{RSS}=\sum_{i=1}^n\left(Y_i-\hat Y_i\right)^2\)</span>, the <strong>Sum of Squared Errors</strong> or <strong>Residual Sum of Squares</strong><a href="main-references-credits.html#fn5" class="footnote-ref" id="fnref5"><sup>5</sup></a>. Is the variation around the conditional mean. Recall that <span class="math inline">\(\text{SSE}=\sum_{i=1}^n \hat\varepsilon_i^2=(n-2)\hat\sigma^2\)</span>, where <span class="math inline">\(\hat\sigma^2\)</span> is the sample variance of <span class="math inline">\(\hat \varepsilon_1,\ldots,\hat \varepsilon_n\)</span>.</li>
+</ul>
+<p>The ANOVA decomposition is
+<span class="math display">\[\begin{align*}
+\underbrace{\text{SST}}_{\text{Variation of }Y_i's} = \underbrace{\text{SSR}}_{\text{Variation of }\hat Y_i's} + \underbrace{\text{SSE}}_{\text{Variation of }\hat \varepsilon_i's}
+\end{align*}\]</span></p>
+<p>The graphical interpretation of this equation is shown in the following figures.</p>
+<div class="figure" style="text-align: center">
+<span style="display:block;" id="fig:anova"></span>
+<img src="img/anova.png" alt="Visualization of the ANOVA decomposition. SSR measures the variation of $Y_1,\ldots,Y_n$ with respect to $\bar Y$. SST measures the variation with respect to the conditional means, $\hat \beta_0+\hat\beta_1X_i$. SSE collects the variation of the residuals." width="70%"><p class="caption">
+Figure 1.1: Visualization of the ANOVA decomposition. SSR measures the variation of <span class="math inline">\(Y_1,\ldots,Y_n\)</span> with respect to <span class="math inline">\(\bar Y\)</span>. SST measures the variation with respect to the conditional means, <span class="math inline">\(\hat \beta_0+\hat\beta_1X_i\)</span>. SSE collects the variation of the residuals.
+</p>
+</div>
+<div class="rmdtip">
+<p>
+Below the ANOVA decomposition and its dependence on <span class="math inline"><span class="math inline">\(\sigma^2\)</span></span> and <span class="math inline"><span class="math inline">\(\hat\sigma^2\)</span></span>. Application is also
+available
+<a href="https://shinyserv.es/shiny/anova/" target="_blank">here</a><a class="footnote-ref" tabindex="0" data-toggle="popover" data-content="&lt;p&gt;Also known as &lt;strong&gt;SSE&lt;/strong&gt;: Sum of Squared Errors.&lt;/p&gt;"><sup>1</sup></a>.
+</p>
+<p>
+Note that the <strong>animation</strong> will not be displayed the
+first time it is browsed (The reason is because it is hosted at
+<code>https</code> websites with auto-signed SSL certificates).
+<strong>To see it</strong>, click on the link above. You will get a
+warning from your browser saying that <em>“Your connection is not
+private”</em>. Click in <em>“Advanced”</em> and <strong>allow an
+exception</strong> in your browser. The next time the animation will
+show up correctly.
+</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+</div>
+<iframe src="https://shinyserv.es/shiny/anova/?showcase=0" width="90%" height="900px" data-external="1">
+</iframe>
+<p>The ANOVA table summarizes the decomposition of the variance. Here is given in the layout employed by <svg aria-hidden="true" role="img" viewbox="0 0 581 512" style="height:1em;width:1.13em;vertical-align:-0.125em;margin-left:auto;margin-right:auto;font-size:inherit;fill:steelblue;overflow:visible;position:relative;"><path d="M581 226.6C581 119.1 450.9 32 290.5 32S0 119.1 0 226.6C0 322.4 103.3 402 239.4 418.1V480h99.1v-61.5c24.3-2.7 47.6-7.4 69.4-13.9L448 480h112l-67.4-113.7c54.5-35.4 88.4-84.9 88.4-139.7zm-466.8 14.5c0-73.5 98.9-133 220.8-133s211.9 40.7 211.9 133c0 50.1-26.5 85-70.3 106.4-2.4-1.6-4.7-2.9-6.4-3.7-10.2-5.2-27.8-10.5-27.8-10.5s86.6-6.4 86.6-92.7-90.6-87.9-90.6-87.9h-199V361c-74.1-21.5-125.2-67.1-125.2-119.9zm225.1 38.3v-55.6c57.8 0 87.8-6.8 87.8 27.3 0 36.5-38.2 28.3-87.8 28.3zm-.9 72.5H365c10.8 0 18.9 11.7 24 19.2-16.1 1.9-33 2.8-50.6 2.9v-22.1z"></path></svg>.</p>
+<div class="inline-table"><table class="table table-sm">
+<colgroup>
+<col width="3%">
+<col width="19%">
+<col width="12%">
+<col width="14%">
+<col width="25%">
+<col width="25%">
+</colgroup>
+<thead><tr class="header">
+<th></th>
+<th>Degrees of freedom</th>
+<th>Sum Squares</th>
+<th>Mean Squares</th>
+<th>
+<span class="math inline">\(F\)</span>-value</th>
+<th>
+<span class="math inline">\(p\)</span>-value</th>
+</tr></thead>
+<tbody>
+<tr class="odd">
+<td>Predictor</td>
+<td><span class="math inline">\(1\)</span></td>
+<td><span class="math inline">\(\text{SSR}=\sum_{i=1}^n\left(\hat Y_i-\bar Y\right)^2\)</span></td>
+<td><span class="math inline">\(\text{MSR}=\frac{\text{SSR}}{1}\)</span></td>
+<td><span class="math inline">\(\frac{\text{SSR}/1}{\text{SSE}/(n-2)}\)</span></td>
+<td><span class="math inline">\(p\)</span></td>
+</tr>
+<tr class="even">
+<td>Residuals</td>
+<td><span class="math inline">\(n - 2\)</span></td>
+<td><span class="math inline">\(\text{SSE}=\sum_{i=1}^n\left(Y_i-\hat Y_i\right)^2\)</span></td>
+<td><span class="math inline">\(\text{MSE}=\frac{\text{SSE}}{n-2}\)</span></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="odd">
+<td>Total</td>
+<td><span class="math inline">\(n-1\)</span></td>
+<td><span class="math inline">\(\text{SST}=\sum_{i=1}^n\left(Y_i-\bar Y\right)^2\)</span></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table></div>
+<p>The <code>anova</code> function in <svg aria-hidden="true" role="img" viewbox="0 0 581 512" style="height:1em;width:1.13em;vertical-align:-0.125em;margin-left:auto;margin-right:auto;font-size:inherit;fill:steelblue;overflow:visible;position:relative;"><path d="M581 226.6C581 119.1 450.9 32 290.5 32S0 119.1 0 226.6C0 322.4 103.3 402 239.4 418.1V480h99.1v-61.5c24.3-2.7 47.6-7.4 69.4-13.9L448 480h112l-67.4-113.7c54.5-35.4 88.4-84.9 88.4-139.7zm-466.8 14.5c0-73.5 98.9-133 220.8-133s211.9 40.7 211.9 133c0 50.1-26.5 85-70.3 106.4-2.4-1.6-4.7-2.9-6.4-3.7-10.2-5.2-27.8-10.5-27.8-10.5s86.6-6.4 86.6-92.7-90.6-87.9-90.6-87.9h-199V361c-74.1-21.5-125.2-67.1-125.2-119.9zm225.1 38.3v-55.6c57.8 0 87.8-6.8 87.8 27.3 0 36.5-38.2 28.3-87.8 28.3zm-.9 72.5H365c10.8 0 18.9 11.7 24 19.2-16.1 1.9-33 2.8-50.6 2.9v-22.1z"></path></svg> takes a model as an input and returns the ANOVA table.</p>
+<p>The “<span class="math inline">\(F\)</span>-value” of the ANOVA table represents the value of the <span class="math inline">\(F\)</span>-statistic <span class="math inline">\(\frac{\text{SSR}/1}{\text{SSE}/(n-2)}\)</span>. This statistic is employed to test
+<span class="math display">\[\begin{align*}
+H_0:\beta_1=0\quad\text{vs.}\quad H_1:\beta_1\neq 0,
+\end{align*}\]</span>
+that is, the hypothesis of no linear dependence of <span class="math inline">\(Y\)</span> on <span class="math inline">\(X\)</span>. The result of this test is completely equivalent to the <span class="math inline">\(t\)</span>-test for <span class="math inline">\(\beta_1\)</span> that we saw previously in the Hypothesis testing (this is something <em>specific for simple linear regression</em> – the <span class="math inline">\(F\)</span>-test will not be equivalent to the <span class="math inline">\(t\)</span>-test for <span class="math inline">\(\beta_1\)</span> in the Mulitple Linear Regression).</p>
+<p>It happens that
+<span class="math display">\[\begin{align*}
+F=\frac{\text{SSR}/1}{\text{SSE}/(n-2)}\stackrel{H_0}{\sim} F_{1,n-2},
+\end{align*}\]</span>
+where <span class="math inline">\(F_{1,n-2}\)</span> is the <em>Snedecor’s <span class="math inline">\(F\)</span> distribution</em><a href="main-references-credits.html#fn6" class="footnote-ref" id="fnref6"><sup>6</sup></a> with <span class="math inline">\(1\)</span> and <span class="math inline">\(n-2\)</span> degrees of freedom.</p>
+<p>If <span class="math inline">\(H_0\)</span> is true, then <span class="math inline">\(F\)</span> is expected to be <em>small</em> since SSR will be close to zero. The <span class="math inline">\(p\)</span>-value of this test is the same as the <span class="math inline">\(p\)</span>-value of the <span class="math inline">\(t\)</span>-test for <span class="math inline">\(H_0:\beta_1=0\)</span>.</p>
+</div>
+<div id="the-r2-statistic" class="section level3" number="1.7.2">
+<h3>
+<span class="header-section-number">1.7.2</span> The <span class="math inline">\(R^2\)</span> Statistic<a class="anchor" aria-label="anchor" href="#the-r2-statistic"><i class="fas fa-link"></i></a>
+</h3>
+<p>To calculate <span class="math inline">\(R^2\)</span>, we use the formula</p>
+<p><span class="math display">\[ R^2 = \frac{\text{TSS} - \text{RSS}}{\text{TSS}} = 1- \frac{\text{RSS}}{\text{TSS}} \]</span></p>
+<p>where <span class="math inline">\(\text{TSS} = \sum (y_i - \bar{y})^2\)</span> is the <em>total sum of squares</em>.</p>
+<p><span class="math inline">\(R^2\)</span> measures the <em>proportion of variability in</em> <span class="math inline">\(Y\)</span> <em>that can be explained using</em> <span class="math inline">\(X\)</span>. An <span class="math inline">\(R^2\)</span> statistic that is close to 1 indicates that a large proportion of the variability in the response has been explained by the regression. A number near 0 indicates that the regression did not explain much of the variability in the response; this might occur because the linear model is wrong, or the inherent error <span class="math inline">\(\sigma^2\)</span> is high, or both.</p>
+<p>It can be shown that in this simple linear regression setting that <span class="math inline">\(R^2 = r^2\)</span>, where <span class="math inline">\(r\)</span> is the correlation between <span class="math inline">\(X\)</span> and <span class="math inline">\(Y\)</span>:</p>
+<p><span class="math display">\[ r = \frac{cov(X,Y)}{\sigma_X \sigma_Y} \]</span></p>
+<div class="caution">
+<p>
+<span class="math inline"><span class="math inline">\(R^2\)</span></span> does not measure the
+correctness of a linear model but its <strong>usefulness</strong> (for
+prediction, for <em>explaining the variance</em> of <span class="math inline"><span class="math inline">\(Y\)</span></span>), assuming the model is correct.
+</p>
+<p>
+Trusting blindly the <span class="math inline"><span class="math inline">\(R^2\)</span></span> can
+lead to catastrophic conclusions, since the model may not be
+correct.
+</p>
+</div>
+So remember:
+<div class="rmdtip">
+<p>
+A large <span class="math inline"><span class="math inline">\(R^2\)</span></span> means
+<em>nothing</em> if the <strong>assumptions of the model do not
+hold</strong>. <span class="math inline"><span class="math inline">\(R^2\)</span></span> is the
+proportion of variance of <span class="math inline"><span class="math inline">\(Y\)</span></span>
+explained by <span class="math inline"><span class="math inline">\(X\)</span></span>, but, of course,
+<em>only when the linear model is correct</em>.
+</p>
+</div>
+<p align="right">
+◼
+</p>
+
+</div>
+</div>
+</div>
+
+  <div class="chapter-nav">
+<div class="prev"><a href="introduction.html">Introduction</a></div>
+<div class="next"><a href="practical-work-1.html">Practical Work 1</a></div>
+</div></main><div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
+    <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
+      <ul class="nav navbar-nav">
+<li><a class="nav-link" href="#linear-regression"><span class="header-section-number">1</span> Linear Regression</a></li>
+<li><a class="nav-link" href="#notation"><span class="header-section-number">1.1</span> Notation</a></li>
+<li><a class="nav-link" href="#model-representation"><span class="header-section-number">1.2</span> Model Representation</a></li>
+<li>
+<a class="nav-link" href="#why-estimate-f"><span class="header-section-number">1.3</span> Why Estimate \(f\) ?</a><ul class="nav navbar-nav">
+<li><a class="nav-link" href="#prediction">Prediction</a></li>
+<li><a class="nav-link" href="#inference">Inference</a></li>
+</ul>
+</li>
+<li><a class="nav-link" href="#simple-linear-regression-model"><span class="header-section-number">1.4</span> Simple Linear Regression Model</a></li>
+<li><a class="nav-link" href="#estimating-the-coefficients"><span class="header-section-number">1.5</span> Estimating the Coefficients</a></li>
+<li>
+<a class="nav-link" href="#assessing-the-accuracy-of-the-coefficient-estimates"><span class="header-section-number">1.6</span> Assessing the Accuracy of the Coefficient Estimates</a><ul class="nav navbar-nav"><li><a class="nav-link" href="#hypothesis-testing">Hypothesis testing</a></li></ul>
+</li>
+<li>
+<a class="nav-link" href="#anova-and-model-fit"><span class="header-section-number">1.7</span> ANOVA and model fit</a><ul class="nav navbar-nav">
+<li><a class="nav-link" href="#anova"><span class="header-section-number">1.7.1</span> ANOVA</a></li>
+<li><a class="nav-link" href="#the-r2-statistic"><span class="header-section-number">1.7.2</span> The \(R^2\) Statistic</a></li>
+</ul>
+</li>
+</ul>
+
+      <div class="book-extra">
+        <ul class="list-unstyled">
+          
+        </ul>
+</div>
+    </nav>
+</div>
+
+</div>
+</div> <!-- .container -->
+
+<footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
+
+  <div class="col-12 col-md-6 mt-3">
+    <p>"<strong>Machine Learning</strong>" was written by Mohamad Ghassany. It was last built on 2022-04-26.</p>
+  </div>
+
+  <div class="col-12 col-md-6 mt-3">
+    <p>This book was built by the <a class="text-light" href="https://bookdown.org">bookdown</a> R package.</p>
+  </div>
+
+</div></div>
+</footer><!-- dynamically load mathjax for compatibility with self-contained --><script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script><script type="text/x-mathjax-config">const popovers = document.querySelectorAll('a.footnote-ref[data-toggle="popover"]');
+for (let popover of popovers) {
+  const div = document.createElement('div');
+  div.setAttribute('style', 'position: absolute; top: 0, left:0; width:0, height:0, overflow: hidden; visibility: hidden;');
+  div.innerHTML = popover.getAttribute('data-content');
+
+  var has_math = div.querySelector("span.math");
+  if (has_math) {
+    document.body.appendChild(div);
+    MathJax.Hub.Queue(["Typeset", MathJax.Hub, div]);
+    MathJax.Hub.Queue(function() {
+      popover.setAttribute('data-content', div.innerHTML);
+      document.body.removeChild(div);
+    })
+  }
+}
+</script>
+</body>
+</html>

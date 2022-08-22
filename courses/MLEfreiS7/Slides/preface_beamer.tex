@@ -1,0 +1,356 @@
+
+% theme metro and its options
+\usetheme[progressbar=none,block=fill]{metropolis}
+% \metroset{block=fill}
+
+% \useoutertheme[subsection=false,shadow]{miniframes}
+
+% \metroset{block=transparent} Options can be changed at any time — even mid-presentation! — with the \metroset macro.
+\makeatletter
+\setbeamertemplate{title page}{
+  \begin{minipage}[b][\paperheight]{\textwidth}
+    \usebeamercolor[fg]{section title}
+  \usebeamerfont{section title}
+    \centering  % <-- Center here
+    \ifx\inserttitlegraphic\@empty\else\usebeamertemplate*{title graphic}\fi
+    \vfill%
+    \ifx\inserttitle\@empty\else\usebeamertemplate*{title}\fi
+    \ifx\insertsubtitle\@empty\else\usebeamertemplate*{subtitle}\fi
+    \usebeamertemplate*{title separator}
+    \ifx\beamer@shortauthor\@empty\else\usebeamertemplate*{author}\fi
+    \ifx\insertdate\@empty\else\usebeamertemplate*{date}\fi
+    \ifx\insertinstitute\@empty\else\usebeamertemplate*{institute}\fi
+    \vfill
+    \vspace*{1mm}
+  \end{minipage}
+}
+
+
+% \setbeamertemplate{section page}{
+% \centering
+% \begin{columns}
+% \begin{column}{0.3\textwidth}
+% \end{column}
+% \begin{column}{0.7\textwidth}  %%<--- here
+% \vspace*{1cm}
+%   \begin{minipage}[c][\paperheight]{\textwidth}
+%     \centering  % <-- Center here
+%     \ifx\inserttitlegraphic\@empty\else\usebeamertemplate*{title graphic}\fi
+%     \vfill%
+%     \usebeamerfont{title}\insertsectionhead\par%
+%     % \ifx\insertsubtitle\@empty\else\usebeamertemplate*{subtitle}\fi
+%     \usebeamertemplate*{title separator}
+%     \ifx\beamer@shortauthor\@empty\else\usebeamertemplate*{author}\fi
+%     \ifx\insertdate\@empty\else\usebeamertemplate*{date}\fi
+%     \ifx\insertinstitute\@empty\else\usebeamertemplate*{institute}\fi
+%     \vfill
+%     \vspace*{1mm}
+%   \end{minipage}
+% \end{column}
+% \end{columns}
+% }
+
+% \setbeamertemplate{section page}{
+% \begin{columns}
+% \begin{column}{0.3\textwidth}
+% \end{column}
+% \begin{column}{0.7\textwidth}  %%<--- here
+%   % \begin{center}
+%   % \includegraphics[scale=0.15]{img/logos/Logo_ESILV.png}
+%   % \end{center}
+%   % \vfill%
+%   \begin{minipage}[c]{0.9\textwidth}
+%   \centering
+%     \usebeamercolor[fg]{section title}
+%   \usebeamerfont{section title}
+%   
+%   %\includegraphics[scale=0.18]{img/logos/Logo_ESILV.png}
+%   
+%   \vspace*{1cm}
+%   
+%   \insertsectionhead\\[-1ex]
+%   
+%   \vspace*{1cm}
+%   
+%   \ifx\inserttitle\@empty\else\usebeamertemplate*{title}\fi
+%   \usebeamertemplate*{progress bar in section page}
+%   \par
+%     \ifx\beamer@shortauthor\@empty\else\usebeamertemplate*{author}\fi
+%     \ifx\insertdate\@empty\else\usebeamertemplate*{date}\fi
+%     \ifx\insertinstitute\@empty\else\usebeamertemplate*{institute}\fi
+%     \vfill
+%   \end{minipage}
+% \end{column}
+% \end{columns}
+%   \par
+%   \vspace{\baselineskip}
+% }
+
+\setbeamertemplate{title}{
+%  \raggedright%  % <-- Comment here
+  \linespread{1.0}%
+  \inserttitle%
+  \par%
+  \vspace*{0.5em}
+}
+\setbeamertemplate{subtitle}{
+%  \raggedright%  % <-- Comment here
+  \insertsubtitle%
+  \par%
+  \vspace*{0.5em}
+}
+
+\setbeamertemplate{footline}
+{
+    \leavevmode%
+    \hbox{%
+        \begin{beamercolorbox}[wd=.2\paperwidth,ht=2.25ex,dp=1ex,left,leftskip=1ex]{title in head/foot}%
+            \usebeamerfont{title in head/foot}\insertauthor
+        \end{beamercolorbox}%
+        \begin{beamercolorbox}[wd=.7\paperwidth,ht=2.25ex,dp=1ex,right,rightskip=1ex]{title in head/foot}%
+            \usebeamerfont{title in head/foot}\insertsection
+        \end{beamercolorbox}%
+        \begin{beamercolorbox}[wd=.1\paperwidth,ht=2.25ex,dp=1ex,right]{date in head/foot}%
+            \usebeamerfont{date in head/foot}
+            \insertframenumber{} / \inserttotalframenumber\hspace*{2ex} 
+        \end{beamercolorbox}}%
+        \vskip0pt%
+}
+\makeatother
+
+% \titlegraphic{%
+%   \includegraphics[width=.3\textwidth]{img/logos/Logo_ESILV.png}
+% }
+
+\setbeamertemplate{frametitle}[default][center]
+
+\usepackage{textpos}
+\addtobeamertemplate{frametitle}{}{%
+\begin{textblock*}{100mm}(-.05\textwidth,-0.7cm)
+\includegraphics[height=3ex, keepaspectratio]{img/logo_hd_2.png}
+\end{textblock*}}
+
+
+%% fonts
+
+\usefonttheme{professionalfonts}
+% \usefonttheme{serif}
+% \usefonttheme[onlymath]{serif}
+\usepackage{eulervm}
+%%packages
+
+\usepackage{appendixnumberbeamer}
+
+\usepackage[labelfont={color=barcolor,small},font={small,it}]{caption}
+
+\usepackage{booktabs}
+\usepackage[scale=2]{ccicons}
+
+\usepackage{pgfplots}
+\usepgfplotslibrary{dateplot}
+ \usepackage{tikz}
+ \usetikzlibrary{patterns}
+% \usetikzlibrary{external}
+% \tikzexternalize 
+
+ 
+\usepackage{xspace}
+\newcommand{\themename}{\textbf{\textsc{metropolis}}\xspace}
+
+\usepackage{hyperref}
+
+ \usepackage{lmodern}
+ \usepackage{amssymb,amsmath,amsthm}
+ \DeclareMathOperator*{\argmax}{argmax}
+\DeclareMathOperator*{\argmin}{argmin}
+
+\usepackage{bbm} % pour fonction indicatrice \mathbbm{1}
+\usepackage{ifxetex,ifluatex}
+\usepackage{color}
+% \usepackage[dvipsnames]{xcolor}
+
+\usepackage{cancel} % for strikethrough text in equation
+
+% \usepackage{pgfplots}
+\usepackage{caption,subcaption}
+\usepackage{fontawesome}
+% \usepackage{subfigure}
+ \usepackage{fixltx2e} % provides \textsubscript
+\ifnum 0\ifxetex 1\fi\ifluatex 1\fi=0 % if pdftex
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+  %\usepackage [frenchb]{babel}
+\else % if luatex or xelatex
+  \ifxetex
+    \usepackage{mathspec}
+  \else
+    \usepackage{fontspec}
+  \fi
+  \defaultfontfeatures{Ligatures=TeX,Scale=MatchLowercase}
+\fi
+
+
+\usepackage{mdframed}
+
+% style
+% \definecolor{barcolor}{HTML}{00B4A1}
+% \definecolor{barcolor}{HTML}{CD0050} % ESILV COLOR
+
+% \definecolor{barcolor}{HTML}{D11F5C} % ESILV COLOR
+% \definecolor{backgroundcolor}{HTML}{ECECED} % ESILV COLOR
+
+\definecolor{barcolor}{HTML}{077BBF} % EFREI COLOR
+\definecolor{backgroundcolor}{HTML}{FEFEFE} %{ECECED} % ESILV COLOR
+\definecolor{esilvcolor}{HTML}{077BBF}%{D11F5C}
+
+
+% \setbeamercolor{palette primary}{fg=white,bg=barcolor}
+% \usecolortheme[named=barcolor]{structure}
+% \useoutertheme{smoothbars} % Alternatively: miniframes, infolines, split, smoothbars
+
+\setbeamercolor{palette primary}{bg=barcolor,fg=backgroundcolor}
+\setbeamercolor{palette secondary}{bg=barcolor,fg=backgroundcolor}
+\setbeamercolor{palette tertiary}{bg=barcolor,fg=backgroundcolor}
+\setbeamercolor{palette quaternary}{bg=barcolor,fg=backgroundcolor}
+\setbeamercolor{structure}{fg=barcolor} % itemize, enumerate, etc
+\setbeamercolor{section in toc}{fg=barcolor} % TOC sections
+\setbeamercolor{background canvas}{bg=backgroundcolor}
+
+% \setbeamercolor{background canvas}{bg=white!5}
+
+\definecolor{green}{RGB}{0,158,115}
+
+\setbeamercolor{alerted text}{ fg= esilvcolor , bg= backgroundcolor }
+\setbeamercolor{example text}{ fg= green , bg= backgroundcolor }
+\setbeamercolor{progress bar}{ fg= barcolor , bg= barcolor!20 }
+% \setbeamercolor{title separator}{ ... }
+% \setbeamercolor{progress bar in head/foot}{ ... }
+% \setbeamercolor{progress bar in section page}{ ... }
+
+\setbeamercolor{lower separation line foot}{bg=barcolor}
+
+\setbeamertemplate{itemize item}{\scriptsize\color{barcolor}$\blacktriangleright$}
+% \setbeamertemplate{itemize subitem}{\footnotesize\color{barcolor!50}$\centerdot
+% $}
+\setbeamertemplate{itemize subitem}[circle]
+
+\addtobeamertemplate{block begin}
+  {}
+  {\vspace{0cm} % Pads top of block
+     % separates paragraphs in a block
+   % \setlength{\parskip}{24pt plus 1pt minus 1pt}
+   }
+
+
+
+
+% \addtobeamertemplate{block end}
+%   {\vspace{2ex plus 0.5ex minus 0.5ex}}% Pads bottom of block
+%   {\vspace{10ex plus 1ex minus 1ex}} % Seperates blocks from each other
+
+
+%% Theorems, exercices, remarks
+
+\newtheorem{theom}{\color{esilvcolor}Théorème}
+\newtheorem{defi}{\textcolor{esilvcolor}{Définition}}[section]
+% \theoremstyle{magentacolor} 
+\theoremstyle{definition}
+\newtheorem{prop}[theom]{\color{esilvcolor}Proposition} 
+% \newtheorem*{solution}{Solution}
+% \theoremstyle{definition}
+\newtheorem*{preuve}{\textcolor{OliveGreen}{Démonstration}}
+\newtheorem*{sol}{\textcolor{PineGreen}{Solution}}
+\newtheorem*{re}{\textcolor{red}{Remarque}}
+\newtheorem*{ex}{\textcolor{barcolor}{Exemple}}
+\newtheorem*{propr}{\color{barcolor}Propriétés}
+
+
+% \newtheoremstyle{exstyle}
+%   {3pt} % Space above
+%   {3pt} % Space below
+%   {} % Body font
+%   {} % Indent amount
+%   {\color{Turquoise}\bfseries} % Theorem head font
+%   {} % Punctuation after theorem head
+%   {.5em} % Space after theorem head
+%   {} % Theorem head spec (can be left empty, meaning `normal')
+
+% \theoremstyle{exstyle}
+% \newtheorem{ex}{Exemple}[section] 
+
+
+
+\newcommand*{\QEDA}{\hfill\ensuremath{\blacksquare}}%
+\newcommand*{\QEDB}{\hfill\ensuremath{\square}}%
+
+
+
+%% shortcuts
+
+\newcommand{\Om}{\Omega}
+\newcommand{\om}{\omega}
+\newcommand{\somme}{\sum_{i=1}^n}
+\newcommand{\sommek}{\sum_{k=1}^n}
+\newcommand{\sommekk}{\sum_{k=0}^n}
+
+
+\newcommand{\intR}{\int_{-\infty}^{+\infty}}
+\newcommand{\intab}{\int_a^b}
+\newcommand{\intx}{\int_{-\infty}^x}
+% \newcommand{}{}
+
+
+% for the CDF of normal
+
+\def\cdf(#1)(#2)(#3){0.5*(1+(erf((#1-#2)/(#3*sqrt(2)))))}%
+% to be used: \cdf(x)(mean)(variance)
+
+\DeclareMathOperator{\CDF}{cdf}
+
+\newenvironment{de}{\metroset{block=fill}\begin{defi}}{\end{defi}} 
+\newenvironment{theo}{\metroset{block=fill}\begin{theom}}{\end{theom}}
+
+
+% \definecolor{metro}{HTML}{F9F9F9} %metro bg color 
+
+% \useoutertheme[hideallsubsections,height=0pt]{sidebar}
+% \setbeamercolor{sidebar}{bg=metro}
+% \usecolortheme{sidebartab}
+% \setbeamerfont{title in sidebar}{size=\fontsize{6}{8}\selectfont}
+% \setbeamerfont{section in sidebar}{size=\fontsize{4}{6}\selectfont}
+
+% \setbeamertemplate{navigation symbols}{%
+% \insertslidenavigationsymbol
+% \insertframenavigationsymbol
+% \insertsectionnavigationsymbol
+% \insertdocnavigationsymbol
+% \insertbackfindforwardnavigationsymbol
+% }
+
+% to create columns in rmarkdown
+\def\begincols{\begin{columns}}
+\def\begincol{\begin{column}}
+\def\endcol{\end{column}}
+\def\endcols{\end{columns}}
+
+
+
+\usepackage{tikz}
+\usetikzlibrary{arrows,shapes}
+\usetikzlibrary{mindmap} % to use grow cyclic
+\usepackage{adjustbox}
+\tikzstyle{block}=[draw opacity=0.7,line width=1.4cm]
+\usetikzlibrary{bayesnet}
+
+
+% R chunks
+\makeatletter
+\definecolor{shadecolor}{RGB}{236,236,237}
+\makeatother
+
+\definecolor{color1}{HTML}{E7AD00}
+\definecolor{color2}{HTML}{A5CC19}
+\definecolor{color3}{HTML}{33B29A}
+\definecolor{color4}{HTML}{3380FF}
+\definecolor{classificationblue}{HTML}{377EB8}
+

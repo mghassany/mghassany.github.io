@@ -1,0 +1,1235 @@
+% Options for packages loaded elsewhere
+\PassOptionsToPackage{unicode}{hyperref}
+\PassOptionsToPackage{hyphens}{url}
+%
+\documentclass[
+  9pt,
+  ignorenonframetext,
+  aspectratio=169,
+  t, dvipsnames]{beamer}
+\usepackage{pgfpages}
+\setbeamertemplate{caption}[numbered]
+\setbeamertemplate{caption label separator}{: }
+\setbeamercolor{caption name}{fg=normal text.fg}
+\beamertemplatenavigationsymbolsempty
+% Prevent slide breaks in the middle of a paragraph
+\widowpenalties 1 10000
+\raggedbottom
+\setbeamertemplate{part page}{
+  \centering
+  \begin{beamercolorbox}[sep=16pt,center]{part title}
+    \usebeamerfont{part title}\insertpart\par
+  \end{beamercolorbox}
+}
+\setbeamertemplate{section page}{
+  \centering
+  \begin{beamercolorbox}[sep=12pt,center]{part title}
+    \usebeamerfont{section title}\insertsection\par
+  \end{beamercolorbox}
+}
+\setbeamertemplate{subsection page}{
+  \centering
+  \begin{beamercolorbox}[sep=8pt,center]{part title}
+    \usebeamerfont{subsection title}\insertsubsection\par
+  \end{beamercolorbox}
+}
+\AtBeginPart{
+  \frame{\partpage}
+}
+\AtBeginSection{
+  \ifbibliography
+  \else
+    \frame{\sectionpage}
+  \fi
+}
+\AtBeginSubsection{
+  \frame{\subsectionpage}
+}
+
+\usepackage{amsmath,amssymb}
+\usepackage{lmodern}
+\usepackage{iftex}
+\ifPDFTeX
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+  \usepackage{textcomp} % provide euro and other symbols
+\else % if luatex or xetex
+  \usepackage{unicode-math}
+  \defaultfontfeatures{Scale=MatchLowercase}
+  \defaultfontfeatures[\rmfamily]{Ligatures=TeX,Scale=1}
+\fi
+% Use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+\IfFileExists{microtype.sty}{% use microtype if available
+  \usepackage[]{microtype}
+  \UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+\makeatletter
+\@ifundefined{KOMAClassName}{% if non-KOMA class
+  \IfFileExists{parskip.sty}{%
+    \usepackage{parskip}
+  }{% else
+    \setlength{\parindent}{0pt}
+    \setlength{\parskip}{6pt plus 2pt minus 1pt}}
+}{% if KOMA class
+  \KOMAoptions{parskip=half}}
+\makeatother
+\usepackage{xcolor}
+\newif\ifbibliography
+\setlength{\emergencystretch}{3em} % prevent overfull lines
+\setcounter{secnumdepth}{-\maxdimen} % remove section numbering
+
+
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}\usepackage{longtable,booktabs,array}
+\usepackage{calc} % for calculating minipage widths
+\usepackage{caption}
+% Make caption package work with longtable
+\makeatletter
+\def\fnum@table{\tablename~\thetable}
+\makeatother
+\usepackage{graphicx}
+\makeatletter
+\def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth\else\Gin@nat@width\fi}
+\def\maxheight{\ifdim\Gin@nat@height>\textheight\textheight\else\Gin@nat@height\fi}
+\makeatother
+% Scale images if necessary, so that they will not overflow the page
+% margins by default, and it is still possible to overwrite the defaults
+% using explicit options in \includegraphics[width, height, ...]{}
+\setkeys{Gin}{width=\maxwidth,height=\maxheight,keepaspectratio}
+% Set default figure placement to htbp
+\makeatletter
+\def\fps@figure{htbp}
+\makeatother
+
+
+% theme metro and its options
+\usetheme[progressbar=none,block=fill]{metropolis}
+% \metroset{block=fill}
+
+% \useoutertheme[subsection=false,shadow]{miniframes}
+
+% \metroset{block=transparent} Options can be changed at any time — even mid-presentation! — with the \metroset macro.
+\makeatletter
+\setbeamertemplate{title page}{
+  \begin{minipage}[b][\paperheight]{\textwidth}
+    \usebeamercolor[fg]{section title}
+  \usebeamerfont{section title}
+    \centering  % <-- Center here
+    \ifx\inserttitlegraphic\@empty\else\usebeamertemplate*{title graphic}\fi
+    \vfill%
+    \ifx\inserttitle\@empty\else\usebeamertemplate*{title}\fi
+    \ifx\insertsubtitle\@empty\else\usebeamertemplate*{subtitle}\fi
+    \usebeamertemplate*{title separator}
+    \ifx\beamer@shortauthor\@empty\else\usebeamertemplate*{author}\fi
+    \ifx\insertdate\@empty\else\usebeamertemplate*{date}\fi
+    \ifx\insertinstitute\@empty\else\usebeamertemplate*{institute}\fi
+    \vfill
+    \vspace*{1mm}
+  \end{minipage}
+}
+
+
+% \setbeamertemplate{section page}{
+% \centering
+% \begin{columns}
+% \begin{column}{0.3\textwidth}
+% \end{column}
+% \begin{column}{0.7\textwidth}  %%<--- here
+% \vspace*{1cm}
+%   \begin{minipage}[c][\paperheight]{\textwidth}
+%     \centering  % <-- Center here
+%     \ifx\inserttitlegraphic\@empty\else\usebeamertemplate*{title graphic}\fi
+%     \vfill%
+%     \usebeamerfont{title}\insertsectionhead\par%
+%     % \ifx\insertsubtitle\@empty\else\usebeamertemplate*{subtitle}\fi
+%     \usebeamertemplate*{title separator}
+%     \ifx\beamer@shortauthor\@empty\else\usebeamertemplate*{author}\fi
+%     \ifx\insertdate\@empty\else\usebeamertemplate*{date}\fi
+%     \ifx\insertinstitute\@empty\else\usebeamertemplate*{institute}\fi
+%     \vfill
+%     \vspace*{1mm}
+%   \end{minipage}
+% \end{column}
+% \end{columns}
+% }
+
+% \setbeamertemplate{section page}{
+% \begin{columns}
+% \begin{column}{0.3\textwidth}
+% \end{column}
+% \begin{column}{0.7\textwidth}  %%<--- here
+%   % \begin{center}
+%   % \includegraphics[scale=0.15]{img/logos/Logo_ESILV.png}
+%   % \end{center}
+%   % \vfill%
+%   \begin{minipage}[c]{0.9\textwidth}
+%   \centering
+%     \usebeamercolor[fg]{section title}
+%   \usebeamerfont{section title}
+%   
+%   %\includegraphics[scale=0.18]{img/logos/Logo_ESILV.png}
+%   
+%   \vspace*{1cm}
+%   
+%   \insertsectionhead\\[-1ex]
+%   
+%   \vspace*{1cm}
+%   
+%   \ifx\inserttitle\@empty\else\usebeamertemplate*{title}\fi
+%   \usebeamertemplate*{progress bar in section page}
+%   \par
+%     \ifx\beamer@shortauthor\@empty\else\usebeamertemplate*{author}\fi
+%     \ifx\insertdate\@empty\else\usebeamertemplate*{date}\fi
+%     \ifx\insertinstitute\@empty\else\usebeamertemplate*{institute}\fi
+%     \vfill
+%   \end{minipage}
+% \end{column}
+% \end{columns}
+%   \par
+%   \vspace{\baselineskip}
+% }
+
+\setbeamertemplate{title}{
+%  \raggedright%  % <-- Comment here
+  \linespread{1.0}%
+  \inserttitle%
+  \par%
+  \vspace*{0.5em}
+}
+\setbeamertemplate{subtitle}{
+%  \raggedright%  % <-- Comment here
+  \insertsubtitle%
+  \par%
+  \vspace*{0.5em}
+}
+
+\setbeamertemplate{footline}
+{
+    \leavevmode%
+    \hbox{%
+        \begin{beamercolorbox}[wd=.2\paperwidth,ht=2.25ex,dp=1ex,left,leftskip=1ex]{title in head/foot}%
+            \usebeamerfont{title in head/foot}\insertauthor
+        \end{beamercolorbox}%
+        \begin{beamercolorbox}[wd=.7\paperwidth,ht=2.25ex,dp=1ex,right,rightskip=1ex]{title in head/foot}%
+            \usebeamerfont{title in head/foot}\insertsection
+        \end{beamercolorbox}%
+        \begin{beamercolorbox}[wd=.1\paperwidth,ht=2.25ex,dp=1ex,right]{date in head/foot}%
+            \usebeamerfont{date in head/foot}
+            \insertframenumber{} / \inserttotalframenumber\hspace*{2ex} 
+        \end{beamercolorbox}}%
+        \vskip0pt%
+}
+\makeatother
+
+% \titlegraphic{%
+%   \includegraphics[width=.3\textwidth]{img/logos/Logo_ESILV.png}
+% }
+
+\setbeamertemplate{frametitle}[default][center]
+
+\usepackage{textpos}
+\addtobeamertemplate{frametitle}{}{%
+\begin{textblock*}{100mm}(-.05\textwidth,-0.7cm)
+\includegraphics[height=3ex, keepaspectratio]{img/logo_hd_2.png}
+\end{textblock*}}
+
+
+%% fonts
+
+\usefonttheme{professionalfonts}
+% \usefonttheme{serif}
+% \usefonttheme[onlymath]{serif}
+\usepackage{eulervm}
+%%packages
+
+\usepackage{appendixnumberbeamer}
+
+\usepackage[labelfont={color=barcolor,small},font={small,it}]{caption}
+
+\usepackage{booktabs}
+\usepackage[scale=2]{ccicons}
+
+\usepackage{pgfplots}
+\usepgfplotslibrary{dateplot}
+ \usepackage{tikz}
+ \usetikzlibrary{patterns}
+% \usetikzlibrary{external}
+% \tikzexternalize 
+
+ 
+\usepackage{xspace}
+\newcommand{\themename}{\textbf{\textsc{metropolis}}\xspace}
+
+\usepackage{hyperref}
+
+ \usepackage{lmodern}
+ \usepackage{amssymb,amsmath,amsthm}
+ \DeclareMathOperator*{\argmax}{argmax}
+\DeclareMathOperator*{\argmin}{argmin}
+
+\usepackage{bbm} % pour fonction indicatrice \mathbbm{1}
+\usepackage{ifxetex,ifluatex}
+\usepackage{color}
+% \usepackage[dvipsnames]{xcolor}
+
+\usepackage{cancel} % for strikethrough text in equation
+
+% \usepackage{pgfplots}
+\usepackage{caption,subcaption}
+\usepackage{fontawesome}
+% \usepackage{subfigure}
+ \usepackage{fixltx2e} % provides \textsubscript
+\ifnum 0\ifxetex 1\fi\ifluatex 1\fi=0 % if pdftex
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+  %\usepackage [frenchb]{babel}
+\else % if luatex or xelatex
+  \ifxetex
+    \usepackage{mathspec}
+  \else
+    \usepackage{fontspec}
+  \fi
+  \defaultfontfeatures{Ligatures=TeX,Scale=MatchLowercase}
+\fi
+
+
+\usepackage{mdframed}
+
+% style
+% \definecolor{barcolor}{HTML}{00B4A1}
+% \definecolor{barcolor}{HTML}{CD0050} % ESILV COLOR
+
+% \definecolor{barcolor}{HTML}{D11F5C} % ESILV COLOR
+% \definecolor{backgroundcolor}{HTML}{ECECED} % ESILV COLOR
+
+\definecolor{barcolor}{HTML}{077BBF} % EFREI COLOR
+\definecolor{backgroundcolor}{HTML}{FEFEFE} %{ECECED} % ESILV COLOR
+\definecolor{esilvcolor}{HTML}{077BBF}%{D11F5C}
+
+
+% \setbeamercolor{palette primary}{fg=white,bg=barcolor}
+% \usecolortheme[named=barcolor]{structure}
+% \useoutertheme{smoothbars} % Alternatively: miniframes, infolines, split, smoothbars
+
+\setbeamercolor{palette primary}{bg=barcolor,fg=backgroundcolor}
+\setbeamercolor{palette secondary}{bg=barcolor,fg=backgroundcolor}
+\setbeamercolor{palette tertiary}{bg=barcolor,fg=backgroundcolor}
+\setbeamercolor{palette quaternary}{bg=barcolor,fg=backgroundcolor}
+\setbeamercolor{structure}{fg=barcolor} % itemize, enumerate, etc
+\setbeamercolor{section in toc}{fg=barcolor} % TOC sections
+\setbeamercolor{background canvas}{bg=backgroundcolor}
+
+% \setbeamercolor{background canvas}{bg=white!5}
+
+\definecolor{green}{RGB}{0,158,115}
+
+\setbeamercolor{alerted text}{ fg= esilvcolor , bg= backgroundcolor }
+\setbeamercolor{example text}{ fg= green , bg= backgroundcolor }
+\setbeamercolor{progress bar}{ fg= barcolor , bg= barcolor!20 }
+% \setbeamercolor{title separator}{ ... }
+% \setbeamercolor{progress bar in head/foot}{ ... }
+% \setbeamercolor{progress bar in section page}{ ... }
+
+\setbeamercolor{lower separation line foot}{bg=barcolor}
+
+\setbeamertemplate{itemize item}{\scriptsize\color{barcolor}$\blacktriangleright$}
+% \setbeamertemplate{itemize subitem}{\footnotesize\color{barcolor!50}$\centerdot
+% $}
+\setbeamertemplate{itemize subitem}[circle]
+
+\addtobeamertemplate{block begin}
+  {}
+  {\vspace{0cm} % Pads top of block
+     % separates paragraphs in a block
+   % \setlength{\parskip}{24pt plus 1pt minus 1pt}
+   }
+
+
+
+
+% \addtobeamertemplate{block end}
+%   {\vspace{2ex plus 0.5ex minus 0.5ex}}% Pads bottom of block
+%   {\vspace{10ex plus 1ex minus 1ex}} % Seperates blocks from each other
+
+
+%% Theorems, exercices, remarks
+
+\newtheorem{theom}{\color{esilvcolor}Théorème}
+\newtheorem{defi}{\textcolor{esilvcolor}{Définition}}[section]
+% \theoremstyle{magentacolor} 
+\theoremstyle{definition}
+\newtheorem{prop}[theom]{\color{esilvcolor}Proposition} 
+% \newtheorem*{solution}{Solution}
+% \theoremstyle{definition}
+\newtheorem*{preuve}{\textcolor{OliveGreen}{Démonstration}}
+\newtheorem*{sol}{\textcolor{PineGreen}{Solution}}
+\newtheorem*{re}{\textcolor{red}{Remarque}}
+\newtheorem*{ex}{\textcolor{barcolor}{Exemple}}
+\newtheorem*{propr}{\color{barcolor}Propriétés}
+
+
+% \newtheoremstyle{exstyle}
+%   {3pt} % Space above
+%   {3pt} % Space below
+%   {} % Body font
+%   {} % Indent amount
+%   {\color{Turquoise}\bfseries} % Theorem head font
+%   {} % Punctuation after theorem head
+%   {.5em} % Space after theorem head
+%   {} % Theorem head spec (can be left empty, meaning `normal')
+
+% \theoremstyle{exstyle}
+% \newtheorem{ex}{Exemple}[section] 
+
+
+
+\newcommand*{\QEDA}{\hfill\ensuremath{\blacksquare}}%
+\newcommand*{\QEDB}{\hfill\ensuremath{\square}}%
+
+
+
+%% shortcuts
+
+\newcommand{\Om}{\Omega}
+\newcommand{\om}{\omega}
+\newcommand{\somme}{\sum_{i=1}^n}
+\newcommand{\sommek}{\sum_{k=1}^n}
+\newcommand{\sommekk}{\sum_{k=0}^n}
+
+
+\newcommand{\intR}{\int_{-\infty}^{+\infty}}
+\newcommand{\intab}{\int_a^b}
+\newcommand{\intx}{\int_{-\infty}^x}
+% \newcommand{}{}
+
+
+% for the CDF of normal
+
+\def\cdf(#1)(#2)(#3){0.5*(1+(erf((#1-#2)/(#3*sqrt(2)))))}%
+% to be used: \cdf(x)(mean)(variance)
+
+\DeclareMathOperator{\CDF}{cdf}
+
+\newenvironment{de}{\metroset{block=fill}\begin{defi}}{\end{defi}} 
+\newenvironment{theo}{\metroset{block=fill}\begin{theom}}{\end{theom}}
+
+
+% \definecolor{metro}{HTML}{F9F9F9} %metro bg color 
+
+% \useoutertheme[hideallsubsections,height=0pt]{sidebar}
+% \setbeamercolor{sidebar}{bg=metro}
+% \usecolortheme{sidebartab}
+% \setbeamerfont{title in sidebar}{size=\fontsize{6}{8}\selectfont}
+% \setbeamerfont{section in sidebar}{size=\fontsize{4}{6}\selectfont}
+
+% \setbeamertemplate{navigation symbols}{%
+% \insertslidenavigationsymbol
+% \insertframenavigationsymbol
+% \insertsectionnavigationsymbol
+% \insertdocnavigationsymbol
+% \insertbackfindforwardnavigationsymbol
+% }
+
+% to create columns in rmarkdown
+\def\begincols{\begin{columns}}
+\def\begincol{\begin{column}}
+\def\endcol{\end{column}}
+\def\endcols{\end{columns}}
+
+
+
+\usepackage{tikz}
+\usetikzlibrary{arrows,shapes}
+\usetikzlibrary{mindmap} % to use grow cyclic
+\usepackage{adjustbox}
+\tikzstyle{block}=[draw opacity=0.7,line width=1.4cm]
+\usetikzlibrary{bayesnet}
+
+
+% R chunks
+\makeatletter
+\definecolor{shadecolor}{RGB}{236,236,237}
+\makeatother
+
+\definecolor{color1}{HTML}{E7AD00}
+\definecolor{color2}{HTML}{A5CC19}
+\definecolor{color3}{HTML}{33B29A}
+\definecolor{color4}{HTML}{3380FF}
+\definecolor{classificationblue}{HTML}{377EB8}
+
+\makeatletter
+\makeatother
+\makeatletter
+\@ifpackageloaded{caption}{}{\usepackage{caption}}
+\AtBeginDocument{%
+\ifdefined\contentsname
+  \renewcommand*\contentsname{Table of contents}
+\else
+  \newcommand\contentsname{Table of contents}
+\fi
+\ifdefined\listfigurename
+  \renewcommand*\listfigurename{List of Figures}
+\else
+  \newcommand\listfigurename{List of Figures}
+\fi
+\ifdefined\listtablename
+  \renewcommand*\listtablename{List of Tables}
+\else
+  \newcommand\listtablename{List of Tables}
+\fi
+\ifdefined\figurename
+  \renewcommand*\figurename{Figure}
+\else
+  \newcommand\figurename{Figure}
+\fi
+\ifdefined\tablename
+  \renewcommand*\tablename{Table}
+\else
+  \newcommand\tablename{Table}
+\fi
+}
+\@ifpackageloaded{float}{}{\usepackage{float}}
+\floatstyle{ruled}
+\@ifundefined{c@chapter}{\newfloat{codelisting}{h}{lop}}{\newfloat{codelisting}{h}{lop}[chapter]}
+\floatname{codelisting}{Listing}
+\newcommand*\listoflistings{\listof{codelisting}{List of Listings}}
+\makeatother
+\makeatletter
+\@ifpackageloaded{caption}{}{\usepackage{caption}}
+\@ifpackageloaded{subcaption}{}{\usepackage{subcaption}}
+\makeatother
+\makeatletter
+\@ifpackageloaded{tcolorbox}{}{\usepackage[many]{tcolorbox}}
+\makeatother
+\makeatletter
+\@ifundefined{shadecolor}{\definecolor{shadecolor}{rgb}{.97, .97, .97}}
+\makeatother
+\makeatletter
+\makeatother
+\ifLuaTeX
+  \usepackage{selnolig}  % disable illegal ligatures
+\fi
+\IfFileExists{bookmark.sty}{\usepackage{bookmark}}{\usepackage{hyperref}}
+\IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
+\urlstyle{same} % disable monospaced font for URLs
+\hypersetup{
+  pdftitle={Machine Learning},
+  pdfauthor={Mohamad GHASSANY},
+  hidelinks,
+  pdfcreator={LaTeX via pandoc}}
+
+\title{Machine Learning}
+\subtitle{Lecture 2 : Introduction to Classification, Logistic
+Regression}
+\author{Mohamad GHASSANY}
+\date{}
+\institute{EFREI PARIS}
+
+\begin{document}
+\frame{\titlepage}
+\ifdefined\Shaded\renewenvironment{Shaded}{\begin{tcolorbox}[enhanced, boxrule=0pt, borderline west={3pt}{0pt}{shadecolor}, frame hidden, sharp corners, interior hidden, breakable]}{\end{tcolorbox}}\fi
+
+\begin{frame}
+\end{frame}
+
+\hypertarget{classification}{%
+\section{Classification}\label{classification}}
+
+\begin{frame}{Classification examples}
+\protect\hypertarget{classification-examples}{}
+\begin{itemize}
+\tightlist
+\item
+  Email: Spam / Not Spam?
+\item
+  Online Transactions: Fraudulent (Yes/No)?
+\item
+  Tumor: Malignant / Benign?
+\item
+  Loan Demand (Credit Risk): Safe / Risky
+\end{itemize}
+
+\vspace{1cm}
+
+\pause
+
+\begin{exampleblock}{Classification: categorical output}
+
+\begin{itemize}
+\tightlist
+\item
+  \(y \in \{0,1\}\)
+\item
+  0: ``Negative class''
+\item
+  1: ``Positive Class''
+\end{itemize}
+
+\end{exampleblock}
+
+\vspace{1cm}
+
+\pause
+
+.. and also multiclass classification
+\end{frame}
+
+\begin{frame}{Evaluating Classifiers}
+\protect\hypertarget{evaluating-classifiers}{}
+\[\text{Accuracy} = \frac{\text{Number of data points classified correctly}}{\text{all data points}}  \]
+
+\begin{alertblock}{Confusion Matrix}
+
+\vspace{3cm}
+
+\end{alertblock}
+
+.. while in Regression (continuous output): Mean Squared Error (MSE).
+\end{frame}
+
+\hypertarget{logistic-regression}{%
+\section{Logistic Regression}\label{logistic-regression}}
+
+\begin{frame}{The logistic function (sigmoid)}
+\protect\hypertarget{the-logistic-function-sigmoid}{}
+\[g(z) = \frac{e^z}{1+e^{z}} = \frac{1}{1+e^{-z}}\]
+
+\pause
+
+\vspace{0.5cm}
+
+\begin{figure}
+
+{\centering \includegraphics[width=0.5\textwidth,height=\textheight]{CM2_Machine_Learning_files/figure-beamer/unnamed-chunk-2-1.pdf}
+
+}
+
+\end{figure}
+\end{frame}
+
+\begin{frame}{Logistic Regression: why not linear regression}
+\protect\hypertarget{logistic-regression-why-not-linear-regression}{}
+\begincols
+\begincol{.48\textwidth}
+
+\begin{figure}
+
+{\centering \includegraphics[width=0.8\textwidth,height=\textheight]{CM2_Machine_Learning_files/figure-beamer/unnamed-chunk-3-1.pdf}
+
+}
+
+\end{figure}
+
+\endcol
+
+\begincol{.48\textwidth}
+
+\begin{itemize}
+\tightlist
+\item
+  \(y \in \{0,1\}\):
+
+  \begin{itemize}
+  \tightlist
+  \item
+    \("0"\): Negative class (here \textcolor{barcolor}{no default})
+  \item
+    \("1"\): Positive class (here
+    \textcolor{classificationblue}{default})
+  \end{itemize}
+\end{itemize}
+
+\vspace{0.5cm}
+
+\begin{itemize}
+\tightlist
+\item
+  \(f_{\omega} (x) = \omega'x\) can be \(>1\) ou \(<0\) \alert{!}
+\end{itemize}
+
+\vspace{0.5cm}
+
+\begin{itemize}
+\tightlist
+\item
+  Ideally \(0 \leq f_{\omega} (x) \leq 1\) s.t.:
+
+  \begin{itemize}
+  \tightlist
+  \item
+    If \(f_{\omega} (x) \geq 0.5\), predict ``\(y=1\)''
+  \item
+    If \(f_{\omega} (x) < 0.5\), predict ``\(y=0\)''
+  \end{itemize}
+\end{itemize}
+
+\endcol
+\endcols
+\end{frame}
+
+\begin{frame}{Logistic Regression: intuition (1)}
+\protect\hypertarget{logistic-regression-intuition-1}{}
+\begincols
+\begincol{.48\textwidth}
+
+\vspace{1cm}
+
+\begin{itemize}
+  \item Let $f_{\omega}(x) =  \textcolor{ForestGreen}{\omega' x}$
+\end{itemize}
+\endcol
+
+\begincol{.48\textwidth}
+
+\begin{figure}
+
+{\centering \includegraphics[width=0.8\textwidth,height=\textheight]{CM2_Machine_Learning_files/figure-beamer/unnamed-chunk-4-1.pdf}
+
+}
+
+\end{figure}
+
+\endcol
+\endcols
+\end{frame}
+
+\begin{frame}{Logistic Regression: intuition (2)}
+\protect\hypertarget{logistic-regression-intuition-2}{}
+\begincols
+\begincol{.48\textwidth}
+
+\vspace{1cm}
+
+\begin{itemize}
+  \item Let $f_{\omega}(x) = \xcancel{\textcolor{ForestGreen}{\omega' x}} =\alert{g(} \textcolor{ForestGreen}{\omega' x} \alert{)} = {\displaystyle \frac{1}{1+e^{- \textcolor{ForestGreen}{\omega' x}}}}$
+\end{itemize}
+\endcol
+
+\begincol{.48\textwidth}
+
+\begin{figure}
+
+{\centering \includegraphics[width=0.8\textwidth,height=\textheight]{CM2_Machine_Learning_files/figure-beamer/unnamed-chunk-5-1.pdf}
+
+}
+
+\end{figure}
+
+\endcol
+\endcols
+\end{frame}
+
+\begin{frame}{Logistic Regression: intuition (3)}
+\protect\hypertarget{logistic-regression-intuition-3}{}
+\begincols
+\begincol{.48\textwidth}
+
+\begin{itemize}
+  \item $0 \leq \alert{g(\omega' x)} \leq 1$
+  
+  \item $f_{\omega}(x) = g(\omega' x)$ = estimated probability that $y=1$ on input $x$
+  
+  \item Probability that $y=1$, given $x$, parameterized by $\omega$
+  
+  \item $\alert{g(\omega' x)} = \textcolor{classificationblue}{p(y=1\mid x)} = \textcolor{classificationblue}{p(x)}$ 
+  
+  \item $y \in \{0,1\}$ so $p(y=1\mid x) + p(y=0\mid x)=1$
+  
+\end{itemize}
+
+\endcol
+
+\begincol{.48\textwidth}
+
+\begin{figure}
+
+{\centering \includegraphics[width=0.8\textwidth,height=\textheight]{CM2_Machine_Learning_files/figure-beamer/unnamed-chunk-6-1.pdf}
+
+}
+
+\end{figure}
+
+\endcol
+
+\endcols
+\end{frame}
+
+\begin{frame}{Logistic Regression: odds \& log-odds (logit)}
+\protect\hypertarget{logistic-regression-odds-log-odds-logit}{}
+\begin{block}{logistic score}
+\[p(x) = p(y=1\mid x) = {\displaystyle \frac{e^{\omega' x}}{1+e^{\omega' x}}} = {\displaystyle \frac{1}{1+e^{-\omega' x}}}\]
+
+\end{block}
+
+\begin{alertblock}{odds (côtes)}
+\[{\displaystyle \frac{p(x)}{1-p(x)}} = e^{\omega' x}\]
+
+\end{alertblock}
+
+\begin{exampleblock}{log-odds or logit (logarithme des côtes)}
+\[\log \big({\displaystyle \frac{p(x)}{1-p(x)}}\big) = \omega' x\]
+
+\end{exampleblock}
+\end{frame}
+
+\hypertarget{logistic-regression-decision-boundary}{%
+\section{Logistic Regression: decision
+boundary}\label{logistic-regression-decision-boundary}}
+
+\begin{frame}{Logistic Regression: decision boundary}
+\protect\hypertarget{logistic-regression-decision-boundary-1}{}
+\begincols
+\begincol{.48\textwidth}
+
+\begin{figure}
+
+{\centering \includegraphics[width=0.8\textwidth,height=\textheight]{CM2_Machine_Learning_files/figure-beamer/unnamed-chunk-7-1.pdf}
+
+}
+
+\end{figure}
+
+\endcol
+\begincol{.48\textwidth}
+
+\begin{itemize}
+  \item We predict "$\textcolor{classificationblue}{y=1}$" if $p(x) \geq 0.5$ which means $\omega' x \geq 0$
+  
+  \vspace{1cm}
+
+  \item $\displaystyle \omega_0 + \omega_1 x \geq 0 \Rightarrow  x \geq - \frac{\omega_0}{\omega_1}$
+\end{itemize}
+\endcol
+\endcols
+\end{frame}
+
+\begin{frame}{Logistic Regression: decision boundary (2 features)}
+\protect\hypertarget{logistic-regression-decision-boundary-2-features}{}
+\begincols
+\begincol{.48\textwidth}
+
+\begin{figure}
+
+{\centering \includegraphics[width=0.8\textwidth,height=\textheight]{CM2_Machine_Learning_files/figure-beamer/unnamed-chunk-8-1.pdf}
+
+}
+
+\end{figure}
+
+\endcol
+\begincol{.48\textwidth}
+
+\begin{itemize}
+\tightlist
+\item
+  \(p(x) = p(y=1\mid x) = f_{\omega}(x) = g(\omega' x)\)
+\item
+  Predict ``\(\textcolor{classificationblue}{y=1}\)'' if
+  \(p(x) \geq 0.5\) which means \(\omega' x \geq 0\)
+\end{itemize}
+
+\vspace{0.5cm}
+
+\begin{itemize}
+\tightlist
+\item
+  \(\omega_0 + \omega_1 x_1 + \omega_2 x_2 \geq 0\) So
+\end{itemize}
+
+\vspace{0.5cm}
+
+\[\textcolor{ForestGreen}{x_2 \geq - \frac{\omega_1}{\omega_2}x_1 - \frac{\omega_0}{\omega_2}}\]
+
+\endcol
+\endcols
+\end{frame}
+
+\begin{frame}{Non linear decision boundaries}
+\protect\hypertarget{non-linear-decision-boundaries}{}
+\begincols
+\begincol{.48\textwidth}
+
+\begin{figure}
+
+{\centering \includegraphics[width=0.8\textwidth,height=\textheight]{CM2_Machine_Learning_files/figure-beamer/unnamed-chunk-9-1.pdf}
+
+}
+
+\end{figure}
+
+\endcol
+\begincol{.48\textwidth}
+
+\begin{itemize}
+\tightlist
+\item
+  Let
+  \(f_{\omega}(x) = g(\omega_0 + \omega_1 x_1 + \omega_2 x_2 + \omega_3 x_1^2 + \omega_4 x_2^2)\)
+\end{itemize}
+
+\vspace{0.5cm}
+
+\begin{itemize}
+\tightlist
+\item
+  For example, predict ``\(\textcolor{classificationblue}{y=1}\)'' if
+  \(-1 + x_1^2 + x_2^2 \geq 0\)
+\end{itemize}
+
+\vspace{0.5cm}
+
+\begin{itemize}
+\tightlist
+\item
+  Or,
+  \(f_{\omega}(x) = g(\omega_0 + \omega_1 x_1 + \omega_2 x_2 + \omega_3 x_1^2 + \omega_4 x_1^2 x_2 + \omega_5 x_1^2 x_2^2 + \ldots)\)
+\end{itemize}
+
+\endcol
+\endcols
+\end{frame}
+
+\hypertarget{logistic-regression-model-estimation}{%
+\section{Logistic Regression: model
+estimation}\label{logistic-regression-model-estimation}}
+
+\begin{frame}{Logistic Regression: model estimation\footnote<.->{check:
+  https://shinyserv.es/shiny/log-maximum-likelihood/, by Eduardo García
+  Portugués}}
+\protect\hypertarget{logistic-regression-model-estimation-1}{}
+\begincols
+\begincol{.48\textwidth}
+
+\begin{itemize}
+\tightlist
+\item
+  Parameters to estimate: \(\omega = \{\omega_0, \omega_1\}\) if
+  univariate
+\end{itemize}
+
+\vspace{0.5cm}
+
+\begin{itemize}
+\tightlist
+\item
+  \(\omega = \{\omega_0, \omega_1, \ldots, \omega_p\}\) if multivariate
+  with \(p\) features
+\end{itemize}
+
+\vspace{0.5cm}
+
+\begin{itemize}
+\tightlist
+\item
+  How to choose parameters \(\omega\)?
+\end{itemize}
+
+\endcol
+
+\begincol{.48\textwidth}
+
+\begin{figure}
+
+{\centering \includegraphics[width=0.8\textwidth,height=\textheight]{CM2_Machine_Learning_files/figure-beamer/unnamed-chunk-10-1.pdf}
+
+}
+
+\end{figure}
+
+\endcol
+\endcols
+\end{frame}
+
+\begin{frame}{Recall the cost function of linear regression}
+\protect\hypertarget{recall-the-cost-function-of-linear-regression}{}
+\begin{block}{Cost function of simple linear regression}
+
+\begin{itemize}
+\tightlist
+\item
+  Model: \(f_{\omega}(x) = \omega_0 + \omega_1 x = \omega'x\)
+\item
+  Parameters: \(\omega_0\) and \(\omega_1\)
+\item
+  Cost function:
+  \(J(\omega_0,\omega_1) = \frac{1}{n} \sum_{i=1}^{n} \frac{1}{2} \left(f_{\omega}\left(x^{(i)}\right)-y^{(i)}\right)^{2}\)
+\item
+  Goal: \(\min_{\omega_0,\omega_1} J(\omega_0,\omega_1)\)
+\end{itemize}
+
+\end{block}
+
+\vspace{1cm}
+
+Non-convex in case of logistic regression \alert{!}
+\end{frame}
+
+\begin{frame}{Logistic Regression: how to estimate the parameters}
+\protect\hypertarget{logistic-regression-how-to-estimate-the-parameters}{}
+\begin{itemize}
+\tightlist
+\item
+  How to choose parameters \(\omega\)?
+\item
+  \(y \in \{0,1\}\), Let's assume: \begin{align*}
+  p(y=1 \mid  x,\omega) &= f_{\omega}(x) \\
+  p(y=0 \mid  x,\omega) &= 1- f_{\omega}(x)
+  \end{align*}
+\end{itemize}
+
+\pause
+
+\begin{itemize}
+\tightlist
+\item
+  We represent \(y\mid x,\omega \thicksim \mathcal{B}(f_{\omega}(x))\)
+\item
+  We can write:
+\end{itemize}
+
+\[p(y \mid  x , \omega)=\left(f_{\omega}(x)\right)^{y}\left(1-f_{\omega}(x)\right)^{1-y} \quad \quad y \in \{0,1\}\]
+
+\pause
+
+\begin{itemize}
+\tightlist
+\item
+  Given the \(n\) observations and assuming independance, we estimate
+  \(\omega\) by maximizing the \alert{likelihood}:
+\end{itemize}
+
+\[\mathcal{L}(\omega) = \prod_{i=1}^{n} p\left(y^{(i)} \mid x^{(i)} , \omega\right)\]
+\end{frame}
+
+\begin{frame}{Logistic Regression: model estimation}
+\protect\hypertarget{logistic-regression-model-estimation-2}{}
+\vspace{-0.5cm}
+
+\begin{itemize}
+\tightlist
+\item
+  The \alert{likelihood}: \begin{align*}
+  \mathcal{L}(\omega) &= \prod_{i=1}^{n} p\left(y^{(i)} \mid x^{(i)} , \omega\right) \\
+                     &= \prod_{i=1}^{n}\left(f_{\omega}\left(x^{(i)}\right)\right)^{y^{(i)}}\left(1-f_{\omega}\left(x^{(i)}\right)\right)^{1-y^{(i)}}
+  \end{align*}
+\end{itemize}
+
+\pause
+
+\begin{itemize}
+\tightlist
+\item
+  Maximizing the likelihood is same as maximizing its log:
+\end{itemize}
+
+\begin{align*}
+  \ell(\omega) &= \log\left(\mathcal{L}(\omega)\right) \\
+                     &= \sum_{i=1}^{n} y^{(i)} \log f_{\omega}\left(x^{(i)}\right)+\left(1-y^{(i)}\right) \log \left(1-f_{\omega}\left(x^{(i)}\right)\right)
+\end{align*}
+
+\begin{itemize}
+\tightlist
+\item
+  Maximizing \(\ell(\omega)\) is same as minimizing:
+  \(- \frac{1}{n} \ell(\omega)\)
+\end{itemize}
+
+\pause
+
+\begin{itemize}
+\tightlist
+\item
+  Let \(J(\omega) = - \frac{1}{n} \ell(\omega)\), a
+  \alert{convex cost function} for the logistic regression model (known
+  as \emph{binary cross entropy}).
+\end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]{Logistic Regression: optimization of the cost
+function}
+\protect\hypertarget{logistic-regression-optimization-of-the-cost-function}{}
+\begin{itemize}
+\tightlist
+\item
+  \textbf{Goal}: Find \(\omega\) s.t.
+  \(\omega=\argmin_{\omega} J(\omega)\)
+\item
+  \(J(\omega) = \displaystyle - \frac{1}{n} \sum_{i=1}^{n} y^{(i)} \log f_{\omega}\left(x^{(i)}\right)+\left(1-y^{(i)}\right) \log \left(1-f_{\omega}\left(x^{(i)}\right)\right)\)
+\item
+  Contrary to the linear regression, this cost function \textbf{does
+  not} have an \alert{analytical} solution. We need an optimization
+  technique.
+\end{itemize}
+
+\pause
+
+\begin{alertblock}{GD for logistic regression}
+
+\begin{itemize}
+\tightlist
+\item
+  \texttt{initialize} \(\omega\) `randomly``
+\item
+  \texttt{repeat\ until\ convergence}\{
+\end{itemize}
+
+\[\omega_i^{new} = \omega_i^{old} - \alpha \frac{\partial J(\omega)}{\partial \omega_i} \]
+
+\(\quad \quad \quad \quad \,\,\) \texttt{simultaneously\ for}
+\(i=0,\ldots,p\) \}
+
+\end{alertblock}
+\end{frame}
+
+\begin{frame}[fragile]{Logistic Regression: optimization of the cost
+function}
+\protect\hypertarget{logistic-regression-optimization-of-the-cost-function-1}{}
+\begin{itemize}
+\tightlist
+\item
+  Recall that
+  \(\displaystyle g(z) = \frac{e^z}{1+e^{z}} = \frac{1}{1+e^{-z}}\)
+\item
+  Notice that \(g'(z)=g(z)(1-g(z))\)
+\end{itemize}
+
+\pause
+
+\begin{itemize}
+\tightlist
+\item
+  \(\displaystyle \frac{\partial J(\omega)}{\partial \omega_{i}} = (y-f_{\omega}(x))x_{i}\)
+\end{itemize}
+
+\pause
+
+\begin{alertblock}{GD for logistic regression}
+
+\begin{itemize}
+\tightlist
+\item
+  \texttt{initialize} \(\omega\) \texttt{randomly}
+\item
+  \texttt{repeat\ until\ convergence}\{
+\end{itemize}
+
+\[\omega_i^{new} = \omega_i^{old} - \alpha \frac{1}{n} \sum_{i=1}^{n}\left(f_{\omega}\left(x^{(i)}\right)-y^{(i)}\right).x_i^{(i)}\]
+
+\(\quad \quad \quad \quad \,\,\) \texttt{simultaneously\ for}
+\(i=0,\ldots,p\) \}
+
+\end{alertblock}
+\end{frame}
+
+\begin{frame}{Multi‐class classification: One‐vs-all}
+\protect\hypertarget{multiclass-classification-onevs-all}{}
+\begincols
+\begincol{.48\textwidth}
+
+\begin{itemize}
+\tightlist
+\item
+  Weather: Sunny, Cloudy, Rain, Snow
+\item
+  Medical diagrams: Not ill, Cold, Flu
+\item
+  News articles: Sport, Education, Technology, Politics
+\end{itemize}
+
+\vspace{0.5cm}
+
+\begin{figure}
+
+{\centering \includegraphics[width=0.7\textwidth,height=\textheight]{CM2_Machine_Learning_files/figure-beamer/unnamed-chunk-11-1.pdf}
+
+}
+
+\end{figure}
+
+\endcol
+
+\begincol{.48\textwidth}
+
+\begin{itemize}
+\tightlist
+\item
+  \(f_{\omega}^{(i)}(x) = P(y=1 | x,\omega) \quad \text{ for } i=1,2,3\)
+\item
+  Train a logistic regression classifier for each class \(i\) to predict
+  the probability that \(y=i\)
+\item
+  On a new input \(x\), to make a prediction, pick the class \(i\) that
+  maximizes \(f_{\omega}^{(i)}(x)\)
+\end{itemize}
+
+\begin{figure}
+
+\begin{minipage}[t]{0.50\linewidth}
+
+{\centering 
+
+\raisebox{-\height}{
+
+\includegraphics[width=1in,height=\textheight]{CM2_Machine_Learning_files/figure-beamer/unnamed-chunk-12-1.pdf}
+
+}
+
+}
+
+\end{minipage}%
+%
+\begin{minipage}[t]{0.50\linewidth}
+
+{\centering 
+
+\raisebox{-\height}{
+
+\includegraphics[width=1in,height=\textheight]{CM2_Machine_Learning_files/figure-beamer/unnamed-chunk-12-2.pdf}
+
+}
+
+}
+
+\end{minipage}%
+\newline
+\begin{minipage}[t]{0.50\linewidth}
+
+{\centering 
+
+\raisebox{-\height}{
+
+\includegraphics[width=1in,height=\textheight]{CM2_Machine_Learning_files/figure-beamer/unnamed-chunk-12-3.pdf}
+
+}
+
+}
+
+\end{minipage}%
+
+\end{figure}
+
+\endcol
+\endcols
+\end{frame}
+
+\begin{frame}{Logistic Regression: Remarks \& summary}
+\protect\hypertarget{logistic-regression-remarks-summary}{}
+\begin{itemize}
+\tightlist
+\item
+  Very famous method and maybe the most used
+\item
+  Adapted for a binary \(y\)
+\item
+  Relation with linear regression
+\item
+  Linear decision boundary, but can be non linear using other hypothesis
+\item
+  Direct calculation of \(p(y=1 \mid x)\)
+\end{itemize}
+\end{frame}
+
+
+
+\end{document}

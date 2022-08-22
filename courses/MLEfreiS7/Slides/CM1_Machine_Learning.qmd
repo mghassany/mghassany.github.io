@@ -1,0 +1,999 @@
+---
+title: "Machine Learning"
+subtitle: "Lecture 1 : Course Overview, \\ Introduction to Machine Learning, \\ Regression"
+author: "Mohamad GHASSANY"
+institute: "EFREI PARIS"
+format:
+  beamer:
+    pdf-engine: pdflatex
+    slide-level: 2
+    aspectratio: 169
+    keep-tex: true
+    include-in-header: preface_beamer.tex
+classoption: "t, dvipsnames"
+fontsize: 9pt
+editor_options: 
+  chunk_output_type: console
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE,
+                      message = FALSE,
+                      warning = FALSE,
+                      fig.width = 6,
+                      fig.asp = 0.8,
+                      out.width = "50%",
+                      fig.align='center',
+                      dev = "tikz",
+                      cache = TRUE)
+```
+
+```{r, message=FALSE, warning=FALSE}
+# libraries 
+pkgs <- c("tidyverse",
+          # "tidylog",
+          "data.table",
+          "magrittr",
+          "RColorBrewer",
+          "ggplot2", 
+          "patchwork",
+          "cowplot",
+          "here",
+          "knitr",
+          "kableExtra",
+          "plot3D",
+          "scatterplot3d")
+
+xfun::pkg_attach(pkgs, message = F, install = T)
+```
+
+
+```{r theme_ggplot2, echo = FALSE}
+# Creating a ggplot2 theme
+theme_mooc <- function(base_size = 14) {
+  theme_bw(base_size = base_size) %+replace%
+  
+    theme(
+      # changed theme options
+        plot.background = element_rect(fill = "white", colour=NA), 
+        # panel.border = element_rect(fill = NA),
+        panel.background = element_rect(fill = "white"),
+        plot.title = element_text(hjust = 0.5),
+        legend.background = element_rect(fill = "white"),
+        legend.key =  element_rect(fill = "white"),
+        panel.grid = element_line(colour="#ECECED",linetype = "dashed"))
+}
+# Changing the default theme
+theme_set(theme_mooc())
+```
+
+
+## About me
+
+\begin{center}
+	\textcolor{barcolor}{\Large{\textbf{\textsc{Mohamad GHASSANY}}}}
+\end{center}
+	
+- Associate Professor at EFREI Paris, head of Data & Artificial Intelligence Master program.
+- Phd in Computer Science Université Paris 13.
+- Master 2 in Applied Mathematics \& Statistics from Université Grenoble Alpes.
+- Personal Website: \href{http://www.mghassany.com/}{\textcolor{blue}{mghassany.com}}
+
+
+\vspace{2cm}
+
+\begin{tikzpicture}[remember picture,overlay]
+  % \draw [help lines] (0,0) grid (8,4);
+  \node[opacity=1] at (1,0.5) {\includegraphics[width=2.3cm]{img/logo_hd_1.png}};
+  \node[opacity=0.7] at (4,0.5) {\includegraphics[width=2cm]{img/logos/Logo_ESILV.png}};
+  \node[opacity=0.7] at (6,0.5) {\includegraphics[width=0.8cm]{img/logos/tem.PNG}};
+  \node[opacity=0.7] at (8,0.5) {\includegraphics[width=1cm]{img/logos/ENS_Cachan.png}};
+  \node[opacity=0.7] at (10,0.5) {\includegraphics[width=1cm]{img/logos/sorbonne.jpeg}};
+  \node[opacity=0.7] at (12,0.5) {\includegraphics[width=1cm]{img/logos/logo_uga.png}};
+\end{tikzpicture}
+
+# Introduction
+
+## Machine Learning examples
+
+You probably use it dozens of times a day without even knowing it. 
+
+Application examples:
+
+\begin{itemize}
+\tightlist
+\item Effective web search.
+\item Social networks recognize friends from photos or suggest friends.
+\item Email spam detection.
+\item Handwriting recognition.
+\item Understanding the human genome.
+\item Medical diagnostics.
+\item Predict possibility for a certain disease on basis of clinical measures.
+\item Fraud detection.
+\item Drive vehicles.
+\item Recommendations (eg, Amazon, Netflix).
+\item Natural language processing.
+\end{itemize}
+
+The aim of ML is to build computer systems that can adapt to their environments and learn form experience.
+
+## Machine Learning examples\footnote{Savin Goyal - useR'19}
+
+\begincols
+\begincol{.4\textwidth}
+This is a high-level view of what
+Netflix does.
+\endcol
+
+\begincol{.6\textwidth}
+
+```{r, out.width="50%", fig.align='center'}
+knitr::include_graphics("img/netflix1.png")
+```
+
+\endcol
+\endcols
+
+
+
+
+## Machine Learning examples\footnote{Savin Goyal - useR'19}
+
+\begincols
+\begincol{.4\textwidth}
+It is probably necessary to **get
+smarter** about everything:
+
+- Content acquisition
+- Marketing
+- Discovery
+- Delivery
+- and more.
+
+ML gets applied everywhere!
+\endcol
+
+\begincol{.6\textwidth}
+
+```{r, out.width="60%", fig.align='center'}
+knitr::include_graphics("img/netflix2.png")
+```
+
+\endcol
+\endcols
+
+
+## Machine Learning examples\footnote{Savin Goyal - useR'19}
+
+
+```{r, out.width="80%", fig.align='center'}
+knitr::include_graphics("img/netflix3.png")
+```
+
+## ML is everywhere
+
+
+![](img/Screenshot_20211118-215613_Twitter.jpg){width=30%}
+
+
+## Machine Learning: Definition
+
+\begin{block}{What is Machine Learning?}
+  \begin{itemize}
+    \item A science of getting computers to learn without being explicitly programmed\footnote{Arthur Samuel.}.
+    % \item A more modern definition: ``A computer program is said to \textcolor{barcolor}{learn from experience E} with respect to \alert{some class of tasks T} and \alert{performance measure P}, if \textcolor{blue}{its performance at tasks in T, as measured by P, improves with experience E}''.
+    \item Study of algorithms that \alert{improve} their \textcolor{blue}{performance P} at \textcolor{blue}{some task T} with \textcolor{blue}{experience E}\footnote{Tom Mitchell.}.
+  \end{itemize}
+\end{block}
+
+```{r, out.width="60%", fig.align='center'}
+knitr::include_graphics("img/ocr.pdf")
+```
+
+<!-- \begin{center} -->
+<!--   \begin{figure} -->
+<!--     \includegraphics[scale=0.3]{img/ocr.pdf} -->
+<!--   \end{figure} -->
+<!-- \end{center} -->
+
+\begin{itemize}
+  \item[\textcolor{barcolor}{T:}] recognition of a handwritten letter ``a'' from its image.
+  \item[\textcolor{barcolor}{E:}] images of a handwritten ``a''.
+  \item[\textcolor{barcolor}{P:}] recognition rate.
+\end{itemize}
+
+<!-- ## Types of Machine Learning Problems -->
+
+
+<!-- In general, any machine learning problem can be assigned to one of two -->
+<!-- broad types: -->
+
+<!-- \tikzset{ -->
+<!--   basic/.style  = {text width=2.5cm, rectangle, fill=backgroundcolor,draw=barcolor}, -->
+<!--   root/.style   = {basic, text width=3.5cm,minimum height=1cm,rounded corners=2pt, thin, align=center}, -->
+<!--   level 2/.style = {basic,  text width=3.5cm, rounded corners=2pt, thin, align=center,minimum height=1cm,sibling distance=40mm} -->
+<!--                   } -->
+
+<!-- \begin{center} -->
+<!-- \begin{tikzpicture}[level 1/.style={sibling distance=60mm}, -->
+<!--   edge from parent/.style={->,draw,barcolor}, -->
+<!--   >=latex] -->
+
+<!-- % root of the the initial tree, level 1 -->
+<!-- \node[root] {Machine Learning Types} -->
+<!-- % The first level, as children of the initial tree -->
+<!--     child { node[level 2] {Supervised Learning}  -->
+<!--       } -->
+<!--     child { node[level 2] {Unsupervised Learning} -->
+<!--     } -->
+<!-- ; -->
+<!-- \end{tikzpicture} -->
+<!-- \end{center} -->
+
+<!-- \text{} -->
+
+<!-- \textcolor{barcolor}{Other}: Semi-supervised Learning, Reinforcement learning, Recommender system, etc... -->
+
+
+
+## Types of Machine Learning Problems
+
+ 
+In general, any machine learning problem can be assigned to one of two
+broad types:
+
+
+```{r, out.width="40%", fig.align='center'}
+knitr::include_graphics("img/Capture d’écran 2022-07-06 à 17.15.11.png")
+```
+
+# Supervised Learning
+
+## Example: House price prediction\footnote{Examples from Andrew Ng's MOOC.}
+
+Let's say we want to predict housing prices. We plot a data set and it looks like this:
+
+
+\begin{center}
+\includegraphics[width=250px]{img/sl1} 
+\end{center}
+
+Let's say we own a house that is, say 750 square feet and hoping to sell
+the house and we want to know how much we can get for the house.
+
+## Example: Medical diagnosis
+
+Let's say a person has a breast tumor, and her breast tumor size is known.
+
+\begin{center}
+\includegraphics[width=230px]{img/sl5} 
+\end{center}
+\begin{itemize}
+  \item The machine learning question here is, can you estimate what is the \textbf{probability} that a tumor is malignant versus benign?
+\end{itemize}
+
+## Example: Medical diagnosis
+
+Let's say that we know both the age of the patients and the tumor size. In that case maybe the data set will look like this.
+
+\begin{center}
+\includegraphics[width=175px]{img/sl9}
+\end{center}
+
+
+## Supervised Learning: Definition \& Model
+
+The term \textcolor{barcolor}{supervised learning} refers to the fact that we gave the
+algorithm a data set in which the \textbf{``right answers''} (known as
+\textbf{labels}) were given. \pause
+
+\tikzset{
+  basic/.style  = {text width=2.5cm, rectangle,fill=backgroundcolor,draw=barcolor},
+  root/.style   = {basic, text width=3.5cm,minimum height=1cm,rounded corners=2pt, thin, align=center},
+  level 2/.style = {basic,  text width=3.5cm, rounded corners=2pt, thin, align=center,minimum height=1cm,sibling distance=40mm},
+  level 3/.style = {basic,  text width=1.5cm, rounded corners=2pt, thin, text=black,align=center,minimum height=1cm,sibling distance=40mm}
+                  }
+
+
+\begin{center}
+\begin{tikzpicture}[level 1/.style={sibling distance=70mm},
+  edge from parent/.style={->,draw,barcolor},
+  >=latex]
+
+% root of the the initial tree, level 1
+\node[root] {\large{Training Set}}
+% The first level, as children of the initial tree
+    child { node[level 2] (n) {\large{Learning Algorithm}} 
+     child { node[level 3] (f) {\Huge $f$} }
+     }
+;
+
+\node (target) [right of=f, xshift=1.6cm] {\Large Target};
+
+\node (features) [left of=f, xshift=-1.6cm] {\Large Features};
+
+\tikzstyle{arrow} = [->,draw,barcolor]
+
+\draw [arrow] (f) -- (target);
+\draw [arrow] (features) -- (f);
+
+\end{tikzpicture}
+\end{center}
+
+
+\begin{itemize}
+\tightlist
+\item Supervised Learning refers to a set of approaches for
+  \textcolor{blue}{estimating $f$}.
+\item \(f\) is also called \textbf{\emph{\textcolor{red}{hypothesis}}} in
+  Machine Learning.
+\end{itemize}
+
+## Regression vs Classification
+
+\begincols
+\begincol{.45\textwidth}
+\begin{block}{Regression}
+\begin{itemize}
+\item The example of the house price prediction is also called a
+  \alert{regression} problem.
+\item A regression problem is when we try to predict a \alert{quantitative
+  (continuous)} value output. Namely the price in the example.
+\end{itemize}
+\end{block}
+
+\endcol
+
+\begincol{.45\textwidth}
+\begin{block}{Classification}
+\begin{itemize}
+\item The process for predicting \alert{qualitative (categorical,
+  discrete)} responses is known as classification.
+\item Methods: Logistic regression, Support Vector Machines, etc..
+\end{itemize}
+\end{block}
+
+\endcol
+\endcols
+
+## Supervised Learning: Notations
+
+Notations:
+
+\begin{itemize}
+\item The size of the house in the first example, tumor size and age in the second example, are the \textbf{\textcolor{barcolor}{input}} variables. Typically
+  denoted by \(X\).
+\item The inputs go by different names, such as
+  \emph{\textcolor{blue}{predictors}},
+  \emph{\textcolor{blue}{independent variables}},
+  \emph{\textcolor{blue}{features}}, \emph{\textcolor{blue}{predictor}}
+  or sometimes just \emph{\textcolor{blue}{variables}}.  \pause
+\item The house price in the first example and the diagnosis in the second example are the \textbf{\textcolor{barcolor}{output}} variables, and are typically
+  denoted using the symbol \(Y\).
+\item The output variable is often called the
+  \emph{\textcolor{red}{response}},
+  \emph{\textcolor{red}{dependent variable}} or
+  \emph{\textcolor{red}{target}}.
+\end{itemize}
+
+# Unsupervised Learning
+
+## Unsupervised Learning: ``No labels''
+
+In Unsupervised Learning, we're given data that doesn't have any
+\textbf{labels}.
+
+For example:
+
+\begin{center}
+\includegraphics[width=150px]{img/ul1}
+\end{center}
+
+Question: Can you find some structure in the data?
+
+## Unsupervised Learning: Example
+
+One example where clustering is used is in Google News (news.google.com)
+
+\begin{center}
+\includegraphics[width=180px]{img/googlenews}
+\end{center}
+
+## Types of Machine Learning Problems
+
+
+\tikzset{
+  % basic/.style  = {text width=2.5cm, text=white, rectangle},
+  basic/.style  = {text width=2.5cm, fill=white,draw=barcolor, rectangle},
+  root/.style   = {basic, minimum height=0.7cm, text width=3.5cm,rounded corners=2pt, thin, align=center},
+  level 2/.style = {basic, minimum height=0.7cm, text width=3.5cm, rounded corners=2pt, thin, align=center,sibling distance=40mm,draw=barcolor!80},
+ level 3/.style = {basic, rounded corners=2pt, thin, align=center,font=\small,draw=barcolor!60},
+level 33/.style = {basic, text width=2.5cm,rounded corners=2pt, thin, align=center,
+                   fill=white, draw=barcolor,font=\small,draw=barcolor!60},
+  level 4/.style = {basic, rounded corners=2pt, thin, align=center,draw=barcolor!40},
+    level 5/.style = {basic, rounded corners=2pt, thin, align=center,font=\small,draw=barcolor!20}
+}
+
+\begin{center}
+\begin{tikzpicture}[scale=0.8,
+  level 1/.style={sibling distance=70mm},
+  edge from parent/.style={->,draw,barcolor},
+  >=latex]
+
+% root of the the initial tree, level 1
+\node[root] {Machine Learning Types}
+% The first level, as children of the initial tree
+    child { node[level 2] {Supervised Learning} 
+          child { node[level 3] {Continuous Target Variable}
+            child { node[level 4] {Regression}
+              child { node[level 5] {House Price \\ Prediction}}}}
+          child { node[level 3] {Categorical Target Variable}
+            child { node[level 4] {Classification}
+              child { node[level 5] {Medical diagnosis}}}}
+      }
+    child { node[level 2] {Unsupervised Learning}
+      child { node[level 33] {Target Variable Not Available}
+        child { node[level 4] {Clustering}
+          child { node[level 5] {Customer segmentation}}}
+         } 
+    }
+;
+\end{tikzpicture}
+\end{center}
+
+# Linear Regression
+
+
+## Regression
+
+\begincols
+
+
+\begincol{.6\textwidth}
+
+```{r, out.width = "50%"}
+set.seed(1812)
+ggplot(MASS::Boston[sample(20),], aes(lstat,medv)) +
+  geom_point(color="#CD0050", size=3) +
+  theme_mooc() +
+  xlab("Lower status of the population (percent)") + 
+  ylab("median value of houses ($\\times$ 10k\\$)") 
+```
+
+
+\endcol
+\begincol{.4\textwidth}
+
+Let:
+
+- $n$: sample size
+- $x$: features
+- $y$: target variable
+- $(x^{(i)},y^{(i)})$: one sample, a training example
+
+\endcol
+\endcols
+
+## Simple Linear Regression
+
+\begincols
+\begincol{.4\textwidth}
+
+```{r, out.width = "70%"}
+set.seed(1812)
+ggplot(MASS::Boston[sample(20),], aes(lstat,medv)) +
+  geom_point(color="#CD0050", size=3) +
+  theme_mooc() +
+  xlab("Lower status of the population (percent)") + 
+  ylab("median value of houses ($\\times$ 10k\\$)") 
+```
+
+
+  
+\endcol
+
+\begincol{.6\textwidth}
+
+- Hypothesis: $f(x) = f_{\omega}(x) = \omega_0 + \omega_1 x$
+- Choose $\omega_0$ and $\omega_1$ so that $f_{\omega}(x)$ is close to $y$
+- \alert{Cost function} $J(\omega) =$
+- How to calculate $\omega$? 
+  + GD
+  + OLS
+
+\endcol
+\endcols
+
+
+## Cost function intuition
+
+
+:::{.block data-latex="{Simple linear regression}"}
+- Model: $f_{\omega}(x) = \omega_0 + \omega_1 x = \omega'x$
+- Parameters: $\omega_0$ and $\omega_1$
+- Cost function: $J(\omega_0,\omega_1) = \frac{1}{2 n} \sum_{i=1}^{n}\left(f_{\omega}\left(x^{(i)}\right)-y^{(i)}\right)^{2}$
+- Goal: $\min_{\omega_0,\omega_1} J(\omega_0,\omega_1)$
+:::
+
+
+\vspace{1cm}
+
+Suppose a \alert{simplified} hypothesis (with 1 parameter): 
+
+- Model: Let $f_{\omega}(x) = \omega_1 x = \omega'x$
+- Parameter: $\omega_1$
+- Cost function: $J(\omega_1) = \frac{1}{2 n} \sum_{i=1}^{n}\left(f_{\omega}\left(x^{(i)}\right)-y^{(i)}\right)^{2}$
+
+
+
+## Cost function intuition
+
+\begincols
+\begincol{.5\textwidth}
+
+<!-- - Let le jeu de données suivant: -->
+
+<!-- \begin{tabular}{r\mid r} -->
+<!-- \hline -->
+<!-- x & y\\ -->
+<!-- \hline -->
+<!-- 1 & 2\\ -->
+<!-- \hline -->
+<!-- 2 & 4\\ -->
+<!-- \hline -->
+<!-- 3 & 6\\ -->
+<!-- \hline -->
+<!-- 4 & 8\\ -->
+<!-- \hline -->
+<!-- \end{tabular} -->
+
+<!-- - Let les Models de Parameters: $\{0, 1, 2, 3, 4\}$  -->
+
+Let the following example:
+
+```{r, out.width = "60%"}
+x=1:4
+y=2*x
+
+ggplot(data.frame(x,y), aes(x,y)) +
+  xlim(0,8) + ylim(0,8) +
+  geom_point(color="#CD0050", size=4) +
+  theme_mooc() +
+  xlab("$x$") + 
+  ylab("$y$")
+```
+
+
+\endcol
+\begincol{.5\textwidth}
+
+```{r, out.width = "60%"}
+x=1:4
+y=2*x
+
+ggplot(data.frame(x,y), aes(x,y)) +
+  xlim(0,8) + ylim(0,8) +
+  geom_point(color="#CD0050", size=4) +
+  theme_mooc() +
+  xlab("$x$") + 
+  ylab("$y$") +
+  geom_abline(slope = 0, intercept = 0, col = RColorBrewer::brewer.pal(5, "Set1")[1], lwd=1) + 
+  geom_abline(slope = 1, intercept = 0, col = RColorBrewer::brewer.pal(5, "Set1")[2], lwd=1) + 
+  geom_abline(slope = 2, intercept = 0, col = RColorBrewer::brewer.pal(5, "Set1")[3], lwd=1) + 
+  geom_abline(slope = 3, intercept = 0, col = RColorBrewer::brewer.pal(5, "Set1")[4], lwd=1) + 
+  geom_abline(slope = 4, intercept = 0, col = RColorBrewer::brewer.pal(5, "Set1")[5], lwd=1)
+
+cost=numeric()
+for(beta1 in seq(0,4,1)){
+  yhat = beta1*x
+  cost=c(cost, mean((y-yhat)^2))
+}
+
+ggplot(data.frame(x=seq(0,4,1),y=cost), aes(x,y)) +
+  geom_point(color=RColorBrewer::brewer.pal(5, "Set1"), size=4) +
+  # geom_line(lwd=1, color =  "#CD0050") +
+  theme_mooc() +
+  xlab("$\\omega_1$") + 
+  ylab("$J(\\omega_1)$")
+```
+
+
+\endcol
+\endcols
+
+
+## Cost function intuition
+
+
+
+:::{.block data-latex="{Simple linear regression}"}
+- Model: $f_{\omega}(x) = \omega_0 + \omega_1 x = \omega'x$
+- Cost function: $J(\omega_0,\omega_1) = \frac{1}{2 n} \sum_{i=1}^{n}\left(f_{\omega}\left(x^{(i)}\right)-y^{(i)}\right)^{2}$
+:::
+
+
+```{r}
+#| layout-ncol: 3
+#| out-width: 1.7in
+
+
+set.seed(1812)
+ggplot(MASS::Boston[sample(20),], aes(lstat,medv)) +
+  geom_point(color="#CD0050", size=3) +
+  theme_mooc() +
+  xlab("Lower status of the population (percent)") + 
+  ylab("median value of houses ($\\times$ 10k\\$)") 
+
+
+fdejong <- function (x, y) {
+  return (x^2 + y^2)
+}
+x <- seq(-10, 10, length= 30)
+y <- x
+z <- outer(x, y, fdejong)
+z[is.na(z)] <- 1
+
+plot3D::persp3D(x,y,z, xlab="$\\omega_0$", ylab="$\\omega_1$", zlab="$J(\\omega)$", colkey = F, bty="g", phi=30)
+
+plot3D::contour2D(z,x,y, xlab="$\\omega_0$", ylab="$\\omega_1$")
+```
+
+
+## Multiple Linear Regression
+
+\begincols
+
+
+\begincol{.7\textwidth}
+
+- Let $p$ features: $x_1, x_2, \ldots, x_p$
+- Multiple linear regression: $f(x) = f_{\omega}(x) = \omega_0 + \omega_1 x_1 + \ldots + \omega_p x_p$
+
+```{r, out.width="70%"}
+library(scatterplot3d)
+
+data(trees)
+
+s3d <- scatterplot3d(trees, color = "#CD0050",
+                     angle = 55, scale.y = 0.7, pch = 19,
+                     xlab="$x_1$", ylab = "$x_2$", zlab = "$y$",
+                     grid = T, col.grid = "white",
+                     main = "Linear Regression with 2 features")
+
+my.lm <- lm(trees$Volume ~ trees$Girth + trees$Height)
+
+s3d$plane3d(my.lm)
+```
+
+
+\endcol
+\begincol{.3\textwidth}
+\endcol
+\endcols
+
+## Multiple Linear Regression
+
+\begincols
+
+
+\begincol{.7\textwidth}
+
+- Let $p$ variables: $x_1, x_2, \ldots, x_p$
+- Multiple linear regression: $f(x) = f_{\omega}(x) = \omega_0 + \omega_1 x_1 + \ldots + \omega_p x_p$
+- Define $x_0 = 1$, and
+
+$$\omega = \begin{pmatrix}
+    \omega_{0} \\
+    \omega_{1} \\
+    \vdots \\
+    \omega_{p}
+    \end{pmatrix}    \quad  x = \begin{pmatrix}
+    x_{0} \\
+    x_{1} \\
+    \vdots \\
+    x_{p}
+    \end{pmatrix}$$
+
+- Using matrices: $f_{\omega}(x) = \omega' x$
+- Methods to estimate $\omega$:
+  + OLS
+  + GD
+- Cost function $J(\omega) = \frac{1}{2 n} \sum_{i=1}^{n}\left(f_{\omega}\left(x^{(i)}\right)-y^{(i)}\right)^{2}$
+
+\endcol
+\begincol{.3\textwidth}
+\endcol
+\endcols
+
+
+# Gradient descent
+
+## Gradient descent: algorithm
+
+\begincols
+
+
+\begincol{.7\textwidth}
+
+- Let a function $J(\theta)$
+- **Goal**: Find $\theta$ that minimizes $J(\theta)$, e.g. $\theta = \argmin_{\theta} J(\theta)$
+- **Algorithm**: 
+
+  + `initialize` $\theta$ `randomly`
+  + `repeat until convergence`{ 
+$$\theta^{new} = \theta^{old} - \alpha J'(\theta)$$
+\text{                            } }
+
+- $\alpha$ is the learning rate
+
+\endcol
+\begincol{.3\textwidth}
+\endcol
+\endcols
+
+## Gradient descent: convex functions
+
+
+:::{.exampleblock data-latex="{Convex function}"}
+
+- $f$ is convex if $f\left(\lambda x_{1}+(1-\lambda) x_{2}\right) \leq \lambda f\left(x_{1}\right)+(1-\lambda) f\left(x_{2}\right), \forall x_{1}$ and $x_{2} \in d_f, \lambda \in(0,1)$.
+- $f$ is convex iff $f'' \geq 0$
+- A convex funtion has a global minimum
+
+:::
+
+
+```{r}
+#| layout-ncol: 2
+#| out-width: 2in
+#| 
+ggplot(data.frame(x=c(-4, 4)), aes(x)) + 
+  stat_function(fun = function(x) x^2, geom = "line",lwd=1, color =  "#CD0050") +
+  theme_mooc() +
+  xlab("") + ylab("")
+
+ggplot(data.frame(x=c(-8, 8)), aes(x)) + 
+  stat_function(fun = function(x) x*cos(x), geom = "line",lwd=1, color =  "#CD0050") +
+  theme_mooc() +
+  xlab("") + ylab("")
+```
+
+
+## Gradient descent: example
+
+\begincols
+\begincol{.2\textwidth}
+
+- Let $J(\theta)=\theta^2$
+- So $J'(\theta) = 2 \theta$
+- Let $\alpha = 0.1$
+
+\endcol
+
+\begincol{.8\textwidth}
+
+```{r}
+ggplot(data.frame(x=c(-3, 3)), aes(x)) + 
+  stat_function(fun = function(x) x^2, geom = "line",lwd=1, color =  "#CD0050") + 
+  theme_mooc() +
+  xlab("$\\theta$") + 
+  ylab("$J(\\theta)$")
+```
+
+\endcol
+\endcols
+
+
+## Gradient descent: choosing $\alpha$
+
+- $J(\theta)$ must decrease after each iteration
+- Define the convergence
+
+```{r}
+#| layout-ncol: 2
+#| out-width: 2in
+
+
+ggplot(data.frame(x=c(0, 50, 100 ,150)), aes(x)) + 
+  theme_mooc() +
+  xlab("itetarion") + 
+  ylab("$\\min J(\\theta)$")
+
+ggplot(data.frame(x=c(-3, 3)), aes(x)) + 
+  stat_function(fun = function(x) x^2, geom = "line",lwd=1, color =  "#CD0050") + 
+  theme_mooc() +
+  xlab("$\\theta$") + 
+  ylab("$J(\\theta)$")
+```
+
+- If $\alpha$ is too small, slow convergence
+- If $\alpha$ is too large, convergence is not guaranteed
+
+
+## Gradient descent: function of two variables
+
+
+- Let a function $J(\theta_0, \theta_1)$
+- **Goal**: find $(\theta_0,\theta_1)$ that minimize $J(\theta_0, \theta_1)$, e.g. $\argmin_{(\theta_0,\theta_1)} J(\theta_0, \theta_1)$
+- **Algorithm**: 
+
+  + `initialize` $(\theta_0,\theta_1)$ `randomly`
+  + `repeat until convergence`{ 
+$$\theta_0^{new} = \theta_0^{old} - \alpha \frac{\partial }{\partial \theta_0} J(\theta_0, \theta_1)$$
+$$\theta_1^{new} = \theta_1^{old} - \alpha \frac{\partial }{\partial \theta_1} J(\theta_0, \theta_1)$$
+\text{                            } }
+
+- $\alpha$ is the learning rate
+- Same principle if $J$ is a function of more variables
+
+
+
+## Gradient descent: function of two variables
+
+
+```{r}
+#| layout-ncol: 3
+#| out-width: 1.7in
+
+
+fdejong <- function (x, y) {
+  return (x^2 + y^2)
+}
+x <- seq(-10, 10, length= 30)
+y <- x
+z <- outer(x, y, fdejong)
+z[is.na(z)] <- 1
+
+plot3D::persp3D(x,y,z, xlab="$\\theta_0$", ylab="$\\theta_1$", zlab="$J(\\theta)$", colkey = F, bty="g", phi=30)
+
+plot3D::contour2D(z,x,y, xlab="$\\theta_0$", ylab="$\\theta_1$")
+
+x <- seq(-pi, pi, by = 0.2)
+y <- seq(-pi, pi, by = 0.3)
+grid <- mesh(x, y)
+z    <- with(grid, cos(x) * sin(y))
+
+plot3D::persp3D(z = z, x = x, y = y,  xlab="$\\theta_0$", ylab="$\\theta_1$", zlab="$J(\\theta)$", colkey = F, bty="g", phi=30)
+# plot3D::contour2D(z,x,y, xlab="$\\theta_0$", ylab="$\\theta_1$")
+```
+
+  
+## Gradient descent for linear regression 
+
+
+
+
+:::{.block data-latex="{Simple linear regression}"}
+- Model: $f_{\omega}(x) = \omega_0 + \omega_1 x = \omega'x$
+- Parameters: $\omega_0$ and $\omega_1$
+- Cost function: $J(\omega_0,\omega_1) = \frac{1}{2 n} \sum_{i=1}^{n}\left(f_{\omega}\left(x^{(i)}\right)-y^{(i)}\right)^{2}$
+- Goal: $\min_{\omega_0,\omega_1} J(\omega_0,\omega_1)$
+:::
+
+\begincols
+\begincol{.49\textwidth}
+
+:::{.alertblock data-latex="{Algorithm}"}
+- `initialize` $(\omega_0,\omega_1)$ `randomly`
+- `repeat until convergence`{ 
+$$\omega_i^{new} = \omega_i^{old} - \alpha \frac{\partial }{\partial \omega_i} J(\omega_0, \omega_1)$$
+$$\text{for } i = 0 \text{ and } i=1$$
+}
+:::
+
+\endcol
+
+\begincol{.49\textwidth}
+
+:::{.alertblock data-latex="{Algorithm}"}
+- `initialize` $(\omega_0,\omega_1)$ `randomly`
+- `repeat until convergence`{ 
+\begin{align*}
+\omega_0^{new} &= \omega_0^{old} - \alpha \frac{1}{n} \sum_{i=1}^{n}\left(f_{\omega}\left(x^{(i)}\right)-y^{(i)}\right) \\
+\omega_1^{new} &= \omega_1^{old} - \alpha \frac{1}{n} \sum_{i=1}^{n}\left(f_{\omega}\left(x^{(i)}\right)-y^{(i)}\right).x^{(i)}
+\end{align*}
+}
+:::
+
+\endcol
+\endcols
+  
+
+## Gradient descent for multiple linear regression 
+
+:::{.block data-latex="{Multiple linear regression}"}
+- Model: $f_{\omega}(x) = \omega_0 + \omega_1 x_1 + \ldots + \omega_p x_p= \omega'x$
+- Parameters: $\omega_0, \omega_1, \ldots, \omega_p$
+- Cost function: $J(\omega) = \frac{1}{2 n} \sum_{i=1}^{n}\left(f_{\omega}\left(x^{(i)}\right)-y^{(i)}\right)^{2}$
+:::
+
+:::{.alertblock data-latex="{Algorithm}"}
+- `initialize` the $\omega_i$ `randomly`
+- `repeat until convergence`{ 
+$$\omega_i^{new} = \omega_i^{old} - \alpha \frac{\partial }{\partial \omega_i} J(\omega) \quad \text{simultaneously for every } i=0,\ldots,p$$
+}
+:::
+
+
+## Gradient descent for multiple linear regression 
+
+:::{.alertblock data-latex="{Algorithm}"}
+- `initialize` the $\omega_i$ `randomly`
+- `repeat until convergence`{ 
+\begin{align*}
+\omega_0^{new} &= \omega_0^{old} - \alpha \frac{1}{n} \sum_{i=1}^{n}\left(f_{\omega}\left(x^{(i)}\right)-y^{(i)}\right).x_0^{(i)} \\
+\omega_1^{new} &= \omega_1^{old} - \alpha \frac{1}{n} \sum_{i=1}^{n}\left(f_{\omega}\left(x^{(i)}\right)-y^{(i)}\right).x_1^{(i)} \\
+\vdots \\
+\omega_p^{new} &= \omega_p^{old} - \alpha \frac{1}{n} \sum_{i=1}^{n}\left(f_{\omega}\left(x^{(i)}\right)-y^{(i)}\right).x_p^{(i)}
+\end{align*}
+}
+:::
+
+
+## Remarks
+
+
+:::{.block data-latex="{Gradient descent}"}
+- Gradient descent ("Batch" version): each step uses all the training examples
+- Features must be scaled
+- We must choose $\alpha$
+- There is more advanced gradient based algorithms
+:::
+
+
+:::{.alertblock data-latex="{Normal equation}"}
+- OLS leads to an analytical solution
+- $\theta = (X^{\prime}X)^{-1} X^{\prime} y$
+- No need to choose $\alpha$ neither to iterate
+- Need to compute $(X^{\prime}X)^{-1}$
+- Slow if $p$ is large
+- What if $(X^{\prime}X)^{-1}$ is non-invertible?
+:::
+
+## Regression: Some important questions 
+
+When we perform multiple linear regression, we usually are interested in answering a few important questions.
+
+1. Is at least one of the predictors $X_1 ,X_2 ,\ldots,X_p$ useful in predicting the response?
+2. Do all the predictors help to explain $y$, or is only a subset of the predictors useful?
+3. How well does the model fit the data?
+4. Given a set of predictor values, what response value should we predict, and how accurate is our prediction?
+
+## Regression: example
+
+|   | Coefficient  | Std. error  | $t$-statistic  | p-value  |
+|---|---|---|---|---|
+| Constant | 2.939 | 0.3119 | 9.42 | <0.0001 |
+| $X_1$ | 0.046 | 0.0014 | 32.81 | <0.0001 |
+| $X_2$ | 0.189 | 0.0086 | 21.89 | <0.0001 |
+| $X_3$ | -0.001 | 0.0059 | -0.18  | 0.8599 |
+
+In this table we have the following model
+
+$$ Y = 2.939 + 0.046 X_1 + 0.189 X_2 - 0.001 X_3 $$
+
+
+# Assessing model accuracy & Bias/Variance Trade-off 
+
+## Sampling: **Train/test split**
+
+![](img/Capture d’écran 2022-07-06 à 00.41.57.png)
+
+## Model accuracy: Regression
+
+:::{.alertblock data-latex="{Regression}"}
+MSE (Mean Squared Error) = $\frac{1}{n} \sum_{i = 1}^{n} (f(x^{(i)}) - y^{(i)})^2$
+:::
+
+## Model accuracy: Classification
+
+![](img/cm.png)
+
+
+## Bias/Variance Trade-off (Underfitting & Overfitting)
+
+![](img/Capture d’écran 2022-07-06 à 00.49.48.png)
+
+## Bias/Variance Trade-off (Underfitting & Overfitting)
+
+![](img/Capture d’écran 2022-07-06 à 00.50.26.png)

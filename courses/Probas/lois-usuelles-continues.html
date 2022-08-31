@@ -1,0 +1,683 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="fr" xml:lang="fr"><head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.1.147">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+<title>Probabilités - 4&nbsp; Lois usuelles continues</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1.6em;
+  vertical-align: middle;
+}
+</style>
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<link href="./exos2.html" rel="next">
+<link href="./variables-aleatoires-continues.html" rel="prev">
+<script src="site_libs/quarto-html/quarto.js"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-dark.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-dark.min.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark"><script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 20,
+  "language": {
+    "search-no-results-text": "Pas de résultats",
+    "search-matching-documents-text": "documents trouvés",
+    "search-copy-link-title": "Copier le lien vers la recherche",
+    "search-hide-matches-text": "Cacher les correspondances additionnelles",
+    "search-more-match-text": "correspondance de plus dans ce document",
+    "search-more-matches-text": "correspondances de plus dans ce document",
+    "search-clear-button-title": "Effacer",
+    "search-detached-cancel-button-title": "Annuler",
+    "search-submit-button-title": "Envoyer"
+  }
+}</script><script async="" src="https://hypothes.is/embed.js"></script><script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script><link rel="stylesheet" href="mycss.css">
+</head>
+<body class="nav-sidebar docked">
+
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top"><nav class="quarto-secondary-nav" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }"><div class="container-fluid d-flex justify-content-between">
+      <h1 class="quarto-secondary-nav-title">
+<span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Lois usuelles continues</span>
+</h1>
+      <button type="button" class="quarto-btn-toggle btn" aria-label="Show secondary navigation">
+        <i class="bi bi-chevron-right"></i>
+      </button>
+    </div>
+  </nav></header><!-- content --><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse sidebar-navigation docked overflow-auto"><div class="pt-lg-2 mt-2 text-left sidebar-header sidebar-header-stacked">
+      <a href="./" class="sidebar-logo-link">
+      <img src="./img/logo_efrei_assas_white.png" alt="" class="sidebar-logo py-0 d-lg-inline d-none"></a>
+    <div class="sidebar-title mb-0 py-0">
+      <a href="./">Probabilités</a> 
+        <div class="sidebar-tools-main">
+  <a href="" class="quarto-color-scheme-toggle sidebar-tool" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
+  <a href="" class="quarto-reader-toggle sidebar-tool" onclick="window.quartoToggleReader(); return false;" title="Toggle reader mode">
+  <div class="quarto-reader-toggle-btn">
+  <i class="bi"></i>
+  </div>
+</a>
+</div>
+    </div>
+      </div>
+      <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+      </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+<li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./index.html" class="sidebar-item-text sidebar-link">Welcome</a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./variables-aleatoires-discretes.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Variables Aléatoires Discrètes</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./lois-usuelles-discretes.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Lois Usuelles Discrètes</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./exos1.html" class="sidebar-item-text sidebar-link">Feuille d’Exercices 1 [Fr]</a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./exos1_en.html" class="sidebar-item-text sidebar-link">Feuille d’Exercices 1 [En]</a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./variables-aleatoires-continues.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Variables Aléatoires Continues</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./lois-usuelles-continues.html" class="sidebar-item-text sidebar-link active"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Lois Usuelles Continues</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./exos2.html" class="sidebar-item-text sidebar-link">Feuille d’Exercices 2 [Fr]</a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./exos2_en.html" class="sidebar-item-text sidebar-link">Feuille d’Exercices 2 [En]</a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true">Appendices</a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">
+<li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./appendix.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">A</span>&nbsp; <span class="chapter-title">Table de la loi Normale centrée réduite</span></a>
+  </div>
+</li>
+      </ul>
+</li>
+    </ul>
+</div>
+</nav><!-- margin-sidebar --><div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active"><h2 id="toc-title">Table des matières</h2>
+   
+  <ul>
+<li><a href="#loi-uniforme-uab" id="toc-loi-uniforme-uab" class="nav-link active" data-scroll-target="#loi-uniforme-uab">Loi uniforme <span class="math inline">\(U(a,b)\)</span></a></li>
+  <li><a href="#loi-exponentielle-mathcalelambda" id="toc-loi-exponentielle-mathcalelambda" class="nav-link" data-scroll-target="#loi-exponentielle-mathcalelambda">Loi exponentielle <span class="math inline">\(\mathcal{E}(\lambda)\)</span></a></li>
+  <li>
+<a href="#loi-normale-ou-de-laplace-gauss-mathcalnmusigma2" id="toc-loi-normale-ou-de-laplace-gauss-mathcalnmusigma2" class="nav-link" data-scroll-target="#loi-normale-ou-de-laplace-gauss-mathcalnmusigma2">Loi Normale ou de Laplace-Gauss <span class="math inline">\(\mathcal{N}(\mu,\sigma^2)\)</span></a>
+  <ul class="collapse">
+<li><a href="#%C3%A9tude-de-la-densit%C3%A9-de-la-loi-normale" id="toc-étude-de-la-densité-de-la-loi-normale" class="nav-link" data-scroll-target="#%C3%A9tude-de-la-densit%C3%A9-de-la-loi-normale">Étude de la densité de la loi Normale</a></li>
+  </ul>
+</li>
+  <li><a href="#loi-normale-centr%C3%A9e-r%C3%A9duite-mathcaln01" id="toc-loi-normale-centrée-réduite-mathcaln01" class="nav-link" data-scroll-target="#loi-normale-centr%C3%A9e-r%C3%A9duite-mathcaln01">Loi Normale centrée réduite <span class="math inline">\(\mathcal{N}(0,1)\)</span></a></li>
+  <li><a href="#relation-entre-loi-normale-et-loi-normale-centr%C3%A9e-r%C3%A9duite" id="toc-relation-entre-loi-normale-et-loi-normale-centrée-réduite" class="nav-link" data-scroll-target="#relation-entre-loi-normale-et-loi-normale-centr%C3%A9e-r%C3%A9duite">Relation entre loi normale et loi normale centrée réduite</a></li>
+  <li><a href="#calcul-des-probabilit%C3%A9s-dune-loi-normale" id="toc-calcul-des-probabilités-dune-loi-normale" class="nav-link" data-scroll-target="#calcul-des-probabilit%C3%A9s-dune-loi-normale">Calcul des probabilités d’une loi normale</a></li>
+  <li><a href="#approximation-normale-dune-r%C3%A9partition-binomiale" id="toc-approximation-normale-dune-répartition-binomiale" class="nav-link" data-scroll-target="#approximation-normale-dune-r%C3%A9partition-binomiale">Approximation normale d’une répartition binomiale</a></li>
+  <li><a href="#loi-de-chi2-de-pearson" id="toc-loi-de-chi2-de-pearson" class="nav-link" data-scroll-target="#loi-de-chi2-de-pearson">Loi de <span class="math inline">\(\chi^{2}\)</span> de Pearson</a></li>
+  <li><a href="#loi-de-student-stn" id="toc-loi-de-student-stn" class="nav-link" data-scroll-target="#loi-de-student-stn">Loi de Student <span class="math inline">\(St(n)\)</span></a></li>
+  <li><a href="#loi-de-fisher-snedecor-mathcalfnm" id="toc-loi-de-fisher-snedecor-mathcalfnm" class="nav-link" data-scroll-target="#loi-de-fisher-snedecor-mathcalfnm">Loi de Fisher-Snedecor <span class="math inline">\(\mathcal{F}(n,m)\)</span></a></li>
+  </ul></nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block default"><div class="quarto-title">
+<h1 class="title d-none d-lg-block">
+<span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Lois usuelles continues</span>
+</h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+    
+  </div>
+  
+
+</header><section id="loi-uniforme-uab" class="level2 unnumbered"><h2 class="unnumbered anchored" data-anchor-id="loi-uniforme-uab">Loi uniforme <span class="math inline">\(U(a,b)\)</span>
+</h2>
+<p>La loi uniforme est la loi exacte de phénomènes continus uniformément répartis sur un intervalle.</p>
+<div id="def-" class="theorem definition">
+<p><span class="theorem-title"><strong>Définition 4.1 </strong></span>La variable aléatoire <span class="math inline">\(X\)</span> suit une loi uniforme sur le segment <span class="math inline">\([a,b]\)</span> avec <span class="math inline">\(a &lt; b\)</span> si sa densité de probabilité est donnée par <span class="math display">\[f(x)= \left\lbrace
+      \begin{array}{ll}
+      \frac{1}{b-a}   &amp; \mbox{si} \quad x \in [a,b]\\
+      0 &amp; \mbox{si} \quad x \notin [a,b]
+      \end{array}
+  \right. = \frac{1}{b-a} {1}_{[a,b]}(x)\]</span></p>
+</div>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div id="fig-unif" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure"><p><img src="img/unif.png" class="img-fluid figure-img" width="316"></p>
+<p></p><figcaption class="figure-caption">Figure&nbsp;4.1: Fonction de densité de <span class="math inline">\(U([a,b]\)</span>)</figcaption><p></p>
+</figure>
+</div>
+</div>
+</div>
+<p><strong><em>Quelques commentaires:</em></strong></p>
+<ol type="1">
+<li><p>La loi uniforme continue étant une loi de probabilité, l’aire hachurée en bleu sur la Figure <a href="#fig-unif">Figure&nbsp;<span>4.1</span></a>) vaut <span class="math inline">\(1\)</span>.</p></li>
+<li><p>La fonction de répartition associée à la loi uniforme continue est <span class="math display">\[F_X(x)= \left\lbrace
+       \begin{array}{ll}
+       0 &amp; \mbox{si} \quad x &lt; a \\
+       \displaystyle \frac{x-a}{b-a}   &amp; \mbox{si} \quad  a \le x \le b \\
+       1 &amp; \mbox{si} \quad x &gt; b
+       \end{array}
+   \right.\]</span></p></li>
+</ol>
+<p><strong>Propriétés:</strong> Si <span class="math inline">\(X\)</span> est une v.a.c qui suit la loi uniforme sur <span class="math inline">\([a,b]\)</span>:</p>
+<ul>
+<li><p><span class="math inline">\(E(X) = \displaystyle \frac{b+a}{2}\)</span></p></li>
+<li><p><span class="math inline">\(V(X) = \displaystyle \frac{(b-a)^2}{12}\)</span></p></li>
+</ul>
+<div class="callout-tip callout callout-style-default callout-captioned">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-caption-container flex-fill">
+Exercice
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Soit <span class="math inline">\(X \thicksim U(0,10)\)</span>. Calculer:</p>
+<ol type="1">
+<li><p><span class="math inline">\(P(X &lt;3)\)</span></p></li>
+<li><p><span class="math inline">\(P(X\ge 6)\)</span></p></li>
+<li><p><span class="math inline">\(P(3 &lt; X &lt; 8)\)</span></p></li>
+</ol>
+</div>
+</div>
+</section><section id="loi-exponentielle-mathcalelambda" class="level2 unnumbered"><h2 class="unnumbered anchored" data-anchor-id="loi-exponentielle-mathcalelambda">Loi exponentielle <span class="math inline">\(\mathcal{E}(\lambda)\)</span>
+</h2>
+<div id="def-" class="theorem definition">
+<p><span class="theorem-title"><strong>Définition 4.2 </strong></span>On dit qu’une variable aléatoire <span class="math inline">\(X\)</span> est <strong>exponentielle</strong> (ou suit la loi exponentielle) de paramètre <span class="math inline">\(\lambda\)</span> si sa densité est donnée par</p>
+<p><span class="math display">\[f(x)= \left\lbrace
+      \begin{array}{ll}
+      \lambda e^{- \lambda x}   &amp; \mbox{si} \quad x \ge 0\\
+      0 &amp; \mbox{si} \quad x &lt; 0
+      \end{array}
+  \right. = \lambda e^{- \lambda x} {1}_{\mathbb{R}^{+}}(x)\]</span></p>
+<p>On dit <span class="math inline">\(X \thicksim \mathcal{E}(\lambda)\)</span></p>
+</div>
+<p>La fonction de répartition <span class="math inline">\(F\)</span> d’une variable aléatoire exponentielle est donnée par</p>
+<p><span class="math display">\[\begin{align}
+\mbox{Si}\,\, x \ge 0 \quad F(x) &amp;= P(X \le x) = \int_0^x f(t)dt \\
+     &amp;= \int_0^x \lambda e^{- \lambda t} dt  \\
+     &amp;= \big[ -e^{- \lambda t} \big]_0^x = 1-e^{- \lambda x}
+\end{align}\]</span></p>
+<p><strong>Propriétés:</strong> Si <span class="math inline">\(X \thicksim \mathcal{E}(\lambda)\)</span></p>
+<ul>
+<li><p><span class="math inline">\(E(X) = \displaystyle \frac{1}{\lambda}\)</span></p></li>
+<li><p><span class="math inline">\(V(X)= \displaystyle \frac{1}{\lambda^2}\)</span></p></li>
+</ul>
+<div class="callout-note callout callout-style-default callout-captioned">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-caption-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><strong>Cas d’utilisations de la loi exponentielle :</strong> Dans la pratique, on rencontre souvent la distribution exponentielle lorsqu’il s’agit de représenter le temps d’attente avant l’arrivée d’un événement spécifié. Une loi exponentielle modélise la durée de vie d’un phénomène sans mémoire, ou sans vieillissement, ou sans usure. En d’autres termes, le fait que le phénomène ait duré pendant un temps <span class="math inline">\(t\)</span> ne change rien à son espérance de vie à partir du temps <span class="math inline">\(t\)</span>. On dit qu’une variable aléatoire non négative <span class="math inline">\(X\)</span> est <strong>sans mémoire</strong> lorsque</p>
+<p><span class="math display">\[P(X &gt; t+h | X &gt; t) = P(X &gt; h) \quad \quad \forall \quad t,h \ge 0\]</span></p>
+<p>Par exemple, la durée de vie de la radioactivité ou d’un composant électronique, le temps qui nous sépare d’un prochain tremblement de terre ou du prochain appel téléphonique mal aiguillé sont toutes des variables aléatoires dont les distributions tendent en pratique à se rapprocher de distributions exponentielles.</p>
+</div>
+</div>
+</section><section id="loi-normale-ou-de-laplace-gauss-mathcalnmusigma2" class="level2 unnumbered"><h2 class="unnumbered anchored" data-anchor-id="loi-normale-ou-de-laplace-gauss-mathcalnmusigma2">Loi Normale ou de Laplace-Gauss <span class="math inline">\(\mathcal{N}(\mu,\sigma^2)\)</span>
+</h2>
+<div id="def-" class="theorem definition">
+<p><span class="theorem-title"><strong>Définition 4.3 </strong></span>Une variable aléatoire <span class="math inline">\(X\)</span> est dite <strong>normale</strong> avec paramètres <span class="math inline">\(\mu\)</span> et <span class="math inline">\(\sigma^2\)</span> si la densité de <span class="math inline">\(X\)</span> est donnée par</p>
+<p><span class="math display">\[f(x) = \frac{1}{\sigma \sqrt{2\pi}} e^{ \displaystyle -(x - \mu)^2/2\sigma^2} \quad \quad \forall \,\, x \in \mathbb{R}\]</span></p>
+<p>Avec <span class="math inline">\(\mu \in \mathbb{R}\)</span> et <span class="math inline">\(\sigma \in \mathbb{R}^{+}\)</span>. On dit que <span class="math inline">\(X \thicksim \mathcal{N}(\mu,\sigma^2)\)</span>.</p>
+</div>
+<p><strong>Remarque:</strong> On admet que <span class="math inline">\(\int_{-\infty}^{+\infty}f(x)dx = 1\)</span> dans la mesure où l’intégration analytique est impossible.</p>
+<section id="étude-de-la-densité-de-la-loi-normale" class="level3 unnumbered"><h3 class="unnumbered anchored" data-anchor-id="étude-de-la-densité-de-la-loi-normale">Étude de la densité de la loi Normale</h3>
+<ul>
+<li><p>La fonction <span class="math inline">\(f\)</span> est paire autour d’un axe de symétrie <span class="math inline">\(x = \mu\)</span> car <span class="math inline">\(f(x + \mu ) = f(\mu - x)\)</span>.</p></li>
+<li><p><span class="math inline">\(f'(x)=0\)</span> pour <span class="math inline">\(x=\mu\)</span>, <span class="math inline">\(f'(x) &lt; 0\)</span> pour <span class="math inline">\(x &lt; \mu\)</span> et <span class="math inline">\(f'(x) &gt; 0\)</span> pour <span class="math inline">\(x &gt; \mu\)</span></p></li>
+</ul>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div id="fig-norm" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure"><p><img src="img/norm.png" class="img-fluid figure-img" width="324"></p>
+<p></p><figcaption class="figure-caption">Figure&nbsp;4.2: Représentation graphique de la densité d’une loi normale. Remarque: Le paramètre <span class="math inline">\(\mu\)</span> représente l’axe de symétrie et σ le degré d’aplatissement de la courbe de la loi normale dont la forme est celle d’une courbe en cloche</figcaption><p></p>
+</figure>
+</div>
+</div>
+</div>
+<p><strong>Propriétés:</strong> Soit <span class="math inline">\(X \thicksim \mathcal{N}(\mu,\sigma^2)\)</span>, on a:</p>
+<ul>
+<li><span class="math inline">\(E(X)=\mu\)</span></li>
+<li><span class="math inline">\(V(X)=\sigma^2\)</span></li>
+</ul>
+<div id="thm-" class="theorem">
+<p><span class="theorem-title"><strong>Théorème 4.1 (Stabilité de la loi normale) </strong></span>Soit <span class="math inline">\(X_1\)</span> et <span class="math inline">\(X_2\)</span> deux variables aléatoires normales et indépendantes de paramètres respectifs <span class="math inline">\((\mu_1,\sigma_1^2)\)</span> et <span class="math inline">\((\mu_2,\sigma_2^2)\)</span>, alors leur somme <span class="math inline">\(X_1+X_2\)</span> est une variable aléatoire normale de paramètres <span class="math inline">\((\mu_1 + \mu_2,\sigma_1^2+\sigma_2^2)\)</span>.</p>
+</div>
+</section></section><section id="loi-normale-centrée-réduite-mathcaln01" class="level2 unnumbered"><h2 class="unnumbered anchored" data-anchor-id="loi-normale-centrée-réduite-mathcaln01">Loi Normale centrée réduite <span class="math inline">\(\mathcal{N}(0,1)\)</span>
+</h2>
+<div id="def-" class="theorem definition">
+<p><span class="theorem-title"><strong>Définition 4.4 </strong></span>Une variable aléatoire continue <span class="math inline">\(X\)</span> suit une <strong>loi normale centrée réduite</strong> si sa densité de probabilité est donnée par</p>
+<p><span class="math display">\[
+f(x) =  \frac{1}{{\sqrt {2\pi } }}e^{\displaystyle - \frac{1}{2} x^2} \quad \quad \forall \,\, x \in \mathbb{R}
+\]</span></p>
+<p>On dit <span class="math inline">\(X \thicksim \mathcal{N}(0,1)\)</span>.</p>
+</div>
+<p><strong>Remarque:</strong> <span class="math inline">\(E(X)=0\)</span> et <span class="math inline">\(V(X)=1\)</span>.</p>
+<div class="cell">
+<div class="cell-output-display">
+<div id="fig-densitenormale" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure"><p><img src="img/normcr.png" class="img-fluid figure-img" width="273"></p>
+<p></p><figcaption class="figure-caption">Figure&nbsp;4.3: Densité d’une loi normale centrée réduite <span class="math inline">\(\mathcal{N}(0,1)\)</span></figcaption><p></p>
+</figure>
+</div>
+</div>
+</div>
+<div class="cell">
+<div class="cell-output-display">
+<div id="fig-phi" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure"><p><img src="img/phi.png" class="img-fluid figure-img" width="226"></p>
+<p></p><figcaption class="figure-caption">Figure&nbsp;4.4: Fonction de répartition de <span class="math inline">\(\mathcal{N}(0,1)\)</span></figcaption><p></p>
+</figure>
+</div>
+</div>
+</div>
+</section><section id="relation-entre-loi-normale-et-loi-normale-centrée-réduite" class="level2 unnumbered"><h2 class="unnumbered anchored" data-anchor-id="relation-entre-loi-normale-et-loi-normale-centrée-réduite">Relation entre loi normale et loi normale centrée réduite</h2>
+<div id="thm-" class="theorem">
+<p><span class="theorem-title"><strong>Théorème 4.2 (Relation avec la loi normale) </strong></span>Si <span class="math inline">\(X\)</span> suit une loi normale <span class="math inline">\(\mathcal{N}(\mu,\sigma^2)\)</span>, alors <span class="math inline">\(\displaystyle Z= \frac{X-\mu}{\sigma}\)</span> est une variable centrée réduite qui suit la loi normale centrée réduite <span class="math inline">\(\mathcal{N}(0,1)\)</span>.</p>
+</div>
+</section><section id="calcul-des-probabilités-dune-loi-normale" class="level2 unnumbered"><h2 class="unnumbered anchored" data-anchor-id="calcul-des-probabilités-dune-loi-normale">Calcul des probabilités d’une loi normale</h2>
+<p>La fonction de répartition de la loi normale réduite permet d’obtenir les probabilités associées à toutes variables aléatoires normales <span class="math inline">\(\mathcal{N}(\mu,\sigma^2)\)</span> après transformation en variable centrée réduite.</p>
+<div id="def-" class="theorem definition">
+<p><span class="theorem-title"><strong>Définition 4.5 </strong></span>On appelle fonction <span class="math inline">\(\Phi\)</span>, la fonction de répartition de la loi normale centrée réduite <span class="math inline">\(\mathcal{N}(0,1)\)</span>, telle que</p>
+<p><span class="math display">\[\forall \,\, x \in \mathbb{R} \quad \Phi(x) = P(X \le x) =  \frac{1}{{\sqrt {2\pi}}} \int_{-\infty}^x f(t)dt\]</span></p>
+</div>
+<p><strong>Propriétés:</strong> Les propriétés associées à la fonction de répartition <span class="math inline">\(\Phi\)</span> sont:</p>
+<ol type="1">
+<li>
+<p><span class="math inline">\(\Phi\)</span> est croissante, continue et dérivable sur <span class="math inline">\(\mathbb{R}\)</span> et vérifie:</p>
+<p><span class="math inline">\(\lim\limits_{x\to - \infty} \Phi(x) = 0\)</span> et <span class="math inline">\(\lim\limits_{x\to\infty} \Phi(x) = 1\)</span></p>
+</li>
+<li><p><span class="math inline">\(\forall \,\, x \in \mathbb{R} \quad \Phi(x) + \Phi(-x) = 1\)</span></p></li>
+<li><p><span class="math inline">\(\forall \,\, x \in \mathbb{R} \quad \Phi(x) - \Phi(-x) = 2\Phi(x) -1\)</span></p></li>
+</ol>
+<p>Une application directe de la fonction <span class="math inline">\(\Phi\)</span> est la lecture des probabilités de la loi normale sur la table de la loi normale centrée réduite.</p>
+<div class="callout-tip callout callout-style-default callout-captioned">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-caption-container flex-fill">
+Exercice
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Soit <span class="math inline">\(X\)</span> une variable aléatoire normale de paramètres <span class="math inline">\(\mu =3\)</span> et <span class="math inline">\(\sigma^2=4\)</span>. Calculer:</p>
+<ol type="1">
+<li><p><span class="math inline">\(P(X &gt; 0)\)</span></p></li>
+<li><p><span class="math inline">\(P(2 &lt; X &lt; 5)\)</span></p></li>
+<li><p><span class="math inline">\(P(|X-3| &gt; 4)\)</span></p></li>
+</ol>
+</div>
+</div>
+</section><section id="approximation-normale-dune-répartition-binomiale" class="level2 unnumbered"><h2 class="unnumbered anchored" data-anchor-id="approximation-normale-dune-répartition-binomiale">Approximation normale d’une répartition binomiale</h2>
+<p>Un résultat important de la théorie de probabilité est connu sous le nom de théorème limite de Moivre-Laplace. Il dit que pour <span class="math inline">\(n\)</span> grand, une variable binomiale <span class="math inline">\(\mathcal{B}(n,p)\)</span> suivra approximativement la même loi qu’une variable aléatoire normale avec même moyenne et même variance. Ce théorème énonce que si “on standardise” une variable aléatoire binomiale <span class="math inline">\(\mathcal{B}(n,p)\)</span> en soustrayant d’abord sa moyenne <span class="math inline">\(np\)</span> puis en divisant le résultat par son écart-type <span class="math inline">\(\sqrt{np(1-p)}\)</span>, alors la variable aléatoire standardisée (de moyenne 0 et variance 1) suivra approximativement, lorsque <span class="math inline">\(n\)</span> est grand, une distribution normale standard. Ce résultat fut ensuite progressivement généralisé par Laplace, Gauss et d’autres pour devenir le théorème actuellement connu comme théorème centrale limite qui est un des deux résultats les plus importants de la théorie de probabilités. Ce théorème sert de base théorique pour expliquer un fait empirique souvent relevé, à savoir qu’en pratique de très nombreux phénomènes aléatoires suivent approximativement une distribution normale.</p>
+<p>On remarquera qu’à ce stade deux approximations de la répartition binomiale ont été proposées: l’approximation de Poisson, satisfaisante lorsque <span class="math inline">\(n\)</span> est grand et lorsque <span class="math inline">\(np\)</span> n’est pas extrême; l’approximation normale pour laquelle on peut montrer qu’elle est de bonne qualité lorsque <span class="math inline">\(np(1-p)\)</span> est grand (dès que <span class="math inline">\(np(1-p)\)</span> dépasse 10).</p>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div id="fig-binomnorm" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure"><p><img src="img/binomnorm.png" class="img-fluid figure-img" width="450"></p>
+<p></p><figcaption class="figure-caption">Figure&nbsp;4.5: La loi de probabilité d’une variable aléatoire <span class="math inline">\(B( n,p )\)</span> devient de plus en plus <strong>normale</strong> à mesure que <span class="math inline">\(n\)</span> augmente.</figcaption><p></p>
+</figure>
+</div>
+</div>
+</div>
+</section><section id="loi-de-chi2-de-pearson" class="level2 unnumbered"><h2 class="unnumbered anchored" data-anchor-id="loi-de-chi2-de-pearson">Loi de <span class="math inline">\(\chi^{2}\)</span> de Pearson</h2>
+<div id="def-" class="theorem definition">
+<p><span class="theorem-title"><strong>Définition 4.6 </strong></span>Soit <span class="math inline">\(X_1,X_2,\ldots,X_n\)</span>, <span class="math inline">\(n\)</span> variables <strong>normales centrées réduites</strong>, et <span class="math inline">\(Y\)</span> la variable aléatoire définie par</p>
+<p><span class="math display">\[Y = X_1^2 + X_2^2 + \ldots + X_i^2 + \ldots + X_n^2 = \sum_{i=1}^n X_i^2\]</span> On dit que <span class="math inline">\(Y\)</span> suit la loi de <span class="math inline">\(\chi^2\)</span> (ou loi de Pearson) à <span class="math inline">\(n\)</span> degrés de liberté, <span class="math inline">\(Y \thicksim \chi^2 (n)\)</span></p>
+</div>
+<div class="callout-note callout callout-style-default callout-captioned">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-caption-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>La loi de <span class="math inline">\(\chi^2\)</span> trouve de nombreuses applications dans le cadre de la comparaison de proportions, des tests de conformité d’une distribution observée à une distribution théorique et le test d’indépendance de deux caractères qualitatifs. Ce sont les <em>tests du khi-deux</em>.</p>
+</div>
+</div>
+<p><strong>Remarque:</strong> Si <span class="math inline">\(n=1\)</span>, la variable du <span class="math inline">\(\chi^2\)</span> correspond au carré d’une variable normale centrée réduite <span class="math inline">\(\mathcal{N}(0,1)\)</span>.</p>
+<p><strong>Propriétés:</strong> Si <span class="math inline">\(Y \thicksim \chi^2 (n)\)</span>, alors:</p>
+<ul>
+<li><p><span class="math inline">\(E(Y)= n\)</span></p></li>
+<li><p><span class="math inline">\(V(Y) = 2n\)</span></p></li>
+</ul></section><section id="loi-de-student-stn" class="level2 unnumbered"><h2 class="unnumbered anchored" data-anchor-id="loi-de-student-stn">Loi de Student <span class="math inline">\(St(n)\)</span>
+</h2>
+<div id="def-" class="theorem definition">
+<p><span class="theorem-title"><strong>Définition 4.7 </strong></span>Soit <span class="math inline">\(U\)</span> une variable aléatoire suivant une loi <strong>normale centrée réduite</strong> <span class="math inline">\(\mathcal{N}(0,1)\)</span> et <span class="math inline">\(V\)</span> une variable aléatoire suivant une loi de <span class="math inline">\(\chi^2(n)\)</span>, <span class="math inline">\(U\)</span> et <span class="math inline">\(V\)</span> étant indépendantes, on dit alors que <span class="math inline">\(\displaystyle T_n = \frac{U}{\sqrt{\frac{V}{n}}}\)</span> suit une <strong>loi de Student</strong> à <span class="math inline">\(n\)</span> degrés de liberté. <span class="math inline">\(T_n \thicksim St(n)\)</span></p>
+</div>
+<div class="callout-note callout callout-style-default callout-captioned">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-caption-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>La loi de Student est utilisée lors des tests de comparaison de paramètres comme la moyenne et dans l’estimation de paramètres de la population à partir de données sur un échantillon (Test de Student).</p>
+</div>
+</div>
+</section><section id="loi-de-fisher-snedecor-mathcalfnm" class="level2 unnumbered"><h2 class="unnumbered anchored" data-anchor-id="loi-de-fisher-snedecor-mathcalfnm">Loi de Fisher-Snedecor <span class="math inline">\(\mathcal{F}(n,m)\)</span>
+</h2>
+<div id="def-" class="theorem definition">
+<p><span class="theorem-title"><strong>Définition 4.8 </strong></span>Soit <span class="math inline">\(U\)</span> et <span class="math inline">\(V\)</span> deux variables aléatoires indépendantes suivant une loi de <span class="math inline">\(\chi^2\)</span> respectivement à <span class="math inline">\(n\)</span> et <span class="math inline">\(m\)</span> degrés de liberté.</p>
+<p>On dit que <span class="math inline">\(\displaystyle F= \frac{U/n}{V/m}\)</span> suit une loi de Fisher-Snedecor à <span class="math inline">\((n,m)\)</span> degrés de liberté. <span class="math inline">\(F \thicksim \mathcal{F}(n,m)\)</span></p>
+</div>
+<div class="callout-note callout callout-style-default callout-captioned">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-caption-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>La loi de Fisher-Snedecor est utilisée pour comparer deux variances observées et sert surtout dans les très nombreux tests d’analyse de variance et de covariance.</p>
+</div>
+</div>
+
+
+</section></main><!-- /main --><script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const disableStylesheet = (stylesheets) => {
+    for (let i=0; i < stylesheets.length; i++) {
+      const stylesheet = stylesheets[i];
+      stylesheet.rel = 'prefetch';
+    }
+  }
+  const enableStylesheet = (stylesheets) => {
+    for (let i=0; i < stylesheets.length; i++) {
+      const stylesheet = stylesheets[i];
+      stylesheet.rel = 'stylesheet';
+    }
+  }
+  const manageTransitions = (selector, allowTransitions) => {
+    const els = window.document.querySelectorAll(selector);
+    for (let i=0; i < els.length; i++) {
+      const el = els[i];
+      if (allowTransitions) {
+        el.classList.remove('notransition');
+      } else {
+        el.classList.add('notransition');
+      }
+    }
+  }
+  const toggleColorMode = (alternate) => {
+    // Switch the stylesheets
+    const alternateStylesheets = window.document.querySelectorAll('link.quarto-color-scheme.quarto-color-alternate');
+    manageTransitions('#quarto-margin-sidebar .nav-link', false);
+    if (alternate) {
+      enableStylesheet(alternateStylesheets);
+      for (const sheetNode of alternateStylesheets) {
+        if (sheetNode.id === "quarto-bootstrap") {
+          toggleBodyColorMode(sheetNode);
+        }
+      }
+    } else {
+      disableStylesheet(alternateStylesheets);
+      toggleBodyColorPrimary();
+    }
+    manageTransitions('#quarto-margin-sidebar .nav-link', true);
+    // Switch the toggles
+    const toggles = window.document.querySelectorAll('.quarto-color-scheme-toggle');
+    for (let i=0; i < toggles.length; i++) {
+      const toggle = toggles[i];
+      if (toggle) {
+        if (alternate) {
+          toggle.classList.add("alternate");     
+        } else {
+          toggle.classList.remove("alternate");
+        }
+      }
+    }
+    // Hack to workaround the fact that safari doesn't
+    // properly recolor the scrollbar when toggling (#1455)
+    if (navigator.userAgent.indexOf('Safari') > 0 && navigator.userAgent.indexOf('Chrome') == -1) {
+      manageTransitions("body", false);
+      window.scrollTo(0, 1);
+      setTimeout(() => {
+        window.scrollTo(0, 0);
+        manageTransitions("body", true);
+      }, 40);  
+    }
+  }
+  const isFileUrl = () => { 
+    return window.location.protocol === 'file:';
+  }
+  const hasAlternateSentinel = () => {  
+    let styleSentinel = getColorSchemeSentinel();
+    if (styleSentinel !== null) {
+      return styleSentinel === "alternate";
+    } else {
+      return false;
+    }
+  }
+  const setStyleSentinel = (alternate) => {
+    const value = alternate ? "alternate" : "default";
+    if (!isFileUrl()) {
+      window.localStorage.setItem("quarto-color-scheme", value);
+    } else {
+      localAlternateSentinel = value;
+    }
+  }
+  const getColorSchemeSentinel = () => {
+    if (!isFileUrl()) {
+      const storageValue = window.localStorage.getItem("quarto-color-scheme");
+      return storageValue != null ? storageValue : localAlternateSentinel;
+    } else {
+      return localAlternateSentinel;
+    }
+  }
+  let localAlternateSentinel = 'default';
+  // Dark / light mode switch
+  window.quartoToggleColorScheme = () => {
+    // Read the current dark / light value 
+    let toAlternate = !hasAlternateSentinel();
+    toggleColorMode(toAlternate);
+    setStyleSentinel(toAlternate);
+  };
+  // Ensure there is a toggle, if there isn't float one in the top right
+  if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
+    const a = window.document.createElement('a');
+    a.classList.add('top-right');
+    a.classList.add('quarto-color-scheme-toggle');
+    a.href = "";
+    a.onclick = function() { try { window.quartoToggleColorScheme(); } catch {} return false; };
+    const i = window.document.createElement("i");
+    i.classList.add('bi');
+    a.appendChild(i);
+    window.document.body.appendChild(a);
+  }
+  // Switch to dark mode if need be
+  if (hasAlternateSentinel()) {
+    toggleColorMode(true);
+  } 
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    target: function(trigger) {
+      return trigger.previousElementSibling;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copié");
+    setTimeout(function() {
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const cites = ref.parentNode.getAttribute('data-cites').split(' ');
+    tippyHover(ref, function() {
+      var popup = window.document.createElement('div');
+      cites.forEach(function(cite) {
+        var citeDiv = window.document.createElement('div');
+        citeDiv.classList.add('hanging-indent');
+        citeDiv.classList.add('csl-entry');
+        var biblioDiv = window.document.getElementById('ref-' + cite);
+        if (biblioDiv) {
+          citeDiv.innerHTML = biblioDiv.innerHTML;
+        }
+        popup.appendChild(citeDiv);
+      });
+      return popup.innerHTML;
+    });
+  }
+});
+</script><nav class="page-navigation"><div class="nav-page nav-page-previous">
+      <a href="./variables-aleatoires-continues.html" class="pagination-link">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Variables Aléatoires Continues</span></span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="./exos2.html" class="pagination-link">
+        <span class="nav-page-text">Feuille d’Exercices 2 [Fr]</span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+
+
+
+</body></html>

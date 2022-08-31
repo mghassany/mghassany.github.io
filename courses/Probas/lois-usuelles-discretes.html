@@ -1,0 +1,744 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="fr" xml:lang="fr"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.1.147">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>Probabilités - 2&nbsp; Lois usuelles discrètes</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1.6em;
+  vertical-align: middle;
+}
+</style>
+
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<link href="./exos1.html" rel="next">
+<link href="./variables-aleatoires-discretes.html" rel="prev">
+<script src="site_libs/quarto-html/quarto.js"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-dark.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-dark.min.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 20,
+  "language": {
+    "search-no-results-text": "Pas de résultats",
+    "search-matching-documents-text": "documents trouvés",
+    "search-copy-link-title": "Copier le lien vers la recherche",
+    "search-hide-matches-text": "Cacher les correspondances additionnelles",
+    "search-more-match-text": "correspondance de plus dans ce document",
+    "search-more-matches-text": "correspondances de plus dans ce document",
+    "search-clear-button-title": "Effacer",
+    "search-detached-cancel-button-title": "Annuler",
+    "search-submit-button-title": "Envoyer"
+  }
+}</script>
+<script async="" src="https://hypothes.is/embed.js"></script>
+
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<link rel="stylesheet" href="mycss.css">
+</head>
+
+<body class="nav-sidebar docked">
+
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+    <div class="container-fluid d-flex justify-content-between">
+      <h1 class="quarto-secondary-nav-title"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Lois usuelles discrètes</span></h1>
+      <button type="button" class="quarto-btn-toggle btn" aria-label="Show secondary navigation">
+        <i class="bi bi-chevron-right"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse sidebar-navigation docked overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header sidebar-header-stacked">
+      <a href="./" class="sidebar-logo-link">
+      <img src="./img/logo_efrei_assas_white.png" alt="" class="sidebar-logo py-0 d-lg-inline d-none">
+      </a>
+    <div class="sidebar-title mb-0 py-0">
+      <a href="./">Probabilités</a> 
+        <div class="sidebar-tools-main">
+  <a href="" class="quarto-color-scheme-toggle sidebar-tool" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
+  <a href="" class="quarto-reader-toggle sidebar-tool" onclick="window.quartoToggleReader(); return false;" title="Toggle reader mode">
+  <div class="quarto-reader-toggle-btn">
+  <i class="bi"></i>
+  </div>
+</a>
+</div>
+    </div>
+      </div>
+      <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+      </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./index.html" class="sidebar-item-text sidebar-link">Welcome</a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./variables-aleatoires-discretes.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Variables Aléatoires Discrètes</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./lois-usuelles-discretes.html" class="sidebar-item-text sidebar-link active"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Lois Usuelles Discrètes</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./exos1.html" class="sidebar-item-text sidebar-link">Feuille d’Exercices 1 [Fr]</a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./exos1_en.html" class="sidebar-item-text sidebar-link">Feuille d’Exercices 1 [En]</a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./variables-aleatoires-continues.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Variables Aléatoires Continues</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./lois-usuelles-continues.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Lois Usuelles Continues</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./exos2.html" class="sidebar-item-text sidebar-link">Feuille d’Exercices 2 [Fr]</a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./exos2_en.html" class="sidebar-item-text sidebar-link">Feuille d’Exercices 2 [En]</a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true">Appendices</a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./appendix.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">A</span>&nbsp; <span class="chapter-title">Table de la loi Normale centrée réduite</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+    </ul>
+    </div>
+</nav>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table des matières</h2>
+   
+  <ul>
+  <li><a href="#loi-uniforme-discrète-mathcalun" id="toc-loi-uniforme-discrète-mathcalun" class="nav-link active" data-scroll-target="#loi-uniforme-discrète-mathcalun">Loi uniforme discrète <span class="math inline">\(\mathcal{U}(n)\)</span></a></li>
+  <li><a href="#loi-de-bernoulli-mathcalbp" id="toc-loi-de-bernoulli-mathcalbp" class="nav-link" data-scroll-target="#loi-de-bernoulli-mathcalbp">Loi de Bernoulli <span class="math inline">\(\mathcal{B}(p)\)</span></a></li>
+  <li><a href="#loi-binomiale-mathcalbnp" id="toc-loi-binomiale-mathcalbnp" class="nav-link" data-scroll-target="#loi-binomiale-mathcalbnp">Loi Binomiale <span class="math inline">\(\mathcal{B}(n,p)\)</span></a></li>
+  <li><a href="#loi-de-poisson-mathcalplambda" id="toc-loi-de-poisson-mathcalplambda" class="nav-link" data-scroll-target="#loi-de-poisson-mathcalplambda">Loi de Poisson <span class="math inline">\(\mathcal{P}(\lambda)\)</span></a></li>
+  <li><a href="#approximation-dune-loi-binomiale" id="toc-approximation-dune-loi-binomiale" class="nav-link" data-scroll-target="#approximation-dune-loi-binomiale">Approximation d’une loi binomiale</a></li>
+  <li><a href="#loi-géométrique-ou-de-pascal-mathcalgp" id="toc-loi-géométrique-ou-de-pascal-mathcalgp" class="nav-link" data-scroll-target="#loi-géométrique-ou-de-pascal-mathcalgp">Loi Géométrique ou de Pascal <span class="math inline">\(\mathcal{G}(p)\)</span></a></li>
+  <li><a href="#loi-binomiale-négative-mathcalbnrp" id="toc-loi-binomiale-négative-mathcalbnrp" class="nav-link" data-scroll-target="#loi-binomiale-négative-mathcalbnrp">Loi Binomiale Négative <span class="math inline">\(\mathcal{BN}(r,p)\)</span></a>
+  <ul class="collapse">
+  <li><a href="#mathcalgpmathcalbn1p" id="toc-mathcalgpmathcalbn1p" class="nav-link" data-scroll-target="#mathcalgpmathcalbn1p"><span class="math inline">\(\mathcal{G}(p)=\mathcal{BN}(1,p)\)</span></a></li>
+  </ul></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title d-none d-lg-block"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Lois usuelles discrètes</span></h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+    
+  </div>
+  
+
+</header>
+
+<section id="loi-uniforme-discrète-mathcalun" class="level2 unnumbered">
+<h2 class="unnumbered anchored" data-anchor-id="loi-uniforme-discrète-mathcalun">Loi uniforme discrète <span class="math inline">\(\mathcal{U}(n)\)</span></h2>
+<div id="def-" class="theorem definition">
+<p><span class="theorem-title"><strong>Définition 2.1 </strong></span>Une distribution de probabilité suit une loi uniforme lorsque toutes les valeurs prises par la variable aléatoire sont équiprobables. Si <span class="math inline">\(n\)</span> est le nombre de valeurs différentes prises par la variable aléatoire alors on a:</p>
+<p><span id="eq-unif"><span class="math display">\[
+P(X=x_i)=\frac{1}{n} \qquad \forall \, i \in \{1,\ldots, n\}
+\tag{2.1}\]</span></span></p>
+</div>
+<p><strong>Exemple:</strong> La distribution des chiffres obtenus au lancer de dé (si ce dernier est non pipé) suit une loi uniforme dont la loi de probabilité est la suivante :</p>
+<table class="table">
+<thead>
+<tr class="header">
+<th style="text-align: center;"><span class="math inline">\(x_i\)</span></th>
+<th style="text-align: center;">1</th>
+<th style="text-align: center;">2</th>
+<th style="text-align: center;">3</th>
+<th style="text-align: center;">4</th>
+<th style="text-align: center;">5</th>
+<th style="text-align: center;">6</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;"><span class="math inline">\(P(X = x_i)\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(\frac{1}{6}\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(\frac{1}{6}\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(\frac{1}{6}\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(\frac{1}{6}\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(\frac{1}{6}\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(\frac{1}{6}\)</span></td>
+</tr>
+</tbody>
+</table>
+<p><strong>Moments de loi uniforme discrète</strong></p>
+<p>Dans le <strong>cas particulier</strong> d’une loi uniforme discrète où chaque valeur de la variable aléatoire <span class="math inline">\(X\)</span> correspond à son rang, i.e. <span class="math inline">\(x_i=i \, \, \forall i \in \{1,\ldots, n\}\)</span>, on a: <span class="math display">\[E(X)=\frac{n+1}{2} \quad \text{et} \quad V(X)=\frac{n^2-1}{12}\]</span> La démonstration de ces résultats est établie en utilisant les égalités (cf.&nbsp;Annexe) <span class="math display">\[\sum_{i=1}^n i=\frac{n(n+1)}{2} \quad \text{et} \quad \sum_{i=1}^n i^2=\frac{n(n+1)(2n+1)}{6}\]</span></p>
+<p>En revenant à l’exemple du lancer du dé de cette section, on peut calculer directement les moments de <span class="math inline">\(X\)</span>: <span class="math display">\[E(X)=\frac{6+1}{2}=3.5\]</span> et <span class="math display">\[V(X)=\frac{6^2-1}{12}=\frac{35}{12}\simeq 2.92\]</span></p>
+</section>
+<section id="loi-de-bernoulli-mathcalbp" class="level2 unnumbered">
+<h2 class="unnumbered anchored" data-anchor-id="loi-de-bernoulli-mathcalbp">Loi de Bernoulli <span class="math inline">\(\mathcal{B}(p)\)</span></h2>
+<div id="def-" class="theorem definition">
+<p><span class="theorem-title"><strong>Définition 2.2 </strong></span>On réalise une expérience dont le résultat sera interprété soit comme un succès soit comme un échec. On définit alors la variable aléatoire <span class="math inline">\(X\)</span> en lui donnant la valeur 1 lors d’un succès et 0 lors d’un échec (variable indicatrice). La loi de probabilité de <span class="math inline">\(X\)</span> est alors</p>
+<p><span id="eq-bern"><span class="math display">\[
+\begin{align}
+    &amp;p(1)=P(X=1)=p  \\
+    &amp;p(0)=P(X=0)= 1-p=q \notag
+\end{align}
+\tag{2.2}\]</span></span></p>
+<p>où <span class="math inline">\(p\)</span> est la probabilité d’un succès, <span class="math inline">\(0 \leq p \leq 1\)</span>.</p>
+<p>Une variable aléatoire <span class="math inline">\(X\)</span> est dite de <strong>Bernoulli</strong> <span class="math inline">\(X \sim \mathcal{B} \left({p}\right)\)</span> s’il existe un nombre <span class="math inline">\(p \, \in \, ]0,1[\)</span> tel que la loi de probabilité de <span class="math inline">\(X\)</span> soit donnée par (<a href="#eq-bern"><span>2.2</span></a>).</p>
+</div>
+<p>La fonction de répartition est définie par: <span class="math display">\[F(x) =
+       \left\{
+       \begin{array}{ll}
+         0 &amp; \quad \text{si $x &lt; 0$} \\
+         1 - p &amp; \quad \text{si $0 \leq x &lt; 1$} \\
+         1 &amp; \quad \text{si $x \geq 1$}.
+       \end{array}
+       \right.\]</span></p>
+<p>L’espérance la loi de Bernoulli est <span class="math inline">\(p\)</span>, en effet</p>
+<p><span class="math display">\[E(X) =1 \times P(X=1)+0 \times P(X=0)=P(X=1)=p\]</span></p>
+<p>La variance la loi de Bernoulli est <span class="math inline">\(np\)</span>, en effet</p>
+<p><span class="math display">\[V(X) =E(X^2)-E^2(X)=p-p^2=p(1-p)=pq\]</span> car <span class="math display">\[E(X^2) =1^2\times P(X=1)+0^2 \times P(X=0)=P(X=1)=p\]</span></p>
+</section>
+<section id="loi-binomiale-mathcalbnp" class="level2 unnumbered">
+<h2 class="unnumbered anchored" data-anchor-id="loi-binomiale-mathcalbnp">Loi Binomiale <span class="math inline">\(\mathcal{B}(n,p)\)</span></h2>
+<div class="callout-note callout callout-style-default callout-captioned">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-caption-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Décrite pour la première fois par <em>Isaac Newton</em> en 1676 et démontrée pour la première fois par le mathématicien suisse <em>Jacob Bernoulli</em> en 1713, la loi binomiale est l’une des distributions de probabilité les plus fréquemment rencontrées en statistique appliquée.</p>
+</div>
+</div>
+<p>Supposons qu’on exécute maintenant <span class="math inline">\(n\)</span> épreuves <strong>indépendantes</strong>, chacune ayant <span class="math inline">\(p\)</span> pour probabilité de succès et <span class="math inline">\(1-p\)</span> pour probabilité d’échec. La variable aléatoire <span class="math inline">\(X\)</span> qui compte <strong>le nombre de succès</strong> sur l’ensemble des <span class="math inline">\(n\)</span> épreuves est dite variable aléatoire <strong>binomiale</strong> de paramètres <span class="math inline">\(n\)</span> et <span class="math inline">\(p\)</span>.</p>
+<div class="callout-tip callout callout-style-default callout-captioned">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-caption-container flex-fill">
+Astuce
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Une variable de Bernoulli n’est donc qu’une variable binomiale de paramètres <span class="math inline">\((1,p)\)</span>.</p>
+</div>
+</div>
+<div id="def-" class="theorem definition">
+<p><span class="theorem-title"><strong>Définition 2.3 </strong></span>Si on effectue <span class="math inline">\(n\)</span> épreuves successives indépendantes où on note à chaque fois la réalisation ou non d’un certain événement <span class="math inline">\(A\)</span>, on obtient une suite de la forme <span class="math inline">\(AA\bar{A}A\bar{A}\ldots \bar{A}AA\)</span>. Soit <span class="math inline">\(X\)</span> le nombre de réalisations de <span class="math inline">\(A\)</span>. On définit ainsi une v.a. <span class="math inline">\(X\)</span> qui suit une loi binomiale de paramètres <span class="math inline">\(n\)</span> et <span class="math inline">\(p=P(A)\)</span>, caractérisée par <span class="math inline">\(X(\Omega)=\{0, 1,\ldots, n\}\)</span> :</p>
+<p><span id="eq-binom"><span class="math display">\[
+P(X=k)=\binom{n}{k}p^k (1-p)^{n-k} \qquad 0\leq k \leq n   
+\tag{2.3}\]</span></span></p>
+<p>On écrit <span class="math inline">\(X \sim \mathcal{B} \left({n, p}\right)\)</span>. Donc la loi binomiale modélise le nombre de réalisations de <span class="math inline">\(A\)</span> (succès) obtenues lors de la répétition indépendante et identique de <span class="math inline">\(n\)</span> épreuves de Bernoulli.</p>
+</div>
+<div class="callout-tip callout callout-style-default callout-captioned">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-caption-container flex-fill">
+Astuce
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Pour établir (<a href="#eq-binom"><span>2.3</span></a>) il faut remarquer que <span class="math inline">\(\binom{n}{k}\)</span> est le nombre d’échantillons de taille <span class="math inline">\(n\)</span> comportant exactement <span class="math inline">\(k\)</span> événements <span class="math inline">\(A\)</span>, de probabilité <span class="math inline">\(p^k\)</span>, indépendamment de l’ordre, et donc <span class="math inline">\(n-k\)</span> événements <span class="math inline">\(\bar{A}\)</span>, de probabilité <span class="math inline">\((1-p)^{n-k}\)</span>.</p>
+</div>
+</div>
+<p><strong>Remarque:</strong> Il est possible d’obtenir aisément les valeurs des combinaisons de la loi binomiale en utilisant le triangle de Pascal.</p>
+<p>En utilisant la formule du binôme de Newton, on vérifie bien que c’est une loi de probabilité:</p>
+<p><span class="math display">\[{\sum_{k=0}^nP(X=k)=\sum_{k=0}^n\binom{n}{k} p^{k}(1-p)^{n-k}=[p+(1-p)]^n=1}\]</span></p>
+<p><strong>Exemple:</strong> On jette cinq pièces équilibrées. Les résultats sont supposés indépendants. Donner la loi de probabilité de la variable <span class="math inline">\(X\)</span> qui compte le nombre de piles obtenus.</p>
+<p><strong>Moments de la loi Binomiale</strong></p>
+<p>Pour calculer facilement les moments de cette loi, nous allons associer à chaque épreuve <span class="math inline">\(i\)</span>, <span class="math inline">\(1\leq i \leq n\)</span>, une v.a. de Bernoulli (variable indicatrice sur <span class="math inline">\(A\)</span>): <span class="math display">\[{1}_A=X_i = \left\{
+\begin{array}{l l}
+1 &amp; \quad \text{si $A$ est réalisé}\\
+0 &amp; \quad \text{si $\bar{A}$ est réalisé}\\
+  \end{array} \right.\]</span> On peut écrire alors: <span class="math inline">\(X=\sum_{i=1}^nX_i=X_1+X_2+\ldots+X_n\)</span>, ce qui nous permet de déduire aisément:</p>
+<p><span class="math display">\[\begin{aligned}
+    E(X)    &amp;=E\left(\sum_{i=1}^nX_i\right)=\sum_{i=1}^nE(X_i)=np \\
+    \text{et} \nonumber \\
+    V(X)    &amp;=V\left(\sum_{i=1}^nX_i\right) \\
+            &amp;=\sum_{i=1}^nV(X_i)=np(1-p) \quad \text{car les v.a. $X_i$ sont indépendantes.}
+  \end{aligned}\]</span></p>
+<p>Le calcul direct des moments de <span class="math inline">\(X\)</span> peut s’effectuer à partir de la définition générale, mais de façon beaucoup plus laborieuse:</p>
+<p><span class="math display">\[\begin{aligned}
+E(X)   &amp;= \sum_{k=0}^nk \binom{n}{k} p^{k}(1-p)^{n-k} \\
+        &amp;=\sum_{k=1}^nk \frac{n!}{k!(n-k)!} p^{k}(1-p)^{n-k} \\
+        &amp;= \sum_{k=1}^n\frac{n!}{(k-1)!(n-k)!} p^{k}(1-p)^{n-k} \\
+        &amp;= np \sum_{k=1}^n\frac{(n-1)!}{(k-1)!(n-k)!} p^{k-1}(1-p)^{n-k} \\
+        &amp;= np \sum_{j=0}^{n-1}\frac{(n-1)!}{j!(n-1-j)!}p^j (1-p)^{n-1-j} \\
+        &amp;=np \sum_{j=0}^{n-1}\binom{n-1}{j} p^{j}(1-p)^{n-1-j} \\
+        &amp;= np [p+(1-p)]^{n-1}=np
+\end{aligned}\]</span></p>
+<p>Pour obtenir <span class="math inline">\(E(X^2)\)</span> par un procédé de calcul identique, on passe par l’intermédiaire du moment factoriel <span class="math inline">\(E[X(X-1)]=E(X^2)-E(X)\)</span>: <span class="math display">\[\begin{aligned}
+  E[X(X-1)]&amp;= \sum_{k=0}^nk(k-1) \frac{n!}{k!(n-k)!} p^{k}(1-p)^{n-k} \\
+  &amp;= n(n-1)p^2 \sum_{k=2}^{n}\frac{(n-2)!}{(k-2)!(n-k)!} p^{k-2}(1-p)^{n-k} \\ &amp;= n(n-1)p^2 \sum_{j=0}^{n-2}\binom{n-2}{j} p^{j}(1-p)^{n-2-j} \\
+  &amp;= n(n-1)p^2[p+(1-p)]^{n-2}= n(n-1)p^2
+   \end{aligned}\]</span></p>
+<p>On en déduit alors:</p>
+<p><span class="math display">\[E(X^2)=E[X(X-1)]+E(X)= n(n-1)p^2+np,\]</span></p>
+<p>puis:</p>
+<p><span class="math display">\[\begin{aligned}
+   V(X) &amp;=n(n-1)p^2+np-(np)^2 \\
+        &amp;=n^2p^2+np(1-p)-n^2p^2 \\
+        &amp;=np(1-p)
+  \end{aligned}\]</span></p>
+<p>Le nombre de résultats pile apparus au cours de <span class="math inline">\(n\)</span> jets d’une pièce de monnaie suit une loi binomiale <span class="math inline">\(\mathcal{B} \left({n, 1/2}\right)\)</span>: <span class="math display">\[P(X=k)=\binom{n}{k}\left(\frac{1}{2}\right)^k \left(\frac{1}{2}\right)^{n-k}=\frac{\binom{n}{k}}{2^n}, \quad 0\leq k \leq n\]</span> avec <span class="math inline">\(E(X)=n/2\)</span> et <span class="math inline">\(V(X)=n/4\)</span>.</p>
+<p>Le nombre <span class="math inline">\(N\)</span> de boules rouges apparues au cours de <span class="math inline">\(n\)</span> tirages avec remise dans une urne contenant deux rouges, trois vertes et une noire suit une loi binomiale <span class="math inline">\(\mathcal{B} \left({n, 1/3}\right)\)</span>: <span class="math display">\[P(N=k)=\binom{n}{k}\left(\frac{1}{3}\right)^k \left(\frac{2}{3}\right)^{n-k}=\binom{n}{k} \frac{2^{n-k}}{3^n}, \quad 0\leq k \leq n\]</span> avec <span class="math inline">\(E(X)=n/3\)</span> et <span class="math inline">\(V(X)=2n/9\)</span>.</p>
+<div id="thm-" class="theorem">
+<p><span class="theorem-title"><strong>Théorème 2.1 </strong></span>Si <span class="math inline">\(X_1 \sim \mathcal{B} \left({n_1, p}\right)\)</span> et <span class="math inline">\(X_2 \sim \mathcal{B} \left({n_2, p}\right)\)</span>, les v.a. <span class="math inline">\(X_1\)</span> et <span class="math inline">\(X_2\)</span> étant indépendantes, alors <span class="math inline">\(X_1+X_2 \sim \mathcal{B} \left({n_1+n_2, p}\right)\)</span>. Ceci résulte de la définition d’une loi binomiale puisqu’on totalise ici le résultat de <span class="math inline">\(n_1+n_2\)</span> épreuves indépendantes.</p>
+</div>
+</section>
+<section id="loi-de-poisson-mathcalplambda" class="level2 unnumbered">
+<h2 class="unnumbered anchored" data-anchor-id="loi-de-poisson-mathcalplambda">Loi de Poisson <span class="math inline">\(\mathcal{P}(\lambda)\)</span></h2>
+<div class="callout-note callout callout-style-default callout-captioned">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-caption-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>La loi de Poisson est découverte au début du XIX<span class="math inline">\(^e\)</span> siècle par le magistrat français <em>Siméon-Denis Poisson</em>. Les variables aléatoires de Poisson ont un champ d’application fort vaste, en particulier du fait qu’on peut les utiliser pour approximer des variables aléatoires binomiales de paramètres <span class="math inline">\((n,p)\)</span> pour autant que <span class="math inline">\(n\)</span> soit grand et <span class="math inline">\(p\)</span> assez petit pour que <span class="math inline">\(np\)</span> soit d’ordre de grandeur moyen.</p>
+</div>
+</div>
+<div id="def-" class="theorem definition">
+<p><span class="theorem-title"><strong>Définition 2.4 </strong></span>Une v.a. <span class="math inline">\(X\)</span> suit une loi de Poisson de paramètre <span class="math inline">\(\lambda&gt;0\)</span> si c’est une variable à valeurs entières, <span class="math inline">\(X(\Omega)=\mathbb{N}\)</span>, donc avec une infinité de valeurs possibles, de probabilité:</p>
+<p><span id="eq-poisson"><span class="math display">\[
+P(X=k)=e^{-\lambda} \frac{\lambda^k}{k!}, \quad k \in \mathbb{N}
+\tag{2.4}\]</span></span></p>
+<p>Cette loi ne dépend qu’un seul paramètre réel positif <span class="math inline">\(\lambda\)</span>, avec l’écriture symbolique <span class="math inline">\(X \sim \mathcal{P}(\lambda)\)</span>.</p>
+</div>
+<p>Le développement en série entière de l’exponentielle <span class="math inline">\(e^\lambda=\displaystyle \sum_{k=0}^{+\infty} \frac{\lambda^k}{k!}\)</span> permet de vérifier qu’il s’agit bien d’une loi de probabilité:</p>
+<p><span class="math display">\[\sum_{k=0}^{\infty} P(X=k)=\sum_{k=0}^{\infty} e^{-\lambda} \frac{\lambda^k}{k!}=e^{-\lambda}\sum_{k=0}^{\infty} \frac{\lambda^k}{k!}=e^{-\lambda}e^{\lambda}=1\]</span></p>
+<p><strong>Moments de loi de Poisson</strong></p>
+<p>Le calcul de l’espérance mathématique se déduit du développement en série entière de l’exponentielle: <span class="math display">\[\begin{aligned}
+    E(X)&amp;=\sum_{k=0}^{\infty} k P(X=k)=\sum_{k=1}^{\infty} k e^{-\lambda} \frac{\lambda^k}{k!} \\
+        &amp;=e^{-\lambda} \sum_{k=1}^{\infty}  \frac{\lambda^k}{(k-1)!}=\lambda e^{-\lambda} \sum_{k=1}^{\infty}  \frac{\lambda^{k-1}}{(k-1)!} \\
+        &amp;= \lambda e^{-\lambda} \sum_{j=0}^{\infty}  \frac{\lambda^{j}}{j!}= \lambda e^{-\lambda}  e^{\lambda} \\
+        &amp;= \lambda.\end{aligned}\]</span> Pour calculer la variance nous n’allons pas calculer <span class="math inline">\(E(X^2)\)</span> mais le moment factoriel <span class="math inline">\(E[X(X-1)]\)</span> qui s’obtient plus facilement, selon la méthode précédente:</p>
+<p><span class="math display">\[\begin{aligned}
+    E[X(X-1)] &amp;=\sum_{k=0}^{\infty} k(k-1)P(X=k)=\sum_{k=2}^{\infty} k(k-1)  \,e^{-\lambda} \frac{\lambda^k}{k!} \\
+        &amp;=e^{-\lambda} \sum_{k=2}^{\infty}  \frac{\lambda^k}{(k-2)!}=\lambda^2 e^{-\lambda} \sum_{k=2}^{\infty}  \frac{\lambda^{k-2}}{(k-2)!} \\
+        &amp;= \lambda^2 e^{-\lambda} \sum_{j=0}^{\infty}  \frac{\lambda^{j}}{j!}= \lambda^2 e^{-\lambda}  e^{\lambda} = \lambda^2.\end{aligned}\]</span> On en déduit: <span class="math display">\[\begin{aligned}
+    V(X)&amp;=E(X^2)-E^2(X)=E[X(X-1)]+E(X)-E^2(X) \\
+        &amp;=\lambda^2+\lambda-\lambda^2=\lambda.\end{aligned}\]</span></p>
+<div id="thm-" class="theorem">
+<p><span class="theorem-title"><strong>Théorème 2.2 </strong></span>Si <span class="math inline">\(X\)</span> et <span class="math inline">\(Y\)</span> sont deux variables <strong>indépendantes</strong> suivant des lois de Poisson <span class="math display">\[X \sim \mathcal{P}(\lambda) \quad \text{et} \quad Y \sim \mathcal{P}(\mu)\]</span> alors leur somme suit aussi une loi de Poisson: <span class="math display">\[X+Y \sim \mathcal{P}(\lambda+\mu)\]</span></p>
+</div>
+<p><strong>Exemple:</strong> Soit <span class="math inline">\(X\)</span> la variable aléatoire associée au nombre de micro-ordinateurs vendus chaque jour dans le magasin. On suppose que <span class="math inline">\(X\)</span> suit une loi de Poisson de paramètre <span class="math inline">\(\lambda=5\)</span>. On écrit alors <span class="math inline">\(X \sim \mathcal{P}(5).\)</span><br>
+La probabilité associée à la vente de 5 micro-ordinateurs se détermine par : <span class="math display">\[P(X=5)=e^{-5} \frac{5^5}{5!}=e^{-5}\simeq 0.1755\]</span> La probabilité de vendre au moins 2 micro-ordinateurs est égal à:</p>
+<p><span class="math display">\[\begin{aligned}
+P(X \geq 2)&amp;=1-\left(e^{-5} \frac{5^0}{0!}+e^{-5} \frac{5^1}{1!}\right)\simeq 0.9596\end{aligned}\]</span></p>
+<p>Le nombre moyen de micro-ordinateurs vendus chaque jour dans le magasin est égal à 5 puisque <span class="math inline">\(E(X)=\lambda=5\)</span>.</p>
+</section>
+<section id="approximation-dune-loi-binomiale" class="level2 unnumbered">
+<h2 class="unnumbered anchored" data-anchor-id="approximation-dune-loi-binomiale">Approximation d’une loi binomiale</h2>
+<p>Le théorème de Poisson nous montre que si <span class="math inline">\(n\)</span> est suffisamment grand et <span class="math inline">\(p\)</span> assez petit, alors on peut approcher la distribution d’une loi binomiale de paramètres <span class="math inline">\(n\)</span> et <span class="math inline">\(p\)</span> par celle d’une loi de Poisson de paramètre <span class="math inline">\(\lambda=np\)</span>, en effet <span class="math display">\[\text{si} \; n \rightarrow \infty \; \text{et}\; p \rightarrow 0 \; \text{alors} \; X: \mathcal{B}(n, p) \rightarrow \mathcal{P}(\lambda)\]</span></p>
+<p>Une bonne approximation est obtenue si <span class="math inline">\(n \geq 50\)</span> et <span class="math inline">\(np \leq 5\)</span>.</p>
+<p>Dans ce contexte, la loi de Poisson est souvent utilisée pour modéliser le nombre de succès lorsqu’on répète un très grand nombre de fois une expérience ayant une chance très faible de réussir par une loi de Poisson (nombre de personnes dans la population française atteints d’une maladie rare, par exemple).</p>
+<p>On cherche la probabilité de trouver au moins un centenaire parmi 200 personnes dans une population où une personne sur cent est un centenaire.</p>
+<p>La probabilité <span class="math inline">\(p=1/100=0.01\)</span> étant faible et <span class="math inline">\(n=200\)</span> étant suffisamment grand, on peut modéliser le nombre <span class="math inline">\(X\)</span> de centenaires pris parmi 200 personnes par la loi de Poisson de paramètre <span class="math inline">\(\lambda=200 \times 0.01=2\)</span>. Donc on a: <span class="math display">\[P(X\geq 1)=1-P(X=0)=1-e^{-2}\simeq 0.86\]</span></p>
+<p>Soit une v.a. <span class="math inline">\(X\)</span> telle que <span class="math inline">\(X \sim \mathcal{B}(100, 0.01)\)</span>, les valeurs des probabilités pour <span class="math inline">\(k\)</span> de 0 à 5 ainsi que leur approximation à <span class="math inline">\(10^{-3}\)</span> avec une loi de Poisson de paramètre <span class="math inline">\(\lambda= np =1\)</span> sont données dans le tableau ci-dessous :</p>
+<table class="table">
+<thead>
+<tr class="header">
+<th style="text-align: center;"><span class="math inline">\(k\)</span></th>
+<th style="text-align: center;">0</th>
+<th style="text-align: center;">1</th>
+<th style="text-align: center;">2</th>
+<th style="text-align: center;">3</th>
+<th style="text-align: center;">4</th>
+<th style="text-align: center;">5</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;"><span class="math inline">\(P(X = k)\)</span></td>
+<td style="text-align: center;">0.366</td>
+<td style="text-align: center;">0.370</td>
+<td style="text-align: center;">0.185</td>
+<td style="text-align: center;">0.061</td>
+<td style="text-align: center;">0.015</td>
+<td style="text-align: center;">0.000</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">Approximation</td>
+<td style="text-align: center;">0.368</td>
+<td style="text-align: center;">0.368</td>
+<td style="text-align: center;">0.184</td>
+<td style="text-align: center;">0.061</td>
+<td style="text-align: center;">0.015</td>
+<td style="text-align: center;">0.003</td>
+</tr>
+</tbody>
+</table>
+<p>Dans le cas de cet exemple où <span class="math inline">\(n =100\)</span> et <span class="math inline">\(np =1\)</span>, l’approximation de la loi binomiale par une loi de poisson donne des valeurs de probabilités identiques à <span class="math inline">\(10^{-3}\)</span> près.</p>
+</section>
+<section id="loi-géométrique-ou-de-pascal-mathcalgp" class="level2 unnumbered">
+<h2 class="unnumbered anchored" data-anchor-id="loi-géométrique-ou-de-pascal-mathcalgp">Loi Géométrique ou de Pascal <span class="math inline">\(\mathcal{G}(p)\)</span></h2>
+<p>On effectue des épreuves successives indépendantes jusqu’à la réalisation d’un événement particulier <span class="math inline">\(A\)</span> de probabilité <span class="math inline">\(p=P(A)\)</span> et on note <span class="math inline">\(X\)</span> le nombre aléatoire d’épreuves effectuées. On définit ainsi une v.a. à valeurs entières de loi géométrique, ou de Pascal. A chaque épreuve est associé l’ensemble fondamental <span class="math inline">\(\Omega=\{A, \bar{A}\}\)</span> et l’événement <span class="math inline">\(\{X=k\}\)</span> pour <span class="math inline">\(k\in \mathbb{N^*}\)</span> est représenté par une suite de <span class="math inline">\(k-1\)</span> événements <span class="math inline">\(\bar{A}\)</span>, terminée par l’événement <span class="math inline">\(A\)</span>: <span class="math display">\[\underbrace{\bar{A}\bar{A}\ldots \bar{A}}_{k-1}A\]</span> D’où:</p>
+<p><span id="eq-geom"><span class="math display">\[
+P(X=k)=(1-p)^{k-1}p \quad \forall \, k \in \mathbb{N^*}
+\tag{2.5}\]</span></span></p>
+<p>Cette loi peut servir à modéliser des temps de vie, ou des temps d’attente, lorsque le temps est mesuré de manière discrète (nombre de jours par exemple).</p>
+<p>En utilisant la série entière</p>
+<p><span id="eq-serie_entiere"><span class="math display">\[
+\sum_{k=0}^\infty x^k = 1/(1-x) \quad \text{pour} \quad |x|&lt;1
+\tag{2.6}\]</span></span></p>
+<p>on vérifie bien que c’est une loi de probabilité:</p>
+<p><span class="math display">\[\begin{aligned}
+\sum_{k=1}^\infty P(X=k)&amp;= \sum_{k=1}^\infty (1-p)^{k-1}p = p \sum_{j=0}^\infty (1-p)^{j} \\
+&amp;= p \frac{1}{1-(1-p)}=1\end{aligned}\]</span></p>
+<p><strong>Moments de loi Géométrique</strong></p>
+<p>En dérivant la série entière (<a href="#eq-geom"><span>2.5</span></a>) ci-dessus, on obtient <span class="math inline">\(\sum_{k=1}^\infty k x^{k-1}=1/(1-x)^2\)</span>. Ceci permet d’obtenir l’espérance:</p>
+<p><span class="math display">\[E(X)=\sum_{k=1}^\infty kp(1-p)^{k-1}=\frac{p}{[1-(1-p)]^2}=\frac{1}{p}\]</span></p>
+<p>En d’autres termes, si des épreuves indépendantes ayant une probabilité <span class="math inline">\(p\)</span> d’obtenir un succès sont réalisés jusqu’à ce que le premier succès se produise, le nombre espéré d’essais nécessaires est égal à <span class="math inline">\(1/p\)</span>. Par exemple, le nombre espéré de jets d’un dé équilibré qu’il faut pour obtenir la valeur 1 est 6.</p>
+<p>Le calcul de la variance se fait à partir du moment factoriel et en utilisant la dérivée seconde de la série entière (<a href="#eq-geom"><span>2.5</span></a>): <span class="math inline">\(\sum_{k=2}^\infty k(k-1) x^{k-2} = 2/(1-x)^3\)</span>, Donc</p>
+<p><span class="math display">\[\begin{aligned}
+E[X(X-1)]   &amp;=\sum_{k=2}^\infty k(k-1)p(1-p)^{k-1} \\
+            &amp;= p(1-p)\sum_{k=2}^\infty k(k-1)(1-p)^{k-2} \\
+            &amp;= \frac{2p(1-p)}{[1-(1-p)]^3}=\frac{2(1-p)}{p^2}
+            \end{aligned}\]</span></p>
+<p>d’où on déduit: <span class="math display">\[V(X)=E[X(X-1)]+E(X)-E^2(X)=\frac{1-p}{p^2}\]</span></p>
+<p>Si l’on considère la variable aléatoire <span class="math inline">\(X\)</span> “nombre de naissances observées jusqu’à l’obtention d’une fille” avec p = 1/2 (même probabilité de naissance d’une fille ou d’un garçon), alors X suit une loi géométrique et on a pour tout <span class="math inline">\(k\in \mathbb{N^*}\)</span>:</p>
+<p><span class="math display">\[P(X=k)=(1-1/2)^{k-1}(1/2)=1/2^k\]</span></p>
+<p>avec <span class="math inline">\(E(X)=2\)</span> et <span class="math inline">\(V(X)=2\)</span>.</p>
+</section>
+<section id="loi-binomiale-négative-mathcalbnrp" class="level2 unnumbered">
+<h2 class="unnumbered anchored" data-anchor-id="loi-binomiale-négative-mathcalbnrp">Loi Binomiale Négative <span class="math inline">\(\mathcal{BN}(r,p)\)</span></h2>
+<ul>
+<li><p><span class="math inline">\(\varepsilon\)</span>: “On répéte l’épreuve de Bernoulli jusqu’à obtenir un total de <span class="math inline">\(r\)</span> succès”.</p></li>
+<li><p>Exemple avec : <span class="math display">\[\bar{A} \quad  {A} \quad  \bar{A} \quad  \bar{A} \quad  \bar{A} \quad  {A} \quad \bar{A} \quad  \bar{A} \quad  {A}\]</span> <span class="math display">\[{E} \quad  {S} \quad  {E} \quad  {E} \quad  {E} \quad  {S} \quad {E} \quad  {E} \quad  {S}\]</span></p></li>
+<li><p>Mais on peut obtenir d’autres façons: <span class="math display">\[{S} \quad  {E} \quad  {E} \quad  {E} \quad  {E} \quad  {E} \quad {S} \quad  {E} \quad  {S}\]</span> <span class="math display">\[{E} \quad  {E} \quad  {E} \quad  {E} \quad  {S} \quad  {E} \quad {S} \quad  {E} \quad  {S}\]</span></p></li>
+<li><p>Chaque épreuve a <span class="math inline">\({p}\)</span> pour probabilité de succès et <span class="math inline">\({1-p}\)</span> pour probabilité d’échec.</p></li>
+<li><p>Désignons <span class="math inline">\(X=\)</span>“le nombre d’épreuves nécessaires pour atteindre ce résultat”. <span class="math display">\[\underbrace{\overbrace{{E} \quad  {S} \quad  {E} \quad  {E} \quad  {E} \quad  {S} \quad {E} \quad  {E}}^{ {r-1 \, succès}\, et \, {k-r \, échecs}} \quad  {S}}_{X=k}\]</span></p></li>
+<li><p><span class="math inline">\(X(\Omega)=\{r,r+1,r+2,\ldots\}\)</span>. On dit <span class="math inline">\(X \sim \mathcal{BN}(r,p)\)</span>.</p></li>
+<li><p><span class="math inline">\(\forall \, k \in X(\Omega),\)</span> <span class="math display">\[P(X=k) = \binom{{k-1}}{{r-1}} {p^r} {(1-p)^{k-r}}\]</span></p></li>
+</ul>
+<section id="mathcalgpmathcalbn1p" class="level3 unnumbered">
+<h3 class="unnumbered anchored" data-anchor-id="mathcalgpmathcalbn1p"><span class="math inline">\(\mathcal{G}(p)=\mathcal{BN}(1,p)\)</span></h3>
+<ul>
+<li><p><span class="math inline">\(\varepsilon\)</span>: “On répéte l’épreuve de Bernoulli jusqu’à obtenir un total de <span class="math inline">\(r\)</span> succès”.</p></li>
+<li><p>Soit, <span class="math display">\[{E} \quad \ldots \quad {E} \quad {S} \quad  {E} \quad  \ldots \quad  {E} \quad  {S} \ldots \quad {E} \ldots \quad  {E} \quad  {S}\]</span></p></li>
+<li><p>Soit, <span class="math inline">\(Y_1\)</span> le nombre d’épreuves nécessaires jusqu’au premier succès, <span class="math inline">\(Y_2\)</span> le nombre d’épreuves supplémentaires nécessaires pour obtenir un deuxième succès, <span class="math inline">\(Y_3\)</span> celui menant au 3ème et ainsi de suite.</p></li>
+<li><p>Càd, <span class="math display">\[\underbrace{{E} \quad \ldots \quad {E} \quad {S}}_{Y_1} \quad  \underbrace{{E} \quad  \ldots \quad  {E} \quad  {S}}_{Y_2} \quad \underbrace{\ldots}_{\ldots} \quad \underbrace{{E} \quad \ldots \quad  {E} \quad  {S}}_{Y_r}\]</span></p></li>
+<li><p>Les tirages étants indépendantes et ayant toujours la même probabilité de succès, chacune des variables <span class="math inline">\(Y_1,Y_2,\ldots,Y_r\)</span> est géométrique <span class="math inline">\(\mathcal{G}(p)\)</span>.</p></li>
+<li><p><span class="math inline">\(X=\)</span>“le nombre d’épreuves nécessaires à l’obtention de <span class="math inline">\(r\)</span> succès”<span class="math inline">\(=Y_1 + Y_2 + \ldots + Y_r\)</span>.</p></li>
+<li><p>Donc, <span class="math display">\[E(X)= E(Y_1) + E(Y_2) + \ldots + E(Y_r) = \sum_{i=1}^r \frac{1}{p} = \frac{r}{p}\]</span> et <span class="math display">\[V(X)= \sum_{i=1}^r V(Y_i) = \frac{r(1-p)}{p^2}\]</span> car les <span class="math inline">\(Y_i\)</span> sont indépendantes.</p></li>
+</ul>
+
+
+</section>
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const disableStylesheet = (stylesheets) => {
+    for (let i=0; i < stylesheets.length; i++) {
+      const stylesheet = stylesheets[i];
+      stylesheet.rel = 'prefetch';
+    }
+  }
+  const enableStylesheet = (stylesheets) => {
+    for (let i=0; i < stylesheets.length; i++) {
+      const stylesheet = stylesheets[i];
+      stylesheet.rel = 'stylesheet';
+    }
+  }
+  const manageTransitions = (selector, allowTransitions) => {
+    const els = window.document.querySelectorAll(selector);
+    for (let i=0; i < els.length; i++) {
+      const el = els[i];
+      if (allowTransitions) {
+        el.classList.remove('notransition');
+      } else {
+        el.classList.add('notransition');
+      }
+    }
+  }
+  const toggleColorMode = (alternate) => {
+    // Switch the stylesheets
+    const alternateStylesheets = window.document.querySelectorAll('link.quarto-color-scheme.quarto-color-alternate');
+    manageTransitions('#quarto-margin-sidebar .nav-link', false);
+    if (alternate) {
+      enableStylesheet(alternateStylesheets);
+      for (const sheetNode of alternateStylesheets) {
+        if (sheetNode.id === "quarto-bootstrap") {
+          toggleBodyColorMode(sheetNode);
+        }
+      }
+    } else {
+      disableStylesheet(alternateStylesheets);
+      toggleBodyColorPrimary();
+    }
+    manageTransitions('#quarto-margin-sidebar .nav-link', true);
+    // Switch the toggles
+    const toggles = window.document.querySelectorAll('.quarto-color-scheme-toggle');
+    for (let i=0; i < toggles.length; i++) {
+      const toggle = toggles[i];
+      if (toggle) {
+        if (alternate) {
+          toggle.classList.add("alternate");     
+        } else {
+          toggle.classList.remove("alternate");
+        }
+      }
+    }
+    // Hack to workaround the fact that safari doesn't
+    // properly recolor the scrollbar when toggling (#1455)
+    if (navigator.userAgent.indexOf('Safari') > 0 && navigator.userAgent.indexOf('Chrome') == -1) {
+      manageTransitions("body", false);
+      window.scrollTo(0, 1);
+      setTimeout(() => {
+        window.scrollTo(0, 0);
+        manageTransitions("body", true);
+      }, 40);  
+    }
+  }
+  const isFileUrl = () => { 
+    return window.location.protocol === 'file:';
+  }
+  const hasAlternateSentinel = () => {  
+    let styleSentinel = getColorSchemeSentinel();
+    if (styleSentinel !== null) {
+      return styleSentinel === "alternate";
+    } else {
+      return false;
+    }
+  }
+  const setStyleSentinel = (alternate) => {
+    const value = alternate ? "alternate" : "default";
+    if (!isFileUrl()) {
+      window.localStorage.setItem("quarto-color-scheme", value);
+    } else {
+      localAlternateSentinel = value;
+    }
+  }
+  const getColorSchemeSentinel = () => {
+    if (!isFileUrl()) {
+      const storageValue = window.localStorage.getItem("quarto-color-scheme");
+      return storageValue != null ? storageValue : localAlternateSentinel;
+    } else {
+      return localAlternateSentinel;
+    }
+  }
+  let localAlternateSentinel = 'default';
+  // Dark / light mode switch
+  window.quartoToggleColorScheme = () => {
+    // Read the current dark / light value 
+    let toAlternate = !hasAlternateSentinel();
+    toggleColorMode(toAlternate);
+    setStyleSentinel(toAlternate);
+  };
+  // Ensure there is a toggle, if there isn't float one in the top right
+  if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
+    const a = window.document.createElement('a');
+    a.classList.add('top-right');
+    a.classList.add('quarto-color-scheme-toggle');
+    a.href = "";
+    a.onclick = function() { try { window.quartoToggleColorScheme(); } catch {} return false; };
+    const i = window.document.createElement("i");
+    i.classList.add('bi');
+    a.appendChild(i);
+    window.document.body.appendChild(a);
+  }
+  // Switch to dark mode if need be
+  if (hasAlternateSentinel()) {
+    toggleColorMode(true);
+  } 
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    target: function(trigger) {
+      return trigger.previousElementSibling;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copié");
+    setTimeout(function() {
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const cites = ref.parentNode.getAttribute('data-cites').split(' ');
+    tippyHover(ref, function() {
+      var popup = window.document.createElement('div');
+      cites.forEach(function(cite) {
+        var citeDiv = window.document.createElement('div');
+        citeDiv.classList.add('hanging-indent');
+        citeDiv.classList.add('csl-entry');
+        var biblioDiv = window.document.getElementById('ref-' + cite);
+        if (biblioDiv) {
+          citeDiv.innerHTML = biblioDiv.innerHTML;
+        }
+        popup.appendChild(citeDiv);
+      });
+      return popup.innerHTML;
+    });
+  }
+});
+</script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="./variables-aleatoires-discretes.html" class="pagination-link">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Variables Aléatoires Discrètes</span></span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="./exos1.html" class="pagination-link">
+        <span class="nav-page-text">Feuille d’Exercices 1 [Fr]</span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+
+
+
+</body></html>

@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="generator" content="quarto-1.1.147">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-<title>Machine Learning - Preface</title>
+<title>Machine Learning - Lab1: Linear Regression</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -119,13 +119,13 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
     "search-detached-cancel-button-title": "Cancel",
     "search-submit-button-title": "Submit"
   }
-}</script><script async="" src="https://hypothes.is/embed.js"></script><link rel="stylesheet" href="mycss.css">
+}</script><script async="" src="https://hypothes.is/embed.js"></script><script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script><link rel="stylesheet" href="mycss.css">
 </head>
 <body class="nav-sidebar docked">
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top"><nav class="quarto-secondary-nav" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }"><div class="container-fluid d-flex justify-content-between">
-      <h1 class="quarto-secondary-nav-title">Preface</h1>
+      <h1 class="quarto-secondary-nav-title">Lab1: Linear Regression</h1>
       <button type="button" class="quarto-btn-toggle btn" aria-label="Show secondary navigation">
         <i class="bi bi-chevron-right"></i>
       </button>
@@ -161,7 +161,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./TD1.html" class="sidebar-item-text sidebar-link active">Preface</a>
+  <a href="./TD1.html" class="sidebar-item-text sidebar-link active">Lab1: Linear Regression</a>
   </div>
 </li>
         <li class="sidebar-item">
@@ -185,10 +185,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
         <nav id="TOC" role="doc-toc" class="toc-active"><h2 id="toc-title">Table of contents</h2>
    
   <ul>
-<li>
-<a href="#lab1-linear-regression" id="toc-lab1-linear-regression" class="nav-link active" data-scroll-target="#lab1-linear-regression">Lab1: Linear Regression</a>
-  <ul class="collapse">
-<li><a href="#python-environment" id="toc-python-environment" class="nav-link" data-scroll-target="#python-environment">Python environment</a></li>
+<li><a href="#python-environment" id="toc-python-environment" class="nav-link active" data-scroll-target="#python-environment">Python environment</a></li>
   <li>
 <a href="#predicting-house-value-boston-dataset" id="toc-predicting-house-value-boston-dataset" class="nav-link" data-scroll-target="#predicting-house-value-boston-dataset">Predicting House Value: Boston dataset</a>
   <ul class="collapse">
@@ -196,13 +193,14 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   </ul>
 </li>
   <li><a href="#data-preprocessing" id="toc-data-preprocessing" class="nav-link" data-scroll-target="#data-preprocessing">Data preprocessing</a></li>
-  </ul>
-</li>
+  <li><a href="#simple-linear-regression-model" id="toc-simple-linear-regression-model" class="nav-link" data-scroll-target="#simple-linear-regression-model"><strong>Simple</strong> Linear Regression model</a></li>
+  <li><a href="#multiple-linear-regression-model" id="toc-multiple-linear-regression-model" class="nav-link" data-scroll-target="#multiple-linear-regression-model">Multiple Linear Regression model</a></li>
+  <li><a href="#anova-analysis-of-variances" id="toc-anova-analysis-of-variances" class="nav-link" data-scroll-target="#anova-analysis-of-variances">ANOVA (ANalysis Of VAriances)</a></li>
   </ul></nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block default"><div class="quarto-title">
-<h1 class="title d-none d-lg-block">Preface</h1>
+<h1 class="title d-none d-lg-block">Lab1: Linear Regression</h1>
 </div>
 
 
@@ -214,10 +212,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   </div>
   
 
-</header><p>This is a Quarto book.</p>
-<p>To learn more about Quarto books visit <a href="https://quarto.org/docs/books" class="uri">https://quarto.org/docs/books</a>.</p>
-<section id="lab1-linear-regression" class="level1 unnumbered"><h1 class="unnumbered">Lab1: Linear Regression</h1>
-<div class="cell">
+</header><div class="cell">
 
 </div>
 <section id="python-environment" class="level2"><h2 class="anchored" data-anchor-id="python-environment">Python environment</h2>
@@ -364,51 +359,49 @@ dtype: int64</code></pre>
 </div>
 </div>
 </div>
-<!-- 
-
-**Exploratory Data Analysis**
-
-Exploratory Data Analysis is a very important step before training the model. In this section, we will use some visualizations to understand the relationship of the target variable with other features.
-
-**5.** Plot the distribution of the target variable `MEDV`. You can use the `distplot()` function from the `seaborn` library.
-
-:::{.callout-important collapse="true" icon="false"}
-## Solution
-
-
-::: {.cell}
-
-```{.python .cell-code}
-sns.distplot(boston['MEDV'], bins=30)
-plt.title('Distribution of the target value')
-plt.show()
-```
-
-::: {.cell-output-display}
-![](TD1_files/figure-html/unnamed-chunk-11-1.png){width=672}
-:::
-:::
-
-:::
-
-
-
-
-**6.** Calculate the correlation matrix and visualize it (you may use `heatmap()` from `seaborn` library). Name the features that are highly correlated with the target variable. 
-
-:::{.callout-important collapse="true" icon="false"}
-## Solution
-
-
-::: {.cell}
-
-```{.python .cell-code}
-boston.corr()
-```
-
-::: {.cell-output .cell-output-stdout}
-```
-             CRIM        ZN     INDUS  ...         B     LSTAT      MEDV
+<p><strong>Exploratory Data Analysis</strong></p>
+<p>Exploratory Data Analysis is a very important step before training the model. In this section, we will use some visualizations to understand the relationship of the target variable with other features.</p>
+<p><strong>5.</strong> Plot the distribution of the target variable <code>MEDV</code>. You can use the <code>distplot()</code> function from the <code>seaborn</code> library.</p>
+<div class="callout-important callout callout-style-default no-icon callout-captioned">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-5-contents" aria-controls="callout-5" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-caption-container flex-fill">
+Solution
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-5" class="callout-5-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>sns.distplot(boston[<span class="st">'MEDV'</span>], bins<span class="op">=</span><span class="dv">30</span>)</span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">'Distribution of the target value'</span>)</span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="TD1_files/figure-html/unnamed-chunk-10-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+</div>
+</div>
+</div>
+<p><strong>6.</strong> Calculate the correlation matrix and visualize it (you may use <code><a href="https://rdrr.io/r/stats/heatmap.html">heatmap()</a></code> from <code>seaborn</code> library). Name the features that are highly correlated with the target variable.</p>
+<div class="callout-important callout callout-style-default no-icon callout-captioned">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-6-contents" aria-controls="callout-6" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-caption-container flex-fill">
+Solution
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-6" class="callout-6-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>boston.corr()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>             CRIM        ZN     INDUS  ...         B     LSTAT      MEDV
 CRIM     1.000000 -0.200469  0.406583  ... -0.385064  0.455621 -0.388305
 ZN      -0.200469  1.000000 -0.533828  ...  0.175520 -0.412995  0.360445
 INDUS    0.406583 -0.533828  1.000000  ... -0.356977  0.603800 -0.483725
@@ -424,33 +417,21 @@ B       -0.385064  0.175520 -0.356977  ...  1.000000 -0.366087  0.333461
 LSTAT    0.455621 -0.412995  0.603800  ... -0.366087  1.000000 -0.737663
 MEDV    -0.388305  0.360445 -0.483725  ...  0.333461 -0.737663  1.000000
 
-[14 rows x 14 columns]
-```
-:::
-:::
-
-::: {.cell}
-
-```{.python .cell-code}
-correlation_matrix = boston.corr().round(2)
-# annot = True to print the values inside the square
-sns.heatmap(data=correlation_matrix, annot=True)
-```
-
-::: {.cell-output-display}
-![](TD1_files/figure-html/unnamed-chunk-13-3.png){width=672}
-:::
-:::
-
-::: {.cell}
-
-```{.python .cell-code}
-correlation_matrix['MEDV'].sort_values(ascending=False)
-```
-
-::: {.cell-output .cell-output-stdout}
-```
-MEDV       1.00
+[14 rows x 14 columns]</code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>correlation_matrix <span class="op">=</span> boston.corr().<span class="bu">round</span>(<span class="dv">2</span>)</span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a><span class="co"># annot = True to print the values inside the square</span></span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>sns.heatmap(data<span class="op">=</span>correlation_matrix, annot<span class="op">=</span><span class="va">True</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="TD1_files/figure-html/unnamed-chunk-12-3.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>correlation_matrix[<span class="st">'MEDV'</span>].sort_values(ascending<span class="op">=</span><span class="va">False</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>MEDV       1.00
 RM         0.70
 ZN         0.36
 B          0.33
@@ -464,271 +445,261 @@ TAX       -0.47
 INDUS     -0.48
 PTRATIO   -0.51
 LSTAT     -0.74
-Name: MEDV, dtype: float64
-```
-:::
-:::
-
-
-The features that are highly correlated with the target variable are RM and LSTAT where 
-
-- **RM**  has a strong positive correlation with MEDV (0.7) and <br>
-- **LSTAT**  has a high negative correlation with MEDV(-0.74).
-
-:::
-
-::: {.callout-tip}
-## Correlation
-The correlation coefficient ranges from -1 to 1. If the value is close to 1, it means that there is a strong positive correlation (linear tendancy) between the two variables. When it is close to -1, the variables have a strong negative correlation.
-:::
-
-::: {.callout-note}
-For a linear regression model, we select the features which have a high correlation with the target variable. Anyway there is some feature selection techniques you may use, one of them is Backward selection:
-
-**Backward selection**:
-
-* Start with all variables in the model.
-* Remove the variable with the largest p-value — that is, the variable that is the least statistically significant.
-* The new $(p − 1)$-variable model is fit, and the variable with the largest p-value is removed.
-* Continue until a stopping rule is reached. For instance, we may stop when all remaining variables have a significant p-value defined by some significance threshold.
-:::
-
-**7.** Check for multi-colinearity between the features. More specifically `RAD` and `TAX`. 
-
-::: {.callout-tip}
-We should not select colinear features together for training the model. Check this [link](https://stats.stackexchange.com/questions/1149/is-there-an-intuitive-explanation-why-multicollinearity-is-a-problem-in-linear-r/1150#1150){target='_blank'} for one explanation.
-:::
-
-:::{.callout-important collapse="true" icon="false"}
-## Solution
-
-It is not great to have colinearities between your features as it will make harder the interpretation of which feature is important and which is not. Although I don't believe it will harm your final estimate that much. In a extreme case it can make the matrix $X^T\cdot X$ hard / impossible to invert. It will also lower the p-value of the two colinear column which may lead to not selecting them. 
-
-"Multicollinearity does not reduce the predictive power or reliability of the model as a whole, at least within the sample data set; it only affects calculations regarding individual predictors" 
-
-
-::: {.cell}
-
-```{.python .cell-code}
-plt.scatter(boston['RAD'], boston['TAX'])
-plt.title(f"Correlation RAD - TAX : {correlation_matrix['RAD']['TAX']:.2f}" )
-plt.show()
-```
-
-::: {.cell-output-display}
-![](TD1_files/figure-html/unnamed-chunk-15-5.png){width=672}
-:::
-:::
-
-::: {.cell}
-
-```{.python .cell-code}
-ncorr = correlation_matrix.drop('MEDV', axis=0).drop('MEDV', axis=1)
-np.fill_diagonal(ncorr.values, 0)
-ncorr[(ncorr < 0.7) & (ncorr > -0.7)] = None
-
-plt.figure(figsize=(10,5))
-sns.heatmap(ncorr, annot=True)
-plt.title('High correlations in features')
-plt.show()
-```
-
-::: {.cell-output-display}
-![](TD1_files/figure-html/unnamed-chunk-16-7.png){width=960}
-:::
-:::
-
-
-
-As we can see we have other quite high colinearity between features but RAD-TAX is the highest. 
-:::
-
-
-**Splitting the data into training and testing sets**
-
-Train test split is a model validation procedure that allows you to simulate how a model would perform on new/unseen data. Here is how the procedure works:
-
-![](img/train_test_split.jpg)
-
-**8.** Split the data into training and testing sets. We are going to train the model with 80% of the samples and test with the remaining 20%. Use `train_test_split()` function provided by `scikit-learn` library
-
-
-
-::: {.cell}
-
-```{.python .cell-code}
-from sklearn.model_selection import train_test_split
-
-# complete the code
-X = ...
-Y = ...
-
-X_train, X_test, Y_train, Y_test = ...(, , test_size = ..., random_state=5)
-
-# print the shapes to verify if the splitting has occured properly
-print(X_train.shape)
-print(X_test.shape)
-print(Y_train.shape)
-print(Y_test.shape)
-```
-:::
-
-
-
-:::{.callout-important collapse="true" icon="false"}
-## Solution
-
-
-::: {.cell}
-
-```{.python .cell-code}
-from sklearn.model_selection import train_test_split
-
-# complete the code
-X = boston.drop('MEDV', axis=1)
-Y = boston[['MEDV']]
-
-X_train, X_test, Y_train, Y_test = train_test_split(X, Y, test_size = 0.2,random_state=5)
-
-# print the shapes to verify if the splitting has occured properly
-print(X_train.shape)
-```
-
-::: {.cell-output .cell-output-stdout}
-```
-(404, 13)
-```
-:::
-
-```{.python .cell-code}
-print(X_test.shape)
-```
-
-::: {.cell-output .cell-output-stdout}
-```
-(102, 13)
-```
-:::
-
-```{.python .cell-code}
-print(Y_train.shape)
-```
-
-::: {.cell-output .cell-output-stdout}
-```
-(404, 1)
-```
-:::
-
-```{.python .cell-code}
-print(Y_test.shape)
-```
-
-::: {.cell-output .cell-output-stdout}
-```
-(102, 1)
-```
-:::
-:::
-
-:::
-
-## **Simple** Linear Regression model
-
-In this part, we are going to build a simple linear regression model. We will choose `LSTAT` as a feature.
-
-**9.** Plot `MEDV` in function of `LSTAT`.
-
-:::{.callout-important collapse="true" icon="false"}
-## Solution
-
-
-::: {.cell}
-
-```{.python .cell-code}
-plt.scatter(X_train['LSTAT'], Y_train['MEDV'])
-plt.show()
-```
-
-::: {.cell-output-display}
-![](TD1_files/figure-html/unnamed-chunk-19-9.png){width=960}
-:::
-:::
-
-:::
-
-**10.** Fit a simple regression model using `LinearRegression()` from `sklearn.linear_model`.
-
-
-::: {.cell}
-
-```{.python .cell-code}
-from sklearn.linear_model import LinearRegression
-
-slm = LinearRegression()
-slm.fit(..., ...)
-```
-:::
-
-
-:::{.callout-important collapse="true" icon="false"}
-## Solution
-
-
-::: {.cell}
-
-```{.python .cell-code}
-X_train_s = X_train[['LSTAT']] # Select LSTAT only
-X_test_s = X_test[['LSTAT']] # Select LSTAT only
-
-from sklearn.linear_model import LinearRegression
-
-slm = LinearRegression(fit_intercept=True)
-slm.fit(X_train_s, Y_train)
-```
-
-::: {.cell-output .cell-output-stdout}
-```
-LinearRegression()
-```
-:::
-:::
-
-:::
-
-
-**11.** The `LinearRegression()` module from `scikit-learn` does not provide a statistical summary of the regression model. To obtain this summary, re-fit a model using `ols()` from `statsmodels`. Analyse the p-value from the summary and interpret.
-
-:::{.callout-important collapse="true" icon="false"}
-## Solution
-
-
-::: {.cell}
-
-```{.python .cell-code}
-import statsmodels.api as sm
-
-X_train_d = sm.add_constant(X_train_s)
-model = sm.OLS(Y_train,X_train_d)
-results = model.fit()
-print(results.summary())
-```
-
-::: {.cell-output .cell-output-stdout}
-```
-                            OLS Regression Results                            
+Name: MEDV, dtype: float64</code></pre>
+</div>
+</div>
+<p>The features that are highly correlated with the target variable are RM and LSTAT where</p>
+<ul>
+<li>
+<strong>RM</strong> has a strong positive correlation with MEDV (0.7) and <br>
+</li>
+<li>
+<strong>LSTAT</strong> has a high negative correlation with MEDV(-0.74).</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="callout-tip callout callout-style-default callout-captioned">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-caption-container flex-fill">
+Correlation
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>The correlation coefficient ranges from -1 to 1. If the value is close to 1, it means that there is a strong positive correlation (linear tendancy) between the two variables. When it is close to -1, the variables have a strong negative correlation.</p>
+</div>
+</div>
+<div class="callout-note callout callout-style-default callout-captioned">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-caption-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>For a linear regression model, we select the features which have a high correlation with the target variable. Anyway there is some feature selection techniques you may use, one of them is Backward selection:</p>
+<p><strong>Backward selection</strong>:</p>
+<ul>
+<li>Start with all variables in the model.</li>
+<li>Remove the variable with the largest p-value — that is, the variable that is the least statistically significant.</li>
+<li>The new <span class="math inline">\((p − 1)\)</span>-variable model is fit, and the variable with the largest p-value is removed.</li>
+<li>Continue until a stopping rule is reached. For instance, we may stop when all remaining variables have a significant p-value defined by some significance threshold.</li>
+</ul>
+</div>
+</div>
+<p><strong>7.</strong> Check for multi-colinearity between the features. More specifically <code>RAD</code> and <code>TAX</code>.</p>
+<div class="callout-tip callout callout-style-default callout-captioned">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-caption-container flex-fill">
+Tip
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>We should not select colinear features together for training the model. Check this <a href="https://stats.stackexchange.com/questions/1149/is-there-an-intuitive-explanation-why-multicollinearity-is-a-problem-in-linear-r/1150#1150" target="_blank">link</a> for one explanation.</p>
+</div>
+</div>
+<div class="callout-important callout callout-style-default no-icon callout-captioned">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-10-contents" aria-controls="callout-10" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-caption-container flex-fill">
+Solution
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-10" class="callout-10-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>It is not great to have colinearities between your features as it will make harder the interpretation of which feature is important and which is not. Although I don’t believe it will harm your final estimate that much. In a extreme case it can make the matrix <span class="math inline">\(X^T\cdot X\)</span> hard / impossible to invert. It will also lower the p-value of the two colinear column which may lead to not selecting them.</p>
+<p>“Multicollinearity does not reduce the predictive power or reliability of the model as a whole, at least within the sample data set; it only affects calculations regarding individual predictors”</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>plt.scatter(boston[<span class="st">'RAD'</span>], boston[<span class="st">'TAX'</span>])</span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="ss">f"Correlation RAD - TAX : </span><span class="sc">{</span>correlation_matrix[<span class="st">'RAD'</span>][<span class="st">'TAX'</span>]<span class="sc">:.2f}</span><span class="ss">"</span> )</span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="TD1_files/figure-html/unnamed-chunk-14-5.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>ncorr <span class="op">=</span> correlation_matrix.drop(<span class="st">'MEDV'</span>, axis<span class="op">=</span><span class="dv">0</span>).drop(<span class="st">'MEDV'</span>, axis<span class="op">=</span><span class="dv">1</span>)</span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>np.fill_diagonal(ncorr.values, <span class="dv">0</span>)</span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>ncorr[(ncorr <span class="op">&lt;</span> <span class="fl">0.7</span>) <span class="op">&amp;</span> (ncorr <span class="op">&gt;</span> <span class="op">-</span><span class="fl">0.7</span>)] <span class="op">=</span> <span class="va">None</span></span>
+<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">10</span>,<span class="dv">5</span>))</span>
+<span id="cb17-6"><a href="#cb17-6" aria-hidden="true" tabindex="-1"></a>sns.heatmap(ncorr, annot<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb17-7"><a href="#cb17-7" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">'High correlations in features'</span>)</span>
+<span id="cb17-8"><a href="#cb17-8" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="TD1_files/figure-html/unnamed-chunk-15-7.png" class="img-fluid" width="960"></p>
+</div>
+</div>
+<p>As we can see we have other quite high colinearity between features but RAD-TAX is the highest.</p>
+</div>
+</div>
+</div>
+<p><strong>Splitting the data into training and testing sets</strong></p>
+<p>Train test split is a model validation procedure that allows you to simulate how a model would perform on new/unseen data. Here is how the procedure works:</p>
+<p><img src="img/train_test_split.jpg" class="img-fluid"></p>
+<p><strong>8.</strong> Split the data into training and testing sets. We are going to train the model with 80% of the samples and test with the remaining 20%. Use <code>train_test_split()</code> function provided by <code>scikit-learn</code> library</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.model_selection <span class="im">import</span> train_test_split</span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a><span class="co"># complete the code</span></span>
+<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a>X <span class="op">=</span> ...</span>
+<span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a>Y <span class="op">=</span> ...</span>
+<span id="cb18-6"><a href="#cb18-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-7"><a href="#cb18-7" aria-hidden="true" tabindex="-1"></a>X_train, X_test, Y_train, Y_test <span class="op">=</span> ...(, , test_size <span class="op">=</span> ..., random_state<span class="op">=</span><span class="dv">5</span>)</span>
+<span id="cb18-8"><a href="#cb18-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-9"><a href="#cb18-9" aria-hidden="true" tabindex="-1"></a><span class="co"># print the shapes to verify if the splitting has occured properly</span></span>
+<span id="cb18-10"><a href="#cb18-10" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(X_train.shape)</span>
+<span id="cb18-11"><a href="#cb18-11" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(X_test.shape)</span>
+<span id="cb18-12"><a href="#cb18-12" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(Y_train.shape)</span>
+<span id="cb18-13"><a href="#cb18-13" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(Y_test.shape)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="callout-important callout callout-style-default no-icon callout-captioned">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-11-contents" aria-controls="callout-11" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-caption-container flex-fill">
+Solution
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-11" class="callout-11-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.model_selection <span class="im">import</span> train_test_split</span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a><span class="co"># complete the code</span></span>
+<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a>X <span class="op">=</span> boston.drop(<span class="st">'MEDV'</span>, axis<span class="op">=</span><span class="dv">1</span>)</span>
+<span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a>Y <span class="op">=</span> boston[[<span class="st">'MEDV'</span>]]</span>
+<span id="cb19-6"><a href="#cb19-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-7"><a href="#cb19-7" aria-hidden="true" tabindex="-1"></a>X_train, X_test, Y_train, Y_test <span class="op">=</span> train_test_split(X, Y, test_size <span class="op">=</span> <span class="fl">0.2</span>,random_state<span class="op">=</span><span class="dv">5</span>)</span>
+<span id="cb19-8"><a href="#cb19-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-9"><a href="#cb19-9" aria-hidden="true" tabindex="-1"></a><span class="co"># print the shapes to verify if the splitting has occured properly</span></span>
+<span id="cb19-10"><a href="#cb19-10" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(X_train.shape)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>(404, 13)</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(X_test.shape)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>(102, 13)</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(Y_train.shape)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>(404, 1)</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(Y_test.shape)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>(102, 1)</code></pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section><section id="simple-linear-regression-model" class="level2"><h2 class="anchored" data-anchor-id="simple-linear-regression-model">
+<strong>Simple</strong> Linear Regression model</h2>
+<p>In this part, we are going to build a simple linear regression model. We will choose <code>LSTAT</code> as a feature.</p>
+<p><strong>9.</strong> Plot <code>MEDV</code> in function of <code>LSTAT</code>.</p>
+<div class="callout-important callout callout-style-default no-icon callout-captioned">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-12-contents" aria-controls="callout-12" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-caption-container flex-fill">
+Solution
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-12" class="callout-12-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a>plt.scatter(X_train[<span class="st">'LSTAT'</span>], Y_train[<span class="st">'MEDV'</span>])</span>
+<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="TD1_files/figure-html/unnamed-chunk-18-9.png" class="img-fluid" width="960"></p>
+</div>
+</div>
+</div>
+</div>
+</div>
+<p><strong>10.</strong> Fit a simple regression model using <code>LinearRegression()</code> from <code>sklearn.linear_model</code>.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.linear_model <span class="im">import</span> LinearRegression</span>
+<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-3"><a href="#cb28-3" aria-hidden="true" tabindex="-1"></a>slm <span class="op">=</span> LinearRegression()</span>
+<span id="cb28-4"><a href="#cb28-4" aria-hidden="true" tabindex="-1"></a>slm.fit(..., ...)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="callout-important callout callout-style-default no-icon callout-captioned">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-13-contents" aria-controls="callout-13" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-caption-container flex-fill">
+Solution
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-13" class="callout-13-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a>X_train_s <span class="op">=</span> X_train[[<span class="st">'LSTAT'</span>]] <span class="co"># Select LSTAT only</span></span>
+<span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a>X_test_s <span class="op">=</span> X_test[[<span class="st">'LSTAT'</span>]] <span class="co"># Select LSTAT only</span></span>
+<span id="cb29-3"><a href="#cb29-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-4"><a href="#cb29-4" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.linear_model <span class="im">import</span> LinearRegression</span>
+<span id="cb29-5"><a href="#cb29-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-6"><a href="#cb29-6" aria-hidden="true" tabindex="-1"></a>slm <span class="op">=</span> LinearRegression(fit_intercept<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb29-7"><a href="#cb29-7" aria-hidden="true" tabindex="-1"></a>slm.fit(X_train_s, Y_train)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>LinearRegression()</code></pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<p><strong>11.</strong> The <code>LinearRegression()</code> module from <code>scikit-learn</code> does not provide a statistical summary of the regression model. To obtain this summary, re-fit a model using <code>ols()</code> from <code>statsmodels</code>. Analyse the p-value from the summary and interpret.</p>
+<div class="callout-important callout callout-style-default no-icon callout-captioned">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-14-contents" aria-controls="callout-14" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-caption-container flex-fill">
+Solution
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-14" class="callout-14-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> statsmodels.api <span class="im">as</span> sm</span>
+<span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb31-3"><a href="#cb31-3" aria-hidden="true" tabindex="-1"></a>X_train_d <span class="op">=</span> sm.add_constant(X_train_s)</span>
+<span id="cb31-4"><a href="#cb31-4" aria-hidden="true" tabindex="-1"></a>model <span class="op">=</span> sm.OLS(Y_train,X_train_d)</span>
+<span id="cb31-5"><a href="#cb31-5" aria-hidden="true" tabindex="-1"></a>results <span class="op">=</span> model.fit()</span>
+<span id="cb31-6"><a href="#cb31-6" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(results.summary())</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>                            OLS Regression Results                            
 ==============================================================================
 Dep. Variable:                   MEDV   R-squared:                       0.552
 Model:                            OLS   Adj. R-squared:                  0.551
 Method:                 Least Squares   F-statistic:                     495.9
-Date:                Sat, 03 Sep 2022   Prob (F-statistic):           3.76e-72
-Time:                        23:56:20   Log-Likelihood:                -1310.5
+Date:                Thu, 08 Sep 2022   Prob (F-statistic):           3.76e-72
+Time:                        22:18:56   Log-Likelihood:                -1310.5
 No. Observations:                 404   AIC:                             2625.
 Df Residuals:                     402   BIC:                             2633.
 Df Model:                           1                                         
 Covariance Type:            nonrobust                                         
 ==============================================================================
-                 coef    std err          t      P>|t|      [0.025      0.975]
+                 coef    std err          t      P&gt;|t|      [0.025      0.975]
 ------------------------------------------------------------------------------
 const         34.8729      0.630     55.341      0.000      33.634      36.112
 LSTAT         -0.9798      0.044    -22.269      0.000      -1.066      -0.893
@@ -740,283 +711,215 @@ Kurtosis:                       5.399   Cond. No.                         29.3
 ==============================================================================
 
 Notes:
-[1] Standard Errors assume that the covariance matrix of the errors is correctly specified.
-```
-:::
-:::
-
-
-Most of the features seem relevant except for `INDUS` and `AGE`. 
-:::
-
-
-**12.** Plot the regression model. 
-
-:::{.callout-important collapse="true" icon="false"}
-## Solution
-
-
-::: {.cell}
-
-```{.python .cell-code}
-plt.plot(X_train_s['LSTAT'], slm.predict(X_train_s), c='red')
-plt.scatter(X_train_s['LSTAT'], Y_train['MEDV'])
-plt.xlabel('LSTAT')
-plt.ylabel('Predicted Values')
-plt.show()
-```
-
-::: {.cell-output-display}
-![](TD1_files/figure-html/unnamed-chunk-23-11.png){width=960}
-:::
-:::
-
-:::
-
-
-**Model evaluation**
-
-**13.** Evaluate the model using MSE (Mean Squarred Error) and R2-score. 
-
-
-::: {.cell}
-
-```{.python .cell-code}
-from sklearn.metrics import mean_squared_error
-
-# train error (MSE)
-y_train_predict = slm.predict(...)
-mse_train = ...(..., ...)
-
-print("The model performance for training set")
-
-print('MSE is {}'.format(mse_train))
-
-
-# test error
-y_test_predict = slm.predict(...)
-mse_test = mean_squared_error(..., ...)
-r2 = r2_score(..., ...)
-
-print("The model performance for testing set")
-
-print('MSE is {}'.format(mse_test))
-print('R2 score is {}'.format(r2))
-```
-:::
-
-
-
-:::{.callout-important collapse="true" icon="false"}
-## Solution
-
-
-::: {.cell}
-
-```{.python .cell-code}
-from sklearn.metrics import mean_squared_error, r2_score
-
-# train error (MSE)
-y_train_predict =  slm.predict(X_train_s)
-mse_train = mean_squared_error(Y_train, y_train_predict)
-
-print("The model performance for training set")
-```
-
-::: {.cell-output .cell-output-stdout}
-```
-The model performance for training set
-```
-:::
-
-```{.python .cell-code}
-print('MSE is {}'.format(mse_train))
-
-
-# test error
-```
-
-::: {.cell-output .cell-output-stdout}
-```
-MSE is 38.45801898706332
-```
-:::
-
-```{.python .cell-code}
-y_test_predict = slm.predict(X_test_s)
-mse_test = mean_squared_error(Y_test, y_test_predict)
-r2 = r2_score(Y_test, y_test_predict)
-
-print("The model performance for testing set")
-```
-
-::: {.cell-output .cell-output-stdout}
-```
-The model performance for testing set
-```
-:::
-
-```{.python .cell-code}
-print('MSE is {}'.format(mse_test))
-```
-
-::: {.cell-output .cell-output-stdout}
-```
-MSE is 38.821829014286585
-```
-:::
-
-```{.python .cell-code}
-print('R2 score is {}'.format(r2))
-```
-
-::: {.cell-output .cell-output-stdout}
-```
-R2 score is 0.5041523728903132
-```
-:::
-:::
-
-:::
-
-**14.** According to the plot in **9**, the relationship between `LSTAT` and `MEDV` is not linear. Let’s try a transformation of our explanatory variable `LSTAT`. Re-do the steps from **9** to **13** but using the log of `LSTAT`. Do you obtain a better model?
-
-
-:::{.callout-important collapse="true" icon="false"}
-## Solution
-
-
-::: {.cell}
-
-```{.python .cell-code}
-X_train_s = np.log(X_train[['LSTAT']]) # Select LSTAT only
-X_test_s = np.log(X_test[['LSTAT']]) # Select LSTAT only
-
-slm = LinearRegression(fit_intercept=True)
-slm.fit(X_train_s, Y_train)
-
-# train error (MSE)
-```
-
-::: {.cell-output .cell-output-stdout}
-```
-LinearRegression()
-```
-:::
-
-```{.python .cell-code}
-y_train_predict =  slm.predict(X_train_s)
-mse_train = mean_squared_error(Y_train, y_train_predict)
-
-print("The model performance for training set")
-```
-
-::: {.cell-output .cell-output-stdout}
-```
-The model performance for training set
-```
-:::
-
-```{.python .cell-code}
-print('MSE is {}'.format(mse_train))
-
-
-# test error
-```
-
-::: {.cell-output .cell-output-stdout}
-```
-MSE is 28.39419482862284
-```
-:::
-
-```{.python .cell-code}
-y_test_predict = slm.predict(X_test_s)
-mse_test = mean_squared_error(Y_test, y_test_predict)
-r2 = r2_score(Y_test, y_test_predict)
-
-print("The model performance for testing set")
-```
-
-::: {.cell-output .cell-output-stdout}
-```
-The model performance for testing set
-```
-:::
-
-```{.python .cell-code}
-print('MSE is {}'.format(mse_test))
-```
-
-::: {.cell-output .cell-output-stdout}
-```
-MSE is 27.899544077825233
-```
-:::
-
-```{.python .cell-code}
-print('R2 score is {}'.format(r2))
-```
-
-::: {.cell-output .cell-output-stdout}
-```
-R2 score is 0.6436560801053237
-```
-:::
-:::
-
-::: {.cell}
-
-```{.python .cell-code}
-plt.scatter(X_train['LSTAT'], Y_train['MEDV'])
-plt.scatter(X_train['LSTAT'], slm.predict(X_train_s), c='red')
-plt.xlabel('LSTAT')
-plt.ylabel('Predicted Values')
-plt.show()
-```
-
-::: {.cell-output-display}
-![](TD1_files/figure-html/unnamed-chunk-27-13.png){width=960}
-:::
-:::
-
-
-We do obtain a better model, interestingly we can visualise that the model is representing a non linear relationship between the variable and the output thanks to this trick. 
-
-:::
-
-## Multiple Linear Regression model
-
-**15.** Train a new model using all the variables of the dataset. Evalute the performance of the model.
-
-:::{.callout-important collapse="true" icon="false"}
-## Solution
-
-
-::: {.cell}
-
-```{.python .cell-code}
-X_train_d = sm.add_constant(X_train)
-model = sm.OLS(Y_train,X_train_d)
-results = model.fit()
-print(results.summary())
-```
-
-::: {.cell-output .cell-output-stdout}
-```
-                            OLS Regression Results                            
+[1] Standard Errors assume that the covariance matrix of the errors is correctly specified.</code></pre>
+</div>
+</div>
+<p>Most of the features seem relevant except for <code>INDUS</code> and <code>AGE</code>.</p>
+</div>
+</div>
+</div>
+<p><strong>12.</strong> Plot the regression model.</p>
+<div class="callout-important callout callout-style-default no-icon callout-captioned">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-15-contents" aria-controls="callout-15" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-caption-container flex-fill">
+Solution
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-15" class="callout-15-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb33"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a>plt.plot(X_train_s[<span class="st">'LSTAT'</span>], slm.predict(X_train_s), c<span class="op">=</span><span class="st">'red'</span>)</span>
+<span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a>plt.scatter(X_train_s[<span class="st">'LSTAT'</span>], Y_train[<span class="st">'MEDV'</span>])</span>
+<span id="cb33-3"><a href="#cb33-3" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">'LSTAT'</span>)</span>
+<span id="cb33-4"><a href="#cb33-4" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">'Predicted Values'</span>)</span>
+<span id="cb33-5"><a href="#cb33-5" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="TD1_files/figure-html/unnamed-chunk-22-11.png" class="img-fluid" width="960"></p>
+</div>
+</div>
+</div>
+</div>
+</div>
+<p><strong>Model evaluation</strong></p>
+<p><strong>13.</strong> Evaluate the model using MSE (Mean Squarred Error) and R2-score.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb34"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.metrics <span class="im">import</span> mean_squared_error</span>
+<span id="cb34-2"><a href="#cb34-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb34-3"><a href="#cb34-3" aria-hidden="true" tabindex="-1"></a><span class="co"># train error (MSE)</span></span>
+<span id="cb34-4"><a href="#cb34-4" aria-hidden="true" tabindex="-1"></a>y_train_predict <span class="op">=</span> slm.predict(...)</span>
+<span id="cb34-5"><a href="#cb34-5" aria-hidden="true" tabindex="-1"></a>mse_train <span class="op">=</span> ...(..., ...)</span>
+<span id="cb34-6"><a href="#cb34-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb34-7"><a href="#cb34-7" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"The model performance for training set"</span>)</span>
+<span id="cb34-8"><a href="#cb34-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb34-9"><a href="#cb34-9" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">'MSE is </span><span class="sc">{}</span><span class="st">'</span>.<span class="bu">format</span>(mse_train))</span>
+<span id="cb34-10"><a href="#cb34-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb34-11"><a href="#cb34-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb34-12"><a href="#cb34-12" aria-hidden="true" tabindex="-1"></a><span class="co"># test error</span></span>
+<span id="cb34-13"><a href="#cb34-13" aria-hidden="true" tabindex="-1"></a>y_test_predict <span class="op">=</span> slm.predict(...)</span>
+<span id="cb34-14"><a href="#cb34-14" aria-hidden="true" tabindex="-1"></a>mse_test <span class="op">=</span> mean_squared_error(..., ...)</span>
+<span id="cb34-15"><a href="#cb34-15" aria-hidden="true" tabindex="-1"></a>r2 <span class="op">=</span> r2_score(..., ...)</span>
+<span id="cb34-16"><a href="#cb34-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb34-17"><a href="#cb34-17" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"The model performance for testing set"</span>)</span>
+<span id="cb34-18"><a href="#cb34-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb34-19"><a href="#cb34-19" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">'MSE is </span><span class="sc">{}</span><span class="st">'</span>.<span class="bu">format</span>(mse_test))</span>
+<span id="cb34-20"><a href="#cb34-20" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">'R2 score is </span><span class="sc">{}</span><span class="st">'</span>.<span class="bu">format</span>(r2))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="callout-important callout callout-style-default no-icon callout-captioned">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-16-contents" aria-controls="callout-16" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-caption-container flex-fill">
+Solution
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-16" class="callout-16-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb35"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.metrics <span class="im">import</span> mean_squared_error, r2_score</span>
+<span id="cb35-2"><a href="#cb35-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb35-3"><a href="#cb35-3" aria-hidden="true" tabindex="-1"></a><span class="co"># train error (MSE)</span></span>
+<span id="cb35-4"><a href="#cb35-4" aria-hidden="true" tabindex="-1"></a>y_train_predict <span class="op">=</span>  slm.predict(X_train_s)</span>
+<span id="cb35-5"><a href="#cb35-5" aria-hidden="true" tabindex="-1"></a>mse_train <span class="op">=</span> mean_squared_error(Y_train, y_train_predict)</span>
+<span id="cb35-6"><a href="#cb35-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb35-7"><a href="#cb35-7" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"The model performance for training set"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>The model performance for training set</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb37"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">'MSE is </span><span class="sc">{}</span><span class="st">'</span>.<span class="bu">format</span>(mse_train))</span>
+<span id="cb37-2"><a href="#cb37-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb37-3"><a href="#cb37-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb37-4"><a href="#cb37-4" aria-hidden="true" tabindex="-1"></a><span class="co"># test error</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>MSE is 38.45801898706332</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb39"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a>y_test_predict <span class="op">=</span> slm.predict(X_test_s)</span>
+<span id="cb39-2"><a href="#cb39-2" aria-hidden="true" tabindex="-1"></a>mse_test <span class="op">=</span> mean_squared_error(Y_test, y_test_predict)</span>
+<span id="cb39-3"><a href="#cb39-3" aria-hidden="true" tabindex="-1"></a>r2 <span class="op">=</span> r2_score(Y_test, y_test_predict)</span>
+<span id="cb39-4"><a href="#cb39-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb39-5"><a href="#cb39-5" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"The model performance for testing set"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>The model performance for testing set</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb41"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">'MSE is </span><span class="sc">{}</span><span class="st">'</span>.<span class="bu">format</span>(mse_test))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>MSE is 38.821829014286585</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb43"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb43-1"><a href="#cb43-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">'R2 score is </span><span class="sc">{}</span><span class="st">'</span>.<span class="bu">format</span>(r2))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>R2 score is 0.5041523728903132</code></pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<p><strong>14.</strong> According to the plot in <strong>9</strong>, the relationship between <code>LSTAT</code> and <code>MEDV</code> is not linear. Let’s try a transformation of our explanatory variable <code>LSTAT</code>. Re-do the steps from <strong>9</strong> to <strong>13</strong> but using the log of <code>LSTAT</code>. Do you obtain a better model?</p>
+<div class="callout-important callout callout-style-default no-icon callout-captioned">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-17-contents" aria-controls="callout-17" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-caption-container flex-fill">
+Solution
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-17" class="callout-17-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb45"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb45-1"><a href="#cb45-1" aria-hidden="true" tabindex="-1"></a>X_train_s <span class="op">=</span> np.log(X_train[[<span class="st">'LSTAT'</span>]]) <span class="co"># Select LSTAT only</span></span>
+<span id="cb45-2"><a href="#cb45-2" aria-hidden="true" tabindex="-1"></a>X_test_s <span class="op">=</span> np.log(X_test[[<span class="st">'LSTAT'</span>]]) <span class="co"># Select LSTAT only</span></span>
+<span id="cb45-3"><a href="#cb45-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb45-4"><a href="#cb45-4" aria-hidden="true" tabindex="-1"></a>slm <span class="op">=</span> LinearRegression(fit_intercept<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb45-5"><a href="#cb45-5" aria-hidden="true" tabindex="-1"></a>slm.fit(X_train_s, Y_train)</span>
+<span id="cb45-6"><a href="#cb45-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb45-7"><a href="#cb45-7" aria-hidden="true" tabindex="-1"></a><span class="co"># train error (MSE)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>LinearRegression()</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb47"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb47-1"><a href="#cb47-1" aria-hidden="true" tabindex="-1"></a>y_train_predict <span class="op">=</span>  slm.predict(X_train_s)</span>
+<span id="cb47-2"><a href="#cb47-2" aria-hidden="true" tabindex="-1"></a>mse_train <span class="op">=</span> mean_squared_error(Y_train, y_train_predict)</span>
+<span id="cb47-3"><a href="#cb47-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb47-4"><a href="#cb47-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"The model performance for training set"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>The model performance for training set</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb49"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb49-1"><a href="#cb49-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">'MSE is </span><span class="sc">{}</span><span class="st">'</span>.<span class="bu">format</span>(mse_train))</span>
+<span id="cb49-2"><a href="#cb49-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb49-3"><a href="#cb49-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb49-4"><a href="#cb49-4" aria-hidden="true" tabindex="-1"></a><span class="co"># test error</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>MSE is 28.39419482862284</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb51"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb51-1"><a href="#cb51-1" aria-hidden="true" tabindex="-1"></a>y_test_predict <span class="op">=</span> slm.predict(X_test_s)</span>
+<span id="cb51-2"><a href="#cb51-2" aria-hidden="true" tabindex="-1"></a>mse_test <span class="op">=</span> mean_squared_error(Y_test, y_test_predict)</span>
+<span id="cb51-3"><a href="#cb51-3" aria-hidden="true" tabindex="-1"></a>r2 <span class="op">=</span> r2_score(Y_test, y_test_predict)</span>
+<span id="cb51-4"><a href="#cb51-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb51-5"><a href="#cb51-5" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"The model performance for testing set"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>The model performance for testing set</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb53"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb53-1"><a href="#cb53-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">'MSE is </span><span class="sc">{}</span><span class="st">'</span>.<span class="bu">format</span>(mse_test))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>MSE is 27.899544077825233</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb55"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb55-1"><a href="#cb55-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">'R2 score is </span><span class="sc">{}</span><span class="st">'</span>.<span class="bu">format</span>(r2))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>R2 score is 0.6436560801053237</code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb57"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb57-1"><a href="#cb57-1" aria-hidden="true" tabindex="-1"></a>plt.scatter(X_train[<span class="st">'LSTAT'</span>], Y_train[<span class="st">'MEDV'</span>])</span>
+<span id="cb57-2"><a href="#cb57-2" aria-hidden="true" tabindex="-1"></a>plt.scatter(X_train[<span class="st">'LSTAT'</span>], slm.predict(X_train_s), c<span class="op">=</span><span class="st">'red'</span>)</span>
+<span id="cb57-3"><a href="#cb57-3" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">'LSTAT'</span>)</span>
+<span id="cb57-4"><a href="#cb57-4" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">'Predicted Values'</span>)</span>
+<span id="cb57-5"><a href="#cb57-5" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="TD1_files/figure-html/unnamed-chunk-26-13.png" class="img-fluid" width="960"></p>
+</div>
+</div>
+<p>We do obtain a better model, interestingly we can visualise that the model is representing a non linear relationship between the variable and the output thanks to this trick.</p>
+</div>
+</div>
+</div>
+</section><section id="multiple-linear-regression-model" class="level2"><h2 class="anchored" data-anchor-id="multiple-linear-regression-model">Multiple Linear Regression model</h2>
+<p><strong>15.</strong> Train a new model using all the variables of the dataset. Evalute the performance of the model.</p>
+<div class="callout-important callout callout-style-default no-icon callout-captioned">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-18-contents" aria-controls="callout-18" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-caption-container flex-fill">
+Solution
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-18" class="callout-18-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb58"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb58-1"><a href="#cb58-1" aria-hidden="true" tabindex="-1"></a>X_train_d <span class="op">=</span> sm.add_constant(X_train)</span>
+<span id="cb58-2"><a href="#cb58-2" aria-hidden="true" tabindex="-1"></a>model <span class="op">=</span> sm.OLS(Y_train,X_train_d)</span>
+<span id="cb58-3"><a href="#cb58-3" aria-hidden="true" tabindex="-1"></a>results <span class="op">=</span> model.fit()</span>
+<span id="cb58-4"><a href="#cb58-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(results.summary())</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>                            OLS Regression Results                            
 ==============================================================================
 Dep. Variable:                   MEDV   R-squared:                       0.738
 Model:                            OLS   Adj. R-squared:                  0.730
 Method:                 Least Squares   F-statistic:                     84.65
-Date:                Sat, 03 Sep 2022   Prob (F-statistic):          8.21e-105
-Time:                        23:56:22   Log-Likelihood:                -1202.0
+Date:                Thu, 08 Sep 2022   Prob (F-statistic):          8.21e-105
+Time:                        22:18:59   Log-Likelihood:                -1202.0
 No. Observations:                 404   AIC:                             2432.
 Df Residuals:                     390   BIC:                             2488.
 Df Model:                          13                                         
 Covariance Type:            nonrobust                                         
 ==============================================================================
-                 coef    std err          t      P>|t|      [0.025      0.975]
+                 coef    std err          t      P&gt;|t|      [0.025      0.975]
 ------------------------------------------------------------------------------
 const         37.9125      5.775      6.565      0.000      26.559      49.266
 CRIM          -0.1308      0.036     -3.603      0.000      -0.202      -0.059
@@ -1042,55 +945,65 @@ Kurtosis:                       7.911   Cond. No.                     1.51e+04
 Notes:
 [1] Standard Errors assume that the covariance matrix of the errors is correctly specified.
 [2] The condition number is large, 1.51e+04. This might indicate that there are
-strong multicollinearity or other numerical problems.
-```
-:::
-:::
-
-:::
-
-**16.** Which features are significant for the model? 
-
-:::{.callout-important collapse="true" icon="false"}
-## Solution
-
-The ones with p-values is less than the error we fix (let's say 5%). `Age` for example.
-:::
-
-**17.** Apply backward selection to fit a model with the best subset of features. 
-
-:::{.callout-important collapse="true" icon="false"}
-## Solution
-
-
-::: {.cell}
-
-```{.python .cell-code}
-columns_to_drop = ['AGE']
-X_train_bck = X_train.drop(columns_to_drop, axis=1)
-X_test_bck = X_test.drop(columns_to_drop, axis=1)
-
-
-model = sm.OLS(Y_train,sm.add_constant(X_train_bck))
-results = model.fit()
-print(results.summary())
-```
-
-::: {.cell-output .cell-output-stdout}
-```
-                            OLS Regression Results                            
+strong multicollinearity or other numerical problems.</code></pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<p><strong>16.</strong> Which features are significant for the model?</p>
+<div class="callout-important callout callout-style-default no-icon callout-captioned">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-19-contents" aria-controls="callout-19" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-caption-container flex-fill">
+Solution
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-19" class="callout-19-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>The ones with p-values is less than the error we fix (let’s say 5%). <code>Age</code> for example.</p>
+</div>
+</div>
+</div>
+<p><strong>17.</strong> Apply backward selection to fit a model with the best subset of features.</p>
+<div class="callout-important callout callout-style-default no-icon callout-captioned">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-20-contents" aria-controls="callout-20" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-caption-container flex-fill">
+Solution
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-20" class="callout-20-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb60"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb60-1"><a href="#cb60-1" aria-hidden="true" tabindex="-1"></a>columns_to_drop <span class="op">=</span> [<span class="st">'AGE'</span>]</span>
+<span id="cb60-2"><a href="#cb60-2" aria-hidden="true" tabindex="-1"></a>X_train_bck <span class="op">=</span> X_train.drop(columns_to_drop, axis<span class="op">=</span><span class="dv">1</span>)</span>
+<span id="cb60-3"><a href="#cb60-3" aria-hidden="true" tabindex="-1"></a>X_test_bck <span class="op">=</span> X_test.drop(columns_to_drop, axis<span class="op">=</span><span class="dv">1</span>)</span>
+<span id="cb60-4"><a href="#cb60-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb60-5"><a href="#cb60-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb60-6"><a href="#cb60-6" aria-hidden="true" tabindex="-1"></a>model <span class="op">=</span> sm.OLS(Y_train,sm.add_constant(X_train_bck))</span>
+<span id="cb60-7"><a href="#cb60-7" aria-hidden="true" tabindex="-1"></a>results <span class="op">=</span> model.fit()</span>
+<span id="cb60-8"><a href="#cb60-8" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(results.summary())</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>                            OLS Regression Results                            
 ==============================================================================
 Dep. Variable:                   MEDV   R-squared:                       0.738
 Model:                            OLS   Adj. R-squared:                  0.730
 Method:                 Least Squares   F-statistic:                     91.94
-Date:                Sat, 03 Sep 2022   Prob (F-statistic):          8.39e-106
-Time:                        23:56:23   Log-Likelihood:                -1202.0
+Date:                Thu, 08 Sep 2022   Prob (F-statistic):          8.39e-106
+Time:                        22:18:59   Log-Likelihood:                -1202.0
 No. Observations:                 404   AIC:                             2430.
 Df Residuals:                     391   BIC:                             2482.
 Df Model:                          12                                         
 Covariance Type:            nonrobust                                         
 ==============================================================================
-                 coef    std err          t      P>|t|      [0.025      0.975]
+                 coef    std err          t      P&gt;|t|      [0.025      0.975]
 ------------------------------------------------------------------------------
 const         37.8841      5.756      6.582      0.000      26.568      49.200
 CRIM          -0.1309      0.036     -3.610      0.000      -0.202      -0.060
@@ -1115,35 +1028,29 @@ Kurtosis:                       7.929   Cond. No.                     1.49e+04
 Notes:
 [1] Standard Errors assume that the covariance matrix of the errors is correctly specified.
 [2] The condition number is large, 1.49e+04. This might indicate that there are
-strong multicollinearity or other numerical problems.
-```
-:::
-
-```{.python .cell-code}
-columns_to_drop = ['INDUS']
-X_train_bck = X_train.drop(columns_to_drop, axis=1)
-X_test_bck = X_test.drop(columns_to_drop, axis=1)
-
-model = sm.OLS(Y_train,sm.add_constant(X_train_bck))
-results = model.fit()
-print(results.summary())
-```
-
-::: {.cell-output .cell-output-stdout}
-```
-                            OLS Regression Results                            
+strong multicollinearity or other numerical problems.</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb62"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb62-1"><a href="#cb62-1" aria-hidden="true" tabindex="-1"></a>columns_to_drop <span class="op">=</span> [<span class="st">'INDUS'</span>]</span>
+<span id="cb62-2"><a href="#cb62-2" aria-hidden="true" tabindex="-1"></a>X_train_bck <span class="op">=</span> X_train.drop(columns_to_drop, axis<span class="op">=</span><span class="dv">1</span>)</span>
+<span id="cb62-3"><a href="#cb62-3" aria-hidden="true" tabindex="-1"></a>X_test_bck <span class="op">=</span> X_test.drop(columns_to_drop, axis<span class="op">=</span><span class="dv">1</span>)</span>
+<span id="cb62-4"><a href="#cb62-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb62-5"><a href="#cb62-5" aria-hidden="true" tabindex="-1"></a>model <span class="op">=</span> sm.OLS(Y_train,sm.add_constant(X_train_bck))</span>
+<span id="cb62-6"><a href="#cb62-6" aria-hidden="true" tabindex="-1"></a>results <span class="op">=</span> model.fit()</span>
+<span id="cb62-7"><a href="#cb62-7" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(results.summary())</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>                            OLS Regression Results                            
 ==============================================================================
 Dep. Variable:                   MEDV   R-squared:                       0.738
 Model:                            OLS   Adj. R-squared:                  0.730
 Method:                 Least Squares   F-statistic:                     91.94
-Date:                Sat, 03 Sep 2022   Prob (F-statistic):          8.37e-106
-Time:                        23:56:23   Log-Likelihood:                -1202.0
+Date:                Thu, 08 Sep 2022   Prob (F-statistic):          8.37e-106
+Time:                        22:18:59   Log-Likelihood:                -1202.0
 No. Observations:                 404   AIC:                             2430.
 Df Residuals:                     391   BIC:                             2482.
 Df Model:                          12                                         
 Covariance Type:            nonrobust                                         
 ==============================================================================
-                 coef    std err          t      P>|t|      [0.025      0.975]
+                 coef    std err          t      P&gt;|t|      [0.025      0.975]
 ------------------------------------------------------------------------------
 const         37.9074      5.758      6.584      0.000      26.588      49.227
 CRIM          -0.1308      0.036     -3.610      0.000      -0.202      -0.060
@@ -1168,129 +1075,100 @@ Kurtosis:                       7.911   Cond. No.                     1.49e+04
 Notes:
 [1] Standard Errors assume that the covariance matrix of the errors is correctly specified.
 [2] The condition number is large, 1.49e+04. This might indicate that there are
-strong multicollinearity or other numerical problems.
-```
-:::
-
-```{.python .cell-code}
-y_test_predict = results.predict(sm.add_constant(X_test_bck))
-mse_test = mean_squared_error(Y_test, y_test_predict)
-r2 = r2_score(Y_test, y_test_predict)
-
-print("The model performance for testing set")
-```
-
-::: {.cell-output .cell-output-stdout}
-```
-The model performance for testing set
-```
-:::
-
-```{.python .cell-code}
-print('MSE is {}'.format(mse_test))
-```
-
-::: {.cell-output .cell-output-stdout}
-```
-MSE is 20.872226101228375
-```
-:::
-
-```{.python .cell-code}
-print('R2 score is {}'.format(r2))
-```
-
-::: {.cell-output .cell-output-stdout}
-```
-R2 score is 0.7334117416007803
-```
-:::
-:::
-
-:::
-
-
-**18.** Is the new model better than the last one with all the features? 
-
-:::{.callout-important collapse="true" icon="false"}
-## Solution
-
-
-::: {.cell}
-
-```{.python .cell-code}
-y_test_predict = results.predict(sm.add_constant(X_test_bck))
-mse_test = mean_squared_error(Y_test, y_test_predict)
-r2 = r2_score(Y_test, y_test_predict)
-
-print("The model performance for testing set")
-```
-
-::: {.cell-output .cell-output-stdout}
-```
-The model performance for testing set
-```
-:::
-
-```{.python .cell-code}
-print('MSE is {}'.format(mse_test))
-```
-
-::: {.cell-output .cell-output-stdout}
-```
-MSE is 20.872226101228375
-```
-:::
-
-```{.python .cell-code}
-print('R2 score is {}'.format(r2))
-```
-
-::: {.cell-output .cell-output-stdout}
-```
-R2 score is 0.7334117416007803
-```
-:::
-:::
-
-:::
-
-**19.** In the last model we didn’t transform `LSTAT`. Re train the model using `log(LSTAT)` instead of `LSTAT`. Does this new model performs better?
-
-:::{.callout-important collapse="true" icon="false"}
-## Solution
-
-
-::: {.cell}
-
-```{.python .cell-code}
-X_train_lg = X_train.drop('LSTAT',axis=1)
-X_train_lg['log(LSTAT)'] = np.log(X_train['LSTAT'])
-
-X_test_lg = X_test.drop('LSTAT',axis=1)
-X_test_lg['log(LSTAT)'] = np.log(X_test['LSTAT'])
-
-
-model = sm.OLS(Y_train,sm.add_constant(X_train_lg))
-results = model.fit()
-print(results.summary())
-```
-
-::: {.cell-output .cell-output-stdout}
-```
-                            OLS Regression Results                            
+strong multicollinearity or other numerical problems.</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb64"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb64-1"><a href="#cb64-1" aria-hidden="true" tabindex="-1"></a>y_test_predict <span class="op">=</span> results.predict(sm.add_constant(X_test_bck))</span>
+<span id="cb64-2"><a href="#cb64-2" aria-hidden="true" tabindex="-1"></a>mse_test <span class="op">=</span> mean_squared_error(Y_test, y_test_predict)</span>
+<span id="cb64-3"><a href="#cb64-3" aria-hidden="true" tabindex="-1"></a>r2 <span class="op">=</span> r2_score(Y_test, y_test_predict)</span>
+<span id="cb64-4"><a href="#cb64-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb64-5"><a href="#cb64-5" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"The model performance for testing set"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>The model performance for testing set</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb66"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb66-1"><a href="#cb66-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">'MSE is </span><span class="sc">{}</span><span class="st">'</span>.<span class="bu">format</span>(mse_test))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>MSE is 20.872226101228375</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb68"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb68-1"><a href="#cb68-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">'R2 score is </span><span class="sc">{}</span><span class="st">'</span>.<span class="bu">format</span>(r2))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>R2 score is 0.7334117416007803</code></pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<p><strong>18.</strong> Is the new model better than the last one with all the features?</p>
+<div class="callout-important callout callout-style-default no-icon callout-captioned">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-21-contents" aria-controls="callout-21" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-caption-container flex-fill">
+Solution
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-21" class="callout-21-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb70"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb70-1"><a href="#cb70-1" aria-hidden="true" tabindex="-1"></a>y_test_predict <span class="op">=</span> results.predict(sm.add_constant(X_test_bck))</span>
+<span id="cb70-2"><a href="#cb70-2" aria-hidden="true" tabindex="-1"></a>mse_test <span class="op">=</span> mean_squared_error(Y_test, y_test_predict)</span>
+<span id="cb70-3"><a href="#cb70-3" aria-hidden="true" tabindex="-1"></a>r2 <span class="op">=</span> r2_score(Y_test, y_test_predict)</span>
+<span id="cb70-4"><a href="#cb70-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb70-5"><a href="#cb70-5" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"The model performance for testing set"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>The model performance for testing set</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb72"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb72-1"><a href="#cb72-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">'MSE is </span><span class="sc">{}</span><span class="st">'</span>.<span class="bu">format</span>(mse_test))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>MSE is 20.872226101228375</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb74"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb74-1"><a href="#cb74-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">'R2 score is </span><span class="sc">{}</span><span class="st">'</span>.<span class="bu">format</span>(r2))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>R2 score is 0.7334117416007803</code></pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<p><strong>19.</strong> In the last model we didn’t transform <code>LSTAT</code>. Re train the model using <code>log(LSTAT)</code> instead of <code>LSTAT</code>. Does this new model performs better?</p>
+<div class="callout-important callout callout-style-default no-icon callout-captioned">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-22-contents" aria-controls="callout-22" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-caption-container flex-fill">
+Solution
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-22" class="callout-22-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb76"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb76-1"><a href="#cb76-1" aria-hidden="true" tabindex="-1"></a>X_train_lg <span class="op">=</span> X_train.drop(<span class="st">'LSTAT'</span>,axis<span class="op">=</span><span class="dv">1</span>)</span>
+<span id="cb76-2"><a href="#cb76-2" aria-hidden="true" tabindex="-1"></a>X_train_lg[<span class="st">'log(LSTAT)'</span>] <span class="op">=</span> np.log(X_train[<span class="st">'LSTAT'</span>])</span>
+<span id="cb76-3"><a href="#cb76-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb76-4"><a href="#cb76-4" aria-hidden="true" tabindex="-1"></a>X_test_lg <span class="op">=</span> X_test.drop(<span class="st">'LSTAT'</span>,axis<span class="op">=</span><span class="dv">1</span>)</span>
+<span id="cb76-5"><a href="#cb76-5" aria-hidden="true" tabindex="-1"></a>X_test_lg[<span class="st">'log(LSTAT)'</span>] <span class="op">=</span> np.log(X_test[<span class="st">'LSTAT'</span>])</span>
+<span id="cb76-6"><a href="#cb76-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb76-7"><a href="#cb76-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb76-8"><a href="#cb76-8" aria-hidden="true" tabindex="-1"></a>model <span class="op">=</span> sm.OLS(Y_train,sm.add_constant(X_train_lg))</span>
+<span id="cb76-9"><a href="#cb76-9" aria-hidden="true" tabindex="-1"></a>results <span class="op">=</span> model.fit()</span>
+<span id="cb76-10"><a href="#cb76-10" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(results.summary())</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>                            OLS Regression Results                            
 ==============================================================================
 Dep. Variable:                   MEDV   R-squared:                       0.787
 Model:                            OLS   Adj. R-squared:                  0.780
 Method:                 Least Squares   F-statistic:                     111.1
-Date:                Sat, 03 Sep 2022   Prob (F-statistic):          3.07e-122
-Time:                        23:56:24   Log-Likelihood:                -1160.0
+Date:                Thu, 08 Sep 2022   Prob (F-statistic):          3.07e-122
+Time:                        22:19:00   Log-Likelihood:                -1160.0
 No. Observations:                 404   AIC:                             2348.
 Df Residuals:                     390   BIC:                             2404.
 Df Model:                          13                                         
 Covariance Type:            nonrobust                                         
 ==============================================================================
-                 coef    std err          t      P>|t|      [0.025      0.975]
+                 coef    std err          t      P&gt;|t|      [0.025      0.975]
 ------------------------------------------------------------------------------
 const         56.7251      5.535     10.249      0.000      45.843      67.607
 CRIM          -0.1438      0.032     -4.444      0.000      -0.207      -0.080
@@ -1316,195 +1194,125 @@ Kurtosis:                       8.218   Cond. No.                     1.56e+04
 Notes:
 [1] Standard Errors assume that the covariance matrix of the errors is correctly specified.
 [2] The condition number is large, 1.56e+04. This might indicate that there are
-strong multicollinearity or other numerical problems.
-```
-:::
+strong multicollinearity or other numerical problems.</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb78"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb78-1"><a href="#cb78-1" aria-hidden="true" tabindex="-1"></a>y_test_predict <span class="op">=</span> results.predict(sm.add_constant(X_test_lg))</span>
+<span id="cb78-2"><a href="#cb78-2" aria-hidden="true" tabindex="-1"></a>mse_test <span class="op">=</span> mean_squared_error(Y_test, y_test_predict)</span>
+<span id="cb78-3"><a href="#cb78-3" aria-hidden="true" tabindex="-1"></a>r2 <span class="op">=</span> r2_score(Y_test, y_test_predict)</span>
+<span id="cb78-4"><a href="#cb78-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb78-5"><a href="#cb78-5" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"The model performance for testing set"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>The model performance for testing set</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb80"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb80-1"><a href="#cb80-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">'MSE is </span><span class="sc">{}</span><span class="st">'</span>.<span class="bu">format</span>(mse_test))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>MSE is 15.039960438345249</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb82"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb82-1"><a href="#cb82-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">'R2 score is </span><span class="sc">{}</span><span class="st">'</span>.<span class="bu">format</span>(r2))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>R2 score is 0.8079037262146341</code></pre>
+</div>
+</div>
+<p>The model is better (lower test MSE).</p>
+</div>
+</div>
+</div>
+</section><section id="anova-analysis-of-variances" class="level2"><h2 class="anchored" data-anchor-id="anova-analysis-of-variances">ANOVA (ANalysis Of VAriances)</h2>
+<p>In this last part we will apply an analysis of variances (ANOVA) in order to test if there is a significant difference of means between two groups <span class="math inline">\(i\)</span> and <span class="math inline">\(j\)</span> (Consider group <span class="math inline">\(i\)</span> is the suburbs bounding the river and <span class="math inline">\(j\)</span> the suburbs which not). The hypotheses are</p>
+<p><span class="math display">\[ H_0 : \mu_i = \mu_j \]</span></p>
+<p><span class="math display">\[ H_1 : \mu_i \neq \mu_j \]</span></p>
+<p>Where <span class="math inline">\(\mu_i\)</span> is the mean of <code>MEDV</code> in group <span class="math inline">\(i\)</span>.</p>
+<div class="callout-note callout callout-style-default callout-captioned">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-caption-container flex-fill">
+Anova
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>This analysis can be conducted during the exploratory data analysis part especially when the target is continuous and a feature is discrete.</p>
+</div>
+</div>
+<p><strong>20.</strong> In the Boston data set there is a categorical variable <code>CHAS</code> which corresponds to Charles River (= 1 if a suburb bounds the river; 0 otherwise). How many of the suburbs in this data set bound the Charles river?</p>
+<p><strong>21.</strong> Create Boxplots of the median value of houses with respect to the variable <code>CHAS</code>. Do we observe some difference between the median value of houses with respect to the neighborhood to Charles River?</p>
+<div class="cell">
 
-```{.python .cell-code}
-y_test_predict = results.predict(sm.add_constant(X_test_lg))
-mse_test = mean_squared_error(Y_test, y_test_predict)
-r2 = r2_score(Y_test, y_test_predict)
+</div>
+<p><strong>22.</strong> Calculate <span class="math inline">\(\mu_i\)</span> and <span class="math inline">\(\mu_j\)</span>.</p>
+<div class="cell">
 
-print("The model performance for testing set")
-```
+</div>
+<p><strong>23.</strong> Apply an ANOVA test of <code>MEDV</code> with respect to <code>CHAS</code>. What do you conclude ?</p>
+<div class="cell">
 
-::: {.cell-output .cell-output-stdout}
-```
-The model performance for testing set
-```
-:::
-
-```{.python .cell-code}
-print('MSE is {}'.format(mse_test))
-```
-
-::: {.cell-output .cell-output-stdout}
-```
-MSE is 15.039960438345249
-```
-:::
-
-```{.python .cell-code}
-print('R2 score is {}'.format(r2))
-
-```
-
-::: {.cell-output .cell-output-stdout}
-```
-R2 score is 0.8079037262146341
-```
-:::
-:::
-
-
-The model is better (lower test MSE).
-
-:::
-
-## ANOVA (ANalysis Of VAriances)
-
-In this last part we will apply an analysis of variances (ANOVA) in order to test if there is a significant difference of means between two groups $i$ and $j$ (Consider group $i$ is the suburbs bounding the river and $j$ the suburbs which not). The hypotheses are 
-
-$$ H_0 : \mu_i = \mu_j $$ 
-
-$$ H_1 : \mu_i \neq \mu_j $$
-
-Where $\mu_i$ is the mean of `MEDV` in group $i$.
-
-::: {.callout-note}
-## Anova
-This analysis can be conducted during the exploratory data analysis part especially when the target is continuous and a feature is discrete.  
-:::
-
-**20.** In the Boston data set there is a categorical variable `CHAS` which corresponds to Charles River (= 1 if a suburb bounds the river; 0 otherwise). How many of the suburbs in this data set bound the Charles river?
-
-
-
-**21.** Create Boxplots of the median value of houses with respect to the variable `CHAS`. Do we observe some difference between the median value of houses with respect to the neighborhood to Charles River? 
-
-
-::: {.cell}
-
-:::
-
-
-
-**22.** Calculate $\mu_i$ and $\mu_j$.
-
-
-::: {.cell}
-
-:::
-
-
-**23.** Apply an ANOVA test of `MEDV` with respect to `CHAS`. What do you conclude ?
-
-
-::: {.cell}
-
-:::
-
-
-
-:::{.callout-important collapse="true" icon="false"}
-## Solution
-
-
-::: {.cell}
-
-```{.python .cell-code}
-boston['CHAS'].value_counts()
-```
-
-::: {.cell-output .cell-output-stdout}
-```
-0.0    471
+</div>
+<div class="callout-important callout callout-style-default no-icon callout-captioned">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-24-contents" aria-controls="callout-24" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-caption-container flex-fill">
+Solution
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-24" class="callout-24-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb84"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb84-1"><a href="#cb84-1" aria-hidden="true" tabindex="-1"></a>boston[<span class="st">'CHAS'</span>].value_counts()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>0.0    471
 1.0     35
-Name: CHAS, dtype: int64
-```
-:::
-:::
-
-::: {.cell}
-
-```{.python .cell-code}
-sns.boxplot(x='CHAS', y='MEDV', data=boston)
-plt.show()
-```
-
-::: {.cell-output-display}
-![](TD1_files/figure-html/unnamed-chunk-36-1.png){width=960}
-:::
-:::
-
-::: {.cell}
-
-```{.python .cell-code}
-boston.groupby('CHAS')['MEDV'].mean()
-```
-
-::: {.cell-output .cell-output-stdout}
-```
-CHAS
+Name: CHAS, dtype: int64</code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb86"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb86-1"><a href="#cb86-1" aria-hidden="true" tabindex="-1"></a>sns.boxplot(x<span class="op">=</span><span class="st">'CHAS'</span>, y<span class="op">=</span><span class="st">'MEDV'</span>, data<span class="op">=</span>boston)</span>
+<span id="cb86-2"><a href="#cb86-2" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="TD1_files/figure-html/unnamed-chunk-35-1.png" class="img-fluid" width="960"></p>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb87"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb87-1"><a href="#cb87-1" aria-hidden="true" tabindex="-1"></a>boston.groupby(<span class="st">'CHAS'</span>)[<span class="st">'MEDV'</span>].mean()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>CHAS
 0.0    22.093843
 1.0    28.440000
-Name: MEDV, dtype: float64
-```
-:::
-:::
-
-
-You can use Anova's test from `statsmodels` or from `scipy`.
-
-
-::: {.cell}
-
-```{.python .cell-code}
-from scipy.stats import f_oneway
-
-f_oneway(boston[boston['CHAS'] == 1.0]['MEDV'].to_numpy(), 
-         boston[boston['CHAS'] == 0.0]['MEDV'].to_numpy())
-```
-
-::: {.cell-output .cell-output-stdout}
-```
-F_onewayResult(statistic=15.971512420371962, pvalue=7.390623170520815e-05)
-```
-:::
-:::
-
-
-Or
-
-
-::: {.cell}
-
-```{.python .cell-code}
-
-from statsmodels.stats.anova import anova_lm
-from statsmodels.formula.api import ols
-
-anova_boston_bound_river = anova_lm(
-    ols('MEDV~C(CHAS)', data=boston[['MEDV', 'CHAS']]).fit())
-print(anova_boston_bound_river)
-```
-
-::: {.cell-output .cell-output-stdout}
-```
-             df        sum_sq      mean_sq          F    PR(>F)
+Name: MEDV, dtype: float64</code></pre>
+</div>
+</div>
+<p>You can use Anova’s test from <code>statsmodels</code> or from <code>scipy</code>.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb89"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb89-1"><a href="#cb89-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> scipy.stats <span class="im">import</span> f_oneway</span>
+<span id="cb89-2"><a href="#cb89-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb89-3"><a href="#cb89-3" aria-hidden="true" tabindex="-1"></a>f_oneway(boston[boston[<span class="st">'CHAS'</span>] <span class="op">==</span> <span class="fl">1.0</span>][<span class="st">'MEDV'</span>].to_numpy(), </span>
+<span id="cb89-4"><a href="#cb89-4" aria-hidden="true" tabindex="-1"></a>         boston[boston[<span class="st">'CHAS'</span>] <span class="op">==</span> <span class="fl">0.0</span>][<span class="st">'MEDV'</span>].to_numpy())</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>F_onewayResult(statistic=15.971512420371962, pvalue=7.390623170520815e-05)</code></pre>
+</div>
+</div>
+<p>Or</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb91"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb91-1"><a href="#cb91-1" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb91-2"><a href="#cb91-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> statsmodels.stats.anova <span class="im">import</span> anova_lm</span>
+<span id="cb91-3"><a href="#cb91-3" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> statsmodels.formula.api <span class="im">import</span> ols</span>
+<span id="cb91-4"><a href="#cb91-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb91-5"><a href="#cb91-5" aria-hidden="true" tabindex="-1"></a>anova_boston_bound_river <span class="op">=</span> anova_lm(</span>
+<span id="cb91-6"><a href="#cb91-6" aria-hidden="true" tabindex="-1"></a>    ols(<span class="st">'MEDV~C(CHAS)'</span>, data<span class="op">=</span>boston[[<span class="st">'MEDV'</span>, <span class="st">'CHAS'</span>]]).fit())</span>
+<span id="cb91-7"><a href="#cb91-7" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(anova_boston_bound_river)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>             df        sum_sq      mean_sq          F    PR(&gt;F)
 C(CHAS)     1.0   1312.079271  1312.079271  15.971512  0.000074
-Residual  504.0  41404.216144    82.151223        NaN       NaN
-```
-:::
-:::
-
-
-
-Because the p-value is low we can reject the hypothesis that the two groups have the same mean and thus conclude that they have different means. Note that we didn't check which was the biggest here, just that they are not the same. Because we are checking only the difference between two distribution and not multiple ones. 
-
-:::
-
-
+Residual  504.0  41404.216144    82.151223        NaN       NaN</code></pre>
+</div>
+</div>
+<p>Because the p-value is low we can reject the hypothesis that the two groups have the same mean and thus conclude that they have different means. Note that we didn’t check which was the biggest here, just that they are not the same. Because we are checking only the difference between two distribution and not multiple ones.</p>
+</div>
+</div>
+</div>
 <!-- :::{.callout-tip collapse="true"} -->
 <!-- ## Expand To see solution -->
 <!-- This is an example of a 'folded' caution callout that can be expanded by the user. You can use `collapse="true"` to collapse it by default or `collapse="false"` to make a collapsible callout that is expanded by default. -->
@@ -1527,9 +1335,12 @@ Because the p-value is low we can reject the hypothesis that the two groups have
 <!-- \end{align} -->
 <!-- <p style="text-align: center;"><span style="color: firebrick;">_______________</span></p> -->
 <!-- </details> -->
+<div class="cell">
+
+</div>
 
 
-</section></section></main><!-- /main --><script id="quarto-html-after-body" type="application/javascript">
+</section></main><!-- /main --><script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
   const toggleBodyColorMode = (bsSheetEl) => {
     const mode = bsSheetEl.getAttribute("data-mode");

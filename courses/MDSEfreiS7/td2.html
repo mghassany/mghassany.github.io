@@ -64,6 +64,7 @@ ul.task-list li input[type="checkbox"] {
 }</script>
 <script async="" src="https://hypothes.is/embed.js"></script>
 
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
 
 <link rel="stylesheet" href="mycss.css">
 </head>
@@ -164,7 +165,17 @@ ul.task-list li input[type="checkbox"] {
 </nav>
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#continuous-random-variables" id="toc-continuous-random-variables" class="nav-link active" data-scroll-target="#continuous-random-variables">Continuous Random Variables</a></li>
+  <li><a href="#overlinex_n" id="toc-overlinex_n" class="nav-link" data-scroll-target="#overlinex_n"><span class="math inline">\(\overline{X}_n\)</span></a></li>
+  <li><a href="#p_n" id="toc-p_n" class="nav-link" data-scroll-target="#p_n"><span class="math inline">\(P_n\)</span></a></li>
+  <li><a href="#statistic" id="toc-statistic" class="nav-link" data-scroll-target="#statistic">Statistic</a></li>
+  <li><a href="#théorème-central-limite" id="toc-théorème-central-limite" class="nav-link" data-scroll-target="#théorème-central-limite">Théorème Central Limite</a></li>
+  </ul>
+</nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
@@ -185,8 +196,180 @@ ul.task-list li input[type="checkbox"] {
 
 </header>
 
+<section id="continuous-random-variables" class="level2 unnumbered">
+<h2 class="unnumbered anchored" data-anchor-id="continuous-random-variables">Continuous Random Variables</h2>
+<div id="exr-" class="theorem exercise">
+<p><span class="theorem-title"><strong>Exercise 2.1 </strong></span>Let <span class="math inline">\(X\)</span> a random variable of density <span class="math inline">\(f\)</span> defined by: <span class="math inline">\(f(x) = k x \times {1}_{]0,2[} (x)\)</span>.</p>
+<ol type="1">
+<li><p>Calculate <span class="math inline">\(k\)</span>.</p></li>
+<li><p>Calculate <span class="math inline">\(E(X)\)</span> and <span class="math inline">\(E(X^2)\)</span>.</p></li>
+<li><p>Let <span class="math inline">\(Z=X^2\)</span>. Determine the density function of <span class="math inline">\(Z\)</span> and calculate <span class="math inline">\(E(Z)\)</span>.</p></li>
+</ol>
+</div>
+<div id="exr-" class="theorem exercise">
+<p><span class="theorem-title"><strong>Exercise 2.2 </strong></span>Let <span class="math inline">\(X\)</span> a random variable of density function:</p>
+<p><span class="math display">\[f(x)= \left\lbrace
+      \begin{array}{ll}
+      c(1-x^2)  &amp; \mbox{si} \quad -1&lt;x&lt;1\\
+      0 &amp; \mbox{sinon}
+      \end{array}
+  \right.\]</span></p>
+<ol type="1">
+<li><p>What is the value of <span class="math inline">\(c\)</span>?</p></li>
+<li><p>Calculate the distribution function of <span class="math inline">\(X\)</span>?</p></li>
+</ol>
+</div>
+<div id="exr-" class="theorem exercise">
+<p><span class="theorem-title"><strong>Exercise 2.3 </strong></span>Let <span class="math inline">\(X\)</span> a random variable of density function:</p>
+<p><span class="math display">\[f(x)= \left\lbrace
+      \begin{array}{ll}
+      0  &amp; \mbox{si} \quad |x| &gt; k &gt; 0\\
+      x+1 &amp; \mbox{si} \quad |x| \le k
+      \end{array}
+  \right.\]</span></p>
+<ol type="1">
+<li><p>Calculate <span class="math inline">\(k\)</span>.</p></li>
+<li><p>Calculate <span class="math inline">\(E(X)\)</span> and <span class="math inline">\(E(X^2)\)</span>.</p></li>
+<li><p>Determine the distribution function of <span class="math inline">\(X\)</span>.</p></li>
+<li><p>Let <span class="math inline">\(Y=X^2\)</span>. Determine the probability distribution of <span class="math inline">\(Y\)</span>.</p></li>
+<li><p>Calculate <span class="math inline">\(E(Y)\)</span>.</p></li>
+</ol>
+</div>
+<div id="exr-" class="theorem exercise">
+<p><span class="theorem-title"><strong>Exercise 2.4 </strong></span>Let <span class="math inline">\(\Phi\)</span> the distribution function of the standard normal distribution.</p>
+<ol type="1">
+<li><p>Let <span class="math inline">\(X\)</span> a random variable following a standard normal distribution, i.e.&nbsp;<span class="math inline">\(X \thicksim \mathcal{N}(0,1)\)</span>. Using the standard normal distribution table, calculate: <span class="math inline">\(P(X&gt;2), P(-1&lt;X&lt;1.5)\)</span> et <span class="math inline">\(P(X&lt;0.5)\)</span>.</p></li>
+<li><p>Let <span class="math inline">\(Y\)</span> a random variable s.t. <span class="math inline">\(Y \thicksim \mathcal{N}(\mu,\sigma^2)=\mathcal{N}(4,16)\)</span>. Calculate: <span class="math inline">\(P(Y&gt;2), P(-1&lt;Y&lt;1.5)\)</span> and <span class="math inline">\(P(Y&lt;0.5)\)</span>.</p></li>
+<li><p>Let <span class="math inline">\(U \thicksim \mathcal{N}(6,4)\)</span>. Calculate: <span class="math inline">\(P(|U-4|&lt;3)\)</span> and <span class="math inline">\(P( U&gt;6 | U &gt; 3)\)</span>.</p></li>
+</ol>
+</div>
+<div id="exr-" class="theorem exercise">
+<p><span class="theorem-title"><strong>Exercise 2.5 </strong></span>A machine produces parts of diameter <span class="math inline">\(X\)</span> (in cm) which is a random variable that follows a normal distribution of expectation <span class="math inline">\(\mu\)</span> and variance <span class="math inline">\(\sigma^2 = (0.01)^2\)</span>. What should be the value of <span class="math inline">\(\mu\)</span> so that the probability that a coin chosen randomly has a diameter greater than 3 cm, is less than 0.01?</p>
+</div>
+<div id="exr-" class="theorem exercise">
+<p><span class="theorem-title"><strong>Exercise 2.6 (Uniform law and exponential law) </strong></span>Let <span class="math inline">\(U\)</span> a random variable following a Uniform law on <span class="math inline">\([0,1]\)</span>. Show that <span class="math inline">\(X= - \ln U\)</span> follows the exponential law.</p>
+</div>
+<div id="exr-" class="theorem exercise">
+<p><span class="theorem-title"><strong>Exercise 2.7 </strong></span>Express the following integrals w.r.t. the distribution function of the standard normal distribution <span class="math inline">\(\Phi\)</span>, then calculate:</p>
+<ol type="1">
+<li><span class="math inline">\(A=\int_0^1 e^{-\frac{x^2}{2}} dx\)</span></li>
+<li><span class="math inline">\(B=\int_0^2 e^{-2x^2+4x-2} dx\)</span></li>
+</ol>
+</div>
+<div id="exr-" class="theorem exercise">
+<p><span class="theorem-title"><strong>Exercise 2.8 </strong></span><strong>Loi de Laplace</strong></p>
+<p>Let <span class="math inline">\(c &gt; 0\)</span> a constant. Let <span class="math inline">\(f\)</span> the function defined on <span class="math inline">\(\mathbb{R}\)</span> by:</p>
+<p><span class="math display">\[ \forall \, x \in  \mathbb{R}, \quad f(x) = \frac{c}{2} e^{- c |x|}\]</span></p>
+<ol type="1">
+<li>Show that <span class="math inline">\(f\)</span> is a density function.</li>
+<li>Calculate the distribution function <span class="math inline">\(F\)</span> of <span class="math inline">\(X\)</span>.</li>
+<li>We admit that <span class="math inline">\(X\)</span> has an expected value. Calculate it.</li>
+<li>What is the probability law of <span class="math inline">\(Y=|X|\)</span>.</li>
+</ol>
+</div>
+</section>
+<section id="overlinex_n" class="level2 unnumbered">
+<h2 class="unnumbered anchored" data-anchor-id="overlinex_n"><span class="math inline">\(\overline{X}_n\)</span></h2>
+<div id="exr-" class="theorem exercise">
+<p><span class="theorem-title"><strong>Exercise 2.9 (Law of <span class="math inline">\(\overline{X}_n\)</span>) </strong></span>A population is composed of 3 employees A, B and C aged respectively 23, 37 and 45 years.</p>
+<p>One employee is chosen at random.</p>
+<ol type="1">
+<li><p>Define the random experiment <span class="math inline">\(\varepsilon\)</span>, the population <span class="math inline">\(\Omega\)</span>, the probability <span class="math inline">\(P\)</span> and the random variable <span class="math inline">\(X\)</span> studied.</p></li>
+<li><p>Calculate <span class="math inline">\(E(X)=m\)</span> and <span class="math inline">\(V(X)=\sigma^2\)</span>. What do <span class="math inline">\(E(X)\)</span> and <span class="math inline">\(V(X)\)</span> represent?</p></li>
+</ol>
+<p>We now randomly select a sample of 2 employees.</p>
+<ol start="3" type="1">
+<li>Define the new random experiment <span class="math inline">\(\varepsilon_n\)</span>, the set of samples <span class="math inline">\(E_n\)</span> and the random variables <span class="math inline">\(X_i, i=1,\ldots,n\)</span>.</li>
+<li>Define the random variable <span class="math inline">\(\overline{X}_n\)</span> and calculate its probability distribution.</li>
+<li>Calculate <span class="math inline">\(E(\overline{X}_n)\)</span> and <span class="math inline">\(V(\overline{X}_n)\)</span> to find the formulas seen during the lecture.</li>
+</ol>
+</div>
+</section>
+<section id="p_n" class="level2 unnumbered">
+<h2 class="unnumbered anchored" data-anchor-id="p_n"><span class="math inline">\(P_n\)</span></h2>
+<div id="exr-" class="theorem exercise">
+<p><span class="theorem-title"><strong>Exercise 2.10 (Law of <span class="math inline">\(P_n\)</span>) </strong></span>A population is composed of 3 individuals A, B and C whose voting results for a certain candidate are respectively: No, No and Yes.</p>
+<p>One individual is chosen at random.</p>
+<ol type="1">
+<li><p>Define the random experiment <span class="math inline">\(\varepsilon\)</span>, the population <span class="math inline">\(\Omega\)</span>, the probability <span class="math inline">\(P\)</span> and the random variable <span class="math inline">\(X\)</span> studied.</p></li>
+<li><p>alculate <span class="math inline">\(E(X)=m\)</span> and <span class="math inline">\(V(X)=\sigma^2\)</span>. What does <span class="math inline">\(E(X)\)</span> represent?</p></li>
+</ol>
+<p>We now randomly select a sample of 2 individuals.</p>
+<ol start="3" type="1">
+<li>Define the new random experiment <span class="math inline">\(\varepsilon_n\)</span>, the set of samples <span class="math inline">\(E_n\)</span> and the random variables <span class="math inline">\(X_i, i=1,\ldots,n\)</span>.</li>
+<li>Define the random variable <span class="math inline">\(\overline{X}_n\)</span> and calculate its probability distribution.</li>
+<li>Calculate <span class="math inline">\(E(P_n)\)</span> and <span class="math inline">\(V(P_n)\)</span> to find the formulas seen during the lecture.</li>
+</ol>
+</div>
+</section>
+<section id="statistic" class="level2 unnumbered">
+<h2 class="unnumbered anchored" data-anchor-id="statistic">Statistic</h2>
+<div id="exr-" class="theorem exercise">
+<p><span class="theorem-title"><strong>Exercise 2.11 </strong></span>Is it a random variable?</p>
+<ol type="1">
+<li>Mean of the population.</li>
+<li>Size of the population.</li>
+<li>Sample size.</li>
+<li>Average of the sample.</li>
+<li>Variance of the sample mean.</li>
+<li>Largest value of the sample.</li>
+<li>Variance of the population.</li>
+<li>Estimated variance of the sample mean.</li>
+</ol>
+</div>
+</section>
+<section id="théorème-central-limite" class="level2 unnumbered">
+<h2 class="unnumbered anchored" data-anchor-id="théorème-central-limite">Théorème Central Limite</h2>
+<div id="exr-" class="theorem exercise">
+<p><span class="theorem-title"><strong>Exercise 2.12 </strong></span>With weight problems on the rise in the European population, a new study has began to measure the relationship between weight and the amount of calories consumed per capita. Previous studies show that a European capita consumes an average of <span class="math inline">\(2700\)</span> calories per day with a standard deviation of <span class="math inline">\(800\)</span>. In this study, we have a sample of <span class="math inline">\(500\)</span> Europeans.</p>
+<ol type="1">
+<li>Define the random variables studied. We name them <span class="math inline">\(X_i\)</span> and <span class="math inline">\(\overline{X}_n\)</span>.</li>
+<li>Use the CLT to give the distribution of the random variable <span class="math inline">\(\overline{X}_n\)</span>.</li>
+<li>Calculate the probability that the average calories consumed per day by the Europeans, which we named <span class="math inline">\(\overline{X}_n\)</span> in the sample, is greater than <span class="math inline">\(2750\)</span>.</li>
+</ol>
+</div>
+<div id="exr-" class="theorem exercise">
+<p><span class="theorem-title"><strong>Exercise 2.13 </strong></span>Paul and his 9 friends would like to go bowling. They decide to gather their pocket money and hope to get the total amount needed. We can suppose that the pocket money of each one is a random variable <span class="math inline">\(X_i\)</span> which follows the exponential law of parameter <span class="math inline">\(\lambda=0.06\)</span>. Its density is then <span class="math display">\[
+f(x)=0.06 e^{-0.06 x} \times 1_{\mathbb{R}^+}(x)
+\]</span></p>
+<p>Moreover, we admit that <span class="math inline">\(X_i\)</span> are independent.</p>
+<ol type="1">
+<li>Show that the exponential law <span class="math inline">\(\mathcal{E}(\lambda)\)</span> is an exceptional case of the Gamma law by giving its parameters. (a reminder of the definition of the Gamma distribution is given below).</li>
+<li>Let <span class="math inline">\(S_{10}=\sum_{i=1}^{10} X_{i}\)</span> What is the law of <span class="math inline">\(S_{10}\)</span>?</li>
+<li>Knowing that a game of bowling costs <span class="math inline">\(15\)</span>€, what is the probability that Paul and his friends can play a game? (<strong>Hint</strong>: Apply the CLT for <span class="math inline">\(S_{10}= \sum_{i=1}^n X_i = n \times \overline{X}_n\)</span>)</li>
+<li>How should <span class="math inline">\(z&gt;0\)</span> be chosen so that the probability that the total amount of money in the group is greater than <span class="math inline">\(z\)</span> is equal to <span class="math inline">\(5 \%\)</span>?</li>
+</ol>
+</div>
+<div class="callout-note callout callout-style-default callout-captioned">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-caption-container flex-fill">
+Gamma distribution <span class="math inline">\(\Gamma(a,\lambda)\)</span>
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>A random variable <span class="math inline">\(X\)</span> follows a Gamma distribution of parameters <span class="math inline">\(a&gt;0\)</span> and <span class="math inline">\(\lambda&gt;0\)</span>, <span class="math inline">\(X \thicksim \Gamma(a,\lambda)\)</span> if <span class="math inline">\(X\)</span> has a density function: <span class="math display">\[\forall \, x \in \mathbb{R}, \quad  f_{a,\lambda} (x)= \frac{\lambda^a}{\Gamma(a)} x^{a-1} e^{-\lambda x} \times {1}_{\mathbb{R}_{+}}(x)\]</span></p>
+<ul>
+<li>The Gamma function is defined on <span class="math inline">\(\mathbb{R}_{+}^*\)</span> by: <span class="math inline">\(\Gamma(x) = \int_0^{+\infty} t^{x-1}e^{-t} dt\)</span>.</li>
+<li>Properties of the Gamma function:
+<ul>
+<li><span class="math inline">\(\Gamma(x+1)=x\Gamma(x) \quad \forall \, x &gt;0\)</span></li>
+<li><span class="math inline">\(\Gamma(n+1) = n! \quad \forall n \in \mathbb{N}\)</span></li>
+<li><span class="math inline">\(\Gamma(1) = 1\)</span> and <span class="math inline">\(\Gamma(\frac{1}{2})=\sqrt{\pi}\)</span></li>
+</ul></li>
+<li>Properties of the Gamma distribution:
+<ul>
+<li><span class="math inline">\(E(X)= \frac{a}{\lambda}\)</span> and <span class="math inline">\(V(X)= \frac{a}{\lambda^2}\)</span>.</li>
+<li>If <span class="math inline">\((X_n)_{n \in \mathbb{N}}\)</span> is a sequence of independent random variables of laws <span class="math inline">\(\Gamma(a_n,\lambda)\)</span> then the sum random variable <span class="math inline">\(\sum_{n=1}^N X_n\)</span> also follows a Gamma distribution <span class="math inline">\(\Gamma(\sum_{n=1}^N a_n, \lambda)\)</span>.</li>
+</ul></li>
+</ul>
+</div>
+</div>
 
 
+</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">

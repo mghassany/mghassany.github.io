@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.1.147">
+<meta name="generator" content="quarto-1.2.90">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 <title>Machine Learning - Lab2: Logistic Regression &amp; Regularization</title>
 <style>
@@ -592,6 +592,15 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div class="alert alert-block alert-warning">
 <p>In <code>plotDecisionBoundary</code>, we plot the non-linear decision boundary by computing the classifier’s predictions on an evenly spaced grid and then and draw a contour plot where the predictions change from y = 0 to y = 1.</p>
 </div>
+<p>You should obtain something like this:</p>
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code>&lt;string&gt;:37: VisibleDeprecationWarning: Creating an ndarray from ragged nested sequences (which is a list-or-tuple of lists-or-tuples-or ndarrays with different lengths or shapes) is deprecated. If you meant to do this, you must specify 'dtype=object' when creating the ndarray.</code></pre>
+</div>
+<div class="cell-output-display">
+<p><img src="TD2_files/figure-html/unnamed-chunk-27-9.png" class="img-fluid" width="672"></p>
+</div>
+</div>
 </section><section id="extra" class="level3"><h3 class="anchored" data-anchor-id="extra">Extra</h3>
 <p>Try out different regularization parameters for the dataset to understand how regularization prevents overfitting.</p>
 <p>Notice the changes in the decision boundary as you vary <span class="math inline">\(\lambda\)</span>. With a small <span class="math inline">\(\lambda\)</span>, you should find that the classifier gets almost every training example correct, but draws a very complicated boundary, thus overfitting the data.</p>
@@ -733,7 +742,9 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
   // Switch to dark mode if need be
   if (hasAlternateSentinel()) {
     toggleColorMode(true);
-  } 
+  } else {
+    toggleColorMode(false);
+  }
   const icon = "";
   const anchorJS = new window.AnchorJS();
   anchorJS.options = {

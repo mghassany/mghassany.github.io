@@ -255,7 +255,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(train_images[<span class="dv">0</span>]) </span>
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(train_images[<span class="dv">0</span>].shape)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p>The labels are an array of integers, ranging from 0 to 9. Check it with your own code. Each image is mapped to a single label. Since the class names are not included with the dataset, store them here to use later when plotting the images: (check the dataset link for more detailed information: <a href="https://www.%20cs.toronto.edu/%7Ekriz/cifar.html" target="_blank">cifar</a>)</p>
+<p>The labels are an array of integers, ranging from 0 to 9. Check it with your own code. Each image is mapped to a single label. Since the class names are not included with the dataset, store them here to use later when plotting the images: (check the dataset link for more detailed information: <a href="https://www.cs.toronto.edu/%7Ekriz/cifar.html" target="_blank">cifar</a>)</p>
 <p><strong>8.</strong> Before training the model, explore the datasets. Number of train and test points, their array size and etc.</p>
 <p><strong>9.</strong> An interesting fact about the image is that you can plot the image. It is possible using the following:</p>
 <div class="cell">
@@ -313,11 +313,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li><p>You ask the model to make predictions about a test set, in this example, the test images array. Verify that the predictions match the labels from the test labels array.</p></li>
 </ul>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>model.<span class="bu">compile</span>(optimizer<span class="op">=</span>’adam’,</span>
-<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>                loss<span class="op">=</span>’sparse_categorical_crossentropy’,</span>
-<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>                metrics<span class="op">=</span>[’accuracy’])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>model.<span class="bu">compile</span>(optimizer<span class="op">=</span><span class="st">'adam'</span>,</span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>                loss<span class="op">=</span><span class="st">'sparse_categorical_crossentropy'</span>,</span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>                metrics<span class="op">=</span>[<span class="st">'accuracy'</span>])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p>To start training, call the <code>model.fit</code> method, so called because it ”fits” the model to the training data:</p>
+<p>To start training, call the <code>model.fit</code> method, so called because it “fits” the model to the training data:</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>model.fit(train_images , train_labels , epochs<span class="op">=</span><span class="dv">10</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>

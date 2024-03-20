@@ -211,6 +211,88 @@ from sklearn.discriminant_analysis import QuadraticDiscriminantAnalysis</code></
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="fu">performance</span><span class="op">(</span><span class="va">score</span>,<span class="st">"tpr"</span>,<span class="st">"fpr"</span><span class="op">)</span>,col<span class="op">=</span><span class="st">"green"</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/abline.html">abline</a></span><span class="op">(</span><span class="fl">0</span>,<span class="fl">1</span>,lty<span class="op">=</span><span class="fl">8</span><span class="op">)</span></span></code></pre></div>
 <p>So now we have a logistic regression model stored in <code>classifier.logreg</code>. It is a model of <code>Purchased</code> in function of <code>Age</code> and <code>EstimatedSalary</code>.</p>
+<div class="rmdtip">
+<p>
+<strong>Confusion matrix</strong>: is a tabular representation of
+Actual vs Predicted values. This helps us to find the accuracy of the
+model. The different results from a binary classifier are true
+positives, true negatives, false positives, and false negatives. This is
+how the confusion matrix looks like:
+</p>
+<p>
+<img src="img/cm.png"> (Image source: <a href="https://en.wikipedia.org/wiki/Confusion_matrix">Wikipedia</a>)
+</p>
+<p>
+You can calculate the <strong>accuracy</strong> of your model
+with:
+</p>
+<div class="inline-figure">
+<img src="img/cm1.png">
+</div>
+<p>
+<strong>Accuracy</strong> is a key measure of performance, and is
+more specifically the rate at which the model is able to predict the
+correct value (classification or regression) for a given data point or
+observation. In other words, accuracy is the proportion of correct
+predictions out of all predictions made.
+</p>
+<p>
+The other two metrics from the confusion matrix worth discussing are
+<strong>Precision</strong> and <strong>Recall</strong>.
+</p>
+<p>
+Precision (positive predictive value) is the ratio of true positives
+to the total amount of positive predictions made (i.e., true or false).
+Said another way, precision measures the proportion of accurate positive
+predictions out of all positive predictions made.
+</p>
+<p>
+Recall on the other hand, or true positive rate, is the ratio of true
+positives to the total amount of actual positives, whether predicted
+correctly or not. So in other words, recall measures the proportion of
+accurate positive predictions out of all actual positive
+observations.
+</p>
+<p>
+A metric that is associated with precision and recall is called the
+F-score (also called F1 score), which combines them mathematically, and
+somewhat like a weighted average, in order to produce a single measure
+of performance based on the simultaneous values of both. Its values
+range from 0 (worst) to 1 (best).
+</p>
+<p>
+Another important concept to know about is the <strong><em>Receiver
+Operating Characteristic</em></strong>, which when plotted, results in
+what’s known as an <strong>ROC</strong> curve.
+</p>
+<p>
+<strong>ROC Curve</strong>: An ROC curve is a two-dimensional plot of
+<em>sensitivity</em> (recall, or true positive rate) vs <em>1-
+specificity</em> (false positive rate). The area under the curve is
+referred to as the <strong><em>AUC</em></strong>, and is a numeric
+metric used to represent the quality and performance of the classifier
+(model).
+</p>
+<div class="inline-figure">
+<img src="img/roc.png">
+</div>
+<p>
+An AUC of 0.5 is essentially the same as random guessing without a
+model, whereas an AUC of 1.0 is considered a perfect classifier.
+Generally, the higher the AUC value the better, and an AUC above 0.8 is
+considered quite good.
+</p>
+<p>
+The higher the AUC value, the closer the curve gets to the upper left
+corner of the plot. One can easily see from the ROC curves then that the
+goal is to find and tune a model that maximizes the true positive rate,
+while simultaneously minimizing the false positive rate. Said another
+way, the goal as shown by the ROC curve is to correctly predict as many
+of the actual positives as possible, while also predicting as many of
+the actual negatives as possible, and therefore minimize errors
+(incorrect classifications) for both.
+</p>
+</div>
 <!-- We will use this model to show the **decision boundary** in the next part of this PW. Then we will compare this model to other models obtained by Discriminant Analysis approaches. -->
 <!-- 
 ## Decision Boundary of Logistic Regression {-}
@@ -415,7 +497,7 @@ If you use the <code>ROCR</code> package:</p>
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>Analyse de données @ UCA</strong>" was written by Mohamad Ghassany. It was last built on 2024-03-19.</p>
+    <p>"<strong>Analyse de données @ UCA</strong>" was written by Mohamad Ghassany. It was last built on 2024-03-20.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">

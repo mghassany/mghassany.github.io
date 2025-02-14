@@ -1,0 +1,931 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<title>3 Logistic Regression | Machine Learning</title>
+<meta name="author" content="Mohamad Ghassany">
+<meta name="description" content="3.1 Introduction In the previous chapters we discussed the linear regression model, which assumes that the response variable \(Y\) is quantitative. But in many situations, the response variable is...">
+<meta name="generator" content="bookdown 0.24.10 with bs4_book()">
+<meta property="og:title" content="3 Logistic Regression | Machine Learning">
+<meta property="og:type" content="book">
+<meta property="og:description" content="3.1 Introduction In the previous chapters we discussed the linear regression model, which assumes that the response variable \(Y\) is quantitative. But in many situations, the response variable is...">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="3 Logistic Regression | Machine Learning">
+<meta name="twitter:description" content="3.1 Introduction In the previous chapters we discussed the linear regression model, which assumes that the response variable \(Y\) is quantitative. But in many situations, the response variable is...">
+<!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
+<script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.3.1/transition.js"></script><script src="libs/bs3compat-0.3.1/tabs.js"></script><script src="libs/bs3compat-0.3.1/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
+<script src="libs/bs4_book-1.0.0/bs4_book.js"></script><script src="libs/kePrint-0.0.1/kePrint.js"></script><link href="libs/lightable-0.0.1/lightable.css" rel="stylesheet">
+<link href="libs/vembedr-0.1.5/css/vembedr.css" rel="stylesheet">
+<script src="libs/htmlwidgets-1.5.4/htmlwidgets.js"></script><script src="libs/plotly-binding-4.10.0/plotly.js"></script><script src="libs/typedarray-0.1/typedarray.min.js"></script><link href="libs/crosstalk-1.2.0/css/crosstalk.min.css" rel="stylesheet">
+<script src="libs/crosstalk-1.2.0/js/crosstalk.min.js"></script><link href="libs/plotly-htmlwidgets-css-2.5.1/plotly-htmlwidgets.css" rel="stylesheet">
+<script src="libs/plotly-main-2.5.1/plotly-latest.min.js"></script><script type="text/x-mathjax-config">
+    const popovers = document.querySelectorAll('a.footnote-ref[data-toggle="popover"]');
+    for (let popover of popovers){
+      const div = document.createElement('div');
+      div.setAttribute('style', 'position: absolute; top: 0, left:0; width:0, height:0, overflow: hidden; visibility: hidden;');
+      div.innerHTML = popover.getAttribute('data-content');
+      
+      // Will this work with TeX on its own line?
+      var has_math = div.querySelector("span.math");
+      if (has_math) {
+        document.body.appendChild(div);
+      	MathJax.Hub.Queue(["Typeset", MathJax.Hub, div]);
+      	MathJax.Hub.Queue(function(){
+          popover.setAttribute('data-content', div.innerHTML);
+      	})
+      }
+    }
+    </script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- CSS --><link rel="stylesheet" href="css/ims-style.css">
+</head>
+<body data-spy="scroll" data-target="#toc">
+
+<div class="container-fluid">
+<div class="row">
+  <header class="col-sm-12 col-lg-3 sidebar sidebar-book"><a class="sr-only sr-only-focusable" href="#content">Skip to main content</a>
+
+    <div class="d-flex align-items-start justify-content-between">
+      <h1>
+        <a href="index.html" title="">Machine Learning</a>
+      </h1>
+      <button class="btn btn-outline-primary d-lg-none ml-2 mt-1" type="button" data-toggle="collapse" data-target="#main-nav" aria-expanded="true" aria-controls="main-nav"><i class="fas fa-bars"></i><span class="sr-only">Show table of contents</span></button>
+    </div>
+
+    <div id="main-nav" class="collapse-lg">
+      <form role="search">
+        <input id="search" class="form-control" type="search" placeholder="Search" aria-label="Search">
+</form>
+
+      <nav aria-label="Table of contents"><h2>Table of contents</h2>
+        <ul class="book-toc list-unstyled">
+<li><a class="" href="index.html">Welcome</a></li>
+<li><a class="" href="introduction.html">Introduction</a></li>
+<li class="book-part">Supervised Learning</li>
+<li class="book-part">Regression</li>
+<li><a class="" href="linear-regression.html"><span class="header-section-number">1</span> Linear Regression</a></li>
+<li><a class="" href="practical-work-1.html">Practical Work 1</a></li>
+<li><a class="" href="multiple-linear-regression.html"><span class="header-section-number">2</span> Multiple Linear Regression</a></li>
+<li><a class="" href="pw-2.html">PW 2</a></li>
+<li class="book-part">Classification</li>
+<li><a class="active" href="logistic-regression.html"><span class="header-section-number">3</span> Logistic Regression</a></li>
+<li><a class="" href="pw-3.html">PW 3</a></li>
+<li><a class="" href="discriminant-analysis.html"><span class="header-section-number">4</span> Discriminant Analysis</a></li>
+<li><a class="" href="pw-4.html">PW 4</a></li>
+<li><a class="" href="decision-trees-random-forests.html"><span class="header-section-number">5</span> Decision Trees &amp; Random Forests</a></li>
+<li><a class="" href="pw-5.html">PW 5</a></li>
+<li class="book-part">Dimensionality Reduction</li>
+<li><a class="" href="principal-components-analysis.html"><span class="header-section-number">6</span> Principal Components Analysis</a></li>
+<li><a class="" href="pw-6.html">PW 6</a></li>
+<li class="book-part">Unsupervised Learning</li>
+<li><a class="" href="kmeans-hierarchical-clustering.html"><span class="header-section-number">7</span> Kmeans &amp; Hierarchical Clustering</a></li>
+<li><a class="" href="pw-7.html">PW 7</a></li>
+<li><a class="" href="gaussian-mixture-models-em.html"><span class="header-section-number">8</span> Gaussian Mixture Models &amp; EM</a></li>
+<li><a class="" href="pw-8.html">PW 8</a></li>
+<li class="book-part">Hackathon</li>
+<li><a class="" href="hackathon.html">Hackathon</a></li>
+<li class="book-part">Appendix</li>
+<li><a class="" href="final-grades.html"><span class="header-section-number">A</span> Final Grades</a></li>
+<li><a class="" href="app-introRStudio.html"><span class="header-section-number">B</span> Introduction to RStudio</a></li>
+<li><a class="" href="app-ht.html"><span class="header-section-number">C</span> Review on hypothesis testing</a></li>
+<li><a class="" href="use-qual.html"><span class="header-section-number">D</span> Use of qualitative predictors</a></li>
+<li><a class="" href="model-selection.html"><span class="header-section-number">E</span> Model Selection</a></li>
+<li><a class="" href="references-and-credits.html"><span class="header-section-number">F</span> References and Credits</a></li>
+<li><a class="" href="other-references.html"><span class="header-section-number">G</span> Other References</a></li>
+<li><a class="" href="main-references-credits.html">Main References &amp; Credits</a></li>
+</ul>
+
+        <div class="book-extra">
+          
+        </div>
+      </nav>
+</div>
+  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="logistic-regression" class="section level1" number="3">
+<h1>
+<span class="header-section-number">3</span> Logistic Regression<a class="anchor" aria-label="anchor" href="#logistic-regression"><i class="fas fa-link"></i></a>
+</h1>
+<div id="introduction-1" class="section level2" number="3.1">
+<h2>
+<span class="header-section-number">3.1</span> Introduction<a class="anchor" aria-label="anchor" href="#introduction-1"><i class="fas fa-link"></i></a>
+</h2>
+<p>In the previous chapters we discussed the linear regression model, which assumes that the response variable <span class="math inline">\(Y\)</span> is quantitative. But in many situations, the response variable is instead qualitative (categorical). For example, eye color is qualitative, taking on values blue, brown, or green.</p>
+<p>The process for predicting qualitative responses is known as <strong><em>classification</em></strong>.</p>
+<p>Given a feature vector <span class="math inline">\(X\)</span> and a qualitative response <span class="math inline">\(Y\)</span> taking values in the set <span class="math inline">\(\mathcal{C}\)</span>, the classification task is to build a function <span class="math inline">\(C(X)\)</span> that takes as input the feature vector <span class="math inline">\(X\)</span> and predicts its value for <span class="math inline">\(Y\)</span>; i.e. <span class="math inline">\(C(X) \in \mathcal{C}\)</span>. We are often more interested in estimating the probabilities that <span class="math inline">\(X\)</span> belongs to each category in <span class="math inline">\(\mathcal{C}\)</span>.</p>
+<blockquote>
+<p>If <span class="math inline">\(c\)</span> is a category (<span class="math inline">\(c \in \mathcal{C}\)</span>), by the probability that <span class="math inline">\(X\)</span> belongs to <span class="math inline">\(c\)</span> we mean <span class="math inline">\(p(X \in c) = \mathbb{P}(Y=c|X)\)</span>.</p>
+</blockquote>
+<p>In the binomial or binary logistic regression, the outcome can have only two possible types of values (e.g. “Yes” or “No”, “Success” or “Failure”). Multinomial logistic refers to cases where the outcome can have three or more possible types of values (e.g., “good” vs. “very good” vs. “best”). Generally outcome is coded as “0” and “1” in binary logistic regression.</p>
+<center>
+<iframe width="560" height="349" src="https://www.youtube.com/embed/SF_jZLUQndY" frameborder="0" allowfullscreen>
+</iframe>
+</center>
+</div>
+<div id="logistic-regression-1" class="section level2" number="3.2">
+<h2>
+<span class="header-section-number">3.2</span> Logistic Regression<a class="anchor" aria-label="anchor" href="#logistic-regression-1"><i class="fas fa-link"></i></a>
+</h2>
+<p>Consider a data set where the response falls into one of two categories, Yes or No. Rather than modeling the response <span class="math inline">\(Y\)</span> directly, logistic regression models the <em>probability</em> that <span class="math inline">\(Y\)</span> belongs to a particular category.</p>
+<div id="the-logistic-model" class="section level3" number="3.2.1">
+<h3>
+<span class="header-section-number">3.2.1</span> The Logistic Model<a class="anchor" aria-label="anchor" href="#the-logistic-model"><i class="fas fa-link"></i></a>
+</h3>
+<p>Let us suppose the response has two categories and we use the generic 0/1 coding for the response. How should we model the relationship between <span class="math inline">\(p(X) = \mathbb{P}(Y = 1|X)\)</span> and <span class="math inline">\(X\)</span>?</p>
+<p>The simplest situation is when <span class="math inline">\(Y\)</span> is <em>binary</em>: it can only take two values, codified for convenience as <span class="math inline">\(1\)</span> (success) and <span class="math inline">\(0\)</span> (failure).</p>
+<p>More formally, a binary variable is known as a <em>Bernoulli variable</em>, which is the simplest non-trivial random variable. We say that <span class="math inline">\(Y\sim\mathrm{Ber}(p)\)</span>, <span class="math inline">\(0\leq p\leq1\)</span>, if <span class="math display">\[
+Y=\left\{\begin{array}{ll}1,&amp;\text{with probability }p,\\0,&amp;\text{with probability }1-p,\end{array}\right.
+\]</span> or, equivalently, if <span class="math inline">\(\mathbb{P}[Y=1]=p\)</span> and <span class="math inline">\(\mathbb{P}[Y=0]=1-p\)</span>, which can be written compactly as <span class="math display">\[\begin{aligned}
+\mathbb{P}[Y=y]=p^y(1-p)^{1-y},\quad y=0,1.
+\end{aligned}\]</span> Recall that a <em>binomial variable with size</em> <span class="math inline">\(n\)</span> and probability <span class="math inline">\(p\)</span>, <span class="math inline">\(\mathrm{Bi}(n,p)\)</span>, was obtained by adding <span class="math inline">\(n\)</span> independent <span class="math inline">\(\mathrm{Ber}(p)\)</span> (so <span class="math inline">\(\mathrm{Ber}(p)\)</span> is the same as <span class="math inline">\(\mathrm{Bi}(1,p)\)</span>).</p>
+<div class="rmdtip">
+<p>
+A Bernoulli variable <span class="math inline"><span class="math inline">\(Y\)</span></span> is
+completely determined by <span class="math inline"><span class="math inline">\(p\)</span></span>.
+<strong>So its mean and variance</strong>:
+</p>
+<ul>
+<li>
+<span class="math inline"><span class="math inline">\(\mathbb{E}[Y]=p\times1+(1-p)\times0=p\)</span></span>
+</li>
+<li>
+<span class="math inline"><span class="math inline">\(\mathbb{V}\mathrm{ar}[Y]=p(1-p)\)</span></span>.
+</li>
+</ul>
+<p>
+In particular, recall that <span class="math inline"><span class="math inline">\(\mathbb{P}[Y=1]=\mathbb{E}[Y]=p\)</span></span>.
+</p>
+</div>
+<p>Assume then that <span class="math inline">\(Y\)</span> is a binary/Bernoulli variable and that <span class="math inline">\(X\)</span> are predictors associated to them (no particular assumptions on them). The purpose in <em>logistic regression</em> is to estimate <span class="math display">\[
+p(x)=\mathbb{P}[Y=1|X=x]=\mathbb{E}[Y|X=x],
+\]</span> this is, how the probability of <span class="math inline">\(Y=1\)</span> is changing according to particular values, denoted by <span class="math inline">\(x\)</span>, of the random variables <span class="math inline">\(X\)</span>.</p>
+<p><em>Why not linear regression?</em> A tempting possibility is to consider the model <span class="math display">\[
+p(x)=\beta_0+\beta_1 x.
+\]</span> However, such a model will run into problems inevitably: negative probabilities and probabilities larger than one (<span class="math inline">\(p(x) &lt; 0\)</span> for some values of <span class="math inline">\(X\)</span> and <span class="math inline">\(p(X) &gt; 1\)</span> for others). To avoid this problem, the solution is to consider a function to encapsulate the value of <span class="math inline">\(z=\beta_0+\beta_1 x\)</span>, in <span class="math inline">\(\mathbb{R}\)</span>, and map it to <span class="math inline">\([0,1]\)</span>. There are several alternatives to do so, based on distribution functions <span class="math inline">\(F:\mathbb{R}\longrightarrow[0,1]\)</span> that deliver <span class="math inline">\(y=F(z)\in[0,1]\)</span>. Many functions meet this description. In logistic regression, we use the <em>logistic function</em>,</p>
+<p><span class="math display">\[ p(X) = \frac{e^{\beta_0 + \beta_1 X}}{1+e^{\beta_0 + \beta_1 X}} \]</span></p>
+<div class="rmdtip">
+<ul>
+<li>
+No matter what values <span class="math inline"><span class="math inline">\(\beta_0\)</span></span>,
+<span class="math inline"><span class="math inline">\(\beta_1\)</span></span> or <span class="math inline"><span class="math inline">\(X\)</span></span> take, <span class="math inline"><span class="math inline">\(p(X)\)</span></span> will have values between 0 and
+1.
+</li>
+<li>
+The logistic function will always produce an <em>S-shaped</em>
+curve.
+</li>
+<li>
+The logistic <em>distribution</em> function is: <span class="math display"><span class="math display">\[F(z)=\mathrm{logistic}(z)=\frac{e^z}{1+e^z}=\frac{1}{1+e^{-z}}.\]</span></span>
+</li>
+</ul>
+</div>
+<p>After a bit of manipulation of the previous equation, we find that</p>
+<p><span class="math display">\[ \frac{p(X)}{1-p(X)} = e^{\beta_0 + \beta_1 X} \]</span></p>
+<div class="rmdtip">
+<p>
+The quantity <span class="math inline"><span class="math inline">\(p(X)/[1−p(X)]\)</span></span> is
+called the <em>odds</em>, and can take on any value between <span class="math inline"><span class="math inline">\(0\)</span></span> and <span class="math inline"><span class="math inline">\(\infty\)</span></span>.
+</p>
+</div>
+<p>By taking the logarithm of both sides of the equation, we arrive at<a href="main-references-credits.html#fn12" class="footnote-ref" id="fnref12"><sup>12</sup></a></p>
+<p><span class="math display">\[ \log( \frac{p(X)}{1-p(X)} ) = \beta_0 + \beta_1 X \]</span></p>
+<div class="rmdtip">
+<p>
+The left-hand side is called the <em>log-odds</em> or <em>logit</em>.
+We see that the logistic regression model has a logit that is linear in
+X.
+</p>
+</div>
+</div>
+<div id="estimating-the-regression-coefficients-1" class="section level3" number="3.2.2">
+<h3>
+<span class="header-section-number">3.2.2</span> Estimating the Regression Coefficients<a class="anchor" aria-label="anchor" href="#estimating-the-regression-coefficients-1"><i class="fas fa-link"></i></a>
+</h3>
+<center>
+<iframe width="560" height="349" src="https://www.youtube.com/embed/0dhcIQ6bX8c" frameborder="0" allowfullscreen>
+</iframe>
+</center>
+<p>We estimate <span class="math inline">\(\beta_0\)</span> and <span class="math inline">\(\beta_1\)</span> using the <em>Maximum Likelihood Estimation</em> method (MLE). The basic intuition behind using maximum likelihood to fit a logistic regression model is as follows: we seek estimates for <span class="math inline">\(\beta_0\)</span> and <span class="math inline">\(\beta_1\)</span> such that the predicted probability <span class="math inline">\(\hat{p}(x_i)\)</span> of the response for each individual, corresponds as closely as possible to the individual’s observed response status (recall that the response <span class="math inline">\(Y\)</span> is categorical). The <em>likelihood function</em> is</p>
+<p><span class="math display">\[ l(\beta_0,\beta_1) = \prod_{i=1}^n p(x_i)^{Y_i}(1-p(x_i))^{1-Y_i}. \]</span></p>
+<p>This likelihood is <strong>the probability of the data based on the model</strong>. It gives the probability of the observed zeros and ones in the data. The estimates <span class="math inline">\(\hat{\beta_0}\)</span> and <span class="math inline">\(\hat{\beta_1}\)</span> are chosen to <em>maximize</em> this likelihood function. The interpretation of the likelihood function is the following:</p>
+<ul>
+<li>
+<span class="math inline">\(\prod_{i=1}^n\)</span> appears because the sample elements are assumed to be independent and we are computing the probability of observing the whole sample <span class="math inline">\((x_{1},y_1),\ldots,(x_{n},y_n)\)</span>. This probability is equal to the product of the <em>probabilities of observing each</em> <span class="math inline">\((x_{i},y_i)\)</span>.</li>
+<li>
+<span class="math inline">\(p(x_i)^{Y_i}(1-p(x_i))^{1-Y_i}\)</span> is the probability of observing <span class="math inline">\((x_{i},Y_i)\)</span>.</li>
+</ul>
+<div class="rmdtip">
+<p>
+In the linear regression setting, the least squares approach is a
+special case of maximum likelihood.
+</p>
+</div>
+<p>We will not give mathematical details about the maximum likelihood and how to estimate the parameters. We will use <svg aria-hidden="true" role="img" viewbox="0 0 581 512" style="height:1em;width:1.13em;vertical-align:-0.125em;margin-left:auto;margin-right:auto;font-size:inherit;fill:steelblue;overflow:visible;position:relative;"><path d="M581 226.6C581 119.1 450.9 32 290.5 32S0 119.1 0 226.6C0 322.4 103.3 402 239.4 418.1V480h99.1v-61.5c24.3-2.7 47.6-7.4 69.4-13.9L448 480h112l-67.4-113.7c54.5-35.4 88.4-84.9 88.4-139.7zm-466.8 14.5c0-73.5 98.9-133 220.8-133s211.9 40.7 211.9 133c0 50.1-26.5 85-70.3 106.4-2.4-1.6-4.7-2.9-6.4-3.7-10.2-5.2-27.8-10.5-27.8-10.5s86.6-6.4 86.6-92.7-90.6-87.9-90.6-87.9h-199V361c-74.1-21.5-125.2-67.1-125.2-119.9zm225.1 38.3v-55.6c57.8 0 87.8-6.8 87.8 27.3 0 36.5-38.2 28.3-87.8 28.3zm-.9 72.5H365c10.8 0 18.9 11.7 24 19.2-16.1 1.9-33 2.8-50.6 2.9v-22.1z"></path></svg> to fit the logistic regression models (using <code>glm</code> function).</p>
+<p>Use the following application (also available <a href="https://shinyserv.es/shiny/log-maximum-likelihood/" target="_blank">here <svg aria-hidden="true" role="img" viewbox="0 0 512 512" style="height:1em;width:1em;vertical-align:-0.125em;margin-left:auto;margin-right:auto;font-size:inherit;fill:currentColor;overflow:visible;position:relative;"><path d="M432,320H400a16,16,0,0,0-16,16V448H64V128H208a16,16,0,0,0,16-16V80a16,16,0,0,0-16-16H48A48,48,0,0,0,0,112V464a48,48,0,0,0,48,48H400a48,48,0,0,0,48-48V336A16,16,0,0,0,432,320ZM488,0h-128c-21.37,0-32.05,25.91-17,41l35.73,35.73L135,320.37a24,24,0,0,0,0,34L157.67,377a24,24,0,0,0,34,0L435.28,133.32,471,169c15,15,41,4.5,41-17V24A24,24,0,0,0,488,0Z"></path></svg></a>) to see how the log-likelihood changes with respect to the values for <span class="math inline">\((\beta_0,\beta_1)\)</span> in three data patterns. The logistic regression fit and its dependence on <span class="math inline">\(\beta_0\)</span> (horizontal displacement) and <span class="math inline">\(\beta_1\)</span> (steepness of the curve). Recall the effect of the sign of <span class="math inline">\(\beta_1\)</span> in the curve: if positive, the logistic curve has an <span class="math inline">\(s\)</span> form; if negative, the form is a reflected <span class="math inline">\(s\)</span>.</p>
+<iframe src="https://shinyserv.es/shiny/log-maximum-likelihood/?showcase=0" width="90%" height="900px" data-external="1">
+</iframe>
+<p>Note that the <strong>animation</strong> will not be displayed the first time it is browsed (The reason is because it is hosted at <code>https</code> websites with auto-signed SSL certificates). <strong>To see it</strong>, click on the link above. You will get a warning from your browser saying that <em>“Your connection is not private”</em>. Click in <em>“Advanced”</em> and <strong>allow an exception</strong> in your browser. The next time the animation will show up correctly.</p>
+</div>
+<div id="prediction-1" class="section level3" number="3.2.3">
+<h3>
+<span class="header-section-number">3.2.3</span> Prediction<a class="anchor" aria-label="anchor" href="#prediction-1"><i class="fas fa-link"></i></a>
+</h3>
+<center>
+<iframe width="560" height="349" src="https://www.youtube.com/embed/CBPZNizyiqA" frameborder="0" allowfullscreen>
+</iframe>
+</center>
+<p><strong>Example</strong></p>
+<div class="inline-table"><table class="table table-sm">
+<thead><tr class="header">
+<th></th>
+<th>Coefficient</th>
+<th>Std. error</th>
+<th>
+<span class="math inline">\(Z\)</span>-statistic</th>
+<th>p-value</th>
+</tr></thead>
+<tbody>
+<tr class="odd">
+<td>Constant</td>
+<td>-10.6513</td>
+<td>0.3612</td>
+<td>-29.5</td>
+<td>&lt;0.0001</td>
+</tr>
+<tr class="even">
+<td><span class="math inline">\(X\)</span></td>
+<td>0.0055</td>
+<td>0.0002</td>
+<td>24.9</td>
+<td>&lt;0.0001</td>
+</tr>
+</tbody>
+</table></div>
+<p>In this example, <span class="math inline">\(\hat{\beta_0} = -10.6513\)</span> and <span class="math inline">\(\hat{\beta_1} = 0.0055\)</span>. It produces the blue curve that separates that data in the following figure,</p>
+<div class="inline-figure"><img src="img/lr_example.png"></div>
+<p>As for prediction, we use the model built with the estimated parameters to predict probabilities. For example,</p>
+<p>If <span class="math inline">\(X=1000\)</span>,</p>
+<p><span class="math display">\[ \hat{p}(X) = \frac{e^{\hat{\beta_0} + \hat{\beta_1} X}}{1+e^{\hat{\beta_0} + \hat{\beta_1} X}} = \frac{e^{-10.6513+0.0055 \times 1000}}{1+e^{-10.6513+0.0055 \times 1000}} = 0.006\]</span></p>
+<p>If <span class="math inline">\(X=2000\)</span>,</p>
+<p><span class="math display">\[ \hat{p}(X) = \frac{e^{\hat{\beta_0} + \hat{\beta_1} X}}{1+e^{\hat{\beta_0} + \hat{\beta_1} X}} = \frac{e^{-10.6513+0.0055 \times 2000}}{1+e^{-10.6513+0.0055 \times 2000}} = 0.586\]</span></p>
+</div>
+</div>
+<div id="multiple-logistic-regression" class="section level2" number="3.3">
+<h2>
+<span class="header-section-number">3.3</span> Multiple Logistic Regression<a class="anchor" aria-label="anchor" href="#multiple-logistic-regression"><i class="fas fa-link"></i></a>
+</h2>
+<p>We now consider the problem of predicting a binary response using multiple predictors. By analogy with the extension from simple to multiple linear regression in the previous chapters, we can generalize the simple logistic regression equation as follows:</p>
+<p><span class="math display">\[ \log( \frac{p(X)}{1-p(X)} ) = \beta_0 + \beta_1 X_1 +  \ldots + \beta_p X_p\]</span></p>
+<p>where <span class="math inline">\(X=(X_1,\ldots,X_p)\)</span> are <span class="math inline">\(p\)</span> predictors. The equation above can be rewritten as</p>
+<p><span class="math display">\[ p(X) = \frac{e^{\beta_0 + \beta_1 X_1 +  \ldots + \beta_p X_p}}{1+e^{\beta_0 + \beta_1 X_1 +  \ldots + \beta_p X_p}} \]</span></p>
+<p>Just as in the simple logistic regression we use the maximum likelihood method to estimate <span class="math inline">\(\beta_0,\beta_1,\ldots,\beta_p\)</span>.</p>
+<center>
+<iframe width="560" height="349" src="https://www.youtube.com/embed/4DzxXEL-Vk4" frameborder="0" allowfullscreen>
+</iframe>
+</center>
+</div>
+<div id="logreg-examps" class="section level2" number="3.4">
+<h2>
+<span class="header-section-number">3.4</span> Example<a class="anchor" aria-label="anchor" href="#logreg-examps"><i class="fas fa-link"></i></a>
+</h2>
+<div id="logreg-examps-challenger" class="section level3" number="3.4.1">
+<h3>
+<span class="header-section-number">3.4.1</span> Case study: <em>The Challenger disaster</em><a class="anchor" aria-label="anchor" href="#logreg-examps-challenger"><i class="fas fa-link"></i></a>
+</h3>
+<p>The <em>Challenger</em> disaster occurred on the 28th January of 1986, when the NASA Space Shuttle orbiter <em>Challenger</em> broke apart and disintegrated at 73 seconds into its flight, leading to the deaths of its seven crew members. The accident deeply shocked the US society, in part due to the attention the mission had received because of the presence of Christa McAuliffe, who would have been the first astronaut-teacher. Because of this, NASA TV broadcasted live the launch to US public schools, which resulted in millions of school children witnessing the accident. The accident had serious consequences for the NASA credibility and resulted in an interruption of 32 months in the shuttle program. The Presidential <em>Rogers Commission</em> (formed by astronaut Neil A. Armstrong and Nobel laureate Richard P. Feynman, among others) was created to investigate the disaster.</p>
+<div class="figure" style="text-align: center">
+<span style="display:block;" id="fig:video3"></span>
+<iframe src="https://www.youtube.com/embed/fSTrmJtHLFU" width="70%" height="400px" data-external="1">
+</iframe>
+<p class="caption">
+Figure 3.1: Challenger launch and posterior explosion, as broadcasted live by NBC in 28/01/1986.
+</p>
+</div>
+<p>The Rogers Commission elaborated a report <span class="citation">(<a href="main-references-credits.html#ref-Roberts1986" role="doc-biblioref">Presidential Commission on the Space Shuttle Challenger Accident 1986</a>)</span> with all the findings. The commission determined that the disintegration began with the <strong>failure of an O-ring seal in the solid rocket motor due to the unusual cold temperatures (-0.6 Celsius degrees)</strong> during the launch. This failure produced a breach of burning gas through the solid rocket motor that compromised the whole shuttle structure, resulting in its disintegration due to the extreme aerodynamic forces. The <strong>problematic with O-rings was something known</strong>: the night before the launch, there was a three-hour teleconference between motor engineers and NASA management, discussing the effect of low temperature forecasted for the launch on the O-ring performance. The conclusion, influenced by Figure <a href="logistic-regression.html#fig:rogerts">3.2</a>a, was:</p>
+<blockquote>
+<p><strong>“Temperature data [are] not conclusive on predicting primary O-ring blowby.”</strong></p>
+</blockquote>
+
+<div class="figure" style="text-align: center">
+<span style="display:block;" id="fig:rogerts"></span>
+<img src="img/challenger.png" alt="Number of incidents in the O-rings (filed joints) versus temperatures. Panel a includes only flights with incidents. Panel b contains all flights (with and without incidents)." width="70%"><p class="caption">
+Figure 3.2: Number of incidents in the O-rings (filed joints) versus temperatures. Panel <em>a</em> includes only flights with incidents. Panel <em>b</em> contains all flights (with and without incidents).
+</p>
+</div>
+<p>The Rogers Commission noted a major flaw in Figure <a href="logistic-regression.html#fig:rogerts">3.2</a>a: the <strong>flights with zero incidents were excluded</strong> from the plot because <em>it was felt</em> that <strong>these flights did not contribute any information about the temperature effect</strong> (Figure <a href="logistic-regression.html#fig:rogerts">3.2</a>b). The Rogers Commission concluded:</p>
+<blockquote>
+<p><strong>“A careful analysis of the flight history of O-ring performance would have revealed the correlation of O-ring damage in low temperature”</strong>.</p>
+</blockquote>
+<p>The purpose of this case study, inspired by <span class="citation">(<a href="main-references-credits.html#ref-Dalal1989" role="doc-biblioref">Dalal, Fowlkes, and Hoadley 1989</a>)</span>, is to quantify what was the influence of the temperature in the probability of having at least one incident related with the O-rings. Specifically, we want to address the following questions:</p>
+<ul>
+<li>Q1. <em>Is the temperature associated with O-ring incidents?</em>
+</li>
+<li>Q2. <em>In which way was the temperature affecting the probability of O-ring incidents?</em>
+</li>
+<li>Q3. <em>What was the predicted probability of an incidient in an O-ring for the temperature of the launch day?</em>
+</li>
+</ul>
+<p>To try to answer these questions we have the <code>challenger</code> ( <a target="_blank" href="datasets/challenger.txt"> dataset <i class="fa fa-table" aria-hidden="true"></i></a>). The dataset contains (as shown in the table below) information regarding the state of the solid rocket boosters after launch<a href="main-references-credits.html#fn13" class="footnote-ref" id="fnref13"><sup>13</sup></a> for 23 flights. Each row has, among others, the following variables:</p>
+<ul>
+<li>
+<code>fail.field</code>, <code>fail.nozzle</code>: binary variables indicating whether there was an incident with the O-rings in the field joints or in the nozzles of the solid rocket boosters. <code>1</code> codifies an incident and <code>0</code> its absence. On the analysis, we focus on the O-rings of the field joint as being the most determinants for the accident.</li>
+<li>
+<code>temp</code>: temperature in the day of launch. Measured in Celsius degrees.</li>
+<li>
+<code>pres.field</code>, <code>pres.nozzle</code>: leak-check pressure tests of the O-rings. These tests assured that the rings would seal the joint.</li>
+</ul>
+<div class="inline-table"><table class="table table-sm">
+<caption>
+<span id="tab:unnamed-chunk-78">Table 3.1: </span>The <code>challenger</code> dataset.
+</caption>
+<thead><tr>
+<th style="text-align:left;">
+flight
+</th>
+<th style="text-align:left;">
+date
+</th>
+<th style="text-align:right;">
+fail.field
+</th>
+<th style="text-align:right;">
+fail.nozzle
+</th>
+<th style="text-align:right;">
+temp
+</th>
+</tr></thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+1
+</td>
+<td style="text-align:left;">
+12/04/81
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+18.9
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+2
+</td>
+<td style="text-align:left;">
+12/11/81
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+21.1
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+3
+</td>
+<td style="text-align:left;">
+22/03/82
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+20.6
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+5
+</td>
+<td style="text-align:left;">
+11/11/82
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+20.0
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+6
+</td>
+<td style="text-align:left;">
+04/04/83
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+19.4
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+7
+</td>
+<td style="text-align:left;">
+18/06/83
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+22.2
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+8
+</td>
+<td style="text-align:left;">
+30/08/83
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+22.8
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+9
+</td>
+<td style="text-align:left;">
+28/11/83
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+21.1
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+41-B
+</td>
+<td style="text-align:left;">
+03/02/84
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+13.9
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+41-C
+</td>
+<td style="text-align:left;">
+06/04/84
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+17.2
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+41-D
+</td>
+<td style="text-align:left;">
+30/08/84
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+21.1
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+41-G
+</td>
+<td style="text-align:left;">
+05/10/84
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+25.6
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+51-A
+</td>
+<td style="text-align:left;">
+08/11/84
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+19.4
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+51-C
+</td>
+<td style="text-align:left;">
+24/01/85
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+11.7
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+51-D
+</td>
+<td style="text-align:left;">
+12/04/85
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+19.4
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+51-B
+</td>
+<td style="text-align:left;">
+29/04/85
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+23.9
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+51-G
+</td>
+<td style="text-align:left;">
+17/06/85
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+21.1
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+51-F
+</td>
+<td style="text-align:left;">
+29/07/85
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+27.2
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+51-I
+</td>
+<td style="text-align:left;">
+27/08/85
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+24.4
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+51-J
+</td>
+<td style="text-align:left;">
+03/10/85
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+26.1
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+61-A
+</td>
+<td style="text-align:left;">
+30/10/85
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+23.9
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+61-B
+</td>
+<td style="text-align:left;">
+26/11/85
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+24.4
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+61-C
+</td>
+<td style="text-align:left;">
+12/01/86
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+14.4
+</td>
+</tr>
+</tbody>
+</table></div>
+<p>Let’s begin the analysis by replicating Figures <a href="logistic-regression.html#fig:rogerts">3.2</a>a and <a href="logistic-regression.html#fig:rogerts">3.2</a>b and checking that linear regression is not the right tool for answering Q1–Q3. For that, we make two scatterplots of <code>nfails.field</code> (number of total incidents in the field joints) in function of <code>temp</code>, the first one excluding the launches without incidents (<code>subset = nfails.field &gt; 0</code>) and the second one for all the data.</p>
+<div class="sourceCode" id="cb31"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">require</a></span><span class="op">(</span><span class="va"><a href="https://r-forge.r-project.org/projects/car/">car</a></span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/pkg/car/man/scatterplot.html">scatterplot</a></span><span class="op">(</span><span class="va">nfails.field</span> <span class="op">~</span> <span class="va">temp</span>, reg.line <span class="op">=</span> <span class="va">lm</span>, smooth <span class="op">=</span> <span class="cn">FALSE</span>, spread <span class="op">=</span> <span class="cn">FALSE</span>,
+            boxplots <span class="op">=</span> <span class="cn">FALSE</span>, data <span class="op">=</span> <span class="va">challenger</span>, subset <span class="op">=</span> <span class="va">nfails.field</span> <span class="op">&gt;</span> <span class="fl">0</span><span class="op">)</span></code></pre></div>
+<div class="inline-figure"><img src="Machine-Learning_files/figure-html/unnamed-chunk-79-1.png" width="70%" style="display: block; margin: auto;"></div>
+<div class="sourceCode" id="cb32"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/pkg/car/man/scatterplot.html">scatterplot</a></span><span class="op">(</span><span class="va">nfails.field</span> <span class="op">~</span> <span class="va">temp</span>, reg.line <span class="op">=</span> <span class="va">lm</span>, smooth <span class="op">=</span> <span class="cn">FALSE</span>, spread <span class="op">=</span> <span class="cn">FALSE</span>,
+            boxplots <span class="op">=</span> <span class="cn">FALSE</span>, data <span class="op">=</span> <span class="va">challenger</span><span class="op">)</span></code></pre></div>
+<div class="inline-figure"><img src="Machine-Learning_files/figure-html/unnamed-chunk-79-2.png" width="70%" style="display: block; margin: auto;"></div>
+<p>There is a fundamental problem in using linear regression for this data: <strong>the response is not continuous</strong>. As a consequence, there is no linearity and the errors around the mean are not normal (indeed, they are strongly non normal). We can check this with the corresponding diagnostic plots:</p>
+<div class="sourceCode" id="cb33"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">mod</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/lm.html">lm</a></span><span class="op">(</span><span class="va">nfails.field</span> <span class="op">~</span> <span class="va">temp</span>, data <span class="op">=</span> <span class="va">challenger</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/r/graphics/par.html">par</a></span><span class="op">(</span>mfrow <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="fl">2</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">mod</span>, <span class="fl">1</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">mod</span>, <span class="fl">2</span><span class="op">)</span></code></pre></div>
+<div class="inline-figure"><img src="Machine-Learning_files/figure-html/unnamed-chunk-80-1.png" width="70%" style="display: block; margin: auto;"></div>
+<p>Although linear regression is not the adequate tool for this data, it is able to detect the obvious difference between the two plots:</p>
+<ol style="list-style-type: decimal">
+<li>
+<strong>The trend for launches with incidents is flat, hence suggesting there is no dependence on the temperature</strong> (Figure <a href="logistic-regression.html#fig:rogerts">3.2</a>a). This was one of the arguments behind NASA’s decision of launching the rocket at a temperature of -0.6 degrees.</li>
+<li>However, <strong>the trend for <em>all</em> launches indicates a clear negative dependence between temperature and number of incidents!</strong> (Figure <a href="logistic-regression.html#fig:rogerts">3.2</a>b). Think about it in this way: the minimum temperature for a launch without incidents ever recorded was above 18 degrees, and the Challenger was launched at -0.6 without clearly knowing the effects of such low temperatures.</li>
+</ol>
+<p>Instead of trying to predict the number of incidents, we will concentrate on modeling the <em>probability of expecting at least one incident given the temperature</em>, a simpler but also revealing approach. In other words, we look to estimate the following curve: <span class="math display">\[
+p(x)=\mathbb{P}(\text{incident}=1|\text{temperature}=x)
+\]</span> from <code>fail.field</code> and <code>temp</code>. This probability can not be properly modeled as a linear function like <span class="math inline">\(\beta_0+\beta_1x\)</span>, since inevitably will fall outside <span class="math inline">\([0,1]\)</span> for some value of <span class="math inline">\(x\)</span> (some will have negative probabilities or probabilities larger than one). The technique that solves this problem is the <strong>logistic regression</strong>. The logistic model in this case is <span class="math display">\[
+\mathbb{P}(\text{incident}=1|\text{temperature}=x)=\text{logistic}\left(\beta_0+\beta_1x\right)=\frac{1}{1+e^{-(\beta_0+\beta_1x)}},
+\]</span> with <span class="math inline">\(\beta_0\)</span> and <span class="math inline">\(\beta_1\)</span> unknown.</p>
+<p>Let’s fit the model to the data by estimating <span class="math inline">\(\beta_0\)</span> and <span class="math inline">\(\beta_1\)</span>.</p>
+<div class="sourceCode" id="cb34"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">nasa</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/glm.html">glm</a></span><span class="op">(</span><span class="va">fail.field</span> <span class="op">~</span> <span class="va">temp</span>, family <span class="op">=</span> <span class="st">"binomial"</span>, data <span class="op">=</span> <span class="va">challenger</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/r/base/summary.html">summary</a></span><span class="op">(</span><span class="va">nasa</span><span class="op">)</span>
+<span class="co">#ans&gt; </span>
+<span class="co">#ans&gt; Call:</span>
+<span class="co">#ans&gt; glm(formula = fail.field ~ temp, family = "binomial", data = challenger)</span>
+<span class="co">#ans&gt; </span>
+<span class="co">#ans&gt; Deviance Residuals: </span>
+<span class="co">#ans&gt;    Min      1Q  Median      3Q     Max  </span>
+<span class="co">#ans&gt; -1.057  -0.757  -0.382   0.457   2.220  </span>
+<span class="co">#ans&gt; </span>
+<span class="co">#ans&gt; Coefficients:</span>
+<span class="co">#ans&gt;             Estimate Std. Error z value Pr(&gt;|z|)  </span>
+<span class="co">#ans&gt; (Intercept)    7.584      3.915    1.94    0.053 .</span>
+<span class="co">#ans&gt; temp          -0.417      0.194   -2.15    0.032 *</span>
+<span class="co">#ans&gt; ---</span>
+<span class="co">#ans&gt; Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</span>
+<span class="co">#ans&gt; </span>
+<span class="co">#ans&gt; (Dispersion parameter for binomial family taken to be 1)</span>
+<span class="co">#ans&gt; </span>
+<span class="co">#ans&gt;     Null deviance: 28.267  on 22  degrees of freedom</span>
+<span class="co">#ans&gt; Residual deviance: 20.335  on 21  degrees of freedom</span>
+<span class="co">#ans&gt; AIC: 24.33</span>
+<span class="co">#ans&gt; </span>
+<span class="co">#ans&gt; Number of Fisher Scoring iterations: 5</span>
+<span class="fu"><a href="https://rdrr.io/r/base/Log.html">exp</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/coef.html">coef</a></span><span class="op">(</span><span class="va">nasa</span><span class="op">)</span><span class="op">)</span> <span class="co"># Exponentiated coefficients ("odds ratios")</span>
+<span class="co">#ans&gt; (Intercept)        temp </span>
+<span class="co">#ans&gt;    1965.974       0.659</span></code></pre></div>
+<div class="rmdtip">
+<p>
+The <code><a href="https://rdrr.io/r/stats/glm.html">glm()</a></code> function fits <strong>g</strong>eneralized
+<strong>l</strong>inear <strong>m</strong>odels, a class of models that
+includes logistic regression. The syntax of the <code><a href="https://rdrr.io/r/stats/glm.html">glm()</a></code>
+function is similar to that of <code><a href="https://rdrr.io/r/stats/lm.html">lm()</a></code>, except that we must
+pass in the argument <code>family=binomial</code> in order to tell <span style="color: Steelblue;"><i class="fab fa-r-project" aria-hidden="true"></i>
+</span> to run a logistic regression rather than some other type of
+generalized linear model.
+</p>
+</div>
+<p>The summary of the logistic model is notably different from the linear regression, as the methodology behind is quite different. Nevertheless, we have tests for the significance of each coefficient. Here we obtain that <code>temp</code> is significantly different from zero, at least at a level <span class="math inline">\(\alpha=0.05\)</span>. Therefore we can conclude that <strong>the temperature is indeed affecting the probability of an incident with the O-rings</strong> (answers Q1).</p>
+<p>The coefficient of <code>temp</code>, <span class="math inline">\(\hat\beta_1\)</span>, can be regarded the “correlation between the temperature and the probability of having at least one incident”. This correlation, as evidenced by the sign of <span class="math inline">\(\hat\beta_1\)</span>, is negative. Let’s plot the fitted logistic curve to see that indeed the probability of incident and temperature are negatively correlated:</p>
+<div class="sourceCode" id="cb35"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="co"># Plot data</span>
+<span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">challenger</span><span class="op">$</span><span class="va">temp</span>, <span class="va">challenger</span><span class="op">$</span><span class="va">fail.field</span>, xlim <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="op">-</span><span class="fl">1</span>, <span class="fl">30</span><span class="op">)</span>, xlab <span class="op">=</span> <span class="st">"Temperature"</span>,
+     ylab <span class="op">=</span> <span class="st">"Incident probability"</span><span class="op">)</span>
+
+<span class="co"># Draw the fitted logistic curve</span>
+<span class="va">x</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq</a></span><span class="op">(</span><span class="op">-</span><span class="fl">1</span>, <span class="fl">30</span>, l <span class="op">=</span> <span class="fl">200</span><span class="op">)</span>
+<span class="va">y</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/Log.html">exp</a></span><span class="op">(</span><span class="op">-</span><span class="op">(</span><span class="va">nasa</span><span class="op">$</span><span class="va">coefficients</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span> <span class="op">+</span> <span class="va">nasa</span><span class="op">$</span><span class="va">coefficients</span><span class="op">[</span><span class="fl">2</span><span class="op">]</span> <span class="op">*</span> <span class="va">x</span><span class="op">)</span><span class="op">)</span>
+<span class="va">y</span> <span class="op">&lt;-</span> <span class="fl">1</span> <span class="op">/</span> <span class="op">(</span><span class="fl">1</span> <span class="op">+</span> <span class="va">y</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/r/graphics/lines.html">lines</a></span><span class="op">(</span><span class="va">x</span>, <span class="va">y</span>, col <span class="op">=</span> <span class="fl">2</span>, lwd <span class="op">=</span> <span class="fl">2</span><span class="op">)</span>
+
+<span class="co"># The Challenger</span>
+<span class="fu"><a href="https://rdrr.io/r/graphics/points.html">points</a></span><span class="op">(</span><span class="op">-</span><span class="fl">0.6</span>, <span class="fl">1</span>, pch <span class="op">=</span> <span class="fl">16</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/r/graphics/text.html">text</a></span><span class="op">(</span><span class="op">-</span><span class="fl">0.6</span>, <span class="fl">1</span>, labels <span class="op">=</span> <span class="st">"Challenger"</span>, pos <span class="op">=</span> <span class="fl">4</span><span class="op">)</span></code></pre></div>
+<div class="inline-figure"><img src="Machine-Learning_files/figure-html/unnamed-chunk-83-1.png" width="70%" style="display: block; margin: auto;"></div>
+<p>At the sight of this curve and the summary of the model we can conclude that <strong>the temperature was increasing the probability of an O-ring incident</strong> (Q2). Indeed, the confidence intervals for the coefficients show a significative negative correlation at level <span class="math inline">\(\alpha=0.05\)</span>:</p>
+<div class="sourceCode" id="cb36"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/stats/confint.html">confint</a></span><span class="op">(</span><span class="va">nasa</span>, level <span class="op">=</span> <span class="fl">0.95</span><span class="op">)</span>
+<span class="co">#ans&gt;              2.5 % 97.5 %</span>
+<span class="co">#ans&gt; (Intercept)  1.336 17.783</span>
+<span class="co">#ans&gt; temp        -0.924 -0.109</span></code></pre></div>
+<p>Finally, <strong>the probability of having at least one incident with the O-rings in the launch day was</strong> <span class="math inline">\(0.9996\)</span> according to the fitted logistic model (Q3). This is easily obtained:</p>
+<div class="sourceCode" id="cb37"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/stats/predict.html">predict</a></span><span class="op">(</span><span class="va">nasa</span>, newdata <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span>temp <span class="op">=</span> <span class="op">-</span><span class="fl">0.6</span><span class="op">)</span>, type <span class="op">=</span> <span class="st">"response"</span><span class="op">)</span>
+<span class="co">#ans&gt; 1 </span>
+<span class="co">#ans&gt; 1</span></code></pre></div>
+<p>Be aware that <code>type = "response"</code> has a different meaning in logistic regression. In linear models it returns a CI for the prediction. But, <code>type = "response"</code> means that the <em>probability</em> should be returned, instead of the value of the link function, which is returned with <code>type = "link"</code> (the default).</p>
+<p>Recall that there is a serious problem of <strong>extrapolation</strong> in the prediction, which makes it less precise (or more variable). But this extrapolation, together with the evidences raised by a simple analysis like we did, should have been strong arguments for postponing the launch.</p>
+<p align="right">
+</p>
+<p>◼</p>
+
+
+</div>
+</div>
+</div>
+
+  <div class="chapter-nav">
+<div class="prev"><a href="pw-2.html">PW 2</a></div>
+<div class="next"><a href="pw-3.html">PW 3</a></div>
+</div></main><div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
+    <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
+      <ul class="nav navbar-nav">
+<li><a class="nav-link" href="#logistic-regression"><span class="header-section-number">3</span> Logistic Regression</a></li>
+<li><a class="nav-link" href="#introduction-1"><span class="header-section-number">3.1</span> Introduction</a></li>
+<li>
+<a class="nav-link" href="#logistic-regression-1"><span class="header-section-number">3.2</span> Logistic Regression</a><ul class="nav navbar-nav">
+<li><a class="nav-link" href="#the-logistic-model"><span class="header-section-number">3.2.1</span> The Logistic Model</a></li>
+<li><a class="nav-link" href="#estimating-the-regression-coefficients-1"><span class="header-section-number">3.2.2</span> Estimating the Regression Coefficients</a></li>
+<li><a class="nav-link" href="#prediction-1"><span class="header-section-number">3.2.3</span> Prediction</a></li>
+</ul>
+</li>
+<li><a class="nav-link" href="#multiple-logistic-regression"><span class="header-section-number">3.3</span> Multiple Logistic Regression</a></li>
+<li>
+<a class="nav-link" href="#logreg-examps"><span class="header-section-number">3.4</span> Example</a><ul class="nav navbar-nav"><li><a class="nav-link" href="#logreg-examps-challenger"><span class="header-section-number">3.4.1</span> Case study: The Challenger disaster</a></li></ul>
+</li>
+</ul>
+
+      <div class="book-extra">
+        <ul class="list-unstyled">
+          
+        </ul>
+</div>
+    </nav>
+</div>
+
+</div>
+</div> <!-- .container -->
+
+<footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
+
+  <div class="col-12 col-md-6 mt-3">
+    <p>"<strong>Machine Learning</strong>" was written by Mohamad Ghassany. It was last built on 2022-04-26.</p>
+  </div>
+
+  <div class="col-12 col-md-6 mt-3">
+    <p>This book was built by the <a class="text-light" href="https://bookdown.org">bookdown</a> R package.</p>
+  </div>
+
+</div></div>
+</footer><!-- dynamically load mathjax for compatibility with self-contained --><script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script><script type="text/x-mathjax-config">const popovers = document.querySelectorAll('a.footnote-ref[data-toggle="popover"]');
+for (let popover of popovers) {
+  const div = document.createElement('div');
+  div.setAttribute('style', 'position: absolute; top: 0, left:0; width:0, height:0, overflow: hidden; visibility: hidden;');
+  div.innerHTML = popover.getAttribute('data-content');
+
+  var has_math = div.querySelector("span.math");
+  if (has_math) {
+    document.body.appendChild(div);
+    MathJax.Hub.Queue(["Typeset", MathJax.Hub, div]);
+    MathJax.Hub.Queue(function() {
+      popover.setAttribute('data-content', div.innerHTML);
+      document.body.removeChild(div);
+    })
+  }
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,454 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<title>PW 6 | Machine Learning</title>
+<meta name="author" content="Mohamad Ghassany">
+<meta name="description" content="The Iris Dataset The Iris flower dataset or Fisher’s Iris dataset is a multivariate data set introduced by the British statistician and biologist Ronald Fisher in his 1936 paper (FISHER 1936). The...">
+<meta name="generator" content="bookdown 0.24.10 with bs4_book()">
+<meta property="og:title" content="PW 6 | Machine Learning">
+<meta property="og:type" content="book">
+<meta property="og:description" content="The Iris Dataset The Iris flower dataset or Fisher’s Iris dataset is a multivariate data set introduced by the British statistician and biologist Ronald Fisher in his 1936 paper (FISHER 1936). The...">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="PW 6 | Machine Learning">
+<meta name="twitter:description" content="The Iris Dataset The Iris flower dataset or Fisher’s Iris dataset is a multivariate data set introduced by the British statistician and biologist Ronald Fisher in his 1936 paper (FISHER 1936). The...">
+<!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
+<script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.3.1/transition.js"></script><script src="libs/bs3compat-0.3.1/tabs.js"></script><script src="libs/bs3compat-0.3.1/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
+<script src="libs/bs4_book-1.0.0/bs4_book.js"></script><script src="libs/kePrint-0.0.1/kePrint.js"></script><link href="libs/lightable-0.0.1/lightable.css" rel="stylesheet">
+<link href="libs/vembedr-0.1.5/css/vembedr.css" rel="stylesheet">
+<script src="libs/htmlwidgets-1.5.4/htmlwidgets.js"></script><script src="libs/plotly-binding-4.10.0/plotly.js"></script><script src="libs/typedarray-0.1/typedarray.min.js"></script><link href="libs/crosstalk-1.2.0/css/crosstalk.min.css" rel="stylesheet">
+<script src="libs/crosstalk-1.2.0/js/crosstalk.min.js"></script><link href="libs/plotly-htmlwidgets-css-2.5.1/plotly-htmlwidgets.css" rel="stylesheet">
+<script src="libs/plotly-main-2.5.1/plotly-latest.min.js"></script><script type="text/x-mathjax-config">
+    const popovers = document.querySelectorAll('a.footnote-ref[data-toggle="popover"]');
+    for (let popover of popovers){
+      const div = document.createElement('div');
+      div.setAttribute('style', 'position: absolute; top: 0, left:0; width:0, height:0, overflow: hidden; visibility: hidden;');
+      div.innerHTML = popover.getAttribute('data-content');
+      
+      // Will this work with TeX on its own line?
+      var has_math = div.querySelector("span.math");
+      if (has_math) {
+        document.body.appendChild(div);
+      	MathJax.Hub.Queue(["Typeset", MathJax.Hub, div]);
+      	MathJax.Hub.Queue(function(){
+          popover.setAttribute('data-content', div.innerHTML);
+      	})
+      }
+    }
+    </script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- CSS --><link rel="stylesheet" href="css/ims-style.css">
+</head>
+<body data-spy="scroll" data-target="#toc">
+
+<div class="container-fluid">
+<div class="row">
+  <header class="col-sm-12 col-lg-3 sidebar sidebar-book"><a class="sr-only sr-only-focusable" href="#content">Skip to main content</a>
+
+    <div class="d-flex align-items-start justify-content-between">
+      <h1>
+        <a href="index.html" title="">Machine Learning</a>
+      </h1>
+      <button class="btn btn-outline-primary d-lg-none ml-2 mt-1" type="button" data-toggle="collapse" data-target="#main-nav" aria-expanded="true" aria-controls="main-nav"><i class="fas fa-bars"></i><span class="sr-only">Show table of contents</span></button>
+    </div>
+
+    <div id="main-nav" class="collapse-lg">
+      <form role="search">
+        <input id="search" class="form-control" type="search" placeholder="Search" aria-label="Search">
+</form>
+
+      <nav aria-label="Table of contents"><h2>Table of contents</h2>
+        <ul class="book-toc list-unstyled">
+<li><a class="" href="index.html">Welcome</a></li>
+<li><a class="" href="introduction.html">Introduction</a></li>
+<li class="book-part">Supervised Learning</li>
+<li class="book-part">Regression</li>
+<li><a class="" href="linear-regression.html"><span class="header-section-number">1</span> Linear Regression</a></li>
+<li><a class="" href="practical-work-1.html">Practical Work 1</a></li>
+<li><a class="" href="multiple-linear-regression.html"><span class="header-section-number">2</span> Multiple Linear Regression</a></li>
+<li><a class="" href="pw-2.html">PW 2</a></li>
+<li class="book-part">Classification</li>
+<li><a class="" href="logistic-regression.html"><span class="header-section-number">3</span> Logistic Regression</a></li>
+<li><a class="" href="pw-3.html">PW 3</a></li>
+<li><a class="" href="discriminant-analysis.html"><span class="header-section-number">4</span> Discriminant Analysis</a></li>
+<li><a class="" href="pw-4.html">PW 4</a></li>
+<li><a class="" href="decision-trees-random-forests.html"><span class="header-section-number">5</span> Decision Trees &amp; Random Forests</a></li>
+<li><a class="" href="pw-5.html">PW 5</a></li>
+<li class="book-part">Dimensionality Reduction</li>
+<li><a class="" href="principal-components-analysis.html"><span class="header-section-number">6</span> Principal Components Analysis</a></li>
+<li><a class="active" href="pw-6.html">PW 6</a></li>
+<li class="book-part">Unsupervised Learning</li>
+<li><a class="" href="kmeans-hierarchical-clustering.html"><span class="header-section-number">7</span> Kmeans &amp; Hierarchical Clustering</a></li>
+<li><a class="" href="pw-7.html">PW 7</a></li>
+<li><a class="" href="gaussian-mixture-models-em.html"><span class="header-section-number">8</span> Gaussian Mixture Models &amp; EM</a></li>
+<li><a class="" href="pw-8.html">PW 8</a></li>
+<li class="book-part">Hackathon</li>
+<li><a class="" href="hackathon.html">Hackathon</a></li>
+<li class="book-part">Appendix</li>
+<li><a class="" href="final-grades.html"><span class="header-section-number">A</span> Final Grades</a></li>
+<li><a class="" href="app-introRStudio.html"><span class="header-section-number">B</span> Introduction to RStudio</a></li>
+<li><a class="" href="app-ht.html"><span class="header-section-number">C</span> Review on hypothesis testing</a></li>
+<li><a class="" href="use-qual.html"><span class="header-section-number">D</span> Use of qualitative predictors</a></li>
+<li><a class="" href="model-selection.html"><span class="header-section-number">E</span> Model Selection</a></li>
+<li><a class="" href="references-and-credits.html"><span class="header-section-number">F</span> References and Credits</a></li>
+<li><a class="" href="other-references.html"><span class="header-section-number">G</span> Other References</a></li>
+<li><a class="" href="main-references-credits.html">Main References &amp; Credits</a></li>
+</ul>
+
+        <div class="book-extra">
+          
+        </div>
+      </nav>
+</div>
+  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="pw-6" class="section level1 unnumbered">
+<h1>PW 6<a class="anchor" aria-label="anchor" href="#pw-6"><i class="fas fa-link"></i></a>
+</h1>
+<div id="the-iris-dataset" class="section level3 unnumbered">
+<h3>The Iris Dataset<a class="anchor" aria-label="anchor" href="#the-iris-dataset"><i class="fas fa-link"></i></a>
+</h3>
+<p>The <strong><em>Iris flower dataset</em></strong> or <strong><em>Fisher’s Iris dataset</em></strong> is a multivariate data set introduced by the British statistician and biologist <a href="https://en.wikipedia.org/wiki/Ronald_Fisher">Ronald Fisher</a> in his <strong>1936</strong> paper <span class="citation">(<a href="main-references-credits.html#ref-Fisher1936" role="doc-biblioref">FISHER 1936</a>)</span>.</p>
+<p>The data set consists of 50 samples from each of three species of Iris. Four features were measured from each sample.</p>
+<p>The three species in the Iris dataset are:</p>
+<ol style="list-style-type: decimal">
+<li>
+<em>Iris-setosa</em> (<span class="math inline">\(n_1=50\)</span>)</li>
+<li>
+<em>Iris-versicolor</em> (<span class="math inline">\(n_2=50\)</span>)</li>
+<li>
+<em>Iris-virginica</em> (<span class="math inline">\(n_3=50\)</span>)</li>
+</ol>
+<p>And the four features in Iris dataset are:</p>
+<ol style="list-style-type: decimal">
+<li>
+<em>sepal length</em> in cm</li>
+<li>
+<em>sepal width</em> in cm</li>
+<li>
+<em>petal length</em> in cm</li>
+<li>
+<em>petal width</em> in cm</li>
+</ol>
+<div class="inline-figure"><img src="img/iris.png" width="85%" style="display: block; margin: auto;"></div>
+</div>
+<div id="loading-data-1" class="section level3 unnumbered">
+<h3>Loading Data<a class="anchor" aria-label="anchor" href="#loading-data-1"><i class="fas fa-link"></i></a>
+</h3>
+<p><strong>1.</strong> Download the iris dataset from <a target="_blank" href="datasets/iris.data"> here <i class="fa fa-table" aria-hidden="true"></i></a> and import it into <svg aria-hidden="true" role="img" viewbox="0 0 581 512" style="height:1em;width:1.13em;vertical-align:-0.125em;margin-left:auto;margin-right:auto;font-size:inherit;fill:steelblue;overflow:visible;position:relative;"><path d="M581 226.6C581 119.1 450.9 32 290.5 32S0 119.1 0 226.6C0 322.4 103.3 402 239.4 418.1V480h99.1v-61.5c24.3-2.7 47.6-7.4 69.4-13.9L448 480h112l-67.4-113.7c54.5-35.4 88.4-84.9 88.4-139.7zm-466.8 14.5c0-73.5 98.9-133 220.8-133s211.9 40.7 211.9 133c0 50.1-26.5 85-70.3 106.4-2.4-1.6-4.7-2.9-6.4-3.7-10.2-5.2-27.8-10.5-27.8-10.5s86.6-6.4 86.6-92.7-90.6-87.9-90.6-87.9h-199V361c-74.1-21.5-125.2-67.1-125.2-119.9zm225.1 38.3v-55.6c57.8 0 87.8-6.8 87.8 27.3 0 36.5-38.2 28.3-87.8 28.3zm-.9 72.5H365c10.8 0 18.9 11.7 24 19.2-16.1 1.9-33 2.8-50.6 2.9v-22.1z"></path></svg>.</p>
+<!-- 
+**2.** Show the last 5 rows of the iris dataset.
+
+
+
+ -->
+</div>
+<div id="exploratory-analysis" class="section level3 unnumbered">
+<h3>Exploratory analysis<a class="anchor" aria-label="anchor" href="#exploratory-analysis"><i class="fas fa-link"></i></a>
+</h3>
+<p><strong>2.</strong> Compare the means and the quartiles of the 3 different flower classes for the 4 different features (Plot 4 boxplots into the same figure).</p>
+<div class="rmdtip">
+<p><strong>Hint</strong>: you can use <code>par(mfrow=c(2,2))</code> to show multiple plots on the same figure (<span class="math inline">\(2 \times 2\)</span> plots here). Like follows:</p>
+</div>
+<div class="inline-figure"><img src="Machine-Learning_files/figure-html/unnamed-chunk-178-1.png" width="70%" style="display: block; margin: auto;"></div>
+<p><strong>3.</strong> To explore how the 3 different flower classes are distributed along the 4 different features, visualize them via histograms using the following code.</p>
+<div class="sourceCode" id="cb59"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="co"># Let's use the ggplot2 library</span>
+<span class="co"># ggplot2 is the most advanced package for data visualization</span>
+<span class="co"># gg corresponds to The Grammar of Graphics.</span>
+<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://ggplot2.tidyverse.org">ggplot2</a></span><span class="op">)</span> <span class="co">#of course you must install it first if you don't have it already</span>
+
+<span class="co"># histogram of sepal_length</span>
+<span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="va">iris</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x<span class="op">=</span><span class="va">sepal_length</span>, fill<span class="op">=</span><span class="va">class</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span>
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_histogram.html">geom_histogram</a></span><span class="op">(</span>binwidth<span class="op">=</span><span class="fl">.2</span>, alpha<span class="op">=</span><span class="fl">.5</span><span class="op">)</span>
+<span class="co"># histogram of sepal_width</span>
+<span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="va">iris</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x<span class="op">=</span><span class="va">sepal_width</span>, fill<span class="op">=</span><span class="va">class</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span>
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_histogram.html">geom_histogram</a></span><span class="op">(</span>binwidth<span class="op">=</span><span class="fl">.2</span>, alpha<span class="op">=</span><span class="fl">.5</span><span class="op">)</span>
+<span class="co"># histogram of petal_length</span>
+<span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="va">iris</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x<span class="op">=</span><span class="va">petal_length</span>, fill<span class="op">=</span><span class="va">class</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span>
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_histogram.html">geom_histogram</a></span><span class="op">(</span>binwidth<span class="op">=</span><span class="fl">.2</span>, alpha<span class="op">=</span><span class="fl">.5</span><span class="op">)</span>
+<span class="co"># histogram of petal_width</span>
+<span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="va">iris</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x<span class="op">=</span><span class="va">petal_width</span>, fill<span class="op">=</span><span class="va">class</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span>
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_histogram.html">geom_histogram</a></span><span class="op">(</span>binwidth<span class="op">=</span><span class="fl">.2</span>, alpha<span class="op">=</span><span class="fl">.5</span><span class="op">)</span></code></pre></div>
+<div class="inline-figure"><img src="Machine-Learning_files/figure-html/unnamed-chunk-180-1.png" width="70%" style="display: block; margin: auto;"></div>
+</div>
+<div id="pca-using-princomp" class="section level3 unnumbered">
+<h3>PCA using <code>princomp()</code><a class="anchor" aria-label="anchor" href="#pca-using-princomp"><i class="fas fa-link"></i></a>
+</h3>
+<div class="rmdtip">
+<p>Both <code><a href="https://rdrr.io/r/stats/princomp.html">princomp()</a></code> and <code><a href="https://rdrr.io/r/stats/prcomp.html">prcomp()</a></code> are built-in <svg aria-hidden="true" role="img" viewbox="0 0 581 512" style="height:1em;width:1.13em;vertical-align:-0.125em;margin-left:auto;margin-right:auto;font-size:inherit;fill:steelblue;overflow:visible;position:relative;"><path d="M581 226.6C581 119.1 450.9 32 290.5 32S0 119.1 0 226.6C0 322.4 103.3 402 239.4 418.1V480h99.1v-61.5c24.3-2.7 47.6-7.4 69.4-13.9L448 480h112l-67.4-113.7c54.5-35.4 88.4-84.9 88.4-139.7zm-466.8 14.5c0-73.5 98.9-133 220.8-133s211.9 40.7 211.9 133c0 50.1-26.5 85-70.3 106.4-2.4-1.6-4.7-2.9-6.4-3.7-10.2-5.2-27.8-10.5-27.8-10.5s86.6-6.4 86.6-92.7-90.6-87.9-90.6-87.9h-199V361c-74.1-21.5-125.2-67.1-125.2-119.9zm225.1 38.3v-55.6c57.8 0 87.8-6.8 87.8 27.3 0 36.5-38.2 28.3-87.8 28.3zm-.9 72.5H365c10.8 0 18.9 11.7 24 19.2-16.1 1.9-33 2.8-50.6 2.9v-22.1z"></path></svg> functions. They both perform PCA.</p>
+</div>
+<p><strong>4.</strong> Apply a PCA on the Iris dataset using the <code><a href="https://rdrr.io/r/stats/princomp.html">princomp()</a></code> function and interpret the results.</p>
+<div class="sourceCode" id="cb60"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">pcairis</span><span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/stats/princomp.html">princomp</a></span><span class="op">(</span><span class="va">iris</span><span class="op">[</span>,<span class="op">-</span><span class="fl">5</span><span class="op">]</span>, cor<span class="op">=</span><span class="cn">T</span><span class="op">)</span> 
+<span class="co"># Note that we take only the numerical columns to apply PCA.</span>
+<span class="co"># now pcairis is a R object of type princomp</span>
+
+<span class="co"># To display the internal structure of pcairis</span>
+<span class="fu"><a href="https://rdrr.io/r/utils/str.html">str</a></span><span class="op">(</span><span class="va">pcairis</span><span class="op">)</span>
+<span class="co">#ans&gt; List of 7</span>
+<span class="co">#ans&gt;  $ sdev    : Named num [1:4] 1.706 0.96 0.384 0.144</span>
+<span class="co">#ans&gt;   ..- attr(*, "names")= chr [1:4] "Comp.1" "Comp.2" "Comp.3" "Comp.4"</span>
+<span class="co">#ans&gt;  $ loadings: 'loadings' num [1:4, 1:4] 0.522 -0.263 0.581 0.566 0.372 ...</span>
+<span class="co">#ans&gt;   ..- attr(*, "dimnames")=List of 2</span>
+<span class="co">#ans&gt;   .. ..$ : chr [1:4] "sepal_length" "sepal_width" "petal_length" "petal_width"</span>
+<span class="co">#ans&gt;   .. ..$ : chr [1:4] "Comp.1" "Comp.2" "Comp.3" "Comp.4"</span>
+<span class="co">#ans&gt;  $ center  : Named num [1:4] 5.84 3.05 3.76 1.2</span>
+<span class="co">#ans&gt;   ..- attr(*, "names")= chr [1:4] "sepal_length" "sepal_width" "petal_length" "petal_width"</span>
+<span class="co">#ans&gt;  $ scale   : Named num [1:4] 0.825 0.432 1.759 0.761</span>
+<span class="co">#ans&gt;   ..- attr(*, "names")= chr [1:4] "sepal_length" "sepal_width" "petal_length" "petal_width"</span>
+<span class="co">#ans&gt;  $ n.obs   : int 150</span>
+<span class="co">#ans&gt;  $ scores  : num [1:150, 1:4] -2.26 -2.09 -2.37 -2.3 -2.39 ...</span>
+<span class="co">#ans&gt;   ..- attr(*, "dimnames")=List of 2</span>
+<span class="co">#ans&gt;   .. ..$ : NULL</span>
+<span class="co">#ans&gt;   .. ..$ : chr [1:4] "Comp.1" "Comp.2" "Comp.3" "Comp.4"</span>
+<span class="co">#ans&gt;  $ call    : language princomp(x = iris[, -5], cor = T)</span>
+<span class="co">#ans&gt;  - attr(*, "class")= chr "princomp"</span>
+
+<span class="co"># To see the variance explained by the the pcs</span>
+<span class="fu"><a href="https://rdrr.io/r/base/summary.html">summary</a></span><span class="op">(</span><span class="va">pcairis</span><span class="op">)</span> 
+<span class="co">#ans&gt; Importance of components:</span>
+<span class="co">#ans&gt;                        Comp.1 Comp.2 Comp.3  Comp.4</span>
+<span class="co">#ans&gt; Standard deviation      1.706  0.960 0.3839 0.14355</span>
+<span class="co">#ans&gt; Proportion of Variance  0.728  0.230 0.0368 0.00515</span>
+<span class="co">#ans&gt; Cumulative Proportion   0.728  0.958 0.9948 1.00000</span>
+
+<span class="co"># To plot the variance explained by each pc</span>
+<span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">pcairis</span><span class="op">)</span> </code></pre></div>
+<div class="inline-figure"><img src="Machine-Learning_files/figure-html/unnamed-chunk-181-1.png" width="70%" style="display: block; margin: auto;"></div>
+<div class="sourceCode" id="cb61"><pre class="downlit sourceCode r">
+<code class="sourceCode R">
+<span class="co"># To plot together the scores for PC1 and PC2 and the </span>
+<span class="co"># variables expressed in terms of PC1 and PC2.</span>
+<span class="fu"><a href="https://rdrr.io/r/stats/biplot.html">biplot</a></span><span class="op">(</span><span class="va">pcairis</span><span class="op">)</span> </code></pre></div>
+<div class="inline-figure"><img src="Machine-Learning_files/figure-html/unnamed-chunk-181-2.png" width="70%" style="display: block; margin: auto;"></div>
+</div>
+<div id="deeper-pca-using-factoextra-package" class="section level3 unnumbered">
+<h3>Deeper PCA using <code>factoextra</code> package<a class="anchor" aria-label="anchor" href="#deeper-pca-using-factoextra-package"><i class="fas fa-link"></i></a>
+</h3>
+<div class="rmdtip">
+<p>To help in the interpretation and in the visualization of PCA we are going to use the package named <code>factoextra</code>.</p>
+<p>No matter which function or package you decide to use for computing principal component methods, the <code>factoextra</code> <svg aria-hidden="true" role="img" viewbox="0 0 581 512" style="height:1em;width:1.13em;vertical-align:-0.125em;margin-left:auto;margin-right:auto;font-size:inherit;fill:steelblue;overflow:visible;position:relative;"><path d="M581 226.6C581 119.1 450.9 32 290.5 32S0 119.1 0 226.6C0 322.4 103.3 402 239.4 418.1V480h99.1v-61.5c24.3-2.7 47.6-7.4 69.4-13.9L448 480h112l-67.4-113.7c54.5-35.4 88.4-84.9 88.4-139.7zm-466.8 14.5c0-73.5 98.9-133 220.8-133s211.9 40.7 211.9 133c0 50.1-26.5 85-70.3 106.4-2.4-1.6-4.7-2.9-6.4-3.7-10.2-5.2-27.8-10.5-27.8-10.5s86.6-6.4 86.6-92.7-90.6-87.9-90.6-87.9h-199V361c-74.1-21.5-125.2-67.1-125.2-119.9zm225.1 38.3v-55.6c57.8 0 87.8-6.8 87.8 27.3 0 36.5-38.2 28.3-87.8 28.3zm-.9 72.5H365c10.8 0 18.9 11.7 24 19.2-16.1 1.9-33 2.8-50.6 2.9v-22.1z"></path></svg> package can help to extract easily, in a human readable data format, the analysis results from the different functions mentioned above. <code>factoextra</code> provides also convenient solutions to create <code>ggplot2</code> based beautiful graphs.</p>
+<p>You can take a look at this <a href="http://www.sthda.com/french/articles/38-methodes-des-composantes-principales-dans-r-guide-pratique/73-acp-analyse-en-composantes-principales-avec-r-l-essentiel/" target="_blank">link <svg aria-hidden="true" role="img" viewbox="0 0 512 512" style="height:1em;width:1em;vertical-align:-0.125em;margin-left:auto;margin-right:auto;font-size:inherit;fill:currentColor;overflow:visible;position:relative;"><path d="M432,320H400a16,16,0,0,0-16,16V448H64V128H208a16,16,0,0,0,16-16V80a16,16,0,0,0-16-16H48A48,48,0,0,0,0,112V464a48,48,0,0,0,48,48H400a48,48,0,0,0,48-48V336A16,16,0,0,0,432,320ZM488,0h-128c-21.37,0-32.05,25.91-17,41l35.73,35.73L135,320.37a24,24,0,0,0,0,34L157.67,377a24,24,0,0,0,34,0L435.28,133.32,471,169c15,15,41,4.5,41-17V24A24,24,0,0,0,488,0Z"></path></svg></a> for a detailed example.</p>
+</div>
+<p><strong>5.</strong> Using <code>factoextra</code> package plot the following:</p>
+<ul>
+<li>The scree plot.</li>
+<li>The graph of individuals.</li>
+<li>The graph of variables.</li>
+<li>The biplot graph.</li>
+<li>The contributions of the variables to the first 2 principal components.</li>
+</ul>
+</div>
+<div id="step-by-step-pca" class="section level3 unnumbered">
+<h3>Step-by-step PCA<a class="anchor" aria-label="anchor" href="#step-by-step-pca"><i class="fas fa-link"></i></a>
+</h3>
+<p>In order to understand how PCA works, let’s implement it step-by-step.</p>
+<div class="rmdtip">
+<p>
+<strong>Summary of the PCA Approach</strong>:
+</p>
+<ul>
+<li>
+Standardize the data.
+</li>
+<li>
+Obtain the Eigenvectors and Eigenvalues from the covariance matrix
+or correlation matrix.
+</li>
+<li>
+Sort eigenvalues in descending order and choose the <span class="math inline"><span class="math inline">\(k\)</span></span> eigenvectors that correspond to the
+<span class="math inline"><span class="math inline">\(k\)</span></span> largest eigenvalues, where <span class="math inline"><span class="math inline">\(k\)</span></span> is the number of dimensions of the new
+feature subspace (<span class="math inline"><span class="math inline">\(k \le p\)</span></span>).
+</li>
+<li>
+Construct the projection matrix <span class="math inline"><span class="math inline">\(\mathbf{A}\)</span></span> from the selected <span class="math inline"><span class="math inline">\(k\)</span></span> eigenvectors.
+</li>
+<li>
+Transform the original dataset <span class="math inline"><span class="math inline">\(X\)</span></span> via <span class="math inline"><span class="math inline">\(\mathbf{A}\)</span></span> to obtain a <span class="math inline"><span class="math inline">\(k\)</span></span>-dimensional feature subspace <span class="math inline"><span class="math inline">\(\mathbf{Y}\)</span></span>.
+</li>
+</ul>
+</div>
+<p><strong>6.</strong> First step, split the iris dataset into data <span class="math inline">\(X\)</span> and class labels <span class="math inline">\(y\)</span>.</p>
+<div class="sourceCode" id="cb62"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">X</span> <span class="op">&lt;-</span> <span class="va">iris</span><span class="op">[</span>,<span class="op">-</span><span class="fl">5</span><span class="op">]</span>
+<span class="va">y</span> <span class="op">&lt;-</span> <span class="va">iris</span><span class="op">[</span>,<span class="fl">5</span><span class="op">]</span></code></pre></div>
+<div class="rmdtip">
+<p>
+The iris dataset is now stored in form of a <span class="math inline"><span class="math inline">\(150 \times 4\)</span></span> matrix where the columns are
+the different features, and every row represents a separate flower
+sample. Each sample row <span class="math inline"><span class="math inline">\(X^i\)</span></span> can be
+pictured as a 4-dimensional vector
+</p>
+<p>
+<span class="math display"><span class="math display">\[ (X^i)^T = \begin{pmatrix} X_1^i \\
+X_2^i \\ X_3^i \\ X_4^i \end{pmatrix}
+= \begin{pmatrix} \text{sepal length} \\ \text{sepal width}
+\\\text{petal length} \\ \text{petal width} \end{pmatrix}\]</span></span>
+</p>
+</div>
+<div class="rmdtip">
+<p>
+<strong>Eigendecomposition - Computing Eigenvectors and
+Eigenvalues</strong>
+</p>
+<p>
+The eigenvectors and eigenvalues of a covariance (or correlation)
+matrix represent the “core” of a PCA: The eigenvectors (principal
+components) determine the directions of the new feature space, and the
+eigenvalues determine their magnitude. In other words, the eigenvalues
+explain the variance of the data along the new feature axes.
+</p>
+</div>
+<p><strong>Standardizing</strong></p>
+<p><strong>7.</strong> Scale the 4 features. Store the scaled matrix into a new one (for example, name it <code>X_scaled</code>).</p>
+<p><strong>Covariance Matrix</strong></p>
+<p><strong>8.</strong> The classic approach to PCA is to perform the eigendecomposition on the covariance matrix <span class="math inline">\(\Sigma\)</span>, which is a <span class="math inline">\(p\times p\)</span> matrix where each element represents the covariance between two features. Compute the Covariance Matrix of the scaled features (Print the results).</p>
+<div class="rmdtip">
+<p>
+We can summarize the calculation of the covariance matrix via the
+following matrix equation: <span class="math display"><span class="math display">\[ \Sigma =
+\frac{1}{n-1} \left( (\mathbf{X} - \mathbf{\bar{X}})^T\;(\mathbf{X} -
+\mathbf{\bar{X}}) \right) \]</span></span> where <span class="math inline"><span class="math inline">\(\mathbf{\bar{X}}\)</span></span> is the mean vector <span class="math inline"><span class="math inline">\(\mathbf{\bar{X}} = \frac{1}{n} \sum\limits_{k=1}^n x_{k}\)</span></span>.
+</p>
+<p>
+The mean vector is a <span class="math inline"><span class="math inline">\(p\)</span></span>-dimensional vector where each value in
+this vector represents the sample mean of a feature column in the
+dataset.
+</p>
+</div>
+<p><strong>9.</strong> Perform an eigendecomposition on the covariance matrix. Compute the Eigenvectors and the Eigenvalues (you can use the <code><a href="https://rdrr.io/r/base/eigen.html">eigen()</a></code> function). What do you obtain?</p>
+<p><strong>Correlation Matrix</strong></p>
+<div class="rmdtip">
+<p>
+Especially, in the field of “Finance”, the correlation matrix
+typically used instead of the covariance matrix. However, the
+eigendecomposition of the covariance matrix (if the input data was
+standardized) yields the same results as a eigendecomposition on the
+correlation matrix, since the correlation matrix can be understood as
+the normalized covariance matrix.
+</p>
+</div>
+<p><strong>10.</strong> Perform an eigendecomposition of the standardized data based on the correlation matrix.</p>
+<p><strong>11.</strong> Perform an eigendecomposition of the raw data based on the correlation matrix. Compare the obtained results with the previous question.</p>
+<div class="rmdtip">
+<p>
+We should see that all three approaches yield the same eigenvectors
+and eigenvalue pairs:
+</p>
+<ul>
+<li>
+Eigendecomposition of the covariance matrix after standardizing the
+data.
+</li>
+<li>
+Eigendecomposition of the correlation matrix.
+</li>
+<li>
+Eigendecomposition of the correlation matrix after standardizing the
+data.
+</li>
+</ul>
+</div>
+<p><strong>Selecting Principal Components</strong></p>
+<div class="rmdtip">
+<p>
+The <code><a href="https://rdrr.io/r/base/eigen.html">eigen()</a></code> function will, by default, sort the
+eigenvalues in decreasing order.
+</p>
+</div>
+<p><strong>Explained Variance</strong></p>
+<p><strong>12.</strong> Calculate the individual explained variation and the cumulative explained variation of each principal component. Show the results.</p>
+<p><strong>13.</strong> Plot the individual explained variation. (scree plot)</p>
+<p><strong>Projection Matrix</strong></p>
+<p><strong>14.</strong> Construct the projection matrix that will be used to transform the Iris data onto the new feature subspace.</p>
+<div class="rmdtip">
+<p>
+The “projection matrix” is basically just a matrix of our
+concatenated top <span class="math inline"><span class="math inline">\(k\)</span></span> eigenvectors.
+Here, the projection matrix <span class="math inline"><span class="math inline">\(\mathbf{A}\)</span></span> is a <span class="math inline"><span class="math inline">\(4 \times 2\)</span></span>-dimensional matrix.
+</p>
+</div>
+<p><strong>Projection Onto the New Feature Space</strong></p>
+<p>In this last step we will use the <span class="math inline">\(4 \times 2\)</span>-dimensional projection matrix <span class="math inline">\(\mathbf{A}\)</span> to transform our samples (observations) onto the new subspace via the equation <span class="math inline">\(\mathbf{Y}=X \times \mathbf{A}\)</span> where <span class="math inline">\(\mathbf{Y}\)</span> is a <span class="math inline">\(150 \times 2\)</span> matrix of our transformed samples.</p>
+<p><strong>15.</strong> Compute <span class="math inline">\(\mathbf{Y}\)</span> (Recall the <span class="math inline">\(\mathbf{Y}\)</span> is the matrix of scores, <span class="math inline">\(\mathbf{A}\)</span> is the matrix of loadings).</p>
+<p><strong>Visualization</strong></p>
+<p><strong>16.</strong> Plot the observations on the new feature space. Name the axis PC1 and PC2.</p>
+<p><strong>17.</strong> On the same plot, color the observations (the flowers) with respect to their flower classes.</p>
+<p align="right">
+◼
+</p>
+
+</div>
+</div>
+
+
+
+  <div class="chapter-nav">
+<div class="prev"><a href="principal-components-analysis.html"><span class="header-section-number">6</span> Principal Components Analysis</a></div>
+<div class="next"><a href="kmeans-hierarchical-clustering.html"><span class="header-section-number">7</span> Kmeans &amp; Hierarchical Clustering</a></div>
+</div></main><div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
+    <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
+      <ul class="nav navbar-nav"><li>
+<a class="nav-link" href="#pw-6">PW 6</a><ul class="nav navbar-nav">
+<li><a class="nav-link" href="#the-iris-dataset">The Iris Dataset</a></li>
+<li><a class="nav-link" href="#loading-data-1">Loading Data</a></li>
+<li><a class="nav-link" href="#exploratory-analysis">Exploratory analysis</a></li>
+<li><a class="nav-link" href="#pca-using-princomp">PCA using princomp()</a></li>
+<li><a class="nav-link" href="#deeper-pca-using-factoextra-package">Deeper PCA using factoextra package</a></li>
+<li><a class="nav-link" href="#step-by-step-pca">Step-by-step PCA</a></li>
+</ul>
+</li></ul>
+
+      <div class="book-extra">
+        <ul class="list-unstyled">
+          
+        </ul>
+</div>
+    </nav>
+</div>
+
+</div>
+</div> <!-- .container -->
+
+<footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
+
+  <div class="col-12 col-md-6 mt-3">
+    <p>"<strong>Machine Learning</strong>" was written by Mohamad Ghassany. It was last built on 2022-04-26.</p>
+  </div>
+
+  <div class="col-12 col-md-6 mt-3">
+    <p>This book was built by the <a class="text-light" href="https://bookdown.org">bookdown</a> R package.</p>
+  </div>
+
+</div></div>
+</footer><!-- dynamically load mathjax for compatibility with self-contained --><script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script><script type="text/x-mathjax-config">const popovers = document.querySelectorAll('a.footnote-ref[data-toggle="popover"]');
+for (let popover of popovers) {
+  const div = document.createElement('div');
+  div.setAttribute('style', 'position: absolute; top: 0, left:0; width:0, height:0, overflow: hidden; visibility: hidden;');
+  div.innerHTML = popover.getAttribute('data-content');
+
+  var has_math = div.querySelector("span.math");
+  if (has_math) {
+    document.body.appendChild(div);
+    MathJax.Hub.Queue(["Typeset", MathJax.Hub, div]);
+    MathJax.Hub.Queue(function() {
+      popover.setAttribute('data-content', div.innerHTML);
+      document.body.removeChild(div);
+    })
+  }
+}
+</script>
+</body>
+</html>

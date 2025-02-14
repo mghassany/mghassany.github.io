@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<title>PW 5 | Machine Learning</title>
+<meta name="author" content="Mohamad Ghassany">
+<meta name="description" content="In this practical work, we will build some decision trees for both regression and classification problems. Note that there are many packages to do this in . The tree package is the basic package...">
+<meta name="generator" content="bookdown 0.24.10 with bs4_book()">
+<meta property="og:title" content="PW 5 | Machine Learning">
+<meta property="og:type" content="book">
+<meta property="og:description" content="In this practical work, we will build some decision trees for both regression and classification problems. Note that there are many packages to do this in . The tree package is the basic package...">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="PW 5 | Machine Learning">
+<meta name="twitter:description" content="In this practical work, we will build some decision trees for both regression and classification problems. Note that there are many packages to do this in . The tree package is the basic package...">
+<!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
+<script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.3.1/transition.js"></script><script src="libs/bs3compat-0.3.1/tabs.js"></script><script src="libs/bs3compat-0.3.1/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
+<script src="libs/bs4_book-1.0.0/bs4_book.js"></script><script src="libs/kePrint-0.0.1/kePrint.js"></script><link href="libs/lightable-0.0.1/lightable.css" rel="stylesheet">
+<link href="libs/vembedr-0.1.5/css/vembedr.css" rel="stylesheet">
+<script src="libs/htmlwidgets-1.5.4/htmlwidgets.js"></script><script src="libs/plotly-binding-4.10.0/plotly.js"></script><script src="libs/typedarray-0.1/typedarray.min.js"></script><link href="libs/crosstalk-1.2.0/css/crosstalk.min.css" rel="stylesheet">
+<script src="libs/crosstalk-1.2.0/js/crosstalk.min.js"></script><link href="libs/plotly-htmlwidgets-css-2.5.1/plotly-htmlwidgets.css" rel="stylesheet">
+<script src="libs/plotly-main-2.5.1/plotly-latest.min.js"></script><script type="text/x-mathjax-config">
+    const popovers = document.querySelectorAll('a.footnote-ref[data-toggle="popover"]');
+    for (let popover of popovers){
+      const div = document.createElement('div');
+      div.setAttribute('style', 'position: absolute; top: 0, left:0; width:0, height:0, overflow: hidden; visibility: hidden;');
+      div.innerHTML = popover.getAttribute('data-content');
+      
+      // Will this work with TeX on its own line?
+      var has_math = div.querySelector("span.math");
+      if (has_math) {
+        document.body.appendChild(div);
+      	MathJax.Hub.Queue(["Typeset", MathJax.Hub, div]);
+      	MathJax.Hub.Queue(function(){
+          popover.setAttribute('data-content', div.innerHTML);
+      	})
+      }
+    }
+    </script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- CSS --><link rel="stylesheet" href="css/ims-style.css">
+</head>
+<body data-spy="scroll" data-target="#toc">
+
+<div class="container-fluid">
+<div class="row">
+  <header class="col-sm-12 col-lg-3 sidebar sidebar-book"><a class="sr-only sr-only-focusable" href="#content">Skip to main content</a>
+
+    <div class="d-flex align-items-start justify-content-between">
+      <h1>
+        <a href="index.html" title="">Machine Learning</a>
+      </h1>
+      <button class="btn btn-outline-primary d-lg-none ml-2 mt-1" type="button" data-toggle="collapse" data-target="#main-nav" aria-expanded="true" aria-controls="main-nav"><i class="fas fa-bars"></i><span class="sr-only">Show table of contents</span></button>
+    </div>
+
+    <div id="main-nav" class="collapse-lg">
+      <form role="search">
+        <input id="search" class="form-control" type="search" placeholder="Search" aria-label="Search">
+</form>
+
+      <nav aria-label="Table of contents"><h2>Table of contents</h2>
+        <ul class="book-toc list-unstyled">
+<li><a class="" href="index.html">Welcome</a></li>
+<li><a class="" href="introduction.html">Introduction</a></li>
+<li class="book-part">Supervised Learning</li>
+<li class="book-part">Regression</li>
+<li><a class="" href="linear-regression.html"><span class="header-section-number">1</span> Linear Regression</a></li>
+<li><a class="" href="practical-work-1.html">Practical Work 1</a></li>
+<li><a class="" href="multiple-linear-regression.html"><span class="header-section-number">2</span> Multiple Linear Regression</a></li>
+<li><a class="" href="pw-2.html">PW 2</a></li>
+<li class="book-part">Classification</li>
+<li><a class="" href="logistic-regression.html"><span class="header-section-number">3</span> Logistic Regression</a></li>
+<li><a class="" href="pw-3.html">PW 3</a></li>
+<li><a class="" href="discriminant-analysis.html"><span class="header-section-number">4</span> Discriminant Analysis</a></li>
+<li><a class="" href="pw-4.html">PW 4</a></li>
+<li><a class="" href="decision-trees-random-forests.html"><span class="header-section-number">5</span> Decision Trees &amp; Random Forests</a></li>
+<li><a class="active" href="pw-5.html">PW 5</a></li>
+<li class="book-part">Dimensionality Reduction</li>
+<li><a class="" href="principal-components-analysis.html"><span class="header-section-number">6</span> Principal Components Analysis</a></li>
+<li><a class="" href="pw-6.html">PW 6</a></li>
+<li class="book-part">Unsupervised Learning</li>
+<li><a class="" href="kmeans-hierarchical-clustering.html"><span class="header-section-number">7</span> Kmeans &amp; Hierarchical Clustering</a></li>
+<li><a class="" href="pw-7.html">PW 7</a></li>
+<li><a class="" href="gaussian-mixture-models-em.html"><span class="header-section-number">8</span> Gaussian Mixture Models &amp; EM</a></li>
+<li><a class="" href="pw-8.html">PW 8</a></li>
+<li class="book-part">Hackathon</li>
+<li><a class="" href="hackathon.html">Hackathon</a></li>
+<li class="book-part">Appendix</li>
+<li><a class="" href="final-grades.html"><span class="header-section-number">A</span> Final Grades</a></li>
+<li><a class="" href="app-introRStudio.html"><span class="header-section-number">B</span> Introduction to RStudio</a></li>
+<li><a class="" href="app-ht.html"><span class="header-section-number">C</span> Review on hypothesis testing</a></li>
+<li><a class="" href="use-qual.html"><span class="header-section-number">D</span> Use of qualitative predictors</a></li>
+<li><a class="" href="model-selection.html"><span class="header-section-number">E</span> Model Selection</a></li>
+<li><a class="" href="references-and-credits.html"><span class="header-section-number">F</span> References and Credits</a></li>
+<li><a class="" href="other-references.html"><span class="header-section-number">G</span> Other References</a></li>
+<li><a class="" href="main-references-credits.html">Main References &amp; Credits</a></li>
+</ul>
+
+        <div class="book-extra">
+          
+        </div>
+      </nav>
+</div>
+  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="pw-5" class="section level1 unnumbered">
+<h1>PW 5<a class="anchor" aria-label="anchor" href="#pw-5"><i class="fas fa-link"></i></a>
+</h1>
+<p>In this practical work, we will build some decision trees for both <em>regression</em> and <em>classification</em> problems. Note that there are many packages to do this in <svg aria-hidden="true" role="img" viewbox="0 0 581 512" style="height:1em;width:1.13em;vertical-align:-0.125em;margin-left:auto;margin-right:auto;font-size:inherit;fill:steelblue;overflow:visible;position:relative;"><path d="M581 226.6C581 119.1 450.9 32 290.5 32S0 119.1 0 226.6C0 322.4 103.3 402 239.4 418.1V480h99.1v-61.5c24.3-2.7 47.6-7.4 69.4-13.9L448 480h112l-67.4-113.7c54.5-35.4 88.4-84.9 88.4-139.7zm-466.8 14.5c0-73.5 98.9-133 220.8-133s211.9 40.7 211.9 133c0 50.1-26.5 85-70.3 106.4-2.4-1.6-4.7-2.9-6.4-3.7-10.2-5.2-27.8-10.5-27.8-10.5s86.6-6.4 86.6-92.7-90.6-87.9-90.6-87.9h-199V361c-74.1-21.5-125.2-67.1-125.2-119.9zm225.1 38.3v-55.6c57.8 0 87.8-6.8 87.8 27.3 0 36.5-38.2 28.3-87.8 28.3zm-.9 72.5H365c10.8 0 18.9 11.7 24 19.2-16.1 1.9-33 2.8-50.6 2.9v-22.1z"></path></svg> . The <code>tree</code> package is the basic package to do so, while the <code>rpart</code><a href="main-references-credits.html#fn17" class="footnote-ref" id="fnref17"><sup>17</sup></a> package seems more widely suggested and provides better plotting features. So we will use the <code>rpart</code> package.</p>
+<div class="caution">
+<p>It is recommended for correct and better using of <svg aria-hidden="true" role="img" viewbox="0 0 581 512" style="height:1em;width:1.13em;vertical-align:-0.125em;margin-left:auto;margin-right:auto;font-size:inherit;fill:steelblue;overflow:visible;position:relative;"><path d="M581 226.6C581 119.1 450.9 32 290.5 32S0 119.1 0 226.6C0 322.4 103.3 402 239.4 418.1V480h99.1v-61.5c24.3-2.7 47.6-7.4 69.4-13.9L448 480h112l-67.4-113.7c54.5-35.4 88.4-84.9 88.4-139.7zm-466.8 14.5c0-73.5 98.9-133 220.8-133s211.9 40.7 211.9 133c0 50.1-26.5 85-70.3 106.4-2.4-1.6-4.7-2.9-6.4-3.7-10.2-5.2-27.8-10.5-27.8-10.5s86.6-6.4 86.6-92.7-90.6-87.9-90.6-87.9h-199V361c-74.1-21.5-125.2-67.1-125.2-119.9zm225.1 38.3v-55.6c57.8 0 87.8-6.8 87.8 27.3 0 36.5-38.2 28.3-87.8 28.3zm-.9 72.5H365c10.8 0 18.9 11.7 24 19.2-16.1 1.9-33 2.8-50.6 2.9v-22.1z"></path></svg> functions that you consult their documentations. Every <svg aria-hidden="true" role="img" viewbox="0 0 581 512" style="height:1em;width:1.13em;vertical-align:-0.125em;margin-left:auto;margin-right:auto;font-size:inherit;fill:steelblue;overflow:visible;position:relative;"><path d="M581 226.6C581 119.1 450.9 32 290.5 32S0 119.1 0 226.6C0 322.4 103.3 402 239.4 418.1V480h99.1v-61.5c24.3-2.7 47.6-7.4 69.4-13.9L448 480h112l-67.4-113.7c54.5-35.4 88.4-84.9 88.4-139.7zm-466.8 14.5c0-73.5 98.9-133 220.8-133s211.9 40.7 211.9 133c0 50.1-26.5 85-70.3 106.4-2.4-1.6-4.7-2.9-6.4-3.7-10.2-5.2-27.8-10.5-27.8-10.5s86.6-6.4 86.6-92.7-90.6-87.9-90.6-87.9h-199V361c-74.1-21.5-125.2-67.1-125.2-119.9zm225.1 38.3v-55.6c57.8 0 87.8-6.8 87.8 27.3 0 36.5-38.2 28.3-87.8 28.3zm-.9 72.5H365c10.8 0 18.9 11.7 24 19.2-16.1 1.9-33 2.8-50.6 2.9v-22.1z"></path></svg> function is well documented indeed. You can do so by writing <code>?function_name</code> or <code>help(function_name)</code>in the console.</p>
+<p>Especially for functions with multiple use, for example, <code><a href="https://rdrr.io/r/stats/glm.html">glm()</a></code> is a function that fits generalizes linear models, one of them is logistic regression when <code>type = "binomial"</code>.</p>
+<p>Another example, is the function <code><a href="https://rdrr.io/r/stats/predict.html">predict()</a></code>, that is a generic function for predictions from the results of various model fitting functions. Its first argument is a <svg aria-hidden="true" role="img" viewbox="0 0 581 512" style="height:1em;width:1.13em;vertical-align:-0.125em;margin-left:auto;margin-right:auto;font-size:inherit;fill:steelblue;overflow:visible;position:relative;"><path d="M581 226.6C581 119.1 450.9 32 290.5 32S0 119.1 0 226.6C0 322.4 103.3 402 239.4 418.1V480h99.1v-61.5c24.3-2.7 47.6-7.4 69.4-13.9L448 480h112l-67.4-113.7c54.5-35.4 88.4-84.9 88.4-139.7zm-466.8 14.5c0-73.5 98.9-133 220.8-133s211.9 40.7 211.9 133c0 50.1-26.5 85-70.3 106.4-2.4-1.6-4.7-2.9-6.4-3.7-10.2-5.2-27.8-10.5-27.8-10.5s86.6-6.4 86.6-92.7-90.6-87.9-90.6-87.9h-199V361c-74.1-21.5-125.2-67.1-125.2-119.9zm225.1 38.3v-55.6c57.8 0 87.8-6.8 87.8 27.3 0 36.5-38.2 28.3-87.8 28.3zm-.9 72.5H365c10.8 0 18.9 11.7 24 19.2-16.1 1.9-33 2.8-50.6 2.9v-22.1z"></path></svg> object, a model, and the rest of the arguments depends on the nature of the object. If you want to consult the documentation about using <code><a href="https://rdrr.io/r/stats/predict.html">predict()</a></code> for a tree built with <code>rpart()</code>, do <code>?predict.rpart</code> or <code>help(predict.rpart)</code></p>
+</div>
+<div class="rmdtip">
+<p>If you want to run a function from a certain package without loading the package, you can write <code>package::function()</code>. For example <code><a href="https://rdrr.io/pkg/MASS/man/lda.html">MASS::lda()</a></code> or <code><a href="https://rdrr.io/pkg/rpart/man/rpart.html">rpart::rpart()</a></code>. It is also helpful to remember the name of the package in which the function is defined.</p>
+</div>
+<div id="regression-trees" class="section level2 unnumbered">
+<h2>Regression Trees<a class="anchor" aria-label="anchor" href="#regression-trees"><i class="fas fa-link"></i></a>
+</h2>
+<div id="single-tree" class="section level3 unnumbered">
+<h3>Single tree<a class="anchor" aria-label="anchor" href="#single-tree"><i class="fas fa-link"></i></a>
+</h3>
+<p>To demonstrate regression trees, we will use the <code>Boston</code> dataset that we used during the first two practical works, from the <code>MASS</code> package. Recall that <code>medv</code> is the response.</p>
+<p><strong>1</strong>. Load the Boston dataset from <code>MASS</code> package. Split the dataset randomly in half.</p>
+<div class="sourceCode" id="cb45"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="http://www.stats.ox.ac.uk/pub/MASS4/">MASS</a></span><span class="op">)</span>
+<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va">caTools</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/r/base/Random.html">set.seed</a></span><span class="op">(</span><span class="fl">18</span><span class="op">)</span>
+<span class="va">Boston_idx</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/sample.html">sample</a></span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fu"><a href="https://rdrr.io/r/base/nrow.html">nrow</a></span><span class="op">(</span><span class="va">Boston</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/r/base/nrow.html">nrow</a></span><span class="op">(</span><span class="va">Boston</span><span class="op">)</span> <span class="op">/</span> <span class="fl">2</span><span class="op">)</span> 
+<span class="co"># You don't know what we just did?</span>
+<span class="co"># open the documentation of the function sample by </span>
+<span class="co"># writing ?sample in the R console.</span>
+<span class="co"># Note that this is one of the ways to split it randomly and it is not necessary the best.</span>
+<span class="va">Boston_train</span> <span class="op">=</span> <span class="va">Boston</span><span class="op">[</span><span class="va">Boston_idx</span>,<span class="op">]</span>
+<span class="va">Boston_test</span>  <span class="op">=</span> <span class="va">Boston</span><span class="op">[</span><span class="op">-</span><span class="va">Boston_idx</span>,<span class="op">]</span></code></pre></div>
+<p><strong>2</strong>. Fit a regression tree to the training data using the <code>rpart()</code> function from the <code>rpart</code> package. Name the tree <code>Boston_tree</code>.</p>
+<p><strong>3</strong>. Plot the obtained tree using the following code.</p>
+<div class="sourceCode" id="cb46"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">Boston_tree</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/r/graphics/text.html">text</a></span><span class="op">(</span><span class="va">Boston_tree</span>, pretty <span class="op">=</span> <span class="fl">0</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/r/graphics/title.html">title</a></span><span class="op">(</span>main <span class="op">=</span> <span class="st">"Regression Tree"</span><span class="op">)</span></code></pre></div>
+<div class="inline-figure"><img src="Machine-Learning_files/figure-html/unnamed-chunk-137-1.png" width="70%" style="display: block; margin: auto;"></div>
+<p><strong>4</strong>. A better plot can be obtained using the <code>rpart.plot</code><a href="main-references-credits.html#fn18" class="footnote-ref" id="fnref18"><sup>18</sup></a> package. Re-plot the tree using it. You can use the <code>rpart.plot()</code> function which by default, when the output is continuous, each node shows: the predicted value, and the percentage of observations in the node. You can also use the <code>prp()</code> function.</p>
+<p><img src="Machine-Learning_files/figure-html/unnamed-chunk-138-1.png" width="50%" style="display: block; margin: auto;"><img src="Machine-Learning_files/figure-html/unnamed-chunk-138-2.png" width="50%" style="display: block; margin: auto;"></p>
+<p><strong>5</strong>. Print the obtained tree and print its summary. Between the things that you can see in the summary, the CP (complexity parameter) table and the importance of each variable in the model. Print the CP table using the <code>printcp()</code> function to see the cross validation results. Plot a comparison figure using the <code>plotcp()</code> function.</p>
+<p>You will notice the obtained tree is <strong>pruned</strong>. This is because <code>rpart</code> prunes the tree by default by performing 10-fold cross-validation.</p>
+<div class="rmdtip">
+<p><code>rpart</code> keeps track of something called the complexity of a tree. The complexity measure is a combination of the size of a tree and the ability of the tree to separate the classes of the target variable. If the next best split in growing a tree does not reduce the tree’s overall complexity by a certain amount, <code>rpart</code> will terminate the growing process. This amount is specified by the complexity parameter, <code>cp</code>, in the call to <code>rpart()</code>. Setting <code>cp</code> to a negative amount (like -1) ensures that the tree will be fully grown. You can try it and then plot the tree.</p>
+<p>Notice that the default <code>cp</code> value may over prune the tree (the default is the one with the lowest <code>xerror</code>). As a rule of thumb, it’s best to prune a decision tree using the <code>cp</code> of smallest tree that is within one standard deviation of the tree with the smallest <code>xerror</code>. In the example above (see the CP table and the figure obtained with <code>plotcp()</code>), the best <code>xerror</code> is 0.30517 with standard deviation 0.056180. So, we want the smallest tree with <code>xerror</code> less than 0.30517 + 0.05618 = 0.361. This is the tree with <code>cp = 0.025293</code>, so we’ll want to prune our tree with a <code>cp</code> slightly greater than <code>0.025293</code>.</p>
+</div>
+<p>Next we will compare this regression tree to a linear model and will use RMSE as our metric. RMSE is the <strong>R</strong>oot <strong>M</strong>ean <strong>S</strong>quare <strong>E</strong>rror, which is the square root of the MSE.</p>
+<p><strong>6</strong>. Write a <svg aria-hidden="true" role="img" viewbox="0 0 581 512" style="height:1em;width:1.13em;vertical-align:-0.125em;margin-left:auto;margin-right:auto;font-size:inherit;fill:steelblue;overflow:visible;position:relative;"><path d="M581 226.6C581 119.1 450.9 32 290.5 32S0 119.1 0 226.6C0 322.4 103.3 402 239.4 418.1V480h99.1v-61.5c24.3-2.7 47.6-7.4 69.4-13.9L448 480h112l-67.4-113.7c54.5-35.4 88.4-84.9 88.4-139.7zm-466.8 14.5c0-73.5 98.9-133 220.8-133s211.9 40.7 211.9 133c0 50.1-26.5 85-70.3 106.4-2.4-1.6-4.7-2.9-6.4-3.7-10.2-5.2-27.8-10.5-27.8-10.5s86.6-6.4 86.6-92.7-90.6-87.9-90.6-87.9h-199V361c-74.1-21.5-125.2-67.1-125.2-119.9zm225.1 38.3v-55.6c57.8 0 87.8-6.8 87.8 27.3 0 36.5-38.2 28.3-87.8 28.3zm-.9 72.5H365c10.8 0 18.9 11.7 24 19.2-16.1 1.9-33 2.8-50.6 2.9v-22.1z"></path></svg> function that returns the RMSE of two vectors.</p>
+<p><strong>7</strong>. Use the function <code><a href="https://rdrr.io/r/stats/predict.html">predict()</a></code> to predict the response on the test set. Then calculate the RMSE obtained with tree model.</p>
+<p><strong>8</strong>. Fit a linear regression model on the training set. Then predict the response on the test set using the linear model. Calculate the RMSE and compare the performance of the tree and the linear regression model.</p>
+<div class="rmdtip">
+<p>Here the most obvious linear regression beats the tree! We’ll improve on this tree by considering ensembles of trees.</p>
+</div>
+<p>You can visually compare the performance of both models by plotting the Actual (reality) response values against the predicted values. The model with closer points are to the diagonal (<code>y=x</code>) line is the better one. You can try to reproduce the figure below.</p>
+<p><img src="Machine-Learning_files/figure-html/unnamed-chunk-144-1.png" width="50%" style="display: block; margin: auto;"><img src="Machine-Learning_files/figure-html/unnamed-chunk-144-2.png" width="50%" style="display: block; margin: auto;"></p>
+<p>By aggregating many decision trees, using methods like <em>bagging</em>,
+<em>random forests</em>, and <em>boosting</em>, the predictive performance of trees can be
+substantially improved. We will now use these concepts, called <em>ensemble methods</em>.</p>
+</div>
+<div id="bagging" class="section level3 unnumbered">
+<h3>Bagging<a class="anchor" aria-label="anchor" href="#bagging"><i class="fas fa-link"></i></a>
+</h3>
+<p>Bagging, or <em>Bootstrap aggregation</em>, is a general-purpose procedure for reducing the variance of a statistical learning method, it is particularly useful and frequently used in the context of decision trees. The idea is to take many training sets from the population, build a separate prediction model using each training set, and average the resulting predictions. Generally we do not have access to multiple training sets. Instead, we can bootstrap, by taking repeated samples from the (single) training data set.</p>
+<p>To apply bagging to regression
+trees, we simply construct <span class="math inline">\(B\)</span> regression trees using B bootstrapped training
+sets, and average the resulting predictions. These trees are grown deep,
+and are not pruned. Hence each individual tree has high variance, but
+low bias. Averaging these <span class="math inline">\(B\)</span> trees reduces the variance.</p>
+<p><strong>9</strong>. Fit a bagged model, using the <code>randomForest()</code> function from the <code>randomForest</code> package.</p>
+<div class="rmdtip">
+<p>Bagging is actually a special case of a random forest where <code>mtry</code> is equal to <span class="math inline">\(p\)</span>, the number of predictors.</p>
+</div>
+<p><strong>10</strong>. Predict the response on the test set using the bagging model. Calculate the RMSE. Is the performance of the model better than linear regression or a simple tree?</p>
+<p>Note that the “Mean of squared residuals” which is output by <code>randomForest()</code> is the <strong>Out of Bag</strong> estimate of the error. Here is its plot:</p>
+<div class="inline-figure"><img src="Machine-Learning_files/figure-html/unnamed-chunk-148-1.png" width="70%" style="display: block; margin: auto;"></div>
+</div>
+<div id="random-forests" class="section level3 unnumbered">
+<h3>Random Forests<a class="anchor" aria-label="anchor" href="#random-forests"><i class="fas fa-link"></i></a>
+</h3>
+<p>Now try a random forest. For regression, on suggestion is to use <code>mtry</code> equal to <span class="math inline">\(p/3\)</span>.<a href="main-references-credits.html#fn19" class="footnote-ref" id="fnref19"><sup>19</sup></a></p>
+<p><strong>11</strong>. Fit a random forest on the training set and compare its performance with the previous models by calculating the predictions and the RMSE.</p>
+<p><strong>12</strong>. Use the function <code>importance()</code> from the <code>randomForest</code> package to see the most important predictors in the obtained random forest model. What are the three most important predictors? Did you find the same results when you selected the best predictors for the linear regression model during session 2?</p>
+<p><strong>13</strong>. Plot the importance of the predictors to the model using the <code>varImpPlot()</code> function.</p>
+</div>
+<div id="boosting-1" class="section level3 unnumbered">
+<h3>Boosting<a class="anchor" aria-label="anchor" href="#boosting-1"><i class="fas fa-link"></i></a>
+</h3>
+<p>Last and not least, let us try a <em>boosted</em> model, which by default will produce a nice <strong>variable importance</strong> plot as well as plots of the marginal effects of the predictors. To do so, we will use the <code>gbm</code> package<a href="main-references-credits.html#fn20" class="footnote-ref" id="fnref20"><sup>20</sup></a>.</p>
+<p><strong>14</strong>. Using the <code><a href="https://rdrr.io/pkg/gbm/man/gbm.html">gbm()</a></code> function like following, fit a boosted model on the training set. Then compare its performance with the previous models by calculating the predictions and the RMSE.</p>
+<div class="sourceCode" id="cb47"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/gbm-developers/gbm">gbm</a></span><span class="op">)</span>
+<span class="va">Boston_boost</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/gbm/man/gbm.html">gbm</a></span><span class="op">(</span><span class="va">medv</span> <span class="op">~</span> <span class="va">.</span>, data <span class="op">=</span> <span class="va">Boston_train</span>, distribution <span class="op">=</span> <span class="st">"gaussian"</span>, 
+                    n.trees <span class="op">=</span> <span class="fl">5000</span>, interaction.depth <span class="op">=</span> <span class="fl">4</span>, shrinkage <span class="op">=</span> <span class="fl">0.01</span><span class="op">)</span></code></pre></div>
+<pre><code>#ans&gt; Using 5000 trees...</code></pre>
+<p><strong>15</strong>. Show the summary of the boosted model. A figure of the variable importance will be shown.</p>
+</div>
+<div id="comparison-1" class="section level3 unnumbered">
+<h3>Comparison<a class="anchor" aria-label="anchor" href="#comparison-1"><i class="fas fa-link"></i></a>
+</h3>
+<p><strong>16</strong>. Reproduce the following comparison: A table in which we show the obtained RMSE with each tested model, you can create a <span class="math inline">\(5 \times 2\)</span> data.frame in which you put the names of the models and the corresponding RMSE. To visualize the data frame in the compiled html report you can use the <code>kable()</code> function from the <code>knitr</code> package. Or, compare the models by plotting the Actual (reality) response values against the predicted values.</p>
+<div class="inline-figure"><img src="Machine-Learning_files/figure-html/unnamed-chunk-158-1.png" width="90%" style="display: block; margin: auto;"></div>
+</div>
+</div>
+<div id="classification-trees-1" class="section level2 unnumbered">
+<h2>Classification Trees<a class="anchor" aria-label="anchor" href="#classification-trees-1"><i class="fas fa-link"></i></a>
+</h2>
+<p>A classification tree is very similar to a regression tree, except that the classification tree is used to predict a qualitative response rather than a quantitative one. Recall that for a regression tree, the predicted response for an observation is given by the mean response of the training observations that belong to the
+same terminal node. In contrast, for a classification tree, we predict that
+each observation belongs to the <strong><em>most commonly occurring class</em></strong> of training
+observations in the region to which it belongs.</p>
+<p>To construct classification trees, we will use the <strong>spam</strong><a href="main-references-credits.html#fn21" class="footnote-ref" id="fnref21"><sup>21</sup></a> dataset, available <a href="datasets/spam.csv" target="_blank">here <svg aria-hidden="true" role="img" viewbox="0 0 512 512" style="height:1em;width:1em;vertical-align:-0.125em;margin-left:auto;margin-right:auto;font-size:inherit;fill:#cd0050;overflow:visible;position:relative;"><path d="M464 32H48C21.49 32 0 53.49 0 80v352c0 26.51 21.49 48 48 48h416c26.51 0 48-21.49 48-48V80c0-26.51-21.49-48-48-48zM224 416H64v-96h160v96zm0-160H64v-96h160v96zm224 160H288v-96h160v96zm0-160H288v-96h160v96z"></path></svg></a>. A description of the dataset is given below.</p>
+<div class="rmdexercise">
+<p>For the rest of this PW, you must:</p>
+<ul>
+<li>Import the <code>spam</code> dataset and explore it. Be aware that it is preferable that the response column is of type factor.</li>
+<li>Split the dataset into training and test sets (choose your own seed when using <code><a href="https://rdrr.io/r/base/Random.html">set.seed()</a></code>).</li>
+<li>Fit (using <code>rpart</code> and <code>gbm</code> packages):
+<ul>
+<li>A <strong>logistic</strong> regression model.</li>
+<li>A simple classification tree.</li>
+<li>Bagging, Random Forests<a href="main-references-credits.html#fn22" class="footnote-ref" id="fnref22"><sup>22</sup></a>, and Boosting models.</li>
+</ul>
+</li>
+<li>For each model, predict the response on the test set and evaluate the performance of the model, using the <em>prediction accuracy</em> (create a function that returns the accuracy for two binary vectors).</li>
+</ul>
+</div>
+<div id="the-spam-dataset" class="section level3 unnumbered">
+<h3>The Spam dataset<a class="anchor" aria-label="anchor" href="#the-spam-dataset"><i class="fas fa-link"></i></a>
+</h3>
+<p>This dataset consists of information from 4601 email messages, in a study to try to predict whether the email was junk email, or
+“spam”. For all 4601 email messages, the true outcome, spam or not, is available,
+along with 57 predictors as described below:</p>
+<ul>
+<li>48 quantitative predictors: the <em>percentage</em> of words in the email that match a given word. Examples include <em>business</em>, <em>address</em>, <em>internet</em>; etc.</li>
+<li>6 quantitative predictors: the percentage of characters in the email that match a given character. The characters are <code>;</code> , <code>(</code> , <code>[</code> , <code>!</code> , <code>$</code> and <code>#</code>.</li>
+<li>The average length of uninterrupted sequences of capital letters: <code>crl.ave</code>.</li>
+<li>The length of the longest uninterrupted sequence of capital letters: <code>crl.long</code>.</li>
+<li>The sum of the length of uninterrupted sequences of capital letters: <code>crl.tot</code>.</li>
+</ul>
+<div class="rmdtip">
+<p>Note that the spam dataset given here is already treated and ready to be explored. To achieve this stage, some steps are required to treat the raw data, like Tokenization, Stemming, and Lemmatization. In this dataset the most important words are already selected and other variables are added.
+Curious students can read more about these steps. Two famous <svg aria-hidden="true" role="img" viewbox="0 0 581 512" style="height:1em;width:1.13em;vertical-align:-0.125em;margin-left:auto;margin-right:auto;font-size:inherit;fill:steelblue;overflow:visible;position:relative;"><path d="M581 226.6C581 119.1 450.9 32 290.5 32S0 119.1 0 226.6C0 322.4 103.3 402 239.4 418.1V480h99.1v-61.5c24.3-2.7 47.6-7.4 69.4-13.9L448 480h112l-67.4-113.7c54.5-35.4 88.4-84.9 88.4-139.7zm-466.8 14.5c0-73.5 98.9-133 220.8-133s211.9 40.7 211.9 133c0 50.1-26.5 85-70.3 106.4-2.4-1.6-4.7-2.9-6.4-3.7-10.2-5.2-27.8-10.5-27.8-10.5s86.6-6.4 86.6-92.7-90.6-87.9-90.6-87.9h-199V361c-74.1-21.5-125.2-67.1-125.2-119.9zm225.1 38.3v-55.6c57.8 0 87.8-6.8 87.8 27.3 0 36.5-38.2 28.3-87.8 28.3zm-.9 72.5H365c10.8 0 18.9 11.7 24 19.2-16.1 1.9-33 2.8-50.6 2.9v-22.1z"></path></svg> packages for text mining are <a href="https://cran.r-project.org/web/packages/tm/vignettes/tm.pdf" target="_blank">tm</a> and <a href="https://www.tidytextmining.com/index.html" target="_blank">tidytext</a>.</p>
+</div>
+</div>
+<div id="extra-tuning" class="section level3 unnumbered">
+<h3>Extra: Tuning<a class="anchor" aria-label="anchor" href="#extra-tuning"><i class="fas fa-link"></i></a>
+</h3>
+<p>So far in this PW, we fit bagging, boosting and random forest models, but did not <strong>tune</strong> any of them, we simply used certain, somewhat arbitrary, parameters. Actually, to make these models better the parameters should be tuned. The parameters include:</p>
+<ul>
+<li>Bagging: Actually just a subset of Random Forest with <code>mtry</code> = <span class="math inline">\(p\)</span>.</li>
+<li>Random Forest: <code>mtry</code>
+</li>
+<li>Boosting: <code>n.trees</code>, <code>interaction.depth</code>, <code>shrinkage</code>, <code>n.minobsinnode</code>
+</li>
+</ul>
+<p>The <code>caret</code> package provides excellent functions to accomplish this. Note that with these tree-based ensemble methods there are two resampling solutions for tuning the model:</p>
+<ul>
+<li>Out of Bag</li>
+<li>Cross-Validation</li>
+</ul>
+<p>Using Out of Bag samples is advantageous with these methods as compared to Cross-Validation since it removes the need to refit the model and is thus much more computationally efficient. Unfortunately OOB methods cannot be used with <code>gbm</code> models. See the <code>caret</code> documentation: <a href="https://cran.r-project.org/web/packages/caret/vignettes/caret.html" target="_blank">Short intro</a>, <a href="https://topepo.github.io/caret/index.html" target="_blank">Long intro</a> for details.</p>
+<p class="text-right">
+◼
+</p>
+
+</div>
+</div>
+</div>
+
+
+
+
+  <div class="chapter-nav">
+<div class="prev"><a href="decision-trees-random-forests.html"><span class="header-section-number">5</span> Decision Trees &amp; Random Forests</a></div>
+<div class="next"><a href="principal-components-analysis.html"><span class="header-section-number">6</span> Principal Components Analysis</a></div>
+</div></main><div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
+    <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
+      <ul class="nav navbar-nav">
+<li><a class="nav-link" href="#pw-5">PW 5</a></li>
+<li>
+<a class="nav-link" href="#regression-trees">Regression Trees</a><ul class="nav navbar-nav">
+<li><a class="nav-link" href="#single-tree">Single tree</a></li>
+<li><a class="nav-link" href="#bagging">Bagging</a></li>
+<li><a class="nav-link" href="#random-forests">Random Forests</a></li>
+<li><a class="nav-link" href="#boosting-1">Boosting</a></li>
+<li><a class="nav-link" href="#comparison-1">Comparison</a></li>
+</ul>
+</li>
+<li>
+<a class="nav-link" href="#classification-trees-1">Classification Trees</a><ul class="nav navbar-nav">
+<li><a class="nav-link" href="#the-spam-dataset">The Spam dataset</a></li>
+<li><a class="nav-link" href="#extra-tuning">Extra: Tuning</a></li>
+</ul>
+</li>
+</ul>
+
+      <div class="book-extra">
+        <ul class="list-unstyled">
+          
+        </ul>
+</div>
+    </nav>
+</div>
+
+</div>
+</div> <!-- .container -->
+
+<footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
+
+  <div class="col-12 col-md-6 mt-3">
+    <p>"<strong>Machine Learning</strong>" was written by Mohamad Ghassany. It was last built on 2022-04-26.</p>
+  </div>
+
+  <div class="col-12 col-md-6 mt-3">
+    <p>This book was built by the <a class="text-light" href="https://bookdown.org">bookdown</a> R package.</p>
+  </div>
+
+</div></div>
+</footer><!-- dynamically load mathjax for compatibility with self-contained --><script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script><script type="text/x-mathjax-config">const popovers = document.querySelectorAll('a.footnote-ref[data-toggle="popover"]');
+for (let popover of popovers) {
+  const div = document.createElement('div');
+  div.setAttribute('style', 'position: absolute; top: 0, left:0; width:0, height:0, overflow: hidden; visibility: hidden;');
+  div.innerHTML = popover.getAttribute('data-content');
+
+  var has_math = div.querySelector("span.math");
+  if (has_math) {
+    document.body.appendChild(div);
+    MathJax.Hub.Queue(["Typeset", MathJax.Hub, div]);
+    MathJax.Hub.Queue(function() {
+      popover.setAttribute('data-content', div.innerHTML);
+      document.body.removeChild(div);
+    })
+  }
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,391 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<title>PW 3 | Machine Learning</title>
+<meta name="author" content="Mohamad Ghassany">
+<meta name="description" content="Social Networks Ads In this PW we are going to analyse the Social_Network_Ads dataset . This dataset contains informations of users of a social network. The social network has several business...">
+<meta name="generator" content="bookdown 0.24.10 with bs4_book()">
+<meta property="og:title" content="PW 3 | Machine Learning">
+<meta property="og:type" content="book">
+<meta property="og:description" content="Social Networks Ads In this PW we are going to analyse the Social_Network_Ads dataset . This dataset contains informations of users of a social network. The social network has several business...">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="PW 3 | Machine Learning">
+<meta name="twitter:description" content="Social Networks Ads In this PW we are going to analyse the Social_Network_Ads dataset . This dataset contains informations of users of a social network. The social network has several business...">
+<!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
+<script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.3.1/transition.js"></script><script src="libs/bs3compat-0.3.1/tabs.js"></script><script src="libs/bs3compat-0.3.1/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
+<script src="libs/bs4_book-1.0.0/bs4_book.js"></script><script src="libs/kePrint-0.0.1/kePrint.js"></script><link href="libs/lightable-0.0.1/lightable.css" rel="stylesheet">
+<link href="libs/vembedr-0.1.5/css/vembedr.css" rel="stylesheet">
+<script src="libs/htmlwidgets-1.5.4/htmlwidgets.js"></script><script src="libs/plotly-binding-4.10.0/plotly.js"></script><script src="libs/typedarray-0.1/typedarray.min.js"></script><link href="libs/crosstalk-1.2.0/css/crosstalk.min.css" rel="stylesheet">
+<script src="libs/crosstalk-1.2.0/js/crosstalk.min.js"></script><link href="libs/plotly-htmlwidgets-css-2.5.1/plotly-htmlwidgets.css" rel="stylesheet">
+<script src="libs/plotly-main-2.5.1/plotly-latest.min.js"></script><script type="text/x-mathjax-config">
+    const popovers = document.querySelectorAll('a.footnote-ref[data-toggle="popover"]');
+    for (let popover of popovers){
+      const div = document.createElement('div');
+      div.setAttribute('style', 'position: absolute; top: 0, left:0; width:0, height:0, overflow: hidden; visibility: hidden;');
+      div.innerHTML = popover.getAttribute('data-content');
+      
+      // Will this work with TeX on its own line?
+      var has_math = div.querySelector("span.math");
+      if (has_math) {
+        document.body.appendChild(div);
+      	MathJax.Hub.Queue(["Typeset", MathJax.Hub, div]);
+      	MathJax.Hub.Queue(function(){
+          popover.setAttribute('data-content', div.innerHTML);
+      	})
+      }
+    }
+    </script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- CSS --><link rel="stylesheet" href="css/ims-style.css">
+</head>
+<body data-spy="scroll" data-target="#toc">
+
+<div class="container-fluid">
+<div class="row">
+  <header class="col-sm-12 col-lg-3 sidebar sidebar-book"><a class="sr-only sr-only-focusable" href="#content">Skip to main content</a>
+
+    <div class="d-flex align-items-start justify-content-between">
+      <h1>
+        <a href="index.html" title="">Machine Learning</a>
+      </h1>
+      <button class="btn btn-outline-primary d-lg-none ml-2 mt-1" type="button" data-toggle="collapse" data-target="#main-nav" aria-expanded="true" aria-controls="main-nav"><i class="fas fa-bars"></i><span class="sr-only">Show table of contents</span></button>
+    </div>
+
+    <div id="main-nav" class="collapse-lg">
+      <form role="search">
+        <input id="search" class="form-control" type="search" placeholder="Search" aria-label="Search">
+</form>
+
+      <nav aria-label="Table of contents"><h2>Table of contents</h2>
+        <ul class="book-toc list-unstyled">
+<li><a class="" href="index.html">Welcome</a></li>
+<li><a class="" href="introduction.html">Introduction</a></li>
+<li class="book-part">Supervised Learning</li>
+<li class="book-part">Regression</li>
+<li><a class="" href="linear-regression.html"><span class="header-section-number">1</span> Linear Regression</a></li>
+<li><a class="" href="practical-work-1.html">Practical Work 1</a></li>
+<li><a class="" href="multiple-linear-regression.html"><span class="header-section-number">2</span> Multiple Linear Regression</a></li>
+<li><a class="" href="pw-2.html">PW 2</a></li>
+<li class="book-part">Classification</li>
+<li><a class="" href="logistic-regression.html"><span class="header-section-number">3</span> Logistic Regression</a></li>
+<li><a class="active" href="pw-3.html">PW 3</a></li>
+<li><a class="" href="discriminant-analysis.html"><span class="header-section-number">4</span> Discriminant Analysis</a></li>
+<li><a class="" href="pw-4.html">PW 4</a></li>
+<li><a class="" href="decision-trees-random-forests.html"><span class="header-section-number">5</span> Decision Trees &amp; Random Forests</a></li>
+<li><a class="" href="pw-5.html">PW 5</a></li>
+<li class="book-part">Dimensionality Reduction</li>
+<li><a class="" href="principal-components-analysis.html"><span class="header-section-number">6</span> Principal Components Analysis</a></li>
+<li><a class="" href="pw-6.html">PW 6</a></li>
+<li class="book-part">Unsupervised Learning</li>
+<li><a class="" href="kmeans-hierarchical-clustering.html"><span class="header-section-number">7</span> Kmeans &amp; Hierarchical Clustering</a></li>
+<li><a class="" href="pw-7.html">PW 7</a></li>
+<li><a class="" href="gaussian-mixture-models-em.html"><span class="header-section-number">8</span> Gaussian Mixture Models &amp; EM</a></li>
+<li><a class="" href="pw-8.html">PW 8</a></li>
+<li class="book-part">Hackathon</li>
+<li><a class="" href="hackathon.html">Hackathon</a></li>
+<li class="book-part">Appendix</li>
+<li><a class="" href="final-grades.html"><span class="header-section-number">A</span> Final Grades</a></li>
+<li><a class="" href="app-introRStudio.html"><span class="header-section-number">B</span> Introduction to RStudio</a></li>
+<li><a class="" href="app-ht.html"><span class="header-section-number">C</span> Review on hypothesis testing</a></li>
+<li><a class="" href="use-qual.html"><span class="header-section-number">D</span> Use of qualitative predictors</a></li>
+<li><a class="" href="model-selection.html"><span class="header-section-number">E</span> Model Selection</a></li>
+<li><a class="" href="references-and-credits.html"><span class="header-section-number">F</span> References and Credits</a></li>
+<li><a class="" href="other-references.html"><span class="header-section-number">G</span> Other References</a></li>
+<li><a class="" href="main-references-credits.html">Main References &amp; Credits</a></li>
+</ul>
+
+        <div class="book-extra">
+          
+        </div>
+      </nav>
+</div>
+  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="pw-3" class="section level1 unnumbered">
+<h1>PW 3<a class="anchor" aria-label="anchor" href="#pw-3"><i class="fas fa-link"></i></a>
+</h1>
+<div id="social-networks-ads" class="section level2 unnumbered">
+<h2>Social Networks Ads<a class="anchor" aria-label="anchor" href="#social-networks-ads"><i class="fas fa-link"></i></a>
+</h2>
+<p>In this PW we are going to analyse the <code>Social_Network_Ads</code> <a target="_blank" href="datasets/Social_Network_Ads.csv">dataset <i class="fa fa-table" aria-hidden="true"></i></a>. This dataset contains informations of users of a social network. The social network has several business clients and its business clients put ads on the social network for marketing compaigns purposes. For this dataset, a company has put ads for one of its new products and the social network gathered some informations about wich users responded positively to the ad by buying the product and those who responded negatively by not buying the product.</p>
+<p><strong>1.</strong> Download the <code>Social_Network_Ads</code> <a target="_blank" href="datasets/Social_Network_Ads.csv">dataset <i class="fa fa-table" aria-hidden="true"></i></a> and import it into <svg aria-hidden="true" role="img" viewbox="0 0 581 512" style="height:1em;width:1.13em;vertical-align:-0.125em;margin-left:auto;margin-right:auto;font-size:inherit;fill:steelblue;overflow:visible;position:relative;"><path d="M581 226.6C581 119.1 450.9 32 290.5 32S0 119.1 0 226.6C0 322.4 103.3 402 239.4 418.1V480h99.1v-61.5c24.3-2.7 47.6-7.4 69.4-13.9L448 480h112l-67.4-113.7c54.5-35.4 88.4-84.9 88.4-139.7zm-466.8 14.5c0-73.5 98.9-133 220.8-133s211.9 40.7 211.9 133c0 50.1-26.5 85-70.3 106.4-2.4-1.6-4.7-2.9-6.4-3.7-10.2-5.2-27.8-10.5-27.8-10.5s86.6-6.4 86.6-92.7-90.6-87.9-90.6-87.9h-199V361c-74.1-21.5-125.2-67.1-125.2-119.9zm225.1 38.3v-55.6c57.8 0 87.8-6.8 87.8 27.3 0 36.5-38.2 28.3-87.8 28.3zm-.9 72.5H365c10.8 0 18.9 11.7 24 19.2-16.1 1.9-33 2.8-50.6 2.9v-22.1z"></path></svg>.</p>
+<p><strong>2.</strong> <strong>Explore</strong> and <strong>Describe</strong> the dataset (you can use <code><a href="https://rdrr.io/r/utils/str.html">str()</a></code> and <code><a href="https://rdrr.io/r/base/summary.html">summary()</a></code> functions, you can calculate and visualize the correlations, show some histograms, scatterplots, pie charts, etc..).</p>
+<div class="rmdtip">
+<p>
+We will consider the variables <code>Age</code> and
+<code>EstimatedSalary</code> as input variables (features) to see the
+correlations between them and the decision of the user to buy (or not)
+the product.
+</p>
+</div>
+<!-- **3.** Is the target variable `Purchased` is of type factor? If not, Encode it as a factor with levels 0 and 1. -->
+<!-- ```{r eval=F, echo=F} -->
+<!-- dataset$Purchased = factor(dataset$Purchased, levels = c(0, 1)) -->
+<!-- ``` -->
+<p><strong>3.</strong> Now we are going to split the dataset into training set and test set. Last week we did it manually. From now on we will split it randomly, you can use this code (after undestanding it of course):</p>
+<div class="sourceCode" id="cb38"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va">caTools</span><span class="op">)</span> <span class="co"># install it first in the console</span>
+<span class="fu"><a href="https://rdrr.io/r/base/Random.html">set.seed</a></span><span class="op">(</span><span class="fl">123</span><span class="op">)</span>
+<span class="co"># we use the function set.seed() with the same seed number</span>
+<span class="co"># to randomly generate the same values, you already know that right? </span>
+<span class="co">#and you know why we want to generate the same values, am I wrong? </span>
+<span class="va">split</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/caTools/man/sample.split.html">sample.split</a></span><span class="op">(</span><span class="va">dataset</span><span class="op">$</span><span class="va">Purchased</span>, SplitRatio <span class="op">=</span> <span class="fl">0.75</span><span class="op">)</span>
+<span class="co"># here we chose the SplitRatio to 75% of the dataset,</span>
+<span class="co"># and 25% for the test set.</span>
+<span class="va">training_set</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/subset.html">subset</a></span><span class="op">(</span><span class="va">dataset</span>, <span class="va">split</span> <span class="op">==</span> <span class="cn">TRUE</span><span class="op">)</span>
+<span class="co"># we use subset to split the dataset</span>
+<span class="va">test_set</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/subset.html">subset</a></span><span class="op">(</span><span class="va">dataset</span>, <span class="va">split</span> <span class="op">==</span> <span class="cn">FALSE</span><span class="op">)</span></code></pre></div>
+<p><strong>4.</strong> Scale the input variables in both training set and test set. Do you know what is scaling? Explain it one sentence.</p>
+<p><strong>5.</strong> Now fit a <strong>simple</strong> logistic regression model of <code>Purchased</code> in function of <code>Age</code>.</p>
+<p><strong>6.</strong> As you saw in the Logistic Regression chapter and in the previous question, we choose argument <code>family</code> to be <code>binomial</code> when we use the function <code>glm</code>. Explain why!</p>
+<p><strong>7.</strong> Write in a equation the model you obtained in question <strong>5</strong>? (Read the following note concerning this question).</p>
+<div class="rmdtip">
+<p>
+Note that there are three different ways to express the equation of a
+Logistic Regression model.
+</p>
+<!-- 2- Use inline codes to call the coefficients instead of writing them manually.  -->
+<!-- 3- You can use Latex to simplify writing equations, you just need to put the equation code between two `\$\$`. For example: `\$e^{\\beta_0+\\beta_1 X}\$` will give $e^{\beta_0+\beta_1 X}$. Try some equations on this [website](https://www.codecogs.com/latex/eqneditor.php)). -->
+<!-- 4- In fact, for any equation shown on this website, you can right click on it and see its corresonding Latex code. -->
+</div>
+<p><strong>8.</strong> Is the feature <code>Age</code> significant to the model? Justify your answer.</p>
+<p><strong>9.</strong> What is the value of AIC of the model?</p>
+<div class="rmdtip">
+<p>
+The <strong>AIC</strong> is the <strong>Akaike Information
+Criterion</strong>. You will use this while comparing multiple models.
+The model with lower value of AIC is better. Suppose that we have a
+statistical model of some data. Let <span class="math inline"><span class="math inline">\({\hat {L}}\)</span></span> be the maximum value of the likelihood function for the
+model; let <span class="math inline"><span class="math inline">\(k\)</span></span> be the number of
+estimated parameters in the model. Then the AIC value of the model is
+the following.
+</p>
+<p>
+<span class="math display"><span class="math display">\[ \text{AIC} = 2 k-2
+\ln(\hat{L})\]</span></span>
+</p>
+<p>
+where
+</p>
+<ul>
+<li>
+<span class="math inline"><span class="math inline">\(\hat{L}\)</span></span> = the maximized value
+of the likelihood function of the model <span class="math inline"><span class="math inline">\(M\)</span></span>, i.e. <span class="math inline"><span class="math inline">\(\hat{L}=p(x|{\hat{\beta }},M)\)</span></span>, where
+<span class="math inline"><span class="math inline">\(\hat{\beta}\)</span></span> are the parameter
+values that maximize the likelihood function.
+</li>
+<li>
+<span class="math inline"><span class="math inline">\(x\)</span></span> = the observed data.
+</li>
+<li>
+<span class="math inline"><span class="math inline">\(k\)</span></span> = the number of free
+parameters to be estimated. If the model under consideration is a linear
+regression, <span class="math inline"><span class="math inline">\(k\)</span></span> is the number of
+regressors, including the intercept.
+</li>
+</ul>
+</div>
+<p><strong>10.</strong> Plot <code>Purchased</code> in function of <code>Age</code> and add the curve of the obtained logistic regression model.</p>
+<p>(<strong>Hints</strong>: One way to do it is to first plot the observations, then use the <code><a href="https://rdrr.io/r/graphics/curve.html">curve()</a></code> function with option <code>add=TRUE</code> in order to add the curve to the plot. Pay attention that the argument “type” of the function <code><a href="https://rdrr.io/r/stats/predict.html">predict()</a></code> must be <code>reponse</code>)</p>
+<p>You must obtain something like</p>
+<center>
+<img src="img/glm1.png">
+</center>
+<div class="rmdtip">
+<p><strong>Extra</strong>: A great <span style="color: Steelblue;"><i class="fab fa-r-project" aria-hidden="true"></i>
+</span> package for visualization is <code>ggplot2</code>. Take a look on this <a href="http://www.r-graph-gallery.com/portfolio/ggplot2-package/" target="_blank">link <svg aria-hidden="true" role="img" viewbox="0 0 512 512" style="height:1em;width:1em;vertical-align:-0.125em;margin-left:auto;margin-right:auto;font-size:inherit;fill:currentColor;overflow:visible;position:relative;"><path d="M432,320H400a16,16,0,0,0-16,16V448H64V128H208a16,16,0,0,0,16-16V80a16,16,0,0,0-16-16H48A48,48,0,0,0,0,112V464a48,48,0,0,0,48,48H400a48,48,0,0,0,48-48V336A16,16,0,0,0,432,320ZM488,0h-128c-21.37,0-32.05,25.91-17,41l35.73,35.73L135,320.37a24,24,0,0,0,0,34L157.67,377a24,24,0,0,0,34,0L435.28,133.32,471,169c15,15,41,4.5,41-17V24A24,24,0,0,0,488,0Z"></path></svg></a> for some examples. With this library we obtain the following plot for our model,</p>
+<div class="inline-figure"><img src="img/glm_ggplot.png"></div>
+</div>
+<p>I obtained the last figure with these lines of code,</p>
+<div class="sourceCode" id="cb39"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://ggplot2.tidyverse.org">ggplot2</a></span><span class="op">)</span>
+<span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="va">training_set</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x<span class="op">=</span><span class="va">Age</span>, y<span class="op">=</span><span class="va">Purchased</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span>
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_point.html">geom_point</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span>
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_smooth.html">stat_smooth</a></span><span class="op">(</span>method<span class="op">=</span><span class="st">"glm"</span>, method.args<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span>family<span class="op">=</span><span class="st">"binomial"</span><span class="op">)</span>, se<span class="op">=</span><span class="cn">FALSE</span><span class="op">)</span></code></pre></div>
+<p><strong>11.</strong> Now let us take another feature into account in the model. Fit a logistic regression model of purchasing the product in function of the age of a user and its salary.</p>
+<p><strong>12.</strong> Are the predictors significant to the new model?</p>
+<p><strong>13.</strong> Do we obtain a better model by adding the estimated salary?</p>
+<p><strong>14.</strong> <strong>Predictions</strong>: On the test set, predict the probability of purchasing the product by the users using the obtained model.</p>
+<p><strong>15.</strong> Take a look on your predicted values for the variable <code>Purchased</code>. We predicted the probability that the user will purchase the product right? Now in order to compare your results with the real answers, transform the predicted values to 0 or 1 (1 if &gt;0.5).</p>
+<p><strong>Hint</strong>: You can easily do it with the <code><a href="https://rdrr.io/r/base/ifelse.html">ifelse()</a></code> function.</p>
+<p>Now read the following about the evaluation of a classifier (of a classification model).</p>
+<div class="rmdtip">
+<p>
+<strong>Confusion matrix</strong>: is a tabular representation of
+Actual vs Predicted values. This helps us to find the accuracy of the
+model. The different results from a binary classifier are true
+positives, true negatives, false positives, and false negatives. This is
+how the confusion matrix looks like:
+</p>
+<p>
+<img src="img/cm.png"> (Image source: <a href="https://en.wikipedia.org/wiki/Confusion_matrix">Wikipedia</a>)
+</p>
+<p>
+You can calculate the <strong>accuracy</strong> of your model
+with:
+</p>
+<div class="inline-figure">
+<img src="img/cm1.png">
+</div>
+<p>
+<strong>Accuracy</strong> is a key measure of performance, and is
+more specifically the rate at which the model is able to predict the
+correct value (classification or regression) for a given data point or
+observation. In other words, accuracy is the proportion of correct
+predictions out of all predictions made.
+</p>
+<p>
+The other two metrics from the confusion matrix worth discussing are
+<strong>Precision</strong> and <strong>Recall</strong>.
+</p>
+<p>
+Precision (positive predictive value) is the ratio of true positives
+to the total amount of positive predictions made (i.e., true or false).
+Said another way, precision measures the proportion of accurate positive
+predictions out of all positive predictions made.
+</p>
+<p>
+Recall on the other hand, or true positive rate, is the ratio of true
+positives to the total amount of actual positives, whether predicted
+correctly or not. So in other words, recall measures the proportion of
+accurate positive predictions out of all actual positive
+observations.
+</p>
+<p>
+A metric that is associated with precision and recall is called the
+F-score (also called F1 score), which combines them mathematically, and
+somewhat like a weighted average, in order to produce a single measure
+of performance based on the simultaneous values of both. Its values
+range from 0 (worst) to 1 (best).
+</p>
+<p>
+Another important concept to know about is the <strong><em>Receiver
+Operating Characteristic</em></strong>, which when plotted, results in
+what’s known as an <strong>ROC</strong> curve.
+</p>
+<p>
+<strong>ROC Curve</strong>: An ROC curve is a two-dimensional plot of
+<em>sensitivity</em> (recall, or true positive rate) vs <em>1-
+specificity</em> (false positive rate). The area under the curve is
+referred to as the <strong><em>AUC</em></strong>, and is a numeric
+metric used to represent the quality and performance of the classifier
+(model).
+</p>
+<div class="inline-figure">
+<img src="img/roc.png">
+</div>
+<p>
+An AUC of 0.5 is essentially the same as random guessing without a
+model, whereas an AUC of 1.0 is considered a perfect classifier.
+Generally, the higher the AUC value the better, and an AUC above 0.8 is
+considered quite good.
+</p>
+<p>
+The higher the AUC value, the closer the curve gets to the upper left
+corner of the plot. One can easily see from the ROC curves then that the
+goal is to find and tune a model that maximizes the true positive rate,
+while simultaneously minimizing the false positive rate. Said another
+way, the goal as shown by the ROC curve is to correctly predict as many
+of the actual positives as possible, while also predicting as many of
+the actual negatives as possible, and therefore minimize errors
+(incorrect classifications) for both.
+</p>
+</div>
+<p><strong>16.</strong> Now in order to evaluate the model and its predictions, compute the confusion matrix. What do you obtain ?</p>
+<p>(<strong>Hint</strong>: you can use the <code><a href="https://rdrr.io/r/base/table.html">table()</a></code> function).</p>
+<p><strong>17.</strong> Calculate the accuracy, specificity, sensitivity and the precision of the model.</p>
+<p>(<strong>Note</strong>: You can create a function that takes a confusion matrix in input and returns the needed metrics)</p>
+<p><strong>18.</strong> Plot the ROC curve and calculate AUC value.</p>
+<div class="rmdtip">
+<p>
+<strong>Hints</strong>: to plot it, install the <code>ROCR</code>
+package. Load and use the functions:
+</p>
+<ul>
+<li>
+<code><a href="http://ipa-tys.github.io/ROCR/reference/prediction.html">prediction()</a></code> to calculate the elements of the confusion
+matrix.
+</li>
+<li>
+<code><a href="http://ipa-tys.github.io/ROCR/reference/performance.html">performance()</a></code> to calculate the AUC.
+</li>
+<li>
+<code><a href="https://rdrr.io/r/graphics/plot.default.html">plot()</a></code> to plot the ROC curve, you can plot the
+performance calculated before.
+</li>
+<li>
+<code><a href="https://rdrr.io/r/graphics/abline.html">abline()</a></code> to plot a line of equation
+<code>y=x</code>.
+</li>
+</ul>
+</div>
+<p><strong>19.</strong> Compare the AUC of the two models you fitted (one with only age and one with age and estimated salary) and plot their ROC curves in the same figure.</p>
+<p class="text-right">
+◼
+</p>
+
+</div>
+</div>
+  <div class="chapter-nav">
+<div class="prev"><a href="logistic-regression.html"><span class="header-section-number">3</span> Logistic Regression</a></div>
+<div class="next"><a href="discriminant-analysis.html"><span class="header-section-number">4</span> Discriminant Analysis</a></div>
+</div></main><div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
+    <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
+      <ul class="nav navbar-nav">
+<li><a class="nav-link" href="#pw-3">PW 3</a></li>
+<li><a class="nav-link" href="#social-networks-ads">Social Networks Ads</a></li>
+</ul>
+
+      <div class="book-extra">
+        <ul class="list-unstyled">
+          
+        </ul>
+</div>
+    </nav>
+</div>
+
+</div>
+</div> <!-- .container -->
+
+<footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
+
+  <div class="col-12 col-md-6 mt-3">
+    <p>"<strong>Machine Learning</strong>" was written by Mohamad Ghassany. It was last built on 2022-04-26.</p>
+  </div>
+
+  <div class="col-12 col-md-6 mt-3">
+    <p>This book was built by the <a class="text-light" href="https://bookdown.org">bookdown</a> R package.</p>
+  </div>
+
+</div></div>
+</footer><!-- dynamically load mathjax for compatibility with self-contained --><script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script><script type="text/x-mathjax-config">const popovers = document.querySelectorAll('a.footnote-ref[data-toggle="popover"]');
+for (let popover of popovers) {
+  const div = document.createElement('div');
+  div.setAttribute('style', 'position: absolute; top: 0, left:0; width:0, height:0, overflow: hidden; visibility: hidden;');
+  div.innerHTML = popover.getAttribute('data-content');
+
+  var has_math = div.querySelector("span.math");
+  if (has_math) {
+    document.body.appendChild(div);
+    MathJax.Hub.Queue(["Typeset", MathJax.Hub, div]);
+    MathJax.Hub.Queue(function() {
+      popover.setAttribute('data-content', div.innerHTML);
+      document.body.removeChild(div);
+    })
+  }
+}
+</script>
+</body>
+</html>

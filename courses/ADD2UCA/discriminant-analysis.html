@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<title>1 Discriminant Analysis | Analyse de données @ UCA</title>
+<meta name="author" content="Mohamad Ghassany">
+<meta name="description" content="Slides for this chapter:  Discriminant analysis is a popular method for multiple-class classiﬁcation. We will start first by the Linear Discriminant Analysis (LDA).  1.1 Introduction As we saw...">
+<meta name="generator" content="bookdown 0.35 with bs4_book()">
+<meta property="og:title" content="1 Discriminant Analysis | Analyse de données @ UCA">
+<meta property="og:type" content="book">
+<meta property="og:description" content="Slides for this chapter:  Discriminant analysis is a popular method for multiple-class classiﬁcation. We will start first by the Linear Discriminant Analysis (LDA).  1.1 Introduction As we saw...">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="1 Discriminant Analysis | Analyse de données @ UCA">
+<meta name="twitter:description" content="Slides for this chapter:  Discriminant analysis is a popular method for multiple-class classiﬁcation. We will start first by the Linear Discriminant Analysis (LDA).  1.1 Introduction As we saw...">
+<!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
+<script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.4.2/transition.js"></script><script src="libs/bs3compat-0.4.2/tabs.js"></script><script src="libs/bs3compat-0.4.2/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
+<script src="libs/bs4_book-1.0.0/bs4_book.js"></script><link href="libs/font-awesome-5.1.0/css/all.css" rel="stylesheet">
+<link href="libs/font-awesome-5.1.0/css/v4-shims.css" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- CSS --><style type="text/css">
+    
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  </style>
+<link rel="stylesheet" href="style.css">
+</head>
+<body data-spy="scroll" data-target="#toc">
+
+<div class="container-fluid">
+<div class="row">
+  <header class="col-sm-12 col-lg-3 sidebar sidebar-book"><a class="sr-only sr-only-focusable" href="#content">Skip to main content</a>
+
+    <div class="d-flex align-items-start justify-content-between">
+      <h1>
+        <a href="index.html" title="">Analyse de données @ UCA</a>
+      </h1>
+      <button class="btn btn-outline-primary d-lg-none ml-2 mt-1" type="button" data-toggle="collapse" data-target="#main-nav" aria-expanded="true" aria-controls="main-nav"><i class="fas fa-bars"></i><span class="sr-only">Show table of contents</span></button>
+    </div>
+
+    <div id="main-nav" class="collapse-lg">
+      <form role="search">
+        <input id="search" class="form-control" type="search" placeholder="Search" aria-label="Search">
+</form>
+
+      <nav aria-label="Table of contents"><h2>Table of contents</h2>
+        <ul class="book-toc list-unstyled">
+<li><a class="" href="index.html">Welcome</a></li>
+<li class="book-part">Machine Learning II</li>
+<li><a class="active" href="discriminant-analysis.html"><span class="header-section-number">1</span> Discriminant Analysis</a></li>
+<li><a class="" href="lab.html">Lab</a></li>
+<li><a class="" href="dimensionality-reduction.html"><span class="header-section-number">2</span> Dimensionality Reduction</a></li>
+<li><a class="" href="lab-1.html">Lab</a></li>
+</ul>
+
+        <div class="book-extra">
+          
+        </div>
+      </nav>
+</div>
+  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="discriminant-analysis" class="section level1" number="1">
+<h1>
+<span class="header-section-number">1</span> Discriminant Analysis<a class="anchor" aria-label="anchor" href="#discriminant-analysis"><i class="fas fa-link"></i></a>
+</h1>
+<div class="rmdimportant">
+<p>Slides for this chapter: <a target="_blank" href="https://dl.dropboxusercontent.com/s/hsjwu9ms99z0pfe/ML2Session1.pdf?dl=0"><i class="fa fa-file-pdf-o" aria-hidden="true" style="color:#096B72"></i></a></p>
+</div>
+<p>Discriminant analysis is a popular method for multiple-class classiﬁcation. We will start first by the <em>Linear Discriminant Analysis (LDA)</em>.</p>
+<div id="introduction" class="section level2" number="1.1">
+<h2>
+<span class="header-section-number">1.1</span> Introduction<a class="anchor" aria-label="anchor" href="#introduction"><i class="fas fa-link"></i></a>
+</h2>
+<p>As we saw previously, Logistic regression involves directly modeling <span class="math inline">\(\mathbb{P} (Y = k|X = x)\)</span> using the <em>logistic function</em>, for the case of two response classes. In logistic regression, we model the conditional distribution of the response <span class="math inline">\(Y\)</span>, given the predictor(s) <span class="math inline">\(X\)</span>. We now consider an alternative and less direct approach to estimating these probabilities. In this alternative approach, <strong><em>we model the distribution</em></strong> of the predictors <span class="math inline">\(X\)</span> <strong><em>separately</em></strong> in each of the response classes (i.e. given <span class="math inline">\(Y\)</span>), and then use <strong>Bayes’ theorem</strong> to flip these around into estimates for <span class="math inline">\(\mathbb{P} (Y = k|X = x)\)</span>. When these distributions are assumed to be <em>Normal</em>, it turns out that the model is very similar in form to logistic regression.</p>
+<p><strong>Why not logistic regression?</strong>
+Why do we need another method, when we have logistic regression? There are several reasons:</p>
+<ul>
+<li>When the classes are well-separated, the parameter estimates for the logistic regression model are surprisingly unstable. Linear discriminant analysis does not suﬀer from this problem.</li>
+<li>If <span class="math inline">\(n\)</span> is small and the distribution of the predictors <span class="math inline">\(X\)</span> is approximately normal in each of the classes, the linear discriminant model is again more stable than the logistic regression model.</li>
+<li>Linear discriminant analysis is popular when we have <em>more than two response classes</em>.</li>
+</ul>
+</div>
+<div id="bayes-theorem" class="section level2" number="1.2">
+<h2>
+<span class="header-section-number">1.2</span> Bayes’ Theorem<a class="anchor" aria-label="anchor" href="#bayes-theorem"><i class="fas fa-link"></i></a>
+</h2>
+<p>Bayes’ theorem is stated mathematically as the following equation:</p>
+<p><span class="math display">\[ P(A | B) = \frac{P(A \cap B)}{P(B)} =  \frac{P(B|A) P(A)}{P(B)}\]</span></p>
+<p>where <span class="math inline">\(A\)</span> and <span class="math inline">\(B\)</span> are events and <span class="math inline">\(P(B) \neq 0\)</span>.</p>
+<ul>
+<li>
+<span class="math inline">\(P(A | B)\)</span>, a conditional probability, is the probability of observing event <span class="math inline">\(A\)</span> given that <span class="math inline">\(B\)</span> is true. It is called the <strong><em>posterior</em></strong> probability.</li>
+<li>
+<span class="math inline">\(P(A)\)</span>, is called the <strong><em>prior</em></strong>, is the initial degree of belief in A.</li>
+<li>
+<span class="math inline">\(P(B)\)</span> is the <strong><em>likelihood</em></strong>.</li>
+</ul>
+<div class="rmdtip">
+<p>The posterior probability can be written in the memorable form as :</p>
+<p>Posterior probability <span class="math inline">\(\propto\)</span> Likelihood <span class="math inline">\(\times\)</span> Prior probability.</p>
+</div>
+<p><strong>Extended form</strong>:</p>
+<p>Suppose we have a partition <span class="math inline">\(\{A_i\}\)</span> of the sample space, the even space is given or conceptualized in terms of <span class="math inline">\(P(A_j)\)</span> and <span class="math inline">\(P(B | A_j)\)</span>. It is then useful to compute <span class="math inline">\(P(B)\)</span> using the law of total probability:</p>
+<p><span class="math display">\[ P(B) = \sum_j P(B|A_j) P(A_j) \]</span></p>
+<p><span class="math display">\[ \Rightarrow P(A_i|B) = \frac{P(B|A_i) P(A_i)}{\sum_j P(B|A_j) P(A_j)} \]</span></p>
+<p><strong>Bayes’ Theorem for Classification</strong>:</p>
+<p>Suppose that we wish to classify an observation into one of <span class="math inline">\(K\)</span> classes, where <span class="math inline">\(K \geq 2\)</span>. In other words, the qualitative response variable <span class="math inline">\(Y\)</span> can take on <span class="math inline">\(K\)</span> possible distinct and unordered values.</p>
+<p>Let <span class="math inline">\(\pi_k\)</span> represent the overall or <em>prior</em> probability that a randomly chosen observation comes from the <span class="math inline">\(k\)</span>-th class; this is the probability that a given observation is associated with the <span class="math inline">\(k\)</span>-th category of the response variable <span class="math inline">\(Y\)</span>.</p>
+<p>Let <span class="math inline">\(f_k(X) \equiv P(X = x|Y = k)\)</span> denote the <em>density function</em> of <span class="math inline">\(X\)</span> for an observation that comes from the <span class="math inline">\(k\)</span>-th class. In other words, <span class="math inline">\(f_k(x)\)</span> is relatively large if there is a high probability that an observation in the <span class="math inline">\(k\)</span>-th class has <span class="math inline">\(X \approx x\)</span>, and <span class="math inline">\(f_k(x)\)</span> is small if it is very unlikely that an observation in the <span class="math inline">\(k\)</span>-th class has <span class="math inline">\(X \approx x\)</span>. Then <em>Bayes’ theorem</em> states that</p>
+<p><span class="math display" id="eq:bayes">\[\begin{equation}
+P(Y=k|X=x) = \frac{ \pi_k f_k(x)}{\sum_{c=1}^K \pi_c f_c(x)}
+\tag{1.1}
+\end{equation}\]</span></p>
+<p>As we did in the last chapter, we will use the abbreviation <span class="math inline">\(p_k(X) =P(Y = k|X)\)</span>.</p>
+<p>The equation above stated by <em>Bayes’ theorem</em> suggests that instead of directly computing <span class="math inline">\(p_k(X)\)</span> as we did in the logistic regression, we can simply plug in estimates of <span class="math inline">\(\pi_k\)</span> and <span class="math inline">\(f_k(X)\)</span> into the equation. In general, estimating <span class="math inline">\(\pi_k\)</span> is easy (the fraction of the training observations that belong to the <span class="math inline">\(k\)</span>-th class). But estimating <span class="math inline">\(f_k(X)\)</span> tends to be more challenging.</p>
+<blockquote>
+<p>Recall that <span class="math inline">\(p_k(x)\)</span> is the <em>posterior</em> probability that an observation <span class="math inline">\(X=x\)</span> belongs to <span class="math inline">\(k\)</span>-th class.</p>
+</blockquote>
+<blockquote>
+<p>If we can find a way to estimate <span class="math inline">\(f_k(X)\)</span>, we can develop a classifier with the lowest possibe error rate out of all classifiers.</p>
+</blockquote>
+</div>
+<div id="lda-for-p1" class="section level2" number="1.3">
+<h2>
+<span class="header-section-number">1.3</span> LDA for <span class="math inline">\(p=1\)</span><a class="anchor" aria-label="anchor" href="#lda-for-p1"><i class="fas fa-link"></i></a>
+</h2>
+<p>Assume that <span class="math inline">\(p=1\)</span>, which mean we have only one predictor. We would like to obtain an estimate for <span class="math inline">\(f_k(x)\)</span> that we can plug into the Equation <a href="discriminant-analysis.html#eq:bayes">(1.1)</a> in order to estimate <span class="math inline">\(p_k(x)\)</span>. <strong>We will then classify an observation to the class for which <span class="math inline">\(p_k(x)\)</span> is greatest</strong>.</p>
+<p>In order to estimate <span class="math inline">\(f_k(x)\)</span>, we will first make some assumptions about its form.</p>
+<p>Suppose we assume that <span class="math inline">\(f_k(x)\)</span> is <em>normal</em> (<em>Gaussian</em>). In the one-dimensional setting, the normal density take the form</p>
+<p><span class="math display" id="eq:normal01">\[\begin{equation}
+f_k(x)= \frac{1}{\sigma_k\sqrt{2\pi}} \exp \big( - \frac{1}{2\sigma_k^2 } (x-\mu_k)^2\big)
+\tag{1.2}
+\end{equation}\]</span></p>
+<p>where <span class="math inline">\(\mu_k\)</span> and <span class="math inline">\(\sigma_k^2\)</span> are the mean and variance parameters for <span class="math inline">\(k\)</span>-th class. Let us assume that <span class="math inline">\(\sigma_1^2 = \ldots = \sigma_K^2 = \sigma^2\)</span> (which means there is a shared variance term across all <span class="math inline">\(K\)</span> classes). Plugging Eq. <a href="discriminant-analysis.html#eq:normal01">(1.2)</a> into the Bayes formula in Eq. <a href="discriminant-analysis.html#eq:bayes">(1.1)</a> we get,</p>
+<p><span class="math display" id="eq:pkx">\[\begin{equation}
+p_k(x) = \frac{  \pi_k \frac{1}{\sigma \sqrt{2\pi}} e^{-\frac{1}{2} \big(\frac{x-\mu_k}{\sigma}\big)^2 } }{  \sum_{c=1}^K  \pi_c \frac{1}{\sigma \sqrt{2\pi}} e^{-\frac{1}{2} \big(\frac{x-\mu_c}{\sigma}\big)^2 } }
+\tag{1.3}
+\end{equation}\]</span></p>
+<div class="rmdcaution">
+<p>Note that <span class="math inline">\(\pi_k\)</span> and <span class="math inline">\(\pi_c\)</span> denote the prior probabilities. And <span class="math inline">\(\pi\)</span> is the mathematical constant <span class="math inline">\(\pi \approx 3.14159\)</span>.</p>
+</div>
+<p>To classify at the value <span class="math inline">\(X = x\)</span>, we need to see which of the <span class="math inline">\(p_k(x)\)</span> is largest. Taking logs, and discarding terms that do not depend on <span class="math inline">\(k\)</span>, we see that this is equivalent to assigning <span class="math inline">\(x\)</span> to the class with the largest <strong><em>discriminant score</em></strong>:</p>
+<p><span class="math display" id="eq:discscore">\[\begin{equation}
+\delta_k(x) = x.\frac{\mu_k}{\sigma^2} - \frac{\mu_k^2}{2\sigma^2} + \log (\pi_k)
+\tag{1.4}
+\end{equation}\]</span></p>
+<p>Note that <span class="math inline">\(\delta_k(x)\)</span> is a <em>linear</em> function of <span class="math inline">\(x\)</span>.</p>
+<div class="rmdtip">
+<ul>
+<li>The decision surfaces (e.g. decision boundaries) for a linear discriminant classifiers are defined by the linear equations <span class="math inline">\(\delta_k(x) = \delta_c(x)\)</span>, for all classes <span class="math inline">\(k\neq c\)</span>. It represents the set of values <span class="math inline">\(x\)</span> for which the probability of belonging to classes <span class="math inline">\(k\)</span> and <span class="math inline">\(c\)</span> is the same, <span class="math inline">\(0.5\)</span>.</li>
+<li>Example: If <span class="math inline">\(K=2\)</span> and <span class="math inline">\(\pi_1=\pi_2\)</span>, then the <strong>desicion boundary</strong> is at <span class="math inline">\(x=\frac{\mu_1+\mu2}{2}\)</span> (<strong>Prove it!</strong>).</li>
+<li>An example where <span class="math inline">\(\mu_1=-1.5\)</span>, <span class="math inline">\(\mu_2=1.5\)</span>, <span class="math inline">\(\pi_1=\pi_2=0.5\)</span> and <span class="math inline">\(\sigma^2=1\)</span> is shown in this following figure</li>
+</ul>
+<center>
+<img src="img/decbound.png">
+</center>
+<ul>
+<li><p>See this <a target="_blank" href="https://www.coursera.org/learn/machine-learning/lecture/WuL1H/decision-boundary"> video <i class="fa fa-video-camera" aria-hidden="true"></i></a> to understand more about <em>decision boundary</em> (Applied on logistic regression).</p></li>
+<li><p>As we classify a new point according to which density is highest, when the priors are diﬀerent we take them into account as well, and compare <span class="math inline">\(\pi_k f_k(x)\)</span>. On the right of the following figure, we favor the pink class (remark that the decision boundary has shifted to the left).</p></li>
+</ul>
+<center>
+<img src="img/decbound2.png">
+</center>
+</div>
+</div>
+<div id="estimating-the-parameters" class="section level2" number="1.4">
+<h2>
+<span class="header-section-number">1.4</span> Estimating the parameters<a class="anchor" aria-label="anchor" href="#estimating-the-parameters"><i class="fas fa-link"></i></a>
+</h2>
+<p>Typically we don’t know these parameters; we just have the training data. In that case we simply estimate the parameters and plug them into the rule.</p>
+<p>Let <span class="math inline">\(n\)</span> the total number of training observations, and <span class="math inline">\(n_k\)</span> the number of training observations in the <span class="math inline">\(k\)</span>-th class. The following estimates are used:</p>
+<p><span class="math display">\[\begin{align*}
+\hat{\pi}_k &amp;= \frac{n_k}{n} \\
+\hat{\mu}_k &amp;= \frac{1}{n_k} \sum_{i: y_i=k} x_i \\
+\hat{\sigma}^2 &amp;= \frac{1}{n - K} \sum_{k=1}^K \sum_{i: y_i=k} (x_i-\hat{\mu}_k)^2 \\
+&amp;= \sum_{k=1}^K \frac{n_k-1}{n - K} . \hat{\sigma}_k^2
+\end{align*}\]</span></p>
+<p>where <span class="math inline">\(\hat{\sigma}_k^2 = \frac{1}{n_k-1}\sum_{i: y_i=k}(x_i-\hat{\mu}_k)^2\)</span> is the usual formula for the estimated variance in the -<span class="math inline">\(k\)</span>-th class.</p>
+<p>The linear discriminant analysis (LDA) classifier plugs these estimates in Eq. <a href="discriminant-analysis.html#eq:discscore">(1.4)</a> and assigns an observation <span class="math inline">\(X=x\)</span> to the class for which</p>
+<p><span class="math display" id="eq:discscoreest">\[\begin{equation}
+\hat{\delta}_k(x) = x.\frac{\hat{\mu}_k}{\hat{\sigma}^2} - \frac{\hat{\mu}_k^2}{2\hat{\sigma}^2} + \log (\hat{\pi}_k)
+\tag{1.5}
+\end{equation}\]</span></p>
+<p>is largest.</p>
+<p>The <em>discriminant functions</em> in Eq. <a href="discriminant-analysis.html#eq:discscoreest">(1.5)</a> are linear functions of <span class="math inline">\(x\)</span>.</p>
+<blockquote>
+<p>Recall that we assumed that the observations come from a normal distribution with a common variance <span class="math inline">\(\sigma^2\)</span>.</p>
+</blockquote>
+</div>
+<div id="lda-for-p-1" class="section level2" number="1.5">
+<h2>
+<span class="header-section-number">1.5</span> LDA for <span class="math inline">\(p &gt; 1\)</span><a class="anchor" aria-label="anchor" href="#lda-for-p-1"><i class="fas fa-link"></i></a>
+</h2>
+<p>Let us now suppose that we have multiple predictors. We assume that <span class="math inline">\(X=(X_1,X_2,\ldots,X_p)\)</span> is drawn from <em>multivariate Gaussian</em> distribution (assuming they have a common covariance matrix, e.g. same variances as in the case of <span class="math inline">\(p=1\)</span>). The multivariate Gaussian distribution assumes that each individual predictor follows a one-dimensional normal distribution as in Eq. <a href="discriminant-analysis.html#eq:normal01">(1.2)</a>, with some correlation between each pair of predictors.</p>
+<p>To indicate that a <span class="math inline">\(p\)</span>-dimensional random variable <span class="math inline">\(X\)</span> has a multivariate Gaussian distribution, we write <span class="math inline">\(X \sim \mathcal{N}(\mu,\Sigma)\)</span>. Where</p>
+<p><span class="math display">\[ \mu = E(X) = \begin{pmatrix}
+    \mu_1 \\
+    \mu_2 \\
+    \vdots \\
+    \mu_p
+\end{pmatrix} \]</span></p>
+<p>and,
+<span class="math display">\[ \Sigma = Cov(X) = \begin{pmatrix}
+    \sigma_1^2 &amp; Cov[X_1, X_2]  &amp; \dots  &amp; Cov[X_1, X_p] \\
+    Cov[X_2, X_1] &amp; \sigma_2^2  &amp; \dots  &amp; Cov[X_2, X_p] \\
+    \vdots &amp; \vdots &amp;  \ddots &amp; \vdots \\
+    Cov[X_p, X_1] &amp; Cov[X_p, X_2]  &amp; \dots  &amp; \sigma_p^2
+\end{pmatrix}  \]</span></p>
+<blockquote>
+<p><span class="math inline">\(\Sigma\)</span> is the <span class="math inline">\(p\times p\)</span> covariance matrix of <span class="math inline">\(X\)</span>.</p>
+</blockquote>
+<p>Formally, the multivariate Gaussian density is deﬁned as</p>
+<p><span class="math display">\[f(x) = \frac{1}{(2\pi)^{p/2} |\Sigma|^{1/2}} \exp \bigg( - \frac{1}{2} (x-\mu)^T \Sigma^{-1} (x-\mu) \bigg)
+\]</span></p>
+<p>Plugging the density function for the <span class="math inline">\(k\)</span>-th class, <span class="math inline">\(f_k(X=x)\)</span>, into Eq. <a href="discriminant-analysis.html#eq:bayes">(1.1)</a> reveals that the Bayes classifier assigns an observation <span class="math inline">\(X=x\)</span> to the class for which</p>
+<p><span class="math display" id="eq:discscorematrix">\[\begin{equation}
+\delta_k(x) = x^T \Sigma^{-1} \mu_k - \frac{1}{2} \mu_k^T \Sigma^{-1}  \mu_k + \log \pi_k
+\tag{1.6}
+\end{equation}\]</span></p>
+<p>is largest. This is the vector/matrix version of <a href="discriminant-analysis.html#eq:discscore">(1.4)</a>.</p>
+<p>An example is shown in the following figure. Three equally-sized Gaussian classes are shown with class-specific mean vectors and a common covariance matrix (<span class="math inline">\(\pi_1=\pi_2=\pi_3=1/3\)</span>). The three ellipses represent regions that contain <span class="math inline">\(95\%\)</span> of the probability for each of the three classes. The dashed lines are the Bayes decision boundaries.</p>
+<center>
+<img src="img/lda2.png">
+</center>
+<p>Recall that the decision boundaries represent the set of values <span class="math inline">\(x\)</span> for which <span class="math inline">\(\delta_k(x)=\delta_c(x)\)</span>; i.e. for <span class="math inline">\(k\neq c\)</span>.</p>
+<p><span class="math display">\[ x^T \Sigma^{-1} \mu_k - \frac{1}{2} \mu_k^T \Sigma^{-1}  \mu_k = x^T \Sigma^{-1} \mu_c - \frac{1}{2} \mu_c^T \Sigma^{-1}  \mu_c  \]</span></p>
+<p>Note that there are three lines representing the Bayes decision boundaries because there are three pairs of classes among the three classes. That is, one Bayes decision boundary separates class 1 from class 2, one separates class 1 from class 3, and one separates class 2 from class 3. These three Bayes decision boundaries divide the predictor space into three regions. The Bayes classiﬁer will classify an observation according to the region in which it is located.</p>
+<p>Once again, we need to estimate the unknown parameters <span class="math inline">\(\mu_1,\ldots,\mu_k,\)</span> and <span class="math inline">\(\pi_1,\ldots,\pi_k,\)</span> and <span class="math inline">\(\Sigma\)</span>; the formulas are similar to those used in the one-dimensional case. To assign a new observation <span class="math inline">\(X = x\)</span>, LDA plugs these estimates into Eq. <a href="discriminant-analysis.html#eq:discscorematrix">(1.6)</a> and classiﬁes to the class for which <span class="math inline">\(\delta_k(x)\)</span> is largest.</p>
+<p>Note that in Eq. <a href="discriminant-analysis.html#eq:discscorematrix">(1.6)</a> <span class="math inline">\(\delta_k(x)\)</span> is a <em>linear</em> function of <span class="math inline">\(x\)</span>; that is, the LDA decision rule depends on <span class="math inline">\(x\)</span> only through a linear combination of its elements (e.g. the decision boundaries are linear). This is the reason for the word linear in LDA.</p>
+</div>
+<div id="making-predictions" class="section level2" number="1.6">
+<h2>
+<span class="header-section-number">1.6</span> Making predictions<a class="anchor" aria-label="anchor" href="#making-predictions"><i class="fas fa-link"></i></a>
+</h2>
+<p>Once we have estimates <span class="math inline">\(\hat{\delta}_k(x)\)</span>, we can turn these into estimates for class probabilities:</p>
+<p><span class="math display">\[ \hat{P}(Y=k|X=x)= \frac{e^{\hat{\delta}_k(x)}}{\sum_{c=1}^K e^{\hat{\delta}_c(x)}} \]</span></p>
+<p>So classifying to the largest <span class="math inline">\(\hat{\delta}_k(x)\)</span> amounts to classifying to the class for which <span class="math inline">\(\hat{P}(Y=k|X=x)\)</span> is largest.</p>
+<p>When <span class="math inline">\(K=2\)</span>, we classify to class 2 if <span class="math inline">\(\hat{P}(Y=2|X=x) \geq 0.5\)</span>, else to class <span class="math inline">\(1\)</span>.</p>
+</div>
+<div id="other-forms-of-discriminant-analysis" class="section level2" number="1.7">
+<h2>
+<span class="header-section-number">1.7</span> Other forms of Discriminant Analysis<a class="anchor" aria-label="anchor" href="#other-forms-of-discriminant-analysis"><i class="fas fa-link"></i></a>
+</h2>
+<p><span class="math display">\[P(Y=k|X=x) = \frac{ \pi_k f_k(x)}{\sum_{c=1}^K \pi_c f_c(x)}\]</span></p>
+<p>We saw before that when <span class="math inline">\(f_k(x)\)</span> are Gaussian densities, whith the same covariance matrix <span class="math inline">\(\Sigma\)</span> in each class, this leads to Linear Discriminant Analysis (LDA).</p>
+<p>By altering the forms for <span class="math inline">\(f_k(x)\)</span>, we get different classifiers.</p>
+<ul>
+<li>With Gaussians but different <span class="math inline">\(\Sigma_k\)</span> in each class, we get <em>Quadratic Discriminant Analysis (QDA)</em>.</li>
+<li>With <span class="math inline">\(f_k(x) = \prod_{j=1}^p f_{jk}(x_j)\)</span> (conditional independence model) in each class we get <em>Naive Bayes</em>. (For Gaussian, this mean the <span class="math inline">\(\Sigma_k\)</span> are diagonal, e.g. <span class="math inline">\(Cov(X_i,X_j)=0 \,\, \forall \, \, 1\leq i,j \leq p\)</span>).</li>
+<li>Many other forms by proposing specific density models for <span class="math inline">\(f_k(x)\)</span>, including <em>nonparametric approaches</em>.</li>
+</ul>
+<div id="quadratic-discriminant-analysis-qda" class="section level3" number="1.7.1">
+<h3>
+<span class="header-section-number">1.7.1</span> Quadratic Discriminant Analysis (QDA)<a class="anchor" aria-label="anchor" href="#quadratic-discriminant-analysis-qda"><i class="fas fa-link"></i></a>
+</h3>
+<p>Like LDA, the QDA classiﬁer results from assuming that the observations from each class are drawn from a Gaussian distribution, and plugging estimates for the parameters into Bayes’ theorem in order to perform prediction.</p>
+<p>However, unlike LDA, QDA assumes that each class has its own covariance matrix. Under this assumption, the Bayes classiﬁer assigns an observation <span class="math inline">\(X = x\)</span> to the class for which</p>
+<p><span class="math display">\[\begin{align*}
+\delta_k(x) &amp;= - \frac{1}{2} (x-\mu)^T \Sigma_k^{-1} (x-\mu) - \frac{1}{2} \log |\Sigma_k| + \log \pi_k \\
+            &amp;= - \frac{1}{2} x^T \Sigma_k^{-1} x + \frac{1}{2} x^T \Sigma_k^{-1} \mu_k - \frac{1}{2} \mu_k^T \Sigma_k^{-1} \mu_k - \frac{1}{2} \log |\Sigma_k| + \log \pi_k
+\end{align*}\]</span></p>
+<p>is largest.</p>
+<p>Unlike in LDA, the quantity <span class="math inline">\(x\)</span> appears as a quadratic function in QDA. This is where QDA gets its name.</p>
+<div class="rmdcaution">
+<p>The decision boundary in QDA is non-linear. It is quadratic (a curve).</p>
+</div>
+</div>
+<div id="naive-bayes" class="section level3" number="1.7.2">
+<h3>
+<span class="header-section-number">1.7.2</span> Naive Bayes<a class="anchor" aria-label="anchor" href="#naive-bayes"><i class="fas fa-link"></i></a>
+</h3>
+<p>We use Naive Bayes classifier if the features are independant in each class. It is useful when <span class="math inline">\(p\)</span> is large (unklike LDA and QDA).</p>
+<p>Naive Bayes assumes that each <span class="math inline">\(\Sigma_k\)</span> is diagonal, so</p>
+<p><span class="math display">\[\begin{align*}
+\delta_k(x) &amp;\propto \log \bigg[\pi_k \prod_{j=1}^p f_{kj}(x_j) \bigg] \\
+            &amp;= -\frac{1}{2} \sum_{j=1}^p \frac{(x_j-\mu_{kj})^2}{\sigma_{kj}^2} + \log \pi_k
+\end{align*}\]</span></p>
+<p>It can used for mixed feature vectors (qualitative and quantitative). If <span class="math inline">\(X_j\)</span> is qualitative, we replace <span class="math inline">\(f_{kj}(x_j)\)</span> by probability mass function (histogram) over discrete categories.</p>
+</div>
+</div>
+<div id="lda-vs-logistic-regression" class="section level2" number="1.8">
+<h2>
+<span class="header-section-number">1.8</span> LDA vs Logistic Regression<a class="anchor" aria-label="anchor" href="#lda-vs-logistic-regression"><i class="fas fa-link"></i></a>
+</h2>
+<p>the logistic regression and LDA methods are closely connected. Consider the two-class setting with <span class="math inline">\(p =1\)</span> predictor, and let <span class="math inline">\(p_1(x)\)</span> and <span class="math inline">\(p_2(x)=1−p_1(x)\)</span> be the probabilities that the observation <span class="math inline">\(X = x\)</span> belongs to class 1 and class 2, respectively. In the LDA framework, we can see from Eq. <a href="discriminant-analysis.html#eq:discscore">(1.4)</a> (and a bit of simple algebra) that the log odds is given by</p>
+<p><span class="math display">\[ \log \bigg(\frac{p_1(x)}{1-p_1(x)}\bigg) = \log \bigg(\frac{p_1(x)}{p_2(x)}\bigg) = c_0 + c_1 x\]</span></p>
+<p>where <span class="math inline">\(c_0\)</span> and <span class="math inline">\(c_1\)</span> are functions of <span class="math inline">\(\mu_1, \mu_2,\)</span> and <span class="math inline">\(\sigma^2\)</span>.</p>
+<p>On the other hand, we know that in logistic regression</p>
+<p><span class="math display">\[ \log \bigg(\frac{p_1}{1-p_1}\bigg) = \beta_0 + \beta_1 x\]</span></p>
+<p>Both of the equations above are linear functions of <span class="math inline">\(x\)</span>. Hence both logistic regression and LDA produce linear decision boundaries. The only diﬀerence between the two approaches lies in the fact that <span class="math inline">\(\beta_0\)</span> and <span class="math inline">\(\beta_1\)</span> are estimated using <em>maximum likelihood</em>, whereas <span class="math inline">\(c_0\)</span> and <span class="math inline">\(c_1\)</span> are computed using the estimated mean and variance from a <em>normal distribution</em>. This same connection between LDA and logistic regression also holds for multidimensional data with <span class="math inline">\(p&gt; 1\)</span>.</p>
+<div class="rmdtip">
+<ul>
+<li>Logistic regression uses the conditional likelihood based on <span class="math inline">\(P(Y|X)\)</span> (known as <em>discriminative learning</em>).</li>
+<li>LDA uses the full likelihood based on <span class="math inline">\(P(X,Y )\)</span> (known as
+<em>generative learning</em>).</li>
+<li>Despite these differences, in practice the results are often very similar.</li>
+</ul>
+<p><strong>Remark</strong>: Logistic regression can also fit quadratic boundaries like QDA, by explicitly including quadratic terms in the model.</p>
+</div>
+<p align="right">
+◼
+</p>
+
+</div>
+</div>
+  <div class="chapter-nav">
+<div class="prev"><a href="index.html">Welcome</a></div>
+<div class="next"><a href="lab.html">Lab</a></div>
+</div></main><div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
+    <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
+      <ul class="nav navbar-nav">
+<li><a class="nav-link" href="#discriminant-analysis"><span class="header-section-number">1</span> Discriminant Analysis</a></li>
+<li><a class="nav-link" href="#introduction"><span class="header-section-number">1.1</span> Introduction</a></li>
+<li><a class="nav-link" href="#bayes-theorem"><span class="header-section-number">1.2</span> Bayes’ Theorem</a></li>
+<li><a class="nav-link" href="#lda-for-p1"><span class="header-section-number">1.3</span> LDA for \(p=1\)</a></li>
+<li><a class="nav-link" href="#estimating-the-parameters"><span class="header-section-number">1.4</span> Estimating the parameters</a></li>
+<li><a class="nav-link" href="#lda-for-p-1"><span class="header-section-number">1.5</span> LDA for \(p &gt; 1\)</a></li>
+<li><a class="nav-link" href="#making-predictions"><span class="header-section-number">1.6</span> Making predictions</a></li>
+<li>
+<a class="nav-link" href="#other-forms-of-discriminant-analysis"><span class="header-section-number">1.7</span> Other forms of Discriminant Analysis</a><ul class="nav navbar-nav">
+<li><a class="nav-link" href="#quadratic-discriminant-analysis-qda"><span class="header-section-number">1.7.1</span> Quadratic Discriminant Analysis (QDA)</a></li>
+<li><a class="nav-link" href="#naive-bayes"><span class="header-section-number">1.7.2</span> Naive Bayes</a></li>
+</ul>
+</li>
+<li><a class="nav-link" href="#lda-vs-logistic-regression"><span class="header-section-number">1.8</span> LDA vs Logistic Regression</a></li>
+</ul>
+
+      <div class="book-extra">
+        <ul class="list-unstyled">
+          
+        </ul>
+</div>
+    </nav>
+</div>
+
+</div>
+</div> <!-- .container -->
+
+<footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
+
+  <div class="col-12 col-md-6 mt-3">
+    <p>"<strong>Analyse de données @ UCA</strong>" was written by Mohamad Ghassany. It was last built on 2024-03-20.</p>
+  </div>
+
+  <div class="col-12 col-md-6 mt-3">
+    <p>This book was built by the <a class="text-light" href="https://bookdown.org">bookdown</a> R package.</p>
+  </div>
+
+</div></div>
+</footer><!-- dynamically load mathjax for compatibility with self-contained --><script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/latest.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script><script type="text/x-mathjax-config">const popovers = document.querySelectorAll('a.footnote-ref[data-toggle="popover"]');
+for (let popover of popovers) {
+  const div = document.createElement('div');
+  div.setAttribute('style', 'position: absolute; top: 0, left:0; width:0, height:0, overflow: hidden; visibility: hidden;');
+  div.innerHTML = popover.getAttribute('data-content');
+
+  var has_math = div.querySelector("span.math");
+  if (has_math) {
+    document.body.appendChild(div);
+    MathJax.Hub.Queue(["Typeset", MathJax.Hub, div]);
+    MathJax.Hub.Queue(function() {
+      popover.setAttribute('data-content', div.innerHTML);
+      document.body.removeChild(div);
+    })
+  }
+}
+</script>
+</body>
+</html>

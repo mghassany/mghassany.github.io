@@ -4,59 +4,152 @@
     "href": "index.html",
     "title": "Data Mining course",
     "section": "",
-    "text": "Preface\nThis Data Mining course is destined to DU Data scientist in UCA Université Clermont Auvergne.",
+    "text": "Preface\nThis Data Mining course is destined to DU Data scientist in UCA Université Clermont Auvergne.\n\n\n\n\n\n\nSlides\n\n\n\nIntroductory slides:\n\nIntroduction to Data Mining: 📄 (from Prof. Yizhou Sun)\nData Exploration: 📄 (from Prof. Yizhou Sun)",
     "crumbs": [
       "Preface"
     ]
   },
   {
-    "objectID": "Intro-pca.html",
-    "href": "Intro-pca.html",
-    "title": "Introduction + Dimensionality Reduction",
+    "objectID": "pca.html",
+    "href": "pca.html",
+    "title": "PCA + t-SNE",
     "section": "",
-    "text": "Lab on Dimensionality Reduction\nThis Data Mining course is destined to DU Data scientist in UCA Université Clermont Auvergne.",
+    "text": "Slides\n\n\n\nSlides for this chapter:\n\nDimensionality Reduction (PCA + t-SNE): 📄\nAnother PCA slides: 📄",
     "crumbs": [
-      "Introduction + Dimensionality Reduction"
+      "Dimensionality reduction",
+      "PCA + t-SNE"
     ]
   },
   {
-    "objectID": "Intro-pca.html#lab-on-dimensionality-reduction",
-    "href": "Intro-pca.html#lab-on-dimensionality-reduction",
-    "title": "Introduction + Dimensionality Reduction",
+    "objectID": "pca-lab.html",
+    "href": "pca-lab.html",
+    "title": "Lab: PCA",
     "section": "",
-    "text": "You are free to apply this lab in  or Python.\nIn Python, use sklearn.decomposition.PCA for PCA and sklearn.manifold.TSNE for t-SNE.\nIn , you are free to use princomp(), prcomp() or factominer::PCA().",
+    "text": "The dataset\nEmployement in European countries in the late 70s\nThe purpose of this case study is to reveal the structure of the job market and economy in different developed countries. The final aim is to have a meaningful and rigorous plot that is able to show the most important features of the countries in a concise form.\nThe eurojob dataset 🔢 contains the data employed in this case study. It contains the percentage of workforce employed in 1979 in 9 industries for 26 European countries. The industries measured are:",
     "crumbs": [
-      "Introduction + Dimensionality Reduction"
+      "Dimensionality reduction",
+      "Lab: PCA"
     ]
   },
   {
-    "objectID": "Intro-pca.html#the-dataset",
-    "href": "Intro-pca.html#the-dataset",
-    "title": "Introduction + Dimensionality Reduction",
-    "section": "The dataset",
-    "text": "The dataset\nEmployement in European countries in the late 70s\nThe purpose of this case study is to reveal the structure of the job market and economy in different developed countries. The final aim is to have a meaningful and rigorous plot that is able to show the most important features of the countries in a concise form.\nThe eurojob dataset 🔢 contains the data employed in this case study. It contains the percentage of workforce employed in 1979 in 9 industries for 26 European countries. The industries measured are:\n\nAgriculture (Agr)\nMining (Min)\nManufacturing (Man)\nPower supply industries (Pow)\nConstruction (Con)\nService industries (Ser)\nFinance (Fin)\nSocial and personal services (Soc)\nTransport and communications (Tra)",
+    "objectID": "pca-lab.html#the-dataset",
+    "href": "pca-lab.html#the-dataset",
+    "title": "Lab: PCA",
+    "section": "",
+    "text": "Agriculture (Agr)\nMining (Min)\nManufacturing (Man)\nPower supply industries (Pow)\nConstruction (Con)\nService industries (Ser)\nFinance (Fin)\nSocial and personal services (Soc)\nTransport and communications (Tra)",
     "crumbs": [
-      "Introduction + Dimensionality Reduction"
+      "Dimensionality reduction",
+      "Lab: PCA"
     ]
   },
   {
-    "objectID": "Intro-pca.html#pca",
-    "href": "Intro-pca.html#pca",
-    "title": "Introduction + Dimensionality Reduction",
+    "objectID": "pca-lab.html#pca",
+    "href": "pca-lab.html#pca",
+    "title": "Lab: PCA",
     "section": "PCA",
     "text": "PCA\n1. Import the eurojob dataset 🔢 .\nIf the dataset is imported correctly, then it should look like this:\n\n\n\nThe eurojob dataset.\n\n\nCountry\nAgr\nMin\nMan\nPow\nCon\nSer\nFin\nSoc\nTra\n\n\n\n\nBelgium\n3.3\n0.9\n27.6\n0.9\n8.2\n19.1\n6.2\n26.6\n7.2\n\n\nDenmark\n9.2\n0.1\n21.8\n0.6\n8.3\n14.6\n6.5\n32.2\n7.1\n\n\nFrance\n10.8\n0.8\n27.5\n0.9\n8.9\n16.8\n6.0\n22.6\n5.7\n\n\nWGerm\n6.7\n1.3\n35.8\n0.9\n7.3\n14.4\n5.0\n22.3\n6.1\n\n\nIreland\n23.2\n1.0\n20.7\n1.3\n7.5\n16.8\n2.8\n20.8\n6.1\n\n\nItaly\n15.9\n0.6\n27.6\n0.5\n10.0\n18.1\n1.6\n20.1\n5.7\n\n\nLuxem\n7.7\n3.1\n30.8\n0.8\n9.2\n18.5\n4.6\n19.2\n6.2\n\n\nNether\n6.3\n0.1\n22.5\n1.0\n9.9\n18.0\n6.8\n28.5\n6.8\n\n\nUK\n2.7\n1.4\n30.2\n1.4\n6.9\n16.9\n5.7\n28.3\n6.4\n\n\nAustria\n12.7\n1.1\n30.2\n1.4\n9.0\n16.8\n4.9\n16.8\n7.0\n\n\nFinland\n13.0\n0.4\n25.9\n1.3\n7.4\n14.7\n5.5\n24.3\n7.6\n\n\nGreece\n41.4\n0.6\n17.6\n0.6\n8.1\n11.5\n2.4\n11.0\n6.7\n\n\nNorway\n9.0\n0.5\n22.4\n0.8\n8.6\n16.9\n4.7\n27.6\n9.4\n\n\nPortugal\n27.8\n0.3\n24.5\n0.6\n8.4\n13.3\n2.7\n16.7\n5.7\n\n\nSpain\n22.9\n0.8\n28.5\n0.7\n11.5\n9.7\n8.5\n11.8\n5.5\n\n\nSweden\n6.1\n0.4\n25.9\n0.8\n7.2\n14.4\n6.0\n32.4\n6.8\n\n\nSwitz\n7.7\n0.2\n37.8\n0.8\n9.5\n17.5\n5.3\n15.4\n5.7\n\n\nTurkey\n66.8\n0.7\n7.9\n0.1\n2.8\n5.2\n1.1\n11.9\n3.2\n\n\nBulgaria\n23.6\n1.9\n32.3\n0.6\n7.9\n8.0\n0.7\n18.2\n6.7\n\n\nCzech\n16.5\n2.9\n35.5\n1.2\n8.7\n9.2\n0.9\n17.9\n7.0\n\n\nEGerm\n4.2\n2.9\n41.2\n1.3\n7.6\n11.2\n1.2\n22.1\n8.4\n\n\nHungary\n21.7\n3.1\n29.6\n1.9\n8.2\n9.4\n0.9\n17.2\n8.0\n\n\nPoland\n31.1\n2.5\n25.7\n0.9\n8.4\n7.5\n0.9\n16.1\n6.9\n\n\nRomania\n34.7\n2.1\n30.1\n0.6\n8.7\n5.9\n1.3\n11.7\n5.0\n\n\nUSSR\n23.7\n1.4\n25.8\n0.6\n9.2\n6.1\n0.5\n23.6\n9.3\n\n\nYugoslavia\n48.7\n1.5\n16.8\n1.1\n4.9\n6.4\n11.3\n5.3\n4.0\n\n\n\n\n\n2. Describe the dataset and make some hypotheses. You can for example:\n\nCalculate the measurements of each variable\nCalculate and visualize the correlation matrix\nShow the scatterplot matrix\netc..\n\n3. Apply PCA to the dataset. Show the variation explained by each of the principal components and the cumulative variation. Comment.\n\n\n\n\n\n\nImportant\n\n\n\nDon’t forget to standardize the dataset, or to use the eigendecomposition of the correlation matrix instead of the variance-covariance matrix (no need to standardize in this case).\n\n\n4. In the following plot, you see a scatterplot matrix of the principal components. What does the green lines correspond to? what do you notice?\n\n\n\n\n\n\n\n\n\n\nThe PCs are uncorrelated, but not independent (uncorrelated does not imply independent).\n\n5. Plot the following:\n\nThe scree plot.\nThe graph of individuals.\nThe graph of variables.\nThe biplot graph.\nThe contributions of the variables to the first 2 principal components.\n\nInterpret the results (at least 3 interpretations).\n\nPCA from scratch\n6. Implement PCA on the eurojob dataset:\n\nStandardize the data.\nObtain the Eigenvectors and Eigenvalues from the covariance matrix or correlation matrix.\nExtra: Verify that the variance-covariance matrix of the standardized data is equal to the correlation matrix for the unstandardized data, and that both yield the same igenvectors and eigenvalue pairs\nSort eigenvalues in descending order and choose the \\(k\\) eigenvectors that correspond to the \\(k\\) largest eigenvalues, where \\(k\\) is the number of dimensions of the new feature subspace (\\(k \\le p\\)).\nConstruct the projection matrix \\(\\mathbf{A}\\) from the selected \\(k\\) eigenvectors.\nTransform the original dataset \\(X\\) via \\(\\mathbf{A}\\) to obtain a \\(k\\)-dimensional feature subspace \\(\\mathbf{Y}\\).\nVisualize the graph of individuals. Compare with the graph obtained in question 5.\n\n\nEigendecomposition - Computing Eigenvectors and Eigenvalues\nThe eigenvectors and eigenvalues of a covariance (or correlation) matrix represent the “core” of a PCA: The eigenvectors (principal components) determine the directions of the new feature space, and the eigenvalues determine their magnitude. In other words, the eigenvalues explain the variance of the data along the new feature axes.",
     "crumbs": [
-      "Introduction + Dimensionality Reduction"
+      "Dimensionality reduction",
+      "Lab: PCA"
     ]
   },
   {
-    "objectID": "Intro-pca.html#t-sne",
-    "href": "Intro-pca.html#t-sne",
-    "title": "Introduction + Dimensionality Reduction",
-    "section": "t-SNE",
-    "text": "t-SNE\nIn this part, we are going to use a sample from the digits dataset. You can download the sample from here \nThe MNIST dataset contains tens of thousands of handwritten digits ranging from zero to nine. Each image is of size 28×28 pixels.\nThe following image displays a couple of handwritten digits from the dataset:\n\n\n\n\n\n\n\n\n\nIt is required to flatten the images from 28×28 to 1×784 (which is already done in the given csv).\n\nLoad the dataset and describe it.\nShow some numbers like in the image above.\nApply PCA and t-SNE on the dataset and visualize in 2D plot the observations. Label the points by coloring them or showing the corresponding letter. Compare the results.\nWhat is the effect of the perplexity parameter when using t-SNE?\n\n\nIf you use R, use the Rtsne package.\n\n\n◼",
+    "objectID": "pca-lab.html#extra-t-sne",
+    "href": "pca-lab.html#extra-t-sne",
+    "title": "Lab: PCA",
+    "section": "Extra: t-SNE",
+    "text": "Extra: t-SNE\nIn this part, we are going to use a sample from the digits dataset. You can download the sample from here \nThe MNIST dataset contains tens of thousands of handwritten digits ranging from zero to nine. Each image is of size 28×28 pixels.\nThe following image displays a couple of handwritten digits from the dataset:\n\n\n\n\n\n\n\n\n\nIt is required to flatten the images from 28×28 to 1×784 (which is already done in the given csv).\n\nLoad the dataset and describe it.\nShow some numbers like in the image above.\nApply PCA and t-SNE on the dataset and visualize in 2D plot the observations. Label the points by coloring them or showing the corresponding letter. Compare the results.\nWhat is the effect of the perplexity parameter when using t-SNE?\n\n\nIf you use R, use the Rtsne package.\n\n\n◼",
     "crumbs": [
-      "Introduction + Dimensionality Reduction"
+      "Dimensionality reduction",
+      "Lab: PCA"
+    ]
+  },
+  {
+    "objectID": "kmeans.html",
+    "href": "kmeans.html",
+    "title": "Kmeans",
+    "section": "",
+    "text": "Unsupervised Learning\nThis Data Mining course is destined to DU Data scientist in UCA Université Clermont Auvergne.\nIn supervised learning methods such as regression and classification, we typically have access to a set of \\(p\\) features \\(X_1,X_2,\\ldots,X_p\\), measured on \\(n\\) observations, and a response \\(Y\\) also measured on those same \\(n\\) observations (what we call labels). The goal is to predict \\(Y\\) using \\(X_1,X_2,\\ldots,X_p\\). While in unsupervised learning, a set of statistical tools we have only a set of features \\(X_1,X_2,\\ldots,X_p\\) measured on \\(n\\) observations. We are not interested in prediction, because we do not have an associated response variable \\(Y\\). Rather, the goal is to discover interesting things about the measurements on \\(X_1,X_2,\\ldots,X_p\\). Is there an informative way to visualize the data? Can we discover subgroups among the variables or among the observations? Unsupervised learning refers to a diverse set of techniques for answering questions such as these. In this chapter, we will focus on a particular type of unsupervised learning: Principal Components Analysis (PCA), a tool used for data visualization or data pre-processing before supervised techniques are applied. In the next chapters, we will talk about clustering, another particular type of unsupervised learning. Clustering is a broad class of methods for discovering unknown subgroups in data.\nUnsupervised learning is often much more challenging than supervised learning. The exercise tends to be more subjective, and there is no simple goal for the analysis, such as prediction of a response. Unsupervised learning is often performed as part of an exploratory data analysis. It is hard to assess the results obtained from unsupervised learning methods. If we fit a predictive model using a supervised learning technique, then it is possible to check our work by seeing how well our model predicts the response \\(Y\\) on observations not used in fitting the model. But in unsupervised learning, there is no way to check our work because we don’t know the true answer: the problem is unsupervised.",
+    "crumbs": [
+      "Clustering",
+      "Kmeans"
+    ]
+  },
+  {
+    "objectID": "kmeans.html#clustering",
+    "href": "kmeans.html#clustering",
+    "title": "Kmeans",
+    "section": "Clustering",
+    "text": "Clustering\nClustering (or Cluster analysis) is the collection of techniques designed to find subgroups or clusters in a dataset of variables \\(X_1,\\ldots,X_p\\). Depending on the similarities between the observations, these are partitioned in homogeneous groups as separated as possible between them. Clustering methods can be classified into these main categories:\n\nPartition methods: Given a fixed number of cluster \\(k\\), these methods aim to assign each observation of \\(X_1,\\ldots,X_p\\) to a unique cluster, in such a way that the within-cluster variation is as small as possible (the clusters are as homogeneous as possible) while the between cluster variation is as large as possible (the clusters are as separated as possible).\nDistribution models: These clustering models are based on the notion of how probable is it that all data points in the cluster belong to the same distribution (For example: Normal, Poisson, etc..). A popular example of these models is Expectation-maximization algorithm using multivariate Normal distributions.\nHierarchical methods: These methods construct a hierarchy for the observations in terms of their similitudes. This results in a tree-based representation of the data in terms of a dendrogram, which depicts how the observations are clustered at different levels – from the smallest groups of one element to the largest representing the whole dataset.\nDensity Models: These models search the data space for areas of varied density of data points in the data space. It isolates various different density regions and assign the data points within these regions in the same cluster. Popular examples of density models are DBSCAN and OPTICS.\n\n\n\n\n\n\nPerformance comparison of different clustering methods on different datasets\n\n\n\n\n\nIn this chapter we will see the basics of the partition methods, and one of the most well-known clustering techniques, namely \\(k\\)-means clustering.",
+    "crumbs": [
+      "Clustering",
+      "Kmeans"
+    ]
+  },
+  {
+    "objectID": "kmeans.html#introduction",
+    "href": "kmeans.html#introduction",
+    "title": "Kmeans",
+    "section": "Introduction",
+    "text": "Introduction\nClustering (or Cluster analysis) is the process of partitioning a set of data objects (observations) into subsets. Each subset is a cluster, such that objects in a cluster are similar to one another, yet dissimilar to objects in other clusters.\nThe set of clusters resulting from a cluster analysis can be referred to as a clustering. In this context, different clustering methods may generate different clustering results on the same data set. The partitioning is not performed by humans, but by the clustering algorithm. Hence, clustering is useful in that it can lead to the discovery of previously unknown groups within the data.\n\n\n\n\n\n\nTip\n\n\n\nDifferent clustering methods may generate different clustering results on the same data set.\n\n\nExample: Imagine a Director of Customer Relationships at an Electronics magazine, and he has five managers working for him. He would like to organize all the company’s customers into five groups so that each group can be assigned to a different manager. Strategically, he would like that the customers in each group are as similar as possible. Moreover, two given customers having very different business patterns should not be placed in the same group. His intention behind this business strategy is to develop customer relationship campaigns that specifically target each group, based on common features shared by the customers per group. Unlike in classification, the class label of each customer is unknown. He needs to discover these groupings. Given a large number of customers and many attributes describing customer profiles, it can be very costly or even infeasible to have a human study the data and manually come up with a way to partition the customers into strategic groups. He needs a clustering tool to help.\nClustering has been widely used in many applications such as business intelligence, image pattern recognition, Web search, biology, and security. In business intelligence, clustering can be used to organize a large number of customers into groups, where customers within a group share strong similar characteristics. In image recognition, clustering can be used to discover clusters or “subclasses” in handwritten character recognition systems, for example. Clustering has also found many applications in Web search. For example, a keyword search may often return a very large number of hits (i.e., pages relevant to the search) due to the extremely large number of web pages. Clustering can be used to organize the search results into groups and present the results in a concise and easily accessible way. Moreover, clustering techniques have been developed to cluster documents into topics (remember the google news example?), which are commonly used in information retrieval practice.\nClustering is also called data segmentation in some applications because clustering partitions large data sets into groups according to their similarity.\nAs a branch of statistics, clustering has been extensively studied, with the main focus on distance-based cluster analysis. Clustering tools were proposed like \\(k\\)-means, fuzzy \\(c\\)-means, and several other methods.\nMany clustering algorithms have been introduced in the literature. Since clusters can formally be seen as subsets of the data set, one possible classification of clustering methods can be according to whether the subsets are fuzzy or crisp (hard).\n\nHard clustering\nHard clustering methods are based on classical set theory, and require that an object either does or does not belong to a cluster. Hard clustering means partitioning the data into a specified number of mutually exclusive subsets. The most common hard clustering method is \\(k\\)-means.\n\n\nFuzzy clustering\nFuzzy clustering methods, however, allow the objects to belong to several clusters simultaneously, with different degrees of membership. In many situations, fuzzy clustering is more natural than hard clustering. The most known technique of fuzzy clustering is the fuzzy \\(c\\)-means.",
+    "crumbs": [
+      "Clustering",
+      "Kmeans"
+    ]
+  },
+  {
+    "objectID": "kmeans.html#k-means",
+    "href": "kmeans.html#k-means",
+    "title": "Kmeans",
+    "section": "\\(k\\)-Means",
+    "text": "\\(k\\)-Means\nIf you have ever watched a group of tourists with a couple of tour guides who hold umbrellas up so that everybody can see them and follow them, then you have seen a dynamic version of the \\(k\\)-means algorithm. \\(k\\)-means is even simpler, because the data (playing the part of the tourists) does not move, only the tour guides move.\nSuppose that we want to divide our input data into \\(K\\) categories, where we know the value of \\(K\\). We allocate \\(K\\) cluster centres (also called prototypes or centroids) to our input space, and we would like to position these centres so that there is one cluster centre in the middle of each cluster. However, we don’t know where the clusters are, let alone where their ‘middle’ is, so we need an algorithm that will find them. Learning algorithms generally try to minimize some sort of error, so we need to think of an error criterion that describes this aim. There are two things that we need to define:\nA distance measure: In order to talk about distances between points, we need some way to measure distances. It is often the normal Euclidean distance, but there are other alternatives like Manhattan distance, Correlation distance, Chessboard distance and other.\nThe Euclidean distance: Let \\(x=(x_1,x_2)\\) and \\(y=(y_1,y_2)\\) two observations in a two-dimensional space. The Euclidean distance \\(d_{x,y}\\) between \\(x\\) and \\(y\\) is\n\\[\\begin{align*}  \nd_{x,y}^2 &= (x_1-y_1)^2+(x_2 - y_2)^2  \\\\\nd_{x,y} &= \\sqrt{(x_1-y_1)^2+(x_2 - y_2)^2}\n\\end{align*}\\]\nThe mean average: Once we have a distance measure, we can compute the central point of a set of data points, which is the mean average. Actually, this is only true in Euclidean space, which is the one we are used to, where everything is nice and flat.\nWe can now think about a suitable way of positioning the cluster centres: we compute the mean point of each cluster, \\(\\textbf{v}_k\\), \\(i=1,\\ldots,K\\), and put the cluster centre there. This is equivalent to minimizing the Euclidean distance (which is the sum-of-squares error) from each data point to its cluster centre. Then we decide which points belong to which clusters by associating each point with the cluster centre that it is closest to. This changes as the algorithm iterates. We start by positioning the cluster centres randomly though the input space, since we don’t know where to put them, and we update their positions according to the data. We decide which cluster each data point belongs to by computing the distance between each data point and all of the cluster centres, and assigning it to the cluster that is the closest. For all the point that are assigned to a cluster, we then compute the mean of them, and move the cluster centre to that place. We iterate the algorithm until the cluster centres stop moving.\nIt is convenient at this point to define some notation to describe the assignment of data points to clusters. For each data point \\(x_i\\), we introduce a corresponding set of binary indicator variables \\(u_{ki} \\in {0,1}\\), where \\(k=1,\\ldots,K\\) describing which of the \\(K\\) clusters the data point \\(x_i\\) is assigned to, so that if data point \\(x_i\\) is assigned to cluster \\(k\\) then \\(u_{ki}= 1\\), and \\(u_{ji}= 0\\) for \\(j \\neq k\\). This is known as the \\(1\\)-of-\\(K\\) coding scheme. We can then define an objective function (and sometimes called a distortion measure), given by\n\\[J= \\sum_{i=1}^{N} \\sum_{k=1}^{K} u_{ki} \\| x_{i}- \\mathbf{v}_{k} \\|^2\\]\nwhich represents the sum of the squares of the distances of each data point to its assigned vector \\(\\mathbf{v}_{k}\\). The goal is to find values for the \\(\\{u_{ki}\\}\\) and the \\(\\{\\mathbf{v}_{k}\\}\\) so as to minimize \\(J\\). We can do this through an iterative procedure in which each iteration involves two successive steps corresponding to successive optimizations with respect to the \\(u_{ki}\\) and the \\(\\mathbf{v}_{k}\\). The algorithm of \\(k\\)-means is described in the following algorithm:\n\n\n\n\n\n\n\nTip\n\n\n\nThe \\(k\\)-means algorithm produces\n\nA final estimate of cluster centroids (i.e. their coordinates).\nAn assignment of each point to their respective cluster.\n\n\n\nThe denominator in the expression \\(\\mathbf{v}_k = \\frac{\\sum_i u_{ki} x_i}{\\sum_i u_{ki}}\\) is equal to the number of points assigned to cluster \\(k\\), and so this result has a simple interpretation, namely set \\(\\mathbf{v}_k\\) equal to the mean of all of the data points \\(x_i\\) assigned to cluster \\(k\\). For this reason, the procedure is known as the \\(k\\)-means algorithm.\nThe two phases of re-assigning data points to clusters and re-computing the cluster means are repeated in turn until there is no further change in the assignments (or until some maximum number of iterations is exceeded). Because each phase reduces the value of the objective function \\(J\\), convergence of the algorithm is assured. However, it may converge to a local rather than global minimum of \\(J\\).\nThe \\(k\\)-means algorithm is illustrated using the Old Faithful data set 1 in following figure.\n\n\n\n\n\nIllustration of the \\(k\\)-means algorithm using the re-scaled Old Faithful data set, where \\(k=2\\). We can see how the \\(k\\)-means algorithm works. (a) The first thing \\(k\\)-means has to do is assign an initial set of centroids. (b) The next stage in the algorithm assigns every point in the dataset to the closest centroid. (c) The next stage is to re-calculate the centroids based on the new cluster assignments of the data points. (d) Now we have completed one full cycle of the algorithm we can continue and re-assign points to their (new) closest cluster centroid. (e) And we can update the centroid positions one more time based on the re-assigned points. (g)(h)(f) The algorithm stops when we obtain the same results in consecutive iterations.\n\n\n\n\nThe \\(k\\)-means algorithm is illustrated using the Iris data set in following interactive figure2. (Try to modify the X and Y variables and the numbers of chosen clusters and see the result)\n\n\n\n\n\n\n\n\\(k\\)-means in \nWe will use an example with simulated data to demonstrate how the \\(k\\)-means algorithm works. Here we simulate some data from three clusters and plot the dataset below.\n\nset.seed(1234)\nx &lt;- rnorm(12,mean=rep(1:3,each=4),sd=0.2)\ny &lt;- rnorm(12,mean=rep(c(1,2,1),each=4),sd=0.2)\nplot(x,y,col=\"blue\",pch=19,cex=2)\ntext(x+0.05,y+0.05,labels=as.character(1:12))\n\n\n\n\nSimulated dataset\n\n\n\n\nThe kmeans() function in R implements the \\(k\\)-means algorithm and can be found in the stats package, which comes with R and is usually already loaded when you start R. Two key parameters that you have to specify are x, which is a matrix or data frame of data, and centers which is either an integer indicating the number of clusters or a matrix indicating the locations of the initial cluster centroids. The data should be organized so that each row is an observation and each column is a variable or feature of that observation.\n\ndataFrame &lt;- data.frame(x,y)\nkmeansObj &lt;- kmeans(dataFrame,centers=3)\nnames(kmeansObj)\n\n[1] \"cluster\"      \"centers\"      \"totss\"        \"withinss\"     \"tot.withinss\"\n[6] \"betweenss\"    \"size\"         \"iter\"         \"ifault\"      \n\n\nYou can see which cluster each data point got assigned to by looking at the cluster element of the list returned by the kmeans() function.\n\nkmeansObj$cluster\n\n [1] 3 1 1 3 2 2 2 2 2 2 2 2\n\n\nHere is a plot of the \\(k\\)-means clustering solution.\n\nplot(x,y,col=kmeansObj$cluster,pch=19,cex=2)\npoints(kmeansObj$centers,col=1:3,pch=3,cex=3,lwd=3)\n\n\n\n\n\\(k\\)-means clustering solution\n\n\n\n\n\n\nCluster Validity, Choosing the Number of Clusters\nThe result of a clustering algorithm can be very different from each other on the same data set as the other input parameters of an algorithm can extremely modify the behavior and execution of the algorithm. The aim of the cluster validity is to find the partitioning that best fits the underlying data. Usually 2D data sets are used for evaluating clustering algorithms as the reader easily can verify the result. But in case of high dimensional data the visualization and visual validation are not trivial tasks therefore some formal methods are needed.\nThe process of evaluating the results of a clustering algorithm is called cluster validity assessment. Two measurement criteria have been proposed for evaluating and selecting an optimal clustering scheme:\n\nCompactness: The member of each cluster should be as close to each other as possible. A common measure of compactness is the variance.\nSeparation: The clusters themselves should be widely separated. There are three common approaches measuring the distance between two different clusters: distance between the closest member of the clusters, distance between the most distant members and distance between the centres of the clusters.\n\nThere are three different techniques for evaluating the result of the clustering algorithms, and several Validity measures are proposed: Validity measures are scalar indices that assess the goodness of the obtained partition. Clustering algorithms generally aim at locating well separated and compact clusters. When the number of clusters is chosen equal to the number of groups that actually exist in the data, it can be expected that the clustering algorithm will identify them correctly. When this is not the case, misclassifications appear, and the clusters are not likely to be well separated and compact. Hence, most cluster validity measures are designed to quantify the separation and the compactness of the clusters.\n\n\n\n\n\n\nTip\n\n\n\nCheck this answer on stackoverflow containing  code for several methods of computing an optimal value of \\(k\\) for \\(k\\)-means cluster analysis: here.",
+    "crumbs": [
+      "Clustering",
+      "Kmeans"
+    ]
+  },
+  {
+    "objectID": "kmeans.html#lab-on-kmeans",
+    "href": "kmeans.html#lab-on-kmeans",
+    "title": "Kmeans",
+    "section": "Lab on Kmeans",
+    "text": "Lab on Kmeans",
+    "crumbs": [
+      "Clustering",
+      "Kmeans"
+    ]
+  },
+  {
+    "objectID": "kmeans.html#footnotes",
+    "href": "kmeans.html#footnotes",
+    "title": "Kmeans",
+    "section": "",
+    "text": "Old Faithful, is a hydrothermal geyser in Yellowstone National Park in the state of Wyoming, U.S.A., and is a popular tourist attraction. Its name stems from the supposed regularity of its eruptions. The data set comprises 272 observations, each of which represents a single eruption and contains two variables corresponding to the duration in minutes of the eruption, and the time until the next eruption, also in minutes.↩︎\nMade by Joseph J. Allaire https://github.com/jjallaire↩︎",
+    "crumbs": [
+      "Clustering",
+      "Kmeans"
+    ]
+  },
+  {
+    "objectID": "kmeans-lab.html",
+    "href": "kmeans-lab.html",
+    "title": "Lab: Kmeans",
+    "section": "",
+    "text": "\\(k\\)-means clustering\nIn this lab, we will use the dataset Ligue1 2017/2018.\n1. Download the dataset: Ligue1 2017/2018 🔢 and import it. Be aware that the teams’ names are in the first column. You can put the argument row.names to 1 in R.\n# You can import directly from my website (instead of downloading it..)\nligue1 &lt;- read.csv(\"http://www.mghassany.com/courses/MLcourse/datasets/ligue1_17_18.csv\", row.names=1, sep=\";\")\n2. Print the first two rows of the dataset and the total number of features in this dataset.",
+    "crumbs": [
+      "Clustering",
+      "Lab: Kmeans"
+    ]
+  },
+  {
+    "objectID": "kmeans-lab.html#k-means-clustering",
+    "href": "kmeans-lab.html#k-means-clustering",
+    "title": "Lab: Kmeans",
+    "section": "",
+    "text": "Tip\n\n\n\nIn R, you can create an awesome HTML table by using the function kable from the knitr library. For example, if you want to show the first 5 lines and 5 columns of your dataset, you can use knitr::kable(ligue1[1:5,1:5]). Give it a try and see the result on your html report!\n\n\n\npointsCards\n3. We will first consider a smaller dataset to easily understand the results of \\(k\\)-means. Create a new dataset in which you consider only Points and Yellow.cards from the original dataset. Name it pointsCards\n4. Apply \\(k\\)-means on pointsCards. Chose \\(k=2\\) clusters and put the number of iterations to 20. Store your results into km. (Remark: kmeans() uses a random initialization of the clusters, so the results may vary from one call to another. Use set.seed() to have reproducible outputs).\n5. Print and describe what is inside km.\n6. What are the coordinates of the centers of the clusters (called also prototypes or centroids) ?\n7. Plot the data (Yellow.cards vs Points). Color the points corresponding to their cluster.\n8. Add to the previous plot the clusters centroids and add the names of the observations.\n9. Re-run \\(k\\)-means on pointsCards using 3 and 4 clusters and store the results into km3 and km4 respectively. Visualize the results like in question 7 and 8.\n\n\n\n\n\n\nImportant\n\n\n\nHow many clusters \\(k\\) do we need in practice? There is not a single answer: the advice is to try several and compare. Inspecting the ‘between_SS / total_SS’ for a good trade-off between the number of clusters and the percentage of total variation explained usually gives a good starting point for deciding on \\(k\\) (criterion to select \\(k\\) similar to PCA).\nThere is several methods of computing an optimal value of \\(k\\) with  code on following stackoverflow answer: here .\n\n\n10. Visualize the “within groups sum of squares” of the \\(k\\)-means clustering results (use the code in the link above).\n\n\n\n11. Modify the code of the previous question in order to visualize the ‘between_SS / total_SS’. Interpret the results.\n\n\nLigue 1\nSo far, you have only taken the information of two variables for performing clustering. Now you will apply kmeans() on the original dataset ligue1. Using PCA, we can visualize the clustering performed with all the available variables in the dataset.\nBy default, kmeans() does not standardize the variables, which will affect the clustering result. As a consequence, the clustering of a dataset will be different if one variable is expressed in millions or in tenths. If you want to avoid this distortion, use scale to automatically center and standardize the dataset (the result will be a matrix, so you need to transform it to a data frame again).\n12. Scale the dataset and transform it to a data frame again. Store the scaled dataset into ligue1_scaled.\n13. Apply kmeans() on ligue1 and on ligue1_scaled using 3 clusters and 20 iterations. Store the results into km.ligue1 and km.ligue1.scaled respectively (do not forget to set a seed)\n14. How many observations there are in each cluster of km.ligue1 and km.ligue1.scaled ? (you can use table()). Do you obtain the same results when you perform kmeans() on the scaled and unscaled data?\n\n\nPCA\n15. Apply PCA on ligue1 dataset and store you results in pcaligue1. Do we need to apply PCA on the scaled dataset? Justify your answer.\n16. Plot the observations and the variables on the first two principal components (biplot). Interpret the results.\n17. Visualize the teams on the first two principal components and color them with respect to their cluster.\n\n# You can use the following code in R, based on `factoextra` library.\nfviz_cluster(km.ligue1, data = ligue1, # km.ligue1 is where you stored your kmeans results\n              palette = c(\"red\", \"blue\", \"green\"), # 3 colors since 3 clusters\n              ggtheme = theme_minimal(),\n              main = \"Clustering Plot\"\n)\n\n18. Recall that the figure of question 17 is a visualization with PC1 and PC2 of the clustering done with all the variables, not on PC1 and PC2. Now apply the kmeans() clustering taking only the first two PCs instead the variables of original dataset. Visualize the results and compare with the question 17.\n\n\n\n\n\n\nTip\n\n\n\nBy applying \\(k\\)-means only on the PCs we obtain different and less accurate result, but it is still an insightful way.",
+    "crumbs": [
+      "Clustering",
+      "Lab: Kmeans"
     ]
   }
 ]

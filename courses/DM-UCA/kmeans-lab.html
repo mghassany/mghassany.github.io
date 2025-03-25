@@ -6,9 +6,8 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
-<meta name="author" content="Mohamad Ghassany">
 
-<title>Data Mining course</title>
+<title>Lab: Kmeans – Data Mining course</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -21,6 +20,40 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
 </style>
 
 
@@ -31,7 +64,7 @@ ul.task-list li input[type="checkbox"] {
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
-<link href="./pca.html" rel="next">
+<link href="./kmeans.html" rel="prev">
 <link href="./data-mining.jpg" rel="icon" type="image/jpeg">
 <script src="site_libs/quarto-html/quarto.js"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
@@ -72,6 +105,35 @@ ul.task-list li input[type="checkbox"] {
   }
 }</script>
 
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
 
 <link rel="stylesheet" href="custom.css">
 </head>
@@ -85,7 +147,7 @@ ul.task-list li input[type="checkbox"] {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./index.html">Preface</a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./kmeans.html">Clustering</a></li><li class="breadcrumb-item"><a href="./kmeans-lab.html">Lab: Kmeans</a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
     </div>
@@ -110,7 +172,7 @@ ul.task-list li input[type="checkbox"] {
     <ul class="list-unstyled mt-1">
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./index.html" class="sidebar-item-text sidebar-link active">
+  <a href="./index.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Preface</span></a>
   </div>
 </li>
@@ -154,7 +216,7 @@ ul.task-list li input[type="checkbox"] {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./kmeans-lab.html" class="sidebar-item-text sidebar-link">
+  <a href="./kmeans-lab.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text">Lab: Kmeans</span></a>
   </div>
 </li>
@@ -170,28 +232,27 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#preface" id="toc-preface" class="nav-link active" data-scroll-target="#preface">Preface</a></li>
+  <li><a href="#k-means-clustering" id="toc-k-means-clustering" class="nav-link active" data-scroll-target="#k-means-clustering"><span class="math inline">\(k\)</span>-means clustering</a>
+  <ul class="collapse">
+  <li><a href="#pointscards" id="toc-pointscards" class="nav-link" data-scroll-target="#pointscards"><code>pointsCards</code></a></li>
+  <li><a href="#ligue-1" id="toc-ligue-1" class="nav-link" data-scroll-target="#ligue-1"><code>Ligue 1</code></a></li>
+  <li><a href="#pca" id="toc-pca" class="nav-link" data-scroll-target="#pca"><code>PCA</code></a></li>
+  </ul></li>
   </ul>
 </nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default">
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./kmeans.html">Clustering</a></li><li class="breadcrumb-item"><a href="./kmeans-lab.html">Lab: Kmeans</a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title">Data Mining course</h1>
+<h1 class="title">Lab: Kmeans</h1>
 </div>
 
 
 
 <div class="quarto-title-meta">
 
-    <div>
-    <div class="quarto-title-meta-heading">Author</div>
-    <div class="quarto-title-meta-contents">
-             <p>Mohamad Ghassany </p>
-          </div>
-  </div>
     
   
     
@@ -202,29 +263,95 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<section id="preface" class="level1 unnumbered">
-<h1 class="unnumbered">Preface</h1>
-<p>This Data Mining course is destined to DU Data scientist in UCA Université Clermont Auvergne.</p>
-<div class="callout callout-style-default callout-note callout-titled">
+<section id="k-means-clustering" class="level2 unnumbered">
+<h2 class="unnumbered anchored" data-anchor-id="k-means-clustering"><span class="math inline">\(k\)</span>-means clustering</h2>
+<p>In this lab, we will use the dataset <code>Ligue1 2017/2018</code>.</p>
+<p><strong>1.</strong> Download the dataset: <a href="datasets/ligue1_17_18.csv"><code>Ligue1 2017/2018</code> 🔢</a> and import it. Be aware that the teams’ names are in the first column. You can put the argument <code>row.names</code> to 1 in R.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># You can import directly from my website (instead of downloading it..)</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>ligue1 <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">"http://www.mghassany.com/courses/MLcourse/datasets/ligue1_17_18.csv"</span>, <span class="at">row.names=</span><span class="dv">1</span>, <span class="at">sep=</span><span class="st">";"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p><strong>2.</strong> Print the first two rows of the dataset and the total number of features in this dataset.</p>
+<div class="callout callout-style-default callout-tip callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Slides
+Tip
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>Introductory slides:</p>
-<ul>
-<li>Introduction to Data Mining: <a href="01Intro.pdf" target="_blank">📄</a> (from <a href="https://github.com/yichousun/Fall2021_CS145_IntroDM/?tab=readme-ov-file" target="_blank">Prof.&nbsp;Yizhou Sun</a>)</li>
-<li>Data Exploration: <a href="02Data_Exploration.pdf" target="_blank">📄</a> (from <a href="https://github.com/yichousun/Fall2021_CS145_IntroDM/?tab=readme-ov-file" target="_blank">Prof.&nbsp;Yizhou Sun</a>)</li>
-</ul>
+<p>In R, you can create an awesome HTML table by using the function <code>kable</code> from the <code>knitr</code> library. For example, if you want to show the first 5 lines and 5 columns of your dataset, you can use <code>knitr::kable(ligue1[1:5,1:5])</code>. Give it a try and see the result on your html report!</p>
 </div>
 </div>
-<p><img src="data-mining.jpg" class="img-fluid"></p>
+<section id="pointscards" class="level3 unnumbered">
+<h3 class="unnumbered anchored" data-anchor-id="pointscards"><code>pointsCards</code></h3>
+<p><strong>3.</strong> We will first consider a smaller dataset to easily understand the results of <span class="math inline">\(k\)</span>-means. Create a new dataset in which you consider only <code>Points</code> and <code>Yellow.cards</code> from the original dataset. Name it <code>pointsCards</code></p>
+<p><strong>4.</strong> Apply <span class="math inline">\(k\)</span>-means on <code>pointsCards</code>. Chose <span class="math inline">\(k=2\)</span> clusters and put the number of iterations to 20. Store your results into <code>km</code>. (<strong>Remark</strong>: <code>kmeans()</code> uses a random initialization of the clusters, so the results may vary from one call to another. Use <code>set.seed()</code> to have reproducible outputs).</p>
+<p><strong>5.</strong> Print and describe what is inside <code>km</code>.</p>
+<p><strong>6.</strong> What are the coordinates of the centers of the clusters (called also prototypes or centroids) ?</p>
+<p><strong>7.</strong> Plot the data (<code>Yellow.cards</code> vs <code>Points</code>). Color the points corresponding to their cluster.</p>
+<p><strong>8.</strong> Add to the previous plot the clusters centroids and add the names of the observations.</p>
+<p><strong>9.</strong> Re-run <span class="math inline">\(k\)</span>-means on <code>pointsCards</code> using 3 and 4 clusters and store the results into <code>km3</code> and <code>km4</code> respectively. Visualize the results like in question <strong>7</strong> and <strong>8</strong>.</p>
+<div class="callout callout-style-default callout-important callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Important
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>How many clusters <span class="math inline">\(k\)</span> do we need in practice? There is not a single answer: the advice is to try several and compare. Inspecting the ‘between_SS / total_SS’ for a good trade-off between the number of clusters and the percentage of total variation explained usually gives a good starting point for deciding on <span class="math inline">\(k\)</span> (criterion to select <span class="math inline">\(k\)</span> similar to PCA).</p>
+<p>There is several methods of computing an optimal value of <span class="math inline">\(k\)</span> with <svg aria-hidden="true" role="img" viewbox="0 0 581 512" style="height:1em;width:1.13em;vertical-align:-0.125em;margin-left:auto;margin-right:auto;font-size:inherit;fill:steelblue;overflow:visible;position:relative;"><path d="M581 226.6C581 119.1 450.9 32 290.5 32S0 119.1 0 226.6C0 322.4 103.3 402 239.4 418.1V480h99.1v-61.5c24.3-2.7 47.6-7.4 69.4-13.9L448 480h112l-67.4-113.7c54.5-35.4 88.4-84.9 88.4-139.7zm-466.8 14.5c0-73.5 98.9-133 220.8-133s211.9 40.7 211.9 133c0 50.1-26.5 85-70.3 106.4-2.4-1.6-4.7-2.9-6.4-3.7-10.2-5.2-27.8-10.5-27.8-10.5s86.6-6.4 86.6-92.7-90.6-87.9-90.6-87.9h-199V361c-74.1-21.5-125.2-67.1-125.2-119.9zm225.1 38.3v-55.6c57.8 0 87.8-6.8 87.8 27.3 0 36.5-38.2 28.3-87.8 28.3zm-.9 72.5H365c10.8 0 18.9 11.7 24 19.2-16.1 1.9-33 2.8-50.6 2.9v-22.1z"></path></svg> code on following <code>stackoverflow</code> answer: <a href="http://stackoverflow.com/a/15376462/" target="_blank">here <svg aria-hidden="true" role="img" viewbox="0 0 384 512" style="height:1em;width:0.75em;vertical-align:-0.125em;margin-left:auto;margin-right:auto;font-size:inherit;fill:currentColor;overflow:visible;position:relative;"><path d="M290.7 311L95 269.7 86.8 309l195.7 41zm51-87L188.2 95.7l-25.5 30.8 153.5 128.3zm-31.2 39.7L129.2 179l-16.7 36.5L293.7 300zM262 32l-32 24 119.3 160.3 32-24zm20.5 328h-200v39.7h200zm39.7 80H42.7V320h-40v160h359.5V320h-40z"></path></svg></a>.</p>
+</div>
+</div>
+<p><strong>10.</strong> Visualize the “within groups sum of squares” of the <span class="math inline">\(k\)</span>-means clustering results (use the code in the link above).</p>
+<center>
+<img src="img/wss_bss.jpg" class="img-fluid">
+</center>
+<p><strong>11.</strong> Modify the code of the previous question in order to visualize the ‘between_SS / total_SS’. Interpret the results.</p>
+</section>
+<section id="ligue-1" class="level3 unnumbered">
+<h3 class="unnumbered anchored" data-anchor-id="ligue-1"><code>Ligue 1</code></h3>
+<p>So far, you have only taken the information of two variables for performing clustering. Now you will apply <code>kmeans()</code> on the original dataset <code>ligue1</code>. Using PCA, we can visualize the clustering performed with all the available variables in the dataset.</p>
+<p>By default, <code>kmeans()</code> does not standardize the variables, which will affect the clustering result. As a consequence, the clustering of a dataset will be different if one variable is expressed in millions or in tenths. If you want to avoid this distortion, use scale to automatically center and standardize the dataset (the result will be a matrix, so you need to transform it to a data frame again).</p>
+<p><strong>12.</strong> Scale the dataset and transform it to a data frame again. Store the scaled dataset into <code>ligue1_scaled</code>.</p>
+<p><strong>13.</strong> Apply <code>kmeans()</code> on <code>ligue1</code> and on <code>ligue1_scaled</code> using 3 clusters and 20 iterations. Store the results into <code>km.ligue1</code> and <code>km.ligue1.scaled</code> respectively (do not forget to set a seed)</p>
+<p><strong>14.</strong> How many observations there are in each cluster of <code>km.ligue1</code> and <code>km.ligue1.scaled</code> ? (you can use <code>table()</code>). Do you obtain the same results when you perform <code>kmeans()</code> on the scaled and unscaled data?</p>
+</section>
+<section id="pca" class="level3 unnumbered">
+<h3 class="unnumbered anchored" data-anchor-id="pca"><code>PCA</code></h3>
+<p><strong>15.</strong> Apply PCA on <code>ligue1</code> dataset and store you results in <code>pcaligue1</code>. Do we need to apply PCA on the scaled dataset? Justify your answer.</p>
+<p><strong>16.</strong> Plot the observations and the variables on the first two principal components (biplot). Interpret the results.</p>
+<p><strong>17.</strong> Visualize the teams on the first two principal components and color them with respect to their cluster.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># You can use the following code in R, based on `factoextra` library.</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="fu">fviz_cluster</span>(km.ligue1, <span class="at">data =</span> ligue1, <span class="co"># km.ligue1 is where you stored your kmeans results</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>              <span class="at">palette =</span> <span class="fu">c</span>(<span class="st">"red"</span>, <span class="st">"blue"</span>, <span class="st">"green"</span>), <span class="co"># 3 colors since 3 clusters</span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>              <span class="at">ggtheme =</span> <span class="fu">theme_minimal</span>(),</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>              <span class="at">main =</span> <span class="st">"Clustering Plot"</span></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p><strong>18.</strong> Recall that the figure of question <strong>17</strong> is a visualization with PC1 and PC2 of the clustering done with all the variables, not on PC1 and PC2. Now apply the <code>kmeans()</code> clustering taking only the first two PCs instead the variables of original dataset. Visualize the results and compare with the question <strong>17</strong>.</p>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Tip
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>By applying <span class="math inline">\(k\)</span>-means only on the PCs we obtain different and less accurate result, but it is still an insightful way.</p>
+</div>
+</div>
 
 
+</section>
 </section>
 
 </main> <!-- /main -->
@@ -791,11 +918,11 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
+      <a href="./kmeans.html" class="pagination-link" aria-label="Kmeans">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Kmeans</span>
+      </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./pca.html" class="pagination-link" aria-label="PCA + t-SNE">
-        <span class="nav-page-text">PCA + t-SNE</span> <i class="bi bi-arrow-right-short"></i>
-      </a>
   </div>
 </nav>
 </div> <!-- /content -->

@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Lab: Kmeans – Data Mining course</title>
+<title>Lab: GMM &amp; EM – Data Mining course</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -64,8 +64,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
-<link href="./em.html" rel="next">
-<link href="./kmeans.html" rel="prev">
+<link href="./em.html" rel="prev">
 <link href="./data-mining.jpg" rel="icon" type="image/jpeg">
 <script src="site_libs/quarto-html/quarto.js"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
@@ -148,7 +147,7 @@ window.Quarto = {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./kmeans.html">Clustering</a></li><li class="breadcrumb-item"><a href="./kmeans-lab.html">Lab: Kmeans</a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./kmeans.html">Clustering</a></li><li class="breadcrumb-item"><a href="./em-lab.html">Lab: GMM &amp; EM</a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
     </div>
@@ -217,7 +216,7 @@ window.Quarto = {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./kmeans-lab.html" class="sidebar-item-text sidebar-link active">
+  <a href="./kmeans-lab.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Lab: Kmeans</span></a>
   </div>
 </li>
@@ -229,7 +228,7 @@ window.Quarto = {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./em-lab.html" class="sidebar-item-text sidebar-link">
+  <a href="./em-lab.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text">Lab: GMM &amp; EM</span></a>
   </div>
 </li>
@@ -245,22 +244,21 @@ window.Quarto = {
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#k-means-clustering" id="toc-k-means-clustering" class="nav-link active" data-scroll-target="#k-means-clustering"><span class="math inline">\(k\)</span>-means clustering</a>
+  <li><a href="#expectation-maximization-em" id="toc-expectation-maximization-em" class="nav-link active" data-scroll-target="#expectation-maximization-em"><strong>E</strong>xpectation-<strong>M</strong>aximization (EM)</a>
   <ul class="collapse">
-  <li><a href="#pointscards" id="toc-pointscards" class="nav-link" data-scroll-target="#pointscards"><code>pointsCards</code></a></li>
-  <li><a href="#ligue-1" id="toc-ligue-1" class="nav-link" data-scroll-target="#ligue-1"><code>Ligue 1</code></a></li>
-  <li><a href="#pca" id="toc-pca" class="nav-link" data-scroll-target="#pca"><code>PCA</code></a></li>
-  <li><a href="#bonus-implementing-k-means" id="toc-bonus-implementing-k-means" class="nav-link" data-scroll-target="#bonus-implementing-k-means">Bonus: <code>Implementing k-means</code></a></li>
+  <li><a href="#gmm-vs-k-means" id="toc-gmm-vs-k-means" class="nav-link" data-scroll-target="#gmm-vs-k-means">GMM vs <span class="math inline">\(k\)</span>-means</a></li>
+  <li><a href="#em-on-1d" id="toc-em-on-1d" class="nav-link" data-scroll-target="#em-on-1d">EM on 1D</a></li>
   </ul></li>
+  <li><a href="#em-from-scratch" id="toc-em-from-scratch" class="nav-link" data-scroll-target="#em-from-scratch">EM from scratch</a></li>
   </ul>
 </nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./kmeans.html">Clustering</a></li><li class="breadcrumb-item"><a href="./kmeans-lab.html">Lab: Kmeans</a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./kmeans.html">Clustering</a></li><li class="breadcrumb-item"><a href="./em-lab.html">Lab: GMM &amp; EM</a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title">Lab: Kmeans</h1>
+<h1 class="title">Lab: GMM &amp; EM</h1>
 </div>
 
 
@@ -277,15 +275,51 @@ window.Quarto = {
 </header>
 
 
-<section id="k-means-clustering" class="level2 unnumbered">
-<h2 class="unnumbered anchored" data-anchor-id="k-means-clustering"><span class="math inline">\(k\)</span>-means clustering</h2>
-<p>In this lab, we will use the dataset <code>Ligue1 2017/2018</code>.</p>
-<p><strong>1.</strong> Download the dataset: <a href="datasets/ligue1_17_18.csv"><code>Ligue1 2017/2018</code> 🔢</a> and import it. Be aware that the teams’ names are in the first column. You can put the argument <code>row.names</code> to 1 in R.</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># You can import directly from my website (instead of downloading it..)</span></span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>ligue1 <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">"http://www.mghassany.com/courses/MLcourse/datasets/ligue1_17_18.csv"</span>, <span class="at">row.names=</span><span class="dv">1</span>, <span class="at">sep=</span><span class="st">";"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="alert alert-block alert-warning">
+<ul>
+<li>You are free to apply this lab in <svg aria-hidden="true" role="img" viewbox="0 0 581 512" style="height:1em;width:1.13em;vertical-align:-0.125em;margin-left:auto;margin-right:auto;font-size:inherit;fill:steelblue;overflow:visible;position:relative;"><path d="M581 226.6C581 119.1 450.9 32 290.5 32S0 119.1 0 226.6C0 322.4 103.3 402 239.4 418.1V480h99.1v-61.5c24.3-2.7 47.6-7.4 69.4-13.9L448 480h112l-67.4-113.7c54.5-35.4 88.4-84.9 88.4-139.7zm-466.8 14.5c0-73.5 98.9-133 220.8-133s211.9 40.7 211.9 133c0 50.1-26.5 85-70.3 106.4-2.4-1.6-4.7-2.9-6.4-3.7-10.2-5.2-27.8-10.5-27.8-10.5s86.6-6.4 86.6-92.7-90.6-87.9-90.6-87.9h-199V361c-74.1-21.5-125.2-67.1-125.2-119.9zm225.1 38.3v-55.6c57.8 0 87.8-6.8 87.8 27.3 0 36.5-38.2 28.3-87.8 28.3zm-.9 72.5H365c10.8 0 18.9 11.7 24 19.2-16.1 1.9-33 2.8-50.6 2.9v-22.1z"></path></svg> or Python.</li>
+<li>In <svg aria-hidden="true" role="img" viewbox="0 0 581 512" style="height:1em;width:1.13em;vertical-align:-0.125em;margin-left:auto;margin-right:auto;font-size:inherit;fill:steelblue;overflow:visible;position:relative;"><path d="M581 226.6C581 119.1 450.9 32 290.5 32S0 119.1 0 226.6C0 322.4 103.3 402 239.4 418.1V480h99.1v-61.5c24.3-2.7 47.6-7.4 69.4-13.9L448 480h112l-67.4-113.7c54.5-35.4 88.4-84.9 88.4-139.7zm-466.8 14.5c0-73.5 98.9-133 220.8-133s211.9 40.7 211.9 133c0 50.1-26.5 85-70.3 106.4-2.4-1.6-4.7-2.9-6.4-3.7-10.2-5.2-27.8-10.5-27.8-10.5s86.6-6.4 86.6-92.7-90.6-87.9-90.6-87.9h-199V361c-74.1-21.5-125.2-67.1-125.2-119.9zm225.1 38.3v-55.6c57.8 0 87.8-6.8 87.8 27.3 0 36.5-38.2 28.3-87.8 28.3zm-.9 72.5H365c10.8 0 18.9 11.7 24 19.2-16.1 1.9-33 2.8-50.6 2.9v-22.1z"></path></svg>, we are going to use the <code>mclust</code> package.</li>
+<li>An excellent documentation of <code>mclust</code> can be found <a href="https://mclust-org.github.io/mclust/articles/mclust.html" target="_blank">here</a>.</li>
+<li>In Python, you can use <code>sklearn.mixture</code> module in which you can find the <code>GaussianMixture()</code> class.</li>
+<li>Note that the <code>GaussianMixture()</code> class does not provide the same automatic determination of the number of components like in <svg aria-hidden="true" role="img" viewbox="0 0 581 512" style="height:1em;width:1.13em;vertical-align:-0.125em;margin-left:auto;margin-right:auto;font-size:inherit;fill:steelblue;overflow:visible;position:relative;"><path d="M581 226.6C581 119.1 450.9 32 290.5 32S0 119.1 0 226.6C0 322.4 103.3 402 239.4 418.1V480h99.1v-61.5c24.3-2.7 47.6-7.4 69.4-13.9L448 480h112l-67.4-113.7c54.5-35.4 88.4-84.9 88.4-139.7zm-466.8 14.5c0-73.5 98.9-133 220.8-133s211.9 40.7 211.9 133c0 50.1-26.5 85-70.3 106.4-2.4-1.6-4.7-2.9-6.4-3.7-10.2-5.2-27.8-10.5-27.8-10.5s86.6-6.4 86.6-92.7-90.6-87.9-90.6-87.9h-199V361c-74.1-21.5-125.2-67.1-125.2-119.9zm225.1 38.3v-55.6c57.8 0 87.8-6.8 87.8 27.3 0 36.5-38.2 28.3-87.8 28.3zm-.9 72.5H365c10.8 0 18.9 11.7 24 19.2-16.1 1.9-33 2.8-50.6 2.9v-22.1z"></path></svg>’s <code>mclust</code> package. But you can use the class <code>AutoGMMCluster()</code> from the <code>graspologic.cluster.autogmm</code> module.</li>
+<li>Description of <code>AutoGMMCluster()</code> from <a href="https://microsoft.github.io/graspologic/tutorials/clustering/autogmm.html" target="_blank">here</a>: This method expands upon the existing Sklearn framework by allowing the user to automatically estimate the best hyperparameters for a Gaussian mixture model. In particular, the ideal <code>n_components_</code> is estimated by <code>AutoGMM</code> from a range of possible values given by the user. <code>AutoGMM</code> also sweeps over multiple covariance structures.</li>
+</ul>
 </div>
-<p><strong>2.</strong> Print the first two rows of the dataset and the total number of features in this dataset.</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>In the first part of this lab you will learn how to fit a Gaussian Mixture Model (GMM) using <svg aria-hidden="true" role="img" viewbox="0 0 581 512" style="height:1em;width:1.13em;vertical-align:-0.125em;margin-left:auto;margin-right:auto;font-size:inherit;fill:steelblue;overflow:visible;position:relative;"><path d="M581 226.6C581 119.1 450.9 32 290.5 32S0 119.1 0 226.6C0 322.4 103.3 402 239.4 418.1V480h99.1v-61.5c24.3-2.7 47.6-7.4 69.4-13.9L448 480h112l-67.4-113.7c54.5-35.4 88.4-84.9 88.4-139.7zm-466.8 14.5c0-73.5 98.9-133 220.8-133s211.9 40.7 211.9 133c0 50.1-26.5 85-70.3 106.4-2.4-1.6-4.7-2.9-6.4-3.7-10.2-5.2-27.8-10.5-27.8-10.5s86.6-6.4 86.6-92.7-90.6-87.9-90.6-87.9h-199V361c-74.1-21.5-125.2-67.1-125.2-119.9zm225.1 38.3v-55.6c57.8 0 87.8-6.8 87.8 27.3 0 36.5-38.2 28.3-87.8 28.3zm-.9 72.5H365c10.8 0 18.9 11.7 24 19.2-16.1 1.9-33 2.8-50.6 2.9v-22.1z"></path></svg> or Python. You will Compare <span class="math inline">\(k\)</span>-means and GMM on artificial data (2-D data). You will also fit a GMM on univariate (1-D) simulated data.</p>
+<p>In the second part of this lab you will build an algorithm from <strong>scratch</strong>. Your algorithm must fit a GMM model using the <strong>E</strong>xpectation-<strong>M</strong>aximization (EM) technique on any multi dimensional dataset.</p>
+</div>
+</div>
+<section id="expectation-maximization-em" class="level2">
+<h2 class="anchored" data-anchor-id="expectation-maximization-em"><strong>E</strong>xpectation-<strong>M</strong>aximization (EM)</h2>
+<section id="gmm-vs-k-means" class="level3 unnumbered">
+<h3 class="unnumbered anchored" data-anchor-id="gmm-vs-k-means">GMM vs <span class="math inline">\(k\)</span>-means</h3>
+<p>In this section, we will use two artificial (simulated) datasets in which we know the ground truth (true labels) in order to compare the performances of <span class="math inline">\(k\)</span>-means and GMM. To fit a GMM using EM technique in <svg aria-hidden="true" role="img" viewbox="0 0 581 512" style="height:1em;width:1.13em;vertical-align:-0.125em;margin-left:auto;margin-right:auto;font-size:inherit;fill:steelblue;overflow:visible;position:relative;"><path d="M581 226.6C581 119.1 450.9 32 290.5 32S0 119.1 0 226.6C0 322.4 103.3 402 239.4 418.1V480h99.1v-61.5c24.3-2.7 47.6-7.4 69.4-13.9L448 480h112l-67.4-113.7c54.5-35.4 88.4-84.9 88.4-139.7zm-466.8 14.5c0-73.5 98.9-133 220.8-133s211.9 40.7 211.9 133c0 50.1-26.5 85-70.3 106.4-2.4-1.6-4.7-2.9-6.4-3.7-10.2-5.2-27.8-10.5-27.8-10.5s86.6-6.4 86.6-92.7-90.6-87.9-90.6-87.9h-199V361c-74.1-21.5-125.2-67.1-125.2-119.9zm225.1 38.3v-55.6c57.8 0 87.8-6.8 87.8 27.3 0 36.5-38.2 28.3-87.8 28.3zm-.9 72.5H365c10.8 0 18.9 11.7 24 19.2-16.1 1.9-33 2.8-50.6 2.9v-22.1z"></path></svg> or Python you need to use specified packages. Please refer to the note above.</p>
+<p><strong>1.</strong> Download and import <a href="datasets/data1.csv" target="_blank">Data1 🔢</a> and <a href="datasets/data2.csv" target="_blank">Data2 🔢</a>. Plot both of the datasets on the same window. Color the observations with respect to the ground truth, like in <a href="#fig-fig1" class="quarto-xref">Figure&nbsp;<span>1</span></a>.</p>
+<div class="cell">
+<div class="cell-output-display">
+<div id="fig-fig1" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-fig1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="em-lab_files/figure-html/fig-fig1-1.png" class="img-fluid figure-img" width="672">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-fig1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;1: Data1 is plotted on left. Data2 on right. Colors shown with respect to ground truth.
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p><strong>2.</strong> Apply <span class="math inline">\(k\)</span>-means on both datasets with 4 clusters. Plot both of the dataset on the same window and color the observations with respect to <span class="math inline">\(k\)</span>-means results. Interpret the results.</p>
 <div class="callout callout-style-default callout-tip callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -296,60 +330,11 @@ Tip
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>In R, you can create an awesome HTML table by using the function <code>kable</code> from the <code>knitr</code> library. For example, if you want to show the first 5 lines and 5 columns of your dataset, you can use <code>knitr::kable(ligue1[1:5,1:5])</code>. Give it a try and see the result on your html report!</p>
+<p>One way to think about the <span class="math inline">\(k\)</span>-means model is that it places a circle (or, in higher dimensions, a hyper-sphere) at the center of each cluster, with a radius defined by the most distant point in the cluster. This radius acts as a hard cutoff for cluster assignment within the training set: any point outside this circle is not considered a member of the cluster. You can try to visualize the circles on your plots.</p>
 </div>
 </div>
-<section id="pointscards" class="level3 unnumbered">
-<h3 class="unnumbered anchored" data-anchor-id="pointscards"><code>pointsCards</code></h3>
-<p><strong>3.</strong> We will first consider a smaller dataset to easily understand the results of <span class="math inline">\(k\)</span>-means. Create a new dataset in which you consider only <code>Points</code> and <code>Yellow.cards</code> from the original dataset. Name it <code>pointsCards</code></p>
-<p><strong>4.</strong> Apply <span class="math inline">\(k\)</span>-means on <code>pointsCards</code>. Chose <span class="math inline">\(k=2\)</span> clusters and put the number of iterations to 20. Store your results into <code>km</code>. (<strong>Remark</strong>: <code>kmeans()</code> uses a random initialization of the clusters, so the results may vary from one call to another. Use <code>set.seed()</code> to have reproducible outputs).</p>
-<p><strong>5.</strong> Print and describe what is inside <code>km</code>.</p>
-<p><strong>6.</strong> What are the coordinates of the centers of the clusters (called also prototypes or centroids) ?</p>
-<p><strong>7.</strong> Plot the data (<code>Yellow.cards</code> vs <code>Points</code>). Color the points corresponding to their cluster.</p>
-<p><strong>8.</strong> Add to the previous plot the clusters centroids and add the names of the observations.</p>
-<p><strong>9.</strong> Re-run <span class="math inline">\(k\)</span>-means on <code>pointsCards</code> using 3 and 4 clusters and store the results into <code>km3</code> and <code>km4</code> respectively. Visualize the results like in question <strong>7</strong> and <strong>8</strong>.</p>
-<div class="callout callout-style-default callout-important callout-titled">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-Important
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<p>How many clusters <span class="math inline">\(k\)</span> do we need in practice? There is not a single answer: the advice is to try several and compare. Inspecting the ‘between_SS / total_SS’ for a good trade-off between the number of clusters and the percentage of total variation explained usually gives a good starting point for deciding on <span class="math inline">\(k\)</span> (criterion to select <span class="math inline">\(k\)</span> similar to PCA).</p>
-<p>There is several methods of computing an optimal value of <span class="math inline">\(k\)</span> with <svg aria-hidden="true" role="img" viewbox="0 0 581 512" style="height:1em;width:1.13em;vertical-align:-0.125em;margin-left:auto;margin-right:auto;font-size:inherit;fill:steelblue;overflow:visible;position:relative;"><path d="M581 226.6C581 119.1 450.9 32 290.5 32S0 119.1 0 226.6C0 322.4 103.3 402 239.4 418.1V480h99.1v-61.5c24.3-2.7 47.6-7.4 69.4-13.9L448 480h112l-67.4-113.7c54.5-35.4 88.4-84.9 88.4-139.7zm-466.8 14.5c0-73.5 98.9-133 220.8-133s211.9 40.7 211.9 133c0 50.1-26.5 85-70.3 106.4-2.4-1.6-4.7-2.9-6.4-3.7-10.2-5.2-27.8-10.5-27.8-10.5s86.6-6.4 86.6-92.7-90.6-87.9-90.6-87.9h-199V361c-74.1-21.5-125.2-67.1-125.2-119.9zm225.1 38.3v-55.6c57.8 0 87.8-6.8 87.8 27.3 0 36.5-38.2 28.3-87.8 28.3zm-.9 72.5H365c10.8 0 18.9 11.7 24 19.2-16.1 1.9-33 2.8-50.6 2.9v-22.1z"></path></svg> code on following <code>stackoverflow</code> answer: <a href="http://stackoverflow.com/a/15376462/" target="_blank">here <svg aria-hidden="true" role="img" viewbox="0 0 384 512" style="height:1em;width:0.75em;vertical-align:-0.125em;margin-left:auto;margin-right:auto;font-size:inherit;fill:currentColor;overflow:visible;position:relative;"><path d="M290.7 311L95 269.7 86.8 309l195.7 41zm51-87L188.2 95.7l-25.5 30.8 153.5 128.3zm-31.2 39.7L129.2 179l-16.7 36.5L293.7 300zM262 32l-32 24 119.3 160.3 32-24zm20.5 328h-200v39.7h200zm39.7 80H42.7V320h-40v160h359.5V320h-40z"></path></svg></a>.</p>
-</div>
-</div>
-<p><strong>10.</strong> Visualize the “within groups sum of squares” of the <span class="math inline">\(k\)</span>-means clustering results (use the code in the link above).</p>
-<center>
-<img src="img/wss_bss.jpg" class="img-fluid">
-</center>
-<p><strong>11.</strong> Modify the code of the previous question in order to visualize the ‘between_SS / total_SS’. Interpret the results.</p>
-</section>
-<section id="ligue-1" class="level3 unnumbered">
-<h3 class="unnumbered anchored" data-anchor-id="ligue-1"><code>Ligue 1</code></h3>
-<p>So far, you have only taken the information of two variables for performing clustering. Now you will apply <code>kmeans()</code> on the original dataset <code>ligue1</code>. Using PCA, we can visualize the clustering performed with all the available variables in the dataset.</p>
-<p>By default, <code>kmeans()</code> does not standardize the variables, which will affect the clustering result. As a consequence, the clustering of a dataset will be different if one variable is expressed in millions or in tenths. If you want to avoid this distortion, use scale to automatically center and standardize the dataset (the result will be a matrix, so you need to transform it to a data frame again).</p>
-<p><strong>12.</strong> Scale the dataset and transform it to a data frame again. Store the scaled dataset into <code>ligue1_scaled</code>.</p>
-<p><strong>13.</strong> Apply <code>kmeans()</code> on <code>ligue1</code> and on <code>ligue1_scaled</code> using 3 clusters and 20 iterations. Store the results into <code>km.ligue1</code> and <code>km.ligue1.scaled</code> respectively (do not forget to set a seed)</p>
-<p><strong>14.</strong> How many observations there are in each cluster of <code>km.ligue1</code> and <code>km.ligue1.scaled</code> ? (you can use <code>table()</code>). Do you obtain the same results when you perform <code>kmeans()</code> on the scaled and unscaled data?</p>
-</section>
-<section id="pca" class="level3 unnumbered">
-<h3 class="unnumbered anchored" data-anchor-id="pca"><code>PCA</code></h3>
-<p><strong>15.</strong> Apply PCA on <code>ligue1</code> dataset and store you results in <code>pcaligue1</code>. Do we need to apply PCA on the scaled dataset? Justify your answer.</p>
-<p><strong>16.</strong> Plot the observations and the variables on the first two principal components (biplot). Interpret the results.</p>
-<p><strong>17.</strong> Visualize the teams on the first two principal components and color them with respect to their cluster.</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># You can use the following code in R, based on `factoextra` library.</span></span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="fu">fviz_cluster</span>(km.ligue1, <span class="at">data =</span> ligue1, <span class="co"># km.ligue1 is where you stored your kmeans results</span></span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>              <span class="at">palette =</span> <span class="fu">c</span>(<span class="st">"red"</span>, <span class="st">"blue"</span>, <span class="st">"green"</span>), <span class="co"># 3 colors since 3 clusters</span></span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>              <span class="at">ggtheme =</span> <span class="fu">theme_minimal</span>(),</span>
-<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>              <span class="at">main =</span> <span class="st">"Clustering Plot"</span></span>
-<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<p><strong>18.</strong> Recall that the figure of question <strong>17</strong> is a visualization with PC1 and PC2 of the clustering done with all the variables, not on PC1 and PC2. Now apply the <code>kmeans()</code> clustering taking only the first two PCs instead the variables of original dataset. Visualize the results and compare with the question <strong>17</strong>.</p>
+<p><strong>3.</strong> Now fit a GMM model on the datasets. To do so in <svg aria-hidden="true" role="img" viewbox="0 0 581 512" style="height:1em;width:1.13em;vertical-align:-0.125em;margin-left:auto;margin-right:auto;font-size:inherit;fill:steelblue;overflow:visible;position:relative;"><path d="M581 226.6C581 119.1 450.9 32 290.5 32S0 119.1 0 226.6C0 322.4 103.3 402 239.4 418.1V480h99.1v-61.5c24.3-2.7 47.6-7.4 69.4-13.9L448 480h112l-67.4-113.7c54.5-35.4 88.4-84.9 88.4-139.7zm-466.8 14.5c0-73.5 98.9-133 220.8-133s211.9 40.7 211.9 133c0 50.1-26.5 85-70.3 106.4-2.4-1.6-4.7-2.9-6.4-3.7-10.2-5.2-27.8-10.5-27.8-10.5s86.6-6.4 86.6-92.7-90.6-87.9-90.6-87.9h-199V361c-74.1-21.5-125.2-67.1-125.2-119.9zm225.1 38.3v-55.6c57.8 0 87.8-6.8 87.8 27.3 0 36.5-38.2 28.3-87.8 28.3zm-.9 72.5H365c10.8 0 18.9 11.7 24 19.2-16.1 1.9-33 2.8-50.6 2.9v-22.1z"></path></svg>, load the <code>mclust</code> library. Then you can use the function <code>Mclust()</code> on your data (this function will choose automatically the number of mixtures, basing on BIC criterion). Use the clustering results from your GMM model to visualize the results on both of the datasets, color the observations with respect to the clusters obtained from the GMM model. Interpret the results.</p>
+<p><strong>In the following questions from this section, explore the <code>mclust</code> library and what it offers. Apply its functions on Data2.</strong></p>
 <div class="callout callout-style-default callout-tip callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -360,66 +345,144 @@ Tip
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>By applying <span class="math inline">\(k\)</span>-means only on the PCs we obtain different and less accurate result, but it is still an insightful way.</p>
+<p><code>mclust</code> is a contributed <svg aria-hidden="true" role="img" viewbox="0 0 581 512" style="height:1em;width:1.13em;vertical-align:-0.125em;margin-left:auto;margin-right:auto;font-size:inherit;fill:steelblue;overflow:visible;position:relative;"><path d="M581 226.6C581 119.1 450.9 32 290.5 32S0 119.1 0 226.6C0 322.4 103.3 402 239.4 418.1V480h99.1v-61.5c24.3-2.7 47.6-7.4 69.4-13.9L448 480h112l-67.4-113.7c54.5-35.4 88.4-84.9 88.4-139.7zm-466.8 14.5c0-73.5 98.9-133 220.8-133s211.9 40.7 211.9 133c0 50.1-26.5 85-70.3 106.4-2.4-1.6-4.7-2.9-6.4-3.7-10.2-5.2-27.8-10.5-27.8-10.5s86.6-6.4 86.6-92.7-90.6-87.9-90.6-87.9h-199V361c-74.1-21.5-125.2-67.1-125.2-119.9zm225.1 38.3v-55.6c57.8 0 87.8-6.8 87.8 27.3 0 36.5-38.2 28.3-87.8 28.3zm-.9 72.5H365c10.8 0 18.9 11.7 24 19.2-16.1 1.9-33 2.8-50.6 2.9v-22.1z"></path></svg> package for model-based clustering, classification, and density estimation based on finite normal mixture modelling. It provides functions for parameter estimation via the EM algorithm for normal mixture models with a variety of covariance structures, and functions for simulation from these models. Also included are functions that combine model-based hierarchical clustering, EM for mixture estimation and the Bayesian Information Criterion (BIC) in comprehensive strategies for clustering, density estimation and discriminant analysis. Additional functionalities are available for displaying and visualizing fitted models along with clustering, classification, and density estimation results.</p>
 </div>
 </div>
+<p><strong>4.</strong> Show the summary of the GMM model you fitted on Data2. Explain what it shows.</p>
+<p><strong>5.</strong> <code>mclust</code> package offers some visualization. To plot your two-dimensional data, use the standard plot function applied on your model. Apply the following code, given that the model is named <code>gmm_model</code>, and interpret what it shows.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(gmm_model, <span class="at">what =</span> <span class="st">"classification"</span>)</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(gmm_model, <span class="at">what =</span> <span class="st">"uncertainty"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p><strong>6.</strong> <code>mclust</code> package uses the Bayesian Information Criterion (BIC) to choose the best number of mixtures. To see the values of BIC for different number of mixtures use the following code.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(gmm_model, <span class="at">what =</span> <span class="st">"BIC"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Information criteria are based on penalised forms of the log-likelihood. As the likelihood increases with the addition of more components, a penalty term for the number of estimated parameters is subtracted from the log-likelihood. The BIC is a popular choice in the context of GMMs, and takes the form</p>
+<p><span class="math display">\[ \text{BIC} \approx 2 \ell (X|\hat{\theta}) - \nu \log (n)\]</span></p>
+<p>where <span class="math inline">\(\theta\)</span> is the set of parameters (in GMM it is <span class="math inline">\(\theta=\{\mu,\Sigma,\pi\})\)</span>, and <span class="math inline">\(\ell (X|\hat{\theta})\)</span> is the log-likelihood at the Maximum Likelihood Estimators <span class="math inline">\(\hat{\theta}\)</span> for the model, <span class="math inline">\(n\)</span> is the sample size, and <span class="math inline">\(\nu\)</span> is the number of estimated parameters. We select the model that maximises BIC.</p>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Tip
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>What you see on the figure showing the BIC values are different parameterisations of the within-group covariance matrix <span class="math inline">\(\Sigma_k\)</span>. In GMM, clusters are ellipsoidal, centered at the mean vector <span class="math inline">\(\mu_k\)</span>, and with other geometric features, such as volume, shape and orientation, determined by the covariance matrix <span class="math inline">\(\Sigma_k\)</span>.</p>
+<p><img src="img/gmm_mclust_sigma.png" class="img-fluid"></p>
+</div>
+</div>
+<p><strong>7.</strong> Though GMM is often categorized as a clustering algorithm, fundamentally it is an algorithm for density estimation. That is to say, the result of a GMM fit to some data is technically not a clustering model, but a generative probabilistic model describing the distribution of the data. Density estimation plays an important role in applied statistical data analysis and theoretical research. A density estimate based on GMM can be obtained using the function <code>densityMclust()</code>. Apply it on Data2 and visualize the estimated densities (show an “image” and a “perspective” plot of the bivariate density estimate).</p>
 </section>
-<section id="bonus-implementing-k-means" class="level3 unnumbered">
-<h3 class="unnumbered anchored" data-anchor-id="bonus-implementing-k-means">Bonus: <code>Implementing k-means</code></h3>
-<p>In this part, you will perform <span class="math inline">\(k\)</span>-means clustering manually, with <span class="math inline">\(k=2\)</span>, on a small example with <span class="math inline">\(n=6\)</span> observations and <span class="math inline">\(p=2\)</span> features. The observations are as follows.</p>
+<section id="em-on-1d" class="level3 unnumbered">
+<h3 class="unnumbered anchored" data-anchor-id="em-on-1d">EM on 1D</h3>
+<p>In this part you must fit a GMM model on a one dimensional simulated data.</p>
+<p><strong>8.</strong> Create a data table of 300 observations in which you have two columns:</p>
+<ul>
+<li>The first column contains generated data. Those data are generated from three Gaussian distributions with different parameters.</li>
+<li>The second column corresponds to the groud truth (every observation was generated from which Gaussian).</li>
+<li>Hint: functions you may need are <code>rnorm()</code>, <code>rep()</code>, <code>rbind()</code> or <code>cbind()</code>.</li>
+<li>You must of course <strong>set a seed</strong> (your sutdent_pk). An example of 9 generated values from three Gaussians is shown in the following table:</li>
+</ul>
 <center>
 <table class="caption-top table">
 <thead>
 <tr class="header">
-<th style="text-align: center;"><strong>Observation</strong></th>
-<th style="text-align: center;"><strong><span class="math inline">\(X_1\)</span></strong></th>
-<th style="text-align: center;"><strong><span class="math inline">\(X_2\)</span></strong></th>
+<th style="text-align: center;">X</th>
+<th style="text-align: center;">source</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
+<td style="text-align: center;">-5.6264538</td>
 <td style="text-align: center;">1</td>
-<td style="text-align: center;">1</td>
-<td style="text-align: center;">4</td>
 </tr>
 <tr class="even">
-<td style="text-align: center;">2</td>
-<td style="text-align: center;">1</td>
-<td style="text-align: center;">3</td>
-</tr>
-<tr class="odd">
-<td style="text-align: center;">3</td>
-<td style="text-align: center;">0</td>
-<td style="text-align: center;">4</td>
-</tr>
-<tr class="even">
-<td style="text-align: center;">4</td>
-<td style="text-align: center;">5</td>
+<td style="text-align: center;">-4.8163567</td>
 <td style="text-align: center;">1</td>
 </tr>
 <tr class="odd">
-<td style="text-align: center;">5</td>
-<td style="text-align: center;">6</td>
+<td style="text-align: center;">-5.8356286</td>
+<td style="text-align: center;">1</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">1.5952808</td>
+<td style="text-align: center;">2</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">0.3295078</td>
 <td style="text-align: center;">2</td>
 </tr>
 <tr class="even">
-<td style="text-align: center;">6</td>
-<td style="text-align: center;">4</td>
-<td style="text-align: center;">0</td>
+<td style="text-align: center;">-0.8204684</td>
+<td style="text-align: center;">2</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">5.4874291</td>
+<td style="text-align: center;">3</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">5.7383247</td>
+<td style="text-align: center;">3</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">5.5757814</td>
+<td style="text-align: center;">3</td>
 </tr>
 </tbody>
 </table>
 </center>
-<p><strong>19.</strong> Plot the observations.</p>
-<p><strong>20.</strong> Randomly assign a cluster label to each observation. You can use the <code>sample()</code> command in <svg aria-hidden="true" role="img" viewbox="0 0 581 512" style="height:1em;width:1.13em;vertical-align:-0.125em;margin-left:auto;margin-right:auto;font-size:inherit;fill:steelblue;overflow:visible;position:relative;"><path d="M581 226.6C581 119.1 450.9 32 290.5 32S0 119.1 0 226.6C0 322.4 103.3 402 239.4 418.1V480h99.1v-61.5c24.3-2.7 47.6-7.4 69.4-13.9L448 480h112l-67.4-113.7c54.5-35.4 88.4-84.9 88.4-139.7zm-466.8 14.5c0-73.5 98.9-133 220.8-133s211.9 40.7 211.9 133c0 50.1-26.5 85-70.3 106.4-2.4-1.6-4.7-2.9-6.4-3.7-10.2-5.2-27.8-10.5-27.8-10.5s86.6-6.4 86.6-92.7-90.6-87.9-90.6-87.9h-199V361c-74.1-21.5-125.2-67.1-125.2-119.9zm225.1 38.3v-55.6c57.8 0 87.8-6.8 87.8 27.3 0 36.5-38.2 28.3-87.8 28.3zm-.9 72.5H365c10.8 0 18.9 11.7 24 19.2-16.1 1.9-33 2.8-50.6 2.9v-22.1z"></path></svg> to do this. Report the cluster labels for each observation.</p>
-<p><strong>21.</strong> Compute the centroid for each cluster.</p>
-<p><strong>22.</strong> Create a function that calculates the Euclidean distance for two observations.</p>
-<p><strong>23.</strong> Assign each observation to the centroid to which it is closest, in terms of Euclidean distance. Report the cluster labels for each observation.</p>
-<p><strong>24.</strong> Repeat <strong>21</strong> and <strong>23</strong> until the answers obtained stop changing.</p>
-<p><strong>25.</strong> In your plot from <strong>19</strong>, color the observations according to the cluster labels obtained.</p>
-
-
+<p><strong>9.</strong> Show your generated data on one axe (this kind of figures are called stripchart), color them with respect to ground truth, you must obtain something like:</p>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="em-lab_files/figure-html/unnamed-chunk-8-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p><strong>10.</strong> Plot the histogram corresponding to your generated data. Interpret it.</p>
+<p><strong>11.</strong> Fit a GMM model on your generated data. Print the summary and visualize your results. Explain your results.</p>
+<p><strong>12.</strong> Apply a density estimate on your generated data and visualize it. Interpret the obtained figure.</p>
 </section>
+</section>
+<section id="em-from-scratch" class="level2">
+<h2 class="anchored" data-anchor-id="em-from-scratch">EM from scratch</h2>
+<p>In this second part of this PW you will build a GMM model from scratch, you must develop the EM technique to fit the model.</p>
+<p><strong>2.1</strong> Generate a two-dimensional dataset from a <span class="math inline">\(k\)</span>-component Gaussian mixture density with different means and different covariance matrices. It is up to you to choose the mixing proportions <span class="math inline">\(\{\pi_1,\ldots,\pi_k\}\)</span>.</p>
+<p><strong>2.2</strong> Implement the EM algorithm to fit a GMM on your generated data:</p>
+<ul>
+<li>Initialize the mixing proportions and the covariance matrices (e.g., you can initialize with equal mixing proportions and Identity covariance matrices).</li>
+<li>Initialize the means “randomly” (by your own choice of <span class="math inline">\(k\)</span>).</li>
+<li>In the EM training loop, store the value of the observed-data log-likelihood at each iteration.</li>
+<li>At convergence, plot the log-likelihood curve.</li>
+</ul>
+<p><strong>2.3</strong> Create a function that selects the number of mixture components by computing the values of BIC criterion for <span class="math inline">\(k\)</span> varying from 1 to 10.</p>
+<p><strong>2.4</strong> On your generated data, compare your results obtained with the algorithm you developed and the ground truth (in terms of the chosen number of mixture components; and in terms of error rate).</p>
+<p><strong>2.5</strong> Apply the algorithm you developed on <a href="datasets/iris.data" target="_blank">Iris 🔢</a> dataset.</p>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Tip
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>To visualize your results on Iris dataset, you can use PCA projection and coloring with respect to clustering results.</p>
+<p>The package <code>mclust</code> provides also a dimensionality reduction technique in function <code>MclustDR()</code>.</p>
+</div>
+</div>
+<p align="right">
+◼
+</p>
+
+
 </section>
 
 </main> <!-- /main -->
@@ -986,14 +1049,11 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="./kmeans.html" class="pagination-link" aria-label="Partition based">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Partition based</span></span>
+      <a href="./em.html" class="pagination-link" aria-label="Distribution based">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Distribution based</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./em.html" class="pagination-link" aria-label="Distribution based">
-        <span class="nav-page-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Distribution based</span></span> <i class="bi bi-arrow-right-short"></i>
-      </a>
   </div>
 </nav>
 </div> <!-- /content -->

@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Lab: GMM &amp; EM – Data Mining course</title>
+<title>Lab: Hierarchical based and Density based – Data Mining course</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -64,8 +64,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
-<link href="./hclust-dbscan.html" rel="next">
-<link href="./em.html" rel="prev">
+<link href="./hclust-dbscan.html" rel="prev">
 <link href="./data-mining.jpg" rel="icon" type="image/jpeg">
 <script src="site_libs/quarto-html/quarto.js"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
@@ -148,7 +147,7 @@ window.Quarto = {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./kmeans.html">Clustering</a></li><li class="breadcrumb-item"><a href="./em-lab.html">Lab: GMM &amp; EM</a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./kmeans.html">Clustering</a></li><li class="breadcrumb-item"><a href="./hclust-dbscan-lab.html">Lab: Hierarchical based and Density based</a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
     </div>
@@ -229,7 +228,7 @@ window.Quarto = {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./em-lab.html" class="sidebar-item-text sidebar-link active">
+  <a href="./em-lab.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Lab: GMM &amp; EM</span></a>
   </div>
 </li>
@@ -241,7 +240,7 @@ window.Quarto = {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./hclust-dbscan-lab.html" class="sidebar-item-text sidebar-link">
+  <a href="./hclust-dbscan-lab.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text">Lab: Hierarchical based and Density based</span></a>
   </div>
 </li>
@@ -257,21 +256,24 @@ window.Quarto = {
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#expectation-maximization-em" id="toc-expectation-maximization-em" class="nav-link active" data-scroll-target="#expectation-maximization-em"><strong>E</strong>xpectation-<strong>M</strong>aximization (EM)</a>
+  <li><a href="#k-means" id="toc-k-means" class="nav-link active" data-scroll-target="#k-means">K-means</a></li>
+  <li><a href="#aglomerative-single-linkage-clustering" id="toc-aglomerative-single-linkage-clustering" class="nav-link" data-scroll-target="#aglomerative-single-linkage-clustering">Aglomerative Single Linkage clustering</a></li>
+  <li><a href="#dbscan" id="toc-dbscan" class="nav-link" data-scroll-target="#dbscan">DBSCAN</a></li>
+  <li><a href="#hdbscan" id="toc-hdbscan" class="nav-link" data-scroll-target="#hdbscan">HDBSCAN</a></li>
+  <li><a href="#apply-the-algorithms-to-the-following-images-and-comment-the-results" id="toc-apply-the-algorithms-to-the-following-images-and-comment-the-results" class="nav-link" data-scroll-target="#apply-the-algorithms-to-the-following-images-and-comment-the-results">Apply the algorithms to the following images and comment the results</a>
   <ul class="collapse">
-  <li><a href="#gmm-vs-k-means" id="toc-gmm-vs-k-means" class="nav-link" data-scroll-target="#gmm-vs-k-means">GMM vs <span class="math inline">\(k\)</span>-means</a></li>
-  <li><a href="#em-on-1d" id="toc-em-on-1d" class="nav-link" data-scroll-target="#em-on-1d">EM on 1D</a></li>
+  <li><a href="#nasa-curiosity-picture" id="toc-nasa-curiosity-picture" class="nav-link" data-scroll-target="#nasa-curiosity-picture">NASA Curiosity Picture</a></li>
+  <li><a href="#color-compression" id="toc-color-compression" class="nav-link" data-scroll-target="#color-compression">Color compression</a></li>
   </ul></li>
-  <li><a href="#em-from-scratch" id="toc-em-from-scratch" class="nav-link" data-scroll-target="#em-from-scratch">EM from scratch</a></li>
   </ul>
 </nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./kmeans.html">Clustering</a></li><li class="breadcrumb-item"><a href="./em-lab.html">Lab: GMM &amp; EM</a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./kmeans.html">Clustering</a></li><li class="breadcrumb-item"><a href="./hclust-dbscan-lab.html">Lab: Hierarchical based and Density based</a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title">Lab: GMM &amp; EM</h1>
+<h1 class="title">Lab: Hierarchical based and Density based</h1>
 </div>
 
 
@@ -288,214 +290,215 @@ window.Quarto = {
 </header>
 
 
-<div class="alert alert-block alert-warning">
-<ul>
-<li>You are free to apply this lab in <svg aria-hidden="true" role="img" viewbox="0 0 581 512" style="height:1em;width:1.13em;vertical-align:-0.125em;margin-left:auto;margin-right:auto;font-size:inherit;fill:steelblue;overflow:visible;position:relative;"><path d="M581 226.6C581 119.1 450.9 32 290.5 32S0 119.1 0 226.6C0 322.4 103.3 402 239.4 418.1V480h99.1v-61.5c24.3-2.7 47.6-7.4 69.4-13.9L448 480h112l-67.4-113.7c54.5-35.4 88.4-84.9 88.4-139.7zm-466.8 14.5c0-73.5 98.9-133 220.8-133s211.9 40.7 211.9 133c0 50.1-26.5 85-70.3 106.4-2.4-1.6-4.7-2.9-6.4-3.7-10.2-5.2-27.8-10.5-27.8-10.5s86.6-6.4 86.6-92.7-90.6-87.9-90.6-87.9h-199V361c-74.1-21.5-125.2-67.1-125.2-119.9zm225.1 38.3v-55.6c57.8 0 87.8-6.8 87.8 27.3 0 36.5-38.2 28.3-87.8 28.3zm-.9 72.5H365c10.8 0 18.9 11.7 24 19.2-16.1 1.9-33 2.8-50.6 2.9v-22.1z"></path></svg> or Python.</li>
-<li>In <svg aria-hidden="true" role="img" viewbox="0 0 581 512" style="height:1em;width:1.13em;vertical-align:-0.125em;margin-left:auto;margin-right:auto;font-size:inherit;fill:steelblue;overflow:visible;position:relative;"><path d="M581 226.6C581 119.1 450.9 32 290.5 32S0 119.1 0 226.6C0 322.4 103.3 402 239.4 418.1V480h99.1v-61.5c24.3-2.7 47.6-7.4 69.4-13.9L448 480h112l-67.4-113.7c54.5-35.4 88.4-84.9 88.4-139.7zm-466.8 14.5c0-73.5 98.9-133 220.8-133s211.9 40.7 211.9 133c0 50.1-26.5 85-70.3 106.4-2.4-1.6-4.7-2.9-6.4-3.7-10.2-5.2-27.8-10.5-27.8-10.5s86.6-6.4 86.6-92.7-90.6-87.9-90.6-87.9h-199V361c-74.1-21.5-125.2-67.1-125.2-119.9zm225.1 38.3v-55.6c57.8 0 87.8-6.8 87.8 27.3 0 36.5-38.2 28.3-87.8 28.3zm-.9 72.5H365c10.8 0 18.9 11.7 24 19.2-16.1 1.9-33 2.8-50.6 2.9v-22.1z"></path></svg>, we are going to use the <code>mclust</code> package.</li>
-<li>An excellent documentation of <code>mclust</code> can be found <a href="https://mclust-org.github.io/mclust/articles/mclust.html" target="_blank">here</a>.</li>
-<li>In Python, you can use <code>sklearn.mixture</code> module in which you can find the <code>GaussianMixture()</code> class.</li>
-<li>Note that the <code>GaussianMixture()</code> class does not provide the same automatic determination of the number of components like in <svg aria-hidden="true" role="img" viewbox="0 0 581 512" style="height:1em;width:1.13em;vertical-align:-0.125em;margin-left:auto;margin-right:auto;font-size:inherit;fill:steelblue;overflow:visible;position:relative;"><path d="M581 226.6C581 119.1 450.9 32 290.5 32S0 119.1 0 226.6C0 322.4 103.3 402 239.4 418.1V480h99.1v-61.5c24.3-2.7 47.6-7.4 69.4-13.9L448 480h112l-67.4-113.7c54.5-35.4 88.4-84.9 88.4-139.7zm-466.8 14.5c0-73.5 98.9-133 220.8-133s211.9 40.7 211.9 133c0 50.1-26.5 85-70.3 106.4-2.4-1.6-4.7-2.9-6.4-3.7-10.2-5.2-27.8-10.5-27.8-10.5s86.6-6.4 86.6-92.7-90.6-87.9-90.6-87.9h-199V361c-74.1-21.5-125.2-67.1-125.2-119.9zm225.1 38.3v-55.6c57.8 0 87.8-6.8 87.8 27.3 0 36.5-38.2 28.3-87.8 28.3zm-.9 72.5H365c10.8 0 18.9 11.7 24 19.2-16.1 1.9-33 2.8-50.6 2.9v-22.1z"></path></svg>’s <code>mclust</code> package. But you can use the class <code>AutoGMMCluster()</code> from the <code>graspologic.cluster.autogmm</code> module.</li>
-<li>Description of <code>AutoGMMCluster()</code> from <a href="https://microsoft.github.io/graspologic/tutorials/clustering/autogmm.html" target="_blank">here</a>: This method expands upon the existing Sklearn framework by allowing the user to automatically estimate the best hyperparameters for a Gaussian mixture model. In particular, the ideal <code>n_components_</code> is estimated by <code>AutoGMM</code> from a range of possible values given by the user. <code>AutoGMM</code> also sweeps over multiple covariance structures.</li>
-</ul>
-</div>
 <div class="callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Note
+Credits
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>In the first part of this lab you will learn how to fit a Gaussian Mixture Model (GMM) using <svg aria-hidden="true" role="img" viewbox="0 0 581 512" style="height:1em;width:1.13em;vertical-align:-0.125em;margin-left:auto;margin-right:auto;font-size:inherit;fill:steelblue;overflow:visible;position:relative;"><path d="M581 226.6C581 119.1 450.9 32 290.5 32S0 119.1 0 226.6C0 322.4 103.3 402 239.4 418.1V480h99.1v-61.5c24.3-2.7 47.6-7.4 69.4-13.9L448 480h112l-67.4-113.7c54.5-35.4 88.4-84.9 88.4-139.7zm-466.8 14.5c0-73.5 98.9-133 220.8-133s211.9 40.7 211.9 133c0 50.1-26.5 85-70.3 106.4-2.4-1.6-4.7-2.9-6.4-3.7-10.2-5.2-27.8-10.5-27.8-10.5s86.6-6.4 86.6-92.7-90.6-87.9-90.6-87.9h-199V361c-74.1-21.5-125.2-67.1-125.2-119.9zm225.1 38.3v-55.6c57.8 0 87.8-6.8 87.8 27.3 0 36.5-38.2 28.3-87.8 28.3zm-.9 72.5H365c10.8 0 18.9 11.7 24 19.2-16.1 1.9-33 2.8-50.6 2.9v-22.1z"></path></svg> or Python. You will Compare <span class="math inline">\(k\)</span>-means and GMM on artificial data (2-D data). You will also fit a GMM on univariate (1-D) simulated data.</p>
-<p>In the second part of this lab you will build an algorithm from <strong>scratch</strong>. Your algorithm must fit a GMM model using the <strong>E</strong>xpectation-<strong>M</strong>aximization (EM) technique on any multi dimensional dataset.</p>
-</div>
-</div>
-<section id="expectation-maximization-em" class="level2">
-<h2 class="anchored" data-anchor-id="expectation-maximization-em"><strong>E</strong>xpectation-<strong>M</strong>aximization (EM)</h2>
-<section id="gmm-vs-k-means" class="level3 unnumbered">
-<h3 class="unnumbered anchored" data-anchor-id="gmm-vs-k-means">GMM vs <span class="math inline">\(k\)</span>-means</h3>
-<p>In this section, we will use two artificial (simulated) datasets in which we know the ground truth (true labels) in order to compare the performances of <span class="math inline">\(k\)</span>-means and GMM. To fit a GMM using EM technique in <svg aria-hidden="true" role="img" viewbox="0 0 581 512" style="height:1em;width:1.13em;vertical-align:-0.125em;margin-left:auto;margin-right:auto;font-size:inherit;fill:steelblue;overflow:visible;position:relative;"><path d="M581 226.6C581 119.1 450.9 32 290.5 32S0 119.1 0 226.6C0 322.4 103.3 402 239.4 418.1V480h99.1v-61.5c24.3-2.7 47.6-7.4 69.4-13.9L448 480h112l-67.4-113.7c54.5-35.4 88.4-84.9 88.4-139.7zm-466.8 14.5c0-73.5 98.9-133 220.8-133s211.9 40.7 211.9 133c0 50.1-26.5 85-70.3 106.4-2.4-1.6-4.7-2.9-6.4-3.7-10.2-5.2-27.8-10.5-27.8-10.5s86.6-6.4 86.6-92.7-90.6-87.9-90.6-87.9h-199V361c-74.1-21.5-125.2-67.1-125.2-119.9zm225.1 38.3v-55.6c57.8 0 87.8-6.8 87.8 27.3 0 36.5-38.2 28.3-87.8 28.3zm-.9 72.5H365c10.8 0 18.9 11.7 24 19.2-16.1 1.9-33 2.8-50.6 2.9v-22.1z"></path></svg> or Python you need to use specified packages. Please refer to the note above.</p>
-<p><strong>1.</strong> Download and import <a href="datasets/data1.csv" target="_blank">Data1 🔢</a> and <a href="datasets/data2.csv" target="_blank">Data2 🔢</a>. Plot both of the datasets on the same window. Color the observations with respect to the ground truth, like in <a href="#fig-fig1" class="quarto-xref">Figure&nbsp;<span>1</span></a>.</p>
-<div class="cell">
-<div class="cell-output-display">
-<div id="fig-fig1" class="quarto-float quarto-figure quarto-figure-center anchored">
-<figure class="quarto-float quarto-float-fig figure">
-<div aria-describedby="fig-fig1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<img src="em-lab_files/figure-html/fig-fig1-1.png" class="img-fluid figure-img" width="672">
-</div>
-<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-fig1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;1: Data1 is plotted on left. Data2 on right. Colors shown with respect to ground truth.
-</figcaption>
-</figure>
-</div>
-</div>
-</div>
-<p><strong>2.</strong> Apply <span class="math inline">\(k\)</span>-means on both datasets with 4 clusters. Plot both of the dataset on the same window and color the observations with respect to <span class="math inline">\(k\)</span>-means results. Interpret the results.</p>
-<div class="callout callout-style-default callout-tip callout-titled">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-Tip
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<p>One way to think about the <span class="math inline">\(k\)</span>-means model is that it places a circle (or, in higher dimensions, a hyper-sphere) at the center of each cluster, with a radius defined by the most distant point in the cluster. This radius acts as a hard cutoff for cluster assignment within the training set: any point outside this circle is not considered a member of the cluster. You can try to visualize the circles on your plots.</p>
-</div>
-</div>
-<p><strong>3.</strong> Now fit a GMM model on the datasets. To do so in <svg aria-hidden="true" role="img" viewbox="0 0 581 512" style="height:1em;width:1.13em;vertical-align:-0.125em;margin-left:auto;margin-right:auto;font-size:inherit;fill:steelblue;overflow:visible;position:relative;"><path d="M581 226.6C581 119.1 450.9 32 290.5 32S0 119.1 0 226.6C0 322.4 103.3 402 239.4 418.1V480h99.1v-61.5c24.3-2.7 47.6-7.4 69.4-13.9L448 480h112l-67.4-113.7c54.5-35.4 88.4-84.9 88.4-139.7zm-466.8 14.5c0-73.5 98.9-133 220.8-133s211.9 40.7 211.9 133c0 50.1-26.5 85-70.3 106.4-2.4-1.6-4.7-2.9-6.4-3.7-10.2-5.2-27.8-10.5-27.8-10.5s86.6-6.4 86.6-92.7-90.6-87.9-90.6-87.9h-199V361c-74.1-21.5-125.2-67.1-125.2-119.9zm225.1 38.3v-55.6c57.8 0 87.8-6.8 87.8 27.3 0 36.5-38.2 28.3-87.8 28.3zm-.9 72.5H365c10.8 0 18.9 11.7 24 19.2-16.1 1.9-33 2.8-50.6 2.9v-22.1z"></path></svg>, load the <code>mclust</code> library. Then you can use the function <code>Mclust()</code> on your data (this function will choose automatically the number of mixtures, basing on BIC criterion). Use the clustering results from your GMM model to visualize the results on both of the datasets, color the observations with respect to the clusters obtained from the GMM model. Interpret the results.</p>
-<p><strong>In the following questions from this section, explore the <code>mclust</code> library and what it offers. Apply its functions on Data2.</strong></p>
-<div class="callout callout-style-default callout-tip callout-titled">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-Tip
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<p><code>mclust</code> is a contributed <svg aria-hidden="true" role="img" viewbox="0 0 581 512" style="height:1em;width:1.13em;vertical-align:-0.125em;margin-left:auto;margin-right:auto;font-size:inherit;fill:steelblue;overflow:visible;position:relative;"><path d="M581 226.6C581 119.1 450.9 32 290.5 32S0 119.1 0 226.6C0 322.4 103.3 402 239.4 418.1V480h99.1v-61.5c24.3-2.7 47.6-7.4 69.4-13.9L448 480h112l-67.4-113.7c54.5-35.4 88.4-84.9 88.4-139.7zm-466.8 14.5c0-73.5 98.9-133 220.8-133s211.9 40.7 211.9 133c0 50.1-26.5 85-70.3 106.4-2.4-1.6-4.7-2.9-6.4-3.7-10.2-5.2-27.8-10.5-27.8-10.5s86.6-6.4 86.6-92.7-90.6-87.9-90.6-87.9h-199V361c-74.1-21.5-125.2-67.1-125.2-119.9zm225.1 38.3v-55.6c57.8 0 87.8-6.8 87.8 27.3 0 36.5-38.2 28.3-87.8 28.3zm-.9 72.5H365c10.8 0 18.9 11.7 24 19.2-16.1 1.9-33 2.8-50.6 2.9v-22.1z"></path></svg> package for model-based clustering, classification, and density estimation based on finite normal mixture modelling. It provides functions for parameter estimation via the EM algorithm for normal mixture models with a variety of covariance structures, and functions for simulation from these models. Also included are functions that combine model-based hierarchical clustering, EM for mixture estimation and the Bayesian Information Criterion (BIC) in comprehensive strategies for clustering, density estimation and discriminant analysis. Additional functionalities are available for displaying and visualizing fitted models along with clustering, classification, and density estimation results.</p>
-</div>
-</div>
-<p><strong>4.</strong> Show the summary of the GMM model you fitted on Data2. Explain what it shows.</p>
-<p><strong>5.</strong> <code>mclust</code> package offers some visualization. To plot your two-dimensional data, use the standard plot function applied on your model. Apply the following code, given that the model is named <code>gmm_model</code>, and interpret what it shows.</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(gmm_model, <span class="at">what =</span> <span class="st">"classification"</span>)</span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(gmm_model, <span class="at">what =</span> <span class="st">"uncertainty"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<p><strong>6.</strong> <code>mclust</code> package uses the Bayesian Information Criterion (BIC) to choose the best number of mixtures. To see the values of BIC for different number of mixtures use the following code.</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(gmm_model, <span class="at">what =</span> <span class="st">"BIC"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<p>Information criteria are based on penalised forms of the log-likelihood. As the likelihood increases with the addition of more components, a penalty term for the number of estimated parameters is subtracted from the log-likelihood. The BIC is a popular choice in the context of GMMs, and takes the form</p>
-<p><span class="math display">\[ \text{BIC} \approx 2 \ell (X|\hat{\theta}) - \nu \log (n)\]</span></p>
-<p>where <span class="math inline">\(\theta\)</span> is the set of parameters (in GMM it is <span class="math inline">\(\theta=\{\mu,\Sigma,\pi\})\)</span>, and <span class="math inline">\(\ell (X|\hat{\theta})\)</span> is the log-likelihood at the Maximum Likelihood Estimators <span class="math inline">\(\hat{\theta}\)</span> for the model, <span class="math inline">\(n\)</span> is the sample size, and <span class="math inline">\(\nu\)</span> is the number of estimated parameters. We select the model that maximises BIC.</p>
-<div class="callout callout-style-default callout-tip callout-titled">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-Tip
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<p>What you see on the figure showing the BIC values are different parameterisations of the within-group covariance matrix <span class="math inline">\(\Sigma_k\)</span>. In GMM, clusters are ellipsoidal, centered at the mean vector <span class="math inline">\(\mu_k\)</span>, and with other geometric features, such as volume, shape and orientation, determined by the covariance matrix <span class="math inline">\(\Sigma_k\)</span>.</p>
-<p><img src="img/gmm_mclust_sigma.png" class="img-fluid"></p>
-</div>
-</div>
-<p><strong>7.</strong> Though GMM is often categorized as a clustering algorithm, fundamentally it is an algorithm for density estimation. That is to say, the result of a GMM fit to some data is technically not a clustering model, but a generative probabilistic model describing the distribution of the data. Density estimation plays an important role in applied statistical data analysis and theoretical research. A density estimate based on GMM can be obtained using the function <code>densityMclust()</code>. Apply it on Data2 and visualize the estimated densities (show an “image” and a “perspective” plot of the bivariate density estimate).</p>
-</section>
-<section id="em-on-1d" class="level3 unnumbered">
-<h3 class="unnumbered anchored" data-anchor-id="em-on-1d">EM on 1D</h3>
-<p>In this part you must fit a GMM model on a one dimensional simulated data.</p>
-<p><strong>8.</strong> Create a data table of 300 observations in which you have two columns:</p>
 <ul>
-<li>The first column contains generated data. Those data are generated from three Gaussian distributions with different parameters.</li>
-<li>The second column corresponds to the groud truth (every observation was generated from which Gaussian).</li>
-<li>Hint: functions you may need are <code>rnorm()</code>, <code>rep()</code>, <code>rbind()</code> or <code>cbind()</code>.</li>
-<li>You must of course <strong>set a seed</strong> (your sutdent_pk). An example of 9 generated values from three Gaussians is shown in the following table:</li>
+<li>Lab is from Prof.&nbsp;<a href="https://fredericpascal.blogspot.com/p/home.html" target="_blank">Frédéric PASCAL</a>’s page.</li>
 </ul>
-<center>
-<table class="caption-top table">
-<thead>
-<tr class="header">
-<th style="text-align: center;">X</th>
-<th style="text-align: center;">source</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td style="text-align: center;">-5.6264538</td>
-<td style="text-align: center;">1</td>
-</tr>
-<tr class="even">
-<td style="text-align: center;">-4.8163567</td>
-<td style="text-align: center;">1</td>
-</tr>
-<tr class="odd">
-<td style="text-align: center;">-5.8356286</td>
-<td style="text-align: center;">1</td>
-</tr>
-<tr class="even">
-<td style="text-align: center;">1.5952808</td>
-<td style="text-align: center;">2</td>
-</tr>
-<tr class="odd">
-<td style="text-align: center;">0.3295078</td>
-<td style="text-align: center;">2</td>
-</tr>
-<tr class="even">
-<td style="text-align: center;">-0.8204684</td>
-<td style="text-align: center;">2</td>
-</tr>
-<tr class="odd">
-<td style="text-align: center;">5.4874291</td>
-<td style="text-align: center;">3</td>
-</tr>
-<tr class="even">
-<td style="text-align: center;">5.7383247</td>
-<td style="text-align: center;">3</td>
-</tr>
-<tr class="odd">
-<td style="text-align: center;">5.5757814</td>
-<td style="text-align: center;">3</td>
-</tr>
-</tbody>
-</table>
-</center>
-<p><strong>9.</strong> Show your generated data on one axe (this kind of figures are called stripchart), color them with respect to ground truth, you must obtain something like:</p>
-<div class="cell">
-<div class="cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="em-lab_files/figure-html/unnamed-chunk-8-1.png" class="img-fluid figure-img" width="672"></p>
-</figure>
 </div>
 </div>
+<p>The objective of this lab session is to code a few clustering algorithms and to apply them to synthetic and real datasets.</p>
+<p>We begin with the standard imports:</p>
+<div id="e4488202" class="cell" data-execution_count="1">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> seaborn <span class="im">as</span> sns</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> sklearn.cluster <span class="im">as</span> cluster <span class="co"># all clustering techniques except hdbscan</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="op">%</span>matplotlib inline</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>sns.set_context(<span class="st">'poster'</span>)</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>sns.set_color_codes()</span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>plot_kwds <span class="op">=</span> {<span class="st">'alpha'</span> : <span class="fl">0.25</span>, <span class="st">'s'</span> : <span class="dv">80</span>, <span class="st">'linewidths'</span>:<span class="dv">0</span>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p><strong>10.</strong> Plot the histogram corresponding to your generated data. Interpret it.</p>
-<p><strong>11.</strong> Fit a GMM model on your generated data. Print the summary and visualize your results. Explain your results.</p>
-<p><strong>12.</strong> Apply a density estimate on your generated data and visualize it. Interpret the obtained figure.</p>
+<p>We will have two toy datasets to try the different methods:</p>
+<p>There are a lot of clustering algorithms to choose from the <code>sklearn</code> library. So what clustering algorithms should you be using? It depends.</p>
+<div id="c61eb55b" class="cell" data-execution_count="2">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> sklearn.datasets <span class="im">as</span> data</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>moons, _ <span class="op">=</span> data.make_moons(n_samples<span class="op">=</span><span class="dv">50</span>, noise<span class="op">=</span><span class="fl">0.05</span>)</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>blobs, _ <span class="op">=</span> data.make_blobs(n_samples<span class="op">=</span><span class="dv">50</span>, centers<span class="op">=</span>[(<span class="op">-</span><span class="fl">0.75</span>,<span class="fl">2.25</span>), (<span class="fl">1.0</span>, <span class="fl">2.0</span>)], cluster_std<span class="op">=</span><span class="fl">0.25</span>)</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>test_data_0 <span class="op">=</span> np.vstack([moons, blobs])</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>test_data_1 <span class="op">=</span> np.load(<span class="st">'clusterable_data.npy'</span>)</span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>fig, ax <span class="op">=</span> plt.subplots(<span class="dv">1</span>, <span class="dv">2</span>, figsize<span class="op">=</span>(<span class="dv">16</span>, <span class="dv">6</span>))</span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>ax[<span class="dv">0</span>].scatter(test_data_0.T[<span class="dv">0</span>], test_data_0.T[<span class="dv">1</span>], c<span class="op">=</span><span class="st">'b'</span>, <span class="op">**</span>plot_kwds)</span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>ax[<span class="dv">0</span>].set_title(<span class="st">'Toy Dataset'</span>, size<span class="op">=</span><span class="dv">16</span>)</span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>ax[<span class="dv">1</span>].scatter(test_data_1.T[<span class="dv">0</span>], test_data_1.T[<span class="dv">1</span>], color<span class="op">=</span><span class="st">'b'</span>, <span class="op">**</span>plot_kwds)</span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a>ax[<span class="dv">1</span>].set_title(<span class="st">'Noisy Toy Dataset'</span>, size<span class="op">=</span><span class="dv">16</span>)</span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a>plt.show()<span class="op">;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<section id="k-means" class="level2">
+<h2 class="anchored" data-anchor-id="k-means">K-means</h2>
+<p>K-Means is the ‘go-to’ clustering algorithm for many simply because it is fast, easy to understand, and available everywhere (there’s an implementation in almost any statistical or machine learning tool you care to use). However, K-Means has a few problems caused by its simplicity.</p>
+<p>We try the <code>sklearn</code> implementation in our toy datasets:</p>
 </section>
-</section>
-<section id="em-from-scratch" class="level2">
-<h2 class="anchored" data-anchor-id="em-from-scratch">EM from scratch</h2>
-<p>In this second part of this PW you will build a GMM model from scratch, you must develop the EM technique to fit the model.</p>
-<p><strong>2.1</strong> Generate a two-dimensional dataset from a <span class="math inline">\(k\)</span>-component Gaussian mixture density with different means and different covariance matrices. It is up to you to choose the mixing proportions <span class="math inline">\(\{\pi_1,\ldots,\pi_k\}\)</span>.</p>
-<p><strong>2.2</strong> Implement the EM algorithm to fit a GMM on your generated data:</p>
+<section id="aglomerative-single-linkage-clustering" class="level2">
+<h2 class="anchored" data-anchor-id="aglomerative-single-linkage-clustering">Aglomerative Single Linkage clustering</h2>
+<div id="cb0461bf" class="cell" data-execution_count="3">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.cluster <span class="im">import</span> KMeans</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>kmeans_0 <span class="op">=</span> KMeans(n_clusters<span class="op">=</span><span class="dv">4</span>, max_iter<span class="op">=</span><span class="dv">200</span>).fit(test_data_0)</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>kmeans_1 <span class="op">=</span> KMeans(n_clusters<span class="op">=</span><span class="dv">4</span>, max_iter<span class="op">=</span><span class="dv">200</span>).fit(test_data_1)</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>fig, ax <span class="op">=</span> plt.subplots(<span class="dv">1</span>, <span class="dv">2</span>, figsize<span class="op">=</span>(<span class="dv">16</span>, <span class="dv">6</span>))</span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>ax[<span class="dv">0</span>].scatter(test_data_0.T[<span class="dv">0</span>], test_data_0.T[<span class="dv">1</span>], c<span class="op">=</span>kmeans_0.labels_ , <span class="op">**</span>plot_kwds)</span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>ax[<span class="dv">0</span>].set_title(<span class="st">'Toy Dataset'</span>, size<span class="op">=</span><span class="dv">16</span>)</span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>ax[<span class="dv">1</span>].scatter(test_data_1.T[<span class="dv">0</span>], test_data_1.T[<span class="dv">1</span>], c<span class="op">=</span>kmeans_1.labels_, <span class="op">**</span>plot_kwds)</span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a>ax[<span class="dv">1</span>].set_title(<span class="st">'Noised Toy Dataset'</span>, size<span class="op">=</span><span class="dv">16</span>)</span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a>plt.show()<span class="op">;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Agglomerative clustering is a suite of algorithms all based on the same idea. The fundamental idea is that you start with each point in it’s own cluster and then, for each cluster, use some criterion to choose another cluster to merge with. Do this repeatedly until you have only one cluster and you get get a hierarchy, or binary tree, of clusters branching down to the last layer which has a leaf for each point in the dataset. The most basic version of this, single linkage, chooses the closest cluster to merge, and hence the tree can be ranked by distance as to when clusters merged/split.</p>
+<p><strong>Code your own Aglomerative Single Linkage clustering algorithm</strong>!:</p>
 <ul>
-<li>Initialize the mixing proportions and the covariance matrices (e.g., you can initialize with equal mixing proportions and Identity covariance matrices).</li>
-<li>Initialize the means “randomly” (by your own choice of <span class="math inline">\(k\)</span>).</li>
-<li>In the EM training loop, store the value of the observed-data log-likelihood at each iteration.</li>
-<li>At convergence, plot the log-likelihood curve.</li>
+<li>Fill in the class</li>
+<li>During the process, keep track of the cluster merges by saving a (num_samples-1,4) np.array being a linkage matrix in scypy format (to use their function to plot dendrogram: <code>scipy.cluster.hierarchy.dendrogram</code>). check documentation.</li>
 </ul>
-<p><strong>2.3</strong> Create a function that selects the number of mixture components by computing the values of BIC criterion for <span class="math inline">\(k\)</span> varying from 1 to 10.</p>
-<p><strong>2.4</strong> On your generated data, compare your results obtained with the algorithm you developed and the ground truth (in terms of the chosen number of mixture components; and in terms of error rate).</p>
-<p><strong>2.5</strong> Apply the algorithm you developed on <a href="datasets/iris.data" target="_blank">Iris 🔢</a> dataset.</p>
-<div class="callout callout-style-default callout-tip callout-titled">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
+<div id="34e91789" class="cell" data-execution_count="4">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> my_SingleLinkageAglomerativeClustering():</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> <span class="fu">__init__</span>(<span class="va">self</span>, metric<span class="op">=</span><span class="st">"euclidean"</span>, n_clusters<span class="op">=</span><span class="dv">3</span>):</span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>        <span class="co">'''</span></span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a><span class="co">        Attributes:</span></span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a><span class="co">        </span></span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a><span class="co">        metric_: {"euclidean","precomputed"}</span></span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a><span class="co">            the distance to be used</span></span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a><span class="co">            if precomputed then X is distance matrix</span></span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a><span class="co">        n_clusters: integer</span></span>
+<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a><span class="co">            number of clusters to return </span></span>
+<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a><span class="co">        linkage_matrix_: (n-1, 4) np.array</span></span>
+<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a><span class="co">            in the same format as linkage  </span></span>
+<span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a><span class="co">        labels_: integer np.array</span></span>
+<span id="cb4-15"><a href="#cb4-15" aria-hidden="true" tabindex="-1"></a><span class="co">            label assigment</span></span>
+<span id="cb4-16"><a href="#cb4-16" aria-hidden="true" tabindex="-1"></a><span class="co">        hierarchy_: list of np.array</span></span>
+<span id="cb4-17"><a href="#cb4-17" aria-hidden="true" tabindex="-1"></a><span class="co">            each array corresponds to label assigment</span></span>
+<span id="cb4-18"><a href="#cb4-18" aria-hidden="true" tabindex="-1"></a><span class="co">            at each level (number of clusters)</span></span>
+<span id="cb4-19"><a href="#cb4-19" aria-hidden="true" tabindex="-1"></a><span class="co">            hierarchy_[0]=np.array(list(range(n)))</span></span>
+<span id="cb4-20"><a href="#cb4-20" aria-hidden="true" tabindex="-1"></a><span class="co">        '''</span></span>
+<span id="cb4-21"><a href="#cb4-21" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.metric_ <span class="op">=</span> metric</span>
+<span id="cb4-22"><a href="#cb4-22" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.n_clusters_ <span class="op">=</span> n_clusters</span>
+<span id="cb4-23"><a href="#cb4-23" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.linkage_matrix_ <span class="op">=</span> <span class="va">None</span></span>
+<span id="cb4-24"><a href="#cb4-24" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.labels_ <span class="op">=</span> <span class="va">None</span></span>
+<span id="cb4-25"><a href="#cb4-25" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.hierarchy_ <span class="op">=</span> <span class="va">None</span></span>
+<span id="cb4-26"><a href="#cb4-26" aria-hidden="true" tabindex="-1"></a>        </span>
+<span id="cb4-27"><a href="#cb4-27" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> fit(<span class="va">self</span>, X):</span>
+<span id="cb4-28"><a href="#cb4-28" aria-hidden="true" tabindex="-1"></a>        <span class="co">""" Create a hierarchy of clusters</span></span>
+<span id="cb4-29"><a href="#cb4-29" aria-hidden="true" tabindex="-1"></a><span class="co">        </span></span>
+<span id="cb4-30"><a href="#cb4-30" aria-hidden="true" tabindex="-1"></a><span class="co">        Parameters:</span></span>
+<span id="cb4-31"><a href="#cb4-31" aria-hidden="true" tabindex="-1"></a><span class="co">        -----------</span></span>
+<span id="cb4-32"><a href="#cb4-32" aria-hidden="true" tabindex="-1"></a><span class="co">        X: (n, p) np.array</span></span>
+<span id="cb4-33"><a href="#cb4-33" aria-hidden="true" tabindex="-1"></a><span class="co">            Data matrix</span></span>
+<span id="cb4-34"><a href="#cb4-34" aria-hidden="true" tabindex="-1"></a><span class="co">        </span></span>
+<span id="cb4-35"><a href="#cb4-35" aria-hidden="true" tabindex="-1"></a><span class="co">        Returns:</span></span>
+<span id="cb4-36"><a href="#cb4-36" aria-hidden="true" tabindex="-1"></a><span class="co">        -----</span></span>
+<span id="cb4-37"><a href="#cb4-37" aria-hidden="true" tabindex="-1"></a><span class="co">        self: my_SingleLinkageAglomerativeClustering</span></span>
+<span id="cb4-38"><a href="#cb4-38" aria-hidden="true" tabindex="-1"></a><span class="co">            to have access to labels_</span></span>
+<span id="cb4-39"><a href="#cb4-39" aria-hidden="true" tabindex="-1"></a><span class="co">        """</span></span>
+<span id="cb4-40"><a href="#cb4-40" aria-hidden="true" tabindex="-1"></a>        <span class="co"># if it's not precomputed compute the distance matrix</span></span>
+<span id="cb4-41"><a href="#cb4-41" aria-hidden="true" tabindex="-1"></a>        <span class="co"># using from scipy.spatial import distance </span></span>
+<span id="cb4-42"><a href="#cb4-42" aria-hidden="true" tabindex="-1"></a>        </span>
+<span id="cb4-43"><a href="#cb4-43" aria-hidden="true" tabindex="-1"></a>        <span class="co"># HINT:</span></span>
+<span id="cb4-44"><a href="#cb4-44" aria-hidden="true" tabindex="-1"></a>        <span class="co"># You can use a minimum spanning tree and add merge in increasing order</span></span>
+<span id="cb4-45"><a href="#cb4-45" aria-hidden="true" tabindex="-1"></a>        <span class="co"># or modifying the distance matrix </span></span>
+<span id="cb4-46"><a href="#cb4-46" aria-hidden="true" tabindex="-1"></a>        <span class="co"># (add row/column for new clusters and remove/put zero in old row/colums)</span></span>
+<span id="cb4-47"><a href="#cb4-47" aria-hidden="true" tabindex="-1"></a>        </span>
+<span id="cb4-48"><a href="#cb4-48" aria-hidden="true" tabindex="-1"></a>        <span class="co"># keep track of merges in linkage_matrix_ and labels in hierarchy_</span></span>
+<span id="cb4-49"><a href="#cb4-49" aria-hidden="true" tabindex="-1"></a>        </span>
+<span id="cb4-50"><a href="#cb4-50" aria-hidden="true" tabindex="-1"></a>        <span class="co"># update labels_ from the hierarchy level selected by n_clusters_ </span></span>
+<span id="cb4-51"><a href="#cb4-51" aria-hidden="true" tabindex="-1"></a>        </span>
+<span id="cb4-52"><a href="#cb4-52" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> plot_dendrogram():</span>
+<span id="cb4-53"><a href="#cb4-53" aria-hidden="true" tabindex="-1"></a>        <span class="co">'''Use self.linkage_matrix_ in `scipy.cluster.hierarchy.dendrogram` </span></span>
+<span id="cb4-54"><a href="#cb4-54" aria-hidden="true" tabindex="-1"></a><span class="co">        to plot the dendrogram of the hierarchical structure</span></span>
+<span id="cb4-55"><a href="#cb4-55" aria-hidden="true" tabindex="-1"></a><span class="co">        '''</span>        </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div class="callout-title-container flex-fill">
-Tip
+<p>Apply the method to our toy datasets</p>
+<div id="8e9a21f7" class="cell" data-execution_count="5">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> scipy.spatial <span class="im">import</span> distance </span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> scipy.cluster.hierarchy <span class="im">import</span> dendrogram</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a><span class="co"># </span><span class="al">TODO</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
+<p>Try the different linkage methods implemented in <code>sklearn</code> and comment</p>
+<div id="5fdcb7c4" class="cell" data-execution_count="6">
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># </span><span class="al">TODO</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div class="callout-body-container callout-body">
-<p>To visualize your results on Iris dataset, you can use PCA projection and coloring with respect to clustering results.</p>
-<p>The package <code>mclust</code> provides also a dimensionality reduction technique in function <code>MclustDR()</code>.</p>
+</section>
+<section id="dbscan" class="level2">
+<h2 class="anchored" data-anchor-id="dbscan">DBSCAN</h2>
+<p>DBSCAN is a density based algorithm – it assumes clusters for dense regions. It is also the first actual clustering algorithm we’ve looked at: it doesn’t require that every point be assigned to a cluster and hence doesn’t partition the data, but instead extracts the ‘dense’ clusters and leaves sparse background classified as ‘noise’. In practice DBSCAN is related to agglomerative clustering. As a first step DBSCAN transforms the space according to the density of the data: points in dense regions are left alone, while points in sparse regions are moved further away. Applying single linkage clustering to the transformed space results in a dendrogram, which we cut according to a distance parameter (called epsilon or <code>eps</code> in many implementations) to get clusters. Importantly any singleton clusters at that cut level are deemed to be ‘noise’ and left unclustered.</p>
+<p>Apply it to the test_data, how do you tune the parameters?</p>
+<div id="bba586e7" class="cell" data-execution_count="7">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co"># </span><span class="al">TODO</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
+</section>
+<section id="hdbscan" class="level2">
+<h2 class="anchored" data-anchor-id="hdbscan">HDBSCAN</h2>
+<p>HDBSCAN is a recent algorithm developed by some of the same people who write the original DBSCAN paper. Their goal was to allow varying density clusters. The algorithm starts off much the same as DBSCAN: we transform the space according to density, exactly as DBSCAN does, and perform single linkage clustering on the transformed space. Instead of taking an epsilon value as a cut level for the dendrogram however, a different approach is taken: the dendrogram is condensed by viewing splits that result in a small number of points splitting off as points ‘falling out of a cluster’. This results in a smaller tree with fewer clusters that ‘lose points’. That tree can then be used to select the most stable or persistent clusters. This process allows the tree to be cut at varying height, picking our varying density clusters based on cluster stability.</p>
+<div id="d2a82696" class="cell" data-execution_count="8">
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> hdbscan</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="co"># </span><span class="al">TODO</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p align="right">
-◼
-</p>
+</section>
+<section id="apply-the-algorithms-to-the-following-images-and-comment-the-results" class="level2">
+<h2 class="anchored" data-anchor-id="apply-the-algorithms-to-the-following-images-and-comment-the-results">Apply the algorithms to the following images and comment the results</h2>
+<section id="nasa-curiosity-picture" class="level3">
+<h3 class="anchored" data-anchor-id="nasa-curiosity-picture">NASA Curiosity Picture</h3>
+<ul>
+<li>Look at following NASA photo taken by a robot in mars:</li>
+</ul>
+<div id="a4197a8e" class="cell" data-execution_count="9">
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> PIL <span class="im">import</span> Image</span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>Im_1  <span class="op">=</span> Image.<span class="bu">open</span>(<span class="st">'im_nasa_reduced.jpg'</span>)</span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>fig <span class="op">=</span> plt.figure(figsize<span class="op">=</span>(<span class="dv">8</span>, <span class="dv">6</span>))</span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a>plt.imshow(Im_1)</span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<ul>
+<li>Transform the image to an intensity (I) and saturation (S) representation, it helps to distinguish bright and textures.</li>
+</ul>
+<p><span class="math display">\[I=\frac{R+G+B}{3}\]</span> <span class="math display">\[S=1-I\times min(R, G, B)\]</span></p>
+<div id="f9790e91" class="cell" data-execution_count="10">
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="co"># </span><span class="al">TODO</span><span class="co">:</span></span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="co"># I = </span></span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a><span class="co"># S = </span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<ul>
+<li>Apply the seen algorithms to segment the image in the Intensity-Saturation representation, comment the results and check if you find something on mars’ surface. Be careful with hdbscan and memory errors for some parameters choice (use algorithm=‘boruvka_kdtree’).</li>
+</ul>
+<div id="4e51f0e2" class="cell" data-execution_count="11">
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="co"># </span><span class="al">TODO</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="color-compression" class="level3">
+<h3 class="anchored" data-anchor-id="color-compression">Color compression</h3>
+<p>One interesting application of clustering is in color compression within images. For example, imagine you have an image with millions of colors. In most images, a large number of the colors will be unused, and many of the pixels in the image will have similar or even identical colors.</p>
+<p>Get a simplified 10-colored version of the following image by applying k-means. Plot both images.</p>
+<div id="76efa52f" class="cell" data-execution_count="12">
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.datasets <span class="im">import</span> load_sample_image</span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>china <span class="op">=</span> load_sample_image(<span class="st">"china.jpg"</span>)</span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>fig <span class="op">=</span> plt.figure(figsize<span class="op">=</span>(<span class="dv">8</span>, <span class="dv">6</span>))</span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a>plt.imshow(china)<span class="op">;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div id="d80a1638" class="cell" data-execution_count="13">
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="co"># </span><span class="al">TODO</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
 
 
+</section>
 </section>
 
 </main> <!-- /main -->
@@ -1062,14 +1065,11 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="./em.html" class="pagination-link" aria-label="Distribution based">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Distribution based</span></span>
+      <a href="./hclust-dbscan.html" class="pagination-link" aria-label="Hierarchical based and Density based">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Hierarchical based and Density based</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./hclust-dbscan.html" class="pagination-link" aria-label="Hierarchical based and Density based">
-        <span class="nav-page-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Hierarchical based and Density based</span></span> <i class="bi bi-arrow-right-short"></i>
-      </a>
   </div>
 </nav>
 </div> <!-- /content -->

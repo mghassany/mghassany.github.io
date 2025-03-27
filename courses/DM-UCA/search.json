@@ -217,5 +217,71 @@
       "Clustering",
       "Lab: GMM & EM"
     ]
+  },
+  {
+    "objectID": "hclust-dbscan.html",
+    "href": "hclust-dbscan.html",
+    "title": "4  Hierarchical based and Density based",
+    "section": "",
+    "text": "Slides\n\n\n\nDocuments for this chapter:\n\nTable of contents 📄 from “Data Clustering Algorithms and Applications” book for authors C Aggarwal and C Reddy.\nClustering lecture notes 📄 from Prof. Emilie Chouzenoux and Prof. Frédéric PASCAL.\n\nExtra:\n\nCluster analysis lecture notes 📄 from Prof. Erich Schuberts.",
+    "crumbs": [
+      "Clustering",
+      "<span class='chapter-number'>4</span>  <span class='chapter-title'>Hierarchical based and Density based</span>"
+    ]
+  },
+  {
+    "objectID": "hclust-dbscan-lab.html",
+    "href": "hclust-dbscan-lab.html",
+    "title": "Lab: Hierarchical based and Density based",
+    "section": "",
+    "text": "K-means\nThe objective of this lab session is to code a few clustering algorithms and to apply them to synthetic and real datasets.\nWe begin with the standard imports:\nWe will have two toy datasets to try the different methods:\nThere are a lot of clustering algorithms to choose from the sklearn library. So what clustering algorithms should you be using? It depends.\nK-Means is the ‘go-to’ clustering algorithm for many simply because it is fast, easy to understand, and available everywhere (there’s an implementation in almost any statistical or machine learning tool you care to use). However, K-Means has a few problems caused by its simplicity.\nWe try the sklearn implementation in our toy datasets:",
+    "crumbs": [
+      "Clustering",
+      "Lab: Hierarchical based and Density based"
+    ]
+  },
+  {
+    "objectID": "hclust-dbscan-lab.html#aglomerative-single-linkage-clustering",
+    "href": "hclust-dbscan-lab.html#aglomerative-single-linkage-clustering",
+    "title": "Lab: Hierarchical based and Density based",
+    "section": "Aglomerative Single Linkage clustering",
+    "text": "Aglomerative Single Linkage clustering\n\nfrom sklearn.cluster import KMeans\nkmeans_0 = KMeans(n_clusters=4, max_iter=200).fit(test_data_0)\nkmeans_1 = KMeans(n_clusters=4, max_iter=200).fit(test_data_1)\n\nfig, ax = plt.subplots(1, 2, figsize=(16, 6))\nax[0].scatter(test_data_0.T[0], test_data_0.T[1], c=kmeans_0.labels_ , **plot_kwds)\nax[0].set_title('Toy Dataset', size=16)\n\nax[1].scatter(test_data_1.T[0], test_data_1.T[1], c=kmeans_1.labels_, **plot_kwds)\nax[1].set_title('Noised Toy Dataset', size=16)\n\n\nplt.show();\n\nAgglomerative clustering is a suite of algorithms all based on the same idea. The fundamental idea is that you start with each point in it’s own cluster and then, for each cluster, use some criterion to choose another cluster to merge with. Do this repeatedly until you have only one cluster and you get get a hierarchy, or binary tree, of clusters branching down to the last layer which has a leaf for each point in the dataset. The most basic version of this, single linkage, chooses the closest cluster to merge, and hence the tree can be ranked by distance as to when clusters merged/split.\nCode your own Aglomerative Single Linkage clustering algorithm!:\n\nFill in the class\nDuring the process, keep track of the cluster merges by saving a (num_samples-1,4) np.array being a linkage matrix in scypy format (to use their function to plot dendrogram: scipy.cluster.hierarchy.dendrogram). check documentation.\n\n\nclass my_SingleLinkageAglomerativeClustering():\n    \n    def __init__(self, metric=\"euclidean\", n_clusters=3):\n        '''\n        Attributes:\n        \n        metric_: {\"euclidean\",\"precomputed\"}\n            the distance to be used\n            if precomputed then X is distance matrix\n        n_clusters: integer\n            number of clusters to return \n        linkage_matrix_: (n-1, 4) np.array\n            in the same format as linkage  \n        labels_: integer np.array\n            label assigment\n        hierarchy_: list of np.array\n            each array corresponds to label assigment\n            at each level (number of clusters)\n            hierarchy_[0]=np.array(list(range(n)))\n        '''\n        self.metric_ = metric\n        self.n_clusters_ = n_clusters\n        self.linkage_matrix_ = None\n        self.labels_ = None\n        self.hierarchy_ = None\n        \n    def fit(self, X):\n        \"\"\" Create a hierarchy of clusters\n        \n        Parameters:\n        -----------\n        X: (n, p) np.array\n            Data matrix\n        \n        Returns:\n        -----\n        self: my_SingleLinkageAglomerativeClustering\n            to have access to labels_\n        \"\"\"\n        # if it's not precomputed compute the distance matrix\n        # using from scipy.spatial import distance \n        \n        # HINT:\n        # You can use a minimum spanning tree and add merge in increasing order\n        # or modifying the distance matrix \n        # (add row/column for new clusters and remove/put zero in old row/colums)\n        \n        # keep track of merges in linkage_matrix_ and labels in hierarchy_\n        \n        # update labels_ from the hierarchy level selected by n_clusters_ \n        \n    def plot_dendrogram():\n        '''Use self.linkage_matrix_ in `scipy.cluster.hierarchy.dendrogram` \n        to plot the dendrogram of the hierarchical structure\n        '''        \n\nApply the method to our toy datasets\n\nfrom scipy.spatial import distance \nfrom scipy.cluster.hierarchy import dendrogram\n\n# TODO\n\nTry the different linkage methods implemented in sklearn and comment\n\n# TODO",
+    "crumbs": [
+      "Clustering",
+      "Lab: Hierarchical based and Density based"
+    ]
+  },
+  {
+    "objectID": "hclust-dbscan-lab.html#dbscan",
+    "href": "hclust-dbscan-lab.html#dbscan",
+    "title": "Lab: Hierarchical based and Density based",
+    "section": "DBSCAN",
+    "text": "DBSCAN\nDBSCAN is a density based algorithm – it assumes clusters for dense regions. It is also the first actual clustering algorithm we’ve looked at: it doesn’t require that every point be assigned to a cluster and hence doesn’t partition the data, but instead extracts the ‘dense’ clusters and leaves sparse background classified as ‘noise’. In practice DBSCAN is related to agglomerative clustering. As a first step DBSCAN transforms the space according to the density of the data: points in dense regions are left alone, while points in sparse regions are moved further away. Applying single linkage clustering to the transformed space results in a dendrogram, which we cut according to a distance parameter (called epsilon or eps in many implementations) to get clusters. Importantly any singleton clusters at that cut level are deemed to be ‘noise’ and left unclustered.\nApply it to the test_data, how do you tune the parameters?\n\n# TODO",
+    "crumbs": [
+      "Clustering",
+      "Lab: Hierarchical based and Density based"
+    ]
+  },
+  {
+    "objectID": "hclust-dbscan-lab.html#hdbscan",
+    "href": "hclust-dbscan-lab.html#hdbscan",
+    "title": "Lab: Hierarchical based and Density based",
+    "section": "HDBSCAN",
+    "text": "HDBSCAN\nHDBSCAN is a recent algorithm developed by some of the same people who write the original DBSCAN paper. Their goal was to allow varying density clusters. The algorithm starts off much the same as DBSCAN: we transform the space according to density, exactly as DBSCAN does, and perform single linkage clustering on the transformed space. Instead of taking an epsilon value as a cut level for the dendrogram however, a different approach is taken: the dendrogram is condensed by viewing splits that result in a small number of points splitting off as points ‘falling out of a cluster’. This results in a smaller tree with fewer clusters that ‘lose points’. That tree can then be used to select the most stable or persistent clusters. This process allows the tree to be cut at varying height, picking our varying density clusters based on cluster stability.\n\nimport hdbscan\n\n# TODO",
+    "crumbs": [
+      "Clustering",
+      "Lab: Hierarchical based and Density based"
+    ]
+  },
+  {
+    "objectID": "hclust-dbscan-lab.html#apply-the-algorithms-to-the-following-images-and-comment-the-results",
+    "href": "hclust-dbscan-lab.html#apply-the-algorithms-to-the-following-images-and-comment-the-results",
+    "title": "Lab: Hierarchical based and Density based",
+    "section": "Apply the algorithms to the following images and comment the results",
+    "text": "Apply the algorithms to the following images and comment the results\n\nNASA Curiosity Picture\n\nLook at following NASA photo taken by a robot in mars:\n\n\nfrom PIL import Image\n\nIm_1  = Image.open('im_nasa_reduced.jpg')\n\nfig = plt.figure(figsize=(8, 6))\nplt.imshow(Im_1)\nplt.show()\n\n\nTransform the image to an intensity (I) and saturation (S) representation, it helps to distinguish bright and textures.\n\n\\[I=\\frac{R+G+B}{3}\\] \\[S=1-I\\times min(R, G, B)\\]\n\n# TODO:\n# I = \n# S = \n\n\nApply the seen algorithms to segment the image in the Intensity-Saturation representation, comment the results and check if you find something on mars’ surface. Be careful with hdbscan and memory errors for some parameters choice (use algorithm=‘boruvka_kdtree’).\n\n\n# TODO\n\n\n\nColor compression\nOne interesting application of clustering is in color compression within images. For example, imagine you have an image with millions of colors. In most images, a large number of the colors will be unused, and many of the pixels in the image will have similar or even identical colors.\nGet a simplified 10-colored version of the following image by applying k-means. Plot both images.\n\nfrom sklearn.datasets import load_sample_image\nchina = load_sample_image(\"china.jpg\")\n\nfig = plt.figure(figsize=(8, 6))\nplt.imshow(china);\n\n\n# TODO",
+    "crumbs": [
+      "Clustering",
+      "Lab: Hierarchical based and Density based"
+    ]
   }
 ]

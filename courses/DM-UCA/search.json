@@ -283,5 +283,104 @@
       "Clustering",
       "Lab: Hierarchical based and Density based"
     ]
+  },
+  {
+    "objectID": "clustering-validity.html",
+    "href": "clustering-validity.html",
+    "title": "5  Clustering validity",
+    "section": "",
+    "text": "Slides\n\n\n\nDocuments for this chapter:\n\nSlides on clustering validity: 📄.\n\nBonus:\n\nCluster validation: Internal versus External indexes.",
+    "crumbs": [
+      "Clustering",
+      "<span class='chapter-number'>5</span>  <span class='chapter-title'>Clustering validity</span>"
+    ]
+  },
+  {
+    "objectID": "anomaly-detection.html",
+    "href": "anomaly-detection.html",
+    "title": "6  Isolation Forest Algorithm",
+    "section": "",
+    "text": "Slides\n\n\n\nDocuments for this chapter:\n\nSlides on anomaly detection: Isolation Forest Algorithm 📄.\n\nBonus resources:\n\nA github repo: Anomaly Detection Learning Resources.\nA workshop from aiTransferLab {target=’_blank’}: link.",
+    "crumbs": [
+      "Anomaly dectection",
+      "<span class='chapter-number'>6</span>  <span class='chapter-title'>Isolation Forest Algorithm</span>"
+    ]
+  },
+  {
+    "objectID": "project.html",
+    "href": "project.html",
+    "title": "7  Multi-spectral Image Segmentation",
+    "section": "",
+    "text": "7.1 Data\nFor this study, you will need two data files:\nThe data in the mars.csv file represent a hyper-spectral image of the surface of Mars. Visible and near-infrared imagery is a key tele-detection technique, used to study planets thanks to satellites with on-board spectrometers. In march 2014, the OMEGA equipment collected more than 310 Go of raw images. It mapped Mars surface with a resolution between 300 and 3000 meters, depending on the height of the space ship1. For each pixel, the spectral response between 0.36 and 5.2 µm was collected and sampled accross 255 channels. The objective is to characterize the geological composition of Mars surface and in particular to distinguish between different classes of silicates, minerals, oxydes, carbonates and frozen regions.\nThese data are represented by an image of 300 x 128 pixels. A vector of 255 spectral values (variables, characteristics, features) is associated to each of the 38400 pixels (instances, individuals).",
+    "crumbs": [
+      "Project",
+      "<span class='chapter-number'>7</span>  <span class='chapter-title'>Multi-spectral Image Segmentation</span>"
+    ]
+  },
+  {
+    "objectID": "project.html#data",
+    "href": "project.html#data",
+    "title": "7  Multi-spectral Image Segmentation",
+    "section": "",
+    "text": "mars.csv 🔢\nmask.csv 🔢\n\n\n\n\n\n\n\n\n\nObjectives\n\n\n\nAccording to experts, there are \\(K=5\\) geological classes to identify on the map. The objective is to operate an automated unsupervised classification of the pixels, in order to segment the image into 5 distinct categories (colors). Before conducting the segmentation, an exploratory approach is conducted to better understand the data and decide how it should be pre-processed. Then, different clustering algorithms are applied and compared on the MARS dataset.",
+    "crumbs": [
+      "Project",
+      "<span class='chapter-number'>7</span>  <span class='chapter-title'>Multi-spectral Image Segmentation</span>"
+    ]
+  },
+  {
+    "objectID": "project.html#data-exploration",
+    "href": "project.html#data-exploration",
+    "title": "7  Multi-spectral Image Segmentation",
+    "section": "7.2 Data exploration",
+    "text": "7.2 Data exploration\n\n7.2.1 Read the data and understand the formatting\n\nRead the “mars.csv” data.\nDisplay a summary of the data.\nHow many rows and columns do the data have? What does it mean in terms of number of data points? Dimensionality of the data?\n\n\n\n7.2.2 Data preprocessing\n\nDraw the histograms of six different dimensions (wave length) selected at random. They represent the distributions of the values of a given dimension across the different pixels.\n\nWhat can you say regarding the discriminative power of single dimensions?\nThe symmetry of the data?\n\nDraw the box plots of all different wave lengths. They should all appear on the same graph.\n\nWhat can you say regarding the spread of the different dimensions?\nThe symmetry of the data?\nOutlier values?\n\nConduct the required data transformations/preprocessing. Visualize the new distribution of the transformed data (histograms, box plots), what can you say?",
+    "crumbs": [
+      "Project",
+      "<span class='chapter-number'>7</span>  <span class='chapter-title'>Multi-spectral Image Segmentation</span>"
+    ]
+  },
+  {
+    "objectID": "project.html#dimensionality-reduction",
+    "href": "project.html#dimensionality-reduction",
+    "title": "7  Multi-spectral Image Segmentation",
+    "section": "7.3 Dimensionality reduction",
+    "text": "7.3 Dimensionality reduction\n\n7.3.1 PCA\n\nConduct a Principal Component Analysis decomposition of the MARS data.\nVisualize the explained variance as a function of the number of dimensions selected. (In Python, We can use the pca.explained_variance_ratio argument from the scikit learn PCA implementation)\nHow many dimensions should be used to conduct a cluster analysis?\nPlot the Variable factor map (Features representation) for the first two PCA dimensions. What can you say?\nPlot the Individuals factor map (Individuals’ representation) for the first two PCA dimensions. What can you say?\n\n\n\n7.3.2 t-SNE\n\nApply the t-SNE method on the MARS data. What can you say?",
+    "crumbs": [
+      "Project",
+      "<span class='chapter-number'>7</span>  <span class='chapter-title'>Multi-spectral Image Segmentation</span>"
+    ]
+  },
+  {
+    "objectID": "project.html#clustering",
+    "href": "project.html#clustering",
+    "title": "7  Multi-spectral Image Segmentation",
+    "section": "7.4 Clustering",
+    "text": "7.4 Clustering\n\n7.4.1 K-means\n\nConduct one of the methods to choose the number of clusters K to apply K-means on these data? What K should be chosen?\nIn practice, the experts tell us that the number of different geological compositions in this image is 5. Apply K-means on the selected PCA dimensions, with this value of K.\nDisplay the clusters in the PCA Individual factor map.\nDisplay the 300x128 image where the pixels represent the clusters. (We can use the reshape() function.)\nPlot the curves representing the values of the wave lengths of the cluster centers.\nRepeat the process using the complete data instead of the data reduced with PCA. Compare the two results using external metrics (normalized mutual information, Fowlkes Mallows). Are the clusters obtained similar?\nRepeat the process using the data reduced with t-SNE. Compare with the previous results.\n\n\n\n7.4.2 Agglomerative Clustering\n\nApply Agglomerative Clustering on the MARS dataset, visualize the results.\n\n\n\n7.4.3 Gaussian Mixture Models\n\nApply Gaussian Mixture Models on the MARS dataset, visualize the results.\n\n\n\n7.4.4 DBSCAN\n\nApply DBSCAN on the MARS dataset, using your previously implemented algorithm from scratch, visualize the results.\nCompare your results with scikit-learn’s dbscan (or R’s dbscan function).",
+    "crumbs": [
+      "Project",
+      "<span class='chapter-number'>7</span>  <span class='chapter-title'>Multi-spectral Image Segmentation</span>"
+    ]
+  },
+  {
+    "objectID": "project.html#comparison-of-clustering-algorithms",
+    "href": "project.html#comparison-of-clustering-algorithms",
+    "title": "7  Multi-spectral Image Segmentation",
+    "section": "7.5 Comparison of clustering algorithms",
+    "text": "7.5 Comparison of clustering algorithms\nThe ground truth of the pixels values was provided by domain experts and can be found in the mask.csv file.\n\nUsing external validation metrics, evaluate which clustering algorithms, parameters, data preprocess ing, etc. gives the best clustering results. In particular, we can study the influence of using PCA, the number of classes, the linkage methods, etc.\n\n\n◼",
+    "crumbs": [
+      "Project",
+      "<span class='chapter-number'>7</span>  <span class='chapter-title'>Multi-spectral Image Segmentation</span>"
+    ]
+  },
+  {
+    "objectID": "project.html#footnotes",
+    "href": "project.html#footnotes",
+    "title": "7  Multi-spectral Image Segmentation",
+    "section": "",
+    "text": "Jean-Pierre Bibring, Yves Langevin, Aline Gendrin, Brigitte Gondet, François Poulet, Michel Berthé, Alain Soufflot, Ray Arvidson, Nicolas Mangold, John Mustard, et al. Mars surface diversity as revealed by the omega/mars express observations. Science, 307(5715):1576–1581, 2005.↩︎",
+    "crumbs": [
+      "Project",
+      "<span class='chapter-number'>7</span>  <span class='chapter-title'>Multi-spectral Image Segmentation</span>"
+    ]
   }
 ]

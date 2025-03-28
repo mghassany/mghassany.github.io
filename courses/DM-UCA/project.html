@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>1&nbsp; PCA + t-SNE – Data Mining course</title>
+<title>7&nbsp; Multi-spectral Image Segmentation – Data Mining course</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -30,8 +30,7 @@ ul.task-list li input[type="checkbox"] {
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
-<link href="./pca-lab.html" rel="next">
-<link href="./index.html" rel="prev">
+<link href="./anomaly-detection.html" rel="prev">
 <link href="./data-mining.jpg" rel="icon" type="image/jpeg">
 <script src="site_libs/quarto-html/quarto.js"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
@@ -72,6 +71,35 @@ ul.task-list li input[type="checkbox"] {
   }
 }</script>
 
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
 
 <link rel="stylesheet" href="custom.css">
 </head>
@@ -85,7 +113,7 @@ ul.task-list li input[type="checkbox"] {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./pca.html">Dimensionality reduction</a></li><li class="breadcrumb-item"><a href="./pca.html"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">PCA + t-SNE</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./project.html">Project</a></li><li class="breadcrumb-item"><a href="./project.html"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Multi-spectral Image Segmentation</span></a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
     </div>
@@ -125,7 +153,7 @@ ul.task-list li input[type="checkbox"] {
       <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./pca.html" class="sidebar-item-text sidebar-link active">
+  <a href="./pca.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">PCA + t-SNE</span></span></a>
   </div>
 </li>
@@ -218,7 +246,7 @@ ul.task-list li input[type="checkbox"] {
       <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./project.html" class="sidebar-item-text sidebar-link">
+  <a href="./project.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Multi-spectral Image Segmentation</span></span></a>
   </div>
 </li>
@@ -229,15 +257,39 @@ ul.task-list li input[type="checkbox"] {
 </nav>
 <div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
-        
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#data" id="toc-data" class="nav-link active" data-scroll-target="#data"><span class="header-section-number">7.1</span> Data</a></li>
+  <li><a href="#data-exploration" id="toc-data-exploration" class="nav-link" data-scroll-target="#data-exploration"><span class="header-section-number">7.2</span> Data exploration</a>
+  <ul class="collapse">
+  <li><a href="#read-the-data-and-understand-the-formatting" id="toc-read-the-data-and-understand-the-formatting" class="nav-link" data-scroll-target="#read-the-data-and-understand-the-formatting"><span class="header-section-number">7.2.1</span> Read the data and understand the formatting</a></li>
+  <li><a href="#data-preprocessing" id="toc-data-preprocessing" class="nav-link" data-scroll-target="#data-preprocessing"><span class="header-section-number">7.2.2</span> Data preprocessing</a></li>
+  </ul></li>
+  <li><a href="#dimensionality-reduction" id="toc-dimensionality-reduction" class="nav-link" data-scroll-target="#dimensionality-reduction"><span class="header-section-number">7.3</span> Dimensionality reduction</a>
+  <ul class="collapse">
+  <li><a href="#pca" id="toc-pca" class="nav-link" data-scroll-target="#pca"><span class="header-section-number">7.3.1</span> PCA</a></li>
+  <li><a href="#t-sne" id="toc-t-sne" class="nav-link" data-scroll-target="#t-sne"><span class="header-section-number">7.3.2</span> t-SNE</a></li>
+  </ul></li>
+  <li><a href="#clustering" id="toc-clustering" class="nav-link" data-scroll-target="#clustering"><span class="header-section-number">7.4</span> Clustering</a>
+  <ul class="collapse">
+  <li><a href="#k-means" id="toc-k-means" class="nav-link" data-scroll-target="#k-means"><span class="header-section-number">7.4.1</span> K-means</a></li>
+  <li><a href="#agglomerative-clustering" id="toc-agglomerative-clustering" class="nav-link" data-scroll-target="#agglomerative-clustering"><span class="header-section-number">7.4.2</span> Agglomerative Clustering</a></li>
+  <li><a href="#gaussian-mixture-models" id="toc-gaussian-mixture-models" class="nav-link" data-scroll-target="#gaussian-mixture-models"><span class="header-section-number">7.4.3</span> Gaussian Mixture Models</a></li>
+  <li><a href="#dbscan" id="toc-dbscan" class="nav-link" data-scroll-target="#dbscan"><span class="header-section-number">7.4.4</span> DBSCAN</a></li>
+  </ul></li>
+  <li><a href="#comparison-of-clustering-algorithms" id="toc-comparison-of-clustering-algorithms" class="nav-link" data-scroll-target="#comparison-of-clustering-algorithms"><span class="header-section-number">7.5</span> Comparison of clustering algorithms</a></li>
+  </ul>
+</nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./pca.html">Dimensionality reduction</a></li><li class="breadcrumb-item"><a href="./pca.html"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">PCA + t-SNE</span></a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./project.html">Project</a></li><li class="breadcrumb-item"><a href="./project.html"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Multi-spectral Image Segmentation</span></a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">PCA + t-SNE</span></h1>
+<h1 class="title"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Multi-spectral Image Segmentation</span></h1>
 </div>
 
 
@@ -260,19 +312,135 @@ ul.task-list li input[type="checkbox"] {
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Slides
+Abstract
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>Slides for this chapter:</p>
+<p>The objective of this lab is to apply the different concepts studied during this course on clustering. Image segmentation is a standard problem where unsupervised learning is used. Here, we want to apply clustering to the pixels of a multi-spectral image representing the surface of Mars. The goal is to identify different “types” of pixels corresponding to different geological compositions, thus generating a geological map of Mars.</p>
+</div>
+</div>
+<section id="data" class="level2" data-number="7.1">
+<h2 data-number="7.1" class="anchored" data-anchor-id="data"><span class="header-section-number">7.1</span> Data</h2>
+<p>For this study, you will need two data files:</p>
 <ul>
-<li>Dimensionality Reduction (PCA + t-SNE): <a href="ACP-Ghassany-En.pdf" target="_blank">📄</a></li>
-<li>Another PCA slides: <a href="PCA-extra.pdf" target="_blank">📄</a></li>
+<li><a href="https://dl.dropboxusercontent.com/s/13wgqgv5aqm83v6/mars.csv?dl=0" target="_blank">mars.csv 🔢</a></li>
+<li><a href="https://dl.dropboxusercontent.com/s/chyrh2djrkbhkaz/mask.csv?dl=0" target="_blank">mask.csv 🔢</a></li>
 </ul>
+<p>The data in the <code>mars.csv</code> file represent a hyper-spectral image of the surface of Mars. Visible and near-infrared imagery is a key tele-detection technique, used to study planets thanks to satellites with on-board spectrometers. In march 2014, the OMEGA equipment collected more than 310 Go of raw images. It mapped Mars surface with a resolution between 300 and 3000 meters, depending on the height of the space ship<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a>. For each pixel, the spectral response between 0.36 and 5.2 <em>µ</em>m was collected and sampled accross 255 channels. The objective is to characterize the geological composition of Mars surface and in particular to distinguish between different classes of silicates, minerals, oxydes, carbonates and frozen regions.</p>
+<p>These data are represented by an image of 300 x 128 pixels. A vector of 255 spectral values (variables, characteristics, features) is associated to each of the 38400 pixels (instances, individuals).</p>
+<div class="callout callout-style-default callout-important callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Objectives
 </div>
 </div>
+<div class="callout-body-container callout-body">
+<p>According to experts, there are <span class="math inline">\(K=5\)</span> geological classes to identify on the map. The objective is to operate an automated unsupervised classification of the pixels, in order to segment the image into 5 distinct categories (colors). Before conducting the segmentation, an exploratory approach is conducted to better understand the data and decide how it should be pre-processed. Then, different clustering algorithms are applied and compared on the MARS dataset.</p>
+</div>
+</div>
+</section>
+<section id="data-exploration" class="level2" data-number="7.2">
+<h2 data-number="7.2" class="anchored" data-anchor-id="data-exploration"><span class="header-section-number">7.2</span> Data exploration</h2>
+<section id="read-the-data-and-understand-the-formatting" class="level3" data-number="7.2.1">
+<h3 data-number="7.2.1" class="anchored" data-anchor-id="read-the-data-and-understand-the-formatting"><span class="header-section-number">7.2.1</span> Read the data and understand the formatting</h3>
+<ol type="1">
+<li><p>Read the “mars.csv” data.</p></li>
+<li><p>Display a summary of the data.</p></li>
+<li><p>How many rows and columns do the data have? What does it mean in terms of number of data points? Dimensionality of the data?</p></li>
+</ol>
+</section>
+<section id="data-preprocessing" class="level3" data-number="7.2.2">
+<h3 data-number="7.2.2" class="anchored" data-anchor-id="data-preprocessing"><span class="header-section-number">7.2.2</span> Data preprocessing</h3>
+<ol type="1">
+<li><p>Draw the histograms of six different dimensions (wave length) selected at random. They represent the distributions of the values of a given dimension across the different pixels.</p>
+<ol type="a">
+<li>What can you say regarding the discriminative power of single dimensions?</li>
+<li>The symmetry of the data?</li>
+</ol></li>
+<li><p>Draw the box plots of all different wave lengths. They should all appear on the same graph.</p>
+<ol type="a">
+<li>What can you say regarding the spread of the different dimensions?</li>
+<li>The symmetry of the data?</li>
+<li>Outlier values?</li>
+</ol></li>
+<li><p>Conduct the required data transformations/preprocessing. Visualize the new distribution of the transformed data (histograms, box plots), what can you say?</p></li>
+</ol>
+</section>
+</section>
+<section id="dimensionality-reduction" class="level2" data-number="7.3">
+<h2 data-number="7.3" class="anchored" data-anchor-id="dimensionality-reduction"><span class="header-section-number">7.3</span> Dimensionality reduction</h2>
+<section id="pca" class="level3" data-number="7.3.1">
+<h3 data-number="7.3.1" class="anchored" data-anchor-id="pca"><span class="header-section-number">7.3.1</span> PCA</h3>
+<ol type="1">
+<li><p>Conduct a Principal Component Analysis decomposition of the MARS data.</p></li>
+<li><p>Visualize the explained variance as a function of the number of dimensions selected. (In Python, We can use the <em>pca.explained_variance_ratio</em> argument from the scikit learn PCA implementation)</p></li>
+<li><p>How many dimensions should be used to conduct a cluster analysis?</p></li>
+<li><p>Plot the <em>Variable factor map</em> (Features representation) for the first two PCA dimensions. What can you say?</p></li>
+<li><p>Plot the <em>Individuals factor map</em> (Individuals’ representation) for the first two PCA dimensions. What can you say?</p></li>
+</ol>
+</section>
+<section id="t-sne" class="level3" data-number="7.3.2">
+<h3 data-number="7.3.2" class="anchored" data-anchor-id="t-sne"><span class="header-section-number">7.3.2</span> t-SNE</h3>
+<ol type="1">
+<li>Apply the t-SNE method on the MARS data. What can you say?</li>
+</ol>
+</section>
+</section>
+<section id="clustering" class="level2" data-number="7.4">
+<h2 data-number="7.4" class="anchored" data-anchor-id="clustering"><span class="header-section-number">7.4</span> Clustering</h2>
+<section id="k-means" class="level3" data-number="7.4.1">
+<h3 data-number="7.4.1" class="anchored" data-anchor-id="k-means"><span class="header-section-number">7.4.1</span> K-means</h3>
+<ol type="1">
+<li><p>Conduct one of the methods to choose the number of clusters <em>K</em> to apply K-means on these data? What K should be chosen?</p></li>
+<li><p>In practice, the experts tell us that the number of different geological compositions in this image is 5. Apply K-means on the selected PCA dimensions, with this value of K.</p></li>
+<li><p>Display the clusters in the PCA <em>Individual factor map</em>.</p></li>
+<li><p>Display the 300x128 image where the pixels represent the clusters. (We can use the <code>reshape()</code> function.)</p></li>
+<li><p>Plot the curves representing the values of the wave lengths of the cluster centers.</p></li>
+<li><p>Repeat the process using the complete data instead of the data reduced with PCA. Compare the two results using external metrics (normalized mutual information, Fowlkes Mallows). Are the clusters obtained similar?</p></li>
+<li><p>Repeat the process using the data reduced with t-SNE. Compare with the previous results.</p></li>
+</ol>
+</section>
+<section id="agglomerative-clustering" class="level3" data-number="7.4.2">
+<h3 data-number="7.4.2" class="anchored" data-anchor-id="agglomerative-clustering"><span class="header-section-number">7.4.2</span> Agglomerative Clustering</h3>
+<ol type="1">
+<li>Apply Agglomerative Clustering on the MARS dataset, visualize the results.</li>
+</ol>
+</section>
+<section id="gaussian-mixture-models" class="level3" data-number="7.4.3">
+<h3 data-number="7.4.3" class="anchored" data-anchor-id="gaussian-mixture-models"><span class="header-section-number">7.4.3</span> Gaussian Mixture Models</h3>
+<ol type="1">
+<li>Apply Gaussian Mixture Models on the MARS dataset, visualize the results.</li>
+</ol>
+</section>
+<section id="dbscan" class="level3" data-number="7.4.4">
+<h3 data-number="7.4.4" class="anchored" data-anchor-id="dbscan"><span class="header-section-number">7.4.4</span> DBSCAN</h3>
+<ol type="1">
+<li>Apply DBSCAN on the MARS dataset, using your previously implemented algorithm from scratch, visualize the results.</li>
+<li>Compare your results with scikit-learn’s dbscan (or R’s dbscan function).</li>
+</ol>
+</section>
+</section>
+<section id="comparison-of-clustering-algorithms" class="level2" data-number="7.5">
+<h2 data-number="7.5" class="anchored" data-anchor-id="comparison-of-clustering-algorithms"><span class="header-section-number">7.5</span> Comparison of clustering algorithms</h2>
+<p>The ground truth of the pixels values was provided by domain experts and can be found in the <em>mask.csv</em> file.</p>
+<ol type="1">
+<li>Using external validation metrics, evaluate which clustering algorithms, parameters, data preprocess ing, etc. gives the best clustering results. <em>In particular, we can study the influence of using PCA, the number of classes, the linkage methods, etc.</em></li>
+</ol>
+<p align="right">
+◼
+</p>
 
 
+</section>
+<section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes">
+<hr>
+<ol>
+<li id="fn1"><p>Jean-Pierre Bibring, Yves Langevin, Aline Gendrin, Brigitte Gondet, François Poulet, Michel Berthé, Alain Soufflot, Ray Arvidson, Nicolas Mangold, John Mustard, et al.&nbsp;Mars surface diversity as revealed by the omega/mars express observations. <em>Science</em>, 307(5715):1576–1581, 2005.<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+</ol>
+</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
@@ -838,14 +1006,11 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="./index.html" class="pagination-link" aria-label="Preface">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Preface</span>
+      <a href="./anomaly-detection.html" class="pagination-link" aria-label="Isolation Forest Algorithm">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Isolation Forest Algorithm</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./pca-lab.html" class="pagination-link" aria-label="Lab: PCA">
-        <span class="nav-page-text">Lab: PCA</span> <i class="bi bi-arrow-right-short"></i>
-      </a>
   </div>
 </nav>
 </div> <!-- /content -->

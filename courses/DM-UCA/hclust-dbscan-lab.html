@@ -348,7 +348,7 @@ Credits
 </div>
 <p>The objective of this lab session is to code a few clustering algorithms and to apply them to synthetic and real datasets.</p>
 <p>We begin with the standard imports:</p>
-<div id="f7474467" class="cell" data-execution_count="1">
+<div id="a10e1052" class="cell" data-execution_count="1">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> seaborn <span class="im">as</span> sns</span>
@@ -361,7 +361,7 @@ Credits
 <p>We will have two toy datasets to try the different methods:</p>
 <p>There are a lot of clustering algorithms to choose from the <code>sklearn</code> library. So what clustering algorithms should you be using? It depends.</p>
 <p>Download <code>clusterable_data.npy</code> from <a href="datasets/clusterable_data.npy">here</a>. If you want to use R, you can download the <code>csv</code> from <a href="datasets/clusterable_data.csv">here</a>.</p>
-<div id="3183475b" class="cell" data-execution_count="2">
+<div id="fce73e6d" class="cell" data-execution_count="2">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> sklearn.datasets <span class="im">as</span> data</span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>moons, _ <span class="op">=</span> data.make_moons(n_samples<span class="op">=</span><span class="dv">50</span>, noise<span class="op">=</span><span class="fl">0.05</span>)</span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>blobs, _ <span class="op">=</span> data.make_blobs(n_samples<span class="op">=</span><span class="dv">50</span>, centers<span class="op">=</span>[(<span class="op">-</span><span class="fl">0.75</span>,<span class="fl">2.25</span>), (<span class="fl">1.0</span>, <span class="fl">2.0</span>)], cluster_std<span class="op">=</span><span class="fl">0.25</span>)</span>
@@ -385,7 +385,7 @@ Credits
 </section>
 <section id="aglomerative-single-linkage-clustering" class="level2">
 <h2 class="anchored" data-anchor-id="aglomerative-single-linkage-clustering">Aglomerative Single Linkage clustering</h2>
-<div id="787b9297" class="cell" data-execution_count="3">
+<div id="6b389dc3" class="cell" data-execution_count="3">
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.cluster <span class="im">import</span> KMeans</span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>kmeans_0 <span class="op">=</span> KMeans(n_clusters<span class="op">=</span><span class="dv">4</span>, max_iter<span class="op">=</span><span class="dv">200</span>).fit(test_data_0)</span>
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>kmeans_1 <span class="op">=</span> KMeans(n_clusters<span class="op">=</span><span class="dv">4</span>, max_iter<span class="op">=</span><span class="dv">200</span>).fit(test_data_1)</span>
@@ -406,7 +406,7 @@ Credits
 <li>Fill in the class</li>
 <li>During the process, keep track of the cluster merges by saving a (num_samples-1,4) np.array being a linkage matrix in scypy format (to use their function to plot dendrogram: <code>scipy.cluster.hierarchy.dendrogram</code>). check documentation.</li>
 </ul>
-<div id="4bf16036" class="cell" data-execution_count="4">
+<div id="10ac7ceb" class="cell" data-execution_count="4">
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> my_SingleLinkageAglomerativeClustering():</span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>    </span>
 <span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> <span class="fu">__init__</span>(<span class="va">self</span>, metric<span class="op">=</span><span class="st">"euclidean"</span>, n_clusters<span class="op">=</span><span class="dv">3</span>):</span>
@@ -464,14 +464,14 @@ Credits
 <span id="cb4-55"><a href="#cb4-55" aria-hidden="true" tabindex="-1"></a><span class="co">        '''</span>        </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Apply the method to our toy datasets</p>
-<div id="6f4b325b" class="cell" data-execution_count="5">
+<div id="eca6177f" class="cell" data-execution_count="5">
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> scipy.spatial <span class="im">import</span> distance </span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> scipy.cluster.hierarchy <span class="im">import</span> dendrogram</span>
 <span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a><span class="co"># </span><span class="al">TODO</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Try the different linkage methods implemented in <code>sklearn</code> and comment</p>
-<div id="bd285d7a" class="cell" data-execution_count="6">
+<div id="26aa2845" class="cell" data-execution_count="6">
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># </span><span class="al">TODO</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
@@ -479,14 +479,14 @@ Credits
 <h2 class="anchored" data-anchor-id="dbscan">DBSCAN</h2>
 <p>DBSCAN is a density based algorithm – it assumes clusters for dense regions. It is also the first actual clustering algorithm we’ve looked at: it doesn’t require that every point be assigned to a cluster and hence doesn’t partition the data, but instead extracts the ‘dense’ clusters and leaves sparse background classified as ‘noise’. In practice DBSCAN is related to agglomerative clustering. As a first step DBSCAN transforms the space according to the density of the data: points in dense regions are left alone, while points in sparse regions are moved further away. Applying single linkage clustering to the transformed space results in a dendrogram, which we cut according to a distance parameter (called epsilon or <code>eps</code> in many implementations) to get clusters. Importantly any singleton clusters at that cut level are deemed to be ‘noise’ and left unclustered.</p>
 <p>Apply it to the test_data, how do you tune the parameters?</p>
-<div id="3caae143" class="cell" data-execution_count="7">
+<div id="20489ef7" class="cell" data-execution_count="7">
 <div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co"># </span><span class="al">TODO</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="hdbscan" class="level2">
 <h2 class="anchored" data-anchor-id="hdbscan">HDBSCAN</h2>
 <p>HDBSCAN is a recent algorithm developed by some of the same people who write the original DBSCAN paper. Their goal was to allow varying density clusters. The algorithm starts off much the same as DBSCAN: we transform the space according to density, exactly as DBSCAN does, and perform single linkage clustering on the transformed space. Instead of taking an epsilon value as a cut level for the dendrogram however, a different approach is taken: the dendrogram is condensed by viewing splits that result in a small number of points splitting off as points ‘falling out of a cluster’. This results in a smaller tree with fewer clusters that ‘lose points’. That tree can then be used to select the most stable or persistent clusters. This process allows the tree to be cut at varying height, picking our varying density clusters based on cluster stability.</p>
-<div id="b106b2fc" class="cell" data-execution_count="8">
+<div id="7ce245e4" class="cell" data-execution_count="8">
 <div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> hdbscan</span>
 <span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="co"># </span><span class="al">TODO</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -499,7 +499,7 @@ Credits
 <ul>
 <li>Look at following <a href="img/im_nasa_reduced.jpg">NASA photo</a> taken by a robot in mars:</li>
 </ul>
-<div id="83f3bc3b" class="cell" data-execution_count="9">
+<div id="2b4ab157" class="cell" data-execution_count="9">
 <div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> PIL <span class="im">import</span> Image</span>
 <span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>Im_1  <span class="op">=</span> Image.<span class="bu">open</span>(<span class="st">'im_nasa_reduced.jpg'</span>)</span>
@@ -518,7 +518,7 @@ Credits
 <li>Transform the image to an intensity (I) and saturation (S) representation, it helps to distinguish bright and textures.</li>
 </ul>
 <p><span class="math display">\[I=\frac{R+G+B}{3}\]</span> <span class="math display">\[S=1-I\times min(R, G, B)\]</span></p>
-<div id="ec94c7a0" class="cell" data-execution_count="10">
+<div id="e19806e1" class="cell" data-execution_count="10">
 <div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="co"># </span><span class="al">TODO</span><span class="co">:</span></span>
 <span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="co"># I = </span></span>
 <span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a><span class="co"># S = </span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -526,7 +526,7 @@ Credits
 <ul>
 <li>Apply the seen algorithms to segment the image in the Intensity-Saturation representation, comment the results and check if you find something on mars’ surface. Be careful with hdbscan and memory errors for some parameters choice (use algorithm=‘boruvka_kdtree’).</li>
 </ul>
-<div id="3386ef56" class="cell" data-execution_count="11">
+<div id="8aded7e8" class="cell" data-execution_count="11">
 <div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="co"># </span><span class="al">TODO</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
@@ -534,14 +534,14 @@ Credits
 <h3 class="anchored" data-anchor-id="color-compression">Color compression</h3>
 <p>One interesting application of clustering is in color compression within images. For example, imagine you have an image with millions of colors. In most images, a large number of the colors will be unused, and many of the pixels in the image will have similar or even identical colors.</p>
 <p>Get a simplified 10-colored version of the following image by applying k-means. Plot both images.</p>
-<div id="05f38737" class="cell" data-execution_count="12">
+<div id="be4e2747" class="cell" data-execution_count="12">
 <div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.datasets <span class="im">import</span> load_sample_image</span>
 <span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>china <span class="op">=</span> load_sample_image(<span class="st">"china.jpg"</span>)</span>
 <span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>fig <span class="op">=</span> plt.figure(figsize<span class="op">=</span>(<span class="dv">8</span>, <span class="dv">6</span>))</span>
 <span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a>plt.imshow(china)<span class="op">;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div id="70558c52" class="cell" data-execution_count="13">
+<div id="911005db" class="cell" data-execution_count="13">
 <div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="co"># </span><span class="al">TODO</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 

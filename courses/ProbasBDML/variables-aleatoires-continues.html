@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="generator" content="quarto-1.6.43">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-<title>Feuille d’exercices 1 – Probabilités et Statistique</title>
+<title>3&nbsp; Variables Aléatoires Continues – Probabilités et Statistique</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -26,8 +26,8 @@ ul.task-list li input[type="checkbox"] {
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
-<link href="./variables-aleatoires-continues.html" rel="next">
-<link href="./lois-usuelles-discretes.html" rel="prev">
+<link href="./lois-usuelles-continues.html" rel="next">
+<link href="./exos1.html" rel="prev">
 <script src="site_libs/quarto-html/quarto.js"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
@@ -102,7 +102,7 @@ window.Quarto = {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Basculer la barre latérale" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./variables-aleatoires-discretes.html">Chap 1: Variables discrètes</a></li><li class="breadcrumb-item"><a href="./exos1.html">Feuille d’Exercices 1</a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./variables-aleatoires-continues.html">Chap 2: Variables Continues</a></li><li class="breadcrumb-item"><a href="./variables-aleatoires-continues.html"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Variables Aléatoires Continues</span></a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Basculer la barre latérale" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Recherche" onclick="window.quartoOpenSearch();">
@@ -162,7 +162,7 @@ window.Quarto = {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./exos1.html" class="sidebar-item-text sidebar-link active">
+  <a href="./exos1.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Feuille d’Exercices 1</span></a>
   </div>
 </li>
@@ -179,7 +179,7 @@ window.Quarto = {
       <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">
 <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./variables-aleatoires-continues.html" class="sidebar-item-text sidebar-link">
+  <a href="./variables-aleatoires-continues.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Variables Aléatoires Continues</span></span></a>
   </div>
 </li>
@@ -222,16 +222,30 @@ window.Quarto = {
         <nav id="TOC" role="doc-toc" class="toc-active"><h2 id="toc-title">Table des matières</h2>
    
   <ul>
-<li><a href="#combinatoire" id="toc-combinatoire" class="nav-link active" data-scroll-target="#combinatoire">Combinatoire</a></li>
-  <li><a href="#%C3%A9v%C3%A9nements" id="toc-événements" class="nav-link" data-scroll-target="#%C3%A9v%C3%A9nements">Événements</a></li>
-  <li><a href="#probabilit%C3%A9" id="toc-probabilité" class="nav-link" data-scroll-target="#probabilit%C3%A9">Probabilité</a></li>
-  <li><a href="#variables-al%C3%A9atoires-discr%C3%A8tes" id="toc-variables-aléatoires-discrètes" class="nav-link" data-scroll-target="#variables-al%C3%A9atoires-discr%C3%A8tes">Variables aléatoires discrètes</a></li>
-  <li><a href="#lois-usuelles-discr%C3%A8tes" id="toc-lois-usuelles-discrètes" class="nav-link" data-scroll-target="#lois-usuelles-discr%C3%A8tes">Lois usuelles discrètes</a></li>
+<li><a href="#densit%C3%A9-dune-variable-al%C3%A9atoire-continue" id="toc-densité-dune-variable-aléatoire-continue" class="nav-link active" data-scroll-target="#densit%C3%A9-dune-variable-al%C3%A9atoire-continue">Densité d’une variable aléatoire continue</a></li>
+  <li><a href="#fonction-de-r%C3%A9partition-dune-v.a.c" id="toc-fonction-de-répartition-dune-v.a.c" class="nav-link" data-scroll-target="#fonction-de-r%C3%A9partition-dune-v.a.c">Fonction de répartition d’une v.a.c</a></li>
+  <li>
+<a href="#fonction-dune-variable-al%C3%A9atoire-continue" id="toc-fonction-dune-variable-aléatoire-continue" class="nav-link" data-scroll-target="#fonction-dune-variable-al%C3%A9atoire-continue">Fonction d’une variable aléatoire continue</a>
+  <ul class="collapse">
+<li><a href="#calcul-de-densit%C3%A9s-pour-hxaxb" id="toc-calcul-de-densités-pour-hxaxb" class="nav-link" data-scroll-target="#calcul-de-densit%C3%A9s-pour-hxaxb">Calcul de densités pour <span class="math inline">\(h(X)=aX+b\)</span></a></li>
+  <li><a href="#calcul-de-densit%C3%A9s-pour-hxx2" id="toc-calcul-de-densités-pour-hxx2" class="nav-link" data-scroll-target="#calcul-de-densit%C3%A9s-pour-hxx2">Calcul de densités pour <span class="math inline">\(h(X)=X^2\)</span></a></li>
+  <li><a href="#calcul-de-densit%C3%A9s-pour-hxex" id="toc-calcul-de-densités-pour-hxex" class="nav-link" data-scroll-target="#calcul-de-densit%C3%A9s-pour-hxex">Calcul de densités pour <span class="math inline">\(h(X)=e^X\)</span></a></li>
+  </ul>
+</li>
+  <li>
+<a href="#esp%C3%A9rance-et-variance-de-variables-al%C3%A9atoires-continues" id="toc-espérance-et-variance-de-variables-aléatoires-continues" class="nav-link" data-scroll-target="#esp%C3%A9rance-et-variance-de-variables-al%C3%A9atoires-continues">Espérance et variance de variables aléatoires continues</a>
+  <ul class="collapse">
+<li><a href="#esp%C3%A9rance-dune-v.a.c" id="toc-espérance-dune-v.a.c" class="nav-link" data-scroll-target="#esp%C3%A9rance-dune-v.a.c">Espérance d’une v.a.c</a></li>
+  <li><a href="#variance-dune-v.a.c" id="toc-variance-dune-v.a.c" class="nav-link" data-scroll-target="#variance-dune-v.a.c">Variance d’une v.a.c</a></li>
+  </ul>
+</li>
   </ul></nav>
     </div>
 <!-- main -->
-<main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./variables-aleatoires-discretes.html">Chap 1: Variables discrètes</a></li><li class="breadcrumb-item"><a href="./exos1.html">Feuille d’Exercices 1</a></li></ol></nav><div class="quarto-title">
-<h1 class="title">Feuille d’exercices 1</h1>
+<main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./variables-aleatoires-continues.html">Chap 2: Variables Continues</a></li><li class="breadcrumb-item"><a href="./variables-aleatoires-continues.html"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Variables Aléatoires Continues</span></a></li></ol></nav><div class="quarto-title">
+<h1 class="title">
+<span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Variables Aléatoires Continues</span>
+</h1>
 </div>
 
 
@@ -245,240 +259,364 @@ window.Quarto = {
   
 
 
-</header><section id="combinatoire" class="level2 unnumbered"><h2 class="unnumbered anchored" data-anchor-id="combinatoire">Combinatoire</h2>
-<div id="exr-" class="theorem exercise">
-<p><span class="theorem-title"><strong>Exercice 1</strong></span> Questions diverses:</p>
+</header><section id="densité-dune-variable-aléatoire-continue" class="level2 unnumbered"><h2 class="unnumbered anchored" data-anchor-id="densité-dune-variable-aléatoire-continue">Densité d’une variable aléatoire continue</h2>
+<p>Dans les chapitres précédents nous avons traité des variables aléatoires discrètes, c’est-à-dire de variables dont l’univers est fini ou infini dénombrable. Il existe cependant des variables dont l’univers est infini non dénombrable. On peut citer par exemple, l’heure d’arrivée d’un train à une gare donnée ou encore la durée de vie d’un transistor. Désignons par <span class="math inline">\(X\)</span> une telle variable.</p>
+<div id="def-" class="theorem definition">
+<p><span class="theorem-title"><strong>Définition 3.1</strong></span> <span class="math inline">\(X\)</span> est une <strong>variable aléatoire continue</strong> s’il existe une fonction <span class="math inline">\(f\)</span> non négative définie pour tout <span class="math inline">\(x \in \mathbb{R}\)</span> et vérifiant pour tout ensemble <span class="math inline">\(B\)</span> de nombres réels la propriété</p>
+<p><span id="eq-def"><span class="math display">\[
+P(X \in B) = \int_B f(x)dx
+\tag{3.1}\]</span></span></p>
+<p>La fonction <span class="math inline">\(f\)</span> est appelée <strong>densité de probabilité</strong> de la variable aléatoire <span class="math inline">\(X\)</span>.</p>
+</div>
+<p>Tous les problèmes de probabilité relatifs à <span class="math inline">\(X\)</span> peuvent être traités grâce à <span class="math inline">\(f\)</span>. Par exemple pour <span class="math inline">\(B=[a,b]\)</span>, on obtient grâce à l’équation (<a href="#eq-def" class="quarto-xref"><span>3.1</span></a>)</p>
+<p><span id="eq-probab"><span class="math display">\[
+P(a\le X \le b) = \int_a^bf(x)dx
+\tag{3.2}\]</span></span></p>
+<p>Graphiquement, <span class="math inline">\(P(a\le X \le b)\)</span> est l’aire de la surface entre l’axe de <span class="math inline">\(x\)</span>, la courbe correspondante à <span class="math inline">\(f(x)\)</span> et les droites <span class="math inline">\(x=a\)</span> et <span class="math inline">\(x=b\)</span>. Voire Figure <a href="#fig-paxb" class="quarto-xref">Figure&nbsp;<span>3.1</span></a>) et Figure <a href="#fig-p2" class="quarto-xref">Figure&nbsp;<span>3.2</span></a>).</p>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div id="fig-paxb" class="quarto-float quarto-figure quarto-figure-center anchored" data-fig-align="center">
+<figure class="quarto-float quarto-float-fig figure"><div aria-describedby="fig-paxb-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="img/paxb.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="516">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-paxb-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;3.1: <span class="math inline">\(P(a \leq X \leq B)=\)</span> surface grisée
+</figcaption></figure>
+</div>
+</div>
+</div>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div id="fig-p2" class="quarto-float quarto-figure quarto-figure-center anchored" data-fig-align="center">
+<figure class="quarto-float quarto-float-fig figure"><div aria-describedby="fig-p2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="img/p2.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="403">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-p2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;3.2: L’aire hachurée correspond à des probabilités. <span class="math inline">\(f(x)\)</span> étant une fonction densité de probabilité
+</figcaption></figure>
+</div>
+</div>
+</div>
+<div id="def-" class="theorem definition">
+<p><span class="theorem-title"><strong>Définition 3.2</strong></span> Pour toute variable aléatoire continue <span class="math inline">\(X\)</span> de densité <span class="math inline">\(f\)</span>:</p>
+<ul>
+<li><p><span class="math inline">\(f(x) \ge 0 \quad \forall \, x \in \mathbb{R}\)</span></p></li>
+<li><p><span class="math inline">\(\int_{-\infty}^{+\infty}f(x)dx = 1\)</span></p></li>
+<li><p>Si l’on pose <span class="math inline">\(a=b\)</span> dans (<a href="#eq-probab" class="quarto-xref"><span>3.2</span></a>), il résulte <span class="math display">\[P(X=a)=\int_a^a f(x)dx = 0\]</span></p></li>
+<li>
+<p>Ceci siginifie que la probabilité qu’une variable aléatoire continue prenne une valeur isolée fixe est toujours nulle. Aussi on peut écrire</p>
+<p><span class="math display">\[P(X &lt; a) = P( X \le a)  = \int_{-\infty}^a f(x)dx\]</span></p>
+</li>
+</ul>
+</div>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Exercice
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Soit <span class="math inline">\(X\)</span> la variable aléatoire réelle de densité de probabilité</p>
+<p><span class="math display">\[f(x)= \left\lbrace
+      \begin{array}{ll}
+      kx  &amp; \mbox{si} \quad 0\le x \le 5\\
+      0 &amp; \mbox{sinon}
+      \end{array}
+  \right.\]</span></p>
 <ol type="1">
-<li>En informatique, on utilise le système binaire pour coder les caractères. Un bit (binary digit : chiffre binaire) est un élément qui prend la valeur 0 ou la valeur 1. Avec 8 chiffres binaires (un octet), combien de caractères peut-on coder?</li>
-</ol>
-<ol start="2" type="1">
-<li>A l’occasion d’une compétition sportive groupant 18 athlètes, on attribue une médaille d’or, une d’argent, une de bronze. Combien y-a-t-il de distributions possibles (avant la compétition, bien sûr…) ?</li>
-</ol>
-<ol start="3" type="1">
-<li>Un tournoi sportif compte 8 équipes engagées. Chaque équipe doit rencontrer toutes les autres une seule fois. Combien doit-on organiser de matchs ?</li>
+<li>Calculer <span class="math inline">\(k\)</span>.</li>
+<li>Calculer: <span class="math inline">\(P(1 \le X \le 3), P(2 \le X \le 4)\)</span> et <span class="math inline">\(P(X &lt; 3)\)</span>.</li>
 </ol>
 </div>
-<div id="exr-" class="theorem exercise">
-<p><span class="theorem-title"><strong>Exercice 2</strong></span> On tire simultanément 5 cartes d’un jeu de 52 cartes.</p>
+</div>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Exercice
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Soit <span class="math inline">\(X\)</span> une variable aléatoire réelle continue ayant pour densité de probabilité <span class="math display">\[f(x)= \left\lbrace
+      \begin{array}{ll}
+      \frac{1}{6} x + k  &amp; \mbox{si} \quad 0\le x \le 3\\
+      0 &amp; \mbox{sinon}
+      \end{array}
+  \right.\]</span></p>
 <ol type="1">
-<li><p>Combien de tirages différents peut-on obtenir?</p></li>
-<li>
-<p>Combien de tirages peut-on obtenir ? contenant:</p>
-<ol type="1">
-<li><p>5 carreaux ou 5 coeurs;</p></li>
-<li><p>2 coeurs et 3 piques;</p></li>
-<li><p>au moins 1 roi;</p></li>
-<li><p>au plus 1 roi.</p></li>
-</ol>
+<li>Calculer <span class="math inline">\(k\)</span>.</li>
+<li>Calculer <span class="math inline">\(P(1 \le X \le 2)\)</span>
 </li>
 </ol>
 </div>
-</section><section id="événements" class="level2 unnumbered"><h2 class="unnumbered anchored" data-anchor-id="événements">Événements</h2>
-<div id="exr-" class="theorem exercise">
-<p><span class="theorem-title"><strong>Exercice 3</strong></span> Soit <span class="math inline">\(A\)</span>,<span class="math inline">\(B\)</span> et <span class="math inline">\(C\)</span> trois événements d’un espace probabilisable <span class="math inline">\((\Omega,\mathcal{A})\)</span>. Exprimer en fonction de <span class="math inline">\(A\)</span>,<span class="math inline">\(B\)</span> et <span class="math inline">\(C\)</span> et des opérations ensemblistes (réunion, intersection et complémentaire) les événements ci-après:</p>
-<ol type="1">
-<li><p><span class="math inline">\(A\)</span> seul (parmi les 3 événements) se produit.</p></li>
-<li><p><span class="math inline">\(A\)</span> et <span class="math inline">\(C\)</span> se produisent, mais non <span class="math inline">\(B\)</span>.</p></li>
-<li><p>Les trois événements se produisent.</p></li>
-<li><p>L’un au moins des 3 événements se produit.</p></li>
-<li><p>Aucun des trois événements ne se produit.</p></li>
-</ol>
 </div>
-</section><section id="probabilité" class="level2 unnumbered"><h2 class="unnumbered anchored" data-anchor-id="probabilité">Probabilité</h2>
-<div id="exr-" class="theorem exercise">
-<p><span class="theorem-title"><strong>Exercice 4</strong></span> Soit les événements <span class="math inline">\(A\)</span> et <span class="math inline">\(B\)</span> t.q. <span class="math inline">\(P(A) = x, P(B) = y\)</span> et <span class="math inline">\(P(A \cup B) = z\)</span>. Trouver les probabilités suivantes: <span class="math inline">\(P(A \cap B), P(\bar{A} \cup \bar{B})\)</span>, et <span class="math inline">\(P(A \cap \bar{B})\)</span>.</p>
+</section><section id="fonction-de-répartition-dune-v.a.c" class="level2 unnumbered"><h2 class="unnumbered anchored" data-anchor-id="fonction-de-répartition-dune-v.a.c">Fonction de répartition d’une v.a.c</h2>
+<div id="def-" class="theorem definition">
+<p><span class="theorem-title"><strong>Définition 3.3</strong></span> Si comme pour les variables aléatoires discrètes, on définit la fonction de répartition de <span class="math inline">\(X\)</span> par:</p>
+<p><span class="math display">\[\begin{aligned}
+    F_X \colon  \mathbb{R} &amp;\longrightarrow \mathbb{R} \\
+                x &amp;\longmapsto F_X(a) = P(X \le a)\end{aligned}\]</span></p>
+<p>alors la relation entre la fonction de répartition <span class="math inline">\(F_X\)</span> et la fonction densité de probabilité <span class="math inline">\(f(x)\)</span> est la suivante:</p>
+<p><span class="math display">\[\forall \quad a \in \mathbb{R} \quad F_X(a)= P(X \le a) = \int_{-\infty}^a f(x)dx\]</span></p>
 </div>
-<div id="exr-" class="theorem exercise">
-<p><span class="theorem-title"><strong>Exercice 5</strong></span> Soit <span class="math inline">\((\Omega,\mathcal{A},P)\)</span> un espace probabilisé. Soient <span class="math inline">\(A\)</span>,<span class="math inline">\(B\)</span> et <span class="math inline">\(C\)</span> trois événements quelconques. On pose : <span class="math inline">\(E = A \cap \bar{B} \cap \bar{C}\)</span> et <span class="math inline">\(F = A \cap (B \cup C)\)</span>.</p>
-<ol type="1">
-<li><p>Montrer que <span class="math inline">\(E\)</span> et <span class="math inline">\(F\)</span> sont incompatibles.</p></li>
-<li><p>Montrer que <span class="math inline">\(E \cup F = A\)</span>.</p></li>
-<li><p>Sachant que <span class="math inline">\(P(A)=0.6; \, P(A\cap B)=0.2; \, P(A\cap C)=0.1\)</span> et <span class="math inline">\(P(A\cap B \cap C)=0.05\)</span>: Calculer <span class="math inline">\(P(F)\)</span> et <span class="math inline">\(P(E)\)</span>.</p></li>
-</ol>
-</div>
-<div id="exr-" class="theorem exercise">
-<p><span class="theorem-title"><strong>Exercice 6</strong></span> Une urne contient dix boules (6 blanches et 4 rouges). On tire au hasard et successivement deux boules de cette urne. Calculer, dans le cas où le tirage est effectué sans remise, puis dans le cas où le tirage est effectué avec remise, les probabilités suivantes:</p>
+<p>La fonction de répartition <span class="math inline">\(F_X(a)\)</span> est la <strong>primitive</strong> de la fonction densité de probabilité <span class="math inline">\(f(x)\)</span> (donc la densité d’une v.a.c est la dérivée de la fonction de répartition), et permet d’obtenir les probabilités associées à la variable aléatoire <span class="math inline">\(X\)</span>, en effet:</p>
+<p><strong>Propriétés:</strong> Pour une variable aléatoire continue X:</p>
 <ul>
-<li>probabilité pour que les deux boules soient blanches.</li>
-<li>probabilité pour que les deux boules soient de même couleur.</li>
-<li>probabilité pour que l’une au moins des boules tirées soit blanche.</li>
+<li><p><span class="math inline">\(F'_X(x) = \frac{\text{d}}{\text{d} x} F_X(x) = f(x)\)</span>.</p></li>
+<li><p>Pour tous réels <span class="math inline">\(a \le b\)</span>, <span class="math display">\[\begin{aligned}
+      P(a &lt; X &lt; b)      &amp; = P(a &lt; X \le b) \\
+                        &amp; = P(a \le X &lt; b) \\
+                        &amp; = P( a \le X \le b) \\
+                        &amp; = F_X(b) - F_X(a) = \int_a^bf(x)dx
+    \end{aligned}\]</span></p></li>
 </ul>
+<p>La fonction de répartition correspond aux probabilités cumulées associées à la variable aléatoire continue sur l’intervalle d’étude (Figure <a href="#fig-rep" class="quarto-xref">Figure&nbsp;<span>3.3</span></a>)).</p>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div id="fig-rep" class="quarto-float quarto-figure quarto-figure-center anchored" data-fig-align="center">
+<figure class="quarto-float quarto-float-fig figure"><div aria-describedby="fig-rep-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="img/rep.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="318">
 </div>
-</section><section id="variables-aléatoires-discrètes" class="level2 unnumbered"><h2 class="unnumbered anchored" data-anchor-id="variables-aléatoires-discrètes">Variables aléatoires discrètes</h2>
-<div id="exr-" class="theorem exercise">
-<p><span class="theorem-title"><strong>Exercice 7</strong></span> Soit <span class="math inline">\(X\)</span> une variable aléatoire qui prend ses valeurs dans l’ensemble <span class="math inline">\(\{- 4, 2, 3, 4, 6, 7, 10\}\)</span> et dont la distribution est donnée par:</p>
-<table class="caption-top table">
-<thead><tr class="header">
-<th style="text-align: center;"><em><span class="math inline">\(x_i\)</span></em></th>
-<th style="text-align: center;"><em>-4</em></th>
-<th style="text-align: center;"><em>2</em></th>
-<th style="text-align: center;"><em>3</em></th>
-<th style="text-align: center;"><em>4</em></th>
-<th style="text-align: center;"><em>6</em></th>
-<th style="text-align: center;"><em>7</em></th>
-<th style="text-align: center;"><em>10</em></th>
-</tr></thead>
-<tbody><tr class="odd">
-<td style="text-align: center;"><em><span class="math inline">\(P(X=x_i)\)</span></em></td>
-<td style="text-align: center;"><em>0.1</em></td>
-<td style="text-align: center;"><em>0.2</em></td>
-<td style="text-align: center;"><em>0.2</em></td>
-<td style="text-align: center;"><em>0.1</em></td>
-<td style="text-align: center;"><em>0.05</em></td>
-<td style="text-align: center;"><em>0.2</em></td>
-<td style="text-align: center;"><em><span class="math inline">\(k\)</span></em></td>
-</tr></tbody>
-</table>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-rep-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;3.3: L’aire hachurée en vert sous la courbe de la fonction densité de probabilité correspond à la probabilité <span class="math inline">\(P ( X &lt; a ) = F_X ( a )\)</span> et vaut 0.5 car ceci correspond exactement à la moitié de l’aire totale sous la courbe
+</figcaption></figure>
+</div>
+</div>
+</div>
+<p><strong>Propriétés:</strong> Les propriétés associées à la fonction de répartition sont les suivantes:</p>
 <ol type="1">
-<li><p>Calculer <span class="math inline">\(k\)</span>.</p></li>
-<li><p>Représenter graphiquement la loi de <span class="math inline">\(X\)</span>.</p></li>
-<li><p>Calculer les probabilités suivantes:</p></li>
-</ol>
+<li><p><span class="math inline">\(F_X\)</span> est continue sur <span class="math inline">\(\mathbb{R}\)</span>, dérivable en tout point où <span class="math inline">\(f\)</span> est continue.</p></li>
+<li><p><span class="math inline">\(F_X\)</span> est croissante sur <span class="math inline">\(\mathbb{R}\)</span>.</p></li>
+<li><p><span class="math inline">\(F_X\)</span> est à valeurs dans <span class="math inline">\([0,1]\)</span>.</p></li>
+<li><p><span class="math inline">\(\lim\limits_{x\to - \infty}  F_X(x) = 0\)</span> et <span class="math inline">\(\lim\limits_{x\to +\infty}  F_X(x) = 1\)</span>.</p></li>
+</ol></section><section id="fonction-dune-variable-aléatoire-continue" class="level2 unnumbered"><h2 class="unnumbered anchored" data-anchor-id="fonction-dune-variable-aléatoire-continue">Fonction d’une variable aléatoire continue</h2>
+<p>Soit <span class="math inline">\(X\)</span> une variable aléatoire continue de densité <span class="math inline">\(f_X\)</span> et de fonction de répartition <span class="math inline">\(F_X\)</span>. Soit <span class="math inline">\(h\)</span> une fonction continue définie sur <span class="math inline">\(X(\Omega)\)</span>, alors <span class="math inline">\(Y=h(X)\)</span> est une variable aléatoire.</p>
+<p>Pour déterminer la densité de <span class="math inline">\(Y\)</span>, notée <span class="math inline">\(f_Y\)</span>, on commence par calculer la fonction de répartition de <span class="math inline">\(Y\)</span>, notée <span class="math inline">\(F_Y\)</span>, ensuite nous dérivons pour déterminer <span class="math inline">\(f_Y\)</span>.</p>
+<section id="calcul-de-densités-pour-hxaxb" class="level3 unnumbered"><h3 class="unnumbered anchored" data-anchor-id="calcul-de-densités-pour-hxaxb">Calcul de densités pour <span class="math inline">\(h(X)=aX+b\)</span>
+</h3>
+<p><span class="math inline">\(\forall \quad y \in \mathbb{R}\)</span>,</p>
+<p><span class="math display">\[F_Y(y) = P(Y\leq y)=P(h(X) \le y) = P(aX+b \le y)\]</span> si <span class="math inline">\(a&gt;0\)</span>, <span class="math display">\[F_Y(y) = P(aX+b \le y) = P(X\leq \frac{y-b}{a})=F_X(\frac{y-b}{a})\]</span> si <span class="math inline">\(a&lt;0\)</span>, <span class="math display">\[F_Y(y) = P(aX+b \le y) =P(X\geq \frac{y-b}{a})=1-F_X(\frac{y-b}{a})\]</span></p>
+<p>En dérivant on obtient la densité de <span class="math inline">\(Y\)</span> <span class="math display">\[f_Y(y)=\frac{1}{|a|}f_X(\frac{y-b}{a})\]</span></p>
+</section><section id="calcul-de-densités-pour-hxx2" class="level3 unnumbered"><h3 class="unnumbered anchored" data-anchor-id="calcul-de-densités-pour-hxx2">Calcul de densités pour <span class="math inline">\(h(X)=X^2\)</span>
+</h3>
+<p>Si <span class="math inline">\(y&lt;0\)</span>, <span class="math inline">\(F_Y(y) =P(Y\leq y)=0\)</span>.<br>
+Si <span class="math inline">\(y&gt;0\)</span>,</p>
+<p><span class="math display">\[
+\begin{align}
+F_Y(y)  &amp;=P(Y\leq y)=P(X^2 \le y)\\
+        &amp;=P(-\sqrt{y}\leq X \leq \sqrt{y}) \\
+        &amp;=F_X(\sqrt{y})-F_X(-\sqrt{y})
+\end{align}\]</span></p>
+<p>En dérivant on obtient la densité de <span class="math inline">\(Y\)</span>,</p>
+<p><span class="math display">\[f_Y(y)= \left\lbrace
+      \begin{array}{ll}
+      \displaystyle \frac{1}{2\sqrt{y}}\big[f_X(\sqrt{y})+f_X(-\sqrt{y})\big]  &amp; \mbox{si} \quad y \ge 0\\
+      0 &amp; \mbox{sinon}
+      \end{array}
+  \right.\]</span></p>
+</section><section id="calcul-de-densités-pour-hxex" class="level3 unnumbered"><h3 class="unnumbered anchored" data-anchor-id="calcul-de-densités-pour-hxex">Calcul de densités pour <span class="math inline">\(h(X)=e^X\)</span>
+</h3>
+<p>Si <span class="math inline">\(y&lt;0\)</span>, <span class="math inline">\(F_Y(y) = P(Y\leq y)=0\)</span>.<br>
+Si <span class="math inline">\(y&gt;0\)</span>, <span class="math inline">\(F_Y(y) = P(Y\leq y)=P(e^X \le y)=P( X \leq \ln (y))=F_X(\ln(y))\)</span>.</p>
+<p>En dérivant on obtient la densité de <span class="math inline">\(Y\)</span></p>
+<p><span class="math display">\[f_Y(y)= \left\lbrace
+      \begin{array}{ll}
+      \displaystyle \frac{1}{y} f\big(\ln (y)\big)  &amp; \mbox{si} \quad y \ge 0\\
+      0 &amp; \mbox{sinon}
+      \end{array}
+  \right.\]</span></p>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Exercice
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Soit la v.a.c <span class="math inline">\(X\)</span> ayant la fonction de densité</p>
+<p><span class="math display">\[f_X(x)= \left\lbrace
+      \begin{array}{ll}
+      2 x   &amp; \mbox{si} \quad 0 \le x \le 1\\
+      0 &amp; \mbox{sinon}
+      \end{array}
+  \right.\]</span></p>
+<p>Déterminer la densité de: <span class="math inline">\(Y=3X+1\)</span>, <span class="math inline">\(Z=X^2\)</span> et <span class="math inline">\(T=e^X\)</span>.</p>
+</div>
+</div>
+</section></section><section id="espérance-et-variance-de-variables-aléatoires-continues" class="level2 unnumbered"><h2 class="unnumbered anchored" data-anchor-id="espérance-et-variance-de-variables-aléatoires-continues">Espérance et variance de variables aléatoires continues</h2>
+<section id="espérance-dune-v.a.c" class="level3 unnumbered"><h3 class="unnumbered anchored" data-anchor-id="espérance-dune-v.a.c">Espérance d’une v.a.c</h3>
+<div id="def-" class="theorem definition">
+<p><span class="theorem-title"><strong>Définition 3.4</strong></span> Si <span class="math inline">\(X\)</span> est une variable aléatoire absolument continue de densité <span class="math inline">\(f\)</span>, on appelle espérance de X, le réel <span class="math inline">\(E(X)\)</span>, défini par:</p>
+<p><span class="math display">\[E(X)= \int_{-\infty}^{+\infty}x f(x) dx\]</span> si cette intégrale est convergente.</p>
+</div>
+<p>Les propriétés de l’espérance d’une variable aléatoire continue sont les mêmes que pour une variable aléatoire discrète.</p>
+<p><strong>Propriétés:</strong> Soit <span class="math inline">\(X\)</span> une variable aléatoire continue,</p>
 <ul>
-<li><span class="math inline">\(P(X &gt;3)\)</span></li>
-<li><span class="math inline">\(P(X \geq 3)\)</span></li>
-<li><span class="math inline">\(P(3 \leq X \leq 7)\)</span></li>
-<li><span class="math inline">\(P(3 &lt; X &lt; 9)\)</span></li>
-<li><span class="math inline">\(P(X+2 &gt; 3)\)</span></li>
-<li><span class="math inline">\(P(X^2 &gt; 4)\)</span></li>
+<li><p><span class="math inline">\(E(aX+b)=aE(X)+b \quad \quad a \ge 0 \,\, \text{et} \,\, b \in \mathbb{R}\)</span>.</p></li>
+<li><p>Si <span class="math inline">\(X \ge 0\)</span> alors <span class="math inline">\(E(X) \ge 0\)</span>.</p></li>
+<li><p>Si <span class="math inline">\(X\)</span> et <span class="math inline">\(Y\)</span> sont deux variables aléatoires définies sur un même univers <span class="math inline">\(\Omega\)</span> alors <span class="math display">\[E(X+Y)=E(X)+E(Y)\]</span></p></li>
 </ul>
+<div id="thm-transfer" class="theorem">
+<p><span class="theorem-title"><strong>Théorème 3.1 (Théorème du transfert)</strong></span> Si <span class="math inline">\(X\)</span> est une variable aléatoire de densité <span class="math inline">\(f(x)\)</span>, alors pour toute fonction réelle <span class="math inline">\(g\)</span> on aura</p>
+<p><span class="math display">\[E[g(X)] = \int_{-\infty}^{+\infty}g(x) f(x) dx\]</span></p>
 </div>
-<div id="exr-" class="theorem exercise">
-<p><span class="theorem-title"><strong>Exercice 8</strong></span> On choisit deux boules au hasard dans une urne contenant 8 boules blanches, 4 boules noires et 2 boules oranges. Supposons que l’on reçoive 2 euros pour chaque boule noire tirée et que l’on perde 1 euro pour chaque boule blanche tirée. Désignons les gains nets par <span class="math inline">\(X\)</span>.</p>
-<ol type="1">
-<li><p>Quelles sont les valeurs possibles pour <span class="math inline">\(X\)</span> et les probabilités associées à ces valeurs ?</p></li>
-<li><p>Quelle est l’espérance de <span class="math inline">\(X\)</span> ?</p></li>
-</ol>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
 </div>
-<div id="exr-" class="theorem exercise">
-<p><span class="theorem-title"><strong>Exercice 9</strong></span> Une urne contient une boule qui porte le numéro 0, deux qui portent le numéro 1 et quatre qui portent le numéro 3. On extrait simultanément deux boules dans cette urne.</p>
-<ol type="1">
-<li><p>Déterminer la loi de probabilité de la variable aléatoire <span class="math inline">\(X\)</span> qui représente la somme des nombres obtenus.</p></li>
-<li><p>Déterminer la fonction de répartition de <span class="math inline">\(X\)</span>.</p></li>
-<li><p>Calculer <span class="math inline">\(E(X)\)</span>, <span class="math inline">\(V(X)\)</span> et <span class="math inline">\(\sigma(X)\)</span>.</p></li>
-</ol>
+<div class="callout-title-container flex-fill">
+Exercice
 </div>
-<div id="exr-" class="theorem exercise">
-<p><span class="theorem-title"><strong>Exercice 10</strong></span> Soit la fonction de répartition <span class="math inline">\(F\)</span> de la variable aléatoire <span class="math inline">\(X\)</span> définie par:</p>
-<p><span class="math display">\[F(x) = \left\{
-\begin{array}{l l}
-0 &amp; \quad \text{si $x&lt;0$}\\
-  1/4 &amp; \quad \text{si $0 \leq x &lt; 1$}\\
-   1/2 &amp; \quad \text{si $1 \leq x &lt; 4$}\\
-    c &amp; \quad \text{si $x \geq 4$}\\
-  \end{array} \right.\]</span></p>
-<ol type="1">
-<li><p>Déterminer en justifiant la constante <span class="math inline">\(c\)</span>.</p></li>
-<li><p>Calculer <span class="math inline">\(P (1 \leq X &lt; 5)\)</span>.</p></li>
-<li><p>Calculer <span class="math inline">\(P(X=1)+P(X=2)\)</span>.</p></li>
-<li><p>Déteminer la loi de probabilité de <span class="math inline">\(X\)</span>.</p></li>
-</ol>
 </div>
-<div id="exr-" class="theorem exercise">
-<p><span class="theorem-title"><strong>Exercice 11</strong></span> Soient X et Y des variables aléatoires discrètes dont la loi jointe est donnée par le tableau suivant:</p>
-<table class="caption-top table">
-<thead><tr class="header">
-<th style="text-align: center;">
-<span class="math inline">\(X\)</span>\<span class="math inline">\(Y\)</span>
-</th>
-<th style="text-align: center;">-1</th>
-<th style="text-align: center;">0</th>
-<th style="text-align: center;">2</th>
-<th style="text-align: center;">5</th>
-</tr></thead>
-<tbody>
-<tr class="odd">
-<td style="text-align: center;">0</td>
-<td style="text-align: center;">0.10</td>
-<td style="text-align: center;">0.05</td>
-<td style="text-align: center;">0.15</td>
-<td style="text-align: center;">0.05</td>
-</tr>
-<tr class="even">
-<td style="text-align: center;">1</td>
-<td style="text-align: center;">0.15</td>
-<td style="text-align: center;">0.20</td>
-<td style="text-align: center;">0.25</td>
-<td style="text-align: center;">0.05</td>
-</tr>
-</tbody>
-</table>
-<ol type="1">
-<li><p>Quelle est la loi marginale de X ?</p></li>
-<li><p>Quelle est la loi marginale de Y ?</p></li>
-<li><p>Calculer <span class="math inline">\(P(Y \geq 0 / X = 1)\)</span>.</p></li>
-<li><p>Calculer <span class="math inline">\(E(X)\)</span>, <span class="math inline">\(E(Y)\)</span>, et <span class="math inline">\(cov(X,Y)\)</span>.</p></li>
-<li><p>Les variables <span class="math inline">\(X\)</span> et <span class="math inline">\(Y\)</span> sont elles indépendantes ?</p></li>
-</ol>
+<div class="callout-body-container callout-body">
+<p>Soit la v.a.c <span class="math inline">\(X\)</span> ayant la fonction de densité</p>
+<p><span class="math display">\[f_X(x)= \left\lbrace
+      \begin{array}{ll}
+      2 x   &amp; \mbox{si} \quad 0 \le x \le 1\\
+      0 &amp; \mbox{sinon}
+      \end{array}
+  \right.\]</span></p>
+<p>Calculer l’espérance des variables aléatoires <span class="math inline">\(Y=3X+1\)</span>, <span class="math inline">\(Z=X^2\)</span> et <span class="math inline">\(T=e^X\)</span>.</p>
 </div>
-</section><section id="lois-usuelles-discrètes" class="level2 unnumbered"><h2 class="unnumbered anchored" data-anchor-id="lois-usuelles-discrètes">Lois usuelles discrètes</h2>
-<div id="exr-" class="theorem exercise">
-<p><span class="theorem-title"><strong>Exercice 12</strong></span> Une urne contient 2 boules de numéro 20, 4 boules de numéro 10 et 4 boules de numéro 5.</p>
-<ol type="1">
-<li><p>Une épreuve consiste à tirer simultanément 3 boules de l’urne. Calculer la probabilité <span class="math inline">\(p\)</span> que la somme des numéros tirés soit égale à 30.</p></li>
-<li>
-<p>On répéte cette épreuve 4 fois en remettant à chaque fois les trois boules tirés dans l’urne. Soit <span class="math inline">\(X\)</span> la v.a. indiquant le nombre de tirages donnant une somme de numéros égale à 30.</p>
-<ol type="1">
-<li><p>Quelle la loi de <span class="math inline">\(X\)</span>. Donner son espérance et son écart-type.</p></li>
-<li><p>Déterminer la probabilité d’avoir au moins une fois la somme 30 dans les 4 tirages.</p></li>
-</ol>
-</li>
-</ol>
 </div>
-<div id="exr-" class="theorem exercise">
-<p><span class="theorem-title"><strong>Exercice 13</strong></span> Vous avez besoin d’une personne pour vous aider à déménager. Quand vous téléphonez à un ami, il y a une chance sur quatre qu’il accepte. Soit <span class="math inline">\(X\)</span> la variable aléatoire qui représente le nombre d’amis que vous devrez contacter pour obtenir cette aide.</p>
-<ol type="1">
-<li><p>Déterminer la loi de probabilité de <span class="math inline">\(X\)</span>.</p></li>
-<li><p>Calculer <span class="math inline">\(P(X\leq 3)\)</span>.</p></li>
-<li><p>Calculer <span class="math inline">\(E(X)\)</span>.</p></li>
-</ol>
+</section><section id="variance-dune-v.a.c" class="level3 unnumbered"><h3 class="unnumbered anchored" data-anchor-id="variance-dune-v.a.c">Variance d’une v.a.c</h3>
+<p>La variance d’une variable aléatoire <span class="math inline">\(V(X)\)</span> est l’espérance mathématique du carré de l’écart à l’espérance mathématique. C’est un paramètre de dispersion qui correspond au moment centré d’ordre 2 de la variable aléatoire <span class="math inline">\(X\)</span>.</p>
+<div id="def-" class="theorem definition">
+<p><span class="theorem-title"><strong>Définition 3.5</strong></span> Si <span class="math inline">\(X\)</span> est une variable aléatoire ayant une espérance <span class="math inline">\(E(X)\)</span>, on appelle variance de <span class="math inline">\(X\)</span> le réel</p>
+<p><span class="math display">\[V(X)=E\big([X-E(X)]^2\big) = E(X^2) - [E(X)]^2\]</span> Si <span class="math inline">\(X\)</span> est une variable aléatoire continue, on calcule <span class="math inline">\(E(X^2)\)</span> en utilisant le théorème @ref(thm:transfert),</p>
+<p><span class="math display">\[E(X^2) = \int_{-\infty}^{+\infty}x^2 f(x)dx\]</span></p>
 </div>
-<div id="exr-" class="theorem exercise">
-<p><span class="theorem-title"><strong>Exercice 14</strong></span> Pour être sélectionné aux jeux olympiques, un athlète doit réussir deux fois à dépasser les minima fixés par sa fédération. Il a une chance sur trois de réussir à chaque épreuve à laquelle il participe. On note <span class="math inline">\(X\)</span> la variable aléatoire qui représente le nombre d’épreuves auxquelles il devra participer pour être sélectionné.</p>
-<ol type="1">
-<li><p>Déterminer la loi de probabilité de <span class="math inline">\(X\)</span>.</p></li>
-<li><p>Si cet athlète ne peut participer qu’à quatre épreuves maximum, quelle est la probabilité qu’il soit sélectionné ?</p></li>
-</ol>
+<p><strong>Propriétés:</strong> Si <span class="math inline">\(X\)</span> est une variable aléatoire admettant une variance alors:</p>
+<ul>
+<li><p><span class="math inline">\(V(X) \ge 0\)</span>, si elle existe.</p></li>
+<li><p><span class="math inline">\(\forall \quad a \in \mathbb{R}, V(aX) = a^2 V(X)\)</span></p></li>
+<li><p><span class="math inline">\(\forall \quad (a,b) \in \mathbb{R}, V(aX+b) = a^2 V(X)\)</span></p></li>
+<li><p>Si <span class="math inline">\(X\)</span> et <span class="math inline">\(Y\)</span> sont deux variables aléatoires indépendantes, <span class="math inline">\(V(X+Y)=V(X)+V(Y)\)</span></p></li>
+</ul>
+<div id="def-ecarttype" class="theorem definition">
+<p><span class="theorem-title"><strong>Définition 3.6 (Ecart-type)</strong></span> Si <span class="math inline">\(X\)</span> est une variable aléatoire ayant une variance <span class="math inline">\(V(X)\)</span>, on appelle écart-type de <span class="math inline">\(X\)</span>, le réel:</p>
+<p><span class="math display">\[\sigma_X = \sqrt{V(X)}\]</span></p>
 </div>
-<div id="exr-" class="theorem exercise">
-<p><span class="theorem-title"><strong>Exercice 15</strong></span> Un sac contient cinq jetons : deux sont numérotés 1 et les trois autres sont numérotés 2. On effectue une série illimitée de tirages avec remise d’un jeton dans le sac S. On désigne par <span class="math inline">\(Y\)</span> la variable aléatoire égale au nombre de tirages effectués avant le tirage amenant un jeton numéroté 1 pour la première fois.</p>
-<ol type="1">
-<li><ol type="1">
-<li><p>Justifier que la variable aléatoire <span class="math inline">\(Z=Y+1\)</span> suit une loi usuelle que l’on précisera.</p></li>
-<li><p>En déduire la loi de probabilité de <span class="math inline">\(Y\)</span>.</p></li>
-</ol></li>
-<li><ol type="1">
-<li><p>Préciser l’espérance mathématique et la variance de <span class="math inline">\(Z\)</span>.</p></li>
-<li><p>En déduire l’espérance mathématique et la variance de <span class="math inline">\(Y\)</span>.</p></li>
-</ol></li>
-</ol>
-</div>
-<div id="exr-" class="theorem exercise">
-<p><span class="theorem-title"><strong>Exercice 16</strong></span> Le nombre de pannes d’électricité qui se produisent dans une certaine région au cours d’une période d’un an suit une loi de Poisson de paramètre <span class="math inline">\(\lambda=3\)</span>.</p>
-<ol type="1">
-<li><p>Calculer la probabilité qu’au cours d’une période d’un an il y a exactement une panne qui se produit.</p></li>
-<li><p>En supposant l’indépendance des pannes d’une année à l’autre, calculer la probabilité qu’au cours des dix prochaines années il y ait au moins une année pendant laquelle il se produira exactement une panne.</p></li>
-</ol>
-</div>
-<div id="exr-" class="theorem exercise">
-<p><span class="theorem-title"><strong>Exercice 17</strong></span> Un poste de radio a 2 types de pannes: transistor ou condensateur. Durant la première année d’utilisation, on désigne par:</p>
-<p><span class="math inline">\(X=\)</span> nombre de pannes dues à une défaillance de transistor.<br><span class="math inline">\(Y=\)</span> nombre de pannes dues à une défaillance de condensateur.</p>
-<p>On suppose que <span class="math inline">\(X\)</span> et <span class="math inline">\(Y\)</span> sont des v.a. indépendantes suivant des lois de Poisson de paramètres respectives <span class="math inline">\(\lambda=2\)</span> et <span class="math inline">\(\mu=1\)</span>.</p>
-<ol type="1">
-<li><p>Calculer la probabilité qu’il y ait 2 pannes dues à une défaillance de transistor.</p></li>
-<li><p>Calculer la probabilité qu’il y ait au moins une panne due à une défaillance de condensateur.</p></li>
-<li><ol type="1">
-<li><p>Quelle est la loi du nombre <span class="math inline">\(Z=X+Y\)</span> de pannes durant la première année ?</p></li>
-<li><p>Déterminer la probabilité qu’il y ait 2 pannes de type quelconque.</p></li>
-<li><p>Calculer <span class="math inline">\(P(Z=3)\)</span>. Que peut-on remarquer ?</p></li>
-<li><p>Décrire les variations de <span class="math inline">\(P(Z=k)\)</span> en fonction de <span class="math inline">\(k\)</span>.</p></li>
-<li><p>Donner le nombre moyen de pannes et la probabilité qu’il y ait au plus une panne durant cette période.</p></li>
-</ol></li>
-</ol>
-</div>
+<!-- 
+
+# Couple de variables aléatoires continues
+
+## Densité conjointe {-}
+
+::: {#def-} 
+On dit que $(X,Y)$ est un couple aléatoire continu s'il existe une
+fonction $f: \mathbb{R}^2 \rightarrow \mathbb{R}$ telle que pour tout
+$D \subseteq \mathbb{R}$ on a
+
+$$P\{(X,Y) \in D\} = \iint\limits_{(x,y) \in D} f(x,y) dx dy$$
+:::
+
+**Remarque:** On a la condition de normalité
+$\iint\limits_{\mathbb{R}^2} f(x,y)dxdy=1$
+
+La fonction $f$ s'appelle **densité conjointe** de $X$ et $Y$. Notons
+par $A$ et $B$ deux ensembles de nombres réels. En définissant
+$D=\{(x,y) : x \in A, y \in B\}$, on obtient
+
+$$P(X\in A, Y \in B) = \int_A \int_B f(x,y) dxdy$$
+
+La fonction de répartition du $(X,Y)$ est définie par
+
+$$F(a,b)=P(X \le a, Y \le b) = \int_{- \infty}^b \int_{- \infty}^a  f(x,y) dx dy$$
+
+$f$ est le dérivé de $F$:
+$f(a,b)= \displaystyle \frac{\partial^2}{\partial a \partial b} F(a,b)$
+
+::: {.callout-tip}
+## Exercice
+
+Soit $(X,Y)$ un couple
+aléatoire continu de densité $$f(x,y)= \left\lbrace
+      \begin{array}{ll}
+      a x y^2   & \mbox{si} \quad 0 \le x \le y \le 1 \\
+      0 & \mbox{sinon}
+      \end{array}
+  \right.$$ Trouver la constante $a$.
+:::
+
+::: {.callout-tip}
+## Exercice
+Soit $(X,Y)$ un couple
+aléatoire continu de densité
+
+$$f(x,y)= \left\lbrace
+      \begin{array}{ll}
+      2 e^{-x} e^{-2y}   & \mbox{si} \quad x > 0, \,\, y > 0\\
+      0 & \mbox{sinon}
+      \end{array}
+  \right.$$ Montrer que:
+
+1.  $P(X > 1, Y < 1)=e^{-1}(1-e^{-2})$
+
+2.  $P(X < a) = 1-e^{-a}$
+
+3.  $P(X < Y ) = 1/3$
+:::
+
+## Densités marginales {-}
+
+Si on dispose de la densité du couple, on peut retrouver les densités de
+$X$ et de $Y$, appelées les densités marginales:
+
+**Densité marginale de X:** $$f(x,.)=f_X(x)=\int_{\mathbb{R}} f(x,y)dy$$
 
 
-</section></main><!-- /main --><script id="quarto-html-after-body" type="application/javascript">
+**Densité marginale de Y:** $$f(.,y)=f_Y(y)=\int_{\mathbb{R}} f(x,y)dx$$
+
+## Espérance d'une fonction du couple {-}
+
+Si $(X,Y)$ est un couple continu de densité $f(x,y)$ et
+$g: \mathbb{R}^2 \rightarrow \mathbb{R}$ on a
+
+$$E[ g(X,Y)] =  \iint\limits_{\mathbb{R}^2} g(x,y) f(x,y)dxdy$$
+
+## Indépendance {-}
+
+Les v.a. $X$ et $Y$ sont indépendantes ssi
+$\forall \, (x,y) \in \mathbb{R}^2$ on a
+
+$$f(x,y)=f_X(x) f_Y(y)$$
+
+
+## Distribution conditionnelle {-}
+
+Si $(X,Y)$ est un couple continu de densité $f(x,y)$, on définit
+**densité conditionnelle de $X$**, sous la condition $Y=y$ et lorsque
+$f_Y(y) > 0$ par la relation
+
+$$f_{X|Y} (x|y) = \frac{f(x,y)}{f_Y(y)}$$
+
+::: {.callout-tip}
+## Exercice
+Supposons que $X$ et $Y$ aient pour densité conjointe
+$$f(x,y)= \left\lbrace
+      \begin{array}{ll}
+      \displaystyle \frac{1}{y} e^{- x/y}e^{-y}   & \mbox{si} \quad x > 0, \,\, y > 0\\
+      0 & \mbox{sinon}
+      \end{array}
+  \right.$$
+
+1.  Déterminer la densité conditionnelle de $X$ lorsque $Y=y$.
+
+2.  Calculer $P(X>1 | Y = y)$
+
+::: -->
+
+
+</section></section></main><!-- /main --><script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
   const toggleBodyColorMode = (bsSheetEl) => {
     const mode = bsSheetEl.getAttribute("data-mode");
@@ -1039,13 +1177,13 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
   }
 });
 </script><nav class="page-navigation"><div class="nav-page nav-page-previous">
-      <a href="./lois-usuelles-discretes.html" class="pagination-link" aria-label="Lois Usuelles Discrètes">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Lois Usuelles Discrètes</span></span>
+      <a href="./exos1.html" class="pagination-link" aria-label="Feuille d'Exercices 1">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Feuille d’Exercices 1</span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./variables-aleatoires-continues.html" class="pagination-link" aria-label="Variables Aléatoires Continues">
-        <span class="nav-page-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Variables Aléatoires Continues</span></span> <i class="bi bi-arrow-right-short"></i>
+      <a href="./lois-usuelles-continues.html" class="pagination-link" aria-label="Lois Usuelles Continues">
+        <span class="nav-page-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Lois Usuelles Continues</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>

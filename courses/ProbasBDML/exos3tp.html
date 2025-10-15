@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="generator" content="quarto-1.6.43">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-<title>Feuille d’exercices 3 – Probabilités et Statistique</title>
+<title>TP illustration numérique – Probabilités et Statistique</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -17,6 +17,40 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
 </style>
 
 <script src="site_libs/quarto-nav/quarto-nav.js"></script>
@@ -26,8 +60,8 @@ ul.task-list li input[type="checkbox"] {
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
-<link href="./exos3tp.html" rel="next">
-<link href="./estimation-ponctuelle.html" rel="prev">
+<link href="./appendix.html" rel="next">
+<link href="./exos3.html" rel="prev">
 <script src="site_libs/quarto-html/quarto.js"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
@@ -102,7 +136,7 @@ window.Quarto = {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Basculer la barre latérale" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./theoremes-limites.html">Chap 3: Statistique Inférentielle</a></li><li class="breadcrumb-item"><a href="./exos3.html">Feuille d’Exercices 3</a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./theoremes-limites.html">Chap 3: Statistique Inférentielle</a></li><li class="breadcrumb-item"><a href="./exos3tp.html">TP Illustration numérique</a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Basculer la barre latérale" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Recherche" onclick="window.quartoOpenSearch();">
@@ -220,13 +254,13 @@ window.Quarto = {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./exos3.html" class="sidebar-item-text sidebar-link active">
+  <a href="./exos3.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Feuille d’Exercices 3</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./exos3tp.html" class="sidebar-item-text sidebar-link">
+  <a href="./exos3tp.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text">TP Illustration numérique</span></a>
   </div>
 </li>
@@ -257,13 +291,28 @@ window.Quarto = {
         <nav id="TOC" role="doc-toc" class="toc-active"><h2 id="toc-title">Table des matières</h2>
    
   <ul>
-<li><a href="#echantillonage-et-th%C3%A9or%C3%A8mes-limites" id="toc-echantillonage-et-théorèmes-limites" class="nav-link active" data-scroll-target="#echantillonage-et-th%C3%A9or%C3%A8mes-limites">Echantillonage et Théorèmes limites</a></li>
-  <li><a href="#estimation-ponctuelle" id="toc-estimation-ponctuelle" class="nav-link" data-scroll-target="#estimation-ponctuelle">Estimation ponctuelle</a></li>
+<li>
+<a href="#illustration-num%C3%A9rique-des-th%C3%A9or%C3%A8mes-limites-avec-r" id="toc-illustration-numérique-des-théorèmes-limites-avec-r" class="nav-link active" data-scroll-target="#illustration-num%C3%A9rique-des-th%C3%A9or%C3%A8mes-limites-avec-r">illustration numérique des théorèmes limites avec R</a>
+  <ul class="collapse">
+<li><a href="#r%C3%A9alisations-de-variables-al%C3%A9atoires" id="toc-réalisations-de-variables-aléatoires" class="nav-link" data-scroll-target="#r%C3%A9alisations-de-variables-al%C3%A9atoires">Réalisations de variables aléatoires</a></li>
+  <li><a href="#fonction-de-densit%C3%A9" id="toc-fonction-de-densité" class="nav-link" data-scroll-target="#fonction-de-densit%C3%A9">Fonction de densité</a></li>
+  <li><a href="#fonction-de-r%C3%A9partition" id="toc-fonction-de-répartition" class="nav-link" data-scroll-target="#fonction-de-r%C3%A9partition">Fonction de répartition</a></li>
+  </ul>
+</li>
+  <li>
+<a href="#illustrations-de-th%C3%A9or%C3%A8mes-limites" id="toc-illustrations-de-théorèmes-limites" class="nav-link" data-scroll-target="#illustrations-de-th%C3%A9or%C3%A8mes-limites">Illustrations de théorèmes limites</a>
+  <ul class="collapse">
+<li><a href="#loi-forte-de-grands-nombres" id="toc-loi-forte-de-grands-nombres" class="nav-link" data-scroll-target="#loi-forte-de-grands-nombres">Loi forte de grands nombres</a></li>
+  <li><a href="#th%C3%A9or%C3%A8me-central-limite" id="toc-théorème-central-limite" class="nav-link" data-scroll-target="#th%C3%A9or%C3%A8me-central-limite">Théorème central limite</a></li>
+  </ul>
+</li>
+  <li><a href="#comparaison-destimateurs" id="toc-comparaison-destimateurs" class="nav-link" data-scroll-target="#comparaison-destimateurs">Comparaison d’estimateurs</a></li>
+  <li><a href="#loi-de-weibull" id="toc-loi-de-weibull" class="nav-link" data-scroll-target="#loi-de-weibull">Loi de Weibull</a></li>
   </ul></nav>
     </div>
 <!-- main -->
-<main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./theoremes-limites.html">Chap 3: Statistique Inférentielle</a></li><li class="breadcrumb-item"><a href="./exos3.html">Feuille d’Exercices 3</a></li></ol></nav><div class="quarto-title">
-<h1 class="title">Feuille d’exercices 3</h1>
+<main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./theoremes-limites.html">Chap 3: Statistique Inférentielle</a></li><li class="breadcrumb-item"><a href="./exos3tp.html">TP Illustration numérique</a></li></ol></nav><div class="quarto-title">
+<h1 class="title">TP illustration numérique</h1>
 </div>
 
 
@@ -277,227 +326,138 @@ window.Quarto = {
   
 
 
-</header><section id="echantillonage-et-théorèmes-limites" class="level2"><h2 class="anchored" data-anchor-id="echantillonage-et-théorèmes-limites">Echantillonage et Théorèmes limites</h2>
-<div id="exr-" class="theorem exercise">
-<p><span class="theorem-title"><strong>Exercice 1 (Loi de <span class="math inline">\(\overline{X}_n\)</span>)</strong></span> Une population est composée de 3 salariés A, B et C âgés respectivement de 23, 37 et 45 ans.</p>
-<p>On choisit au hasard un salarié.</p>
-<ol type="1">
-<li><p>Définir l’expérience aléatoire <span class="math inline">\(\varepsilon\)</span>, la population <span class="math inline">\(\Omega\)</span>, la probabilité <span class="math inline">\(P\)</span> et la variable aléatoire <span class="math inline">\(X\)</span> étudiée.</p></li>
-<li><p>Calculer <span class="math inline">\(E(X)=m\)</span> et <span class="math inline">\(V(X)=\sigma^2\)</span>. Que représentent <span class="math inline">\(E(X)\)</span> et <span class="math inline">\(V(X)\)</span>?</p></li>
-</ol>
-<p>On choisit maintenant au hasard un échantillon de 2 salariés.</p>
-<ol start="3" type="1">
-<li>Définir la nouvelle expérience aléatoire <span class="math inline">\(\varepsilon_n\)</span>, l’ensemble des échantillons <span class="math inline">\(E_n\)</span> et les variables aléatoires <span class="math inline">\(X_i, i=1,\ldots,n\)</span>.</li>
-<li>Définir la variable aléatoire <span class="math inline">\(\overline{X}_n\)</span> et déterminer sa loi.</li>
-<li>Calculer <span class="math inline">\(E(\overline{X}_n)\)</span> et <span class="math inline">\(V(\overline{X}_n)\)</span>. Retrouver les formules du cours.</li>
-</ol>
+</header><section id="illustration-numérique-des-théorèmes-limites-avec-r" class="level2"><h2 class="anchored" data-anchor-id="illustration-numérique-des-théorèmes-limites-avec-r">illustration numérique des théorèmes limites avec R</h2>
+<section id="réalisations-de-variables-aléatoires" class="level3 unnumbered"><h3 class="unnumbered anchored" data-anchor-id="réalisations-de-variables-aléatoires">Réalisations de variables aléatoires</h3>
+<p>Pour générer (simuler) des réalisations de variables aléatoires on utilise la fonction qui commence par la lettre <code>r</code> (pour <em>random</em>) succédée par le nom de la loi que l’on souhaite simuler. Par exemple <code>rnorm</code> pour simuler des réalisations de la variable alétoire de loi normale. Tapez <code><a href="https://rdrr.io/r/stats/Normal.html">?rnorm</a></code> pour voir la liste des paramètres (arguments) de cette fonction.</p>
+<div class="cell">
+<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/stats/Normal.html">rnorm</a></span><span class="op">(</span><span class="fl">10</span><span class="op">)</span> <span class="co"># génére 10 réalisations alétoires de la loi normale centrée réduite.</span></span></code><button title="Copier vers le presse-papier" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code> [1]  0.146 -0.288  0.733  1.317  1.286 -0.421  1.252 -0.698
+ [9] -0.455  0.506</code></pre>
 </div>
-<div id="exr-" class="theorem exercise">
-<p><span class="theorem-title"><strong>Exercice 2 (Loi de <span class="math inline">\(P_n\)</span>)</strong></span> Une population est composée de 3 individus A, B et C dont les résultats de vote pour un certain candidat sont respectivement les suivants: Non, Non et Oui.</p>
-<p>On choisit au hasard un individu.</p>
-<ol type="1">
-<li><p>Définir l’expérience aléatoire <span class="math inline">\(\varepsilon\)</span>, la population <span class="math inline">\(\Omega\)</span>, la probabilité <span class="math inline">\(P\)</span> et la variable aléatoire <span class="math inline">\(X\)</span> étudiée.</p></li>
-<li><p>Calculer <span class="math inline">\(E(X)\)</span> et <span class="math inline">\(V(X)\)</span>. Que représente <span class="math inline">\(E(X)\)</span>?</p></li>
-</ol>
-<p>On choisit maintenant au hasard un échantillon de 2 individus.</p>
-<ol start="3" type="1">
-<li>Définir la nouvelle expérience aléatoire <span class="math inline">\(\varepsilon_n\)</span>, l’ensemble des échantillons <span class="math inline">\(E_n\)</span> et les variables aléatoires <span class="math inline">\(X_i, i=1,\ldots,n\)</span>.</li>
-<li>Définir la variable aléatoire <span class="math inline">\(P_n\)</span> et déterminer sa loi.</li>
-<li>Calculer <span class="math inline">\(E(P_n)\)</span> et <span class="math inline">\(V(P_n)\)</span>. Retrouver les formules du cours.</li>
-</ol>
+<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/stats/Normal.html">rnorm</a></span><span class="op">(</span><span class="fl">10</span>, mean <span class="op">=</span> <span class="fl">1</span>, sd <span class="op">=</span> <span class="fl">3</span><span class="op">)</span> <span class="co"># génére 10 réalisations alétoires de la loi normale d'espérance 1 et écart-type 3</span></span></code><button title="Copier vers le presse-papier" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code> [1] -0.891  5.699  5.713  4.136  2.925 -3.289  3.868  6.007
+ [9]  0.124  1.181</code></pre>
 </div>
-<div id="exr-" class="theorem exercise">
-<p><span class="theorem-title"><strong>Exercice 3</strong></span> Est ce qu’il s’agit d’une variable aléatoire?</p>
-<ol type="1">
-<li>Moyenne de la population.</li>
-<li>Taille de la population.</li>
-<li>Taille de l’échantillon.</li>
-<li>Moyenne de l’échantillon.</li>
-<li>Variance de la moyenne de l’échantillon.</li>
-<li>Plus grande valeur de l’échantillon.</li>
-<li>Variance de la population.</li>
-<li>Variance estimée de la moyenne de l’échantillon.</li>
-</ol>
 </div>
-<div id="exr-" class="theorem exercise">
-<p><span class="theorem-title"><strong>Exercice 4 (Théorème Central Limite)</strong></span> Devant l’augmentation des problèmes de poids dans la population européenne, une nouvelle étude est mandatée pour mesurer la relation entre celui-ci et la quantité de calories ingérées par habitant. Des études antérieures montrent qu’un Européen consomme en moyenne <span class="math inline">\(2700\)</span> calories par jour avec un écart-type de <span class="math inline">\(800\)</span>. On dispose dans cette étude d’un échantillon de <span class="math inline">\(500\)</span> Européens.</p>
-<ol type="1">
-<li>Définir les variables aléatoires étudiées dans l’énoncé. On les nomme <span class="math inline">\(X_i\)</span> et <span class="math inline">\(\overline{X}_n\)</span>.</li>
-<li>Utiliser le TCL pour donner la distribution de la v.a. <span class="math inline">\(\overline{X}_n\)</span>.</li>
-<li>Calculer la probabilité que la moyenne des calories consommées par jour par les Européens, qu’on a nommé <span class="math inline">\(\overline{X}_n\)</span>, dans l’échantillon soit supérieure à <span class="math inline">\(2750\)</span>.</li>
-</ol>
+<p><strong>1.</strong> Simuler un vecteur de 1000 réalisations indépendantes de loi uniforme sur l’intervalle <span class="math inline">\([0,1]\)</span>. Simuler ensuite 1000 réalisations de la loi exponentielle de paramètre 2.</p>
+<p><strong>Extra</strong>: Afin de vérifier les simulations on peut afficher l’histogramme des réalisations et superposer avec la densité de la loi correspondante.</p>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure class="figure"><p><img src="exos3tp_files/figure-html/unnamed-chunk-3-1.png" class="img-fluid figure-img" style="width:80.0%"></p>
+</figure>
 </div>
-<div id="exr-" class="theorem exercise">
-<p><span class="theorem-title"><strong>Exercice 5</strong></span> Afin d’estimer leur espérance respective, on échantillonne 2 populations. On utilise un échantillon de taille <span class="math inline">\(n_{1}\)</span> pour la population 1, qui présente un écart-type égal à <span class="math inline">\(\sigma_{1}\)</span>. Pour la population 2, dont l’écart-type vaut <span class="math inline">\(\sigma_{2}=2\sigma_{1}\)</span>, on prend un échantillon de taille <span class="math inline">\(n_{2}=2 n_{1}\)</span>.</p>
-<p>Pour lequel des 2 échantillons est-ce que l’estimation de la moyenne de la population est la plus précise?</p>
 </div>
-<div id="exr-" class="theorem exercise">
-<p><span class="theorem-title"><strong>Exercice 6</strong></span> Dans une certaine commune française, on veut estimer la proportion de familles vivant en dessous du seuil de pauvreté. Si cette proportion est environ <span class="math inline">\(0.15\)</span>, quelle est la taille de l’échantillon nécessaire pour que l’écart-type de l’estimateur soit égal à <span class="math inline">\(0.02\)</span>?</p>
 </div>
-<p><strong>Extra</strong></p>
-<div id="exr-" class="theorem exercise">
-<p><span class="theorem-title"><strong>Exercice 7 (Théorème Central Limite)</strong></span> Rémy et ses 9 amis voudraient jouer au bowling. Ils décident de rassembler leur argent de poche et espèrent obtenir la somme totale nécessaire. On peut supposer que l’argent de poche de chacun est une variable aléatoire <span class="math inline">\(X_i\)</span> qui suit la loi exponentielle de paramètre <span class="math inline">\(\lambda=0.06\)</span>. Sa densité est donc <span class="math display">\[
-f(x)=0.06 e^{-0.06 x} \times 1_{\mathbb{R}^+}(x)
-\]</span></p>
-<p>De plus, on admet que les <span class="math inline">\(X_i\)</span> sont indépendantes.</p>
-<ol type="1">
-<li>Démontrer que la loi exponentielle <span class="math inline">\(\mathcal{E}(\lambda)\)</span> est un cas exceptionnel de la loi Gamma en donnant les paramètres de celle-ci. (un rappel de la définition de la loi Gamma est donnée ci dessous).</li>
-<li>Soit <span class="math inline">\(S_{10}=\sum_{i=1}^{10} X_{i}\)</span> Quelle est la loi de <span class="math inline">\(S_{10}\)</span>?</li>
-<li>Sachant qu’une partie de bowling coûte <span class="math inline">\(15\)</span> euros, quelle est la probabilité que Rémy et ses amis puissent jouer une partie? (<strong>Indication</strong>: Appliquer le TCL pour <span class="math inline">\(S_{10}= \sum_{i=1}^n X_i = n \times \overline{X}_n\)</span>)</li>
-<li>Comment faut-il choisir <span class="math inline">\(z&gt;0\)</span> pour que la probabilité que la somme totale d’argent du groupe soit supérieure à <span class="math inline">\(z\)</span> soit égale à <span class="math inline">\(5 \%\)</span>?</li>
-</ol>
-</div>
-<div class="callout callout-style-simple callout-tip callout-titled">
-<div class="callout-header d-flex align-content-center">
+</section><section id="fonction-de-densité" class="level3 unnumbered"><h3 class="unnumbered anchored" data-anchor-id="fonction-de-densité">Fonction de densité</h3>
+<p>Pour calculer la densité d’une certaine loi, il suffit d’utiliser comme fonction le nom de la loi dans <svg aria-hidden="true" role="img" viewbox="0 0 581 512" style="height:1em;width:1.13em;vertical-align:-0.125em;margin-left:auto;margin-right:auto;font-size:inherit;fill:steelblue;overflow:visible;position:relative;"><path d="M581 226.6C581 119.1 450.9 32 290.5 32S0 119.1 0 226.6C0 322.4 103.3 402 239.4 418.1V480h99.1v-61.5c24.3-2.7 47.6-7.4 69.4-13.9L448 480h112l-67.4-113.7c54.5-35.4 88.4-84.9 88.4-139.7zm-466.8 14.5c0-73.5 98.9-133 220.8-133s211.9 40.7 211.9 133c0 50.1-26.5 85-70.3 106.4-2.4-1.6-4.7-2.9-6.4-3.7-10.2-5.2-27.8-10.5-27.8-10.5s86.6-6.4 86.6-92.7-90.6-87.9-90.6-87.9h-199V361c-74.1-21.5-125.2-67.1-125.2-119.9zm225.1 38.3v-55.6c57.8 0 87.8-6.8 87.8 27.3 0 36.5-38.2 28.3-87.8 28.3zm-.9 72.5H365c10.8 0 18.9 11.7 24 19.2-16.1 1.9-33 2.8-50.6 2.9v-22.1z"></path></svg> avec le préfixe <code>d</code> pour une densité. Taper <code><a href="https://rdrr.io/r/stats/Normal.html">?dnorm</a></code> pour comprendre le fonctionnement de cette commande.</p>
+<p><strong>2.</strong> Que vaut la densité de la loi normale centrée réduite en 0? Essayer la même chose pour la loi binomiale de paramètres <span class="math inline">\(n=10\)</span> et <span class="math inline">\(p=0.5\)</span>.</p>
+<div class="callout callout-style-simple callout-tip">
+<div class="callout-body d-flex">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
-<div class="callout-title-container flex-fill">
-Loi Gamma <span class="math inline">\(\Gamma(a,\lambda)\)</span>
+<div class="callout-body-container">
+<p>Cette commande permet de tracer facilement des fonctions de densité.</p>
 </div>
 </div>
-<div class="callout-body-container callout-body">
-<p>On dit que la variable aléatoire <span class="math inline">\(X\)</span> suit une loi Gamma de paramètres <span class="math inline">\(a&gt;0\)</span> et <span class="math inline">\(\lambda&gt;0\)</span>, <span class="math inline">\(X \thicksim \Gamma(a,\lambda)\)</span> si <span class="math inline">\(X\)</span> a la densité: <span class="math display">\[\forall \, x \in \mathbb{R}, \quad  f_{a,\lambda} (x)= \frac{\lambda^a}{\Gamma(a)} x^{a-1} e^{-\lambda x} \times {1}_{\mathbb{R}_{+}}(x)\]</span></p>
-<ul>
-<li>La fonction Gamma est définie sur <span class="math inline">\(\mathbb{R}_{+}^*\)</span> par: <span class="math inline">\(\Gamma(x) = \int_0^{+\infty} t^{x-1}e^{-t} dt\)</span>.</li>
-<li>Propriétés de la fonction Gamma:
-<ul>
-<li><span class="math inline">\(\Gamma(x+1)=x\Gamma(x) \quad \forall \, x &gt;0\)</span></li>
-<li><span class="math inline">\(\Gamma(n+1) = n! \quad \forall n \in \mathbb{N}\)</span></li>
-<li>
-<span class="math inline">\(\Gamma(1) = 1\)</span> et <span class="math inline">\(\Gamma(\frac{1}{2})=\sqrt{\pi}\)</span>
-</li>
-</ul>
-</li>
-<li>Propriétés de la loi Gamma:
-<ul>
-<li>
-<span class="math inline">\(E(X)= \frac{a}{\lambda}\)</span> et <span class="math inline">\(V(X)= \frac{a}{\lambda^2}\)</span>.</li>
-<li>Si <span class="math inline">\((X_n)_{n \in \mathbb{N}}\)</span> est une suite de variables aléatoires indépendantes de lois <span class="math inline">\(\Gamma(a_n,\lambda)\)</span> alors la variable aléatoire somme <span class="math inline">\(\sum_{n=1}^N X_n\)</span> suit également une loi gamma <span class="math inline">\(\Gamma(\sum_{n=1}^N a_n, \lambda)\)</span>.</li>
-</ul>
-</li>
-</ul>
+</div>
+<p><strong>3.</strong> Que se passe-t-il si l’on demande la fonction de densité de la loi binomiale en 0.3? Pourquoi?</p>
+<p><strong>4.</strong> Tracer la fonction de densité de la loi normale centrée réduite. Commencer par créer un vecteur d’abscisses à l’aide de la fonction <code><a href="https://rdrr.io/r/base/seq.html">seq()</a></code>. Tracer ensuite la fonction de densité en ces points.</p>
+<div class="callout callout-style-simple callout-tip">
+<div class="callout-body d-flex">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-body-container">
+<p>Il existe plusieurs paramètres réglables pour avoir des courbes de différents design.</p>
 </div>
 </div>
-</section><section id="estimation-ponctuelle" class="level2"><h2 class="anchored" data-anchor-id="estimation-ponctuelle">Estimation ponctuelle</h2>
-<div id="exr-" class="theorem exercise">
-<p><span class="theorem-title"><strong>Exercice 8 (La variance corrigée)</strong></span> Soit <span class="math inline">\(X\)</span> une variable aléatoire ayant une espérance <span class="math inline">\(m\)</span> et une variance <span class="math inline">\(\sigma^2\)</span>, sa variance empirique est <span class="math inline">\(s_{n}^2=\frac{1}{n} \sum X_{i}^{2}-\overline{X}_{n}^{2}\)</span> avec <span class="math inline">\(\overline{X}_{n}\)</span> la moyenne empirique de <span class="math inline">\(X\)</span> et <span class="math inline">\(\frac{1}{n} \sum X_{i}^{2}\)</span> la moyenne empirique de <span class="math inline">\(X^{2}\)</span>.</p>
-<ol type="1">
-<li>Calculer <span class="math inline">\(E\left(\overline{X}_{n}\right)\)</span> et <span class="math inline">\(V\left(\overline{X}_{n}\right)\)</span> et en déduire <span class="math inline">\(E(\overline{X}_{n}^{2})\)</span>.</li>
-<li>Montrer enfin que <span class="math inline">\(E\left(s_{n}^2\right)=\frac{n-1}{n} V(X)\)</span> et en déduire un estimateur sans biais de la variance (on nomme cet estimateur <span class="math inline">\(s_{n}^{*^2}\)</span>).</li>
-</ol>
 </div>
-<div id="exr-" class="theorem exercise">
-<p><span class="theorem-title"><strong>Exercice 9</strong></span> On considère l’échantillon statistique</p>
-<p><span class="math display">\[1,0,2,1,1,0,1,0,0\]</span></p>
-<ol type="1">
-<li>Cacluler sa moyenne et sa variance empirique.</li>
-<li>En supposant que les données de cet échantillon sont des réalisations d’une variable de loi inconnue, donner une estimation non biaisée de l’espérance et de la variance de cette loi.</li>
-<li>On choisit de modéliser les valeurs de cet échantillon par une loi binomiale <span class="math inline">\(\mathcal{B}(2, p)\)</span>. Utiliser la moyenne empirique pour proposer une estimation ponctuelle pour <span class="math inline">\(p\)</span>.</li>
-<li>Avec le même modèle, utiliser la variance pour proposer une autre estimation de <span class="math inline">\(p\)</span>.</li>
-<li>On choisit de modéliser les valeurs de cet échantillon par une loi de Poisson <span class="math inline">\(\mathcal{P}(\lambda)\)</span>, qui a pour espérance <span class="math inline">\(\lambda\)</span>. Quelle estimation ponctuelle proposez-vous pour <span class="math inline">\(\lambda\)</span>?</li>
-</ol>
-</div>
-<div id="exr-" class="theorem exercise">
-<p><span class="theorem-title"><strong>Exercice 10 (EMV loi normale)</strong></span> Considérons un échantillon aléatoire <span class="math inline">\((X_1,\ldots,X_n)\)</span> (les <span class="math inline">\(X_i\)</span> sont <strong>iid</strong>) et issu d’une variable aléatoire parente <span class="math inline">\(X \thicksim \mathcal{N}(\mu,\sigma^2)\)</span>.</p>
-<ol type="1">
-<li>Calculer les estimateurs de maximum de vraisemblance (EMV) de <span class="math inline">\(\mu\)</span> et <span class="math inline">\(\sigma^2\)</span>.</li>
-<li>Ces estimateurs sont-ils sans biais?</li>
-</ol>
-</div>
-<div id="exr-" class="theorem exercise">
-<p><span class="theorem-title"><strong>Exercice 11 (EMV loi géométrique)</strong></span> Les oiseaux d’un certain type prennent leur envol après avoir effectué quelques sauts sur le sol. On suppose que ce nombre <span class="math inline">\(X\)</span> de sauts peut être modélisé par une distribution géométrique sur <span class="math inline">\(\mathbb{N}^*\)</span>:</p>
-<p><span class="math display">\[P(X=x)= p(1-p)^{x-1} \quad x \geq 1\]</span></p>
-<p>Pour <span class="math inline">\(n=130\)</span> oiseaux de ce type, on a relevé les données suivantes:</p>
-<table class="caption-top table">
-<colgroup>
-<col style="width: 32%">
-<col style="width: 6%">
-<col style="width: 6%">
-<col style="width: 6%">
-<col style="width: 4%">
-<col style="width: 4%">
-<col style="width: 4%">
-<col style="width: 4%">
-<col style="width: 4%">
-<col style="width: 4%">
-<col style="width: 6%">
-<col style="width: 6%">
-<col style="width: 6%">
-</colgroup>
-<tbody>
-<tr class="odd">
-<td style="text-align: center;"><strong>Nombre de sauts <span class="math inline">\(x\)</span></strong></td>
-<td style="text-align: center;">1</td>
-<td style="text-align: center;">2</td>
-<td style="text-align: center;">3</td>
-<td style="text-align: center;">4</td>
-<td style="text-align: center;">5</td>
-<td style="text-align: center;">6</td>
-<td style="text-align: center;">7</td>
-<td style="text-align: center;">8</td>
-<td style="text-align: center;">9</td>
-<td style="text-align: center;">10</td>
-<td style="text-align: center;">11</td>
-<td style="text-align: center;">12</td>
-</tr>
-<tr class="even">
-<td style="text-align: center;"><strong>Effectifs</strong></td>
-<td style="text-align: center;">48</td>
-<td style="text-align: center;">31</td>
-<td style="text-align: center;">20</td>
-<td style="text-align: center;">9</td>
-<td style="text-align: center;">6</td>
-<td style="text-align: center;">5</td>
-<td style="text-align: center;">4</td>
-<td style="text-align: center;">2</td>
-<td style="text-align: center;">1</td>
-<td style="text-align: center;">1</td>
-<td style="text-align: center;">2</td>
-<td style="text-align: center;">1</td>
-</tr>
-</tbody>
-</table>
-<ol type="1">
-<li>Quel est l’estimateur du maximum de vraisemblance de <span class="math inline">\(p\)</span>?</li>
-<li>Calculer la valeur de cet estimateur avec les données de l’échantillon.</li>
-</ol>
-</div>
-<div id="exr-" class="theorem exercise">
-<p><span class="theorem-title"><strong>Exercice 12 (Comparaison d’estimateurs)</strong></span> Soit <span class="math inline">\(X\)</span> une VAR de loi uniforme sur un intervalle <span class="math inline">\([0, a]\)</span> où <span class="math inline">\(a\)</span> est un paramètre inconnu, et on dispose de <span class="math inline">\(\left(X_{1}, \ldots, X_{n}\right)\)</span> un <span class="math inline">\(n\)</span> -echantillon de <span class="math inline">\(X\)</span>. On note <span class="math inline">\(\overline{X}_{n}\)</span> la moyenne empirique de <span class="math inline">\(X\)</span>.</p>
-<ol type="1">
-<li>Soit <span class="math inline">\(T_{n}=2 \overline{X}_{n}\)</span>, l’estimateur par la méthode de moments de <span class="math inline">\(a\)</span>. Montrer que <span class="math inline">\(T_{n}\)</span> est un estimateur sans biais de <span class="math inline">\(a\)</span> et calculer son risque quadratique.</li>
-<li>Soit <span class="math inline">\(T_{n}^{\prime}=\max \left(X_{1}, \ldots, X_{n}\right)\)</span>. Montrer que <span class="math inline">\(T_n^{\prime}\)</span> est l’estimateur par maximum de vraisemblance de <span class="math inline">\(a\)</span>.</li>
-<li>Donner la fonction de répartition de <span class="math inline">\(T_{n}^{\prime}\)</span>. En déduire une densité de <span class="math inline">\(T_{n}^{\prime}\)</span>, puis son biais et son risque quadratique.</li>
-<li>Soit <span class="math inline">\(T_{n}^{\prime \prime}=\frac{n+1}{n} T_{n}^{\prime}\)</span>. Déterminer son biais et son risque quadratique.</li>
-<li>Pour de grandes valeurs de <span class="math inline">\(n\)</span>, quel est le meilleur estimateur de <span class="math inline">\(a\)</span>?</li>
-</ol>
-</div>
-<p><strong>Extra</strong></p>
-<div id="exr-" class="theorem exercise">
-<p><span class="theorem-title"><strong>Exercice 13</strong></span> On considère une variable aléatoire <span class="math inline">\(X\)</span> de densité <span class="math inline">\(f_{\theta}\)</span> avec <span class="math inline">\(-\frac{1}{2} \leq \theta \leq \frac{1}{2}\)</span> et</p>
+<p><strong>5.</strong> Tracer un histogramme d’un vecteur de 10000 réalisations indépendantes d’une loi normale centrée réduite. Superposer l’histogramme avec la densité réelle de cette loi.</p>
+</section><section id="fonction-de-répartition" class="level3 unnumbered"><h3 class="unnumbered anchored" data-anchor-id="fonction-de-répartition">Fonction de répartition</h3>
+<p>Pour calculer la fonction de répartition d’une certaine loi on utilise le nom de la loi dans <svg aria-hidden="true" role="img" viewbox="0 0 581 512" style="height:1em;width:1.13em;vertical-align:-0.125em;margin-left:auto;margin-right:auto;font-size:inherit;fill:steelblue;overflow:visible;position:relative;"><path d="M581 226.6C581 119.1 450.9 32 290.5 32S0 119.1 0 226.6C0 322.4 103.3 402 239.4 418.1V480h99.1v-61.5c24.3-2.7 47.6-7.4 69.4-13.9L448 480h112l-67.4-113.7c54.5-35.4 88.4-84.9 88.4-139.7zm-466.8 14.5c0-73.5 98.9-133 220.8-133s211.9 40.7 211.9 133c0 50.1-26.5 85-70.3 106.4-2.4-1.6-4.7-2.9-6.4-3.7-10.2-5.2-27.8-10.5-27.8-10.5s86.6-6.4 86.6-92.7-90.6-87.9-90.6-87.9h-199V361c-74.1-21.5-125.2-67.1-125.2-119.9zm225.1 38.3v-55.6c57.8 0 87.8-6.8 87.8 27.3 0 36.5-38.2 28.3-87.8 28.3zm-.9 72.5H365c10.8 0 18.9 11.7 24 19.2-16.1 1.9-33 2.8-50.6 2.9v-22.1z"></path></svg> avec le préfixe <code>p</code>.</p>
+<p><strong>6.</strong> Que vaut la fonction de répartition de la loi normale centrée réduite en 0?</p>
+<p><strong>7.</strong> Tracer la fonction de répartition de la loi normale centrée réduite.</p>
+<p>On peut également tracer des fonctions de répartitions empiriques (calculées sur un échantillon).</p>
+<p><strong>8.</strong> Créer un vecteur de 100 réalisations indépendantes de la loi de votre choix. Utiliser la fonction <code><a href="https://rdrr.io/r/stats/ecdf.html">ecdf()</a></code> pour construire la fonction de répartition empirique de votre vecteur. Puis superposer avec la fonction de répartition théorique.</p>
+</section></section><section id="illustrations-de-théorèmes-limites" class="level2 unnumbered"><h2 class="unnumbered anchored" data-anchor-id="illustrations-de-théorèmes-limites">Illustrations de théorèmes limites</h2>
+<section id="loi-forte-de-grands-nombres" class="level3 unnumbered"><h3 class="unnumbered anchored" data-anchor-id="loi-forte-de-grands-nombres">Loi forte de grands nombres</h3>
+<p>On considère une variable <span class="math inline">\(X\)</span> à valeurs dans <span class="math inline">\(\{0,1,3\}\)</span>, distribuée comme suit: <span class="math inline">\(P(X=0)=0.5, P(X=1)=0.25, P(X=3)=0.25\)</span>.</p>
+<p><strong>9.</strong> Proposer une façon de simuler <span class="math inline">\(X\)</span>. (Suggestion: utiliser la fonction <code><a href="https://rdrr.io/r/base/sample.html">sample()</a></code>).</p>
+<p><strong>10.</strong> On considère <span class="math inline">\(X_1,X_2,\ldots\)</span> une suite infinie de variables indépendantes de même loi que <span class="math inline">\(X\)</span>. Soit <span class="math inline">\(\overline{X}_n\)</span> la moyenne empirique des <span class="math inline">\(X_i\)</span> pour <span class="math inline">\(i \in \{1,\ldots,n\}\)</span>.</p>
+<p><strong>10.1</strong> Simuler la suite des <span class="math inline">\(X_i\)</span> pour <span class="math inline">\(i \in \{1,\ldots,10000\}\)</span>.</p>
+<p><strong>10.2</strong> Produire un graphique représentant l’évolution de <span class="math inline">\(\overline{X}_n\)</span> pour <span class="math inline">\(n\)</span> variant de 1 à 10000. (<strong>Indication</strong>: penser à utiliser la fonction <code><a href="https://rdrr.io/r/base/cumsum.html">cumsum()</a></code>).</p>
+<p><strong>10.3</strong> Que constate-on? Pouvait-on s’y attendre?</p>
+</section><section id="théorème-central-limite" class="level3 unnumbered"><h3 class="unnumbered anchored" data-anchor-id="théorème-central-limite">Théorème central limite</h3>
+<p>On désire maintenant approfondir comment <span class="math inline">\(\overline{X}_{500}\)</span> varie autour de sa valeur moyenne.</p>
+<p><strong>11.</strong> Proposer une transformation affine de <span class="math inline">\(\overline{X}_{500}\)</span>, de la forme <span class="math inline">\(Y=a \times (\overline{X}_{500} + b)\)</span>, qui suive approximativement la loi <span class="math inline">\(\mathcal{N}(0,1)\)</span>.</p>
+<p><strong>11.1</strong> Simuler avec <span class="math inline">\(10000\)</span> réalisations indépendantes de la variable <span class="math inline">\(Y\)</span>. Nous les noterons <span class="math inline">\(Y_1, \ldots, Y_{10000}\)</span>.</p>
+<p><strong>11.2</strong> Confirmer l’approximation gaussienne en réalisant un histogramme des valeurs prises par les <span class="math inline">\(Y_j\)</span> pour <span class="math inline">\(j \in \{1,\ldots,10000\}\)</span>, sans oublier de tracer la densité gaussienne correctement renormalisée. Commenter l’écart entre l’histogramme et la densité gaussienne.</p>
+</section></section><section id="comparaison-destimateurs" class="level2 unnumbered"><h2 class="unnumbered anchored" data-anchor-id="comparaison-destimateurs">Comparaison d’estimateurs</h2>
+<p>Soit <span class="math inline">\(\left(X_{1}, \ldots, X_{n}\right)\)</span> un échantillon de la loi uniforme sur <span class="math inline">\([0, \theta]\)</span> où <span class="math inline">\(\theta\)</span> est un paramètre inconnu.</p>
+<p>On considère les estimateurs convergents (on dit aussi consistants) suivants du paramètre <span class="math inline">\(\theta\)</span>.</p>
 <p><span class="math display">\[
-f_{\theta}(x)=\left\{\begin{array}{cl}{\frac{1}{2}-\theta} &amp; {\text { si } x \in[-1,0]} \\ {\frac{1}{2}+\theta} &amp; {\text { si } x \in[0,1]} \\ {0} &amp; {\text { sinon }}\end{array}\right.
+\begin{aligned}
+T_{1}=&amp; \frac{2}{n} \times\left(X_{1}+\ldots+X_{n}\right) \\ T_{2}=&amp; \sqrt{\frac{3}{n} \times\left(X_{1}^{2}+\ldots+X_{n}^{2}\right)} \\ T_{3}=&amp;\left(\frac{4}{n} \times\left(X_{1}^{3}+\ldots+X_{n}^{3}\right)\right)^{\frac{1}{3}} \\
+T_{4}=&amp;\left(\frac{3}{2 n} \times(\sqrt{X_{1}}+\ldots+\sqrt{X_{n}})\right)^{2} \\ T_{5}=&amp;\left(\frac{1}{2 n} \times\left(\frac{1}{\sqrt{X_{1}}}+\ldots+\frac{1}{\sqrt{X_{n}}}\right)\right)^{-2} \\
+T_{6}=&amp; \exp (1) \times\left(X_{1} \times \ldots \times X_{n}\right)^{\frac{1}{n}} \\
+T_{7}=&amp; \max \left\{X_{1}, \ldots, X_{n}\right\} \\
+T_{8}=&amp; \frac{n+1}{n} \max \left\{X_{1}, \ldots, X_{n}\right\} \end{aligned}
 \]</span></p>
-<ol type="1">
-<li>Représenter <span class="math inline">\(f_{\theta}\)</span> et justifier que <span class="math inline">\(f_{\theta}\)</span> est bien une densité de probabilité pour <span class="math inline">\(-\frac{1}{2} \leq \theta \leq \frac{1}{2}\)</span>.</li>
-<li>Calculer l’espérance et la variance de <span class="math inline">\(X\)</span>.</li>
-</ol>
-<p>On considère maintenant <span class="math inline">\(X_{1}, \ldots X_{n}\)</span> des variables aléatoires indépendantes et de même loi. On suppose que la loi commune est de densité <span class="math inline">\(f_{\theta}\)</span> avec <span class="math inline">\(-\frac{1}{2} \leq \theta \leq \frac{1}{2}\)</span> inconnu. On va chercher à estimer <span class="math inline">\(\theta\)</span>.</p>
-<ol start="3" type="1">
-<li>Proposer un esitmateur <span class="math inline">\(\hat{\theta}\)</span> de <span class="math inline">\(\theta\)</span> basé sur la méthode des moments. On prend <span class="math inline">\(\hat{\theta}_{n}=\frac{1}{n} \sum X_{i}\)</span>.</li>
-<li>Calculer son biais et son risque quadratique.</li>
-</ol>
-<p>On va maintenant s’intéresser à l’estimateur du maximum de vraisemblance de <span class="math inline">\(\theta\)</span>.</p>
-<ol start="5" type="1">
-<li><p>On note <span class="math inline">\(N_{1}=\sum_{i=1}^{n} \mathbf{1}_{\left\{X_{i} \geq 0\right\}}\)</span> et <span class="math inline">\(N_{2}=\sum_{i=1}^{n} \mathbf{1}_{\left\{X_{i}&lt;0\right\}}\)</span>. Soient <span class="math inline">\(x_{1}, \ldots, x_{n} \in [-1,1]\)</span> et <span class="math inline">\(-\frac{1}{2} \leq \theta \leq \frac{1}{2}\)</span>. Ecrire la vraisemblance du modèle au point <span class="math inline">\(\left(x_{1}, \ldots, x_{n} ; \theta\right)\)</span> en fonction de <span class="math inline">\(N_{1}, N_{2}\)</span> et <span class="math inline">\(\theta\)</span>.</p></li>
-<li><p>Montrer que l’estimateur du maximum devraisemblance existe et vaut: <span class="math display">\[
-\hat{\theta}_{M V}=\frac{N_{1}-N_{2}}{2\left(N_{1}+N_{2}\right)}=\frac{N_{1}}{n}-\frac{1}{2}
-\]</span></p></li>
-<li><p>On pose <span class="math inline">\(Y_i = 1_{\left\{X_{i} \geq 0\right\}}\)</span>, pour <span class="math inline">\(1 \leq i \leq n\)</span>. Calculer l’espérance et la variance des variables aléatoires <span class="math inline">\(Y_{i}\)</span>. En déduire l’espérance et le risque quadratique de <span class="math inline">\(\hat{\theta}_{M V}\)</span>.</p></li>
-<li><p>Quel estimateur vaut-il mieux utiliser entre <span class="math inline">\(\hat{\theta}\)</span> et <span class="math inline">\(\hat{\theta}_{M V}\)</span>? Justifier.</p></li>
-</ol>
+<div class="callout callout-style-simple callout-tip">
+<div class="callout-body d-flex">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
 </div>
+<div class="callout-body-container">
+<ul>
+<li>
+<span class="math inline">\(T1\)</span> est l’emm de <span class="math inline">\(\theta\)</span>.</li>
+<li>
+<span class="math inline">\(T7\)</span> est l’emv de <span class="math inline">\(\theta\)</span> (biaisé).</li>
+<li>
+<span class="math inline">\(T8\)</span> est l’emv corrigé de <span class="math inline">\(\theta\)</span>.</li>
+</ul>
+</div>
+</div>
+</div>
+<p><strong>1.</strong> Choisir une valeur de <span class="math inline">\(\theta\)</span> et simuler <strong>1000</strong> échantillons de taille <strong>100</strong> de la loi uniforme sur <span class="math inline">\([0, \theta]\)</span>. Calculer pour chacun de ces échantillons la valeur prise par les 8 estimateurs.</p>
+<p>On pourra ensuite créer une matrice ayant 1000 lignes et 8 colonnes dont la <em>j</em>ème colonne contient les 1000 réalisations de l’estimateur <span class="math inline">\(T_{j}\)</span>:</p>
+<div class="cell">
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="cn">T</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/cbind.html">cbind</a></span><span class="op">(</span><span class="va">T1</span>,<span class="va">T2</span>,<span class="va">T3</span>,<span class="va">T4</span>,<span class="va">T5</span>,<span class="va">T6</span>,<span class="va">T7</span>,<span class="va">T8</span><span class="op">)</span></span></code><button title="Copier vers le presse-papier" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p><strong>2.</strong> Calculer la moyenne empirique et la variance empirique des 8 échantillons de taille 1000 ainsi obtenus. En déduire une estimation du biais et de l’erreur quadratique de chacun des 8 estimateurs.</p>
+<div class="callout callout-style-simple callout-tip">
+<div class="callout-body d-flex">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-body-container">
+<p>On rappelle que pour un estimateur <span class="math inline">\(T\)</span>, le biais est <span class="math inline">\(E[T]-\theta\)</span> et l’erreur quadratique est <span class="math inline">\(E\left[(T-\theta)^{2}\right]\)</span>.</p>
+</div>
+</div>
+</div>
+<p><strong>3.</strong> Quels estimateus sont les moins biaisés? Et les estimateurs de risque quadratique minimale?</p>
+<p><strong>4.</strong> Représenter sur un même graphique les boites à moustaches (boxplots) des 8 estimateurs. Superposer sur le même graphique la vraie valeur du paramètre, en rouge. Commenter la pertinence de chacun des estimateurs: lequel préfereriez-vous utiliser?</p>
+<p>On pourra utiliser</p>
+<div class="cell">
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/boxplot.html">boxplot</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span><span class="cn">T</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/abline.html">abline</a></span><span class="op">(</span>h<span class="op">=</span><span class="va">theta</span>,col<span class="op">=</span><span class="st">"red"</span><span class="op">)</span></span></code><button title="Copier vers le presse-papier" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section><section id="loi-de-weibull" class="level2 unnumbered"><h2 class="unnumbered anchored" data-anchor-id="loi-de-weibull">Loi de Weibull</h2>
+<p>En fiabilité, la durée de vie <span class="math inline">\(X\)</span> d’un composant électronique est souvent modélisée par une loi de Weibull de paramètre <span class="math inline">\(\theta&gt;0\)</span>. Une variable aleatoire <span class="math inline">\(X\)</span> distribuée selon une loi de Weibull de paramètre <span class="math inline">\(\theta\)</span> a pour densité:</p>
+<p><span id="eq-dweibull"><span class="math display">\[
+f(x)=\theta x^{\theta-1} \exp (-x^{\theta}) \, \times \, 1_{\mathbb{R}^+}
+\tag{1}\]</span></span></p>
+<p>A noter que quand <span class="math inline">\(\theta=1\)</span> la loi de Weibull coincide avec la loi Exponentielle de paramètre égal à <span class="math inline">\(1\)</span>.</p>
+<p>L’interprétation du paramètre <span class="math inline">\(\theta\)</span> est la suivante. Quand <span class="math inline">\(\theta&gt;1\)</span> cela signifie que la propension à tomber en panne à l’instant <span class="math inline">\(t\)</span> augmente avec <span class="math inline">\(t\)</span>, quand <span class="math inline">\(\theta&lt;1\)</span>, c’est l’inverse. Enfin, quand <span class="math inline">\(\theta=1\)</span> la propension à tomber en panne à l’instant <span class="math inline">\(t\)</span> ne dépent pas de <span class="math inline">\(t\)</span> (la loi exponentielle est sans mémoire). On entend ici par panne toute défaillance du composant électronique rendant celui-ci hors d’usage.</p>
+<p><strong>1.</strong> Représenter le graphe de la densité d’une loi de Weibull quand <span class="math inline">\(\theta = 1/2, 1, 2,\text{et } 3\)</span>. On se limitera à l’intervalle <span class="math inline">\([0,5]\)</span> pour <span class="math inline">\(x\)</span>. Pour cette question, vous devez créer la fonction <code>dweibull</code> qui calcule la densité comme définie dans l’équation <a href="#eq-dweibull" class="quarto-xref"><span>1</span></a>.</p>
+<p>Pour estimer <span class="math inline">\(\theta\)</span> on dispose de la durée de vie de <span class="math inline">\(n=1000\)</span> composants. Les données (en milliers d’heures) se trouvent dans le fichier <a href="datasets/weibull.txt" target="_blank">weibull.txt</a>.</p>
+<p><strong>2.</strong> Chercher la valeur de <span class="math inline">\(\theta\)</span> qui maximise la vraisemblance. (<span class="math inline">\(\theta \in [0,5]\)</span>). On la notera <span class="math inline">\(\hat{\theta}\)</span>.</p>
+<p><strong>3.</strong> Afficher l’histogramme de l’échantillon et superposer la densité de Weibull de paramètre <span class="math inline">\(\hat{\theta}\)</span>.</p>
 
 
 </section></main><!-- /main --><script id="quarto-html-after-body" type="application/javascript">
@@ -1061,13 +1021,13 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
   }
 });
 </script><nav class="page-navigation"><div class="nav-page nav-page-previous">
-      <a href="./estimation-ponctuelle.html" class="pagination-link" aria-label="Estimation ponctuelle">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Estimation ponctuelle</span></span>
+      <a href="./exos3.html" class="pagination-link" aria-label="Feuille d'Exercices 3">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Feuille d’Exercices 3</span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./exos3tp.html" class="pagination-link" aria-label="TP Illustration numérique">
-        <span class="nav-page-text">TP Illustration numérique</span> <i class="bi bi-arrow-right-short"></i>
+      <a href="./appendix.html" class="pagination-link" aria-label="Table de la loi Normale centrée réduite">
+        <span class="nav-page-text"><span class="chapter-number">A</span>&nbsp; <span class="chapter-title">Table de la loi Normale centrée réduite</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>

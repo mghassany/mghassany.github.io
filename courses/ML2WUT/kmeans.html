@@ -221,8 +221,20 @@ window.Quarto = {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
+  <a href="./Lab-EM.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">- 💻 Lab</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
   <a href="./density-based.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">📗 Density-based Clustering</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Lab-DBScan.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">- 💻 Lab</span></a>
   </div>
 </li>
       </ul>
@@ -684,6 +696,36 @@ Figure&nbsp;2.7: Average, complete, and single linkage applied to an example dat
 </div>
 </div>
 </div>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Tip
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>In hierarchical clustering, Average Linkage is often the default choice because it strikes a healthy balance: it is robust to noise and tends to form relatively compact clusters without being overly biased toward a specific shape.</p>
+<p>However, you would prefer Single Linkage or Complete Linkage over Average Linkage when your dataset has specific topological characteristics or when your business problem requires strict definitions of similarity.</p>
+<p>You may think of choosing Single Linkage when:</p>
+<ul>
+<li>You need to identify non-elliptical or complex shapes: Single linkage is excellent at capturing manifolds, elongated shapes, or clusters that follow a “path” (like a crescent moon or concentric circles). Average and complete linkages will typically break these continuous shapes apart to force them into spheres.</li>
+<li>You are looking for “chained” relationships: Single linkage suffers from the “chaining effect” (merging clusters just because two points are close), but this is actually a feature if you are tracking a continuous progression, such as evolutionary biology traits, the spread of a virus, or sequential spatial data.</li>
+<li>The clusters are well-separated by distinct, empty gaps: If there is absolutely no noise between your clusters, single linkage will easily identify the boundaries without artificially forcing the clusters to be a certain size.</li>
+<li>Caution: Do not use Single Linkage if your data is noisy. Even a single outlier lying between two distinct clusters can act as a “bridge,” causing Single Linkage to merge them into one massive cluster.</li>
+</ul>
+<p>Here is an example of “Two Moons” dataset where both Single Linkage and Average Linkage are applied to demonstrate exactly why Single Linkage succeeds where Average Linkage fails.</p>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure class="figure"><p><img src="kmeans_files/figure-html/unnamed-chunk-6-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+</div>
+</div>
 </section><section id="hierarchical-clustering-in" class="level3" data-number="2.5.3"><h3 data-number="2.5.3" class="anchored" data-anchor-id="hierarchical-clustering-in">
 <span class="header-section-number">2.5.3</span> Hierarchical clustering in <svg aria-hidden="true" role="img" viewbox="0 0 581 512" style="height:1em;width:1.13em;vertical-align:-0.125em;margin-left:auto;margin-right:auto;font-size:inherit;fill:steelblue;overflow:visible;position:relative;"><path d="M581 226.6C581 119.1 450.9 32 290.5 32S0 119.1 0 226.6C0 322.4 103.3 402 239.4 418.1V480h99.1v-61.5c24.3-2.7 47.6-7.4 69.4-13.9L448 480h112l-67.4-113.7c54.5-35.4 88.4-84.9 88.4-139.7zm-466.8 14.5c0-73.5 98.9-133 220.8-133s211.9 40.7 211.9 133c0 50.1-26.5 85-70.3 106.4-2.4-1.6-4.7-2.9-6.4-3.7-10.2-5.2-27.8-10.5-27.8-10.5s86.6-6.4 86.6-92.7-90.6-87.9-90.6-87.9h-199V361c-74.1-21.5-125.2-67.1-125.2-119.9zm225.1 38.3v-55.6c57.8 0 87.8-6.8 87.8 27.3 0 36.5-38.2 28.3-87.8 28.3zm-.9 72.5H365c10.8 0 18.9 11.7 24 19.2-16.1 1.9-33 2.8-50.6 2.9v-22.1z"></path></svg>
 </h3>
@@ -703,7 +745,7 @@ Figure&nbsp;2.7: Average, complete, and single linkage applied to an example dat
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">treeComp</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
-<figure class="figure"><p><img src="kmeans_files/figure-html/unnamed-chunk-6-1.png" class="img-fluid figure-img" width="864"></p>
+<figure class="figure"><p><img src="kmeans_files/figure-html/unnamed-chunk-7-1.png" class="img-fluid figure-img" width="864"></p>
 </figure>
 </div>
 </div>
@@ -712,7 +754,7 @@ Figure&nbsp;2.7: Average, complete, and single linkage applied to an example dat
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">treeAve</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
-<figure class="figure"><p><img src="kmeans_files/figure-html/unnamed-chunk-6-2.png" class="img-fluid figure-img" width="864"></p>
+<figure class="figure"><p><img src="kmeans_files/figure-html/unnamed-chunk-7-2.png" class="img-fluid figure-img" width="864"></p>
 </figure>
 </div>
 </div>
@@ -721,7 +763,7 @@ Figure&nbsp;2.7: Average, complete, and single linkage applied to an example dat
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">treeSingle</span><span class="op">)</span> <span class="co"># Chaining</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
-<figure class="figure"><p><img src="kmeans_files/figure-html/unnamed-chunk-6-3.png" class="img-fluid figure-img" width="864"></p>
+<figure class="figure"><p><img src="kmeans_files/figure-html/unnamed-chunk-7-3.png" class="img-fluid figure-img" width="864"></p>
 </figure>
 </div>
 </div>

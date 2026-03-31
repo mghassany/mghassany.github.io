@@ -6,10 +6,8 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
-<meta name="author" content="Mohamad Ghassany">
-<meta name="dcterms.date" content="2026-04-01">
 
-<title>Machine Learning II</title>
+<title>4&nbsp; Density-based Clustering – Machine Learning II</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -32,7 +30,8 @@ ul.task-list li input[type="checkbox"] {
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
-<link href="./discriminantanalysis.html" rel="next">
+<link href="./textbook.html" rel="next">
+<link href="./em.html" rel="prev">
 <script src="site_libs/quarto-html/quarto.js"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
@@ -85,7 +84,7 @@ ul.task-list li input[type="checkbox"] {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./index.html">Preface</a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./kmeans.html">Unsupervised Learning</a></li><li class="breadcrumb-item"><a href="./density-based.html"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">📗 Density-based Clustering</span></a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -123,7 +122,7 @@ ul.task-list li input[type="checkbox"] {
     <ul class="list-unstyled mt-1">
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./index.html" class="sidebar-item-text sidebar-link active">
+  <a href="./index.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Preface</span></a>
   </div>
 </li>
@@ -179,7 +178,7 @@ ul.task-list li input[type="checkbox"] {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./density-based.html" class="sidebar-item-text sidebar-link">
+  <a href="./density-based.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">📗 Density-based Clustering</span></span></a>
   </div>
 </li>
@@ -212,35 +211,24 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#welcome" id="toc-welcome" class="nav-link active" data-scroll-target="#welcome">Welcome</a></li>
+  <li><a href="#slides-for-this-chapter" id="toc-slides-for-this-chapter" class="nav-link active" data-scroll-target="#slides-for-this-chapter"><span class="header-section-number">4.1</span> Slides for this chapter</a></li>
+  <li><a href="#supplementary-documents-this-chapter-and-clustering-in-general" id="toc-supplementary-documents-this-chapter-and-clustering-in-general" class="nav-link" data-scroll-target="#supplementary-documents-this-chapter-and-clustering-in-general"><span class="header-section-number">4.2</span> Supplementary documents this chapter and Clustering in general</a></li>
   </ul>
 </nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default">
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./kmeans.html">Unsupervised Learning</a></li><li class="breadcrumb-item"><a href="./density-based.html"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">📗 Density-based Clustering</span></a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title">Machine Learning II</h1>
+<h1 class="title"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Density-based Clustering</span></h1>
 </div>
 
 
 
 <div class="quarto-title-meta">
 
-    <div>
-    <div class="quarto-title-meta-heading">Author</div>
-    <div class="quarto-title-meta-contents">
-             <p>Mohamad Ghassany </p>
-          </div>
-  </div>
     
-    <div>
-    <div class="quarto-title-meta-heading">Published</div>
-    <div class="quarto-title-meta-contents">
-      <p class="date">April 1, 2026</p>
-    </div>
-  </div>
   
     
   </div>
@@ -250,61 +238,54 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<section id="welcome" class="level1 unnumbered">
-<h1 class="unnumbered">Welcome</h1>
-<p>This course is designed for <a href="http://english.whut.edu.cn/" target="_blank">Wuhan University of Technology (WUT)</a> students enrolled in the <a href="https://eng.efrei.fr/graduate-programs/msc-data-artificial-intelligence-and-cloud/" target="_blank"><strong>Master of Science in Data, AI &amp; Cloud Engineering</strong></a> program. Building upon your foundational knowledge, this class focuses on the advanced algorithms and techniques that drive modern intelligent systems.</p>
-<p>Throughout the course, the curriculum will cover three core areas of Machine Learning:</p>
+<!-- 
+<object width="600" height="400"data='pdf/KDDClusterAnalysis17-screen.pdf'>
+    <p>Oops! Your browser doesn't support PDFs!</p>
+    <p><a href="pdf/KDDClusterAnalysis17-screen.pdf">Download Instead</a></p>
+</object>
+
+<object data="pdf/KDDClusterAnalysis17-screen.pdf" type="application/pdf" frameborder="0" width="100%" height="600px" style="padding: 20px;">
+    <embed src="pdf/KDDClusterAnalysis17-screen.pdf" width="100%" height="600px"/> 
+</object>
+ -->
+<section id="slides-for-this-chapter" class="level2" data-number="4.1">
+<h2 data-number="4.1" class="anchored" data-anchor-id="slides-for-this-chapter"><span class="header-section-number">4.1</span> Slides for this chapter</h2>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Slides
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Slides for this chapter: <a href="Slides/ML2Session4WUT.pdf" target="_blank">📄</a></p>
+</div>
+</div>
+</section>
+<section id="supplementary-documents-this-chapter-and-clustering-in-general" class="level2" data-number="4.2">
+<h2 data-number="4.2" class="anchored" data-anchor-id="supplementary-documents-this-chapter-and-clustering-in-general"><span class="header-section-number">4.2</span> Supplementary documents this chapter and Clustering in general</h2>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Documents
+</div>
+</div>
+<div class="callout-body-container callout-body">
 <ul>
-<li><p><strong>Supervised</strong> Learning: We will examine Discriminant Analysis, focusing on the mathematical and practical methods used to separate and classify complex datasets.</p></li>
-<li><p><strong>Unsupervised</strong> Learning: We will explore multiple <strong>clustering</strong> techniques, enabling you to identify hidden structures and natural groupings within unlabelled data.</p></li>
-<li><p><strong>Reinforcement</strong> Learning: We will introduce the mechanics of autonomous agents, analyzing how models learn to make sequential decisions and optimize behavior through trial, error, and reward.</p></li>
+<li><a href="pdf/toc-data-clustering.pdf" target="_blank">Table of contents 📄</a> from “Data Clustering Algorithms and Applications” book for authors C Aggarwal and C Reddy.</li>
+<li>Cluster analysis <a href="pdf/KDDClusterAnalysis17-screen.pdf" target="_blank">lecture notes 📄</a> from Prof.&nbsp;<a href="https://www.vitavonni.de/" target="_blank">Erich Schuberts</a>.</li>
+<li>Clustering <a href="pdf/clustering-slides.pdf" target="_blank">lecture notes 📄</a> from Prof.&nbsp;<a href="https://pages.saclay.inria.fr/emilie.chouzenoux/index.html" target="_blank">Emilie Chouzenoux</a> and Prof.&nbsp;<a href="https://fredericpascal.blogspot.com/p/home.html" target="_blank">Frédéric PASCAL</a>. <!-- - [DBSCAN chapter 📄](pdf/chapter3Jones.pdf){target='_blank'} from "The Unsupervised Learning" book for authors A Jones, C Kruger and B Johnston. --></li>
+<li><a href="./pdf/data-mining-dbscan.pdf" target="_blank">Density-bsed Methods 📄</a> from “Data Mining Concepts and Techniques” book for authors J Han, M Kamber and J Pei.</li>
+<li><a href="pdf/dbscan-kassambara.pdf" target="_blank">DBSCAN: Density-Based Clustering 📄</a> from “Practical Guide To Cluster Analysis in R” book for author A Kassambara.</li>
+<li>Cluster validation: <a href="pdf/InternalversusExternalclustervalidation.pdf" target="_blank">Internal versus External indexes</a>.</li>
 </ul>
-<p>The objective of this course is to bridge theoretical concepts with applied, cloud-ready engineering practices.</p>
-<p><strong>Course Prerequisites</strong></p>
-<p>To successfully engage with the advanced topics in Machine Learning 2, students are expected to have a strong foundation in the following areas:</p>
-<ul>
-<li><p>Mathematics and Statistics: Proficiency in linear algebra, multivariate calculus, and foundational probability and statistics.</p></li>
-<li><p>Programming Proficiency: Strong coding skills in Python, with practical experience using standard data science libraries such as NumPy, Pandas, Scikit-learn, and Matplotlib/Seaborn.</p></li>
-<li><p>Foundational Machine Learning: A clear understanding of the concepts covered in the introductory Machine Learning course. This includes fundamental supervised learning models (e.g., linear and logistic regression), model evaluation metrics, cross-validation techniques, and the bias-variance tradeoff.</p></li>
-</ul>
-<p>Students who need a refresher on these topics are encouraged to review their prior coursework materials early in the semester.</p>
-<p>Course Schedual:</p>
-<table class="caption-top table">
-<thead>
-<tr class="header">
-<th style="text-align: left;">Session</th>
-<th style="text-align: left;">Topic</th>
-<th style="text-align: left;">Methods</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td style="text-align: left;">Session 1</td>
-<td style="text-align: left;">Supervised Learning</td>
-<td style="text-align: left;">Discriminant Analysis</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">Sessions 2 - 3</td>
-<td style="text-align: left;">Unsupervised Learning</td>
-<td style="text-align: left;">Clustering</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;">Session 4</td>
-<td style="text-align: left;">Evaluation Lab by groups of 3</td>
-<td style="text-align: left;">-</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">Session 5 - 7</td>
-<td style="text-align: left;">Reinforcement Learning</td>
-<td style="text-align: left;">MDP, DP, Q-Learning</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;">Session 8 (2 hours)</td>
-<td style="text-align: left;">Evaluation</td>
-<td style="text-align: left;">MCQ exam</td>
-</tr>
-</tbody>
-</table>
+</div>
+</div>
 
 
 </section>
@@ -873,10 +854,13 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
+      <a href="./em.html" class="pagination-link" aria-label="📗 Gaussian Mixture Models">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">📗 Gaussian Mixture Models</span></span>
+      </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./discriminantanalysis.html" class="pagination-link" aria-label="📗 Discriminant Analysis">
-        <span class="nav-page-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">📗 Discriminant Analysis</span></span> <i class="bi bi-arrow-right-short"></i>
+      <a href="./textbook.html" class="pagination-link" aria-label="📗 Textbook">
+        <span class="nav-page-text">📗 Textbook</span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>

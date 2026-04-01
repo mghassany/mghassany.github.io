@@ -421,7 +421,95 @@
     "href": "Lab-image-segmentation.html",
     "title": "5  Multi-spectral Image Segmentation",
     "section": "",
-    "text": "Instructions\n\n\n\nGeneral Information\n\nDuration: 4 Hours.\nTeam Structure: Groups of three (3) students.\nWeighting: This evaluation represents 60% of your final grade.\nLanguage: The report and all code comments must be written exclusively in English.\n\nSubmission Requirements\nAt the end of the 4-hour session, one designated representative from each group must send the final deliverables via email.\n\nFiles to include:\n\nThe Jupyter Notebook file (.ipynb).\nThe exported HTML version of the report (.html).\n\nEmail Protocol:\n\nTo: m.ghassany@gmail.com\nCC: Both teammates and the co-teacher shengkai.zhang@gmail.com.\nSubject Line: [ML Lab Eval] - Names of Group Members\n\nDeadline: Submissions are due precisely at the end of the session at noon. Late submissions will not be tolerated.\n\nContent & Quality Standards To achieve maximum marks, your report must demonstrate both technical proficiency and analytical depth.\n\nCode Documentation: All code must be clearly commented.\nInterpretation of Results: Do not simply provide plots and numbers. You must interpret your findings and explain what the results imply.\nA conclusion section is mandatory at the end of the notebook. It should summarize your findings, identify the best-performing method, and justify your choice based on the metrics computed throughout the lab.\nAcademic Integrity:\n\nInternet Usage: Internet use is permitted, but any copied code or external resources must be explicitly cited.\nGenerative AI: Use of Generative AI is strictly forbidden. Any detection of AI-generated code will result in a heavy penalty.\n\n\n\n\n\n\n\n\n\n\nTechnical hints\n\n\n\nReproducibility\nAll stochastic methods (K-means, t-SNE, GMM, etc.) must use a fixed random seed to ensure reproducibility. Use random_state in every relevant function call. Results that cannot be reproduced will be harder to grade.\nBefore Submitting\n\nRestart the kernel (Kernel → Restart & Run All) and verify that the notebook runs from top to bottom without errors.\nMake sure all outputs are visible in the notebook before exporting to HTML.\n\n\nA notebook that does not run cleanly from top to bottom will be penalized, even if the code was correct during the session.\n\n\n\n\n\n\n\n\n\n实验测评指南 (Instructions)\n\n\n\n基本信息 (General Information)\n\n时长： 4 小时。\n团队结构： 每组三 (3) 名学生。\n分值权重： 本次测评占期末总成绩的 60%。\n语言要求： 报告及所有代码注释必须仅使用英文书写。\n\n提交要求 (Submission Requirements)\n在 4 小时课时结束时，每组需指派一名代表通过电子邮件发送最终成果。\n\n包含文件：\n\nJupyter Notebook 源文件 (.ipynb)。\n导出的 HTML 格式报告 (.html)。\n\n邮件规范：\n\n收件人： m.ghassany@gmail.com\n抄送 (CC)： 另外两名队友以及助教 shengkai.zhang@gmail.com。\n邮件主题： [ML Lab Eval] - 组员姓名\n\n截止时间： 必须在课程结束时（中午 12 点）准时提交。逾期提交将不予受理。\n\n内容与质量标准 (Content & Quality Standards)\n若要获得高分，你的报告必须展现出扎实的技术能力和分析深度。\n\n代码文档： 所有代码必须有清晰的注释。\n结果解读： 不要只提供图表和数字。你必须对实验结果进行解读，并说明这些结果所代表的意义。\n学术诚信：\n\n互联网使用： 允许使用互联网，但任何引用或参考的代码及外部资源必须明确注明出处。\n生成式人工智能 (Generative AI)： 严禁使用生成式人工智能。任何检测到的 AI 生成代码都将面临严厉惩罚。\n\n\n\n\n\n\n\n\n\n\n技术提示 (Technical Hints)\n\n\n\n可复现性 (Reproducibility)\n所有随机算法（如 K-means、t-SNE、GMM 等）必须使用固定的随机种子以确保结果的可复现性。请在每个相关的函数调用中使用 random_state 参数。无法复现的结果将增加评分难度。\n提交前检查 (Before Submitting)\n\n重启内核 (Kernel → Restart & Run All)，并验证 Notebook 从头到尾运行正常且无错误。\n在导出为 HTML 之前，确保 Notebook 中的所有输出结果均清晰可见。\n\n\n若 Notebook 无法从头到尾完整运行，即使实验过程中的代码是正确的，也将被扣分。",
+    "text": "Abstract",
+    "crumbs": [
+      "Unsupervised Learning",
+      "<span class='chapter-number'>5</span>  <span class='chapter-title'>💻 Evaluation Lab</span>"
+    ]
+  },
+  {
+    "objectID": "Lab-image-segmentation.html#abstract",
+    "href": "Lab-image-segmentation.html#abstract",
+    "title": "5  Multi-spectral Image Segmentation",
+    "section": "",
+    "text": "The objective of this lab is to apply the different concepts studied during this course on clustering. Image segmentation is a standard problem where unsupervised learning is used. Here, we want to apply clustering to the pixels of a multi-spectral image representing the surface of Mars. The goal is to identify different “types” of pixels corresponding to different geological compositions, thus generating a geological map of Mars.",
+    "crumbs": [
+      "Unsupervised Learning",
+      "<span class='chapter-number'>5</span>  <span class='chapter-title'>💻 Evaluation Lab</span>"
+    ]
+  },
+  {
+    "objectID": "Lab-image-segmentation.html#data",
+    "href": "Lab-image-segmentation.html#data",
+    "title": "5  Multi-spectral Image Segmentation",
+    "section": "Data",
+    "text": "Data\nFor this study, you will need two data files:\n\nmars.csv 🔢\nmask.csv 🔢\n\nThe data in the mars.csv file represent a hyper-spectral image of the surface of Mars. Visible and near-infrared imagery is a key tele-detection technique, used to study planets thanks to satellites with on-board spectrometers. In march 2014, the OMEGA equipment collected more than 310 Go of raw images. It mapped Mars surface with a resolution between 300 and 3000 meters, depending on the height of the space ship1. For each pixel, the spectral response between 0.36 and 5.2 µm was collected and sampled accross 255 channels. The objective is to characterize the geological composition of Mars surface and in particular to distinguish between different classes of silicates, minerals, oxydes, carbonates and frozen regions.\nThese data are represented by an image of 300 x 128 pixels. A vector of 255 spectral values (variables, characteristics, features) is associated to each of the 38400 pixels (instances, individuals).\n\n\n\n\n\n\nObjectives\n\n\n\nAccording to experts, there are \\(K=5\\) geological classes to identify on the map. The objective is to operate an automated unsupervised classification of the pixels, in order to segment the image into 5 distinct categories (colors). Before conducting the segmentation, an exploratory approach is conducted to better understand the data and decide how it should be pre-processed. Then, different clustering algorithms are applied and compared on the MARS dataset.\n\n\n\n\n\n\n\n\n⏱ Computation Time Advisory\n\n\n\nSome steps in this lab are computationally intensive. Plan your time accordingly.",
+    "crumbs": [
+      "Unsupervised Learning",
+      "<span class='chapter-number'>5</span>  <span class='chapter-title'>💻 Evaluation Lab</span>"
+    ]
+  },
+  {
+    "objectID": "Lab-image-segmentation.html#data-exploration",
+    "href": "Lab-image-segmentation.html#data-exploration",
+    "title": "5  Multi-spectral Image Segmentation",
+    "section": "Data exploration",
+    "text": "Data exploration\n\nRead the data and understand the formatting\n\nRead the “mars.csv” data.\nDisplay a summary of the data.\nHow many rows and columns do the data have? What does it mean in terms of number of data points? Dimensionality of the data?\n\n\n\nData preprocessing\n\nDraw the histograms of six different dimensions (wave length) selected at random. They represent the distributions of the values of a given dimension across the different pixels.\n\nWhat can you say regarding the discriminative power of single dimensions?\nThe symmetry of the data?\n\nDraw the box plots of all different wave lengths. They should all appear on the same graph.\n\nWhat can you say regarding the spread of the different dimensions?\nThe symmetry of the data?\nOutlier values?\n\nConduct the required data transformations/preprocessing. Visualize the new distribution of the transformed data (histograms, box plots), what can you say?",
+    "crumbs": [
+      "Unsupervised Learning",
+      "<span class='chapter-number'>5</span>  <span class='chapter-title'>💻 Evaluation Lab</span>"
+    ]
+  },
+  {
+    "objectID": "Lab-image-segmentation.html#dimensionality-reduction",
+    "href": "Lab-image-segmentation.html#dimensionality-reduction",
+    "title": "5  Multi-spectral Image Segmentation",
+    "section": "Dimensionality reduction",
+    "text": "Dimensionality reduction\n\nPCA\n\nConduct a Principal Component Analysis decomposition of the MARS data.\nVisualize the explained variance as a function of the number of dimensions selected. (In Python, We can use the pca.explained_variance_ratio argument from the scikit learn PCA implementation)\nHow many dimensions should be used to conduct a cluster analysis?\nPlot the Variable factor map (Features representation) for the first two PCA dimensions. What can you say?\nPlot the Individuals factor map (Individuals’ representation) for the first two PCA dimensions. What can you say?\n\n\n\nt-SNE\n\nApply the t-SNE method on the MARS data. What can you say?",
+    "crumbs": [
+      "Unsupervised Learning",
+      "<span class='chapter-number'>5</span>  <span class='chapter-title'>💻 Evaluation Lab</span>"
+    ]
+  },
+  {
+    "objectID": "Lab-image-segmentation.html#clustering",
+    "href": "Lab-image-segmentation.html#clustering",
+    "title": "5  Multi-spectral Image Segmentation",
+    "section": "Clustering",
+    "text": "Clustering\n\nK-means\n\nConduct one of the methods to choose the number of clusters K to apply K-means on these data? What K should be chosen?\nIn practice, the experts tell us that the number of different geological compositions in this image is 5. Apply K-means on the selected PCA dimensions, with this value of K.\nDisplay the clusters in the PCA Individual factor map.\nDisplay the 300x128 image where the pixels represent the clusters. (We can use the reshape() function.)\nPlot the curves representing the values of the wave lengths of the cluster centers.\nRepeat the process using the complete data instead of the data reduced with PCA. Compare the two results using external metrics (Normalized Mutual Information, Fowlkes Mallows). Are the clusters obtained similar?\nRepeat the process using the data reduced with t-SNE. Compare with the previous results.\n\n\n\nAgglomerative Clustering\n\nApply Agglomerative Clustering on the MARS dataset. Experiment with at least two different linkage methods.\nVisualize the results and compare with K-means.\n\n\n\nGaussian Mixture Models\n\nApply Gaussian Mixture Models on the MARS dataset with \\(K=5\\) components.\nVisualize the results. How does GMM compare to K-means in terms of cluster shapes?\n\n\n\nDBSCAN\n\nApply DBSCAN on the MARS dataset (using PCA-reduced data).\n\nExplain the role of the parameters \\(\\varepsilon\\) and min_samples.\nUse a k-distance plot to guide your choice of \\(\\varepsilon\\).\nVisualize the resulting clusters and noise points.\n\nApply HDBSCAN (Hierarchical DBSCAN) on the same data.\n\nHow does HDBSCAN differ from DBSCAN in terms of parameter sensitivity?\nCompare the results with DBSCAN.\n\nWhat are the limitations of density-based methods for this particular dataset?",
+    "crumbs": [
+      "Unsupervised Learning",
+      "<span class='chapter-number'>5</span>  <span class='chapter-title'>💻 Evaluation Lab</span>"
+    ]
+  },
+  {
+    "objectID": "Lab-image-segmentation.html#comparison-of-clustering-algorithms",
+    "href": "Lab-image-segmentation.html#comparison-of-clustering-algorithms",
+    "title": "5  Multi-spectral Image Segmentation",
+    "section": "Comparison of Clustering Algorithms",
+    "text": "Comparison of Clustering Algorithms\nThe ground truth of the pixel values was provided by domain experts and can be found in the mask.csv file.\n\nUsing external validation metrics (NMI, Fowlkes-Mallows, Adjusted Rand Index), evaluate which combination of clustering algorithm, preprocessing, and parameters gives the best results.\nSummarize your findings in a comparison table.\n\n\n\n\n\n\n\nNote\n\n\n\nIn particular, study the influence of using PCA vs. raw data, the number of classes, and the linkage methods for agglomerative clustering.",
+    "crumbs": [
+      "Unsupervised Learning",
+      "<span class='chapter-number'>5</span>  <span class='chapter-title'>💻 Evaluation Lab</span>"
+    ]
+  },
+  {
+    "objectID": "Lab-image-segmentation.html#bonus-supervised-learning-using-discriminative-analysis",
+    "href": "Lab-image-segmentation.html#bonus-supervised-learning-using-discriminative-analysis",
+    "title": "5  Multi-spectral Image Segmentation",
+    "section": "Bonus: Supervised Learning using Discriminative Analysis",
+    "text": "Bonus: Supervised Learning using Discriminative Analysis\nTaking into account the ground truth pixel values in the mask.csv file, we can create a supervised model to learn the class of each pixel.\n\nFit a supervised model using LDA and QDA and evaluate its performance.\nCompare classification performance with the best unsupervised result obtained above. What does this tell you about the difficulty of the unsupervised problem?\n\n\n◼",
+    "crumbs": [
+      "Unsupervised Learning",
+      "<span class='chapter-number'>5</span>  <span class='chapter-title'>💻 Evaluation Lab</span>"
+    ]
+  },
+  {
+    "objectID": "Lab-image-segmentation.html#footnotes",
+    "href": "Lab-image-segmentation.html#footnotes",
+    "title": "5  Multi-spectral Image Segmentation",
+    "section": "",
+    "text": "Jean-Pierre Bibring, Yves Langevin, Aline Gendrin, Brigitte Gondet, François Poulet, Michel Berthé, Alain Soufflot, Ray Arvidson, Nicolas Mangold, John Mustard, et al. Mars surface diversity as revealed by the omega/mars express observations. Science, 307(5715):1576–1581, 2005.↩︎",
     "crumbs": [
       "Unsupervised Learning",
       "<span class='chapter-number'>5</span>  <span class='chapter-title'>💻 Evaluation Lab</span>"

@@ -71,6 +71,35 @@ ul.task-list li input[type="checkbox"] {
   }
 }</script>
 
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
 
 <link rel="stylesheet" href="mycss.css">
 </head>
@@ -224,8 +253,34 @@ ul.task-list li input[type="checkbox"] {
 </nav>
 <div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
-        
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#abstract" id="toc-abstract" class="nav-link active" data-scroll-target="#abstract">Abstract</a></li>
+  <li><a href="#data" id="toc-data" class="nav-link" data-scroll-target="#data">Data</a></li>
+  <li><a href="#data-exploration" id="toc-data-exploration" class="nav-link" data-scroll-target="#data-exploration">Data exploration</a>
+  <ul class="collapse">
+  <li><a href="#read-the-data-and-understand-the-formatting" id="toc-read-the-data-and-understand-the-formatting" class="nav-link" data-scroll-target="#read-the-data-and-understand-the-formatting">Read the data and understand the formatting</a></li>
+  <li><a href="#data-preprocessing" id="toc-data-preprocessing" class="nav-link" data-scroll-target="#data-preprocessing">Data preprocessing</a></li>
+  </ul></li>
+  <li><a href="#dimensionality-reduction" id="toc-dimensionality-reduction" class="nav-link" data-scroll-target="#dimensionality-reduction">Dimensionality reduction</a>
+  <ul class="collapse">
+  <li><a href="#pca" id="toc-pca" class="nav-link" data-scroll-target="#pca">PCA</a></li>
+  <li><a href="#t-sne" id="toc-t-sne" class="nav-link" data-scroll-target="#t-sne">t-SNE</a></li>
+  </ul></li>
+  <li><a href="#clustering" id="toc-clustering" class="nav-link" data-scroll-target="#clustering">Clustering</a>
+  <ul class="collapse">
+  <li><a href="#k-means" id="toc-k-means" class="nav-link" data-scroll-target="#k-means">K-means</a></li>
+  <li><a href="#agglomerative-clustering" id="toc-agglomerative-clustering" class="nav-link" data-scroll-target="#agglomerative-clustering">Agglomerative Clustering</a></li>
+  <li><a href="#gaussian-mixture-models" id="toc-gaussian-mixture-models" class="nav-link" data-scroll-target="#gaussian-mixture-models">Gaussian Mixture Models</a></li>
+  <li><a href="#dbscan" id="toc-dbscan" class="nav-link" data-scroll-target="#dbscan">DBSCAN</a></li>
+  </ul></li>
+  <li><a href="#comparison-of-clustering-algorithms" id="toc-comparison-of-clustering-algorithms" class="nav-link" data-scroll-target="#comparison-of-clustering-algorithms">Comparison of Clustering Algorithms</a></li>
+  <li><a href="#bonus-supervised-learning-using-discriminative-analysis" id="toc-bonus-supervised-learning-using-discriminative-analysis" class="nav-link" data-scroll-target="#bonus-supervised-learning-using-discriminative-analysis">Bonus: Supervised Learning using Discriminative Analysis</a></li>
+  </ul>
+</nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
@@ -385,8 +440,181 @@ Technical hints
 </blockquote>
 </div>
 </div>
+<section id="abstract" class="level2">
+<h2 class="anchored" data-anchor-id="abstract">Abstract</h2>
+<div class="alert alert-block alert-warning">
+<p>The objective of this lab is to apply the different concepts studied during this course on clustering. Image segmentation is a standard problem where unsupervised learning is used. Here, we want to apply clustering to the pixels of a multi-spectral image representing the surface of Mars. The goal is to identify different “types” of pixels corresponding to different geological compositions, thus generating a geological map of Mars.</p>
+</div>
+</section>
+<section id="data" class="level2">
+<h2 class="anchored" data-anchor-id="data">Data</h2>
+<p>For this study, you will need two data files:</p>
+<ul>
+<li><a href="datasets/mars.csv.zip" target="_blank">mars.csv 🔢</a></li>
+<li><a href="datasets/mask.csv" target="_blank">mask.csv 🔢</a></li>
+</ul>
+<p>The data in the <code>mars.csv</code> file represent a hyper-spectral image of the surface of Mars. Visible and near-infrared imagery is a key tele-detection technique, used to study planets thanks to satellites with on-board spectrometers. In march 2014, the OMEGA equipment collected more than 310 Go of raw images. It mapped Mars surface with a resolution between 300 and 3000 meters, depending on the height of the space ship<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a>. For each pixel, the spectral response between 0.36 and 5.2 <em>µ</em>m was collected and sampled accross 255 channels. The objective is to characterize the geological composition of Mars surface and in particular to distinguish between different classes of silicates, minerals, oxydes, carbonates and frozen regions.</p>
+<p>These data are represented by an image of 300 x 128 pixels. A vector of 255 spectral values (variables, characteristics, features) is associated to each of the 38400 pixels (instances, individuals).</p>
+<div class="callout callout-style-default callout-important callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Objectives
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>According to experts, there are <span class="math inline">\(K=5\)</span> geological classes to identify on the map. The objective is to operate an automated unsupervised classification of the pixels, in order to segment the image into 5 distinct categories (colors). Before conducting the segmentation, an exploratory approach is conducted to better understand the data and decide how it should be pre-processed. Then, different clustering algorithms are applied and compared on the MARS dataset.</p>
+</div>
+</div>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+⏱ Computation Time Advisory
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Some steps in this lab are computationally intensive. Plan your time accordingly.</p>
+</div>
+</div>
+</section>
+<section id="data-exploration" class="level2">
+<h2 class="anchored" data-anchor-id="data-exploration">Data exploration</h2>
+<section id="read-the-data-and-understand-the-formatting" class="level3">
+<h3 class="anchored" data-anchor-id="read-the-data-and-understand-the-formatting">Read the data and understand the formatting</h3>
+<ol type="1">
+<li><p>Read the “mars.csv” data.</p></li>
+<li><p>Display a summary of the data.</p></li>
+<li><p>How many rows and columns do the data have? What does it mean in terms of number of data points? Dimensionality of the data?</p></li>
+</ol>
+</section>
+<section id="data-preprocessing" class="level3">
+<h3 class="anchored" data-anchor-id="data-preprocessing">Data preprocessing</h3>
+<ol type="1">
+<li><p>Draw the histograms of six different dimensions (wave length) selected at random. They represent the distributions of the values of a given dimension across the different pixels.</p>
+<ol type="a">
+<li>What can you say regarding the discriminative power of single dimensions?</li>
+<li>The symmetry of the data?</li>
+</ol></li>
+<li><p>Draw the box plots of all different wave lengths. They should all appear on the same graph.</p>
+<ol type="a">
+<li>What can you say regarding the spread of the different dimensions?</li>
+<li>The symmetry of the data?</li>
+<li>Outlier values?</li>
+</ol></li>
+<li><p>Conduct the required data transformations/preprocessing. Visualize the new distribution of the transformed data (histograms, box plots), what can you say?</p></li>
+</ol>
+</section>
+</section>
+<section id="dimensionality-reduction" class="level2">
+<h2 class="anchored" data-anchor-id="dimensionality-reduction">Dimensionality reduction</h2>
+<section id="pca" class="level3">
+<h3 class="anchored" data-anchor-id="pca">PCA</h3>
+<ol type="1">
+<li><p>Conduct a Principal Component Analysis decomposition of the MARS data.</p></li>
+<li><p>Visualize the explained variance as a function of the number of dimensions selected. (In Python, We can use the <code>pca.explained_variance_ratio</code> argument from the scikit learn PCA implementation)</p></li>
+<li><p>How many dimensions should be used to conduct a cluster analysis?</p></li>
+<li><p>Plot the <em>Variable factor map</em> (Features representation) for the first two PCA dimensions. What can you say?</p></li>
+<li><p>Plot the <em>Individuals factor map</em> (Individuals’ representation) for the first two PCA dimensions. What can you say?</p></li>
+</ol>
+</section>
+<section id="t-sne" class="level3">
+<h3 class="anchored" data-anchor-id="t-sne">t-SNE</h3>
+<ol type="1">
+<li>Apply the t-SNE method on the MARS data. What can you say?</li>
+</ol>
+</section>
+</section>
+<section id="clustering" class="level2">
+<h2 class="anchored" data-anchor-id="clustering">Clustering</h2>
+<section id="k-means" class="level3">
+<h3 class="anchored" data-anchor-id="k-means">K-means</h3>
+<ol type="1">
+<li><p>Conduct one of the methods to choose the number of clusters <em>K</em> to apply K-means on these data? What K should be chosen?</p></li>
+<li><p>In practice, the experts tell us that the number of different geological compositions in this image is 5. Apply K-means on the selected PCA dimensions, with this value of K.</p></li>
+<li><p>Display the clusters in the PCA <em>Individual factor map</em>.</p></li>
+<li><p>Display the 300x128 image where the pixels represent the clusters. (We can use the <code>reshape()</code> function.)</p></li>
+<li><p>Plot the curves representing the values of the wave lengths of the cluster centers.</p></li>
+<li><p>Repeat the process using the complete data instead of the data reduced with PCA. Compare the two results using external metrics (Normalized Mutual Information, Fowlkes Mallows). Are the clusters obtained similar?</p></li>
+<li><p>Repeat the process using the data reduced with t-SNE. Compare with the previous results.</p></li>
+</ol>
+</section>
+<section id="agglomerative-clustering" class="level3">
+<h3 class="anchored" data-anchor-id="agglomerative-clustering">Agglomerative Clustering</h3>
+<ol type="1">
+<li>Apply Agglomerative Clustering on the MARS dataset. Experiment with at least two different linkage methods.</li>
+<li>Visualize the results and compare with K-means.</li>
+</ol>
+</section>
+<section id="gaussian-mixture-models" class="level3">
+<h3 class="anchored" data-anchor-id="gaussian-mixture-models">Gaussian Mixture Models</h3>
+<ol type="1">
+<li>Apply Gaussian Mixture Models on the MARS dataset with <span class="math inline">\(K=5\)</span> components.</li>
+<li>Visualize the results. How does GMM compare to K-means in terms of cluster shapes?</li>
+</ol>
+</section>
+<section id="dbscan" class="level3">
+<h3 class="anchored" data-anchor-id="dbscan">DBSCAN</h3>
+<ol type="1">
+<li>Apply <strong>DBSCAN</strong> on the MARS dataset (using PCA-reduced data).
+<ol type="a">
+<li>Explain the role of the parameters <span class="math inline">\(\varepsilon\)</span> and <code>min_samples</code>.</li>
+<li>Use a k-distance plot to guide your choice of <span class="math inline">\(\varepsilon\)</span>.</li>
+<li>Visualize the resulting clusters and noise points.</li>
+</ol></li>
+<li>Apply <strong>HDBSCAN</strong> (Hierarchical DBSCAN) on the same data.
+<ol type="a">
+<li>How does HDBSCAN differ from DBSCAN in terms of parameter sensitivity?</li>
+<li>Compare the results with DBSCAN.</li>
+</ol></li>
+<li>What are the limitations of density-based methods for this particular dataset?</li>
+</ol>
+</section>
+</section>
+<section id="comparison-of-clustering-algorithms" class="level2">
+<h2 class="anchored" data-anchor-id="comparison-of-clustering-algorithms">Comparison of Clustering Algorithms</h2>
+<p>The ground truth of the pixel values was provided by domain experts and can be found in the <code>mask.csv</code> file.</p>
+<ol type="1">
+<li>Using external validation metrics (NMI, Fowlkes-Mallows, Adjusted Rand Index), evaluate which combination of clustering algorithm, preprocessing, and parameters gives the best results.</li>
+<li>Summarize your findings in a comparison table.</li>
+</ol>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>In particular, study the influence of using PCA vs.&nbsp;raw data, the number of classes, and the linkage methods for agglomerative clustering.</p>
+</div>
+</div>
+</section>
+<section id="bonus-supervised-learning-using-discriminative-analysis" class="level2">
+<h2 class="anchored" data-anchor-id="bonus-supervised-learning-using-discriminative-analysis">Bonus: Supervised Learning using Discriminative Analysis</h2>
+<p>Taking into account the ground truth pixel values in the <code>mask.csv</code> file, we can create a supervised model to learn the class of each pixel.</p>
+<ol type="1">
+<li>Fit a supervised model using LDA and QDA and evaluate its performance.</li>
+<li>Compare classification performance with the best unsupervised result obtained above. What does this tell you about the difficulty of the unsupervised problem?</li>
+</ol>
+<p align="right">
+◼
+</p>
 
 
+</section>
+<section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes">
+<hr>
+<ol>
+<li id="fn1"><p>Jean-Pierre Bibring, Yves Langevin, Aline Gendrin, Brigitte Gondet, François Poulet, Michel Berthé, Alain Soufflot, Ray Arvidson, Nicolas Mangold, John Mustard, et al.&nbsp;Mars surface diversity as revealed by the omega/mars express observations. <em>Science</em>, 307(5715):1576–1581, 2005.<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+</ol>
+</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">

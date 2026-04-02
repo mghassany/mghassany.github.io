@@ -335,7 +335,7 @@ window.Quarto = {
 <h2 class="unnumbered anchored" data-anchor-id="part-1-why-dbscan-motivation-with-synthetic-data">Part 1 — Why DBSCAN? Motivation with Synthetic Data</h2>
 <p>Before working on a real dataset, we illustrate <strong>why DBSCAN matters</strong> using two classic synthetic datasets where k-means is known to struggle.</p>
 <p><strong>1.</strong> Generate two synthetic datasets — <em>moons</em> and <em>circles</em> — and visualize them side by side, colored by their true labels.</p>
-<div id="bb7b6084" class="cell" data-execution_count="1">
+<div id="a043f2bd" class="cell" data-execution_count="1">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.datasets <span class="im">import</span> make_moons, make_circles</span>
@@ -372,14 +372,14 @@ Note
 <h2 class="unnumbered anchored" data-anchor-id="part-2-dbscan-on-the-mall-customers-dataset">Part 2 — DBSCAN on the Mall Customers Dataset</h2>
 <p>We now apply DBSCAN to a real-world dataset: <strong>Mall Customers</strong>, which captures the spending behaviour of 200 customers and is widely used in marketing segmentation.</p>
 <p><strong>3.</strong> Load the dataset. It contains 5 columns: <code>CustomerID</code>, <code>Genre</code>, <code>Age</code>, <code>Annual Income (k$)</code> and <code>Spending Score (1-100)</code>. Print the first few rows and basic statistics. You can download it from <a href="datasets/Mall_Customers.csv">here</a></p>
-<div id="6e914bb8" class="cell" data-execution_count="4">
+<div id="cfc39c6f" class="cell" data-execution_count="4">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>mall <span class="op">=</span> pd.read_csv(<span class="st">"Mall_Customers.csv"</span>)</span>
 <span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(mall.head())</span>
 <span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(mall.describe())</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div id="6aee7dbd" class="cell" data-execution_count="5">
+<div id="ecfb86f9" class="cell" data-execution_count="5">
 <div class="cell-output cell-output-stdout">
 <pre><code>   CustomerID  Gender  Age  Annual Income (k$)  Spending Score (1-100)
 0           1    Male   19                  15                      39

@@ -354,7 +354,7 @@ Note
 <h3 class="unnumbered anchored" data-anchor-id="gmm-vs-k-means">GMM vs <span class="math inline">\(k\)</span>-means</h3>
 <p>In this section, we will use two artificial (simulated) datasets in which we know the ground truth (true labels) in order to compare the performances of <span class="math inline">\(k\)</span>-means and GMM. To fit a GMM using the EM technique in Python, we use <code>sklearn.mixture.GaussianMixture</code>.</p>
 <p><strong>1.</strong> Download and import <a href="datasets/data1.csv">Data1 🔢</a> and <a href="datasets/data2.csv">Data2 🔢</a>. Plot both datasets on the same window, coloring the observations with respect to the ground truth, like in the figure below.</p>
-<div id="d9699276" class="cell" data-execution_count="2">
+<div id="3ab233de" class="cell" data-execution_count="2">
 <div class="cell-output cell-output-display">
 <div>
 <figure class="figure">
@@ -399,7 +399,7 @@ Tip
 <li><strong>Uncertainty plot</strong>: color each point by its assignment uncertainty, i.e.&nbsp;<span class="math inline">\(1 - \max_k r(z_{nk})\)</span>, where <span class="math inline">\(r(z_{nk})\)</span> are the posterior probabilities from <code>predict_proba()</code>.</li>
 </ul>
 <p><strong>6.</strong> <code>GaussianMixture</code> can compute <strong>BIC</strong> and <strong>AIC</strong> to help select the number of mixture components. Fit GMMs with <span class="math inline">\(k\)</span> ranging from 1 to 10 on Data2 and plot the BIC and AIC curves. Identify the optimal <span class="math inline">\(k\)</span>.</p>
-<div id="bb07e089" class="cell" data-execution_count="7">
+<div id="e2ba3107" class="cell" data-execution_count="7">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>bic_scores <span class="op">=</span> []</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>aic_scores <span class="op">=</span> []</span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>k_range <span class="op">=</span> <span class="bu">range</span>(<span class="dv">1</span>, <span class="dv">11</span>)</span>
@@ -440,7 +440,7 @@ Tip
 </div>
 </div>
 <p><strong>7.</strong> Though GMM is often categorized as a clustering algorithm, fundamentally it is a <strong>density estimation</strong> algorithm — its output is a generative probabilistic model describing the distribution of the data. Estimate and visualize the density of Data2 using your fitted GMM. Produce both a <strong>contour plot</strong> and a <strong>3D surface plot</strong> of the estimated bivariate density. The code is given below:</p>
-<div id="3d4c0531" class="cell" data-execution_count="8">
+<div id="a13d47e3" class="cell" data-execution_count="8">
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> mpl_toolkits.mplot3d <span class="im">import</span> Axes3D</span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> scipy.stats <span class="im">import</span> multivariate_normal</span>
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -487,7 +487,7 @@ In this part you will fit a GMM model on one-dimensional simulated data.
 
 Use `numpy.random.seed()` with your student ID as the seed. An example of 9 generated values from three Gaussians is shown below:
 
-::: {#14ade775 .cell execution_count=9}
+::: {#d32df272 .cell execution_count=9}
 ``` {.python .cell-code}
 import numpy as np
 import pandas as pd
@@ -586,7 +586,7 @@ example_df
 
 **9.** Show your generated data on a single axis (a **strip chart**), colored with respect to the ground truth. You should obtain something like the figure below.
 
-::: {#6a4839b9 .cell execution_count=10}
+::: {#b68d60fb .cell execution_count=10}
 
 ::: {.cell-output .cell-output-display}
 ![](Lab-EM_files/figure-html/cell-11-output-1.png){}

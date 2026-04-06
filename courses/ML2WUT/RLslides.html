@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Lab on Gaussian Mixture Models (GMM) and Expectation Maximization (EM) technique – Machine Learning II</title>
+<title>7&nbsp; Reinforcement Learning – Machine Learning II</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -20,52 +20,17 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
-/* CSS for syntax highlighting */
-pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { line-height: 1.25; }
-pre > code.sourceCode > span:empty { height: 1.2em; }
-.sourceCode { overflow: visible; }
-code.sourceCode > span { color: inherit; text-decoration: inherit; }
-div.sourceCode { margin: 1em 0; }
-pre.sourceCode { margin: 0; }
-@media screen {
-div.sourceCode { overflow: auto; }
-}
-@media print {
-pre > code.sourceCode { white-space: pre-wrap; }
-pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
-}
-pre.numberSource code
-  { counter-reset: source-line 0; }
-pre.numberSource code > span
-  { position: relative; left: -4em; counter-increment: source-line; }
-pre.numberSource code > span > a:first-child::before
-  { content: counter(source-line);
-    position: relative; left: -1em; text-align: right; vertical-align: baseline;
-    border: none; display: inline-block;
-    -webkit-touch-callout: none; -webkit-user-select: none;
-    -khtml-user-select: none; -moz-user-select: none;
-    -ms-user-select: none; user-select: none;
-    padding: 0 4px; width: 4em;
-  }
-pre.numberSource { margin-left: 3em;  padding-left: 4px; }
-div.sourceCode
-  {   }
-@media screen {
-pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
-}
 </style>
 
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" integrity="sha512-bLT0Qm9VnAYZDflyKcBaQ2gg0hSYNQrJ8RilYldYQ1FxQYoCLtUjuuRuZo+fjqhx/qtq/1itJ0C2ejDxltZVFg==" crossorigin="anonymous"></script><script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
 <script src="site_libs/quarto-nav/headroom.min.js"></script>
 <script src="site_libs/clipboard/clipboard.min.js"></script>
 <script src="site_libs/quarto-search/autocomplete.umd.js"></script>
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
-<link href="./density-based.html" rel="next">
-<link href="./em.html" rel="prev">
+<link href="./textbook.html" rel="prev">
 <script src="site_libs/quarto-html/quarto.js"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
@@ -104,39 +69,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     "search-label": "Search"
   }
 }</script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.6/require.min.js" integrity="sha512-c3Nl8+7g4LMSTdrm621y7kf9v3SDPnhxLNhcjFJbKECVnmZHTdo+IRO05sNLTH/D3vA6u1X32ehoLC7WFVdheg==" crossorigin="anonymous"></script>
 
-<script type="application/javascript">define('jquery', [],function() {return window.jQuery;})</script>
-
-  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
-  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
-
-<script type="text/javascript">
-const typesetMath = (el) => {
-  if (window.MathJax) {
-    // MathJax Typeset
-    window.MathJax.typeset([el]);
-  } else if (window.katex) {
-    // KaTeX Render
-    var mathElements = el.getElementsByClassName("math");
-    var macros = [];
-    for (var i = 0; i < mathElements.length; i++) {
-      var texText = mathElements[i].firstChild;
-      if (mathElements[i].tagName == "SPAN") {
-        window.katex.render(texText.data, mathElements[i], {
-          displayMode: mathElements[i].classList.contains('display'),
-          throwOnError: false,
-          macros: macros,
-          fleqn: false
-        });
-      }
-    }
-  }
-}
-window.Quarto = {
-  typesetMath
-};
-</script>
 
 <link rel="stylesheet" href="mycss.css">
 </head>
@@ -150,7 +83,7 @@ window.Quarto = {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./kmeans.html">Unsupervised Learning</a></li><li class="breadcrumb-item"><a href="./Lab-EM.html">- 💻 Lab</a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./textbook.html">Reinforcement Learning</a></li><li class="breadcrumb-item"><a href="./RLslides.html"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">📗 Slides &amp; Labs</span></a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -244,7 +177,7 @@ window.Quarto = {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./Lab-EM.html" class="sidebar-item-text sidebar-link active">
+  <a href="./Lab-EM.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">- 💻 Lab</span></a>
   </div>
 </li>
@@ -280,7 +213,13 @@ window.Quarto = {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./textbook.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">📗 Textbook &amp; Slides</span></span></a>
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">📗 Textbook</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./RLslides.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">📗 Slides &amp; Labs</span></span></a>
   </div>
 </li>
       </ul>
@@ -295,20 +234,16 @@ window.Quarto = {
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#expectation-maximization-em" id="toc-expectation-maximization-em" class="nav-link active" data-scroll-target="#expectation-maximization-em"><strong>E</strong>xpectation-<strong>M</strong>aximization (EM)</a>
-  <ul class="collapse">
-  <li><a href="#gmm-vs-k-means" id="toc-gmm-vs-k-means" class="nav-link" data-scroll-target="#gmm-vs-k-means">GMM vs <span class="math inline">\(k\)</span>-means</a></li>
-  </ul></li>
-  <li><a href="#extra-work-em-from-scratch" id="toc-extra-work-em-from-scratch" class="nav-link" data-scroll-target="#extra-work-em-from-scratch"><strong>Extra work</strong>: EM from Scratch</a></li>
+  <li><a href="#slides-and-labs" id="toc-slides-and-labs" class="nav-link active" data-scroll-target="#slides-and-labs">Slides and Labs</a></li>
   </ul>
 </nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./kmeans.html">Unsupervised Learning</a></li><li class="breadcrumb-item"><a href="./Lab-EM.html">- 💻 Lab</a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./textbook.html">Reinforcement Learning</a></li><li class="breadcrumb-item"><a href="./RLslides.html"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">📗 Slides &amp; Labs</span></a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title">Lab on Gaussian Mixture Models (GMM) and Expectation Maximization (EM) technique</h1>
+<h1 class="title"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Reinforcement Learning</span></h1>
 </div>
 
 
@@ -325,101 +260,33 @@ window.Quarto = {
 </header>
 
 
-<div class="alert alert-block alert-warning">
-<ul>
-<li>In R, the <code>mclust</code> package is famous for building GMMs.</li>
-<li>An excellent documentation of <code>mclust</code> can be found <a href="https://mclust-org.github.io/mclust/articles/mclust.html" target="_blank">here</a>.</li>
-<li>In Python, we can use <code>sklearn.mixture</code> module in which there is the <code>GaussianMixture()</code> class.</li>
-<li>Note that the <code>GaussianMixture()</code> class does not provide the same automatic determination of the number of components like in R’s <code>mclust</code> package. But you can do it manually or use the class <code>AutoGMMCluster()</code> from the <code>graspologic.cluster.autogmm</code> module.</li>
-<li>Description of <code>AutoGMMCluster()</code> from <a href="https://graspologic-org.github.io/graspologic/tutorials/clustering/autogmm.html" target="_blank">here</a>: This method expands upon the existing Sklearn framework by allowing the user to automatically estimate the best hyperparameters for a Gaussian mixture model. In particular, the ideal <code>n_components_</code> is estimated by <code>AutoGMM</code> from a range of possible values given by the user. <code>AutoGMM</code> also sweeps over multiple covariance structures.</li>
-</ul>
-</div>
-<div class="callout callout-style-default callout-note callout-titled">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-Note
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<p>In the first part of this lab you will learn how to fit a Gaussian Mixture Model (GMM) using Python. You will Compare <span class="math inline">\(k\)</span>-means and GMM on artificial data (2-D data).</p>
-<p>In the second part (extra work) of this lab you will build an algorithm from <strong>scratch</strong>. Your algorithm must fit a GMM model using the <strong>E</strong>xpectation-<strong>M</strong>aximization (EM) technique on any multi dimensional dataset.</p>
-</div>
-</div>
-<section id="expectation-maximization-em" class="level2">
-<h2 class="anchored" data-anchor-id="expectation-maximization-em"><strong>E</strong>xpectation-<strong>M</strong>aximization (EM)</h2>
-<section id="gmm-vs-k-means" class="level3 unnumbered">
-<h3 class="unnumbered anchored" data-anchor-id="gmm-vs-k-means">GMM vs <span class="math inline">\(k\)</span>-means</h3>
-<p>In this section, we will use two artificial (simulated) datasets in which we know the ground truth (true labels) in order to compare the performances of <span class="math inline">\(k\)</span>-means and GMM. To fit a GMM using the EM technique in Python, we use <code>sklearn.mixture.GaussianMixture</code>.</p>
-<p><strong>1.</strong> Download and import <a href="datasets/data1.csv">Data1 🔢</a> and <a href="datasets/data2.csv">Data2 🔢</a>. Plot both datasets on the same window, coloring the observations with respect to the ground truth, like in the figure below.</p>
-<div id="37c8d39b" class="cell" data-execution_count="2">
-<div class="cell-output cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="Lab-EM_files/figure-html/cell-3-output-1.png" class="img-fluid figure-img"></p>
-</figure>
-</div>
-</div>
-</div>
-<p><strong>2.</strong> Apply <span class="math inline">\(k\)</span>-means on both datasets with 4 clusters. Plot both datasets on the same window and color the observations with respect to the <span class="math inline">\(k\)</span>-means results. Interpret the results.</p>
+<!-- 
+<object width="600" height="400"data='pdf/KDDClusterAnalysis17-screen.pdf'>
+    <p>Oops! Your browser doesn't support PDFs!</p>
+    <p><a href="pdf/KDDClusterAnalysis17-screen.pdf">Download Instead</a></p>
+</object>
+
+<object data="pdf/KDDClusterAnalysis17-screen.pdf" type="application/pdf" frameborder="0" width="100%" height="600px" style="padding: 20px;">
+    <embed src="pdf/KDDClusterAnalysis17-screen.pdf" width="100%" height="600px"/> 
+</object>
+ -->
+<section id="slides-and-labs" class="level2">
+<h2 class="anchored" data-anchor-id="slides-and-labs">Slides and Labs</h2>
 <div class="callout callout-style-default callout-tip callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Tip
+Session 1: Introduction to RL and MPD
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>One way to think about the <span class="math inline">\(k\)</span>-means model is that it places a circle (or, in higher dimensions, a hyper-sphere) at the center of each cluster, with a radius defined by the most distant point in the cluster. This radius acts as a hard cutoff for cluster assignment: any point outside this circle is not considered a member of the cluster. You can try to visualize these circles on your plots using <code>matplotlib.patches.Circle</code>.</p>
-</div>
-</div>
-<p><strong>3.</strong> Now fit a GMM model on both datasets. In Python, use <code>GaussianMixture</code> from <code>sklearn.mixture</code>. Set <code>n_components=4</code> to match the known number of clusters. Visualize the results on both datasets and interpret them.</p>
-<p><strong>In the following questions, explore <code>GaussianMixture</code> and what it offers. Apply its functions on Data2.</strong></p>
-<div class="callout callout-style-default callout-tip callout-titled">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-Tip
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<p><code>sklearn.mixture.GaussianMixture</code> fits a Gaussian Mixture Model via the EM algorithm. It supports several covariance structures (<code>full</code>, <code>tied</code>, <code>diag</code>, <code>spherical</code>), automatic convergence detection, and provides access to fitted parameters (<span class="math inline">\(\mu_k\)</span>, <span class="math inline">\(\Sigma_k\)</span>, <span class="math inline">\(\pi_k\)</span>), posterior probabilities, log-likelihood, and BIC/AIC scores. It is the Python equivalent of R’s <code>mclust</code> package.</p>
-</div>
-</div>
-<p><strong>4.</strong> Print a summary of the GMM model fitted on Data2. Inspect and explain the fitted parameters: means (<code>means_</code>), covariances (<code>covariances_</code>), and mixing weights (<code>weights_</code>).</p>
-<p><strong>5.</strong> Visualize the GMM results on Data2. Produce two plots:</p>
 <ul>
-<li><strong>Classification plot</strong>: color each point by its most likely cluster (hard assignment via <code>predict()</code>).</li>
-<li><strong>Uncertainty plot</strong>: color each point by its assignment uncertainty, i.e.&nbsp;<span class="math inline">\(1 - \max_k r(z_{nk})\)</span>, where <span class="math inline">\(r(z_{nk})\)</span> are the posterior probabilities from <code>predict_proba()</code>.</li>
+<li>For this session, you’ll need to read <strong>Chapter 3</strong> of the textbook.</li>
+<li>Slides: <a href="Slides/Introduction-to-RL-and-MDP.pdf" target="_blank">📄 Introduction to RL and MDPs</a></li>
 </ul>
-<p><strong>6.</strong> <code>GaussianMixture</code> can compute <strong>BIC</strong> and <strong>AIC</strong> to help select the number of mixture components. Fit GMMs with <span class="math inline">\(k\)</span> ranging from 1 to 10 on Data2 and plot the BIC and AIC curves. Identify the optimal <span class="math inline">\(k\)</span>.</p>
-<div id="9cfdf767" class="cell" data-execution_count="7">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>bic_scores <span class="op">=</span> []</span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>aic_scores <span class="op">=</span> []</span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>k_range <span class="op">=</span> <span class="bu">range</span>(<span class="dv">1</span>, <span class="dv">11</span>)</span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> k <span class="kw">in</span> k_range:</span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>    gmm_k <span class="op">=</span> GaussianMixture(n_components<span class="op">=</span>k, n_init<span class="op">=</span><span class="dv">5</span>, random_state<span class="op">=</span><span class="dv">42</span>)</span>
-<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>    gmm_k.fit(X2)</span>
-<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>    bic_scores.append(gmm_k.bic(X2))</span>
-<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>    aic_scores.append(gmm_k.aic(X2))</span>
-<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">8</span>, <span class="dv">4</span>))</span>
-<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>plt.plot(k_range, bic_scores, marker<span class="op">=</span><span class="st">"o"</span>, label<span class="op">=</span><span class="st">"BIC"</span>)</span>
-<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>plt.plot(k_range, aic_scores, marker<span class="op">=</span><span class="st">"s"</span>, linestyle<span class="op">=</span><span class="st">"--"</span>, label<span class="op">=</span><span class="st">"AIC"</span>)</span>
-<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">"Number of components $k$"</span>)</span>
-<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">"Score (lower is better)"</span>)</span>
-<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">"BIC and AIC vs. Number of Gaussian Components (Data2)"</span>)</span>
-<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a>plt.legend()</span>
-<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a>plt.xticks(<span class="bu">list</span>(k_range))</span>
-<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a>plt.tight_layout()</span>
-<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
 </div>
 <div class="callout callout-style-default callout-tip callout-titled">
 <div class="callout-header d-flex align-content-center">
@@ -427,227 +294,30 @@ Tip
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Tip
+Session 2: Dynamic Programming
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>In <code>sklearn</code>, <strong>lower BIC/AIC is better</strong> — this is the opposite sign convention from R’s <code>mclust</code>, where higher BIC is better. The formula used is:</p>
-<p><span class="math display">\[\text{BIC} \approx -2\,\ell(X|\hat{\theta}) + \nu \log(n)\]</span></p>
-<p>We select the model that <strong>minimises</strong> BIC.</p>
-<p>The covariance type (<code>full</code>, <code>tied</code>, <code>diag</code>, <code>spherical</code>) plays the same role as the parameterisation of <span class="math inline">\(\Sigma_k\)</span> in <code>mclust</code>. You can loop over covariance types to find the best model structure:</p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> cov_type <span class="kw">in</span> [<span class="st">"full"</span>, <span class="st">"tied"</span>, <span class="st">"diag"</span>, <span class="st">"spherical"</span>]:</span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>    gmm_k <span class="op">=</span> GaussianMixture(n_components<span class="op">=</span>k, covariance_type<span class="op">=</span>cov_type, ...)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-</div>
-<p><strong>7.</strong> Though GMM is often categorized as a clustering algorithm, fundamentally it is a <strong>density estimation</strong> algorithm — its output is a generative probabilistic model describing the distribution of the data. Estimate and visualize the density of Data2 using your fitted GMM. Produce both a <strong>contour plot</strong> and a <strong>3D surface plot</strong> of the estimated bivariate density. The code is given below:</p>
-<div id="1addb480" class="cell" data-execution_count="8">
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> mpl_toolkits.mplot3d <span class="im">import</span> Axes3D</span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> scipy.stats <span class="im">import</span> multivariate_normal</span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Build a grid</span></span>
-<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>x_min, x_max <span class="op">=</span> X2[:, <span class="dv">0</span>].<span class="bu">min</span>() <span class="op">-</span> <span class="dv">1</span>, X2[:, <span class="dv">0</span>].<span class="bu">max</span>() <span class="op">+</span> <span class="dv">1</span></span>
-<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>y_min, y_max <span class="op">=</span> X2[:, <span class="dv">1</span>].<span class="bu">min</span>() <span class="op">-</span> <span class="dv">1</span>, X2[:, <span class="dv">1</span>].<span class="bu">max</span>() <span class="op">+</span> <span class="dv">1</span></span>
-<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>xx, yy <span class="op">=</span> np.meshgrid(np.linspace(x_min, x_max, <span class="dv">200</span>),</span>
-<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>                     np.linspace(y_min, y_max, <span class="dv">200</span>))</span>
-<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>grid <span class="op">=</span> np.c_[xx.ravel(), yy.ravel()]</span>
-<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a><span class="co"># Evaluate log-density on the grid</span></span>
-<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a>log_density <span class="op">=</span> gmm2.score_samples(grid)</span>
-<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a>density <span class="op">=</span> np.exp(log_density).reshape(xx.shape)</span>
-<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a>fig <span class="op">=</span> plt.figure(figsize<span class="op">=</span>(<span class="dv">14</span>, <span class="dv">5</span>))</span>
-<span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-17"><a href="#cb3-17" aria-hidden="true" tabindex="-1"></a><span class="co"># Contour plot</span></span>
-<span id="cb3-18"><a href="#cb3-18" aria-hidden="true" tabindex="-1"></a>ax1 <span class="op">=</span> fig.add_subplot(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">1</span>)</span>
-<span id="cb3-19"><a href="#cb3-19" aria-hidden="true" tabindex="-1"></a>ax1.contourf(xx, yy, density, levels<span class="op">=</span><span class="dv">20</span>, cmap<span class="op">=</span><span class="st">"viridis"</span>)</span>
-<span id="cb3-20"><a href="#cb3-20" aria-hidden="true" tabindex="-1"></a>ax1.scatter(X2[:, <span class="dv">0</span>], X2[:, <span class="dv">1</span>], s<span class="op">=</span><span class="dv">10</span>, color<span class="op">=</span><span class="st">"white"</span>, alpha<span class="op">=</span><span class="fl">0.4</span>)</span>
-<span id="cb3-21"><a href="#cb3-21" aria-hidden="true" tabindex="-1"></a>ax1.set_title(<span class="st">"GMM Density Estimate — Contour (Data2)"</span>)</span>
-<span id="cb3-22"><a href="#cb3-22" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-23"><a href="#cb3-23" aria-hidden="true" tabindex="-1"></a><span class="co"># 3D surface</span></span>
-<span id="cb3-24"><a href="#cb3-24" aria-hidden="true" tabindex="-1"></a>ax2 <span class="op">=</span> fig.add_subplot(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">2</span>, projection<span class="op">=</span><span class="st">"3d"</span>)</span>
-<span id="cb3-25"><a href="#cb3-25" aria-hidden="true" tabindex="-1"></a>ax2.plot_surface(xx, yy, density, cmap<span class="op">=</span><span class="st">"viridis"</span>, edgecolor<span class="op">=</span><span class="st">"none"</span>, alpha<span class="op">=</span><span class="fl">0.85</span>)</span>
-<span id="cb3-26"><a href="#cb3-26" aria-hidden="true" tabindex="-1"></a>ax2.set_title(<span class="st">"GMM Density Estimate — 3D Surface (Data2)"</span>)</span>
-<span id="cb3-27"><a href="#cb3-27" aria-hidden="true" tabindex="-1"></a>ax2.set_xlabel(<span class="st">"X1"</span>)</span>
-<span id="cb3-28"><a href="#cb3-28" aria-hidden="true" tabindex="-1"></a>ax2.set_ylabel(<span class="st">"X2"</span>)</span>
-<span id="cb3-29"><a href="#cb3-29" aria-hidden="true" tabindex="-1"></a>ax2.set_zlabel(<span class="st">"Density"</span>)</span>
-<span id="cb3-30"><a href="#cb3-30" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-31"><a href="#cb3-31" aria-hidden="true" tabindex="-1"></a>plt.tight_layout()</span>
-<span id="cb3-32"><a href="#cb3-32" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<!-- ---
-
-### EM on 1D {-}
-
-In this part you will fit a GMM model on one-dimensional simulated data.
-
-**8.** Create a dataset of 300 observations with two columns:
-
-- The first column contains data generated from **three Gaussian distributions** with different parameters.
-- The second column contains the **ground truth** (which Gaussian each observation was generated from).
-
-Use `numpy.random.seed()` with your student ID as the seed. An example of 9 generated values from three Gaussians is shown below:
-
-::: {#ee0e2f82 .cell execution_count=9}
-``` {.python .cell-code}
-import numpy as np
-import pandas as pd
-
-np.random.seed(1)
-n_ex = 3
-X_ex = np.concatenate([np.random.normal(-5, 1, n_ex),
-                        np.random.normal( 0, 1, n_ex),
-                        np.random.normal( 5, 1, n_ex)])
-source_ex = np.repeat([1, 2, 3], n_ex)
-example_df = pd.DataFrame({"X": X_ex, "source": source_ex})
-example_df
-```
-
-::: {.cell-output .cell-output-display execution_count=2}
-
-```{=html}
-<div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-
-<table class="dataframe caption-top" data-quarto-postprocess="true" data-border="1">
-<thead>
-<tr class="header" style="text-align: right;">
-<th data-quarto-table-cell-role="th"></th>
-<th data-quarto-table-cell-role="th">X</th>
-<th data-quarto-table-cell-role="th">source</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td data-quarto-table-cell-role="th">0</td>
-<td>-3.375655</td>
-<td>1</td>
-</tr>
-<tr class="even">
-<td data-quarto-table-cell-role="th">1</td>
-<td>-5.611756</td>
-<td>1</td>
-</tr>
-<tr class="odd">
-<td data-quarto-table-cell-role="th">2</td>
-<td>-5.528172</td>
-<td>1</td>
-</tr>
-<tr class="even">
-<td data-quarto-table-cell-role="th">3</td>
-<td>-1.072969</td>
-<td>2</td>
-</tr>
-<tr class="odd">
-<td data-quarto-table-cell-role="th">4</td>
-<td>0.865408</td>
-<td>2</td>
-</tr>
-<tr class="even">
-<td data-quarto-table-cell-role="th">5</td>
-<td>-2.301539</td>
-<td>2</td>
-</tr>
-<tr class="odd">
-<td data-quarto-table-cell-role="th">6</td>
-<td>6.744812</td>
-<td>3</td>
-</tr>
-<tr class="even">
-<td data-quarto-table-cell-role="th">7</td>
-<td>4.238793</td>
-<td>3</td>
-</tr>
-<tr class="odd">
-<td data-quarto-table-cell-role="th">8</td>
-<td>5.319039</td>
-<td>3</td>
-</tr>
-</tbody>
-</table>
-
-</div>
-```
-
-:::
-:::
-
-
-**9.** Show your generated data on a single axis (a **strip chart**), colored with respect to the ground truth. You should obtain something like the figure below.
-
-::: {#b302e354 .cell execution_count=10}
-
-::: {.cell-output .cell-output-display}
-![](Lab-EM_files/figure-html/cell-11-output-1.png){}
-:::
-:::
-
-
-**10.** Plot the histogram of your generated data. Interpret it.
-
-
-
-**11.** Fit a GMM model on your generated 1D data (reshape it to a column vector first). Print the summary and produce the following four plots. Explain your results.
-
-- BIC curve for $k = 1, \ldots, 9$
-- Classification (hard assignment colored strip chart)
-- Uncertainty strip chart
-- Estimated density overlaid on the histogram
-
-
-
-**12.** Apply density estimation on your generated 1D data and visualize the estimated density overlaid on the histogram with custom bin count. Interpret the figure.
-
-
-
---- -->
-</section>
-</section>
-<section id="extra-work-em-from-scratch" class="level2 unnumbered">
-<h2 class="unnumbered anchored" data-anchor-id="extra-work-em-from-scratch"><strong>Extra work</strong>: EM from Scratch</h2>
-<p>In this second part you will build a GMM from scratch using the EM algorithm, without relying on <code>sklearn</code>.</p>
-<p><strong>2.1</strong> Generate a two-dimensional dataset from a <span class="math inline">\(k\)</span>-component Gaussian mixture density with <strong>different means</strong> and <strong>different covariance matrices</strong>. Choose the mixing proportions <span class="math inline">\(\{\pi_1, \ldots, \pi_k\}\)</span> freely.</p>
-<p><strong>2.2</strong> Implement the EM algorithm to fit a GMM on your generated data:</p>
 <ul>
-<li>Initialize mixing proportions with equal weights and covariance matrices as identity matrices.</li>
-<li>Initialize means randomly (choose <span class="math inline">\(k\)</span> freely).</li>
-<li>At each iteration of the EM loop, store the <strong>observed-data log-likelihood</strong>.</li>
-<li>At convergence, plot the log-likelihood curve.</li>
+<li>For this session, you’ll need to read <strong>Chapter 4</strong> of the textbook.</li>
 </ul>
-<p><strong>2.3</strong> Create a function that selects the number of mixture components by computing <strong>BIC</strong> for <span class="math inline">\(k\)</span> ranging from 1 to 10.</p>
-<p><strong>2.4</strong> Compare the results of your scratch implementation with the ground truth in terms of:</p>
-<ul>
-<li>The chosen number of mixture components (does BIC recover the true <span class="math inline">\(k\)</span>?).</li>
-<li>The error rate: assign each point to its most likely component and compare with the true labels.</li>
-</ul>
-<p><strong>2.5</strong> Apply your EM implementation on the <a href="datasets/iris.data">Iris 🔢</a> dataset.</p>
+</div>
+</div>
 <div class="callout callout-style-default callout-tip callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Tip
+Session 3: Model-Free based techniques
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>To visualize results on the Iris dataset, use PCA projection and color by clustering results — as done above. For a richer dimensionality reduction adapted to mixture models, <code>sklearn</code> also provides <code>LinearDiscriminantAnalysis</code> as an alternative to PCA when class labels are available.</p>
+<ul>
+<li>For this session, you’ll need to read <strong>Chapters 5 &amp; 6</strong> of the textbook.</li>
+</ul>
 </div>
 </div>
-<p align="right">
-◼
-</p>
 
 
 </section>
@@ -1216,14 +886,11 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="./em.html" class="pagination-link" aria-label="📗 Gaussian Mixture Models">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">📗 Gaussian Mixture Models</span></span>
+      <a href="./textbook.html" class="pagination-link" aria-label="📗 Textbook">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">📗 Textbook</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./density-based.html" class="pagination-link" aria-label="📗 Density-based Clustering">
-        <span class="nav-page-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">📗 Density-based Clustering</span></span> <i class="bi bi-arrow-right-short"></i>
-      </a>
   </div>
 </nav>
 </div> <!-- /content -->

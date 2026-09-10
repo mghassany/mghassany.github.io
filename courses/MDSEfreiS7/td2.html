@@ -387,6 +387,134 @@ F(x) = P(X \leq x) =
 <li>What is the probability law of <span class="math inline">\(Y=|X|\)</span>.</li>
 </ol>
 </div>
+<div class="callout callout-style-default callout-important callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-1-contents" aria-controls="callout-1" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Solution
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-1" class="callout-1-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p><strong>Exercise 2.9 — Laplace Distribution</strong></p>
+<ol type="1">
+<li><p>To be a probability density function, <span class="math inline">\(f\)</span> must satisfy two conditions:</p>
+<ul>
+<li><span class="math inline">\(f(x)\geq 0\)</span> for every <span class="math inline">\(x\in\mathbb{R}\)</span>: Since <span class="math inline">\(c&gt;0\)</span> and <span class="math inline">\(e^{-c|x|}&gt;0\)</span> for every <span class="math inline">\(x\in\mathbb{R}\)</span>, <span class="math inline">\(f(x)=\frac{c}{2}e^{-c|x|}&gt;0.\)</span> Therefore, <span class="math inline">\(f(x)\geq 0\quad\forall x\in\mathbb{R}.\)</span></li>
+<li>The total integral must be equal to <span class="math inline">\(1\)</span>:</li>
+</ul></li>
+</ol>
+<p><span class="math display">\[
+\int_{-\infty}^{+\infty}f(x)\,dx
+=
+\frac{c}{2}
+\int_{-\infty}^{0}e^{cx}\,dx
++
+\frac{c}{2}
+\int_{0}^{+\infty}e^{-cx}\,dx = \frac{c}{2}\frac{1}{c}
++
+\frac{c}{2}\frac{1}{c}
+=
+\frac12+\frac12=1.
+\]</span></p>
+<ol start="2" type="1">
+<li>The distribution function is <span class="math inline">\(F(x)=P(X\leq x)=\int_{-\infty}^{x}f(t)\,dt.\)</span></li>
+</ol>
+<ul>
+<li><p>If <span class="math inline">\(x&lt;0\)</span>: <span class="math inline">\(F(x) = \int_{-\infty}^{x}\frac{c}{2}e^{ct}\,dt = \frac{c}{2} \left[\frac{1}{c}e^{ct}\right]_{-\infty}^{x} = \frac12e^{cx}\)</span></p></li>
+<li><p>If <span class="math inline">\(x\geq0\)</span>:</p></li>
+</ul>
+<p><span class="math display">\[
+\begin{aligned}
+F(x)
+&amp;=
+\int_{-\infty}^{0}f(t)\,dt + \int_{0}^{x}f(t)\,dt
+&amp;=
+\frac12+
+\frac{c}{2}\int_{0}^{x}e^{-ct}\,dt\\
+&amp;=
+\frac12+
+\frac{c}{2}
+\left[-\frac1c e^{-ct}\right]_{0}^{x}\\
+&amp;=
+\frac12+
+\frac12(1-e^{-cx})\\
+&amp;=
+1-\frac12e^{-cx}.
+\end{aligned}
+\]</span></p>
+<p>Therefore,</p>
+<p><span class="math display">\[
+\boxed{
+F(x)=
+\begin{cases}
+\dfrac12e^{cx}, &amp; x&lt;0,\\[6pt]
+1-\dfrac12e^{-cx}, &amp; x\geq0.
+\end{cases}
+}
+\]</span></p>
+<ol start="3" type="1">
+<li><span class="math inline">\(\mathbb{E}[X] =\int_{-\infty}^{+\infty}x f(x)\,dx = \frac{c}{2}\int_{-\infty}^{+\infty}x e^{-c|x|}\,dx\)</span></li>
+</ol>
+<p>The density is symmetric around <span class="math inline">\(0\)</span>, <span class="math inline">\(f\)</span> is an even function. So <span class="math inline">\(\mathbb{E}[X]=0.\)</span></p>
+<ol start="4" type="1">
+<li><span class="math inline">\(Y=|X|\)</span>, <span class="math inline">\(\boxed{Y(\Omega)= \mathbb{R}^+.}\)</span></li>
+</ol>
+<p>We want to determine the distribution of <span class="math inline">\(Y\)</span>.</p>
+<p>For <span class="math inline">\(y&lt;0\)</span>, <span class="math inline">\(P(Y\leq y)=0.\)</span></p>
+<p>For <span class="math inline">\(y\geq0\)</span>,</p>
+<p><span class="math display">\[
+P(Y\leq y)
+=
+P(-y\leq X\leq y).
+\]</span></p>
+<p>Using the distribution function of <span class="math inline">\(X\)</span>,</p>
+<p><span class="math display">\[
+P(-y\leq X\leq y)
+=
+F(y)-F(-y).
+\]</span></p>
+<p><span class="math display">\[
+\begin{aligned}
+P(Y\leq y)
+&amp;=
+\left(1-\frac12e^{-cy}\right)
+-\frac12e^{-cy}\\
+&amp;=
+1-e^{-cy}.
+\end{aligned}
+\]</span></p>
+<p>Thus, the distribution function of <span class="math inline">\(Y\)</span> is</p>
+<p><span class="math display">\[
+\boxed{
+F_Y(y)=
+\begin{cases}
+0, &amp; y&lt;0,\\[4pt]
+1-e^{-cy}, &amp; y\geq0.
+\end{cases}
+}
+\]</span></p>
+<p>This is precisely the distribution function of an exponential random variable with parameter <span class="math inline">\(c\)</span>.</p>
+<p>Therefore,</p>
+<p><span class="math display">\[
+\boxed{Y=|X|\sim\operatorname{Exp}(c).}
+\]</span></p>
+<p>In particular, the density of <span class="math inline">\(Y\)</span> is</p>
+<p><span class="math display">\[
+\boxed{
+f_Y(y)=
+\begin{cases}
+ce^{-cy}, &amp; y\geq0,\\
+0, &amp; y&lt;0.
+\end{cases}
+}
+\]</span></p>
+</div>
+</div>
+</div>
 <!-- 
 ## $\overline{X}_n$ {-}
 

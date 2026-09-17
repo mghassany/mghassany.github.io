@@ -363,9 +363,203 @@ paquets de lessive
 </table>
 <p>Assuming that the average annual precipitation follows a Normal distribution of unknown parameters<a href="#fn3" class="footnote-ref" id="fnref3" role="doc-noteref"><sup>3</sup></a>. Construct a 95% confidence interval for the mean annual rainfall.</p>
 </div>
+<div class="callout callout-style-default callout-important callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-1-contents" aria-controls="callout-1" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Solution
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-1" class="callout-1-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p><span class="math inline">\(X =\)</span> annual precipitation <span class="math inline">\(\sim \mathcal{N}(\mu,\sigma^2)\)</span>, with <span class="math inline">\(\sigma\)</span> unknown.</p>
+<ul>
+<li><p><strong>C.I.</strong> for <span class="math inline">\(\mu\)</span></p></li>
+<li><p>Estimator <span class="math inline">\(\overline{X}_n\)</span>: <span class="math inline">\(\overline{X}_n \sim \mathcal{N}\left(\mu,\frac{\sigma^2}{n}\right)\)</span> so <span class="math inline">\(\frac{\overline{X}-\mu}{\sigma/\sqrt{n}} \sim \mathcal{N}(0,1).\)</span></p></li>
+</ul>
+<p>But <span class="math inline">\(\sigma^2\)</span> is unknown, so we estimate it with <span class="math inline">\(S^2\)</span>, where <span class="math inline">\(S^2 = \frac{1}{n-1}\sum_{i=1}^{n}(X_i-\overline{X})^2.\)</span></p>
+<p>Therefore,</p>
+<p><span class="math display">\[
+T=\frac{\overline{X}-\mu}{S/\sqrt{n}}
+\sim St(n-1).
+\]</span></p>
+<ul>
+<li>We have</li>
+</ul>
+<p><span class="math display">\[
+P\left(
+t_{\alpha/2}
+&lt;
+T
+&lt;
+t_{1-\alpha/2}
+\right)
+=1-\alpha.
+\]</span></p>
+<p>Since</p>
+<p><span class="math display">\[
+t_{1-\alpha/2}=-t_{\alpha/2},
+\]</span></p>
+<p>we obtain</p>
+<p><span class="math display">\[
+P\left(
+-t_{1-\alpha/2}
+&lt;
+\frac{\overline{X}-\mu}{S/\sqrt{n}}
+&lt;
+t_{1-\alpha/2}
+\right)
+=1-\alpha.
+\]</span></p>
+<p>Therefore,</p>
+<p><span class="math display">\[
+\mu \in
+\left[
+\overline{X}
+-
+t_{1-\alpha/2}\frac{S}{\sqrt{n}},
+\;
+\overline{X}
++
+t_{1-\alpha/2}\frac{S}{\sqrt{n}}
+\right].
+\]</span></p>
+<p>For the numerical application:</p>
+<p><span class="math display">\[
+\overline{X}
+=
+\frac{499.2+499.3+\cdots}{20}
+=
+485.75.
+\]</span></p>
+<p>For <span class="math inline">\(\alpha=5\%\)</span> and <span class="math inline">\(n=20\)</span>, we have <span class="math inline">\(n-1=19\)</span> degrees of freedom:</p>
+<p><span class="math display">\[
+t_{1-\alpha/2}(n-1)
+=
+t_{0.975}(19)
+=
+2.09.
+\]</span></p>
+<p>Also,</p>
+<p><span class="math display">\[
+S=90.34.
+\]</span></p>
+<p>Recall that</p>
+<p><span class="math display">\[
+\hat{\sigma}^2
+=
+\frac{1}{n}\sum X_i^2
+-
+(\overline{X})^2,
+\text{ and therefore }
+S^2=\frac{n}{n-1}\hat{\sigma}^2.
+\]</span></p>
+<p>Hence,</p>
+<p><span class="math display">\[
+\mu
+\in
+[443.5363,\;527.9737].
+\]</span></p>
+</div>
+</div>
+</div>
 <div id="exr-" class="theorem exercise">
 <p><span class="theorem-title"><strong>Exercise 4.5</strong></span> The percentage of titanium in an alloy used in aerospace castings is measured in 51 randomly selected parts.</p>
 <p>The sample standard deviation is <span class="math inline">\(s = 0.37\)</span>. Construct a 95% two-sided confidence interval for <span class="math inline">\(\sigma\)</span>.</p>
+</div>
+<div class="callout callout-style-default callout-important callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-2-contents" aria-controls="callout-2" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Solution
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-2" class="callout-2-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>If <span class="math inline">\(s^2\)</span> is the sample variance from a random sample of <span class="math inline">\(n\)</span> observations from a normal distribution with unknown variance <span class="math inline">\(\sigma^2\)</span>, then a <span class="math inline">\(100(1-\alpha)\%\)</span> confidence interval for <span class="math inline">\(\sigma^2\)</span> is</p>
+<p><span class="math display">\[
+\frac{(n-1)s^2}{\chi^2_{1-\alpha/2,n-1}}
+\leq
+\sigma^2
+\leq
+\frac{(n-1)s^2}{\chi^2_{\alpha/2,n-1}}.
+\tag{1}
+\]</span></p>
+<p>where <span class="math inline">\(\chi^2_{\alpha/2,n-1}\)</span> and <span class="math inline">\(\chi^2_{1-\alpha/2,n-1}\)</span> are the lower and upper quantiles of the chi-square distribution with <span class="math inline">\(n-1\)</span> degrees of freedom, respectively.</p>
+<p>We know that the confidence level is <span class="math inline">\(95\%\)</span>, sample size <span class="math inline">\(n=51\)</span> and sample standard deviation <span class="math inline">\(s=0.37\)</span>, then</p>
+<p><span class="math display">\[
+\frac{\alpha}{2}
+=
+\frac{1-0.95}{2}
+=
+0.025
+\]</span></p>
+<p>and</p>
+<p><span class="math display">\[
+1-\frac{\alpha}{2}
+=
+1-\frac{1-0.95}{2}
+=
+0.975
+\]</span></p>
+<p>Therefore,</p>
+<p><span class="math display">\[
+\chi^2_{\alpha/2,n-1}
+=
+\chi^2_{0.025,50}
+=
+32.36
+\]</span></p>
+<p>and</p>
+<p><span class="math display">\[
+\chi^2_{1-\alpha/2,n-1}
+=
+\chi^2_{0.975,50}
+=
+71.42
+\]</span></p>
+<p>Now, from Equations (1), (2) and (3) we get</p>
+<p><span class="math display">\[
+\frac{50\times 0.37^2}{71.42}
+\leq
+\sigma^2
+\leq
+\frac{50\times 0.37^2}{32.36}
+\]</span></p>
+<p>Then,</p>
+<p><span class="math display">\[
+0.0958
+\leq
+\sigma^2
+\leq
+0.2115
+\]</span></p>
+<p>Therefore, a <span class="math inline">\(95\%\)</span> two-sided confidence interval for <span class="math inline">\(\sigma\)</span> is</p>
+<p><span class="math display">\[
+\sqrt{0.0958}
+\leq
+\sigma
+\leq
+\sqrt{0.2115}.
+\]</span></p>
+<p>Hence,</p>
+<p><span class="math display">\[
+\boxed{
+0.309
+\leq
+\sigma
+\leq
+0.459
+}
+\]</span></p>
+</div>
+</div>
 </div>
 <section id="lab" class="level2 unnumbered"><h2 class="unnumbered anchored" data-anchor-id="lab">Lab</h2>
 <div id="exr-" class="theorem exercise">
